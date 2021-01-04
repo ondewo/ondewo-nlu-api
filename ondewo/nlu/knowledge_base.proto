@@ -1,0 +1,60 @@
+syntax = "proto3";
+
+package ondewo.nlu;
+
+import "ondewo/survey/survey.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+
+
+option cc_enable_arenas = true;
+option csharp_namespace = "Google.Cloud.Dialogflow.V2";
+option go_package = "google.golang.org/genproto/googleapis/cloud/dialogflow/v2;dialogflow";
+option java_multiple_files = true;
+option java_outer_classname = "KnowledgeBaseProto";
+option java_package = "com.google.cloud.dialogflow.v2";
+option objc_class_prefix = "DF";
+
+/////// Services ///////
+
+service KnowledgeBase {
+    rpc PersistSurvey (PersistSurveyRequest) returns (google.protobuf.Empty) {
+        option (google.api.http) = {
+            post: "/v2/survey"
+            body: "*"
+        };
+    }
+    rpc RetrieveSurvey (RetrieveSurveyRequest) returns (RetrieveSurveyResponse) {
+        option (google.api.http) = {
+            get: "/v2/survey/{survey_id=*}"
+        };
+    }
+    rpc EraseSurvey (EraseSurveyRequest) returns (google.protobuf.Empty) {
+        option (google.api.http) = {
+            get: "/v2/survey/{survey_id=*}/erase"
+        };
+    }
+}
+
+/////// Messages ///////
+
+message PersistSurveyRequest {
+    // The survey which should be persisted
+    survey.Survey survey = 1;
+}
+
+message EraseSurveyRequest {
+    // The survey which should be erased from the KnowledgeBase
+    string survey_id = 1;
+}
+
+message RetrieveSurveyRequest {
+    // The project identifier for this survey. Equal to the parent of the corresponding Agent.
+    // Format: `projects/<Project ID>/agent`.
+    string survey_id = 1;
+}
+
+message RetrieveSurveyResponse {
+    // The survey which was retrieved
+    survey.Survey survey = 1;
+}
