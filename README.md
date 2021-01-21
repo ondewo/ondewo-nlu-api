@@ -14,7 +14,7 @@ The interfaces are given in Protobuffer format.
 
 ## Repository Structure ##
 ```
-ondewoapis
+ondewo-nlu-api
 │
 ├── googleapis
 │   └── (submodule = https://github.com/googleapis/googleapis.git)
@@ -25,13 +25,12 @@ ondewoapis
 │   |   ├── context.proto
 │   |   ├── entity_type.proto
 │   |   ├── intent.proto
-│   |   ├── knowledge_base.proto
 │   |   ├── operation_metadata.proto
 │   |   ├── project_role.proto
 │   |   ├── session.proto
 │   |   └── user.proto
-│   └── survey
-│       └── survey.proto
+│   └── qa
+│       └── qa.proto
 ├── .git
 ├── .gitignore
 ├── .gitmodules
