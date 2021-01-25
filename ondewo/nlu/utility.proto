@@ -43,11 +43,17 @@ option objc_class_prefix = "DF";
 service Utility {
     // Holds a collection of utility functions
 
-    // Cleans intent training phrases and entity annotations
-    rpc CleanIntents(CleanIntentsRequest) returns (CleanIntentsResponse);
+    // Cleans all intent training phrases and entity annotations of parent
+    rpc CleanAllIntents(CleanAllIntentsRequest) returns (CleanAllIntentsResponse);
 
-    // Cleans entity types
-    rpc CleanEntityTypes(CleanEntityTypesRequest) returns (CleanEntityTypesResponse);
+    // Cleans intent training phrases and entity annotations
+    rpc CleanIntent(CleanIntentRequest) returns (CleanIntentResponse);
+
+    // Cleans all entity types of parent
+    rpc CleanAllEntityTypes(CleanAllEntityTypesRequest) returns (CleanAllEntityTypesResponse);
+
+    // Cleans entity type
+    rpc CleanEntityType(CleanEntityTypeRequest) returns (CleanEntityTypeResponse);
 
     // Creates new training phrases corresponding to intent specified by its intent display name
     rpc AddTrainingPhrases(AddTrainingPhrasesRequest) returns (AddTrainingPhrasesResponse);
@@ -65,8 +71,8 @@ message TrainingPhraseCleanerOptions {
     bool delete_trailing_special_characters = 3;
 }
 
-// The request to clean the intents.
-message CleanIntentsRequest {
+// The request to clean the all intents.
+message CleanAllIntentsRequest {
     enum ReannotateEntitiesOptions {
         // Never re-annotate training phrases
         REANNOTATE_NEVER = 0;
@@ -115,34 +121,34 @@ message StringUpdate {
     string old = 2;
 }
 
-message CleanIntentsResponse {
-    // Stores updates applied to an intent
-    message IntentUpdate {
-        message TrainingPhraseUpdate {
+// Stores updates applied to an intent
+message IntentUpdate {
+    message TrainingPhraseUpdate {
 
-        // Stores updates of training phrases
-        StringUpdate training_phrase_update = 1;
+    // Stores updates of training phrases
+    StringUpdate training_phrase_update = 1;
 
-        // Stores updates of entity strings
-        repeated StringUpdate entity_updates = 2;
+    // Stores updates of entity strings
+    repeated StringUpdate entity_updates = 2;
 
-        // Stores re-annotated entity strings
-        repeated string entities_reannotated = 3;
+    // Stores re-annotated entity strings
+    repeated string entities_reannotated = 3;
 
-        // Will be switched to True if at least one update has been performed
-        bool contains_update_variable = 4;
-        }
-
-        // The display name of the intent
-        string intent_display_name = 1;
-
-        // List of the updated training phrases
-        repeated TrainingPhraseUpdate training_phrase_update_list = 2;
-
-        // List of the deleted parameters
-        repeated string deleted_parameters = 3;
+    // Will be switched to True if at least one update has been performed
+    bool contains_update_variable = 4;
     }
 
+    // The display name of the intent
+    string intent_display_name = 1;
+
+    // List of the updated training phrases
+    repeated TrainingPhraseUpdate training_phrase_update_list = 2;
+
+    // List of the deleted parameters
+    repeated string deleted_parameters = 3;
+}
+
+message CleanAllIntentsResponse {
     // Required. The agent to list all intents from.
     // Format: `projects/<Project ID>/agent`.
     string parent = 1;
@@ -158,12 +164,140 @@ message CleanIntentsResponse {
     repeated IntentUpdate intent_update_list = 3;
 }
 
+// The request to clean the all intents.
+message CleanIntentRequest {
+    enum ReannotateEntitiesOptions {
+        // Never re-annotate training phrases
+        REANNOTATE_NEVER = 0;
+        // Always re-annotate training phrases
+        REANNOTATE_ALWAYS = 1;
+        // Re-annotate training phrases if there are no annotations
+        REANNOTATE_IF_NO_ANNOTATIONS = 2;
+        // Re-annotate if training phrases have been deleted
+        REANNOTATE_AFTER_DELETION = 3;
+    }
+
+    // Required. The name of the intent.
+    string intent_name = 1;
+
+    // Optional. The language to list training phrases, parameters and rich
+    // messages for. If not specified, the agent's default language is used.
+    // [More than a dozen
+    // languages](https://dialogflow.com/docs/reference/language) are supported.
+    // Note: languages must be enabled in the agent before they can be used.
+    string language_code = 2;
+
+    // Optional. Characters to be recognized as special characters for cleaning.
+    // Overrides the default: '.,;!?:'
+    string special_characters = 3;
+
+    // Optional. List of substring that shall not be cleaned/deleted.
+    // Example: ['St.', 'U.S.', 'sys.', '24.12.', 'Nr.', 'TelNr.']
+    // Default = None
+    repeated string substring_white_list = 4;
+
+    // Required. Whether or not to actually keep the changes/apply them to the database
+    bool keep_changes = 5;
+
+    TrainingPhraseCleanerOptions training_phrase_cleaner_options = 6;
+
+    ReannotateEntitiesOptions reannotate_entities_options = 7;
+
+}
+
+message CleanIntentResponse {
+    // Required. The name of the intent.
+    string intent_name = 1;
+
+    // Optional. The language to list training phrases, parameters and rich
+    // messages for. If not specified, the agent's default language is used.
+    // [More than a dozen
+    // languages](https://dialogflow.com/docs/reference/language) are supported.
+    // Note: languages must be enabled in the agent before they can be used.
+    string language_code = 2;
+
+    // Required. Updates applied to intent
+    IntentUpdate intent_update = 3;
+}
+
+
 // Request to clean the entity types
-message CleanEntityTypesRequest {
+message CleanAllEntityTypesRequest {
 
     // Required. The agent to list all intents from.
     // Format: `projects/<Project ID>/agent`.
     string parent = 1;
+
+    // Optional. The language to list training phrases, parameters and rich
+    // messages for. If not specified, the agent's default language is used.
+    // [More than a dozen
+    // languages](https://dialogflow.com/docs/reference/language) are supported.
+    // Note: languages must be enabled in the agent before they can be used.
+    string language_code = 2;
+
+    // Optional. Characters to be recognized as special characters for cleaning.
+    // Overrides the default: '.,;!?:'
+    string special_characters = 3;
+
+    // Optional. List of substring that shall not be cleaned/deleted.
+    // Example: ['St.', 'U.S.', 'sys.', '24.12.', 'Nr.', 'TelNr.']
+    repeated string substring_white_list = 4;
+
+    // Optional. Entity type that contain more than max_entity_count_update entities will
+    // not be cleaned. Relevant for auto-generated entity values (e.g. City Names)
+    // Default = 10000
+    int32 max_entity_count_update = 5;
+
+    // Optional. List of strings or regexes. Entity types will be deleted if their display
+    // name matches an element of this list
+    // Example: ['sys.ignore.'] -> would delete entity types with display names sys.ignore.*
+    repeated string forbidden_entity_type_patterns = 6;
+
+    // Required. Whether or not to actually keep the changes/apply them to the database
+    bool keep_changes = 7;
+}
+
+// Stores updates applied to an entity type
+message EntityTypeUpdate {
+    // Stores updates applied to an entity
+    message EntityUpdate {
+        // Updates made to the entity value
+        StringUpdate entity_value_update = 1;
+        // Updates made to the entity synonyms
+        repeated StringUpdate entity_synonym_updates = 2;
+    }
+    // The entity type name
+    string entity_type_name = 1;
+    // List of the updated entities
+    repeated EntityUpdate values_update_list = 2;
+
+}
+
+// Response from entity type cleaner
+message CleanAllEntityTypesResponse {
+    // Required. The agent to list all intents from.
+    // Format: `projects/<Project ID>/agent`.
+    string parent = 1;
+
+    // Optional. The language to list training phrases, parameters and rich
+    // messages for. If not specified, the agent's default language is used.
+    // [More than a dozen
+    // languages](https://dialogflow.com/docs/reference/language) are supported.
+    // Note: languages must be enabled in the agent before they can be used.
+    string language_code = 2;
+
+    // Required. List of the updated entity types
+    repeated EntityTypeUpdate entity_type_updates = 3;
+
+    // Required. List of the deleted entity types
+    repeated EntityTypeUpdate entity_type_deletions = 4;
+}
+
+// Request to clean a single entity type
+message CleanEntityTypeRequest {
+
+    // Required. The name of the entity_type
+    string entity_type_name = 1;
 
     // Optional. The language to list training phrases, parameters and rich
     // messages for. If not specified, the agent's default language is used.
@@ -190,25 +324,9 @@ message CleanEntityTypesRequest {
 }
 
 // Response from entity type cleaner
-message CleanEntityTypesResponse {
-    // Stores updates applied to an entity type
-    message EntityTypeUpdate {
-        // Stores updates applied to an entity
-        message EntityUpdate {
-            // Updates made to the entity value
-            StringUpdate entity_value_update = 1;
-            // Updates made to the entity synonyms
-            repeated StringUpdate entity_synonym_updates = 2;
-        }
-        // The entity type name
-        string entity_type_name = 1;
-        // List of the updated entities
-        repeated EntityUpdate values_update_list = 2;
-
-    }
-    // Required. The agent to list all intents from.
-    // Format: `projects/<Project ID>/agent`.
-    string parent = 1;
+message CleanEntityTypeResponse {
+    // Required. The name of the entity type.
+    string entity_type_name = 1;
 
     // Optional. The language to list training phrases, parameters and rich
     // messages for. If not specified, the agent's default language is used.
@@ -217,11 +335,8 @@ message CleanEntityTypesResponse {
     // Note: languages must be enabled in the agent before they can be used.
     string language_code = 2;
 
-    // Required. List of the updated entity types
-    repeated EntityTypeUpdate entity_type_updates = 3;
-
-    // Required. List of the deleted entity types
-    repeated EntityTypeUpdate entity_type_deletions = 4;
+    // Required. The updated entity type
+    EntityTypeUpdate entity_type_updates = 3;
 }
 
 message AddTrainingPhrasesRequest {
