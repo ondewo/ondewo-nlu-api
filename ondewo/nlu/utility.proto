@@ -103,8 +103,11 @@ message CleanAllIntentsResponse {
     // Note: languages must be enabled in the agent before they can be used.
     string language_code = 2;
 
-    // Required. List of updates applied to intents
-    repeated IntentUpdate intent_update_list = 3;
+    // Required. List of updates performed on intents
+    repeated Intent cleaned_intents = 3;
+
+    // Optional. List of updates applied to intents
+    repeated IntentUpdate intent_update_list = 4;
 }
 
 // The request to clean the all intents.
@@ -148,8 +151,11 @@ message CleanIntentResponse {
     // Note: languages must be enabled in the agent before they can be used.
     string language_code = 2;
 
-    // Required. Updates applied to intent
-    IntentUpdate intent_update = 3;
+    // Required. Cleaned Intent
+    Intent cleaned_intent = 3;
+
+    // Optional. Updates applied to intent
+    IntentUpdate intent_update = 4;
 }
 
 
@@ -279,11 +285,14 @@ message CleanAllEntityTypesResponse {
     // Note: languages must be enabled in the agent before they can be used.
     string language_code = 2;
 
-    // Required. List of the updated entity types
-    repeated EntityTypeUpdate entity_type_updates = 3;
+    // Required. List of updated entity types
+    repeated EntityType cleaned_entity_types = 3;
 
-    // Required. List of the deleted entity types
-    repeated EntityTypeUpdate entity_type_deletions = 4;
+    // Optional. List of updates performed on entity types
+    repeated EntityTypeUpdate entity_type_updates = 4;
+
+    // Optional. List of the deleted entity types
+    repeated EntityTypeUpdate entity_type_deletions = 5;
 }
 
 // Request to clean a single entity type
@@ -328,8 +337,11 @@ message CleanEntityTypeResponse {
     // Note: languages must be enabled in the agent before they can be used.
     string language_code = 2;
 
-    // Required. The updated entity type
-    EntityTypeUpdate entity_type_updates = 3;
+    // Required. The cleaned entity type
+    EntityType cleaned_entity_type = 3;
+
+    // Optional. The updated entity type
+    EntityTypeUpdate entity_type_updates = 4;
 }
 
 message AddTrainingPhrasesRequest {
