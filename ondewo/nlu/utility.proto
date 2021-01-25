@@ -113,50 +113,60 @@ message CleanAllIntentsResponse {
 
 // The request to clean the all intents.
 message CleanIntentRequest {
+
+    // Required. The agent to list all intents from.
+    // Format: `projects/<Project ID>/agent`.
+    string parent = 1;
+
     // Required. The name of the intent.
-    string intent_name = 1;
+    string intent_name = 2;
 
     // Optional. The language to list training phrases, parameters and rich
     // messages for. If not specified, the agent's default language is used.
     // [More than a dozen
     // languages](https://dialogflow.com/docs/reference/language) are supported.
     // Note: languages must be enabled in the agent before they can be used.
-    string language_code = 2;
+    string language_code = 3;
 
     // Optional. Characters to be recognized as special characters for cleaning.
     // Overrides the default: '.,;!?:'
-    string special_characters = 3;
+    string special_characters = 4;
 
     // Optional. List of substring that shall not be cleaned/deleted.
     // Example: ['St.', 'U.S.', 'sys.', '24.12.', 'Nr.', 'TelNr.']
     // Default = None
-    repeated string substring_white_list = 4;
+    repeated string substring_white_list = 5;
 
     // Required. Whether or not to actually keep the changes/apply them to the database
-    bool keep_changes = 5;
+    bool keep_changes = 6;
 
-    TrainingPhraseCleanerOptions training_phrase_cleaner_options = 6;
+    TrainingPhraseCleanerOptions training_phrase_cleaner_options = 7;
 
-    ReannotateEntitiesOptions reannotate_entities_options = 7;
+    ReannotateEntitiesOptions reannotate_entities_options = 8;
 
 }
 
 message CleanIntentResponse {
+
+    // Required. The agent to list all intents from.
+    // Format: `projects/<Project ID>/agent`.
+    string parent = 1;
+
     // Required. The name of the intent.
-    string intent_name = 1;
+    string intent_name = 2;
 
     // Optional. The language to list training phrases, parameters and rich
     // messages for. If not specified, the agent's default language is used.
     // [More than a dozen
     // languages](https://dialogflow.com/docs/reference/language) are supported.
     // Note: languages must be enabled in the agent before they can be used.
-    string language_code = 2;
+    string language_code = 3;
 
     // Required. Cleaned Intent
-    Intent cleaned_intent = 3;
+    Intent cleaned_intent = 4;
 
     // Optional. Updates applied to intent
-    IntentUpdate intent_update = 4;
+    IntentUpdate intent_update = 5;
 }
 
 
@@ -299,50 +309,59 @@ message CleanAllEntityTypesResponse {
 // Request to clean a single entity type
 message CleanEntityTypeRequest {
 
+    // Required. The agent to list all intents from.
+    // Format: `projects/<Project ID>/agent`.
+    string parent = 1;
+
     // Required. The name of the entity_type
-    string entity_type_name = 1;
+    string entity_type_name = 2;
 
     // Optional. The language to list training phrases, parameters and rich
     // messages for. If not specified, the agent's default language is used.
     // [More than a dozen
     // languages](https://dialogflow.com/docs/reference/language) are supported.
     // Note: languages must be enabled in the agent before they can be used.
-    string language_code = 2;
+    string language_code = 3;
 
     // Optional. Characters to be recognized as special characters for cleaning.
     // Overrides the default: '.,;!?:'
-    string special_characters = 3;
+    string special_characters = 4;
 
     // Optional. List of substring that shall not be cleaned/deleted.
     // Example: ['St.', 'U.S.', 'sys.', '24.12.', 'Nr.', 'TelNr.']
-    repeated string substring_white_list = 4;
+    repeated string substring_white_list = 5;
 
     // Optional. Entity type that contain more than max_entity_count_update entities will
     // not be cleaned. Relevant for auto-generated entity values (e.g. City Names)
     // Default = 10000
-    int32 max_entity_count_update = 5;
+    int32 max_entity_count_update = 6;
 
     // Required. Whether or not to actually keep the changes/apply them to the database
-    bool keep_changes = 6;
+    bool keep_changes = 7;
 }
 
 // Response from entity type cleaner
 message CleanEntityTypeResponse {
+
+    // Required. The agent to list all intents from.
+    // Format: `projects/<Project ID>/agent`.
+    string parent = 1;
+
     // Required. The name of the entity type.
-    string entity_type_name = 1;
+    string entity_type_name = 2;
 
     // Optional. The language to list training phrases, parameters and rich
     // messages for. If not specified, the agent's default language is used.
     // [More than a dozen
     // languages](https://dialogflow.com/docs/reference/language) are supported.
     // Note: languages must be enabled in the agent before they can be used.
-    string language_code = 2;
+    string language_code = 3;
 
     // Required. The cleaned entity type
-    EntityType cleaned_entity_type = 3;
+    EntityType cleaned_entity_type = 4;
 
     // Optional. The updated entity type
-    EntityTypeUpdate entity_type_updates = 4;
+    EntityTypeUpdate entity_type_updates = 5;
 }
 
 message AddTrainingPhrasesRequest {
