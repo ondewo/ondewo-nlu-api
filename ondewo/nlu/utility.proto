@@ -46,7 +46,7 @@ service Utility {
     // Cleans all intent training phrases and entity annotations of parent
     rpc CleanAllIntents(CleanAllIntentsRequest) returns (CleanAllIntentsResponse);
 
-    // Cleans intent training phrases and entity annotations
+    // Cleans single intent training phrases and entity annotations
     rpc CleanIntent(CleanIntentRequest) returns (CleanIntentResponse);
 
     // Cleans all entity types of parent
@@ -59,31 +59,8 @@ service Utility {
     rpc AddTrainingPhrases(AddTrainingPhrasesRequest) returns (AddTrainingPhrasesResponse);
 }
 
-// Options for cleaning the training phrases
-message TrainingPhraseCleanerOptions {
-    // Whether or not to delete repeated whitespaces
-    bool delete_repeated_whitespaces = 1;
-
-    // Whether of not to delete leading special characters
-    bool delete_leading_special_characters = 2;
-
-    // Whether of not to delete trailing special characters
-    bool delete_trailing_special_characters = 3;
-}
-
 // The request to clean the all intents.
 message CleanAllIntentsRequest {
-    enum ReannotateEntitiesOptions {
-        // Never re-annotate training phrases
-        REANNOTATE_NEVER = 0;
-        // Always re-annotate training phrases
-        REANNOTATE_ALWAYS = 1;
-        // Re-annotate training phrases if there are no annotations
-        REANNOTATE_IF_NO_ANNOTATIONS = 2;
-        // Re-annotate if training phrases have been deleted
-        REANNOTATE_AFTER_DELETION = 3;
-    }
-
     // Required. The agent to list all intents from.
     // Format: `projects/<Project ID>/agent`.
     string parent = 1;
@@ -113,40 +90,6 @@ message CleanAllIntentsRequest {
 
 }
 
-// Message to keep track of updated strings
-message StringUpdate {
-    // New version of the string
-    string new = 1;
-    // Old version of the string
-    string old = 2;
-}
-
-// Stores updates applied to an intent
-message IntentUpdate {
-    message TrainingPhraseUpdate {
-
-    // Stores updates of training phrases
-    StringUpdate training_phrase_update = 1;
-
-    // Stores updates of entity strings
-    repeated StringUpdate entity_updates = 2;
-
-    // Stores re-annotated entity strings
-    repeated string entities_reannotated = 3;
-
-    // Will be switched to True if at least one update has been performed
-    bool contains_update_variable = 4;
-    }
-
-    // The display name of the intent
-    string intent_display_name = 1;
-
-    // List of the updated training phrases
-    repeated TrainingPhraseUpdate training_phrase_update_list = 2;
-
-    // List of the deleted parameters
-    repeated string deleted_parameters = 3;
-}
 
 message CleanAllIntentsResponse {
     // Required. The agent to list all intents from.
@@ -166,17 +109,6 @@ message CleanAllIntentsResponse {
 
 // The request to clean the all intents.
 message CleanIntentRequest {
-    enum ReannotateEntitiesOptions {
-        // Never re-annotate training phrases
-        REANNOTATE_NEVER = 0;
-        // Always re-annotate training phrases
-        REANNOTATE_ALWAYS = 1;
-        // Re-annotate training phrases if there are no annotations
-        REANNOTATE_IF_NO_ANNOTATIONS = 2;
-        // Re-annotate if training phrases have been deleted
-        REANNOTATE_AFTER_DELETION = 3;
-    }
-
     // Required. The name of the intent.
     string intent_name = 1;
 
@@ -218,6 +150,67 @@ message CleanIntentResponse {
 
     // Required. Updates applied to intent
     IntentUpdate intent_update = 3;
+}
+
+
+// Options for cleaning the training phrases
+message TrainingPhraseCleanerOptions {
+    // Whether or not to delete repeated whitespaces
+    bool delete_repeated_whitespaces = 1;
+
+    // Whether of not to delete leading special characters
+    bool delete_leading_special_characters = 2;
+
+    // Whether of not to delete trailing special characters
+    bool delete_trailing_special_characters = 3;
+}
+
+enum ReannotateEntitiesOptions {
+    // Never re-annotate training phrases
+    REANNOTATE_NEVER = 0;
+    // Always re-annotate training phrases
+    REANNOTATE_ALWAYS = 1;
+    // Re-annotate training phrases if there are no annotations
+    REANNOTATE_IF_NO_ANNOTATIONS = 2;
+    // Re-annotate if training phrases have been deleted
+    REANNOTATE_AFTER_DELETION = 3;
+    // Re-annotate if there are no annotations or if training phrases have been deleted
+    REANNOTATE_IF_NO_ANNOTATIONS_OR_AFTER_DELETION = 4;
+}
+
+// Message to keep track of updated strings
+message StringUpdate {
+    // New version of the string
+    string new = 1;
+    // Old version of the string
+    string old = 2;
+}
+
+// Stores updates applied to an intent
+message IntentUpdate {
+    message TrainingPhraseUpdate {
+
+    // Stores updates of training phrases
+    StringUpdate training_phrase_update = 1;
+
+    // Stores updates of entity strings
+    repeated StringUpdate entity_updates = 2;
+
+    // Stores re-annotated entity strings
+    repeated string entities_reannotated = 3;
+
+    // Will be switched to True if at least one update has been performed
+    bool contains_update_variable = 4;
+    }
+
+    // The display name of the intent
+    string intent_display_name = 1;
+
+    // List of the updated training phrases
+    repeated TrainingPhraseUpdate training_phrase_update_list = 2;
+
+    // List of the deleted parameters
+    repeated string deleted_parameters = 3;
 }
 
 
