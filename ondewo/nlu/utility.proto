@@ -28,6 +28,7 @@ syntax = "proto3";
 package ondewo.nlu;
 
 import "ondewo/nlu/intent.proto";
+import "ondewo/nlu/entity_type.proto";
 
 option cc_enable_arenas = true;
 option csharp_namespace = "Google.Cloud.Dialogflow.V2";
