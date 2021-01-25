@@ -171,11 +171,11 @@ enum ReannotateEntitiesOptions {
     // Always re-annotate training phrases
     REANNOTATE_ALWAYS = 1;
     // Re-annotate training phrases if there are no annotations
-    REANNOTATE_IF_NO_ANNOTATIONS = 2;
+    REANNOTATE_IF_EMPTY = 2;
     // Re-annotate if training phrases have been deleted
     REANNOTATE_AFTER_DELETION = 3;
     // Re-annotate if there are no annotations or if training phrases have been deleted
-    REANNOTATE_IF_NO_ANNOTATIONS_OR_AFTER_DELETION = 4;
+    REANNOTATE_IF_EMPTY_OR_AFTER_DELETION = 4;
 }
 
 // Message to keep track of updated strings
