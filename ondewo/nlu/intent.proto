@@ -896,7 +896,8 @@ enum IntentView {
     // All fields are populated.
     INTENT_VIEW_FULL = 1;
 
-    // All fields are populated; Training phrases field is populated with only a few entries.
+    // The only nested structures populated are Contexts and Training phrases.
+    //  The Training phrases field is populated with only a few entries and no annotations.
     INTENT_VIEW_PARTIAL = 2;
 
     // All nested structures are not populated (no training phrases, nor contexts, nor parameters, ...)
