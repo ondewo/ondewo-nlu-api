@@ -399,6 +399,9 @@ message AddTrainingPhrasesRequest {
     // Optional. Characters to be recognized as special characters for cleaning
     // the training phrases. Overrides the default: '.,;!?:'
     string special_characters = 5;
+
+    // Optional. Options for the training phrase cleaner to override the default settings
+    TrainingPhraseCleanerOptions training_phrase_cleaner_options = 6;
 }
 
 message AddTrainingPhrasesResponse {
@@ -416,10 +419,4 @@ message AddTrainingPhrasesResponse {
     // Required. If something goes wrong, error messages will be conveyed via a repeated string
     repeated string error_messages = 3;
 
-    // Optional. Characters to be recognized as special characters for cleaning.
-    // Overrides the default: '.,;!?:'
-    string special_characters = 4;
-
-    // Optional. Options for the training phrase cleaner to override the default settings
-    TrainingPhraseCleanerOptions training_phrase_cleaner_options = 5;
 }
