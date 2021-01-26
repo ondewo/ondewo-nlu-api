@@ -395,6 +395,10 @@ message AddTrainingPhrasesRequest {
     // Optional. Whether or not to extract entities for the new training phrases
     // Default is true
     bool extract_entities_for_training_phrases = 4;
+
+    // Optional. Characters to be recognized as special characters for cleaning
+    // the training phrases. Overrides the default: '.,;!?:'
+    string special_characters = 5;
 }
 
 message AddTrainingPhrasesResponse {
