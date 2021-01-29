@@ -89,6 +89,8 @@ message CleanAllIntentsRequest {
 
     ReannotateEntitiesOptions reannotate_entities_options = 7;
 
+    // Optional. Number of threads used to accomplish the task
+    int32 number_of_workers = 8;
 }
 
 
@@ -110,8 +112,6 @@ message CleanAllIntentsResponse {
     // Optional. List of updates applied to intents
     repeated IntentUpdate intent_update_list = 4;
 
-    // Optional. Number of threads used to accomplish the task
-    int32 number_of_workers = 5;
 }
 
 // The request to clean the all intents.
