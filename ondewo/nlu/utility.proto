@@ -40,7 +40,6 @@ option objc_class_prefix = "DF";
 
 // This is collection of utility endpoints, intended to language-independent operations,
 // such as code checks, regex checks, etc.
-
 service Utility {
     // Holds a collection of utility functions
 
@@ -85,8 +84,10 @@ message CleanAllIntentsRequest {
     // Required. Whether or not to actually keep the changes/apply them to the database
     bool keep_changes = 5;
 
+    // Optional. Options for the cleaning of the training phrases.
     TrainingPhraseCleanerOptions training_phrase_cleaner_options = 6;
 
+    // Optional. Options for re-annotation of entities (default = REANNOTATE_NEVER)
     ReannotateEntitiesOptions reannotate_entities_options = 7;
 
     // Optional. Number of threads used to accomplish the task
@@ -94,6 +95,7 @@ message CleanAllIntentsRequest {
 }
 
 
+// Response corresponding to the CleanAllIntents Request
 message CleanAllIntentsResponse {
     // Required. The agent to list all intents from.
     // Format: `projects/<Project ID>/agent`.
@@ -114,7 +116,7 @@ message CleanAllIntentsResponse {
 
 }
 
-// The request to clean the all intents.
+// The request message to clean a single intents.
 message CleanIntentRequest {
 
     // Required. The agent to list all intents from.
@@ -143,12 +145,15 @@ message CleanIntentRequest {
     // Required. Whether or not to actually keep the changes/apply them to the database
     bool keep_changes = 6;
 
+    // Optional. Options for the cleaning of the training phrases.
     TrainingPhraseCleanerOptions training_phrase_cleaner_options = 7;
 
+    // Optional. Options for re-annotation of entities (default = REANNOTATE_NEVER)
     ReannotateEntitiesOptions reannotate_entities_options = 8;
 
 }
 
+// The response message to clean a single intents.
 message CleanIntentResponse {
 
     // Required. The agent to list all intents from.
@@ -185,6 +190,7 @@ message TrainingPhraseCleanerOptions {
     bool delete_trailing_special_characters = 3;
 }
 
+// Lists entity re-annotation options
 enum ReannotateEntitiesOptions {
     // Never re-annotate training phrases
     REANNOTATE_NEVER = 0;
@@ -208,19 +214,19 @@ message StringUpdate {
 
 // Stores updates applied to an intent
 message IntentUpdate {
+    // Message to track the updates made to a training phrase
     message TrainingPhraseUpdate {
+        // Stores updates of training phrases
+        StringUpdate training_phrase_update = 1;
 
-    // Stores updates of training phrases
-    StringUpdate training_phrase_update = 1;
+        // Stores updates of entity strings
+        repeated StringUpdate entity_updates = 2;
 
-    // Stores updates of entity strings
-    repeated StringUpdate entity_updates = 2;
+        // Stores re-annotated entity strings
+        repeated string entities_reannotated = 3;
 
-    // Stores re-annotated entity strings
-    repeated string entities_reannotated = 3;
-
-    // Will be switched to True if at least one update has been performed
-    bool contains_update_variable = 4;
+        // Will be switched to True if at least one update has been performed
+        bool contains_update_variable = 4;
     }
 
     // The display name of the intent
@@ -370,6 +376,7 @@ message CleanEntityTypeResponse {
     EntityTypeUpdate entity_type_updates = 5;
 }
 
+// Request message to AddTrainingPhrase rpc
 message AddTrainingPhrasesRequest {
     // Message that contains the new training phrase, together with the intent display name
     // and, optionally the entity annotations
@@ -413,6 +420,7 @@ message AddTrainingPhrasesRequest {
     int32 number_of_workers = 7;
 }
 
+// Response message to AddTrainingPhrase rpc
 message AddTrainingPhrasesResponse {
     // Required. The agent to list all intents from.
     // Format: `projects/<Project ID>/agent`.
