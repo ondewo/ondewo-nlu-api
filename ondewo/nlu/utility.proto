@@ -109,6 +109,9 @@ message CleanAllIntentsResponse {
 
     // Optional. List of updates applied to intents
     repeated IntentUpdate intent_update_list = 4;
+
+    // Optional. Number of threads used to accomplish the task
+    int32 number_of_workers = 5;
 }
 
 // The request to clean the all intents.
@@ -265,6 +268,9 @@ message CleanAllEntityTypesRequest {
 
     // Required. Whether or not to actually keep the changes/apply them to the database
     bool keep_changes = 7;
+
+    // Optional. Number of threads used to accomplish the task
+    int32 number_of_workers = 8;
 }
 
 // Stores updates applied to an entity type
@@ -368,13 +374,13 @@ message AddTrainingPhrasesRequest {
     // Message that contains the new training phrase, together with the intent display name
     // and, optionally the entity annotations
     message TrainingPhraseForIntent {
-        // New training phrase to be added
+        // Required. New training phrase to be added
         string training_phrase = 1;
 
-        // Corresponding display name of the intent
+        // Required. Corresponding display name of the intent
         string intent_display_name = 2;
 
-        // Optional - entity annotations
+        // Optional. Entity annotations
         repeated Intent.TrainingPhrase.Entity entities = 3;
     }
 
@@ -402,6 +408,9 @@ message AddTrainingPhrasesRequest {
 
     // Optional. Options for the training phrase cleaner to override the default settings
     TrainingPhraseCleanerOptions training_phrase_cleaner_options = 6;
+
+    // Optional. Number of threads used to accomplish the task
+    int32 number_of_workers = 7;
 }
 
 message AddTrainingPhrasesResponse {
