@@ -57,6 +57,9 @@ service Utility {
 
     // Creates new training phrases corresponding to intent specified by its intent display name
     rpc AddTrainingPhrases(AddTrainingPhrasesRequest) returns (AddTrainingPhrasesResponse);
+
+    // Creates new training phrases corresponding to intent specified by its intent display name from csv file
+    rpc AddTrainingPhrasesFromCSV(AddTrainingPhrasesFromCSVRequest) returns (AddTrainingPhrasesResponse);
 }
 
 // The request to clean the all intents.
@@ -240,6 +243,22 @@ message IntentUpdate {
 }
 
 
+// Stores updates applied to an entity type
+message EntityTypeUpdate {
+    // Stores updates applied to an entity
+    message EntityUpdate {
+        // Updates made to the entity value
+        StringUpdate entity_value_update = 1;
+        // Updates made to the entity synonyms
+        repeated StringUpdate entity_synonym_updates = 2;
+    }
+    // The entity type name
+    string entity_type_name = 1;
+    // List of the updated entities
+    repeated EntityUpdate values_update_list = 2;
+
+}
+
 // Request to clean the entity types
 message CleanAllEntityTypesRequest {
 
@@ -277,22 +296,6 @@ message CleanAllEntityTypesRequest {
 
     // Optional. Number of threads used to accomplish the task
     int32 number_of_workers = 8;
-}
-
-// Stores updates applied to an entity type
-message EntityTypeUpdate {
-    // Stores updates applied to an entity
-    message EntityUpdate {
-        // Updates made to the entity value
-        StringUpdate entity_value_update = 1;
-        // Updates made to the entity synonyms
-        repeated StringUpdate entity_synonym_updates = 2;
-    }
-    // The entity type name
-    string entity_type_name = 1;
-    // List of the updated entities
-    repeated EntityUpdate values_update_list = 2;
-
 }
 
 // Response from entity type cleaner
@@ -373,7 +376,7 @@ message CleanEntityTypeResponse {
     EntityType cleaned_entity_type = 4;
 
     // Optional. The updated entity type
-    EntityTypeUpdate entity_type_updates = 5;
+    EntityTypeUpdate entity_type_update = 5;
 }
 
 // Request message to AddTrainingPhrase rpc
@@ -387,20 +390,20 @@ message AddTrainingPhrasesRequest {
         // Required. Corresponding display name of the intent
         string intent_display_name = 2;
 
+        // Optional. The language to list training phrases, parameters and rich
+        // messages for. If not specified, the agent's default language is used.
+        // [More than a dozen
+        // languages](https://dialogflow.com/docs/reference/language) are supported.
+        // Note: languages must be enabled in the agent before they can be used.
+        string language_code = 3;
+
         // Optional. Entity annotations
-        repeated Intent.TrainingPhrase.Entity entities = 3;
+        repeated Intent.TrainingPhrase.Entity entities = 4;
     }
 
     // Required. The agent to list all intents from.
     // Format: `projects/<Project ID>/agent`.
     string parent = 1;
-
-    // Optional. The language to list training phrases, parameters and rich
-    // messages for. If not specified, the agent's default language is used.
-    // [More than a dozen
-    // languages](https://dialogflow.com/docs/reference/language) are supported.
-    // Note: languages must be enabled in the agent before they can be used.
-    string language_code = 2;
 
     // Required. List of training phrases to be added to the intent
     repeated TrainingPhraseForIntent training_phrase_list = 3;
@@ -426,14 +429,31 @@ message AddTrainingPhrasesResponse {
     // Format: `projects/<Project ID>/agent`.
     string parent = 1;
 
-    // Optional. The language to list training phrases, parameters and rich
-    // messages for. If not specified, the agent's default language is used.
-    // [More than a dozen
-    // languages](https://dialogflow.com/docs/reference/language) are supported.
-    // Note: languages must be enabled in the agent before they can be used.
-    string language_code = 2;
-
     // Required. If something goes wrong, error messages will be conveyed via a repeated string
     repeated string error_messages = 3;
 
+}
+
+// Request message to AddTrainingPhraseFromCSV rpc
+message AddTrainingPhrasesFromCSVRequest {
+    // Required. The agent to list all intents from.
+    // Format: `projects/<Project ID>/agent`.
+    string parent = 1;
+
+    // Required. List of training phrases to be added to the intent
+    string training_phrase_csv_directory = 2;
+
+    // Optional. Whether or not to extract entities for the new training phrases
+    // Default is true
+    bool extract_entities_for_training_phrases = 3;
+
+    // Optional. Characters to be recognized as special characters for cleaning
+    // the training phrases. Overrides the default: '.,;!?:'
+    string special_characters = 4;
+
+    // Optional. Options for the training phrase cleaner to override the default settings
+    TrainingPhraseCleanerOptions training_phrase_cleaner_options = 5;
+
+    // Optional. Number of threads used to accomplish the task
+    int32 number_of_workers = 6;
 }
