@@ -314,11 +314,14 @@ message CleanAllEntityTypesResponse {
     // Required. List of updated entity types
     repeated EntityType cleaned_entity_types = 3;
 
+    // Optional. List of updated entity types
+    repeated EntityType deleted_entity_types = 4;
+
     // Optional. List of updates performed on entity types
-    repeated EntityTypeUpdate entity_type_updates = 4;
+    repeated EntityTypeUpdate entity_type_updates = 5;
 
     // Optional. List of the deleted entity types
-    repeated EntityTypeUpdate entity_type_deletions = 5;
+    repeated EntityTypeUpdate entity_type_deletions = 6;
 }
 
 // Request to clean a single entity type
