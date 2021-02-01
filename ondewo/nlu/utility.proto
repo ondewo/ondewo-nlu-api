@@ -1,0 +1,77 @@
+// Copyright 2018 Google Inc.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+// Modifications Copyright 2020 ONDEWO GmbH
+// Licensed under the ONDEWO GmbH license, Version 1.0 (the "License");
+// you must not use this file except in compliance with the License.
+// You must obtain a copy of the License at
+// office@ondewo.com
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+package ondewo.nlu;
+
+import "ondewo/nlu/entity_type.proto";
+
+option cc_enable_arenas = true;
+option csharp_namespace = "Google.Cloud.Dialogflow.V2";
+option go_package = "google.golang.org/genproto/googleapis/cloud/dialogflow/v2;dialogflow";
+option java_multiple_files = true;
+option java_outer_classname = "UtilityProto";
+option java_package = "com.google.cloud.dialogflow.v2";
+option objc_class_prefix = "DF";
+
+// This is collection of utility endpoints, intended to language-independent operations,
+// such as code checks, regex checks, etc.
+
+service Utility {
+    // Holds a collection of utility functions
+
+    // Validates the validity of python regexes
+    rpc RegexValidation (RegexValidationRequest) returns (RegexValidationResponse);
+
+    // Validate that entity types with group references have synonyms with
+    // capturing groups.
+    rpc RegexEntityValueValidation(RegexEntityValueValidationRequest) returns (RegexEntityValueValidationResponse);
+
+}
+
+// The request to validate regexes.
+message RegexValidationRequest {
+    // String containing the regex.
+    string regex = 1;
+}
+
+// The response of the regex validation
+message RegexValidationResponse {
+    // Regex validation response - True if regex is valid, else False
+    bool regex_is_valid = 1;
+}
+
+// Validation request for entity type values
+message RegexEntityValueValidationRequest {
+    EntityType.Entity entity_type = 1;
+}
+
+// Response of the entity type validation
+message RegexEntityValueValidationResponse {
+    // List of error message from the validation
+    repeated string error_messages = 1;
+}
+
