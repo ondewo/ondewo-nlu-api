@@ -405,6 +405,13 @@ message AddTrainingPhrasesRequest {
     // Format: `projects/<Project ID>/agent`.
     string parent = 1;
 
+    // Optional. The language to list training phrases, parameters and rich
+    // messages for. If not specified, the agent's default language is used.
+    // [More than a dozen
+    // languages](https://dialogflow.com/docs/reference/language) are supported.
+    // Note: languages must be enabled in the agent before they can be used.
+    string language_code = 2;
+
     // Required. List of training phrases to be added to the intent
     repeated TrainingPhraseForIntent training_phrase_list = 3;
 
@@ -440,20 +447,27 @@ message AddTrainingPhrasesFromCSVRequest {
     // Format: `projects/<Project ID>/agent`.
     string parent = 1;
 
+    // Optional. The language to list training phrases, parameters and rich
+    // messages for. If not specified, the agent's default language is used.
+    // [More than a dozen
+    // languages](https://dialogflow.com/docs/reference/language) are supported.
+    // Note: languages must be enabled in the agent before they can be used.
+    string language_code = 2;
+
     // Required. List of training phrases to be added to the intent
-    string training_phrase_csv_directory = 2;
+    string training_phrase_csv_directory = 3;
 
     // Optional. Whether or not to extract entities for the new training phrases
     // Default is true
-    bool extract_entities_for_training_phrases = 3;
+    bool extract_entities_for_training_phrases = 4;
 
     // Optional. Characters to be recognized as special characters for cleaning
     // the training phrases. Overrides the default: '.,;!?:'
-    string special_characters = 4;
+    string special_characters = 5;
 
     // Optional. Options for the training phrase cleaner to override the default settings
-    TrainingPhraseCleanerOptions training_phrase_cleaner_options = 5;
+    TrainingPhraseCleanerOptions training_phrase_cleaner_options = 6;
 
     // Optional. Number of threads used to accomplish the task
-    int32 number_of_workers = 6;
+    int32 number_of_workers = 7;
 }
