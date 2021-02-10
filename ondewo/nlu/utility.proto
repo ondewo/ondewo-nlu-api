@@ -40,7 +40,7 @@ option objc_class_prefix = "DF";
 
 // This is collection of utility endpoints, intended to language-independent operations,
 // such as code checks, regex checks, etc.
-service Utility {
+service Utilities {
     // Holds a collection of utility functions
 
     // Cleans all intent training phrases and entity annotations of parent
@@ -70,8 +70,6 @@ message CleanAllIntentsRequest {
 
     // Optional. The language to list training phrases, parameters and rich
     // messages for. If not specified, the agent's default language is used.
-    // [More than a dozen
-    // languages](https://dialogflow.com/docs/reference/language) are supported.
     // Note: languages must be enabled in the agent before they can be used.
     string language_code = 2;
 
@@ -100,22 +98,11 @@ message CleanAllIntentsRequest {
 
 // Response corresponding to the CleanAllIntents Request
 message CleanAllIntentsResponse {
-    // Required. The agent to list all intents from.
-    // Format: `projects/<Project ID>/agent`.
-    string parent = 1;
-
-    // Optional. The language to list training phrases, parameters and rich
-    // messages for. If not specified, the agent's default language is used.
-    // [More than a dozen
-    // languages](https://dialogflow.com/docs/reference/language) are supported.
-    // Note: languages must be enabled in the agent before they can be used.
-    string language_code = 2;
-
     // Required. List of updates performed on intents
-    repeated Intent cleaned_intents = 3;
+    repeated Intent cleaned_intents = 1;
 
     // Optional. List of updates applied to intents
-    repeated IntentUpdate intent_update_list = 4;
+    repeated IntentUpdate intent_update_list = 2;
 
 }
 
@@ -127,6 +114,7 @@ message CleanIntentRequest {
     string parent = 1;
 
     // Required. The name of the intent.
+    // Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
     string intent_name = 2;
 
     // Optional. The language to list training phrases, parameters and rich
@@ -159,25 +147,11 @@ message CleanIntentRequest {
 // The response message to clean a single intents.
 message CleanIntentResponse {
 
-    // Required. The agent to list all intents from.
-    // Format: `projects/<Project ID>/agent`.
-    string parent = 1;
-
-    // Required. The name of the intent.
-    string intent_name = 2;
-
-    // Optional. The language to list training phrases, parameters and rich
-    // messages for. If not specified, the agent's default language is used.
-    // [More than a dozen
-    // languages](https://dialogflow.com/docs/reference/language) are supported.
-    // Note: languages must be enabled in the agent before they can be used.
-    string language_code = 3;
-
     // Required. Cleaned Intent
-    Intent cleaned_intent = 4;
+    Intent cleaned_intent = 1;
 
     // Optional. Updates applied to intent
-    IntentUpdate intent_update = 5;
+    IntentUpdate intent_update = 2;
 }
 
 
@@ -193,7 +167,7 @@ message TrainingPhraseCleanerOptions {
     bool delete_trailing_special_characters = 3;
 }
 
-// Lists entity re-annotation options
+// Encapsulates entity re-annotation options
 enum ReannotateEntitiesOptions {
     // Never re-annotate training phrases
     REANNOTATE_NEVER = 0;
@@ -300,28 +274,18 @@ message CleanAllEntityTypesRequest {
 
 // Response from entity type cleaner
 message CleanAllEntityTypesResponse {
-    // Required. The agent to list all intents from.
-    // Format: `projects/<Project ID>/agent`.
-    string parent = 1;
-
-    // Optional. The language to list training phrases, parameters and rich
-    // messages for. If not specified, the agent's default language is used.
-    // [More than a dozen
-    // languages](https://dialogflow.com/docs/reference/language) are supported.
-    // Note: languages must be enabled in the agent before they can be used.
-    string language_code = 2;
 
     // Required. List of updated entity types
-    repeated EntityType cleaned_entity_types = 3;
+    repeated EntityType cleaned_entity_types = 1;
 
     // Optional. List of updated entity types
-    repeated EntityType deleted_entity_types = 4;
+    repeated EntityType deleted_entity_types = 2;
 
     // Optional. List of updates performed on entity types
-    repeated EntityTypeUpdate entity_type_updates = 5;
+    repeated EntityTypeUpdate entity_type_updates = 3;
 
     // Optional. List of the deleted entity types
-    repeated EntityTypeUpdate entity_type_deletions = 6;
+    repeated EntityTypeUpdate entity_type_deletions = 4;
 }
 
 // Request to clean a single entity type
@@ -361,25 +325,11 @@ message CleanEntityTypeRequest {
 // Response from entity type cleaner
 message CleanEntityTypeResponse {
 
-    // Required. The agent to list all intents from.
-    // Format: `projects/<Project ID>/agent`.
-    string parent = 1;
-
-    // Required. The name of the entity type.
-    string entity_type_name = 2;
-
-    // Optional. The language to list training phrases, parameters and rich
-    // messages for. If not specified, the agent's default language is used.
-    // [More than a dozen
-    // languages](https://dialogflow.com/docs/reference/language) are supported.
-    // Note: languages must be enabled in the agent before they can be used.
-    string language_code = 3;
-
     // Required. The cleaned entity type
-    EntityType cleaned_entity_type = 4;
+    EntityType cleaned_entity_type = 1;
 
     // Optional. The updated entity type
-    EntityTypeUpdate entity_type_update = 5;
+    EntityTypeUpdate entity_type_update = 2;
 }
 
 // Request message to AddTrainingPhrase rpc
@@ -391,7 +341,8 @@ message AddTrainingPhrasesRequest {
         string training_phrase = 1;
 
         // Required. Corresponding display name of the intent
-        string intent_display_name = 2;
+        // Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
+        string intent_name = 2;
 
         // Optional. The language to list training phrases, parameters and rich
         // messages for. If not specified, the agent's default language is used.
@@ -408,46 +359,28 @@ message AddTrainingPhrasesRequest {
     // Format: `projects/<Project ID>/agent`.
     string parent = 1;
 
-    // Optional. The language to list training phrases, parameters and rich
-    // messages for. If not specified, the agent's default language is used.
-    // [More than a dozen
-    // languages](https://dialogflow.com/docs/reference/language) are supported.
-    // Note: languages must be enabled in the agent before they can be used.
-    string language_code = 2;
-
     // Required. List of training phrases to be added to the intent
-    repeated TrainingPhraseForIntent training_phrase_list = 3;
+    repeated TrainingPhraseForIntent training_phrase_list = 2;
 
     // Optional. Whether or not to extract entities for the new training phrases
-    // Default is true
-    bool extract_entities_for_training_phrases = 4;
+    bool extract_entities_for_training_phrases = 3;
 
     // Optional. Characters to be recognized as special characters for cleaning
     // the training phrases. Overrides the default: '.,;!?:'
-    string special_characters = 5;
+    string special_characters = 4;
 
     // Optional. Options for the training phrase cleaner to override the default settings
-    TrainingPhraseCleanerOptions training_phrase_cleaner_options = 6;
+    TrainingPhraseCleanerOptions training_phrase_cleaner_options = 5;
 
     // Optional. Number of threads used to accomplish the task
-    int32 number_of_workers = 7;
+    int32 number_of_workers = 6;
 }
 
 // Response message to AddTrainingPhrase rpc
 message AddTrainingPhrasesResponse {
-    // Required. The agent to list all intents from.
-    // Format: `projects/<Project ID>/agent`.
-    string parent = 1;
-
-    // Optional. The language to list training phrases, parameters and rich
-    // messages for. If not specified, the agent's default language is used.
-    // [More than a dozen
-    // languages](https://dialogflow.com/docs/reference/language) are supported.
-    // Note: languages must be enabled in the agent before they can be used.
-    string language_code = 2;
 
     // Required. If something goes wrong, error messages will be conveyed via a repeated string
-    repeated string error_messages = 3;
+    repeated string error_messages = 1;
 
 }
 
@@ -464,15 +397,16 @@ message AddTrainingPhrasesFromCSVRequest {
     // Note: languages must be enabled in the agent before they can be used.
     string language_code = 2;
 
-    // Required. List of training phrases to be added to the intent
-    string training_phrase_csv_directory = 3;
+    // Required. Directory to .csv file containing training phrases to be added to the intents
+    string csv_directory = 3;
 
     // Optional. Whether or not to extract entities for the new training phrases
-    // Default is true
-    bool extract_entities_for_training_phrases = 4;
+    bool extract_entities = 4;
 
-    // Optional. Characters to be recognized as special characters for cleaning
-    // the training phrases. Overrides the default: '.,;!?:'
+    // Optional. Before new training phrases are added to their corresponding intent,
+    // they are cleaned with cleaning scripts. These cleaning scripts remove certain special characters,
+    // if they are found at the beginning of the text or if they appear in annotations.
+    // Overrides the default: '.,;!?:'
     string special_characters = 5;
 
     // Optional. Options for the training phrase cleaner to override the default settings
