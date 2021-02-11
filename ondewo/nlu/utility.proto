@@ -82,8 +82,8 @@ message CleanAllIntentsRequest {
     // Default = None
     repeated string substring_white_list = 4;
 
-    // Required. Whether or not to actually keep the changes/apply them to the database
-    bool keep_changes = 5;
+    // Required. Do not apply changes to the database if set to True
+    bool dry_run = 5;
 
     // Optional. Options for the cleaning of the training phrases.
     TrainingPhraseCleanerOptions training_phrase_cleaner_options = 6;
@@ -133,8 +133,8 @@ message CleanIntentRequest {
     // Default = None
     repeated string substring_white_list = 5;
 
-    // Required. Whether or not to actually keep the changes/apply them to the database
-    bool keep_changes = 6;
+    // Required. Do not apply changes to the database if set to True
+    bool dry_run = 6;
 
     // Optional. Options for the cleaning of the training phrases.
     TrainingPhraseCleanerOptions training_phrase_cleaner_options = 7;
@@ -265,8 +265,8 @@ message CleanAllEntityTypesRequest {
     // Example: ['sys.ignore.'] -> would delete entity types with display names sys.ignore.*
     repeated string forbidden_entity_type_patterns = 6;
 
-    // Required. Whether or not to actually keep the changes/apply them to the database
-    bool keep_changes = 7;
+    // Required. Do not apply changes to the database if set to True
+    bool dry_run = 7;
 
     // Optional. Number of threads used to accomplish the task
     int32 number_of_workers = 8;
@@ -318,8 +318,8 @@ message CleanEntityTypeRequest {
     // Default = 10000
     int32 max_entity_count_update = 6;
 
-    // Required. Whether or not to actually keep the changes/apply them to the database
-    bool keep_changes = 7;
+    // Required. Do not apply changes to the database if set to True
+    bool dry_run = 7;
 }
 
 // Response from entity type cleaner
@@ -392,8 +392,6 @@ message AddTrainingPhrasesFromCSVRequest {
 
     // Optional. The language to list training phrases, parameters and rich
     // messages for. If not specified, the agent's default language is used.
-    // [More than a dozen
-    // languages](https://dialogflow.com/docs/reference/language) are supported.
     // Note: languages must be enabled in the agent before they can be used.
     string language_code = 2;
 
