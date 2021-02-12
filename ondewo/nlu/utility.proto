@@ -333,7 +333,7 @@ message AddTrainingPhrasesRequest {
     repeated TrainingPhraseForIntent training_phrase_list = 3;
 
     // Optional. Whether or not to extract entities for the new training phrases
-    bool extract_entities_for_training_phrases = 4;
+    bool extract_entities = 4;
 
     // Optional. Characters to be recognized as special characters for cleaning
     // the training phrases. Overrides the default: '.,;!?:'
