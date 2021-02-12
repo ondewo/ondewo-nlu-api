@@ -316,34 +316,34 @@ message AddTrainingPhrasesRequest {
         // Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
         string intent_name = 2;
 
-        // Optional. The language to list training phrases, parameters and rich
-        // messages for. If not specified, the agent's default language is used.
-        // Note: languages must be enabled in the agent before they can be used.
-        string language_code = 3;
-
         // Optional. Entity annotations
-        repeated Intent.TrainingPhrase.Entity entities = 4;
+        repeated Intent.TrainingPhrase.Entity entities = 3;
     }
 
     // Required. The agent to list all intents from.
     // Format: `projects/<Project ID>/agent`.
     string parent = 1;
 
+    // Required. The language to list training phrases, parameters and rich
+    // messages for. If not specified, the agent's default language is used.
+    // Note: languages must be enabled in the agent before they can be used.
+    string language_code = 2;
+
     // Required. List of training phrases to be added to the intent
-    repeated TrainingPhraseForIntent training_phrase_list = 2;
+    repeated TrainingPhraseForIntent training_phrase_list = 3;
 
     // Optional. Whether or not to extract entities for the new training phrases
-    bool extract_entities_for_training_phrases = 3;
+    bool extract_entities_for_training_phrases = 4;
 
     // Optional. Characters to be recognized as special characters for cleaning
     // the training phrases. Overrides the default: '.,;!?:'
-    string special_characters = 4;
+    string special_characters = 5;
 
     // Optional. Options for the training phrase cleaner to override the default settings
-    TrainingPhraseCleanerOptions training_phrase_cleaner_options = 5;
+    TrainingPhraseCleanerOptions training_phrase_cleaner_options = 6;
 
     // Optional. Number of threads used to accomplish the task
-    int32 number_of_workers = 6;
+    int32 number_of_workers = 7;
 }
 
 // Response message to AddTrainingPhrase rpc
@@ -360,7 +360,7 @@ message AddTrainingPhrasesFromCSVRequest {
     // Format: `projects/<Project ID>/agent`.
     string parent = 1;
 
-    // Optional. The language to list training phrases, parameters and rich
+    // Required. The language to list training phrases, parameters and rich
     // messages for. If not specified, the agent's default language is used.
     // Note: languages must be enabled in the agent before they can be used.
     string language_code = 2;
