@@ -313,8 +313,7 @@ message AddTrainingPhrasesRequest {
         string training_phrase = 1;
 
         // Required. Corresponding display name of the intent
-        // Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
-        string intent_name = 2;
+        string intent_display_name = 2;
 
         // Optional. Entity annotations
         repeated Intent.TrainingPhrase.Entity entities = 3;
