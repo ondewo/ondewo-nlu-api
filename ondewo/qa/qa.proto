@@ -40,7 +40,7 @@ service QA {
             get: "/qa:RunTraining"
         };
     }
-
+	
 
 }
 
@@ -63,8 +63,8 @@ message GetAnswerRequest {
     // Threshold (minimal score) to give back retriever result
     float threshold_retriever = 5;
 
-    // Formula for overall score
-    string custom_score_formula = 6;
+    // Threshold (minimal score) overall probability
+    float threshold_overall = 6;
 
     // Reader model name
     string reader_model_name = 7;

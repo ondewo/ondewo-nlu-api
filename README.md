@@ -35,7 +35,7 @@ Please use the issue tracker in this repo for discussions about this API, or the
 .
 ├── CONTRIBUTING.md
 ├── googleapis
-│   └── (submodule = https://github.com/googleapis/googleapis.git)
+│   └── (clone of https://github.com/googleapis/googleapis.git on commit hash == 79ab27f3b70ebc221e265d2e8ab30a8cc2d21fa2)
 ├── LICENSE
 ├── ondewo
 │   ├── nlu
