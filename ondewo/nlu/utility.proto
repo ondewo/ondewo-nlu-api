@@ -364,8 +364,8 @@ message AddTrainingPhrasesFromCSVRequest {
     // Note: languages must be enabled in the agent before they can be used.
     string language_code = 2;
 
-    // Required. Directory to .csv file containing training phrases to be added to the intents
-    string csv_directory = 3;
+    // Required. Contents of the .csv file containing training phrases to be added to the intents
+    bytes csv_contents = 3;
 
     // Optional. Whether or not to extract entities for the new training phrases
     bool extract_entities = 4;
