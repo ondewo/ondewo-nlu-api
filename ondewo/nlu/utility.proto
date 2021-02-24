@@ -26,7 +26,7 @@ service Utilities {
 
     // Validate that entity types with group references have synonyms with
     // capturing groups.
-    rpc ValidateEmbedded(ValidateEmbeddedRequest) returns (ValidateEmbeddedResponse);
+    rpc ValidateEmbeddedRegex(ValidateEmbeddedRegexRequest) returns (ValidateEmbeddedRegexResponse);
 
     // Cleans all intent training phrases and entity annotations of parent
     rpc CleanAllIntents(CleanAllIntentsRequest) returns (CleanAllIntentsResponse);
@@ -60,12 +60,12 @@ message ValidateRegexResponse {
 }
 
 // Validation request for entity type values
-message ValidateEmbeddedRequest {
+message ValidateEmbeddedRegexRequest {
     EntityType.Entity entity_type = 1;
 }
 
 // Response of the entity type validation
-message ValidateEmbeddedResponse {
+message ValidateEmbeddedRegexResponse {
     // List of error message from the validation
     repeated string error_messages = 1;
 }
