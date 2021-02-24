@@ -40,7 +40,7 @@ option objc_class_prefix = "DF";
 // This is collection of utility endpoints, intended to language-independent operations,
 // such as code checks, regex checks, etc.
 
-service Utility {
+service Utilities {
     // Holds a collection of utility functions
 
     // Validates the validity of python regexes
