@@ -22,11 +22,11 @@ service Utilities {
     // Holds a collection of utility functions
 
     // Validates the validity of python regexes
-    rpc RegexValidation (RegexValidationRequest) returns (RegexValidationResponse);
+    rpc ValidateRegex (ValidateRegexRequest) returns (ValidateRegexResponse);
 
     // Validate that entity types with group references have synonyms with
     // capturing groups.
-    rpc RegexEntityValueValidation(RegexEntityValueValidationRequest) returns (RegexEntityValueValidationResponse);
+    rpc ValidateEmbedded(ValidateEmbeddedRequest) returns (ValidateEmbeddedResponse);
 
     // Cleans all intent training phrases and entity annotations of parent
     rpc CleanAllIntents(CleanAllIntentsRequest) returns (CleanAllIntentsResponse);
@@ -48,24 +48,24 @@ service Utilities {
 }
 
 // The request to validate regexes.
-message RegexValidationRequest {
+message ValidateRegexRequest {
     // String containing the regex.
     string regex = 1;
 }
 
 // The response of the regex validation
-message RegexValidationResponse {
-    // Regex validation response - True if regex is valid, else False
-    bool regex_is_valid = 1;
+message ValidateRegexResponse {
+    // Error messages
+    repeated string error_messages = 1;
 }
 
 // Validation request for entity type values
-message RegexEntityValueValidationRequest {
+message ValidateEmbeddedRequest {
     EntityType.Entity entity_type = 1;
 }
 
 // Response of the entity type validation
-message RegexEntityValueValidationResponse {
+message ValidateEmbeddedResponse {
     // List of error message from the validation
     repeated string error_messages = 1;
 }
