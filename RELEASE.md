@@ -1,6 +1,15 @@
 # Release History
 *****************
 
+## Release ONDEWO NLU APIS 1.0.1
+
+### New Features
+ * [OND211-1693] Implement regex validation endpoints.
+ * [OND211-1714] Implement intent cleaning endpoints.
+ * [OND211-1714] Implement entity_type cleaning endpoints.
+ * [OND211-1714] Implement endpoints to add new training phrases to intents.
+
+
 ## Release ONDEWO NLU APIS 1.0.0
 
 ### New Features
