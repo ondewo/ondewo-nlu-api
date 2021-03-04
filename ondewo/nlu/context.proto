@@ -11,12 +11,15 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
+//
 // Modifications Copyright 2020 ONDEWO GmbH
-// Licensed under the ONDEWO GmbH license, Version 1.0 (the "License");
-// you must not use this file except in compliance with the License.
-// You must obtain a copy of the License at
-// office@ondewo.com
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -30,7 +33,6 @@ package ondewo.nlu;
 import "google/api/annotations.proto";
 import "google/protobuf/empty.proto";
 import "google/protobuf/field_mask.proto";
-import "google/protobuf/struct.proto";
 
 option cc_enable_arenas = true;
 option csharp_namespace = "Google.Cloud.Dialogflow.V2";
@@ -105,6 +107,23 @@ service Contexts {
 
 // Represents a context.
 message Context {
+
+    message Parameter {
+
+        // The name of the context parameter.
+        string name = 1;
+
+        // The display name of the context parameter.
+        string display_name = 2;
+
+        // The value(s) of the context parameter.
+        string value = 3;
+
+        // The original value(s) of the context parameter.
+        string value_original = 4;
+
+    }
+
     // Required. The display name of the context (must be unique per session).
     //
     // Note: we are deviating from the dialogflow format `projects/<Project ID>/agent/sessions/<Session ID>/contexts/<Context ID>`.
@@ -126,7 +145,8 @@ message Context {
     // Optional. The collection of parameters associated with this context.
     // Refer to [this doc](https://dialogflow.com/docs/actions-and-parameters) for
     // syntax.
-    google.protobuf.Struct parameters = 3;
+    // Keys are the display names of context parameters.
+    map<string, Parameter> parameters = 3;
 
     // Optional. The time span in seconds after which the context expires. By default it does not expire.
     float lifespan_time = 4;
