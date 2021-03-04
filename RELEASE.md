@@ -4,7 +4,7 @@
 ## Release ONDEWO NLU APIS 1.1.0
 
 ### New Features
- Created a new file ondewo/nlu/utility.proto that contains the following endpoinds:
+ Created a new file ondewo/nlu/utility.proto that contains the following endpoints:
  * [OND211-1693] Implement regex validation endpoints.
  * [OND211-1714] Implement intent cleaning endpoints.
  * [OND211-1714] Implement entity_type cleaning endpoints.
