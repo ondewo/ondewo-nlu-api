@@ -968,6 +968,9 @@ message UpdateTrainingPhraseRequest {
 
     // Required. The language of training phrases
     string language_code = 2;
+
+    // Optional. The mask to control which fields get updated.
+    google.protobuf.FieldMask update_mask = 3;
 }
 
 message DeleteTrainingPhraseRequest {
