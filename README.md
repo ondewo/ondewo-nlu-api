@@ -1,4 +1,8 @@
-![Logo](https://raw.githubusercontent.com/ondewo/ondewo-logos/master/github/ondewo_logo_github_2.png)
+<p align="center">
+    <a href="https://www.ondewo.com">
+      <img alt="ONDEWO Logo" src="https://raw.githubusercontent.com/ondewo/ondewo-logos/master/github/ondewo_logo_github_2.png"/>
+    </a>
+</p>
 
 # ONDEWO NLU APIs
 
@@ -61,3 +65,4 @@ Please use the issue tracker in this repo for discussions about this API, or the
 ## Generate gRPC Source Code
 
 API client libraries can be built directly from files in this repo using [the proto compiler.](https://github.com/ondewo/ondewo-proto-compiler)
+>>>>>>>>> Temporary merge branch 2
