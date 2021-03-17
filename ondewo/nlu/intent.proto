@@ -990,7 +990,7 @@ message ListTrainingPhraseRequest {
     string language_code = 2;
 
     // Optional. The next_page_token value returned from a previous list request.
-    string page_token = 3
+    string page_token = 3;
 }
 
 
