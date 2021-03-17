@@ -139,6 +139,9 @@ service Intents {
     // Delete a specific training phrase (of a specific intent).
     rpc DeleteTrainingPhrase(DeleteTrainingPhraseRequest) returns (google.protobuf.Empty);
 
+    // List training phrases (of a specific intent).
+    rpc ListTrainingPhrase(ListTrainingPhraseRequest) returns (ListTrainingPhraseResponse);
+
 }
 
 // Represents an intent.
@@ -974,4 +977,30 @@ message DeleteTrainingPhraseRequest {
     // Required. The name of the training phrase.
     // Format: `projects/<Project ID>/agent/intents/<Intent ID>/trainingPhrases/<Training Phrase ID>`
     string name = 1;
+}
+
+// The request message for TrainingPhraseRequest
+message ListTrainingPhraseRequest {
+    // Required. The agent to list all intents from.
+    // Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
+    string intent_name = 1;
+
+    // Optional. The language to list training phrases, parameters and rich
+    // messages for. If not specified, the agent's default language is used.
+    string language_code = 2;
+
+    // Optional. The next_page_token value returned from a previous list request.
+    string page_token = 3
+}
+
+
+// The response message for ListTrainingPhrase
+message ListTrainingPhraseResponse {
+    // The list of training phrases. There will be a maximum number of items
+    // returned based on the page_token field in the request.
+    repeated Intent.TrainingPhrase training_phrases = 1;
+
+    // Token to retrieve the next page of results, or empty if there are no
+    // more results in the list.
+    string next_page_token = 2;
 }
