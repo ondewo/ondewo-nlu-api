@@ -413,6 +413,10 @@ message ExportAgentRequest {
     // Note: The URI must start with
     // "gs://". If left unspecified, the serialized agent is returned inline.
     string agent_uri = 2;
+
+    // Optional. The compression level of the zip file created.
+    // Valid range 1-9; other values are replaced by the default value 1
+    int32 compression_level = 3;
 }
 
 // The response message for [Agents.ExportAgent][google.cloud.dialogflow.v2.Agents.ExportAgent].
