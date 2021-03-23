@@ -9,6 +9,7 @@
  * [OND211-1714] Implement intent cleaning endpoints.
  * [OND211-1714] Implement entity_type cleaning endpoints.
  * [OND211-1714] Implement endpoints to add new training phrases to intents.
+ * [OND211-1714] Add initiation protocol into train agent endpoint
 
 
 ## Release ONDEWO NLU APIS 1.0.0
