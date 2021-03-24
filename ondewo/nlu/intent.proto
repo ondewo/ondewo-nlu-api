@@ -203,19 +203,22 @@ message Intent {
         // Format: `projects/<Project ID>/agent/intents/<Intent ID>/trainingPhrases/<Training Phrase ID>`.
         string name = 1;
 
+        // Required. The language of training phrases
+        string language_code = 2;
+
         // Required. The type of the training phrase.
-        Type type = 2;
+        Type type = 3;
 
         // Required. The text of the training phrase.
-        string text = 3;
+        string text = 4;
 
         // Optional. The collection of annotated entities in the training phrase.
-        repeated Entity entities = 4;
+        repeated Entity entities = 5;
 
         // Optional. Indicates how many times this example or template was added to
         // the intent. Each time a developer adds an existing sample by editing an
         // intent or training, this counter is increased.
-        int32 times_added_count = 5;
+        int32 times_added_count = 6;
     }
 
     enum IntentStatus {
@@ -948,9 +951,6 @@ message CreateTrainingPhraseRequest {
 
     // Required. The training phrase to create.
     Intent.TrainingPhrase training_phrase = 2;
-
-    // Required. The language of training phrases
-    string language_code = 3;
 }
 
 message GetTrainingPhraseRequest {
