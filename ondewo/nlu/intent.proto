@@ -127,23 +127,17 @@ service Intents {
         };
     }
 
-    // Creates a training phrase for a specified intent (of a specific intent).
-    rpc CreateTrainingPhrase(CreateTrainingPhraseBatchRequest) returns (Intent.TrainingPhrase);
-
     // Creates batch of training phrases
-    rpc CreateTrainingPhraseBatch(CreateTrainingPhraseBatchRequest) returns (TrainingPhraseBatch);
+    rpc CreateTrainingPhraseBatch(CreateTrainingPhraseBatchRequest) returns (TrainingPhraseStatusBatch);
 
-    // Retrieve a specific training phrase (of a specific intent).
-    rpc GetTrainingPhrase(GetTrainingPhraseBatchRequest) returns (TrainingPhraseBatch);
-
-    // Update a specific training phrase (of a specific intent).
-    rpc UpdateTrainingPhrase(UpdateTrainingPhraseBatchRequest) returns (TrainingPhraseBatch);
+    // Retrieve a specific training phrases batch (of a specific intent).
+    rpc GetTrainingPhraseBatch(GetTrainingPhraseBatchRequest) returns (TrainingPhraseStatusBatch);
 
     // Updates batch of training phrases
-    rpc UpdateTrainingPhrase(UpdateTrainingPhraseBatchRequest) returns (TrainingPhraseBatch);
+    rpc UpdateTrainingPhraseBatch(UpdateTrainingPhraseBatchRequest) returns (TrainingPhraseStatusBatch);
 
-    // Delete a specific training phrase (of a specific intent).
-    rpc DeleteTrainingPhrase(DeleteTrainingPhraseBatchRequest) returns (google.protobuf.Empty);
+    // Delete a specific training phrases batch (of a specific intent).
+    rpc DeleteTrainingPhraseBatch(DeleteTrainingPhraseBatchRequest) returns (google.protobuf.Empty);
 
 }
 
@@ -946,8 +940,16 @@ message IntentSorting {
     SortingMode sorting_mode = 2;
 }
 
-message TrainingPhraseBatch{
-    repeated Intent.TrainingPhrase = 1;
+message UpdateTrainingPhraseBatchRequest {
+    repeated Intent.TrainingPhrase training_phrases = 1;
+}
+
+message TrainingPhraseStatusBatch{
+    message TrainingPhraseStatus {
+        Intent.TrainingPhrase training_phrase = 1;
+        bool status = 2;
+    }
+    repeated TrainingPhraseStatus training_phrase_statuses = 1;
 }
 
 message CreateTrainingPhraseBatchRequest {
@@ -963,18 +965,13 @@ message CreateTrainingPhraseBatchRequest {
         // Required. The language of training phrases
         string language_code = 3;
     };
-    repeated CreatePhraseRequest training_phrese_requests = 1;
+    repeated CreatePhraseRequest training_phrase_requests = 1;
 }
 
 message GetTrainingPhraseBatchRequest {
     // Required. The name of the training phrase.
     // Format: `projects/<Project ID>/agent/intents/<Intent ID>/trainingPhrases/<Training Phrase ID>`
     repeated string name = 1;
-}
-
-message UpdateTrainingPhraseBatchRequest {
-    // Required. The training phrase to update.
-    repeated Intent.TrainingPhrase training_phrases = 1;
 }
 
 message DeleteTrainingPhraseBatchRequest {
