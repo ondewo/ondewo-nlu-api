@@ -130,11 +130,17 @@ service Intents {
     // Creates a training phrase for a specified intent (of a specific intent).
     rpc CreateTrainingPhrase(CreateTrainingPhraseRequest) returns (Intent.TrainingPhrase);
 
+    // Creates batch of training phrases
+    rpc CreateTrainingPhraseBatch(CreateTrainingPhraseBatchRequest) returns (TrainingPhraseBatch);
+
     // Retrieve a specific training phrase (of a specific intent).
-    rpc GetTrainingPhrase(GetTrainingPhraseRequest) returns (Intent.TrainingPhrase);
+    rpc GetTrainingPhrase(GetTrainingPhraseRequest) returns (TrainingPhraseBatch);
 
     // Update a specific training phrase (of a specific intent).
     rpc UpdateTrainingPhrase(UpdateTrainingPhraseRequest) returns (Intent.TrainingPhrase);
+
+    // Updates batch of training phrases
+    rpc UpdateTrainingPhrase(UpdateTrainingPhraseBatchRequest) returns (TrainingPhraseBatch);
 
     // Delete a specific training phrase (of a specific intent).
     rpc DeleteTrainingPhrase(DeleteTrainingPhraseRequest) returns (google.protobuf.Empty);
@@ -940,38 +946,35 @@ message IntentSorting {
     SortingMode sorting_mode = 2;
 }
 
-message CreateTrainingPhraseRequest {
+message CreateTrainingPhraseBatchRequest {
     // Required. The name of the intent for which to create a training phrase for.
     // Needed since the name of the training phrase may not be set upon creation.
     // Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
-    string intent_name = 1;
+    message CreatePhraseRequest{
+        string intent_name = 1;
 
-    // Required. The training phrase to create.
-    Intent.TrainingPhrase training_phrase = 2;
+        // Required. The training phrase to create.
+        Intent.TrainingPhrase training_phrase = 2;
 
-    // Required. The language of training phrases
-    string language_code = 3;
+        // Required. The language of training phrases
+        string language_code = 3;
+    };
+    repeated CreatePhraseRequest training_phrese_requests = 1;
 }
 
-message GetTrainingPhraseRequest {
+message GetTrainingPhraseBatchRequest {
     // Required. The name of the training phrase.
     // Format: `projects/<Project ID>/agent/intents/<Intent ID>/trainingPhrases/<Training Phrase ID>`
-    string name = 1;
-
-    // Required. The language of training phrases
-    string language_code = 2;
+    repeated string name = 1;
 }
 
-message UpdateTrainingPhraseRequest {
+message UpdateTrainingPhraseBatchRequest {
     // Required. The training phrase to update.
-    Intent.TrainingPhrase training_phrase = 1;
-
-    // Required. The language of training phrases
-    string language_code = 2;
+    repeated Intent.TrainingPhrase training_phrases = 1;
 }
 
-message DeleteTrainingPhraseRequest {
+message DeleteTrainingPhraseBatchRequest {
     // Required. The name of the training phrase.
     // Format: `projects/<Project ID>/agent/intents/<Intent ID>/trainingPhrases/<Training Phrase ID>`
-    string name = 1;
+    repeated string name = 1;
 }
