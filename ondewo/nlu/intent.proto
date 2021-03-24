@@ -128,22 +128,22 @@ service Intents {
     }
 
     // Creates a training phrase for a specified intent (of a specific intent).
-    rpc CreateTrainingPhrase(CreateTrainingPhraseRequest) returns (Intent.TrainingPhrase);
+    rpc CreateTrainingPhrase(CreateTrainingPhraseBatchRequest) returns (Intent.TrainingPhrase);
 
     // Creates batch of training phrases
     rpc CreateTrainingPhraseBatch(CreateTrainingPhraseBatchRequest) returns (TrainingPhraseBatch);
 
     // Retrieve a specific training phrase (of a specific intent).
-    rpc GetTrainingPhrase(GetTrainingPhraseRequest) returns (TrainingPhraseBatch);
+    rpc GetTrainingPhrase(GetTrainingPhraseBatchRequest) returns (TrainingPhraseBatch);
 
     // Update a specific training phrase (of a specific intent).
-    rpc UpdateTrainingPhrase(UpdateTrainingPhraseRequest) returns (Intent.TrainingPhrase);
+    rpc UpdateTrainingPhrase(UpdateTrainingPhraseBatchRequest) returns (TrainingPhraseBatch);
 
     // Updates batch of training phrases
     rpc UpdateTrainingPhrase(UpdateTrainingPhraseBatchRequest) returns (TrainingPhraseBatch);
 
     // Delete a specific training phrase (of a specific intent).
-    rpc DeleteTrainingPhrase(DeleteTrainingPhraseRequest) returns (google.protobuf.Empty);
+    rpc DeleteTrainingPhrase(DeleteTrainingPhraseBatchRequest) returns (google.protobuf.Empty);
 
 }
 
@@ -944,6 +944,10 @@ message IntentSorting {
 
     IntentSortingField sorting_field = 1;
     SortingMode sorting_mode = 2;
+}
+
+message TrainingPhraseBatch{
+    repeated Intent.TrainingPhrase = 1;
 }
 
 message CreateTrainingPhraseBatchRequest {
