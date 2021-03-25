@@ -952,7 +952,6 @@ message TrainingPhraseStatus {
 }
 
 message TrainingPhraseStatusBatch{
-
     repeated TrainingPhraseStatus training_phrase_statuses = 1;
 }
 
@@ -991,5 +990,5 @@ message DeleteTrainingPhraseStatuses{
             string error_message = 2;
         }
     }
-    repeated DeleteTrainingPhraseStatus delete_status = 1;
+    repeated DeleteTrainingPhraseStatus delete_statuses = 1;
 }
