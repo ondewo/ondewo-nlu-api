@@ -974,7 +974,7 @@ message CreateTrainingPhraseBatchRequest {
 message GetTrainingPhraseBatchRequest {
     // Required. The name of the training phrase.
     // Format: `projects/<Project ID>/agent/intents/<Intent ID>/trainingPhrases/<Training Phrase ID>`
-    repeated string name = 1;
+    repeated string names = 1;
 }
 
 message DeleteTrainingPhraseBatchRequest {
