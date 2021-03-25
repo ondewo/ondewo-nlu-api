@@ -944,11 +944,15 @@ message UpdateTrainingPhraseBatchRequest {
     repeated Intent.TrainingPhrase training_phrases = 1;
 }
 
-message TrainingPhraseStatusBatch{
-    message TrainingPhraseStatus {
+message TrainingPhraseStatus {
+    oneof phrase_or_status {
         Intent.TrainingPhrase training_phrase = 1;
-        bool status = 2;
+        string error_message = 2;
     }
+}
+
+message TrainingPhraseStatusBatch{
+
     repeated TrainingPhraseStatus training_phrase_statuses = 1;
 }
 
