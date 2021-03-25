@@ -980,7 +980,7 @@ message GetTrainingPhraseBatchRequest {
 message DeleteTrainingPhraseBatchRequest {
     // Required. The name of the training phrase.
     // Format: `projects/<Project ID>/agent/intents/<Intent ID>/trainingPhrases/<Training Phrase ID>`
-    repeated string name = 1;
+    repeated string names = 1;
 }
 
 message DeleteTrainingPhraseStatuses{
