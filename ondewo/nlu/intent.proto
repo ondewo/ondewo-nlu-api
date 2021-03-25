@@ -137,7 +137,7 @@ service Intents {
     rpc UpdateTrainingPhraseBatch(UpdateTrainingPhraseBatchRequest) returns (TrainingPhraseStatusBatch);
 
     // Delete a specific training phrases batch (of a specific intent).
-    rpc DeleteTrainingPhraseBatch(DeleteTrainingPhraseBatchRequest) returns (DeleteTrainingPhraseStatus);
+    rpc DeleteTrainingPhraseBatch(DeleteTrainingPhraseBatchRequest) returns (DeleteTrainingPhraseStatuses);
 
 }
 
