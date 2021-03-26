@@ -1,6 +1,12 @@
 # Release History
 *****************
 
+## Release ONDEWO NLU APIS 1.1.1
+
+### New Features
+ * [OND211-1732] Implement endpoints directly create/update/get/delete training phrases.
+
+
 ## Release ONDEWO NLU APIS 1.1.0
 
 ### New Features

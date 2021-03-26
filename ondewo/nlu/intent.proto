@@ -957,17 +957,11 @@ message GetTrainingPhraseRequest {
     // Required. The name of the training phrase.
     // Format: `projects/<Project ID>/agent/intents/<Intent ID>/trainingPhrases/<Training Phrase ID>`
     string name = 1;
-
-    // Required. The language of training phrases
-    string language_code = 2;
 }
 
 message UpdateTrainingPhraseRequest {
     // Required. The training phrase to update.
     Intent.TrainingPhrase training_phrase = 1;
-
-    // Required. The language of training phrases
-    string language_code = 2;
 }
 
 message DeleteTrainingPhraseRequest {
