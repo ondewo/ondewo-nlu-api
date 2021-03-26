@@ -206,11 +206,11 @@ message Intent {
         // Required. The type of the training phrase.
         Type type = 2;
 
-        // Required. The language of the training phrase.
-        string language_code = 3;
-
         // Required. The text of the training phrase.
-        string text = 4;
+        string text = 3;
+
+        // Optional. The language of the training phrase.
+        string language_code = 4;
 
         // Optional. The collection of annotated entities in the training phrase.
         repeated Entity entities = 5;
