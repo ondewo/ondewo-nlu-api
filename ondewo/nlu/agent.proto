@@ -389,9 +389,9 @@ message ListAgentsOfUserResponse {
 
 // Defines when to initiate newly created agent when training started
 enum InitiationProtocol {
-    // after cache successfully built
+    // after cache successfully built and after each model trained the agent will be updated
     AS_SOON_AS_POSSIBLE = 0;
-    // after cache successfully built and all the active models successfully trained)
+    // after cache successfully built and all the active models successfully trained
     WHEN_TRAINED = 1;
     // do not initiate
     NEVER = 2;
