@@ -164,6 +164,19 @@ service EntityTypes {
           body: "*"
         };
     }
+
+    // Creates an entity value in an entity type.
+    rpc CreateEntityValue (CreateEntityValueRequest) returns (EntityType.Entity);
+
+    // Updates a specific entity value.
+    rpc UpdateEntityValue (UpdateEntityValueRequest) returns (EntityType.Entity);
+
+    // Gets a specific entity value.
+    rpc GetEntityValue (GetEntityValueRequest) returns (EntityType.Entity);
+
+    // Deletes the specified entity value.
+    rpc DeleteEntityValue (DeleteEntityValueRequest) returns (google.protobuf.Empty);
+
 }
 
 // Represents an entity type.
@@ -500,4 +513,30 @@ message EntityTypeSorting {
 
     EntityTypeSortingField sorting_field = 1;
     SortingMode sorting_mode = 2;
+}
+
+message CreateEntityValueRequest {
+    // Required. Name of the entity type in which to create the entity value. Format:
+    // `projects/<Project ID>/agent/entityTypes/<Entity Type ID>`.
+    string name = 1;
+
+    // The entity value to create
+    EntityType.Entity entity = 2;
+}
+
+message UpdateEntityValueRequest {
+    // The entity value to update
+    EntityType.Entity entity = 1;
+}
+
+message GetEntityValueRequest {
+    // The unique identifier of the entity. Format:
+    // `projects/<Project ID>/agent/entityTypes/<Entity Type ID>/entities/<Entity ID>`.
+    string name = 1;
+}
+
+message DeleteEntityValueRequest {
+    // The unique identifier of the entity. Format:
+    // `projects/<Project ID>/agent/entityTypes/<Entity Type ID>/entities/<Entity ID>`.
+    string name = 1;
 }
