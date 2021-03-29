@@ -390,11 +390,11 @@ message ListAgentsOfUserResponse {
 // Defines when to initiate newly created agent when training started
 enum InitiationProtocol {
     // after cache successfully built
-    as_soon_as_possible = 0;
+    AS_SOON_AS_POSSIBLE = 0;
     // after cache successfully built and all the active models successfully trained)
-    when_trained = 1;
+    WHEN_TRAINED = 1;
     // do not initiate
-    never = 2;
+    NEVER = 2;
 }
 // The request message for [Agents.TrainAgent][google.cloud.dialogflow.v2.Agents.TrainAgent].
 message TrainAgentRequest {
