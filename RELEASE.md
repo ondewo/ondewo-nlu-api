@@ -1,11 +1,16 @@
 # Release History
 *****************
 
+## Release ONDEWO NLU APIS 1.2.0
+
+### New Features
+ * [OND211-1744] Add initiation protocol into train agent endpoint
+
 ## Release ONDEWO NLU APIS 1.1.1
 
 ### New Features
  * [OND211-1732] Implement endpoints directly create/update/get/delete training phrases.
- * [OND211-1744] Add initiation protocol into train agent endpoint
+
 
 ## Release ONDEWO NLU APIS 1.1.0
 
