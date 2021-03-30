@@ -988,7 +988,7 @@ message DeleteTrainingPhraseBatchRequest {
 message DeleteTrainingPhraseResponse {
     message DeleteTrainingPhraseStatus{
         oneof delete_status{
-            google.protobuf.Empty successfuly_deleted = 1;
+            google.protobuf.Empty successfully_deleted = 1;
             string error_message = 2;
         }
     }
