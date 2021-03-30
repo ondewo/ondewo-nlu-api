@@ -137,7 +137,7 @@ service Intents {
     rpc UpdateTrainingPhraseBatch (UpdateTrainingPhraseBatchRequest) returns (TrainingPhraseStatusBatchResponse);
 
     // Delete a training phrases batch of the specified names.
-    rpc DeleteTrainingPhraseBatch (DeleteTrainingPhraseBatchRequest) returns (DeleteTrainingPhraseResponse);
+    rpc DeleteTrainingPhraseBatch (DeleteTrainingPhraseBatchRequest) returns (DeleteTrainingPhraseBatchResponse);
 
 }
 
@@ -958,10 +958,9 @@ message TrainingPhraseStatusBatchResponse {
 }
 
 message CreateTrainingPhraseBatchRequest {
-    // Required. The name of the intent for which to create a training phrase for.
-    // Needed since the name of the training phrase may not be set upon creation.
-    // Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
+
     message CreatePhraseRequest{
+        // Required. The name of the intent for which to create a training phrase for.
         string intent_name = 1;
 
         // Required. The training phrase to create.
@@ -985,7 +984,7 @@ message DeleteTrainingPhraseBatchRequest {
     repeated string names = 1;
 }
 
-message DeleteTrainingPhraseResponse {
+message DeleteTrainingPhraseBatchResponse {
     message DeleteTrainingPhraseStatus{
         oneof delete_status{
             google.protobuf.Empty successfully_deleted = 1;
