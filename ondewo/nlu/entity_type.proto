@@ -166,16 +166,16 @@ service EntityTypes {
     }
 
     // Creates an entity value in an entity type.
-    rpc CreateEntityValue (CreateEntityValueRequest) returns (EntityType.Entity);
+    rpc CreateEntity (CreateEntityRequest) returns (EntityType.Entity);
 
     // Updates a specific entity value.
-    rpc UpdateEntityValue (UpdateEntityValueRequest) returns (EntityType.Entity);
+    rpc UpdateEntity (UpdateEntityRequest) returns (EntityType.Entity);
 
     // Gets a specific entity value.
-    rpc GetEntityValue (GetEntityValueRequest) returns (EntityType.Entity);
+    rpc GetEntity (GetEntityRequest) returns (EntityType.Entity);
 
     // Deletes the specified entity value.
-    rpc DeleteEntityValue (DeleteEntityValueRequest) returns (google.protobuf.Empty);
+    rpc DeleteEntity (DeleteEntityRequest) returns (google.protobuf.Empty);
 
 }
 
@@ -518,27 +518,27 @@ message EntityTypeSorting {
     SortingMode sorting_mode = 2;
 }
 
-message CreateEntityValueRequest {
+message CreateEntityRequest {
     // Required. Name of the entity type in which to create the entity value. Format:
     // `projects/<Project ID>/agent/entityTypes/<Entity Type ID>`.
-    string name = 1;
+    string entity_type_name = 1;
 
     // The entity value to create
     EntityType.Entity entity = 2;
 }
 
-message UpdateEntityValueRequest {
+message UpdateEntityRequest {
     // The entity value to update
     EntityType.Entity entity = 1;
 }
 
-message GetEntityValueRequest {
+message GetEntityRequest {
     // The unique identifier of the entity. Format:
     // `projects/<Project ID>/agent/entityTypes/<Entity Type ID>/entities/<Entity ID>`.
     string name = 1;
 }
 
-message DeleteEntityValueRequest {
+message DeleteEntityRequest {
     // The unique identifier of the entity. Format:
     // `projects/<Project ID>/agent/entityTypes/<Entity Type ID>/entities/<Entity ID>`.
     string name = 1;
