@@ -522,6 +522,9 @@ message CreateEntityValueRequest {
 
     // The entity value to create
     EntityType.Entity entity = 2;
+
+    // Language code
+    string language_code = 3;
 }
 
 message UpdateEntityValueRequest {
