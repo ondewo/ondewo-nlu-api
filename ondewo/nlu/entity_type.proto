@@ -201,11 +201,14 @@ message EntityType {
         // `projects/<Project ID>/agent/entityTypes/<Entity Type ID>/entities/<Entity ID>`.
         string name = 3;
 
+        // Required. The language to list entity synonyms for.
+        string language_code = 4;
+
         // The name of the entity.
-        string display_name = 4;
+        string display_name = 5;
 
         // Optional. Total count of entity synonyms
-        int32 synonym_count = 5;
+        int32 synonym_count = 6;
     }
 
     // Represents kinds of entities.
@@ -522,9 +525,6 @@ message CreateEntityValueRequest {
 
     // The entity value to create
     EntityType.Entity entity = 2;
-
-    // Language code
-    string language_code = 3;
 }
 
 message UpdateEntityValueRequest {
