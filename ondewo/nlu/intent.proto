@@ -128,16 +128,16 @@ service Intents {
     }
 
     // Creates batch of training phrases
-    rpc CreateTrainingPhraseBatch(CreateTrainingPhraseBatchRequest) returns (TrainingPhraseStatusBatch);
+    rpc CreateTrainingPhraseBatch (CreateTrainingPhraseBatchRequest) returns (TrainingPhraseStatusBatchResponse);
 
-    // Retrieve a specific training phrases batch (of a specific intent).
-    rpc GetTrainingPhraseBatch(GetTrainingPhraseBatchRequest) returns (TrainingPhraseStatusBatch);
+    // Retrieve a training phrases batch of the specified names.
+    rpc GetTrainingPhraseBatch (GetTrainingPhraseBatchRequest) returns (TrainingPhraseStatusBatchResponse);
 
     // Updates batch of training phrases
-    rpc UpdateTrainingPhraseBatch(UpdateTrainingPhraseBatchRequest) returns (TrainingPhraseStatusBatch);
+    rpc UpdateTrainingPhraseBatch (UpdateTrainingPhraseBatchRequest) returns (TrainingPhraseStatusBatchResponse);
 
-    // Delete a specific training phrases batch (of a specific intent).
-    rpc DeleteTrainingPhraseBatch(DeleteTrainingPhraseBatchRequest) returns (DeleteTrainingPhraseStatuses);
+    // Delete a training phrases batch of the specified names.
+    rpc DeleteTrainingPhraseBatch (DeleteTrainingPhraseBatchRequest) returns (DeleteTrainingPhraseResponse);
 
 }
 
@@ -951,8 +951,10 @@ message TrainingPhraseStatus {
     }
 }
 
-message TrainingPhraseStatusBatch{
+message TrainingPhraseStatusBatchResponse {
     repeated TrainingPhraseStatus training_phrase_statuses = 1;
+    // indicates if statuses of some of the training phrases have errors
+    bool has_errors = 2;
 }
 
 message CreateTrainingPhraseBatchRequest {
@@ -972,18 +974,18 @@ message CreateTrainingPhraseBatchRequest {
 }
 
 message GetTrainingPhraseBatchRequest {
-    // Required. The name of the training phrase.
+    // Required. The names of the training phrases.
     // Format: `projects/<Project ID>/agent/intents/<Intent ID>/trainingPhrases/<Training Phrase ID>`
     repeated string names = 1;
 }
 
 message DeleteTrainingPhraseBatchRequest {
-    // Required. The name of the training phrase.
+    // Required. The names of the training phrases.
     // Format: `projects/<Project ID>/agent/intents/<Intent ID>/trainingPhrases/<Training Phrase ID>`
     repeated string names = 1;
 }
 
-message DeleteTrainingPhraseStatuses{
+message DeleteTrainingPhraseResponse {
     message DeleteTrainingPhraseStatus{
         oneof delete_status{
             google.protobuf.Empty successfuly_deleted = 1;
@@ -991,4 +993,5 @@ message DeleteTrainingPhraseStatuses{
         }
     }
     repeated DeleteTrainingPhraseStatus delete_statuses = 1;
+    bool has_errors = 2;
 }
