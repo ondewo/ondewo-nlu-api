@@ -1,10 +1,11 @@
 # Release History
 *****************
 
-## Release ONDEWO NLU APIS 1.1.1
+## Release ONDEWO NLU APIS 1.2.0
 
 ### New Features
  * [OND211-1732] Implement endpoints directly create/update/get/delete training phrases.
+ * [OND211-1724] Add compression_level field to ExportAgentRequest message.
 
 
 ## Release ONDEWO NLU APIS 1.1.0
@@ -32,7 +33,7 @@
  * Type definition for Parameters improved (`context.proto`)
 
 ### Migration Guide
- * Usages of the Context Parameters must be adapted to the new typed structure 
+ * Usages of the Context Parameters must be adapted to the new typed structure
 
 *****************
 
