@@ -518,14 +518,14 @@ message EntityTypeSorting {
     SortingMode sorting_mode = 2;
 }
 
-message EntityBatchResponse {
-    message EntityStatus {
-        oneof entity_or_status {
-            EntityType.Entity entity = 1;
-            string error_message = 2;
-        }
+message EntityStatus {
+    oneof entity_or_status {
+        EntityType.Entity entity = 1;
+        string error_message = 2;
     }
+}
 
+message EntityBatchResponse {
     repeated EntityStatus entity_statuses = 1;
     // indicates if statuses of some of the training phrases have errors
     bool has_errors = 2;
