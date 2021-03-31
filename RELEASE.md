@@ -32,7 +32,7 @@
  * Type definition for Parameters improved (`context.proto`)
 
 ### Migration Guide
- * Usages of the Context Parameters must be adapted to the new typed structure 
+ * Usages of the Context Parameters must be adapted to the new typed structure
 
 *****************
 
