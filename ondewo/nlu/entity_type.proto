@@ -166,16 +166,16 @@ service EntityTypes {
     }
 
     // Creates an entity value in an entity type.
-    rpc CreateEntity (CreateEntityRequest) returns (EntityType.Entity);
+    rpc CreateEntityBatch (CreateEntityBatchRequest) returns (EntityBatchResponse);
 
     // Updates a specific entity value.
-    rpc UpdateEntity (UpdateEntityRequest) returns (EntityType.Entity);
+    rpc UpdateEntityBatch (UpdateEntityBatchRequest) returns (EntityBatchResponse);
 
     // Gets a specific entity value.
-    rpc GetEntity (GetEntityRequest) returns (EntityType.Entity);
+    rpc GetEntityBatch (GetEntityBatchRequest) returns (EntityBatchResponse);
 
     // Deletes the specified entity value.
-    rpc DeleteEntity (DeleteEntityRequest) returns (google.protobuf.Empty);
+    rpc DeleteEntityBatch (DeleteEntityBatchRequest) returns (DeleteEntityBatchResponse);
 
 }
 
@@ -518,28 +518,55 @@ message EntityTypeSorting {
     SortingMode sorting_mode = 2;
 }
 
-message CreateEntityRequest {
-    // Required. Name of the entity type in which to create the entity value. Format:
-    // `projects/<Project ID>/agent/entityTypes/<Entity Type ID>`.
-    string entity_type_name = 1;
+message EntityBatchResponse {
+    message EntityStatus {
+        oneof entity_or_status {
+            EntityType.Entity entity = 1;
+            string error_message = 2;
+        }
+    }
 
-    // The entity value to create
-    EntityType.Entity entity = 2;
+    repeated EntityStatus entity_statuses = 1;
+    // indicates if statuses of some of the training phrases have errors
+    bool has_errors = 2;
 }
 
-message UpdateEntityRequest {
-    // The entity value to update
-    EntityType.Entity entity = 1;
+message CreateEntityBatchRequest {
+    message CreateEntityRequest {
+        // Required. Name of the entity type in which to create the entity value. Format:
+        // `projects/<Project ID>/agent/entityTypes/<Entity Type ID>`.
+        string entity_type_name = 1;
+
+        // The entity value to create
+        EntityType.Entity entity = 2;
+    }
+    repeated CreateEntityRequest create_entity_requests = 1;
 }
 
-message GetEntityRequest {
-    // The unique identifier of the entity. Format:
+message UpdateEntityBatchRequest {
+    // The entities to update
+    repeated EntityType.Entity entities = 1;
+}
+
+message GetEntityBatchRequest {
+    // The unique identifiers of the entities. Format:
     // `projects/<Project ID>/agent/entityTypes/<Entity Type ID>/entities/<Entity ID>`.
-    string name = 1;
+    repeated string names = 1;
 }
 
-message DeleteEntityRequest {
-    // The unique identifier of the entity. Format:
+message DeleteEntityBatchRequest {
+    // The unique identifiers of the entities. Format:
     // `projects/<Project ID>/agent/entityTypes/<Entity Type ID>/entities/<Entity ID>`.
-    string name = 1;
+    repeated string names = 1;
+}
+
+message DeleteEntityBatchResponse {
+    message DeleteEntityStatus {
+        oneof delete_status{
+            google.protobuf.Empty successfully_deleted = 1;
+            string error_message = 2;
+        }
+    }
+    repeated DeleteEntityStatus delete_statuses = 1;
+    bool has_errors = 2;
 }
