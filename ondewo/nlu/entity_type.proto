@@ -144,6 +144,8 @@ service EntityTypes {
     // Deletes the specified entity value.
     rpc DeleteEntityBatch (DeleteEntityBatchRequest) returns (DeleteEntityBatchResponse);
 
+    // List entities of an entity type
+    rpc ListEntities(ListEntitiesRequest) returns (ListEntitiesResponse);
 }
 
 // Represents an entity type.
@@ -481,4 +483,26 @@ message DeleteEntityBatchResponse {
     }
     repeated DeleteEntityStatus delete_statuses = 1;
     bool has_errors = 2;
+}
+
+message ListEntitiesRequest {
+    // The unique identifier of the entity type. Format:
+    // `projects/<Project ID>/agent/entityTypes/<Entity Type ID>
+    string entity_type_name = 1;
+
+    // Optional. The language to list training phrases, parameters and rich
+    // messages for. If not specified, the agent's default language is used.
+    string language_code = 2;
+
+    // Optional. The next_page_token value returned from a previous list request.
+    string page_token = 3;
+}
+
+message ListEntitiesResponse {
+    // The list of entities
+    repeated EntityType.Entity entities = 1;
+
+    // Token to retrieve the next page of results, or empty if there are no
+    // more results in the list.
+    string next_page_token = 2;
 }
