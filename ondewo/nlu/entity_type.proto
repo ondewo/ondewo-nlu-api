@@ -496,6 +496,9 @@ message ListEntitiesRequest {
 
     // Optional. The next_page_token value returned from a previous list request.
     string page_token = 3;
+
+    // Optional. The resource view to apply to the returned entity type.
+    EntityTypeView entity_type_view = 4;
 }
 
 message ListEntitiesResponse {
