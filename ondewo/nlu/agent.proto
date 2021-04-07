@@ -387,12 +387,22 @@ message ListAgentsOfUserResponse {
     string next_page_token = 2;
 }
 
+// Defines when to initiate newly created agent when training started
+enum InitiationProtocol {
+    // after cache successfully built and after each model trained the agent will be updated
+    AS_SOON_AS_POSSIBLE = 0;
+    // after cache successfully built and all the active models successfully trained
+    WHEN_TRAINED = 1;
+    // do not initiate
+    NEVER = 2;
+}
 // The request message for [Agents.TrainAgent][google.cloud.dialogflow.v2.Agents.TrainAgent].
 message TrainAgentRequest {
     // Required. The project that the agent to train is associated with.
     // Format: `projects/<Project ID>`.
     string parent = 1;
     string branch = 2;
+    InitiationProtocol initiation_protocol = 3;
 }
 
 // The request message for [Agents.TrainAgentBuildCache][google.cloud.dialogflow.v2.Agents.BuildCache].
