@@ -5,7 +5,9 @@
 
 ### New Features
  * [OND211-1760] Implement endpoint to directly list training phrases.
- * [OND211-1732] Implement endpoints to directly create/update/get/delete training phrases.
+ * [OND211-1744] Add initiation protocol into train agent endpoint
+ * [OND211-1732] Implement endpoints directly create/update/get/delete training phrases.
+
 
 ## Release ONDEWO NLU APIS 1.1.0
 
@@ -32,7 +34,7 @@
  * Type definition for Parameters improved (`context.proto`)
 
 ### Migration Guide
- * Usages of the Context Parameters must be adapted to the new typed structure 
+ * Usages of the Context Parameters must be adapted to the new typed structure
 
 *****************
 
