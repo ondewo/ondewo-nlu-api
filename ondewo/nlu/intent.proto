@@ -139,6 +139,9 @@ service Intents {
     // Delete a training phrases batch of the specified names.
     rpc DeleteTrainingPhraseBatch (DeleteTrainingPhraseBatchRequest) returns (DeleteTrainingPhraseBatchResponse);
 
+    // List training phrases (of a specific intent).
+    rpc ListTrainingPhrases(ListTrainingPhrasesRequest) returns (ListTrainingPhrasesResponse);
+
 }
 
 // Represents an intent.
@@ -216,6 +219,9 @@ message Intent {
         // the intent. Each time a developer adds an existing sample by editing an
         // intent or training, this counter is increased.
         int32 times_added_count = 5;
+
+        // Optional. The language of the training phrase.
+        string language_code = 6;
     }
 
     enum IntentStatus {
@@ -727,6 +733,8 @@ message Intent {
     // name of this intent as a root_name.
     repeated FollowupIntentInfo followup_intent_info = 18;
 
+    // Format: `current_index-<CURRENT_INDEX>--page_size-<PAGE_SIZE>`
+    // where <CURRENT_INDEX> and <PAGE_SIZE> are of type int
     string next_page_token = 30;
 
     // Optional. Domain to which the intent belongs
@@ -762,6 +770,8 @@ message ListIntentsRequest {
     IntentView intent_view = 3;
 
     // Optional. The next_page_token value returned from a previous list request.
+    // Format: `current_index-<CURRENT_INDEX>--page_size-<PAGE_SIZE>`
+    // where <CURRENT_INDEX> and <PAGE_SIZE> are of type int
     string page_token = 5;
 
     // Optional. Applies a filter to the list. Default, no filter.
@@ -779,6 +789,8 @@ message ListIntentsResponse {
 
     // Token to retrieve the next page of results, or empty if there are no
     // more results in the list.
+    // Format: `current_index-<CURRENT_INDEX>--page_size-<PAGE_SIZE>`
+    // where <CURRENT_INDEX> and <PAGE_SIZE> are of type int
     string next_page_token = 2;
 }
 
@@ -798,6 +810,9 @@ message GetIntentRequest {
     // Optional. The resource view to apply to the returned intent.
     IntentView intent_view = 3;
 
+    // Optional. The next_page_token value returned from a previous list request.
+    // Format: `current_index-<CURRENT_INDEX>--page_size-<PAGE_SIZE>`
+    // where <CURRENT_INDEX> and <PAGE_SIZE> are of type int
     string page_token = 10;
 }
 
@@ -993,4 +1008,35 @@ message DeleteTrainingPhraseBatchResponse {
     }
     repeated DeleteTrainingPhraseStatus delete_statuses = 1;
     bool has_errors = 2;
+}
+
+
+// The request message for TrainingPhraseRequest
+message ListTrainingPhrasesRequest {
+    // Required. The agent to list all intents from.
+    // Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
+    string intent_name = 1;
+
+    // Optional. The language to list training phrases, parameters and rich
+    // messages for. If not specified, the agent's default language is used.
+    string language_code = 2;
+
+    // Optional. The next_page_token value returned from a previous list request.
+    // Format: `current_index-<CURRENT_INDEX>--page_size-<PAGE_SIZE>--sub_field-<SUB_FIELD>`
+    // where <CURRENT_INDEX> and <PAGE_SIZE> are of type int, <SUB_FIELD> is of type str (example: `training_phrases`)
+    string page_token = 3;
+}
+
+
+// The response message for ListTrainingPhrase
+message ListTrainingPhrasesResponse {
+    // The list of training phrases. There will be a maximum number of items
+    // returned based on the page_token field in the request.
+    repeated Intent.TrainingPhrase training_phrases = 1;
+
+    // Token to retrieve the next page of results, or empty if there are no
+    // more results in the list.
+    // Format: `current_index-<CURRENT_INDEX>--page_size-<PAGE_SIZE>--sub_field-<SUB_FIELD>`
+    // where <CURRENT_INDEX> and <PAGE_SIZE> are of type int, <SUB_FIELD> is of type str (example: `training_phrases`)
+    string next_page_token = 2;
 }
