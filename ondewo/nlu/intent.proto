@@ -730,6 +730,8 @@ message Intent {
     // name of this intent as a root_name.
     repeated FollowupIntentInfo followup_intent_info = 18;
 
+    // Format: `current_index-<CURRENT_INDEX>--page_size-<PAGE_SIZE>`
+    // where <CURRENT_INDEX> and <PAGE_SIZE> are of type int
     string next_page_token = 30;
 
     // Optional. Domain to which the intent belongs
@@ -765,6 +767,8 @@ message ListIntentsRequest {
     IntentView intent_view = 3;
 
     // Optional. The next_page_token value returned from a previous list request.
+    // Format: `current_index-<CURRENT_INDEX>--page_size-<PAGE_SIZE>`
+    // where <CURRENT_INDEX> and <PAGE_SIZE> are of type int
     string page_token = 5;
 
     // Optional. Applies a filter to the list. Default, no filter.
@@ -782,6 +786,8 @@ message ListIntentsResponse {
 
     // Token to retrieve the next page of results, or empty if there are no
     // more results in the list.
+    // Format: `current_index-<CURRENT_INDEX>--page_size-<PAGE_SIZE>`
+    // where <CURRENT_INDEX> and <PAGE_SIZE> are of type int
     string next_page_token = 2;
 }
 
@@ -801,6 +807,9 @@ message GetIntentRequest {
     // Optional. The resource view to apply to the returned intent.
     IntentView intent_view = 3;
 
+    // Optional. The next_page_token value returned from a previous list request.
+    // Format: `current_index-<CURRENT_INDEX>--page_size-<PAGE_SIZE>`
+    // where <CURRENT_INDEX> and <PAGE_SIZE> are of type int
     string page_token = 10;
 }
 
@@ -1010,6 +1019,8 @@ message ListTrainingPhrasesRequest {
     string language_code = 2;
 
     // Optional. The next_page_token value returned from a previous list request.
+    // Format: `current_index-<CURRENT_INDEX>--page_size-<PAGE_SIZE>--sub_field-<SUB_FIELD>`
+    // where <CURRENT_INDEX> and <PAGE_SIZE> are of type int, <SUB_FIELD> is of type str (example: `training_phrases`)
     string page_token = 3;
 }
 
@@ -1022,5 +1033,7 @@ message ListTrainingPhrasesResponse {
 
     // Token to retrieve the next page of results, or empty if there are no
     // more results in the list.
+    // Format: `current_index-<CURRENT_INDEX>--page_size-<PAGE_SIZE>--sub_field-<SUB_FIELD>`
+    // where <CURRENT_INDEX> and <PAGE_SIZE> are of type int, <SUB_FIELD> is of type str (example: `training_phrases`)
     string next_page_token = 2;
 }
