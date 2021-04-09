@@ -968,7 +968,10 @@ message CreateTrainingPhraseBatchRequest {
 
         // Required. The training phrase to create.
         Intent.TrainingPhrase training_phrase = 2;
-    }
+
+        // Required. The language of training phrases
+        string language_code = 3;
+    };
     repeated CreateTrainingPhraseRequest training_phrase_requests = 1;
 }
 
