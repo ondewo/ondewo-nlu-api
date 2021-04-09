@@ -4,13 +4,10 @@
 ## Release ONDEWO NLU APIS 1.2.0
 
 ### New Features
+ * [OND211-1767] Change the training phrase message to include a language_code field
+ * [OND211-1766] Make training phrases endpoints work with batches.  
  * [OND211-1744] Add initiation protocol into train agent endpoint
-
-## Release ONDEWO NLU APIS 1.1.1
-
-### New Features
  * [OND211-1732] Implement endpoints directly create/update/get/delete training phrases.
-
 
 ## Release ONDEWO NLU APIS 1.1.0
 
@@ -20,7 +17,6 @@
  * [OND211-1714] Implement intent cleaning endpoints.
  * [OND211-1714] Implement entity_type cleaning endpoints.
  * [OND211-1714] Implement endpoints to add new training phrases to intents.
-
 
 
 ## Release ONDEWO NLU APIS 1.0.0
