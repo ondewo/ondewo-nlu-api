@@ -219,6 +219,9 @@ message Intent {
         // the intent. Each time a developer adds an existing sample by editing an
         // intent or training, this counter is increased.
         int32 times_added_count = 5;
+
+        // Optional. The language of the training phrase.
+        string language_code = 6;
     }
 
     enum IntentStatus {
@@ -977,10 +980,7 @@ message CreateTrainingPhraseBatchRequest {
 
         // Required. The training phrase to create.
         Intent.TrainingPhrase training_phrase = 2;
-
-        // Required. The language of training phrases
-        string language_code = 3;
-    };
+    }
     repeated CreateTrainingPhraseRequest training_phrase_requests = 1;
 }
 
