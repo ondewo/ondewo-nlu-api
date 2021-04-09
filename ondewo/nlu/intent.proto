@@ -209,16 +209,16 @@ message Intent {
         // Required. The text of the training phrase.
         string text = 3;
 
-        // Optional. The language of the training phrase.
-        string language_code = 4;
-
         // Optional. The collection of annotated entities in the training phrase.
-        repeated Entity entities = 5;
+        repeated Entity entities = 4;
 
         // Optional. Indicates how many times this example or template was added to
         // the intent. Each time a developer adds an existing sample by editing an
         // intent or training, this counter is increased.
-        int32 times_added_count = 6;
+        int32 times_added_count = 5;
+
+        // Optional. The language of the training phrase.
+        string language_code = 6;
     }
 
     enum IntentStatus {
@@ -968,7 +968,7 @@ message CreateTrainingPhraseBatchRequest {
 
         // Required. The training phrase to create.
         Intent.TrainingPhrase training_phrase = 2;
-    };
+    }
     repeated CreateTrainingPhraseRequest training_phrase_requests = 1;
 }
 
