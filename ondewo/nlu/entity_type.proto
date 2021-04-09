@@ -170,14 +170,14 @@ message EntityType {
         // `projects/<Project ID>/agent/entityTypes/<Entity Type ID>/entities/<Entity ID>`.
         string name = 3;
 
-        // Required. The language to list entity synonyms for.
-        string language_code = 4;
-
         // The name of the entity.
-        string display_name = 5;
+        string display_name = 4;
 
         // Optional. Total count of entity synonyms
-        int32 synonym_count = 6;
+        int32 synonym_count = 5;
+
+        // Required. The language to list entity synonyms for.
+        string language_code = 6;
     }
 
     // Represents kinds of entities.
