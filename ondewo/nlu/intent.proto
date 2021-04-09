@@ -216,6 +216,9 @@ message Intent {
         // the intent. Each time a developer adds an existing sample by editing an
         // intent or training, this counter is increased.
         int32 times_added_count = 5;
+
+        // Optional. The language of the training phrase.
+        string language_code = 6;
     }
 
     enum IntentStatus {
