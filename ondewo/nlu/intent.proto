@@ -1060,24 +1060,24 @@ message BatchCreateResponsesRequest {
 
 message BatchGetResponsesRequest {
     // Required. The names of the training phrases.
-    // Format: `projects/<Project ID>/agent/intents/<Intent ID>/trainingPhrases/<Training Phrase ID>`
+    // Format: `projects/<Project ID>/agent/intents/<Intent ID>/messages/<Message ID>`
     repeated string names = 1;
 }
 
 message BatchDeleteResponsesRequest {
     // Required. The names of the training phrases.
-    // Format: `projects/<Project ID>/agent/intents/<Intent ID>/trainingPhrases/<Training Phrase ID>`
+    // Format: `projects/<Project ID>/agent/intents/<Intent ID>/messages/<Message ID>`
     repeated string names = 1;
 }
 
 message BatchDeleteResponsesResponse {
-    message DeleteTrainingPhraseStatus{
+    message DeleteResponseStatus{
         oneof delete_status{
             google.protobuf.Empty successfully_deleted = 1;
             string error_message = 2;
         }
     }
-    repeated DeleteTrainingPhraseStatus delete_statuses = 1;
+    repeated DeleteResponseStatus delete_statuses = 1;
     bool has_errors = 2;
 }
 
@@ -1094,7 +1094,7 @@ message ListResponsesRequest {
 
     // Optional. The next_page_token value returned from a previous list request.
     // Format: `current_index-<CURRENT_INDEX>--page_size-<PAGE_SIZE>--sub_field-<SUB_FIELD>`
-    // where <CURRENT_INDEX> and <PAGE_SIZE> are of type int, <SUB_FIELD> is of type str (example: `training_phrases`)
+    // where <CURRENT_INDEX> and <PAGE_SIZE> are of type int, <SUB_FIELD> is of type str (example: `messages`)
     string page_token = 3;
 }
 
@@ -1103,11 +1103,11 @@ message ListResponsesRequest {
 message ListResponsesResponse {
     // The list of training phrases. There will be a maximum number of items
     // returned based on the page_token field in the request.
-    repeated Intent.TrainingPhrase training_phrases = 1;
+    repeated Intent.Message messages = 1;
 
     // Token to retrieve the next page of results, or empty if there are no
     // more results in the list.
     // Format: `current_index-<CURRENT_INDEX>--page_size-<PAGE_SIZE>--sub_field-<SUB_FIELD>`
-    // where <CURRENT_INDEX> and <PAGE_SIZE> are of type int, <SUB_FIELD> is of type str (example: `training_phrases`)
+    // where <CURRENT_INDEX> and <PAGE_SIZE> are of type int, <SUB_FIELD> is of type str (example: `messages`)
     string next_page_token = 2;
 }
