@@ -127,6 +127,8 @@ service Intents {
         };
     }
 
+    /************************* Training Phrase RPC Endpoints ****************************/
+
     // Creates batch of training phrases
     rpc BatchCreateTrainingPhrases (BatchCreateTrainingPhrasesRequest) returns (BatchTrainingPhrasesStatusResponse);
 
@@ -141,6 +143,9 @@ service Intents {
 
     // List training phrases (of a specific intent).
     rpc ListTrainingPhrases(ListTrainingPhrasesRequest) returns (ListTrainingPhrasesResponse);
+
+
+    /************************* Response RPC Endpoints ****************************/
 
     // Creates batch of intent messages
     rpc BatchCreateResponses (BatchCreateResponsesRequest) returns (BatchResponsesStatusResponse);
