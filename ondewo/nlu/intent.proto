@@ -142,6 +142,21 @@ service Intents {
     // List training phrases (of a specific intent).
     rpc ListTrainingPhrases(ListTrainingPhrasesRequest) returns (ListTrainingPhrasesResponse);
 
+    // Creates batch of intent messages
+    rpc BatchCreateResponses (BatchCreateResponsesRequest) returns (BatchResponsesStatusResponse);
+
+    // Retrieve a intent messages batch of the specified names.
+    rpc BatchGetResponses (BatchGetResponsesRequest) returns (BatchResponsesStatusResponse);
+
+    // Updates batch of intent messages
+    rpc BatchUpdateResponses (BatchUpdateResponsesRequest) returns (BatchResponsesStatusResponse);
+
+    // Delete a intent messages batch of the specified names.
+    rpc BatchDeleteResponses (BatchDeleteResponsesRequest) returns (BatchDeleteResponsesResponse);
+
+    // List messages (of a specific intent).
+    rpc ListResponses(ListResponsesRequest) returns (ListResponsesResponse);
+
 }
 
 // Represents an intent.
@@ -579,6 +594,13 @@ message Intent {
             ACTIONS_ON_GOOGLE = 8;
         }
 
+        // Required. The name of the return message.
+        // Format: `projects/<Project ID>/agent/intents/<Intent ID>/messages/<Message ID>`.
+        string name = 16;
+
+        // Required. The language of the return message.
+        string language_code = 17;
+
         // Required. The rich response message.
         oneof message {
             // The text response.
@@ -980,9 +1002,6 @@ message BatchCreateTrainingPhrasesRequest {
 
         // Required. The training phrase to create.
         Intent.TrainingPhrase training_phrase = 2;
-
-        // Required. The language of training phrases
-        string language_code = 3;
     };
     repeated CreateTrainingPhraseRequest training_phrase_requests = 1;
 }
@@ -1027,9 +1046,61 @@ message ListTrainingPhrasesRequest {
     string page_token = 3;
 }
 
+message BatchCreateResponsesRequest {
+
+    message CreateResponseRequest {
+        // Required. The name of the intent for which to create a training phrase for.
+        string intent_name = 1;
+
+        // Required. The response message.
+        Intent.Message message = 2;
+    };
+    repeated CreateResponseRequest response_requests = 1;
+}
+
+message BatchGetResponsesRequest {
+    // Required. The names of the training phrases.
+    // Format: `projects/<Project ID>/agent/intents/<Intent ID>/trainingPhrases/<Training Phrase ID>`
+    repeated string names = 1;
+}
+
+message BatchDeleteResponsesRequest {
+    // Required. The names of the training phrases.
+    // Format: `projects/<Project ID>/agent/intents/<Intent ID>/trainingPhrases/<Training Phrase ID>`
+    repeated string names = 1;
+}
+
+message BatchDeleteResponsesResponse {
+    message DeleteTrainingPhraseStatus{
+        oneof delete_status{
+            google.protobuf.Empty successfully_deleted = 1;
+            string error_message = 2;
+        }
+    }
+    repeated DeleteTrainingPhraseStatus delete_statuses = 1;
+    bool has_errors = 2;
+}
+
+
+// The request message for TrainingPhraseRequest
+message ListResponsesRequest {
+    // Required. The agent to list all intents from.
+    // Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
+    string intent_name = 1;
+
+    // Optional. The language to list training phrases, parameters and rich
+    // messages for. If not specified, the agent's default language is used.
+    string language_code = 2;
+
+    // Optional. The next_page_token value returned from a previous list request.
+    // Format: `current_index-<CURRENT_INDEX>--page_size-<PAGE_SIZE>--sub_field-<SUB_FIELD>`
+    // where <CURRENT_INDEX> and <PAGE_SIZE> are of type int, <SUB_FIELD> is of type str (example: `training_phrases`)
+    string page_token = 3;
+}
+
 
 // The response message for ListTrainingPhrase
-message ListTrainingPhrasesResponse {
+message ListResponsesResponse {
     // The list of training phrases. There will be a maximum number of items
     // returned based on the page_token field in the request.
     repeated Intent.TrainingPhrase training_phrases = 1;
