@@ -148,19 +148,19 @@ service Intents {
     /************************* Response RPC Endpoints ****************************/
 
     // Creates batch of intent messages
-    rpc BatchCreateResponses (BatchCreateResponsesRequest) returns (BatchResponsesStatusResponse);
+    rpc BatchCreateResponseMessages (BatchCreateResponseMessagesRequest) returns (BatchResponseMessagesStatusResponse);
 
     // Retrieve a intent messages batch of the specified names.
-    rpc BatchGetResponses (BatchGetResponsesRequest) returns (BatchResponsesStatusResponse);
+    rpc BatchGetResponseMessages (BatchGetResponseMessagesRequest) returns (BatchResponseMessagesStatusResponse);
 
     // Updates batch of intent messages
-    rpc BatchUpdateResponses (BatchUpdateResponsesRequest) returns (BatchResponsesStatusResponse);
+    rpc BatchUpdateResponseMessages (BatchUpdateResponseMessagesRequest) returns (BatchResponseMessagesStatusResponse);
 
     // Delete a intent messages batch of the specified names.
-    rpc BatchDeleteResponses (BatchDeleteResponsesRequest) returns (BatchDeleteResponsesResponse);
+    rpc BatchDeleteResponseMessages (BatchDeleteResponseMessagesRequest) returns (BatchDeleteResponseMessagesResponse);
 
     // List messages (of a specific intent).
-    rpc ListResponses(ListResponsesRequest) returns (ListResponsesResponse);
+    rpc ListResponseMessages(ListResponseMessagesRequest) returns (ListResponseMessagesResponse);
 
 }
 
@@ -1064,7 +1064,7 @@ message ListTrainingPhrasesResponse {
     string next_page_token = 2;
 }
 
-message BatchResponsesStatusResponse {
+message BatchResponseMessagesStatusResponse {
     message ResponseStatus {
         oneof phrase_or_status {
             Intent.Message message = 1;
@@ -1076,49 +1076,49 @@ message BatchResponsesStatusResponse {
     bool has_errors = 2;
 }
 
-message BatchCreateResponsesRequest {
+message BatchCreateResponseMessagesRequest {
 
-    message CreateResponseRequest {
+    message CreateResponseMessageRequest {
         // Required. The name of the intent for which to create a training phrase for.
         string intent_name = 1;
 
         // Required. The response message.
-        Intent.Message message = 2;
+        Intent.Message response_message = 2;
     };
-    repeated CreateResponseRequest response_requests = 1;
+    repeated CreateResponseMessageRequest response_message_requests = 1;
 }
 
-message BatchUpdateResponsesRequest {
+message BatchUpdateResponseMessagesRequest {
     // The response messages to update
-    repeated Intent.Message responses = 1;
+    repeated Intent.Message response_messages = 1;
 }
 
-message BatchGetResponsesRequest {
-    // Required. The names of the training phrases.
+message BatchGetResponseMessagesRequest {
+    // Required. The names of the response messages.
     // Format: `projects/<Project ID>/agent/intents/<Intent ID>/messages/<Message ID>`
     repeated string names = 1;
 }
 
-message BatchDeleteResponsesRequest {
-    // Required. The names of the training phrases.
+message BatchDeleteResponseMessagesRequest {
+    // Required. The names of the  response messages.
     // Format: `projects/<Project ID>/agent/intents/<Intent ID>/messages/<Message ID>`
     repeated string names = 1;
 }
 
-message BatchDeleteResponsesResponse {
-    message DeleteResponseStatus{
+message BatchDeleteResponseMessagesResponse {
+    message DeleteResponseMessageStatus{
         oneof delete_status{
             google.protobuf.Empty successfully_deleted = 1;
             string error_message = 2;
         }
     }
-    repeated DeleteResponseStatus delete_statuses = 1;
+    repeated DeleteResponseMessageStatus delete_statuses = 1;
     bool has_errors = 2;
 }
 
 
 // The request message for TrainingPhraseRequest
-message ListResponsesRequest {
+message ListResponseMessagesRequest {
     // Required. The agent to list all intents from.
     // Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
     string intent_name = 1;
@@ -1135,10 +1135,10 @@ message ListResponsesRequest {
 
 
 // The response message for ListTrainingPhrase
-message ListResponsesResponse {
+message ListResponseMessagesResponse {
     // The list of training phrases. There will be a maximum number of items
     // returned based on the page_token field in the request.
-    repeated Intent.Message messages = 1;
+    repeated Intent.Message response_messages = 1;
 
     // Token to retrieve the next page of results, or empty if there are no
     // more results in the list.
