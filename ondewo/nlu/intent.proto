@@ -1065,13 +1065,13 @@ message ListTrainingPhrasesResponse {
 }
 
 message BatchResponseMessagesStatusResponse {
-    message ResponseStatus {
+    message ResponseMessageStatus {
         oneof phrase_or_status {
             Intent.Message message = 1;
             string error_message = 2;
     }
     }
-    repeated ResponseStatus response_statuses = 1;
+    repeated ResponseMessageStatus response_message_statuses = 1;
     // indicates if statuses of some of the training phrases have errors
     bool has_errors = 2;
 }
