@@ -1051,6 +1051,31 @@ message ListTrainingPhrasesRequest {
     string page_token = 3;
 }
 
+// The response message for ListTrainingPhrase
+message ListTrainingPhrasesResponse {
+    // The list of training phrases. There will be a maximum number of items
+    // returned based on the page_token field in the request.
+    repeated Intent.TrainingPhrase training_phrases = 1;
+
+    // Token to retrieve the next page of results, or empty if there are no
+    // more results in the list.
+    // Format: `current_index-<CURRENT_INDEX>--page_size-<PAGE_SIZE>--sub_field-<SUB_FIELD>`
+    // where <CURRENT_INDEX> and <PAGE_SIZE> are of type int, <SUB_FIELD> is of type str (example: `training_phrases`)
+    string next_page_token = 2;
+}
+
+message BatchResponsesStatusResponse {
+    message ResponseStatus {
+        oneof phrase_or_status {
+            Intent.Message message = 1;
+            string error_message = 2;
+    }
+    }
+    repeated ResponseStatus response_statuses = 1;
+    // indicates if statuses of some of the training phrases have errors
+    bool has_errors = 2;
+}
+
 message BatchCreateResponsesRequest {
 
     message CreateResponseRequest {
@@ -1061,6 +1086,11 @@ message BatchCreateResponsesRequest {
         Intent.Message message = 2;
     };
     repeated CreateResponseRequest response_requests = 1;
+}
+
+message BatchUpdateResponsesRequest {
+    // The response messages to update
+    repeated Intent.Message responses = 1;
 }
 
 message BatchGetResponsesRequest {
