@@ -600,7 +600,7 @@ message Intent {
         }
 
         // Required. The name of the return message.
-        // Format: `projects/<Project ID>/agent/intents/<Intent ID>/messages/<Message ID>`.
+        // Format: `projects/<Project ID>/agent/intents/<Intent ID>/responseMessages/<Message ID>`.
         string name = 16;
 
         // Required. The language of the return message.
