@@ -1067,7 +1067,7 @@ message ListTrainingPhrasesResponse {
 message BatchResponseMessagesStatusResponse {
     message ResponseMessageStatus {
         oneof phrase_or_status {
-            Intent.Message message = 1;
+            Intent.Message response_message = 1;
             string error_message = 2;
     }
     }
