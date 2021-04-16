@@ -741,6 +741,6 @@ message ModelStatusProto {
 message GetModelStatusesResponse {
     // Required. The project that the agent to fetch is associated with.
     // Format: `projects/<Project ID>`.
-    repeated ModelStatus model_statuses = 1;
+    repeated ModelStatusProto model_statuses = 1;
 }
 
