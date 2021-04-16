@@ -713,6 +713,9 @@ message GetModelStatusesRequest {
     // Required. The project that the agent to fetch is associated with.
     // Format: `projects/<Project ID>`.
     string parent = 1;
+    int32 cache_version = 2;
+    string language_code = 3;
+    string model_name = 4;
 }
 
 message GetModelStatusesResponse {
