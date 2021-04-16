@@ -253,7 +253,7 @@ service Agents {
         };
     }
     // Get statuses of models related to project
-    rpc GetMogelStatuses (GetModelStatusesRequest) returns (GetModelStatusesResponse);
+    rpc GetModelStatuses (GetModelStatusesRequest) returns (GetModelStatusesResponse);
 }
 
 // Project/Agent messages
