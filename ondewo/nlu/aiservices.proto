@@ -73,7 +73,8 @@ message ExtractEntitiesRequest {
 
 message EntityDetected{
     Intent.TrainingPhrase.Entity entity = 1;
-    string detection_data = 2;
+    string extraction_method = 2;
+    float score = 3;
 }
 
 message ExtractEntitiesResponse {
