@@ -78,7 +78,7 @@ message EntityDetected{
 }
 
 message ExtractEntitiesResponse {
-    repeated EntityDetected entities = 1;
+    repeated EntityDetected entities_detected = 1;
     string text = 2;
 }
 
