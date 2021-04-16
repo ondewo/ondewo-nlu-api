@@ -1095,13 +1095,13 @@ message BatchUpdateResponseMessagesRequest {
 
 message BatchGetResponseMessagesRequest {
     // Required. The names of the response messages.
-    // Format: `projects/<Project ID>/agent/intents/<Intent ID>/messages/<Message ID>`
+    // Format: `projects/<Project ID>/agent/intents/<Intent ID>/responseMessages/<Message ID>`
     repeated string names = 1;
 }
 
 message BatchDeleteResponseMessagesRequest {
     // Required. The names of the  response messages.
-    // Format: `projects/<Project ID>/agent/intents/<Intent ID>/messages/<Message ID>`
+    // Format: `projects/<Project ID>/agent/intents/<Intent ID>/responseMessages/<Message ID>`
     repeated string names = 1;
 }
 
