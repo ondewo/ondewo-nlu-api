@@ -142,6 +142,24 @@ service Intents {
     // List training phrases (of a specific intent).
     rpc ListTrainingPhrases(ListTrainingPhrasesRequest) returns (ListTrainingPhrasesResponse);
 
+
+    /************************* Parameter RPC Endpoints ****************************/
+
+    // Creates batch of intent messages
+    rpc BatchCreateParameters (BatchCreateParametersRequest) returns (BatchParametersStatusResponse);
+
+    // Retrieve a intent messages batch of the specified names.
+    rpc BatchGetParameters (BatchGetParametersRequest) returns (BatchParametersStatusResponse);
+
+    // Updates batch of intent messages
+    rpc BatchUpdateParameters (BatchUpdateParametersRequest) returns (BatchParametersStatusResponse);
+
+    // Delete a intent messages batch of the specified names.
+    rpc BatchDeleteParameters (BatchDeleteParametersRequest) returns (BatchDeleteParametersResponse);
+
+    // List messages (of a specific intent).
+    rpc ListParameters(ListParametersRequest) returns (ListParametersResponse);
+
 }
 
 // Represents an intent.
@@ -272,6 +290,9 @@ message Intent {
 
         // Optional. Indicates whether the parameter represents a list of values.
         bool is_list = 9;
+
+        // Optional. The language of the prompts
+        string language_code = 10;
     }
 
     // Corresponds to the `Response` field in the Dialogflow console.
@@ -1038,5 +1059,88 @@ message ListTrainingPhrasesResponse {
     // more results in the list.
     // Format: `current_index-<CURRENT_INDEX>--page_size-<PAGE_SIZE>--sub_field-<SUB_FIELD>`
     // where <CURRENT_INDEX> and <PAGE_SIZE> are of type int, <SUB_FIELD> is of type str (example: `training_phrases`)
+    string next_page_token = 2;
+}
+
+message BatchParametersStatusResponse {
+    message ParameterStatus {
+        oneof phrase_or_status {
+            Intent.Parameter parameter = 1;
+            string error_message = 2;
+    }
+    }
+    repeated ParameterStatus response_message_statuses = 1;
+    // indicates if statuses of some of the parameters have errors
+    bool has_errors = 2;
+}
+
+message BatchCreateParametersRequest {
+
+    message CreateParameterRequest {
+        // Required. The name of the intent for which to create a training phrase for.
+        string intent_name = 1;
+
+        // Required. The response message.
+        Intent.Parameter parameters = 2;
+    };
+    repeated CreateParameterRequest parameter_requests = 1;
+}
+
+message BatchUpdateParametersRequest {
+    // The response messages to update
+    repeated Intent.Parameter parameters = 1;
+}
+
+message BatchGetParametersRequest {
+    // Required. The names of the response messages.
+    // Format: `projects/<Project ID>/agent/intents/<Intent ID>/parameters/<Parameter ID>`
+    repeated string names = 1;
+}
+
+message BatchDeleteParametersRequest {
+    // Required. The names of the  response messages.
+    // Format: `projects/<Project ID>/agent/intents/<Intent ID>/parameters/<Parameter ID>`
+    repeated string names = 1;
+}
+
+message BatchDeleteParametersResponse {
+    message DeleteParameterStatus{
+        oneof delete_status{
+            google.protobuf.Empty successfully_deleted = 1;
+            string error_message = 2;
+        }
+    }
+    repeated DeleteParameterStatus delete_statuses = 1;
+    bool has_errors = 2;
+}
+
+
+// The request message for TrainingPhraseRequest
+message ListParametersRequest {
+    // Required. The agent to list all intents from.
+    // Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
+    string intent_name = 1;
+
+    // Optional. The language to list prompts for.
+    // If not specified, the agent's default language is used.
+    string language_code = 2;
+
+    // Optional. The next_page_token value returned from a previous list request.
+    // Format: `current_index-<CURRENT_INDEX>--page_size-<PAGE_SIZE>--sub_field-<SUB_FIELD>`
+    // where <CURRENT_INDEX> and <PAGE_SIZE> are of type int, <SUB_FIELD> is of type str (example: `parameters`)
+    string page_token = 3;
+}
+
+
+// The response message for ListTrainingPhrase
+message ListParametersResponse {
+    // The list of parameters. There will be a maximum number of items
+    // returned based on the page_token field in the request.
+    repeated Intent.Parameter parameters = 1;
+
+    // Token to retrieve the next page of results, or empty if there are no
+    // more results in the list.
+    // Format: `current_index-<CURRENT_INDEX>--page_size-<PAGE_SIZE>--sub_field-<SUB_FIELD>`
+    // where <CURRENT_INDEX> and <PAGE_SIZE> are of type int, <SUB_FIELD> is of type str (example: `parameters`)
     string next_page_token = 2;
 }
