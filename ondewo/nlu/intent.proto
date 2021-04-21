@@ -1069,7 +1069,7 @@ message BatchParametersStatusResponse {
             string error_message = 2;
     }
     }
-    repeated ParameterStatus response_message_statuses = 1;
+    repeated ParameterStatus parameter_statuses = 1;
     // indicates if statuses of some of the parameters have errors
     bool has_errors = 2;
 }
