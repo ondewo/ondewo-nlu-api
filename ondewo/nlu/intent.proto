@@ -1081,7 +1081,7 @@ message BatchCreateParametersRequest {
         string intent_name = 1;
 
         // Required. The response message.
-        Intent.Parameter parameters = 2;
+        Intent.Parameter parameter = 2;
     };
     repeated CreateParameterRequest parameter_requests = 1;
 }
