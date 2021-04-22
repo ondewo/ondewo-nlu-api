@@ -718,7 +718,7 @@ message GetModelStatusesRequest {
     string model_name = 4;
 }
 
-message ModelStatusProto {
+message ModelStatus {
     // Required. The project that the agent to fetch is associated with.
     // Format: `projects/<Project ID>`.
     int32 cache_version = 1;
@@ -741,6 +741,6 @@ message ModelStatusProto {
 message GetModelStatusesResponse {
     // Required. The project that the agent to fetch is associated with.
     // Format: `projects/<Project ID>`.
-    repeated ModelStatusProto model_statuses = 1;
+    repeated ModelStatus model_statuses = 1;
 }
 
