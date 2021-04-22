@@ -251,10 +251,13 @@ message Intent {
     message Parameter {
         // Represents the prompts in the parameters.
         message Prompt {
+            // The unique identifier of this prompt.
+            // Format: `projects/<Project ID>/agent/intents/<Intent ID>/parameters/<Parameter ID>/prompts/<Prompt ID>`.
+            string name = 1;
             // Required. Text of the prompt
-            string text = 1;
+            string text = 2;
             // Optional. The language of the prompts. If not specified, the default language code will be used.
-            string language_code = 2;
+            string language_code = 3;
         }
         // The unique identifier of this parameter.
         // Format: `projects/<Project ID>/agent/intents/<Intent ID>/parameters/<Parameter ID>`.
