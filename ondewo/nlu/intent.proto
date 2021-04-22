@@ -1128,8 +1128,7 @@ message ListParametersRequest {
     // Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
     string intent_name = 1;
 
-    // Optional. The language to list prompts for.
-    // If not specified, the agent's default language is used.
+    // Optional. The language code used to filter out prompts.
     string language_code = 2;
 
     // Optional. The next_page_token value returned from a previous list request.
