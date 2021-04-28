@@ -38,6 +38,7 @@ import "google/protobuf/struct.proto";
 import "ondewo/nlu/common.proto";
 import "ondewo/nlu/user.proto";
 import "ondewo/nlu/project_role.proto";
+import "google/protobuf/timestamp.proto";
 
 // Agents are best described as Natural Language Understanding (NLU) modules
 // that transform user requests into actionable data. You can include agents
@@ -251,6 +252,8 @@ service Agents {
             body: "*"
         };
     }
+    // Get statuses of models related to project
+    rpc GetModelStatuses (GetModelStatusesRequest) returns (GetModelStatusesResponse);
 }
 
 // Project/Agent messages
@@ -706,3 +709,38 @@ message ExportResourcesResponse {
     string language_code = 4;
     bytes resource_file = 5;
 }
+message GetModelStatusesRequest {
+    // Required. The project that the agent to fetch is associated with.
+    // Format: `projects/<Project ID>`.
+    string parent = 1;
+    int32 cache_version = 2;
+    string language_code = 3;
+    string model_name = 4;
+}
+
+message ModelStatus {
+    // Required. The project that the agent to fetch is associated with.
+    // Format: `projects/<Project ID>`.
+    int32 cache_version = 1;
+    string language_code = 2;
+    string model_name = 3;
+    google.protobuf.Timestamp status_set_time = 4;
+    enum StatusName {
+        UNKNOWN = 0;
+        INITIALIZING = 1;
+        INITIALIZED = 2;
+        LOADING_DATA = 3;
+        TRAINING = 4;
+        TESTING = 5;
+        TRAINED = 6;
+    }
+    string config = 5;
+    StatusName status = 6;
+}
+
+message GetModelStatusesResponse {
+    // Required. The project that the agent to fetch is associated with.
+    // Format: `projects/<Project ID>`.
+    repeated ModelStatus model_statuses = 1;
+}
+
