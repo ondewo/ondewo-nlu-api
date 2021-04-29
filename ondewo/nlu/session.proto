@@ -361,8 +361,7 @@ message StreamingDetectIntentRequest {
     bool single_utterance = 4;
 
     // Optional. The input audio content to be recognized. Must be sent if
-    // `query_input` was set to a streaming input audio config. The complete audio
-    // over all streaming messages must not exceed 1 minute.
+    // `query_input` was set to a streaming input audio config.
     bytes input_audio = 6;
 }
 
@@ -391,6 +390,9 @@ message StreamingDetectIntentResponse {
 
     // Specifies the status of the webhook request.
     google.rpc.Status webhook_status = 4;
+
+    // Synthetized audio bytes
+    bytes audio = 5;
 }
 
 // Contains a speech recognition result corresponding to a portion of the audio
