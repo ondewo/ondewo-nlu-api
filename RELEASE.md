@@ -1,5 +1,11 @@
 # Release History
 *****************
+## Release ONDEWO NLU APIS 1.3.0
+
+### New Features
+ * [OND211-1773] Implement endpoints to directly create/update/get/delete and list responses (=intent messages).
+
+*****************
 
 ## Release ONDEWO NLU APIS 1.2.0
 
@@ -12,6 +18,7 @@
  * [OND211-1731] Implement endpoints to directly create/update/get/delete and list entity values.
  * [OND211-1724] Add compression_level field to ExportAgentRequest message.
 
+*****************
 
 ## Release ONDEWO NLU APIS 1.1.0
 
@@ -22,6 +29,7 @@
  * [OND211-1714] Implement entity_type cleaning endpoints.
  * [OND211-1714] Implement endpoints to add new training phrases to intents.
 
+*****************
 
 ## Release ONDEWO NLU APIS 1.0.0
 
