@@ -65,4 +65,3 @@ Please use the issue tracker in this repo for discussions about this API, or the
 ## Generate gRPC Source Code
 
 API client libraries can be built directly from files in this repo using [the proto compiler.](https://github.com/ondewo/ondewo-proto-compiler)
->>>>>>>>> Temporary merge branch 2
