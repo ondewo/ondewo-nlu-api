@@ -1072,14 +1072,14 @@ message BatchResponseMessagesStatusResponse {
     }
     }
     repeated ResponseMessageStatus response_message_statuses = 1;
-    // indicates if statuses of some of the training phrases have errors
+    // indicates if statuses of some of the response messages have errors
     bool has_errors = 2;
 }
 
 message BatchCreateResponseMessagesRequest {
 
     message CreateResponseMessageRequest {
-        // Required. The name of the intent for which to create a training phrase for.
+        // Required. The name of the intent for which to create a response message for.
         string intent_name = 1;
 
         // Required. The response message.
@@ -1117,13 +1117,13 @@ message BatchDeleteResponseMessagesResponse {
 }
 
 
-// The request message for TrainingPhraseRequest
+// The request message for ResponseMessageRequest
 message ListResponseMessagesRequest {
     // Required. The agent to list all intents from.
     // Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
     string intent_name = 1;
 
-    // Optional. The language to list training phrases, parameters and rich
+    // Optional. The language to list response messages, parameters and rich
     // messages for. If not specified, the agent's default language is used.
     string language_code = 2;
 
@@ -1134,9 +1134,9 @@ message ListResponseMessagesRequest {
 }
 
 
-// The response message for ListTrainingPhrase
+// The response message for ListResponseMessage
 message ListResponseMessagesResponse {
-    // The list of training phrases. There will be a maximum number of items
+    // The list of response messages. There will be a maximum number of items
     // returned based on the page_token field in the request.
     repeated Intent.Message response_messages = 1;
 
