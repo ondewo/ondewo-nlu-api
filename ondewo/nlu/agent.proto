@@ -38,6 +38,7 @@ import "google/protobuf/struct.proto";
 import "ondewo/nlu/common.proto";
 import "ondewo/nlu/user.proto";
 import "ondewo/nlu/project_role.proto";
+import "google/protobuf/timestamp.proto";
 
 // Agents are best described as Natural Language Understanding (NLU) modules
 // that transform user requests into actionable data. You can include agents
@@ -251,6 +252,8 @@ service Agents {
             body: "*"
         };
     }
+    // Get statuses of models related to project
+    rpc GetModelStatuses (GetModelStatusesRequest) returns (GetModelStatusesResponse);
 }
 
 // Project/Agent messages
@@ -387,12 +390,22 @@ message ListAgentsOfUserResponse {
     string next_page_token = 2;
 }
 
+// Defines when to initiate newly created agent when training started
+enum InitiationProtocol {
+    // after cache successfully built and after each model trained the agent will be updated
+    AS_SOON_AS_POSSIBLE = 0;
+    // after cache successfully built and all the active models successfully trained
+    WHEN_TRAINED = 1;
+    // do not initiate
+    NEVER = 2;
+}
 // The request message for [Agents.TrainAgent][google.cloud.dialogflow.v2.Agents.TrainAgent].
 message TrainAgentRequest {
     // Required. The project that the agent to train is associated with.
     // Format: `projects/<Project ID>`.
     string parent = 1;
     string branch = 2;
+    InitiationProtocol initiation_protocol = 3;
 }
 
 // The request message for [Agents.TrainAgentBuildCache][google.cloud.dialogflow.v2.Agents.BuildCache].
@@ -413,6 +426,11 @@ message ExportAgentRequest {
     // Note: The URI must start with
     // "gs://". If left unspecified, the serialized agent is returned inline.
     string agent_uri = 2;
+
+    // Optional. The compression level of the zip file created.
+    // Valid range 1-9; the grpc-default value 0 will be mapped to 1,
+    // other values cause an error in the request validation handler.
+    int32 compression_level = 3;
 }
 
 // The response message for [Agents.ExportAgent][google.cloud.dialogflow.v2.Agents.ExportAgent].
@@ -691,3 +709,38 @@ message ExportResourcesResponse {
     string language_code = 4;
     bytes resource_file = 5;
 }
+message GetModelStatusesRequest {
+    // Required. The project that the agent to fetch is associated with.
+    // Format: `projects/<Project ID>`.
+    string parent = 1;
+    int32 cache_version = 2;
+    string language_code = 3;
+    string model_name = 4;
+}
+
+message ModelStatus {
+    // Required. The project that the agent to fetch is associated with.
+    // Format: `projects/<Project ID>`.
+    int32 cache_version = 1;
+    string language_code = 2;
+    string model_name = 3;
+    google.protobuf.Timestamp status_set_time = 4;
+    enum StatusName {
+        UNKNOWN = 0;
+        INITIALIZING = 1;
+        INITIALIZED = 2;
+        LOADING_DATA = 3;
+        TRAINING = 4;
+        TESTING = 5;
+        TRAINED = 6;
+    }
+    string config = 5;
+    StatusName status = 6;
+}
+
+message GetModelStatusesResponse {
+    // Required. The project that the agent to fetch is associated with.
+    // Format: `projects/<Project ID>`.
+    repeated ModelStatus model_statuses = 1;
+}
+
