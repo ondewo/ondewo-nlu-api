@@ -133,16 +133,16 @@ service EntityTypes {
 
 
     // Creates an entity value in an entity type.
-    rpc CreateEntityBatch (CreateEntityBatchRequest) returns (EntityBatchResponse);
+    rpc BatchCreateEntities (BatchCreateEntitiesRequest) returns (BatchEntitiesResponse);
 
     // Updates a specific entity value.
-    rpc UpdateEntityBatch (UpdateEntityBatchRequest) returns (EntityBatchResponse);
+    rpc BatchUpdateEntities (BatchUpdateEntitiesRequest) returns (BatchEntitiesResponse);
 
     // Gets a specific entity value.
-    rpc GetEntityBatch (GetEntityBatchRequest) returns (EntityBatchResponse);
+    rpc BatchGetEntities (BatchGetEntitiesRequest) returns (BatchEntitiesResponse);
 
     // Deletes the specified entity value.
-    rpc DeleteEntityBatch (DeleteEntityBatchRequest) returns (DeleteEntityBatchResponse);
+    rpc BatchDeleteEntities (BatchDeleteEntitiesRequest) returns (BatchDeleteEntitiesResponse);
 
     // List entities of an entity type
     rpc ListEntities(ListEntitiesRequest) returns (ListEntitiesResponse);
@@ -432,7 +432,7 @@ message EntityTypeSorting {
     SortingMode sorting_mode = 2;
 }
 
-message EntityBatchResponse {
+message BatchEntitiesResponse {
     message EntityStatus {
         oneof entity_or_status {
             EntityType.Entity entity = 1;
@@ -444,7 +444,7 @@ message EntityBatchResponse {
     bool has_errors = 2;
 }
 
-message CreateEntityBatchRequest {
+message BatchCreateEntitiesRequest {
     message CreateEntityRequest {
         // Required. Name of the entity type in which to create the entity value. Format:
         // `projects/<Project ID>/agent/entityTypes/<Entity Type ID>`.
@@ -456,24 +456,24 @@ message CreateEntityBatchRequest {
     repeated CreateEntityRequest create_entity_requests = 1;
 }
 
-message UpdateEntityBatchRequest {
+message BatchUpdateEntitiesRequest {
     // The entities to update
     repeated EntityType.Entity entities = 1;
 }
 
-message GetEntityBatchRequest {
+message BatchGetEntitiesRequest {
     // The unique identifiers of the entities. Format:
     // `projects/<Project ID>/agent/entityTypes/<Entity Type ID>/entities/<Entity ID>`.
     repeated string names = 1;
 }
 
-message DeleteEntityBatchRequest {
+message BatchDeleteEntitiesRequest {
     // The unique identifiers of the entities. Format:
     // `projects/<Project ID>/agent/entityTypes/<Entity Type ID>/entities/<Entity ID>`.
     repeated string names = 1;
 }
 
-message DeleteEntityBatchResponse {
+message BatchDeleteEntitiesResponse {
     message DeleteEntityStatus {
         oneof delete_status{
             google.protobuf.Empty successfully_deleted = 1;
