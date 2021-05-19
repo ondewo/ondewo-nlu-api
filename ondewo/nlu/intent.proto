@@ -162,6 +162,24 @@ service Intents {
     // List messages (of a specific intent).
     rpc ListResponseMessages(ListResponseMessagesRequest) returns (ListResponseMessagesResponse);
 
+
+    /************************* Parameter RPC Endpoints ****************************/
+
+    // Creates batch of intent messages
+    rpc BatchCreateParameters (BatchCreateParametersRequest) returns (BatchParametersStatusResponse);
+
+    // Retrieve a intent messages batch of the specified names.
+    rpc BatchGetParameters (BatchGetParametersRequest) returns (BatchParametersStatusResponse);
+
+    // Updates batch of intent messages
+    rpc BatchUpdateParameters (BatchUpdateParametersRequest) returns (BatchParametersStatusResponse);
+
+    // Delete a intent messages batch of the specified names.
+    rpc BatchDeleteParameters (BatchDeleteParametersRequest) returns (BatchDeleteParametersResponse);
+
+    // List messages (of a specific intent).
+    rpc ListParameters(ListParametersRequest) returns (ListParametersResponse);
+
 }
 
 // Represents an intent.
@@ -251,6 +269,16 @@ message Intent {
 
     // Represents intent parameters.
     message Parameter {
+        // Represents the prompts in the parameters.
+        message Prompt {
+            // The unique identifier of this prompt.
+            // Format: `projects/<Project ID>/agent/intents/<Intent ID>/parameters/<Parameter ID>/prompts/<Prompt ID>`.
+            string name = 1;
+            // Required. Text of the prompt
+            string text = 2;
+            // Optional. The language of the prompts. If not specified, the default language code will be used.
+            string language_code = 3;
+        }
         // The unique identifier of this parameter.
         // Format: `projects/<Project ID>/agent/intents/<Intent ID>/parameters/<Parameter ID>`.
         string name = 1;
@@ -288,7 +316,7 @@ message Intent {
 
         // Optional. The collection of prompts that the agent can present to the
         // user in order to collect value for the parameter.
-        repeated string prompts = 8;
+        repeated Prompt prompts = 8;
 
         // Optional. Indicates whether the parameter represents a list of values.
         bool is_list = 9;
@@ -1144,5 +1172,87 @@ message ListResponseMessagesResponse {
     // more results in the list.
     // Format: `current_index-<CURRENT_INDEX>--page_size-<PAGE_SIZE>--sub_field-<SUB_FIELD>`
     // where <CURRENT_INDEX> and <PAGE_SIZE> are of type int, <SUB_FIELD> is of type str (example: `messages`)
+    string next_page_token = 2;
+}
+
+message BatchParametersStatusResponse {
+    message ParameterStatus {
+        oneof phrase_or_status {
+            Intent.Parameter parameter = 1;
+            string error_message = 2;
+    }
+    }
+    repeated ParameterStatus parameter_statuses = 1;
+    // indicates if statuses of some of the parameters have errors
+    bool has_errors = 2;
+}
+
+message BatchCreateParametersRequest {
+
+    message CreateParameterRequest {
+        // Required. The name of the intent for which to create a training phrase for.
+        string intent_name = 1;
+
+        // Required. The response message.
+        Intent.Parameter parameter = 2;
+    };
+    repeated CreateParameterRequest parameter_requests = 1;
+}
+
+message BatchUpdateParametersRequest {
+    // The response messages to update
+    repeated Intent.Parameter parameters = 1;
+}
+
+message BatchGetParametersRequest {
+    // Required. The names of the response messages.
+    // Format: `projects/<Project ID>/agent/intents/<Intent ID>/parameters/<Parameter ID>`
+    repeated string names = 1;
+}
+
+message BatchDeleteParametersRequest {
+    // Required. The names of the  response messages.
+    // Format: `projects/<Project ID>/agent/intents/<Intent ID>/parameters/<Parameter ID>`
+    repeated string names = 1;
+}
+
+message BatchDeleteParametersResponse {
+    message DeleteParameterStatus{
+        oneof delete_status{
+            google.protobuf.Empty successfully_deleted = 1;
+            string error_message = 2;
+        }
+    }
+    repeated DeleteParameterStatus delete_statuses = 1;
+    bool has_errors = 2;
+}
+
+
+// The request message for TrainingPhraseRequest
+message ListParametersRequest {
+    // Required. The agent to list all intents from.
+    // Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
+    string intent_name = 1;
+
+    // Optional. The language code used to filter out prompts.
+    string language_code = 2;
+
+    // Optional. The next_page_token value returned from a previous list request.
+    // Format: `current_index-<CURRENT_INDEX>--page_size-<PAGE_SIZE>--sub_field-<SUB_FIELD>`
+    // where <CURRENT_INDEX> and <PAGE_SIZE> are of type int, <SUB_FIELD> is of type str (example: `parameters`)
+    string page_token = 3;
+}
+
+
+// The response message for ListTrainingPhrase
+message ListParametersResponse {
+    // The list of parameters. There will be a maximum number of items
+    // returned based on the page_token field in the request.
+    repeated Intent.Parameter parameters = 1;
+
+    // Token to retrieve the next page of results, or empty if there are no
+    // more results in the list.
+    // Format: `current_index-<CURRENT_INDEX>--page_size-<PAGE_SIZE>--sub_field-<SUB_FIELD>`
+    // where <CURRENT_INDEX> and <PAGE_SIZE> are of type int, <SUB_FIELD> is of type str (example: `parameters`)
     string next_page_token = 2;
 }
