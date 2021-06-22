@@ -33,6 +33,7 @@ jobs:
           go get -v -u github.com/pseudomuto/protoc-gen-doc/cmd/protoc-gen-doc
           export PATH=$(go env GOPATH)/bin:$PATH
           echo $PATH
+          ls $(go env GOPATH)/bin
 
       # Runs a set of commands using the runners shell
       - name: Generate documentation from ONDEWO proto files
