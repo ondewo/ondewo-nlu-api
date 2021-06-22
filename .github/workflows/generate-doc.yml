@@ -22,18 +22,15 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - uses: actions/setup-go@v2.1.3
-
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
+      - uses: actions/setup-go@v2.1.3
+
       - name: Install protoc and protoc-gen-doc
         run: |
-          which go
-          echo $GOPATH
           sudo apt install -y protobuf-compiler
-          which go
-          echo $GOPATH
+          go version
           go get -v -u github.com/pseudomuto/protoc-gen-doc/cmd/protoc-gen-doc
 
       # Runs a set of commands using the runners shell
