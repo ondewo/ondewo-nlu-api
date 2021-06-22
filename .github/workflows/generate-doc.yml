@@ -29,7 +29,7 @@ jobs:
 
       - name: Install protoc and protoc-gen-doc
         run: |
-          go get -u github.com/pseudomuto/protoc-gen-doc/cmd/protoc-gen-doc
+          go get -u google.golang.org/protobuf/cmd/protoc-gen-go github.com/pseudomuto/protoc-gen-doc/cmd/protoc-gen-doc
           export GOPATH=$(go env GOPATH)
           export PATH=$GOPATH/bin:$PATH
 
