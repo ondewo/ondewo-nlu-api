@@ -31,7 +31,7 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Generate documentation from ONDEWO proto files
         run: |
-          apt install -y protobuf-compiler
+          sudo apt install -y protobuf-compiler
           for f in $(find ondewo -name '*.proto')
           do
           	protoc -Igoogleapis -Iondewo --doc_opt=markdown,$(basename ${f%.proto}.md) --doc_out=doc/$(dirname $f) $f
