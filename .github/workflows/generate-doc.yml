@@ -31,5 +31,5 @@ jobs:
           go get -u github.com/pseudomuto/protoc-gen-doc/cmd/protoc-gen-doc
           for f in $(find ondewo -name '*.proto')
           do
-          	protoc -Igoogleapis -Iondewo --doc_opt=markdown,$(basename ${f%.proto}.md) --doc_out=doc/$(dirname $f) $f
+          	echo "protoc -Igoogleapis -Iondewo --doc_opt=markdown,$(basename ${f%.proto}.md) --doc_out=doc/$(dirname $f) $f"
           done
