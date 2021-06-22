@@ -29,5 +29,7 @@ jobs:
       - name: Generate
         run: |
           go get -u github.com/pseudomuto/protoc-gen-doc/cmd/protoc-gen-doc
-          echo Add other actions to build,
-          echo test, and deploy your project.
+          for f in $(find ondewo -name '*.proto')
+          do
+          	protoc -Igoogleapis -Iondewo --doc_opt=markdown,$(basename ${f%.proto}.md) --doc_out=doc/$(dirname $f) $f
+          done
