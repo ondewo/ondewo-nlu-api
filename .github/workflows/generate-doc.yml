@@ -32,6 +32,7 @@ jobs:
       - name: Generate documentation from ONDEWO proto files
         run: |
           sudo apt install -y protobuf-compiler
+          go get -u github.com/pseudomuto/protoc-gen-doc/cmd/protoc-gen-doc
           for f in $(find ondewo -name '*.proto')
           do
           	protoc -I. -Igoogleapis --doc_opt=markdown,$(basename ${f%.proto}.md) --doc_out=doc/$(dirname $f) $f
