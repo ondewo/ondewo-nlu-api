@@ -29,7 +29,8 @@ jobs:
 
       - name: Install protoc and protoc-gen-doc
         run: |
-          go get -u google.golang.org/protobuf/cmd/protoc github.com/pseudomuto/protoc-gen-doc/cmd/protoc-gen-doc
+          sudo apt install -y protobuf-compiler
+          go get -u github.com/pseudomuto/protoc-gen-doc/cmd/protoc-gen-doc
           export GOPATH=$(go env GOPATH)
           export PATH=$GOPATH/bin:$PATH
           ls -al $GOPATH/bin
