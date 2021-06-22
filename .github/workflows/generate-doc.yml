@@ -34,5 +34,5 @@ jobs:
           sudo apt install -y protobuf-compiler
           for f in $(find ondewo -name '*.proto')
           do
-          	protoc -I. --doc_opt=markdown,$(basename ${f%.proto}.md) --doc_out=doc/$(dirname $f) $f
+          	protoc -I. -Igoogleapis --doc_opt=markdown,$(basename ${f%.proto}.md) --doc_out=doc/$(dirname $f) $f
           done
