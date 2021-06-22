@@ -32,7 +32,7 @@ jobs:
       - name: Install protoc and protoc-gen-doc
         run: |
           sudo apt install -y protobuf-compiler
-          go get -u github.com/pseudomuto/protoc-gen-doc/cmd/protoc-gen-doc
+          go get -v -u github.com/pseudomuto/protoc-gen-doc/cmd/protoc-gen-doc
 
       # Runs a set of commands using the runners shell
       - name: Generate documentation from ONDEWO proto files
