@@ -25,13 +25,14 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      - name: Setup Go environment
-        uses: actions/setup-go@v2.1.3
+#      - name: Setup Go environment
+#        uses: actions/setup-go@v2.1.3
 
       # Runs a set of commands using the runners shell
       - name: Generate documentation from ONDEWO proto files
         run: |
-          go get -u github.com/pseudomuto/protoc-gen-doc/cmd/protoc-gen-doc
+          apt install -y protobuf-compiler
+#          go get -u github.com/pseudomuto/protoc-gen-doc/cmd/protoc-gen-doc
           for f in $(find ondewo -name '*.proto')
           do
           	protoc -Igoogleapis -Iondewo --doc_opt=markdown,$(basename ${f%.proto}.md) --doc_out=doc/$(dirname $f) $f
