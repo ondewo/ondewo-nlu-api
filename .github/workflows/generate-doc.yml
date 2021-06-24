@@ -42,4 +42,4 @@ jobs:
 #          git commit -am "Automatically generate documentation from protos."
 #          git push
 
-      - uses: ondewo/ondewo-csi-client-python
+      - uses: ondewo/ondewo-csi-client-python@main
