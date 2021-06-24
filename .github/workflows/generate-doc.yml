@@ -43,5 +43,3 @@ jobs:
 #          git push
 
       - uses: ondewo/ondewo-protoc-gen-doc-action@main
-        with:
-          out-file: nlu
