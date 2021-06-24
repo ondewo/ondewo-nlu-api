@@ -42,4 +42,4 @@ jobs:
 #          git commit -am "Automatically generate documentation from protos."
 #          git push
 
-      - uses: ondewo/ondewo-ondewo-protoc-gen-doc-action@main
+      - uses: ondewo/ondewo-protoc-gen-doc-action@main
