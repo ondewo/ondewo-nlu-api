@@ -8,13 +8,17 @@
 
 This repository contains the original interface definitions of public ONDEWO APIs that support gRPC protocols. Reading the original interface definitions can provide a better understanding of ONDEWO APIs and help you to utilize them more efficiently. You can also use these definitions with open source tools to generate client libraries, documentation, and other artifacts.
 
-The core componenets of all the client libraries are built directly from files in this repo using [the proto compiler.](https://github.com/ondewo/ondewo-proto-compiler)
+The API documentation is generated from files using [protoc-gen-doc](https://github.com/pseudomuto/protoc-gen-doc) in formats:
+* [html](https://htmlpreview.github.io/?https://github.com/ondewo/ondewo-nlu-api/blob/feature/OND211-380-generate-documentation/doc/index.html)
+* [markdown](doc/index.md)
 
-For an end-user, the APIS in this repo function mostly as documentation for the endpoints. For specific implementations, look in the following repos for working implementations:
+The core components of all the client libraries are built directly from files in this repo using [the proto compiler](https://github.com/ondewo/ondewo-proto-compiler).
+
+For an end-user, the APIs in this repo function mostly as documentation for the endpoints. For specific implementations, look in the following repos for working implementations:
 * [Python](https://github.com/ondewo/ondewo-nlu-client-python)
-* [Angular](https://github.com/ondewo/ondewo-survey-client-angular)
-* [JavaScript](https://github.com/ondewo/ondewo-survey-client-javascript)
-* [TypeScript](https://github.com/ondewo/ondewo-survey-client-typescript)
+* [Angular](https://github.com/ondewo/ondewo-nlu-client-angular)
+* [JavaScript](https://github.com/ondewo/ondewo-nlu-client-javascript)
+* [TypeScript](https://github.com/ondewo/ondewo-nlu-client-typescript)
 
 Please note that some of these implementations are works-in-progress. The repo will make clear the status of the implementation.
 
@@ -38,6 +42,10 @@ Please use the issue tracker in this repo for discussions about this API, or the
 ```
 .
 ├── CONTRIBUTING.md
+├── doc
+│   ├── index.html
+│   ├── index.md
+│   ├── style.css
 ├── googleapis
 │   └── (clone of https://github.com/googleapis/googleapis.git on commit hash == 79ab27f3b70ebc221e265d2e8ab30a8cc2d21fa2)
 ├── LICENSE
