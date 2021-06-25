@@ -16,7 +16,12 @@ h2 {
 }
 
 h3 {
-    font-weight: normal;
+    border-bottom: 1px solid #aaa;
+    padding-bottom: 0.5ex;
+    margin: 2em 0 1em;
+}
+
+h4 {
     border-bottom: 1px solid #aaa;
     padding-bottom: 0.5ex;
 }
@@ -123,25 +128,6 @@ td p:nth-child(1) {
     display: table-cell;
 }
 
-  /* The 'M', 'E' and 'X' badges in the ToC */
-.badge {
-    width: 1.6em;
-    height: 1.6em;
-    display: inline-block;
-
-    line-height: 1.6em;
-    text-align: center;
-    font-weight: bold;
-    font-size: 60%;
-
-    color: #fff;
-    background-color: #bf206b;
-
-    margin: 0.5ex 1em 0.5ex -1em;
-    border: 1px solid #fbfbfb;
-    border-radius: 1ex;
-}
-
 .nav-side {
     position: fixed;
     top: 0;
@@ -163,7 +149,7 @@ td p:nth-child(1) {
     margin: 20px;
 }
 
-#toc-container ul {
+#toc {
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -185,15 +171,8 @@ td p:nth-child(1) {
     background-color: #fff;
 }
 
-#toc > li > a.active h3 {
+#toc > li > a.active {
     font-weight: bold;
-}
-
-#toc h3 {
-    font-size: 100%;
-    margin: 0;
-    padding: 0;
-    border-bottom: 0;
 }
 
 .file-content {
@@ -206,13 +185,6 @@ td p:nth-child(1) {
     color: #000;
     display: block;
     text-decoration: none;
-}
-
-.file-content > a:hover {
-    background-color: #e3e3e3;
-}
-
-.file-content h4 {
     font-size: 80%;
     font-weight: normal;
     margin: 0;
@@ -220,16 +192,72 @@ td p:nth-child(1) {
     text-transform: uppercase;
 }
 
-#toc-container .file-content ul {
+.file-content > a:hover {
+    background-color: #e3e3e3;
+}
+
+.file-content ul {
+    list-style-type: none;
     padding: 0 0 1ex 2em;
 }
 
-.file-content li {
+.file-content a {
+    display: block;
     line-height: 1.6em;
 }
 
 .content-wrap {
     margin-left: 330px;
-    max-width: 50em;
+    max-width: 60em;
     padding: 0 1em;
+}
+
+.object-category {
+    font-size: 120%;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin: 3em 0 1em 0;
+}
+
+.title-badge:before {
+    display: inline-block;
+    color: #fff;
+    width: 1.6em;
+    height: 1.6em;
+    line-height: 1.6em;
+    text-align: center;
+    vertical-align: middle;
+    border-radius: 1ex;
+    font-size: 0.6em;
+    font-weight: bold;
+    margin-right: .5em;
+}
+
+.title-badge.service:before {
+    content: "S";
+    background-color: #bf206b;
+}
+
+.title-badge.method:before {
+    content: "M";
+    background-color: #014c89;
+}
+
+.title-badge.message:before {
+    content: "M";
+    background-color: #bf206b;
+}
+
+.title-badge.enum:before {
+    content: "E";
+    background-color: #bf206b;
+}
+
+pre,
+samp {
+    display: block;
+    padding: 1em;
+    margin: 1em 0;
+    background-color: #f2f2f2;
+    white-space: pre;
 }
