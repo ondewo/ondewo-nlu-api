@@ -133,6 +133,28 @@ service Agents {
     }
 
     // Retrieves the specified agent.
+    //
+    // <p>Examples:</p>
+    //
+    // <pre>
+    // grpcurl -plaintext -H 'cai-token: aimp' -d '{
+    //   "parent": "projects/76aaf4f3-a1f6-4fda-b4b3-351c64e65bc4/agent"
+    // }' localhost:50055 ondewo.nlu.Agents.GetAgent
+    // </pre>
+    // <samp>{
+    //   "parent": "projects/76aaf4f3-a1f6-4fda-b4b3-351c64e65bc4/agent",
+    //   "display_name": "Pizza Bot 2",
+    //   "default_language_code": "en",
+    //   "supported_language_codes": [
+    //     "en",
+    //     "de"
+    //   ],
+    //   "time_zone": "Europe/Vienna",
+    //   "nlu_platform": "ONDEWO",
+    //   "configs": {...},
+    //   "owner_id": "5aac51b8-668f-49dd-913f-cc683e56af34"
+    // }
+    // </samp>
     rpc GetAgent (GetAgentRequest) returns (Agent) {
         option (google.api.http) = {
             get: "/v2/{parent=projects/*/agent}"
@@ -156,6 +178,13 @@ service Agents {
     }
 
     // Deletes all agents in the server (for development purposes only).
+    //
+    // <p>Examples:</p>
+    //
+    // <pre>
+    // grpcurl -plaintext -H 'cai-token: aimp' localhost:50055 ondewo.nlu.Agents.DeleteAllAgents
+    // </pre>
+    // <samp>{}</samp>
     rpc DeleteAllAgents (google.protobuf.Empty) returns (google.protobuf.Empty) {
         option (google.api.http) = {
             delete: "/v2/projects"
@@ -163,6 +192,31 @@ service Agents {
     }
 
     // Lists agents in the server associated to the current user
+    //
+    // <p>Examples:</p>
+    //
+    // <pre>
+    // grpcurl -plaintext -H 'cai-token: aimp' localhost:50055 ondewo.nlu.Agents.ListAgents
+    // </pre>
+    // <samp>{
+    //   "agents_with_owners": [
+    //     {
+    //       "agent": {
+    //         "parent": "projects/76aaf4f3-a1f6-4fda-b4b3-351c64e65bc4/agent",
+    //         "display_name": "Pizza Bot 2",
+    //         "owner_id": "5aac51b8-668f-49dd-913f-cc683e56af34"
+    //       },
+    //       "owner": {
+    //         "user_id": "5aac51b8-668f-49dd-913f-cc683e56af34",
+    //         "display_name": "admin",
+    //         "server_role_id": 3,
+    //         "user_email": "admin@ondewo.com"
+    //       }
+    //     }
+    //   ],
+    //   "next_page_token": "current_index-1"
+    // }
+    // </samp>
     rpc ListAgents (ListAgentsRequest) returns (ListAgentsResponse) {
         option (google.api.http) = {
             get: "/v2/projects"
@@ -170,6 +224,37 @@ service Agents {
     }
 
     // Lists agents in the server associated to the given user
+    //
+    // <p>Examples:</p>
+    //
+    // <pre>
+    // grpcurl -plaintext -H 'cai-token: aimp' localhost:50055 ondewo.nlu.Agents.ListAgentsOfUser
+    // </pre>
+    // <samp>{
+    //   "agents_of_user_with_owners": [
+    //     {
+    //       "agent_with_owner": {
+    //         "agent": {
+    //           "parent": "projects/76aaf4f3-a1f6-4fda-b4b3-351c64e65bc4/agent",
+    //           "display_name": "Pizza Bot 2",
+    //           "owner_id": "5aac51b8-668f-49dd-913f-cc683e56af34"
+    //         },
+    //         "owner": {
+    //           "user_id": "5aac51b8-668f-49dd-913f-cc683e56af34",
+    //           "display_name": "admin",
+    //           "server_role_id": 3,
+    //           "user_email": "admin@ondewo.com"
+    //         }
+    //       },
+    //       "project_role": {
+    //         "role_id": 4,
+    //         "name": "ADMIN"
+    //       }
+    //     }
+    //   ],
+    //   "next_page_token": "current_index-1"
+    // }
+    // </samp>
     rpc ListAgentsOfUser (ListAgentsRequest) returns (ListAgentsOfUserResponse) {
         option (google.api.http) = {
             get: "/v2/projects"
@@ -177,6 +262,31 @@ service Agents {
     }
 
     // Lists all agents in the server
+    //
+    // <p>Examples:</p>
+    //
+    // <pre>
+    // grpcurl -plaintext -H 'cai-token: aimp' localhost:50055 ondewo.nlu.Agents.ListAllAgents
+    // </pre>
+    // <samp>{
+    //   "agents_with_owners": [
+    //     {
+    //       "agent": {
+    //         "parent": "projects/76aaf4f3-a1f6-4fda-b4b3-351c64e65bc4/agent",
+    //         "display_name": "Pizza Bot 2",
+    //         "owner_id": "5aac51b8-668f-49dd-913f-cc683e56af34"
+    //       },
+    //       "owner": {
+    //         "user_id": "5aac51b8-668f-49dd-913f-cc683e56af34",
+    //         "display_name": "admin",
+    //         "server_role_id": 3,
+    //         "user_email": "admin@ondewo.com"
+    //       }
+    //     }
+    //   ],
+    //   "next_page_token": "current_index-1"
+    // }
+    // </samp>
     rpc ListAllAgents (ListAgentsRequest) returns (ListAgentsResponse) {
         option (google.api.http) = {
             get: "/v2/projects:all"
