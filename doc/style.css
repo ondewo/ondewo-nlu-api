@@ -253,6 +253,12 @@ td p:nth-child(1) {
     background-color: #bf206b;
 }
 
+.service-methods {
+    font-weight: bold;
+    text-transform: uppercase;
+    margin: 2em 0 1em 0;
+}
+
 pre,
 samp {
     display: block;

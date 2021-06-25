@@ -1972,11 +1972,11 @@
         <p>Agents are best described as Natural Language Understanding (NLU) modules that transform user requests into actionable data. You can include agents in your app, product, or service to determine user intent and respond to the user in a natural way.</p><p>After you create an agent, you can add [Intents][google.cloud.dialogflow.v2.Intents], [Contexts][google.cloud.dialogflow.v2.Contexts], [Entity Types][google.cloud.dialogflow.v2.EntityTypes], [Webhooks][google.cloud.dialogflow.v2.WebhookRequest], and so on to manage the flow of a conversation and match user input to predefined intents and actions.</p><p>You can create an agent using both Dialogflow Standard Edition and Dialogflow Enterprise Edition. For details, see [Dialogflow Editions](/dialogflow-enterprise/docs/editions).</p><p>You can save your agent for backup or versioning by exporting the agent by using the [ExportAgent][google.cloud.dialogflow.v2.Agents.ExportAgent] method. You can import a saved agent by using the [ImportAgent][google.cloud.dialogflow.v2.Agents.ImportAgent] method.</p><p>Dialogflow provides several [prebuilt agents](https://dialogflow.com/docs/prebuilt-agents) for common conversation scenarios such as determining a date and time, converting currency, and so on.</p><p>For more information about agents, see the [Dialogflow documentation](https://dialogflow.com/docs/agents).</p>
 
         
-        <div id="ondewo.nlu.Agents-methods">Methods</div>
+        <div id="ondewo.nlu.Agents-methods" class="service-methods">Service Methods</div>
         
           <h4 id="ondewo.nlu.Agents.CreateAgent" class="title-badge method">CreateAgent</h4>
 
-          <pre>rpc CreateAgent (<a href="#ondewo.nlu.CreateAgentRequest">CreateAgentRequest</a>) returns (Agent)</pre>
+          <pre>rpc CreateAgent (<a href="#ondewo.nlu.CreateAgentRequest">CreateAgentRequest</a>) returns (<a href="#ondewo.nlu.Agent">Agent)</a></pre>
 
           Creates the specified agent.
 
@@ -2009,7 +2009,7 @@ grpcurl -plaintext -H 'cai-token: aimp' -d '{
         
           <h4 id="ondewo.nlu.Agents.UpdateAgent" class="title-badge method">UpdateAgent</h4>
 
-          <pre>rpc UpdateAgent (<a href="#ondewo.nlu.UpdateAgentRequest">UpdateAgentRequest</a>) returns (Agent)</pre>
+          <pre>rpc UpdateAgent (<a href="#ondewo.nlu.UpdateAgentRequest">UpdateAgentRequest</a>) returns (<a href="#ondewo.nlu.Agent">Agent)</a></pre>
 
           Updates the specified agent.
 
@@ -2047,13 +2047,35 @@ grpcurl -plaintext -H 'cai-token: aimp' -d '{
         
           <h4 id="ondewo.nlu.Agents.GetAgent" class="title-badge method">GetAgent</h4>
 
-          <pre>rpc GetAgent (<a href="#ondewo.nlu.GetAgentRequest">GetAgentRequest</a>) returns (Agent)</pre>
+          <pre>rpc GetAgent (<a href="#ondewo.nlu.GetAgentRequest">GetAgentRequest</a>) returns (<a href="#ondewo.nlu.Agent">Agent)</a></pre>
 
           Retrieves the specified agent.
+
+<p>Examples:</p>
+
+<pre>
+grpcurl -plaintext -H 'cai-token: aimp' -d '{
+  "parent": "projects/76aaf4f3-a1f6-4fda-b4b3-351c64e65bc4/agent"
+}' localhost:50055 ondewo.nlu.Agents.GetAgent
+</pre>
+<samp>{
+  "parent": "projects/76aaf4f3-a1f6-4fda-b4b3-351c64e65bc4/agent",
+  "display_name": "Pizza Bot 2",
+  "default_language_code": "en",
+  "supported_language_codes": [
+    "en",
+    "de"
+  ],
+  "time_zone": "Europe/Vienna",
+  "nlu_platform": "ONDEWO",
+  "configs": {...},
+  "owner_id": "5aac51b8-668f-49dd-913f-cc683e56af34"
+}
+</samp>
         
           <h4 id="ondewo.nlu.Agents.DeleteAgent" class="title-badge method">DeleteAgent</h4>
 
-          <pre>rpc DeleteAgent (<a href="#ondewo.nlu.DeleteAgentRequest">DeleteAgentRequest</a>) returns (.google.protobuf.Empty)</pre>
+          <pre>rpc DeleteAgent (<a href="#ondewo.nlu.DeleteAgentRequest">DeleteAgentRequest</a>) returns (<a href="#google.protobuf.Empty">.google.protobuf.Empty)</a></pre>
 
           Deletes the specified agent.
 
@@ -2068,61 +2090,149 @@ grpcurl -plaintext -H 'cai-token: aimp' -d '{
         
           <h4 id="ondewo.nlu.Agents.DeleteAllAgents" class="title-badge method">DeleteAllAgents</h4>
 
-          <pre>rpc DeleteAllAgents (<a href="#google.protobuf.Empty">.google.protobuf.Empty</a>) returns (.google.protobuf.Empty)</pre>
+          <pre>rpc DeleteAllAgents (<a href="#google.protobuf.Empty">.google.protobuf.Empty</a>) returns (<a href="#google.protobuf.Empty">.google.protobuf.Empty)</a></pre>
 
           Deletes all agents in the server (for development purposes only).
+
+<p>Examples:</p>
+
+<pre>
+grpcurl -plaintext -H 'cai-token: aimp' localhost:50055 ondewo.nlu.Agents.DeleteAllAgents
+</pre>
+<samp>{}</samp>
         
           <h4 id="ondewo.nlu.Agents.ListAgents" class="title-badge method">ListAgents</h4>
 
-          <pre>rpc ListAgents (<a href="#ondewo.nlu.ListAgentsRequest">ListAgentsRequest</a>) returns (ListAgentsResponse)</pre>
+          <pre>rpc ListAgents (<a href="#ondewo.nlu.ListAgentsRequest">ListAgentsRequest</a>) returns (<a href="#ondewo.nlu.ListAgentsResponse">ListAgentsResponse)</a></pre>
 
           Lists agents in the server associated to the current user
+
+<p>Examples:</p>
+
+<pre>
+grpcurl -plaintext -H 'cai-token: aimp' localhost:50055 ondewo.nlu.Agents.ListAgents
+</pre>
+<samp>{
+  "agents_with_owners": [
+    {
+      "agent": {
+        "parent": "projects/76aaf4f3-a1f6-4fda-b4b3-351c64e65bc4/agent",
+        "display_name": "Pizza Bot 2",
+        "owner_id": "5aac51b8-668f-49dd-913f-cc683e56af34"
+      },
+      "owner": {
+        "user_id": "5aac51b8-668f-49dd-913f-cc683e56af34",
+        "display_name": "admin",
+        "server_role_id": 3,
+        "user_email": "admin@ondewo.com"
+      }
+    }
+  ],
+  "next_page_token": "current_index-1"
+}
+</samp>
         
           <h4 id="ondewo.nlu.Agents.ListAgentsOfUser" class="title-badge method">ListAgentsOfUser</h4>
 
-          <pre>rpc ListAgentsOfUser (<a href="#ondewo.nlu.ListAgentsRequest">ListAgentsRequest</a>) returns (ListAgentsOfUserResponse)</pre>
+          <pre>rpc ListAgentsOfUser (<a href="#ondewo.nlu.ListAgentsRequest">ListAgentsRequest</a>) returns (<a href="#ondewo.nlu.ListAgentsOfUserResponse">ListAgentsOfUserResponse)</a></pre>
 
           Lists agents in the server associated to the given user
+
+<p>Examples:</p>
+
+<pre>
+grpcurl -plaintext -H 'cai-token: aimp' localhost:50055 ondewo.nlu.Agents.ListAgentsOfUser
+</pre>
+<samp>{
+  "agents_of_user_with_owners": [
+    {
+      "agent_with_owner": {
+        "agent": {
+          "parent": "projects/76aaf4f3-a1f6-4fda-b4b3-351c64e65bc4/agent",
+          "display_name": "Pizza Bot 2",
+          "owner_id": "5aac51b8-668f-49dd-913f-cc683e56af34"
+        },
+        "owner": {
+          "user_id": "5aac51b8-668f-49dd-913f-cc683e56af34",
+          "display_name": "admin",
+          "server_role_id": 3,
+          "user_email": "admin@ondewo.com"
+        }
+      },
+      "project_role": {
+        "role_id": 4,
+        "name": "ADMIN"
+      }
+    }
+  ],
+  "next_page_token": "current_index-1"
+}
+</samp>
         
           <h4 id="ondewo.nlu.Agents.ListAllAgents" class="title-badge method">ListAllAgents</h4>
 
-          <pre>rpc ListAllAgents (<a href="#ondewo.nlu.ListAgentsRequest">ListAgentsRequest</a>) returns (ListAgentsResponse)</pre>
+          <pre>rpc ListAllAgents (<a href="#ondewo.nlu.ListAgentsRequest">ListAgentsRequest</a>) returns (<a href="#ondewo.nlu.ListAgentsResponse">ListAgentsResponse)</a></pre>
 
           Lists all agents in the server
+
+<p>Examples:</p>
+
+<pre>
+grpcurl -plaintext -H 'cai-token: aimp' localhost:50055 ondewo.nlu.Agents.ListAllAgents
+</pre>
+<samp>{
+  "agents_with_owners": [
+    {
+      "agent": {
+        "parent": "projects/76aaf4f3-a1f6-4fda-b4b3-351c64e65bc4/agent",
+        "display_name": "Pizza Bot 2",
+        "owner_id": "5aac51b8-668f-49dd-913f-cc683e56af34"
+      },
+      "owner": {
+        "user_id": "5aac51b8-668f-49dd-913f-cc683e56af34",
+        "display_name": "admin",
+        "server_role_id": 3,
+        "user_email": "admin@ondewo.com"
+      }
+    }
+  ],
+  "next_page_token": "current_index-1"
+}
+</samp>
         
           <h4 id="ondewo.nlu.Agents.AddUserToProject" class="title-badge method">AddUserToProject</h4>
 
-          <pre>rpc AddUserToProject (<a href="#ondewo.nlu.AddUserToProjectRequest">AddUserToProjectRequest</a>) returns (.google.protobuf.Empty)</pre>
+          <pre>rpc AddUserToProject (<a href="#ondewo.nlu.AddUserToProjectRequest">AddUserToProjectRequest</a>) returns (<a href="#google.protobuf.Empty">.google.protobuf.Empty)</a></pre>
 
           Adds a user with specified id to the project (agent)
         
           <h4 id="ondewo.nlu.Agents.RemoveUserFromProject" class="title-badge method">RemoveUserFromProject</h4>
 
-          <pre>rpc RemoveUserFromProject (<a href="#ondewo.nlu.RemoveUserFromProjectRequest">RemoveUserFromProjectRequest</a>) returns (.google.protobuf.Empty)</pre>
+          <pre>rpc RemoveUserFromProject (<a href="#ondewo.nlu.RemoveUserFromProjectRequest">RemoveUserFromProjectRequest</a>) returns (<a href="#google.protobuf.Empty">.google.protobuf.Empty)</a></pre>
 
           Removes a user with specified id from the project (agent)
         
           <h4 id="ondewo.nlu.Agents.ListUsersInProject" class="title-badge method">ListUsersInProject</h4>
 
-          <pre>rpc ListUsersInProject (<a href="#ondewo.nlu.ListUsersInProjectRequest">ListUsersInProjectRequest</a>) returns (ListUsersInProjectResponse)</pre>
+          <pre>rpc ListUsersInProject (<a href="#ondewo.nlu.ListUsersInProjectRequest">ListUsersInProjectRequest</a>) returns (<a href="#ondewo.nlu.ListUsersInProjectResponse">ListUsersInProjectResponse)</a></pre>
 
           
         
           <h4 id="ondewo.nlu.Agents.GetPlatformInfo" class="title-badge method">GetPlatformInfo</h4>
 
-          <pre>rpc GetPlatformInfo (<a href="#google.protobuf.Empty">.google.protobuf.Empty</a>) returns (GetPlatformInfoResponse)</pre>
+          <pre>rpc GetPlatformInfo (<a href="#google.protobuf.Empty">.google.protobuf.Empty</a>) returns (<a href="#ondewo.nlu.GetPlatformInfoResponse">GetPlatformInfoResponse)</a></pre>
 
           
         
           <h4 id="ondewo.nlu.Agents.ListProjectPermissions" class="title-badge method">ListProjectPermissions</h4>
 
-          <pre>rpc ListProjectPermissions (<a href="#ondewo.nlu.ListProjectPermissionsRequest">ListProjectPermissionsRequest</a>) returns (ListProjectPermissionsResponse)</pre>
+          <pre>rpc ListProjectPermissions (<a href="#ondewo.nlu.ListProjectPermissionsRequest">ListProjectPermissionsRequest</a>) returns (<a href="#ondewo.nlu.ListProjectPermissionsResponse">ListProjectPermissionsResponse)</a></pre>
 
           
         
           <h4 id="ondewo.nlu.Agents.TrainAgent" class="title-badge method">TrainAgent</h4>
 
-          <pre>rpc TrainAgent (<a href="#ondewo.nlu.TrainAgentRequest">TrainAgentRequest</a>) returns (.google.longrunning.Operation)</pre>
+          <pre>rpc TrainAgent (<a href="#ondewo.nlu.TrainAgentRequest">TrainAgentRequest</a>) returns (<a href="#google.longrunning.Operation">.google.longrunning.Operation)</a></pre>
 
           Trains the specified agent.
 
@@ -2131,7 +2241,7 @@ Operation <response: [google.protobuf.Empty][google.protobuf.Empty],
         
           <h4 id="ondewo.nlu.Agents.BuildCache" class="title-badge method">BuildCache</h4>
 
-          <pre>rpc BuildCache (<a href="#ondewo.nlu.BuildCacheRequest">BuildCacheRequest</a>) returns (.google.longrunning.Operation)</pre>
+          <pre>rpc BuildCache (<a href="#ondewo.nlu.BuildCacheRequest">BuildCacheRequest</a>) returns (<a href="#google.longrunning.Operation">.google.longrunning.Operation)</a></pre>
 
           Builds cache for the specified agent.
 
@@ -2140,7 +2250,7 @@ Operation <response: [google.protobuf.Empty][google.protobuf.Empty],
         
           <h4 id="ondewo.nlu.Agents.ExportAgent" class="title-badge method">ExportAgent</h4>
 
-          <pre>rpc ExportAgent (<a href="#ondewo.nlu.ExportAgentRequest">ExportAgentRequest</a>) returns (.google.longrunning.Operation)</pre>
+          <pre>rpc ExportAgent (<a href="#ondewo.nlu.ExportAgentRequest">ExportAgentRequest</a>) returns (<a href="#google.longrunning.Operation">.google.longrunning.Operation)</a></pre>
 
           Exports the specified agent to a ZIP file.
 
@@ -2149,7 +2259,7 @@ Operation <response: [ExportAgentResponse][google.cloud.dialogflow.v2.ExportAgen
         
           <h4 id="ondewo.nlu.Agents.ImportAgent" class="title-badge method">ImportAgent</h4>
 
-          <pre>rpc ImportAgent (<a href="#ondewo.nlu.ImportAgentRequest">ImportAgentRequest</a>) returns (.google.longrunning.Operation)</pre>
+          <pre>rpc ImportAgent (<a href="#ondewo.nlu.ImportAgentRequest">ImportAgentRequest</a>) returns (<a href="#google.longrunning.Operation">.google.longrunning.Operation)</a></pre>
 
           Imports the specified agent from a ZIP file.
 
@@ -2162,13 +2272,13 @@ Operation <response: [google.protobuf.Empty][google.protobuf.Empty],
         
           <h4 id="ondewo.nlu.Agents.OptimizeRankingMatch" class="title-badge method">OptimizeRankingMatch</h4>
 
-          <pre>rpc OptimizeRankingMatch (<a href="#ondewo.nlu.OptimizeRankingMatchRequest">OptimizeRankingMatchRequest</a>) returns (.google.longrunning.Operation)</pre>
+          <pre>rpc OptimizeRankingMatch (<a href="#ondewo.nlu.OptimizeRankingMatchRequest">OptimizeRankingMatchRequest</a>) returns (<a href="#google.longrunning.Operation">.google.longrunning.Operation)</a></pre>
 
           
         
           <h4 id="ondewo.nlu.Agents.RestoreAgent" class="title-badge method">RestoreAgent</h4>
 
-          <pre>rpc RestoreAgent (<a href="#ondewo.nlu.RestoreAgentRequest">RestoreAgentRequest</a>) returns (.google.longrunning.Operation)</pre>
+          <pre>rpc RestoreAgent (<a href="#ondewo.nlu.RestoreAgentRequest">RestoreAgentRequest</a>) returns (<a href="#google.longrunning.Operation">.google.longrunning.Operation)</a></pre>
 
           Restores the specified agent from a ZIP file.
 
@@ -2180,37 +2290,37 @@ Operation <response: [google.protobuf.Empty][google.protobuf.Empty],
         
           <h4 id="ondewo.nlu.Agents.GetAgentStatistics" class="title-badge method">GetAgentStatistics</h4>
 
-          <pre>rpc GetAgentStatistics (<a href="#ondewo.nlu.GetAgentStatisticsRequest">GetAgentStatisticsRequest</a>) returns (GetAgentStatisticsResponse)</pre>
+          <pre>rpc GetAgentStatistics (<a href="#ondewo.nlu.GetAgentStatisticsRequest">GetAgentStatisticsRequest</a>) returns (<a href="#ondewo.nlu.GetAgentStatisticsResponse">GetAgentStatisticsResponse)</a></pre>
 
           
         
           <h4 id="ondewo.nlu.Agents.SetAgentStatus" class="title-badge method">SetAgentStatus</h4>
 
-          <pre>rpc SetAgentStatus (<a href="#ondewo.nlu.SetAgentStatusRequest">SetAgentStatusRequest</a>) returns (Agent)</pre>
+          <pre>rpc SetAgentStatus (<a href="#ondewo.nlu.SetAgentStatusRequest">SetAgentStatusRequest</a>) returns (<a href="#ondewo.nlu.Agent">Agent)</a></pre>
 
           
         
           <h4 id="ondewo.nlu.Agents.SetResources" class="title-badge method">SetResources</h4>
 
-          <pre>rpc SetResources (<a href="#ondewo.nlu.SetResourcesRequest">SetResourcesRequest</a>) returns (.google.protobuf.Empty)</pre>
+          <pre>rpc SetResources (<a href="#ondewo.nlu.SetResourcesRequest">SetResourcesRequest</a>) returns (<a href="#google.protobuf.Empty">.google.protobuf.Empty)</a></pre>
 
           
         
           <h4 id="ondewo.nlu.Agents.DeleteResources" class="title-badge method">DeleteResources</h4>
 
-          <pre>rpc DeleteResources (<a href="#ondewo.nlu.DeleteResourcesRequest">DeleteResourcesRequest</a>) returns (.google.protobuf.Empty)</pre>
+          <pre>rpc DeleteResources (<a href="#ondewo.nlu.DeleteResourcesRequest">DeleteResourcesRequest</a>) returns (<a href="#google.protobuf.Empty">.google.protobuf.Empty)</a></pre>
 
           
         
           <h4 id="ondewo.nlu.Agents.ExportResources" class="title-badge method">ExportResources</h4>
 
-          <pre>rpc ExportResources (<a href="#ondewo.nlu.ExportResourcesRequest">ExportResourcesRequest</a>) returns (ExportResourcesResponse)</pre>
+          <pre>rpc ExportResources (<a href="#ondewo.nlu.ExportResourcesRequest">ExportResourcesRequest</a>) returns (<a href="#ondewo.nlu.ExportResourcesResponse">ExportResourcesResponse)</a></pre>
 
           
         
           <h4 id="ondewo.nlu.Agents.GetModelStatuses" class="title-badge method">GetModelStatuses</h4>
 
-          <pre>rpc GetModelStatuses (<a href="#ondewo.nlu.GetModelStatusesRequest">GetModelStatusesRequest</a>) returns (GetModelStatusesResponse)</pre>
+          <pre>rpc GetModelStatuses (<a href="#ondewo.nlu.GetModelStatusesRequest">GetModelStatusesRequest</a>) returns (<a href="#ondewo.nlu.GetModelStatusesResponse">GetModelStatusesResponse)</a></pre>
 
           Get statuses of models related to project
         
@@ -4271,41 +4381,41 @@ Format: `projects/<Project ID>`. </p></td>
         <p>The Central class defining the ondewo ai services</p>
 
         
-        <div id="ondewo.nlu.AiServices-methods">Methods</div>
+        <div id="ondewo.nlu.AiServices-methods" class="service-methods">Service Methods</div>
         
           <h4 id="ondewo.nlu.AiServices.ExtractEntities" class="title-badge method">ExtractEntities</h4>
 
-          <pre>rpc ExtractEntities (<a href="#ondewo.nlu.ExtractEntitiesRequest">ExtractEntitiesRequest</a>) returns (ExtractEntitiesResponse)</pre>
+          <pre>rpc ExtractEntities (<a href="#ondewo.nlu.ExtractEntitiesRequest">ExtractEntitiesRequest</a>) returns (<a href="#ondewo.nlu.ExtractEntitiesResponse">ExtractEntitiesResponse)</a></pre>
 
           Processes a natural language query and returns detected entities
         
           <h4 id="ondewo.nlu.AiServices.GenerateUserSays" class="title-badge method">GenerateUserSays</h4>
 
-          <pre>rpc GenerateUserSays (<a href="#ondewo.nlu.GenerateUserSaysRequest">GenerateUserSaysRequest</a>) returns (GenerateUserSaysResponse)</pre>
+          <pre>rpc GenerateUserSays (<a href="#ondewo.nlu.GenerateUserSaysRequest">GenerateUserSaysRequest</a>) returns (<a href="#ondewo.nlu.GenerateUserSaysResponse">GenerateUserSaysResponse)</a></pre>
 
           
         
           <h4 id="ondewo.nlu.AiServices.GenerateResponses" class="title-badge method">GenerateResponses</h4>
 
-          <pre>rpc GenerateResponses (<a href="#ondewo.nlu.GenerateResponsesRequest">GenerateResponsesRequest</a>) returns (GenerateResponsesResponse)</pre>
+          <pre>rpc GenerateResponses (<a href="#ondewo.nlu.GenerateResponsesRequest">GenerateResponsesRequest</a>) returns (<a href="#ondewo.nlu.GenerateResponsesResponse">GenerateResponsesResponse)</a></pre>
 
           
         
           <h4 id="ondewo.nlu.AiServices.GetAlternativeSentences" class="title-badge method">GetAlternativeSentences</h4>
 
-          <pre>rpc GetAlternativeSentences (<a href="#ondewo.nlu.GetAlternativeSentencesRequest">GetAlternativeSentencesRequest</a>) returns (GetAlternativeSentencesResponse)</pre>
+          <pre>rpc GetAlternativeSentences (<a href="#ondewo.nlu.GetAlternativeSentencesRequest">GetAlternativeSentencesRequest</a>) returns (<a href="#ondewo.nlu.GetAlternativeSentencesResponse">GetAlternativeSentencesResponse)</a></pre>
 
           
         
           <h4 id="ondewo.nlu.AiServices.GetAlternativeTrainingPhrases" class="title-badge method">GetAlternativeTrainingPhrases</h4>
 
-          <pre>rpc GetAlternativeTrainingPhrases (<a href="#ondewo.nlu.GetAlternativeTrainingPhrasesRequest">GetAlternativeTrainingPhrasesRequest</a>) returns (GetAlternativeTrainingPhrasesResponse)</pre>
+          <pre>rpc GetAlternativeTrainingPhrases (<a href="#ondewo.nlu.GetAlternativeTrainingPhrasesRequest">GetAlternativeTrainingPhrasesRequest</a>) returns (<a href="#ondewo.nlu.GetAlternativeTrainingPhrasesResponse">GetAlternativeTrainingPhrasesResponse)</a></pre>
 
           
         
           <h4 id="ondewo.nlu.AiServices.GetSynonyms" class="title-badge method">GetSynonyms</h4>
 
-          <pre>rpc GetSynonyms (<a href="#ondewo.nlu.GetSynonymsRequest">GetSynonymsRequest</a>) returns (GetSynonymsResponse)</pre>
+          <pre>rpc GetSynonyms (<a href="#ondewo.nlu.GetSynonymsRequest">GetSynonymsRequest</a>) returns (<a href="#ondewo.nlu.GetSynonymsResponse">GetSynonymsResponse)</a></pre>
 
           
         
@@ -5526,41 +5636,41 @@ as duplicate. Meaningful values of similarity_threshold are between 0.95 and 1.0
         <p>A context represents additional information included with user input or with</p><p>an intent returned by the Dialogflow API. Contexts are helpful for</p><p>differentiating user input which may be vague or have a different meaning</p><p>depending on additional details from your application such as user setting</p><p>and preferences, previous user input, where the user is in your application,</p><p>geographic location, and so on.</p><p>You can include contexts as input parameters of a</p><p>[DetectIntent][google.cloud.dialogflow.v2.Sessions.DetectIntent] (or</p><p>[StreamingDetectIntent][google.cloud.dialogflow.v2.Sessions.StreamingDetectIntent]) request,</p><p>or as output contexts included in the returned intent.</p><p>Contexts expire when an intent is matched, after the number of `DetectIntent`</p><p>requests specified by the `lifespan_count` parameter, or after 10 minutes</p><p>if no intents are matched for a `DetectIntent` request.</p><p>For more information about contexts, see the</p><p>[Dialogflow documentation](https://dialogflow.com/docs/contexts).</p>
 
         
-        <div id="ondewo.nlu.Contexts-methods">Methods</div>
+        <div id="ondewo.nlu.Contexts-methods" class="service-methods">Service Methods</div>
         
           <h4 id="ondewo.nlu.Contexts.ListContexts" class="title-badge method">ListContexts</h4>
 
-          <pre>rpc ListContexts (<a href="#ondewo.nlu.ListContextsRequest">ListContextsRequest</a>) returns (ListContextsResponse)</pre>
+          <pre>rpc ListContexts (<a href="#ondewo.nlu.ListContextsRequest">ListContextsRequest</a>) returns (<a href="#ondewo.nlu.ListContextsResponse">ListContextsResponse)</a></pre>
 
           Returns the list of all contexts in the specified session.
         
           <h4 id="ondewo.nlu.Contexts.GetContext" class="title-badge method">GetContext</h4>
 
-          <pre>rpc GetContext (<a href="#ondewo.nlu.GetContextRequest">GetContextRequest</a>) returns (Context)</pre>
+          <pre>rpc GetContext (<a href="#ondewo.nlu.GetContextRequest">GetContextRequest</a>) returns (<a href="#ondewo.nlu.Context">Context)</a></pre>
 
           Retrieves the specified context.
         
           <h4 id="ondewo.nlu.Contexts.CreateContext" class="title-badge method">CreateContext</h4>
 
-          <pre>rpc CreateContext (<a href="#ondewo.nlu.CreateContextRequest">CreateContextRequest</a>) returns (Context)</pre>
+          <pre>rpc CreateContext (<a href="#ondewo.nlu.CreateContextRequest">CreateContextRequest</a>) returns (<a href="#ondewo.nlu.Context">Context)</a></pre>
 
           Creates a context.
         
           <h4 id="ondewo.nlu.Contexts.UpdateContext" class="title-badge method">UpdateContext</h4>
 
-          <pre>rpc UpdateContext (<a href="#ondewo.nlu.UpdateContextRequest">UpdateContextRequest</a>) returns (Context)</pre>
+          <pre>rpc UpdateContext (<a href="#ondewo.nlu.UpdateContextRequest">UpdateContextRequest</a>) returns (<a href="#ondewo.nlu.Context">Context)</a></pre>
 
           Updates the specified context.
         
           <h4 id="ondewo.nlu.Contexts.DeleteContext" class="title-badge method">DeleteContext</h4>
 
-          <pre>rpc DeleteContext (<a href="#ondewo.nlu.DeleteContextRequest">DeleteContextRequest</a>) returns (.google.protobuf.Empty)</pre>
+          <pre>rpc DeleteContext (<a href="#ondewo.nlu.DeleteContextRequest">DeleteContextRequest</a>) returns (<a href="#google.protobuf.Empty">.google.protobuf.Empty)</a></pre>
 
           Deletes the specified context.
         
           <h4 id="ondewo.nlu.Contexts.DeleteAllContexts" class="title-badge method">DeleteAllContexts</h4>
 
-          <pre>rpc DeleteAllContexts (<a href="#ondewo.nlu.DeleteAllContextsRequest">DeleteAllContextsRequest</a>) returns (.google.protobuf.Empty)</pre>
+          <pre>rpc DeleteAllContexts (<a href="#ondewo.nlu.DeleteAllContextsRequest">DeleteAllContextsRequest</a>) returns (<a href="#google.protobuf.Empty">.google.protobuf.Empty)</a></pre>
 
           Deletes all active contexts in the specified session.
         
@@ -6011,41 +6121,41 @@ more results in the list. </p></td>
         <p>Entities are extracted from user input and represent parameters that are</p><p>meaningful to your application. For example, a date range, a proper name</p><p>such as a geographic location or landmark, and so on. Entities represent</p><p>actionable data for your application.</p><p>When you define an entity, you can also include synonyms that all map to</p><p>that entity. For example, "soft drink", "soda", "pop", and so on.</p><p>There are three types of entities:</p><p>*   **System** - entities that are defined by the Dialogflow API for common</p><p>data types such as date, time, currency, and so on. A system entity is</p><p>represented by the `EntityType` type.</p><p>*   **Developer** - entities that are defined by you that represent</p><p>actionable data that is meaningful to your application. For example,</p><p>you could define a `pizza.sauce` entity for red or white pizza sauce,</p><p>a `pizza.cheese` entity for the different types of cheese on a pizza,</p><p>a `pizza.topping` entity for different toppings, and so on. A developer</p><p>entity is represented by the `EntityType` type.</p><p>*   **User** - entities that are built for an individual user such as</p><p>favorites, preferences, playlists, and so on. A user entity is</p><p>represented by the [SessionEntityType][google.cloud.dialogflow.v2.SessionEntityType] type.</p><p>For more information about entity types, see the</p><p>[Dialogflow documentation](https://dialogflow.com/docs/entities).</p>
 
         
-        <div id="ondewo.nlu.EntityTypes-methods">Methods</div>
+        <div id="ondewo.nlu.EntityTypes-methods" class="service-methods">Service Methods</div>
         
           <h4 id="ondewo.nlu.EntityTypes.ListEntityTypes" class="title-badge method">ListEntityTypes</h4>
 
-          <pre>rpc ListEntityTypes (<a href="#ondewo.nlu.ListEntityTypesRequest">ListEntityTypesRequest</a>) returns (ListEntityTypesResponse)</pre>
+          <pre>rpc ListEntityTypes (<a href="#ondewo.nlu.ListEntityTypesRequest">ListEntityTypesRequest</a>) returns (<a href="#ondewo.nlu.ListEntityTypesResponse">ListEntityTypesResponse)</a></pre>
 
           Returns the list of all entity types in the specified agent.
         
           <h4 id="ondewo.nlu.EntityTypes.GetEntityType" class="title-badge method">GetEntityType</h4>
 
-          <pre>rpc GetEntityType (<a href="#ondewo.nlu.GetEntityTypeRequest">GetEntityTypeRequest</a>) returns (EntityType)</pre>
+          <pre>rpc GetEntityType (<a href="#ondewo.nlu.GetEntityTypeRequest">GetEntityTypeRequest</a>) returns (<a href="#ondewo.nlu.EntityType">EntityType)</a></pre>
 
           Retrieves the specified entity type.
         
           <h4 id="ondewo.nlu.EntityTypes.CreateEntityType" class="title-badge method">CreateEntityType</h4>
 
-          <pre>rpc CreateEntityType (<a href="#ondewo.nlu.CreateEntityTypeRequest">CreateEntityTypeRequest</a>) returns (EntityType)</pre>
+          <pre>rpc CreateEntityType (<a href="#ondewo.nlu.CreateEntityTypeRequest">CreateEntityTypeRequest</a>) returns (<a href="#ondewo.nlu.EntityType">EntityType)</a></pre>
 
           Creates an entity type in the specified agent.
         
           <h4 id="ondewo.nlu.EntityTypes.UpdateEntityType" class="title-badge method">UpdateEntityType</h4>
 
-          <pre>rpc UpdateEntityType (<a href="#ondewo.nlu.UpdateEntityTypeRequest">UpdateEntityTypeRequest</a>) returns (EntityType)</pre>
+          <pre>rpc UpdateEntityType (<a href="#ondewo.nlu.UpdateEntityTypeRequest">UpdateEntityTypeRequest</a>) returns (<a href="#ondewo.nlu.EntityType">EntityType)</a></pre>
 
           Updates the specified entity type.
         
           <h4 id="ondewo.nlu.EntityTypes.DeleteEntityType" class="title-badge method">DeleteEntityType</h4>
 
-          <pre>rpc DeleteEntityType (<a href="#ondewo.nlu.DeleteEntityTypeRequest">DeleteEntityTypeRequest</a>) returns (.google.protobuf.Empty)</pre>
+          <pre>rpc DeleteEntityType (<a href="#ondewo.nlu.DeleteEntityTypeRequest">DeleteEntityTypeRequest</a>) returns (<a href="#google.protobuf.Empty">.google.protobuf.Empty)</a></pre>
 
           Deletes the specified entity type.
         
           <h4 id="ondewo.nlu.EntityTypes.BatchUpdateEntityTypes" class="title-badge method">BatchUpdateEntityTypes</h4>
 
-          <pre>rpc BatchUpdateEntityTypes (<a href="#ondewo.nlu.BatchUpdateEntityTypesRequest">BatchUpdateEntityTypesRequest</a>) returns (.google.longrunning.Operation)</pre>
+          <pre>rpc BatchUpdateEntityTypes (<a href="#ondewo.nlu.BatchUpdateEntityTypesRequest">BatchUpdateEntityTypesRequest</a>) returns (<a href="#google.longrunning.Operation">.google.longrunning.Operation)</a></pre>
 
           Updates/Creates multiple entity types in the specified agent.
 
@@ -6054,7 +6164,7 @@ Operation <response: [BatchUpdateEntityTypesResponse][google.cloud.dialogflow.v2
         
           <h4 id="ondewo.nlu.EntityTypes.BatchDeleteEntityTypes" class="title-badge method">BatchDeleteEntityTypes</h4>
 
-          <pre>rpc BatchDeleteEntityTypes (<a href="#ondewo.nlu.BatchDeleteEntityTypesRequest">BatchDeleteEntityTypesRequest</a>) returns (.google.longrunning.Operation)</pre>
+          <pre>rpc BatchDeleteEntityTypes (<a href="#ondewo.nlu.BatchDeleteEntityTypesRequest">BatchDeleteEntityTypesRequest</a>) returns (<a href="#google.longrunning.Operation">.google.longrunning.Operation)</a></pre>
 
           Deletes entity types in the specified agent.
 
@@ -6063,31 +6173,31 @@ Operation <response: [google.protobuf.Empty][google.protobuf.Empty],
         
           <h4 id="ondewo.nlu.EntityTypes.BatchCreateEntities" class="title-badge method">BatchCreateEntities</h4>
 
-          <pre>rpc BatchCreateEntities (<a href="#ondewo.nlu.BatchCreateEntitiesRequest">BatchCreateEntitiesRequest</a>) returns (BatchEntitiesResponse)</pre>
+          <pre>rpc BatchCreateEntities (<a href="#ondewo.nlu.BatchCreateEntitiesRequest">BatchCreateEntitiesRequest</a>) returns (<a href="#ondewo.nlu.BatchEntitiesResponse">BatchEntitiesResponse)</a></pre>
 
           Creates an entity value in an entity type.
         
           <h4 id="ondewo.nlu.EntityTypes.BatchUpdateEntities" class="title-badge method">BatchUpdateEntities</h4>
 
-          <pre>rpc BatchUpdateEntities (<a href="#ondewo.nlu.BatchUpdateEntitiesRequest">BatchUpdateEntitiesRequest</a>) returns (BatchEntitiesResponse)</pre>
+          <pre>rpc BatchUpdateEntities (<a href="#ondewo.nlu.BatchUpdateEntitiesRequest">BatchUpdateEntitiesRequest</a>) returns (<a href="#ondewo.nlu.BatchEntitiesResponse">BatchEntitiesResponse)</a></pre>
 
           Updates a specific entity value.
         
           <h4 id="ondewo.nlu.EntityTypes.BatchGetEntities" class="title-badge method">BatchGetEntities</h4>
 
-          <pre>rpc BatchGetEntities (<a href="#ondewo.nlu.BatchGetEntitiesRequest">BatchGetEntitiesRequest</a>) returns (BatchEntitiesResponse)</pre>
+          <pre>rpc BatchGetEntities (<a href="#ondewo.nlu.BatchGetEntitiesRequest">BatchGetEntitiesRequest</a>) returns (<a href="#ondewo.nlu.BatchEntitiesResponse">BatchEntitiesResponse)</a></pre>
 
           Gets a specific entity value.
         
           <h4 id="ondewo.nlu.EntityTypes.BatchDeleteEntities" class="title-badge method">BatchDeleteEntities</h4>
 
-          <pre>rpc BatchDeleteEntities (<a href="#ondewo.nlu.BatchDeleteEntitiesRequest">BatchDeleteEntitiesRequest</a>) returns (BatchDeleteEntitiesResponse)</pre>
+          <pre>rpc BatchDeleteEntities (<a href="#ondewo.nlu.BatchDeleteEntitiesRequest">BatchDeleteEntitiesRequest</a>) returns (<a href="#ondewo.nlu.BatchDeleteEntitiesResponse">BatchDeleteEntitiesResponse)</a></pre>
 
           Deletes the specified entity value.
         
           <h4 id="ondewo.nlu.EntityTypes.ListEntities" class="title-badge method">ListEntities</h4>
 
-          <pre>rpc ListEntities (<a href="#ondewo.nlu.ListEntitiesRequest">ListEntitiesRequest</a>) returns (ListEntitiesResponse)</pre>
+          <pre>rpc ListEntities (<a href="#ondewo.nlu.ListEntitiesRequest">ListEntitiesRequest</a>) returns (<a href="#ondewo.nlu.ListEntitiesResponse">ListEntitiesResponse)</a></pre>
 
           List entities of an entity type
         
@@ -7308,41 +7418,41 @@ types (with or without aliases).</p></td>
         <p>An intent represents a mapping between input from a user and an action to</p><p>be taken by your application. When you pass user input to the</p><p>[DetectIntent][google.cloud.dialogflow.v2.Sessions.DetectIntent] (or</p><p>[StreamingDetectIntent][google.cloud.dialogflow.v2.Sessions.StreamingDetectIntent]) method, the</p><p>Dialogflow API analyzes the input and searches</p><p>for a matching intent. If no match is found, the Dialogflow API returns a</p><p>fallback intent (`is_fallback` = true).</p><p>You can provide additional information for the Dialogflow API to use to</p><p>match user input to an intent by adding the following to your intent.</p><p>*   **Contexts** - provide additional context for intent analysis. For</p><p>example, if an intent is related to an object in your application that</p><p>plays music, you can provide a context to determine when to match the</p><p>intent if the user input is “turn it off”.  You can include a context</p><p>that matches the intent when there is previous user input of</p><p>"play music", and not when there is previous user input of</p><p>"turn on the light".</p><p>*   **Events** - allow for matching an intent by using an event name</p><p>instead of user input. Your application can provide an event name and</p><p>related parameters to the Dialogflow API to match an intent. For</p><p>example, when your application starts, you can send a welcome event</p><p>with a user name parameter to the Dialogflow API to match an intent with</p><p>a personalized welcome message for the user.</p><p>*   **Training phrases** - provide examples of user input to train the</p><p>Dialogflow API agent to better match intents.</p><p>For more information about intents, see the</p><p>[Dialogflow documentation](https://dialogflow.com/docs/intents).</p>
 
         
-        <div id="ondewo.nlu.Intents-methods">Methods</div>
+        <div id="ondewo.nlu.Intents-methods" class="service-methods">Service Methods</div>
         
           <h4 id="ondewo.nlu.Intents.ListIntents" class="title-badge method">ListIntents</h4>
 
-          <pre>rpc ListIntents (<a href="#ondewo.nlu.ListIntentsRequest">ListIntentsRequest</a>) returns (ListIntentsResponse)</pre>
+          <pre>rpc ListIntents (<a href="#ondewo.nlu.ListIntentsRequest">ListIntentsRequest</a>) returns (<a href="#ondewo.nlu.ListIntentsResponse">ListIntentsResponse)</a></pre>
 
           Returns the list of all intents in the specified agent.
         
           <h4 id="ondewo.nlu.Intents.GetIntent" class="title-badge method">GetIntent</h4>
 
-          <pre>rpc GetIntent (<a href="#ondewo.nlu.GetIntentRequest">GetIntentRequest</a>) returns (Intent)</pre>
+          <pre>rpc GetIntent (<a href="#ondewo.nlu.GetIntentRequest">GetIntentRequest</a>) returns (<a href="#ondewo.nlu.Intent">Intent)</a></pre>
 
           Retrieves the specified intent.
         
           <h4 id="ondewo.nlu.Intents.CreateIntent" class="title-badge method">CreateIntent</h4>
 
-          <pre>rpc CreateIntent (<a href="#ondewo.nlu.CreateIntentRequest">CreateIntentRequest</a>) returns (Intent)</pre>
+          <pre>rpc CreateIntent (<a href="#ondewo.nlu.CreateIntentRequest">CreateIntentRequest</a>) returns (<a href="#ondewo.nlu.Intent">Intent)</a></pre>
 
           Creates an intent in the specified agent.
         
           <h4 id="ondewo.nlu.Intents.UpdateIntent" class="title-badge method">UpdateIntent</h4>
 
-          <pre>rpc UpdateIntent (<a href="#ondewo.nlu.UpdateIntentRequest">UpdateIntentRequest</a>) returns (Intent)</pre>
+          <pre>rpc UpdateIntent (<a href="#ondewo.nlu.UpdateIntentRequest">UpdateIntentRequest</a>) returns (<a href="#ondewo.nlu.Intent">Intent)</a></pre>
 
           Updates the specified intent.
         
           <h4 id="ondewo.nlu.Intents.DeleteIntent" class="title-badge method">DeleteIntent</h4>
 
-          <pre>rpc DeleteIntent (<a href="#ondewo.nlu.DeleteIntentRequest">DeleteIntentRequest</a>) returns (.google.protobuf.Empty)</pre>
+          <pre>rpc DeleteIntent (<a href="#ondewo.nlu.DeleteIntentRequest">DeleteIntentRequest</a>) returns (<a href="#google.protobuf.Empty">.google.protobuf.Empty)</a></pre>
 
           Deletes the specified intent.
         
           <h4 id="ondewo.nlu.Intents.BatchUpdateIntents" class="title-badge method">BatchUpdateIntents</h4>
 
-          <pre>rpc BatchUpdateIntents (<a href="#ondewo.nlu.BatchUpdateIntentsRequest">BatchUpdateIntentsRequest</a>) returns (.google.longrunning.Operation)</pre>
+          <pre>rpc BatchUpdateIntents (<a href="#ondewo.nlu.BatchUpdateIntentsRequest">BatchUpdateIntentsRequest</a>) returns (<a href="#google.longrunning.Operation">.google.longrunning.Operation)</a></pre>
 
           Updates/Creates multiple intents in the specified agent.
 
@@ -7350,7 +7460,7 @@ Operation <response: [BatchUpdateIntentsResponse][google.cloud.dialogflow.v2.Bat
         
           <h4 id="ondewo.nlu.Intents.BatchDeleteIntents" class="title-badge method">BatchDeleteIntents</h4>
 
-          <pre>rpc BatchDeleteIntents (<a href="#ondewo.nlu.BatchDeleteIntentsRequest">BatchDeleteIntentsRequest</a>) returns (.google.longrunning.Operation)</pre>
+          <pre>rpc BatchDeleteIntents (<a href="#ondewo.nlu.BatchDeleteIntentsRequest">BatchDeleteIntentsRequest</a>) returns (<a href="#google.longrunning.Operation">.google.longrunning.Operation)</a></pre>
 
           Deletes intents in the specified agent.
 
@@ -7358,91 +7468,91 @@ Operation <response: [google.protobuf.Empty][google.protobuf.Empty]>
         
           <h4 id="ondewo.nlu.Intents.BatchCreateTrainingPhrases" class="title-badge method">BatchCreateTrainingPhrases</h4>
 
-          <pre>rpc BatchCreateTrainingPhrases (<a href="#ondewo.nlu.BatchCreateTrainingPhrasesRequest">BatchCreateTrainingPhrasesRequest</a>) returns (BatchTrainingPhrasesStatusResponse)</pre>
+          <pre>rpc BatchCreateTrainingPhrases (<a href="#ondewo.nlu.BatchCreateTrainingPhrasesRequest">BatchCreateTrainingPhrasesRequest</a>) returns (<a href="#ondewo.nlu.BatchTrainingPhrasesStatusResponse">BatchTrainingPhrasesStatusResponse)</a></pre>
 
           Creates batch of training phrases
         
           <h4 id="ondewo.nlu.Intents.BatchGetTrainingPhrases" class="title-badge method">BatchGetTrainingPhrases</h4>
 
-          <pre>rpc BatchGetTrainingPhrases (<a href="#ondewo.nlu.BatchGetTrainingPhrasesRequest">BatchGetTrainingPhrasesRequest</a>) returns (BatchTrainingPhrasesStatusResponse)</pre>
+          <pre>rpc BatchGetTrainingPhrases (<a href="#ondewo.nlu.BatchGetTrainingPhrasesRequest">BatchGetTrainingPhrasesRequest</a>) returns (<a href="#ondewo.nlu.BatchTrainingPhrasesStatusResponse">BatchTrainingPhrasesStatusResponse)</a></pre>
 
           Retrieve a training phrases batch of the specified names.
         
           <h4 id="ondewo.nlu.Intents.BatchUpdateTrainingPhrases" class="title-badge method">BatchUpdateTrainingPhrases</h4>
 
-          <pre>rpc BatchUpdateTrainingPhrases (<a href="#ondewo.nlu.BatchUpdateTrainingPhrasesRequest">BatchUpdateTrainingPhrasesRequest</a>) returns (BatchTrainingPhrasesStatusResponse)</pre>
+          <pre>rpc BatchUpdateTrainingPhrases (<a href="#ondewo.nlu.BatchUpdateTrainingPhrasesRequest">BatchUpdateTrainingPhrasesRequest</a>) returns (<a href="#ondewo.nlu.BatchTrainingPhrasesStatusResponse">BatchTrainingPhrasesStatusResponse)</a></pre>
 
           Updates batch of training phrases
         
           <h4 id="ondewo.nlu.Intents.BatchDeleteTrainingPhrases" class="title-badge method">BatchDeleteTrainingPhrases</h4>
 
-          <pre>rpc BatchDeleteTrainingPhrases (<a href="#ondewo.nlu.BatchDeleteTrainingPhrasesRequest">BatchDeleteTrainingPhrasesRequest</a>) returns (BatchDeleteTrainingPhrasesResponse)</pre>
+          <pre>rpc BatchDeleteTrainingPhrases (<a href="#ondewo.nlu.BatchDeleteTrainingPhrasesRequest">BatchDeleteTrainingPhrasesRequest</a>) returns (<a href="#ondewo.nlu.BatchDeleteTrainingPhrasesResponse">BatchDeleteTrainingPhrasesResponse)</a></pre>
 
           Delete a training phrases batch of the specified names.
         
           <h4 id="ondewo.nlu.Intents.ListTrainingPhrases" class="title-badge method">ListTrainingPhrases</h4>
 
-          <pre>rpc ListTrainingPhrases (<a href="#ondewo.nlu.ListTrainingPhrasesRequest">ListTrainingPhrasesRequest</a>) returns (ListTrainingPhrasesResponse)</pre>
+          <pre>rpc ListTrainingPhrases (<a href="#ondewo.nlu.ListTrainingPhrasesRequest">ListTrainingPhrasesRequest</a>) returns (<a href="#ondewo.nlu.ListTrainingPhrasesResponse">ListTrainingPhrasesResponse)</a></pre>
 
           List training phrases (of a specific intent).
         
           <h4 id="ondewo.nlu.Intents.BatchCreateResponseMessages" class="title-badge method">BatchCreateResponseMessages</h4>
 
-          <pre>rpc BatchCreateResponseMessages (<a href="#ondewo.nlu.BatchCreateResponseMessagesRequest">BatchCreateResponseMessagesRequest</a>) returns (BatchResponseMessagesStatusResponse)</pre>
+          <pre>rpc BatchCreateResponseMessages (<a href="#ondewo.nlu.BatchCreateResponseMessagesRequest">BatchCreateResponseMessagesRequest</a>) returns (<a href="#ondewo.nlu.BatchResponseMessagesStatusResponse">BatchResponseMessagesStatusResponse)</a></pre>
 
           Creates batch of intent messages
         
           <h4 id="ondewo.nlu.Intents.BatchGetResponseMessages" class="title-badge method">BatchGetResponseMessages</h4>
 
-          <pre>rpc BatchGetResponseMessages (<a href="#ondewo.nlu.BatchGetResponseMessagesRequest">BatchGetResponseMessagesRequest</a>) returns (BatchResponseMessagesStatusResponse)</pre>
+          <pre>rpc BatchGetResponseMessages (<a href="#ondewo.nlu.BatchGetResponseMessagesRequest">BatchGetResponseMessagesRequest</a>) returns (<a href="#ondewo.nlu.BatchResponseMessagesStatusResponse">BatchResponseMessagesStatusResponse)</a></pre>
 
           Retrieve a intent messages batch of the specified names.
         
           <h4 id="ondewo.nlu.Intents.BatchUpdateResponseMessages" class="title-badge method">BatchUpdateResponseMessages</h4>
 
-          <pre>rpc BatchUpdateResponseMessages (<a href="#ondewo.nlu.BatchUpdateResponseMessagesRequest">BatchUpdateResponseMessagesRequest</a>) returns (BatchResponseMessagesStatusResponse)</pre>
+          <pre>rpc BatchUpdateResponseMessages (<a href="#ondewo.nlu.BatchUpdateResponseMessagesRequest">BatchUpdateResponseMessagesRequest</a>) returns (<a href="#ondewo.nlu.BatchResponseMessagesStatusResponse">BatchResponseMessagesStatusResponse)</a></pre>
 
           Updates batch of intent messages
         
           <h4 id="ondewo.nlu.Intents.BatchDeleteResponseMessages" class="title-badge method">BatchDeleteResponseMessages</h4>
 
-          <pre>rpc BatchDeleteResponseMessages (<a href="#ondewo.nlu.BatchDeleteResponseMessagesRequest">BatchDeleteResponseMessagesRequest</a>) returns (BatchDeleteResponseMessagesResponse)</pre>
+          <pre>rpc BatchDeleteResponseMessages (<a href="#ondewo.nlu.BatchDeleteResponseMessagesRequest">BatchDeleteResponseMessagesRequest</a>) returns (<a href="#ondewo.nlu.BatchDeleteResponseMessagesResponse">BatchDeleteResponseMessagesResponse)</a></pre>
 
           Delete a intent messages batch of the specified names.
         
           <h4 id="ondewo.nlu.Intents.ListResponseMessages" class="title-badge method">ListResponseMessages</h4>
 
-          <pre>rpc ListResponseMessages (<a href="#ondewo.nlu.ListResponseMessagesRequest">ListResponseMessagesRequest</a>) returns (ListResponseMessagesResponse)</pre>
+          <pre>rpc ListResponseMessages (<a href="#ondewo.nlu.ListResponseMessagesRequest">ListResponseMessagesRequest</a>) returns (<a href="#ondewo.nlu.ListResponseMessagesResponse">ListResponseMessagesResponse)</a></pre>
 
           List messages (of a specific intent).
         
           <h4 id="ondewo.nlu.Intents.BatchCreateParameters" class="title-badge method">BatchCreateParameters</h4>
 
-          <pre>rpc BatchCreateParameters (<a href="#ondewo.nlu.BatchCreateParametersRequest">BatchCreateParametersRequest</a>) returns (BatchParametersStatusResponse)</pre>
+          <pre>rpc BatchCreateParameters (<a href="#ondewo.nlu.BatchCreateParametersRequest">BatchCreateParametersRequest</a>) returns (<a href="#ondewo.nlu.BatchParametersStatusResponse">BatchParametersStatusResponse)</a></pre>
 
           Creates batch of intent messages
         
           <h4 id="ondewo.nlu.Intents.BatchGetParameters" class="title-badge method">BatchGetParameters</h4>
 
-          <pre>rpc BatchGetParameters (<a href="#ondewo.nlu.BatchGetParametersRequest">BatchGetParametersRequest</a>) returns (BatchParametersStatusResponse)</pre>
+          <pre>rpc BatchGetParameters (<a href="#ondewo.nlu.BatchGetParametersRequest">BatchGetParametersRequest</a>) returns (<a href="#ondewo.nlu.BatchParametersStatusResponse">BatchParametersStatusResponse)</a></pre>
 
           Retrieve a intent messages batch of the specified names.
         
           <h4 id="ondewo.nlu.Intents.BatchUpdateParameters" class="title-badge method">BatchUpdateParameters</h4>
 
-          <pre>rpc BatchUpdateParameters (<a href="#ondewo.nlu.BatchUpdateParametersRequest">BatchUpdateParametersRequest</a>) returns (BatchParametersStatusResponse)</pre>
+          <pre>rpc BatchUpdateParameters (<a href="#ondewo.nlu.BatchUpdateParametersRequest">BatchUpdateParametersRequest</a>) returns (<a href="#ondewo.nlu.BatchParametersStatusResponse">BatchParametersStatusResponse)</a></pre>
 
           Updates batch of intent messages
         
           <h4 id="ondewo.nlu.Intents.BatchDeleteParameters" class="title-badge method">BatchDeleteParameters</h4>
 
-          <pre>rpc BatchDeleteParameters (<a href="#ondewo.nlu.BatchDeleteParametersRequest">BatchDeleteParametersRequest</a>) returns (BatchDeleteParametersResponse)</pre>
+          <pre>rpc BatchDeleteParameters (<a href="#ondewo.nlu.BatchDeleteParametersRequest">BatchDeleteParametersRequest</a>) returns (<a href="#ondewo.nlu.BatchDeleteParametersResponse">BatchDeleteParametersResponse)</a></pre>
 
           Delete a intent messages batch of the specified names.
         
           <h4 id="ondewo.nlu.Intents.ListParameters" class="title-badge method">ListParameters</h4>
 
-          <pre>rpc ListParameters (<a href="#ondewo.nlu.ListParametersRequest">ListParametersRequest</a>) returns (ListParametersResponse)</pre>
+          <pre>rpc ListParameters (<a href="#ondewo.nlu.ListParametersRequest">ListParametersRequest</a>) returns (<a href="#ondewo.nlu.ListParametersResponse">ListParametersResponse)</a></pre>
 
           List messages (of a specific intent).
         
@@ -10818,35 +10928,35 @@ filling prompt is forwarded to the webhook.</p></td>
         <p></p>
 
         
-        <div id="ondewo.nlu.ProjectRoles-methods">Methods</div>
+        <div id="ondewo.nlu.ProjectRoles-methods" class="service-methods">Service Methods</div>
         
           <h4 id="ondewo.nlu.ProjectRoles.CreateProjectRole" class="title-badge method">CreateProjectRole</h4>
 
-          <pre>rpc CreateProjectRole (<a href="#ondewo.nlu.CreateProjectRoleRequest">CreateProjectRoleRequest</a>) returns (ProjectRole)</pre>
+          <pre>rpc CreateProjectRole (<a href="#ondewo.nlu.CreateProjectRoleRequest">CreateProjectRoleRequest</a>) returns (<a href="#ondewo.nlu.ProjectRole">ProjectRole)</a></pre>
 
           
         
           <h4 id="ondewo.nlu.ProjectRoles.GetProjectRole" class="title-badge method">GetProjectRole</h4>
 
-          <pre>rpc GetProjectRole (<a href="#ondewo.nlu.GetProjectRoleRequest">GetProjectRoleRequest</a>) returns (ProjectRole)</pre>
+          <pre>rpc GetProjectRole (<a href="#ondewo.nlu.GetProjectRoleRequest">GetProjectRoleRequest</a>) returns (<a href="#ondewo.nlu.ProjectRole">ProjectRole)</a></pre>
 
           
         
           <h4 id="ondewo.nlu.ProjectRoles.DeleteProjectRole" class="title-badge method">DeleteProjectRole</h4>
 
-          <pre>rpc DeleteProjectRole (<a href="#ondewo.nlu.DeleteProjectRoleRequest">DeleteProjectRoleRequest</a>) returns (.google.protobuf.Empty)</pre>
+          <pre>rpc DeleteProjectRole (<a href="#ondewo.nlu.DeleteProjectRoleRequest">DeleteProjectRoleRequest</a>) returns (<a href="#google.protobuf.Empty">.google.protobuf.Empty)</a></pre>
 
           
         
           <h4 id="ondewo.nlu.ProjectRoles.UpdateProjectRole" class="title-badge method">UpdateProjectRole</h4>
 
-          <pre>rpc UpdateProjectRole (<a href="#ondewo.nlu.UpdateProjectRoleRequest">UpdateProjectRoleRequest</a>) returns (ProjectRole)</pre>
+          <pre>rpc UpdateProjectRole (<a href="#ondewo.nlu.UpdateProjectRoleRequest">UpdateProjectRoleRequest</a>) returns (<a href="#ondewo.nlu.ProjectRole">ProjectRole)</a></pre>
 
           
         
           <h4 id="ondewo.nlu.ProjectRoles.ListProjectRoles" class="title-badge method">ListProjectRoles</h4>
 
-          <pre>rpc ListProjectRoles (<a href="#ondewo.nlu.ListProjectRolesRequest">ListProjectRolesRequest</a>) returns (ListProjectRolesResponse)</pre>
+          <pre>rpc ListProjectRoles (<a href="#ondewo.nlu.ListProjectRolesRequest">ListProjectRolesRequest</a>) returns (<a href="#ondewo.nlu.ListProjectRolesResponse">ListProjectRolesResponse)</a></pre>
 
           
         
@@ -11304,53 +11414,53 @@ unspecified, default value depends on endpoint # TODO</p></td>
         <p></p>
 
         
-        <div id="ondewo.nlu.ProjectStatistics-methods">Methods</div>
+        <div id="ondewo.nlu.ProjectStatistics-methods" class="service-methods">Service Methods</div>
         
           <h4 id="ondewo.nlu.ProjectStatistics.GetIntentCount" class="title-badge method">GetIntentCount</h4>
 
-          <pre>rpc GetIntentCount (<a href="#ondewo.nlu.GetIntentCountRequest">GetIntentCountRequest</a>) returns (StatResponse)</pre>
+          <pre>rpc GetIntentCount (<a href="#ondewo.nlu.GetIntentCountRequest">GetIntentCountRequest</a>) returns (<a href="#ondewo.nlu.StatResponse">StatResponse)</a></pre>
 
           Project Root Statistics
         
           <h4 id="ondewo.nlu.ProjectStatistics.GetEntityTypeCount" class="title-badge method">GetEntityTypeCount</h4>
 
-          <pre>rpc GetEntityTypeCount (<a href="#ondewo.nlu.GetEntityTypeCountRequest">GetEntityTypeCountRequest</a>) returns (StatResponse)</pre>
+          <pre>rpc GetEntityTypeCount (<a href="#ondewo.nlu.GetEntityTypeCountRequest">GetEntityTypeCountRequest</a>) returns (<a href="#ondewo.nlu.StatResponse">StatResponse)</a></pre>
 
           
         
           <h4 id="ondewo.nlu.ProjectStatistics.GetUserCount" class="title-badge method">GetUserCount</h4>
 
-          <pre>rpc GetUserCount (<a href="#ondewo.nlu.GetProjectStatRequest">GetProjectStatRequest</a>) returns (StatResponse)</pre>
+          <pre>rpc GetUserCount (<a href="#ondewo.nlu.GetProjectStatRequest">GetProjectStatRequest</a>) returns (<a href="#ondewo.nlu.StatResponse">StatResponse)</a></pre>
 
           
         
           <h4 id="ondewo.nlu.ProjectStatistics.GetSessionCount" class="title-badge method">GetSessionCount</h4>
 
-          <pre>rpc GetSessionCount (<a href="#ondewo.nlu.GetProjectStatRequest">GetProjectStatRequest</a>) returns (StatResponse)</pre>
+          <pre>rpc GetSessionCount (<a href="#ondewo.nlu.GetProjectStatRequest">GetProjectStatRequest</a>) returns (<a href="#ondewo.nlu.StatResponse">StatResponse)</a></pre>
 
           
         
           <h4 id="ondewo.nlu.ProjectStatistics.GetTrainingPhraseCount" class="title-badge method">GetTrainingPhraseCount</h4>
 
-          <pre>rpc GetTrainingPhraseCount (<a href="#ondewo.nlu.GetProjectElementStatRequest">GetProjectElementStatRequest</a>) returns (StatResponse)</pre>
+          <pre>rpc GetTrainingPhraseCount (<a href="#ondewo.nlu.GetProjectElementStatRequest">GetProjectElementStatRequest</a>) returns (<a href="#ondewo.nlu.StatResponse">StatResponse)</a></pre>
 
           Intent Statistics
         
           <h4 id="ondewo.nlu.ProjectStatistics.GetResponseCount" class="title-badge method">GetResponseCount</h4>
 
-          <pre>rpc GetResponseCount (<a href="#ondewo.nlu.GetProjectElementStatRequest">GetProjectElementStatRequest</a>) returns (StatResponse)</pre>
+          <pre>rpc GetResponseCount (<a href="#ondewo.nlu.GetProjectElementStatRequest">GetProjectElementStatRequest</a>) returns (<a href="#ondewo.nlu.StatResponse">StatResponse)</a></pre>
 
           
         
           <h4 id="ondewo.nlu.ProjectStatistics.GetEntityValueCount" class="title-badge method">GetEntityValueCount</h4>
 
-          <pre>rpc GetEntityValueCount (<a href="#ondewo.nlu.GetProjectElementStatRequest">GetProjectElementStatRequest</a>) returns (StatResponse)</pre>
+          <pre>rpc GetEntityValueCount (<a href="#ondewo.nlu.GetProjectElementStatRequest">GetProjectElementStatRequest</a>) returns (<a href="#ondewo.nlu.StatResponse">StatResponse)</a></pre>
 
           Entity Type Statistics
         
           <h4 id="ondewo.nlu.ProjectStatistics.GetEntitySynonymCount" class="title-badge method">GetEntitySynonymCount</h4>
 
-          <pre>rpc GetEntitySynonymCount (<a href="#ondewo.nlu.GetProjectElementStatRequest">GetProjectElementStatRequest</a>) returns (StatResponse)</pre>
+          <pre>rpc GetEntitySynonymCount (<a href="#ondewo.nlu.GetProjectElementStatRequest">GetProjectElementStatRequest</a>) returns (<a href="#ondewo.nlu.StatResponse">StatResponse)</a></pre>
 
           Entity Value Statistics
         
@@ -11613,23 +11723,23 @@ Example:
         <p></p>
 
         
-        <div id="ondewo.nlu.ServerStatistics-methods">Methods</div>
+        <div id="ondewo.nlu.ServerStatistics-methods" class="service-methods">Service Methods</div>
         
           <h4 id="ondewo.nlu.ServerStatistics.GetProjectCount" class="title-badge method">GetProjectCount</h4>
 
-          <pre>rpc GetProjectCount (<a href="#google.protobuf.Empty">.google.protobuf.Empty</a>) returns (StatResponse)</pre>
+          <pre>rpc GetProjectCount (<a href="#google.protobuf.Empty">.google.protobuf.Empty</a>) returns (<a href="#ondewo.nlu.StatResponse">StatResponse)</a></pre>
 
           
         
           <h4 id="ondewo.nlu.ServerStatistics.GetUserProjectCount" class="title-badge method">GetUserProjectCount</h4>
 
-          <pre>rpc GetUserProjectCount (<a href="#ondewo.nlu.GetUserProjectCountRequest">GetUserProjectCountRequest</a>) returns (StatResponse)</pre>
+          <pre>rpc GetUserProjectCount (<a href="#ondewo.nlu.GetUserProjectCountRequest">GetUserProjectCountRequest</a>) returns (<a href="#ondewo.nlu.StatResponse">StatResponse)</a></pre>
 
           
         
           <h4 id="ondewo.nlu.ServerStatistics.GetUserCount" class="title-badge method">GetUserCount</h4>
 
-          <pre>rpc GetUserCount (<a href="#google.protobuf.Empty">.google.protobuf.Empty</a>) returns (StatResponse)</pre>
+          <pre>rpc GetUserCount (<a href="#google.protobuf.Empty">.google.protobuf.Empty</a>) returns (<a href="#ondewo.nlu.StatResponse">StatResponse)</a></pre>
 
           
         
@@ -11735,11 +11845,11 @@ Example:
         <p>A session represents an interaction with a user. You retrieve user input</p><p>and pass it to the [DetectIntent][google.cloud.dialogflow.v2.Sessions.DetectIntent] (or</p><p>[StreamingDetectIntent][google.cloud.dialogflow.v2.Sessions.StreamingDetectIntent]) method to determine</p><p>user intent and respond.</p>
 
         
-        <div id="ondewo.nlu.Sessions-methods">Methods</div>
+        <div id="ondewo.nlu.Sessions-methods" class="service-methods">Service Methods</div>
         
           <h4 id="ondewo.nlu.Sessions.DetectIntent" class="title-badge method">DetectIntent</h4>
 
-          <pre>rpc DetectIntent (<a href="#ondewo.nlu.DetectIntentRequest">DetectIntentRequest</a>) returns (DetectIntentResponse)</pre>
+          <pre>rpc DetectIntent (<a href="#ondewo.nlu.DetectIntentRequest">DetectIntentRequest</a>) returns (<a href="#ondewo.nlu.DetectIntentResponse">DetectIntentResponse)</a></pre>
 
           Processes a natural language query and returns structured, actionable data
 as a result. This method is not idempotent, because it may cause contexts
@@ -11748,7 +11858,7 @@ results of future queries.
         
           <h4 id="ondewo.nlu.Sessions.StreamingDetectIntent" class="title-badge method">StreamingDetectIntent</h4>
 
-          <pre>rpc StreamingDetectIntent (stream <a href="#ondewo.nlu.StreamingDetectIntentRequest">StreamingDetectIntentRequest</a>) returns (stream StreamingDetectIntentResponse)</pre>
+          <pre>rpc StreamingDetectIntent (stream <a href="#ondewo.nlu.StreamingDetectIntentRequest">StreamingDetectIntentRequest</a>) returns (stream <a href="#ondewo.nlu.StreamingDetectIntentResponse">StreamingDetectIntentResponse)</a></pre>
 
           Processes a natural language query in audio format in a streaming fashion
 and returns structured, actionable data as a result. This method is only
@@ -11756,50 +11866,50 @@ available via the gRPC API (not REST).
         
           <h4 id="ondewo.nlu.Sessions.ListSessions" class="title-badge method">ListSessions</h4>
 
-          <pre>rpc ListSessions (<a href="#ondewo.nlu.ListSessionsRequest">ListSessionsRequest</a>) returns (ListSessionsResponse)</pre>
+          <pre>rpc ListSessions (<a href="#ondewo.nlu.ListSessionsRequest">ListSessionsRequest</a>) returns (<a href="#ondewo.nlu.ListSessionsResponse">ListSessionsResponse)</a></pre>
 
           SESSION RELATED ENDPOINTS *** //
 ListSessions: returns list of sessions from ondewo-kb; by default returns only session IDs
         
           <h4 id="ondewo.nlu.Sessions.GetSession" class="title-badge method">GetSession</h4>
 
-          <pre>rpc GetSession (<a href="#ondewo.nlu.GetSessionRequest">GetSessionRequest</a>) returns (Session)</pre>
+          <pre>rpc GetSession (<a href="#ondewo.nlu.GetSessionRequest">GetSessionRequest</a>) returns (<a href="#ondewo.nlu.Session">Session)</a></pre>
 
           GetSession: returns a session(=conversation) from ondewo-kb
         
           <h4 id="ondewo.nlu.Sessions.TrackSessionStep" class="title-badge method">TrackSessionStep</h4>
 
-          <pre>rpc TrackSessionStep (<a href="#ondewo.nlu.TrackSessionStepRequest">TrackSessionStepRequest</a>) returns (Session)</pre>
+          <pre>rpc TrackSessionStep (<a href="#ondewo.nlu.TrackSessionStepRequest">TrackSessionStepRequest</a>) returns (<a href="#ondewo.nlu.Session">Session)</a></pre>
 
           TrackSessionStep: append to an existing session; creates it if not existing
         
           <h4 id="ondewo.nlu.Sessions.DeleteSession" class="title-badge method">DeleteSession</h4>
 
-          <pre>rpc DeleteSession (<a href="#ondewo.nlu.DeleteSessionRequest">DeleteSessionRequest</a>) returns (.google.protobuf.Empty)</pre>
+          <pre>rpc DeleteSession (<a href="#ondewo.nlu.DeleteSessionRequest">DeleteSessionRequest</a>) returns (<a href="#google.protobuf.Empty">.google.protobuf.Empty)</a></pre>
 
           DeleteSession: delete a session(=conversation) from ondewo-kb (for testing only)
         
           <h4 id="ondewo.nlu.Sessions.ListSessionLabels" class="title-badge method">ListSessionLabels</h4>
 
-          <pre>rpc ListSessionLabels (<a href="#ondewo.nlu.ListSessionLabelsRequest">ListSessionLabelsRequest</a>) returns (ListSessionLabelsResponse)</pre>
+          <pre>rpc ListSessionLabels (<a href="#ondewo.nlu.ListSessionLabelsRequest">ListSessionLabelsRequest</a>) returns (<a href="#ondewo.nlu.ListSessionLabelsResponse">ListSessionLabelsResponse)</a></pre>
 
           SESSION-LABEL RELATED ENDPOINTS *** //
         
           <h4 id="ondewo.nlu.Sessions.AddSessionLabels" class="title-badge method">AddSessionLabels</h4>
 
-          <pre>rpc AddSessionLabels (<a href="#ondewo.nlu.AddSessionLabelsRequest">AddSessionLabelsRequest</a>) returns (Session)</pre>
+          <pre>rpc AddSessionLabels (<a href="#ondewo.nlu.AddSessionLabelsRequest">AddSessionLabelsRequest</a>) returns (<a href="#ondewo.nlu.Session">Session)</a></pre>
 
           
         
           <h4 id="ondewo.nlu.Sessions.RemoveSessionLabels" class="title-badge method">RemoveSessionLabels</h4>
 
-          <pre>rpc RemoveSessionLabels (<a href="#ondewo.nlu.RemoveSessionLabelsRequest">RemoveSessionLabelsRequest</a>) returns (Session)</pre>
+          <pre>rpc RemoveSessionLabels (<a href="#ondewo.nlu.RemoveSessionLabelsRequest">RemoveSessionLabelsRequest</a>) returns (<a href="#ondewo.nlu.Session">Session)</a></pre>
 
           
         
           <h4 id="ondewo.nlu.Sessions.ListSessionReviews" class="title-badge method">ListSessionReviews</h4>
 
-          <pre>rpc ListSessionReviews (<a href="#ondewo.nlu.ListSessionReviewsRequest">ListSessionReviewsRequest</a>) returns (ListSessionReviewsResponse)</pre>
+          <pre>rpc ListSessionReviews (<a href="#ondewo.nlu.ListSessionReviewsRequest">ListSessionReviewsRequest</a>) returns (<a href="#ondewo.nlu.ListSessionReviewsResponse">ListSessionReviewsResponse)</a></pre>
 
           SESSION-REVIEW RELATED ENDPOINTS *** //
 ListSessionReviews:
@@ -11807,21 +11917,21 @@ returns list of session reviews from ondewo-kb; by default only returns session 
         
           <h4 id="ondewo.nlu.Sessions.GetSessionReview" class="title-badge method">GetSessionReview</h4>
 
-          <pre>rpc GetSessionReview (<a href="#ondewo.nlu.GetSessionReviewRequest">GetSessionReviewRequest</a>) returns (SessionReview)</pre>
+          <pre>rpc GetSessionReview (<a href="#ondewo.nlu.GetSessionReviewRequest">GetSessionReviewRequest</a>) returns (<a href="#ondewo.nlu.SessionReview">SessionReview)</a></pre>
 
           GetSessionReview:
 returns a session-review from ondewo-kb or computes the first review if none exists
         
           <h4 id="ondewo.nlu.Sessions.GetLatestSessionReview" class="title-badge method">GetLatestSessionReview</h4>
 
-          <pre>rpc GetLatestSessionReview (<a href="#ondewo.nlu.GetLatestSessionReviewRequest">GetLatestSessionReviewRequest</a>) returns (SessionReview)</pre>
+          <pre>rpc GetLatestSessionReview (<a href="#ondewo.nlu.GetLatestSessionReviewRequest">GetLatestSessionReviewRequest</a>) returns (<a href="#ondewo.nlu.SessionReview">SessionReview)</a></pre>
 
           GetLatestSessionReview:
 returns a session-review from ondewo-kb or computes the first review if none exists
         
           <h4 id="ondewo.nlu.Sessions.CreateSessionReview" class="title-badge method">CreateSessionReview</h4>
 
-          <pre>rpc CreateSessionReview (<a href="#ondewo.nlu.CreateSessionReviewRequest">CreateSessionReviewRequest</a>) returns (SessionReview)</pre>
+          <pre>rpc CreateSessionReview (<a href="#ondewo.nlu.CreateSessionReviewRequest">CreateSessionReviewRequest</a>) returns (<a href="#ondewo.nlu.SessionReview">SessionReview)</a></pre>
 
           CreateSessionReview:
 persist a session review in ondewo-kb
@@ -13704,95 +13814,95 @@ until the server closes the gRPC connection. This message is only sent if
         <p></p>
 
         
-        <div id="ondewo.nlu.Users-methods">Methods</div>
+        <div id="ondewo.nlu.Users-methods" class="service-methods">Service Methods</div>
         
           <h4 id="ondewo.nlu.Users.CreateUser" class="title-badge method">CreateUser</h4>
 
-          <pre>rpc CreateUser (<a href="#ondewo.nlu.CreateUserRequest">CreateUserRequest</a>) returns (User)</pre>
+          <pre>rpc CreateUser (<a href="#ondewo.nlu.CreateUserRequest">CreateUserRequest</a>) returns (<a href="#ondewo.nlu.User">User)</a></pre>
 
           
         
           <h4 id="ondewo.nlu.Users.GetUser" class="title-badge method">GetUser</h4>
 
-          <pre>rpc GetUser (<a href="#ondewo.nlu.GetUserRequest">GetUserRequest</a>) returns (User)</pre>
+          <pre>rpc GetUser (<a href="#ondewo.nlu.GetUserRequest">GetUserRequest</a>) returns (<a href="#ondewo.nlu.User">User)</a></pre>
 
           
         
           <h4 id="ondewo.nlu.Users.GetUserInfo" class="title-badge method">GetUserInfo</h4>
 
-          <pre>rpc GetUserInfo (<a href="#ondewo.nlu.GetUserRequest">GetUserRequest</a>) returns (UserInfo)</pre>
+          <pre>rpc GetUserInfo (<a href="#ondewo.nlu.GetUserRequest">GetUserRequest</a>) returns (<a href="#ondewo.nlu.UserInfo">UserInfo)</a></pre>
 
           
         
           <h4 id="ondewo.nlu.Users.DeleteUser" class="title-badge method">DeleteUser</h4>
 
-          <pre>rpc DeleteUser (<a href="#ondewo.nlu.GetUserRequest">GetUserRequest</a>) returns (.google.protobuf.Empty)</pre>
+          <pre>rpc DeleteUser (<a href="#ondewo.nlu.GetUserRequest">GetUserRequest</a>) returns (<a href="#google.protobuf.Empty">.google.protobuf.Empty)</a></pre>
 
           
         
           <h4 id="ondewo.nlu.Users.UpdateUser" class="title-badge method">UpdateUser</h4>
 
-          <pre>rpc UpdateUser (<a href="#ondewo.nlu.UpdateUserRequest">UpdateUserRequest</a>) returns (User)</pre>
+          <pre>rpc UpdateUser (<a href="#ondewo.nlu.UpdateUserRequest">UpdateUserRequest</a>) returns (<a href="#ondewo.nlu.User">User)</a></pre>
 
           
         
           <h4 id="ondewo.nlu.Users.ListUsers" class="title-badge method">ListUsers</h4>
 
-          <pre>rpc ListUsers (<a href="#ondewo.nlu.ListUsersRequest">ListUsersRequest</a>) returns (ListUsersResponse)</pre>
+          <pre>rpc ListUsers (<a href="#ondewo.nlu.ListUsersRequest">ListUsersRequest</a>) returns (<a href="#ondewo.nlu.ListUsersResponse">ListUsersResponse)</a></pre>
 
           
         
           <h4 id="ondewo.nlu.Users.ListUserInfos" class="title-badge method">ListUserInfos</h4>
 
-          <pre>rpc ListUserInfos (<a href="#ondewo.nlu.ListUsersRequest">ListUsersRequest</a>) returns (ListUserInfosResponse)</pre>
+          <pre>rpc ListUserInfos (<a href="#ondewo.nlu.ListUsersRequest">ListUsersRequest</a>) returns (<a href="#ondewo.nlu.ListUserInfosResponse">ListUserInfosResponse)</a></pre>
 
           
         
           <h4 id="ondewo.nlu.Users.CreateServerRole" class="title-badge method">CreateServerRole</h4>
 
-          <pre>rpc CreateServerRole (<a href="#ondewo.nlu.CreateServerRoleRequest">CreateServerRoleRequest</a>) returns (ServerRole)</pre>
+          <pre>rpc CreateServerRole (<a href="#ondewo.nlu.CreateServerRoleRequest">CreateServerRoleRequest</a>) returns (<a href="#ondewo.nlu.ServerRole">ServerRole)</a></pre>
 
           
         
           <h4 id="ondewo.nlu.Users.GetServerRole" class="title-badge method">GetServerRole</h4>
 
-          <pre>rpc GetServerRole (<a href="#ondewo.nlu.GetServerRoleRequest">GetServerRoleRequest</a>) returns (ServerRole)</pre>
+          <pre>rpc GetServerRole (<a href="#ondewo.nlu.GetServerRoleRequest">GetServerRoleRequest</a>) returns (<a href="#ondewo.nlu.ServerRole">ServerRole)</a></pre>
 
           
         
           <h4 id="ondewo.nlu.Users.DeleteServerRole" class="title-badge method">DeleteServerRole</h4>
 
-          <pre>rpc DeleteServerRole (<a href="#ondewo.nlu.DeleteServerRoleRequest">DeleteServerRoleRequest</a>) returns (.google.protobuf.Empty)</pre>
+          <pre>rpc DeleteServerRole (<a href="#ondewo.nlu.DeleteServerRoleRequest">DeleteServerRoleRequest</a>) returns (<a href="#google.protobuf.Empty">.google.protobuf.Empty)</a></pre>
 
           
         
           <h4 id="ondewo.nlu.Users.UpdateServerRole" class="title-badge method">UpdateServerRole</h4>
 
-          <pre>rpc UpdateServerRole (<a href="#ondewo.nlu.UpdateServerRoleRequest">UpdateServerRoleRequest</a>) returns (ServerRole)</pre>
+          <pre>rpc UpdateServerRole (<a href="#ondewo.nlu.UpdateServerRoleRequest">UpdateServerRoleRequest</a>) returns (<a href="#ondewo.nlu.ServerRole">ServerRole)</a></pre>
 
           
         
           <h4 id="ondewo.nlu.Users.ListServerRoles" class="title-badge method">ListServerRoles</h4>
 
-          <pre>rpc ListServerRoles (<a href="#ondewo.nlu.ListServerRolesRequest">ListServerRolesRequest</a>) returns (ListServerRolesResponse)</pre>
+          <pre>rpc ListServerRoles (<a href="#ondewo.nlu.ListServerRolesRequest">ListServerRolesRequest</a>) returns (<a href="#ondewo.nlu.ListServerRolesResponse">ListServerRolesResponse)</a></pre>
 
           
         
           <h4 id="ondewo.nlu.Users.ListServerPermissions" class="title-badge method">ListServerPermissions</h4>
 
-          <pre>rpc ListServerPermissions (<a href="#ondewo.nlu.ListServerPermissionsRequest">ListServerPermissionsRequest</a>) returns (ListServerPermissionsResponse)</pre>
+          <pre>rpc ListServerPermissions (<a href="#ondewo.nlu.ListServerPermissionsRequest">ListServerPermissionsRequest</a>) returns (<a href="#ondewo.nlu.ListServerPermissionsResponse">ListServerPermissionsResponse)</a></pre>
 
           
         
           <h4 id="ondewo.nlu.Users.Login" class="title-badge method">Login</h4>
 
-          <pre>rpc Login (<a href="#ondewo.nlu.LoginRequest">LoginRequest</a>) returns (LoginResponse)</pre>
+          <pre>rpc Login (<a href="#ondewo.nlu.LoginRequest">LoginRequest</a>) returns (<a href="#ondewo.nlu.LoginResponse">LoginResponse)</a></pre>
 
           
         
           <h4 id="ondewo.nlu.Users.CheckLogin" class="title-badge method">CheckLogin</h4>
 
-          <pre>rpc CheckLogin (<a href="#google.protobuf.Empty">.google.protobuf.Empty</a>) returns (.google.protobuf.Empty)</pre>
+          <pre>rpc CheckLogin (<a href="#google.protobuf.Empty">.google.protobuf.Empty</a>) returns (<a href="#google.protobuf.Empty">.google.protobuf.Empty)</a></pre>
 
           
         
@@ -14689,54 +14799,54 @@ of parent of the project and corresponding ProjectRole of the user </p></td>
         <p>This is collection of utility endpoints, intended to language-independent operations,</p><p>such as code checks, regex checks, etc.</p><p>Holds a collection of utility functions</p>
 
         
-        <div id="ondewo.nlu.Utilities-methods">Methods</div>
+        <div id="ondewo.nlu.Utilities-methods" class="service-methods">Service Methods</div>
         
           <h4 id="ondewo.nlu.Utilities.ValidateRegex" class="title-badge method">ValidateRegex</h4>
 
-          <pre>rpc ValidateRegex (<a href="#ondewo.nlu.ValidateRegexRequest">ValidateRegexRequest</a>) returns (ValidateRegexResponse)</pre>
+          <pre>rpc ValidateRegex (<a href="#ondewo.nlu.ValidateRegexRequest">ValidateRegexRequest</a>) returns (<a href="#ondewo.nlu.ValidateRegexResponse">ValidateRegexResponse)</a></pre>
 
           Validates the validity of python regexes
         
           <h4 id="ondewo.nlu.Utilities.ValidateEmbeddedRegex" class="title-badge method">ValidateEmbeddedRegex</h4>
 
-          <pre>rpc ValidateEmbeddedRegex (<a href="#ondewo.nlu.ValidateEmbeddedRegexRequest">ValidateEmbeddedRegexRequest</a>) returns (ValidateEmbeddedRegexResponse)</pre>
+          <pre>rpc ValidateEmbeddedRegex (<a href="#ondewo.nlu.ValidateEmbeddedRegexRequest">ValidateEmbeddedRegexRequest</a>) returns (<a href="#ondewo.nlu.ValidateEmbeddedRegexResponse">ValidateEmbeddedRegexResponse)</a></pre>
 
           Validate that entity types with group references have synonyms with
 capturing groups.
         
           <h4 id="ondewo.nlu.Utilities.CleanAllIntents" class="title-badge method">CleanAllIntents</h4>
 
-          <pre>rpc CleanAllIntents (<a href="#ondewo.nlu.CleanAllIntentsRequest">CleanAllIntentsRequest</a>) returns (CleanAllIntentsResponse)</pre>
+          <pre>rpc CleanAllIntents (<a href="#ondewo.nlu.CleanAllIntentsRequest">CleanAllIntentsRequest</a>) returns (<a href="#ondewo.nlu.CleanAllIntentsResponse">CleanAllIntentsResponse)</a></pre>
 
           Cleans all intent training phrases and entity annotations of parent
         
           <h4 id="ondewo.nlu.Utilities.CleanIntent" class="title-badge method">CleanIntent</h4>
 
-          <pre>rpc CleanIntent (<a href="#ondewo.nlu.CleanIntentRequest">CleanIntentRequest</a>) returns (CleanIntentResponse)</pre>
+          <pre>rpc CleanIntent (<a href="#ondewo.nlu.CleanIntentRequest">CleanIntentRequest</a>) returns (<a href="#ondewo.nlu.CleanIntentResponse">CleanIntentResponse)</a></pre>
 
           Cleans single intent training phrases and entity annotations
         
           <h4 id="ondewo.nlu.Utilities.CleanAllEntityTypes" class="title-badge method">CleanAllEntityTypes</h4>
 
-          <pre>rpc CleanAllEntityTypes (<a href="#ondewo.nlu.CleanAllEntityTypesRequest">CleanAllEntityTypesRequest</a>) returns (CleanAllEntityTypesResponse)</pre>
+          <pre>rpc CleanAllEntityTypes (<a href="#ondewo.nlu.CleanAllEntityTypesRequest">CleanAllEntityTypesRequest</a>) returns (<a href="#ondewo.nlu.CleanAllEntityTypesResponse">CleanAllEntityTypesResponse)</a></pre>
 
           Cleans all entity types of parent
         
           <h4 id="ondewo.nlu.Utilities.CleanEntityType" class="title-badge method">CleanEntityType</h4>
 
-          <pre>rpc CleanEntityType (<a href="#ondewo.nlu.CleanEntityTypeRequest">CleanEntityTypeRequest</a>) returns (CleanEntityTypeResponse)</pre>
+          <pre>rpc CleanEntityType (<a href="#ondewo.nlu.CleanEntityTypeRequest">CleanEntityTypeRequest</a>) returns (<a href="#ondewo.nlu.CleanEntityTypeResponse">CleanEntityTypeResponse)</a></pre>
 
           Cleans entity type
         
           <h4 id="ondewo.nlu.Utilities.AddTrainingPhrases" class="title-badge method">AddTrainingPhrases</h4>
 
-          <pre>rpc AddTrainingPhrases (<a href="#ondewo.nlu.AddTrainingPhrasesRequest">AddTrainingPhrasesRequest</a>) returns (AddTrainingPhrasesResponse)</pre>
+          <pre>rpc AddTrainingPhrases (<a href="#ondewo.nlu.AddTrainingPhrasesRequest">AddTrainingPhrasesRequest</a>) returns (<a href="#ondewo.nlu.AddTrainingPhrasesResponse">AddTrainingPhrasesResponse)</a></pre>
 
           Creates new training phrases corresponding to intent specified by its intent display name
         
           <h4 id="ondewo.nlu.Utilities.AddTrainingPhrasesFromCSV" class="title-badge method">AddTrainingPhrasesFromCSV</h4>
 
-          <pre>rpc AddTrainingPhrasesFromCSV (<a href="#ondewo.nlu.AddTrainingPhrasesFromCSVRequest">AddTrainingPhrasesFromCSVRequest</a>) returns (AddTrainingPhrasesResponse)</pre>
+          <pre>rpc AddTrainingPhrasesFromCSV (<a href="#ondewo.nlu.AddTrainingPhrasesFromCSVRequest">AddTrainingPhrasesFromCSVRequest</a>) returns (<a href="#ondewo.nlu.AddTrainingPhrasesResponse">AddTrainingPhrasesResponse)</a></pre>
 
           Creates new training phrases corresponding to intent specified by its intent display name from csv file
         
@@ -15780,18 +15890,18 @@ Default = None </p></td>
         <p>service to send requests to a webhook server</p>
 
         
-        <div id="ondewo.nlu.Webhook-methods">Methods</div>
+        <div id="ondewo.nlu.Webhook-methods" class="service-methods">Service Methods</div>
         
           <h4 id="ondewo.nlu.Webhook.ResponseRefinement" class="title-badge method">ResponseRefinement</h4>
 
-          <pre>rpc ResponseRefinement (<a href="#ondewo.nlu.WebhookRequest">WebhookRequest</a>) returns (WebhookResponse)</pre>
+          <pre>rpc ResponseRefinement (<a href="#ondewo.nlu.WebhookRequest">WebhookRequest</a>) returns (<a href="#ondewo.nlu.WebhookResponse">WebhookResponse)</a></pre>
 
           send a request for /response_refinement/ to the webhook server
 fulfillment messages can be overwritten by the webhook server
         
           <h4 id="ondewo.nlu.Webhook.SlotFilling" class="title-badge method">SlotFilling</h4>
 
-          <pre>rpc SlotFilling (<a href="#ondewo.nlu.WebhookRequest">WebhookRequest</a>) returns (WebhookResponse)</pre>
+          <pre>rpc SlotFilling (<a href="#ondewo.nlu.WebhookRequest">WebhookRequest</a>) returns (<a href="#ondewo.nlu.WebhookResponse">WebhookResponse)</a></pre>
 
           send a request for /slot_filling/ to the webhook server
 parameter values can be provided &
@@ -15799,7 +15909,7 @@ context information can be changed by the webhook server
         
           <h4 id="ondewo.nlu.Webhook.Ping" class="title-badge method">Ping</h4>
 
-          <pre>rpc Ping (<a href="#ondewo.nlu.PingRequest">PingRequest</a>) returns (PingResponse)</pre>
+          <pre>rpc Ping (<a href="#ondewo.nlu.PingRequest">PingRequest</a>) returns (<a href="#ondewo.nlu.PingResponse">PingResponse)</a></pre>
 
           send a Ping to the webhook server to check server health
 will return True if http status_code==200 is detected in the response
@@ -16106,23 +16216,23 @@ internally with the specified event as input. </p></td>
         <p></p>
 
         
-        <div id="ondewo.qa.QA-methods">Methods</div>
+        <div id="ondewo.qa.QA-methods" class="service-methods">Service Methods</div>
         
           <h4 id="ondewo.qa.QA.GetAnswer" class="title-badge method">GetAnswer</h4>
 
-          <pre>rpc GetAnswer (<a href="#ondewo.qa.GetAnswerRequest">GetAnswerRequest</a>) returns (GetAnswerResponse)</pre>
+          <pre>rpc GetAnswer (<a href="#ondewo.qa.GetAnswerRequest">GetAnswerRequest</a>) returns (<a href="#ondewo.qa.GetAnswerResponse">GetAnswerResponse)</a></pre>
 
           
         
           <h4 id="ondewo.qa.QA.RunScraper" class="title-badge method">RunScraper</h4>
 
-          <pre>rpc RunScraper (<a href="#google.protobuf.Empty">.google.protobuf.Empty</a>) returns (RunScraperResponse)</pre>
+          <pre>rpc RunScraper (<a href="#google.protobuf.Empty">.google.protobuf.Empty</a>) returns (<a href="#ondewo.qa.RunScraperResponse">RunScraperResponse)</a></pre>
 
           
         
           <h4 id="ondewo.qa.QA.RunTraining" class="title-badge method">RunTraining</h4>
 
-          <pre>rpc RunTraining (<a href="#google.protobuf.Empty">.google.protobuf.Empty</a>) returns (RunTrainingResponse)</pre>
+          <pre>rpc RunTraining (<a href="#google.protobuf.Empty">.google.protobuf.Empty</a>) returns (<a href="#ondewo.qa.RunTrainingResponse">RunTrainingResponse)</a></pre>
 
           
         
