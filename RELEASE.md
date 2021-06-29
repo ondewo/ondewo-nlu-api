@@ -1,15 +1,33 @@
 # Release History
 *****************
+## Release ONDEWO NLU APIS 2.0.0
+
+### New Features
+ * [OND211-1774] Implement endpoints to directly create/update/get/delete and list parameters.
+ * [OND211-1773] Implement endpoints to directly create/update/get/delete and list responses (=intent messages).
+ * [OND211-354] Establish a clear hierarchy for the merging
+  of entities within the generalized waterfall strategy. Include intent parameters to entity selection criteria.
+
+ * [OND211-1767] Change the training phrase message to include a language_code field
+ * [OND211-1766] Make training phrases endpoints work with batches.  
+ * [OND211-1760] Implement endpoint to directly list training phrases.
+ * [OND211-1744] Add initiation protocol into train agent endpoint
+ * [OND211-1732] Implement endpoints directly create/update/get/delete training phrases.
+ * [OND211-1731] Implement endpoints to directly create/update/get/delete and list entity values.
+ * [OND211-1724] Add compression_level field to ExportAgentRequest message.
+
+*****************
 
 ## Release ONDEWO NLU APIS 1.1.0
 
 ### New Features
- Created a new file ondewo/nlu/utility.proto that contains the following endpoinds:
+ Created a new file ondewo/nlu/utility.proto that contains the following endpoints:
  * [OND211-1693] Implement regex validation endpoints.
  * [OND211-1714] Implement intent cleaning endpoints.
  * [OND211-1714] Implement entity_type cleaning endpoints.
  * [OND211-1714] Implement endpoints to add new training phrases to intents.
 
+*****************
 
 ## Release ONDEWO NLU APIS 1.0.0
 
@@ -26,7 +44,7 @@
  * Type definition for Parameters improved (`context.proto`)
 
 ### Migration Guide
- * Usages of the Context Parameters must be adapted to the new typed structure 
+ * Usages of the Context Parameters must be adapted to the new typed structure
 
 *****************
 

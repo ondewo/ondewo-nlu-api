@@ -69,11 +69,20 @@ message ExtractEntitiesRequest {
     string text = 2;
     // the input language
     string language_code = 3;
+    // Optional. The name of the relevant intent. Used to establish preference
+    // hierarchy for entities that correspond to intent parameters
+    // Format: `projects/<Project ID>/agent/intents/<Intent ID>`
+    string intent_name = 4;
+}
+
+message EntityDetected{
+    Intent.TrainingPhrase.Entity entity = 1;
+    string extraction_method = 2;
+    float score = 3;
 }
 
 message ExtractEntitiesResponse {
-    repeated Intent.TrainingPhrase.Entity entities = 1;
-
+    repeated EntityDetected entities_detected = 1;
     string text = 2;
 }
 
