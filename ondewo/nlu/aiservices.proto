@@ -81,7 +81,7 @@ message ExtractEntitiesFuzzyRequest {
     // The text to be analyzed
     string text = 1;
     // Potential entities to be extracted from the text
-    repeated Intent.TrainingPhrase.Entity potential_entities = 2;
+    repeated EntityType potential_entities = 2;
     // Minimal similarity score to consider entity as "matched"
     float minimal_score = 3;
 }
