@@ -58,6 +58,8 @@ service AiServices {
             body: "*"
         };
     }
+    // Processes a natural language query and returns detected entities
+    rpc ExtractEntitiesFuzzy (ExtractEntitiesFuzzyRequest) returns (ExtractEntitiesResponse);
 }
 
 // The request to detect parameters.
@@ -73,6 +75,15 @@ message ExtractEntitiesRequest {
     // hierarchy for entities that correspond to intent parameters
     // Format: `projects/<Project ID>/agent/intents/<Intent ID>`
     string intent_name = 4;
+}
+
+message ExtractEntitiesFuzzyRequest {
+    // The text to be analyzed
+    string text = 1;
+    // Potential entities to be extracted from the text
+    repeated Intent.TrainingPhrase.Entity potential_entities = 2;
+    // Minimal similarity score to consider entity as "matched"
+    float minimal_score = 3;
 }
 
 message EntityDetected{
