@@ -18,6 +18,8 @@ package ondewo.nlu;
 
 import "google/api/annotations.proto";
 import "ondewo/nlu/intent.proto";
+import "ondewo/nlu/entity_type.proto";
+
 
 // The Central class defining the ondewo ai services
 service AiServices {
