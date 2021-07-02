@@ -6,9 +6,9 @@ name: Generate Documentation
 on:
   # Triggers the workflow on push
   push:
-#    branches: [ master ]
-#   pull_request:
-#     branches: [ master ]
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -36,10 +36,10 @@ jobs:
 
       - uses: ondewo/ondewo-protoc-gen-doc-action@main
 
-      - name: Commit and Push
-        run: |
-          git add doc
-          git config --global user.name "Github Action"
-          git config --global user.email "github-action@github.com"
-          git commit -am "Automatically generate documentation from protos."
-          git push
+      - name: Deploy 🚀
+        if: ${{ !env.ACT }}
+        uses: JamesIves/github-pages-deploy-action@4.1.4
+        with:
+          branch: gh-pages # The branch the action should deploy to.
+          folder: docs # The folder, of which contents the action should deploy.
+          target-folder: docs # The target folder, to which the action should deploy the folder contents
