@@ -1,5 +1,12 @@
 # Release History
 *****************
+## Release ONDEWO NLU APIS 2.0.1
+
+### Improvements
+ * [OND211-380] Add GitHub action to auto-deploy documentation on Git Pages from the protobuf files
+
+*****************
+
 ## Release ONDEWO NLU APIS 2.0.0
 
 ### New Features
