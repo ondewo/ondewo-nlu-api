@@ -4,11 +4,11 @@ name: Generate Documentation
 
 # Controls when the action will run. 
 on:
-  # Triggers the workflow on push or pull request events but only for the master branch
+  # Triggers the workflow on push
   push:
-    branches: [ feature/OND211-380-generate-documentation ]
-#   pull_request:
-#     branches: [ master ]
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -24,10 +24,22 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+#      - uses: actions/setup-go@v2.1.3
+#      - run: sudo apt install -y protobuf-compiler
 
-      # Runs a set of commands using the runners shell
-      - name: Generate
-        run: |
-          go get -u github.com/pseudomuto/protoc-gen-doc/cmd/protoc-gen-doc
-          echo Add other actions to build,
-          echo test, and deploy your project.
+#      - name: Generate documentation from ONDEWO proto files
+#        run: |
+#          go get -u github.com/pseudomuto/protoc-gen-doc/cmd/protoc-gen-doc
+#          export PATH=$(go env GOPATH)/bin:$PATH
+#          mkdir -p doc
+#          protoc -I. -Igoogleapis --doc_opt=markdown,nlu.md --doc_out=doc $(find ondewo -name '*.proto' | sort)
+
+      - uses: ondewo/ondewo-protoc-gen-doc-action@main
+
+      - name: Deploy 🚀
+        if: ${{ !env.ACT }}
+        uses: JamesIves/github-pages-deploy-action@4.1.4
+        with:
+          branch: gh-pages # The branch the action should deploy to.
+          folder: docs # The folder, of which contents the action should deploy.
+          target-folder: docs # The target folder, to which the action should deploy the folder contents
