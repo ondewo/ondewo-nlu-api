@@ -86,6 +86,8 @@ message ExtractEntitiesFuzzyRequest {
     repeated EntityType potential_entities = 2;
     // Minimal similarity score to consider entity as "matched"
     float minimal_score = 3;
+    // Optional. Whether or not entities of the same values are not allowed to overlap.
+    bool same_value_cannot_overlap = 4;
 }
 
 message EntityDetected{
