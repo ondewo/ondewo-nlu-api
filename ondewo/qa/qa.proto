@@ -100,5 +100,5 @@ message MetadataFilters {
     repeated string filters = 2;
 
     // Optional. Regular expression which must be matched by the meta data.
-    repeated string regex_filter = 3;
+    string regex_filter = 3;
 }
