@@ -276,7 +276,7 @@ message Intent {
             string name = 1;
             // Required. Text of the prompt
             string text = 2;
-            // Optional. The language of the prompts. If not specified, the default language code will be used.
+            // The language of the prompts. If not specified, the default language code will be used.
             string language_code = 3;
         }
         // The unique identifier of this parameter.
