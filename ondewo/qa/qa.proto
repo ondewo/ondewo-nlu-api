@@ -82,14 +82,12 @@ message RunScraperResponse {
     string container_name = 1;
     // ID of the docker container that is running the scraping job
     string container_id = 2;
-
 }
 
 message RunTrainingResponse {
     // Response message of training
     float f1 = 1;
     float accuracy = 2;
-
 }
 
 message MetadataFilters {
