@@ -66,6 +66,9 @@ message GetAnswerRequest {
 
     // Reader model name
     string reader_model_name = 7;
+
+    // Optional. Filters applied to the metadata, to restrict the retrieved documents.
+    repeated MetadataFilters filters = 8;
 }
 
 // The response message containing the greetings
@@ -79,13 +82,21 @@ message RunScraperResponse {
     string container_name = 1;
     // ID of the docker container that is running the scraping job
     string container_id = 2;
-
 }
 
 message RunTrainingResponse {
     // Response message of training
     float f1 = 1;
     float accuracy = 2;
-
 }
 
+message MetadataFilters {
+    // Required. Name of the meta data field on which to apply filters on.
+    string metadata_field = 1;
+
+    // Optional. Filters to restrict the possible values of the meta data.
+    repeated string filters = 2;
+
+    // Optional. Regular expression which must be matched by the meta data.
+    string regex_filter = 3;
+}
