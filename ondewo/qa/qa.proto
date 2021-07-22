@@ -95,8 +95,14 @@ message MetadataFilters {
     string metadata_field = 1;
 
     // Optional. Filters to restrict the possible values of the meta data.
-    repeated string filters = 2;
+    repeated string filters_pos = 2;
+
+    // Optional. List of forbidden values of the meta data.
+    repeated string filters_neg = 3;
 
     // Optional. Regular expression which must be matched by the meta data.
-    string regex_filter = 3;
+    string regex_filter_pos = 4;
+
+    // Optional. Regular expression which must not be matched by the meta data.
+    string regex_filter_neg = 5;
 }
