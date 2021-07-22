@@ -353,11 +353,11 @@ message Intent {
         message Card {
             // Optional. Contains information about a button.
             message Button {
+                // Note: One of the following is required:
                 // Optional. The text to show on the button.
                 string text = 1;
 
-                // Optional. The text to send back to the Dialogflow API or a URI to
-                // open.
+                // Optional. The text to send back to the Dialogflow API or a URI to open.
                 string postback = 2;
             }
 
