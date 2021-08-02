@@ -80,14 +80,17 @@ message ExtractEntitiesRequest {
 }
 
 message ExtractEntitiesFuzzyRequest {
+    // the parent of the request
+    // Format: `projects/<Project ID>`.
+    string parent = 1;
     // The text to be analyzed
-    string text = 1;
+    string text = 2;
     // Potential entities to be extracted from the text
-    repeated EntityType potential_entities = 2;
+    repeated EntityType potential_entities = 3;
     // Minimal similarity score to consider entity as "matched"
-    float minimal_score = 3;
+    float minimal_score = 4;
     // Optional. Whether or not entities are allowed to overlap.
-    bool allow_overlaps = 4;
+    bool allow_overlaps = 5;
 }
 
 message EntityDetected{
