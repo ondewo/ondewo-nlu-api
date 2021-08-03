@@ -85,12 +85,31 @@ message ExtractEntitiesFuzzyRequest {
     string parent = 1;
     // The text to be analyzed
     string text = 2;
-    // Potential entities to be extracted from the text
-    repeated EntityType potential_entities = 3;
+    // Potential entities to be extracted from the text with entity-specific configs
+    repeated EntityTypeFuzzyNerConfig potential_entities = 3;
     // Minimal similarity score to consider entity as "matched"
     float minimal_score = 4;
     // Optional. Whether or not entities are allowed to overlap.
     bool allow_overlaps = 5;
+}
+
+message EntityTypeFuzzyNerConfig {
+    // The Entity Type
+    EntityType entity_type = 1;
+    // Optional. Overrides the minimal score in ExtractEntitiesFuzzyRequest.
+    float minimal_score = 2;
+    // Optional. If defined, only entity value from this list are considered.
+    repeated string entity_values = 3;
+
+    // Enum of fuzzy ner algorithms
+    enum FuzzyNerAlgorithm {
+        PREFILTER_LEVENSHTEIN = 0;
+        LOCAL_MAXIMUM = 1;
+    }
+    // Optional. Specify the Fuzzy Ner algorithm
+    FuzzyNerAlgorithm algorithm = 4;
+    // Should not use allow_overlaps here, since its default value is False
+    // bool allow_overlaps = 5;
 }
 
 message EntityDetected{
