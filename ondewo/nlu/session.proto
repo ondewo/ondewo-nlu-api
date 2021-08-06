@@ -83,6 +83,14 @@ service Sessions {
         };
     };
 
+    // CreateSession: creates and returns a session(=conversation) from ondewo-kb
+    rpc CreateSession (CreateSessionRequest) returns (Session) {
+        option (google.api.http) = {
+            post: "/v2/{parent=projects/*/agent}/sessions"
+            body: "*"
+        };
+    };
+
     // TrackSessionStep: append to an existing session; creates it if not existing
     rpc TrackSessionStep (TrackSessionStepRequest) returns (Session) {
         option (google.api.http) = {
@@ -717,6 +725,13 @@ message GetSessionRequest {
 
     // whether to return a full or sparse view; if unspecified full view is returned
     Session.View session_view = 2;
+}
+
+message CreateSessionRequest {
+    // Creates a session that collects all the conversation interactions between the machine and a user
+    // The unique identifier of a Session in an Agent
+    // Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_UUID>`.
+    string session_path = 1;
 }
 
 message DeleteSessionRequest {
