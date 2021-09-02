@@ -18,6 +18,7 @@ package ondewo.nlu;
 
 import "google/api/annotations.proto";
 import "ondewo/nlu/intent.proto";
+import "ondewo/nlu/context.proto";
 
 // The Central class defining the ondewo ai services
 service AiServices {
@@ -55,6 +56,12 @@ service AiServices {
     rpc GetSynonyms (GetSynonymsRequest) returns (GetSynonymsResponse) {
         option (google.api.http) = {
             post: "/v2/{parent=projects/*/agent}/get_synonyms"
+            body: "*"
+        };
+    }
+    rpc ClassifyIntents (ClassifyIntentsRequest) returns (ClassifyIntentsResponse) {
+        option (google.api.http) = {
+            post: "/v2/{parent=projects/*/agent}/classify_intent"
             body: "*"
         };
     }
@@ -145,11 +152,11 @@ message GetAlternativeSentencesResponse {
 }
 
 message GenerateResponsesResponse {
-    repeated string responses =2;
+    repeated string responses = 2;
 }
 
 message GenerateUserSaysResponse {
-    repeated string user_says =2;
+    repeated string user_says = 2;
 }
 
 message GetAlternativeTrainingPhrasesResponse {
@@ -243,4 +250,68 @@ message XLNetAugEnrichmentConfig {
     int32 enrichment_factor = 2;
 
     int32 execution_order = 3;
+}
+
+// The request for intent classification.
+message ClassifyIntentsRequest {
+    // the parent of the request
+    // Format: `projects/<Project ID>`.
+    string parent = 1;
+    // the input text
+    string text = 2;
+    // the input language
+    string language_code = 3;
+    // Optional: to use the contexts with names listed in the field `context_names` during the classification
+    bool active_contexts = 4;
+    // Optional: names of the contexts for the intent classification
+    repeated string context_names = 5;
+    // Optional: Which mode to use:
+    // EXCLUSIVE - skip algorithms listed in `algorithms` field,
+    // INCLUSIVE - run ONLY algorithms listed in `algorithms` field,
+    // None - default mode, described in intent_ranking_match.py
+    Mode mode = 6;
+    // Optional: Algorithm list
+    repeated IntentAlgorithms algorithms = 7;
+}
+
+enum Mode {
+    EXCLUSIVE = 0;
+    INCLUSIVE = 1;
+}
+
+enum IntentAlgorithms {
+    OndewoIntentExactContextDetector = 0;
+    OndewoIntentExactMatch = 1;
+    OndewoIntentNamedExactMatch = 2;
+    OndewoIntentSimilarityMatch = 3;
+    OndewoIntentNamedSimilarityMatch = 4;
+    OndewoIntentLogisticRegression = 5;
+    OndewoIntentSupportVectorClassifier = 6;
+    OndewoIntentRandomForestClassifier = 7;
+    OndewoIntentFastTextClassifier = 8;
+    OndewoIntentMachineLearningMatch = 9;
+    OndewoIntentBertClassifier = 10;
+    OndewoIntentMetaClassifier = 11;
+    OndewoIntentSnipsClassifier = 12;
+    IntentExitDetector = 13;
+    DefaultFallBackAlgorithm = 14;
+    OndewoIntentRankingMatch = 15;
+    OndewoIntentRasaClassifier = 16;
+    DeviationEndingDetection = 17;
+    OndewoWeightedEnsemble = 18;
+    OndewoIntentExitDetector = 19;
+    OndewoIntentParameterMatch = 20;
+}
+
+message IntentClassified{
+    Intent intent = 1;
+    string classifier = 2;
+    float score = 3;
+}
+
+message ClassifyIntentsResponse {
+    repeated IntentClassified intents_classified = 1;
+    string text = 2;
+    bool active_contexts = 3;
+    repeated string context_names = 4;
 }
