@@ -312,8 +312,9 @@ message ClassifyIntentsRequest {
 }
 
 enum Mode {
-    EXCLUSIVE = 0;
-    INCLUSIVE = 1;
+    UNSPECIFIED = 0;
+    EXCLUSIVE = 1;
+    INCLUSIVE = 2;
 }
 
 enum IntentAlgorithms {
