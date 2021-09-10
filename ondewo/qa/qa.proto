@@ -68,7 +68,7 @@ message GetAnswerRequest {
     string reader_model_name = 7;
 
     // Optional. Filters applied to the metadata, to restrict the retrieved documents.
-    repeated MetadataFilters filters = 8;
+    map<string, MetadataFilter> metadata_filters = 8;
 }
 
 // The response message containing the greetings
@@ -90,19 +90,13 @@ message RunTrainingResponse {
     float accuracy = 2;
 }
 
-message MetadataFilters {
-    // Required. Name of the meta data field on which to apply filters on.
-    string metadata_field = 1;
-
-    // Optional. Filters to restrict the possible values of the meta data.
-    repeated string filters_include = 2;
-
-    // Optional. List of forbidden values of the meta data.
-    repeated string filters_exclude = 3;
+message MetadataFilter {
+    // Optional. List of values that the metadata_field is allowed to take.
+    repeated string allowed_values = 1;
 
     // Optional. Regular expression which must be matched by the meta data.
-    string regex_filter_include = 4;
+    string regex_filter_include = 2;
 
     // Optional. Regular expression which must not be matched by the meta data.
-    string regex_filter_exclude = 5;
+    string regex_filter_exclude = 3;
 }
