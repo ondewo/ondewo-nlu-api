@@ -49,7 +49,8 @@ message GetAnswerRequest {
     // Required. The name of the QA session.
     string session_id = 1;
 
-    // Required. The context of the request. A string, in the form of a sentence.
+    // Required. The context of the request. A message containing a string (in the form of a sentence) and a
+    // language code.
     ondewo.nlu.TextInput text = 2;
 
     // Maximal number of answers returned
@@ -67,8 +68,8 @@ message GetAnswerRequest {
     // Reader model name
     string reader_model_name = 7;
 
-    // Optional. Filters applied to the metadata, to restrict the retrieved documents.
-    map<string, MetadataFilter> metadata_filters = 8;
+    // Optional. Filters applied to the urls, to restrict the retrieved documents.
+    UrlFilter url_filter = 8;
 }
 
 // The response message containing the greetings
@@ -90,7 +91,7 @@ message RunTrainingResponse {
     float accuracy = 2;
 }
 
-message MetadataFilter {
+message UrlFilter {
     // Optional. List of values that the metadata_field is allowed to take.
     repeated string allowed_values = 1;
 
