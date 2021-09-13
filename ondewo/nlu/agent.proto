@@ -521,7 +521,7 @@ message DeleteAgentRequest {
 // The request message for [Agents.GetAgent][google.cloud.dialogflow.v2.Agents.GetAgent].
 message GetAgentRequest {
     // Required. The project that the agent to fetch is associated with.
-    // Format: `projects/<Project ID>`.
+    // Format: `projects/<Project ID>/agents`.
     string parent = 1;
 
     // Optional. Specify the view of the returned agent (full view by default)
