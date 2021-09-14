@@ -41,6 +41,7 @@ import "google/protobuf/field_mask.proto";
 import "google/protobuf/empty.proto";
 import "google/protobuf/struct.proto";
 import "ondewo/nlu/common.proto";
+import "ondewo/nlu/intent.proto";
 import "ondewo/nlu/user.proto";
 import "ondewo/nlu/project_role.proto";
 import "google/protobuf/timestamp.proto";
@@ -626,6 +627,23 @@ message ExportAgentResponse {
         // | base64 --decode > <agent zip file>
         bytes agent_content = 2;
     }
+}
+
+message ExportBenchmarkAgentRequest {
+    // agent related info
+    string parent = 1;
+    int32 compression_level = 2;
+
+    //train-test split related info
+    float test_size = 3;
+    float train_size = 4;
+    int32 random_state = 5;
+    bool shuffle = 6;
+}
+
+message ExportBenchmarkAgentResponse {
+    bytes agent_content = 1;
+    ListTrainingPhrasesResponse training_phrases = 2;
 }
 
 message OptimizeRankingMatchRequest {
