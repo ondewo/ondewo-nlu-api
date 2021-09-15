@@ -359,6 +359,13 @@ service Agents {
         };
     }
 
+    rpc ExportBenchmarkAgent (ExportBenchmarkAgentRequest) returns (google.longrunning.Operation) {
+        option (google.api.http) = {
+          post: "/v2/{parent=projects/*/agent}:export_benchmark"
+          body: "*"
+        };
+    }
+
     // Imports the specified agent from a ZIP file.
     //
     // Uploads new intents and entity types without deleting the existing ones.
