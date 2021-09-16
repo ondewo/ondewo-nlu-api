@@ -359,6 +359,8 @@ service Agents {
         };
     }
 
+    // Exports the specified train agent to a ZIP file after train-test split, returns the test TrainingPhrase list.
+    //
     rpc ExportBenchmarkAgent (ExportBenchmarkAgentRequest) returns (google.longrunning.Operation) {
         option (google.api.http) = {
           post: "/v2/{parent=projects/*/agent}:export_benchmark"
@@ -637,14 +639,24 @@ message ExportAgentResponse {
 }
 
 message ExportBenchmarkAgentRequest {
-    // agent related info
+    // Agent related info
+    // Required. The project that the agent to export is associated with.
+    // Format: `projects/<Project ID>`.
     string parent = 1;
+    // Optional. The compression level of the zip file created.
+    // Valid range 1-9; the grpc-default value 0 will be mapped to 1,
+    // other values cause an error in the request validation handler.
     int32 compression_level = 2;
 
-    //train-test split related info
+    // Train-test split related parameters, for further info,
+    // check https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html
+    // Optional: bigger than zero
     float test_size = 3;
+    // Optional: bigger than zero
     float train_size = 4;
+    // Optional: random seed
     int32 random_state = 5;
+    // Always True
     bool shuffle = 6;
 }
 
