@@ -662,7 +662,7 @@ message ExportBenchmarkAgentRequest {
 
 message ExportBenchmarkAgentResponse {
     bytes agent_content = 1;
-    ListTrainingPhrasesResponse training_phrases = 2;
+    map<string, ListTrainingPhrasesResponse> training_phrases = 2;
 }
 
 message OptimizeRankingMatchRequest {
