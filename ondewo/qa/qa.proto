@@ -40,13 +40,23 @@ service QA {
             get: "/qa:RunTraining"
         };
     }
+
+    rpc GetServerState (google.protobuf.Empty) returns (GetServerStateResponse) {
+        option (google.api.http) = {
+            get: "/qa:GetServerState"
+        };
+    }
 }
 
 /////// Messages ///////
 
 // The request message
 message GetAnswerRequest {
-    // Required. The name of the QA session.
+    // Required. The name of the session this query is sent to. Format:
+    // `projects/<Project ID>/agent/sessions/<Session ID>`. It's up to the API
+    // caller to choose an appropriate session ID. It can be a random number or
+    // some type of user identifier (preferably hashed). The length of the session
+    // ID must not exceed 36 bytes.
     string session_id = 1;
 
     // Required. The context of the request. A message containing a string (in the form of a sentence) and a
@@ -92,7 +102,7 @@ message RunTrainingResponse {
 }
 
 message UrlFilter {
-    // Optional. List of values that the metadata_field is allowed to take.
+    // Optional. List of values that the metadata_field 'url' is allowed to take.
     repeated string allowed_values = 1;
 
     // Optional. Regular expression which must be matched by the meta data.
@@ -100,4 +110,9 @@ message UrlFilter {
 
     // Optional. Regular expression which must not be matched by the meta data.
     string regex_filter_exclude = 3;
+}
+
+message GetServerStateResponse {
+    // Whether or not the server is ready to accept requests
+    bool server_is_ready = 1;
 }
