@@ -46,6 +46,16 @@ service QA {
             get: "/qa:GetServerState"
         };
     }
+    rpc ListProjectIds (google.protobuf.Empty) returns (ListProjectIdsResponse) {
+        option (google.api.http) = {
+            get: "/qa:ListProjectIds"
+        };
+    }
+    rpc GetProjectConfig (GetProjectConfigRequest) returns (GetProjectConfigResponse) {
+        option (google.api.http) = {
+            get: "/qa:ListProjectConfig"
+        };
+    }
 }
 
 /////// Messages ///////
@@ -115,4 +125,16 @@ message UrlFilter {
 message GetServerStateResponse {
     // Whether or not the server is ready to accept requests
     bool server_is_ready = 1;
+}
+
+message ListProjectIdsResponse {
+    repeated string project_ids = 1;
+}
+
+message GetProjectConfigRequest {
+    string project_id = 1;
+}
+
+message GetProjectConfigResponse {
+    string config_serialized = 1;
 }
