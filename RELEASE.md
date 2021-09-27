@@ -3,6 +3,7 @@
 ## Release ONDEWO NLU APIS 2.0.1
 
 ### Improvements
+ * Add endpoints to list project ids, get project config and get server state to qa.proto.
  * [OND211-380] Add GitHub action to auto-deploy documentation on Git Pages from the protobuf files
 
 *****************
