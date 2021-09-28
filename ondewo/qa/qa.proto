@@ -146,5 +146,5 @@ message GetProjectConfigResponse {
 }
 
 message UpdateDatabaseResponse {
-    bool successful = 1;
+    repeated string error_messages = 1;
 }
