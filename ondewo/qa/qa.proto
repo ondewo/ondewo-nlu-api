@@ -35,6 +35,12 @@ service QA {
         };
     }
 
+    rpc UpdateDatabase (google.protobuf.Empty) returns (UpdateDatabaseResponse) {
+        option (google.api.http) = {
+            get: "/qa:UpdateDatabase"
+        };
+    }
+
     rpc RunTraining (google.protobuf.Empty) returns (RunTrainingResponse) {
         option (google.api.http) = {
             get: "/qa:RunTraining"
@@ -137,4 +143,8 @@ message GetProjectConfigRequest {
 
 message GetProjectConfigResponse {
     string config_serialized = 1;
+}
+
+message UpdateDatabaseResponse {
+    bool successful = 1;
 }
