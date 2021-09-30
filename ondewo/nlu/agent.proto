@@ -660,6 +660,7 @@ message ExportBenchmarkAgentRequest {
 
 message ExportBenchmarkAgentResponse {
     bytes agent_content = 1;
+    // Key is the language code, value is the corresponding ListTrainingPhrasesResponse
     map<string, ListTrainingPhrasesResponse> training_phrases = 2;
 }
 
