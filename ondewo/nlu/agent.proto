@@ -656,8 +656,6 @@ message ExportBenchmarkAgentRequest {
     float train_size = 4;
     // Optional: random seed
     int32 random_state = 5;
-    // Always True
-    bool shuffle = 6;
 }
 
 message ExportBenchmarkAgentResponse {
