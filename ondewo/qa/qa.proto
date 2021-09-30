@@ -110,10 +110,13 @@ message RunScraperRequest {
 }
 
 message RunScraperResponse {
-    // Name of the docker container that is running the job
-    string container_name = 1;
-    // ID of the docker container that is running the scraping job
-    string container_id = 2;
+    message ScraperContainer {
+        // Name of the docker container that is running the job
+        string container_name = 1;
+        // ID of the docker container that is running the scraping job
+        string container_id = 2;
+    }
+    repeated ScraperContainer scraper_containers = 1;
 }
 
 message RunTrainingResponse {
