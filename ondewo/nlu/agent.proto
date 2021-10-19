@@ -650,6 +650,7 @@ message ExportBenchmarkAgentRequest {
 
     // Train-test split related parameters, for further info,
     // check https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html
+    // default values come from API definition above
     // Optional: bigger than zero
     float test_size = 3;
     // Optional: bigger than zero
