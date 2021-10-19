@@ -3,6 +3,10 @@
 ## Release ONDEWO NLU APIS 2.0.1
 
 ### Improvements
+ * Add endpoint to update retriever database to qa.proto.
+ * Add endpoint to list project ids to qa.proto.
+ * Add endpoint to get project config to qa.proto.
+ * Add endpoint to get server state to qa.proto.
  * [OND211-380] Add GitHub action to auto-deploy documentation on Git Pages from the protobuf files
 
 *****************

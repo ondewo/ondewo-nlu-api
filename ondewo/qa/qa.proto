@@ -29,9 +29,15 @@ service QA {
             body: "*"
         };
     }
-    rpc RunScraper (google.protobuf.Empty) returns (RunScraperResponse) {
+    rpc RunScraper (RunScraperRequest) returns (RunScraperResponse) {
         option (google.api.http) = {
             get: "/qa:RunScraper"
+        };
+    }
+
+    rpc UpdateDatabase (UpdateDatabaseRequest) returns (UpdateDatabaseResponse) {
+        option (google.api.http) = {
+            get: "/qa:UpdateDatabase"
         };
     }
 
@@ -40,13 +46,33 @@ service QA {
             get: "/qa:RunTraining"
         };
     }
+
+    rpc GetServerState (google.protobuf.Empty) returns (GetServerStateResponse) {
+        option (google.api.http) = {
+            get: "/qa:GetServerState"
+        };
+    }
+    rpc ListProjectIds (google.protobuf.Empty) returns (ListProjectIdsResponse) {
+        option (google.api.http) = {
+            get: "/qa:ListProjectIds"
+        };
+    }
+    rpc GetProjectConfig (GetProjectConfigRequest) returns (GetProjectConfigResponse) {
+        option (google.api.http) = {
+            get: "/qa:ListProjectConfig"
+        };
+    }
 }
 
 /////// Messages ///////
 
 // The request message
 message GetAnswerRequest {
-    // Required. The name of the QA session.
+    // Required. The name of the session this query is sent to. Format:
+    // `projects/<Project ID>/agent/sessions/<Session ID>`. It's up to the API
+    // caller to choose an appropriate session ID. It can be a random number or
+    // some type of user identifier (preferably hashed). The length of the session
+    // ID must not exceed 36 bytes.
     string session_id = 1;
 
     // Required. The context of the request. A message containing a string (in the form of a sentence) and a
@@ -78,11 +104,19 @@ message GetAnswerResponse {
     ondewo.nlu.DetectIntentResponse query_result = 2;
 }
 
+message RunScraperRequest {
+    // List of project_ids
+    repeated string project_ids = 1;
+}
+
 message RunScraperResponse {
-    // Name of the docker container that is running the job
-    string container_name = 1;
-    // ID of the docker container that is running the scraping job
-    string container_id = 2;
+    message ScraperContainer {
+        // Name of the docker container that is running the job
+        string container_name = 1;
+        // ID of the docker container that is running the scraping job
+        string container_id = 2;
+    }
+    repeated ScraperContainer scraper_containers = 1;
 }
 
 message RunTrainingResponse {
@@ -92,7 +126,7 @@ message RunTrainingResponse {
 }
 
 message UrlFilter {
-    // Optional. List of values that the metadata_field is allowed to take.
+    // Optional. List of values that the metadata_field 'url' is allowed to take.
     repeated string allowed_values = 1;
 
     // Optional. Regular expression which must be matched by the meta data.
@@ -100,4 +134,30 @@ message UrlFilter {
 
     // Optional. Regular expression which must not be matched by the meta data.
     string regex_filter_exclude = 3;
+}
+
+message GetServerStateResponse {
+    // Whether or not the server is ready to accept requests
+    bool server_is_ready = 1;
+}
+
+message ListProjectIdsResponse {
+    repeated string project_ids = 1;
+}
+
+message GetProjectConfigRequest {
+    string project_id = 1;
+}
+
+message GetProjectConfigResponse {
+    string config_serialized = 1;
+}
+
+message UpdateDatabaseRequest {
+    // List of project_ids of which to update the database
+    repeated string project_ids = 1;
+}
+
+message UpdateDatabaseResponse {
+    repeated string error_messages = 1;
 }
