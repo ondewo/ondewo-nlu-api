@@ -18,6 +18,7 @@ package ondewo.nlu;
 
 import "google/api/annotations.proto";
 import "ondewo/nlu/intent.proto";
+import "ondewo/nlu/context.proto";
 import "ondewo/nlu/entity_type.proto";
 import "ondewo/nlu/context.proto";
 
@@ -60,8 +61,6 @@ service AiServices {
             body: "*"
         };
     }
-    // Processes a natural language query and returns detected entities
-    rpc ExtractEntitiesFuzzy (ExtractEntitiesFuzzyRequest) returns (ExtractEntitiesResponse);
 
     rpc ClassifyIntents (ClassifyIntentsRequest) returns (ClassifyIntentsResponse) {
         option (google.api.http) = {
@@ -69,6 +68,9 @@ service AiServices {
             body: "*"
         };
     }
+
+    // Processes a natural language query and returns detected entities
+    rpc ExtractEntitiesFuzzy (ExtractEntitiesFuzzyRequest) returns (ExtractEntitiesResponse);
 }
 
 // The request to detect parameters.
@@ -211,8 +213,6 @@ message AltTrainingPhrase {
 }
 
 message DataEnrichmentConfig {
-
-
     EntityEnrichmentConfig entity_enrichment = 1;
     ThesaurusEnrichmentConfig thesaurus_enrichment = 2;
     Word2VecEnrichmentConfig word2vec_enrichment = 3;
@@ -222,7 +222,6 @@ message DataEnrichmentConfig {
     FastTextEnrichmentConfig fasttext_enrichment = 7;
     BertAugEnrichmentConfig bert_enrichment = 8;
     XLNetAugEnrichmentConfig xlnet_enrichment = 9;
-
 }
 
 message EntityEnrichmentConfig {
