@@ -89,6 +89,8 @@ message OperationMetadata {
         BUILD_AGENT_CACHE = 6;
         // train agent
         TRAIN_AGENT = 7;
+        // export benchmark agent to a zip file
+        EXPORT_BENCHMARK_AGENT = 8;
     }
 
     // name of the host where the operation was executed

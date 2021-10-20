@@ -1,8 +1,19 @@
 # Release History
 *****************
+
+## Release ONDEWO NLU APIS 2.1.0
+
+### Improvements
+ * [OND211-1832] Extend Intent message definition to include the optional fields "start_date" and "end_date"
+
+*****************
 ## Release ONDEWO NLU APIS 2.0.1
 
 ### Improvements
+ * Add endpoint to update retriever database to qa.proto.
+ * Add endpoint to list project ids to qa.proto.
+ * Add endpoint to get project config to qa.proto.
+ * Add endpoint to get server state to qa.proto.
  * [OND211-380] Add GitHub action to auto-deploy documentation on Git Pages from the protobuf files
 
 *****************

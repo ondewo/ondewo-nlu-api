@@ -41,6 +41,7 @@ import "google/protobuf/field_mask.proto";
 import "google/protobuf/empty.proto";
 import "google/protobuf/struct.proto";
 import "ondewo/nlu/common.proto";
+import "ondewo/nlu/intent.proto";
 import "ondewo/nlu/user.proto";
 import "ondewo/nlu/project_role.proto";
 import "google/protobuf/timestamp.proto";
@@ -358,6 +359,15 @@ service Agents {
         };
     }
 
+    // Exports the specified train agent to a ZIP file after train-test split, returns the test TrainingPhrase list.
+    //
+    rpc ExportBenchmarkAgent (ExportBenchmarkAgentRequest) returns (google.longrunning.Operation) {
+        option (google.api.http) = {
+          post: "/v2/{parent=projects/*/agent}:export_benchmark"
+          body: "*"
+        };
+    }
+
     // Imports the specified agent from a ZIP file.
     //
     // Uploads new intents and entity types without deleting the existing ones.
@@ -626,6 +636,33 @@ message ExportAgentResponse {
         // | base64 --decode > <agent zip file>
         bytes agent_content = 2;
     }
+}
+
+message ExportBenchmarkAgentRequest {
+    // Agent related info
+    // Required. The project that the agent to export is associated with.
+    // Format: `projects/<Project ID>`.
+    string parent = 1;
+    // Optional. The compression level of the zip file created.
+    // Valid range 1-9; the grpc-default value 0 will be mapped to 1,
+    // other values cause an error in the request validation handler.
+    int32 compression_level = 2;
+
+    // Train-test split related parameters, for further info,
+    // check https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html
+    // default values come from API definition above
+    // Optional: bigger than zero
+    float test_size = 3;
+    // Optional: bigger than zero
+    float train_size = 4;
+    // Optional: random seed
+    int32 random_state = 5;
+}
+
+message ExportBenchmarkAgentResponse {
+    bytes agent_content = 1;
+    // Key is the language code, value is the corresponding ListTrainingPhrasesResponse
+    map<string, ListTrainingPhrasesResponse> training_phrases = 2;
 }
 
 message OptimizeRankingMatchRequest {
