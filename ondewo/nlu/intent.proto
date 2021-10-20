@@ -35,6 +35,7 @@ import "ondewo/nlu/context.proto";
 import "ondewo/nlu/common.proto";
 import "google/longrunning/operations.proto";
 import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
 import "google/protobuf/field_mask.proto";
 import "google/protobuf/struct.proto";
 
@@ -806,6 +807,12 @@ message Intent {
 
     // Indicates whether the intent is active or not
     IntentStatus status = 35;
+
+    // Optional. Provides information that can be used in custom scripts
+    google.protobuf.Timestamp start_date = 36;
+
+    // Optional. Provides information that can be used in custom scripts
+    google.protobuf.Timestamp end_date = 37;
 }
 
 // The request message for [Intents.ListIntents][google.cloud.dialogflow.v2.Intents.ListIntents].
@@ -995,6 +1002,10 @@ enum IntentCategory {
     ALL_INTENTS = 0;  // represent all intents
     DEFAULT_INTENTS = 1;  // represent the default intents
     USER_DEFINED_INTENTS = 2;  // represent the user defined (custom) intents
+    DATE_EXPIRED_INTENTS = 3;  // represents the intents that had its end_date elapsed
+    DATE_ACTIVE_INTENTS = 4;  // represents the intents that its start_date began but had not yet expired
+    DATE_UPCOMING_INTENTS = 5;  // represent the intents that are still expecting its start_date to begin
+
 }
 
 message IntentSorting {
@@ -1004,6 +1015,8 @@ message IntentSorting {
         SORT_INTENT_BY_CREATION_DATE = 2;
         SORT_INTENT_BY_LAST_UPDATED = 3;
         SORT_INTENT_BY_USERSAYS_COUNT = 4;
+        SORT_INTENT_BY_START_DATE = 5;
+        SORT_INTENT_BY_END_DATE = 6;
     }
 
     IntentSortingField sorting_field = 1;
