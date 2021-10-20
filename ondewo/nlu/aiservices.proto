@@ -18,6 +18,8 @@ package ondewo.nlu;
 
 import "google/api/annotations.proto";
 import "ondewo/nlu/intent.proto";
+import "ondewo/nlu/entity_type.proto";
+
 
 // The Central class defining the ondewo ai services
 service AiServices {
@@ -58,6 +60,8 @@ service AiServices {
             body: "*"
         };
     }
+    // Processes a natural language query and returns detected entities
+    rpc ExtractEntitiesFuzzy (ExtractEntitiesFuzzyRequest) returns (ExtractEntitiesResponse);
 }
 
 // The request to detect parameters.
@@ -73,6 +77,39 @@ message ExtractEntitiesRequest {
     // hierarchy for entities that correspond to intent parameters
     // Format: `projects/<Project ID>/agent/intents/<Intent ID>`
     string intent_name = 4;
+}
+
+message ExtractEntitiesFuzzyRequest {
+    // the parent of the request
+    // Format: `projects/<Project ID>`.
+    string parent = 1;
+    // The text to be analyzed
+    string text = 2;
+    // Potential entities to be extracted from the text with entity-specific configs
+    repeated EntityTypeFuzzyNerConfig potential_entities = 3;
+    // Minimal similarity score to consider entity as "matched"
+    float minimal_score = 4;
+    // Optional. Whether or not entities are allowed to overlap.
+    bool allow_overlaps = 5;
+}
+
+message EntityTypeFuzzyNerConfig {
+    // The Entity Type
+    EntityType entity_type = 1;
+    // Optional. Overrides the minimal score in ExtractEntitiesFuzzyRequest.
+    float minimal_score = 2;
+    // Optional. If defined, only entity value from this list are considered.
+    repeated string entity_values = 3;
+
+    // Enum of fuzzy ner algorithms
+    enum FuzzyNerAlgorithm {
+        PREFILTER_LEVENSHTEIN = 0;
+        LOCAL_MAXIMUM = 1;
+    }
+    // Optional. Specify the Fuzzy Ner algorithm
+    FuzzyNerAlgorithm algorithm = 4;
+    // Should not use allow_overlaps here, since its default value is False
+    // bool allow_overlaps = 5;
 }
 
 message EntityDetected{
