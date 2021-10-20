@@ -5,6 +5,7 @@
 
 ### Improvements
  * [OND211-1832] Extend Intent message definition to include the optional fields "start_date" and "end_date"
+ * [OND211-1785] Support of the CreateSession endpoint on the Session Servicer
 
 *****************
 ## Release ONDEWO NLU APIS 2.0.1
