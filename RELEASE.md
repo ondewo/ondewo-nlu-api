@@ -6,7 +6,8 @@
 ### Improvements
  * [OND211-1832] Extend Intent message definition to include the optional fields "start_date" and "end_date"
  * [OND211-1785] Add CreateSession endpoint to the Session Servicer
- * [OND211-1799] Implement endpoints for fuzzy named entity extraction.
+ * [OND211-1799] Add ExtractEntitiesFuzzy endpoint to the AIServices Servicer
+ * [OND211-1734] Add ExportBenchmarkAgent endpoint to the Agent Servicer
  * [XXX002-38] Add endpoint to list project ids to qa.proto.
  * [XXX002-35] Add endpoint to update retriever database to qa.proto.
  * [XXX002-35] Add endpoint to get project config to qa.proto.
