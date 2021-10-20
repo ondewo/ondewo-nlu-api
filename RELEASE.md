@@ -1,5 +1,12 @@
 # Release History
 *****************
+
+## Release ONDEWO NLU APIS 2.1.0
+
+### Improvements
+ * [OND211-1832] Extend Intent message definition to include the optional fields "start_date" and "end_date"
+
+*****************
 ## Release ONDEWO NLU APIS 2.0.1
 
 ### Improvements
