@@ -6,15 +6,17 @@
 ### Improvements
  * [OND211-1832] Extend Intent message definition to include the optional fields "start_date" and "end_date"
  * [OND211-1785] Add CreateSession endpoint to the Session Servicer
+ * [OND211-1799] Add ExtractEntitiesFuzzy endpoint to the AIServices Servicer
+ * [OND211-1734] Add ExportBenchmarkAgent endpoint to the Agent Servicer
+ * [XXX002-38] Add endpoint to list project ids to qa.proto.
+ * [XXX002-35] Add endpoint to update retriever database to qa.proto.
+ * [XXX002-35] Add endpoint to get project config to qa.proto.
+ * [XXX002-35] Add endpoint to get server state to qa.proto.
 
 *****************
 ## Release ONDEWO NLU APIS 2.0.1
 
 ### Improvements
- * Add endpoint to update retriever database to qa.proto.
- * Add endpoint to list project ids to qa.proto.
- * Add endpoint to get project config to qa.proto.
- * Add endpoint to get server state to qa.proto.
  * [OND211-380] Add GitHub action to auto-deploy documentation on Git Pages from the protobuf files
 
 *****************
@@ -22,7 +24,6 @@
 ## Release ONDEWO NLU APIS 2.0.0
 
 ### New Features
- * [OND211-1799] Implement endpoints for fuzzy named entity extraction.
  * [OND211-1774] Implement endpoints to directly create/update/get/delete and list parameters.
  * [OND211-1773] Implement endpoints to directly create/update/get/delete and list responses (=intent messages).
  * [OND211-354] Establish a clear hierarchy for the merging
