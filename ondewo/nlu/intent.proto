@@ -626,6 +626,46 @@ message Intent {
             //   }
             // }</pre>
             ACTIONS_ON_GOOGLE = 8;
+
+            PLACEHOLDER_1 = 9;
+
+            PLACEHOLDER_2 = 10;
+
+            PLACEHOLDER_3 = 11;
+
+            PLACEHOLDER_4 = 12;
+
+            PLACEHOLDER_5 = 13;
+
+            PLACEHOLDER_6 = 14;
+
+            PLACEHOLDER_7 = 15;
+
+            PLACEHOLDER_8 = 16;
+
+            PLACEHOLDER_9 = 17;
+
+            PLACEHOLDER_10 = 18;
+
+            PLACEHOLDER_11 = 19;
+
+            PLACEHOLDER_12 = 20;
+
+            PLACEHOLDER_13 = 21;
+
+            PLACEHOLDER_14 = 22;
+
+            PLACEHOLDER_15 = 23;
+
+            PLACEHOLDER_16 = 24;
+
+            PLACEHOLDER_17 = 25;
+
+            PLACEHOLDER_18 = 26;
+
+            PLACEHOLDER_19 = 27;
+
+            PLACEHOLDER_20 = 28;
         }
 
         // Required. The name of the return message.
