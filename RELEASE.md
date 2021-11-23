@@ -1,6 +1,13 @@
 # Release History
 *****************
 
+## Release ONDEWO NLU APIS 2.2.0
+
+### New Features
+
+ * [OND211-1841] Add custom placeholder platforms to the Message.Platform Enum
+ * [OND211-1841] Add a simple CRUD to handle the custom name mapping for Placeholder platforms (per Agent)
+
 ## Release ONDEWO NLU APIS 2.1.0
 
 ### Improvements
