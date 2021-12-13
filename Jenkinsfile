@@ -1,5 +1,9 @@
 pipeline {
-    agent None
+    agent{
+        node{
+            label 'cpu'
+        }
+    }
     stages {
         stage('Cleaning work space'){
             steps{
