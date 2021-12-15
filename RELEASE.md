@@ -1,5 +1,7 @@
 # Release History
 *****************
+## This is a temporary release note from automated client generation. Build Number = 123 and release tag = 1.0.0 
+
 
 ## Release ONDEWO NLU APIS 2.3.0
 
