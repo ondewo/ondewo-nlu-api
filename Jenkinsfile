@@ -18,6 +18,7 @@ pipeline {
                         CLIENT_BRANCH = 'automation'
                         CLIENT_DIR = 'ondewo-client'
                         API_BRANCH_NAME = "${env.BRANCH_NAME}"
+                        sh "echo ${API_BRANCH_NAME}"
                     }
                     stages{
                         stage('Clonning & filesystem setup'){
