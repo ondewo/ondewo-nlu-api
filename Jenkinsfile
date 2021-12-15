@@ -1,12 +1,12 @@
 pipeline {
     agent any
     stages {
-        stage('Cleaning the Workspace') {
-            steps {
-                sh "rm -rf *"
-                sh "pwd ; ls"
-            }//steps
-        }//stage
+        // stage('Cleaning the Workspace') {
+        //     steps {
+        //         sh "rm -rf *"
+        //         sh "pwd ; ls"
+        //     }//steps
+        // }//stage
         stage('Generate Clients'){
             parallel{
                 stage('Python') {
@@ -95,6 +95,12 @@ pipeline {
                     }
                 }// JS
             }//parallel
+        }//stage
+        stage('Cleaning the Workspace') {
+            steps {
+                sh "rm -rf *"
+                sh "pwd ; ls"
+            }//steps
         }//stage
     }//stages
 }//pipeline
