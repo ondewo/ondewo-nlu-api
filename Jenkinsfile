@@ -52,8 +52,9 @@ pipeline {
                                 }
                             }
                         }//Create Client
-                        stage('Release'){
-                            if(API_BRANCH == 'release*') {                                
+                        if(API_BRANCH == 'release*') {
+                            stage('Release'){
+                                                            
                                 stages{
                                     stage('Client Release'){
                                         steps{
