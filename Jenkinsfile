@@ -11,6 +11,8 @@ pipeline {
             parallel{
                 stage('Python') {
                     environment{
+                        API_REPO = "git@github.com:ondewo/ondewo-nlu-api.git"
+                        API_DIR = 'ondewo-nlu-api'
                         COMPILER_REPO = 'git@github.com:ondewo/ondewo-proto-compiler.git'
                         COMPILER_BRANCH = 'automation'
                         COMPILER_DIR = 'ondewo-proto-compiler'
@@ -22,12 +24,13 @@ pipeline {
                         stage('Clonning & filesystem setup'){
                             steps{
                                 sh "git clone -b automation ${COMPILER_REPO} ${compiler_dir}"
+                                sh "git clone -b master ${API_REPO} ${API_DIR}"
                                 sh "mkdir -p clients/python"                                
                             }
                         }
                         stage('Generate Protos'){
                             steps{
-                                sh "cp -r ondewo ${COMPILER_DIR}"
+                                sh "cp -r ${API_DIR}/ondewo ${COMPILER_DIR}"
                                 sh "cp ${COMPILER_DIR}/python/Dockerfile ${COMPILER_DIR}/Dockerfile"
                                 sh "docker build -t proto-compiler-image --build-arg api_directory=${API_DIR} --build-arg compiler_directory=${COMPILER_DIR} -f ${COMPILER_DIR}/Dockerfile ."
                                 sh "docker run -v ${env.WORKSPACE}/clients/python:/workspace/clients/python -u \$(id -u):\$(id -g) proto-compiler-image"
@@ -42,22 +45,22 @@ pipeline {
                                 sh "cp -r clients/python/* ${CLIENT_DIR}/"
                                 dir("${CLIENT_DIR}"){
                                     sh """sed -i '3i \\\n## This is a temporary release note from automated client generation. Build Number = ${env.BUILD_NUMBER} \\n' RELEASE.md """
-                                    //sh "git config user.name '${CREDENTIALS_USR}'"
-                                    //sh "git add . ; git commit -m 'testing pipeline'; git push"
+                                    sh "git config user.name '${CREDENTIALS_USR}'"
+                                    sh "git add . ; git commit -m 'testing pipeline'; git push"
                                 }
                             }
                         }//Create Client
                         stage('Release'){
                             when {
-                                not {
-                                    expression {
-                                        env.BRANCH_NAME.startsWith("release")
-                                    }
+                                expression {
+                                    env.BRANCH_NAME.startsWith("release/")
                                 }
                             }
                             stages{
                                 stage('Client Release'){
                                     steps{
+                                        sh "cd ${API_DIR} ; echo ${env.BRANCH_NAME}"
+                                        sh "cd .."
                                         sh "echo Documentation"
                                         sh "echo create a branch with same tag as API"
                                         sh "echo push it to GitHub"
@@ -65,7 +68,7 @@ pipeline {
                                 }//Make Release
                                 stage('PyPi Release'){
                                     steps{
-                                        sh """sed -i -r 's/version.+/version=${env.BRANCH_NAME}/g setup.py'"""
+                                        sh """sed -i -r 's/version.+/version=${API_BRANCH_NAME}/g setup.py'"""
                                     }
                                 }//PyPi Release
                             }//stages
