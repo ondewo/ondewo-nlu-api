@@ -68,7 +68,7 @@ pipeline {
                                 stage('PyPi Release'){
                                     steps{
                                         dir("${CLIENT_DIR}"){
-                                            sh """sed -i -r 's/version.+/version=${API_BRANCH_NAME}/g setup.py'"""
+                                            sh """sed -i -r "s/version.+/version=${API_BRANCH_NAME}/g" setup.py"""
                                             sh "cat setup.py"
                                         }
                                     }
