@@ -18,7 +18,6 @@ pipeline {
                         CLIENT_BRANCH = 'automation'
                         CLIENT_DIR = 'ondewo-client'
                         API_BRANCH_NAME = "${env.BRANCH_NAME}"
-                        sh "echo ${API_BRANCH_NAME}"
                     }
                     stages{
                         stage('Clonning & filesystem setup'){
@@ -35,32 +34,25 @@ pipeline {
                                 sh "docker run -v ${env.WORKSPACE}/clients/python:/workspace/clients/python -u \$(id -u):\$(id -g) proto-compiler-image"
                             }
                         }//Generate Protos
-                        stage('Create Client'){
+                        stage('Release'){
                             environment {
                                 CREDENTIALS = credentials('ondewo-jenkins')
                             }
-                            steps{
-                                sh "git clone -b ${CLIENT_BRANCH} ${CLIENT_REPO} ${CLIENT_DIR}"
-                                sh "cp -r clients/python/* ${CLIENT_DIR}/"
-                                dir("${CLIENT_DIR}"){
-                                    sh """sed -i '3i \\\n## This is a temporary release note from automated client generation. Build Number = ${env.BUILD_NUMBER} \\n' RELEASE.md """
-                                    sh "git config user.name '${CREDENTIALS_USR}'"
-                                    sh "git add . ; git commit -m 'testing pipeline'; git push"
-                                }
-                            }
-                        }//Create Client
-                        stage('Release'){
                             when {
                                 expression {
 					            	env.API_BRANCH_NAME.startsWith("") // PUT 'release' AFTER TESTING
             					}
                             }//when
                             stages{
-                                stage('Client Release'){
+                                stage('Create Client'){
                                     steps{
-                                        sh "echo Documentation"
-                                        sh "echo create a branch with same tag as API"
-                                        sh "echo push it to GitHub"
+                                        sh "git clone -b ${CLIENT_BRANCH} ${CLIENT_REPO} ${CLIENT_DIR}"
+                                        sh "cp -r clients/python/* ${CLIENT_DIR}/"
+                                        dir("${CLIENT_DIR}"){
+                                            sh """sed -i '3i \\\n## This is a temporary release note from automated client generation. Build Number = ${env.BUILD_NUMBER} \\n' RELEASE.md """
+                                            sh "git config user.name '${CREDENTIALS_USR}'"
+                                            sh "git add . ; git commit -m 'testing pipeline'; git push"
+                                        }
                                     }
                                 }//Client Release
                                 stage('PyPi Release'){
