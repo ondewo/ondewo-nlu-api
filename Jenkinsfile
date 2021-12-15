@@ -53,7 +53,7 @@ pipeline {
                             }
                         }//Create Client
                         stage('Release'){
-                            when {
+                            if {
                                 API_BRANCH == 'release*'
                             }
                             stages{
