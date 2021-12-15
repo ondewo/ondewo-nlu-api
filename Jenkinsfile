@@ -53,26 +53,26 @@ pipeline {
                             }
                         }//Create Client
                         stage('Release'){
-                            if {
-                                API_BRANCH == 'release*'
-                            }
-                            stages{
-                                stage('Client Release'){
-                                    steps{
-                                        sh "cd ${API_DIR} ; echo ${env.BRANCH_NAME}"
-                                        sh "cd .."
-                                        sh "echo Documentation"
-                                        sh "echo create a branch with same tag as API"
-                                        sh "echo push it to GitHub"
-                                    }
-                                }//Make Release
-                                stage('PyPi Release'){
-                                    steps{
-                                        sh """sed -i -r 's/version.+/version=${API_BRANCH_NAME}/g setup.py'"""
-                                    }
-                                }//PyPi Release
-                            }//stages
-                        }//stage('Release')
+                            if(API_BRANCH == 'release*') {                                
+                                stages{
+                                    stage('Client Release'){
+                                        steps{
+                                            sh "cd ${API_DIR} ; echo ${env.BRANCH_NAME}"
+                                            sh "cd .."
+                                            sh "echo Documentation"
+                                            sh "echo create a branch with same tag as API"
+                                            sh "echo push it to GitHub"
+                                        }
+                                    }//Make Release
+                                    stage('PyPi Release'){
+                                        steps{
+                                            sh """sed -i -r 's/version.+/version=${API_BRANCH_NAME}/g setup.py'"""
+                                        }
+                                    }//PyPi Release
+                                }//stages
+                            }//stage('Release')
+                        }
+
                     }//stages
                 }// stage('Python Client')
                 stage('Angular') {
