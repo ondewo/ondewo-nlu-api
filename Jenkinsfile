@@ -19,6 +19,7 @@ pipeline {
                         CLIENT_REPO = 'git@github.com:ondewo/ondewo-nlu-client-python.git'
                         CLIENT_BRANCH = 'automation'
                         CLIENT_DIR = 'ondewo-client'
+                        API_BRANCH = env.BRANCH_NAME
                     }
                     stages{
                         stage('Clonning & filesystem setup'){
@@ -47,14 +48,13 @@ pipeline {
                                     sh """sed -i '3i \\\n## This is a temporary release note from automated client generation. Build Number = ${env.BUILD_NUMBER} \\n' RELEASE.md """
                                     sh "git config user.name '${CREDENTIALS_USR}'"
                                     sh "git add . ; git commit -m 'testing pipeline'; git push"
+                                    sh "echo ${API_BRANCH}"
                                 }
                             }
                         }//Create Client
                         stage('Release'){
                             when {
-                                expression {
-                                    env.BRANCH_NAME.startsWith("release/")
-                                }
+                                API_BRANCH == 'release*'
                             }
                             stages{
                                 stage('Client Release'){
