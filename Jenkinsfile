@@ -48,32 +48,33 @@ pipeline {
                                     sh """sed -i '3i \\\n## This is a temporary release note from automated client generation. Build Number = ${env.BUILD_NUMBER} \\n' RELEASE.md """
                                     sh "git config user.name '${CREDENTIALS_USR}'"
                                     sh "git add . ; git commit -m 'testing pipeline'; git push"
-                                    sh "echo ${API_BRANCH}"
+                                    sh "echo {}"
                                 }
                             }
                         }//Create Client
-                        if(API_BRANCH == 'release*') {
-                            stage('Release'){
-                                                            
-                                stages{
-                                    stage('Client Release'){
-                                        steps{
-                                            sh "cd ${API_DIR} ; echo ${env.BRANCH_NAME}"
-                                            sh "cd .."
-                                            sh "echo Documentation"
-                                            sh "echo create a branch with same tag as API"
-                                            sh "echo push it to GitHub"
-                                        }
-                                    }//Make Release
-                                    stage('PyPi Release'){
-                                        steps{
-                                            sh """sed -i -r 's/version.+/version=${API_BRANCH_NAME}/g setup.py'"""
-                                        }
-                                    }//PyPi Release
-                                }//stages
-                            }//stage('Release')
-                        }
-
+                        stage('Release'){
+                            when {
+                                expression {
+					            	env.API_BRANCH_NAME.startsWith("release")
+            					}
+                            }
+                            stages{
+                                stage('Client Release'){
+                                    steps{
+                                        sh "cd ${API_DIR} ; echo ${env.BRANCH_NAME}"
+                                        sh "cd .."
+                                        sh "echo Documentation"
+                                        sh "echo create a branch with same tag as API"
+                                        sh "echo push it to GitHub"
+                                    }
+                                }//Make Release
+                                stage('PyPi Release'){
+                                    steps{
+                                        sh """sed -i -r 's/version.+/version=${API_BRANCH_NAME}/g setup.py'"""
+                                    }
+                                }//PyPi Release
+                            }//stages
+                        }//stage('Release')
                     }//stages
                 }// stage('Python Client')
                 stage('Angular') {
