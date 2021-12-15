@@ -19,7 +19,7 @@ pipeline {
                         CLIENT_REPO = 'git@github.com:ondewo/ondewo-nlu-client-python.git'
                         CLIENT_BRANCH = 'automation'
                         CLIENT_DIR = 'ondewo-client'
-                        API_BRANCH = env.BRANCH_NAME
+                        API_BRANCH = "${env.BRANCH_NAME}"
                     }
                     stages{
                         stage('Clonning & filesystem setup'){
