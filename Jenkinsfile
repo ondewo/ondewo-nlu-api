@@ -48,29 +48,29 @@ pipeline {
                                     sh """sed -i '3i \\\n## This is a temporary release note from automated client generation. Build Number = ${env.BUILD_NUMBER} \\n' RELEASE.md """
                                     sh "git config user.name '${CREDENTIALS_USR}'"
                                     sh "git add . ; git commit -m 'testing pipeline'; git push"
-                                    sh "echo {}"
                                 }
                             }
                         }//Create Client
                         stage('Release'){
                             when {
                                 expression {
-					            	env.API_BRANCH_NAME.startsWith("release")
+					            	env.API_BRANCH_NAME.startsWith("") // PUT 'release' AFTER TESTING
             					}
-                            }
+                            }//when
                             stages{
                                 stage('Client Release'){
                                     steps{
-                                        sh "cd ${API_DIR} ; echo ${env.BRANCH_NAME}"
-                                        sh "cd .."
                                         sh "echo Documentation"
                                         sh "echo create a branch with same tag as API"
                                         sh "echo push it to GitHub"
                                     }
-                                }//Make Release
+                                }//Client Release
                                 stage('PyPi Release'){
                                     steps{
-                                        sh """sed -i -r 's/version.+/version=${API_BRANCH_NAME}/g setup.py'"""
+                                        dir("${CLIENT_DIR}"){
+                                            sh """sed -i -r 's/version.+/version=${API_BRANCH_NAME}/g setup.py'"""
+                                            sh "cat setup.py"
+                                        }
                                     }
                                 }//PyPi Release
                             }//stages
