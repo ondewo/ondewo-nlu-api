@@ -11,8 +11,6 @@ pipeline {
             parallel{
                 stage('Python') {
                     environment{
-                        API_REPO = "git@github.com:ondewo/ondewo-nlu-api.git"
-                        API_DIR = 'ondewo-nlu-api'
                         COMPILER_REPO = 'git@github.com:ondewo/ondewo-proto-compiler.git'
                         COMPILER_BRANCH = 'automation'
                         COMPILER_DIR = 'ondewo-proto-compiler'
@@ -25,15 +23,14 @@ pipeline {
                         stage('Clonning & filesystem setup'){
                             steps{
                                 sh "git clone -b automation ${COMPILER_REPO} ${compiler_dir}"
-                                sh "git clone -b master ${API_REPO} ${API_DIR}"
                                 sh "mkdir -p clients/python"                                
                             }
                         }
                         stage('Generate Protos'){
                             steps{
-                                sh "cp -r ${API_DIR}/ondewo ${COMPILER_DIR}"
+                                sh "cp -r ondewo ${COMPILER_DIR}"
                                 sh "cp ${COMPILER_DIR}/python/Dockerfile ${COMPILER_DIR}/Dockerfile"
-                                sh "docker build -t proto-compiler-image --build-arg api_directory=${API_DIR} --build-arg compiler_directory=${COMPILER_DIR} -f ${COMPILER_DIR}/Dockerfile ."
+                                sh "docker build -t proto-compiler-image --build-arg api_directory=. --build-arg compiler_directory=${COMPILER_DIR} -f ${COMPILER_DIR}/Dockerfile ."
                                 sh "docker run -v ${env.WORKSPACE}/clients/python:/workspace/clients/python -u \$(id -u):\$(id -g) proto-compiler-image"
                             }
                         }//Generate Protos
