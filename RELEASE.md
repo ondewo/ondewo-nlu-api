@@ -5,7 +5,7 @@
 
 ### Improvements
 
- * [OND211-1877] Extend the Intent Messages to include information about it being a prompt or not~~~~
+ * [OND211-1877] Extend the Intent Messages to include information about it being a prompt or not
 
 *****************
 ## Release ONDEWO NLU APIS 2.3.0
