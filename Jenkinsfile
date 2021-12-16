@@ -49,7 +49,7 @@ pipeline {
                         }//Generate Protos
                         stage('Create Client'){
                             environment {
-                                CREDENTIALS = credentials('ondewo-jenkins')
+                                CREDENTIALS = credentials('devops_ondewo')
                             }
                             steps{
                                 sh "git clone -b ${CLIENT_BRANCH} ${CLIENT_REPO} ${CLIENT_DIR}"
@@ -71,7 +71,7 @@ pipeline {
                                         }
                                     }
                                     environment {
-                                       CREDENTIALS = credentials('ondewo-jenkins')
+                                       CREDENTIALS = credentials('devops_ondewo')
                                     }
                                     steps{
                                         generate_docs('ondewo-nlu-api')
