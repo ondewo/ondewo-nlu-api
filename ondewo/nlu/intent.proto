@@ -724,6 +724,9 @@ message Intent {
 
         // Optional. The platform that this message is intended for.
         Platform platform = 6;
+
+        // Read-only. States if a returned message is a prompt or not.
+        bool is_prompt = 18;
     }
 
     // Represents a single followup intent in the chain.
