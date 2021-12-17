@@ -19,7 +19,7 @@ pipeline {
         stage('Cleaning the Workspace') {
             steps {
                 sh "echo ${params.RELEASE_BRANCH}"
-                sh "echo ${params.RELEASE}"
+                sh "echo ${params.RELEASE_BRANCH}"
                 sh "echo ${params.PyPi}"
                 sh "pwd ; ls"
                 sh 'ls | grep -v doc | xargs rm -rf'
