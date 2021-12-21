@@ -130,7 +130,7 @@ pipeline {
                                     sh """sed -i -r \"s#branch =.+#branch = ${params.RELEASE_BRANCH}#g\" .gitmodules ; cat .gitmodules """
                                     dir('src'){
                                         sh "echo \$(printenv)"
-                                    //     sh """sed -i -r 's/\"version\":.+/\"version\": \"${API_TAG}\",/g' package.json ; cat package.json"""
+                                        sh """sed -i -r 's/\"version\":.+/\"version\": \"${API_TAG}\",/g' package.json ; cat package.json"""
                                     //     sh """sed -i '3i \\\n## Release ONDEWO NLU Angular Client ${API_TAG}\\n\\n### New Features \\n* Track version ${API_TAG} of ONDEWO NLU API \\n\\n*** \\n ' RELEASE.md ; cat RELEASE.md"""
                                     //     sh "git config user.name '${CREDENTIALS_USR}'"
                                     //     sh "npm run build"
