@@ -122,7 +122,7 @@ pipeline {
                                 CREDENTIALS = credentials('ondewo-jenkins')
                             }
                             steps{
-                                sh "git clone -b ${CLIENT_BRANCH} ${CLIENT_REPO} ${CLIENT_DIR}"
+                                sh "git clone -b ${CLIENT_BRANCH} ${CLIENT_REPO} ${CLIENT_DIR} --recurse-submodules"
                                 dir("${CLIENT_DIR}"){
                                         sh """sed -i -r \"s#branch =.+#branch = ${params.RELEASE_BRANCH}#g\" .gitmodules ; cat .gitmodules """
                                     dir('src'){
