@@ -142,7 +142,7 @@ pipeline {
                                 }
                             }
                             steps{
-                                sh 'npm run publish-npm'
+                                // sh 'npm run publish-npm'
                             }
                         }
                     }
