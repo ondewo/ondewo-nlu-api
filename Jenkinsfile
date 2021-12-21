@@ -42,75 +42,75 @@ pipeline {
                         CLIENT_DIR = 'python-ondewo-client'
                     }
                     stages{
-                        stage('Generate Protos'){
-                            steps{
-                                sh "echo \$(printenv)"
-                                sh "mkdir -p clients/python"
-                                sh "cp -r ${API_DIR}/ondewo ${COMPILER_DIR}"
-                                sh "cp ${COMPILER_DIR}/python/Dockerfile ${COMPILER_DIR}/Dockerfile"
-                                sh "docker build -t proto-compiler-image --build-arg api_directory=${API_DIR} --build-arg compiler_directory=${COMPILER_DIR} -f ${COMPILER_DIR}/Dockerfile ."
-                                sh "docker run -v ${env.WORKSPACE}/clients/python:/workspace/clients/python -u \$(id -u):\$(id -g) proto-compiler-image"
-                            }
-                        }//Generate Protos
-                        stage('Create Client'){
-                            environment {
-                                CREDENTIALS = credentials('ondewo-jenkins')
-                            }
-                            steps{
-                                sh "git clone -b ${CLIENT_BRANCH} ${CLIENT_REPO} ${CLIENT_DIR}"
-                                sh "cp -r clients/python/* ${CLIENT_DIR}/"
-                                dir("${CLIENT_DIR}"){ 
-                                    sh """sed -i '3i \\\n## This is a temporary release note from automated client generation. Build Number = ${env.BUILD_NUMBER} \\n' RELEASE.md """
+                        // stage('Generate Protos'){
+                        //     steps{
+                        //         sh "echo \$(printenv)"
+                        //         sh "mkdir -p clients/python"
+                        //         sh "cp -r ${API_DIR}/ondewo ${COMPILER_DIR}"
+                        //         sh "cp ${COMPILER_DIR}/python/Dockerfile ${COMPILER_DIR}/Dockerfile"
+                        //         sh "docker build -t proto-compiler-image --build-arg api_directory=${API_DIR} --build-arg compiler_directory=${COMPILER_DIR} -f ${COMPILER_DIR}/Dockerfile ."
+                        //         sh "docker run -v ${env.WORKSPACE}/clients/python:/workspace/clients/python -u \$(id -u):\$(id -g) proto-compiler-image"
+                        //     }
+                        // }//Generate Protos
+                        // stage('Create Client'){
+                        //     environment {
+                        //         CREDENTIALS = credentials('ondewo-jenkins')
+                        //     }
+                        //     steps{
+                        //         sh "git clone -b ${CLIENT_BRANCH} ${CLIENT_REPO} ${CLIENT_DIR}"
+                        //         sh "cp -r clients/python/* ${CLIENT_DIR}/"
+                        //         dir("${CLIENT_DIR}"){ 
+                        //             sh """sed -i '3i \\\n## This is a temporary release note from automated client generation. Build Number = ${env.BUILD_NUMBER} \\n' RELEASE.md """
 
-                                    // sh "git config user.name '${CREDENTIALS_USR}'"
-                                    // sh "git add . ; git commit -m 'testing pipeline'; git push"
-                                }
-                            }
-                        }//Create Client
-                        stage('Release'){
-                            stages{                           
-                                stage('Client Release'){
-                                    when{
-                                        expression{
-                                            params.Python_RELEASE == true
-                                        }
-                                    }
-                                    environment {
-                                       CREDENTIALS = credentials('ondewo-jenkins')
-                                    }
-                                    steps{
-                                        generate_docs('ondewo-nlu-api')
-                                        sh 'cp -r doc ${API_DIR}'
-                                        dir("${API_DIR}"){
-                                            sh "ls doc*"
-                                            sh "echo \$(printenv)"
-//                                            sh "git config user.name '${CREDENTIALS_USR}'"
-//                                            sh "git add . ; git commit -m 'testing pipeline'; git push"
-                                        }
-                                    }//Client Release
-                                }
-                                stage('PyPi Release'){
-                                    when{
-                                        expression{
-                                            params.PyPi == true
-                                        }
-                                    }
-                                    steps{
-                                            dir("${CLIENT_DIR}"){
-                                                // this line updates the version number in the setup.py
-                                                sh "echo \$(printenv)"
-                                                sh """sed -i -r "s/version.+/version=${API_TAG}/g" setup.py"""
-                                                sh "cat setup.py"
+                        //             // sh "git config user.name '${CREDENTIALS_USR}'"
+                        //             // sh "git add . ; git commit -m 'testing pipeline'; git push"
+                        //         }
+                        //     }
+                        // }//Create Client
+                        // stage('Release'){
+                        //     stages{                           
+                        //         stage('Client Release'){
+                        //             when{
+                        //                 expression{
+                        //                     params.Python_RELEASE == true
+                        //                 }
+                        //             }
+                        //             environment {
+                        //                CREDENTIALS = credentials('ondewo-jenkins')
+                        //             }
+                        //             steps{
+                        //                 generate_docs('ondewo-nlu-api')
+                        //                 sh 'cp -r doc ${API_DIR}'
+                        //                 dir("${API_DIR}"){
+                        //                     sh "ls doc*"
+                        //                     sh "echo \$(printenv)"
+// //                                            sh "git config user.name '${CREDENTIALS_USR}'"
+// //                                            sh "git add . ; git commit -m 'testing pipeline'; git push"
+//                                         }
+//                                     }//Client Release
+//                                 }
+//                                 stage('PyPi Release'){
+//                                     when{
+//                                         expression{
+//                                             params.PyPi == true
+//                                         }
+//                                     }
+//                                     steps{
+//                                             dir("${CLIENT_DIR}"){
+//                                                 // this line updates the version number in the setup.py
+//                                                 sh "echo \$(printenv)"
+//                                                 sh """sed -i -r "s/version.+/version=${API_TAG}/g" setup.py"""
+//                                                 sh "cat setup.py"
 
-                                                // sh "python setup.py sdist bdist_wheel"
-                                                // sh "twine upload -r pypi dist/*"
-                                                // BE CAREFUL WHEN YOU COMMENT OUT ABOVE LINES !!!
-                                            }
-                                    }
-                                }//PyPi Release
-                            }//stages
-                        }//stage('Release')
-                    }//stages
+//                                                 // sh "python setup.py sdist bdist_wheel"
+//                                                 // sh "twine upload -r pypi dist/*"
+//                                                 // BE CAREFUL WHEN YOU COMMENT OUT ABOVE LINES !!!
+//                                             }
+//                                     }
+//                                 }//PyPi Release
+//                             }//stages
+//                         }//stage('Release')
+//                     }//stages
                 }// stage('Python Client')
                 
                 stage('Angular') {
