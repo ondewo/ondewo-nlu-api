@@ -1,7 +1,7 @@
 pipeline {
     agent any
     parameters{
-        string(name: 'RELEASE_BRANCH', defaultValue: 'release/1.0.0', description: 'Release branch to generate client.')
+        string(name: 'RELEASE_BRANCH', defaultValue: 'release/2.0.0', description: 'Release branch to generate client.')
         booleanParam(name: 'Python_RELEASE', defaultValue: false, description: 'True if you need a complete release, otherwise false')
         booleanParam(name: 'PyPi', defaultValue: false, description: 'True if you need to publish a PyPi package. CAREFULLLLLLL!!!!!')
         booleanParam(name: 'NPM_RELEASE', defaultValue: false, description: 'True if you need to publish a NPM package. CAREFULLLLLLL!!!!!')
