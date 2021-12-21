@@ -143,6 +143,7 @@ pipeline {
                             }
                             steps{
                                 // sh 'npm run publish-npm'
+                                sh 'echo BE CAREFUL WHEN YOU COMMENT OUT ABOVE LINES'
                             }
                         }
                     }
