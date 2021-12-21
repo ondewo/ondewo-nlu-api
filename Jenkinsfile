@@ -44,7 +44,7 @@ pipeline {
                     stages{
                         stage('Generate Protos'){
                             steps{
-                                sh "echo $(printenv)"
+                                sh "echo \$(printenv)"
                                 sh "mkdir -p clients/python"
                                 sh "cp -r ${API_DIR}/ondewo ${COMPILER_DIR}"
                                 sh "cp ${COMPILER_DIR}/python/Dockerfile ${COMPILER_DIR}/Dockerfile"
@@ -83,7 +83,7 @@ pipeline {
                                         sh 'cp -r doc ${API_DIR}'
                                         dir("${API_DIR}"){
                                             sh "ls doc*"
-                                            sh "echo $(printenv)"
+                                            sh "echo \$(printenv)"
 //                                            sh "git config user.name '${CREDENTIALS_USR}'"
 //                                            sh "git add . ; git commit -m 'testing pipeline'; git push"
                                         }
@@ -98,7 +98,7 @@ pipeline {
                                     steps{
                                             dir("${CLIENT_DIR}"){
                                                 // this line updates the version number in the setup.py
-                                                sh "echo $(printenv)"
+                                                sh "echo \$(printenv)"
                                                 sh """sed -i -r "s/version.+/version=${API_TAG}/g" setup.py"""
                                                 sh "cat setup.py"
 
@@ -127,9 +127,9 @@ pipeline {
                             steps{
                                 sh "git clone -b ${CLIENT_BRANCH} ${CLIENT_REPO} ${CLIENT_DIR} --recurse-submodules"
                                 dir("${CLIENT_DIR}"){
-                                        sh """sed -i -r \"s#branch =.+#branch = ${params.RELEASE_BRANCH}#g\" .gitmodules ; cat .gitmodules """
+                                    sh """sed -i -r \"s#branch =.+#branch = ${params.RELEASE_BRANCH}#g\" .gitmodules ; cat .gitmodules """
                                     dir('src'){
-                                        sh "echo $(printenv)"
+                                        sh "echo \$(printenv)"
                                         sh """sed -i -r 's/\"version\":.+/\"version\": \"${API_TAG}\",/g' package.json ; cat package.json"""
                                         sh """sed -i '3i \\\n## Release ONDEWO NLU Angular Client ${API_TAG}\\n\\n### New Features \\n* Track version ${API_TAG} of ONDEWO NLU API \\n\\n*** \\n ' RELEASE.md ; cat RELEASE.md"""
                                         sh "git config user.name '${CREDENTIALS_USR}'"
