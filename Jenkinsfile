@@ -45,11 +45,11 @@ pipeline {
                         stage('Generate Protos'){
                             steps{
                                 sh "echo \$(printenv)"
-                                // sh "mkdir -p clients/python"
-                                // sh "cp -r ${API_DIR}/ondewo ${COMPILER_DIR}"
-                                // sh "cp ${COMPILER_DIR}/python/Dockerfile ${COMPILER_DIR}/Dockerfile"
-                                // sh "docker build -t proto-compiler-image --build-arg api_directory=${API_DIR} --build-arg compiler_directory=${COMPILER_DIR} -f ${COMPILER_DIR}/Dockerfile ."
-                                // sh "docker run -v ${env.WORKSPACE}/clients/python:/workspace/clients/python -u \$(id -u):\$(id -g) proto-compiler-image"
+                                sh "mkdir -p clients/python"
+                                sh "cp -r ${API_DIR}/ondewo ${COMPILER_DIR}"
+                                sh "cp ${COMPILER_DIR}/python/Dockerfile ${COMPILER_DIR}/Dockerfile"
+                                sh "docker build -t proto-compiler-image --build-arg api_directory=${API_DIR} --build-arg compiler_directory=${COMPILER_DIR} -f ${COMPILER_DIR}/Dockerfile ."
+                                sh "docker run -v ${env.WORKSPACE}/clients/python:/workspace/clients/python -u \$(id -u):\$(id -g) proto-compiler-image"
                             }
                         }//Generate Protos
                         stage('Create Client'){
