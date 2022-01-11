@@ -498,6 +498,20 @@ message ListEntitiesRequest {
 
     // Optional. The resource view to apply to the returned entity type.
     EntityTypeView entity_type_view = 4;
+
+    // Optional. Defines the sorting of the list. Default, no sorting.
+    EntityValueSorting sort_by_field = 5;
+
+    // Optional. Defines a pattern to search for in the entity type "values" and "synonyms"
+    // Example:
+    //      Pattern: "dark"
+    //      Results:
+    //              [Entity Value]          [Entity Synonyms]
+    //              Red                     red, scarlett, dark red, ...
+    //              Blue                    blue, indico, dark blue, sky blue, ...
+    //              Dark                    obscure, black, opaque, ...
+    //
+    string search_by_pattern = 6;
 }
 
 message ListEntitiesResponse {
@@ -507,4 +521,15 @@ message ListEntitiesResponse {
     // Token to retrieve the next page of results, or empty if there are no
     // more results in the list.
     string next_page_token = 2;
+}
+
+message EntityValueSorting {
+    enum EntityValueSortingField {
+        NO_ENTITY_VALUE_SORTING = 0;
+        SORT_ENTITY_VALUE_BY_NAME = 1;
+        SORT_ENTITY_VALUE_BY_SYNONYM_COUNT = 5;
+    }
+
+    EntityValueSortingField sorting_field = 1;
+    SortingMode sorting_mode = 2;
 }
