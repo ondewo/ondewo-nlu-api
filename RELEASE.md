@@ -1,6 +1,14 @@
 # Release History
 *****************
 
+## Release ONDEWO NLU APIS 2.4.0
+
+### Improvements
+
+ * [OND211-1850] Allow sorting and searching of entity values on listing
+
+*****************
+
 ## Release ONDEWO NLU APIS 2.3.1
 
 ### Improvements
