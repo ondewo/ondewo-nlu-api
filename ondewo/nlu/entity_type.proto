@@ -526,10 +526,11 @@ message ListEntitiesResponse {
 message EntityValueSorting {
     enum EntityValueSortingField {
         NO_ENTITY_VALUE_SORTING = 0;
-        SORT_ENTITY_VALUE_BY_NAME = 1;
-        SORT_ENTITY_VALUE_BY_SYNONYM_COUNT = 5;
+        SORT_ENTITY_VALUE_BY_DISPLAY_NAME = 1;
+        SORT_ENTITY_VALUE_BY_VALUE = 2;
+        SORT_ENTITY_VALUE_BY_SYNONYM_COUNT = 3;
     }
 
-    EntityValueSortingField sorting_field = 1;
-    SortingMode sorting_mode = 2;
+    EntityValueSortingField sorting_field = 7;
+    SortingMode sorting_mode = 8;
 }
