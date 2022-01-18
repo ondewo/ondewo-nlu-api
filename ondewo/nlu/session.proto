@@ -795,6 +795,9 @@ message SessionReviewStep {
 
     // The contexts which were active at the beginning of this step
     repeated Context contexts = 4;
+
+    // The output contexts of this step
+    repeated Context contexts_out = 5;
 }
 
 message DetectedIntent {
