@@ -898,6 +898,9 @@ message ListIntentsRequest {
 
     // Optional. Defines the sorting of the list. Default, no sorting.
     IntentSorting sort_by_field = 7;
+
+    // Optional. Applies a filter to the list by tags. Default, no filter.
+    repeated string filter_by_tags = 8;
 }
 
 // The response message for [Intents.ListIntents][google.cloud.dialogflow.v2.Intents.ListIntents].
