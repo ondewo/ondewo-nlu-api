@@ -53,9 +53,9 @@ pipeline {
                             }
                         }//Generate Protos
                         stage('Create Client'){
-                            environment {
-                                CREDENTIALS = credentials('ondewo-jenkins')
-                            }
+                            // environment {
+                            //     CREDENTIALS = credentials('ondewo-jenkins')
+                            // }
                             steps{
                                // sh "echo uncomment below lines and remove this line"
                                 sh "git clone -b ${CLIENT_BRANCH} ${CLIENT_REPO} ${CLIENT_DIR}"
@@ -75,9 +75,9 @@ pipeline {
                                             params.Python_RELEASE == true
                                         }
                                     }
-                                    environment {
-                                       CREDENTIALS = credentials('ondewo-jenkins')
-                                    }
+                                    // environment {
+                                    //    CREDENTIALS = credentials('ondewo-jenkins')
+                                    // }
                                     steps{
                                         generate_docs('ondewo-nlu-api')
                                         sh 'cp -r doc ${API_DIR}'
@@ -120,9 +120,9 @@ pipeline {
                     }
                     stages{
                         stage('Generate Protos'){
-                            environment {
-                                CREDENTIALS = credentials('ondewo-jenkins')
-                            }
+                            // environment {
+                            //     CREDENTIALS = credentials('ondewo-jenkins')
+                            // }
                             steps{
                                 sh "git clone -b ${CLIENT_BRANCH} ${CLIENT_REPO} ${CLIENT_DIR} --recurse-submodules"
                                 dir("${CLIENT_DIR}"){
