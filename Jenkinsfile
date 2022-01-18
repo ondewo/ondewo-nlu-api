@@ -57,15 +57,14 @@ pipeline {
                                 CREDENTIALS = credentials('ondewo-jenkins')
                             }
                             steps{
-                                sh "echo uncomment below lines and remove this line"
-                                // sh "git clone -b ${CLIENT_BRANCH} ${CLIENT_REPO} ${CLIENT_DIR}"
-                                // sh "cp -r clients/python/* ${CLIENT_DIR}/"
-                                // dir("${CLIENT_DIR}"){ 
-                                //     sh """sed -i '3i \\\n## This is a temporary release note from automated client generation. Build Number = ${env.BUILD_NUMBER} \\n' RELEASE.md """
-
-                                //     // sh "git config user.name '${CREDENTIALS_USR}'"
-                                //     // sh "git add . ; git commit -m 'testing pipeline'; git push"
-                                // }
+                               // sh "echo uncomment below lines and remove this line"
+                                sh "git clone -b ${CLIENT_BRANCH} ${CLIENT_REPO} ${CLIENT_DIR}"
+                                sh "cp -r clients/python/* ${CLIENT_DIR}/"
+                                dir("${CLIENT_DIR}"){ 
+                                    sh """sed -i '3i \\\n## This is a temporary release note from automated client generation. Build Number = ${env.BUILD_NUMBER} \\n' RELEASE.md """
+                                    // sh "git config user.name '${CREDENTIALS_USR}'"
+                                    // sh "git add . ; git commit -m 'testing pipeline'; git push"
+                                }
                             }
                         }//Create Client
                         stage('Release'){
