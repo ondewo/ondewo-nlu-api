@@ -1087,6 +1087,8 @@ message IntentSorting {
 }
 
 message IntentTagMessage {
+    // The path of the intent.
+    // Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
     string intent_name = 1;
     string value = 2;
 }
