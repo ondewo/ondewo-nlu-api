@@ -5,6 +5,7 @@
 
 ### Improvements
 
+ * [OND211-1836] Support intent tags with filtering
  * [OND211-1850] Allow sorting and searching of entity values on listing
  * [OND211-1850] Add Entity Type View to the Entity Type CRUD
 
@@ -22,7 +23,7 @@
 ### Improvements
 
  * [OND211-1843] Output contexts added to SessionReviewStep
- 
+
 ## Release ONDEWO NLU APIS 2.2.0
 
 ### New Features
@@ -59,7 +60,7 @@
   of entities within the generalized waterfall strategy. Include intent parameters to entity selection criteria.
 
  * [OND211-1767] Change the training phrase message to include a language_code field
- * [OND211-1766] Make training phrases endpoints work with batches.  
+ * [OND211-1766] Make training phrases endpoints work with batches.
  * [OND211-1760] Implement endpoint to directly list training phrases.
  * [OND211-1744] Add initiation protocol into train agent endpoint
  * [OND211-1732] Implement endpoints directly create/update/get/delete training phrases.
