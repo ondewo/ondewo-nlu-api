@@ -128,14 +128,14 @@ service Intents {
         };
     }
 
-    rpc TagIntent (IntentTagMessage) returns (IntentTagMessage) {
+    rpc TagIntent (IntentTagMessage) returns (google.protobuf.Empty) {
         option (google.api.http) = {
             post: "/v2/{parent=projects/*/agent}/intents:tagIntent"
             body: "*"
         };
     }
 
-    rpc DeleteIntentTag (IntentTagMessage) returns (IntentTagMessage) {
+    rpc DeleteIntentTag (IntentTagMessage) returns (google.protobuf.Empty) {
         option (google.api.http) = {
             post: "/v2/{parent=projects/*/agent}/intents:deleteIntentTag"
             body: "*"
