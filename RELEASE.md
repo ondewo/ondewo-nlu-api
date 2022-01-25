@@ -1,12 +1,52 @@
 # Release History
 *****************
+
+## Release ONDEWO NLU APIS 2.4.0
+
+### Improvements
+
+ * [OND211-1836] Support intent tags with filtering
+ * [OND211-1850] Allow sorting and searching of entity values on listing
+ * [OND211-1850] Add Entity Type View to the Entity Type CRUD
+
+*****************
+
+## Release ONDEWO NLU APIS 2.3.1
+
+### Improvements
+
+ * [OND211-1877] Extend the Intent Messages to include information about it being a prompt or not
+
+*****************
+## Release ONDEWO NLU APIS 2.3.0
+
+### Improvements
+
+ * [OND211-1843] Output contexts added to SessionReviewStep
+
+## Release ONDEWO NLU APIS 2.2.0
+
+### New Features
+
+ * [OND211-1841] Add custom placeholder platforms to the Message.Platform Enum
+ * [OND211-1841] Add a simple CRUD to handle the custom name mapping for Placeholder platforms (per Agent)
+
+## Release ONDEWO NLU APIS 2.1.0
+
+### Improvements
+ * [OND211-1832] Extend Intent message definition to include the optional fields "start_date" and "end_date"
+ * [OND211-1785] Add CreateSession endpoint to the Session Servicer
+ * [OND211-1799] Add ExtractEntitiesFuzzy endpoint to the AIServices Servicer
+ * [OND211-1734] Add ExportBenchmarkAgent endpoint to the Agent Servicer
+ * [XXX002-38] Add endpoint to list project ids to qa.proto.
+ * [XXX002-35] Add endpoint to update retriever database to qa.proto.
+ * [XXX002-35] Add endpoint to get project config to qa.proto.
+ * [XXX002-35] Add endpoint to get server state to qa.proto.
+
+*****************
 ## Release ONDEWO NLU APIS 2.0.1
 
 ### Improvements
- * Add endpoint to update retriever database to qa.proto.
- * Add endpoint to list project ids to qa.proto.
- * Add endpoint to get project config to qa.proto.
- * Add endpoint to get server state to qa.proto.
  * [OND211-380] Add GitHub action to auto-deploy documentation on Git Pages from the protobuf files
 
 *****************
@@ -14,14 +54,13 @@
 ## Release ONDEWO NLU APIS 2.0.0
 
 ### New Features
- * [OND211-1799] Implement endpoints for fuzzy named entity extraction.
  * [OND211-1774] Implement endpoints to directly create/update/get/delete and list parameters.
  * [OND211-1773] Implement endpoints to directly create/update/get/delete and list responses (=intent messages).
  * [OND211-354] Establish a clear hierarchy for the merging
   of entities within the generalized waterfall strategy. Include intent parameters to entity selection criteria.
 
  * [OND211-1767] Change the training phrase message to include a language_code field
- * [OND211-1766] Make training phrases endpoints work with batches.  
+ * [OND211-1766] Make training phrases endpoints work with batches.
  * [OND211-1760] Implement endpoint to directly list training phrases.
  * [OND211-1744] Add initiation protocol into train agent endpoint
  * [OND211-1732] Implement endpoints directly create/update/get/delete training phrases.

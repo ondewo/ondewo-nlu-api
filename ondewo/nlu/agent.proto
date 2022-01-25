@@ -333,8 +333,8 @@ service Agents {
     //            metadata: [google.protobuf.Struct][google.protobuf.Struct]>
     rpc TrainAgent (TrainAgentRequest) returns (google.longrunning.Operation) {
         option (google.api.http) = {
-          post: "/v2/{parent=projects/*/agent}:train"
-          body: "*"
+            post: "/v2/{parent=projects/*/agent}:train"
+            body: "*"
         };
     }
     // Builds cache for the specified agent.
@@ -343,8 +343,8 @@ service Agents {
     //            metadata: [google.protobuf.Struct][google.protobuf.Struct]>
     rpc BuildCache (BuildCacheRequest) returns (google.longrunning.Operation) {
         option (google.api.http) = {
-          post: "/v2/{parent=projects/*/agent}:build_cache"
-          body: "*"
+            post: "/v2/{parent=projects/*/agent}:build_cache"
+            body: "*"
         };
     }
 
@@ -354,8 +354,8 @@ service Agents {
     //            metadata: [google.protobuf.Struct][google.protobuf.Struct]>
     rpc ExportAgent (ExportAgentRequest) returns (google.longrunning.Operation) {
         option (google.api.http) = {
-          post: "/v2/{parent=projects/*/agent}:export"
-          body: "*"
+            post: "/v2/{parent=projects/*/agent}:export"
+            body: "*"
         };
     }
 
@@ -363,8 +363,8 @@ service Agents {
     //
     rpc ExportBenchmarkAgent (ExportBenchmarkAgentRequest) returns (google.longrunning.Operation) {
         option (google.api.http) = {
-          post: "/v2/{parent=projects/*/agent}:export_benchmark"
-          body: "*"
+            post: "/v2/{parent=projects/*/agent}:export_benchmark"
+            body: "*"
         };
     }
 
@@ -378,14 +378,14 @@ service Agents {
     //            metadata: [google.protobuf.Struct][google.protobuf.Struct]>
     rpc ImportAgent (ImportAgentRequest) returns (google.longrunning.Operation) {
         option (google.api.http) = {
-          post: "/v2/{parent=projects/*/agent}:import"
-          body: "*"
+            post: "/v2/{parent=projects/*/agent}:import"
+            body: "*"
         };
     }
     rpc OptimizeRankingMatch (OptimizeRankingMatchRequest) returns (google.longrunning.Operation) {
         option (google.api.http) = {
-          post: "/v2/{parent=projects/*/agent}:optimize_ranking_match"
-          body: "*"
+            post: "/v2/{parent=projects/*/agent}:optimize_ranking_match"
+            body: "*"
         };
     }
     // Restores the specified agent from a ZIP file.
@@ -397,14 +397,14 @@ service Agents {
     //            metadata: [google.protobuf.Struct][google.protobuf.Struct]>
     rpc RestoreAgent (RestoreAgentRequest) returns (google.longrunning.Operation) {
         option (google.api.http) = {
-          post: "/v2/{parent=projects/*/agent}:restore"
-          body: "*"
+            post: "/v2/{parent=projects/*/agent}:restore"
+            body: "*"
         };
     }
 
     rpc GetAgentStatistics (GetAgentStatisticsRequest) returns (GetAgentStatisticsResponse) {
         option (google.api.http) = {
-          get: "/v2/{parent=projects/*/agent}:statistics"
+            get: "/v2/{parent=projects/*/agent}:statistics"
         };
     }
 
@@ -433,6 +433,12 @@ service Agents {
     }
     // Get statuses of models related to project
     rpc GetModelStatuses (GetModelStatusesRequest) returns (GetModelStatusesResponse);
+
+    // Get all set platform name mappings for an Agent
+    rpc GetPlatformMapping (GetPlatformMappingRequest) returns (PlatformMapping);
+
+    // Set platform name mappings for an Agent
+    rpc SetPlatformMapping (PlatformMapping) returns (PlatformMapping);
 }
 
 // Project/Agent messages
@@ -531,7 +537,7 @@ message DeleteAgentRequest {
 // The request message for [Agents.GetAgent][google.cloud.dialogflow.v2.Agents.GetAgent].
 message GetAgentRequest {
     // Required. The project that the agent to fetch is associated with.
-    // Format: `projects/<Project ID>`.
+    // Format: `projects/<Project ID>/agents`.
     string parent = 1;
 
     // Optional. Specify the view of the returned agent (full view by default)
@@ -917,7 +923,7 @@ message ExportResourcesResponse {
 }
 message GetModelStatusesRequest {
     // Required. The project that the agent to fetch is associated with.
-    // Format: `projects/<Project ID>`.
+    // Format: `projects/<Project ID>/agent`.
     string parent = 1;
     int32 cache_version = 2;
     string language_code = 3;
@@ -925,8 +931,6 @@ message GetModelStatusesRequest {
 }
 
 message ModelStatus {
-    // Required. The project that the agent to fetch is associated with.
-    // Format: `projects/<Project ID>`.
     int32 cache_version = 1;
     string language_code = 2;
     string model_name = 3;
@@ -945,8 +949,34 @@ message ModelStatus {
 }
 
 message GetModelStatusesResponse {
-    // Required. The project that the agent to fetch is associated with.
-    // Format: `projects/<Project ID>`.
     repeated ModelStatus model_statuses = 1;
 }
 
+message CustomPlatformInfo {
+    // Required. ID of the Platform.
+    // Custom Intent.Message.Platform placeholder. Note: it will not work with non-placeholders values
+    Intent.Message.Platform platform = 1;
+
+    // Required.
+    // Name to be displayed.
+    string display_name = 2;
+
+    // Optional.
+    // Sorting position of the GetPlatformMappingRequest.
+    uint32 position = 3;
+}
+
+message GetPlatformMappingRequest {
+    // Required. The project that the agent is associated with.
+    // Format: `projects/<Project ID>/agent`.
+    string parent = 1;
+}
+
+message PlatformMapping {
+    // Required. The project that the agent is associated with.
+    // Format: `projects/<Project ID>/agent`.
+    string parent = 1;
+    // Required.
+    // If not set, it will set it empty.
+    repeated CustomPlatformInfo platform_info = 2;
+}

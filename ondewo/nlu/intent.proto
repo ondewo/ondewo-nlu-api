@@ -35,6 +35,7 @@ import "ondewo/nlu/context.proto";
 import "ondewo/nlu/common.proto";
 import "google/longrunning/operations.proto";
 import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
 import "google/protobuf/field_mask.proto";
 import "google/protobuf/struct.proto";
 
@@ -123,6 +124,20 @@ service Intents {
     rpc BatchDeleteIntents (BatchDeleteIntentsRequest) returns (google.longrunning.Operation) {
         option (google.api.http) = {
             post: "/v2/{parent=projects/*/agent}/intents:batchDelete"
+            body: "*"
+        };
+    }
+
+    rpc TagIntent (IntentTagMessage) returns (IntentTagMessage) {
+        option (google.api.http) = {
+            post: "/v2/{parent=projects/*/agent}/intents:tagIntent"
+            body: "*"
+        };
+    }
+
+    rpc DeleteIntentTag (IntentTagMessage) returns (IntentTagMessage) {
+        option (google.api.http) = {
+            post: "/v2/{parent=projects/*/agent}/intents:deleteIntentTag"
             body: "*"
         };
     }
@@ -625,6 +640,46 @@ message Intent {
             //   }
             // }</pre>
             ACTIONS_ON_GOOGLE = 8;
+
+            PLACEHOLDER_1 = 9;
+
+            PLACEHOLDER_2 = 10;
+
+            PLACEHOLDER_3 = 11;
+
+            PLACEHOLDER_4 = 12;
+
+            PLACEHOLDER_5 = 13;
+
+            PLACEHOLDER_6 = 14;
+
+            PLACEHOLDER_7 = 15;
+
+            PLACEHOLDER_8 = 16;
+
+            PLACEHOLDER_9 = 17;
+
+            PLACEHOLDER_10 = 18;
+
+            PLACEHOLDER_11 = 19;
+
+            PLACEHOLDER_12 = 20;
+
+            PLACEHOLDER_13 = 21;
+
+            PLACEHOLDER_14 = 22;
+
+            PLACEHOLDER_15 = 23;
+
+            PLACEHOLDER_16 = 24;
+
+            PLACEHOLDER_17 = 25;
+
+            PLACEHOLDER_18 = 26;
+
+            PLACEHOLDER_19 = 27;
+
+            PLACEHOLDER_20 = 28;
         }
 
         // Required. The name of the return message.
@@ -683,6 +738,9 @@ message Intent {
 
         // Optional. The platform that this message is intended for.
         Platform platform = 6;
+
+        // Read-only. States if a returned message is a prompt or not.
+        bool is_prompt = 18;
     }
 
     // Represents a single followup intent in the chain.
@@ -806,6 +864,15 @@ message Intent {
 
     // Indicates whether the intent is active or not
     IntentStatus status = 35;
+
+    // Optional. Provides information that can be used in custom scripts
+    google.protobuf.Timestamp start_date = 36;
+
+    // Optional. Provides information that can be used in custom scripts
+    google.protobuf.Timestamp end_date = 37;
+
+    // Optional.
+    repeated string tags = 38;
 }
 
 // The request message for [Intents.ListIntents][google.cloud.dialogflow.v2.Intents.ListIntents].
@@ -834,6 +901,9 @@ message ListIntentsRequest {
 
     // Optional. Defines the sorting of the list. Default, no sorting.
     IntentSorting sort_by_field = 7;
+
+    // Optional. Applies a filter to the list by tags. Default, no filter.
+    repeated string filter_by_tags = 8;
 }
 
 // The response message for [Intents.ListIntents][google.cloud.dialogflow.v2.Intents.ListIntents].
@@ -995,6 +1065,10 @@ enum IntentCategory {
     ALL_INTENTS = 0;  // represent all intents
     DEFAULT_INTENTS = 1;  // represent the default intents
     USER_DEFINED_INTENTS = 2;  // represent the user defined (custom) intents
+    DATE_EXPIRED_INTENTS = 3;  // represents the intents that had its end_date elapsed
+    DATE_ACTIVE_INTENTS = 4;  // represents the intents that its start_date began but had not yet expired
+    DATE_UPCOMING_INTENTS = 5;  // represent the intents that are still expecting its start_date to begin
+
 }
 
 message IntentSorting {
@@ -1004,10 +1078,19 @@ message IntentSorting {
         SORT_INTENT_BY_CREATION_DATE = 2;
         SORT_INTENT_BY_LAST_UPDATED = 3;
         SORT_INTENT_BY_USERSAYS_COUNT = 4;
+        SORT_INTENT_BY_START_DATE = 5;
+        SORT_INTENT_BY_END_DATE = 6;
     }
 
     IntentSortingField sorting_field = 1;
     SortingMode sorting_mode = 2;
+}
+
+message IntentTagMessage {
+    // The path of the intent.
+    // Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
+    string intent_name = 1;
+    string value = 2;
 }
 
 message BatchUpdateTrainingPhrasesRequest {
