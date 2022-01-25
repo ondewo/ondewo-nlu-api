@@ -297,14 +297,15 @@ message ClassifyIntentsRequest {
     string text = 2;
     // the input language
     string language_code = 3;
-    // Optional: to use the contexts with names listed in the field `context_names` during the classification
+    // Optional: if restrict classification result with input contexts listed in the field `context_names`
     bool active_contexts = 4;
-    // Optional: names of the contexts for the intent classification
+    // Optional: names of the input contexts to restrict the classification result with.
+    // Intents can only be classified if the intent's input context set is the subset of the given context set.
     repeated string context_names = 5;
     // Optional: Which mode to use:
     // EXCLUSIVE - skip algorithms listed in `algorithms` field,
     // INCLUSIVE - run ONLY algorithms listed in `algorithms` field,
-    // UNSPECIFIED - default mode, described in intent_ranking_match.py
+    // UNSPECIFIED - default mode, described in agent config
     Mode mode = 6;
     // Optional: Algorithm list
     repeated IntentAlgorithms algorithms = 7;
@@ -322,25 +323,21 @@ enum IntentAlgorithms {
     OndewoIntentNamedExactMatch = 2;
     OndewoIntentSimilarityMatch = 3;
     OndewoIntentNamedSimilarityMatch = 4;
-    OndewoIntentLogisticRegression = 5;
-    OndewoIntentSupportVectorClassifier = 6;
-    OndewoIntentRandomForestClassifier = 7;
-    OndewoIntentFastTextClassifier = 8;
-    OndewoIntentMachineLearningMatch = 9;
-    OndewoIntentBertClassifier = 10;
-    OndewoIntentMetaClassifier = 11;
-    OndewoIntentSnipsClassifier = 12;
-    IntentExitDetector = 13;
-    DefaultFallBackAlgorithm = 14;
-    OndewoIntentRankingMatch = 15;
-    OndewoIntentRasaClassifier = 16;
-    DeviationEndingDetection = 17;
-    OndewoWeightedEnsemble = 18;
-    OndewoIntentExitDetector = 19;
-    OndewoIntentParameterMatch = 20;
+    OndewoIntentFastTextClassifier = 5;
+    OndewoIntentMachineLearningMatch = 6;
+    OndewoIntentBertClassifier = 7;
+    OndewoIntentMetaClassifier = 8;
+    OndewoIntentSnipsClassifier = 9;
+    IntentExitDetector = 10;
+    OndewoIntentRankingMatch = 11;
+    OndewoIntentRasaClassifier = 12;
+    OndewoWeightedEnsemble = 13;
+    OndewoIntentExitDetector = 14;
+    OndewoIntentParameterMatch = 15;
 }
 
 message IntentClassified{
+    // Only PARTIAL_VIEW is being returned.
     Intent intent = 1;
     string classifier = 2;
     float score = 3;
