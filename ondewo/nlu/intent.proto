@@ -128,6 +128,20 @@ service Intents {
         };
     }
 
+    rpc TagIntent (IntentTagMessage) returns (google.protobuf.Empty) {
+        option (google.api.http) = {
+            post: "/v2/{parent=projects/*/agent}/intents:tagIntent"
+            body: "*"
+        };
+    }
+
+    rpc DeleteIntentTag (IntentTagMessage) returns (google.protobuf.Empty) {
+        option (google.api.http) = {
+            post: "/v2/{parent=projects/*/agent}/intents:deleteIntentTag"
+            body: "*"
+        };
+    }
+
     /************************* Training Phrase RPC Endpoints ****************************/
 
     // Creates batch of training phrases
@@ -856,6 +870,9 @@ message Intent {
 
     // Optional. Provides information that can be used in custom scripts
     google.protobuf.Timestamp end_date = 37;
+
+    // Optional.
+    repeated string tags = 38;
 }
 
 // The request message for [Intents.ListIntents][google.cloud.dialogflow.v2.Intents.ListIntents].
@@ -884,6 +901,9 @@ message ListIntentsRequest {
 
     // Optional. Defines the sorting of the list. Default, no sorting.
     IntentSorting sort_by_field = 7;
+
+    // Optional. Applies a filter to the list by tags. Default, no filter.
+    repeated string filter_by_tags = 8;
 }
 
 // The response message for [Intents.ListIntents][google.cloud.dialogflow.v2.Intents.ListIntents].
@@ -1064,6 +1084,13 @@ message IntentSorting {
 
     IntentSortingField sorting_field = 1;
     SortingMode sorting_mode = 2;
+}
+
+message IntentTagMessage {
+    // The path of the intent.
+    // Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
+    string intent_name = 1;
+    string value = 2;
 }
 
 message BatchUpdateTrainingPhrasesRequest {
