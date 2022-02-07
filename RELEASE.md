@@ -1,6 +1,13 @@
 # Release History
 *****************
 
+## Release ONDEWO NLU APIS 2.5.0
+
+### New Features
+* [OND211-1793] AI Services. Added endpoint to classify and intent given an agent
+
+*****************
+
 ## Release ONDEWO NLU APIS 2.4.0
 
 ### Improvements
