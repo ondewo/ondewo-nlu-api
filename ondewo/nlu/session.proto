@@ -669,6 +669,9 @@ message SessionFilter {
 
     // Match only session which had all of the following user_ids interacting with them.
     repeated string user_ids = 13;
+
+    // Match only session which have all of the following intent tags assigned
+    repeated string intent_tags = 14;
 }
 
 
