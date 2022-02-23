@@ -711,6 +711,9 @@ message SessionInfo {
     // The user_ids of the users which were interacting within the given session
     repeated string user_ids = 10;
 
+    // The list of intent tags in the given session
+    repeated string intent_tags = 11;
+
 }
 
 message ListSessionsResponse {
