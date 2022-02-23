@@ -8,6 +8,7 @@
 
 ### Improvements
 * [OND211-1940] Session Review. Allow the filtering of sessions by intent tags
+* [OND211-1942] Intents. Allow the addition/deletion of multiple tags at a time 
 
 *****************
 
