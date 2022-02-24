@@ -871,7 +871,7 @@ message Intent {
     // Optional. Provides information that can be used in custom scripts
     google.protobuf.Timestamp end_date = 37;
 
-    // Optional.
+    // Optional. Adds arbitrary "categories" for which one could filter the intents
     repeated string tags = 38;
 }
 
