@@ -128,14 +128,14 @@ service Intents {
         };
     }
 
-    rpc TagIntent (IntentTagMessage) returns (google.protobuf.Empty) {
+    rpc TagIntent (IntentTagRequest) returns (google.protobuf.Empty) {
         option (google.api.http) = {
             post: "/v2/{parent=projects/*/agent}/intents:tagIntent"
             body: "*"
         };
     }
 
-    rpc DeleteIntentTag (IntentTagMessage) returns (google.protobuf.Empty) {
+    rpc DeleteIntentTag (IntentTagRequest) returns (google.protobuf.Empty) {
         option (google.api.http) = {
             post: "/v2/{parent=projects/*/agent}/intents:deleteIntentTag"
             body: "*"
@@ -871,7 +871,7 @@ message Intent {
     // Optional. Provides information that can be used in custom scripts
     google.protobuf.Timestamp end_date = 37;
 
-    // Optional.
+    // Optional. Adds arbitrary "categories" for which one could filter the intents
     repeated string tags = 38;
 }
 
@@ -1086,11 +1086,11 @@ message IntentSorting {
     SortingMode sorting_mode = 2;
 }
 
-message IntentTagMessage {
+message IntentTagRequest {
     // The path of the intent.
     // Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
     string intent_name = 1;
-    string value = 2;
+    repeated string tags = 2;
 }
 
 message BatchUpdateTrainingPhrasesRequest {
