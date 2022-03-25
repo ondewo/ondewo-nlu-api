@@ -142,6 +142,13 @@ service Intents {
         };
     }
 
+    rpc GetAllIntentTags (GetAllIntentTagsRequest) returns (GetAllIntentTagsResponse) {
+        option (google.api.http) = {
+            post: "/v2/{parent=projects/*/agent}/intents:tagIntent"
+            body: "*"
+        };
+    }
+
     /************************* Training Phrase RPC Endpoints ****************************/
 
     // Creates batch of training phrases
@@ -1091,6 +1098,17 @@ message IntentTagRequest {
     // Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
     string intent_name = 1;
     repeated string tags = 2;
+}
+
+message GetAllIntentTagsRequest {
+    // Required. The name of the agent to delete all entities types for. Format:
+    // `projects/<Project ID>/agent`.
+    string parent = 1;
+}
+
+message GetAllIntentTagsResponse {
+    // All the intent tags for this parent
+    repeated string intent_tags = 1;
 }
 
 message BatchUpdateTrainingPhrasesRequest {
