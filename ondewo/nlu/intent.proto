@@ -142,6 +142,13 @@ service Intents {
         };
     }
 
+    rpc GetIntentTags (GetIntentTagsRequest) returns (GetIntentTagsResponse) {
+        option (google.api.http) = {
+            post: "/v2/{parent=projects/*/agent}/intents:tagIntent"
+            body: "*"
+        };
+    }
+
     rpc GetAllIntentTags (GetAllIntentTagsRequest) returns (GetAllIntentTagsResponse) {
         option (google.api.http) = {
             post: "/v2/{parent=projects/*/agent}/intents:tagIntent"
@@ -1098,6 +1105,17 @@ message IntentTagRequest {
     // Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
     string intent_name = 1;
     repeated string tags = 2;
+}
+
+message GetIntentTagsRequest {
+    // The path of the intent.
+    // Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
+    string intent_name = 1;
+}
+
+message GetIntentTagsResponse {
+    // All the intent tags for this intent
+    repeated string intent_tags = 1;
 }
 
 message GetAllIntentTagsRequest {
