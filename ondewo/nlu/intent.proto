@@ -148,7 +148,7 @@ service Intents {
     rpc GetIntentTags (GetIntentTagsRequest) returns (GetIntentTagsResponse) {}
 
     // Gets all the tags for all the intents
-    rpc GetAllIntentTags (GetAllIntentTagsRequest) returns (GetAllIntentTagsResponse) {}
+    rpc GetAllIntentTags (GetAllIntentTagsRequest) returns (GetIntentTagsResponse) {}
 
     /************************* Training Phrase RPC Endpoints ****************************/
 
