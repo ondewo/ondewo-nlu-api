@@ -128,6 +128,7 @@ service Intents {
         };
     }
 
+    // Tags a specific intent with tag(s)
     rpc TagIntent (IntentTagRequest) returns (google.protobuf.Empty) {
         option (google.api.http) = {
             post: "/v2/{parent=projects/*/agent}/intents:tagIntent"
@@ -135,6 +136,7 @@ service Intents {
         };
     }
 
+    // Deletes tag(s) for a specific intent
     rpc DeleteIntentTag (IntentTagRequest) returns (google.protobuf.Empty) {
         option (google.api.http) = {
             post: "/v2/{parent=projects/*/agent}/intents:deleteIntentTag"
@@ -142,19 +144,11 @@ service Intents {
         };
     }
 
-    rpc GetIntentTags (GetIntentTagsRequest) returns (GetIntentTagsResponse) {
-        option (google.api.http) = {
-            post: "/v2/{parent=projects/*/agent}/intents:tagIntent"
-            body: "*"
-        };
-    }
+    // Gets all the tags for a specific intent
+    rpc GetIntentTags (GetIntentTagsRequest) returns (GetIntentTagsResponse) {}
 
-    rpc GetAllIntentTags (GetAllIntentTagsRequest) returns (GetAllIntentTagsResponse) {
-        option (google.api.http) = {
-            post: "/v2/{parent=projects/*/agent}/intents:tagIntent"
-            body: "*"
-        };
-    }
+    // Gets all the tags for all the intents
+    rpc GetAllIntentTags (GetAllIntentTagsRequest) returns (GetAllIntentTagsResponse) {}
 
     /************************* Training Phrase RPC Endpoints ****************************/
 
@@ -1104,6 +1098,7 @@ message IntentTagRequest {
     // The path of the intent.
     // Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
     string intent_name = 1;
+    // Intent tags for this intent to operate on
     repeated string tags = 2;
 }
 
@@ -1114,7 +1109,7 @@ message GetIntentTagsRequest {
 }
 
 message GetIntentTagsResponse {
-    // All the intent tags for this intent
+    // All the distinct intent tags sorted
     repeated string intent_tags = 1;
 }
 
@@ -1122,11 +1117,6 @@ message GetAllIntentTagsRequest {
     // Required. The name of the agent to delete all entities types for. Format:
     // `projects/<Project ID>/agent`.
     string parent = 1;
-}
-
-message GetAllIntentTagsResponse {
-    // All the intent tags for this parent
-    repeated string intent_tags = 1;
 }
 
 message BatchUpdateTrainingPhrasesRequest {
