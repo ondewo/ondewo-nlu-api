@@ -217,7 +217,6 @@ message DataEnrichmentConfig {
     WordNetAugEnrichmentConfig word_net_enrichment = 4;
     GPT2EnrichmentConfig gpt2_enrichment = 5;
     GloVeEnrichmentConfig glove_enrichment = 6;
-    FastTextEnrichmentConfig fasttext_enrichment = 7;
     BertAugEnrichmentConfig bert_enrichment = 8;
     XLNetAugEnrichmentConfig xlnet_enrichment = 9;
 }
@@ -230,13 +229,6 @@ message EntityEnrichmentConfig {
     int32 execution_order = 3;
 }
 message ThesaurusEnrichmentConfig {
-    bool is_active = 1;
-
-    int32 enrichment_factor = 2;
-
-    int32 execution_order = 3;
-}
-message FastTextEnrichmentConfig {
     bool is_active = 1;
 
     int32 enrichment_factor = 2;
@@ -321,14 +313,10 @@ enum IntentAlgorithms {
     OndewoIntentNamedExactMatch = 2;
     OndewoIntentSimilarityMatch = 3;
     OndewoIntentNamedSimilarityMatch = 4;
-    OndewoIntentFastTextClassifier = 5;
-    OndewoIntentMachineLearningMatch = 6;
     OndewoIntentBertClassifier = 7;
     OndewoIntentMetaClassifier = 8;
-    OndewoIntentSnipsClassifier = 9;
     IntentExitDetector = 10;
     OndewoIntentRankingMatch = 11;
-    OndewoIntentRasaClassifier = 12;
     OndewoWeightedEnsemble = 13;
     OndewoIntentExitDetector = 14;
     OndewoIntentParameterMatch = 15;

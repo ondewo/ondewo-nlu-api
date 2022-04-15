@@ -62,7 +62,6 @@
     - [EntityEnrichmentConfig](#ondewo.nlu.EntityEnrichmentConfig)
     - [ExtractEntitiesRequest](#ondewo.nlu.ExtractEntitiesRequest)
     - [ExtractEntitiesResponse](#ondewo.nlu.ExtractEntitiesResponse)
-    - [FastTextEnrichmentConfig](#ondewo.nlu.FastTextEnrichmentConfig)
     - [GPT2EnrichmentConfig](#ondewo.nlu.GPT2EnrichmentConfig)
     - [GenerateResponsesRequest](#ondewo.nlu.GenerateResponsesRequest)
     - [GenerateResponsesResponse](#ondewo.nlu.GenerateResponsesResponse)
@@ -1310,7 +1309,6 @@ Operation <response: [google.protobuf.Empty][google.protobuf.Empty], metadata: [
 | word_net_enrichment | [WordNetAugEnrichmentConfig](#ondewo.nlu.WordNetAugEnrichmentConfig) |  |  |
 | gpt2_enrichment | [GPT2EnrichmentConfig](#ondewo.nlu.GPT2EnrichmentConfig) |  |  |
 | glove_enrichment | [GloVeEnrichmentConfig](#ondewo.nlu.GloVeEnrichmentConfig) |  |  |
-| fasttext_enrichment | [FastTextEnrichmentConfig](#ondewo.nlu.FastTextEnrichmentConfig) |  |  |
 | bert_enrichment | [BertAugEnrichmentConfig](#ondewo.nlu.BertAugEnrichmentConfig) |  |  |
 | xlnet_enrichment | [XLNetAugEnrichmentConfig](#ondewo.nlu.XLNetAugEnrichmentConfig) |  |  |
 
@@ -1385,19 +1383,6 @@ The request to detect parameters.
 
 
 
-
-
-<a name="ondewo.nlu.FastTextEnrichmentConfig"></a>
-
-### FastTextEnrichmentConfig
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| is_active | [bool](#bool) |  |  |
-| enrichment_factor | [int32](#int32) |  |  |
-| execution_order | [int32](#int32) |  |  |
 
 
 
