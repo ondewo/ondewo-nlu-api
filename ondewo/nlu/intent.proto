@@ -33,7 +33,7 @@ package ondewo.nlu;
 import "google/api/annotations.proto";
 import "ondewo/nlu/context.proto";
 import "ondewo/nlu/common.proto";
-import "google/longrunning/operations.proto";
+import "ondewo/nlu/operations.proto";
 import "google/protobuf/empty.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/field_mask.proto";
@@ -111,7 +111,7 @@ service Intents {
     // Updates/Creates multiple intents in the specified agent.
     //
     // Operation <response: [BatchUpdateIntentsResponse][google.cloud.dialogflow.v2.BatchUpdateIntentsResponse]>
-    rpc BatchUpdateIntents (BatchUpdateIntentsRequest) returns (google.longrunning.Operation) {
+    rpc BatchUpdateIntents (BatchUpdateIntentsRequest) returns (ondewo.nlu.Operation) {
         option (google.api.http) = {
             post: "/v2/{parent=projects/*/agent}/intents:batchUpdate"
             body: "*"
@@ -121,7 +121,7 @@ service Intents {
     // Deletes intents in the specified agent.
     //
     // Operation <response: [google.protobuf.Empty][google.protobuf.Empty]>
-    rpc BatchDeleteIntents (BatchDeleteIntentsRequest) returns (google.longrunning.Operation) {
+    rpc BatchDeleteIntents (BatchDeleteIntentsRequest) returns (ondewo.nlu.Operation) {
         option (google.api.http) = {
             post: "/v2/{parent=projects/*/agent}/intents:batchDelete"
             body: "*"

@@ -5,6 +5,7 @@
 
 ### New features
 * [[OND211-1959]](https://ondewo.atlassian.net/browse/OND211-1959) - Intents. GetAllTags and GetAllIntentTags endpoints.
+* [[OND211-1987]](https://ondewo.atlassian.net/browse/OND211-1987) - Operations. Added filters to ListOperations.
 
 ### Improvements
 * [[OND211-1927]](https://ondewo.atlassian.net/browse/OND211-1927) - Intents. Remove old Intent classification algorithms
