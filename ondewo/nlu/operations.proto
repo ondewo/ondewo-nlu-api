@@ -143,10 +143,10 @@ message OperationFilter {
     repeated string project_parents = 1;
 
     // Match operation which had any of the following operation statuses.
-    repeated OperationMetadata.Status status = 2;
+    repeated OperationMetadata.Status statuses = 2;
 
     // Match operation which had any of the following operation types.
-    repeated OperationMetadata.OperationType type = 3;
+    repeated OperationMetadata.OperationType types = 3;
 
     // The time operation processing started.
     google.protobuf.Timestamp start_time = 4;
