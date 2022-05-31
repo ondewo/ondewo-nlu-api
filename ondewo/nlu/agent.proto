@@ -36,7 +36,6 @@ syntax = "proto3";
 package ondewo.nlu;
 
 import "google/api/annotations.proto";
-import "google/longrunning/operations.proto";
 import "google/protobuf/field_mask.proto";
 import "google/protobuf/empty.proto";
 import "google/protobuf/struct.proto";
@@ -44,6 +43,7 @@ import "ondewo/nlu/common.proto";
 import "ondewo/nlu/intent.proto";
 import "ondewo/nlu/user.proto";
 import "ondewo/nlu/project_role.proto";
+import "ondewo/nlu/operations.proto";
 import "google/protobuf/timestamp.proto";
 
 // Agents are best described as Natural Language Understanding (NLU) modules that transform user requests into actionable data. You can include agents in your app, product, or service to determine user intent and respond to the user in a natural way.
@@ -331,7 +331,7 @@ service Agents {
     //
     // Operation <response: [google.protobuf.Empty][google.protobuf.Empty],
     //            metadata: [google.protobuf.Struct][google.protobuf.Struct]>
-    rpc TrainAgent (TrainAgentRequest) returns (google.longrunning.Operation) {
+    rpc TrainAgent (TrainAgentRequest) returns (ondewo.nlu.Operation) {
         option (google.api.http) = {
             post: "/v2/{parent=projects/*/agent}:train"
             body: "*"
@@ -341,7 +341,7 @@ service Agents {
     //
     // Operation <response: [google.protobuf.Empty][google.protobuf.Empty],
     //            metadata: [google.protobuf.Struct][google.protobuf.Struct]>
-    rpc BuildCache (BuildCacheRequest) returns (google.longrunning.Operation) {
+    rpc BuildCache (BuildCacheRequest) returns (ondewo.nlu.Operation) {
         option (google.api.http) = {
             post: "/v2/{parent=projects/*/agent}:build_cache"
             body: "*"
@@ -352,7 +352,7 @@ service Agents {
     //
     // Operation <response: [ExportAgentResponse][google.cloud.dialogflow.v2.ExportAgentResponse],
     //            metadata: [google.protobuf.Struct][google.protobuf.Struct]>
-    rpc ExportAgent (ExportAgentRequest) returns (google.longrunning.Operation) {
+    rpc ExportAgent (ExportAgentRequest) returns (ondewo.nlu.Operation) {
         option (google.api.http) = {
             post: "/v2/{parent=projects/*/agent}:export"
             body: "*"
@@ -361,7 +361,7 @@ service Agents {
 
     // Exports the specified train agent to a ZIP file after train-test split, returns the test TrainingPhrase list.
     //
-    rpc ExportBenchmarkAgent (ExportBenchmarkAgentRequest) returns (google.longrunning.Operation) {
+    rpc ExportBenchmarkAgent (ExportBenchmarkAgentRequest) returns (ondewo.nlu.Operation) {
         option (google.api.http) = {
             post: "/v2/{parent=projects/*/agent}:export_benchmark"
             body: "*"
@@ -376,13 +376,13 @@ service Agents {
     //
     // Operation <response: [google.protobuf.Empty][google.protobuf.Empty],
     //            metadata: [google.protobuf.Struct][google.protobuf.Struct]>
-    rpc ImportAgent (ImportAgentRequest) returns (google.longrunning.Operation) {
+    rpc ImportAgent (ImportAgentRequest) returns (ondewo.nlu.Operation) {
         option (google.api.http) = {
             post: "/v2/{parent=projects/*/agent}:import"
             body: "*"
         };
     }
-    rpc OptimizeRankingMatch (OptimizeRankingMatchRequest) returns (google.longrunning.Operation) {
+    rpc OptimizeRankingMatch (OptimizeRankingMatchRequest) returns (ondewo.nlu.Operation) {
         option (google.api.http) = {
             post: "/v2/{parent=projects/*/agent}:optimize_ranking_match"
             body: "*"
@@ -395,7 +395,7 @@ service Agents {
     //
     // Operation <response: [google.protobuf.Empty][google.protobuf.Empty],
     //            metadata: [google.protobuf.Struct][google.protobuf.Struct]>
-    rpc RestoreAgent (RestoreAgentRequest) returns (google.longrunning.Operation) {
+    rpc RestoreAgent (RestoreAgentRequest) returns (ondewo.nlu.Operation) {
         option (google.api.http) = {
             post: "/v2/{parent=projects/*/agent}:restore"
             body: "*"
