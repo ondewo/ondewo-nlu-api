@@ -148,12 +148,15 @@ message OperationFilter {
     // Match operation which had any of the following operation types.
     repeated OperationMetadata.OperationType types = 3;
 
-    // The time operation processing started.
-    google.protobuf.Timestamp start_time = 4;
+    oneof start_time_oneof{
+      // The time operation processing started.
+      google.protobuf.Timestamp start_time = 4;
+    }
 
-    // The time operation processing completed.
-    google.protobuf.Timestamp end_time = 5;
-
+    oneof end_time_oneof{
+      // The time operation processing completed.
+      google.protobuf.Timestamp end_time = 5;
+    }
     // Match operation which had any of the following user_ids.
     repeated string user_ids = 6;
 }
