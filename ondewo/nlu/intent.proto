@@ -203,6 +203,8 @@ service Intents {
     // List messages (of a specific intent).
     rpc ListParameters(ListParametersRequest) returns (ListParametersResponse);
 
+    // List Training phrases (of a specific intent).
+    rpc ListTrainingPhrasesofIntentsWithEnrichment(ListTrainingPhrasesofIntentsWithEnrichmentRequest) returns (ListTrainingPhrasesofIntentsWithEnrichmentResponse);
 }
 
 // Represents an intent.
@@ -1352,7 +1354,6 @@ message ListParametersRequest {
     string page_token = 3;
 }
 
-
 // The response message for ListTrainingPhrase
 message ListParametersResponse {
     // The list of parameters. There will be a maximum number of items
@@ -1361,6 +1362,37 @@ message ListParametersResponse {
 
     // Token to retrieve the next page of results, or empty if there are no
     // more results in the list.
+    // Format: `current_index-<CURRENT_INDEX>--page_size-<PAGE_SIZE>--sub_field-<SUB_FIELD>`
+    // where <CURRENT_INDEX> and <PAGE_SIZE> are of type int, <SUB_FIELD> is of type str (example: `parameters`)
+    string next_page_token = 2;
+}
+
+// The request message for TrainingPhraseRequest
+message ListTrainingPhrasesofIntentsWithEnrichmentRequest {
+    // Required. The agent to list all intents from.
+    // Format: `projects/<Project ID>/agent/intents/...`.
+    string project_id = 1;
+
+    // Optional. The language code used to filter out prompts.
+    string language_code = 2;
+
+    // Optional. List of intent uuids to filter by. Only training phrases
+    // that have this intent uuid will be returned
+    // If not passed, returns all
+    repeated string intent_ids = 3;
+
+    // Optional. The next_page_token value returned from a previous list request.
+    // Format: `current_index-<CURRENT_INDEX>--page_size-<PAGE_SIZE>--sub_field-<SUB_FIELD>`
+    // where <CURRENT_INDEX> and <PAGE_SIZE> are of type int, <SUB_FIELD> is of type str (example: `parameters`)
+    string page_token = 4;
+}
+
+message ListTrainingPhrasesofIntentsWithEnrichmentResponse {
+    // List of user_says values. There will be a maximum number of items
+    // returned based on the page_token field in the request.
+    repeated string training_phrases = 1;
+
+    // Optional. The next_page_token value returned from a previous list request.
     // Format: `current_index-<CURRENT_INDEX>--page_size-<PAGE_SIZE>--sub_field-<SUB_FIELD>`
     // where <CURRENT_INDEX> and <PAGE_SIZE> are of type int, <SUB_FIELD> is of type str (example: `parameters`)
     string next_page_token = 2;
