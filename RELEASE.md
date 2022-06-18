@@ -1,13 +1,22 @@
 # Release History
 *****************
 
+## Release ONDEWO NLU APIS 2.7.0
+
+### New features
+* [[OND211-1987]](https://ondewo.atlassian.net/browse/OND211-1987) - Operations. Added filters to ListOperations.
+* [[OND211-2011]](https://ondewo.atlassian.net/browse/OND211-2011) - Intent. List all user says from cache incl. enrichtment 
+
+### Improvements
+* [[OND211-1987]](https://ondewo.atlassian.net/browse/OND211-1987) - Operations. Fixed timestamp field of operation
+
+*****************
+
 ## Release ONDEWO NLU APIS 2.6.0
 
 ### New features
 * [[OND211-1959]](https://ondewo.atlassian.net/browse/OND211-1959) - Intents. GetAllTags and GetAllIntentTags endpoints.
-* [[OND211-1987]](https://ondewo.atlassian.net/browse/OND211-1987) - Operations. Added filters to ListOperations.
-* [[OND211-2011]](https://ondewo.atlassian.net/browse/OND211-2011) - Intent. List all user says from cache incl. enrichtment 
-
+*
 ### Improvements
 * [[OND211-1927]](https://ondewo.atlassian.net/browse/OND211-1927) - Intents. Remove old Intent classification algorithms
 * [[OND211-1928]](https://ondewo.atlassian.net/browse/OND211-1928) - Entities. Remove old Entity Recognition algorithms
