@@ -1369,9 +1369,9 @@ message ListParametersResponse {
 
 // The request message for TrainingPhraseRequest
 message ListTrainingPhrasesofIntentsWithEnrichmentRequest {
-    // Required. The agent to list all intents from.
-    // Format: `projects/<Project ID>/agent/intents/...`.
-    string project_id = 1;
+    // Required. The name of the agent to delete all entities types for. Format:
+    // `projects/<Project ID>/agent`.
+    string parent = 1;
 
     // Optional. The language code used to filter out prompts.
     string language_code = 2;
