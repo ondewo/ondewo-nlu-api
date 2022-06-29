@@ -31,10 +31,10 @@ syntax = "proto3";
 package ondewo.nlu;
 
 import "google/api/annotations.proto";
-import "google/longrunning/operations.proto";
 import "google/protobuf/empty.proto";
 import "google/protobuf/field_mask.proto";
 import "ondewo/nlu/common.proto";
+import "ondewo/nlu/operations.proto";
 
 option cc_enable_arenas = true;
 option csharp_namespace = "Google.Cloud.Dialogflow.V2";
@@ -113,7 +113,7 @@ service EntityTypes {
     //
     // Operation <response: [BatchUpdateEntityTypesResponse][google.cloud.dialogflow.v2.BatchUpdateEntityTypesResponse],
     //            metadata: [google.protobuf.Struct][google.protobuf.Struct]>
-    rpc BatchUpdateEntityTypes (BatchUpdateEntityTypesRequest) returns (google.longrunning.Operation) {
+    rpc BatchUpdateEntityTypes (BatchUpdateEntityTypesRequest) returns (ondewo.nlu.Operation) {
         option (google.api.http) = {
           post: "/v2/{parent=projects/*/agent}/entityTypes:batchUpdate"
           body: "*"
@@ -124,7 +124,7 @@ service EntityTypes {
     //
     // Operation <response: [google.protobuf.Empty][google.protobuf.Empty],
     //            metadata: [google.protobuf.Struct][google.protobuf.Struct]>
-    rpc BatchDeleteEntityTypes (BatchDeleteEntityTypesRequest) returns (google.longrunning.Operation) {
+    rpc BatchDeleteEntityTypes (BatchDeleteEntityTypesRequest) returns (ondewo.nlu.Operation) {
         option (google.api.http) = {
           post: "/v2/{parent=projects/*/agent}/entityTypes:batchDelete"
           body: "*"
