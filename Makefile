@@ -41,7 +41,7 @@ create_release_tag: ## Create Release Tag and push it to origin
 	git tag -a ${ONDEWO_NLU_API_VERSION} -m "release/${ONDEWO_NLU_API_VERSION}"
 	git push origin ${ONDEWO_NLU_API_VERSION}
 
-build_and_release_to_github_via_docker: build build_utils_docker_image release_to_github_via_docker_image  ## Release automation for building and releasing on GitHub via a docker image
+build_and_release_to_github_via_docker: build_utils_docker_image release_to_github_via_docker_image  ## Release automation for building and releasing on GitHub via a docker image
 
 login_to_gh: ## Login to Github CLI with Access Token
 	echo $(GITHUB_GH_TOKEN) | gh auth login -p ssh --with-token
@@ -68,13 +68,13 @@ clone_devops_accounts: ## Clones devops-accounts repo
 	git clone git@bitbucket.org:ondewo/${DEVOPS_ACCOUNT_GIT}.git
 
 DEVOPS_ACCOUNT_GIT="ondewo-devops-accounts"
-DEVOPS_ACCOUNT_DIR="./${DEVOPS_ACCOUNT_GIT}/info"
+DEVOPS_ACCOUNT_DIR="./${DEVOPS_ACCOUNT_GIT}"
 
 TEST:
 	@echo ${GITHUB_GH_TOKEN}
 
 run_release_with_devops:
-	$(eval info:= $(shell cat ${DEVOPS_ACCOUNT_DIR} | grep GITHUB))
+	$(eval info:= $(shell cat ${DEVOPS_ACCOUNT_DIR}/account_github.env | grep GITHUB_GH))
 	make release $(info)
 
 spc: ## Checks if the Release Branch, Tag and Pypi version already exist
