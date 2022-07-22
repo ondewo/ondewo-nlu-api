@@ -2,6 +2,15 @@
 
 *****************
 
+## Release ONDEWO NLU APIS 2.9.0
+
+### Improvements
+
+* [[OND211-2038]](https://ondewo.atlassian.net/browse/OND211-2038) - Add SessionReview Filter for "Context in", "Context out" and "Session Id"
+* [[OND211-2039]](https://ondewo.atlassian.net/browse/OND211-2039) - Implemented Automatic Release Process
+
+*****************
+
 ## Release ONDEWO NLU APIS 2.8.0
 
 ### Improvements

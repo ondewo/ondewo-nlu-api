@@ -10,7 +10,7 @@ export
 # 2 - Create Release Tag and push
 # 3 - GitHub Release
 
-ONDEWO_NLU_API_VERSION=2.8.0
+ONDEWO_NLU_API_VERSION=2.9.0
 
 
 # You need to setup an access token at https://github.com/settings/tokens - permissions are important
@@ -72,6 +72,7 @@ DEVOPS_ACCOUNT_DIR="./${DEVOPS_ACCOUNT_GIT}"
 
 TEST:
 	@echo ${GITHUB_GH_TOKEN}
+	@echo ${CURRENT_RELEASE_NOTES}
 
 run_release_with_devops:
 	$(eval info:= $(shell cat ${DEVOPS_ACCOUNT_DIR}/account_github.env | grep GITHUB_GH))
