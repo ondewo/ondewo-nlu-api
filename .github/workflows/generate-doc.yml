@@ -34,7 +34,7 @@ jobs:
 #          mkdir -p doc
 #          protoc -I. -Igoogleapis --doc_opt=markdown,nlu.md --doc_out=doc $(find ondewo -name '*.proto' | sort)
 
-      - uses: ondewo/ondewo-protoc-gen-doc-action@main
+      - uses: ondewo/ondewo-protoc-gen-doc-action@master
 
       - name: Deploy 🚀
         if: ${{ !env.ACT }}
