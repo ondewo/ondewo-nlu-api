@@ -1005,6 +1005,7 @@ message FullTextSearchRequest {
         OndewoIntentUsersaysQuery = 7;
         OndewoIntentTagsQuery = 8;
         OndewoIntentParametersQuery = 9;
+        OndewoIntentResponseQuery = 10;
     }
 
     // What is the type of the query that needs to be sent to elasticsearch
