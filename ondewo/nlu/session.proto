@@ -672,6 +672,13 @@ message SessionFilter {
 
     // Match only session which have all of the following intent tags assigned
     repeated string intent_tags = 14;
+
+    // Match only sessions whose IDs are specified here
+    repeated string session_ids = 15;
+
+    // Match only sessions whose session info contains at least one step having all the contexts specified here
+    repeated Context input_contexts = 16;
+    repeated Context output_contexts = 17;
 }
 
 
@@ -713,6 +720,13 @@ message SessionInfo {
 
     // The list of intent tags in the given session
     repeated string intent_tags = 11;
+
+    // The list of contexts of each step collected in an outer list
+    message ContextSteps {
+        repeated Context contexts = 1;
+    }
+    repeated ContextSteps input_context_steps = 12;
+    repeated ContextSteps output_context_steps = 13;
 
 }
 
