@@ -1,6 +1,13 @@
 # Release History
 
 *****************
+## Release ONDEWO NLU APIS 2.10.0
+
+### Improvements
+
+* [[OND211-2039]](https://ondewo.atlassian.net/browse/OND211-2039) - Added pre-commit hooks and adjusted files to them
+
+*****************
 
 ## Release ONDEWO NLU APIS 2.9.0
 

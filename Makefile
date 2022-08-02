@@ -17,7 +17,7 @@ export
 
 # MUST BE THE SAME AS API in Mayor and Minor Version Number
 # example: API 2.9.0 --> Client 2.9.X
-ONDEWO_NLU_API_VERSION=2.9.0
+ONDEWO_NLU_API_VERSION=2.10.0
 
 # You need to setup an access token at https://github.com/settings/tokens - permissions are important
 GITHUB_GH_TOKEN?=ENTER_YOUR_TOKEN_HERE
@@ -34,7 +34,7 @@ IMAGE_UTILS_NAME=ondewo-nlu-api-utils:${ONDEWO_NLU_API_VERSION}
 ########################################################
 #       ONDEWO Standard Make Targets
 ########################################################
-setup_developer_environment_locally: install_precommit_hooks install_dependencies_locally
+setup_developer_environment_locally: install_precommit_hooks
 
 install_precommit_hooks: ## Installs pre-commit hooks and sets them up for the ondewo-csi-client repo
 	pip install pre-commit
@@ -43,12 +43,6 @@ install_precommit_hooks: ## Installs pre-commit hooks and sets them up for the o
 
 precommit_hooks_run_all_files: ## Runs all pre-commit hooks on all files and not just the changed ones
 	pre-commit run --all-file
-
-install_dependencies_locally: ## Install dependencies locally
-	pip install -r requirements-dev.txt
-
-flake8:
-	flake8
 
 help: ## Print usage info about help targets
 	# (first comment after target starting with double hashes ##)
