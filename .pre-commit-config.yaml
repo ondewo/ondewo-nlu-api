@@ -55,6 +55,7 @@ repos:
             -   id: debug-statements  # Check for debugger imports and py37+ breakpoint() calls
             -   id: detect-private-key  # Check for the existence of private keys
             -   id: check-executables-have-shebangs
+                exclude: googleapis
             -   id: trailing-whitespace  # Trim trailing whitespace.
             -   id: end-of-file-fixer # makes sure files end in a newline and only a newline
             -   id: pretty-format-json # autoformat json files (e.g. sorting keys)
