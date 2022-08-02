@@ -115,5 +115,3 @@ message GetProjectElementStatRequest {
     string name = 1;
     string language_code = 2;
 }
-
-
