@@ -998,8 +998,8 @@ message FullTextSearchRequest {
         ALL = 0;
         OndewoEntityQuery = 1;
         OndewoEntityTypeQuery = 2;
-        OndewoSynonymQuery = 3;
-        OndewoIntentNameQuery = 4;
+        OndewoEntitySynonymQuery = 3;
+        OndewoIntentQuery = 4;
         OndewoIntentContextInQuery = 5;
         OndewoIntentContextOutQuery = 6;
         OndewoIntentUsersaysQuery = 7;
