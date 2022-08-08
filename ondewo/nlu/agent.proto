@@ -1013,6 +1013,12 @@ message FullTextSearchRequest {
 
     // What to search for in the elastic server
     string term = 4;
+
+    // Return results after this many result item
+    int32 from_result = 5;
+
+    // Return this many results after from_result
+    int32 size = 6;
 }
 
 message FullTextSearchResponse {
