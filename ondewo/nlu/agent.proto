@@ -1014,11 +1014,8 @@ message FullTextSearchRequest {
     // What to search for in the elastic server
     string term = 4;
 
-    // Return results after this many result item
-    int32 from_result = 5;
-
-    // Return this many results after from_result
-    int32 size = 6;
+    // Composite string: current_index-0--page_size-10
+    string page_token = 5;
 }
 
 message FullTextSearchResponse {
