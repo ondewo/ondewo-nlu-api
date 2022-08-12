@@ -1,6 +1,15 @@
 # Release History
 
 *****************
+
+## Release ONDEWO NLU APIS 2.11.0
+
+### Improvements
+
+* [[OND211-2050]](https://ondewo.atlassian.net/browse/OND211-2050) - Changed metadata from Any to OperationMetadata type
+
+*****************
+
 ## Release ONDEWO NLU APIS 2.10.0
 
 ### Improvements
@@ -13,7 +22,8 @@
 
 ### Improvements
 
-* [[OND211-2038]](https://ondewo.atlassian.net/browse/OND211-2038) - Add SessionReview Filter for "Context in", "Context out" and "Session Id"
+* [[OND211-2038]](https://ondewo.atlassian.net/browse/OND211-2038) - Add SessionReview Filter for "Context in", "Context
+  out" and "Session Id"
 * [[OND211-2039]](https://ondewo.atlassian.net/browse/OND211-2039) - Implemented Automatic Release Process
 
 *****************
@@ -22,7 +32,8 @@
 
 ### Improvements
 
-* [[OND211-2011]](https://ondewo.atlassian.net/browse/OND211-2011) - Intent. List all user says from cache incl. enrichtment based on agent parent instead of project_id
+* [[OND211-2011]](https://ondewo.atlassian.net/browse/OND211-2011) - Intent. List all user says from cache incl.
+  enrichtment based on agent parent instead of project_id
 
 *****************
 
@@ -31,7 +42,8 @@
 ### New features
 
 * [[OND211-1987]](https://ondewo.atlassian.net/browse/OND211-1987) - Operations. Added filters to ListOperations.
-* [[OND211-2011]](https://ondewo.atlassian.net/browse/OND211-2011) - Intent. List all user says from cache incl. enrichtment
+* [[OND211-2011]](https://ondewo.atlassian.net/browse/OND211-2011) - Intent. List all user says from cache incl.
+  enrichtment
 
 ### Improvements
 
@@ -49,7 +61,8 @@
 
 ### Improvements
 
-* [[OND211-1927]](https://ondewo.atlassian.net/browse/OND211-1927) - Intents. Remove old Intent classification algorithms
+* [[OND211-1927]](https://ondewo.atlassian.net/browse/OND211-1927) - Intents. Remove old Intent classification
+  algorithms
 * [[OND211-1928]](https://ondewo.atlassian.net/browse/OND211-1928) - Entities. Remove old Entity Recognition algorithms
 
 *****************
@@ -145,7 +158,7 @@
 
 ### New Features
 
- Created a new file ondewo/nlu/utility.proto that contains the following endpoints:
+Created a new file ondewo/nlu/utility.proto that contains the following endpoints:
 
 * [OND211-1693] Implement regex validation endpoints.
 * [OND211-1714] Implement intent cleaning endpoints.
