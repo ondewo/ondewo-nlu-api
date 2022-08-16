@@ -1,6 +1,13 @@
 # Release History
 
 *****************
+## Release ONDEWO NLU APIS 2.12.0
+
+### Improvements
+
+* [[OND211-2044]](https://ondewo.atlassian.net/browse/OND211-2044) - Implemented new endpoints for searching intents and entities by keyword/term
+
+*****************
 
 ## Release ONDEWO NLU APIS 2.11.0
 
