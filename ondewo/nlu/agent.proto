@@ -39,6 +39,7 @@ import "google/api/annotations.proto";
 import "google/protobuf/field_mask.proto";
 import "google/protobuf/empty.proto";
 import "google/protobuf/struct.proto";
+import "google/protobuf/any.proto";
 import "ondewo/nlu/common.proto";
 import "ondewo/nlu/intent.proto";
 import "ondewo/nlu/user.proto";
@@ -439,6 +440,9 @@ service Agents {
 
     // Set platform name mappings for an Agent
     rpc SetPlatformMapping (PlatformMapping) returns (PlatformMapping);
+
+    // Full text search endpoint
+    rpc GetFullTextSearch (FullTextSearchRequest) returns (FullTextSearchResponse);
 }
 
 // Project/Agent messages
@@ -979,4 +983,41 @@ message PlatformMapping {
     // Required.
     // If not set, it will set it empty.
     repeated CustomPlatformInfo platform_info = 2;
+}
+
+message FullTextSearchRequest {
+
+    // Required. The project that the agent is associated with.
+    // Format: `projects/<Project ID>/agent`.
+    string parent = 1;
+
+    // In which language to search for
+    string language_code = 2;
+
+    enum QueryType {
+        ALL = 0;
+        OndewoEntityQuery = 1;
+        OndewoEntityTypeQuery = 2;
+        OndewoEntitySynonymQuery = 3;
+        OndewoIntentQuery = 4;
+        OndewoIntentContextInQuery = 5;
+        OndewoIntentContextOutQuery = 6;
+        OndewoIntentUsersaysQuery = 7;
+        OndewoIntentTagsQuery = 8;
+        OndewoIntentParametersQuery = 9;
+        OndewoIntentResponseQuery = 10;
+    }
+
+    // What is the type of the query that needs to be sent to elasticsearch
+    QueryType query_type = 3;
+
+    // What to search for in the elastic server
+    string term = 4;
+
+    // Composite string: current_index-0--page_size-10
+    string page_token = 5;
+}
+
+message FullTextSearchResponse {
+    map<string, google.protobuf.Any> response = 1;
 }
