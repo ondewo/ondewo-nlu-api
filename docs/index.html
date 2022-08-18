@@ -98,6 +98,8 @@
                       
                         <li><a href="#ondewo.nlu.Agents.SetPlatformMapping" class="title-badge method">SetPlatformMapping</a></li>
                       
+                        <li><a href="#ondewo.nlu.Agents.GetFullTextSearch" class="title-badge method">GetFullTextSearch</a></li>
+                      
                       </ul>
                       
                     </li>
@@ -174,6 +176,18 @@
                     
                       <li>
                         <a href="#ondewo.nlu.ExportResourcesResponse" class="title-badge message">ExportResourcesResponse</a>
+                      </li>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.FullTextSearchRequest" class="title-badge message">FullTextSearchRequest</a>
+                      </li>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.FullTextSearchResponse" class="title-badge message">FullTextSearchResponse</a>
+                      </li>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.FullTextSearchResponse.ResponseEntry" class="title-badge message">FullTextSearchResponse.ResponseEntry</a>
                       </li>
                     
                       <li>
@@ -300,6 +314,10 @@
                     
                       <li>
                         <a href="#ondewo.nlu.AgentView" class="title-badge enum">AgentView</a>
+                      </li>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.FullTextSearchRequest.QueryType" class="title-badge enum">FullTextSearchRequest.QueryType</a>
                       </li>
                     
                       <li>
@@ -2585,6 +2603,12 @@ Operation <response: [google.protobuf.Empty][google.protobuf.Empty],
 
           Set platform name mappings for an Agent
         
+          <h4 id="ondewo.nlu.Agents.GetFullTextSearch" class="title-badge method">GetFullTextSearch</h4>
+
+          <pre>rpc GetFullTextSearch (<a href="#ondewo.nlu.FullTextSearchRequest">FullTextSearchRequest</a>) returns (<a href="#ondewo.nlu.FullTextSearchResponse">FullTextSearchResponse)</a></pre>
+
+          Full text search endpoint
+        
 
         
           
@@ -3559,6 +3583,114 @@ Optional: bigger than zero </p></td>
                 <tr>
                   <td>resource_file</td>
                   <td><a href="#bytes">bytes</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="ondewo.nlu.FullTextSearchRequest" class="title-badge message">FullTextSearchRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>parent</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The project that the agent is associated with.
+Format: `projects/<Project ID>/agent`. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>language_code</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>In which language to search for </p></td>
+                </tr>
+              
+                <tr>
+                  <td>query_type</td>
+                  <td><a href="#ondewo.nlu.FullTextSearchRequest.QueryType">FullTextSearchRequest.QueryType</a></td>
+                  <td></td>
+                  <td><p>What is the type of the query that needs to be sent to elasticsearch </p></td>
+                </tr>
+              
+                <tr>
+                  <td>term</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>What to search for in the elastic server </p></td>
+                </tr>
+              
+                <tr>
+                  <td>page_token</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Composite string: current_index-0--page_size-10 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="ondewo.nlu.FullTextSearchResponse" class="title-badge message">FullTextSearchResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>response</td>
+                  <td><a href="#ondewo.nlu.FullTextSearchResponse.ResponseEntry">FullTextSearchResponse.ResponseEntry</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="ondewo.nlu.FullTextSearchResponse.ResponseEntry" class="title-badge message">FullTextSearchResponse.ResponseEntry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#google.protobuf.Any">google.protobuf.Any</a></td>
                   <td></td>
                   <td><p> </p></td>
                 </tr>
@@ -4694,6 +4826,83 @@ Format: `projects/<Project ID>`. </p></td>
                 <td>AGENT_VIEW_SHALLOW</td>
                 <td>2</td>
                 <td><p>Shallow agent view: populates all the fields except configs.</p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="ondewo.nlu.FullTextSearchRequest.QueryType" class="title-badge enum">FullTextSearchRequest.QueryType</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ALL</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>OndewoEntityQuery</td>
+                <td>1</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>OndewoEntityTypeQuery</td>
+                <td>2</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>OndewoEntitySynonymQuery</td>
+                <td>3</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>OndewoIntentQuery</td>
+                <td>4</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>OndewoIntentContextInQuery</td>
+                <td>5</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>OndewoIntentContextOutQuery</td>
+                <td>6</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>OndewoIntentUsersaysQuery</td>
+                <td>7</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>OndewoIntentTagsQuery</td>
+                <td>8</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>OndewoIntentParametersQuery</td>
+                <td>9</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>OndewoIntentResponseQuery</td>
+                <td>10</td>
+                <td><p></p></td>
               </tr>
             
           </tbody>

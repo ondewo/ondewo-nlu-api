@@ -21,6 +21,9 @@
     - [ExportBenchmarkAgentResponse.TrainingPhrasesEntry](#ondewo.nlu.ExportBenchmarkAgentResponse.TrainingPhrasesEntry)
     - [ExportResourcesRequest](#ondewo.nlu.ExportResourcesRequest)
     - [ExportResourcesResponse](#ondewo.nlu.ExportResourcesResponse)
+    - [FullTextSearchRequest](#ondewo.nlu.FullTextSearchRequest)
+    - [FullTextSearchResponse](#ondewo.nlu.FullTextSearchResponse)
+    - [FullTextSearchResponse.ResponseEntry](#ondewo.nlu.FullTextSearchResponse.ResponseEntry)
     - [GetAgentRequest](#ondewo.nlu.GetAgentRequest)
     - [GetAgentStatisticsRequest](#ondewo.nlu.GetAgentStatisticsRequest)
     - [GetAgentStatisticsResponse](#ondewo.nlu.GetAgentStatisticsResponse)
@@ -52,6 +55,7 @@
     - [AgentSorting.AgentSortingField](#ondewo.nlu.AgentSorting.AgentSortingField)
     - [AgentStatus](#ondewo.nlu.AgentStatus)
     - [AgentView](#ondewo.nlu.AgentView)
+    - [FullTextSearchRequest.QueryType](#ondewo.nlu.FullTextSearchRequest.QueryType)
     - [InitiationProtocol](#ondewo.nlu.InitiationProtocol)
     - [ModelStatus.StatusName](#ondewo.nlu.ModelStatus.StatusName)
     - [ReportFormat](#ondewo.nlu.ReportFormat)
@@ -722,6 +726,56 @@ curl \ 'https://dialogflow.googleapis.com/v2/projects/<project_name>/agent:expor
 
 
 
+<a name="ondewo.nlu.FullTextSearchRequest"></a>
+
+### FullTextSearchRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  | Required. The project that the agent is associated with. Format: `projects/<Project ID>/agent`. |
+| language_code | [string](#string) |  | In which language to search for |
+| query_type | [FullTextSearchRequest.QueryType](#ondewo.nlu.FullTextSearchRequest.QueryType) |  | What is the type of the query that needs to be sent to elasticsearch |
+| term | [string](#string) |  | What to search for in the elastic server |
+| page_token | [string](#string) |  | Composite string: current_index-0--page_size-10 |
+
+
+
+
+
+
+<a name="ondewo.nlu.FullTextSearchResponse"></a>
+
+### FullTextSearchResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| response | [FullTextSearchResponse.ResponseEntry](#ondewo.nlu.FullTextSearchResponse.ResponseEntry) | repeated |  |
+
+
+
+
+
+
+<a name="ondewo.nlu.FullTextSearchResponse.ResponseEntry"></a>
+
+### FullTextSearchResponse.ResponseEntry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
+| value | [google.protobuf.Any](#google.protobuf.Any) |  |  |
+
+
+
+
+
+
 <a name="ondewo.nlu.GetAgentRequest"></a>
 
 ### GetAgentRequest
@@ -1224,6 +1278,27 @@ The request message for [Agents.TrainAgent][google.cloud.dialogflow.v2.Agents.Tr
 
 
 
+<a name="ondewo.nlu.FullTextSearchRequest.QueryType"></a>
+
+### FullTextSearchRequest.QueryType
+
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| ALL | 0 |  |
+| OndewoEntityQuery | 1 |  |
+| OndewoEntityTypeQuery | 2 |  |
+| OndewoEntitySynonymQuery | 3 |  |
+| OndewoIntentQuery | 4 |  |
+| OndewoIntentContextInQuery | 5 |  |
+| OndewoIntentContextOutQuery | 6 |  |
+| OndewoIntentUsersaysQuery | 7 |  |
+| OndewoIntentTagsQuery | 8 |  |
+| OndewoIntentParametersQuery | 9 |  |
+| OndewoIntentResponseQuery | 10 |  |
+
+
+
 <a name="ondewo.nlu.InitiationProtocol"></a>
 
 ### InitiationProtocol
@@ -1381,6 +1456,7 @@ Operation <response: [google.protobuf.Empty][google.protobuf.Empty], metadata: [
 | GetModelStatuses | [GetModelStatusesRequest](#ondewo.nlu.GetModelStatusesRequest) | [GetModelStatusesResponse](#ondewo.nlu.GetModelStatusesResponse) | Get statuses of models related to project |
 | GetPlatformMapping | [GetPlatformMappingRequest](#ondewo.nlu.GetPlatformMappingRequest) | [PlatformMapping](#ondewo.nlu.PlatformMapping) | Get all set platform name mappings for an Agent |
 | SetPlatformMapping | [PlatformMapping](#ondewo.nlu.PlatformMapping) | [PlatformMapping](#ondewo.nlu.PlatformMapping) | Set platform name mappings for an Agent |
+| GetFullTextSearch | [FullTextSearchRequest](#ondewo.nlu.FullTextSearchRequest) | [FullTextSearchResponse](#ondewo.nlu.FullTextSearchResponse) | Full text search endpoint |
 
  <!-- end services -->
 
