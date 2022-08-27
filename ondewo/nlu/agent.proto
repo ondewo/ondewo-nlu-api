@@ -442,7 +442,16 @@ service Agents {
     rpc SetPlatformMapping (PlatformMapping) returns (PlatformMapping);
 
     // Full text search endpoint
-    rpc GetFullTextSearch (FullTextSearchRequest) returns (FullTextSearchResponse);
+    rpc GetFullTextSearchEntityType (FullTextSearchRequest) returns (FullTextSearchResponseEntityType);
+    rpc GetFullTextSearchEntity (FullTextSearchRequest) returns (FullTextSearchResponseEntity);
+    rpc GetFullTextSearchEntitySynonym (FullTextSearchRequest) returns (FullTextSearchResponseEntitySynonym);
+    rpc GetFullTextSearchIntent (FullTextSearchRequest) returns (FullTextSearchResponseIntent);
+    rpc GetFullTextSearchIntentContextIn (FullTextSearchRequest) returns (FullTextSearchResponseIntentContextIn);
+    rpc GetFullTextSearchIntentContextOut (FullTextSearchRequest) returns (FullTextSearchResponseIntentContextOut);
+    rpc GetFullTextSearchIntentUsersays (FullTextSearchRequest) returns (FullTextSearchResponseIntentUsersays);
+    rpc GetFullTextSearchIntentTags (FullTextSearchRequest) returns (FullTextSearchResponseIntentTags);
+    rpc GetFullTextSearchIntentResponse (FullTextSearchRequest) returns (FullTextSearchResponseIntentResponse);
+    rpc GetFullTextSearchIntentParameters (FullTextSearchRequest) returns (FullTextSearchResponseIntentParameters);
 }
 
 // Project/Agent messages
@@ -994,8 +1003,14 @@ message FullTextSearchRequest {
     // In which language to search for
     string language_code = 2;
 
+    // What to search for in the elastic server
+    string term = 3;
+
+    // Composite string: current_index-0--page_size-10
+    string page_token = 4;
+
     enum QueryType {
-        ALL = 0;
+        ALL = 0;  // just a placeholder, has to start with zero
         OndewoEntityQuery = 1;
         OndewoEntityTypeQuery = 2;
         OndewoEntitySynonymQuery = 3;
@@ -1007,17 +1022,166 @@ message FullTextSearchRequest {
         OndewoIntentParametersQuery = 9;
         OndewoIntentResponseQuery = 10;
     }
-
-    // What is the type of the query that needs to be sent to elasticsearch
-    QueryType query_type = 3;
-
-    // What to search for in the elastic server
-    string term = 4;
-
-    // Composite string: current_index-0--page_size-10
-    string page_token = 5;
 }
 
-message FullTextSearchResponse {
-    map<string, google.protobuf.Any> response = 1;
+message FullTextSearchResponseEntityType {
+    string parent = 1;
+    string language_code = 2;
+    message EntityTypeSearchResult {
+        string name = 1;
+        string display_name = 2;
+        string language = 3;
+    }
+    repeated EntityTypeSearchResult entity_type_results = 3;
+    string term = 4;
+    string elastic_query = 5;
+    float time = 6;
+    string next_page_token = 7;
+}
+
+message FullTextSearchResponseEntity {
+    string parent = 1;
+    string language_code = 2;
+    message EntitySearchResult {
+        string name = 1;
+        string display_name = 2;
+        string entity_type_name = 3;
+        string language = 4;
+    }
+    repeated EntitySearchResult entity_results = 3;
+    string term = 4;
+    string elastic_query = 5;
+    float time = 6;
+    string next_page_token = 7;
+}
+
+message FullTextSearchResponseEntitySynonym {
+    string parent = 1;
+    string language_code = 2;
+    message EntitySynonymSearchResult {
+        string name = 1;
+        string display_name = 2;
+        string entity_type_name = 3;
+        string entity_name = 4;
+        string language = 5;
+    }
+    repeated EntitySynonymSearchResult entity_synonym_results = 3;
+    string term = 4;
+    string elastic_query = 5;
+    float time = 6;
+    string next_page_token = 7;
+}
+
+message FullTextSearchResponseIntent {
+    string parent = 1;
+    string language_code = 2;
+    message IntentSearchResult {
+        string name = 1;
+        string display_name = 2;
+        string domain_name = 3;
+        string language = 4;
+    }
+    repeated IntentSearchResult intent_results = 3;
+    string term = 4;
+    string elastic_query = 5;
+    float time = 6;
+    string next_page_token = 7;
+}
+
+message FullTextSearchResponseIntentContextIn {
+    string parent = 1;
+    string language_code = 2;
+    message IntentContextInSearchResult {
+        string name = 1;
+        string intent_name = 2;
+        string language = 3;
+    }
+    repeated IntentContextInSearchResult intent_context_in_results = 3;
+    string term = 4;
+    string elastic_query = 5;
+    float time = 6;
+    string next_page_token = 7;
+}
+
+message FullTextSearchResponseIntentContextOut {
+    string parent = 1;
+    string language_code = 2;
+    message IntentContextOutSearchResult {
+        string name = 1;
+        string intent_name = 2;
+        string language = 3;
+    }
+    repeated IntentContextOutSearchResult intent_context_out_results = 3;
+    string term = 4;
+    string elastic_query = 5;
+    float time = 6;
+    string next_page_token = 7;
+}
+
+message FullTextSearchResponseIntentUsersays {
+    string parent = 1;
+    string language_code = 2;
+    message IntentUsersaysSearchResult {
+        string name = 1;
+        string text = 2;
+        string text_as_entity_types = 3;
+        string text_as_entity_values = 4;
+        string type = 5;
+        string intent_name = 6;
+        string language = 7;
+    }
+    repeated IntentUsersaysSearchResult intent_usersays_results = 3;
+    string term = 4;
+    string elastic_query = 5;
+    float time = 6;
+    string next_page_token = 7;
+}
+
+message FullTextSearchResponseIntentTags {
+    string parent = 1;
+    string language_code = 2;
+    message IntentTagsSearchResult {
+        string name = 1;
+        string text = 2;
+        string intent_name = 3;
+        string language = 4;
+    }
+    repeated IntentTagsSearchResult intent_tags_results = 3;
+    string term = 4;
+    string elastic_query = 5;
+    float time = 6;
+    string next_page_token = 7;
+}
+
+message FullTextSearchResponseIntentResponse {
+    string parent = 1;
+    string language_code = 2;
+    message IntentResponseSearchResult {
+        string text = 1;
+        int32 platform = 2;
+        string response_type = 3;
+        string intent_name = 4;
+        string language = 5;
+    }
+    repeated IntentResponseSearchResult intent_response_results = 3;
+    string term = 4;
+    string elastic_query = 5;
+    float time = 6;
+    string next_page_token = 7;
+}
+
+message FullTextSearchResponseIntentParameters {
+    string parent = 1;
+    string language_code = 2;
+    message IntentParametersSearchResult {
+        string parameter_name = 1;
+        string parameter_display_name = 2;
+        string intent_name = 3;
+        string language = 4;
+    }
+    repeated IntentParametersSearchResult intent_parameters_results = 3;
+    string term = 4;
+    string elastic_query = 5;
+    float time = 6;
+    string next_page_token = 7;
 }
