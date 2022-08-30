@@ -1,6 +1,14 @@
 # Release History
 
 *****************
+## Release ONDEWO NLU APIS 2.14.0
+
+### Improvements
+
+* [[OND211-2044]](https://ondewo.atlassian.net/browse/OND211-2044) - Update to Proto Files due to changes in Full Text Search
+
+
+*****************
 ## Release ONDEWO NLU APIS 2.13.0
 
 ### Improvements
