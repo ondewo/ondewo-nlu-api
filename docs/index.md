@@ -22,8 +22,26 @@
     - [ExportResourcesRequest](#ondewo.nlu.ExportResourcesRequest)
     - [ExportResourcesResponse](#ondewo.nlu.ExportResourcesResponse)
     - [FullTextSearchRequest](#ondewo.nlu.FullTextSearchRequest)
-    - [FullTextSearchResponse](#ondewo.nlu.FullTextSearchResponse)
-    - [FullTextSearchResponse.ResponseEntry](#ondewo.nlu.FullTextSearchResponse.ResponseEntry)
+    - [FullTextSearchResponseEntity](#ondewo.nlu.FullTextSearchResponseEntity)
+    - [FullTextSearchResponseEntity.EntitySearchResult](#ondewo.nlu.FullTextSearchResponseEntity.EntitySearchResult)
+    - [FullTextSearchResponseEntitySynonym](#ondewo.nlu.FullTextSearchResponseEntitySynonym)
+    - [FullTextSearchResponseEntitySynonym.EntitySynonymSearchResult](#ondewo.nlu.FullTextSearchResponseEntitySynonym.EntitySynonymSearchResult)
+    - [FullTextSearchResponseEntityType](#ondewo.nlu.FullTextSearchResponseEntityType)
+    - [FullTextSearchResponseEntityType.EntityTypeSearchResult](#ondewo.nlu.FullTextSearchResponseEntityType.EntityTypeSearchResult)
+    - [FullTextSearchResponseIntent](#ondewo.nlu.FullTextSearchResponseIntent)
+    - [FullTextSearchResponseIntent.IntentSearchResult](#ondewo.nlu.FullTextSearchResponseIntent.IntentSearchResult)
+    - [FullTextSearchResponseIntentContextIn](#ondewo.nlu.FullTextSearchResponseIntentContextIn)
+    - [FullTextSearchResponseIntentContextIn.IntentContextInSearchResult](#ondewo.nlu.FullTextSearchResponseIntentContextIn.IntentContextInSearchResult)
+    - [FullTextSearchResponseIntentContextOut](#ondewo.nlu.FullTextSearchResponseIntentContextOut)
+    - [FullTextSearchResponseIntentContextOut.IntentContextOutSearchResult](#ondewo.nlu.FullTextSearchResponseIntentContextOut.IntentContextOutSearchResult)
+    - [FullTextSearchResponseIntentParameters](#ondewo.nlu.FullTextSearchResponseIntentParameters)
+    - [FullTextSearchResponseIntentParameters.IntentParametersSearchResult](#ondewo.nlu.FullTextSearchResponseIntentParameters.IntentParametersSearchResult)
+    - [FullTextSearchResponseIntentResponse](#ondewo.nlu.FullTextSearchResponseIntentResponse)
+    - [FullTextSearchResponseIntentResponse.IntentResponseSearchResult](#ondewo.nlu.FullTextSearchResponseIntentResponse.IntentResponseSearchResult)
+    - [FullTextSearchResponseIntentTags](#ondewo.nlu.FullTextSearchResponseIntentTags)
+    - [FullTextSearchResponseIntentTags.IntentTagsSearchResult](#ondewo.nlu.FullTextSearchResponseIntentTags.IntentTagsSearchResult)
+    - [FullTextSearchResponseIntentUsersays](#ondewo.nlu.FullTextSearchResponseIntentUsersays)
+    - [FullTextSearchResponseIntentUsersays.IntentUsersaysSearchResult](#ondewo.nlu.FullTextSearchResponseIntentUsersays.IntentUsersaysSearchResult)
     - [GetAgentRequest](#ondewo.nlu.GetAgentRequest)
     - [GetAgentStatisticsRequest](#ondewo.nlu.GetAgentStatisticsRequest)
     - [GetAgentStatisticsResponse](#ondewo.nlu.GetAgentStatisticsResponse)
@@ -736,7 +754,6 @@ curl \ 'https://dialogflow.googleapis.com/v2/projects/<project_name>/agent:expor
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The project that the agent is associated with. Format: `projects/<Project ID>/agent`. |
 | language_code | [string](#string) |  | In which language to search for |
-| query_type | [FullTextSearchRequest.QueryType](#ondewo.nlu.FullTextSearchRequest.QueryType) |  | What is the type of the query that needs to be sent to elasticsearch |
 | term | [string](#string) |  | What to search for in the elastic server |
 | page_token | [string](#string) |  | Composite string: current_index-0--page_size-10 |
 
@@ -745,31 +762,392 @@ curl \ 'https://dialogflow.googleapis.com/v2/projects/<project_name>/agent:expor
 
 
 
-<a name="ondewo.nlu.FullTextSearchResponse"></a>
+<a name="ondewo.nlu.FullTextSearchResponseEntity"></a>
 
-### FullTextSearchResponse
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| response | [FullTextSearchResponse.ResponseEntry](#ondewo.nlu.FullTextSearchResponse.ResponseEntry) | repeated |  |
-
-
-
-
-
-
-<a name="ondewo.nlu.FullTextSearchResponse.ResponseEntry"></a>
-
-### FullTextSearchResponse.ResponseEntry
+### FullTextSearchResponseEntity
 
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| key | [string](#string) |  |  |
-| value | [google.protobuf.Any](#google.protobuf.Any) |  |  |
+| parent | [string](#string) |  |  |
+| language_code | [string](#string) |  |  |
+| entity_results | [FullTextSearchResponseEntity.EntitySearchResult](#ondewo.nlu.FullTextSearchResponseEntity.EntitySearchResult) | repeated |  |
+| term | [string](#string) |  |  |
+| elastic_query | [string](#string) |  |  |
+| time | [float](#float) |  |  |
+| next_page_token | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="ondewo.nlu.FullTextSearchResponseEntity.EntitySearchResult"></a>
+
+### FullTextSearchResponseEntity.EntitySearchResult
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  |  |
+| display_name | [string](#string) |  |  |
+| entity_type_name | [string](#string) |  |  |
+| language | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="ondewo.nlu.FullTextSearchResponseEntitySynonym"></a>
+
+### FullTextSearchResponseEntitySynonym
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  |  |
+| language_code | [string](#string) |  |  |
+| entity_synonym_results | [FullTextSearchResponseEntitySynonym.EntitySynonymSearchResult](#ondewo.nlu.FullTextSearchResponseEntitySynonym.EntitySynonymSearchResult) | repeated |  |
+| term | [string](#string) |  |  |
+| elastic_query | [string](#string) |  |  |
+| time | [float](#float) |  |  |
+| next_page_token | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="ondewo.nlu.FullTextSearchResponseEntitySynonym.EntitySynonymSearchResult"></a>
+
+### FullTextSearchResponseEntitySynonym.EntitySynonymSearchResult
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  |  |
+| display_name | [string](#string) |  |  |
+| entity_type_name | [string](#string) |  |  |
+| entity_name | [string](#string) |  |  |
+| language | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="ondewo.nlu.FullTextSearchResponseEntityType"></a>
+
+### FullTextSearchResponseEntityType
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  |  |
+| language_code | [string](#string) |  |  |
+| entity_type_results | [FullTextSearchResponseEntityType.EntityTypeSearchResult](#ondewo.nlu.FullTextSearchResponseEntityType.EntityTypeSearchResult) | repeated |  |
+| term | [string](#string) |  |  |
+| elastic_query | [string](#string) |  |  |
+| time | [float](#float) |  |  |
+| next_page_token | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="ondewo.nlu.FullTextSearchResponseEntityType.EntityTypeSearchResult"></a>
+
+### FullTextSearchResponseEntityType.EntityTypeSearchResult
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  |  |
+| display_name | [string](#string) |  |  |
+| language | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="ondewo.nlu.FullTextSearchResponseIntent"></a>
+
+### FullTextSearchResponseIntent
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  |  |
+| language_code | [string](#string) |  |  |
+| intent_results | [FullTextSearchResponseIntent.IntentSearchResult](#ondewo.nlu.FullTextSearchResponseIntent.IntentSearchResult) | repeated |  |
+| term | [string](#string) |  |  |
+| elastic_query | [string](#string) |  |  |
+| time | [float](#float) |  |  |
+| next_page_token | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="ondewo.nlu.FullTextSearchResponseIntent.IntentSearchResult"></a>
+
+### FullTextSearchResponseIntent.IntentSearchResult
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  |  |
+| display_name | [string](#string) |  |  |
+| domain_name | [string](#string) |  |  |
+| language | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="ondewo.nlu.FullTextSearchResponseIntentContextIn"></a>
+
+### FullTextSearchResponseIntentContextIn
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  |  |
+| language_code | [string](#string) |  |  |
+| intent_context_in_results | [FullTextSearchResponseIntentContextIn.IntentContextInSearchResult](#ondewo.nlu.FullTextSearchResponseIntentContextIn.IntentContextInSearchResult) | repeated |  |
+| term | [string](#string) |  |  |
+| elastic_query | [string](#string) |  |  |
+| time | [float](#float) |  |  |
+| next_page_token | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="ondewo.nlu.FullTextSearchResponseIntentContextIn.IntentContextInSearchResult"></a>
+
+### FullTextSearchResponseIntentContextIn.IntentContextInSearchResult
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  |  |
+| intent_name | [string](#string) |  |  |
+| language | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="ondewo.nlu.FullTextSearchResponseIntentContextOut"></a>
+
+### FullTextSearchResponseIntentContextOut
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  |  |
+| language_code | [string](#string) |  |  |
+| intent_context_out_results | [FullTextSearchResponseIntentContextOut.IntentContextOutSearchResult](#ondewo.nlu.FullTextSearchResponseIntentContextOut.IntentContextOutSearchResult) | repeated |  |
+| term | [string](#string) |  |  |
+| elastic_query | [string](#string) |  |  |
+| time | [float](#float) |  |  |
+| next_page_token | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="ondewo.nlu.FullTextSearchResponseIntentContextOut.IntentContextOutSearchResult"></a>
+
+### FullTextSearchResponseIntentContextOut.IntentContextOutSearchResult
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  |  |
+| intent_name | [string](#string) |  |  |
+| language | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="ondewo.nlu.FullTextSearchResponseIntentParameters"></a>
+
+### FullTextSearchResponseIntentParameters
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  |  |
+| language_code | [string](#string) |  |  |
+| intent_parameters_results | [FullTextSearchResponseIntentParameters.IntentParametersSearchResult](#ondewo.nlu.FullTextSearchResponseIntentParameters.IntentParametersSearchResult) | repeated |  |
+| term | [string](#string) |  |  |
+| elastic_query | [string](#string) |  |  |
+| time | [float](#float) |  |  |
+| next_page_token | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="ondewo.nlu.FullTextSearchResponseIntentParameters.IntentParametersSearchResult"></a>
+
+### FullTextSearchResponseIntentParameters.IntentParametersSearchResult
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parameter_name | [string](#string) |  |  |
+| parameter_display_name | [string](#string) |  |  |
+| intent_name | [string](#string) |  |  |
+| language | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="ondewo.nlu.FullTextSearchResponseIntentResponse"></a>
+
+### FullTextSearchResponseIntentResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  |  |
+| language_code | [string](#string) |  |  |
+| intent_response_results | [FullTextSearchResponseIntentResponse.IntentResponseSearchResult](#ondewo.nlu.FullTextSearchResponseIntentResponse.IntentResponseSearchResult) | repeated |  |
+| term | [string](#string) |  |  |
+| elastic_query | [string](#string) |  |  |
+| time | [float](#float) |  |  |
+| next_page_token | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="ondewo.nlu.FullTextSearchResponseIntentResponse.IntentResponseSearchResult"></a>
+
+### FullTextSearchResponseIntentResponse.IntentResponseSearchResult
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| text | [string](#string) |  |  |
+| platform | [int32](#int32) |  |  |
+| response_type | [string](#string) |  |  |
+| intent_name | [string](#string) |  |  |
+| language | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="ondewo.nlu.FullTextSearchResponseIntentTags"></a>
+
+### FullTextSearchResponseIntentTags
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  |  |
+| language_code | [string](#string) |  |  |
+| intent_tags_results | [FullTextSearchResponseIntentTags.IntentTagsSearchResult](#ondewo.nlu.FullTextSearchResponseIntentTags.IntentTagsSearchResult) | repeated |  |
+| term | [string](#string) |  |  |
+| elastic_query | [string](#string) |  |  |
+| time | [float](#float) |  |  |
+| next_page_token | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="ondewo.nlu.FullTextSearchResponseIntentTags.IntentTagsSearchResult"></a>
+
+### FullTextSearchResponseIntentTags.IntentTagsSearchResult
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  |  |
+| text | [string](#string) |  |  |
+| intent_name | [string](#string) |  |  |
+| language | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="ondewo.nlu.FullTextSearchResponseIntentUsersays"></a>
+
+### FullTextSearchResponseIntentUsersays
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  |  |
+| language_code | [string](#string) |  |  |
+| intent_usersays_results | [FullTextSearchResponseIntentUsersays.IntentUsersaysSearchResult](#ondewo.nlu.FullTextSearchResponseIntentUsersays.IntentUsersaysSearchResult) | repeated |  |
+| term | [string](#string) |  |  |
+| elastic_query | [string](#string) |  |  |
+| time | [float](#float) |  |  |
+| next_page_token | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="ondewo.nlu.FullTextSearchResponseIntentUsersays.IntentUsersaysSearchResult"></a>
+
+### FullTextSearchResponseIntentUsersays.IntentUsersaysSearchResult
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  |  |
+| text | [string](#string) |  |  |
+| text_as_entity_types | [string](#string) |  |  |
+| text_as_entity_values | [string](#string) |  |  |
+| type | [string](#string) |  |  |
+| intent_name | [string](#string) |  |  |
+| language | [string](#string) |  |  |
 
 
 
@@ -1285,7 +1663,7 @@ The request message for [Agents.TrainAgent][google.cloud.dialogflow.v2.Agents.Tr
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| ALL | 0 |  |
+| ALL | 0 | just a placeholder, has to start with zero |
 | OndewoEntityQuery | 1 |  |
 | OndewoEntityTypeQuery | 2 |  |
 | OndewoEntitySynonymQuery | 3 |  |
@@ -1456,7 +1834,16 @@ Operation <response: [google.protobuf.Empty][google.protobuf.Empty], metadata: [
 | GetModelStatuses | [GetModelStatusesRequest](#ondewo.nlu.GetModelStatusesRequest) | [GetModelStatusesResponse](#ondewo.nlu.GetModelStatusesResponse) | Get statuses of models related to project |
 | GetPlatformMapping | [GetPlatformMappingRequest](#ondewo.nlu.GetPlatformMappingRequest) | [PlatformMapping](#ondewo.nlu.PlatformMapping) | Get all set platform name mappings for an Agent |
 | SetPlatformMapping | [PlatformMapping](#ondewo.nlu.PlatformMapping) | [PlatformMapping](#ondewo.nlu.PlatformMapping) | Set platform name mappings for an Agent |
-| GetFullTextSearch | [FullTextSearchRequest](#ondewo.nlu.FullTextSearchRequest) | [FullTextSearchResponse](#ondewo.nlu.FullTextSearchResponse) | Full text search endpoint |
+| GetFullTextSearchEntityType | [FullTextSearchRequest](#ondewo.nlu.FullTextSearchRequest) | [FullTextSearchResponseEntityType](#ondewo.nlu.FullTextSearchResponseEntityType) | Full text search endpoint |
+| GetFullTextSearchEntity | [FullTextSearchRequest](#ondewo.nlu.FullTextSearchRequest) | [FullTextSearchResponseEntity](#ondewo.nlu.FullTextSearchResponseEntity) |  |
+| GetFullTextSearchEntitySynonym | [FullTextSearchRequest](#ondewo.nlu.FullTextSearchRequest) | [FullTextSearchResponseEntitySynonym](#ondewo.nlu.FullTextSearchResponseEntitySynonym) |  |
+| GetFullTextSearchIntent | [FullTextSearchRequest](#ondewo.nlu.FullTextSearchRequest) | [FullTextSearchResponseIntent](#ondewo.nlu.FullTextSearchResponseIntent) |  |
+| GetFullTextSearchIntentContextIn | [FullTextSearchRequest](#ondewo.nlu.FullTextSearchRequest) | [FullTextSearchResponseIntentContextIn](#ondewo.nlu.FullTextSearchResponseIntentContextIn) |  |
+| GetFullTextSearchIntentContextOut | [FullTextSearchRequest](#ondewo.nlu.FullTextSearchRequest) | [FullTextSearchResponseIntentContextOut](#ondewo.nlu.FullTextSearchResponseIntentContextOut) |  |
+| GetFullTextSearchIntentUsersays | [FullTextSearchRequest](#ondewo.nlu.FullTextSearchRequest) | [FullTextSearchResponseIntentUsersays](#ondewo.nlu.FullTextSearchResponseIntentUsersays) |  |
+| GetFullTextSearchIntentTags | [FullTextSearchRequest](#ondewo.nlu.FullTextSearchRequest) | [FullTextSearchResponseIntentTags](#ondewo.nlu.FullTextSearchResponseIntentTags) |  |
+| GetFullTextSearchIntentResponse | [FullTextSearchRequest](#ondewo.nlu.FullTextSearchRequest) | [FullTextSearchResponseIntentResponse](#ondewo.nlu.FullTextSearchResponseIntentResponse) |  |
+| GetFullTextSearchIntentParameters | [FullTextSearchRequest](#ondewo.nlu.FullTextSearchRequest) | [FullTextSearchResponseIntentParameters](#ondewo.nlu.FullTextSearchResponseIntentParameters) |  |
 
  <!-- end services -->
 
