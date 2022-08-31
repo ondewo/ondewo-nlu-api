@@ -85,6 +85,54 @@ login_to_gh: ## Login to Github CLI with Access Token
 build_gh_release: ## Generate Github Release with CLI
 	gh release create --repo $(GH_REPO) "$(ONDEWO_NLU_API_VERSION)" -n "$(CURRENT_RELEASE_NOTES)" -t "Release ${ONDEWO_NLU_API_VERSION}"
 
+
+release_all_clients: release_python_client release_nodejs_client release_typescript_client release_angular_client release_js_client
+	@echo "End releasing all clients"
+
+GENERIC_CLIENT?=
+
+release_client:
+	$(eval REPO_NAME:= $(shell echo ${GENERIC_CLIENT} | cut -c 41- | cut -d '.' -f 1))
+	$(eval GENERIC_RELEASE_NOTES:= $(shell echo ${CURRENT_RELEASE_NOTES} ))
+	@echo ${GENERIC_CLIENT}
+	@echo $(GENERIC_RELEASE_NOTES)
+
+
+PYTHON_CLIENT="git@github.com:ondewo/ondewo-nlu-client-python.git"
+
+release_python_client:
+	@echo "Start releasing Python Client"
+	make release_client GENERIC_CLIENT=${PYTHON_CLIENT}
+	@echo "End releasing Python Client \n \n \n"
+
+NODEJS_CLIENT="git@github.com:ondewo/ondewo-nlu-client-nodejs.git"
+
+release_nodejs_client:
+	@echo "Start releasing Nodejs Client"
+	make release_client GENERIC_CLIENT=${NODEJS_CLIENT}
+	@echo "End releasing Nodejs Client \n \n \n"
+
+TYPESCRIPT_CLIENT="git@github.com:ondewo/ondewo-nlu-client-typescript.git"
+
+release_typescript_client:
+	@echo "Start releasing Typescript Client"
+	make release_client GENERIC_CLIENT=${TYPESCRIPT_CLIENT}
+	@echo "End releasing Typescript Client \n \n \n"
+
+ANGULAR_CLIENT="git@github.com:ondewo/ondewo-nlu-client-angular.git"
+
+release_angular_client:
+	@echo "Start releasing Angular Client"
+	make release_client GENERIC_CLIENT=${ANGULAR_CLIENT}
+	@echo "End releasing Angular Client \n \n \n"
+
+JS_CLIENT="git@github.com:ondewo/ondewo-nlu-client-js.git"
+
+release_js_client:
+	@echo "Start releasing Js Client"
+	make release_client GENERIC_CLIENT=${JS_CLIENT}
+	@echo "End releasing Js Client \n \n \n"
+
 ########################################################
 #		GITHUB
 
