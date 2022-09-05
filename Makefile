@@ -86,7 +86,12 @@ build_gh_release: ## Generate Github Release with CLI
 	gh release create --repo $(GH_REPO) "$(ONDEWO_NLU_API_VERSION)" -n "$(CURRENT_RELEASE_NOTES)" -t "Release ${ONDEWO_NLU_API_VERSION}"
 
 
-release_all_clients: release_python_client release_nodejs_client release_typescript_client release_angular_client release_js_client
+release_all_clients:
+	@make release_python_client || (echo "Already released ${ONDEWO_NLU_API_VERSION} of Python Client")
+	@make release_nodejs_client || (echo "Already released ${ONDEWO_NLU_API_VERSION} of Nodejs Client")
+	@make release_typescript_client || (echo "Already released ${ONDEWO_NLU_API_VERSION} of Typescript Client")
+	@make release_angular_client || (echo "Already released ${ONDEWO_NLU_API_VERSION} of Angular Client")
+	@make release_js_client || (echo "Already released ${ONDEWO_NLU_API_VERSION} of JS Client")
 	@echo "End releasing all clients"
 
 GENERIC_CLIENT?=
@@ -108,6 +113,9 @@ release_client:
 
 	@echo ${GENERIC_RELEASE_NOTES} > temp-notes && sed -i 's/\\//g' temp-notes && sed -i 's/REPONAME/${UPPER_REPO_NAME}/g' temp-notes
 	git clone ${GENERIC_CLIENT}
+# Check if Client is already uptodate with API Version
+	@! git -C ${REPO_DIR} branch -a | grep -q ${ONDEWO_NLU_API_VERSION} || (echo "Already Released ${ONDEWO_NLU_API_VERSION} \n\n\n"  && rm -rf ${REPO_DIR} && rm -f temp-notes && exit 1)
+
 # Change Version Number and RELEASE NOTES
 	cd ${REPO_DIR} && sed -i -e '/Release History/r ../temp-notes' ${RELEASEMD}
 	cd ${REPO_DIR} && head -20 ${RELEASEMD}
@@ -117,7 +125,13 @@ release_client:
 
 # Build new code
 	make -C ${REPO_DIR} build | tee build_log_${REPO_NAME}.txt
+	make -C ${REPO_DIR} check_build
 	git -C ${REPO_DIR} status >> build_log_${REPO_NAME}.txt
+	git -C ${REPO_DIR} add .
+	echo "AFTER GIT ADD" >> build_log_${REPO_NAME}.txt && git -C ${REPO_DIR} status >> build_log_${REPO_NAME}.txt
+	git -C ${REPO_DIR} commit -m "TEST API-side release -- Preparing for Release ${ONDEWO_NLU_API_VERSION}"
+	git -C ${REPO_DIR} push
+	make -C ${REPO_DIR} ondewo_release
 # Remove everything from Release
 	rm -rf ${REPO_DIR}
 	rm -f temp-notes
