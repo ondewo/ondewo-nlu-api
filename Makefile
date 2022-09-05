@@ -129,7 +129,7 @@ release_client:
 	git -C ${REPO_DIR} status >> build_log_${REPO_NAME}.txt
 	git -C ${REPO_DIR} add .
 	echo "AFTER GIT ADD" >> build_log_${REPO_NAME}.txt && git -C ${REPO_DIR} status >> build_log_${REPO_NAME}.txt
-	git -C ${REPO_DIR} commit -m "TEST API-side release -- Preparing for Release ${ONDEWO_NLU_API_VERSION}"
+	git -C ${REPO_DIR} commit -m "API-Release: Preparing for Release ${ONDEWO_NLU_API_VERSION}"
 	git -C ${REPO_DIR} push
 	make -C ${REPO_DIR} ondewo_release
 # Remove everything from Release
