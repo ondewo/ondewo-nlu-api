@@ -55,6 +55,9 @@ TEST:
 	@echo ${GITHUB_GH_TOKEN}
 	@echo ${CURRENT_RELEASE_NOTES}
 
+update_githubio:
+	@echo TEST OF UPDATE_GITHUBIO
+
 ########################################################
 #       Repo Specific Make Targets
 ########################################################
