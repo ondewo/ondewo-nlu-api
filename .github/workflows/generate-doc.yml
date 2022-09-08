@@ -45,4 +45,4 @@ jobs:
           target-folder: docs # The target folder, to which the action should deploy the folder contents
 
       - name: Update Github.io
-        run: make update_githubio
+        run: make update_githubio || (echo "Version already up-to-date")
