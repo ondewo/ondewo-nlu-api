@@ -1158,7 +1158,7 @@ message FullTextSearchResponseIntentResponse {
     string language_code = 2;
     message IntentResponseSearchResult {
         string text = 1;
-        int32 platform = 2;
+        string platform = 2;
         string response_type = 3;
         string intent_name = 4;
         string language = 5;
