@@ -1063,7 +1063,7 @@ curl \ 'https://dialogflow.googleapis.com/v2/projects/<project_name>/agent:expor
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | text | [string](#string) |  |  |
-| platform | [int32](#int32) |  |  |
+| platform | [string](#string) |  |  |
 | response_type | [string](#string) |  |  |
 | intent_name | [string](#string) |  |  |
 | language | [string](#string) |  |  |
