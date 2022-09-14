@@ -62,6 +62,7 @@
     - [OptimizeRankingMatchResponse](#ondewo.nlu.OptimizeRankingMatchResponse)
     - [PlatformMapping](#ondewo.nlu.PlatformMapping)
     - [RankingMatchOptimizationConfig](#ondewo.nlu.RankingMatchOptimizationConfig)
+    - [ReindexAgentRequest](#ondewo.nlu.ReindexAgentRequest)
     - [RemoveUserFromProjectRequest](#ondewo.nlu.RemoveUserFromProjectRequest)
     - [RestoreAgentRequest](#ondewo.nlu.RestoreAgentRequest)
     - [SetAgentStatusRequest](#ondewo.nlu.SetAgentStatusRequest)
@@ -1490,6 +1491,23 @@ Project permissions
 
 
 
+<a name="ondewo.nlu.ReindexAgentRequest"></a>
+
+### ReindexAgentRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  | projects/<project_id>/agent |
+| branch_name | [string](#string) |  | Optional, useful for versioning reasons in the future |
+| index_types | [FullTextSearchRequest.QueryType](#ondewo.nlu.FullTextSearchRequest.QueryType) | repeated | Optional, useful for reindexing specific indices in the future |
+
+
+
+
+
+
 <a name="ondewo.nlu.RemoveUserFromProjectRequest"></a>
 
 ### RemoveUserFromProjectRequest
@@ -1844,6 +1862,7 @@ Operation <response: [google.protobuf.Empty][google.protobuf.Empty], metadata: [
 | GetFullTextSearchIntentTags | [FullTextSearchRequest](#ondewo.nlu.FullTextSearchRequest) | [FullTextSearchResponseIntentTags](#ondewo.nlu.FullTextSearchResponseIntentTags) |  |
 | GetFullTextSearchIntentResponse | [FullTextSearchRequest](#ondewo.nlu.FullTextSearchRequest) | [FullTextSearchResponseIntentResponse](#ondewo.nlu.FullTextSearchResponseIntentResponse) |  |
 | GetFullTextSearchIntentParameters | [FullTextSearchRequest](#ondewo.nlu.FullTextSearchRequest) | [FullTextSearchResponseIntentParameters](#ondewo.nlu.FullTextSearchResponseIntentParameters) |  |
+| ReindexAgent | [ReindexAgentRequest](#ondewo.nlu.ReindexAgentRequest) | [Operation](#ondewo.nlu.Operation) | Force reindexing Intent and Entity data of Agent |
 
  <!-- end services -->
 
