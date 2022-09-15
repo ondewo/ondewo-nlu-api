@@ -70,7 +70,7 @@
     - [TrainAgentRequest](#ondewo.nlu.TrainAgentRequest)
     - [UpdateAgentRequest](#ondewo.nlu.UpdateAgentRequest)
     - [UserInProject](#ondewo.nlu.UserInProject)
-  
+
     - [AgentSorting.AgentSortingField](#ondewo.nlu.AgentSorting.AgentSortingField)
     - [AgentStatus](#ondewo.nlu.AgentStatus)
     - [AgentView](#ondewo.nlu.AgentView)
@@ -79,9 +79,9 @@
     - [ModelStatus.StatusName](#ondewo.nlu.ModelStatus.StatusName)
     - [ReportFormat](#ondewo.nlu.ReportFormat)
     - [ReportType](#ondewo.nlu.ReportType)
-  
+
     - [Agents](#ondewo.nlu.Agents)
-  
+
 - [ondewo/nlu/aiservices.proto](#ondewo/nlu/aiservices.proto)
     - [AltSentence](#ondewo.nlu.AltSentence)
     - [AltTrainingPhrase](#ondewo.nlu.AltTrainingPhrase)
@@ -113,18 +113,18 @@
     - [Word2VecEnrichmentConfig](#ondewo.nlu.Word2VecEnrichmentConfig)
     - [WordNetAugEnrichmentConfig](#ondewo.nlu.WordNetAugEnrichmentConfig)
     - [XLNetAugEnrichmentConfig](#ondewo.nlu.XLNetAugEnrichmentConfig)
-  
+
     - [EntityTypeFuzzyNerConfig.FuzzyNerAlgorithm](#ondewo.nlu.EntityTypeFuzzyNerConfig.FuzzyNerAlgorithm)
     - [IntentAlgorithms](#ondewo.nlu.IntentAlgorithms)
     - [Mode](#ondewo.nlu.Mode)
-  
+
     - [AiServices](#ondewo.nlu.AiServices)
-  
+
 - [ondewo/nlu/common.proto](#ondewo/nlu/common.proto)
     - [StatResponse](#ondewo.nlu.StatResponse)
-  
+
     - [SortingMode](#ondewo.nlu.SortingMode)
-  
+
 - [ondewo/nlu/context.proto](#ondewo/nlu/context.proto)
     - [Context](#ondewo.nlu.Context)
     - [Context.Parameter](#ondewo.nlu.Context.Parameter)
@@ -136,9 +136,9 @@
     - [ListContextsRequest](#ondewo.nlu.ListContextsRequest)
     - [ListContextsResponse](#ondewo.nlu.ListContextsResponse)
     - [UpdateContextRequest](#ondewo.nlu.UpdateContextRequest)
-  
+
     - [Contexts](#ondewo.nlu.Contexts)
-  
+
 - [ondewo/nlu/entity_type.proto](#ondewo/nlu/entity_type.proto)
     - [BatchCreateEntitiesRequest](#ondewo.nlu.BatchCreateEntitiesRequest)
     - [BatchCreateEntitiesRequest.CreateEntityRequest](#ondewo.nlu.BatchCreateEntitiesRequest.CreateEntityRequest)
@@ -165,7 +165,7 @@
     - [ListEntityTypesRequest](#ondewo.nlu.ListEntityTypesRequest)
     - [ListEntityTypesResponse](#ondewo.nlu.ListEntityTypesResponse)
     - [UpdateEntityTypeRequest](#ondewo.nlu.UpdateEntityTypeRequest)
-  
+
     - [EntityType.AutoExpansionMode](#ondewo.nlu.EntityType.AutoExpansionMode)
     - [EntityType.EntityTypeStatus](#ondewo.nlu.EntityType.EntityTypeStatus)
     - [EntityType.Kind](#ondewo.nlu.EntityType.Kind)
@@ -173,9 +173,9 @@
     - [EntityTypeSorting.EntityTypeSortingField](#ondewo.nlu.EntityTypeSorting.EntityTypeSortingField)
     - [EntityTypeView](#ondewo.nlu.EntityTypeView)
     - [EntityValueSorting.EntityValueSortingField](#ondewo.nlu.EntityValueSorting.EntityValueSortingField)
-  
+
     - [EntityTypes](#ondewo.nlu.EntityTypes)
-  
+
 - [ondewo/nlu/intent.proto](#ondewo/nlu/intent.proto)
     - [BatchCreateParametersRequest](#ondewo.nlu.BatchCreateParametersRequest)
     - [BatchCreateParametersRequest.CreateParameterRequest](#ondewo.nlu.BatchCreateParametersRequest.CreateParameterRequest)
@@ -255,7 +255,7 @@
     - [ListTrainingPhrasesofIntentsWithEnrichmentResponse](#ondewo.nlu.ListTrainingPhrasesofIntentsWithEnrichmentResponse)
     - [TrainingPhraseStatus](#ondewo.nlu.TrainingPhraseStatus)
     - [UpdateIntentRequest](#ondewo.nlu.UpdateIntentRequest)
-  
+
     - [Intent.IntentStatus](#ondewo.nlu.Intent.IntentStatus)
     - [Intent.Message.Platform](#ondewo.nlu.Intent.Message.Platform)
     - [Intent.TrainingPhrase.Type](#ondewo.nlu.Intent.TrainingPhrase.Type)
@@ -263,15 +263,15 @@
     - [IntentCategory](#ondewo.nlu.IntentCategory)
     - [IntentSorting.IntentSortingField](#ondewo.nlu.IntentSorting.IntentSortingField)
     - [IntentView](#ondewo.nlu.IntentView)
-  
+
     - [Intents](#ondewo.nlu.Intents)
-  
+
 - [ondewo/nlu/operation_metadata.proto](#ondewo/nlu/operation_metadata.proto)
     - [OperationMetadata](#ondewo.nlu.OperationMetadata)
-  
+
     - [OperationMetadata.OperationType](#ondewo.nlu.OperationMetadata.OperationType)
     - [OperationMetadata.Status](#ondewo.nlu.OperationMetadata.Status)
-  
+
 - [ondewo/nlu/operations.proto](#ondewo/nlu/operations.proto)
     - [CancelOperationRequest](#ondewo.nlu.CancelOperationRequest)
     - [DeleteOperationRequest](#ondewo.nlu.DeleteOperationRequest)
@@ -280,9 +280,9 @@
     - [ListOperationsResponse](#ondewo.nlu.ListOperationsResponse)
     - [Operation](#ondewo.nlu.Operation)
     - [OperationFilter](#ondewo.nlu.OperationFilter)
-  
+
     - [Operations](#ondewo.nlu.Operations)
-  
+
 - [ondewo/nlu/project_role.proto](#ondewo/nlu/project_role.proto)
     - [CreateProjectRoleRequest](#ondewo.nlu.CreateProjectRoleRequest)
     - [DeleteProjectRoleRequest](#ondewo.nlu.DeleteProjectRoleRequest)
@@ -291,25 +291,25 @@
     - [ListProjectRolesResponse](#ondewo.nlu.ListProjectRolesResponse)
     - [ProjectRole](#ondewo.nlu.ProjectRole)
     - [UpdateProjectRoleRequest](#ondewo.nlu.UpdateProjectRoleRequest)
-  
+
     - [DefaultProjectRole](#ondewo.nlu.DefaultProjectRole)
     - [ProjectRoleView](#ondewo.nlu.ProjectRoleView)
-  
+
     - [ProjectRoles](#ondewo.nlu.ProjectRoles)
-  
+
 - [ondewo/nlu/project_statistics.proto](#ondewo/nlu/project_statistics.proto)
     - [GetEntityTypeCountRequest](#ondewo.nlu.GetEntityTypeCountRequest)
     - [GetIntentCountRequest](#ondewo.nlu.GetIntentCountRequest)
     - [GetProjectElementStatRequest](#ondewo.nlu.GetProjectElementStatRequest)
     - [GetProjectStatRequest](#ondewo.nlu.GetProjectStatRequest)
-  
+
     - [ProjectStatistics](#ondewo.nlu.ProjectStatistics)
-  
+
 - [ondewo/nlu/server_statistics.proto](#ondewo/nlu/server_statistics.proto)
     - [GetUserProjectCountRequest](#ondewo.nlu.GetUserProjectCountRequest)
-  
+
     - [ServerStatistics](#ondewo.nlu.ServerStatistics)
-  
+
 - [ondewo/nlu/session.proto](#ondewo/nlu/session.proto)
     - [AddSessionLabelsRequest](#ondewo.nlu.AddSessionLabelsRequest)
     - [CreateSessionRequest](#ondewo.nlu.CreateSessionRequest)
@@ -345,14 +345,14 @@
     - [StreamingRecognitionResult](#ondewo.nlu.StreamingRecognitionResult)
     - [TextInput](#ondewo.nlu.TextInput)
     - [TrackSessionStepRequest](#ondewo.nlu.TrackSessionStepRequest)
-  
+
     - [AudioEncoding](#ondewo.nlu.AudioEncoding)
     - [Session.View](#ondewo.nlu.Session.View)
     - [SessionReview.View](#ondewo.nlu.SessionReview.View)
     - [StreamingRecognitionResult.MessageType](#ondewo.nlu.StreamingRecognitionResult.MessageType)
-  
+
     - [Sessions](#ondewo.nlu.Sessions)
-  
+
 - [ondewo/nlu/user.proto](#ondewo/nlu/user.proto)
     - [CreateServerRoleRequest](#ondewo.nlu.CreateServerRoleRequest)
     - [CreateUserRequest](#ondewo.nlu.CreateUserRequest)
@@ -375,11 +375,11 @@
     - [User](#ondewo.nlu.User)
     - [UserInfo](#ondewo.nlu.UserInfo)
     - [UserInfo.ProjectRolesEntry](#ondewo.nlu.UserInfo.ProjectRolesEntry)
-  
+
     - [DefaultServerRole](#ondewo.nlu.DefaultServerRole)
-  
+
     - [Users](#ondewo.nlu.Users)
-  
+
 - [ondewo/nlu/utility.proto](#ondewo/nlu/utility.proto)
     - [AddTrainingPhrasesFromCSVRequest](#ondewo.nlu.AddTrainingPhrasesFromCSVRequest)
     - [AddTrainingPhrasesRequest](#ondewo.nlu.AddTrainingPhrasesRequest)
@@ -403,20 +403,20 @@
     - [ValidateEmbeddedRegexResponse](#ondewo.nlu.ValidateEmbeddedRegexResponse)
     - [ValidateRegexRequest](#ondewo.nlu.ValidateRegexRequest)
     - [ValidateRegexResponse](#ondewo.nlu.ValidateRegexResponse)
-  
+
     - [ReannotateEntitiesOptions](#ondewo.nlu.ReannotateEntitiesOptions)
-  
+
     - [Utilities](#ondewo.nlu.Utilities)
-  
+
 - [ondewo/nlu/webhook.proto](#ondewo/nlu/webhook.proto)
     - [OriginalDetectIntentRequest](#ondewo.nlu.OriginalDetectIntentRequest)
     - [PingRequest](#ondewo.nlu.PingRequest)
     - [PingResponse](#ondewo.nlu.PingResponse)
     - [WebhookRequest](#ondewo.nlu.WebhookRequest)
     - [WebhookResponse](#ondewo.nlu.WebhookResponse)
-  
+
     - [Webhook](#ondewo.nlu.Webhook)
-  
+
 - [ondewo/qa/qa.proto](#ondewo/qa/qa.proto)
     - [GetAnswerRequest](#ondewo.qa.GetAnswerRequest)
     - [GetAnswerResponse](#ondewo.qa.GetAnswerResponse)
@@ -431,9 +431,9 @@
     - [UpdateDatabaseRequest](#ondewo.qa.UpdateDatabaseRequest)
     - [UpdateDatabaseResponse](#ondewo.qa.UpdateDatabaseResponse)
     - [UrlFilter](#ondewo.qa.UrlFilter)
-  
+
     - [QA](#ondewo.qa.QA)
-  
+
 - [Scalar Value Types](#scalar-value-types)
 
 
