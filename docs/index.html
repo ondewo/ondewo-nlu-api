@@ -117,6 +117,8 @@
                         <li><a href="#ondewo.nlu.Agents.GetFullTextSearchIntentResponse" class="title-badge method">GetFullTextSearchIntentResponse</a></li>
 
                         <li><a href="#ondewo.nlu.Agents.GetFullTextSearchIntentParameters" class="title-badge method">GetFullTextSearchIntentParameters</a></li>
+             
+                        <li><a href="#ondewo.nlu.Agents.ReindexAgent" class="title-badge method">ReindexAgent</a></li>
 
                       </ul>
 
@@ -360,6 +362,10 @@
                         <a href="#ondewo.nlu.RankingMatchOptimizationConfig" class="title-badge message">RankingMatchOptimizationConfig</a>
                       </li>
 
+                      <li>
+                        <a href="#ondewo.nlu.ReindexAgentRequest" class="title-badge message">ReindexAgentRequest</a>
+                      </li>
+                    
                       <li>
                         <a href="#ondewo.nlu.RemoveUserFromProjectRequest" class="title-badge message">RemoveUserFromProjectRequest</a>
                       </li>
@@ -2750,6 +2756,12 @@ Operation <response: [google.protobuf.Empty][google.protobuf.Empty],
           <h4 id="ondewo.nlu.Agents.GetFullTextSearchIntentParameters" class="title-badge method">GetFullTextSearchIntentParameters</h4>
 
           <pre>rpc GetFullTextSearchIntentParameters (<a href="#ondewo.nlu.FullTextSearchRequest">FullTextSearchRequest</a>) returns (<a href="#ondewo.nlu.FullTextSearchResponseIntentParameters">FullTextSearchResponseIntentParameters)</a></pre>
+ 
+          <h4 id="ondewo.nlu.Agents.ReindexAgent" class="title-badge method">ReindexAgent</h4>
+
+          <pre>rpc ReindexAgent (<a href="#ondewo.nlu.ReindexAgentRequest">ReindexAgentRequest</a>) returns (<a href="#ondewo.nlu.Operation">Operation)</a></pre>
+
+          Force reindexing Intent and Entity data of Agent
 
 
 
@@ -5641,7 +5653,44 @@ example {'OndewoIntentSimilarityMatch': 0.59, 'OndewoIntentNamedSimilarityMatch'
 
 
 
+        <h3 id="ondewo.nlu.ReindexAgentRequest" class="title-badge message">ReindexAgentRequest</h3>
+        <p></p>
 
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>parent</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>projects/<project_id>/agent </p></td>
+                </tr>
+              
+                <tr>
+                  <td>branch_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional, useful for versioning reasons in the future </p></td>
+                </tr>
+              
+                <tr>
+                  <td>index_types</td>
+                  <td><a href="#ondewo.nlu.FullTextSearchRequest.QueryType">FullTextSearchRequest.QueryType</a></td>
+                  <td>repeated</td>
+                  <td><p>Optional, useful for reindexing specific indices in the future </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
 
         <h3 id="ondewo.nlu.RemoveUserFromProjectRequest" class="title-badge message">RemoveUserFromProjectRequest</h3>
         <p></p>
