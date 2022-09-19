@@ -43,7 +43,3 @@ jobs:
           branch: master # The branch the action should deploy to.
           folder: docs # The folder, of which contents the action should deploy.
           target-folder: docs # The target folder, to which the action should deploy the folder contents
-
-      - uses: ondewo/ondewo.github.io@main
-      - name: Update Github.io
-        run: make update_githubio || (echo "Version already up-to-date")
