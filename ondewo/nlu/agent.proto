@@ -452,6 +452,9 @@ service Agents {
     rpc GetFullTextSearchIntentTags (FullTextSearchRequest) returns (FullTextSearchResponseIntentTags);
     rpc GetFullTextSearchIntentResponse (FullTextSearchRequest) returns (FullTextSearchResponseIntentResponse);
     rpc GetFullTextSearchIntentParameters (FullTextSearchRequest) returns (FullTextSearchResponseIntentParameters);
+
+    // Force reindexing Intent and Entity data of Agent
+    rpc ReindexAgent(ReindexAgentRequest) returns (ondewo.nlu.Operation);
 }
 
 // Project/Agent messages
@@ -1158,7 +1161,7 @@ message FullTextSearchResponseIntentResponse {
     string language_code = 2;
     message IntentResponseSearchResult {
         string text = 1;
-        int32 platform = 2;
+        string platform = 2;
         string response_type = 3;
         string intent_name = 4;
         string language = 5;
@@ -1184,4 +1187,13 @@ message FullTextSearchResponseIntentParameters {
     string elastic_query = 5;
     float time = 6;
     string next_page_token = 7;
+}
+
+message ReindexAgentRequest {
+    // projects/<project_id>/agent
+    string parent = 1;
+    // Optional, useful for versioning reasons in the future
+    string branch_name = 2;
+    // Optional, useful for reindexing specific indices in the future
+    repeated FullTextSearchRequest.QueryType index_types = 3;
 }

@@ -17,7 +17,7 @@ export
 
 # MUST BE THE SAME AS API in Mayor and Minor Version Number
 # example: API 2.9.0 --> Client 2.9.X
-ONDEWO_NLU_API_VERSION=2.14.0
+ONDEWO_NLU_API_VERSION=3.0.0
 
 # You need to setup an access token at https://github.com/settings/tokens - permissions are important
 GITHUB_GH_TOKEN?=ENTER_YOUR_TOKEN_HERE
@@ -53,7 +53,7 @@ makefile_chapters: ## Shows all sections of Makefile
 
 TEST:
 	@echo ${GITHUB_GH_TOKEN}
-	@echo ${CURRENT_RELEASE_NOTES}
+	@echo "\n${CURRENT_RELEASE_NOTES}"
 
 update_githubio:
 	@rm -rf ondewo.github.io
@@ -101,7 +101,7 @@ build_gh_release: ## Generate Github Release with CLI
 	gh release create --repo $(GH_REPO) "$(ONDEWO_NLU_API_VERSION)" -n "$(CURRENT_RELEASE_NOTES)" -t "Release ${ONDEWO_NLU_API_VERSION}"
 
 
-release_all_clients:
+release_all_clients: ## Releases all NLU Clients
 	@make release_python_client || (echo "Already released ${ONDEWO_NLU_API_VERSION} of Python Client")
 	@make release_nodejs_client || (echo "Already released ${ONDEWO_NLU_API_VERSION} of Nodejs Client")
 	@make release_typescript_client || (echo "Already released ${ONDEWO_NLU_API_VERSION} of Typescript Client")
@@ -113,10 +113,10 @@ GENERIC_CLIENT?=
 RELEASEMD?=
 GENERIC_RELEASE_NOTES="\n***************** \n\\\#\\\# Release ONDEWO NLU REPONAME Client ${ONDEWO_NLU_API_VERSION} \n \
 	\n\\\#\\\#\\\# Improvements \n \
-	* Tracking API Version ${ONDEWO_NLU_API_VERSION} \n"
+	* Tracking API Version [${ONDEWO_NLU_API_VERSION}](https://github.com/ondewo/ondewo-nlu-api/releases/tag/${ONDEWO_NLU_API_VERSION}) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) ) \n"
 
 
-release_client:
+release_client: ## Generic Function to Release a Client
 	$(eval REPO_NAME:= $(shell echo ${GENERIC_CLIENT} | cut -c 41- | cut -d '.' -f 1))
 	$(eval REPO_DIR:= $(shell echo "ondewo-nlu-client-${REPO_NAME}"))
 	$(eval UPPER_REPO_NAME:= $(shell echo ${REPO_NAME} | sed 's/.*/\u&/'))
@@ -138,15 +138,8 @@ release_client:
 	cd ${REPO_DIR} && sed -i -e 's/ONDEWO_PROTO_COMPILER_GIT_BRANCH.*=.*tags\/[0-9]*.[0-9]*.[0-9]/ONDEWO_PROTO_COMPILER_GIT_BRANCH=tags\/${PROTO_COMPILER}/' Makefile
 	cd ${REPO_DIR} && sed -i -e 's/NLU_API_GIT_BRANCH=tags\/[0-9]*.[0-9]*.[0-9]/NLU_API_GIT_BRANCH=tags\/${ONDEWO_NLU_API_VERSION}/' Makefile && head -30 Makefile
 
-# Build new code
-	make -C ${REPO_DIR} build | tee build_log_${REPO_NAME}.txt
-	make -C ${REPO_DIR} check_build
-	git -C ${REPO_DIR} status >> build_log_${REPO_NAME}.txt
-	git -C ${REPO_DIR} add .
-	echo "AFTER GIT ADD" >> build_log_${REPO_NAME}.txt && git -C ${REPO_DIR} status >> build_log_${REPO_NAME}.txt
-	git -C ${REPO_DIR} commit -m "API-Release: Preparing for Release ${ONDEWO_NLU_API_VERSION}"
-	git -C ${REPO_DIR} push
-	make -C ${REPO_DIR} ondewo_release
+# Release
+	make -C ${REPO_DIR} ondewo_release | tee build_log_${REPO_NAME}.txt
 # Remove everything from Release
 	rm -rf ${REPO_DIR}
 	rm -f temp-notes
@@ -154,35 +147,35 @@ release_client:
 
 PYTHON_CLIENT="git@github.com:ondewo/ondewo-nlu-client-python.git"
 
-release_python_client:
+release_python_client: ## Release Python Client
 	@echo "Start releasing Python Client"
 	make release_client GENERIC_CLIENT=${PYTHON_CLIENT} RELEASEMD="RELEASE.md"
 	@echo "End releasing Python Client \n \n \n"
 
 NODEJS_CLIENT="git@github.com:ondewo/ondewo-nlu-client-nodejs.git"
 
-release_nodejs_client:
+release_nodejs_client: ## Release NodeJs Client
 	@echo "Start releasing Nodejs Client"
 	make release_client GENERIC_CLIENT=${NODEJS_CLIENT} RELEASEMD="src/RELEASE.md"
 	@echo "End releasing Nodejs Client \n \n \n"
 
 TYPESCRIPT_CLIENT="git@github.com:ondewo/ondewo-nlu-client-typescript.git"
 
-release_typescript_client:
+release_typescript_client: ## Release Typescript Client
 	@echo "Start releasing Typescript Client"
 	make release_client GENERIC_CLIENT=${TYPESCRIPT_CLIENT} RELEASEMD="src/RELEASE.md"
 	@echo "End releasing Typescript Client \n \n \n"
 
 ANGULAR_CLIENT="git@github.com:ondewo/ondewo-nlu-client-angular.git"
 
-release_angular_client:
+release_angular_client: ## Release Angular Client
 	@echo "Start releasing Angular Client"
 	make release_client GENERIC_CLIENT=${ANGULAR_CLIENT} RELEASEMD="src/RELEASE.md"
 	@echo "End releasing Angular Client \n \n \n"
 
 JS_CLIENT="git@github.com:ondewo/ondewo-nlu-client-js.git"
 
-release_js_client:
+release_js_client: ## Release JS Client
 	@echo "Start releasing Js Client"
 	make release_client GENERIC_CLIENT=${JS_CLIENT} RELEASEMD="src/RELEASE.md"
 	@echo "End releasing Js Client \n \n \n"
@@ -190,7 +183,7 @@ release_js_client:
 ########################################################
 #		GITHUB
 
-push_to_gh: login_to_gh build_gh_release
+push_to_gh: login_to_gh build_gh_release ## Logs into GitHub CLI and Releases
 	@echo 'Released to Github'
 
 release_to_github_via_docker_image:  ## Release to Github via docker
@@ -208,7 +201,7 @@ clone_devops_accounts: ## Clones devops-accounts repo
 	@if [ -d $(DEVOPS_ACCOUNT_GIT) ]; then rm -Rf $(DEVOPS_ACCOUNT_GIT); fi
 	git clone git@bitbucket.org:ondewo/${DEVOPS_ACCOUNT_GIT}.git
 
-run_release_with_devops:
+run_release_with_devops: ## Gets Credentials from devops-repo and runs release with them
 	$(eval info:= $(shell cat ${DEVOPS_ACCOUNT_DIR}/account_github.env | grep GITHUB_GH))
 	make release $(info)
 
