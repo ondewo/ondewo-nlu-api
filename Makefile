@@ -56,12 +56,12 @@ TEST:
 	@echo "\n${CURRENT_RELEASE_NOTES}"
 
 githubio_wrapper:
-	@rm -rf ondewo.github.io
 	$(eval REPO_NAME:= $(shell echo ${GH_REPO} | cut -d "-" -f 2 | sed -e 's/\(.*\)/\U\1/'))
+	@rm -rf ondewo.github.io
+	@git branch | grep "*" | grep -q "master" || (echo "Not on master branch"  & rm -rf ondewo.github.io && exit 1)
 	@echo "UPDATING API-TABLE VERSION FOR ${REPO_NAME}"
 	@git clone git@github.com:ondewo/ondewo.github.io.git
-	@$(shell cat ondewo.github.io/index.html | grep "${REPO_NAME} API" | grep -q ${ONDEWO_NLU_API_VERSION})
-	@if test $$? = 0; then echo "Already updated ${REPO_NAME} to ${ONDEWO_NLU_API_VERSION}" & rm -rf ondewo.github.io && exit 1; fi
+	@! cat ondewo.github.io/index.html | grep "${REPO_NAME} API" | grep -q ${ONDEWO_NLU_API_VERSION} || (echo "Already updated ${REPO_NAME} to ${ONDEWO_NLU_API_VERSION}" & rm -rf ondewo.github.io && exit 1)
 	@sed -i "s/${REPO_NAME} API.*\</${REPO_NAME} API ${ONDEWO_NLU_API_VERSION}\<\//" ondewo.github.io/index.html
 	@cat ondewo.github.io/index.html | grep "${REPO_NAME} API"
 	@git -C ondewo.github.io add index.html
