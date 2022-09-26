@@ -1063,21 +1063,30 @@ enum IntentView {
     INTENT_VIEW_FULL = 1;
 
     // The only nested structures populated are Contexts and Training phrases.
-    //  The Training phrases field is populated with only a few entries and no annotations.
+    // The Training phrases field is populated with only a few entries and no annotations.
     INTENT_VIEW_PARTIAL = 2;
 
     // All nested structures are not populated (no training phrases, nor contexts, nor parameters, ...)
     INTENT_VIEW_SHALLOW = 3;
+
+    // Minimum view including only intent UUID and intent display name
+    INTENT_VIEW_MINIMUM = 4;
 }
 
 // Represents the type of intents to filter by in the "List Intents" request
 enum IntentCategory {
-    ALL_INTENTS = 0;  // represent all intents
-    DEFAULT_INTENTS = 1;  // represent the default intents
-    USER_DEFINED_INTENTS = 2;  // represent the user defined (custom) intents
-    DATE_EXPIRED_INTENTS = 3;  // represents the intents that had its end_date elapsed
-    DATE_ACTIVE_INTENTS = 4;  // represents the intents that its start_date began but had not yet expired
-    DATE_UPCOMING_INTENTS = 5;  // represent the intents that are still expecting its start_date to begin
+    // represent all intents
+    ALL_INTENTS = 0;
+    // represent the default intents
+    DEFAULT_INTENTS = 1;
+    // represent the user defined (custom) intents
+    USER_DEFINED_INTENTS = 2;
+    // represents the intents that had its end_date elapsed
+    DATE_EXPIRED_INTENTS = 3;
+    // represents the intents that its start_date began but had not yet expired
+    DATE_ACTIVE_INTENTS = 4;
+    // represent the intents that are still expecting its start_date to begin
+    DATE_UPCOMING_INTENTS = 5;
 
 }
 
@@ -1208,7 +1217,7 @@ message BatchResponseMessagesStatusResponse {
         oneof phrase_or_status {
             Intent.Message response_message = 1;
             string error_message = 2;
-    }
+        }
     }
     repeated ResponseMessageStatus response_message_statuses = 1;
     // indicates if statuses of some of the response messages have errors
@@ -1291,7 +1300,7 @@ message BatchParametersStatusResponse {
         oneof phrase_or_status {
             Intent.Parameter parameter = 1;
             string error_message = 2;
-    }
+        }
     }
     repeated ParameterStatus parameter_statuses = 1;
     // indicates if statuses of some of the parameters have errors
