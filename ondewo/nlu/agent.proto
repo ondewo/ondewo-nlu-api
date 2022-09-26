@@ -527,6 +527,9 @@ enum AgentView {
 
     // Shallow agent view: populates all the fields except configs.
     AGENT_VIEW_SHALLOW = 2;
+
+    // Minimum view including only agent UUID and agent display name
+    AGENT_VIEW_MINIMUM = 3;
 }
 
 message CreateAgentRequest {
