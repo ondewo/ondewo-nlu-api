@@ -6084,6 +6084,12 @@ Format: `projects/<Project ID>`. </p></td>
                 <td><p>Shallow agent view: populates all the fields except configs.</p></td>
               </tr>
             
+              <tr>
+                <td>AGENT_VIEW_MINIMUM</td>
+                <td>3</td>
+                <td><p>Minimum view including only agent UUID and agent display name</p></td>
+              </tr>
+            
           </tbody>
         </table>
       
@@ -9792,6 +9798,12 @@ types (with or without aliases).</p></td>
                 <td>ENTITY_TYPE_VIEW_SHALLOW</td>
                 <td>3</td>
                 <td><p>No entity synonyms are returned, only entity values</p></td>
+              </tr>
+            
+              <tr>
+                <td>ENTITY_TYPE_VIEW_MINIMUM</td>
+                <td>4</td>
+                <td><p>Minimum view including only entity type UUID and entity type display name</p></td>
               </tr>
             
           </tbody>
@@ -13608,13 +13620,19 @@ filling prompt is forwarded to the webhook.</p></td>
                 <td>INTENT_VIEW_PARTIAL</td>
                 <td>2</td>
                 <td><p>The only nested structures populated are Contexts and Training phrases.
- The Training phrases field is populated with only a few entries and no annotations.</p></td>
+The Training phrases field is populated with only a few entries and no annotations.</p></td>
               </tr>
             
               <tr>
                 <td>INTENT_VIEW_SHALLOW</td>
                 <td>3</td>
                 <td><p>All nested structures are not populated (no training phrases, nor contexts, nor parameters, ...)</p></td>
+              </tr>
+            
+              <tr>
+                <td>INTENT_VIEW_MINIMUM</td>
+                <td>4</td>
+                <td><p>Minimum view including only intent UUID and intent display name</p></td>
               </tr>
             
           </tbody>

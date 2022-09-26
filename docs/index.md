@@ -1671,6 +1671,7 @@ The request message for [Agents.TrainAgent][google.cloud.dialogflow.v2.Agents.Tr
 | AGENT_VIEW_UNSPECIFIED | 0 | Unspecified agent view: the view is defined by the call: - CreateAgent: AGENT_VIEW_SHALLOW - UpdateAgent: AGENT_VIEW_SHALLOW - GetAgent: AGENT_VIEW_FULL - ListAgents: AGENT_VIEW_SHALLOW |
 | AGENT_VIEW_FULL | 1 | Full agent view: populate all the fields of the Agent message including configs. |
 | AGENT_VIEW_SHALLOW | 2 | Shallow agent view: populates all the fields except configs. |
+| AGENT_VIEW_MINIMUM | 3 | Minimum view including only agent UUID and agent display name |
 
 
 
@@ -3242,6 +3243,7 @@ does not return all values and synonyms besides the full view that is set by def
 | ENTITY_TYPE_VIEW_FULL | 1 | All fields are populated. |
 | ENTITY_TYPE_VIEW_PARTIAL | 2 | The amount of entity values and synonyms is limited |
 | ENTITY_TYPE_VIEW_SHALLOW | 3 | No entity synonyms are returned, only entity values |
+| ENTITY_TYPE_VIEW_MINIMUM | 4 | Minimum view including only entity type UUID and entity type display name |
 
 
 
@@ -4770,6 +4772,7 @@ does not return training phrases in the response by default.
 | INTENT_VIEW_FULL | 1 | All fields are populated. |
 | INTENT_VIEW_PARTIAL | 2 | The only nested structures populated are Contexts and Training phrases. The Training phrases field is populated with only a few entries and no annotations. |
 | INTENT_VIEW_SHALLOW | 3 | All nested structures are not populated (no training phrases, nor contexts, nor parameters, ...) |
+| INTENT_VIEW_MINIMUM | 4 | Minimum view including only intent UUID and intent display name |
 
 
  <!-- end enums -->
