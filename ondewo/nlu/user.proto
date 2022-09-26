@@ -31,19 +31,19 @@ service Users {
 
     rpc GetUser (GetUserRequest) returns (User) {
         option (google.api.http) = {
-           get: "/v2/users/{user_identifier=*}"
+            get: "/v2/users/{user_identifier=*}"
         };
     }
 
     rpc GetUserInfo (GetUserRequest) returns (UserInfo) {
         option (google.api.http) = {
-           get: "/v2/user_infos/{user_identifier=*}"
+            get: "/v2/user_infos/{user_identifier=*}"
         };
     }
 
     rpc DeleteUser (GetUserRequest) returns (google.protobuf.Empty) {
         option (google.api.http) = {
-           delete: "/v2/users/{user_identifier=*}"
+            delete: "/v2/users/{user_identifier=*}"
         };
     }
 
@@ -81,7 +81,7 @@ service Users {
 
     rpc DeleteServerRole (DeleteServerRoleRequest) returns (google.protobuf.Empty) {
         option (google.api.http) = {
-           delete: "/v2/server_roles/{role_id=*}"
+            delete: "/v2/server_roles/{role_id=*}"
         };
     }
 
@@ -206,11 +206,16 @@ message ServerRole {
 }
 
 enum DefaultServerRole {
-    SERVER_UNSPECIFIED = 0; // unspecified server role
-    SERVER_USER = 1; // read-only access
-    SERVER_MANAGER = 2; // SERVER_USER's permissions + CRUD of projects and Users
-    SERVER_ADMIN = 3; // this role can do everything
-    SERVER_INACTIVE = 4; // this role can do nothing. Used to set a user as inactive in the server.
+    // unspecified server role
+    SERVER_UNSPECIFIED = 0;
+    // read-only access
+    SERVER_USER = 1;
+    // SERVER_USER's permissions + CRUD of projects and Users
+    SERVER_MANAGER = 2;
+    // this role can do everything
+    SERVER_ADMIN = 3;
+    // this role can do nothing. Used to set a user as inactive in the server.
+    SERVER_INACTIVE = 4;
 }
 
 message CreateServerRoleRequest {
