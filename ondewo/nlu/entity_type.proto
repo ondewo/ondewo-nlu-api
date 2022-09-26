@@ -75,37 +75,37 @@ service EntityTypes {
     // Returns the list of all entity types in the specified agent.
     rpc ListEntityTypes (ListEntityTypesRequest) returns (ListEntityTypesResponse) {
         option (google.api.http) = {
-          get: "/v2/{parent=projects/*/agent}/entityTypes"
+            get: "/v2/{parent=projects/*/agent}/entityTypes"
         };
     }
 
     // Retrieves the specified entity type.
     rpc GetEntityType (GetEntityTypeRequest) returns (EntityType) {
         option (google.api.http) = {
-          get: "/v2/{name=projects/*/agent/entityTypes/*}"
+            get: "/v2/{name=projects/*/agent/entityTypes/*}"
         };
     }
 
     // Creates an entity type in the specified agent.
     rpc CreateEntityType (CreateEntityTypeRequest) returns (EntityType) {
         option (google.api.http) = {
-          post: "/v2/{parent=projects/*/agent}/entityTypes"
-          body: "*"
+            post: "/v2/{parent=projects/*/agent}/entityTypes"
+            body: "*"
         };
     }
 
     // Updates the specified entity type.
     rpc UpdateEntityType (UpdateEntityTypeRequest) returns (EntityType) {
         option (google.api.http) = {
-          patch: "/v2/{entity_type.name=projects/*/agent/entityTypes/*}"
-          body: "*"
+            patch: "/v2/{entity_type.name=projects/*/agent/entityTypes/*}"
+            body: "*"
         };
     }
 
     // Deletes the specified entity type.
     rpc DeleteEntityType (DeleteEntityTypeRequest) returns (google.protobuf.Empty) {
         option (google.api.http) = {
-          delete: "/v2/{name=projects/*/agent/entityTypes/*}"
+            delete: "/v2/{name=projects/*/agent/entityTypes/*}"
         };
     }
 
@@ -115,8 +115,8 @@ service EntityTypes {
     //            metadata: [google.protobuf.Struct][google.protobuf.Struct]>
     rpc BatchUpdateEntityTypes (BatchUpdateEntityTypesRequest) returns (ondewo.nlu.Operation) {
         option (google.api.http) = {
-          post: "/v2/{parent=projects/*/agent}/entityTypes:batchUpdate"
-          body: "*"
+            post: "/v2/{parent=projects/*/agent}/entityTypes:batchUpdate"
+            body: "*"
         };
     }
 
@@ -126,8 +126,8 @@ service EntityTypes {
     //            metadata: [google.protobuf.Struct][google.protobuf.Struct]>
     rpc BatchDeleteEntityTypes (BatchDeleteEntityTypesRequest) returns (ondewo.nlu.Operation) {
         option (google.api.http) = {
-          post: "/v2/{parent=projects/*/agent}/entityTypes:batchDelete"
-          body: "*"
+            post: "/v2/{parent=projects/*/agent}/entityTypes:batchDelete"
+            body: "*"
         };
     }
 
@@ -418,13 +418,20 @@ enum EntityTypeView {
 
     // No entity synonyms are returned, only entity values
     ENTITY_TYPE_VIEW_SHALLOW = 3;
+
+    // Minimum view including only entity type UUID and entity type display name
+    ENTITY_TYPE_VIEW_MINIMUM = 4;
 }
 
 // Represents the category of entity types to filter by in the "List Entity Types" request
 enum EntityTypeCategory {
-    ALL_ENTITY_TYPES = 0; // represent all entity types
-    DEFAULT_ENTITY_TYPES = 1; // represent the default entity types
-    USER_DEFINED_ENTITY_TYPES = 2; // represent the user defined (custom) entity types
+    // represent all entity types
+    ALL_ENTITY_TYPES = 0;
+    // represent the default entity types
+    DEFAULT_ENTITY_TYPES = 1;
+    // represent the user defined (custom) entity types
+    USER_DEFINED_ENTITY_TYPES = 2;
+
 }
 
 message EntityTypeSorting {
