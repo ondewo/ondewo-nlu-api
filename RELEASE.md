@@ -2,13 +2,20 @@
 
 *****************
 
+## Release ONDEWO NLU APIS 3.1.0
+
+### Improvements
+
+* [[OND211-2056]](https://ondewo.atlassian.net/browse/OND211-2056) - Added AgentView.AGENT_VIEW_MINIMUM, EntityTypeView.ENTITY_TYPE_VIEW_MINIMUM, and IntentView.INTENT_VIEW_MINIMUM to only return the UUID of the object and the display name
+
+*****************
+
 ## Release ONDEWO NLU APIS 3.0.0
 
 ### Improvements
 
 * [[OND211-2044]](https://ondewo.atlassian.net/browse/OND211-2044) - Added Reindex Agent Endpoint
 * Synchronize API Client Verions
-
 
 *****************
 
@@ -18,7 +25,6 @@
 
 * [[OND211-2044]](https://ondewo.atlassian.net/browse/OND211-2044) - Full-Text-Search Response field type changed (from Int to String)
 
-
 *****************
 
 ## Release ONDEWO NLU APIS 2.14.0
@@ -26,7 +32,6 @@
 ### Improvements
 
 * [[OND211-2044]](https://ondewo.atlassian.net/browse/OND211-2044) - Update to Proto Files due to changes in Full-Text-Search
-
 
 *****************
 ## Release ONDEWO NLU APIS 2.13.0
