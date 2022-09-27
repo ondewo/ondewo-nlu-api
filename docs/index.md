@@ -795,6 +795,7 @@ curl \ 'https://dialogflow.googleapis.com/v2/projects/<project_name>/agent:expor
 | name | [string](#string) |  |  |
 | display_name | [string](#string) |  |  |
 | entity_type_name | [string](#string) |  |  |
+| entity_type_display_name | [string](#string) |  |  |
 | language | [string](#string) |  |  |
 
 
@@ -834,7 +835,9 @@ curl \ 'https://dialogflow.googleapis.com/v2/projects/<project_name>/agent:expor
 | name | [string](#string) |  |  |
 | display_name | [string](#string) |  |  |
 | entity_type_name | [string](#string) |  |  |
+| entity_type_display_name | [string](#string) |  |  |
 | entity_name | [string](#string) |  |  |
+| entity_display_name | [string](#string) |  |  |
 | language | [string](#string) |  |  |
 
 
@@ -950,6 +953,7 @@ curl \ 'https://dialogflow.googleapis.com/v2/projects/<project_name>/agent:expor
 | ----- | ---- | ----- | ----------- |
 | name | [string](#string) |  |  |
 | intent_name | [string](#string) |  |  |
+| intent_display_name | [string](#string) |  |  |
 | language | [string](#string) |  |  |
 
 
@@ -988,6 +992,7 @@ curl \ 'https://dialogflow.googleapis.com/v2/projects/<project_name>/agent:expor
 | ----- | ---- | ----- | ----------- |
 | name | [string](#string) |  |  |
 | intent_name | [string](#string) |  |  |
+| intent_display_name | [string](#string) |  |  |
 | language | [string](#string) |  |  |
 
 
@@ -1027,6 +1032,7 @@ curl \ 'https://dialogflow.googleapis.com/v2/projects/<project_name>/agent:expor
 | parameter_name | [string](#string) |  |  |
 | parameter_display_name | [string](#string) |  |  |
 | intent_name | [string](#string) |  |  |
+| intent_display_name | [string](#string) |  |  |
 | language | [string](#string) |  |  |
 
 
@@ -1067,6 +1073,7 @@ curl \ 'https://dialogflow.googleapis.com/v2/projects/<project_name>/agent:expor
 | platform | [string](#string) |  |  |
 | response_type | [string](#string) |  |  |
 | intent_name | [string](#string) |  |  |
+| intent_display_name | [string](#string) |  |  |
 | language | [string](#string) |  |  |
 
 
@@ -1106,6 +1113,7 @@ curl \ 'https://dialogflow.googleapis.com/v2/projects/<project_name>/agent:expor
 | name | [string](#string) |  |  |
 | text | [string](#string) |  |  |
 | intent_name | [string](#string) |  |  |
+| intent_display_name | [string](#string) |  |  |
 | language | [string](#string) |  |  |
 
 
@@ -1148,6 +1156,7 @@ curl \ 'https://dialogflow.googleapis.com/v2/projects/<project_name>/agent:expor
 | text_as_entity_values | [string](#string) |  |  |
 | type | [string](#string) |  |  |
 | intent_name | [string](#string) |  |  |
+| intent_display_name | [string](#string) |  |  |
 | language | [string](#string) |  |  |
 
 
