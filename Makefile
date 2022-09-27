@@ -72,7 +72,6 @@ githubio_logic:
 update_githubio:
 	@rm -rf ondewo.github.io
 	@git clone git@github.com:ondewo/ondewo.github.io.git
-	@git -C ondewo.github.io checkout new-design-layout
 	@make githubio_logic || (echo "Done")
 	@rm -rf ondewo.github.io
 
