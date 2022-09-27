@@ -146,7 +146,7 @@ release_client: ## Generic Function to Release a Client
 # Release
 	make -C ${REPO_DIR} ondewo_release | tee build_log_${REPO_NAME}.txt
 # Remove everything from Release
-	rm -rf ${REPO_DIR}
+	sudo rm -rf ${REPO_DIR}
 	rm -f temp-notes
 
 
