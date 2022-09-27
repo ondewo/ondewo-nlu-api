@@ -285,6 +285,9 @@ message Intent {
 
         // Optional. The language of the training phrase.
         string language_code = 6;
+
+        // created_at, created_by,modified_at, modified_by
+        CreatedModified created_modified = 7;
     }
 
     enum IntentStatus {
@@ -303,6 +306,8 @@ message Intent {
             string text = 2;
             // The language of the prompts. If not specified, the default language code will be used.
             string language_code = 3;
+            // created_at, created_by,modified_at, modified_by
+            CreatedModified created_modified = 4;
         }
         // The unique identifier of this parameter.
         // Format: `projects/<Project ID>/agent/intents/<Intent ID>/parameters/<Parameter ID>`.
@@ -345,6 +350,9 @@ message Intent {
 
         // Optional. Indicates whether the parameter represents a list of values.
         bool is_list = 9;
+
+        // created_at, created_by,modified_at, modified_by
+        CreatedModified created_modified = 10;
     }
 
     // Corresponds to the `Response` field in the Dialogflow console.
@@ -751,6 +759,9 @@ message Intent {
 
         // Read-only. States if a returned message is a prompt or not.
         bool is_prompt = 18;
+
+        // created_at, created_by,modified_at, modified_by
+        CreatedModified created_modified = 19;
     }
 
     // Represents a single followup intent in the chain.
@@ -883,6 +894,9 @@ message Intent {
 
     // Optional. Adds arbitrary "categories" for which one could filter the intents
     repeated string tags = 38;
+
+    // created_at, created_by,modified_at, modified_by
+    CreatedModified created_modified = 39;
 }
 
 // The request message for [Intents.ListIntents][google.cloud.dialogflow.v2.Intents.ListIntents].

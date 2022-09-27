@@ -122,6 +122,9 @@ message Context {
         // The original value(s) of the context parameter.
         string value_original = 4;
 
+        // created_at, created_by,modified_at, modified_by
+        CreatedModified created_modified = 5;
+
     }
 
     // Required. The display name of the context (must be unique per session).
@@ -150,6 +153,9 @@ message Context {
 
     // Optional. The time span in seconds after which the context expires. By default it does not expire.
     float lifespan_time = 4;
+
+    // created_at, created_by,modified_at, modified_by
+    CreatedModified created_modified = 5;
 }
 
 // The request message for [Contexts.ListContexts][google.cloud.dialogflow.v2.Contexts.ListContexts].

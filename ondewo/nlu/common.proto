@@ -25,3 +25,14 @@ message StatResponse {
     // Response wrapper for the "Get<Stat>" endpoints
     uint32 value = 1;
 }
+
+message CreatedModified {
+    // Read-only
+    string created_at = 1;
+    // Read-only
+    string modified_at = 2;
+    // Read-only, except import/restore agent, otherwise populated with current user
+    string created_by = 3;
+    // Read-only except import/restore agent, otherwise populated wit current user
+    string modified_by = 4;
+}

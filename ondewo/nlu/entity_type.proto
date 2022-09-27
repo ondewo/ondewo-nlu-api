@@ -178,6 +178,9 @@ message EntityType {
 
         // Required. The language to list entity synonyms for.
         string language_code = 6;
+
+        // created_at, created_by,modified_at, modified_by
+        CreatedModified created_modified = 7;
     }
 
     // Represents kinds of entities.
@@ -241,6 +244,9 @@ message EntityType {
 
     // Read-Only field. Total count of entity synonyms of the entity type
     int32 synonym_count = 13;
+
+    // created_at, created_by,modified_at, modified_by
+    CreatedModified created_modified = 14;
 }
 
 // The request message for [EntityTypes.ListEntityTypes][google.cloud.dialogflow.v2.EntityTypes.ListEntityTypes].

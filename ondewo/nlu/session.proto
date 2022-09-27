@@ -602,6 +602,8 @@ message Session {
         // Only some fields are populated in the response.
         VIEW_SPARSE = 2;
     }
+    // created_at, created_by,modified_at, modified_by
+    CreatedModified created_modified = 4;
 }
 
 message SessionStep {
@@ -609,6 +611,8 @@ message SessionStep {
     DetectIntentResponse detect_intent_response = 2;
     // The contexts which were active at the beginning of this step
     repeated Context contexts = 3;
+    // created_at, created_by,modified_at, modified_by
+    CreatedModified created_modified = 4;
 }
 
 message TrackSessionStepRequest {
@@ -801,6 +805,8 @@ message SessionReview {
         // Only some fields are populated in the response.
         VIEW_SPARSE = 2;
     }
+    // created_at, created_by,modified_at, modified_by
+    CreatedModified created_modified = 3;
 }
 
 message SessionReviewStep {
@@ -818,6 +824,9 @@ message SessionReviewStep {
 
     // The output contexts of this step
     repeated Context contexts_out = 5;
+
+    // created_at, created_by,modified_at, modified_by
+    CreatedModified created_modified = 6;
 }
 
 message DetectedIntent {
