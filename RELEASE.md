@@ -2,6 +2,14 @@
 
 *****************
 
+## Release ONDEWO NLU APIS 3.2.0
+
+### Improvements
+
+* [[OND211-2057]](https://ondewo.atlassian.net/browse/OND211-2057) - Added intent/entity type display name in full text search responses
+
+*****************
+
 ## Release ONDEWO NLU APIS 3.1.0
 
 ### Improvements
