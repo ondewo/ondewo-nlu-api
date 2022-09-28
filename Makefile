@@ -34,7 +34,13 @@ IMAGE_UTILS_NAME=ondewo-nlu-api-utils:${ONDEWO_NLU_API_VERSION}
 ########################################################
 #       ONDEWO Standard Make Targets
 ########################################################
-setup_developer_environment_locally: install_precommit_hooks
+setup_developer_environment_locally: install_precommit_hooks install_nvm
+
+install_nvm:
+	@curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
+	sh install_nvm.sh
+
+
 
 install_precommit_hooks: ## Installs pre-commit hooks and sets them up for the ondewo-csi-client repo
 	pip install pre-commit
