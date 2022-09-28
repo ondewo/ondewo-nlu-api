@@ -17,7 +17,7 @@ export
 
 # MUST BE THE SAME AS API in Mayor and Minor Version Number
 # example: API 2.9.0 --> Client 2.9.X
-ONDEWO_NLU_API_VERSION=3.1.0
+ONDEWO_NLU_API_VERSION=3.2.0
 
 # You need to setup an access token at https://github.com/settings/tokens - permissions are important
 GITHUB_GH_TOKEN?=ENTER_YOUR_TOKEN_HERE
@@ -34,7 +34,13 @@ IMAGE_UTILS_NAME=ondewo-nlu-api-utils:${ONDEWO_NLU_API_VERSION}
 ########################################################
 #       ONDEWO Standard Make Targets
 ########################################################
-setup_developer_environment_locally: install_precommit_hooks
+setup_developer_environment_locally: install_precommit_hooks install_nvm
+
+install_nvm:
+	@curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
+	sh install_nvm.sh
+
+
 
 install_precommit_hooks: ## Installs pre-commit hooks and sets them up for the ondewo-csi-client repo
 	pip install pre-commit
@@ -56,15 +62,32 @@ TEST:
 	@echo "\n${CURRENT_RELEASE_NOTES}"
 
 githubio_logic:
-	$(eval REPO_NAME:= $(shell echo ${GH_REPO} | cut -d "-" -f 2 | sed -e 's/\(.*\)/\U\1/'))
+	$(eval REPO_NAME:= $(shell echo ${GH_REPO} | cut -d "-" -f 2 ))
+	$(eval REPO_NAME_UPPER:= $(shell echo ${GH_REPO} | cut -d "-" -f 2 | sed -e 's/\(.*\)/\U\1/'))
 	@git branch | grep "*" | grep -q "master" || (echo "Not on master branch"  & rm -rf ondewo.github.io && exit 1)
-	@! cat ondewo.github.io/data.js | sed -n "/name\: '${REPO_NAME}'/,/end\: ''/p" | grep -q "number: '${ONDEWO_NLU_API_VERSION}'" || (echo "Already Released" && exit 1)
-	$(eval VERSION_LINE:= $(shell cat -n ondewo.github.io/data.js | sed -n "/name\: '${REPO_NAME}'/,/end\: ''/p" | grep "versions: " -A 1 | tail -1 | grep -o -E '[0-9]+' | head -1 | sed -e 's/^0\+//'))
+	@! cat ondewo.github.io/data.js | sed -n "/name\: '${REPO_NAME_UPPER}'/,/end\: ''/p" | grep -q "number: '${ONDEWO_NLU_API_VERSION}'" || (echo "Already Released" && exit 1)
+	$(eval VERSION_LINE:= $(shell cat -n ondewo.github.io/data.js | sed -n "/name\: '${REPO_NAME_UPPER}'/,/end\: ''/p" | grep "versions: " -A 1 | tail -1 | grep -o -E '[0-9]+' | head -1 | sed -e 's/^0\+//'))
 	$(eval TEMP_TEXT:= $(shell cat ondewo.github.io/script_object.txt | sed -e "s/VERSION/${ONDEWO_NLU_API_VERSION}/g" -e "s/TECHNOLOGY/${REPO_NAME}/g"))
 	@sed -i "${VERSION_LINE} i ${TEMP_TEXT}" ondewo.github.io/data.js
 	@cd ondewo.github.io && npx prettier -w --single-quote data.js
+
+	$(eval DOCS_DIR:=ondewo.github.io/docs/ondewo-${REPO_NAME}-api/${ONDEWO_NLU_API_VERSION})
+	@rm -rf ${DOCS_DIR}
+	@mkdir "${DOCS_DIR}"
+	@cp docs/* ${DOCS_DIR}
+	@sed -i "s/h1>Protocol Documentation/h1>${REPO_NAME_UPPER} ${ONDEWO_NLU_API_VERSION} Documentation/" ${DOCS_DIR}/index.html
+
+	$(eval HEADER_LINE:= $(shell cat ${DOCS_DIR}/index.html | grep -n "${REPO_NAME_UPPER} ${ONDEWO_NLU_API_VERSION} Documentation" | grep -o -E '[0-9]+' | head -1 | sed -e 's/^0\+//'))
+	$(eval TEMP_IMG:= $(shell cat  ondewo.github.io/script_image.txt))
+	$(eval TEMP_CALC:= $(shell expr ${HEADER_LINE} - 1))
+
+	sed -i '${TEMP_CALC} i ${TEMP_IMG}' ${DOCS_DIR}/index.html
+	head -30 ${DOCS_DIR}/index.html
+	head -20 ondewo.github.io/data.js
+
 	@git -C ondewo.github.io status
 	@git -C ondewo.github.io add data.js
+	@git -C ondewo.github.io add docs
 	@git -C ondewo.github.io status
 	@git -C ondewo.github.io commit -m "Added ${REPO_NAME} Documentation for ${ONDEWO_NLU_API_VERSION}"
 	@git -C ondewo.github.io push
