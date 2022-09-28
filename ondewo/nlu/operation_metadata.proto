@@ -91,6 +91,8 @@ message OperationMetadata {
         TRAIN_AGENT = 7;
         // export benchmark agent to a zip file
         EXPORT_BENCHMARK_AGENT = 8;
+        // force loading agent data for full text search
+        INDEX_AGENT = 9;
     }
 
     // name of the host where the operation was executed
