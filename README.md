@@ -9,7 +9,7 @@
 This repository contains the original interface definitions of public ONDEWO APIs that support gRPC protocols. Reading the original interface definitions can provide a better understanding of ONDEWO APIs and help you to utilize them more efficiently. You can also use these definitions with open source tools to generate client libraries, documentation, and other artifacts.
 
 The API documentation is generated from files using [protoc-gen-doc](https://github.com/pseudomuto/protoc-gen-doc) in formats:
-* [html](https://htmlpreview.github.io/?https://github.com/ondewo/ondewo-nlu-api/blob/feature/OND211-380-generate-documentation/doc/index.html)
+* [html](https://ondewo.github.io/ondewo-nlu-api)
 * [markdown](doc/index.md)
 
 The core components of all the client libraries are built directly from files in this repo using [the proto compiler](https://github.com/ondewo/ondewo-proto-compiler).
@@ -19,6 +19,7 @@ For an end-user, the APIs in this repo function mostly as documentation for the 
 * [Angular](https://github.com/ondewo/ondewo-nlu-client-angular)
 * [JavaScript](https://github.com/ondewo/ondewo-nlu-client-javascript)
 * [TypeScript](https://github.com/ondewo/ondewo-nlu-client-typescript)
+* [NodeJS](https://github.com/ondewo/ondewo-nlu-client-nodejs)
 
 Please note that some of these implementations are works-in-progress. The repo will make clear the status of the implementation.
 
@@ -42,76 +43,96 @@ Please use the issue tracker in this repo for discussions about this API, or the
 ```
 .
 ├── CONTRIBUTING.md
-├── doc
-│   ├── index.html
-│   ├── index.md
-│   ├── style.css
-├── googleapis
-│   └── (clone of https://github.com/googleapis/googleapis.git on commit hash == 79ab27f3b70ebc221e265d2e8ab30a8cc2d21fa2)
+├── Dockerfile.utils
+├── docs
+│   ├── index.html
+│   ├── index.md
+│   └── style.css
 ├── LICENSE
+├── Makefile
+├── googleapis
+│   └── (clone of https://github.com/googleapis/googleapis.git on commit hash ==79ab27f3b70ebc221e265d2e8ab30a8cc2d21fa2)
 ├── ondewo
-│   ├── nlu
-│   │   ├── agent.proto
-│   │   ├── aiservices.proto
-│   │   ├── common.proto
-│   │   ├── context.proto
-│   │   ├── entity_type.proto
-│   │   ├── intent.proto
-│   │   ├── operation_metadata.proto
-│   │   ├── project_role.proto
-│   │   ├── project_statistics.proto
-│   │   ├── server_statistics.proto
-│   │   ├── session.proto
-│   │   ├── user.proto
-│   │   └── webhook.proto
-│   └── qa
-│       └── qa.proto
+│   ├── nlu
+│   │   ├── agent.proto
+│   │   ├── aiservices.proto
+│   │   ├── common.proto
+│   │   ├── context.proto
+│   │   ├── entity_type.proto
+│   │   ├── intent.proto
+│   │   ├── operation_metadata.proto
+│   │   ├── operations.proto
+│   │   ├── project_role.proto
+│   │   ├── project_statistics.proto
+│   │   ├── server_statistics.proto
+│   │   ├── session.proto
+│   │   ├── user.proto
+│   │   ├── utility.proto
+│   │   └── webhook.proto
+│   └── qa
+│       └── qa.proto
 ├── README.md
 └── RELEASE.md
+
 ```
 
 ## Generate gRPC Source Code
 
 API client libraries can be built directly from files in this repo using [the proto compiler.](https://github.com/ondewo/ondewo-proto-compiler)
 
-Automatic Release Process
-------------------
+## Automatic Release Process
 The entire process is automated to make development easier. The actual steps are simple:
-
-TODOs in Pull Request before the release:
-
- - Update the Version number inside the Makefile
-
- - Check if RELEASE.md is up-to-date
 
 TODOs after Pull Request was merged in:
 
  - Checkout master:
-    ```bash
-    git checkout master
-    ```
+    >git checkout master
  - Pull the new stuff:
-    ```bash
-    git pull
-    ```
- - Release:
-    ```bash
-    make ondewo_release
-    ```
+    >git pull
+ - (If not already, run the `setup_developer_environment_locally` command):
+   >make setup_developer_environment_locally
+ - Update the `ONDEWO_NLU_API_VERSION` in the `Makefile`
+ - Add the new Release Notes in `RELEASE.md` in the format:
+   ```
+   ## Release ONDEWO NLU APIS X.X.X       <---- Beginning of Notes
 
-The   ``` make ondewo_release``` command can be divided into 5 steps:
+      ...<NOTES>...
+
+   *****************                      <---- End of Notes
+   ```
+ - `Commit and push` the changes made in `RELEASE.md` and `Makefile`
+ - Release:
+   >make ondewo_release
+
+---
+The `make ondewo_release` command can be divided into 5 steps:
 
 - cloning the devops-accounts repository and extracting the credentials
 - creating and pushing the release branch
 - creating and pushing the release tag
 - creating the GitHub release
 
-The variable for the GitHub Access Token is inside the Makefile,
-but the value is overwritten during ``` make ondewo_release```, because
-it is passed from the devops-accounts repo as an argument to the actual ```release``` command.
+The variable for the GitHub Access Token is inside the Makefile, but the value is overwritten during
+`make ondewo_release`, because it is passed from the devops-accounts repo as an argument to the actual `release` command.
 
-Proto Documentation
--------------------
+## Automatic Release Process - Clients
 
-Documentation for the .proto files is generated automatically when there is a pullrequest or push
-to master. It is located in the branch [gh-pages](https://github.com/ondewo/ondewo-nlu-api/tree/gh-pages).
+Every available Client of this API can be released from this repository, to make the release process for major and minor changes easier.
+
+The generic `release_client` command depends on 4 variables:
+ - `ONDEWO_NLU_API_VERSION` -- Current API version
+ - `GENERIC_CLIENT` -- specifies `SSH git link` to client-repository
+ - `RELEASEMD` -- position of `RELEASE.md` inside the client-repository
+ - `GENERIC_RELEASE_NOTES` -- template text of client release notes
+
+To release all clients in sequence, use the `make release_all_clients` command.
+
+## Proto Documentation
+
+The documentation for this, and all other APIs and their available versions, can be found on [ondewo.github.io](https://ondewo.github.io). For Offline usage, it can also be found in the `docs` folder.
+
+As part of the `pre-commit` hooks, `update_githubio` is run. It will preemptively stop if:
+ - The command is not run on the `master` branch
+ - There already exists a version-object with the specified version in the `data.js` of the `ondewo.github.io` repository
+
+> :warning:  This command is dependent on your installation of NPM and NodeJS -- Make sure to install both, or run `make setup_developer_environment_locally`
