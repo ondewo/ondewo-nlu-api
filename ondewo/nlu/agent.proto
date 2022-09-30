@@ -1157,7 +1157,8 @@ message FullTextSearchResponseIntentTags {
         string text = 2;
         string intent_name = 3;
         string intent_display_name = 4;
-        string language = 5;
+        repeated string tags = 5;
+        string language = 6;
     }
     repeated IntentTagsSearchResult intent_tags_results = 3;
     string term = 4;
