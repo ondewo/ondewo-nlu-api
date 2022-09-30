@@ -452,14 +452,14 @@ The most important messages is <a href="#ondewo.nlu.Agent">Agent</a> and its mos
 <a name="ondewo.nlu.AddUserToProjectRequest"></a>
 
 ### AddUserToProjectRequest
-
+Request to add user to project.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| parent | [string](#string) |  |  |
-| user_id | [string](#string) |  |  |
-| project_role_id | [uint32](#uint32) |  |  |
+| parent | [string](#string) |  | ID of the project |
+| user_id | [string](#string) |  | User object |
+| project_role_id | [uint32](#uint32) |  | ID of the project role of the user |
 
 
 
@@ -509,7 +509,7 @@ Project/Agent messages
 <a name="ondewo.nlu.AgentSorting"></a>
 
 ### AgentSorting
-
+Sorting agents
 
 
 | Field | Type | Label | Description |
@@ -547,7 +547,7 @@ The request message for [Agents.TrainAgentBuildCache][google.cloud.dialogflow.v2
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The project that the agent to build cache is associated with. Format: `projects/<Project ID>`. |
-| branch | [string](#string) |  |  |
+| branch | [string](#string) |  | Git branch |
 
 
 
@@ -557,7 +557,7 @@ The request message for [Agents.TrainAgentBuildCache][google.cloud.dialogflow.v2
 <a name="ondewo.nlu.CreateAgentRequest"></a>
 
 ### CreateAgentRequest
-
+Request to create an agent
 
 
 | Field | Type | Label | Description |
@@ -590,12 +590,12 @@ The request message for [Agents.TrainAgentBuildCache][google.cloud.dialogflow.v2
 <a name="ondewo.nlu.DeleteAgentRequest"></a>
 
 ### DeleteAgentRequest
-
+Request to delete the agent
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| parent | [string](#string) |  |  |
+| parent | [string](#string) |  | Required. The project that the agent to fetch is associated with. Format: `projects/<Project ID>/agents`. |
 
 
 
@@ -605,12 +605,12 @@ The request message for [Agents.TrainAgentBuildCache][google.cloud.dialogflow.v2
 <a name="ondewo.nlu.DeleteResourcesRequest"></a>
 
 ### DeleteResourcesRequest
-
+Request to delete resources
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| parent | [string](#string) |  |  |
+| parent | [string](#string) |  | Required. The project that the agent to fetch is associated with. Format: `projects/<Project ID>/agents`. |
 | name | [string](#string) |  |  |
 | type | [string](#string) |  |  |
 | language_code | [string](#string) |  |  |
@@ -660,7 +660,7 @@ curl \ 'https://dialogflow.googleapis.com/v2/projects/<project_name>/agent:expor
 <a name="ondewo.nlu.ExportBenchmarkAgentRequest"></a>
 
 ### ExportBenchmarkAgentRequest
-
+Request to export benchmark agent
 
 
 | Field | Type | Label | Description |
@@ -679,7 +679,7 @@ curl \ 'https://dialogflow.googleapis.com/v2/projects/<project_name>/agent:expor
 <a name="ondewo.nlu.ExportBenchmarkAgentResponse"></a>
 
 ### ExportBenchmarkAgentResponse
-
+Response to export benchmark agent
 
 
 | Field | Type | Label | Description |
@@ -711,12 +711,12 @@ curl \ 'https://dialogflow.googleapis.com/v2/projects/<project_name>/agent:expor
 <a name="ondewo.nlu.ExportResourcesRequest"></a>
 
 ### ExportResourcesRequest
-
+Request to export resources
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| parent | [string](#string) |  |  |
+| parent | [string](#string) |  | Required. The project that the agent to fetch is associated with. Format: `projects/<Project ID>/agents`. |
 | name | [string](#string) |  |  |
 | type | [string](#string) |  |  |
 | language_code | [string](#string) |  |  |
@@ -729,12 +729,12 @@ curl \ 'https://dialogflow.googleapis.com/v2/projects/<project_name>/agent:expor
 <a name="ondewo.nlu.ExportResourcesResponse"></a>
 
 ### ExportResourcesResponse
-
+Response to export resources
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| parent | [string](#string) |  |  |
+| parent | [string](#string) |  | Required. The project that the agent to fetch is associated with. Format: `projects/<Project ID>/agents`. |
 | name | [string](#string) |  |  |
 | type | [string](#string) |  |  |
 | language_code | [string](#string) |  |  |
@@ -771,7 +771,7 @@ curl \ 'https://dialogflow.googleapis.com/v2/projects/<project_name>/agent:expor
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| parent | [string](#string) |  |  |
+| parent | [string](#string) |  | Required. The project that the agent to fetch is associated with. Format: `projects/<Project ID>/agents`. |
 | language_code | [string](#string) |  |  |
 | entity_results | [FullTextSearchResponseEntity.EntitySearchResult](#ondewo.nlu.FullTextSearchResponseEntity.EntitySearchResult) | repeated |  |
 | term | [string](#string) |  |  |
@@ -811,7 +811,7 @@ curl \ 'https://dialogflow.googleapis.com/v2/projects/<project_name>/agent:expor
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| parent | [string](#string) |  |  |
+| parent | [string](#string) |  | Required. The project that the agent to fetch is associated with. Format: `projects/<Project ID>/agents`. |
 | language_code | [string](#string) |  |  |
 | entity_synonym_results | [FullTextSearchResponseEntitySynonym.EntitySynonymSearchResult](#ondewo.nlu.FullTextSearchResponseEntitySynonym.EntitySynonymSearchResult) | repeated |  |
 | term | [string](#string) |  |  |
@@ -853,7 +853,7 @@ curl \ 'https://dialogflow.googleapis.com/v2/projects/<project_name>/agent:expor
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| parent | [string](#string) |  |  |
+| parent | [string](#string) |  | Required. The project that the agent to fetch is associated with. Format: `projects/<Project ID>/agents`. |
 | language_code | [string](#string) |  |  |
 | entity_type_results | [FullTextSearchResponseEntityType.EntityTypeSearchResult](#ondewo.nlu.FullTextSearchResponseEntityType.EntityTypeSearchResult) | repeated |  |
 | term | [string](#string) |  |  |
@@ -891,7 +891,7 @@ curl \ 'https://dialogflow.googleapis.com/v2/projects/<project_name>/agent:expor
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| parent | [string](#string) |  |  |
+| parent | [string](#string) |  | Required. The project that the agent to fetch is associated with. Format: `projects/<Project ID>/agents`. |
 | language_code | [string](#string) |  |  |
 | intent_results | [FullTextSearchResponseIntent.IntentSearchResult](#ondewo.nlu.FullTextSearchResponseIntent.IntentSearchResult) | repeated |  |
 | term | [string](#string) |  |  |
@@ -931,7 +931,7 @@ curl \ 'https://dialogflow.googleapis.com/v2/projects/<project_name>/agent:expor
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| parent | [string](#string) |  |  |
+| parent | [string](#string) |  | Required. The project that the agent to fetch is associated with. Format: `projects/<Project ID>/agents`. |
 | language_code | [string](#string) |  |  |
 | intent_context_in_results | [FullTextSearchResponseIntentContextIn.IntentContextInSearchResult](#ondewo.nlu.FullTextSearchResponseIntentContextIn.IntentContextInSearchResult) | repeated |  |
 | term | [string](#string) |  |  |
@@ -971,7 +971,7 @@ curl \ 'https://dialogflow.googleapis.com/v2/projects/<project_name>/agent:expor
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| parent | [string](#string) |  |  |
+| parent | [string](#string) |  | Required. The project that the agent to fetch is associated with. Format: `projects/<Project ID>/agents`. |
 | language_code | [string](#string) |  |  |
 | intent_context_out_results | [FullTextSearchResponseIntentContextOut.IntentContextOutSearchResult](#ondewo.nlu.FullTextSearchResponseIntentContextOut.IntentContextOutSearchResult) | repeated |  |
 | term | [string](#string) |  |  |
@@ -1011,7 +1011,7 @@ curl \ 'https://dialogflow.googleapis.com/v2/projects/<project_name>/agent:expor
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| parent | [string](#string) |  |  |
+| parent | [string](#string) |  | Required. The project that the agent to fetch is associated with. Format: `projects/<Project ID>/agents`. |
 | language_code | [string](#string) |  |  |
 | intent_parameters_results | [FullTextSearchResponseIntentParameters.IntentParametersSearchResult](#ondewo.nlu.FullTextSearchResponseIntentParameters.IntentParametersSearchResult) | repeated |  |
 | term | [string](#string) |  |  |
@@ -1052,7 +1052,7 @@ curl \ 'https://dialogflow.googleapis.com/v2/projects/<project_name>/agent:expor
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| parent | [string](#string) |  |  |
+| parent | [string](#string) |  | Required. The project that the agent to fetch is associated with. Format: `projects/<Project ID>/agents`. |
 | language_code | [string](#string) |  |  |
 | intent_response_results | [FullTextSearchResponseIntentResponse.IntentResponseSearchResult](#ondewo.nlu.FullTextSearchResponseIntentResponse.IntentResponseSearchResult) | repeated |  |
 | term | [string](#string) |  |  |
@@ -1094,7 +1094,7 @@ curl \ 'https://dialogflow.googleapis.com/v2/projects/<project_name>/agent:expor
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| parent | [string](#string) |  |  |
+| parent | [string](#string) |  | Required. The project that the agent to fetch is associated with. Format: `projects/<Project ID>/agents`. |
 | language_code | [string](#string) |  |  |
 | intent_tags_results | [FullTextSearchResponseIntentTags.IntentTagsSearchResult](#ondewo.nlu.FullTextSearchResponseIntentTags.IntentTagsSearchResult) | repeated |  |
 | term | [string](#string) |  |  |
@@ -1135,7 +1135,7 @@ curl \ 'https://dialogflow.googleapis.com/v2/projects/<project_name>/agent:expor
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| parent | [string](#string) |  |  |
+| parent | [string](#string) |  | Required. The project that the agent to fetch is associated with. Format: `projects/<Project ID>/agents`. |
 | language_code | [string](#string) |  |  |
 | intent_usersays_results | [FullTextSearchResponseIntentUsersays.IntentUsersaysSearchResult](#ondewo.nlu.FullTextSearchResponseIntentUsersays.IntentUsersaysSearchResult) | repeated |  |
 | term | [string](#string) |  |  |
@@ -1190,7 +1190,7 @@ The request message for [Agents.GetAgent][google.cloud.dialogflow.v2.Agents.GetA
 <a name="ondewo.nlu.GetAgentStatisticsRequest"></a>
 
 ### GetAgentStatisticsRequest
-
+Request statistics of the agent
 
 
 | Field | Type | Label | Description |
@@ -1208,7 +1208,7 @@ The request message for [Agents.GetAgent][google.cloud.dialogflow.v2.Agents.GetA
 <a name="ondewo.nlu.GetAgentStatisticsResponse"></a>
 
 ### GetAgentStatisticsResponse
-
+Response to get statistics of the agent
 
 
 | Field | Type | Label | Description |
@@ -1225,7 +1225,7 @@ The request message for [Agents.GetAgent][google.cloud.dialogflow.v2.Agents.GetA
 <a name="ondewo.nlu.GetModelStatusesRequest"></a>
 
 ### GetModelStatusesRequest
-
+Request to get model statuses
 
 
 | Field | Type | Label | Description |
@@ -1243,7 +1243,7 @@ The request message for [Agents.GetAgent][google.cloud.dialogflow.v2.Agents.GetA
 <a name="ondewo.nlu.GetModelStatusesResponse"></a>
 
 ### GetModelStatusesResponse
-
+Response to get model statuses
 
 
 | Field | Type | Label | Description |
@@ -1258,13 +1258,13 @@ The request message for [Agents.GetAgent][google.cloud.dialogflow.v2.Agents.GetA
 <a name="ondewo.nlu.GetPlatformInfoResponse"></a>
 
 ### GetPlatformInfoResponse
-
+Get platform information
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| version | [string](#string) |  |  |
-| commit_hash | [string](#string) |  |  |
+| version | [string](#string) |  | Version of the platform |
+| commit_hash | [string](#string) |  | Corresponding commit hash |
 
 
 
@@ -1274,7 +1274,7 @@ The request message for [Agents.GetAgent][google.cloud.dialogflow.v2.Agents.GetA
 <a name="ondewo.nlu.GetPlatformMappingRequest"></a>
 
 ### GetPlatformMappingRequest
-
+Requeset to get platform mapping
 
 
 | Field | Type | Label | Description |
@@ -1310,7 +1310,7 @@ curl \ 'https://dialogflow.googleapis.com/v2/projects/<project_name>/agent:impor
 <a name="ondewo.nlu.ListAgentsOfUserResponse"></a>
 
 ### ListAgentsOfUserResponse
-
+Get list of agents of user
 
 
 | Field | Type | Label | Description |
@@ -1326,7 +1326,7 @@ curl \ 'https://dialogflow.googleapis.com/v2/projects/<project_name>/agent:impor
 <a name="ondewo.nlu.ListAgentsRequest"></a>
 
 ### ListAgentsRequest
-
+Request to get the list of agents
 
 
 | Field | Type | Label | Description |
@@ -1343,7 +1343,7 @@ curl \ 'https://dialogflow.googleapis.com/v2/projects/<project_name>/agent:impor
 <a name="ondewo.nlu.ListAgentsResponse"></a>
 
 ### ListAgentsResponse
-
+Get list of agents
 
 
 | Field | Type | Label | Description |
@@ -1374,7 +1374,7 @@ Project permissions
 <a name="ondewo.nlu.ListProjectPermissionsResponse"></a>
 
 ### ListProjectPermissionsResponse
-
+List project permissions
 
 
 | Field | Type | Label | Description |
@@ -1390,7 +1390,7 @@ Project permissions
 <a name="ondewo.nlu.ListUsersInProjectRequest"></a>
 
 ### ListUsersInProjectRequest
-
+Request to list users in the project
 
 
 | Field | Type | Label | Description |
@@ -1406,7 +1406,7 @@ Project permissions
 <a name="ondewo.nlu.ListUsersInProjectResponse"></a>
 
 ### ListUsersInProjectResponse
-
+Get list users in project
 
 
 | Field | Type | Label | Description |
@@ -1422,7 +1422,7 @@ Project permissions
 <a name="ondewo.nlu.ModelStatus"></a>
 
 ### ModelStatus
-
+Status of model
 
 
 | Field | Type | Label | Description |
@@ -1527,13 +1527,13 @@ Project permissions
 <a name="ondewo.nlu.RemoveUserFromProjectRequest"></a>
 
 ### RemoveUserFromProjectRequest
-
+Request to remove user from the project.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| parent | [string](#string) |  |  |
-| user_id | [string](#string) |  |  |
+| parent | [string](#string) |  | ID of the project |
+| user_id | [string](#string) |  | User object |
 
 
 
@@ -1564,7 +1564,7 @@ curl \ 'https://dialogflow.googleapis.com/v2/projects/<project_name>/agent:resto
 <a name="ondewo.nlu.SetAgentStatusRequest"></a>
 
 ### SetAgentStatusRequest
-
+Request to set status of the agent
 
 
 | Field | Type | Label | Description |
@@ -1581,12 +1581,12 @@ curl \ 'https://dialogflow.googleapis.com/v2/projects/<project_name>/agent:resto
 <a name="ondewo.nlu.SetResourcesRequest"></a>
 
 ### SetResourcesRequest
-
+Request to set resources
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| parent | [string](#string) |  |  |
+| parent | [string](#string) |  | Required. The project that the agent to fetch is associated with. Format: `projects/<Project ID>/agents`. |
 | name | [string](#string) |  |  |
 | type | [string](#string) |  |  |
 | resource_file | [bytes](#bytes) |  |  |
@@ -1606,7 +1606,7 @@ The request message for [Agents.TrainAgent][google.cloud.dialogflow.v2.Agents.Tr
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The project that the agent to train is associated with. Format: `projects/<Project ID>`. |
-| branch | [string](#string) |  |  |
+| branch | [string](#string) |  | Git branch |
 | initiation_protocol | [InitiationProtocol](#ondewo.nlu.InitiationProtocol) |  |  |
 
 
@@ -1617,7 +1617,7 @@ The request message for [Agents.TrainAgent][google.cloud.dialogflow.v2.Agents.Tr
 <a name="ondewo.nlu.UpdateAgentRequest"></a>
 
 ### UpdateAgentRequest
-
+Request to update the agent
 
 
 | Field | Type | Label | Description |
@@ -1634,7 +1634,7 @@ The request message for [Agents.TrainAgent][google.cloud.dialogflow.v2.Agents.Tr
 <a name="ondewo.nlu.UserInProject"></a>
 
 ### UserInProject
-
+Request to get user in project
 
 
 | Field | Type | Label | Description |
@@ -1668,7 +1668,7 @@ The request message for [Agents.TrainAgent][google.cloud.dialogflow.v2.Agents.Tr
 <a name="ondewo.nlu.AgentStatus"></a>
 
 ### AgentStatus
-
+Structure for Agent / Project status
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
@@ -1694,7 +1694,7 @@ The request message for [Agents.TrainAgent][google.cloud.dialogflow.v2.Agents.Tr
 <a name="ondewo.nlu.FullTextSearchRequest.QueryType"></a>
 
 ### FullTextSearchRequest.QueryType
-
+Structure of query
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
@@ -1745,7 +1745,7 @@ Defines when to initiate newly created agent when training started
 <a name="ondewo.nlu.ReportFormat"></a>
 
 ### ReportFormat
-
+Structure of report
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
@@ -1837,9 +1837,9 @@ For more information about agents, see the [Dialogflow documentation](https://di
 <pre> grpcurl -plaintext -H 'cai-token: aimp' localhost:50055 ondewo.nlu.Agents.ListAllAgents </pre> <samp>{ "agents_with_owners": [ { "agent": { "parent": "projects/76aaf4f3-a1f6-4fda-b4b3-351c64e65bc4/agent", "display_name": "Pizza Bot 2", "owner_id": "5aac51b8-668f-49dd-913f-cc683e56af34" }, "owner": { "user_id": "5aac51b8-668f-49dd-913f-cc683e56af34", "display_name": "admin", "server_role_id": 3, "user_email": "admin@ondewo.com" } } ], "next_page_token": "current_index-1" } </samp> |
 | AddUserToProject | [AddUserToProjectRequest](#ondewo.nlu.AddUserToProjectRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Adds a user with specified id to the project (agent) |
 | RemoveUserFromProject | [RemoveUserFromProjectRequest](#ondewo.nlu.RemoveUserFromProjectRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Removes a user with specified id from the project (agent) |
-| ListUsersInProject | [ListUsersInProjectRequest](#ondewo.nlu.ListUsersInProjectRequest) | [ListUsersInProjectResponse](#ondewo.nlu.ListUsersInProjectResponse) |  |
-| GetPlatformInfo | [.google.protobuf.Empty](#google.protobuf.Empty) | [GetPlatformInfoResponse](#ondewo.nlu.GetPlatformInfoResponse) |  |
-| ListProjectPermissions | [ListProjectPermissionsRequest](#ondewo.nlu.ListProjectPermissionsRequest) | [ListProjectPermissionsResponse](#ondewo.nlu.ListProjectPermissionsResponse) |  |
+| ListUsersInProject | [ListUsersInProjectRequest](#ondewo.nlu.ListUsersInProjectRequest) | [ListUsersInProjectResponse](#ondewo.nlu.ListUsersInProjectResponse) | Lists users in the project (agent) |
+| GetPlatformInfo | [.google.protobuf.Empty](#google.protobuf.Empty) | [GetPlatformInfoResponse](#ondewo.nlu.GetPlatformInfoResponse) | Gets information from the platform |
+| ListProjectPermissions | [ListProjectPermissionsRequest](#ondewo.nlu.ListProjectPermissionsRequest) | [ListProjectPermissionsResponse](#ondewo.nlu.ListProjectPermissionsResponse) | List permissions from the project (agent) |
 | TrainAgent | [TrainAgentRequest](#ondewo.nlu.TrainAgentRequest) | [Operation](#ondewo.nlu.Operation) | Trains the specified agent.
 
 Operation <response: [google.protobuf.Empty][google.protobuf.Empty], metadata: [google.protobuf.Struct][google.protobuf.Struct]> |
@@ -1855,17 +1855,17 @@ Operation <response: [ExportAgentResponse][google.cloud.dialogflow.v2.ExportAgen
 Uploads new intents and entity types without deleting the existing ones. Intents and entity types with the same name are replaced with the new versions from ImportAgentRequest.
 
 Operation <response: [google.protobuf.Empty][google.protobuf.Empty], metadata: [google.protobuf.Struct][google.protobuf.Struct]> |
-| OptimizeRankingMatch | [OptimizeRankingMatchRequest](#ondewo.nlu.OptimizeRankingMatchRequest) | [Operation](#ondewo.nlu.Operation) |  |
+| OptimizeRankingMatch | [OptimizeRankingMatchRequest](#ondewo.nlu.OptimizeRankingMatchRequest) | [Operation](#ondewo.nlu.Operation) | Runs optimize ranking match |
 | RestoreAgent | [RestoreAgentRequest](#ondewo.nlu.RestoreAgentRequest) | [Operation](#ondewo.nlu.Operation) | Restores the specified agent from a ZIP file.
 
 Replaces the current agent version with a new one. All the intents and entity types in the older version are deleted.
 
 Operation <response: [google.protobuf.Empty][google.protobuf.Empty], metadata: [google.protobuf.Struct][google.protobuf.Struct]> |
-| GetAgentStatistics | [GetAgentStatisticsRequest](#ondewo.nlu.GetAgentStatisticsRequest) | [GetAgentStatisticsResponse](#ondewo.nlu.GetAgentStatisticsResponse) |  |
-| SetAgentStatus | [SetAgentStatusRequest](#ondewo.nlu.SetAgentStatusRequest) | [Agent](#ondewo.nlu.Agent) |  |
-| SetResources | [SetResourcesRequest](#ondewo.nlu.SetResourcesRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) |  |
-| DeleteResources | [DeleteResourcesRequest](#ondewo.nlu.DeleteResourcesRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) |  |
-| ExportResources | [ExportResourcesRequest](#ondewo.nlu.ExportResourcesRequest) | [ExportResourcesResponse](#ondewo.nlu.ExportResourcesResponse) |  |
+| GetAgentStatistics | [GetAgentStatisticsRequest](#ondewo.nlu.GetAgentStatisticsRequest) | [GetAgentStatisticsResponse](#ondewo.nlu.GetAgentStatisticsResponse) | Gets statistics for the agent |
+| SetAgentStatus | [SetAgentStatusRequest](#ondewo.nlu.SetAgentStatusRequest) | [Agent](#ondewo.nlu.Agent) | Sets status for the agent |
+| SetResources | [SetResourcesRequest](#ondewo.nlu.SetResourcesRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Sets resources |
+| DeleteResources | [DeleteResourcesRequest](#ondewo.nlu.DeleteResourcesRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Deletes resources |
+| ExportResources | [ExportResourcesRequest](#ondewo.nlu.ExportResourcesRequest) | [ExportResourcesResponse](#ondewo.nlu.ExportResourcesResponse) | Exports resources |
 | GetModelStatuses | [GetModelStatusesRequest](#ondewo.nlu.GetModelStatusesRequest) | [GetModelStatusesResponse](#ondewo.nlu.GetModelStatusesResponse) | Get statuses of models related to project |
 | GetPlatformMapping | [GetPlatformMappingRequest](#ondewo.nlu.GetPlatformMappingRequest) | [PlatformMapping](#ondewo.nlu.PlatformMapping) | Get all set platform name mappings for an Agent |
 | SetPlatformMapping | [PlatformMapping](#ondewo.nlu.PlatformMapping) | [PlatformMapping](#ondewo.nlu.PlatformMapping) | Set platform name mappings for an Agent |
@@ -1927,14 +1927,14 @@ Operation <response: [google.protobuf.Empty][google.protobuf.Empty], metadata: [
 <a name="ondewo.nlu.BertAugEnrichmentConfig"></a>
 
 ### BertAugEnrichmentConfig
-
+Configuration for BERT augmenter enrichment
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| is_active | [bool](#bool) |  |  |
-| enrichment_factor | [int32](#int32) |  |  |
-| execution_order | [int32](#int32) |  |  |
+| is_active | [bool](#bool) |  | Activation flag |
+| enrichment_factor | [int32](#int32) |  | Factor of enrichment |
+| execution_order | [int32](#int32) |  | Order of augmenter execution |
 
 
 
@@ -1965,7 +1965,7 @@ The request for intent classification.
 <a name="ondewo.nlu.ClassifyIntentsResponse"></a>
 
 ### ClassifyIntentsResponse
-
+Response containing the intents classified in a sentence
 
 
 | Field | Type | Label | Description |
@@ -2022,14 +2022,14 @@ The request for intent classification.
 <a name="ondewo.nlu.EntityEnrichmentConfig"></a>
 
 ### EntityEnrichmentConfig
-
+Configuration for Entity enrichment
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| is_active | [bool](#bool) |  |  |
-| enrichment_factor | [int32](#int32) |  |  |
-| execution_order | [int32](#int32) |  |  |
+| is_active | [bool](#bool) |  | Activation flag |
+| enrichment_factor | [int32](#int32) |  | Factor of enrichment |
+| execution_order | [int32](#int32) |  | Order of augmenter execution |
 
 
 
@@ -2039,7 +2039,7 @@ The request for intent classification.
 <a name="ondewo.nlu.EntityTypeFuzzyNerConfig"></a>
 
 ### EntityTypeFuzzyNerConfig
-
+Configuration for Fuzzy Entity Recognizer
 
 
 | Field | Type | Label | Description |
@@ -2112,14 +2112,14 @@ The request to detect parameters.
 <a name="ondewo.nlu.GPT2EnrichmentConfig"></a>
 
 ### GPT2EnrichmentConfig
-
+Configuration for GPT2 enrichment
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| is_active | [bool](#bool) |  |  |
-| enrichment_factor | [int32](#int32) |  |  |
-| execution_order | [int32](#int32) |  |  |
+| is_active | [bool](#bool) |  | Activation flag |
+| enrichment_factor | [int32](#int32) |  | Factor of enrichment |
+| execution_order | [int32](#int32) |  | Order of augmenter execution |
 
 
 
@@ -2129,7 +2129,7 @@ The request to detect parameters.
 <a name="ondewo.nlu.GenerateResponsesRequest"></a>
 
 ### GenerateResponsesRequest
-
+Request to generate responses
 
 
 | Field | Type | Label | Description |
@@ -2148,7 +2148,7 @@ The request to detect parameters.
 <a name="ondewo.nlu.GenerateResponsesResponse"></a>
 
 ### GenerateResponsesResponse
-
+Response containing responses
 
 
 | Field | Type | Label | Description |
@@ -2163,7 +2163,7 @@ The request to detect parameters.
 <a name="ondewo.nlu.GenerateUserSaysRequest"></a>
 
 ### GenerateUserSaysRequest
-
+Request to generate user sentences
 
 
 | Field | Type | Label | Description |
@@ -2181,7 +2181,7 @@ The request to detect parameters.
 <a name="ondewo.nlu.GenerateUserSaysResponse"></a>
 
 ### GenerateUserSaysResponse
-
+Response containing user sentences
 
 
 | Field | Type | Label | Description |
@@ -2196,7 +2196,7 @@ The request to detect parameters.
 <a name="ondewo.nlu.GetAlternativeSentencesRequest"></a>
 
 ### GetAlternativeSentencesRequest
-
+Request to get alternative sentences
 
 
 | Field | Type | Label | Description |
@@ -2216,7 +2216,7 @@ The request to detect parameters.
 <a name="ondewo.nlu.GetAlternativeSentencesResponse"></a>
 
 ### GetAlternativeSentencesResponse
-
+Response containing alternative sentences
 
 
 | Field | Type | Label | Description |
@@ -2231,7 +2231,7 @@ The request to detect parameters.
 <a name="ondewo.nlu.GetAlternativeTrainingPhrasesRequest"></a>
 
 ### GetAlternativeTrainingPhrasesRequest
-
+Request to get alternative training phrases
 
 
 | Field | Type | Label | Description |
@@ -2255,7 +2255,7 @@ The request to detect parameters.
 <a name="ondewo.nlu.GetAlternativeTrainingPhrasesResponse"></a>
 
 ### GetAlternativeTrainingPhrasesResponse
-
+Response containing alternative training phrases
 
 
 | Field | Type | Label | Description |
@@ -2270,7 +2270,7 @@ The request to detect parameters.
 <a name="ondewo.nlu.GetSynonymsRequest"></a>
 
 ### GetSynonymsRequest
-
+Request to get synonyms
 
 
 | Field | Type | Label | Description |
@@ -2288,7 +2288,7 @@ The request to detect parameters.
 <a name="ondewo.nlu.GetSynonymsResponse"></a>
 
 ### GetSynonymsResponse
-
+Response containing synonyms
 
 
 | Field | Type | Label | Description |
@@ -2303,14 +2303,14 @@ The request to detect parameters.
 <a name="ondewo.nlu.GloVeEnrichmentConfig"></a>
 
 ### GloVeEnrichmentConfig
-
+Configuration for GloVe enrichment
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| is_active | [bool](#bool) |  |  |
-| enrichment_factor | [int32](#int32) |  |  |
-| execution_order | [int32](#int32) |  |  |
+| is_active | [bool](#bool) |  | Activation flag |
+| enrichment_factor | [int32](#int32) |  | Factor of enrichment |
+| execution_order | [int32](#int32) |  | Order of augmenter execution |
 
 
 
@@ -2320,7 +2320,7 @@ The request to detect parameters.
 <a name="ondewo.nlu.IntentClassified"></a>
 
 ### IntentClassified
-
+Intent classified by a certain intent classifier
 
 
 | Field | Type | Label | Description |
@@ -2354,14 +2354,14 @@ The request to detect parameters.
 <a name="ondewo.nlu.ThesaurusEnrichmentConfig"></a>
 
 ### ThesaurusEnrichmentConfig
-
+Configuration for Thesaurus enrichment
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| is_active | [bool](#bool) |  |  |
-| enrichment_factor | [int32](#int32) |  |  |
-| execution_order | [int32](#int32) |  |  |
+| is_active | [bool](#bool) |  | Activation flag |
+| enrichment_factor | [int32](#int32) |  | Factor of enrichment |
+| execution_order | [int32](#int32) |  | Order of augmenter execution |
 
 
 
@@ -2371,14 +2371,14 @@ The request to detect parameters.
 <a name="ondewo.nlu.Word2VecEnrichmentConfig"></a>
 
 ### Word2VecEnrichmentConfig
-
+Configuration for Word2Vec enrichment
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| is_active | [bool](#bool) |  |  |
-| enrichment_factor | [int32](#int32) |  |  |
-| execution_order | [int32](#int32) |  |  |
+| is_active | [bool](#bool) |  | Activation flag |
+| enrichment_factor | [int32](#int32) |  | Factor of enrichment |
+| execution_order | [int32](#int32) |  | Order of augmenter execution |
 
 
 
@@ -2388,14 +2388,14 @@ The request to detect parameters.
 <a name="ondewo.nlu.WordNetAugEnrichmentConfig"></a>
 
 ### WordNetAugEnrichmentConfig
-
+Configuration for WordNet augmenter enrichment
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| is_active | [bool](#bool) |  |  |
-| enrichment_factor | [int32](#int32) |  |  |
-| execution_order | [int32](#int32) |  |  |
+| is_active | [bool](#bool) |  | Activation flag |
+| enrichment_factor | [int32](#int32) |  | Factor of enrichment |
+| execution_order | [int32](#int32) |  | Order of augmenter execution |
 
 
 
@@ -2405,14 +2405,14 @@ The request to detect parameters.
 <a name="ondewo.nlu.XLNetAugEnrichmentConfig"></a>
 
 ### XLNetAugEnrichmentConfig
-
+Configuration for Thesaurus enrichment
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| is_active | [bool](#bool) |  |  |
-| enrichment_factor | [int32](#int32) |  |  |
-| execution_order | [int32](#int32) |  |  |
+| is_active | [bool](#bool) |  | Activation flag |
+| enrichment_factor | [int32](#int32) |  | Factor of enrichment |
+| execution_order | [int32](#int32) |  | Order of augmenter execution |
 
 
 
@@ -2436,7 +2436,7 @@ Enum of fuzzy ner algorithms
 <a name="ondewo.nlu.IntentAlgorithms"></a>
 
 ### IntentAlgorithms
-
+Structure of all Intent algorithms
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
@@ -2480,12 +2480,12 @@ The Central class defining the ondewo ai services
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
 | ExtractEntities | [ExtractEntitiesRequest](#ondewo.nlu.ExtractEntitiesRequest) | [ExtractEntitiesResponse](#ondewo.nlu.ExtractEntitiesResponse) | Processes a natural language query and returns detected entities |
-| GenerateUserSays | [GenerateUserSaysRequest](#ondewo.nlu.GenerateUserSaysRequest) | [GenerateUserSaysResponse](#ondewo.nlu.GenerateUserSaysResponse) |  |
-| GenerateResponses | [GenerateResponsesRequest](#ondewo.nlu.GenerateResponsesRequest) | [GenerateResponsesResponse](#ondewo.nlu.GenerateResponsesResponse) |  |
-| GetAlternativeSentences | [GetAlternativeSentencesRequest](#ondewo.nlu.GetAlternativeSentencesRequest) | [GetAlternativeSentencesResponse](#ondewo.nlu.GetAlternativeSentencesResponse) |  |
-| GetAlternativeTrainingPhrases | [GetAlternativeTrainingPhrasesRequest](#ondewo.nlu.GetAlternativeTrainingPhrasesRequest) | [GetAlternativeTrainingPhrasesResponse](#ondewo.nlu.GetAlternativeTrainingPhrasesResponse) |  |
-| GetSynonyms | [GetSynonymsRequest](#ondewo.nlu.GetSynonymsRequest) | [GetSynonymsResponse](#ondewo.nlu.GetSynonymsResponse) |  |
-| ClassifyIntents | [ClassifyIntentsRequest](#ondewo.nlu.ClassifyIntentsRequest) | [ClassifyIntentsResponse](#ondewo.nlu.ClassifyIntentsResponse) |  |
+| GenerateUserSays | [GenerateUserSaysRequest](#ondewo.nlu.GenerateUserSaysRequest) | [GenerateUserSaysResponse](#ondewo.nlu.GenerateUserSaysResponse) | Generates a list of training phrases |
+| GenerateResponses | [GenerateResponsesRequest](#ondewo.nlu.GenerateResponsesRequest) | [GenerateResponsesResponse](#ondewo.nlu.GenerateResponsesResponse) | Generate responses from all intents using synonyms |
+| GetAlternativeSentences | [GetAlternativeSentencesRequest](#ondewo.nlu.GetAlternativeSentencesRequest) | [GetAlternativeSentencesResponse](#ondewo.nlu.GetAlternativeSentencesResponse) | Generates alternative phrase based on original phrase |
+| GetAlternativeTrainingPhrases | [GetAlternativeTrainingPhrasesRequest](#ondewo.nlu.GetAlternativeTrainingPhrasesRequest) | [GetAlternativeTrainingPhrasesResponse](#ondewo.nlu.GetAlternativeTrainingPhrasesResponse) | Generates alternative training phrase based on original training phrase |
+| GetSynonyms | [GetSynonymsRequest](#ondewo.nlu.GetSynonymsRequest) | [GetSynonymsResponse](#ondewo.nlu.GetSynonymsResponse) | Generates synonyms for a certain word |
+| ClassifyIntents | [ClassifyIntentsRequest](#ondewo.nlu.ClassifyIntentsRequest) | [ClassifyIntentsResponse](#ondewo.nlu.ClassifyIntentsResponse) | Preprocess text and detects intents in a sentence |
 | ExtractEntitiesFuzzy | [ExtractEntitiesFuzzyRequest](#ondewo.nlu.ExtractEntitiesFuzzyRequest) | [ExtractEntitiesResponse](#ondewo.nlu.ExtractEntitiesResponse) | Processes a natural language query and returns detected entities |
 
  <!-- end services -->
@@ -3345,7 +3345,7 @@ Operation <response: [google.protobuf.Empty][google.protobuf.Empty], metadata: [
 <a name="ondewo.nlu.BatchCreateParametersRequest"></a>
 
 ### BatchCreateParametersRequest
-
+Request to create a batch of parameters in the specified intent
 
 
 | Field | Type | Label | Description |
@@ -3376,7 +3376,7 @@ Operation <response: [google.protobuf.Empty][google.protobuf.Empty], metadata: [
 <a name="ondewo.nlu.BatchCreateResponseMessagesRequest"></a>
 
 ### BatchCreateResponseMessagesRequest
-
+Request to create a list of new response messages and adds it to an intent
 
 
 | Field | Type | Label | Description |
@@ -3454,7 +3454,7 @@ The request message for [Intents.BatchDeleteIntents][google.cloud.dialogflow.v2.
 <a name="ondewo.nlu.BatchDeleteParametersRequest"></a>
 
 ### BatchDeleteParametersRequest
-
+Request to delete parameters specified by their names.
 
 
 | Field | Type | Label | Description |
@@ -3469,7 +3469,7 @@ The request message for [Intents.BatchDeleteIntents][google.cloud.dialogflow.v2.
 <a name="ondewo.nlu.BatchDeleteParametersResponse"></a>
 
 ### BatchDeleteParametersResponse
-
+This message contains response of deleted parameters
 
 
 | Field | Type | Label | Description |
@@ -3501,7 +3501,7 @@ The request message for [Intents.BatchDeleteIntents][google.cloud.dialogflow.v2.
 <a name="ondewo.nlu.BatchDeleteResponseMessagesRequest"></a>
 
 ### BatchDeleteResponseMessagesRequest
-
+Request to delete response messages specified by their names
 
 
 | Field | Type | Label | Description |
@@ -3516,7 +3516,7 @@ The request message for [Intents.BatchDeleteIntents][google.cloud.dialogflow.v2.
 <a name="ondewo.nlu.BatchDeleteResponseMessagesResponse"></a>
 
 ### BatchDeleteResponseMessagesResponse
-
+Response containing list with deleted response messages
 
 
 | Field | Type | Label | Description |
@@ -3595,7 +3595,7 @@ The request message for [Intents.BatchDeleteIntents][google.cloud.dialogflow.v2.
 <a name="ondewo.nlu.BatchGetParametersRequest"></a>
 
 ### BatchGetParametersRequest
-
+Request to get batch of parameters in a specified intent
 
 
 | Field | Type | Label | Description |
@@ -3610,7 +3610,7 @@ The request message for [Intents.BatchDeleteIntents][google.cloud.dialogflow.v2.
 <a name="ondewo.nlu.BatchGetResponseMessagesRequest"></a>
 
 ### BatchGetResponseMessagesRequest
-
+Request to retrieve a response messages
 
 
 | Field | Type | Label | Description |
@@ -3640,7 +3640,7 @@ The request message for [Intents.BatchDeleteIntents][google.cloud.dialogflow.v2.
 <a name="ondewo.nlu.BatchParametersStatusResponse"></a>
 
 ### BatchParametersStatusResponse
-
+Response containing a batch of parameters in the specified intent
 
 
 | Field | Type | Label | Description |
@@ -3755,7 +3755,7 @@ The response message for [Intents.BatchUpdateIntents][google.cloud.dialogflow.v2
 <a name="ondewo.nlu.BatchUpdateParametersRequest"></a>
 
 ### BatchUpdateParametersRequest
-
+Request to update parameters and adds them to an intent
 
 
 | Field | Type | Label | Description |
@@ -3770,7 +3770,7 @@ The response message for [Intents.BatchUpdateIntents][google.cloud.dialogflow.v2
 <a name="ondewo.nlu.BatchUpdateResponseMessagesRequest"></a>
 
 ### BatchUpdateResponseMessagesRequest
-
+Request to update a response message in the specified intent
 
 
 | Field | Type | Label | Description |
@@ -4616,7 +4616,7 @@ The request message for TrainingPhraseRequest
 <a name="ondewo.nlu.ListTrainingPhrasesofIntentsWithEnrichmentResponse"></a>
 
 ### ListTrainingPhrasesofIntentsWithEnrichmentResponse
-
+This message contains a list of training phrases filtered by intent ids, language code and parent passed through the request
 
 
 | Field | Type | Label | Description |
@@ -5302,7 +5302,7 @@ unspecified, default value depends on endpoint # TODO |
 <a name="ondewo.nlu.GetEntityTypeCountRequest"></a>
 
 ### GetEntityTypeCountRequest
-
+Request to get entity type count
 
 
 | Field | Type | Label | Description |
@@ -5320,7 +5320,7 @@ Example: * `projects/<Project ID>/agent` |
 <a name="ondewo.nlu.GetIntentCountRequest"></a>
 
 ### GetIntentCountRequest
-
+Request to get the intent count
 
 
 | Field | Type | Label | Description |
@@ -5338,7 +5338,7 @@ Example: * `projects/<Project ID>/agent` |
 <a name="ondewo.nlu.GetProjectElementStatRequest"></a>
 
 ### GetProjectElementStatRequest
-
+Request to get project element statistics
 
 
 | Field | Type | Label | Description |
@@ -5356,7 +5356,7 @@ Example: * `projects/<Project ID>/agent/intents/<Intent ID>` * `projects/<Projec
 <a name="ondewo.nlu.GetProjectStatRequest"></a>
 
 ### GetProjectStatRequest
-
+Request to get project statistics
 
 
 | Field | Type | Label | Description |
@@ -5379,18 +5379,18 @@ Example: * `projects/<Project ID>/agent` |
 <a name="ondewo.nlu.ProjectStatistics"></a>
 
 ### ProjectStatistics
-
+Project Root Statistics
 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
-| GetIntentCount | [GetIntentCountRequest](#ondewo.nlu.GetIntentCountRequest) | [StatResponse](#ondewo.nlu.StatResponse) | Project Root Statistics |
-| GetEntityTypeCount | [GetEntityTypeCountRequest](#ondewo.nlu.GetEntityTypeCountRequest) | [StatResponse](#ondewo.nlu.StatResponse) |  |
-| GetUserCount | [GetProjectStatRequest](#ondewo.nlu.GetProjectStatRequest) | [StatResponse](#ondewo.nlu.StatResponse) |  |
-| GetSessionCount | [GetProjectStatRequest](#ondewo.nlu.GetProjectStatRequest) | [StatResponse](#ondewo.nlu.StatResponse) |  |
-| GetTrainingPhraseCount | [GetProjectElementStatRequest](#ondewo.nlu.GetProjectElementStatRequest) | [StatResponse](#ondewo.nlu.StatResponse) | Intent Statistics |
-| GetResponseCount | [GetProjectElementStatRequest](#ondewo.nlu.GetProjectElementStatRequest) | [StatResponse](#ondewo.nlu.StatResponse) |  |
-| GetEntityValueCount | [GetProjectElementStatRequest](#ondewo.nlu.GetProjectElementStatRequest) | [StatResponse](#ondewo.nlu.StatResponse) | Entity Type Statistics |
-| GetEntitySynonymCount | [GetProjectElementStatRequest](#ondewo.nlu.GetProjectElementStatRequest) | [StatResponse](#ondewo.nlu.StatResponse) | Entity Value Statistics |
+| GetIntentCount | [GetIntentCountRequest](#ondewo.nlu.GetIntentCountRequest) | [StatResponse](#ondewo.nlu.StatResponse) | Returns the intent count within a project |
+| GetEntityTypeCount | [GetEntityTypeCountRequest](#ondewo.nlu.GetEntityTypeCountRequest) | [StatResponse](#ondewo.nlu.StatResponse) | Returns the entity types count within a project |
+| GetUserCount | [GetProjectStatRequest](#ondewo.nlu.GetProjectStatRequest) | [StatResponse](#ondewo.nlu.StatResponse) | Returns the users count within a project |
+| GetSessionCount | [GetProjectStatRequest](#ondewo.nlu.GetProjectStatRequest) | [StatResponse](#ondewo.nlu.StatResponse) | Returns the sessions count within a project |
+| GetTrainingPhraseCount | [GetProjectElementStatRequest](#ondewo.nlu.GetProjectElementStatRequest) | [StatResponse](#ondewo.nlu.StatResponse) | Returns the training phrases count within a project |
+| GetResponseCount | [GetProjectElementStatRequest](#ondewo.nlu.GetProjectElementStatRequest) | [StatResponse](#ondewo.nlu.StatResponse) | Returns the responses count within a project |
+| GetEntityValueCount | [GetProjectElementStatRequest](#ondewo.nlu.GetProjectElementStatRequest) | [StatResponse](#ondewo.nlu.StatResponse) | Returns the entity value count within a project |
+| GetEntitySynonymCount | [GetProjectElementStatRequest](#ondewo.nlu.GetProjectElementStatRequest) | [StatResponse](#ondewo.nlu.StatResponse) | Returns the entity synonyms count within a project |
 
  <!-- end services -->
 
@@ -5406,7 +5406,7 @@ Example: * `projects/<Project ID>/agent` |
 <a name="ondewo.nlu.GetUserProjectCountRequest"></a>
 
 ### GetUserProjectCountRequest
-
+Request to get user project count
 
 
 | Field | Type | Label | Description |
@@ -5427,13 +5427,13 @@ Example: * `projects/<Project ID>/agent` |
 <a name="ondewo.nlu.ServerStatistics"></a>
 
 ### ServerStatistics
-
+Server project statistics
 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
-| GetProjectCount | [.google.protobuf.Empty](#google.protobuf.Empty) | [StatResponse](#ondewo.nlu.StatResponse) |  |
-| GetUserProjectCount | [GetUserProjectCountRequest](#ondewo.nlu.GetUserProjectCountRequest) | [StatResponse](#ondewo.nlu.StatResponse) |  |
-| GetUserCount | [.google.protobuf.Empty](#google.protobuf.Empty) | [StatResponse](#ondewo.nlu.StatResponse) |  |
+| GetProjectCount | [.google.protobuf.Empty](#google.protobuf.Empty) | [StatResponse](#ondewo.nlu.StatResponse) | Returns the count of projects in the CAI server |
+| GetUserProjectCount | [GetUserProjectCountRequest](#ondewo.nlu.GetUserProjectCountRequest) | [StatResponse](#ondewo.nlu.StatResponse) | Returns the count of projects of a user |
+| GetUserCount | [.google.protobuf.Empty](#google.protobuf.Empty) | [StatResponse](#ondewo.nlu.StatResponse) | Returns the users count within a project |
 
  <!-- end services -->
 
@@ -6264,7 +6264,7 @@ user intent and respond.
 <a name="ondewo.nlu.CreateServerRoleRequest"></a>
 
 ### CreateServerRoleRequest
-
+Request to create server role
 
 
 | Field | Type | Label | Description |
@@ -6279,13 +6279,13 @@ user intent and respond.
 <a name="ondewo.nlu.CreateUserRequest"></a>
 
 ### CreateUserRequest
-
+Request to create user
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| user | [User](#ondewo.nlu.User) |  |  |
-| password | [string](#string) |  |  |
+| user | [User](#ondewo.nlu.User) |  | User ID |
+| password | [string](#string) |  | password |
 
 
 
@@ -6295,7 +6295,7 @@ user intent and respond.
 <a name="ondewo.nlu.DeleteServerRoleRequest"></a>
 
 ### DeleteServerRoleRequest
-
+Request to delete server role
 
 
 | Field | Type | Label | Description |
@@ -6310,7 +6310,7 @@ user intent and respond.
 <a name="ondewo.nlu.DeleteUserRequest"></a>
 
 ### DeleteUserRequest
-
+Request to delete user
 
 
 | Field | Type | Label | Description |
@@ -6325,7 +6325,7 @@ user intent and respond.
 <a name="ondewo.nlu.GetServerRoleRequest"></a>
 
 ### GetServerRoleRequest
-
+Request to get server role
 
 
 | Field | Type | Label | Description |
@@ -6341,7 +6341,7 @@ user intent and respond.
 <a name="ondewo.nlu.GetUserRequest"></a>
 
 ### GetUserRequest
-
+Request to get user
 
 
 | Field | Type | Label | Description |
@@ -6372,7 +6372,7 @@ Server permissions
 <a name="ondewo.nlu.ListServerPermissionsResponse"></a>
 
 ### ListServerPermissionsResponse
-
+Response containing list of server permissions
 
 
 | Field | Type | Label | Description |
@@ -6388,7 +6388,7 @@ Server permissions
 <a name="ondewo.nlu.ListServerRolesRequest"></a>
 
 ### ListServerRolesRequest
-
+Request to list server roles
 
 
 | Field | Type | Label | Description |
@@ -6403,7 +6403,7 @@ Server permissions
 <a name="ondewo.nlu.ListServerRolesResponse"></a>
 
 ### ListServerRolesResponse
-
+Response containing list of server roles
 
 
 | Field | Type | Label | Description |
@@ -6419,7 +6419,7 @@ Server permissions
 <a name="ondewo.nlu.ListUserInfosResponse"></a>
 
 ### ListUserInfosResponse
-
+Response containing list of users
 
 
 | Field | Type | Label | Description |
@@ -6435,7 +6435,7 @@ Server permissions
 <a name="ondewo.nlu.ListUsersRequest"></a>
 
 ### ListUsersRequest
-
+Request to list user
 
 
 | Field | Type | Label | Description |
@@ -6450,7 +6450,7 @@ Server permissions
 <a name="ondewo.nlu.ListUsersResponse"></a>
 
 ### ListUsersResponse
-
+Response containing list of users
 
 
 | Field | Type | Label | Description |
@@ -6515,7 +6515,7 @@ Server Role messages
 <a name="ondewo.nlu.UpdateServerRoleRequest"></a>
 
 ### UpdateServerRoleRequest
-
+Request to update server role
 
 
 | Field | Type | Label | Description |
@@ -6531,7 +6531,7 @@ Server Role messages
 <a name="ondewo.nlu.UpdateUserRequest"></a>
 
 ### UpdateUserRequest
-
+Request to update user
 
 
 | Field | Type | Label | Description |
@@ -6600,7 +6600,7 @@ this message contains all the fields that required for user db
 <a name="ondewo.nlu.DefaultServerRole"></a>
 
 ### DefaultServerRole
-
+Structure of server role
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
@@ -6623,21 +6623,21 @@ this message contains all the fields that required for user db
 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
-| CreateUser | [CreateUserRequest](#ondewo.nlu.CreateUserRequest) | [User](#ondewo.nlu.User) |  |
-| GetUser | [GetUserRequest](#ondewo.nlu.GetUserRequest) | [User](#ondewo.nlu.User) |  |
-| GetUserInfo | [GetUserRequest](#ondewo.nlu.GetUserRequest) | [UserInfo](#ondewo.nlu.UserInfo) |  |
-| DeleteUser | [GetUserRequest](#ondewo.nlu.GetUserRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) |  |
-| UpdateUser | [UpdateUserRequest](#ondewo.nlu.UpdateUserRequest) | [User](#ondewo.nlu.User) |  |
-| ListUsers | [ListUsersRequest](#ondewo.nlu.ListUsersRequest) | [ListUsersResponse](#ondewo.nlu.ListUsersResponse) |  |
-| ListUserInfos | [ListUsersRequest](#ondewo.nlu.ListUsersRequest) | [ListUserInfosResponse](#ondewo.nlu.ListUserInfosResponse) |  |
-| CreateServerRole | [CreateServerRoleRequest](#ondewo.nlu.CreateServerRoleRequest) | [ServerRole](#ondewo.nlu.ServerRole) |  |
-| GetServerRole | [GetServerRoleRequest](#ondewo.nlu.GetServerRoleRequest) | [ServerRole](#ondewo.nlu.ServerRole) |  |
-| DeleteServerRole | [DeleteServerRoleRequest](#ondewo.nlu.DeleteServerRoleRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) |  |
-| UpdateServerRole | [UpdateServerRoleRequest](#ondewo.nlu.UpdateServerRoleRequest) | [ServerRole](#ondewo.nlu.ServerRole) |  |
-| ListServerRoles | [ListServerRolesRequest](#ondewo.nlu.ListServerRolesRequest) | [ListServerRolesResponse](#ondewo.nlu.ListServerRolesResponse) |  |
-| ListServerPermissions | [ListServerPermissionsRequest](#ondewo.nlu.ListServerPermissionsRequest) | [ListServerPermissionsResponse](#ondewo.nlu.ListServerPermissionsResponse) |  |
-| Login | [LoginRequest](#ondewo.nlu.LoginRequest) | [LoginResponse](#ondewo.nlu.LoginResponse) |  |
-| CheckLogin | [.google.protobuf.Empty](#google.protobuf.Empty) | [.google.protobuf.Empty](#google.protobuf.Empty) |  |
+| CreateUser | [CreateUserRequest](#ondewo.nlu.CreateUserRequest) | [User](#ondewo.nlu.User) | Creates user |
+| GetUser | [GetUserRequest](#ondewo.nlu.GetUserRequest) | [User](#ondewo.nlu.User) | Gets user |
+| GetUserInfo | [GetUserRequest](#ondewo.nlu.GetUserRequest) | [UserInfo](#ondewo.nlu.UserInfo) | Gets user information |
+| DeleteUser | [GetUserRequest](#ondewo.nlu.GetUserRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Deletes user |
+| UpdateUser | [UpdateUserRequest](#ondewo.nlu.UpdateUserRequest) | [User](#ondewo.nlu.User) | Updates user |
+| ListUsers | [ListUsersRequest](#ondewo.nlu.ListUsersRequest) | [ListUsersResponse](#ondewo.nlu.ListUsersResponse) | Lists users |
+| ListUserInfos | [ListUsersRequest](#ondewo.nlu.ListUsersRequest) | [ListUserInfosResponse](#ondewo.nlu.ListUserInfosResponse) | Lists users information |
+| CreateServerRole | [CreateServerRoleRequest](#ondewo.nlu.CreateServerRoleRequest) | [ServerRole](#ondewo.nlu.ServerRole) | Creates server role |
+| GetServerRole | [GetServerRoleRequest](#ondewo.nlu.GetServerRoleRequest) | [ServerRole](#ondewo.nlu.ServerRole) | Get server role |
+| DeleteServerRole | [DeleteServerRoleRequest](#ondewo.nlu.DeleteServerRoleRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Deletes server role |
+| UpdateServerRole | [UpdateServerRoleRequest](#ondewo.nlu.UpdateServerRoleRequest) | [ServerRole](#ondewo.nlu.ServerRole) | Updates server role |
+| ListServerRoles | [ListServerRolesRequest](#ondewo.nlu.ListServerRolesRequest) | [ListServerRolesResponse](#ondewo.nlu.ListServerRolesResponse) | Lists server roles |
+| ListServerPermissions | [ListServerPermissionsRequest](#ondewo.nlu.ListServerPermissionsRequest) | [ListServerPermissionsResponse](#ondewo.nlu.ListServerPermissionsResponse) | Lists server permissions |
+| Login | [LoginRequest](#ondewo.nlu.LoginRequest) | [LoginResponse](#ondewo.nlu.LoginResponse) | Request to login |
+| CheckLogin | [.google.protobuf.Empty](#google.protobuf.Empty) | [.google.protobuf.Empty](#google.protobuf.Empty) | Checks login |
 
  <!-- end services -->
 

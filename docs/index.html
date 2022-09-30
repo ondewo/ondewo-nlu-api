@@ -2573,19 +2573,19 @@ grpcurl -plaintext -H 'cai-token: aimp' localhost:50055 ondewo.nlu.Agents.ListAl
 
           <pre>rpc ListUsersInProject (<a href="#ondewo.nlu.ListUsersInProjectRequest">ListUsersInProjectRequest</a>) returns (<a href="#ondewo.nlu.ListUsersInProjectResponse">ListUsersInProjectResponse)</a></pre>
 
-          
+          Lists users in the project (agent)
         
           <h4 id="ondewo.nlu.Agents.GetPlatformInfo" class="title-badge method">GetPlatformInfo</h4>
 
           <pre>rpc GetPlatformInfo (<a href="#google.protobuf.Empty">.google.protobuf.Empty</a>) returns (<a href="#ondewo.nlu.GetPlatformInfoResponse">GetPlatformInfoResponse)</a></pre>
 
-          
+          Gets information from the platform
         
           <h4 id="ondewo.nlu.Agents.ListProjectPermissions" class="title-badge method">ListProjectPermissions</h4>
 
           <pre>rpc ListProjectPermissions (<a href="#ondewo.nlu.ListProjectPermissionsRequest">ListProjectPermissionsRequest</a>) returns (<a href="#ondewo.nlu.ListProjectPermissionsResponse">ListProjectPermissionsResponse)</a></pre>
 
-          
+          List permissions from the project (agent)
         
           <h4 id="ondewo.nlu.Agents.TrainAgent" class="title-badge method">TrainAgent</h4>
 
@@ -2637,7 +2637,7 @@ Operation <response: [google.protobuf.Empty][google.protobuf.Empty],
 
           <pre>rpc OptimizeRankingMatch (<a href="#ondewo.nlu.OptimizeRankingMatchRequest">OptimizeRankingMatchRequest</a>) returns (<a href="#ondewo.nlu.Operation">Operation)</a></pre>
 
-          
+          Runs optimize ranking match
         
           <h4 id="ondewo.nlu.Agents.RestoreAgent" class="title-badge method">RestoreAgent</h4>
 
@@ -2655,31 +2655,31 @@ Operation <response: [google.protobuf.Empty][google.protobuf.Empty],
 
           <pre>rpc GetAgentStatistics (<a href="#ondewo.nlu.GetAgentStatisticsRequest">GetAgentStatisticsRequest</a>) returns (<a href="#ondewo.nlu.GetAgentStatisticsResponse">GetAgentStatisticsResponse)</a></pre>
 
-          
+          Gets statistics for the agent
         
           <h4 id="ondewo.nlu.Agents.SetAgentStatus" class="title-badge method">SetAgentStatus</h4>
 
           <pre>rpc SetAgentStatus (<a href="#ondewo.nlu.SetAgentStatusRequest">SetAgentStatusRequest</a>) returns (<a href="#ondewo.nlu.Agent">Agent)</a></pre>
 
-          
+          Sets status for the agent
         
           <h4 id="ondewo.nlu.Agents.SetResources" class="title-badge method">SetResources</h4>
 
           <pre>rpc SetResources (<a href="#ondewo.nlu.SetResourcesRequest">SetResourcesRequest</a>) returns (<a href="#google.protobuf.Empty">.google.protobuf.Empty)</a></pre>
 
-          
+          Sets resources
         
           <h4 id="ondewo.nlu.Agents.DeleteResources" class="title-badge method">DeleteResources</h4>
 
           <pre>rpc DeleteResources (<a href="#ondewo.nlu.DeleteResourcesRequest">DeleteResourcesRequest</a>) returns (<a href="#google.protobuf.Empty">.google.protobuf.Empty)</a></pre>
 
-          
+          Deletes resources
         
           <h4 id="ondewo.nlu.Agents.ExportResources" class="title-badge method">ExportResources</h4>
 
           <pre>rpc ExportResources (<a href="#ondewo.nlu.ExportResourcesRequest">ExportResourcesRequest</a>) returns (<a href="#ondewo.nlu.ExportResourcesResponse">ExportResourcesResponse)</a></pre>
 
-          
+          Exports resources
         
           <h4 id="ondewo.nlu.Agents.GetModelStatuses" class="title-badge method">GetModelStatuses</h4>
 
@@ -3043,7 +3043,7 @@ Operation <response: [google.protobuf.Empty][google.protobuf.Empty],
       <div id="ondewo/nlu/agent.proto-messages" class="object-category">Messages</div>
       
         <h3 id="ondewo.nlu.AddUserToProjectRequest" class="title-badge message">AddUserToProjectRequest</h3>
-        <p></p>
+        <p>Request to add user to project.</p>
 
         
           <table class="field-table">
@@ -3056,21 +3056,21 @@ Operation <response: [google.protobuf.Empty][google.protobuf.Empty],
                   <td>parent</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>ID of the project </p></td>
                 </tr>
               
                 <tr>
                   <td>user_id</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>User object </p></td>
                 </tr>
               
                 <tr>
                   <td>project_role_id</td>
                   <td><a href="#uint32">uint32</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>ID of the project role of the user </p></td>
                 </tr>
               
             </tbody>
@@ -3210,7 +3210,7 @@ Read-only in the Agent message </p></td>
         
       
         <h3 id="ondewo.nlu.AgentSorting" class="title-badge message">AgentSorting</h3>
-        <p></p>
+        <p>Sorting agents</p>
 
         
           <table class="field-table">
@@ -3293,7 +3293,7 @@ Format: `projects/<Project ID>`. </p></td>
                   <td>branch</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Git branch </p></td>
                 </tr>
               
             </tbody>
@@ -3304,7 +3304,7 @@ Format: `projects/<Project ID>`. </p></td>
         
       
         <h3 id="ondewo.nlu.CreateAgentRequest" class="title-badge message">CreateAgentRequest</h3>
-        <p></p>
+        <p>Request to create an agent</p>
 
         
           <table class="field-table">
@@ -3376,7 +3376,7 @@ Sorting position of the GetPlatformMappingRequest. </p></td>
         
       
         <h3 id="ondewo.nlu.DeleteAgentRequest" class="title-badge message">DeleteAgentRequest</h3>
-        <p></p>
+        <p>Request to delete the agent</p>
 
         
           <table class="field-table">
@@ -3389,7 +3389,8 @@ Sorting position of the GetPlatformMappingRequest. </p></td>
                   <td>parent</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Required. The project that the agent to fetch is associated with.
+Format: `projects/<Project ID>/agents`. </p></td>
                 </tr>
               
             </tbody>
@@ -3400,7 +3401,7 @@ Sorting position of the GetPlatformMappingRequest. </p></td>
         
       
         <h3 id="ondewo.nlu.DeleteResourcesRequest" class="title-badge message">DeleteResourcesRequest</h3>
-        <p></p>
+        <p>Request to delete resources</p>
 
         
           <table class="field-table">
@@ -3413,7 +3414,8 @@ Sorting position of the GetPlatformMappingRequest. </p></td>
                   <td>parent</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Required. The project that the agent to fetch is associated with.
+Format: `projects/<Project ID>/agents`. </p></td>
                 </tr>
               
                 <tr>
@@ -3533,7 +3535,7 @@ curl \
         
       
         <h3 id="ondewo.nlu.ExportBenchmarkAgentRequest" class="title-badge message">ExportBenchmarkAgentRequest</h3>
-        <p></p>
+        <p>Request to export benchmark agent</p>
 
         
           <table class="field-table">
@@ -3592,7 +3594,7 @@ Optional: bigger than zero </p></td>
         
       
         <h3 id="ondewo.nlu.ExportBenchmarkAgentResponse" class="title-badge message">ExportBenchmarkAgentResponse</h3>
-        <p></p>
+        <p>Response to export benchmark agent</p>
 
         
           <table class="field-table">
@@ -3654,7 +3656,7 @@ Optional: bigger than zero </p></td>
         
       
         <h3 id="ondewo.nlu.ExportResourcesRequest" class="title-badge message">ExportResourcesRequest</h3>
-        <p></p>
+        <p>Request to export resources</p>
 
         
           <table class="field-table">
@@ -3667,7 +3669,8 @@ Optional: bigger than zero </p></td>
                   <td>parent</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Required. The project that the agent to fetch is associated with.
+Format: `projects/<Project ID>/agents`. </p></td>
                 </tr>
               
                 <tr>
@@ -3699,7 +3702,7 @@ Optional: bigger than zero </p></td>
         
       
         <h3 id="ondewo.nlu.ExportResourcesResponse" class="title-badge message">ExportResourcesResponse</h3>
-        <p></p>
+        <p>Response to export resources</p>
 
         
           <table class="field-table">
@@ -3712,7 +3715,8 @@ Optional: bigger than zero </p></td>
                   <td>parent</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Required. The project that the agent to fetch is associated with.
+Format: `projects/<Project ID>/agents`. </p></td>
                 </tr>
               
                 <tr>
@@ -3810,7 +3814,8 @@ Format: `projects/<Project ID>/agent`. </p></td>
                   <td>parent</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Required. The project that the agent to fetch is associated with.
+Format: `projects/<Project ID>/agents`. </p></td>
                 </tr>
               
                 <tr>
@@ -3928,7 +3933,8 @@ Format: `projects/<Project ID>/agent`. </p></td>
                   <td>parent</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Required. The project that the agent to fetch is associated with.
+Format: `projects/<Project ID>/agents`. </p></td>
                 </tr>
               
                 <tr>
@@ -4060,7 +4066,8 @@ Format: `projects/<Project ID>/agent`. </p></td>
                   <td>parent</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Required. The project that the agent to fetch is associated with.
+Format: `projects/<Project ID>/agents`. </p></td>
                 </tr>
               
                 <tr>
@@ -4164,7 +4171,8 @@ Format: `projects/<Project ID>/agent`. </p></td>
                   <td>parent</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Required. The project that the agent to fetch is associated with.
+Format: `projects/<Project ID>/agents`. </p></td>
                 </tr>
               
                 <tr>
@@ -4282,7 +4290,8 @@ Format: `projects/<Project ID>/agent`. </p></td>
                   <td>parent</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Required. The project that the agent to fetch is associated with.
+Format: `projects/<Project ID>/agents`. </p></td>
                 </tr>
               
                 <tr>
@@ -4400,7 +4409,8 @@ Format: `projects/<Project ID>/agent`. </p></td>
                   <td>parent</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Required. The project that the agent to fetch is associated with.
+Format: `projects/<Project ID>/agents`. </p></td>
                 </tr>
               
                 <tr>
@@ -4518,7 +4528,8 @@ Format: `projects/<Project ID>/agent`. </p></td>
                   <td>parent</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Required. The project that the agent to fetch is associated with.
+Format: `projects/<Project ID>/agents`. </p></td>
                 </tr>
               
                 <tr>
@@ -4643,7 +4654,8 @@ Format: `projects/<Project ID>/agent`. </p></td>
                   <td>parent</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Required. The project that the agent to fetch is associated with.
+Format: `projects/<Project ID>/agents`. </p></td>
                 </tr>
               
                 <tr>
@@ -4775,7 +4787,8 @@ Format: `projects/<Project ID>/agent`. </p></td>
                   <td>parent</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Required. The project that the agent to fetch is associated with.
+Format: `projects/<Project ID>/agents`. </p></td>
                 </tr>
               
                 <tr>
@@ -4900,7 +4913,8 @@ Format: `projects/<Project ID>/agent`. </p></td>
                   <td>parent</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Required. The project that the agent to fetch is associated with.
+Format: `projects/<Project ID>/agents`. </p></td>
                 </tr>
               
                 <tr>
@@ -5065,7 +5079,7 @@ Format: `projects/<Project ID>/agents`. </p></td>
         
       
         <h3 id="ondewo.nlu.GetAgentStatisticsRequest" class="title-badge message">GetAgentStatisticsRequest</h3>
-        <p></p>
+        <p>Request statistics of the agent</p>
 
         
           <table class="field-table">
@@ -5111,7 +5125,7 @@ Format: `projects/<Project ID>`. </p></td>
         
       
         <h3 id="ondewo.nlu.GetAgentStatisticsResponse" class="title-badge message">GetAgentStatisticsResponse</h3>
-        <p></p>
+        <p>Response to get statistics of the agent</p>
 
         
           <table class="field-table">
@@ -5149,7 +5163,7 @@ Format: `projects/<Project ID>`. </p></td>
         
       
         <h3 id="ondewo.nlu.GetModelStatusesRequest" class="title-badge message">GetModelStatusesRequest</h3>
-        <p></p>
+        <p>Request to get model statuses</p>
 
         
           <table class="field-table">
@@ -5195,7 +5209,7 @@ Format: `projects/<Project ID>/agent`. </p></td>
         
       
         <h3 id="ondewo.nlu.GetModelStatusesResponse" class="title-badge message">GetModelStatusesResponse</h3>
-        <p></p>
+        <p>Response to get model statuses</p>
 
         
           <table class="field-table">
@@ -5219,7 +5233,7 @@ Format: `projects/<Project ID>/agent`. </p></td>
         
       
         <h3 id="ondewo.nlu.GetPlatformInfoResponse" class="title-badge message">GetPlatformInfoResponse</h3>
-        <p></p>
+        <p>Get platform information</p>
 
         
           <table class="field-table">
@@ -5232,14 +5246,14 @@ Format: `projects/<Project ID>/agent`. </p></td>
                   <td>version</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Version of the platform </p></td>
                 </tr>
               
                 <tr>
                   <td>commit_hash</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Corresponding commit hash </p></td>
                 </tr>
               
             </tbody>
@@ -5250,7 +5264,7 @@ Format: `projects/<Project ID>/agent`. </p></td>
         
       
         <h3 id="ondewo.nlu.GetPlatformMappingRequest" class="title-badge message">GetPlatformMappingRequest</h3>
-        <p></p>
+        <p>Requeset to get platform mapping</p>
 
         
           <table class="field-table">
@@ -5328,7 +5342,7 @@ curl \
         
       
         <h3 id="ondewo.nlu.ListAgentsOfUserResponse" class="title-badge message">ListAgentsOfUserResponse</h3>
-        <p></p>
+        <p>Get list of agents of user</p>
 
         
           <table class="field-table">
@@ -5361,7 +5375,7 @@ more results in the list. </p></td>
         
       
         <h3 id="ondewo.nlu.ListAgentsRequest" class="title-badge message">ListAgentsRequest</h3>
-        <p></p>
+        <p>Request to get the list of agents</p>
 
         
           <table class="field-table">
@@ -5399,7 +5413,7 @@ more results in the list. </p></td>
         
       
         <h3 id="ondewo.nlu.ListAgentsResponse" class="title-badge message">ListAgentsResponse</h3>
-        <p></p>
+        <p>Get list of agents</p>
 
         
           <table class="field-table">
@@ -5456,7 +5470,7 @@ more results in the list. </p></td>
         
       
         <h3 id="ondewo.nlu.ListProjectPermissionsResponse" class="title-badge message">ListProjectPermissionsResponse</h3>
-        <p></p>
+        <p>List project permissions</p>
 
         
           <table class="field-table">
@@ -5489,7 +5503,7 @@ more results in the list. </p></td>
         
       
         <h3 id="ondewo.nlu.ListUsersInProjectRequest" class="title-badge message">ListUsersInProjectRequest</h3>
-        <p></p>
+        <p>Request to list users in the project</p>
 
         
           <table class="field-table">
@@ -5520,7 +5534,7 @@ more results in the list. </p></td>
         
       
         <h3 id="ondewo.nlu.ListUsersInProjectResponse" class="title-badge message">ListUsersInProjectResponse</h3>
-        <p></p>
+        <p>Get list users in project</p>
 
         
           <table class="field-table">
@@ -5553,7 +5567,7 @@ more results in the list. </p></td>
         
       
         <h3 id="ondewo.nlu.ModelStatus" class="title-badge message">ModelStatus</h3>
-        <p></p>
+        <p>Status of model</p>
 
         
           <table class="field-table">
@@ -5806,7 +5820,7 @@ example {'OndewoIntentSimilarityMatch': 0.59, 'OndewoIntentNamedSimilarityMatch'
         
       
         <h3 id="ondewo.nlu.RemoveUserFromProjectRequest" class="title-badge message">RemoveUserFromProjectRequest</h3>
-        <p></p>
+        <p>Request to remove user from the project.</p>
 
         
           <table class="field-table">
@@ -5819,14 +5833,14 @@ example {'OndewoIntentSimilarityMatch': 0.59, 'OndewoIntentNamedSimilarityMatch'
                   <td>parent</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>ID of the project </p></td>
                 </tr>
               
                 <tr>
                   <td>user_id</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>User object </p></td>
                 </tr>
               
             </tbody>
@@ -5890,7 +5904,7 @@ curl \
         
       
         <h3 id="ondewo.nlu.SetAgentStatusRequest" class="title-badge message">SetAgentStatusRequest</h3>
-        <p></p>
+        <p>Request to set status of the agent</p>
 
         
           <table class="field-table">
@@ -5929,7 +5943,7 @@ Format: `projects/<Project ID>/agent`. </p></td>
         
       
         <h3 id="ondewo.nlu.SetResourcesRequest" class="title-badge message">SetResourcesRequest</h3>
-        <p></p>
+        <p>Request to set resources</p>
 
         
           <table class="field-table">
@@ -5942,7 +5956,8 @@ Format: `projects/<Project ID>/agent`. </p></td>
                   <td>parent</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Required. The project that the agent to fetch is associated with.
+Format: `projects/<Project ID>/agents`. </p></td>
                 </tr>
               
                 <tr>
@@ -6002,7 +6017,7 @@ Format: `projects/<Project ID>`. </p></td>
                   <td>branch</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Git branch </p></td>
                 </tr>
               
                 <tr>
@@ -6020,7 +6035,7 @@ Format: `projects/<Project ID>`. </p></td>
         
       
         <h3 id="ondewo.nlu.UpdateAgentRequest" class="title-badge message">UpdateAgentRequest</h3>
-        <p></p>
+        <p>Request to update the agent</p>
 
         
           <table class="field-table">
@@ -6058,7 +6073,7 @@ Format: `projects/<Project ID>`. </p></td>
         
       
         <h3 id="ondewo.nlu.UserInProject" class="title-badge message">UserInProject</h3>
-        <p></p>
+        <p>Request to get user in project</p>
 
         
           <table class="field-table">
@@ -6142,7 +6157,7 @@ Format: `projects/<Project ID>`. </p></td>
         </table>
       
         <h3 id="ondewo.nlu.AgentStatus" class="title-badge enum">AgentStatus</h3>
-        <p></p>
+        <p>Structure for Agent / Project status</p>
         <table class="enum-table">
           <thead>
             <tr><td>Name</td><td>Number</td><td>Description</td></tr>
@@ -6206,7 +6221,7 @@ Format: `projects/<Project ID>`. </p></td>
         </table>
       
         <h3 id="ondewo.nlu.FullTextSearchRequest.QueryType" class="title-badge enum">FullTextSearchRequest.QueryType</h3>
-        <p></p>
+        <p>Structure of query</p>
         <table class="enum-table">
           <thead>
             <tr><td>Name</td><td>Number</td><td>Description</td></tr>
@@ -6365,7 +6380,7 @@ Format: `projects/<Project ID>`. </p></td>
         </table>
       
         <h3 id="ondewo.nlu.ReportFormat" class="title-badge enum">ReportFormat</h3>
-        <p></p>
+        <p>Structure of report</p>
         <table class="enum-table">
           <thead>
             <tr><td>Name</td><td>Number</td><td>Description</td></tr>
@@ -6465,37 +6480,37 @@ Format: `projects/<Project ID>`. </p></td>
 
           <pre>rpc GenerateUserSays (<a href="#ondewo.nlu.GenerateUserSaysRequest">GenerateUserSaysRequest</a>) returns (<a href="#ondewo.nlu.GenerateUserSaysResponse">GenerateUserSaysResponse)</a></pre>
 
-          
+          Generates a list of training phrases
         
           <h4 id="ondewo.nlu.AiServices.GenerateResponses" class="title-badge method">GenerateResponses</h4>
 
           <pre>rpc GenerateResponses (<a href="#ondewo.nlu.GenerateResponsesRequest">GenerateResponsesRequest</a>) returns (<a href="#ondewo.nlu.GenerateResponsesResponse">GenerateResponsesResponse)</a></pre>
 
-          
+          Generate responses from all intents using synonyms
         
           <h4 id="ondewo.nlu.AiServices.GetAlternativeSentences" class="title-badge method">GetAlternativeSentences</h4>
 
           <pre>rpc GetAlternativeSentences (<a href="#ondewo.nlu.GetAlternativeSentencesRequest">GetAlternativeSentencesRequest</a>) returns (<a href="#ondewo.nlu.GetAlternativeSentencesResponse">GetAlternativeSentencesResponse)</a></pre>
 
-          
+          Generates alternative phrase based on original phrase
         
           <h4 id="ondewo.nlu.AiServices.GetAlternativeTrainingPhrases" class="title-badge method">GetAlternativeTrainingPhrases</h4>
 
           <pre>rpc GetAlternativeTrainingPhrases (<a href="#ondewo.nlu.GetAlternativeTrainingPhrasesRequest">GetAlternativeTrainingPhrasesRequest</a>) returns (<a href="#ondewo.nlu.GetAlternativeTrainingPhrasesResponse">GetAlternativeTrainingPhrasesResponse)</a></pre>
 
-          
+          Generates alternative training phrase based on original training phrase
         
           <h4 id="ondewo.nlu.AiServices.GetSynonyms" class="title-badge method">GetSynonyms</h4>
 
           <pre>rpc GetSynonyms (<a href="#ondewo.nlu.GetSynonymsRequest">GetSynonymsRequest</a>) returns (<a href="#ondewo.nlu.GetSynonymsResponse">GetSynonymsResponse)</a></pre>
 
-          
+          Generates synonyms for a certain word
         
           <h4 id="ondewo.nlu.AiServices.ClassifyIntents" class="title-badge method">ClassifyIntents</h4>
 
           <pre>rpc ClassifyIntents (<a href="#ondewo.nlu.ClassifyIntentsRequest">ClassifyIntentsRequest</a>) returns (<a href="#ondewo.nlu.ClassifyIntentsResponse">ClassifyIntentsResponse)</a></pre>
 
-          
+          Preprocess text and detects intents in a sentence
         
           <h4 id="ondewo.nlu.AiServices.ExtractEntitiesFuzzy" class="title-badge method">ExtractEntitiesFuzzy</h4>
 
@@ -6663,7 +6678,7 @@ Format: `projects/<Project ID>`. </p></td>
         
       
         <h3 id="ondewo.nlu.BertAugEnrichmentConfig" class="title-badge message">BertAugEnrichmentConfig</h3>
-        <p></p>
+        <p>Configuration for BERT augmenter enrichment</p>
 
         
           <table class="field-table">
@@ -6676,21 +6691,21 @@ Format: `projects/<Project ID>`. </p></td>
                   <td>is_active</td>
                   <td><a href="#bool">bool</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Activation flag </p></td>
                 </tr>
               
                 <tr>
                   <td>enrichment_factor</td>
                   <td><a href="#int32">int32</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Factor of enrichment </p></td>
                 </tr>
               
                 <tr>
                   <td>execution_order</td>
                   <td><a href="#int32">int32</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Order of augmenter execution </p></td>
                 </tr>
               
             </tbody>
@@ -6772,7 +6787,7 @@ UNSPECIFIED - default mode, described in agent config </p></td>
         
       
         <h3 id="ondewo.nlu.ClassifyIntentsResponse" class="title-badge message">ClassifyIntentsResponse</h3>
-        <p></p>
+        <p>Response containing the intents classified in a sentence</p>
 
         
           <table class="field-table">
@@ -6928,7 +6943,7 @@ UNSPECIFIED - default mode, described in agent config </p></td>
         
       
         <h3 id="ondewo.nlu.EntityEnrichmentConfig" class="title-badge message">EntityEnrichmentConfig</h3>
-        <p></p>
+        <p>Configuration for Entity enrichment</p>
 
         
           <table class="field-table">
@@ -6941,21 +6956,21 @@ UNSPECIFIED - default mode, described in agent config </p></td>
                   <td>is_active</td>
                   <td><a href="#bool">bool</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Activation flag </p></td>
                 </tr>
               
                 <tr>
                   <td>enrichment_factor</td>
                   <td><a href="#int32">int32</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Factor of enrichment </p></td>
                 </tr>
               
                 <tr>
                   <td>execution_order</td>
                   <td><a href="#int32">int32</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Order of augmenter execution </p></td>
                 </tr>
               
             </tbody>
@@ -6966,7 +6981,7 @@ UNSPECIFIED - default mode, described in agent config </p></td>
         
       
         <h3 id="ondewo.nlu.EntityTypeFuzzyNerConfig" class="title-badge message">EntityTypeFuzzyNerConfig</h3>
-        <p></p>
+        <p>Configuration for Fuzzy Entity Recognizer</p>
 
         
           <table class="field-table">
@@ -7146,7 +7161,7 @@ Format: `projects/<Project ID>/agent/intents/<Intent ID>` </p></td>
         
       
         <h3 id="ondewo.nlu.GPT2EnrichmentConfig" class="title-badge message">GPT2EnrichmentConfig</h3>
-        <p></p>
+        <p>Configuration for GPT2 enrichment</p>
 
         
           <table class="field-table">
@@ -7159,21 +7174,21 @@ Format: `projects/<Project ID>/agent/intents/<Intent ID>` </p></td>
                   <td>is_active</td>
                   <td><a href="#bool">bool</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Activation flag </p></td>
                 </tr>
               
                 <tr>
                   <td>enrichment_factor</td>
                   <td><a href="#int32">int32</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Factor of enrichment </p></td>
                 </tr>
               
                 <tr>
                   <td>execution_order</td>
                   <td><a href="#int32">int32</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Order of augmenter execution </p></td>
                 </tr>
               
             </tbody>
@@ -7184,7 +7199,7 @@ Format: `projects/<Project ID>/agent/intents/<Intent ID>` </p></td>
         
       
         <h3 id="ondewo.nlu.GenerateResponsesRequest" class="title-badge message">GenerateResponsesRequest</h3>
-        <p></p>
+        <p>Request to generate responses</p>
 
         
           <table class="field-table">
@@ -7236,7 +7251,7 @@ Format: `projects/<Project ID>/agent/intents/<Intent ID>` </p></td>
         
       
         <h3 id="ondewo.nlu.GenerateResponsesResponse" class="title-badge message">GenerateResponsesResponse</h3>
-        <p></p>
+        <p>Response containing responses</p>
 
         
           <table class="field-table">
@@ -7260,7 +7275,7 @@ Format: `projects/<Project ID>/agent/intents/<Intent ID>` </p></td>
         
       
         <h3 id="ondewo.nlu.GenerateUserSaysRequest" class="title-badge message">GenerateUserSaysRequest</h3>
-        <p></p>
+        <p>Request to generate user sentences</p>
 
         
           <table class="field-table">
@@ -7305,7 +7320,7 @@ Format: `projects/<Project ID>/agent/intents/<Intent ID>` </p></td>
         
       
         <h3 id="ondewo.nlu.GenerateUserSaysResponse" class="title-badge message">GenerateUserSaysResponse</h3>
-        <p></p>
+        <p>Response containing user sentences</p>
 
         
           <table class="field-table">
@@ -7329,7 +7344,7 @@ Format: `projects/<Project ID>/agent/intents/<Intent ID>` </p></td>
         
       
         <h3 id="ondewo.nlu.GetAlternativeSentencesRequest" class="title-badge message">GetAlternativeSentencesRequest</h3>
-        <p></p>
+        <p>Request to get alternative sentences</p>
 
         
           <table class="field-table">
@@ -7388,7 +7403,7 @@ Format: `projects/<Project ID>/agent/intents/<Intent ID>` </p></td>
         
       
         <h3 id="ondewo.nlu.GetAlternativeSentencesResponse" class="title-badge message">GetAlternativeSentencesResponse</h3>
-        <p></p>
+        <p>Response containing alternative sentences</p>
 
         
           <table class="field-table">
@@ -7412,7 +7427,7 @@ Format: `projects/<Project ID>/agent/intents/<Intent ID>` </p></td>
         
       
         <h3 id="ondewo.nlu.GetAlternativeTrainingPhrasesRequest" class="title-badge message">GetAlternativeTrainingPhrasesRequest</h3>
-        <p></p>
+        <p>Request to get alternative training phrases</p>
 
         
           <table class="field-table">
@@ -7500,7 +7515,7 @@ as duplicate. Meaningful values of similarity_threshold are between 0.95 and 1.0
         
       
         <h3 id="ondewo.nlu.GetAlternativeTrainingPhrasesResponse" class="title-badge message">GetAlternativeTrainingPhrasesResponse</h3>
-        <p></p>
+        <p>Response containing alternative training phrases</p>
 
         
           <table class="field-table">
@@ -7524,7 +7539,7 @@ as duplicate. Meaningful values of similarity_threshold are between 0.95 and 1.0
         
       
         <h3 id="ondewo.nlu.GetSynonymsRequest" class="title-badge message">GetSynonymsRequest</h3>
-        <p></p>
+        <p>Request to get synonyms</p>
 
         
           <table class="field-table">
@@ -7569,7 +7584,7 @@ as duplicate. Meaningful values of similarity_threshold are between 0.95 and 1.0
         
       
         <h3 id="ondewo.nlu.GetSynonymsResponse" class="title-badge message">GetSynonymsResponse</h3>
-        <p></p>
+        <p>Response containing synonyms</p>
 
         
           <table class="field-table">
@@ -7593,7 +7608,7 @@ as duplicate. Meaningful values of similarity_threshold are between 0.95 and 1.0
         
       
         <h3 id="ondewo.nlu.GloVeEnrichmentConfig" class="title-badge message">GloVeEnrichmentConfig</h3>
-        <p></p>
+        <p>Configuration for GloVe enrichment</p>
 
         
           <table class="field-table">
@@ -7606,21 +7621,21 @@ as duplicate. Meaningful values of similarity_threshold are between 0.95 and 1.0
                   <td>is_active</td>
                   <td><a href="#bool">bool</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Activation flag </p></td>
                 </tr>
               
                 <tr>
                   <td>enrichment_factor</td>
                   <td><a href="#int32">int32</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Factor of enrichment </p></td>
                 </tr>
               
                 <tr>
                   <td>execution_order</td>
                   <td><a href="#int32">int32</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Order of augmenter execution </p></td>
                 </tr>
               
             </tbody>
@@ -7631,7 +7646,7 @@ as duplicate. Meaningful values of similarity_threshold are between 0.95 and 1.0
         
       
         <h3 id="ondewo.nlu.IntentClassified" class="title-badge message">IntentClassified</h3>
-        <p></p>
+        <p>Intent classified by a certain intent classifier</p>
 
         
           <table class="field-table">
@@ -7708,7 +7723,7 @@ Format: `projects/<Project ID>/agent/intents/<Intent ID>`. </p></td>
         
       
         <h3 id="ondewo.nlu.ThesaurusEnrichmentConfig" class="title-badge message">ThesaurusEnrichmentConfig</h3>
-        <p></p>
+        <p>Configuration for Thesaurus enrichment</p>
 
         
           <table class="field-table">
@@ -7721,21 +7736,21 @@ Format: `projects/<Project ID>/agent/intents/<Intent ID>`. </p></td>
                   <td>is_active</td>
                   <td><a href="#bool">bool</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Activation flag </p></td>
                 </tr>
               
                 <tr>
                   <td>enrichment_factor</td>
                   <td><a href="#int32">int32</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Factor of enrichment </p></td>
                 </tr>
               
                 <tr>
                   <td>execution_order</td>
                   <td><a href="#int32">int32</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Order of augmenter execution </p></td>
                 </tr>
               
             </tbody>
@@ -7746,7 +7761,7 @@ Format: `projects/<Project ID>/agent/intents/<Intent ID>`. </p></td>
         
       
         <h3 id="ondewo.nlu.Word2VecEnrichmentConfig" class="title-badge message">Word2VecEnrichmentConfig</h3>
-        <p></p>
+        <p>Configuration for Word2Vec enrichment</p>
 
         
           <table class="field-table">
@@ -7759,21 +7774,21 @@ Format: `projects/<Project ID>/agent/intents/<Intent ID>`. </p></td>
                   <td>is_active</td>
                   <td><a href="#bool">bool</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Activation flag </p></td>
                 </tr>
               
                 <tr>
                   <td>enrichment_factor</td>
                   <td><a href="#int32">int32</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Factor of enrichment </p></td>
                 </tr>
               
                 <tr>
                   <td>execution_order</td>
                   <td><a href="#int32">int32</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Order of augmenter execution </p></td>
                 </tr>
               
             </tbody>
@@ -7784,7 +7799,7 @@ Format: `projects/<Project ID>/agent/intents/<Intent ID>`. </p></td>
         
       
         <h3 id="ondewo.nlu.WordNetAugEnrichmentConfig" class="title-badge message">WordNetAugEnrichmentConfig</h3>
-        <p></p>
+        <p>Configuration for WordNet augmenter enrichment</p>
 
         
           <table class="field-table">
@@ -7797,21 +7812,21 @@ Format: `projects/<Project ID>/agent/intents/<Intent ID>`. </p></td>
                   <td>is_active</td>
                   <td><a href="#bool">bool</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Activation flag </p></td>
                 </tr>
               
                 <tr>
                   <td>enrichment_factor</td>
                   <td><a href="#int32">int32</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Factor of enrichment </p></td>
                 </tr>
               
                 <tr>
                   <td>execution_order</td>
                   <td><a href="#int32">int32</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Order of augmenter execution </p></td>
                 </tr>
               
             </tbody>
@@ -7822,7 +7837,7 @@ Format: `projects/<Project ID>/agent/intents/<Intent ID>`. </p></td>
         
       
         <h3 id="ondewo.nlu.XLNetAugEnrichmentConfig" class="title-badge message">XLNetAugEnrichmentConfig</h3>
-        <p></p>
+        <p>Configuration for Thesaurus enrichment</p>
 
         
           <table class="field-table">
@@ -7835,21 +7850,21 @@ Format: `projects/<Project ID>/agent/intents/<Intent ID>`. </p></td>
                   <td>is_active</td>
                   <td><a href="#bool">bool</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Activation flag </p></td>
                 </tr>
               
                 <tr>
                   <td>enrichment_factor</td>
                   <td><a href="#int32">int32</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Factor of enrichment </p></td>
                 </tr>
               
                 <tr>
                   <td>execution_order</td>
                   <td><a href="#int32">int32</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Order of augmenter execution </p></td>
                 </tr>
               
             </tbody>
@@ -7888,7 +7903,7 @@ Format: `projects/<Project ID>/agent/intents/<Intent ID>`. </p></td>
         </table>
       
         <h3 id="ondewo.nlu.IntentAlgorithms" class="title-badge enum">IntentAlgorithms</h3>
-        <p></p>
+        <p>Structure of all Intent algorithms</p>
         <table class="enum-table">
           <thead>
             <tr><td>Name</td><td>Number</td><td>Description</td></tr>
@@ -10261,7 +10276,7 @@ Operation <response: [google.protobuf.Empty][google.protobuf.Empty]>
       <div id="ondewo/nlu/intent.proto-messages" class="object-category">Messages</div>
       
         <h3 id="ondewo.nlu.BatchCreateParametersRequest" class="title-badge message">BatchCreateParametersRequest</h3>
-        <p></p>
+        <p>Request to create a batch of parameters in the specified intent</p>
 
         
           <table class="field-table">
@@ -10316,7 +10331,7 @@ Operation <response: [google.protobuf.Empty][google.protobuf.Empty]>
         
       
         <h3 id="ondewo.nlu.BatchCreateResponseMessagesRequest" class="title-badge message">BatchCreateResponseMessagesRequest</h3>
-        <p></p>
+        <p>Request to create a list of new response messages and adds it to an intent</p>
 
         
           <table class="field-table">
@@ -10459,7 +10474,7 @@ filled in. </p></td>
         
       
         <h3 id="ondewo.nlu.BatchDeleteParametersRequest" class="title-badge message">BatchDeleteParametersRequest</h3>
-        <p></p>
+        <p>Request to delete parameters specified by their names.</p>
 
         
           <table class="field-table">
@@ -10484,7 +10499,7 @@ Format: `projects/<Project ID>/agent/intents/<Intent ID>/parameters/<Parameter I
         
       
         <h3 id="ondewo.nlu.BatchDeleteParametersResponse" class="title-badge message">BatchDeleteParametersResponse</h3>
-        <p></p>
+        <p>This message contains response of deleted parameters</p>
 
         
           <table class="field-table">
@@ -10546,7 +10561,7 @@ Format: `projects/<Project ID>/agent/intents/<Intent ID>/parameters/<Parameter I
         
       
         <h3 id="ondewo.nlu.BatchDeleteResponseMessagesRequest" class="title-badge message">BatchDeleteResponseMessagesRequest</h3>
-        <p></p>
+        <p>Request to delete response messages specified by their names</p>
 
         
           <table class="field-table">
@@ -10571,7 +10586,7 @@ Format: `projects/<Project ID>/agent/intents/<Intent ID>/responseMessages/<Messa
         
       
         <h3 id="ondewo.nlu.BatchDeleteResponseMessagesResponse" class="title-badge message">BatchDeleteResponseMessagesResponse</h3>
-        <p></p>
+        <p>Response containing list with deleted response messages</p>
 
         
           <table class="field-table">
@@ -10720,7 +10735,7 @@ Format: `projects/<Project ID>/agent/intents/<Intent ID>/trainingPhrases/<Traini
         
       
         <h3 id="ondewo.nlu.BatchGetParametersRequest" class="title-badge message">BatchGetParametersRequest</h3>
-        <p></p>
+        <p>Request to get batch of parameters in a specified intent</p>
 
         
           <table class="field-table">
@@ -10745,7 +10760,7 @@ Format: `projects/<Project ID>/agent/intents/<Intent ID>/parameters/<Parameter I
         
       
         <h3 id="ondewo.nlu.BatchGetResponseMessagesRequest" class="title-badge message">BatchGetResponseMessagesRequest</h3>
-        <p></p>
+        <p>Request to retrieve a response messages</p>
 
         
           <table class="field-table">
@@ -10795,7 +10810,7 @@ Format: `projects/<Project ID>/agent/intents/<Intent ID>/trainingPhrases/<Traini
         
       
         <h3 id="ondewo.nlu.BatchParametersStatusResponse" class="title-badge message">BatchParametersStatusResponse</h3>
-        <p></p>
+        <p>Response containing a batch of parameters in the specified intent</p>
 
         
           <table class="field-table">
@@ -11040,7 +11055,7 @@ Note: languages must be enabled in the agent, before they can be used. </p></td>
         
       
         <h3 id="ondewo.nlu.BatchUpdateParametersRequest" class="title-badge message">BatchUpdateParametersRequest</h3>
-        <p></p>
+        <p>Request to update parameters and adds them to an intent</p>
 
         
           <table class="field-table">
@@ -11064,7 +11079,7 @@ Note: languages must be enabled in the agent, before they can be used. </p></td>
         
       
         <h3 id="ondewo.nlu.BatchUpdateResponseMessagesRequest" class="title-badge message">BatchUpdateResponseMessagesRequest</h3>
-        <p></p>
+        <p>Request to update a response message in the specified intent</p>
 
         
           <table class="field-table">
@@ -13160,7 +13175,7 @@ where <CURRENT_INDEX> and <PAGE_SIZE> are of type int, <SUB_FIELD> is of type st
         
       
         <h3 id="ondewo.nlu.ListTrainingPhrasesofIntentsWithEnrichmentResponse" class="title-badge message">ListTrainingPhrasesofIntentsWithEnrichmentResponse</h3>
-        <p></p>
+        <p>This message contains a list of training phrases filtered by intent ids, language code and parent passed through the request</p>
 
         
           <table class="field-table">
@@ -14926,7 +14941,7 @@ unspecified, default value depends on endpoint # TODO</p></td>
       
         
         <h3 id="ondewo.nlu.ProjectStatistics" class="title-badge service">ProjectStatistics</h3>
-        <p></p>
+        <p>Project Root Statistics</p>
 
         
         <div id="ondewo.nlu.ProjectStatistics-methods" class="service-methods">Service Methods</div>
@@ -14935,49 +14950,49 @@ unspecified, default value depends on endpoint # TODO</p></td>
 
           <pre>rpc GetIntentCount (<a href="#ondewo.nlu.GetIntentCountRequest">GetIntentCountRequest</a>) returns (<a href="#ondewo.nlu.StatResponse">StatResponse)</a></pre>
 
-          Project Root Statistics
+          Returns the intent count within a project
         
           <h4 id="ondewo.nlu.ProjectStatistics.GetEntityTypeCount" class="title-badge method">GetEntityTypeCount</h4>
 
           <pre>rpc GetEntityTypeCount (<a href="#ondewo.nlu.GetEntityTypeCountRequest">GetEntityTypeCountRequest</a>) returns (<a href="#ondewo.nlu.StatResponse">StatResponse)</a></pre>
 
-          
+          Returns the entity types count within a project
         
           <h4 id="ondewo.nlu.ProjectStatistics.GetUserCount" class="title-badge method">GetUserCount</h4>
 
           <pre>rpc GetUserCount (<a href="#ondewo.nlu.GetProjectStatRequest">GetProjectStatRequest</a>) returns (<a href="#ondewo.nlu.StatResponse">StatResponse)</a></pre>
 
-          
+          Returns the users count within a project
         
           <h4 id="ondewo.nlu.ProjectStatistics.GetSessionCount" class="title-badge method">GetSessionCount</h4>
 
           <pre>rpc GetSessionCount (<a href="#ondewo.nlu.GetProjectStatRequest">GetProjectStatRequest</a>) returns (<a href="#ondewo.nlu.StatResponse">StatResponse)</a></pre>
 
-          
+          Returns the sessions count within a project
         
           <h4 id="ondewo.nlu.ProjectStatistics.GetTrainingPhraseCount" class="title-badge method">GetTrainingPhraseCount</h4>
 
           <pre>rpc GetTrainingPhraseCount (<a href="#ondewo.nlu.GetProjectElementStatRequest">GetProjectElementStatRequest</a>) returns (<a href="#ondewo.nlu.StatResponse">StatResponse)</a></pre>
 
-          Intent Statistics
+          Returns the training phrases count within a project
         
           <h4 id="ondewo.nlu.ProjectStatistics.GetResponseCount" class="title-badge method">GetResponseCount</h4>
 
           <pre>rpc GetResponseCount (<a href="#ondewo.nlu.GetProjectElementStatRequest">GetProjectElementStatRequest</a>) returns (<a href="#ondewo.nlu.StatResponse">StatResponse)</a></pre>
 
-          
+          Returns the responses count within a project
         
           <h4 id="ondewo.nlu.ProjectStatistics.GetEntityValueCount" class="title-badge method">GetEntityValueCount</h4>
 
           <pre>rpc GetEntityValueCount (<a href="#ondewo.nlu.GetProjectElementStatRequest">GetProjectElementStatRequest</a>) returns (<a href="#ondewo.nlu.StatResponse">StatResponse)</a></pre>
 
-          Entity Type Statistics
+          Returns the entity value count within a project
         
           <h4 id="ondewo.nlu.ProjectStatistics.GetEntitySynonymCount" class="title-badge method">GetEntitySynonymCount</h4>
 
           <pre>rpc GetEntitySynonymCount (<a href="#ondewo.nlu.GetProjectElementStatRequest">GetProjectElementStatRequest</a>) returns (<a href="#ondewo.nlu.StatResponse">StatResponse)</a></pre>
 
-          Entity Value Statistics
+          Returns the entity synonyms count within a project
         
 
         
@@ -15087,7 +15102,7 @@ unspecified, default value depends on endpoint # TODO</p></td>
       <div id="ondewo/nlu/project_statistics.proto-messages" class="object-category">Messages</div>
       
         <h3 id="ondewo.nlu.GetEntityTypeCountRequest" class="title-badge message">GetEntityTypeCountRequest</h3>
-        <p></p>
+        <p>Request to get entity type count</p>
 
         
           <table class="field-table">
@@ -15121,7 +15136,7 @@ Example:
         
       
         <h3 id="ondewo.nlu.GetIntentCountRequest" class="title-badge message">GetIntentCountRequest</h3>
-        <p></p>
+        <p>Request to get the intent count</p>
 
         
           <table class="field-table">
@@ -15155,7 +15170,7 @@ Example:
         
       
         <h3 id="ondewo.nlu.GetProjectElementStatRequest" class="title-badge message">GetProjectElementStatRequest</h3>
-        <p></p>
+        <p>Request to get project element statistics</p>
 
         
           <table class="field-table">
@@ -15191,7 +15206,7 @@ Example:
         
       
         <h3 id="ondewo.nlu.GetProjectStatRequest" class="title-badge message">GetProjectStatRequest</h3>
-        <p></p>
+        <p>Request to get project statistics</p>
 
         
           <table class="field-table">
@@ -15235,7 +15250,7 @@ Example:
       
         
         <h3 id="ondewo.nlu.ServerStatistics" class="title-badge service">ServerStatistics</h3>
-        <p></p>
+        <p>Server project statistics</p>
 
         
         <div id="ondewo.nlu.ServerStatistics-methods" class="service-methods">Service Methods</div>
@@ -15244,19 +15259,19 @@ Example:
 
           <pre>rpc GetProjectCount (<a href="#google.protobuf.Empty">.google.protobuf.Empty</a>) returns (<a href="#ondewo.nlu.StatResponse">StatResponse)</a></pre>
 
-          
+          Returns the count of projects in the CAI server
         
           <h4 id="ondewo.nlu.ServerStatistics.GetUserProjectCount" class="title-badge method">GetUserProjectCount</h4>
 
           <pre>rpc GetUserProjectCount (<a href="#ondewo.nlu.GetUserProjectCountRequest">GetUserProjectCountRequest</a>) returns (<a href="#ondewo.nlu.StatResponse">StatResponse)</a></pre>
 
-          
+          Returns the count of projects of a user
         
           <h4 id="ondewo.nlu.ServerStatistics.GetUserCount" class="title-badge method">GetUserCount</h4>
 
           <pre>rpc GetUserCount (<a href="#google.protobuf.Empty">.google.protobuf.Empty</a>) returns (<a href="#ondewo.nlu.StatResponse">StatResponse)</a></pre>
 
-          
+          Returns the users count within a project
         
 
         
@@ -15316,7 +15331,7 @@ Example:
       <div id="ondewo/nlu/server_statistics.proto-messages" class="object-category">Messages</div>
       
         <h3 id="ondewo.nlu.GetUserProjectCountRequest" class="title-badge message">GetUserProjectCountRequest</h3>
-        <p></p>
+        <p>Request to get user project count</p>
 
         
           <table class="field-table">
@@ -17469,91 +17484,91 @@ until the server closes the gRPC connection. This message is only sent if
 
           <pre>rpc CreateUser (<a href="#ondewo.nlu.CreateUserRequest">CreateUserRequest</a>) returns (<a href="#ondewo.nlu.User">User)</a></pre>
 
-          
+          Creates user
         
           <h4 id="ondewo.nlu.Users.GetUser" class="title-badge method">GetUser</h4>
 
           <pre>rpc GetUser (<a href="#ondewo.nlu.GetUserRequest">GetUserRequest</a>) returns (<a href="#ondewo.nlu.User">User)</a></pre>
 
-          
+          Gets user
         
           <h4 id="ondewo.nlu.Users.GetUserInfo" class="title-badge method">GetUserInfo</h4>
 
           <pre>rpc GetUserInfo (<a href="#ondewo.nlu.GetUserRequest">GetUserRequest</a>) returns (<a href="#ondewo.nlu.UserInfo">UserInfo)</a></pre>
 
-          
+          Gets user information
         
           <h4 id="ondewo.nlu.Users.DeleteUser" class="title-badge method">DeleteUser</h4>
 
           <pre>rpc DeleteUser (<a href="#ondewo.nlu.GetUserRequest">GetUserRequest</a>) returns (<a href="#google.protobuf.Empty">.google.protobuf.Empty)</a></pre>
 
-          
+          Deletes user
         
           <h4 id="ondewo.nlu.Users.UpdateUser" class="title-badge method">UpdateUser</h4>
 
           <pre>rpc UpdateUser (<a href="#ondewo.nlu.UpdateUserRequest">UpdateUserRequest</a>) returns (<a href="#ondewo.nlu.User">User)</a></pre>
 
-          
+          Updates user
         
           <h4 id="ondewo.nlu.Users.ListUsers" class="title-badge method">ListUsers</h4>
 
           <pre>rpc ListUsers (<a href="#ondewo.nlu.ListUsersRequest">ListUsersRequest</a>) returns (<a href="#ondewo.nlu.ListUsersResponse">ListUsersResponse)</a></pre>
 
-          
+          Lists users
         
           <h4 id="ondewo.nlu.Users.ListUserInfos" class="title-badge method">ListUserInfos</h4>
 
           <pre>rpc ListUserInfos (<a href="#ondewo.nlu.ListUsersRequest">ListUsersRequest</a>) returns (<a href="#ondewo.nlu.ListUserInfosResponse">ListUserInfosResponse)</a></pre>
 
-          
+          Lists users information
         
           <h4 id="ondewo.nlu.Users.CreateServerRole" class="title-badge method">CreateServerRole</h4>
 
           <pre>rpc CreateServerRole (<a href="#ondewo.nlu.CreateServerRoleRequest">CreateServerRoleRequest</a>) returns (<a href="#ondewo.nlu.ServerRole">ServerRole)</a></pre>
 
-          
+          Creates server role
         
           <h4 id="ondewo.nlu.Users.GetServerRole" class="title-badge method">GetServerRole</h4>
 
           <pre>rpc GetServerRole (<a href="#ondewo.nlu.GetServerRoleRequest">GetServerRoleRequest</a>) returns (<a href="#ondewo.nlu.ServerRole">ServerRole)</a></pre>
 
-          
+          Get server role
         
           <h4 id="ondewo.nlu.Users.DeleteServerRole" class="title-badge method">DeleteServerRole</h4>
 
           <pre>rpc DeleteServerRole (<a href="#ondewo.nlu.DeleteServerRoleRequest">DeleteServerRoleRequest</a>) returns (<a href="#google.protobuf.Empty">.google.protobuf.Empty)</a></pre>
 
-          
+          Deletes server role
         
           <h4 id="ondewo.nlu.Users.UpdateServerRole" class="title-badge method">UpdateServerRole</h4>
 
           <pre>rpc UpdateServerRole (<a href="#ondewo.nlu.UpdateServerRoleRequest">UpdateServerRoleRequest</a>) returns (<a href="#ondewo.nlu.ServerRole">ServerRole)</a></pre>
 
-          
+          Updates server role
         
           <h4 id="ondewo.nlu.Users.ListServerRoles" class="title-badge method">ListServerRoles</h4>
 
           <pre>rpc ListServerRoles (<a href="#ondewo.nlu.ListServerRolesRequest">ListServerRolesRequest</a>) returns (<a href="#ondewo.nlu.ListServerRolesResponse">ListServerRolesResponse)</a></pre>
 
-          
+          Lists server roles
         
           <h4 id="ondewo.nlu.Users.ListServerPermissions" class="title-badge method">ListServerPermissions</h4>
 
           <pre>rpc ListServerPermissions (<a href="#ondewo.nlu.ListServerPermissionsRequest">ListServerPermissionsRequest</a>) returns (<a href="#ondewo.nlu.ListServerPermissionsResponse">ListServerPermissionsResponse)</a></pre>
 
-          
+          Lists server permissions
         
           <h4 id="ondewo.nlu.Users.Login" class="title-badge method">Login</h4>
 
           <pre>rpc Login (<a href="#ondewo.nlu.LoginRequest">LoginRequest</a>) returns (<a href="#ondewo.nlu.LoginResponse">LoginResponse)</a></pre>
 
-          
+          Request to login
         
           <h4 id="ondewo.nlu.Users.CheckLogin" class="title-badge method">CheckLogin</h4>
 
           <pre>rpc CheckLogin (<a href="#google.protobuf.Empty">.google.protobuf.Empty</a>) returns (<a href="#google.protobuf.Empty">.google.protobuf.Empty)</a></pre>
 
-          
+          Checks login
         
 
         
@@ -17733,7 +17748,7 @@ until the server closes the gRPC connection. This message is only sent if
       <div id="ondewo/nlu/user.proto-messages" class="object-category">Messages</div>
       
         <h3 id="ondewo.nlu.CreateServerRoleRequest" class="title-badge message">CreateServerRoleRequest</h3>
-        <p></p>
+        <p>Request to create server role</p>
 
         
           <table class="field-table">
@@ -17759,7 +17774,7 @@ The permissions all default to False if not provided specifically </p></td>
         
       
         <h3 id="ondewo.nlu.CreateUserRequest" class="title-badge message">CreateUserRequest</h3>
-        <p></p>
+        <p>Request to create user</p>
 
         
           <table class="field-table">
@@ -17772,14 +17787,14 @@ The permissions all default to False if not provided specifically </p></td>
                   <td>user</td>
                   <td><a href="#ondewo.nlu.User">User</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>User ID </p></td>
                 </tr>
               
                 <tr>
                   <td>password</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>password </p></td>
                 </tr>
               
             </tbody>
@@ -17790,7 +17805,7 @@ The permissions all default to False if not provided specifically </p></td>
         
       
         <h3 id="ondewo.nlu.DeleteServerRoleRequest" class="title-badge message">DeleteServerRoleRequest</h3>
-        <p></p>
+        <p>Request to delete server role</p>
 
         
           <table class="field-table">
@@ -17814,7 +17829,7 @@ The permissions all default to False if not provided specifically </p></td>
         
       
         <h3 id="ondewo.nlu.DeleteUserRequest" class="title-badge message">DeleteUserRequest</h3>
-        <p></p>
+        <p>Request to delete user</p>
 
         
           <table class="field-table">
@@ -17838,7 +17853,7 @@ The permissions all default to False if not provided specifically </p></td>
         
       
         <h3 id="ondewo.nlu.GetServerRoleRequest" class="title-badge message">GetServerRoleRequest</h3>
-        <p></p>
+        <p>Request to get server role</p>
 
         
           <table class="field-table">
@@ -17869,7 +17884,7 @@ The permissions all default to False if not provided specifically </p></td>
         
       
         <h3 id="ondewo.nlu.GetUserRequest" class="title-badge message">GetUserRequest</h3>
-        <p></p>
+        <p>Request to get user</p>
 
         
           <table class="field-table">
@@ -17924,7 +17939,7 @@ The permissions all default to False if not provided specifically </p></td>
         
       
         <h3 id="ondewo.nlu.ListServerPermissionsResponse" class="title-badge message">ListServerPermissionsResponse</h3>
-        <p></p>
+        <p>Response containing list of server permissions</p>
 
         
           <table class="field-table">
@@ -17957,7 +17972,7 @@ more results in the list. </p></td>
         
       
         <h3 id="ondewo.nlu.ListServerRolesRequest" class="title-badge message">ListServerRolesRequest</h3>
-        <p></p>
+        <p>Request to list server roles</p>
 
         
           <table class="field-table">
@@ -17981,7 +17996,7 @@ more results in the list. </p></td>
         
       
         <h3 id="ondewo.nlu.ListServerRolesResponse" class="title-badge message">ListServerRolesResponse</h3>
-        <p></p>
+        <p>Response containing list of server roles</p>
 
         
           <table class="field-table">
@@ -18014,7 +18029,7 @@ more results in the list. </p></td>
         
       
         <h3 id="ondewo.nlu.ListUserInfosResponse" class="title-badge message">ListUserInfosResponse</h3>
-        <p></p>
+        <p>Response containing list of users</p>
 
         
           <table class="field-table">
@@ -18047,7 +18062,7 @@ more results in the list. </p></td>
         
       
         <h3 id="ondewo.nlu.ListUsersRequest" class="title-badge message">ListUsersRequest</h3>
-        <p></p>
+        <p>Request to list user</p>
 
         
           <table class="field-table">
@@ -18071,7 +18086,7 @@ more results in the list. </p></td>
         
       
         <h3 id="ondewo.nlu.ListUsersResponse" class="title-badge message">ListUsersResponse</h3>
-        <p></p>
+        <p>Response containing list of users</p>
 
         
           <table class="field-table">
@@ -18204,7 +18219,7 @@ more results in the list. </p></td>
         
       
         <h3 id="ondewo.nlu.UpdateServerRoleRequest" class="title-badge message">UpdateServerRoleRequest</h3>
-        <p></p>
+        <p>Request to update server role</p>
 
         
           <table class="field-table">
@@ -18236,7 +18251,7 @@ other fields in the Role are optional. Only the fields to be updated should be p
         
       
         <h3 id="ondewo.nlu.UpdateUserRequest" class="title-badge message">UpdateUserRequest</h3>
-        <p></p>
+        <p>Request to update user</p>
 
         
           <table class="field-table">
@@ -18389,7 +18404,7 @@ of parent of the project and corresponding ProjectRole of the user </p></td>
       <div id="ondewo/nlu/user.proto-enums" class="object-category">Enums</div>
       
         <h3 id="ondewo.nlu.DefaultServerRole" class="title-badge enum">DefaultServerRole</h3>
-        <p></p>
+        <p>Structure of server role</p>
         <table class="enum-table">
           <thead>
             <tr><td>Name</td><td>Number</td><td>Description</td></tr>
