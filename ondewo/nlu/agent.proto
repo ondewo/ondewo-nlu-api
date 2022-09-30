@@ -1088,7 +1088,8 @@ message FullTextSearchResponseIntent {
         string name = 1;
         string display_name = 2;
         string domain_name = 3;
-        string language = 4;
+        repeated string tags = 4;
+        string language = 5;
     }
     repeated IntentSearchResult intent_results = 3;
     string term = 4;
@@ -1104,7 +1105,8 @@ message FullTextSearchResponseIntentContextIn {
         string name = 1;
         string intent_name = 2;
         string intent_display_name = 3;
-        string language = 4;
+        repeated string tags = 4;
+        string language = 5;
     }
     repeated IntentContextInSearchResult intent_context_in_results = 3;
     string term = 4;
@@ -1120,7 +1122,8 @@ message FullTextSearchResponseIntentContextOut {
         string name = 1;
         string intent_name = 2;
         string intent_display_name = 3;
-        string language = 4;
+        repeated string tags = 4;
+        string language = 5;
     }
     repeated IntentContextOutSearchResult intent_context_out_results = 3;
     string term = 4;
@@ -1140,7 +1143,8 @@ message FullTextSearchResponseIntentUsersays {
         string type = 5;
         string intent_name = 6;
         string intent_display_name = 7;
-        string language = 8;
+        repeated string tags = 8;
+        string language = 9;
     }
     repeated IntentUsersaysSearchResult intent_usersays_results = 3;
     string term = 4;
@@ -1176,7 +1180,8 @@ message FullTextSearchResponseIntentResponse {
         string response_type = 3;
         string intent_name = 4;
         string intent_display_name = 5;
-        string language = 6;
+        repeated string tags = 6;
+        string language = 7;
     }
     repeated IntentResponseSearchResult intent_response_results = 3;
     string term = 4;
@@ -1193,7 +1198,8 @@ message FullTextSearchResponseIntentParameters {
         string parameter_display_name = 2;
         string intent_name = 3;
         string intent_display_name = 4;
-        string language = 5;
+        repeated string tags = 5;
+        string language = 6;
     }
     repeated IntentParametersSearchResult intent_parameters_results = 3;
     string term = 4;
