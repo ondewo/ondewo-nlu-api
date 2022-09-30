@@ -1114,6 +1114,7 @@ curl \ 'https://dialogflow.googleapis.com/v2/projects/<project_name>/agent:expor
 | text | [string](#string) |  |  |
 | intent_name | [string](#string) |  |  |
 | intent_display_name | [string](#string) |  |  |
+| tags | [string](#string) | repeated |  |
 | language | [string](#string) |  |  |
 
 
