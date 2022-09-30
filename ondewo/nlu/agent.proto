@@ -310,18 +310,21 @@ service Agents {
         };
     }
 
+    // Lists users in the project (agent)
     rpc ListUsersInProject (ListUsersInProjectRequest) returns (ListUsersInProjectResponse) {
         option (google.api.http) = {
             get: "/v2/{parent=projects/*/agent}/users"
         };
     }
 
+    // Gets information from the platform
     rpc GetPlatformInfo (google.protobuf.Empty) returns (GetPlatformInfoResponse) {
         option (google.api.http) = {
             get: "/v2/version"
         };
     }
 
+    // List permissions from the project (agent)
     rpc ListProjectPermissions (ListProjectPermissionsRequest) returns (ListProjectPermissionsResponse) {
         option (google.api.http) = {
             get: "/v2/project_permissions"
@@ -383,6 +386,8 @@ service Agents {
             body: "*"
         };
     }
+
+    // Runs optimize ranking match
     rpc OptimizeRankingMatch (OptimizeRankingMatchRequest) returns (ondewo.nlu.Operation) {
         option (google.api.http) = {
             post: "/v2/{parent=projects/*/agent}:optimize_ranking_match"
@@ -403,29 +408,37 @@ service Agents {
         };
     }
 
+    // Gets statistics for the agent
     rpc GetAgentStatistics (GetAgentStatisticsRequest) returns (GetAgentStatisticsResponse) {
         option (google.api.http) = {
             get: "/v2/{parent=projects/*/agent}:statistics"
         };
     }
 
+    // Sets status for the agent
     rpc SetAgentStatus (SetAgentStatusRequest) returns (Agent) {
         option (google.api.http) = {
             post: "/v2/{parent=projects/*/agent}:status"
             body: "*"
         };
     }
+
+    // Sets resources
     rpc SetResources (SetResourcesRequest) returns (google.protobuf.Empty) {
         option (google.api.http) = {
             post: "/v2/{parent=projects/*/agent}:resources"
             body: "*"
         };
     }
+
+    // Deletes resources
     rpc DeleteResources (DeleteResourcesRequest) returns (google.protobuf.Empty) {
         option (google.api.http) = {
             delete: "/v2/{parent=projects/*/agent}:resources"
         };
     }
+
+    // Exports resources
     rpc ExportResources (ExportResourcesRequest) returns (ExportResourcesResponse) {
         option (google.api.http) = {
             post: "/v2/{parent=projects/*/agent}:resources"
@@ -532,6 +545,7 @@ enum AgentView {
     AGENT_VIEW_MINIMUM = 3;
 }
 
+// Request to create an agent
 message CreateAgentRequest {
     Agent agent = 1;
 
@@ -539,6 +553,7 @@ message CreateAgentRequest {
     AgentView agent_view = 2;
 }
 
+// Request to update the agent
 message UpdateAgentRequest {
     Agent agent = 1;
 
@@ -549,7 +564,10 @@ message UpdateAgentRequest {
     google.protobuf.FieldMask update_mask = 3;
 }
 
+// Request to delete the agent
 message DeleteAgentRequest {
+    // Required. The project that the agent to fetch is associated with.
+    // Format: `projects/<Project ID>/agents`.
     string parent = 1;
 }
 
@@ -563,6 +581,7 @@ message GetAgentRequest {
     AgentView agent_view = 2;
 }
 
+// Request to get the list of agents
 message ListAgentsRequest {
     // Optional. Specify the view of the returned agent (full view by default)
     AgentView agent_view = 1;
@@ -574,6 +593,7 @@ message ListAgentsRequest {
     AgentSorting sort_by_field = 3;
 }
 
+// Get list of agents
 message ListAgentsResponse {
     // The list of agent and their owners. There will be a maximum number of items
     // returned based on the page_token field in the request.
@@ -584,6 +604,7 @@ message ListAgentsResponse {
     string next_page_token = 2;
 }
 
+// Get list of agents of user
 message ListAgentsOfUserResponse {
     // The list of agents with their owners of the given user. There will be a maximum number of items
     // returned based on the page_token field in the request.
@@ -608,6 +629,7 @@ message TrainAgentRequest {
     // Required. The project that the agent to train is associated with.
     // Format: `projects/<Project ID>`.
     string parent = 1;
+    // Git branch
     string branch = 2;
     InitiationProtocol initiation_protocol = 3;
 }
@@ -617,6 +639,7 @@ message BuildCacheRequest {
     // Required. The project that the agent to build cache is associated with.
     // Format: `projects/<Project ID>`.
     string parent = 1;
+    // Git branch
     string branch = 2;
 }
 
@@ -663,6 +686,7 @@ message ExportAgentResponse {
     }
 }
 
+// Request to export benchmark agent
 message ExportBenchmarkAgentRequest {
     // Agent related info
     // Required. The project that the agent to export is associated with.
@@ -684,6 +708,7 @@ message ExportBenchmarkAgentRequest {
     int32 random_state = 5;
 }
 
+// Response to export benchmark agent
 message ExportBenchmarkAgentResponse {
     bytes agent_content = 1;
     // Key is the language code, value is the corresponding ListTrainingPhrasesResponse
@@ -774,6 +799,7 @@ message RestoreAgentRequest {
     }
 }
 
+// Request statistics of the agent
 message GetAgentStatisticsRequest {
     // Required. The project to get statistics from.
     // Format: `projects/<Project ID>`.
@@ -783,6 +809,7 @@ message GetAgentStatisticsRequest {
     ReportType type = 4;
 }
 
+// Response to get statistics of the agent
 message GetAgentStatisticsResponse {
     // Statistic info.
     bytes reports = 1;
@@ -803,29 +830,39 @@ enum ReportType {
     INTENT_GENERAL = 4;
 }
 
+// Structure of report
 enum ReportFormat {
     CSV = 0;
     HTML = 1;
     JSON = 2;
 }
 
+// Request to add user to project.
 message AddUserToProjectRequest {
+    // ID of the project
     string parent = 1;
+    // User object
     string user_id = 2;
+    // ID of the project role of the user
     uint32 project_role_id = 4;
 }
 
+// Request to remove user from the project.
 message RemoveUserFromProjectRequest {
+    // ID of the project
     string parent = 1;
+    // User object
     string user_id = 2;
 }
 
+// Request to list users in the project
 message ListUsersInProjectRequest {
     string parent = 1;
     // Optional. The next_page_token value returned from a previous list request.
     string page_token = 2;
 }
 
+// Request to get user in project
 message UserInProject {
     // ID of the project
     string parent = 1;
@@ -837,6 +874,7 @@ message UserInProject {
     uint32 role_id = 3;
 }
 
+// Get list users in project
 message ListUsersInProjectResponse {
     // The list of users in a project. There will be a maximum number of items
     // returned based on the page_token field in the request.
@@ -847,8 +885,11 @@ message ListUsersInProjectResponse {
     string next_page_token = 2;
 }
 
+// Get platform information
 message GetPlatformInfoResponse {
+    // Version of the platform
     string version = 1;
+    // Corresponding commit hash
     string commit_hash = 2;
 }
 
@@ -858,6 +899,7 @@ message ListProjectPermissionsRequest {
     string page_token = 1;
 }
 
+// List project permissions
 message ListProjectPermissionsResponse {
     // The list of project permissions. There will be a maximum number of items
     // returned based on the page_token field in the request.
@@ -868,6 +910,7 @@ message ListProjectPermissionsResponse {
     string next_page_token = 2;
 }
 
+// Request to set status of the agent
 message SetAgentStatusRequest {
     // Required. The project of which to set the status.
     // Format: `projects/<Project ID>/agent`.
@@ -882,6 +925,7 @@ message SetAgentStatusRequest {
 
 // fixme: add endpoint to set agent owner
 
+// Structure for Agent / Project status
 enum AgentStatus {
     // If project is active, all its endpoints are active
     ACTIVE = 0;
@@ -898,6 +942,7 @@ enum AgentStatus {
     // READY = 5;
 }
 
+// Sorting agents
 message AgentSorting {
     enum AgentSortingField {
         NO_AGENT_SORTING = 0;
@@ -911,7 +956,10 @@ message AgentSorting {
     SortingMode sorting_mode = 2;
 }
 
+// Request to set resources
 message SetResourcesRequest {
+    // Required. The project that the agent to fetch is associated with.
+    // Format: `projects/<Project ID>/agents`.
     string parent = 1;
     string name = 2;
     string type = 3;
@@ -919,27 +967,38 @@ message SetResourcesRequest {
     string language_code = 5;
 }
 
+// Request to delete resources
 message DeleteResourcesRequest {
+    // Required. The project that the agent to fetch is associated with.
+    // Format: `projects/<Project ID>/agents`.
     string parent = 1;
     string name = 2;
     string type = 3;
     string language_code = 4;
 }
 
+// Request to export resources
 message ExportResourcesRequest {
+    // Required. The project that the agent to fetch is associated with.
+    // Format: `projects/<Project ID>/agents`.
     string parent = 1;
     string name = 2;
     string type = 3;
     string language_code = 4;
 }
 
+// Response to export resources
 message ExportResourcesResponse {
+    // Required. The project that the agent to fetch is associated with.
+    // Format: `projects/<Project ID>/agents`.
     string parent = 1;
     string name = 2;
     string type = 3;
     string language_code = 4;
     bytes resource_file = 5;
 }
+
+// Request to get model statuses
 message GetModelStatusesRequest {
     // Required. The project that the agent to fetch is associated with.
     // Format: `projects/<Project ID>/agent`.
@@ -949,6 +1008,7 @@ message GetModelStatusesRequest {
     string model_name = 4;
 }
 
+// Status of model
 message ModelStatus {
     int32 cache_version = 1;
     string language_code = 2;
@@ -967,6 +1027,7 @@ message ModelStatus {
     StatusName status = 6;
 }
 
+// Response to get model statuses
 message GetModelStatusesResponse {
     repeated ModelStatus model_statuses = 1;
 }
@@ -984,7 +1045,7 @@ message CustomPlatformInfo {
     // Sorting position of the GetPlatformMappingRequest.
     uint32 position = 3;
 }
-
+// Requeset to get platform mapping
 message GetPlatformMappingRequest {
     // Required. The project that the agent is associated with.
     // Format: `projects/<Project ID>/agent`.
@@ -1015,6 +1076,7 @@ message FullTextSearchRequest {
     // Composite string: current_index-0--page_size-10
     string page_token = 4;
 
+    // Structure of query
     enum QueryType {
         ALL = 0;  // just a placeholder, has to start with zero
         OndewoEntityQuery = 1;
@@ -1031,6 +1093,8 @@ message FullTextSearchRequest {
 }
 
 message FullTextSearchResponseEntityType {
+    // Required. The project that the agent to fetch is associated with.
+    // Format: `projects/<Project ID>/agents`.
     string parent = 1;
     string language_code = 2;
     message EntityTypeSearchResult {
@@ -1046,6 +1110,8 @@ message FullTextSearchResponseEntityType {
 }
 
 message FullTextSearchResponseEntity {
+    // Required. The project that the agent to fetch is associated with.
+    // Format: `projects/<Project ID>/agents`.
     string parent = 1;
     string language_code = 2;
     message EntitySearchResult {
@@ -1063,6 +1129,8 @@ message FullTextSearchResponseEntity {
 }
 
 message FullTextSearchResponseEntitySynonym {
+    // Required. The project that the agent to fetch is associated with.
+    // Format: `projects/<Project ID>/agents`.
     string parent = 1;
     string language_code = 2;
     message EntitySynonymSearchResult {
@@ -1082,6 +1150,8 @@ message FullTextSearchResponseEntitySynonym {
 }
 
 message FullTextSearchResponseIntent {
+    // Required. The project that the agent to fetch is associated with.
+    // Format: `projects/<Project ID>/agents`.
     string parent = 1;
     string language_code = 2;
     message IntentSearchResult {
@@ -1098,6 +1168,8 @@ message FullTextSearchResponseIntent {
 }
 
 message FullTextSearchResponseIntentContextIn {
+    // Required. The project that the agent to fetch is associated with.
+    // Format: `projects/<Project ID>/agents`.
     string parent = 1;
     string language_code = 2;
     message IntentContextInSearchResult {
@@ -1114,6 +1186,8 @@ message FullTextSearchResponseIntentContextIn {
 }
 
 message FullTextSearchResponseIntentContextOut {
+    // Required. The project that the agent to fetch is associated with.
+    // Format: `projects/<Project ID>/agents`.
     string parent = 1;
     string language_code = 2;
     message IntentContextOutSearchResult {
@@ -1130,6 +1204,8 @@ message FullTextSearchResponseIntentContextOut {
 }
 
 message FullTextSearchResponseIntentUsersays {
+    // Required. The project that the agent to fetch is associated with.
+    // Format: `projects/<Project ID>/agents`.
     string parent = 1;
     string language_code = 2;
     message IntentUsersaysSearchResult {
@@ -1150,6 +1226,8 @@ message FullTextSearchResponseIntentUsersays {
 }
 
 message FullTextSearchResponseIntentTags {
+    // Required. The project that the agent to fetch is associated with.
+    // Format: `projects/<Project ID>/agents`.
     string parent = 1;
     string language_code = 2;
     message IntentTagsSearchResult {
@@ -1167,6 +1245,8 @@ message FullTextSearchResponseIntentTags {
 }
 
 message FullTextSearchResponseIntentResponse {
+    // Required. The project that the agent to fetch is associated with.
+    // Format: `projects/<Project ID>/agents`.
     string parent = 1;
     string language_code = 2;
     message IntentResponseSearchResult {
@@ -1185,6 +1265,8 @@ message FullTextSearchResponseIntentResponse {
 }
 
 message FullTextSearchResponseIntentParameters {
+    // Required. The project that the agent to fetch is associated with.
+    // Format: `projects/<Project ID>/agents`.
     string parent = 1;
     string language_code = 2;
     message IntentParametersSearchResult {
