@@ -1,7 +1,13 @@
 # Release History
 
 *****************
+## Release ONDEWO NLU APIS 3.3.0
 
+### Improvements
+
+* [[OND211-2057]](https://ondewo.atlassian.net/browse/OND211-2057) - Added all tags to tag-fulltextsearch response
+
+*****************
 ## Release ONDEWO NLU APIS 3.2.0
 
 ### Improvements
