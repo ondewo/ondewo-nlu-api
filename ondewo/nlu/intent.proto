@@ -1224,6 +1224,7 @@ message BatchResponseMessagesStatusResponse {
     bool has_errors = 2;
 }
 
+// Request to create a list of new response messages and adds it to an intent
 message BatchCreateResponseMessagesRequest {
 
     message CreateResponseMessageRequest {
@@ -1236,23 +1237,27 @@ message BatchCreateResponseMessagesRequest {
     repeated CreateResponseMessageRequest response_message_requests = 1;
 }
 
+// Request to update a response message in the specified intent
 message BatchUpdateResponseMessagesRequest {
     // The response messages to update
     repeated Intent.Message response_messages = 1;
 }
 
+// Request to retrieve a response messages
 message BatchGetResponseMessagesRequest {
     // Required. The names of the response messages.
     // Format: `projects/<Project ID>/agent/intents/<Intent ID>/responseMessages/<Message ID>`
     repeated string names = 1;
 }
 
+// Request to delete response messages specified by their names
 message BatchDeleteResponseMessagesRequest {
     // Required. The names of the  response messages.
     // Format: `projects/<Project ID>/agent/intents/<Intent ID>/responseMessages/<Message ID>`
     repeated string names = 1;
 }
 
+// Response containing list with deleted response messages
 message BatchDeleteResponseMessagesResponse {
     message DeleteResponseMessageStatus{
         oneof delete_status{
@@ -1295,6 +1300,7 @@ message ListResponseMessagesResponse {
     string next_page_token = 2;
 }
 
+// Response containing a batch of parameters in the specified intent
 message BatchParametersStatusResponse {
     message ParameterStatus {
         oneof phrase_or_status {
@@ -1307,6 +1313,7 @@ message BatchParametersStatusResponse {
     bool has_errors = 2;
 }
 
+// Request to create a batch of parameters in the specified intent
 message BatchCreateParametersRequest {
 
     message CreateParameterRequest {
@@ -1319,23 +1326,27 @@ message BatchCreateParametersRequest {
     repeated CreateParameterRequest parameter_requests = 1;
 }
 
+// Request to update parameters and adds them to an intent
 message BatchUpdateParametersRequest {
     // The response messages to update
     repeated Intent.Parameter parameters = 1;
 }
 
+// Request to get batch of parameters in a specified intent
 message BatchGetParametersRequest {
     // Required. The names of the response messages.
     // Format: `projects/<Project ID>/agent/intents/<Intent ID>/parameters/<Parameter ID>`
     repeated string names = 1;
 }
 
+// Request to delete parameters specified by their names.
 message BatchDeleteParametersRequest {
     // Required. The names of the  response messages.
     // Format: `projects/<Project ID>/agent/intents/<Intent ID>/parameters/<Parameter ID>`
     repeated string names = 1;
 }
 
+// This message contains response of deleted parameters
 message BatchDeleteParametersResponse {
     message DeleteParameterStatus{
         oneof delete_status{
@@ -1395,7 +1406,7 @@ message ListTrainingPhrasesofIntentsWithEnrichmentRequest {
     // where <CURRENT_INDEX> and <PAGE_SIZE> are of type int, <SUB_FIELD> is of type str (example: `parameters`)
     string page_token = 4;
 }
-
+// This message contains a list of training phrases filtered by intent ids, language code and parent passed through the request
 message ListTrainingPhrasesofIntentsWithEnrichmentResponse {
     // List of user_says values. There will be a maximum number of items
     // returned based on the page_token field in the request.
