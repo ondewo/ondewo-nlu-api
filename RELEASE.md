@@ -1,11 +1,18 @@
 # Release History
 
 *****************
+## Release ONDEWO NLU APIS 3.4.0
+
+### Improvements
+
+* [[OND211-2060]](https://ondewo.atlassian.net/browse/OND211-2060) - Added all intent tags to every fulltext search response
+
+*****************
 ## Release ONDEWO NLU APIS 3.3.0
 
 ### Improvements
 
-* [[OND211-2057]](https://ondewo.atlassian.net/browse/OND211-2057) - Added all tags to tag-fulltextsearch response
+* [[OND211-2060]](https://ondewo.atlassian.net/browse/OND211-2060) - Added all tags to tag-fulltext search response
 
 *****************
 ## Release ONDEWO NLU APIS 3.2.0
