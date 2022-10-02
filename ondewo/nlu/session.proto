@@ -900,3 +900,118 @@ message GetLatestSessionReviewRequest {
     // An enum specifying the amount of information to be returned for the desired session review
     SessionReview.View session_review_view = 2;
 }
+
+// Analysis data for user log analysis
+message UsageLog {
+
+    // analysis user logs
+    id = Column(String, primary_key=True)
+
+    // the uuid of the user
+    user_id = Column(String)
+
+    // usually the email of the user
+    user_name = Column(String)
+
+    // user display name
+    user_display_name = Column(String)
+
+    // access token given to the user after logging in
+    user_access_token = Column(String)
+
+    // uuid of the session the request belongs to
+    session_id = Column(String)
+
+    // the number of interaction of the user with the AI
+    session_interaction_count = Column(Integer)
+
+    // detect intent data
+    intent_name = Column(String)
+
+    //display name of the intent at the time of matching
+    intent_display_name = Column(String)
+
+    // the language code of the detect intent request
+    intent_language_code = Column(String)
+
+    // the requested platform response. If non requested, then set to "all"
+    intent_response_platform = Column(String)
+
+    // score of matched intent
+    intent_score = Column(Float)
+
+    // score of next best matched intent
+    intent_score_diff_to_next_best_intent = Column(Float)
+
+    // duration of intent detection
+    intent_detection_duration_in_s = Column(Float)
+
+    // algorithm that detected the intent
+    intent_detection_algorithm = Column(String)
+
+    // algorithm that detected the best next intent (Note: can be empty if IntentExactMatch
+    intent_detection_algorith_of_next_best_intent= Column(String)
+
+    // list of context in names
+    intent_context_in_names = Column(String)
+
+    // list of context out names
+    intent_context_out_names = Column(String)
+
+    // True if human handover, else False
+    intent_human_handover = Column(Bool)
+
+    // Handed over to humna with user id, e.g. caller id or UUID
+    intent_human_handover_to_user_id = Column(String)
+
+    // Handed over to human display name, e.g. Peter Huber
+    intent_human_handover_to_user_display_name = Column(String)
+
+    // Handed over to user with user name, e.g. caller id or user name
+    intent_human_handover_to_user_name = Column(String)
+
+    // timestamp of the request in milliseconds
+    request_timestamp_in_milli = Column(Integer)
+
+    // timestamp in datetime format
+    request_timestamp_in_datetime = Column(DateTime)
+
+    // Unix timezone format as tzdata format,e.g., Europe/Vienna
+    request_timestamp_timezone = Column(String)
+
+    // 08:15-08:30
+    request_timestamp_in_15min = Column(String)
+
+    // 08:00-08:30
+    request_timestamp_in_30min = Column(String)
+
+    // 08:00-09:00
+    request_timestamp_in_hours = Column(String)
+
+    // 06:00-12:00, 12:00-18:00, 18:00-24:00, 00:00-06:00
+    request_timestamp_in_day_phase = Column(String)
+
+    // parameter "origin_id" value string defines uniquly the origin, e.g. caller id
+    session_origin_id = Column(String)
+
+    // parameter "origin_type_1" value string, defines the origin, e.g. domain, caller id
+    session_origin_type_1 = Column(String)
+
+    // parameter "origin_type_2" value string
+    session_origin_type_2 = Column(String)
+
+    // parameter "origi_type_3" value string
+    session_origin_type_3 = Column(String)
+
+    // parameter "origin_type_4" value string
+    session_origin_type_4 = Column(String)
+
+    // user from session if passed through context e.g. caller phone number
+    session_user_id = Column(String)
+
+    // caller id (name of the caller or logged in user name)
+    session_user_display_name = Column(String)
+
+    // TODO Add here the standard SIP headers and information we have
+
+}
