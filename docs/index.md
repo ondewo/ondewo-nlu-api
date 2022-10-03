@@ -493,7 +493,7 @@ Project/Agent messages
 <a name="ondewo.nlu.AgentOfUserWithOwner"></a>
 
 ### AgentOfUserWithOwner
-
+This message contains the agent of user with owner
 
 
 | Field | Type | Label | Description |
@@ -525,7 +525,7 @@ Sorting agents
 <a name="ondewo.nlu.AgentWithOwner"></a>
 
 ### AgentWithOwner
-
+This message contains the agent with owner
 
 
 | Field | Type | Label | Description |
@@ -573,7 +573,7 @@ Request to create an agent
 <a name="ondewo.nlu.CustomPlatformInfo"></a>
 
 ### CustomPlatformInfo
-
+This message contains the information of custom platform
 
 
 | Field | Type | Label | Description |
@@ -748,7 +748,7 @@ Response to export resources
 <a name="ondewo.nlu.FullTextSearchRequest"></a>
 
 ### FullTextSearchRequest
-
+This message is a request to run full text search
 
 
 | Field | Type | Label | Description |
@@ -766,7 +766,7 @@ Response to export resources
 <a name="ondewo.nlu.FullTextSearchResponseEntity"></a>
 
 ### FullTextSearchResponseEntity
-
+This message is a response of full text search of entity
 
 
 | Field | Type | Label | Description |
@@ -806,7 +806,7 @@ Response to export resources
 <a name="ondewo.nlu.FullTextSearchResponseEntitySynonym"></a>
 
 ### FullTextSearchResponseEntitySynonym
-
+This message is a response of full text search of synonym entit
 
 
 | Field | Type | Label | Description |
@@ -848,7 +848,7 @@ Response to export resources
 <a name="ondewo.nlu.FullTextSearchResponseEntityType"></a>
 
 ### FullTextSearchResponseEntityType
-
+This message is a response of full text search of entity type
 
 
 | Field | Type | Label | Description |
@@ -886,7 +886,7 @@ Response to export resources
 <a name="ondewo.nlu.FullTextSearchResponseIntent"></a>
 
 ### FullTextSearchResponseIntent
-
+This message is a response of full text search of intent
 
 
 | Field | Type | Label | Description |
@@ -926,7 +926,7 @@ Response to export resources
 <a name="ondewo.nlu.FullTextSearchResponseIntentContextIn"></a>
 
 ### FullTextSearchResponseIntentContextIn
-
+This message is a response of full text search of intent with context in
 
 
 | Field | Type | Label | Description |
@@ -966,7 +966,7 @@ Response to export resources
 <a name="ondewo.nlu.FullTextSearchResponseIntentContextOut"></a>
 
 ### FullTextSearchResponseIntentContextOut
-
+This message is a response of full text search of intent with context out
 
 
 | Field | Type | Label | Description |
@@ -1006,7 +1006,7 @@ Response to export resources
 <a name="ondewo.nlu.FullTextSearchResponseIntentParameters"></a>
 
 ### FullTextSearchResponseIntentParameters
-
+This message is a response of full text search of intent with parameters
 
 
 | Field | Type | Label | Description |
@@ -1047,7 +1047,7 @@ Response to export resources
 <a name="ondewo.nlu.FullTextSearchResponseIntentResponse"></a>
 
 ### FullTextSearchResponseIntentResponse
-
+This message is a response of full text search of intent response
 
 
 | Field | Type | Label | Description |
@@ -1089,7 +1089,7 @@ Response to export resources
 <a name="ondewo.nlu.FullTextSearchResponseIntentTags"></a>
 
 ### FullTextSearchResponseIntentTags
-
+This message is a response of full text search of intent with tags
 
 
 | Field | Type | Label | Description |
@@ -1130,7 +1130,7 @@ Response to export resources
 <a name="ondewo.nlu.FullTextSearchResponseIntentUsersays"></a>
 
 ### FullTextSearchResponseIntentUsersays
-
+This message is a response of full text search of intent with sentence
 
 
 | Field | Type | Label | Description |
@@ -1274,7 +1274,7 @@ Get platform information
 <a name="ondewo.nlu.GetPlatformMappingRequest"></a>
 
 ### GetPlatformMappingRequest
-Requeset to get platform mapping
+Request to get platform mapping
 
 
 | Field | Type | Label | Description |
@@ -1442,7 +1442,7 @@ Status of model
 <a name="ondewo.nlu.OptimizeRankingMatchRequest"></a>
 
 ### OptimizeRankingMatchRequest
-
+This message is a request to run Optimize Ranking Match
 
 
 | Field | Type | Label | Description |
@@ -1460,7 +1460,7 @@ Status of model
 <a name="ondewo.nlu.OptimizeRankingMatchResponse"></a>
 
 ### OptimizeRankingMatchResponse
-
+This message is a response of Optimize Ranking Match
 
 
 | Field | Type | Label | Description |
@@ -1476,7 +1476,7 @@ Status of model
 <a name="ondewo.nlu.PlatformMapping"></a>
 
 ### PlatformMapping
-
+This message contains the mapping of platform
 
 
 | Field | Type | Label | Description |
@@ -1492,7 +1492,7 @@ Status of model
 <a name="ondewo.nlu.RankingMatchOptimizationConfig"></a>
 
 ### RankingMatchOptimizationConfig
-
+This message contains the configuration to run Optimize Ranking Match
 
 
 | Field | Type | Label | Description |
@@ -1510,7 +1510,7 @@ Status of model
 <a name="ondewo.nlu.ReindexAgentRequest"></a>
 
 ### ReindexAgentRequest
-
+This message is a request to reindex agent
 
 
 | Field | Type | Label | Description |
@@ -1680,7 +1680,7 @@ Structure for Agent / Project status
 <a name="ondewo.nlu.AgentView"></a>
 
 ### AgentView
-
+Strucutre of agent view
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
@@ -1745,7 +1745,7 @@ Defines when to initiate newly created agent when training started
 <a name="ondewo.nlu.ReportFormat"></a>
 
 ### ReportFormat
-Structure of report
+Structure of Report format
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
@@ -1758,7 +1758,7 @@ Structure of report
 <a name="ondewo.nlu.ReportType"></a>
 
 ### ReportType
-
+Structure of Report type
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
@@ -1895,7 +1895,7 @@ Operation <response: [google.protobuf.Empty][google.protobuf.Empty], metadata: [
 <a name="ondewo.nlu.AltSentence"></a>
 
 ### AltSentence
-
+This message contains an alternative sentence
 
 
 | Field | Type | Label | Description |
@@ -1911,7 +1911,7 @@ Operation <response: [google.protobuf.Empty][google.protobuf.Empty], metadata: [
 <a name="ondewo.nlu.AltTrainingPhrase"></a>
 
 ### AltTrainingPhrase
-
+This message contains an alternative training phrase
 
 
 | Field | Type | Label | Description |
@@ -1983,7 +1983,7 @@ Response containing the intents classified in a sentence
 <a name="ondewo.nlu.DataEnrichmentConfig"></a>
 
 ### DataEnrichmentConfig
-
+This message contains the configuration of data enrichment
 
 
 | Field | Type | Label | Description |
@@ -2005,7 +2005,7 @@ Response containing the intents classified in a sentence
 <a name="ondewo.nlu.EntityDetected"></a>
 
 ### EntityDetected
-
+This message contains the entity detected
 
 
 | Field | Type | Label | Description |
@@ -2059,7 +2059,7 @@ Should not use allow_overlaps here, since its default value is False bool allow_
 <a name="ondewo.nlu.ExtractEntitiesFuzzyRequest"></a>
 
 ### ExtractEntitiesFuzzyRequest
-
+This message is a request to extract entities with Fuzzy Entity Recognizer
 
 
 | Field | Type | Label | Description |
@@ -2096,7 +2096,7 @@ The request to detect parameters.
 <a name="ondewo.nlu.ExtractEntitiesResponse"></a>
 
 ### ExtractEntitiesResponse
-
+This message is a response of extracting entities
 
 
 | Field | Type | Label | Description |
@@ -2338,7 +2338,7 @@ Intent classified by a certain intent classifier
 <a name="ondewo.nlu.Synonym"></a>
 
 ### Synonym
-
+This message contains a Synonym
 
 
 | Field | Type | Label | Description |
@@ -2458,7 +2458,7 @@ Structure of all Intent algorithms
 <a name="ondewo.nlu.Mode"></a>
 
 ### Mode
-
+Structure of mode
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
@@ -2502,7 +2502,7 @@ The Central class defining the ondewo ai services
 <a name="ondewo.nlu.StatResponse"></a>
 
 ### StatResponse
-
+This message is a response of status
 
 
 | Field | Type | Label | Description |
@@ -2519,7 +2519,7 @@ The Central class defining the ondewo ai services
 <a name="ondewo.nlu.SortingMode"></a>
 
 ### SortingMode
-
+Structure of sorting mode
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
@@ -2757,7 +2757,7 @@ For more information about contexts, see the
 <a name="ondewo.nlu.BatchCreateEntitiesRequest"></a>
 
 ### BatchCreateEntitiesRequest
-
+This message is a request to create a batch entities
 
 
 | Field | Type | Label | Description |
@@ -2788,7 +2788,7 @@ For more information about contexts, see the
 <a name="ondewo.nlu.BatchDeleteEntitiesRequest"></a>
 
 ### BatchDeleteEntitiesRequest
-
+This message is a request to delete a batch of entities
 
 
 | Field | Type | Label | Description |
@@ -2803,7 +2803,7 @@ For more information about contexts, see the
 <a name="ondewo.nlu.BatchDeleteEntitiesResponse"></a>
 
 ### BatchDeleteEntitiesResponse
-
+This message is a response of deletion of a batch of entities
 
 
 | Field | Type | Label | Description |
@@ -2819,7 +2819,7 @@ For more information about contexts, see the
 <a name="ondewo.nlu.BatchDeleteEntitiesResponse.DeleteEntityStatus"></a>
 
 ### BatchDeleteEntitiesResponse.DeleteEntityStatus
-
+This message contains the status of an entity deletion
 
 
 | Field | Type | Label | Description |
@@ -2851,7 +2851,7 @@ The request message for [EntityTypes.BatchDeleteEntityTypes][google.cloud.dialog
 <a name="ondewo.nlu.BatchEntitiesResponse"></a>
 
 ### BatchEntitiesResponse
-
+This message is a response of batch entities
 
 
 | Field | Type | Label | Description |
@@ -2883,7 +2883,7 @@ The request message for [EntityTypes.BatchDeleteEntityTypes][google.cloud.dialog
 <a name="ondewo.nlu.BatchGetEntitiesRequest"></a>
 
 ### BatchGetEntitiesRequest
-
+Thiss message is a request to get a batch of entities
 
 
 | Field | Type | Label | Description |
@@ -2898,7 +2898,7 @@ The request message for [EntityTypes.BatchDeleteEntityTypes][google.cloud.dialog
 <a name="ondewo.nlu.BatchUpdateEntitiesRequest"></a>
 
 ### BatchUpdateEntitiesRequest
-
+This message is a request to update a batch of entities
 
 
 | Field | Type | Label | Description |
@@ -3040,7 +3040,7 @@ This message is a wrapper around a collection of entity types.
 <a name="ondewo.nlu.EntityTypeSorting"></a>
 
 ### EntityTypeSorting
-
+This message contains Entity type sorting
 
 
 | Field | Type | Label | Description |
@@ -3056,7 +3056,7 @@ This message is a wrapper around a collection of entity types.
 <a name="ondewo.nlu.EntityValueSorting"></a>
 
 ### EntityValueSorting
-
+This message contains entity value sorting
 
 
 | Field | Type | Label | Description |
@@ -3090,7 +3090,7 @@ The request message for [EntityTypes.GetEntityType][google.cloud.dialogflow.v2.E
 <a name="ondewo.nlu.ListEntitiesRequest"></a>
 
 ### ListEntitiesRequest
-
+This message is a request to get a list of entities
 
 
 | Field | Type | Label | Description |
@@ -3109,7 +3109,7 @@ The request message for [EntityTypes.GetEntityType][google.cloud.dialogflow.v2.E
 <a name="ondewo.nlu.ListEntitiesResponse"></a>
 
 ### ListEntitiesResponse
-
+This message is a response of listing entities
 
 
 | Field | Type | Label | Description |
@@ -3233,7 +3233,7 @@ Represents the category of entity types to filter by in the "List Entity Types" 
 <a name="ondewo.nlu.EntityTypeSorting.EntityTypeSortingField"></a>
 
 ### EntityTypeSorting.EntityTypeSortingField
-
+Structure of Entity type sorting field
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
@@ -3266,7 +3266,7 @@ does not return all values and synonyms besides the full view that is set by def
 <a name="ondewo.nlu.EntityValueSorting.EntityValueSortingField"></a>
 
 ### EntityValueSorting.EntityValueSortingField
-
+Structure of Entity value sorting field
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
@@ -3407,7 +3407,7 @@ Request to create a list of new response messages and adds it to an intent
 <a name="ondewo.nlu.BatchCreateTrainingPhrasesRequest"></a>
 
 ### BatchCreateTrainingPhrasesRequest
-
+This message is a request of a creation of a batch of training phrases
 
 
 | Field | Type | Label | Description |
@@ -3548,7 +3548,7 @@ Response containing list with deleted response messages
 <a name="ondewo.nlu.BatchDeleteTrainingPhrasesRequest"></a>
 
 ### BatchDeleteTrainingPhrasesRequest
-
+This message is a request to delete a batch of training phrases
 
 
 | Field | Type | Label | Description |
@@ -3563,7 +3563,7 @@ Response containing list with deleted response messages
 <a name="ondewo.nlu.BatchDeleteTrainingPhrasesResponse"></a>
 
 ### BatchDeleteTrainingPhrasesResponse
-
+This message is a response of deleting a batch of training phrases
 
 
 | Field | Type | Label | Description |
@@ -3625,7 +3625,7 @@ Request to retrieve a response messages
 <a name="ondewo.nlu.BatchGetTrainingPhrasesRequest"></a>
 
 ### BatchGetTrainingPhrasesRequest
-
+This message is a request to get a batch training phrases
 
 
 | Field | Type | Label | Description |
@@ -3672,7 +3672,7 @@ Response containing a batch of parameters in the specified intent
 <a name="ondewo.nlu.BatchResponseMessagesStatusResponse"></a>
 
 ### BatchResponseMessagesStatusResponse
-
+This message is a response of a batch responses of message status
 
 
 | Field | Type | Label | Description |
@@ -3704,7 +3704,7 @@ Response containing a batch of parameters in the specified intent
 <a name="ondewo.nlu.BatchTrainingPhrasesStatusResponse"></a>
 
 ### BatchTrainingPhrasesStatusResponse
-
+This message is a response of the status of a batch of training phrases
 
 
 | Field | Type | Label | Description |
@@ -3785,7 +3785,7 @@ Request to update a response message in the specified intent
 <a name="ondewo.nlu.BatchUpdateTrainingPhrasesRequest"></a>
 
 ### BatchUpdateTrainingPhrasesRequest
-
+This message is a request to update a batch of training phrases
 
 
 | Field | Type | Label | Description |
@@ -3833,7 +3833,7 @@ The request message for [Intents.DeleteIntent][google.cloud.dialogflow.v2.Intent
 <a name="ondewo.nlu.GetAllIntentTagsRequest"></a>
 
 ### GetAllIntentTagsRequest
-
+This message is a request to get all intent tags
 
 
 | Field | Type | Label | Description |
@@ -3866,7 +3866,7 @@ The request message for [Intents.GetIntent][google.cloud.dialogflow.v2.Intents.G
 <a name="ondewo.nlu.GetIntentTagsRequest"></a>
 
 ### GetIntentTagsRequest
-
+This message is a request to get intent tags
 
 
 | Field | Type | Label | Description |
@@ -3881,7 +3881,7 @@ The request message for [Intents.GetIntent][google.cloud.dialogflow.v2.Intents.G
 <a name="ondewo.nlu.GetIntentTagsResponse"></a>
 
 ### GetIntentTagsResponse
-
+This message is a response of getting intent tags
 
 
 | Field | Type | Label | Description |
@@ -4120,7 +4120,7 @@ An item in the carousel.
 <a name="ondewo.nlu.Intent.Message.HTMLText"></a>
 
 ### Intent.Message.HTMLText
-
+This message contains HTML text
 
 
 | Field | Type | Label | Description |
@@ -4430,7 +4430,7 @@ This message is a wrapper around a collection of intents.
 <a name="ondewo.nlu.IntentSorting"></a>
 
 ### IntentSorting
-
+This message contains sorting of an intentn
 
 
 | Field | Type | Label | Description |
@@ -4446,7 +4446,7 @@ This message is a wrapper around a collection of intents.
 <a name="ondewo.nlu.IntentTagRequest"></a>
 
 ### IntentTagRequest
-
+This message is a request to get an intent tag
 
 
 | Field | Type | Label | Description |
@@ -4632,7 +4632,7 @@ This message contains a list of training phrases filtered by intent ids, languag
 <a name="ondewo.nlu.TrainingPhraseStatus"></a>
 
 ### TrainingPhraseStatus
-
+This message containing the training phrases status
 
 
 | Field | Type | Label | Description |
@@ -4668,7 +4668,7 @@ The request message for [Intents.UpdateIntent][google.cloud.dialogflow.v2.Intent
 <a name="ondewo.nlu.Intent.IntentStatus"></a>
 
 ### Intent.IntentStatus
-
+Structure of status of an Intent
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
@@ -4761,7 +4761,7 @@ Represents the type of intents to filter by in the "List Intents" request
 <a name="ondewo.nlu.IntentSorting.IntentSortingField"></a>
 
 ### IntentSorting.IntentSortingField
-
+Structure of intent sorting field
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
@@ -5061,6 +5061,8 @@ network API call.
 <a name="ondewo.nlu.OperationFilter"></a>
 
 ### OperationFilter
+This message contains an operation filter
+
 An operationFilter can be used in some requests to return only operations matching certain filter conditions.
 
 All fields below are  optional. Multiple fields specified at the same time are chained via OR.
@@ -5122,7 +5124,7 @@ NOTE: the `name` binding below allows API services to override the binding to us
 <a name="ondewo.nlu.CreateProjectRoleRequest"></a>
 
 ### CreateProjectRoleRequest
-
+This message is a request to create project role
 
 
 | Field | Type | Label | Description |
@@ -5139,7 +5141,7 @@ NOTE: the `name` binding below allows API services to override the binding to us
 <a name="ondewo.nlu.DeleteProjectRoleRequest"></a>
 
 ### DeleteProjectRoleRequest
-
+This message is a request to delete project role
 
 
 | Field | Type | Label | Description |
@@ -5155,7 +5157,7 @@ NOTE: the `name` binding below allows API services to override the binding to us
 <a name="ondewo.nlu.GetProjectRoleRequest"></a>
 
 ### GetProjectRoleRequest
-
+This message is a request to get project role
 
 
 | Field | Type | Label | Description |
@@ -5173,7 +5175,7 @@ NOTE: the `name` binding below allows API services to override the binding to us
 <a name="ondewo.nlu.ListProjectRolesRequest"></a>
 
 ### ListProjectRolesRequest
-
+This message is a request to list project role
 
 
 | Field | Type | Label | Description |
@@ -5190,7 +5192,7 @@ NOTE: the `name` binding below allows API services to override the binding to us
 <a name="ondewo.nlu.ListProjectRolesResponse"></a>
 
 ### ListProjectRolesResponse
-
+This message is a response of listing project role
 
 
 | Field | Type | Label | Description |
@@ -5223,7 +5225,7 @@ Project Role messages
 <a name="ondewo.nlu.UpdateProjectRoleRequest"></a>
 
 ### UpdateProjectRoleRequest
-
+This message is a request to update project role
 
 
 | Field | Type | Label | Description |
@@ -5243,7 +5245,7 @@ Project Role messages
 <a name="ondewo.nlu.DefaultProjectRole"></a>
 
 ### DefaultProjectRole
-
+Structure of project role
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
@@ -5261,7 +5263,7 @@ unspecified, default value depends on endpoint # TODO |
 <a name="ondewo.nlu.ProjectRoleView"></a>
 
 ### ProjectRoleView
-
+Structure of project role view
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
@@ -5278,15 +5280,15 @@ unspecified, default value depends on endpoint # TODO |
 <a name="ondewo.nlu.ProjectRoles"></a>
 
 ### ProjectRoles
-
+Project roles
 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
-| CreateProjectRole | [CreateProjectRoleRequest](#ondewo.nlu.CreateProjectRoleRequest) | [ProjectRole](#ondewo.nlu.ProjectRole) |  |
-| GetProjectRole | [GetProjectRoleRequest](#ondewo.nlu.GetProjectRoleRequest) | [ProjectRole](#ondewo.nlu.ProjectRole) |  |
-| DeleteProjectRole | [DeleteProjectRoleRequest](#ondewo.nlu.DeleteProjectRoleRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) |  |
-| UpdateProjectRole | [UpdateProjectRoleRequest](#ondewo.nlu.UpdateProjectRoleRequest) | [ProjectRole](#ondewo.nlu.ProjectRole) |  |
-| ListProjectRoles | [ListProjectRolesRequest](#ondewo.nlu.ListProjectRolesRequest) | [ListProjectRolesResponse](#ondewo.nlu.ListProjectRolesResponse) |  |
+| CreateProjectRole | [CreateProjectRoleRequest](#ondewo.nlu.CreateProjectRoleRequest) | [ProjectRole](#ondewo.nlu.ProjectRole) | Creats a project role by creating the knowledge base master |
+| GetProjectRole | [GetProjectRoleRequest](#ondewo.nlu.GetProjectRoleRequest) | [ProjectRole](#ondewo.nlu.ProjectRole) | Creats a project role by getting the knowledge base master |
+| DeleteProjectRole | [DeleteProjectRoleRequest](#ondewo.nlu.DeleteProjectRoleRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Deletes project role |
+| UpdateProjectRole | [UpdateProjectRoleRequest](#ondewo.nlu.UpdateProjectRoleRequest) | [ProjectRole](#ondewo.nlu.ProjectRole) | Updates project role |
+| ListProjectRoles | [ListProjectRolesRequest](#ondewo.nlu.ListProjectRolesRequest) | [ListProjectRolesResponse](#ondewo.nlu.ListProjectRolesResponse) | List project roles |
 
  <!-- end services -->
 
@@ -5449,7 +5451,7 @@ Server project statistics
 <a name="ondewo.nlu.AddSessionLabelsRequest"></a>
 
 ### AddSessionLabelsRequest
-
+This message is a request to add session labels
 
 
 | Field | Type | Label | Description |
@@ -5466,7 +5468,7 @@ Server project statistics
 <a name="ondewo.nlu.CreateSessionRequest"></a>
 
 ### CreateSessionRequest
-
+This message is a request to create a session
 
 
 | Field | Type | Label | Description |
@@ -5504,7 +5506,7 @@ SESSION-REVIEW RELATED MESSAGES *** //
 <a name="ondewo.nlu.DeleteSessionRequest"></a>
 
 ### DeleteSessionRequest
-
+This message is a request to delete a session
 
 
 | Field | Type | Label | Description |
@@ -5560,7 +5562,7 @@ The message returned from the DetectIntent method.
 <a name="ondewo.nlu.DetectedIntent"></a>
 
 ### DetectedIntent
-
+This message contains a detected intent
 
 
 | Field | Type | Label | Description |
@@ -5600,7 +5602,7 @@ The parameter `name` may be used by the agent in the response:
 <a name="ondewo.nlu.GetLatestSessionReviewRequest"></a>
 
 ### GetLatestSessionReviewRequest
-
+This message is a request to get latest session review
 
 
 | Field | Type | Label | Description |
@@ -5616,7 +5618,7 @@ The parameter `name` may be used by the agent in the response:
 <a name="ondewo.nlu.GetSessionRequest"></a>
 
 ### GetSessionRequest
-
+This message is a request to get a session
 
 
 | Field | Type | Label | Description |
@@ -5632,7 +5634,7 @@ The parameter `name` may be used by the agent in the response:
 <a name="ondewo.nlu.GetSessionReviewRequest"></a>
 
 ### GetSessionReviewRequest
-
+This message is a request to get session review
 
 
 | Field | Type | Label | Description |
@@ -5666,7 +5668,7 @@ Instructs the speech recognizer how to process the audio content.
 <a name="ondewo.nlu.ListSessionLabelsRequest"></a>
 
 ### ListSessionLabelsRequest
-
+This message is a request to list session labels
 
 
 | Field | Type | Label | Description |
@@ -5681,7 +5683,7 @@ Instructs the speech recognizer how to process the audio content.
 <a name="ondewo.nlu.ListSessionLabelsResponse"></a>
 
 ### ListSessionLabelsResponse
-
+This message is a response of listing session labels
 
 
 | Field | Type | Label | Description |
@@ -5696,7 +5698,7 @@ Instructs the speech recognizer how to process the audio content.
 <a name="ondewo.nlu.ListSessionReviewsRequest"></a>
 
 ### ListSessionReviewsRequest
-
+This message is a request to list session reviews
 
 
 | Field | Type | Label | Description |
@@ -5713,7 +5715,7 @@ Instructs the speech recognizer how to process the audio content.
 <a name="ondewo.nlu.ListSessionReviewsResponse"></a>
 
 ### ListSessionReviewsResponse
-
+This message is a response of listing session reviews
 
 
 | Field | Type | Label | Description |
@@ -5729,7 +5731,7 @@ Instructs the speech recognizer how to process the audio content.
 <a name="ondewo.nlu.ListSessionsRequest"></a>
 
 ### ListSessionsRequest
-
+This message is a request to list sessions
 
 
 | Field | Type | Label | Description |
@@ -5836,7 +5838,7 @@ You should not rely on this field as it isn't guaranteed to be accurate, or even
 <a name="ondewo.nlu.RemoveSessionLabelsRequest"></a>
 
 ### RemoveSessionLabelsRequest
-
+This message is a request to remove session labels
 
 
 | Field | Type | Label | Description |
@@ -5870,6 +5872,8 @@ SESSION RELATED MESSAGES *** //
 <a name="ondewo.nlu.SessionFilter"></a>
 
 ### SessionFilter
+This message contains a session filter
+
 A SessionFilter can be used in some requests to return only sessions matching certain filter conditions.
 
 All fields below are  optional. Multiple fields specified at the same time are chained via AND.
@@ -5911,6 +5915,8 @@ defaults to 0 if not set |
 <a name="ondewo.nlu.SessionInfo"></a>
 
 ### SessionInfo
+This message contains information about session
+
 A SessionInfo contains some general information about a session.
 
 This information can be returned inside a Session object for consumption by a client.
@@ -5958,7 +5964,7 @@ The list of contexts of each step collected in an outer list
 <a name="ondewo.nlu.SessionReview"></a>
 
 ### SessionReview
-
+This message contains a session review
 
 
 | Field | Type | Label | Description |
@@ -5974,7 +5980,7 @@ The list of contexts of each step collected in an outer list
 <a name="ondewo.nlu.SessionReviewStep"></a>
 
 ### SessionReviewStep
-
+This message contains a session review step
 
 
 | Field | Type | Label | Description |
@@ -5993,7 +5999,7 @@ The list of contexts of each step collected in an outer list
 <a name="ondewo.nlu.SessionStep"></a>
 
 ### SessionStep
-
+This message contains a session step
 
 
 | Field | Type | Label | Description |
@@ -6142,7 +6148,7 @@ Represents the natural language text to be processed.
 <a name="ondewo.nlu.TrackSessionStepRequest"></a>
 
 ### TrackSessionStepRequest
-
+This message is a request to track a session
 
 
 | Field | Type | Label | Description |
@@ -6482,7 +6488,7 @@ Authentication messages
 <a name="ondewo.nlu.LoginResponse"></a>
 
 ### LoginResponse
-
+This message is a response of logging
 
 
 | Field | Type | Label | Description |
@@ -6566,7 +6572,7 @@ this message contains all the fields that required for user db
 <a name="ondewo.nlu.UserInfo"></a>
 
 ### UserInfo
-
+This message contains information about user
 
 
 | Field | Type | Label | Description |
@@ -7124,7 +7130,7 @@ request sent for webhook ping
 <a name="ondewo.nlu.PingResponse"></a>
 
 ### PingResponse
-
+This message is a response of pinging
 
 
 | Field | Type | Label | Description |
