@@ -604,6 +604,7 @@ message Session {
     }
 }
 
+// This message contains a session step
 message SessionStep {
     DetectIntentRequest detect_intent_request = 1;
     DetectIntentResponse detect_intent_response = 2;
@@ -611,12 +612,14 @@ message SessionStep {
     repeated Context contexts = 3;
 }
 
+// This message is a request to track a session
 message TrackSessionStepRequest {
     string session_id = 1;
     SessionStep session_step = 2;
     Session.View session_view = 3;
 }
 
+// This message is a request to list sessions
 message ListSessionsRequest {
     // The parent for which sessions should be listed
     // Format: `projects/<PROJECT_ID>/agent`.
@@ -632,6 +635,7 @@ message ListSessionsRequest {
     SessionFilter session_filter = 5;
 }
 
+// This message contains a session filter
 message SessionFilter {
     // A SessionFilter can be used in some requests to return only sessions matching certain filter conditions.
     //
@@ -681,7 +685,7 @@ message SessionFilter {
     repeated Context output_contexts = 17;
 }
 
-
+// This message contains information about session
 message SessionInfo {
     // A SessionInfo contains some general information about a session.
     //
@@ -738,6 +742,7 @@ message ListSessionsResponse {
     string next_page_token = 2;
 }
 
+// This message is a request to get a session
 message GetSessionRequest {
     // The session to be returned
     // Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID>`.
@@ -747,6 +752,7 @@ message GetSessionRequest {
     Session.View session_view = 2;
 }
 
+// This message is a request to create a session
 message CreateSessionRequest {
     // Creates a session that collects all the conversation interactions between the machine and a user
     // The unique identifier of an Agent
@@ -758,6 +764,7 @@ message CreateSessionRequest {
     string session_uuid = 2; // Optional. If not provided, it will be auto-generated
 }
 
+// This message is a request to delete a session
 message DeleteSessionRequest {
     // Required. The session to be deleted
     // Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_UUID>`.
@@ -780,6 +787,7 @@ message CreateSessionReviewRequest {
     SessionReview.View session_review_view = 4;
 }
 
+// This message contains a session review
 message SessionReview {
     // The unique identifier for the given review
     // Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID>/reviews/<SESSION_REVIEW_ID>`.
@@ -803,6 +811,7 @@ message SessionReview {
     }
 }
 
+// This message contains a session review step
 message SessionReviewStep {
     // The user says with markup of the detected entity types
     Intent.TrainingPhrase annotated_usersays = 1;
@@ -820,6 +829,7 @@ message SessionReviewStep {
     repeated Context contexts_out = 5;
 }
 
+// This message contains a detected intent
 message DetectedIntent {
     // intent
     Intent intent = 1;
@@ -843,28 +853,33 @@ message DetectedIntent {
     bool required_param_missing = 5;
 }
 
+// This message is a request to list session labels
 message ListSessionLabelsRequest {
     // The parent for which the labels for all sessions should be listed
     // Format: `projects/<PROJECT_ID>/agent`.
     string parent = 1;
 }
 
+// This message is a response of listing session labels
 message ListSessionLabelsResponse {
     repeated string labels = 1;
 }
 
+// This message is a request to add session labels
 message AddSessionLabelsRequest {
     string session_id = 1;
     repeated string labels = 2;
     Session.View session_view = 3;
 }
 
+// This message is a request to remove session labels
 message RemoveSessionLabelsRequest {
     string session_id = 1;
     repeated string labels = 2;
     Session.View session_view = 3;
 }
 
+// This message is a request to list session reviews
 message ListSessionReviewsRequest {
     // The unique identifier for the session for which reviews should be listed
     // Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID>`.
@@ -877,6 +892,7 @@ message ListSessionReviewsRequest {
     string page_token = 4;
 }
 
+// This message is a response of listing session reviews
 message ListSessionReviewsResponse {
     // The requested session reviews
     repeated SessionReview session_reviews = 1;
@@ -885,6 +901,7 @@ message ListSessionReviewsResponse {
     string next_page_token = 2;
 }
 
+// This message is a request to get session review
 message GetSessionReviewRequest {
     // The unique identifier of the session review to be returned
     string session_review_id = 1;
@@ -892,6 +909,7 @@ message GetSessionReviewRequest {
     SessionReview.View session_review_view = 2;
 }
 
+// This message is a request to get latest session review
 message GetLatestSessionReviewRequest {
     // The unique identifier of the session for which the latest review should be returned
     // Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID>`.

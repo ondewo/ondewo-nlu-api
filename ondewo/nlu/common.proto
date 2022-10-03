@@ -16,11 +16,13 @@ syntax = "proto3";
 
 package ondewo.nlu;
 
+// Structure of sorting mode
 enum SortingMode {
     ASCENDING = 0;
     DESCENDING = 1;
 }
 
+// This message is a response of status
 message StatResponse {
     // Response wrapper for the "Get<Stat>" endpoints
     uint32 value = 1;

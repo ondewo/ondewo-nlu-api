@@ -513,11 +513,13 @@ message Agent {
     string description = 10;
 }
 
+// This message contains the agent with owner
 message AgentWithOwner {
     Agent agent = 1;
     User owner = 2;
 }
 
+// This message contains the agent of user with owner
 message AgentOfUserWithOwner {
     // Required. Agent message and User message of its owner.
     AgentWithOwner agent_with_owner = 1;
@@ -527,6 +529,7 @@ message AgentOfUserWithOwner {
 }
 
 
+// Strucutre of agent view
 enum AgentView {
     // Unspecified agent view: the view is defined by the call:
     // - CreateAgent: AGENT_VIEW_SHALLOW
@@ -715,6 +718,7 @@ message ExportBenchmarkAgentResponse {
     map<string, ListTrainingPhrasesResponse> training_phrases = 2;
 }
 
+// This message is a request to run Optimize Ranking Match
 message OptimizeRankingMatchRequest {
     string parent = 1;
     repeated string language_codes = 2;
@@ -725,6 +729,7 @@ message OptimizeRankingMatchRequest {
     bool in_place = 4;
 }
 
+// This message contains the configuration to run Optimize Ranking Match
 message RankingMatchOptimizationConfig {
     string language_code = 1;
     int32 n_splits = 2;
@@ -734,6 +739,7 @@ message RankingMatchOptimizationConfig {
     google.protobuf.Struct initial_thresholds = 4;
 }
 
+// This message is a response of Optimize Ranking Match
 message OptimizeRankingMatchResponse {
     google.protobuf.Struct optimization_info = 1;
     google.protobuf.Struct optimized_ondewo_config = 3;
@@ -817,6 +823,7 @@ message GetAgentStatisticsResponse {
     ReportType type = 3;
 }
 
+// Structure of Report type
 enum ReportType {
     // will return all reports as files of specified format compressed into a single zipfile
     ALL = 0;
@@ -830,7 +837,7 @@ enum ReportType {
     INTENT_GENERAL = 4;
 }
 
-// Structure of report
+// Structure of Report format
 enum ReportFormat {
     CSV = 0;
     HTML = 1;
@@ -1032,6 +1039,7 @@ message GetModelStatusesResponse {
     repeated ModelStatus model_statuses = 1;
 }
 
+// This message contains the information of custom platform
 message CustomPlatformInfo {
     // Required. ID of the Platform.
     // Custom Intent.Message.Platform placeholder. Note: it will not work with non-placeholders values
@@ -1045,13 +1053,14 @@ message CustomPlatformInfo {
     // Sorting position of the GetPlatformMappingRequest.
     uint32 position = 3;
 }
-// Requeset to get platform mapping
+// Request to get platform mapping
 message GetPlatformMappingRequest {
     // Required. The project that the agent is associated with.
     // Format: `projects/<Project ID>/agent`.
     string parent = 1;
 }
 
+// This message contains the mapping of platform
 message PlatformMapping {
     // Required. The project that the agent is associated with.
     // Format: `projects/<Project ID>/agent`.
@@ -1061,6 +1070,7 @@ message PlatformMapping {
     repeated CustomPlatformInfo platform_info = 2;
 }
 
+// This message is a request to run full text search
 message FullTextSearchRequest {
 
     // Required. The project that the agent is associated with.
@@ -1092,6 +1102,7 @@ message FullTextSearchRequest {
     }
 }
 
+// This message is a response of full text search of entity type
 message FullTextSearchResponseEntityType {
     // Required. The project that the agent to fetch is associated with.
     // Format: `projects/<Project ID>/agents`.
@@ -1109,6 +1120,7 @@ message FullTextSearchResponseEntityType {
     string next_page_token = 7;
 }
 
+// This message is a response of full text search of entity
 message FullTextSearchResponseEntity {
     // Required. The project that the agent to fetch is associated with.
     // Format: `projects/<Project ID>/agents`.
@@ -1128,6 +1140,7 @@ message FullTextSearchResponseEntity {
     string next_page_token = 7;
 }
 
+// This message is a response of full text search of synonym entit
 message FullTextSearchResponseEntitySynonym {
     // Required. The project that the agent to fetch is associated with.
     // Format: `projects/<Project ID>/agents`.
@@ -1149,6 +1162,7 @@ message FullTextSearchResponseEntitySynonym {
     string next_page_token = 7;
 }
 
+// This message is a response of full text search of intent
 message FullTextSearchResponseIntent {
     // Required. The project that the agent to fetch is associated with.
     // Format: `projects/<Project ID>/agents`.
@@ -1167,6 +1181,7 @@ message FullTextSearchResponseIntent {
     string next_page_token = 7;
 }
 
+// This message is a response of full text search of intent with context in
 message FullTextSearchResponseIntentContextIn {
     // Required. The project that the agent to fetch is associated with.
     // Format: `projects/<Project ID>/agents`.
@@ -1185,6 +1200,7 @@ message FullTextSearchResponseIntentContextIn {
     string next_page_token = 7;
 }
 
+// This message is a response of full text search of intent with context out
 message FullTextSearchResponseIntentContextOut {
     // Required. The project that the agent to fetch is associated with.
     // Format: `projects/<Project ID>/agents`.
@@ -1203,6 +1219,7 @@ message FullTextSearchResponseIntentContextOut {
     string next_page_token = 7;
 }
 
+// This message is a response of full text search of intent with sentence
 message FullTextSearchResponseIntentUsersays {
     // Required. The project that the agent to fetch is associated with.
     // Format: `projects/<Project ID>/agents`.
@@ -1225,6 +1242,7 @@ message FullTextSearchResponseIntentUsersays {
     string next_page_token = 7;
 }
 
+// This message is a response of full text search of intent with tags
 message FullTextSearchResponseIntentTags {
     // Required. The project that the agent to fetch is associated with.
     // Format: `projects/<Project ID>/agents`.
@@ -1244,6 +1262,7 @@ message FullTextSearchResponseIntentTags {
     string next_page_token = 7;
 }
 
+// This message is a response of full text search of intent response
 message FullTextSearchResponseIntentResponse {
     // Required. The project that the agent to fetch is associated with.
     // Format: `projects/<Project ID>/agents`.
@@ -1264,6 +1283,7 @@ message FullTextSearchResponseIntentResponse {
     string next_page_token = 7;
 }
 
+// This message is a response of full text search of intent with parameters
 message FullTextSearchResponseIntentParameters {
     // Required. The project that the agent to fetch is associated with.
     // Format: `projects/<Project ID>/agents`.
@@ -1283,6 +1303,7 @@ message FullTextSearchResponseIntentParameters {
     string next_page_token = 7;
 }
 
+// This message is a request to reindex agent
 message ReindexAgentRequest {
     // projects/<project_id>/agent
     string parent = 1;

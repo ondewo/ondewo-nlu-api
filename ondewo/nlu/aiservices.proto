@@ -92,6 +92,7 @@ message ExtractEntitiesRequest {
     string intent_name = 4;
 }
 
+// This message is a request to extract entities with Fuzzy Entity Recognizer
 message ExtractEntitiesFuzzyRequest {
     // the parent of the request
     // Format: `projects/<Project ID>`.
@@ -126,12 +127,14 @@ message EntityTypeFuzzyNerConfig {
     // bool allow_overlaps = 5;
 }
 
+// This message contains the entity detected
 message EntityDetected{
     Intent.TrainingPhrase.Entity entity = 1;
     string extraction_method = 2;
     float score = 3;
 }
 
+// This message is a response of extracting entities
 message ExtractEntitiesResponse {
     repeated EntityDetected entities_detected = 1;
     string text = 2;
@@ -192,6 +195,7 @@ message GetSynonymsResponse {
     repeated Synonym synonyms = 1;
 }
 
+// This message contains a Synonym
 message Synonym {
     string synonym = 1;
     int32 score = 2;
@@ -217,16 +221,19 @@ message GetAlternativeTrainingPhrasesResponse {
     repeated AltTrainingPhrase alternative_training_phrases = 1;
 }
 
+// This message contains an alternative sentence
 message AltSentence {
     string sentence = 1;
     float score = 2;
 }
 
+// This message contains an alternative training phrase
 message AltTrainingPhrase {
     Intent.TrainingPhrase training_phrase = 1;
     float score = 2;
 }
 
+// This message contains the configuration of data enrichment
 message DataEnrichmentConfig {
     EntityEnrichmentConfig entity_enrichment = 1;
     ThesaurusEnrichmentConfig thesaurus_enrichment = 2;
@@ -335,6 +342,7 @@ message ClassifyIntentsRequest {
     repeated IntentAlgorithms algorithms = 7;
 }
 
+// Structure of mode
 enum Mode {
     UNSPECIFIED = 0;
     EXCLUSIVE = 1;

@@ -149,6 +149,7 @@ message User {
     string user_email = 7;
 }
 
+// This message contains information about user
 message UserInfo {
     User user = 1;
 
@@ -318,6 +319,7 @@ message LoginRequest {
     string password = 2;
 }
 
+// This message is a response of logging
 message LoginResponse {
     User user = 1;
     string auth_token = 2;
