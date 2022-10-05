@@ -376,7 +376,7 @@ message ClassifyIntentsRequest {
     repeated IntentAlgorithms algorithms = 7;
 }
 
-// Structure of mode
+// Type of mode
 enum Mode {
     UNSPECIFIED = 0;
     EXCLUSIVE = 1;
