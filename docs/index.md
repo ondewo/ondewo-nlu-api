@@ -2458,7 +2458,7 @@ Structure of all Intent algorithms
 <a name="ondewo.nlu.Mode"></a>
 
 ### Mode
-Structure of mode
+Type of mode
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
@@ -4912,7 +4912,8 @@ can be a sub-operation itself
 <a name="ondewo.nlu.OperationMetadata.OperationType"></a>
 
 ### OperationMetadata.OperationType
-
+Type of operation. It can be creating, importing, exporting, deleting, restoring, building cache,
+training or exporting benchmark an agent
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
@@ -4931,7 +4932,8 @@ can be a sub-operation itself
 <a name="ondewo.nlu.OperationMetadata.Status"></a>
 
 ### OperationMetadata.Status
-
+Structure to set status of operation. An operation may not be started if NOT_STARTED is set, in
+progress if IN_PROGRESS, finished if DONE, interrupted if CANCELED or failed if FAILED.
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
