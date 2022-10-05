@@ -142,26 +142,43 @@ message ExtractEntitiesResponse {
 
 // Request to get alternative sentences
 message GetAlternativeSentencesRequest {
+    // Configuration type of the enricher
     DataEnrichmentConfig config = 1;
+    // The sentence from which it is desired to get alternative sentences
     string sentence = 2;
+    // Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
     string language_code = 4;
+    // the parent of the request
+    // Format: `projects/<Project ID>`.
     string parent = 5;
+    // Protected words in the augmentation process
     repeated string protected_words = 6;
+    // Words to be changed in the augmentation process
     repeated string words_to_change = 7;
 }
 
 // Request to generate user sentences
 message GenerateUserSaysRequest {
+    // language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
     string language_code = 4;
+    // the parent of the request
+    // Format: `projects/<Project ID>`.
     string parent = 5;
+    // The number of synonyms desired
     int32 n_repeat_synonym = 6;
+    // Git branch
     string branch = 8;
 }
 // Request to generate responses
 message GenerateResponsesRequest {
+    // language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
     string language_code = 4;
+    // the parent of the request
+    // Format: `projects/<Project ID>`.
     string parent = 5;
+    // The number of synonyms desired
     int32 n_repeat_synonym = 7;
+    // Git branch
     string branch = 8;
     bool drop_unknown_parameters = 9;
 }
@@ -171,14 +188,20 @@ message GetAlternativeTrainingPhrasesRequest {
     DataEnrichmentConfig config = 1;
     Intent.TrainingPhrase training_phrase = 2;
     string intent_name = 3;
+    // language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
     string language_code = 4;
+    // the parent of the request
+    // Format: `projects/<Project ID>`.
     string parent = 5;
     bool detect_entities = 6;
     // similarity threshold defines how similar sentences should be to drop generated training phrase
     // as duplicate. Meaningful values of similarity_threshold are between 0.95 and 1.0
     float similarity_threshold = 7;
+    // Protected words in the augmentation process
     repeated string protected_words = 8;
+    // Words to be changed in the augmentation process
     repeated string words_to_change = 9;
+    // Git branch
     string branch = 10;
 }
 
@@ -186,7 +209,10 @@ message GetAlternativeTrainingPhrasesRequest {
 message GetSynonymsRequest {
     DataEnrichmentConfig config = 1;
     string word = 2;
+    // language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
     string language_code = 4;
+    // the parent of the request
+    // Format: `projects/<Project ID>`.
     string parent = 5;
 }
 
@@ -235,13 +261,21 @@ message AltTrainingPhrase {
 
 // This message contains the configuration of data enrichment
 message DataEnrichmentConfig {
+    // Entity augmenter configuration
     EntityEnrichmentConfig entity_enrichment = 1;
+    // Thesaurus augmenter configuration
     ThesaurusEnrichmentConfig thesaurus_enrichment = 2;
+    // Word2Vec augmenter configuration
     Word2VecEnrichmentConfig word2vec_enrichment = 3;
+    // WordNet augmenter configuration
     WordNetAugEnrichmentConfig word_net_enrichment = 4;
+    // GPT2 augmenter configuration
     GPT2EnrichmentConfig gpt2_enrichment = 5;
+    // GloVe augmenter configuration
     GloVeEnrichmentConfig glove_enrichment = 6;
+    // BERT augmenter configuration
     BertAugEnrichmentConfig bert_enrichment = 8;
+    // XLNet augmenter configuration
     XLNetAugEnrichmentConfig xlnet_enrichment = 9;
 }
 
