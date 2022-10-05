@@ -383,7 +383,7 @@ enum Mode {
     INCLUSIVE = 2;
 }
 
-// Structure of all Intent algorithms
+// Type of Intent algorithm.
 enum IntentAlgorithms {
     OndewoIntentExactContextDetector = 0;
     OndewoIntentExactMatch = 1;

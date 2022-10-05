@@ -823,7 +823,7 @@ message GetAgentStatisticsResponse {
     ReportType type = 3;
 }
 
-// Structure of Report type
+// Type of Report
 enum ReportType {
     // will return all reports as files of specified format compressed into a single zipfile
     ALL = 0;
@@ -837,7 +837,7 @@ enum ReportType {
     INTENT_GENERAL = 4;
 }
 
-// Structure of Report format
+// Type of Report format
 enum ReportFormat {
     CSV = 0;
     HTML = 1;
@@ -932,7 +932,7 @@ message SetAgentStatusRequest {
 
 // fixme: add endpoint to set agent owner
 
-// Structure for Agent / Project status
+// Type of Agent / Project statusfor
 enum AgentStatus {
     // If project is active, all its endpoints are active
     ACTIVE = 0;
@@ -1086,7 +1086,7 @@ message FullTextSearchRequest {
     // Composite string: current_index-0--page_size-10
     string page_token = 4;
 
-    // Structure of query
+    // Type of query
     enum QueryType {
         ALL = 0;  // just a placeholder, has to start with zero
         OndewoEntityQuery = 1;

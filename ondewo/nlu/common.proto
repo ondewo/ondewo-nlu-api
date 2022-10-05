@@ -16,7 +16,7 @@ syntax = "proto3";
 
 package ondewo.nlu;
 
-// Structure of sorting mode
+// Sorting mode
 enum SortingMode {
     ASCENDING = 0;
     DESCENDING = 1;
