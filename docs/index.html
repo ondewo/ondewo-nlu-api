@@ -6845,56 +6845,56 @@ UNSPECIFIED - default mode, described in agent config </p></td>
                   <td>entity_enrichment</td>
                   <td><a href="#ondewo.nlu.EntityEnrichmentConfig">EntityEnrichmentConfig</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Entity augmenter configuration </p></td>
                 </tr>
               
                 <tr>
                   <td>thesaurus_enrichment</td>
                   <td><a href="#ondewo.nlu.ThesaurusEnrichmentConfig">ThesaurusEnrichmentConfig</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Thesaurus augmenter configuration </p></td>
                 </tr>
               
                 <tr>
                   <td>word2vec_enrichment</td>
                   <td><a href="#ondewo.nlu.Word2VecEnrichmentConfig">Word2VecEnrichmentConfig</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Word2Vec augmenter configuration </p></td>
                 </tr>
               
                 <tr>
                   <td>word_net_enrichment</td>
                   <td><a href="#ondewo.nlu.WordNetAugEnrichmentConfig">WordNetAugEnrichmentConfig</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>WordNet augmenter configuration </p></td>
                 </tr>
               
                 <tr>
                   <td>gpt2_enrichment</td>
                   <td><a href="#ondewo.nlu.GPT2EnrichmentConfig">GPT2EnrichmentConfig</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>GPT2 augmenter configuration </p></td>
                 </tr>
               
                 <tr>
                   <td>glove_enrichment</td>
                   <td><a href="#ondewo.nlu.GloVeEnrichmentConfig">GloVeEnrichmentConfig</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>GloVe augmenter configuration </p></td>
                 </tr>
               
                 <tr>
                   <td>bert_enrichment</td>
                   <td><a href="#ondewo.nlu.BertAugEnrichmentConfig">BertAugEnrichmentConfig</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>BERT augmenter configuration </p></td>
                 </tr>
               
                 <tr>
                   <td>xlnet_enrichment</td>
                   <td><a href="#ondewo.nlu.XLNetAugEnrichmentConfig">XLNetAugEnrichmentConfig</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>XLNet augmenter configuration </p></td>
                 </tr>
               
             </tbody>
@@ -7212,28 +7212,29 @@ Format: `projects/<Project ID>/agent/intents/<Intent ID>` </p></td>
                   <td>language_code</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru </p></td>
                 </tr>
               
                 <tr>
                   <td>parent</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>the parent of the request
+Format: `projects/<Project ID>`. </p></td>
                 </tr>
               
                 <tr>
                   <td>n_repeat_synonym</td>
                   <td><a href="#int32">int32</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>The number of synonyms desired </p></td>
                 </tr>
               
                 <tr>
                   <td>branch</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Git branch </p></td>
                 </tr>
               
                 <tr>
@@ -7288,28 +7289,29 @@ Format: `projects/<Project ID>/agent/intents/<Intent ID>` </p></td>
                   <td>language_code</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru </p></td>
                 </tr>
               
                 <tr>
                   <td>parent</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>the parent of the request
+Format: `projects/<Project ID>`. </p></td>
                 </tr>
               
                 <tr>
                   <td>n_repeat_synonym</td>
                   <td><a href="#int32">int32</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>The number of synonyms desired </p></td>
                 </tr>
               
                 <tr>
                   <td>branch</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Git branch </p></td>
                 </tr>
               
             </tbody>
@@ -7357,42 +7359,43 @@ Format: `projects/<Project ID>/agent/intents/<Intent ID>` </p></td>
                   <td>config</td>
                   <td><a href="#ondewo.nlu.DataEnrichmentConfig">DataEnrichmentConfig</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Configuration type of the enricher </p></td>
                 </tr>
               
                 <tr>
                   <td>sentence</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>The sentence from which it is desired to get alternative sentences </p></td>
                 </tr>
               
                 <tr>
                   <td>language_code</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru </p></td>
                 </tr>
               
                 <tr>
                   <td>parent</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>the parent of the request
+Format: `projects/<Project ID>`. </p></td>
                 </tr>
               
                 <tr>
                   <td>protected_words</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
-                  <td><p> </p></td>
+                  <td><p>Protected words in the augmentation process </p></td>
                 </tr>
               
                 <tr>
                   <td>words_to_change</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
-                  <td><p> </p></td>
+                  <td><p>Words to be changed in the augmentation process </p></td>
                 </tr>
               
             </tbody>
@@ -7461,14 +7464,15 @@ Format: `projects/<Project ID>/agent/intents/<Intent ID>` </p></td>
                   <td>language_code</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru </p></td>
                 </tr>
               
                 <tr>
                   <td>parent</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>the parent of the request
+Format: `projects/<Project ID>`. </p></td>
                 </tr>
               
                 <tr>
@@ -7490,21 +7494,21 @@ as duplicate. Meaningful values of similarity_threshold are between 0.95 and 1.0
                   <td>protected_words</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
-                  <td><p> </p></td>
+                  <td><p>Protected words in the augmentation process </p></td>
                 </tr>
               
                 <tr>
                   <td>words_to_change</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
-                  <td><p> </p></td>
+                  <td><p>Words to be changed in the augmentation process </p></td>
                 </tr>
               
                 <tr>
                   <td>branch</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Git branch </p></td>
                 </tr>
               
             </tbody>
@@ -7566,14 +7570,15 @@ as duplicate. Meaningful values of similarity_threshold are between 0.95 and 1.0
                   <td>language_code</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru </p></td>
                 </tr>
               
                 <tr>
                   <td>parent</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>the parent of the request
+Format: `projects/<Project ID>`. </p></td>
                 </tr>
               
             </tbody>

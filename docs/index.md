@@ -1988,14 +1988,14 @@ This message contains the configuration of data enrichment
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| entity_enrichment | [EntityEnrichmentConfig](#ondewo.nlu.EntityEnrichmentConfig) |  |  |
-| thesaurus_enrichment | [ThesaurusEnrichmentConfig](#ondewo.nlu.ThesaurusEnrichmentConfig) |  |  |
-| word2vec_enrichment | [Word2VecEnrichmentConfig](#ondewo.nlu.Word2VecEnrichmentConfig) |  |  |
-| word_net_enrichment | [WordNetAugEnrichmentConfig](#ondewo.nlu.WordNetAugEnrichmentConfig) |  |  |
-| gpt2_enrichment | [GPT2EnrichmentConfig](#ondewo.nlu.GPT2EnrichmentConfig) |  |  |
-| glove_enrichment | [GloVeEnrichmentConfig](#ondewo.nlu.GloVeEnrichmentConfig) |  |  |
-| bert_enrichment | [BertAugEnrichmentConfig](#ondewo.nlu.BertAugEnrichmentConfig) |  |  |
-| xlnet_enrichment | [XLNetAugEnrichmentConfig](#ondewo.nlu.XLNetAugEnrichmentConfig) |  |  |
+| entity_enrichment | [EntityEnrichmentConfig](#ondewo.nlu.EntityEnrichmentConfig) |  | Entity augmenter configuration |
+| thesaurus_enrichment | [ThesaurusEnrichmentConfig](#ondewo.nlu.ThesaurusEnrichmentConfig) |  | Thesaurus augmenter configuration |
+| word2vec_enrichment | [Word2VecEnrichmentConfig](#ondewo.nlu.Word2VecEnrichmentConfig) |  | Word2Vec augmenter configuration |
+| word_net_enrichment | [WordNetAugEnrichmentConfig](#ondewo.nlu.WordNetAugEnrichmentConfig) |  | WordNet augmenter configuration |
+| gpt2_enrichment | [GPT2EnrichmentConfig](#ondewo.nlu.GPT2EnrichmentConfig) |  | GPT2 augmenter configuration |
+| glove_enrichment | [GloVeEnrichmentConfig](#ondewo.nlu.GloVeEnrichmentConfig) |  | GloVe augmenter configuration |
+| bert_enrichment | [BertAugEnrichmentConfig](#ondewo.nlu.BertAugEnrichmentConfig) |  | BERT augmenter configuration |
+| xlnet_enrichment | [XLNetAugEnrichmentConfig](#ondewo.nlu.XLNetAugEnrichmentConfig) |  | XLNet augmenter configuration |
 
 
 
@@ -2134,10 +2134,10 @@ Request to generate responses
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| language_code | [string](#string) |  |  |
-| parent | [string](#string) |  |  |
-| n_repeat_synonym | [int32](#int32) |  |  |
-| branch | [string](#string) |  |  |
+| language_code | [string](#string) |  | language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru |
+| parent | [string](#string) |  | the parent of the request Format: `projects/<Project ID>`. |
+| n_repeat_synonym | [int32](#int32) |  | The number of synonyms desired |
+| branch | [string](#string) |  | Git branch |
 | drop_unknown_parameters | [bool](#bool) |  |  |
 
 
@@ -2168,10 +2168,10 @@ Request to generate user sentences
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| language_code | [string](#string) |  |  |
-| parent | [string](#string) |  |  |
-| n_repeat_synonym | [int32](#int32) |  |  |
-| branch | [string](#string) |  |  |
+| language_code | [string](#string) |  | language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru |
+| parent | [string](#string) |  | the parent of the request Format: `projects/<Project ID>`. |
+| n_repeat_synonym | [int32](#int32) |  | The number of synonyms desired |
+| branch | [string](#string) |  | Git branch |
 
 
 
@@ -2201,12 +2201,12 @@ Request to get alternative sentences
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| config | [DataEnrichmentConfig](#ondewo.nlu.DataEnrichmentConfig) |  |  |
-| sentence | [string](#string) |  |  |
-| language_code | [string](#string) |  |  |
-| parent | [string](#string) |  |  |
-| protected_words | [string](#string) | repeated |  |
-| words_to_change | [string](#string) | repeated |  |
+| config | [DataEnrichmentConfig](#ondewo.nlu.DataEnrichmentConfig) |  | Configuration type of the enricher |
+| sentence | [string](#string) |  | The sentence from which it is desired to get alternative sentences |
+| language_code | [string](#string) |  | Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru |
+| parent | [string](#string) |  | the parent of the request Format: `projects/<Project ID>`. |
+| protected_words | [string](#string) | repeated | Protected words in the augmentation process |
+| words_to_change | [string](#string) | repeated | Words to be changed in the augmentation process |
 
 
 
@@ -2239,13 +2239,13 @@ Request to get alternative training phrases
 | config | [DataEnrichmentConfig](#ondewo.nlu.DataEnrichmentConfig) |  |  |
 | training_phrase | [Intent.TrainingPhrase](#ondewo.nlu.Intent.TrainingPhrase) |  |  |
 | intent_name | [string](#string) |  |  |
-| language_code | [string](#string) |  |  |
-| parent | [string](#string) |  |  |
+| language_code | [string](#string) |  | language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru |
+| parent | [string](#string) |  | the parent of the request Format: `projects/<Project ID>`. |
 | detect_entities | [bool](#bool) |  |  |
 | similarity_threshold | [float](#float) |  | similarity threshold defines how similar sentences should be to drop generated training phrase as duplicate. Meaningful values of similarity_threshold are between 0.95 and 1.0 |
-| protected_words | [string](#string) | repeated |  |
-| words_to_change | [string](#string) | repeated |  |
-| branch | [string](#string) |  |  |
+| protected_words | [string](#string) | repeated | Protected words in the augmentation process |
+| words_to_change | [string](#string) | repeated | Words to be changed in the augmentation process |
+| branch | [string](#string) |  | Git branch |
 
 
 
@@ -2277,8 +2277,8 @@ Request to get synonyms
 | ----- | ---- | ----- | ----------- |
 | config | [DataEnrichmentConfig](#ondewo.nlu.DataEnrichmentConfig) |  |  |
 | word | [string](#string) |  |  |
-| language_code | [string](#string) |  |  |
-| parent | [string](#string) |  |  |
+| language_code | [string](#string) |  | language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru |
+| parent | [string](#string) |  | the parent of the request Format: `projects/<Project ID>`. |
 
 
 
