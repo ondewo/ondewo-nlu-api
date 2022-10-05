@@ -24,6 +24,8 @@ message OperationMetadata {
     // long-running operation status code
     Status status = 1;
 
+    // Structure to set status of operation. An operation may not be started if NOT_STARTED is set, in
+    // progress if IN_PROGRESS, finished if DONE, interrupted if CANCELED or failed if FAILED.
     enum Status {
         // unspecified status code
         STATUS_UNSPECIFIED = 0;
@@ -72,6 +74,8 @@ message OperationMetadata {
     // operation type
     OperationType operation_type = 12;
 
+    // Type of operation. It can be creating, importing, exporting, deleting, restoring, building cache,
+    // training or exporting benchmark an agent
     enum OperationType {
         // unspecified operation type
         OPERATION_TYPE_UNSPECIFIED = 0;
