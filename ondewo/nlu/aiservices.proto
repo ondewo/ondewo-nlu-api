@@ -129,14 +129,18 @@ message EntityTypeFuzzyNerConfig {
 
 // This message contains the entity detected
 message EntityDetected{
+    // The entity name that is detected
     Intent.TrainingPhrase.Entity entity = 1;
+    // The extractor name, e.g. SpacyNer
     string extraction_method = 2;
     float score = 3;
 }
 
 // This message is a response of extracting entities
 message ExtractEntitiesResponse {
+    // A list of entities detected
     repeated EntityDetected entities_detected = 1;
+    // The text containing the entities detected
     string text = 2;
 }
 
@@ -185,14 +189,18 @@ message GenerateResponsesRequest {
 
 // Request to get alternative training phrases
 message GetAlternativeTrainingPhrasesRequest {
+    // Configuration of the enricher
     DataEnrichmentConfig config = 1;
+    // Training phrase from which an alternative one is got
     Intent.TrainingPhrase training_phrase = 2;
+    // The intent tag attached to the training phrase
     string intent_name = 3;
     // language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
     string language_code = 4;
     // the parent of the request
     // Format: `projects/<Project ID>`.
     string parent = 5;
+    // Flag to determine whether entities must or not be detected
     bool detect_entities = 6;
     // similarity threshold defines how similar sentences should be to drop generated training phrase
     // as duplicate. Meaningful values of similarity_threshold are between 0.95 and 1.0
@@ -207,7 +215,9 @@ message GetAlternativeTrainingPhrasesRequest {
 
 // Request to get synonyms
 message GetSynonymsRequest {
+    // Configuration of the enricher
     DataEnrichmentConfig config = 1;
+    // Word from which a synonym is got
     string word = 2;
     // language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
     string language_code = 4;
@@ -218,44 +228,55 @@ message GetSynonymsRequest {
 
 // Response containing synonyms
 message GetSynonymsResponse {
+    // A list of synonyms
     repeated Synonym synonyms = 1;
 }
 
 // This message contains a Synonym
 message Synonym {
+    // Synonym word
     string synonym = 1;
+    // Score associated to the synonym resulted
     int32 score = 2;
 }
 
 // Response containing alternative sentences
 message GetAlternativeSentencesResponse {
+    // A list of alternative sentences
     repeated AltSentence alternative_sentences = 1;
 }
 
 // Response containing responses
 message GenerateResponsesResponse {
+    // A list of responses
     repeated string responses = 2;
 }
 
 // Response containing user sentences
 message GenerateUserSaysResponse {
+    // A list of sampled sentences
     repeated string user_says = 2;
 }
 
 // Response containing alternative training phrases
 message GetAlternativeTrainingPhrasesResponse {
+    // A list of alternative training phrases
     repeated AltTrainingPhrase alternative_training_phrases = 1;
 }
 
 // This message contains an alternative sentence
 message AltSentence {
+    // Alternative sentence
     string sentence = 1;
+    // Score associated to the alternative sentence resulted
     float score = 2;
 }
 
 // This message contains an alternative training phrase
 message AltTrainingPhrase {
+    // Alternative training phrase
     Intent.TrainingPhrase training_phrase = 1;
+    // Score associated to training_phrase
     float score = 2;
 }
 
@@ -406,14 +427,20 @@ message IntentClassified {
     string intent_name = 1;
     // The name of the intent.
     string intent_display_name = 2;
+    // The name of the classifier that detected the intent
     string classifier = 3;
+    // Score associated to the detection of the intent by the classifier
     float score = 4;
 }
 
 // Response containing the intents classified in a sentence
 message ClassifyIntentsResponse {
+    // A list of intents detected
     repeated IntentClassified intents_classified = 1;
+    // The text containing from which the intents were detected
     string text = 2;
+    // Flag that enables the context through the conversation
     bool active_contexts = 3;
+    // The context tags associated to the intents
     repeated string context_names = 4;
 }
