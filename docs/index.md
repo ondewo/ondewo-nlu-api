@@ -1668,7 +1668,7 @@ Request to get user in project
 <a name="ondewo.nlu.AgentStatus"></a>
 
 ### AgentStatus
-Structure for Agent / Project status
+Type of Agent / Project statusfor
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
@@ -1694,7 +1694,7 @@ Strucutre of agent view
 <a name="ondewo.nlu.FullTextSearchRequest.QueryType"></a>
 
 ### FullTextSearchRequest.QueryType
-Structure of query
+Type of query
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
@@ -1745,7 +1745,7 @@ Defines when to initiate newly created agent when training started
 <a name="ondewo.nlu.ReportFormat"></a>
 
 ### ReportFormat
-Structure of Report format
+Type of Report format
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
@@ -1758,7 +1758,7 @@ Structure of Report format
 <a name="ondewo.nlu.ReportType"></a>
 
 ### ReportType
-Structure of Report type
+Type of Report
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
@@ -2436,7 +2436,7 @@ Enum of fuzzy ner algorithms
 <a name="ondewo.nlu.IntentAlgorithms"></a>
 
 ### IntentAlgorithms
-Structure of all Intent algorithms
+Type of Intent algorithm.
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
@@ -2519,7 +2519,7 @@ This message is a response of status
 <a name="ondewo.nlu.SortingMode"></a>
 
 ### SortingMode
-Structure of sorting mode
+Sorting mode
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
