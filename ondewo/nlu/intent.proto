@@ -1140,6 +1140,7 @@ message GetAllIntentTagsRequest {
 
 // This message is a request to update a batch of training phrases
 message BatchUpdateTrainingPhrasesRequest {
+    // A list of training phrases
     repeated Intent.TrainingPhrase training_phrases = 1;
 }
 
@@ -1153,6 +1154,7 @@ message TrainingPhraseStatus {
 
 // This message is a response of the status of a batch of training phrases
 message BatchTrainingPhrasesStatusResponse {
+    // A list of training phrase statuses
     repeated TrainingPhraseStatus training_phrase_statuses = 1;
     // indicates if statuses of some of the training phrases have errors
     bool has_errors = 2;
