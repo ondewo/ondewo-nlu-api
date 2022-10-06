@@ -292,7 +292,7 @@ message GetEntityTypeRequest {
     // languages](https://dialogflow.com/docs/reference/language) are supported.
     // Note: languages must be enabled in the agent, before they can be used.
     string language_code = 2;
-
+    // A page_token allows the pagination of elements where <CURRENT_INDEX> and <PAGE_SIZE> are of type int, <SUB_FIELD> is of type str (example: `parameters`). An example for a page_token is page_size-1000
     string page_token = 5;
 
     // Optional. The resource view to apply to the returned Entity Type
@@ -458,6 +458,7 @@ message BatchEntitiesResponse {
             string error_message = 2;
         }
     }
+    // A list of entity statuses
     repeated EntityStatus entity_statuses = 1;
     // indicates if statuses of some of the training phrases have errors
     bool has_errors = 2;
