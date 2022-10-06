@@ -613,7 +613,7 @@ Request to delete resources
 | parent | [string](#string) |  | Required. The project that the agent to fetch is associated with. Format: `projects/<Project ID>/agents`. |
 | name | [string](#string) |  |  |
 | type | [string](#string) |  |  |
-| language_code | [string](#string) |  |  |
+| language_code | [string](#string) |  | Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru |
 
 
 
@@ -719,7 +719,7 @@ Request to export resources
 | parent | [string](#string) |  | Required. The project that the agent to fetch is associated with. Format: `projects/<Project ID>/agents`. |
 | name | [string](#string) |  |  |
 | type | [string](#string) |  |  |
-| language_code | [string](#string) |  |  |
+| language_code | [string](#string) |  | Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru |
 
 
 
@@ -737,7 +737,7 @@ Response to export resources
 | parent | [string](#string) |  | Required. The project that the agent to fetch is associated with. Format: `projects/<Project ID>/agents`. |
 | name | [string](#string) |  |  |
 | type | [string](#string) |  |  |
-| language_code | [string](#string) |  |  |
+| language_code | [string](#string) |  | Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru |
 | resource_file | [bytes](#bytes) |  |  |
 
 
@@ -754,7 +754,7 @@ This message is a request to run full text search
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The project that the agent is associated with. Format: `projects/<Project ID>/agent`. |
-| language_code | [string](#string) |  | In which language to search for |
+| language_code | [string](#string) |  | Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru |
 | term | [string](#string) |  | What to search for in the elastic server |
 | page_token | [string](#string) |  | Composite string: current_index-0--page_size-10 |
 
@@ -772,12 +772,12 @@ This message is a response of full text search of entity
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The project that the agent to fetch is associated with. Format: `projects/<Project ID>/agents`. |
-| language_code | [string](#string) |  |  |
+| language_code | [string](#string) |  | Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru |
 | entity_results | [FullTextSearchResponseEntity.EntitySearchResult](#ondewo.nlu.FullTextSearchResponseEntity.EntitySearchResult) | repeated |  |
 | term | [string](#string) |  |  |
 | elastic_query | [string](#string) |  |  |
 | time | [float](#float) |  |  |
-| next_page_token | [string](#string) |  |  |
+| next_page_token | [string](#string) |  | The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2 |
 
 
 
@@ -812,12 +812,12 @@ This message is a response of full text search of synonym entit
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The project that the agent to fetch is associated with. Format: `projects/<Project ID>/agents`. |
-| language_code | [string](#string) |  |  |
+| language_code | [string](#string) |  | Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru |
 | entity_synonym_results | [FullTextSearchResponseEntitySynonym.EntitySynonymSearchResult](#ondewo.nlu.FullTextSearchResponseEntitySynonym.EntitySynonymSearchResult) | repeated |  |
 | term | [string](#string) |  |  |
 | elastic_query | [string](#string) |  |  |
 | time | [float](#float) |  |  |
-| next_page_token | [string](#string) |  |  |
+| next_page_token | [string](#string) |  | The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2 |
 
 
 
@@ -854,12 +854,12 @@ This message is a response of full text search of entity type
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The project that the agent to fetch is associated with. Format: `projects/<Project ID>/agents`. |
-| language_code | [string](#string) |  |  |
+| language_code | [string](#string) |  | Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru |
 | entity_type_results | [FullTextSearchResponseEntityType.EntityTypeSearchResult](#ondewo.nlu.FullTextSearchResponseEntityType.EntityTypeSearchResult) | repeated |  |
 | term | [string](#string) |  |  |
 | elastic_query | [string](#string) |  |  |
 | time | [float](#float) |  |  |
-| next_page_token | [string](#string) |  |  |
+| next_page_token | [string](#string) |  | The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2 |
 
 
 
@@ -892,12 +892,12 @@ This message is a response of full text search of intent
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The project that the agent to fetch is associated with. Format: `projects/<Project ID>/agents`. |
-| language_code | [string](#string) |  |  |
+| language_code | [string](#string) |  | Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru |
 | intent_results | [FullTextSearchResponseIntent.IntentSearchResult](#ondewo.nlu.FullTextSearchResponseIntent.IntentSearchResult) | repeated |  |
 | term | [string](#string) |  |  |
 | elastic_query | [string](#string) |  |  |
 | time | [float](#float) |  |  |
-| next_page_token | [string](#string) |  |  |
+| next_page_token | [string](#string) |  | The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2 |
 
 
 
@@ -932,12 +932,12 @@ This message is a response of full text search of intent with context in
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The project that the agent to fetch is associated with. Format: `projects/<Project ID>/agents`. |
-| language_code | [string](#string) |  |  |
+| language_code | [string](#string) |  | Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru |
 | intent_context_in_results | [FullTextSearchResponseIntentContextIn.IntentContextInSearchResult](#ondewo.nlu.FullTextSearchResponseIntentContextIn.IntentContextInSearchResult) | repeated |  |
 | term | [string](#string) |  |  |
 | elastic_query | [string](#string) |  |  |
 | time | [float](#float) |  |  |
-| next_page_token | [string](#string) |  |  |
+| next_page_token | [string](#string) |  | The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2 |
 
 
 
@@ -972,12 +972,12 @@ This message is a response of full text search of intent with context out
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The project that the agent to fetch is associated with. Format: `projects/<Project ID>/agents`. |
-| language_code | [string](#string) |  |  |
+| language_code | [string](#string) |  | Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru |
 | intent_context_out_results | [FullTextSearchResponseIntentContextOut.IntentContextOutSearchResult](#ondewo.nlu.FullTextSearchResponseIntentContextOut.IntentContextOutSearchResult) | repeated |  |
 | term | [string](#string) |  |  |
 | elastic_query | [string](#string) |  |  |
 | time | [float](#float) |  |  |
-| next_page_token | [string](#string) |  |  |
+| next_page_token | [string](#string) |  | The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2 |
 
 
 
@@ -1012,12 +1012,12 @@ This message is a response of full text search of intent with parameters
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The project that the agent to fetch is associated with. Format: `projects/<Project ID>/agents`. |
-| language_code | [string](#string) |  |  |
+| language_code | [string](#string) |  | Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru |
 | intent_parameters_results | [FullTextSearchResponseIntentParameters.IntentParametersSearchResult](#ondewo.nlu.FullTextSearchResponseIntentParameters.IntentParametersSearchResult) | repeated |  |
 | term | [string](#string) |  |  |
 | elastic_query | [string](#string) |  |  |
 | time | [float](#float) |  |  |
-| next_page_token | [string](#string) |  |  |
+| next_page_token | [string](#string) |  | The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2 |
 
 
 
@@ -1053,12 +1053,12 @@ This message is a response of full text search of intent response
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The project that the agent to fetch is associated with. Format: `projects/<Project ID>/agents`. |
-| language_code | [string](#string) |  |  |
+| language_code | [string](#string) |  | Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru |
 | intent_response_results | [FullTextSearchResponseIntentResponse.IntentResponseSearchResult](#ondewo.nlu.FullTextSearchResponseIntentResponse.IntentResponseSearchResult) | repeated |  |
 | term | [string](#string) |  |  |
 | elastic_query | [string](#string) |  |  |
 | time | [float](#float) |  |  |
-| next_page_token | [string](#string) |  |  |
+| next_page_token | [string](#string) |  | The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2 |
 
 
 
@@ -1095,12 +1095,12 @@ This message is a response of full text search of intent with tags
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The project that the agent to fetch is associated with. Format: `projects/<Project ID>/agents`. |
-| language_code | [string](#string) |  |  |
+| language_code | [string](#string) |  | Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru |
 | intent_tags_results | [FullTextSearchResponseIntentTags.IntentTagsSearchResult](#ondewo.nlu.FullTextSearchResponseIntentTags.IntentTagsSearchResult) | repeated |  |
 | term | [string](#string) |  |  |
 | elastic_query | [string](#string) |  |  |
 | time | [float](#float) |  |  |
-| next_page_token | [string](#string) |  |  |
+| next_page_token | [string](#string) |  | The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2 |
 
 
 
@@ -1136,12 +1136,12 @@ This message is a response of full text search of intent with sentence
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The project that the agent to fetch is associated with. Format: `projects/<Project ID>/agents`. |
-| language_code | [string](#string) |  |  |
+| language_code | [string](#string) |  | Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru |
 | intent_usersays_results | [FullTextSearchResponseIntentUsersays.IntentUsersaysSearchResult](#ondewo.nlu.FullTextSearchResponseIntentUsersays.IntentUsersaysSearchResult) | repeated |  |
 | term | [string](#string) |  |  |
 | elastic_query | [string](#string) |  |  |
 | time | [float](#float) |  |  |
-| next_page_token | [string](#string) |  |  |
+| next_page_token | [string](#string) |  | The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2 |
 
 
 
@@ -1197,7 +1197,7 @@ Request statistics of the agent
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The project to get statistics from. Format: `projects/<Project ID>`. |
 | format | [ReportFormat](#ondewo.nlu.ReportFormat) |  |  |
-| language_code | [string](#string) |  |  |
+| language_code | [string](#string) |  | Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru |
 | type | [ReportType](#ondewo.nlu.ReportType) |  |  |
 
 
@@ -1232,7 +1232,7 @@ Request to get model statuses
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The project that the agent to fetch is associated with. Format: `projects/<Project ID>/agent`. |
 | cache_version | [int32](#int32) |  |  |
-| language_code | [string](#string) |  |  |
+| language_code | [string](#string) |  | Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru |
 | model_name | [string](#string) |  |  |
 
 
@@ -1427,9 +1427,9 @@ Status of model
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| cache_version | [int32](#int32) |  |  |
-| language_code | [string](#string) |  |  |
-| model_name | [string](#string) |  |  |
+| cache_version | [int32](#int32) |  | Cache version that contains the correspondent model |
+| language_code | [string](#string) |  | Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru |
+| model_name | [string](#string) |  | The model name |
 | status_set_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  |  |
 | config | [string](#string) |  |  |
 | status | [ModelStatus.StatusName](#ondewo.nlu.ModelStatus.StatusName) |  |  |
@@ -1497,7 +1497,7 @@ This message contains the configuration to run Optimize Ranking Match
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| language_code | [string](#string) |  |  |
+| language_code | [string](#string) |  | Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru |
 | n_splits | [int32](#int32) |  |  |
 | random_seed | [int32](#int32) |  |  |
 | initial_thresholds | [google.protobuf.Struct](#google.protobuf.Struct) |  | initial thresholds are optional, if not given will be taken from the current config example {'OndewoIntentSimilarityMatch': 0.59, 'OndewoIntentNamedSimilarityMatch': 0.39} |
@@ -1590,7 +1590,7 @@ Request to set resources
 | name | [string](#string) |  |  |
 | type | [string](#string) |  |  |
 | resource_file | [bytes](#bytes) |  |  |
-| language_code | [string](#string) |  |  |
+| language_code | [string](#string) |  | Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru |
 
 
 
@@ -1900,8 +1900,8 @@ This message contains an alternative sentence
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| sentence | [string](#string) |  |  |
-| score | [float](#float) |  |  |
+| sentence | [string](#string) |  | Alternative sentence |
+| score | [float](#float) |  | Score associated to the alternative sentence resulted |
 
 
 
@@ -1916,8 +1916,8 @@ This message contains an alternative training phrase
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| training_phrase | [Intent.TrainingPhrase](#ondewo.nlu.Intent.TrainingPhrase) |  |  |
-| score | [float](#float) |  |  |
+| training_phrase | [Intent.TrainingPhrase](#ondewo.nlu.Intent.TrainingPhrase) |  | Alternative training phrase |
+| score | [float](#float) |  | Score associated to training_phrase |
 
 
 
@@ -1970,10 +1970,10 @@ Response containing the intents classified in a sentence
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| intents_classified | [IntentClassified](#ondewo.nlu.IntentClassified) | repeated |  |
-| text | [string](#string) |  |  |
-| active_contexts | [bool](#bool) |  |  |
-| context_names | [string](#string) | repeated |  |
+| intents_classified | [IntentClassified](#ondewo.nlu.IntentClassified) | repeated | A list of intents detected |
+| text | [string](#string) |  | The text containing from which the intents were detected |
+| active_contexts | [bool](#bool) |  | Flag that enables the context through the conversation |
+| context_names | [string](#string) | repeated | The context tags associated to the intents |
 
 
 
@@ -2010,8 +2010,8 @@ This message contains the entity detected
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| entity | [Intent.TrainingPhrase.Entity](#ondewo.nlu.Intent.TrainingPhrase.Entity) |  |  |
-| extraction_method | [string](#string) |  |  |
+| entity | [Intent.TrainingPhrase.Entity](#ondewo.nlu.Intent.TrainingPhrase.Entity) |  | The entity name that is detected |
+| extraction_method | [string](#string) |  | The extractor name, e.g. SpacyNer |
 | score | [float](#float) |  |  |
 
 
@@ -2101,8 +2101,8 @@ This message is a response of extracting entities
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| entities_detected | [EntityDetected](#ondewo.nlu.EntityDetected) | repeated |  |
-| text | [string](#string) |  |  |
+| entities_detected | [EntityDetected](#ondewo.nlu.EntityDetected) | repeated | A list of entities detected |
+| text | [string](#string) |  | The text containing the entities detected |
 
 
 
@@ -2153,7 +2153,7 @@ Response containing responses
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| responses | [string](#string) | repeated |  |
+| responses | [string](#string) | repeated | A list of responses |
 
 
 
@@ -2186,7 +2186,7 @@ Response containing user sentences
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| user_says | [string](#string) | repeated |  |
+| user_says | [string](#string) | repeated | A list of sampled sentences |
 
 
 
@@ -2221,7 +2221,7 @@ Response containing alternative sentences
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| alternative_sentences | [AltSentence](#ondewo.nlu.AltSentence) | repeated |  |
+| alternative_sentences | [AltSentence](#ondewo.nlu.AltSentence) | repeated | A list of alternative sentences |
 
 
 
@@ -2236,12 +2236,12 @@ Request to get alternative training phrases
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| config | [DataEnrichmentConfig](#ondewo.nlu.DataEnrichmentConfig) |  |  |
-| training_phrase | [Intent.TrainingPhrase](#ondewo.nlu.Intent.TrainingPhrase) |  |  |
-| intent_name | [string](#string) |  |  |
+| config | [DataEnrichmentConfig](#ondewo.nlu.DataEnrichmentConfig) |  | Configuration of the enricher |
+| training_phrase | [Intent.TrainingPhrase](#ondewo.nlu.Intent.TrainingPhrase) |  | Training phrase from which an alternative one is got |
+| intent_name | [string](#string) |  | The intent tag attached to the training phrase |
 | language_code | [string](#string) |  | language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru |
 | parent | [string](#string) |  | the parent of the request Format: `projects/<Project ID>`. |
-| detect_entities | [bool](#bool) |  |  |
+| detect_entities | [bool](#bool) |  | Flag to determine whether entities must or not be detected |
 | similarity_threshold | [float](#float) |  | similarity threshold defines how similar sentences should be to drop generated training phrase as duplicate. Meaningful values of similarity_threshold are between 0.95 and 1.0 |
 | protected_words | [string](#string) | repeated | Protected words in the augmentation process |
 | words_to_change | [string](#string) | repeated | Words to be changed in the augmentation process |
@@ -2260,7 +2260,7 @@ Response containing alternative training phrases
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| alternative_training_phrases | [AltTrainingPhrase](#ondewo.nlu.AltTrainingPhrase) | repeated |  |
+| alternative_training_phrases | [AltTrainingPhrase](#ondewo.nlu.AltTrainingPhrase) | repeated | A list of alternative training phrases |
 
 
 
@@ -2275,8 +2275,8 @@ Request to get synonyms
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| config | [DataEnrichmentConfig](#ondewo.nlu.DataEnrichmentConfig) |  |  |
-| word | [string](#string) |  |  |
+| config | [DataEnrichmentConfig](#ondewo.nlu.DataEnrichmentConfig) |  | Configuration of the enricher |
+| word | [string](#string) |  | Word from which a synonym is got |
 | language_code | [string](#string) |  | language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru |
 | parent | [string](#string) |  | the parent of the request Format: `projects/<Project ID>`. |
 
@@ -2293,7 +2293,7 @@ Response containing synonyms
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| synonyms | [Synonym](#ondewo.nlu.Synonym) | repeated |  |
+| synonyms | [Synonym](#ondewo.nlu.Synonym) | repeated | A list of synonyms |
 
 
 
@@ -2327,8 +2327,8 @@ Intent classified by a certain intent classifier
 | ----- | ---- | ----- | ----------- |
 | intent_name | [string](#string) |  | The unique identifier of this intent. Format: `projects/<Project ID>/agent/intents/<Intent ID>`. |
 | intent_display_name | [string](#string) |  | The name of the intent. |
-| classifier | [string](#string) |  |  |
-| score | [float](#float) |  |  |
+| classifier | [string](#string) |  | The name of the classifier that detected the intent |
+| score | [float](#float) |  | Score associated to the detection of the intent by the classifier |
 
 
 
@@ -2343,8 +2343,8 @@ This message contains a Synonym
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| synonym | [string](#string) |  |  |
-| score | [int32](#int32) |  |  |
+| synonym | [string](#string) |  | Synonym word |
+| score | [int32](#int32) |  | Score associated to the synonym resulted |
 
 
 
@@ -2856,7 +2856,7 @@ This message is a response of batch entities
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| entity_statuses | [BatchEntitiesResponse.EntityStatus](#ondewo.nlu.BatchEntitiesResponse.EntityStatus) | repeated |  |
+| entity_statuses | [BatchEntitiesResponse.EntityStatus](#ondewo.nlu.BatchEntitiesResponse.EntityStatus) | repeated | A list of entity statuses |
 | has_errors | [bool](#bool) |  | indicates if statuses of some of the training phrases have errors |
 
 
@@ -3079,7 +3079,7 @@ The request message for [EntityTypes.GetEntityType][google.cloud.dialogflow.v2.E
 | ----- | ---- | ----- | ----------- |
 | name | [string](#string) |  | Required. The name of the entity type. Format: `projects/<Project ID>/agent/entityTypes/<EntityType ID>`. |
 | language_code | [string](#string) |  | Optional. The language to retrieve entity synonyms for. If not specified, the agent's default language is used. [More than a dozen languages](https://dialogflow.com/docs/reference/language) are supported. Note: languages must be enabled in the agent, before they can be used. |
-| page_token | [string](#string) |  |  |
+| page_token | [string](#string) |  | A page_token allows the pagination of elements where <CURRENT_INDEX> and <PAGE_SIZE> are of type int, <SUB_FIELD> is of type str (example: `parameters`). An example for a page_token is page_size-1000 |
 | entity_type_view | [EntityTypeView](#ondewo.nlu.EntityTypeView) |  | Optional. The resource view to apply to the returned Entity Type |
 
 
@@ -3709,7 +3709,7 @@ This message is a response of the status of a batch of training phrases
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| training_phrase_statuses | [TrainingPhraseStatus](#ondewo.nlu.TrainingPhraseStatus) | repeated |  |
+| training_phrase_statuses | [TrainingPhraseStatus](#ondewo.nlu.TrainingPhraseStatus) | repeated | A list of training phrase statuses |
 | has_errors | [bool](#bool) |  | indicates if statuses of some of the training phrases have errors |
 
 
@@ -3790,7 +3790,7 @@ This message is a request to update a batch of training phrases
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| training_phrases | [Intent.TrainingPhrase](#ondewo.nlu.Intent.TrainingPhrase) | repeated |  |
+| training_phrases | [Intent.TrainingPhrase](#ondewo.nlu.Intent.TrainingPhrase) | repeated | A list of training phrases |
 
 
 
