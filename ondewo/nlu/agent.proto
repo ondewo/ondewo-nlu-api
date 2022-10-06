@@ -731,6 +731,7 @@ message OptimizeRankingMatchRequest {
 
 // This message contains the configuration to run Optimize Ranking Match
 message RankingMatchOptimizationConfig {
+    // Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
     string language_code = 1;
     int32 n_splits = 2;
     int32 random_seed = 3;
@@ -811,6 +812,7 @@ message GetAgentStatisticsRequest {
     // Format: `projects/<Project ID>`.
     string parent = 1;
     ReportFormat format = 2;
+    // Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
     string language_code = 3;
     ReportType type = 4;
 }
@@ -971,6 +973,7 @@ message SetResourcesRequest {
     string name = 2;
     string type = 3;
     bytes resource_file = 4;
+    // Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
     string language_code = 5;
 }
 
@@ -981,6 +984,7 @@ message DeleteResourcesRequest {
     string parent = 1;
     string name = 2;
     string type = 3;
+    // Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
     string language_code = 4;
 }
 
@@ -991,6 +995,7 @@ message ExportResourcesRequest {
     string parent = 1;
     string name = 2;
     string type = 3;
+    // Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
     string language_code = 4;
 }
 
@@ -1001,6 +1006,7 @@ message ExportResourcesResponse {
     string parent = 1;
     string name = 2;
     string type = 3;
+    // Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
     string language_code = 4;
     bytes resource_file = 5;
 }
@@ -1011,14 +1017,18 @@ message GetModelStatusesRequest {
     // Format: `projects/<Project ID>/agent`.
     string parent = 1;
     int32 cache_version = 2;
+    // Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
     string language_code = 3;
     string model_name = 4;
 }
 
 // Status of model
 message ModelStatus {
+    // Cache version that contains the correspondent model
     int32 cache_version = 1;
+    // Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
     string language_code = 2;
+    // The model name
     string model_name = 3;
     google.protobuf.Timestamp status_set_time = 4;
     enum StatusName {
@@ -1077,7 +1087,7 @@ message FullTextSearchRequest {
     // Format: `projects/<Project ID>/agent`.
     string parent = 1;
 
-    // In which language to search for
+    // Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
     string language_code = 2;
 
     // What to search for in the elastic server
@@ -1107,6 +1117,7 @@ message FullTextSearchResponseEntityType {
     // Required. The project that the agent to fetch is associated with.
     // Format: `projects/<Project ID>/agents`.
     string parent = 1;
+    // Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
     string language_code = 2;
     message EntityTypeSearchResult {
         string name = 1;
@@ -1117,6 +1128,7 @@ message FullTextSearchResponseEntityType {
     string term = 4;
     string elastic_query = 5;
     float time = 6;
+    // The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2
     string next_page_token = 7;
 }
 
@@ -1125,6 +1137,7 @@ message FullTextSearchResponseEntity {
     // Required. The project that the agent to fetch is associated with.
     // Format: `projects/<Project ID>/agents`.
     string parent = 1;
+    // Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
     string language_code = 2;
     message EntitySearchResult {
         string name = 1;
@@ -1137,6 +1150,7 @@ message FullTextSearchResponseEntity {
     string term = 4;
     string elastic_query = 5;
     float time = 6;
+    // The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2
     string next_page_token = 7;
 }
 
@@ -1145,6 +1159,7 @@ message FullTextSearchResponseEntitySynonym {
     // Required. The project that the agent to fetch is associated with.
     // Format: `projects/<Project ID>/agents`.
     string parent = 1;
+    // Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
     string language_code = 2;
     message EntitySynonymSearchResult {
         string name = 1;
@@ -1159,6 +1174,7 @@ message FullTextSearchResponseEntitySynonym {
     string term = 4;
     string elastic_query = 5;
     float time = 6;
+    // The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2
     string next_page_token = 7;
 }
 
@@ -1167,6 +1183,7 @@ message FullTextSearchResponseIntent {
     // Required. The project that the agent to fetch is associated with.
     // Format: `projects/<Project ID>/agents`.
     string parent = 1;
+    // Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
     string language_code = 2;
     message IntentSearchResult {
         string name = 1;
@@ -1178,6 +1195,7 @@ message FullTextSearchResponseIntent {
     string term = 4;
     string elastic_query = 5;
     float time = 6;
+    // The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2
     string next_page_token = 7;
 }
 
@@ -1186,6 +1204,7 @@ message FullTextSearchResponseIntentContextIn {
     // Required. The project that the agent to fetch is associated with.
     // Format: `projects/<Project ID>/agents`.
     string parent = 1;
+    // Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
     string language_code = 2;
     message IntentContextInSearchResult {
         string name = 1;
@@ -1197,6 +1216,7 @@ message FullTextSearchResponseIntentContextIn {
     string term = 4;
     string elastic_query = 5;
     float time = 6;
+    // The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2
     string next_page_token = 7;
 }
 
@@ -1205,6 +1225,7 @@ message FullTextSearchResponseIntentContextOut {
     // Required. The project that the agent to fetch is associated with.
     // Format: `projects/<Project ID>/agents`.
     string parent = 1;
+    // Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
     string language_code = 2;
     message IntentContextOutSearchResult {
         string name = 1;
@@ -1216,6 +1237,7 @@ message FullTextSearchResponseIntentContextOut {
     string term = 4;
     string elastic_query = 5;
     float time = 6;
+    // The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2
     string next_page_token = 7;
 }
 
@@ -1224,6 +1246,7 @@ message FullTextSearchResponseIntentUsersays {
     // Required. The project that the agent to fetch is associated with.
     // Format: `projects/<Project ID>/agents`.
     string parent = 1;
+    // Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
     string language_code = 2;
     message IntentUsersaysSearchResult {
         string name = 1;
@@ -1239,6 +1262,7 @@ message FullTextSearchResponseIntentUsersays {
     string term = 4;
     string elastic_query = 5;
     float time = 6;
+    // The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2
     string next_page_token = 7;
 }
 
@@ -1247,6 +1271,7 @@ message FullTextSearchResponseIntentTags {
     // Required. The project that the agent to fetch is associated with.
     // Format: `projects/<Project ID>/agents`.
     string parent = 1;
+    // Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
     string language_code = 2;
     message IntentTagsSearchResult {
         string name = 1;
@@ -1259,6 +1284,7 @@ message FullTextSearchResponseIntentTags {
     string term = 4;
     string elastic_query = 5;
     float time = 6;
+    // The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2
     string next_page_token = 7;
 }
 
@@ -1267,6 +1293,7 @@ message FullTextSearchResponseIntentResponse {
     // Required. The project that the agent to fetch is associated with.
     // Format: `projects/<Project ID>/agents`.
     string parent = 1;
+    // Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
     string language_code = 2;
     message IntentResponseSearchResult {
         string text = 1;
@@ -1280,6 +1307,7 @@ message FullTextSearchResponseIntentResponse {
     string term = 4;
     string elastic_query = 5;
     float time = 6;
+    // The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2
     string next_page_token = 7;
 }
 
@@ -1288,6 +1316,7 @@ message FullTextSearchResponseIntentParameters {
     // Required. The project that the agent to fetch is associated with.
     // Format: `projects/<Project ID>/agents`.
     string parent = 1;
+    // Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
     string language_code = 2;
     message IntentParametersSearchResult {
         string parameter_name = 1;
@@ -1300,6 +1329,7 @@ message FullTextSearchResponseIntentParameters {
     string term = 4;
     string elastic_query = 5;
     float time = 6;
+    // The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2
     string next_page_token = 7;
 }
 
