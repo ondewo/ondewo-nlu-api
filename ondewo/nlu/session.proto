@@ -756,6 +756,9 @@ message CreateSessionRequest {
     // The unique UUID of a Session
     // Format: UUID Version 4, e.g. 2f59fad2-06bc-4730-9920-d3148f28f357
     string session_uuid = 2; // Optional. If not provided, it will be auto-generated
+
+    // Labels for the session
+    repeated string labels = 3; // Optional
 }
 
 message DeleteSessionRequest {
