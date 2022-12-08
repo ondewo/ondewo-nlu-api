@@ -847,6 +847,11 @@ message DetectedIntent {
 }
 
 message ListSessionLabelsRequest {
+    // The id of the session
+    string session_id = 1;
+}
+
+message ListSessionLabelsOfAllSessionsRequest {
     // The parent for which the labels for all sessions should be listed
     // Format: `projects/<PROJECT_ID>/agent`.
     string parent = 1;
@@ -859,13 +864,11 @@ message ListSessionLabelsResponse {
 message AddSessionLabelsRequest {
     string session_id = 1;
     repeated string labels = 2;
-    Session.View session_view = 3;
 }
 
 message RemoveSessionLabelsRequest {
     string session_id = 1;
     repeated string labels = 2;
-    Session.View session_view = 3;
 }
 
 message ListSessionReviewsRequest {
