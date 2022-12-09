@@ -109,8 +109,14 @@ service Sessions {
     // *** SESSION-LABEL RELATED ENDPOINTS *** //
     rpc ListSessionLabels (ListSessionLabelsRequest) returns (ListSessionLabelsResponse) {
         option (google.api.http) = {
-            get: "/v2/{parent=projects/*/agent}/sessions/labels"
+            get: "/v2/{session_id=projects/*/agent/sessions/*}/labels"
         };
+    };
+
+    rpc ListSessionLabelsOfAllSessions (ListSessionLabelsOfAllSessionsRequest) returns (ListSessionLabelsResponse) {
+    option (google.api.http) = {
+        get: "/v2/{parent=projects/*/agent}/sessions/labels"
+    };
     };
 
     rpc AddSessionLabels (AddSessionLabelsRequest) returns (Session) {
@@ -120,9 +126,9 @@ service Sessions {
         };
     };
 
-    rpc RemoveSessionLabels (RemoveSessionLabelsRequest) returns (Session) {
+    rpc DeleteSessionLabels (DeleteSessionLabelsRequest) returns (Session) {
         option (google.api.http) = {
-            post: "/v2/{session_id=projects/*/agent/sessions/*}/labels:remove"
+            post: "/v2/{session_id=projects/*/agent/sessions/*}/labels:delete"
             body: "*"
         };
     };
@@ -677,7 +683,10 @@ message SessionFilter {
     repeated string session_ids = 15;
 
     // Match only sessions whose session info contains at least one step having all the contexts specified here
+    // The input contexts are pre-conditions for detecting intents
     repeated Context input_contexts = 16;
+
+    // The output contexts are the result of the intent matching and track the contextual state of a conversation
     repeated Context output_contexts = 17;
 }
 
@@ -756,6 +765,9 @@ message CreateSessionRequest {
     // The unique UUID of a Session
     // Format: UUID Version 4, e.g. 2f59fad2-06bc-4730-9920-d3148f28f357
     string session_uuid = 2; // Optional. If not provided, it will be auto-generated
+
+    // labels for the session - Optional
+    repeated string labels = 3;
 }
 
 message DeleteSessionRequest {
@@ -844,25 +856,35 @@ message DetectedIntent {
 }
 
 message ListSessionLabelsRequest {
+    // The id of the session
+    string session_id = 1;
+}
+
+message ListSessionLabelsOfAllSessionsRequest {
     // The parent for which the labels for all sessions should be listed
     // Format: `projects/<PROJECT_ID>/agent`.
     string parent = 1;
 }
 
 message ListSessionLabelsResponse {
+    // The labels of the session
     repeated string labels = 1;
 }
 
 message AddSessionLabelsRequest {
+    // The id of the session
     string session_id = 1;
+
+    // The labels to add to the session
     repeated string labels = 2;
-    Session.View session_view = 3;
 }
 
-message RemoveSessionLabelsRequest {
+message DeleteSessionLabelsRequest {
+    // The id of the session
     string session_id = 1;
+
+    // The labels to delete from the session
     repeated string labels = 2;
-    Session.View session_view = 3;
 }
 
 message ListSessionReviewsRequest {
