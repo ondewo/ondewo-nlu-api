@@ -441,16 +441,34 @@ service Agents {
     // Set platform name mappings for an Agent
     rpc SetPlatformMapping (PlatformMapping) returns (PlatformMapping);
 
-    // Full text search endpoint
+    // Full text search endpoint in entity types
     rpc GetFullTextSearchEntityType (FullTextSearchRequest) returns (FullTextSearchResponseEntityType);
+
+    // Full text search endpoint in entities
     rpc GetFullTextSearchEntity (FullTextSearchRequest) returns (FullTextSearchResponseEntity);
+
+    // Full text search endpoint in entity synonyms
     rpc GetFullTextSearchEntitySynonym (FullTextSearchRequest) returns (FullTextSearchResponseEntitySynonym);
+
+    // Full text search endpoint in intents
     rpc GetFullTextSearchIntent (FullTextSearchRequest) returns (FullTextSearchResponseIntent);
+
+    // Full text search endpoint in context ins of intents
     rpc GetFullTextSearchIntentContextIn (FullTextSearchRequest) returns (FullTextSearchResponseIntentContextIn);
+
+    // Full text search endpoint in context outs of intents
     rpc GetFullTextSearchIntentContextOut (FullTextSearchRequest) returns (FullTextSearchResponseIntentContextOut);
+
+    // Full text search endpoint in user says of intents
     rpc GetFullTextSearchIntentUsersays (FullTextSearchRequest) returns (FullTextSearchResponseIntentUsersays);
+
+    // Full text search endpoint in tags of intents
     rpc GetFullTextSearchIntentTags (FullTextSearchRequest) returns (FullTextSearchResponseIntentTags);
+
+    // Full text search endpoint in responses of intents
     rpc GetFullTextSearchIntentResponse (FullTextSearchRequest) returns (FullTextSearchResponseIntentResponse);
+
+    // Full text search endpoint in parameters of intents
     rpc GetFullTextSearchIntentParameters (FullTextSearchRequest) returns (FullTextSearchResponseIntentParameters);
 
     // Force reindexing Intent and Entity data of Agent
@@ -501,7 +519,9 @@ message Agent {
 }
 
 message AgentWithOwner {
+    // The agent
     Agent agent = 1;
+    // User who created the agent
     User owner = 2;
 }
 
@@ -533,6 +553,7 @@ enum AgentView {
 }
 
 message CreateAgentRequest {
+    // The agent
     Agent agent = 1;
 
     // Optional. Specify the view of the returned agent (sparse view by default)
@@ -540,6 +561,7 @@ message CreateAgentRequest {
 }
 
 message UpdateAgentRequest {
+    // The agent
     Agent agent = 1;
 
     // Optional. Specify the view of the returned agent (sparse view by default)
@@ -550,6 +572,8 @@ message UpdateAgentRequest {
 }
 
 message DeleteAgentRequest {
+    // Required. The project that the agent to fetch is associated with.
+    // Format: `projects/<Project ID>/agents`.
     string parent = 1;
 }
 
@@ -598,8 +622,10 @@ message ListAgentsOfUserResponse {
 enum InitiationProtocol {
     // after cache successfully built and after each model trained the agent will be updated
     AS_SOON_AS_POSSIBLE = 0;
+
     // after cache successfully built and all the active models successfully trained
     WHEN_TRAINED = 1;
+
     // do not initiate
     NEVER = 2;
 }
@@ -608,7 +634,11 @@ message TrainAgentRequest {
     // Required. The project that the agent to train is associated with.
     // Format: `projects/<Project ID>`.
     string parent = 1;
+
+    // Name of the branch of the agent for versioning. The default branch name is <code>develop</code>.
     string branch = 2;
+
+    // Defines when to initiate newly created agent when training started
     InitiationProtocol initiation_protocol = 3;
 }
 
@@ -617,6 +647,7 @@ message BuildCacheRequest {
     // Required. The project that the agent to build cache is associated with.
     // Format: `projects/<Project ID>`.
     string parent = 1;
+    // Name of the branch of the agent for versioning. The default branch name is <code>develop</code>.
     string branch = 2;
 }
 
@@ -668,6 +699,7 @@ message ExportBenchmarkAgentRequest {
     // Required. The project that the agent to export is associated with.
     // Format: `projects/<Project ID>`.
     string parent = 1;
+
     // Optional. The compression level of the zip file created.
     // Valid range 1-9; the grpc-default value 0 will be mapped to 1,
     // other values cause an error in the request validation handler.
@@ -678,39 +710,58 @@ message ExportBenchmarkAgentRequest {
     // default values come from API definition above
     // Optional: bigger than zero
     float test_size = 3;
+
     // Optional: bigger than zero
     float train_size = 4;
+
     // Optional: random seed
     int32 random_state = 5;
 }
 
 message ExportBenchmarkAgentResponse {
+    // Agent responses as zip file
     bytes agent_content = 1;
+
     // Key is the language code, value is the corresponding ListTrainingPhrasesResponse
     map<string, ListTrainingPhrasesResponse> training_phrases = 2;
 }
 
 message OptimizeRankingMatchRequest {
+    // Required. The project that the agent to train is associated with.
+    // Format: `projects/<Project ID>`.
     string parent = 1;
+
+    // languages that should be optimized
     repeated string language_codes = 2;
+
     // optimization config will contain all possible optimizations, with which we will come up in the future
     repeated RankingMatchOptimizationConfig optimization_configs = 3;
+
     // if in_place is true then the config of the agent on the server will be updated, if False then config
     // with optimized thresholds will be returned but not updated on the server
     bool in_place = 4;
 }
 
 message RankingMatchOptimizationConfig {
+    // language
     string language_code = 1;
+
+    // number of splits for optimization
     int32 n_splits = 2;
+
+    // random seed number for defining the split of train and test of training phrases for optimization
     int32 random_seed = 3;
+
     // initial thresholds are optional, if not given will be taken from the current config
     // example {'OndewoIntentSimilarityMatch': 0.59, 'OndewoIntentNamedSimilarityMatch': 0.39}
     google.protobuf.Struct initial_thresholds = 4;
 }
 
 message OptimizeRankingMatchResponse {
+    // info about optimization
     google.protobuf.Struct optimization_info = 1;
+
+    // the optimized configuration of the ondewo agent e.g., optimized parameters
     google.protobuf.Struct optimized_ondewo_config = 3;
 }
 
@@ -778,66 +829,106 @@ message GetAgentStatisticsRequest {
     // Required. The project to get statistics from.
     // Format: `projects/<Project ID>`.
     string parent = 1;
+
+    // File formats for reports
     ReportFormat format = 2;
+
+    // the language to calculate statistics about
     string language_code = 3;
+
+    // Type of reports about the domain of the agent
     ReportType type = 4;
 }
 
 message GetAgentStatisticsResponse {
     // Statistic info.
     bytes reports = 1;
+
+    // File formats for reports
     ReportFormat format = 2;
+
+    // Type of reports about the domain of the agent
     ReportType type = 3;
 }
 
+// Type of reports about the domain of the agent
 enum ReportType {
+
     // will return all reports as files of specified format compressed into a single zipfile
     ALL = 0;
+
     // statistics of the language specific part of the intent database
     INTENT_PER_LANGUAGE = 1;
+
     // statistics of the language specific part of the entity database
     ENTITY_PER_LANGUAGE = 2;
+
     // report on collision of the entity synonyms
     ENTITY_COLLISION = 3;
+
     // report of statistics of the general (relevant to all supported languages) part of intent database
     INTENT_GENERAL = 4;
 }
 
+// File formats for reports
 enum ReportFormat {
+
+    // CSV (comma separated values) file format
     CSV = 0;
+
+    // HTML file format
     HTML = 1;
+
+    // JSON file format
     JSON = 2;
 }
 
 message AddUserToProjectRequest {
+    // Required. The project that the agent to train is associated with.
+    // Format: `projects/<Project ID>`.
     string parent = 1;
+
+    // id of the user
     string user_id = 2;
+
+    // role id of the user in the project
     uint32 project_role_id = 4;
 }
 
 message RemoveUserFromProjectRequest {
+    // Required. The project that the agent to train is associated with.
+    // Format: `projects/<Project ID>`.
     string parent = 1;
+
+    // id of the user
     string user_id = 2;
 }
 
 message ListUsersInProjectRequest {
+    // Required. The project that the agent to train is associated with.
+    // Format: `projects/<Project ID>`.
     string parent = 1;
+
     // Optional. The next_page_token value returned from a previous list request.
     string page_token = 2;
 }
 
 message UserInProject {
-    // ID of the project
+
+    // Required. The project that the agent to train is associated with.
+    // Format: `projects/<Project ID>`.
     string parent = 1;
 
     // User object
     User user = 2;
 
-    // ID of the project role of the user
+    // id of the project role of the user
     uint32 role_id = 3;
 }
 
+// List the users in a project
 message ListUsersInProjectResponse {
+
     // The list of users in a project. There will be a maximum number of items
     // returned based on the page_token field in the request.
     repeated UserInProject users = 1;
@@ -847,18 +938,25 @@ message ListUsersInProjectResponse {
     string next_page_token = 2;
 }
 
+// GIT information about the version of the server
 message GetPlatformInfoResponse {
+
+    // version of the server build
     string version = 1;
+
+    // git commit hash of the server build
     string commit_hash = 2;
 }
 
 // Project permissions
 message ListProjectPermissionsRequest {
+
     // Optional. The next_page_token value returned from a previous list request.
     string page_token = 1;
 }
 
 message ListProjectPermissionsResponse {
+
     // The list of project permissions. There will be a maximum number of items
     // returned based on the page_token field in the request.
     repeated string permissions = 1;
@@ -868,6 +966,7 @@ message ListProjectPermissionsResponse {
     string next_page_token = 2;
 }
 
+// status of the agent
 message SetAgentStatusRequest {
     // Required. The project of which to set the status.
     // Format: `projects/<Project ID>/agent`.
@@ -881,7 +980,6 @@ message SetAgentStatusRequest {
 }
 
 // fixme: add endpoint to set agent owner
-
 enum AgentStatus {
     // If project is active, all its endpoints are active
     ACTIVE = 0;
@@ -898,16 +996,32 @@ enum AgentStatus {
     // READY = 5;
 }
 
+// Sorting order of agent
 message AgentSorting {
+
+    // Sorting field
     enum AgentSortingField {
+
+        // no sorting
         NO_AGENT_SORTING = 0;
+
+        // sorting by name
         SORT_AGENT_BY_NAME = 1;
+
+        // sorting by creation date
         SORT_AGENT_BY_CREATION_DATE = 2;
+
+        // sorting by last updated date
         SORT_AGENT_BY_LAST_UPDATED = 3;
+
+        // sorting by owner, i.e. user who owns the agent which is usually the creator of the agent
         SORT_AGENT_BY_OWNER_NAME = 4;
     }
 
+    // sorting field for agent sorting
     AgentSortingField sorting_field = 1;
+
+    // Sorting mode
     SortingMode sorting_mode = 2;
 }
 
