@@ -1,4 +1,10 @@
 # Release History
+*****************
+## Release ONDEWO NLU APIS 3.5.0
+
+### Improvements
+
+* [[OND211-2072]](https://ondewo.atlassian.net/browse/OND211-2072) - Added CRUD operations for labeling sessions
 
 *****************
 ## Release ONDEWO NLU APIS 3.4.0
