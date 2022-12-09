@@ -1668,9 +1668,11 @@
                       
                         <li><a href="#ondewo.nlu.Sessions.ListSessionLabels" class="title-badge method">ListSessionLabels</a></li>
                       
+                        <li><a href="#ondewo.nlu.Sessions.ListSessionLabelsOfAllSessions" class="title-badge method">ListSessionLabelsOfAllSessions</a></li>
+                      
                         <li><a href="#ondewo.nlu.Sessions.AddSessionLabels" class="title-badge method">AddSessionLabels</a></li>
                       
-                        <li><a href="#ondewo.nlu.Sessions.RemoveSessionLabels" class="title-badge method">RemoveSessionLabels</a></li>
+                        <li><a href="#ondewo.nlu.Sessions.DeleteSessionLabels" class="title-badge method">DeleteSessionLabels</a></li>
                       
                         <li><a href="#ondewo.nlu.Sessions.ListSessionReviews" class="title-badge method">ListSessionReviews</a></li>
                       
@@ -1700,6 +1702,10 @@
                     
                       <li>
                         <a href="#ondewo.nlu.CreateSessionReviewRequest" class="title-badge message">CreateSessionReviewRequest</a>
+                      </li>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.DeleteSessionLabelsRequest" class="title-badge message">DeleteSessionLabelsRequest</a>
                       </li>
                     
                       <li>
@@ -1739,6 +1745,10 @@
                       </li>
                     
                       <li>
+                        <a href="#ondewo.nlu.ListSessionLabelsOfAllSessionsRequest" class="title-badge message">ListSessionLabelsOfAllSessionsRequest</a>
+                      </li>
+                    
+                      <li>
                         <a href="#ondewo.nlu.ListSessionLabelsRequest" class="title-badge message">ListSessionLabelsRequest</a>
                       </li>
                     
@@ -1772,10 +1782,6 @@
                     
                       <li>
                         <a href="#ondewo.nlu.QueryResult" class="title-badge message">QueryResult</a>
-                      </li>
-                    
-                      <li>
-                        <a href="#ondewo.nlu.RemoveSessionLabelsRequest" class="title-badge message">RemoveSessionLabelsRequest</a>
                       </li>
                     
                       <li>
@@ -15416,15 +15422,21 @@ ListSessions: returns list of sessions from ondewo-kb; by default returns only s
 
           SESSION-LABEL RELATED ENDPOINTS *** //
         
+          <h4 id="ondewo.nlu.Sessions.ListSessionLabelsOfAllSessions" class="title-badge method">ListSessionLabelsOfAllSessions</h4>
+
+          <pre>rpc ListSessionLabelsOfAllSessions (<a href="#ondewo.nlu.ListSessionLabelsOfAllSessionsRequest">ListSessionLabelsOfAllSessionsRequest</a>) returns (<a href="#ondewo.nlu.ListSessionLabelsResponse">ListSessionLabelsResponse)</a></pre>
+
+          
+        
           <h4 id="ondewo.nlu.Sessions.AddSessionLabels" class="title-badge method">AddSessionLabels</h4>
 
           <pre>rpc AddSessionLabels (<a href="#ondewo.nlu.AddSessionLabelsRequest">AddSessionLabelsRequest</a>) returns (<a href="#ondewo.nlu.Session">Session)</a></pre>
 
           
         
-          <h4 id="ondewo.nlu.Sessions.RemoveSessionLabels" class="title-badge method">RemoveSessionLabels</h4>
+          <h4 id="ondewo.nlu.Sessions.DeleteSessionLabels" class="title-badge method">DeleteSessionLabels</h4>
 
-          <pre>rpc RemoveSessionLabels (<a href="#ondewo.nlu.RemoveSessionLabelsRequest">RemoveSessionLabelsRequest</a>) returns (<a href="#ondewo.nlu.Session">Session)</a></pre>
+          <pre>rpc DeleteSessionLabels (<a href="#ondewo.nlu.DeleteSessionLabelsRequest">DeleteSessionLabelsRequest</a>) returns (<a href="#ondewo.nlu.Session">Session)</a></pre>
 
           
         
@@ -15539,6 +15551,16 @@ as a side effect: also update training data in ondewo-cai
               <tr>
                 <td>ListSessionLabels</td>
                 <td>GET</td>
+                <td>/v2/{session_id=projects/*/agent/sessions/*}/labels</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ListSessionLabelsOfAllSessions</td>
+                <td>GET</td>
                 <td>/v2/{parent=projects/*/agent}/sessions/labels</td>
                 <td></td>
               </tr>
@@ -15557,9 +15579,9 @@ as a side effect: also update training data in ondewo-cai
               
               
               <tr>
-                <td>RemoveSessionLabels</td>
+                <td>DeleteSessionLabels</td>
                 <td>POST</td>
-                <td>/v2/{session_id=projects/*/agent/sessions/*}/labels:remove</td>
+                <td>/v2/{session_id=projects/*/agent/sessions/*}/labels:delete</td>
                 <td>*</td>
               </tr>
               
@@ -15629,21 +15651,14 @@ as a side effect: also update training data in ondewo-cai
                   <td>session_id</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>The id of the session </p></td>
                 </tr>
               
                 <tr>
                   <td>labels</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>session_view</td>
-                  <td><a href="#ondewo.nlu.Session.View">Session.View</a></td>
-                  <td></td>
-                  <td><p> </p></td>
+                  <td><p>The labels to add to the session </p></td>
                 </tr>
               
             </tbody>
@@ -15682,6 +15697,13 @@ Required. </p></td>
 Format: UUID Version 4, e.g. 2f59fad2-06bc-4730-9920-d3148f28f357
 
 Optional. If not provided, it will be auto-generated </p></td>
+                </tr>
+              
+                <tr>
+                  <td>labels</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>labels for the session - Optional </p></td>
                 </tr>
               
             </tbody>
@@ -15729,6 +15751,37 @@ Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID>/reviews/<SESSION_REVI
                   <td><a href="#ondewo.nlu.SessionReview.View">SessionReview.View</a></td>
                   <td></td>
                   <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="ondewo.nlu.DeleteSessionLabelsRequest" class="title-badge message">DeleteSessionLabelsRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>session_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The id of the session </p></td>
+                </tr>
+              
+                <tr>
+                  <td>labels</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>The labels to delete from the session </p></td>
                 </tr>
               
             </tbody>
@@ -16109,7 +16162,7 @@ for more details. </p></td>
 
         
       
-        <h3 id="ondewo.nlu.ListSessionLabelsRequest" class="title-badge message">ListSessionLabelsRequest</h3>
+        <h3 id="ondewo.nlu.ListSessionLabelsOfAllSessionsRequest" class="title-badge message">ListSessionLabelsOfAllSessionsRequest</h3>
         <p></p>
 
         
@@ -16134,6 +16187,30 @@ Format: `projects/<PROJECT_ID>/agent`. </p></td>
 
         
       
+        <h3 id="ondewo.nlu.ListSessionLabelsRequest" class="title-badge message">ListSessionLabelsRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>session_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The id of the session </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="ondewo.nlu.ListSessionLabelsResponse" class="title-badge message">ListSessionLabelsResponse</h3>
         <p></p>
 
@@ -16148,7 +16225,7 @@ Format: `projects/<PROJECT_ID>/agent`. </p></td>
                   <td>labels</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
-                  <td><p> </p></td>
+                  <td><p>The labels of the session </p></td>
                 </tr>
               
             </tbody>
@@ -16545,44 +16622,6 @@ could contain webhook call latency. </p></td>
 
         
       
-        <h3 id="ondewo.nlu.RemoveSessionLabelsRequest" class="title-badge message">RemoveSessionLabelsRequest</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>session_id</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>labels</td>
-                  <td><a href="#string">string</a></td>
-                  <td>repeated</td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>session_view</td>
-                  <td><a href="#ondewo.nlu.Session.View">Session.View</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
         <h3 id="ondewo.nlu.Session" class="title-badge message">Session</h3>
         <p>SESSION RELATED MESSAGES *** //</p>
 
@@ -16750,14 +16789,15 @@ defaults to 0 if not set </p></td>
                   <td>input_contexts</td>
                   <td><a href="#ondewo.nlu.Context">Context</a></td>
                   <td>repeated</td>
-                  <td><p>Match only sessions whose session info contains at least one step having all the contexts specified here </p></td>
+                  <td><p>Match only sessions whose session info contains at least one step having all the contexts specified here
+The input contexts are pre-conditions for detecting intents </p></td>
                 </tr>
               
                 <tr>
                   <td>output_contexts</td>
                   <td><a href="#ondewo.nlu.Context">Context</a></td>
                   <td>repeated</td>
-                  <td><p> </p></td>
+                  <td><p>The output contexts are the result of the intent matching and track the contextual state of a conversation </p></td>
                 </tr>
               
             </tbody>

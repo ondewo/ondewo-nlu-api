@@ -314,6 +314,7 @@
     - [AddSessionLabelsRequest](#ondewo.nlu.AddSessionLabelsRequest)
     - [CreateSessionRequest](#ondewo.nlu.CreateSessionRequest)
     - [CreateSessionReviewRequest](#ondewo.nlu.CreateSessionReviewRequest)
+    - [DeleteSessionLabelsRequest](#ondewo.nlu.DeleteSessionLabelsRequest)
     - [DeleteSessionRequest](#ondewo.nlu.DeleteSessionRequest)
     - [DetectIntentRequest](#ondewo.nlu.DetectIntentRequest)
     - [DetectIntentResponse](#ondewo.nlu.DetectIntentResponse)
@@ -323,6 +324,7 @@
     - [GetSessionRequest](#ondewo.nlu.GetSessionRequest)
     - [GetSessionReviewRequest](#ondewo.nlu.GetSessionReviewRequest)
     - [InputAudioConfig](#ondewo.nlu.InputAudioConfig)
+    - [ListSessionLabelsOfAllSessionsRequest](#ondewo.nlu.ListSessionLabelsOfAllSessionsRequest)
     - [ListSessionLabelsRequest](#ondewo.nlu.ListSessionLabelsRequest)
     - [ListSessionLabelsResponse](#ondewo.nlu.ListSessionLabelsResponse)
     - [ListSessionReviewsRequest](#ondewo.nlu.ListSessionReviewsRequest)
@@ -332,7 +334,6 @@
     - [QueryInput](#ondewo.nlu.QueryInput)
     - [QueryParameters](#ondewo.nlu.QueryParameters)
     - [QueryResult](#ondewo.nlu.QueryResult)
-    - [RemoveSessionLabelsRequest](#ondewo.nlu.RemoveSessionLabelsRequest)
     - [Session](#ondewo.nlu.Session)
     - [SessionFilter](#ondewo.nlu.SessionFilter)
     - [SessionInfo](#ondewo.nlu.SessionInfo)
@@ -5454,9 +5455,8 @@ Example: * `projects/<Project ID>/agent` |
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| session_id | [string](#string) |  |  |
-| labels | [string](#string) | repeated |  |
-| session_view | [Session.View](#ondewo.nlu.Session.View) |  |  |
+| session_id | [string](#string) |  | The id of the session |
+| labels | [string](#string) | repeated | The labels to add to the session |
 
 
 
@@ -5477,6 +5477,7 @@ Required. |
 | session_uuid | [string](#string) |  | The unique UUID of a Session Format: UUID Version 4, e.g. 2f59fad2-06bc-4730-9920-d3148f28f357
 
 Optional. If not provided, it will be auto-generated |
+| labels | [string](#string) | repeated | labels for the session - Optional |
 
 
 
@@ -5495,6 +5496,22 @@ SESSION-REVIEW RELATED MESSAGES *** //
 | parent_review_id | [string](#string) |  | Optional: The unique identifier of the parent review Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID>/reviews/<SESSION_REVIEW_ID>`. |
 | session_review | [SessionReview](#ondewo.nlu.SessionReview) |  | The reviews for all steps in the session |
 | session_review_view | [SessionReview.View](#ondewo.nlu.SessionReview.View) |  |  |
+
+
+
+
+
+
+<a name="ondewo.nlu.DeleteSessionLabelsRequest"></a>
+
+### DeleteSessionLabelsRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| session_id | [string](#string) |  | The id of the session |
+| labels | [string](#string) | repeated | The labels to delete from the session |
 
 
 
@@ -5663,6 +5680,21 @@ Instructs the speech recognizer how to process the audio content.
 
 
 
+<a name="ondewo.nlu.ListSessionLabelsOfAllSessionsRequest"></a>
+
+### ListSessionLabelsOfAllSessionsRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  | The parent for which the labels for all sessions should be listed Format: `projects/<PROJECT_ID>/agent`. |
+
+
+
+
+
+
 <a name="ondewo.nlu.ListSessionLabelsRequest"></a>
 
 ### ListSessionLabelsRequest
@@ -5671,7 +5703,7 @@ Instructs the speech recognizer how to process the audio content.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| parent | [string](#string) |  | The parent for which the labels for all sessions should be listed Format: `projects/<PROJECT_ID>/agent`. |
+| session_id | [string](#string) |  | The id of the session |
 
 
 
@@ -5686,7 +5718,7 @@ Instructs the speech recognizer how to process the audio content.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| labels | [string](#string) | repeated |  |
+| labels | [string](#string) | repeated | The labels of the session |
 
 
 
@@ -5833,23 +5865,6 @@ You should not rely on this field as it isn't guaranteed to be accurate, or even
 
 
 
-<a name="ondewo.nlu.RemoveSessionLabelsRequest"></a>
-
-### RemoveSessionLabelsRequest
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| session_id | [string](#string) |  |  |
-| labels | [string](#string) | repeated |  |
-| session_view | [Session.View](#ondewo.nlu.Session.View) |  |  |
-
-
-
-
-
-
 <a name="ondewo.nlu.Session"></a>
 
 ### Session
@@ -5900,8 +5915,8 @@ defaults to 0 if not set |
 | user_ids | [string](#string) | repeated | Match only session which had all of the following user_ids interacting with them. |
 | intent_tags | [string](#string) | repeated | Match only session which have all of the following intent tags assigned |
 | session_ids | [string](#string) | repeated | Match only sessions whose IDs are specified here |
-| input_contexts | [Context](#ondewo.nlu.Context) | repeated | Match only sessions whose session info contains at least one step having all the contexts specified here |
-| output_contexts | [Context](#ondewo.nlu.Context) | repeated |  |
+| input_contexts | [Context](#ondewo.nlu.Context) | repeated | Match only sessions whose session info contains at least one step having all the contexts specified here The input contexts are pre-conditions for detecting intents |
+| output_contexts | [Context](#ondewo.nlu.Context) | repeated | The output contexts are the result of the intent matching and track the contextual state of a conversation |
 
 
 
@@ -6243,8 +6258,9 @@ user intent and respond.
 | TrackSessionStep | [TrackSessionStepRequest](#ondewo.nlu.TrackSessionStepRequest) | [Session](#ondewo.nlu.Session) | TrackSessionStep: append to an existing session; creates it if not existing |
 | DeleteSession | [DeleteSessionRequest](#ondewo.nlu.DeleteSessionRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | DeleteSession: delete a session(=conversation) from ondewo-kb (for testing only) |
 | ListSessionLabels | [ListSessionLabelsRequest](#ondewo.nlu.ListSessionLabelsRequest) | [ListSessionLabelsResponse](#ondewo.nlu.ListSessionLabelsResponse) | SESSION-LABEL RELATED ENDPOINTS *** // |
+| ListSessionLabelsOfAllSessions | [ListSessionLabelsOfAllSessionsRequest](#ondewo.nlu.ListSessionLabelsOfAllSessionsRequest) | [ListSessionLabelsResponse](#ondewo.nlu.ListSessionLabelsResponse) |  |
 | AddSessionLabels | [AddSessionLabelsRequest](#ondewo.nlu.AddSessionLabelsRequest) | [Session](#ondewo.nlu.Session) |  |
-| RemoveSessionLabels | [RemoveSessionLabelsRequest](#ondewo.nlu.RemoveSessionLabelsRequest) | [Session](#ondewo.nlu.Session) |  |
+| DeleteSessionLabels | [DeleteSessionLabelsRequest](#ondewo.nlu.DeleteSessionLabelsRequest) | [Session](#ondewo.nlu.Session) |  |
 | ListSessionReviews | [ListSessionReviewsRequest](#ondewo.nlu.ListSessionReviewsRequest) | [ListSessionReviewsResponse](#ondewo.nlu.ListSessionReviewsResponse) | SESSION-REVIEW RELATED ENDPOINTS *** // ListSessionReviews: returns list of session reviews from ondewo-kb; by default only returns session review IDs |
 | GetSessionReview | [GetSessionReviewRequest](#ondewo.nlu.GetSessionReviewRequest) | [SessionReview](#ondewo.nlu.SessionReview) | GetSessionReview: returns a session-review from ondewo-kb or computes the first review if none exists |
 | GetLatestSessionReview | [GetLatestSessionReviewRequest](#ondewo.nlu.GetLatestSessionReviewRequest) | [SessionReview](#ondewo.nlu.SessionReview) | GetLatestSessionReview: returns a session-review from ondewo-kb or computes the first review if none exists |
