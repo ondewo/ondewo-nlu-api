@@ -126,9 +126,9 @@ build_gh_release: ## Generate Github Release with CLI
 
 release_all_clients: ## Releases all NLU Clients
 	@make release_python_client || (echo "Already released ${ONDEWO_NLU_API_VERSION} of Python Client")
+	@make release_angular_client || (echo "Already released ${ONDEWO_NLU_API_VERSION} of Angular Client")
 	@make release_nodejs_client || (echo "Already released ${ONDEWO_NLU_API_VERSION} of Nodejs Client")
 	@make release_typescript_client || (echo "Already released ${ONDEWO_NLU_API_VERSION} of Typescript Client")
-	@make release_angular_client || (echo "Already released ${ONDEWO_NLU_API_VERSION} of Angular Client")
 #@make release_js_client || (echo "Already released ${ONDEWO_NLU_API_VERSION} of JS Client")
 	@echo "End releasing all clients"
 
