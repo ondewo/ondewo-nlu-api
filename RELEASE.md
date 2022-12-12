@@ -2,6 +2,14 @@
 
 *****************
 
+## Release ONDEWO NLU APIS 3.5.1
+
+### Bug fixes
+
+* Not releasing JS client anymore
+
+*****************
+
 ## Release ONDEWO NLU APIS 3.5.0
 
 ### Improvements
