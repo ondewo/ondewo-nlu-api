@@ -2,6 +2,14 @@
 
 *****************
 
+## Release ONDEWO NLU APIS 3.5.2
+
+### Bug fixes
+
+* Testing release process
+
+*****************
+
 ## Release ONDEWO NLU APIS 3.5.1
 
 ### Bug fixes
