@@ -2709,61 +2709,61 @@ Operation <response: [google.protobuf.Empty][google.protobuf.Empty],
 
           <pre>rpc GetFullTextSearchEntityType (<a href="#ondewo.nlu.FullTextSearchRequest">FullTextSearchRequest</a>) returns (<a href="#ondewo.nlu.FullTextSearchResponseEntityType">FullTextSearchResponseEntityType)</a></pre>
 
-          Full text search endpoint
+          Full text search endpoint in entity types
         
           <h4 id="ondewo.nlu.Agents.GetFullTextSearchEntity" class="title-badge method">GetFullTextSearchEntity</h4>
 
           <pre>rpc GetFullTextSearchEntity (<a href="#ondewo.nlu.FullTextSearchRequest">FullTextSearchRequest</a>) returns (<a href="#ondewo.nlu.FullTextSearchResponseEntity">FullTextSearchResponseEntity)</a></pre>
 
-          
+          Full text search endpoint in entities
         
           <h4 id="ondewo.nlu.Agents.GetFullTextSearchEntitySynonym" class="title-badge method">GetFullTextSearchEntitySynonym</h4>
 
           <pre>rpc GetFullTextSearchEntitySynonym (<a href="#ondewo.nlu.FullTextSearchRequest">FullTextSearchRequest</a>) returns (<a href="#ondewo.nlu.FullTextSearchResponseEntitySynonym">FullTextSearchResponseEntitySynonym)</a></pre>
 
-          
+          Full text search endpoint in entity synonyms
         
           <h4 id="ondewo.nlu.Agents.GetFullTextSearchIntent" class="title-badge method">GetFullTextSearchIntent</h4>
 
           <pre>rpc GetFullTextSearchIntent (<a href="#ondewo.nlu.FullTextSearchRequest">FullTextSearchRequest</a>) returns (<a href="#ondewo.nlu.FullTextSearchResponseIntent">FullTextSearchResponseIntent)</a></pre>
 
-          
+          Full text search endpoint in intents
         
           <h4 id="ondewo.nlu.Agents.GetFullTextSearchIntentContextIn" class="title-badge method">GetFullTextSearchIntentContextIn</h4>
 
           <pre>rpc GetFullTextSearchIntentContextIn (<a href="#ondewo.nlu.FullTextSearchRequest">FullTextSearchRequest</a>) returns (<a href="#ondewo.nlu.FullTextSearchResponseIntentContextIn">FullTextSearchResponseIntentContextIn)</a></pre>
 
-          
+          Full text search endpoint in context ins of intents
         
           <h4 id="ondewo.nlu.Agents.GetFullTextSearchIntentContextOut" class="title-badge method">GetFullTextSearchIntentContextOut</h4>
 
           <pre>rpc GetFullTextSearchIntentContextOut (<a href="#ondewo.nlu.FullTextSearchRequest">FullTextSearchRequest</a>) returns (<a href="#ondewo.nlu.FullTextSearchResponseIntentContextOut">FullTextSearchResponseIntentContextOut)</a></pre>
 
-          
+          Full text search endpoint in context outs of intents
         
           <h4 id="ondewo.nlu.Agents.GetFullTextSearchIntentUsersays" class="title-badge method">GetFullTextSearchIntentUsersays</h4>
 
           <pre>rpc GetFullTextSearchIntentUsersays (<a href="#ondewo.nlu.FullTextSearchRequest">FullTextSearchRequest</a>) returns (<a href="#ondewo.nlu.FullTextSearchResponseIntentUsersays">FullTextSearchResponseIntentUsersays)</a></pre>
 
-          
+          Full text search endpoint in user says of intents
         
           <h4 id="ondewo.nlu.Agents.GetFullTextSearchIntentTags" class="title-badge method">GetFullTextSearchIntentTags</h4>
 
           <pre>rpc GetFullTextSearchIntentTags (<a href="#ondewo.nlu.FullTextSearchRequest">FullTextSearchRequest</a>) returns (<a href="#ondewo.nlu.FullTextSearchResponseIntentTags">FullTextSearchResponseIntentTags)</a></pre>
 
-          
+          Full text search endpoint in tags of intents
         
           <h4 id="ondewo.nlu.Agents.GetFullTextSearchIntentResponse" class="title-badge method">GetFullTextSearchIntentResponse</h4>
 
           <pre>rpc GetFullTextSearchIntentResponse (<a href="#ondewo.nlu.FullTextSearchRequest">FullTextSearchRequest</a>) returns (<a href="#ondewo.nlu.FullTextSearchResponseIntentResponse">FullTextSearchResponseIntentResponse)</a></pre>
 
-          
+          Full text search endpoint in responses of intents
         
           <h4 id="ondewo.nlu.Agents.GetFullTextSearchIntentParameters" class="title-badge method">GetFullTextSearchIntentParameters</h4>
 
           <pre>rpc GetFullTextSearchIntentParameters (<a href="#ondewo.nlu.FullTextSearchRequest">FullTextSearchRequest</a>) returns (<a href="#ondewo.nlu.FullTextSearchResponseIntentParameters">FullTextSearchResponseIntentParameters)</a></pre>
 
-          
+          Full text search endpoint in parameters of intents
         
           <h4 id="ondewo.nlu.Agents.ReindexAgent" class="title-badge method">ReindexAgent</h4>
 
@@ -3062,21 +3062,22 @@ Operation <response: [google.protobuf.Empty][google.protobuf.Empty],
                   <td>parent</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Required. The project that the agent to train is associated with.
+Format: `projects/<Project ID>`. </p></td>
                 </tr>
               
                 <tr>
                   <td>user_id</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>id of the user </p></td>
                 </tr>
               
                 <tr>
                   <td>project_role_id</td>
                   <td><a href="#uint32">uint32</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>role id of the user in the project </p></td>
                 </tr>
               
             </tbody>
@@ -3216,7 +3217,7 @@ Read-only in the Agent message </p></td>
         
       
         <h3 id="ondewo.nlu.AgentSorting" class="title-badge message">AgentSorting</h3>
-        <p></p>
+        <p>Sorting order of agent</p>
 
         
           <table class="field-table">
@@ -3229,14 +3230,14 @@ Read-only in the Agent message </p></td>
                   <td>sorting_field</td>
                   <td><a href="#ondewo.nlu.AgentSorting.AgentSortingField">AgentSorting.AgentSortingField</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>sorting field for agent sorting </p></td>
                 </tr>
               
                 <tr>
                   <td>sorting_mode</td>
                   <td><a href="#ondewo.nlu.SortingMode">SortingMode</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Sorting mode </p></td>
                 </tr>
               
             </tbody>
@@ -3260,14 +3261,14 @@ Read-only in the Agent message </p></td>
                   <td>agent</td>
                   <td><a href="#ondewo.nlu.Agent">Agent</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>The agent </p></td>
                 </tr>
               
                 <tr>
                   <td>owner</td>
                   <td><a href="#ondewo.nlu.User">User</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>User who created the agent </p></td>
                 </tr>
               
             </tbody>
@@ -3299,7 +3300,7 @@ Format: `projects/<Project ID>`. </p></td>
                   <td>branch</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Name of the branch of the agent for versioning. The default branch name is <code>develop</code>. </p></td>
                 </tr>
               
             </tbody>
@@ -3323,7 +3324,7 @@ Format: `projects/<Project ID>`. </p></td>
                   <td>agent</td>
                   <td><a href="#ondewo.nlu.Agent">Agent</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>The agent </p></td>
                 </tr>
               
                 <tr>
@@ -3395,7 +3396,8 @@ Sorting position of the GetPlatformMappingRequest. </p></td>
                   <td>parent</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Required. The project that the agent to fetch is associated with.
+Format: `projects/<Project ID>/agents`. </p></td>
                 </tr>
               
             </tbody>
@@ -3611,7 +3613,7 @@ Optional: bigger than zero </p></td>
                   <td>agent_content</td>
                   <td><a href="#bytes">bytes</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Agent responses as zip file </p></td>
                 </tr>
               
                 <tr>
@@ -5092,21 +5094,21 @@ Format: `projects/<Project ID>`. </p></td>
                   <td>format</td>
                   <td><a href="#ondewo.nlu.ReportFormat">ReportFormat</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>File formats for reports </p></td>
                 </tr>
               
                 <tr>
                   <td>language_code</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>the language to calculate statistics about </p></td>
                 </tr>
               
                 <tr>
                   <td>type</td>
                   <td><a href="#ondewo.nlu.ReportType">ReportType</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Type of reports about the domain of the agent </p></td>
                 </tr>
               
             </tbody>
@@ -5137,14 +5139,14 @@ Format: `projects/<Project ID>`. </p></td>
                   <td>format</td>
                   <td><a href="#ondewo.nlu.ReportFormat">ReportFormat</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>File formats for reports </p></td>
                 </tr>
               
                 <tr>
                   <td>type</td>
                   <td><a href="#ondewo.nlu.ReportType">ReportType</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Type of reports about the domain of the agent </p></td>
                 </tr>
               
             </tbody>
@@ -5225,7 +5227,7 @@ Format: `projects/<Project ID>/agent`. </p></td>
         
       
         <h3 id="ondewo.nlu.GetPlatformInfoResponse" class="title-badge message">GetPlatformInfoResponse</h3>
-        <p></p>
+        <p>GIT information about the version of the server</p>
 
         
           <table class="field-table">
@@ -5238,14 +5240,14 @@ Format: `projects/<Project ID>/agent`. </p></td>
                   <td>version</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>version of the server build </p></td>
                 </tr>
               
                 <tr>
                   <td>commit_hash</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>git commit hash of the server build </p></td>
                 </tr>
               
             </tbody>
@@ -5508,7 +5510,8 @@ more results in the list. </p></td>
                   <td>parent</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Required. The project that the agent to train is associated with.
+Format: `projects/<Project ID>`. </p></td>
                 </tr>
               
                 <tr>
@@ -5526,7 +5529,7 @@ more results in the list. </p></td>
         
       
         <h3 id="ondewo.nlu.ListUsersInProjectResponse" class="title-badge message">ListUsersInProjectResponse</h3>
-        <p></p>
+        <p>List the users in a project</p>
 
         
           <table class="field-table">
@@ -5631,14 +5634,15 @@ more results in the list. </p></td>
                   <td>parent</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Required. The project that the agent to train is associated with.
+Format: `projects/<Project ID>`. </p></td>
                 </tr>
               
                 <tr>
                   <td>language_codes</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
-                  <td><p> </p></td>
+                  <td><p>languages that should be optimized </p></td>
                 </tr>
               
                 <tr>
@@ -5677,14 +5681,14 @@ with optimized thresholds will be returned but not updated on the server </p></t
                   <td>optimization_info</td>
                   <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>info about optimization </p></td>
                 </tr>
               
                 <tr>
                   <td>optimized_ondewo_config</td>
                   <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>the optimized configuration of the ondewo agent e.g., optimized parameters </p></td>
                 </tr>
               
             </tbody>
@@ -5741,21 +5745,21 @@ If not set, it will set it empty. </p></td>
                   <td>language_code</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>language </p></td>
                 </tr>
               
                 <tr>
                   <td>n_splits</td>
                   <td><a href="#int32">int32</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>number of splits for optimization </p></td>
                 </tr>
               
                 <tr>
                   <td>random_seed</td>
                   <td><a href="#int32">int32</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>random seed number for defining the split of train and test of training phrases for optimization </p></td>
                 </tr>
               
                 <tr>
@@ -5825,14 +5829,15 @@ example {'OndewoIntentSimilarityMatch': 0.59, 'OndewoIntentNamedSimilarityMatch'
                   <td>parent</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Required. The project that the agent to train is associated with.
+Format: `projects/<Project ID>`. </p></td>
                 </tr>
               
                 <tr>
                   <td>user_id</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>id of the user </p></td>
                 </tr>
               
             </tbody>
@@ -5896,7 +5901,7 @@ curl \
         
       
         <h3 id="ondewo.nlu.SetAgentStatusRequest" class="title-badge message">SetAgentStatusRequest</h3>
-        <p></p>
+        <p>status of the agent</p>
 
         
           <table class="field-table">
@@ -6008,14 +6013,14 @@ Format: `projects/<Project ID>`. </p></td>
                   <td>branch</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Name of the branch of the agent for versioning. The default branch name is <code>develop</code>. </p></td>
                 </tr>
               
                 <tr>
                   <td>initiation_protocol</td>
                   <td><a href="#ondewo.nlu.InitiationProtocol">InitiationProtocol</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Defines when to initiate newly created agent when training started </p></td>
                 </tr>
               
             </tbody>
@@ -6039,7 +6044,7 @@ Format: `projects/<Project ID>`. </p></td>
                   <td>agent</td>
                   <td><a href="#ondewo.nlu.Agent">Agent</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>The agent </p></td>
                 </tr>
               
                 <tr>
@@ -6077,7 +6082,8 @@ Format: `projects/<Project ID>`. </p></td>
                   <td>parent</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>ID of the project </p></td>
+                  <td><p>Required. The project that the agent to train is associated with.
+Format: `projects/<Project ID>`. </p></td>
                 </tr>
               
                 <tr>
@@ -6091,7 +6097,7 @@ Format: `projects/<Project ID>`. </p></td>
                   <td>role_id</td>
                   <td><a href="#uint32">uint32</a></td>
                   <td></td>
-                  <td><p>ID of the project role of the user </p></td>
+                  <td><p>id of the project role of the user </p></td>
                 </tr>
               
             </tbody>
@@ -6107,7 +6113,7 @@ Format: `projects/<Project ID>`. </p></td>
       <div id="ondewo/nlu/agent.proto-enums" class="object-category">Enums</div>
       
         <h3 id="ondewo.nlu.AgentSorting.AgentSortingField" class="title-badge enum">AgentSorting.AgentSortingField</h3>
-        <p></p>
+        <p>Sorting field</p>
         <table class="enum-table">
           <thead>
             <tr><td>Name</td><td>Number</td><td>Description</td></tr>
@@ -6117,38 +6123,38 @@ Format: `projects/<Project ID>`. </p></td>
               <tr>
                 <td>NO_AGENT_SORTING</td>
                 <td>0</td>
-                <td><p></p></td>
+                <td><p>no sorting</p></td>
               </tr>
             
               <tr>
                 <td>SORT_AGENT_BY_NAME</td>
                 <td>1</td>
-                <td><p></p></td>
+                <td><p>sorting by name</p></td>
               </tr>
             
               <tr>
                 <td>SORT_AGENT_BY_CREATION_DATE</td>
                 <td>2</td>
-                <td><p></p></td>
+                <td><p>sorting by creation date</p></td>
               </tr>
             
               <tr>
                 <td>SORT_AGENT_BY_LAST_UPDATED</td>
                 <td>3</td>
-                <td><p></p></td>
+                <td><p>sorting by last updated date</p></td>
               </tr>
             
               <tr>
                 <td>SORT_AGENT_BY_OWNER_NAME</td>
                 <td>4</td>
-                <td><p></p></td>
+                <td><p>sorting by owner, i.e. user who owns the agent which is usually the creator of the agent</p></td>
               </tr>
             
           </tbody>
         </table>
       
         <h3 id="ondewo.nlu.AgentStatus" class="title-badge enum">AgentStatus</h3>
-        <p></p>
+        <p>fixme: add endpoint to set agent owner</p>
         <table class="enum-table">
           <thead>
             <tr><td>Name</td><td>Number</td><td>Description</td></tr>
@@ -6371,7 +6377,7 @@ Format: `projects/<Project ID>`. </p></td>
         </table>
       
         <h3 id="ondewo.nlu.ReportFormat" class="title-badge enum">ReportFormat</h3>
-        <p></p>
+        <p>File formats for reports</p>
         <table class="enum-table">
           <thead>
             <tr><td>Name</td><td>Number</td><td>Description</td></tr>
@@ -6381,26 +6387,26 @@ Format: `projects/<Project ID>`. </p></td>
               <tr>
                 <td>CSV</td>
                 <td>0</td>
-                <td><p></p></td>
+                <td><p>CSV (comma separated values) file format</p></td>
               </tr>
             
               <tr>
                 <td>HTML</td>
                 <td>1</td>
-                <td><p></p></td>
+                <td><p>HTML file format</p></td>
               </tr>
             
               <tr>
                 <td>JSON</td>
                 <td>2</td>
-                <td><p></p></td>
+                <td><p>JSON file format</p></td>
               </tr>
             
           </tbody>
         </table>
       
         <h3 id="ondewo.nlu.ReportType" class="title-badge enum">ReportType</h3>
-        <p></p>
+        <p>Type of reports about the domain of the agent</p>
         <table class="enum-table">
           <thead>
             <tr><td>Name</td><td>Number</td><td>Description</td></tr>
@@ -8022,7 +8028,7 @@ Format: `projects/<Project ID>/agent/intents/<Intent ID>`. </p></td>
       <div id="ondewo/nlu/common.proto-messages" class="object-category">Messages</div>
       
         <h3 id="ondewo.nlu.StatResponse" class="title-badge message">StatResponse</h3>
-        <p></p>
+        <p>statistic response</p>
 
         
           <table class="field-table">
@@ -8051,7 +8057,7 @@ Format: `projects/<Project ID>/agent/intents/<Intent ID>`. </p></td>
       <div id="ondewo/nlu/common.proto-enums" class="object-category">Enums</div>
       
         <h3 id="ondewo.nlu.SortingMode" class="title-badge enum">SortingMode</h3>
-        <p></p>
+        <p>Sorting mode</p>
         <table class="enum-table">
           <thead>
             <tr><td>Name</td><td>Number</td><td>Description</td></tr>
@@ -8061,13 +8067,13 @@ Format: `projects/<Project ID>/agent/intents/<Intent ID>`. </p></td>
               <tr>
                 <td>ASCENDING</td>
                 <td>0</td>
-                <td><p></p></td>
+                <td><p>ascending sorting</p></td>
               </tr>
             
               <tr>
                 <td>DESCENDING</td>
                 <td>1</td>
-                <td><p></p></td>
+                <td><p>descending sorting</p></td>
               </tr>
             
           </tbody>
