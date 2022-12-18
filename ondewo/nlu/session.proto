@@ -233,6 +233,9 @@ message QueryParameters {
     // Optional. This field can be used to pass custom data into the webhook
     // associated with the agent. Arbitrary JSON objects are supported.
     google.protobuf.Struct payload = 6;
+
+    // labels associated to this request
+    repeated string labels = 7;
 }
 
 // Represents the query input. It can contain either:
