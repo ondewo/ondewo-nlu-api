@@ -173,5 +173,5 @@ message DeleteContextRequest {
 message DeleteAllContextsRequest {
   // Required. The name of the session to delete all contexts from. Format:
   // `projects/<Project ID>/agent/sessions/<Session ID>`.
-  string parent = 1;
+  string session_id = 1;
 }
