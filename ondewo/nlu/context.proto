@@ -156,7 +156,7 @@ message Context {
 message ListContextsRequest {
     // Required. The session to list all contexts from.
     // Format: `projects/<Project ID>/agent/sessions/<Session ID>`.
-    string parent = 1;
+    string session_id = 1;
 
     // Optional. The next_page_token value returned from a previous list request.
     string page_token = 3;
@@ -184,7 +184,7 @@ message GetContextRequest {
 message CreateContextRequest {
     // Required. The session to create a context for.
     // Format: `projects/<Project ID>/agent/sessions/<Session ID>`.
-    string parent = 1;
+    string session_id = 1;
 
     // Required. The context to create.
     Context context = 2;
