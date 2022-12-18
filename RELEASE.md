@@ -2,6 +2,14 @@
 
 *****************
 
+## Release ONDEWO NLU APIS 3.6.0
+
+### Improvements
+
+* Added labels to Added labels to QueryParameters for DetectIntentRequest
+
+*****************
+
 ## Release ONDEWO NLU APIS 3.5.2
 
 ### Bug fixes
