@@ -114,9 +114,9 @@ service Sessions {
     };
 
     rpc ListSessionLabelsOfAllSessions (ListSessionLabelsOfAllSessionsRequest) returns (ListSessionLabelsResponse) {
-    option (google.api.http) = {
-        get: "/v2/{parent=projects/*/agent}/sessions/labels"
-    };
+        option (google.api.http) = {
+            get: "/v2/{parent=projects/*/agent}/sessions/labels"
+        };
     };
 
     rpc AddSessionLabels (AddSessionLabelsRequest) returns (Session) {
@@ -779,6 +779,7 @@ message SessionFilter {
 
     // Match only sessions for which the duration in seconds rounded are smaller or equal
     float duration_in_s_rounded_max = 41;
+
 }
 
 
@@ -788,7 +789,7 @@ message SessionInfo {
     // This information can be returned inside a Session object for consumption by a client.
     // Or it can be used by the backend to check whether the Session matches a given SessionFilter.
     //
-    // All fields below are  optional. Multiple fields specified at the same time are chained
+    // All fields below are optional. Multiple fields specified at the same time are chained.
 
     // The language codes used in the given session.
     repeated string language_codes = 1;
@@ -805,8 +806,12 @@ message SessionInfo {
     // The minimum confidence for entity recognition along the session
     float min_entity_types_confidence = 5;
 
-    // The start and end dates of the given session (in UNIX epochs)
+    // The earliest date of the given session (in UNIX epochs), i.e. the time of the first interaction of a user
+    // in the given session
     float earliest = 6;
+
+    // The latest date of the given session (in UNIX epochs), i.e. the time of the last interaction of a user
+    // in the given session
     float latest = 7;
 
     // The number of turns (interaction steps) in the given session
@@ -825,7 +830,13 @@ message SessionInfo {
     message ContextSteps {
         repeated Context contexts = 1;
     }
+
+    // The input contexts that are matched in the given session. The name of the context here is the short name
+    // and not the full URL name including the project parent
     repeated ContextSteps input_context_steps = 12;
+
+    // The output contexts that are matched in the given session. The name of the context here is the short name
+    // and not the full URL name including the project parent
     repeated ContextSteps output_context_steps = 13;
 
 }
