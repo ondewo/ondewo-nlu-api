@@ -612,6 +612,8 @@ message Session {
         // Only some fields are populated in the response.
         VIEW_SPARSE = 2;
     }
+
+
 }
 
 message SessionStep {
@@ -642,6 +644,7 @@ message ListSessionsRequest {
     SessionFilter session_filter = 5;
 
     // Optional. The mask to control which fields will be filled with data.
+    // Example: path=["session_info.duration_in_s_min"]
     google.protobuf.FieldMask field_mask = 6;
 }
 
@@ -842,6 +845,44 @@ message SessionInfo {
     // and not the full URL name including the project parent
     repeated ContextSteps output_context_steps = 13;
 
+    //  duration in seconds
+    float duration_in_s = 14;
+
+    // duration in minutes
+    float duration_in_m = 15;
+
+    // duration in minutes rounded
+    float duration_in_m_rounded_min = 16;
+
+    // duration in 15 seconds intervals rounded
+    float duration_interval_15s_rounded = 17;
+
+    // duration in 30 seconds intervals rounded
+    float duration_interval_30s_rounded_min = 18;
+
+    // duration in 30 seconds intervals rounded
+    float duration_interval_30s_rounded_max = 19;
+
+    // duration in 45 seconds intervals rounded
+    float duration_interval_45s_rounded = 20;
+
+    // started_time_slot_per_hour (e.g. 08:00)
+    string started_time_slot_per_hour = 21;
+
+    // started_time_slot_per_quarter_hour (e.g. 08:00)
+    string started_time_slot_per_quarter_hour = 22;
+
+    // started_time_slot_per_half_hour (e.g. 08:00)
+    string started_time_slot_per_half_hour = 23;
+
+    // started_time_slot_per_day_phase (e.g. 14:00)
+    string started_time_slot_per_day_phase = 24;
+
+    // started_time_slot_per_minute (e.g. 14:00)
+    string started_time_slot_per_minute = 25;
+
+    // duration in seconds rounded
+    float duration_in_s_rounded_max = 26;
 }
 
 message ListSessionsResponse {
@@ -861,6 +902,7 @@ message GetSessionRequest {
     Session.View session_view = 2;
 
     // Optional. The mask to control which fields will be filled with data.
+    // Example: path=["session_info.duration_in_s_min"]
     google.protobuf.FieldMask field_mask = 6;
 }
 
