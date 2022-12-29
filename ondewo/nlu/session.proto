@@ -879,7 +879,7 @@ message SessionInfo {
     string started_time_slot_per_minute = 24;
 
     // duration in seconds rounded
-    float duration_in_s_rounded_max = 25;
+    float duration_in_s_rounded = 25;
 }
 
 message ListSessionsResponse {
