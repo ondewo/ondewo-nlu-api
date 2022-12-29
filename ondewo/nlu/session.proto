@@ -714,12 +714,6 @@ message SessionFilter {
     // Match only sessions for which the duration in seconds are smaller or equal
     float duration_in_s_max = 19;
 
-    // Match only sessions for which the duration in seconds rounded are larger or equal
-    float duration_in_s_rounded_min = 18;
-
-    // Match only sessions for which the duration in seconds rounded are smaller or equal
-    float duration_in_s_rounded_max = 19;
-
     // Match only sessions for which the duration in minutes are larger or equal
     float duration_in_m_min = 20;
 
@@ -780,7 +774,11 @@ message SessionFilter {
     // Match only sessions for which the started_time_slot_per_minute (e.g. 14:00) are smaller or equal
     string started_time_slot_per_minute_max = 39;
 
+    // Match only sessions for which the duration in seconds rounded are larger or equal
+    float duration_in_s_rounded_min = 40;
 
+    // Match only sessions for which the duration in seconds rounded are smaller or equal
+    float duration_in_s_rounded_max = 41;
 }
 
 
