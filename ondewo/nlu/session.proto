@@ -32,6 +32,7 @@ package ondewo.nlu;
 
 import "google/api/annotations.proto";
 import "google/protobuf/empty.proto";
+import "google/protobuf/field_mask.proto";
 import "google/protobuf/struct.proto";
 import "google/rpc/status.proto";
 import "google/type/latlng.proto";
@@ -639,6 +640,9 @@ message ListSessionsRequest {
 
     // Optional. A filter to narrow the response down to sessions of interest.
     SessionFilter session_filter = 5;
+
+    // Optional. The mask to control which fields will be filled with data.
+    google.protobuf.FieldMask field_mask = 6;
 }
 
 message SessionFilter {
@@ -779,7 +783,6 @@ message SessionFilter {
 
     // Match only sessions for which the duration in seconds rounded are smaller or equal
     float duration_in_s_rounded_max = 41;
-
 }
 
 
@@ -856,6 +859,9 @@ message GetSessionRequest {
 
     // whether to return a full or sparse view; if unspecified full view is returned
     Session.View session_view = 2;
+
+    // Optional. The mask to control which fields will be filled with data.
+    google.protobuf.FieldMask field_mask = 6;
 }
 
 message CreateSessionRequest {
