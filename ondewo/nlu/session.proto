@@ -657,21 +657,37 @@ message SessionFilter {
     // NOTE: only name and display name fields are used for comparison
     repeated EntityType matched_entity_types = 3;
 
-    // Match only sessions where the minimum confidence for intent detection along the session falls in the following range
-    float min_intents_confidence_min = 4; // defaults to -1 if not set
-    float min_intents_confidence_max = 5; // defaults to +1 if not set
+    // Match only sessions where the minimum confidence for intent detection along the session falls
+    // in the following range. Defaults to -1 if not set.
+    float min_intents_confidence_min = 4;
 
-    // Match only sessions where the minimum confidence for entity recognition along the session falls in the following range
-    float min_entity_types_confidence_min = 6; // defaults to -1 if not set
-    float min_entity_types_confidence_max = 7; // defaults to +1 if not set
+    // Match only sessions where the minimum confidence for intent detection along the session falls
+    // in the following range. Defaults to +1 if not set.
+    float min_intents_confidence_max = 5;
 
-    // Match only sessions whose time range falls within the following range (in UNIX epochs)
-    float earliest = 8; // defaults to 0 if not set
-    float latest = 9; // defaults to current epoch if not set
+    // Match only sessions where the minimum confidence for entity recognition along the session falls
+    //  in the following range. Defaults to -1 if not set.
+    float min_entity_types_confidence_min = 6;
+
+    // Match only sessions where the minimum confidence for entity recognition along the session falls
+    //  in the following range. Defaults to +1 if not set.
+    float min_entity_types_confidence_max = 7;
+
+    // Match only sessions whose time range falls within the following range (in UNIX epochs).
+    // Defaults to 0 if not set.
+    float earliest = 8;
+
+    // Match only sessions whose time range falls within the following range (in UNIX epochs).
+    // Defaults to current epoch if not set
+    float latest = 9;
 
     // Match only sessions for which the number of turns (interaction steps) falls in the following range
-    int32 min_number_turns = 10; // defaults to 0 if not set
-    int32 max_number_turns = 11; // defaults to MAXINT if not set
+    // Defaults to 0 if not set.
+    int32 min_number_turns = 10;
+
+    // Match only sessions for which the number of turns (interaction steps) falls in the following range
+    // Defaults to MAXINT if not set.
+    int32 max_number_turns = 11;
 
     // Match only session which have all of the following labels assigned
     repeated string labels = 12;
@@ -691,6 +707,80 @@ message SessionFilter {
 
     // The output contexts are the result of the intent matching and track the contextual state of a conversation
     repeated Context output_contexts = 17;
+
+    // Match only sessions for which the duration in seconds are larger or equal
+    float duration_in_s_min = 18;
+
+    // Match only sessions for which the duration in seconds are smaller or equal
+    float duration_in_s_max = 19;
+
+    // Match only sessions for which the duration in seconds rounded are larger or equal
+    float duration_in_s_rounded_min = 18;
+
+    // Match only sessions for which the duration in seconds rounded are smaller or equal
+    float duration_in_s_rounded_max = 19;
+
+    // Match only sessions for which the duration in minutes are larger or equal
+    float duration_in_m_min = 20;
+
+    // Match only sessions for which the duration in minutes are smaller or equal
+    float duration_in_m_max = 21;
+
+    // Match only sessions for which the duration in minutes rounded are larger or equal
+    float duration_in_m_rounded_min = 22;
+
+    // Match only sessions for which the duration in minutes rounded are smaller or equal
+    float duration_in_m_rounded_max = 23;
+
+    // Match only sessions for which the duration in 15 seconds rounded are larger or equal
+    float duration_interval_15s_rounded_min = 24;
+
+    // Match only sessions for which the duration in 15 seconds rounded are smaller or equal
+    float duration_interval_15s_rounded_max = 25;
+
+    // Match only sessions for which the duration in 30 seconds rounded are larger or equal
+    float duration_interval_30s_rounded_min = 26;
+
+    // Match only sessions for which the duration in 30 seconds rounded are smaller or equal
+    float duration_interval_30s_rounded_max = 27;
+
+    // Match only sessions for which the duration in 45 seconds rounded are larger or equal
+    float duration_interval_45s_rounded_min = 28;
+
+    // Match only sessions for which the duration in 45 seconds rounded are smaller or equal
+    float duration_interval_45s_rounded_max = 29;
+
+    // Match only sessions for which the started_time_slot_per_hour (e.g. 08:00) are larger or equal
+    string started_time_slot_per_hour_min = 30;
+
+    // Match only sessions for which the started_time_slot_per_hour (e.g. 14:00) are smaller or equal
+    string started_time_slot_per_hour_max = 31;
+
+    // Match only sessions for which the started_time_slot_per_quarter_hour (e.g. 08:00) are larger or equal
+    string started_time_slot_per_quarter_hour_min = 32;
+
+    // Match only sessions for which the started_time_slot_per_quarter_hour (e.g. 14:00) are smaller or equal
+    string started_time_slot_per_quarter_hour_max = 33;
+
+    // Match only sessions for which the started_time_slot_per_half_hour (e.g. 08:00) are larger or equal
+    string started_time_slot_per_half_hour_min = 34;
+
+    // Match only sessions for which the started_time_slot_per_half_hour (e.g. 14:00) are smaller or equal
+    string started_time_slot_per_half_hour_max = 35;
+
+    // Match only sessions for which the started_time_slot_per_day_phase (e.g. 08:00) are larger or equal
+    string started_time_slot_per_day_phase_min = 36;
+
+    // Match only sessions for which the started_time_slot_per_day_phase (e.g. 14:00) are smaller or equal
+    string started_time_slot_per_day_phase_max = 37;
+
+    // Match only sessions for which the started_time_slot_per_minute (e.g. 08:00) are larger or equal
+    string started_time_slot_per_minute_min = 38;
+
+    // Match only sessions for which the started_time_slot_per_minute (e.g. 14:00) are smaller or equal
+    string started_time_slot_per_minute_max = 39;
+
+
 }
 
 
