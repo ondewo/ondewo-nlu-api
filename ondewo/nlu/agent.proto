@@ -39,7 +39,6 @@ import "google/api/annotations.proto";
 import "google/protobuf/field_mask.proto";
 import "google/protobuf/empty.proto";
 import "google/protobuf/struct.proto";
-import "google/protobuf/any.proto";
 import "ondewo/nlu/common.proto";
 import "ondewo/nlu/intent.proto";
 import "ondewo/nlu/user.proto";
