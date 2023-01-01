@@ -4,9 +4,12 @@
 
 ## Release ONDEWO NLU APIS 3.6.0
 
-### Improvements
+### New Features
 
-* Added labels to Added labels to QueryParameters for DetectIntentRequest
+* [[OND211-1979]](https://ondewo.atlassian.net/browse/OND211-1979) - Added labels to Added labels to QueryParameters for
+  DetectIntentRequest
+* [[OND211-2054]](https://ondewo.atlassian.net/browse/OND211-2054) - Added reporting capabilities for sessions incl.
+  ContextFilter and ComparisonOperator for detailed sessions filtering
 
 *****************
 
