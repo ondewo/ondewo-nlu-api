@@ -648,6 +648,46 @@ message ListSessionsRequest {
     google.protobuf.FieldMask field_mask = 6;
 }
 
+// Message used to filter sessions based on contextual information
+message ContextFilter {
+
+        // name of the context
+        string context_name = 1;
+
+        // name of the key of the context parameter
+        string key = 2;
+
+        // value of the parameter
+        string value = 3;
+
+        ComparisonOperator operator = 4;
+}
+
+// Type of operator to compare
+enum ComparisonOperator {
+
+    // equal operator
+    EQUAL = 0;
+
+    // greater operator, e.g. for numbers, dates, and strings
+    GREATER = 1;
+
+    // greater or equal operator, e.g. for numbers, dates, and strings
+    GREATER_OR_EQUAL = 2;
+
+    // less or equal operator, e.g. for numbers, dates, and strings
+    LESS_OR_EQUAL = 3;
+
+    // contains operator, e.g. part of string, or one of the elements in an iterable such as set or list
+    CONTAINS = 4;
+
+    // starts with operator for string comparison only
+    STARTS_WITH = 5;
+
+    // ends with operator for string comparison only
+    ENDS_WITH = 6;
+}
+
 message SessionFilter {
     // A SessionFilter can be used in some requests to return only sessions matching certain filter conditions.
     //
