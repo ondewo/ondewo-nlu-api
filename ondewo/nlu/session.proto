@@ -623,7 +623,7 @@ message Session {
 message SessionStep {
 
     // The unique identifier for the given review
-    // Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID>/steps/<SESSION_ID>`.
+    // Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID>/sessionsteps/<SESSION_ID>`.
     string name = 1;
 
     // The detect intent request of the session step
@@ -1027,7 +1027,7 @@ message SessionReview {
 
 message SessionReviewStep {
     // The unique identifier for the given review step
-    // Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID>/reviews/<SESSION_REVIEW_ID>/steps/<SESSION_REVIEW_STEP_ID>`.
+    // Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID>/reviews/<SESSION_REVIEW_ID>/sessionreviewsteps/<SESSION_REVIEW_STEP_ID>`.
     string name = 1;
 
     // The user says with markup of the detected entity types
