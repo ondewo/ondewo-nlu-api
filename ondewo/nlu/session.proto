@@ -591,7 +591,10 @@ enum AudioEncoding {
 }
 
 // *** SESSION RELATED MESSAGES *** //
+
+// Session of a user interaction
 message Session {
+
     // The unique identifier of the session
     // Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID>
     string name = 1;
@@ -604,6 +607,7 @@ message Session {
     // A session can be a sizable object. Therefore, we provide a resource view that
     // does not return all data
     enum View {
+
         // Endpoints decide whether to return the full or the sparse view
         VIEW_UNSPECIFIED = 0;
 
@@ -617,20 +621,35 @@ message Session {
 
 }
 
+// SessionSTep is a single user interaction as part of a session
 message SessionStep {
-    DetectIntentRequest detect_intent_request = 1;
-    DetectIntentResponse detect_intent_response = 2;
-    // The contexts which were active at the beginning of this step
-    repeated Context contexts = 3;
 
     // The unique identifier for the given review
     // Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID>/steps/<SESSION_ID>`.
-    string name = 4;
+    string name = 1;
+
+    // The detect intent request of the session step
+    DetectIntentRequest detect_intent_request = 2;
+
+    // The detect intent response  of the session step
+    DetectIntentResponse detect_intent_response = 3;
+
+    // The contexts which were active at the beginning of this step
+    repeated Context contexts = 4;
+
 }
 
+// TrackSessionStepRequest stores a session step into the session
 message TrackSessionStepRequest {
+
+    // The unique identifier for the given review
+    // Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID>/steps/<SESSION_ID>`.
     string session_id = 1;
+
+    // The session step to be added
     SessionStep session_step = 2;
+
+    // Defines which fields of the session should be returned in the response
     Session.View session_view = 3;
 }
 
@@ -656,16 +675,16 @@ message ListSessionsRequest {
 // Message used to filter sessions based on contextual information
 message ContextFilter {
 
-        // name of the context
-        string context_name = 1;
+    // name of the context
+    string context_name = 1;
 
-        // name of the key of the context parameter
-        string key = 2;
+    // name of the key of the context parameter
+    string key = 2;
 
-        // value of the parameter
-        string value = 3;
+    // value of the parameter
+    string value = 3;
 
-        ComparisonOperator operator = 4;
+    ComparisonOperator operator = 4;
 }
 
 // Type of operator to compare
@@ -1009,25 +1028,26 @@ message SessionReview {
 }
 
 message SessionReviewStep {
-    // The user says with markup of the detected entity types
-    Intent.TrainingPhrase annotated_usersays = 1;
-
-    // The language code
-    string language_code = 2;
-
-    // Unique detected intents ordered by descending confidence
-    repeated DetectedIntent detected_intents = 3;
-
-    // The contexts which were active at the beginning of this step
-    repeated Context contexts = 4;
-
-    // The output contexts of this step
-    repeated Context contexts_out = 5;
-
     // The unique identifier for the given review step
     // Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID>/reviews/<SESSION_REVIEW_ID>/steps/<SESSION_REVIEW_STEP_ID>`.
-    string name = 6;
+    string name = 1;
+
+    // The user says with markup of the detected entity types
+    Intent.TrainingPhrase annotated_usersays = 2;
+
+    // The language code
+    string language_code = 3;
+
+    // Unique detected intents ordered by descending confidence
+    repeated DetectedIntent detected_intents = 4;
+
+    // The contexts which were active at the beginning of this step
+    repeated Context contexts = 5;
+
+    // The output contexts of this step
+    repeated Context contexts_out = 6;
 }
+
 
 message DetectedIntent {
     // intent
