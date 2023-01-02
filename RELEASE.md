@@ -2,7 +2,7 @@
 
 *****************
 
-## Release ONDEWO NLU APIS 3.6.0
+## Release ONDEWO NLU APIS 4.0.0
 
 ### New Features
 
@@ -10,7 +10,14 @@
   DetectIntentRequest
 * [[OND211-2054]](https://ondewo.atlassian.net/browse/OND211-2054) - Added reporting capabilities for sessions incl.
   ContextFilter and ComparisonOperator for detailed sessions filtering
+* [[OND211-1979]](https://ondewo.atlassian.net/browse/OND211-1979) - Added name in message SessionStep
+* [[OND211-1979]](https://ondewo.atlassian.net/browse/OND211-1979) - Added name in message SessionReviewStep
 
+### Breaking changes
+
+* [[OND211-1979]](https://ondewo.atlassian.net/browse/OND211-1979) - Consistency: Renamed message Session.session_id to Session.name
+  and in SessionReview renamed SessionReview.session_review_id to SessionReview.name
+  
 *****************
 
 ## Release ONDEWO NLU APIS 3.5.2
