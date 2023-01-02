@@ -593,7 +593,8 @@ enum AudioEncoding {
 // *** SESSION RELATED MESSAGES *** //
 message Session {
     // The unique identifier of the session
-    string session_id = 1;
+    // Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID>
+    string name = 1;
 
     // The list of all the steps of the session
     repeated SessionStep session_steps = 2;
@@ -621,6 +622,10 @@ message SessionStep {
     DetectIntentResponse detect_intent_response = 2;
     // The contexts which were active at the beginning of this step
     repeated Context contexts = 3;
+
+    // The unique identifier for the given review
+    // Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID>/steps/<SESSION_ID>`.
+    string name = 4;
 }
 
 message TrackSessionStepRequest {
@@ -980,9 +985,10 @@ message CreateSessionReviewRequest {
 }
 
 message SessionReview {
+
     // The unique identifier for the given review
     // Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID>/reviews/<SESSION_REVIEW_ID>`.
-    string session_review_id = 1;
+    string name = 1;
 
     // The reviews for all steps in the session
     repeated SessionReviewStep session_review_steps = 2;
@@ -1017,6 +1023,10 @@ message SessionReviewStep {
 
     // The output contexts of this step
     repeated Context contexts_out = 5;
+
+    // The unique identifier for the given review step
+    // Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID>/reviews/<SESSION_REVIEW_ID>/steps/<SESSION_REVIEW_STEP_ID>`.
+    string name = 6;
 }
 
 message DetectedIntent {
