@@ -617,8 +617,6 @@ message Session {
         // Only some fields are populated in the response.
         VIEW_SPARSE = 2;
     }
-
-
 }
 
 // SessionSTep is a single user interaction as part of a session
