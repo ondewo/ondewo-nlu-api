@@ -84,6 +84,8 @@
                       
                         <li><a href="#ondewo.nlu.Agents.GetAgentStatistics" class="title-badge method">GetAgentStatistics</a></li>
                       
+                        <li><a href="#ondewo.nlu.Agents.GetSessionsStatistics" class="title-badge method">GetSessionsStatistics</a></li>
+                      
                         <li><a href="#ondewo.nlu.Agents.SetAgentStatus" class="title-badge method">SetAgentStatus</a></li>
                       
                         <li><a href="#ondewo.nlu.Agents.SetResources" class="title-badge method">SetResources</a></li>
@@ -311,6 +313,14 @@
                       </li>
                     
                       <li>
+                        <a href="#ondewo.nlu.GetSessionsStatisticsRequest" class="title-badge message">GetSessionsStatisticsRequest</a>
+                      </li>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.GetSessionsStatisticsResponse" class="title-badge message">GetSessionsStatisticsResponse</a>
+                      </li>
+                    
+                      <li>
                         <a href="#ondewo.nlu.ImportAgentRequest" class="title-badge message">ImportAgentRequest</a>
                       </li>
                     
@@ -430,6 +440,10 @@
                     
                       <li>
                         <a href="#ondewo.nlu.ReportType" class="title-badge enum">ReportType</a>
+                      </li>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.SessionsReportType" class="title-badge enum">SessionsReportType</a>
                       </li>
                     
                   </ul>
@@ -1697,6 +1711,10 @@
                       </li>
                     
                       <li>
+                        <a href="#ondewo.nlu.ContextFilter" class="title-badge message">ContextFilter</a>
+                      </li>
+                    
+                      <li>
                         <a href="#ondewo.nlu.CreateSessionRequest" class="title-badge message">CreateSessionRequest</a>
                       </li>
                     
@@ -1840,6 +1858,10 @@
                     
                       <li>
                         <a href="#ondewo.nlu.AudioEncoding" class="title-badge enum">AudioEncoding</a>
+                      </li>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.ComparisonOperator" class="title-badge enum">ComparisonOperator</a>
                       </li>
                     
                       <li>
@@ -2663,6 +2685,12 @@ Operation <response: [google.protobuf.Empty][google.protobuf.Empty],
 
           Gets statistics for the agent
         
+          <h4 id="ondewo.nlu.Agents.GetSessionsStatistics" class="title-badge method">GetSessionsStatistics</h4>
+
+          <pre>rpc GetSessionsStatistics (<a href="#ondewo.nlu.GetSessionsStatisticsRequest">GetSessionsStatisticsRequest</a>) returns (<a href="#ondewo.nlu.GetSessionsStatisticsResponse">GetSessionsStatisticsResponse)</a></pre>
+
+          
+        
           <h4 id="ondewo.nlu.Agents.SetAgentStatus" class="title-badge method">SetAgentStatus</h4>
 
           <pre>rpc SetAgentStatus (<a href="#ondewo.nlu.SetAgentStatusRequest">SetAgentStatusRequest</a>) returns (<a href="#ondewo.nlu.Agent">Agent)</a></pre>
@@ -2993,6 +3021,16 @@ Operation <response: [google.protobuf.Empty][google.protobuf.Empty],
                 <td>GetAgentStatistics</td>
                 <td>GET</td>
                 <td>/v2/{parent=projects/*/agent}:statistics</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetSessionsStatistics</td>
+                <td>GET</td>
+                <td>/v2/{parent=projects/*/agent}:session_statistics</td>
                 <td></td>
               </tr>
               
@@ -5296,6 +5334,126 @@ Format: `projects/<Project ID>/agent`. </p></td>
 
         
       
+        <h3 id="ondewo.nlu.GetSessionsStatisticsRequest" class="title-badge message">GetSessionsStatisticsRequest</h3>
+        <p>Request of the report of the statistics about sessions</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>parent</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The project to get statistics from.
+Format: `projects/<Project ID>`. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>format</td>
+                  <td><a href="#ondewo.nlu.ReportFormat">ReportFormat</a></td>
+                  <td></td>
+                  <td><p>File formats for reports </p></td>
+                </tr>
+              
+                <tr>
+                  <td>type</td>
+                  <td><a href="#ondewo.nlu.ReportType">ReportType</a></td>
+                  <td></td>
+                  <td><p>Type of reports about the domain of the agent </p></td>
+                </tr>
+              
+                <tr>
+                  <td>session_filter</td>
+                  <td><a href="#ondewo.nlu.SessionFilter">SessionFilter</a></td>
+                  <td></td>
+                  <td><p>Optional. A filter to narrow reports based on sessions </p></td>
+                </tr>
+              
+                <tr>
+                  <td>context_filter</td>
+                  <td><a href="#ondewo.nlu.ContextFilter">ContextFilter</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>limit</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>Optional. limit the returned number of results </p></td>
+                </tr>
+              
+                <tr>
+                  <td>group_by</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Optional. Grouping based on named properties </p></td>
+                </tr>
+              
+                <tr>
+                  <td>sort_by</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Optional. Sorting based on named properties </p></td>
+                </tr>
+              
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td></td>
+                  <td><p>Optional. The mask to control which data fields will be added to the returned data.
+Example: path=["session.duration_in_s_min", "session.tags"] </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="ondewo.nlu.GetSessionsStatisticsResponse" class="title-badge message">GetSessionsStatisticsResponse</h3>
+        <p>Report of the statistics about sessions</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>reports</td>
+                  <td><a href="#bytes">bytes</a></td>
+                  <td></td>
+                  <td><p>Statistic info. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>format</td>
+                  <td><a href="#ondewo.nlu.ReportFormat">ReportFormat</a></td>
+                  <td></td>
+                  <td><p>File formats for reports </p></td>
+                </tr>
+              
+                <tr>
+                  <td>type</td>
+                  <td><a href="#ondewo.nlu.SessionsReportType">SessionsReportType</a></td>
+                  <td></td>
+                  <td><p>Type of reports about the domain of the agent </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="ondewo.nlu.ImportAgentRequest" class="title-badge message">ImportAgentRequest</h3>
         <p>The request message for [Agents.ImportAgent][google.cloud.dialogflow.v2.Agents.ImportAgent].</p>
 
@@ -6461,6 +6619,65 @@ Format: `projects/<Project ID>`. </p></td>
           </tbody>
         </table>
       
+        <h3 id="ondewo.nlu.SessionsReportType" class="title-badge enum">SessionsReportType</h3>
+        <p>Type of reports about the domain of the agent</p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>SESSION</td>
+                <td>0</td>
+                <td><p>report on sessions. Supports SessionFilter to filter</p></td>
+              </tr>
+            
+              <tr>
+                <td>SESSION_TOP_X_INTENTS</td>
+                <td>1</td>
+                <td><p>report top x detected intents in session. Supports SessionFilter to filter</p></td>
+              </tr>
+            
+              <tr>
+                <td>SESSION_TOP_X_ENTITIES</td>
+                <td>2</td>
+                <td><p>report top x detected entities. Supports SessionFilter to filter</p></td>
+              </tr>
+            
+              <tr>
+                <td>SESSION_TOP_X_USERS</td>
+                <td>3</td>
+                <td><p>report top x users. Supports SessionFilter to filter</p></td>
+              </tr>
+            
+              <tr>
+                <td>SESSION_TOP_X_LABELS</td>
+                <td>4</td>
+                <td><p>report top x labels. Supports SessionFilter to filter</p></td>
+              </tr>
+            
+              <tr>
+                <td>SESSION_TOP_X_TAGS</td>
+                <td>5</td>
+                <td><p>report top x tags. Supports SessionFilter to filter</p></td>
+              </tr>
+            
+              <tr>
+                <td>SESSION_TOP_X_PHONE_NUMBERS</td>
+                <td>6</td>
+                <td><p>report top x phone_numbers. Supports SessionFilter to filter</p></td>
+              </tr>
+            
+              <tr>
+                <td>SESSION_HUMAN_HANDOVERS</td>
+                <td>7</td>
+                <td><p>report on human handovers. Supports SessionFilter to filter</p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
       
 
       
@@ -6741,8 +6958,8 @@ Format: `projects/<Project ID>`. </p></td>
                   <td>parent</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>the parent of the request
-Format: `projects/<Project ID>`. </p></td>
+                  <td><p>Required. The project of this agent.
+Format: `projects/<Project ID>/agent`. </p></td>
                 </tr>
               
                 <tr>
@@ -6944,7 +7161,7 @@ UNSPECIFIED - default mode, described in agent config </p></td>
                   <td>score</td>
                   <td><a href="#float">float</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>The confidence score of the detected entity </p></td>
                 </tr>
               
             </tbody>
@@ -7027,10 +7244,14 @@ UNSPECIFIED - default mode, described in agent config </p></td>
                   <td>algorithm</td>
                   <td><a href="#ondewo.nlu.EntityTypeFuzzyNerConfig.FuzzyNerAlgorithm">EntityTypeFuzzyNerConfig.FuzzyNerAlgorithm</a></td>
                   <td></td>
-                  <td><p>Optional. Specify the Fuzzy Ner algorithm
-
-Should not use allow_overlaps here, since its default value is False
-bool allow_overlaps = 5; </p></td>
+                  <td><p>Optional. Specify the Fuzzy Ner algorithm </p></td>
+                </tr>
+              
+                <tr>
+                  <td>allow_overlaps</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Should not use allow_overlaps here, since its default value is False </p></td>
                 </tr>
               
             </tbody>
@@ -7907,13 +8128,13 @@ Format: `projects/<Project ID>/agent/intents/<Intent ID>`. </p></td>
               <tr>
                 <td>PREFILTER_LEVENSHTEIN</td>
                 <td>0</td>
-                <td><p></p></td>
+                <td><p>Levenshtein algorithm for fuzzy ner matching</p></td>
               </tr>
             
               <tr>
                 <td>LOCAL_MAXIMUM</td>
                 <td>1</td>
-                <td><p></p></td>
+                <td><p>local maximum</p></td>
               </tr>
             
           </tbody>
@@ -7930,37 +8151,44 @@ Format: `projects/<Project ID>/agent/intents/<Intent ID>`. </p></td>
               <tr>
                 <td>OndewoIntentExactContextDetector</td>
                 <td>0</td>
-                <td><p></p></td>
+                <td><p>By enabling this, a specific intent is triggered if the context and the intent name in the user says is
+matched. This can be used for directly triggering 'quick reply' button clicks confidence is always '1.0'.</p></td>
               </tr>
             
               <tr>
                 <td>OndewoIntentExactMatch</td>
                 <td>1</td>
-                <td><p></p></td>
+                <td><p>exact matching' of user input to user says is used to detect the intent. Confidence is always '1.0' if an
+'exact match' is found.</p></td>
               </tr>
             
               <tr>
                 <td>OndewoIntentNamedExactMatch</td>
                 <td>2</td>
-                <td><p></p></td>
+                <td><p>the entity synonym in the user says text is replaced by the entity and 'exact matching' of user says text
+is performed. Confidence is alway '1.0'.</p></td>
               </tr>
             
               <tr>
                 <td>OndewoIntentSimilarityMatch</td>
                 <td>3</td>
-                <td><p></p></td>
+                <td><p>the algorithm computes the similarity of the user input to all user says of all intents.</p></td>
               </tr>
             
               <tr>
                 <td>OndewoIntentNamedSimilarityMatch</td>
                 <td>4</td>
-                <td><p></p></td>
+                <td><p>the entity synonyms in the user says are replaced by their Entity. Text similarity algorithms are then
+used to detect the intent.</p></td>
               </tr>
             
               <tr>
                 <td>OndewoIntentBertClassifier</td>
                 <td>7</td>
-                <td><p></p></td>
+                <td><p>new language representation model called BERT, which stands for Bidirectional Encoder Representations
+from Transformers.BERT is designed to pre-train deep bidirectional representations by jointly conditioning
+on both left and right context in all layers. As a result, the pre-trained BERT representations can be
+fine-tuned for multi-class intent detection. For details seehttps://arxiv.org/abs/1810.04805</p></td>
               </tr>
             
               <tr>
@@ -7972,31 +8200,31 @@ Format: `projects/<Project ID>/agent/intents/<Intent ID>`. </p></td>
               <tr>
                 <td>IntentExitDetector</td>
                 <td>10</td>
-                <td><p></p></td>
+                <td><p>Maximum number of repeated fallbacks before this algorithm exists the conversation and resets contexts</p></td>
               </tr>
             
               <tr>
                 <td>OndewoIntentRankingMatch</td>
                 <td>11</td>
-                <td><p></p></td>
+                <td><p>Algorithm to improve the interplay of the other algorithms</p></td>
               </tr>
             
               <tr>
                 <td>OndewoWeightedEnsemble</td>
                 <td>13</td>
-                <td><p></p></td>
+                <td><p>Ensemble calculation of used algorithms</p></td>
               </tr>
             
               <tr>
                 <td>OndewoIntentExitDetector</td>
                 <td>14</td>
-                <td><p></p></td>
+                <td><p>Maximum number of repeated fallbacks before this algorithm exists the conversation and resets contexts</p></td>
               </tr>
             
               <tr>
                 <td>OndewoIntentParameterMatch</td>
                 <td>15</td>
-                <td><p></p></td>
+                <td><p>Matches the intent based on the parameter constellation and the current user context</p></td>
               </tr>
             
           </tbody>
@@ -8013,19 +8241,19 @@ Format: `projects/<Project ID>/agent/intents/<Intent ID>`. </p></td>
               <tr>
                 <td>UNSPECIFIED</td>
                 <td>0</td>
-                <td><p></p></td>
+                <td><p>default mode, described in agent config</p></td>
               </tr>
             
               <tr>
                 <td>EXCLUSIVE</td>
                 <td>1</td>
-                <td><p></p></td>
+                <td><p>skip algorithms listed in `algorithms` field,</p></td>
               </tr>
             
               <tr>
                 <td>INCLUSIVE</td>
                 <td>2</td>
-                <td><p></p></td>
+                <td><p>run ONLY algorithms listed in `algorithms` field</p></td>
               </tr>
             
           </tbody>
@@ -8390,7 +8618,7 @@ Keys are the display names of context parameters. </p></td>
             <tbody>
               
                 <tr>
-                  <td>parent</td>
+                  <td>session_id</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Required. The session to create a context for.
@@ -8412,7 +8640,7 @@ Format: `projects/<Project ID>/agent/sessions/<Session ID>`. </p></td>
         
       
         <h3 id="ondewo.nlu.DeleteAllContextsRequest" class="title-badge message">DeleteAllContextsRequest</h3>
-        <p>The request message for [Contexts.DeleteAllContexts][google.cloud.dialogflow.v2.Contexts.DeleteAllContexts].</p>
+        <p>The request message for [Contexts.DeleteAllContexts][google.cloud.dialogflow.v2.Contexts.DeleteAllContexts].</p><p>Required. The name of the session to delete all contexts from.</p><p>Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_UUID>`.</p>
 
         
           <table class="field-table">
@@ -8422,11 +8650,10 @@ Format: `projects/<Project ID>/agent/sessions/<Session ID>`. </p></td>
             <tbody>
               
                 <tr>
-                  <td>parent</td>
+                  <td>session_id</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Required. The name of the session to delete all contexts from. Format:
-`projects/<Project ID>/agent/sessions/<Session ID>`. </p></td>
+                  <td><p> </p></td>
                 </tr>
               
             </tbody>
@@ -8497,7 +8724,7 @@ Format: `projects/<Project ID>/agent/sessions/<Session ID>`. </p></td>
             <tbody>
               
                 <tr>
-                  <td>parent</td>
+                  <td>session_id</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Required. The session to list all contexts from.
@@ -14101,11 +14328,11 @@ makes a best effort to cancel the operation, but success is not
 guaranteed.  If the server doesn't support this method, it returns
 `google.rpc.Code.UNIMPLEMENTED`.  Clients can use
 [Operations.GetOperation][ondewo.nlu.Operations.GetOperation] or
-other methods to check whether the cancellation succeeded or whether the
+other methods to verify whether the cancellation succeeded or whether the
 operation completed despite cancellation. On successful cancellation,
 the operation is not deleted; instead, it becomes an operation with
-an [Operation.error][ondewo.nlu.Operation.error] value with a [google.rpc.Status.code][google.rpc.Status.code] of 1,
-corresponding to `Code.CANCELLED`.
+an [Operation.error][ondewo.nlu.Operation.error] value with a [google.rpc.Status.code][google.rpc.Status.code]
+of 1, corresponding to `Code.CANCELLED`.
         
 
         
@@ -14396,7 +14623,7 @@ is `TakeSnapshot()`, the inferred response type is
         
       
         <h3 id="ondewo.nlu.OperationFilter" class="title-badge message">OperationFilter</h3>
-        <p>This message contains an operation filter</p><p>An operationFilter can be used in some requests to return only operations matching certain filter conditions.</p><p>All fields below are  optional. Multiple fields specified at the same time are chained via OR.</p>
+        <p>This message contains an operation filter</p>
 
         
           <table class="field-table">
@@ -14409,7 +14636,10 @@ is `TakeSnapshot()`, the inferred response type is
                   <td>project_parents</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
-                  <td><p>Match operations with any of the following project parents. </p></td>
+                  <td><p>An operationFilter can be used in some requests to return only operations matching certain filter conditions.
+
+All fields below are  optional. Multiple fields specified at the same time are chained via OR.
+Match operations with any of the following project parents. </p></td>
                 </tr>
               
                 <tr>
@@ -14481,13 +14711,13 @@ is `TakeSnapshot()`, the inferred response type is
 
           <pre>rpc CreateProjectRole (<a href="#ondewo.nlu.CreateProjectRoleRequest">CreateProjectRoleRequest</a>) returns (<a href="#ondewo.nlu.ProjectRole">ProjectRole)</a></pre>
 
-          Creats a project role by creating the knowledge base master
+          Creates a project role by creating the knowledge base master
         
           <h4 id="ondewo.nlu.ProjectRoles.GetProjectRole" class="title-badge method">GetProjectRole</h4>
 
           <pre>rpc GetProjectRole (<a href="#ondewo.nlu.GetProjectRoleRequest">GetProjectRoleRequest</a>) returns (<a href="#ondewo.nlu.ProjectRole">ProjectRole)</a></pre>
 
-          Creats a project role by getting the knowledge base master
+          Creates a project role by getting the knowledge base master
         
           <h4 id="ondewo.nlu.ProjectRoles.DeleteProjectRole" class="title-badge method">DeleteProjectRole</h4>
 
@@ -15694,6 +15924,51 @@ as a side effect: also update training data in ondewo-cai
 
         
       
+        <h3 id="ondewo.nlu.ContextFilter" class="title-badge message">ContextFilter</h3>
+        <p>Message used to filter sessions based on contextual information</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>context_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>name of the context </p></td>
+                </tr>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>name of the key of the context parameter </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>value of the parameter </p></td>
+                </tr>
+              
+                <tr>
+                  <td>operator</td>
+                  <td><a href="#ondewo.nlu.ComparisonOperator">ComparisonOperator</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="ondewo.nlu.CreateSessionRequest" class="title-badge message">CreateSessionRequest</h3>
         <p>This message is a request to create a session</p>
 
@@ -16096,6 +16371,14 @@ Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID>`. </p></td>
                   <td><p>whether to return a full or sparse view; if unspecified full view is returned </p></td>
                 </tr>
               
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td></td>
+                  <td><p>Optional. The mask to control which fields will be filled with data.
+Example: path=["session_info.duration_in_s_min"] </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -16370,6 +16653,14 @@ Format: `projects/<PROJECT_ID>/agent`. </p></td>
                   <td><p>Optional. A filter to narrow the response down to sessions of interest. </p></td>
                 </tr>
               
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td></td>
+                  <td><p>Optional. The mask to control which fields will be filled with data.
+Example: path=["session_info.duration_in_s_min"] </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -16378,7 +16669,7 @@ Format: `projects/<PROJECT_ID>/agent`. </p></td>
         
       
         <h3 id="ondewo.nlu.ListSessionsResponse" class="title-badge message">ListSessionsResponse</h3>
-        <p></p>
+        <p>This message is a response including the listing of sessions</p>
 
         
           <table class="field-table">
@@ -16495,6 +16786,13 @@ before the new ones are activated. </p></td>
                   <td></td>
                   <td><p>Optional. This field can be used to pass custom data into the webhook
 associated with the agent. Arbitrary JSON objects are supported. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>labels</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>labels associated to this request </p></td>
                 </tr>
               
             </tbody>
@@ -16649,7 +16947,7 @@ could contain webhook call latency. </p></td>
         
       
         <h3 id="ondewo.nlu.Session" class="title-badge message">Session</h3>
-        <p>SESSION RELATED MESSAGES *** //</p>
+        <p>Session of a user interaction</p>
 
         
           <table class="field-table">
@@ -16659,10 +16957,11 @@ could contain webhook call latency. </p></td>
             <tbody>
               
                 <tr>
-                  <td>session_id</td>
+                  <td>name</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>The unique identifier of the session </p></td>
+                  <td><p>The unique identifier of the session
+Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID> </p></td>
                 </tr>
               
                 <tr>
@@ -16725,48 +17024,48 @@ NOTE: only name and display name fields are used for comparison </p></td>
                   <td>min_intents_confidence_min</td>
                   <td><a href="#float">float</a></td>
                   <td></td>
-                  <td><p>Match only sessions where the minimum confidence for intent detection along the session falls in the following range
-
-defaults to -1 if not set </p></td>
+                  <td><p>Match only sessions where the minimum confidence for intent detection along the session falls
+in the following range. Defaults to -1 if not set. </p></td>
                 </tr>
               
                 <tr>
                   <td>min_intents_confidence_max</td>
                   <td><a href="#float">float</a></td>
                   <td></td>
-                  <td><p>defaults to +1 if not set </p></td>
+                  <td><p>Match only sessions where the minimum confidence for intent detection along the session falls
+in the following range. Defaults to +1 if not set. </p></td>
                 </tr>
               
                 <tr>
                   <td>min_entity_types_confidence_min</td>
                   <td><a href="#float">float</a></td>
                   <td></td>
-                  <td><p>Match only sessions where the minimum confidence for entity recognition along the session falls in the following range
-
-defaults to -1 if not set </p></td>
+                  <td><p>Match only sessions where the minimum confidence for entity recognition along the session falls
+ in the following range. Defaults to -1 if not set. </p></td>
                 </tr>
               
                 <tr>
                   <td>min_entity_types_confidence_max</td>
                   <td><a href="#float">float</a></td>
                   <td></td>
-                  <td><p>defaults to +1 if not set </p></td>
+                  <td><p>Match only sessions where the minimum confidence for entity recognition along the session falls
+ in the following range. Defaults to +1 if not set. </p></td>
                 </tr>
               
                 <tr>
                   <td>earliest</td>
                   <td><a href="#float">float</a></td>
                   <td></td>
-                  <td><p>Match only sessions whose time range falls within the following range (in UNIX epochs)
-
-defaults to 0 if not set </p></td>
+                  <td><p>Match only sessions whose time range falls within the following range (in UNIX epochs).
+Defaults to 0 if not set. </p></td>
                 </tr>
               
                 <tr>
                   <td>latest</td>
                   <td><a href="#float">float</a></td>
                   <td></td>
-                  <td><p>defaults to current epoch if not set </p></td>
+                  <td><p>Match only sessions whose time range falls within the following range (in UNIX epochs).
+Defaults to current epoch if not set </p></td>
                 </tr>
               
                 <tr>
@@ -16774,15 +17073,15 @@ defaults to 0 if not set </p></td>
                   <td><a href="#int32">int32</a></td>
                   <td></td>
                   <td><p>Match only sessions for which the number of turns (interaction steps) falls in the following range
-
-defaults to 0 if not set </p></td>
+Defaults to 0 if not set. </p></td>
                 </tr>
               
                 <tr>
                   <td>max_number_turns</td>
                   <td><a href="#int32">int32</a></td>
                   <td></td>
-                  <td><p>defaults to MAXINT if not set </p></td>
+                  <td><p>Match only sessions for which the number of turns (interaction steps) falls in the following range
+Defaults to MAXINT if not set. </p></td>
                 </tr>
               
                 <tr>
@@ -16828,6 +17127,174 @@ The input contexts are pre-conditions for detecting intents </p></td>
                   <td><p>The output contexts are the result of the intent matching and track the contextual state of a conversation </p></td>
                 </tr>
               
+                <tr>
+                  <td>duration_in_s_min</td>
+                  <td><a href="#float">float</a></td>
+                  <td></td>
+                  <td><p>Match only sessions for which the duration in seconds are larger or equal </p></td>
+                </tr>
+              
+                <tr>
+                  <td>duration_in_s_max</td>
+                  <td><a href="#float">float</a></td>
+                  <td></td>
+                  <td><p>Match only sessions for which the duration in seconds are smaller or equal </p></td>
+                </tr>
+              
+                <tr>
+                  <td>duration_in_m_min</td>
+                  <td><a href="#float">float</a></td>
+                  <td></td>
+                  <td><p>Match only sessions for which the duration in minutes are larger or equal </p></td>
+                </tr>
+              
+                <tr>
+                  <td>duration_in_m_max</td>
+                  <td><a href="#float">float</a></td>
+                  <td></td>
+                  <td><p>Match only sessions for which the duration in minutes are smaller or equal </p></td>
+                </tr>
+              
+                <tr>
+                  <td>duration_in_m_rounded_min</td>
+                  <td><a href="#float">float</a></td>
+                  <td></td>
+                  <td><p>Match only sessions for which the duration in minutes rounded are larger or equal </p></td>
+                </tr>
+              
+                <tr>
+                  <td>duration_in_m_rounded_max</td>
+                  <td><a href="#float">float</a></td>
+                  <td></td>
+                  <td><p>Match only sessions for which the duration in minutes rounded are smaller or equal </p></td>
+                </tr>
+              
+                <tr>
+                  <td>duration_interval_15s_rounded_min</td>
+                  <td><a href="#float">float</a></td>
+                  <td></td>
+                  <td><p>Match only sessions for which the duration in 15 seconds rounded are larger or equal </p></td>
+                </tr>
+              
+                <tr>
+                  <td>duration_interval_15s_rounded_max</td>
+                  <td><a href="#float">float</a></td>
+                  <td></td>
+                  <td><p>Match only sessions for which the duration in 15 seconds rounded are smaller or equal </p></td>
+                </tr>
+              
+                <tr>
+                  <td>duration_interval_30s_rounded_min</td>
+                  <td><a href="#float">float</a></td>
+                  <td></td>
+                  <td><p>Match only sessions for which the duration in 30 seconds rounded are larger or equal </p></td>
+                </tr>
+              
+                <tr>
+                  <td>duration_interval_30s_rounded_max</td>
+                  <td><a href="#float">float</a></td>
+                  <td></td>
+                  <td><p>Match only sessions for which the duration in 30 seconds rounded are smaller or equal </p></td>
+                </tr>
+              
+                <tr>
+                  <td>duration_interval_45s_rounded_min</td>
+                  <td><a href="#float">float</a></td>
+                  <td></td>
+                  <td><p>Match only sessions for which the duration in 45 seconds rounded are larger or equal </p></td>
+                </tr>
+              
+                <tr>
+                  <td>duration_interval_45s_rounded_max</td>
+                  <td><a href="#float">float</a></td>
+                  <td></td>
+                  <td><p>Match only sessions for which the duration in 45 seconds rounded are smaller or equal </p></td>
+                </tr>
+              
+                <tr>
+                  <td>started_time_slot_per_hour_min</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Match only sessions for which the started_time_slot_per_hour (e.g. 08:00) are larger or equal </p></td>
+                </tr>
+              
+                <tr>
+                  <td>started_time_slot_per_hour_max</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Match only sessions for which the started_time_slot_per_hour (e.g. 14:00) are smaller or equal </p></td>
+                </tr>
+              
+                <tr>
+                  <td>started_time_slot_per_quarter_hour_min</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Match only sessions for which the started_time_slot_per_quarter_hour (e.g. 08:00) are larger or equal </p></td>
+                </tr>
+              
+                <tr>
+                  <td>started_time_slot_per_quarter_hour_max</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Match only sessions for which the started_time_slot_per_quarter_hour (e.g. 14:00) are smaller or equal </p></td>
+                </tr>
+              
+                <tr>
+                  <td>started_time_slot_per_half_hour_min</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Match only sessions for which the started_time_slot_per_half_hour (e.g. 08:00) are larger or equal </p></td>
+                </tr>
+              
+                <tr>
+                  <td>started_time_slot_per_half_hour_max</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Match only sessions for which the started_time_slot_per_half_hour (e.g. 14:00) are smaller or equal </p></td>
+                </tr>
+              
+                <tr>
+                  <td>started_time_slot_per_day_phase_min</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Match only sessions for which the started_time_slot_per_day_phase (e.g. 08:00) are larger or equal </p></td>
+                </tr>
+              
+                <tr>
+                  <td>started_time_slot_per_day_phase_max</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Match only sessions for which the started_time_slot_per_day_phase (e.g. 14:00) are smaller or equal </p></td>
+                </tr>
+              
+                <tr>
+                  <td>started_time_slot_per_minute_min</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Match only sessions for which the started_time_slot_per_minute (e.g. 08:00) are larger or equal </p></td>
+                </tr>
+              
+                <tr>
+                  <td>started_time_slot_per_minute_max</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Match only sessions for which the started_time_slot_per_minute (e.g. 14:00) are smaller or equal </p></td>
+                </tr>
+              
+                <tr>
+                  <td>duration_in_s_rounded_min</td>
+                  <td><a href="#float">float</a></td>
+                  <td></td>
+                  <td><p>Match only sessions for which the duration in seconds rounded are larger or equal </p></td>
+                </tr>
+              
+                <tr>
+                  <td>duration_in_s_rounded_max</td>
+                  <td><a href="#float">float</a></td>
+                  <td></td>
+                  <td><p>Match only sessions for which the duration in seconds rounded are smaller or equal </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -16854,7 +17321,7 @@ The input contexts are pre-conditions for detecting intents </p></td>
 This information can be returned inside a Session object for consumption by a client.
 Or it can be used by the backend to check whether the Session matches a given SessionFilter.
 
-All fields below are  optional. Multiple fields specified at the same time are chained
+All fields below are optional. Multiple fields specified at the same time are chained
 The language codes used in the given session. </p></td>
                 </tr>
               
@@ -16890,14 +17357,16 @@ The language codes used in the given session. </p></td>
                   <td>earliest</td>
                   <td><a href="#float">float</a></td>
                   <td></td>
-                  <td><p>The earliest date of the given session (in UNIX epochs) </p></td>
+                  <td><p>The earliest date of the given session (in UNIX epochs), i.e. the time of the first interaction of a user
+in the given session </p></td>
                 </tr>
               
                 <tr>
                   <td>latest</td>
                   <td><a href="#float">float</a></td>
                   <td></td>
-                  <td><p>The latest date of the given session (in UNIX epochs) </p></td>
+                  <td><p>The latest date of the given session (in UNIX epochs), i.e. the time of the last interaction of a user
+in the given session </p></td>
                 </tr>
               
                 <tr>
@@ -16932,14 +17401,100 @@ The language codes used in the given session. </p></td>
                   <td>input_context_steps</td>
                   <td><a href="#ondewo.nlu.SessionInfo.ContextSteps">SessionInfo.ContextSteps</a></td>
                   <td>repeated</td>
-                  <td><p> </p></td>
+                  <td><p>The input contexts that are matched in the given session. The name of the context here is the short name
+and not the full URL name including the project parent </p></td>
                 </tr>
               
                 <tr>
                   <td>output_context_steps</td>
                   <td><a href="#ondewo.nlu.SessionInfo.ContextSteps">SessionInfo.ContextSteps</a></td>
                   <td>repeated</td>
-                  <td><p> </p></td>
+                  <td><p>The output contexts that are matched in the given session. The name of the context here is the short name
+and not the full URL name including the project parent </p></td>
+                </tr>
+              
+                <tr>
+                  <td>duration_in_s</td>
+                  <td><a href="#float">float</a></td>
+                  <td></td>
+                  <td><p>duration in seconds </p></td>
+                </tr>
+              
+                <tr>
+                  <td>duration_in_m</td>
+                  <td><a href="#float">float</a></td>
+                  <td></td>
+                  <td><p>duration in minutes </p></td>
+                </tr>
+              
+                <tr>
+                  <td>duration_in_m_rounded</td>
+                  <td><a href="#float">float</a></td>
+                  <td></td>
+                  <td><p>duration in minutes rounded </p></td>
+                </tr>
+              
+                <tr>
+                  <td>duration_interval_15s_rounded</td>
+                  <td><a href="#float">float</a></td>
+                  <td></td>
+                  <td><p>duration in 15 seconds intervals rounded </p></td>
+                </tr>
+              
+                <tr>
+                  <td>duration_interval_30s_rounded</td>
+                  <td><a href="#float">float</a></td>
+                  <td></td>
+                  <td><p>duration in 30 seconds intervals rounded </p></td>
+                </tr>
+              
+                <tr>
+                  <td>duration_interval_45s_rounded</td>
+                  <td><a href="#float">float</a></td>
+                  <td></td>
+                  <td><p>duration in 45 seconds intervals rounded </p></td>
+                </tr>
+              
+                <tr>
+                  <td>started_time_slot_per_hour</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>started_time_slot_per_hour (e.g. 08:00) </p></td>
+                </tr>
+              
+                <tr>
+                  <td>started_time_slot_per_quarter_hour</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>started_time_slot_per_quarter_hour (e.g. 08:00) </p></td>
+                </tr>
+              
+                <tr>
+                  <td>started_time_slot_per_half_hour</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>started_time_slot_per_half_hour (e.g. 08:00) </p></td>
+                </tr>
+              
+                <tr>
+                  <td>started_time_slot_per_day_phase</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>started_time_slot_per_day_phase (e.g. 14:00) </p></td>
+                </tr>
+              
+                <tr>
+                  <td>started_time_slot_per_minute</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>started_time_slot_per_minute (e.g. 14:00) </p></td>
+                </tr>
+              
+                <tr>
+                  <td>duration_in_s_rounded</td>
+                  <td><a href="#float">float</a></td>
+                  <td></td>
+                  <td><p>duration in seconds rounded </p></td>
                 </tr>
               
             </tbody>
@@ -16984,7 +17539,7 @@ The language codes used in the given session. </p></td>
             <tbody>
               
                 <tr>
-                  <td>session_review_id</td>
+                  <td>name</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>The unique identifier for the given review
@@ -17014,6 +17569,14 @@ Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID>/reviews/<SESSION_REVI
               <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
             </thead>
             <tbody>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The unique identifier for the given review step
+Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID>/reviews/<SESSION_REVIEW_ID>/sessionreviewsteps/<SESSION_REVIEW_STEP_ID>`. </p></td>
+                </tr>
               
                 <tr>
                   <td>annotated_usersays</td>
@@ -17058,7 +17621,7 @@ Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID>/reviews/<SESSION_REVI
         
       
         <h3 id="ondewo.nlu.SessionStep" class="title-badge message">SessionStep</h3>
-        <p>This message contains a session step</p>
+        <p>SessionSTep is a single user interaction as part of a session</p>
 
         
           <table class="field-table">
@@ -17068,17 +17631,25 @@ Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID>/reviews/<SESSION_REVI
             <tbody>
               
                 <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The unique identifier for the given review
+Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID>/sessionsteps/<SESSION_ID>`. </p></td>
+                </tr>
+              
+                <tr>
                   <td>detect_intent_request</td>
                   <td><a href="#ondewo.nlu.DetectIntentRequest">DetectIntentRequest</a></td>
                   <td></td>
-                  <td><p>The detect intent request </p></td>
+                  <td><p>The detect intent request of the session step </p></td>
                 </tr>
               
                 <tr>
                   <td>detect_intent_response</td>
                   <td><a href="#ondewo.nlu.DetectIntentResponse">DetectIntentResponse</a></td>
                   <td></td>
-                  <td><p>The detect intent response </p></td>
+                  <td><p>The detect intent response  of the session step </p></td>
                 </tr>
               
                 <tr>
@@ -17306,7 +17877,7 @@ do not necessarily need to specify the same language. </p></td>
         
       
         <h3 id="ondewo.nlu.TrackSessionStepRequest" class="title-badge message">TrackSessionStepRequest</h3>
-        <p>This message is a request to track a session</p>
+        <p>TrackSessionStepRequest stores a session step into the session</p>
 
         
           <table class="field-table">
@@ -17319,21 +17890,22 @@ do not necessarily need to specify the same language. </p></td>
                   <td>session_id</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>the full session path </p></td>
+                  <td><p>The unique identifier for the given review
+Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID>/steps/<SESSION_ID>`. </p></td>
                 </tr>
               
                 <tr>
                   <td>session_step</td>
                   <td><a href="#ondewo.nlu.SessionStep">SessionStep</a></td>
                   <td></td>
-                  <td><p>The session step </p></td>
+                  <td><p>The session step to be added </p></td>
                 </tr>
               
                 <tr>
                   <td>session_view</td>
                   <td><a href="#ondewo.nlu.Session.View">Session.View</a></td>
                   <td></td>
-                  <td><p>Defines what else is returned in the response </p></td>
+                  <td><p>Defines which fields of the session should be returned in the response </p></td>
                 </tr>
               
             </tbody>
@@ -17393,7 +17965,7 @@ bandwidth of `LINEAR16`. `FLAC` stream encoding supports 16-bit and
               <tr>
                 <td>AUDIO_ENCODING_AMR_WB</td>
                 <td>5</td>
-                <td><p>Adaptive Multi-Rate Wideband codec. `sample_rate_hertz` must be 16000.</p></td>
+                <td><p>Adaptive Multi-Rate wideband codec. `sample_rate_hertz` must be 16000.</p></td>
               </tr>
             
               <tr>
@@ -17420,6 +17992,59 @@ by one or more frames of Speex data, padded to an integral number of
 bytes (octets) as specified in RFC 5574. In other words, each RTP header
 is replaced with a single byte containing the block length. Only Speex
 wideband is supported. `sample_rate_hertz` must be 16000.</p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="ondewo.nlu.ComparisonOperator" class="title-badge enum">ComparisonOperator</h3>
+        <p>Type of operator to compare</p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>EQUAL</td>
+                <td>0</td>
+                <td><p>equal operator</p></td>
+              </tr>
+            
+              <tr>
+                <td>GREATER</td>
+                <td>1</td>
+                <td><p>greater operator, e.g. for numbers, dates, and strings</p></td>
+              </tr>
+            
+              <tr>
+                <td>GREATER_OR_EQUAL</td>
+                <td>2</td>
+                <td><p>greater or equal operator, e.g. for numbers, dates, and strings</p></td>
+              </tr>
+            
+              <tr>
+                <td>LESS_OR_EQUAL</td>
+                <td>3</td>
+                <td><p>less or equal operator, e.g. for numbers, dates, and strings</p></td>
+              </tr>
+            
+              <tr>
+                <td>CONTAINS</td>
+                <td>4</td>
+                <td><p>contains operator, e.g. part of string, or one of the elements in an iterable such as set or list</p></td>
+              </tr>
+            
+              <tr>
+                <td>STARTS_WITH</td>
+                <td>5</td>
+                <td><p>starts with operator for string comparison only</p></td>
+              </tr>
+            
+              <tr>
+                <td>ENDS_WITH</td>
+                <td>6</td>
+                <td><p>ends with operator for string comparison only</p></td>
               </tr>
             
           </tbody>
@@ -17846,7 +18471,7 @@ The permissions all default to False if not provided specifically </p></td>
                   <td>user</td>
                   <td><a href="#ondewo.nlu.User">User</a></td>
                   <td></td>
-                  <td><p>User ID </p></td>
+                  <td><p>user_id in the User message should be given, if empty will throw an error in the backend </p></td>
                 </tr>
               
                 <tr>
@@ -18191,14 +18816,14 @@ more results in the list. </p></td>
                   <td>user_email</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>user email </p></td>
                 </tr>
               
                 <tr>
                   <td>password</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>user password </p></td>
                 </tr>
               
             </tbody>
@@ -18222,14 +18847,14 @@ more results in the list. </p></td>
                   <td>user</td>
                   <td><a href="#ondewo.nlu.User">User</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>user object - user_id must be there </p></td>
                 </tr>
               
                 <tr>
                   <td>auth_token</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>authentication token after successful login of the user to access NLU services </p></td>
                 </tr>
               
             </tbody>
@@ -18331,7 +18956,7 @@ password and other fields in the User are optional. Only the fields to be update
                   <td>password</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Password of the user </p></td>
                 </tr>
               
                 <tr>
@@ -18408,7 +19033,7 @@ it shouldn't be unique. If not provided user_name will also be used as display n
                   <td>user</td>
                   <td><a href="#ondewo.nlu.User">User</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>user object </p></td>
                 </tr>
               
                 <tr>
@@ -19634,7 +20259,7 @@ context information can be changed by the webhook server
 
           <pre>rpc Ping (<a href="#ondewo.nlu.PingRequest">PingRequest</a>) returns (<a href="#ondewo.nlu.PingResponse">PingResponse)</a></pre>
 
-          send a Ping to the webhook server to check server health
+          send a Ping to the webhook server to verify server health
 will return True if http status_code==200 is detected in the response
         
 
@@ -19936,7 +20561,7 @@ internally with the specified event as input. </p></td>
       
         
         <h3 id="ondewo.qa.QA" class="title-badge service">QA</h3>
-        <p></p>
+        <p>Question Answering (QA) Services ///////</p>
 
         
         <div id="ondewo.qa.QA-methods" class="service-methods">Service Methods</div>
@@ -20378,7 +21003,7 @@ language code. </p></td>
                   <td>accuracy</td>
                   <td><a href="#float">float</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>accuracy </p></td>
                 </tr>
               
             </tbody>
@@ -20437,7 +21062,7 @@ language code. </p></td>
         
       
         <h3 id="ondewo.qa.UrlFilter" class="title-badge message">UrlFilter</h3>
-        <p></p>
+        <p>Filters with URLs should be included and excluded from the scraping process</p>
 
         
           <table class="field-table">

@@ -49,6 +49,8 @@
     - [GetModelStatusesResponse](#ondewo.nlu.GetModelStatusesResponse)
     - [GetPlatformInfoResponse](#ondewo.nlu.GetPlatformInfoResponse)
     - [GetPlatformMappingRequest](#ondewo.nlu.GetPlatformMappingRequest)
+    - [GetSessionsStatisticsRequest](#ondewo.nlu.GetSessionsStatisticsRequest)
+    - [GetSessionsStatisticsResponse](#ondewo.nlu.GetSessionsStatisticsResponse)
     - [ImportAgentRequest](#ondewo.nlu.ImportAgentRequest)
     - [ListAgentsOfUserResponse](#ondewo.nlu.ListAgentsOfUserResponse)
     - [ListAgentsRequest](#ondewo.nlu.ListAgentsRequest)
@@ -79,6 +81,7 @@
     - [ModelStatus.StatusName](#ondewo.nlu.ModelStatus.StatusName)
     - [ReportFormat](#ondewo.nlu.ReportFormat)
     - [ReportType](#ondewo.nlu.ReportType)
+    - [SessionsReportType](#ondewo.nlu.SessionsReportType)
   
     - [Agents](#ondewo.nlu.Agents)
   
@@ -312,6 +315,7 @@
   
 - [ondewo/nlu/session.proto](#ondewo/nlu/session.proto)
     - [AddSessionLabelsRequest](#ondewo.nlu.AddSessionLabelsRequest)
+    - [ContextFilter](#ondewo.nlu.ContextFilter)
     - [CreateSessionRequest](#ondewo.nlu.CreateSessionRequest)
     - [CreateSessionReviewRequest](#ondewo.nlu.CreateSessionReviewRequest)
     - [DeleteSessionLabelsRequest](#ondewo.nlu.DeleteSessionLabelsRequest)
@@ -348,6 +352,7 @@
     - [TrackSessionStepRequest](#ondewo.nlu.TrackSessionStepRequest)
   
     - [AudioEncoding](#ondewo.nlu.AudioEncoding)
+    - [ComparisonOperator](#ondewo.nlu.ComparisonOperator)
     - [Session.View](#ondewo.nlu.Session.View)
     - [SessionReview.View](#ondewo.nlu.SessionReview.View)
     - [StreamingRecognitionResult.MessageType](#ondewo.nlu.StreamingRecognitionResult.MessageType)
@@ -1287,6 +1292,46 @@ Request to get platform mapping
 
 
 
+<a name="ondewo.nlu.GetSessionsStatisticsRequest"></a>
+
+### GetSessionsStatisticsRequest
+Request of the report of the statistics about sessions
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  | Required. The project to get statistics from. Format: `projects/<Project ID>`. |
+| format | [ReportFormat](#ondewo.nlu.ReportFormat) |  | File formats for reports |
+| type | [ReportType](#ondewo.nlu.ReportType) |  | Type of reports about the domain of the agent |
+| session_filter | [SessionFilter](#ondewo.nlu.SessionFilter) |  | Optional. A filter to narrow reports based on sessions |
+| context_filter | [ContextFilter](#ondewo.nlu.ContextFilter) | repeated |  |
+| limit | [int32](#int32) |  | Optional. limit the returned number of results |
+| group_by | [string](#string) | repeated | Optional. Grouping based on named properties |
+| sort_by | [string](#string) | repeated | Optional. Sorting based on named properties |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which data fields will be added to the returned data. Example: path=["session.duration_in_s_min", "session.tags"] |
+
+
+
+
+
+
+<a name="ondewo.nlu.GetSessionsStatisticsResponse"></a>
+
+### GetSessionsStatisticsResponse
+Report of the statistics about sessions
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| reports | [bytes](#bytes) |  | Statistic info. |
+| format | [ReportFormat](#ondewo.nlu.ReportFormat) |  | File formats for reports |
+| type | [SessionsReportType](#ondewo.nlu.SessionsReportType) |  | Type of reports about the domain of the agent |
+
+
+
+
+
+
 <a name="ondewo.nlu.ImportAgentRequest"></a>
 
 ### ImportAgentRequest
@@ -1770,6 +1815,24 @@ Type of reports about the domain of the agent
 | INTENT_GENERAL | 4 | report of statistics of the general (relevant to all supported languages) part of intent database |
 
 
+
+<a name="ondewo.nlu.SessionsReportType"></a>
+
+### SessionsReportType
+Type of reports about the domain of the agent
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| SESSION | 0 | report on sessions. Supports SessionFilter to filter |
+| SESSION_TOP_X_INTENTS | 1 | report top x detected intents in session. Supports SessionFilter to filter |
+| SESSION_TOP_X_ENTITIES | 2 | report top x detected entities. Supports SessionFilter to filter |
+| SESSION_TOP_X_USERS | 3 | report top x users. Supports SessionFilter to filter |
+| SESSION_TOP_X_LABELS | 4 | report top x labels. Supports SessionFilter to filter |
+| SESSION_TOP_X_TAGS | 5 | report top x tags. Supports SessionFilter to filter |
+| SESSION_TOP_X_PHONE_NUMBERS | 6 | report top x phone_numbers. Supports SessionFilter to filter |
+| SESSION_HUMAN_HANDOVERS | 7 | report on human handovers. Supports SessionFilter to filter |
+
+
  <!-- end enums -->
 
  <!-- end HasExtensions -->
@@ -1863,6 +1926,7 @@ Replaces the current agent version with a new one. All the intents and entity ty
 
 Operation <response: [google.protobuf.Empty][google.protobuf.Empty], metadata: [google.protobuf.Struct][google.protobuf.Struct]> |
 | GetAgentStatistics | [GetAgentStatisticsRequest](#ondewo.nlu.GetAgentStatisticsRequest) | [GetAgentStatisticsResponse](#ondewo.nlu.GetAgentStatisticsResponse) | Gets statistics for the agent |
+| GetSessionsStatistics | [GetSessionsStatisticsRequest](#ondewo.nlu.GetSessionsStatisticsRequest) | [GetSessionsStatisticsResponse](#ondewo.nlu.GetSessionsStatisticsResponse) |  |
 | SetAgentStatus | [SetAgentStatusRequest](#ondewo.nlu.SetAgentStatusRequest) | [Agent](#ondewo.nlu.Agent) | Sets status for the agent |
 | SetResources | [SetResourcesRequest](#ondewo.nlu.SetResourcesRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Sets resources |
 | DeleteResources | [DeleteResourcesRequest](#ondewo.nlu.DeleteResourcesRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Deletes resources |
@@ -1950,7 +2014,7 @@ The request for intent classification.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| parent | [string](#string) |  | the parent of the request Format: `projects/<Project ID>`. |
+| parent | [string](#string) |  | Required. The project of this agent. Format: `projects/<Project ID>/agent`. |
 | text | [string](#string) |  | the input text |
 | language_code | [string](#string) |  | the input language |
 | active_contexts | [bool](#bool) |  | Optional: if restrict classification result with input contexts listed in the field `context_names` |
@@ -2013,7 +2077,7 @@ This message contains the entity detected
 | ----- | ---- | ----- | ----------- |
 | entity | [Intent.TrainingPhrase.Entity](#ondewo.nlu.Intent.TrainingPhrase.Entity) |  | The entity name that is detected |
 | extraction_method | [string](#string) |  | The extractor name, e.g. SpacyNer |
-| score | [float](#float) |  |  |
+| score | [float](#float) |  | The confidence score of the detected entity |
 
 
 
@@ -2048,9 +2112,8 @@ Configuration for Fuzzy Entity Recognizer
 | entity_type | [EntityType](#ondewo.nlu.EntityType) |  | The Entity Type |
 | minimal_score | [float](#float) |  | Optional. Overrides the minimal score in ExtractEntitiesFuzzyRequest. |
 | entity_values | [string](#string) | repeated | Optional. If defined, only entity value from this list are considered. |
-| algorithm | [EntityTypeFuzzyNerConfig.FuzzyNerAlgorithm](#ondewo.nlu.EntityTypeFuzzyNerConfig.FuzzyNerAlgorithm) |  | Optional. Specify the Fuzzy Ner algorithm
-
-Should not use allow_overlaps here, since its default value is False bool allow_overlaps = 5; |
+| algorithm | [EntityTypeFuzzyNerConfig.FuzzyNerAlgorithm](#ondewo.nlu.EntityTypeFuzzyNerConfig.FuzzyNerAlgorithm) |  | Optional. Specify the Fuzzy Ner algorithm |
+| allow_overlaps | [bool](#bool) |  | Should not use allow_overlaps here, since its default value is False |
 
 
 
@@ -2429,8 +2492,8 @@ Enum of fuzzy ner algorithms
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| PREFILTER_LEVENSHTEIN | 0 |  |
-| LOCAL_MAXIMUM | 1 |  |
+| PREFILTER_LEVENSHTEIN | 0 | Levenshtein algorithm for fuzzy ner matching |
+| LOCAL_MAXIMUM | 1 | local maximum |
 
 
 
@@ -2441,18 +2504,18 @@ Type of Intent algorithm.
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| OndewoIntentExactContextDetector | 0 |  |
-| OndewoIntentExactMatch | 1 |  |
-| OndewoIntentNamedExactMatch | 2 |  |
-| OndewoIntentSimilarityMatch | 3 |  |
-| OndewoIntentNamedSimilarityMatch | 4 |  |
-| OndewoIntentBertClassifier | 7 |  |
+| OndewoIntentExactContextDetector | 0 | By enabling this, a specific intent is triggered if the context and the intent name in the user says is matched. This can be used for directly triggering 'quick reply' button clicks confidence is always '1.0'. |
+| OndewoIntentExactMatch | 1 | exact matching' of user input to user says is used to detect the intent. Confidence is always '1.0' if an 'exact match' is found. |
+| OndewoIntentNamedExactMatch | 2 | the entity synonym in the user says text is replaced by the entity and 'exact matching' of user says text is performed. Confidence is alway '1.0'. |
+| OndewoIntentSimilarityMatch | 3 | the algorithm computes the similarity of the user input to all user says of all intents. |
+| OndewoIntentNamedSimilarityMatch | 4 | the entity synonyms in the user says are replaced by their Entity. Text similarity algorithms are then used to detect the intent. |
+| OndewoIntentBertClassifier | 7 | new language representation model called BERT, which stands for Bidirectional Encoder Representations from Transformers.BERT is designed to pre-train deep bidirectional representations by jointly conditioning on both left and right context in all layers. As a result, the pre-trained BERT representations can be fine-tuned for multi-class intent detection. For details seehttps://arxiv.org/abs/1810.04805 |
 | OndewoIntentMetaClassifier | 8 |  |
-| IntentExitDetector | 10 |  |
-| OndewoIntentRankingMatch | 11 |  |
-| OndewoWeightedEnsemble | 13 |  |
-| OndewoIntentExitDetector | 14 |  |
-| OndewoIntentParameterMatch | 15 |  |
+| IntentExitDetector | 10 | Maximum number of repeated fallbacks before this algorithm exists the conversation and resets contexts |
+| OndewoIntentRankingMatch | 11 | Algorithm to improve the interplay of the other algorithms |
+| OndewoWeightedEnsemble | 13 | Ensemble calculation of used algorithms |
+| OndewoIntentExitDetector | 14 | Maximum number of repeated fallbacks before this algorithm exists the conversation and resets contexts |
+| OndewoIntentParameterMatch | 15 | Matches the intent based on the parameter constellation and the current user context |
 
 
 
@@ -2463,9 +2526,9 @@ Type of mode
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| UNSPECIFIED | 0 |  |
-| EXCLUSIVE | 1 |  |
-| INCLUSIVE | 2 |  |
+| UNSPECIFIED | 0 | default mode, described in agent config |
+| EXCLUSIVE | 1 | skip algorithms listed in `algorithms` field, |
+| INCLUSIVE | 2 | run ONLY algorithms listed in `algorithms` field |
 
 
  <!-- end enums -->
@@ -2607,7 +2670,7 @@ The request message for [Contexts.CreateContext][google.cloud.dialogflow.v2.Cont
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| parent | [string](#string) |  | Required. The session to create a context for. Format: `projects/<Project ID>/agent/sessions/<Session ID>`. |
+| session_id | [string](#string) |  | Required. The session to create a context for. Format: `projects/<Project ID>/agent/sessions/<Session ID>`. |
 | context | [Context](#ondewo.nlu.Context) |  | Required. The context to create. |
 
 
@@ -2620,10 +2683,13 @@ The request message for [Contexts.CreateContext][google.cloud.dialogflow.v2.Cont
 ### DeleteAllContextsRequest
 The request message for [Contexts.DeleteAllContexts][google.cloud.dialogflow.v2.Contexts.DeleteAllContexts].
 
+Required. The name of the session to delete all contexts from.
+Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_UUID>`.
+
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| parent | [string](#string) |  | Required. The name of the session to delete all contexts from. Format: `projects/<Project ID>/agent/sessions/<Session ID>`. |
+| session_id | [string](#string) |  |  |
 
 
 
@@ -2668,7 +2734,7 @@ The request message for [Contexts.ListContexts][google.cloud.dialogflow.v2.Conte
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| parent | [string](#string) |  | Required. The session to list all contexts from. Format: `projects/<Project ID>/agent/sessions/<Session ID>`. |
+| session_id | [string](#string) |  | Required. The session to list all contexts from. Format: `projects/<Project ID>/agent/sessions/<Session ID>`. |
 | page_token | [string](#string) |  | Optional. The next_page_token value returned from a previous list request. |
 
 
@@ -5066,14 +5132,12 @@ network API call.
 ### OperationFilter
 This message contains an operation filter
 
-An operationFilter can be used in some requests to return only operations matching certain filter conditions.
-
-All fields below are  optional. Multiple fields specified at the same time are chained via OR.
-
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| project_parents | [string](#string) | repeated | Match operations with any of the following project parents. |
+| project_parents | [string](#string) | repeated | An operationFilter can be used in some requests to return only operations matching certain filter conditions.
+
+All fields below are optional. Multiple fields specified at the same time are chained via OR. Match operations with any of the following project parents. |
 | statuses | [OperationMetadata.Status](#ondewo.nlu.OperationMetadata.Status) | repeated | Match operation which had any of the following operation statuses. |
 | types | [OperationMetadata.OperationType](#ondewo.nlu.OperationMetadata.OperationType) | repeated | Match operation which had any of the following operation types. |
 | start_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | The time operation processing started. |
@@ -5111,7 +5175,7 @@ so developers can have a consistent client experience.
 NOTE: the `name` binding below allows API services to override the binding to use different resource name schemes, such as `users/*/operations`. |
 | GetOperation | [GetOperationRequest](#ondewo.nlu.GetOperationRequest) | [Operation](#ondewo.nlu.Operation) | Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service. |
 | DeleteOperation | [DeleteOperationRequest](#ondewo.nlu.DeleteOperationRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`. |
-| CancelOperation | [CancelOperationRequest](#ondewo.nlu.CancelOperationRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`. Clients can use [Operations.GetOperation][ondewo.nlu.Operations.GetOperation] or other methods to check whether the cancellation succeeded or whether the operation completed despite cancellation. On successful cancellation, the operation is not deleted; instead, it becomes an operation with an [Operation.error][ondewo.nlu.Operation.error] value with a [google.rpc.Status.code][google.rpc.Status.code] of 1, corresponding to `Code.CANCELLED`. |
+| CancelOperation | [CancelOperationRequest](#ondewo.nlu.CancelOperationRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`. Clients can use [Operations.GetOperation][ondewo.nlu.Operations.GetOperation] or other methods to verify whether the cancellation succeeded or whether the operation completed despite cancellation. On successful cancellation, the operation is not deleted; instead, it becomes an operation with an [Operation.error][ondewo.nlu.Operation.error] value with a [google.rpc.Status.code][google.rpc.Status.code] of 1, corresponding to `Code.CANCELLED`. |
 
  <!-- end services -->
 
@@ -5287,8 +5351,8 @@ Project roles
 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
-| CreateProjectRole | [CreateProjectRoleRequest](#ondewo.nlu.CreateProjectRoleRequest) | [ProjectRole](#ondewo.nlu.ProjectRole) | Creats a project role by creating the knowledge base master |
-| GetProjectRole | [GetProjectRoleRequest](#ondewo.nlu.GetProjectRoleRequest) | [ProjectRole](#ondewo.nlu.ProjectRole) | Creats a project role by getting the knowledge base master |
+| CreateProjectRole | [CreateProjectRoleRequest](#ondewo.nlu.CreateProjectRoleRequest) | [ProjectRole](#ondewo.nlu.ProjectRole) | Creates a project role by creating the knowledge base master |
+| GetProjectRole | [GetProjectRoleRequest](#ondewo.nlu.GetProjectRoleRequest) | [ProjectRole](#ondewo.nlu.ProjectRole) | Creates a project role by getting the knowledge base master |
 | DeleteProjectRole | [DeleteProjectRoleRequest](#ondewo.nlu.DeleteProjectRoleRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Deletes project role |
 | UpdateProjectRole | [UpdateProjectRoleRequest](#ondewo.nlu.UpdateProjectRoleRequest) | [ProjectRole](#ondewo.nlu.ProjectRole) | Updates project role |
 | ListProjectRoles | [ListProjectRolesRequest](#ondewo.nlu.ListProjectRolesRequest) | [ListProjectRolesResponse](#ondewo.nlu.ListProjectRolesResponse) | List project roles |
@@ -5461,6 +5525,24 @@ This message is a request to add session labels
 | ----- | ---- | ----- | ----------- |
 | session_id | [string](#string) |  | The id of the session |
 | labels | [string](#string) | repeated | The labels to add to the session |
+
+
+
+
+
+
+<a name="ondewo.nlu.ContextFilter"></a>
+
+### ContextFilter
+Message used to filter sessions based on contextual information
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| context_name | [string](#string) |  | name of the context |
+| key | [string](#string) |  | name of the key of the context parameter |
+| value | [string](#string) |  | value of the parameter |
+| operator | [ComparisonOperator](#ondewo.nlu.ComparisonOperator) |  |  |
 
 
 
@@ -5644,6 +5726,7 @@ This message is a request to get a session
 | ----- | ---- | ----- | ----------- |
 | session_id | [string](#string) |  | The session to be returned Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID>`. |
 | session_view | [Session.View](#ondewo.nlu.Session.View) |  | whether to return a full or sparse view; if unspecified full view is returned |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which fields will be filled with data. Example: path=["session_info.duration_in_s_min"] |
 
 
 
@@ -5774,6 +5857,7 @@ This message is a request to list sessions
 | session_view | [Session.View](#ondewo.nlu.Session.View) |  | An enum specifying the amount of information to be returned per session |
 | page_token | [string](#string) |  | Optional. The next_page_token value returned from a previous list request. |
 | session_filter | [SessionFilter](#ondewo.nlu.SessionFilter) |  | Optional. A filter to narrow the response down to sessions of interest. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which fields will be filled with data. Example: path=["session_info.duration_in_s_min"] |
 
 
 
@@ -5783,7 +5867,7 @@ This message is a request to list sessions
 <a name="ondewo.nlu.ListSessionsResponse"></a>
 
 ### ListSessionsResponse
-
+This message is a response including the listing of sessions
 
 
 | Field | Type | Label | Description |
@@ -5833,6 +5917,7 @@ Represents the parameters of the conversational query.
 | contexts | [Context](#ondewo.nlu.Context) | repeated | Optional. The collection of contexts to be activated before this query is executed. |
 | reset_contexts | [bool](#bool) |  | Optional. Specifies whether to delete all contexts in the current session before the new ones are activated. |
 | payload | [google.protobuf.Struct](#google.protobuf.Struct) |  | Optional. This field can be used to pass custom data into the webhook associated with the agent. Arbitrary JSON objects are supported. |
+| labels | [string](#string) | repeated | labels associated to this request |
 
 
 
@@ -5872,12 +5957,12 @@ You should not rely on this field as it isn't guaranteed to be accurate, or even
 <a name="ondewo.nlu.Session"></a>
 
 ### Session
-SESSION RELATED MESSAGES *** //
+Session of a user interaction
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| session_id | [string](#string) |  | The unique identifier of the session |
+| name | [string](#string) |  | The unique identifier of the session Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID> |
 | session_steps | [SessionStep](#ondewo.nlu.SessionStep) | repeated | The list of all the steps of the session |
 | session_info | [SessionInfo](#ondewo.nlu.SessionInfo) |  |  |
 
@@ -5897,28 +5982,44 @@ This message contains a session filter
 | language_codes | [string](#string) | repeated | A SessionFilter can be used in some requests to return only sessions matching certain filter conditions. All fields below are optional. Multiple fields specified at the same time are chained via AND. Match only sessions with all of the following language_codes |
 | matched_intents | [Intent](#ondewo.nlu.Intent) | repeated | Match only sessions during which all of the following intents were detected NOTE: only name and display name fields are used for comparison |
 | matched_entity_types | [EntityType](#ondewo.nlu.EntityType) | repeated | Match only sessions during which all of the following entity types were recognized NOTE: only name and display name fields are used for comparison |
-| min_intents_confidence_min | [float](#float) |  | Match only sessions where the minimum confidence for intent detection along the session falls in the following range
-
-defaults to -1 if not set |
-| min_intents_confidence_max | [float](#float) |  | defaults to +1 if not set |
-| min_entity_types_confidence_min | [float](#float) |  | Match only sessions where the minimum confidence for entity recognition along the session falls in the following range
-
-defaults to -1 if not set |
-| min_entity_types_confidence_max | [float](#float) |  | defaults to +1 if not set |
-| earliest | [float](#float) |  | Match only sessions whose time range falls within the following range (in UNIX epochs)
-
-defaults to 0 if not set |
-| latest | [float](#float) |  | defaults to current epoch if not set |
-| min_number_turns | [int32](#int32) |  | Match only sessions for which the number of turns (interaction steps) falls in the following range
-
-defaults to 0 if not set |
-| max_number_turns | [int32](#int32) |  | defaults to MAXINT if not set |
+| min_intents_confidence_min | [float](#float) |  | Match only sessions where the minimum confidence for intent detection along the session falls in the following range. Defaults to -1 if not set. |
+| min_intents_confidence_max | [float](#float) |  | Match only sessions where the minimum confidence for intent detection along the session falls in the following range. Defaults to +1 if not set. |
+| min_entity_types_confidence_min | [float](#float) |  | Match only sessions where the minimum confidence for entity recognition along the session falls in the following range. Defaults to -1 if not set. |
+| min_entity_types_confidence_max | [float](#float) |  | Match only sessions where the minimum confidence for entity recognition along the session falls in the following range. Defaults to +1 if not set. |
+| earliest | [float](#float) |  | Match only sessions whose time range falls within the following range (in UNIX epochs). Defaults to 0 if not set. |
+| latest | [float](#float) |  | Match only sessions whose time range falls within the following range (in UNIX epochs). Defaults to current epoch if not set |
+| min_number_turns | [int32](#int32) |  | Match only sessions for which the number of turns (interaction steps) falls in the following range Defaults to 0 if not set. |
+| max_number_turns | [int32](#int32) |  | Match only sessions for which the number of turns (interaction steps) falls in the following range Defaults to MAXINT if not set. |
 | labels | [string](#string) | repeated | Match only session which have all of the following labels assigned |
 | user_ids | [string](#string) | repeated | Match only session which had all of the following user_ids interacting with them. |
 | intent_tags | [string](#string) | repeated | Match only session which have all of the following intent tags assigned |
 | session_ids | [string](#string) | repeated | Match only sessions whose IDs are specified here |
 | input_contexts | [Context](#ondewo.nlu.Context) | repeated | Match only sessions whose session info contains at least one step having all the contexts specified here The input contexts are pre-conditions for detecting intents |
 | output_contexts | [Context](#ondewo.nlu.Context) | repeated | The output contexts are the result of the intent matching and track the contextual state of a conversation |
+| duration_in_s_min | [float](#float) |  | Match only sessions for which the duration in seconds are larger or equal |
+| duration_in_s_max | [float](#float) |  | Match only sessions for which the duration in seconds are smaller or equal |
+| duration_in_m_min | [float](#float) |  | Match only sessions for which the duration in minutes are larger or equal |
+| duration_in_m_max | [float](#float) |  | Match only sessions for which the duration in minutes are smaller or equal |
+| duration_in_m_rounded_min | [float](#float) |  | Match only sessions for which the duration in minutes rounded are larger or equal |
+| duration_in_m_rounded_max | [float](#float) |  | Match only sessions for which the duration in minutes rounded are smaller or equal |
+| duration_interval_15s_rounded_min | [float](#float) |  | Match only sessions for which the duration in 15 seconds rounded are larger or equal |
+| duration_interval_15s_rounded_max | [float](#float) |  | Match only sessions for which the duration in 15 seconds rounded are smaller or equal |
+| duration_interval_30s_rounded_min | [float](#float) |  | Match only sessions for which the duration in 30 seconds rounded are larger or equal |
+| duration_interval_30s_rounded_max | [float](#float) |  | Match only sessions for which the duration in 30 seconds rounded are smaller or equal |
+| duration_interval_45s_rounded_min | [float](#float) |  | Match only sessions for which the duration in 45 seconds rounded are larger or equal |
+| duration_interval_45s_rounded_max | [float](#float) |  | Match only sessions for which the duration in 45 seconds rounded are smaller or equal |
+| started_time_slot_per_hour_min | [string](#string) |  | Match only sessions for which the started_time_slot_per_hour (e.g. 08:00) are larger or equal |
+| started_time_slot_per_hour_max | [string](#string) |  | Match only sessions for which the started_time_slot_per_hour (e.g. 14:00) are smaller or equal |
+| started_time_slot_per_quarter_hour_min | [string](#string) |  | Match only sessions for which the started_time_slot_per_quarter_hour (e.g. 08:00) are larger or equal |
+| started_time_slot_per_quarter_hour_max | [string](#string) |  | Match only sessions for which the started_time_slot_per_quarter_hour (e.g. 14:00) are smaller or equal |
+| started_time_slot_per_half_hour_min | [string](#string) |  | Match only sessions for which the started_time_slot_per_half_hour (e.g. 08:00) are larger or equal |
+| started_time_slot_per_half_hour_max | [string](#string) |  | Match only sessions for which the started_time_slot_per_half_hour (e.g. 14:00) are smaller or equal |
+| started_time_slot_per_day_phase_min | [string](#string) |  | Match only sessions for which the started_time_slot_per_day_phase (e.g. 08:00) are larger or equal |
+| started_time_slot_per_day_phase_max | [string](#string) |  | Match only sessions for which the started_time_slot_per_day_phase (e.g. 14:00) are smaller or equal |
+| started_time_slot_per_minute_min | [string](#string) |  | Match only sessions for which the started_time_slot_per_minute (e.g. 08:00) are larger or equal |
+| started_time_slot_per_minute_max | [string](#string) |  | Match only sessions for which the started_time_slot_per_minute (e.g. 14:00) are smaller or equal |
+| duration_in_s_rounded_min | [float](#float) |  | Match only sessions for which the duration in seconds rounded are larger or equal |
+| duration_in_s_rounded_max | [float](#float) |  | Match only sessions for which the duration in seconds rounded are smaller or equal |
 
 
 
@@ -5942,14 +6043,26 @@ All fields below are optional. Multiple fields specified at the same time are ch
 | matched_entity_types | [EntityType](#ondewo.nlu.EntityType) | repeated | A list of entity types which have been matched |
 | min_intents_confidence | [float](#float) |  | The minimum confidence for intent recognition along the session |
 | min_entity_types_confidence | [float](#float) |  | The minimum confidence for entity recognition along the session |
-| earliest | [float](#float) |  | The earliest date of the given session (in UNIX epochs) |
-| latest | [float](#float) |  | The latest date of the given session (in UNIX epochs) |
+| earliest | [float](#float) |  | The earliest date of the given session (in UNIX epochs), i.e. the time of the first interaction of a user in the given session |
+| latest | [float](#float) |  | The latest date of the given session (in UNIX epochs), i.e. the time of the last interaction of a user in the given session |
 | number_turns | [int32](#int32) |  | The number of turns (interaction steps) in the given session |
 | labels | [string](#string) | repeated | The list of labels of the given session |
 | user_ids | [string](#string) | repeated | The user_ids of the users which were interacting within the given session |
 | intent_tags | [string](#string) | repeated | The list of intent tags in the given session |
-| input_context_steps | [SessionInfo.ContextSteps](#ondewo.nlu.SessionInfo.ContextSteps) | repeated |  |
-| output_context_steps | [SessionInfo.ContextSteps](#ondewo.nlu.SessionInfo.ContextSteps) | repeated |  |
+| input_context_steps | [SessionInfo.ContextSteps](#ondewo.nlu.SessionInfo.ContextSteps) | repeated | The input contexts that are matched in the given session. The name of the context here is the short name and not the full URL name including the project parent |
+| output_context_steps | [SessionInfo.ContextSteps](#ondewo.nlu.SessionInfo.ContextSteps) | repeated | The output contexts that are matched in the given session. The name of the context here is the short name and not the full URL name including the project parent |
+| duration_in_s | [float](#float) |  | duration in seconds |
+| duration_in_m | [float](#float) |  | duration in minutes |
+| duration_in_m_rounded | [float](#float) |  | duration in minutes rounded |
+| duration_interval_15s_rounded | [float](#float) |  | duration in 15 seconds intervals rounded |
+| duration_interval_30s_rounded | [float](#float) |  | duration in 30 seconds intervals rounded |
+| duration_interval_45s_rounded | [float](#float) |  | duration in 45 seconds intervals rounded |
+| started_time_slot_per_hour | [string](#string) |  | started_time_slot_per_hour (e.g. 08:00) |
+| started_time_slot_per_quarter_hour | [string](#string) |  | started_time_slot_per_quarter_hour (e.g. 08:00) |
+| started_time_slot_per_half_hour | [string](#string) |  | started_time_slot_per_half_hour (e.g. 08:00) |
+| started_time_slot_per_day_phase | [string](#string) |  | started_time_slot_per_day_phase (e.g. 14:00) |
+| started_time_slot_per_minute | [string](#string) |  | started_time_slot_per_minute (e.g. 14:00) |
+| duration_in_s_rounded | [float](#float) |  | duration in seconds rounded |
 
 
 
@@ -5979,7 +6092,7 @@ This message contains a session review
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| session_review_id | [string](#string) |  | The unique identifier for the given review Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID>/reviews/<SESSION_REVIEW_ID>`. |
+| name | [string](#string) |  | The unique identifier for the given review Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID>/reviews/<SESSION_REVIEW_ID>`. |
 | session_review_steps | [SessionReviewStep](#ondewo.nlu.SessionReviewStep) | repeated | The reviews for all steps in the session |
 
 
@@ -5995,6 +6108,7 @@ This message contains a session review step
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The unique identifier for the given review step Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID>/reviews/<SESSION_REVIEW_ID>/sessionreviewsteps/<SESSION_REVIEW_STEP_ID>`. |
 | annotated_usersays | [Intent.TrainingPhrase](#ondewo.nlu.Intent.TrainingPhrase) |  | The user says with markup of the detected entity types |
 | language_code | [string](#string) |  | The language code |
 | detected_intents | [DetectedIntent](#ondewo.nlu.DetectedIntent) | repeated | Unique detected intents ordered by descending confidence |
@@ -6009,13 +6123,14 @@ This message contains a session review step
 <a name="ondewo.nlu.SessionStep"></a>
 
 ### SessionStep
-This message contains a session step
+SessionSTep is a single user interaction as part of a session
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| detect_intent_request | [DetectIntentRequest](#ondewo.nlu.DetectIntentRequest) |  | The detect intent request |
-| detect_intent_response | [DetectIntentResponse](#ondewo.nlu.DetectIntentResponse) |  | The detect intent response |
+| name | [string](#string) |  | The unique identifier for the given review Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID>/sessionsteps/<SESSION_ID>`. |
+| detect_intent_request | [DetectIntentRequest](#ondewo.nlu.DetectIntentRequest) |  | The detect intent request of the session step |
+| detect_intent_response | [DetectIntentResponse](#ondewo.nlu.DetectIntentResponse) |  | The detect intent response of the session step |
 | contexts | [Context](#ondewo.nlu.Context) | repeated | The contexts which were active at the beginning of this step |
 
 
@@ -6158,14 +6273,14 @@ Represents the natural language text to be processed.
 <a name="ondewo.nlu.TrackSessionStepRequest"></a>
 
 ### TrackSessionStepRequest
-This message is a request to track a session
+TrackSessionStepRequest stores a session step into the session
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| session_id | [string](#string) |  | the full session path |
-| session_step | [SessionStep](#ondewo.nlu.SessionStep) |  | The session step |
-| session_view | [Session.View](#ondewo.nlu.Session.View) |  | Defines what else is returned in the response |
+| session_id | [string](#string) |  | The unique identifier for the given review Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID>/steps/<SESSION_ID>`. |
+| session_step | [SessionStep](#ondewo.nlu.SessionStep) |  | The session step to be added |
+| session_view | [Session.View](#ondewo.nlu.Session.View) |  | Defines which fields of the session should be returned in the response |
 
 
 
@@ -6188,9 +6303,26 @@ details.
 | AUDIO_ENCODING_FLAC | 2 | [`FLAC`](https://xiph.org/flac/documentation.html) (Free Lossless Audio Codec) is the recommended encoding because it is lossless (therefore recognition is not compromised) and requires only about half the bandwidth of `LINEAR16`. `FLAC` stream encoding supports 16-bit and 24-bit samples, however, not all fields in `STREAMINFO` are supported. |
 | AUDIO_ENCODING_MULAW | 3 | 8-bit samples that compand 14-bit audio samples using G.711 PCMU/mu-law. |
 | AUDIO_ENCODING_AMR | 4 | Adaptive Multi-Rate Narrowband codec. `sample_rate_hertz` must be 8000. |
-| AUDIO_ENCODING_AMR_WB | 5 | Adaptive Multi-Rate Wideband codec. `sample_rate_hertz` must be 16000. |
+| AUDIO_ENCODING_AMR_WB | 5 | Adaptive Multi-Rate wideband codec. `sample_rate_hertz` must be 16000. |
 | AUDIO_ENCODING_OGG_OPUS | 6 | Opus encoded audio frames in Ogg container ([OggOpus](https://wiki.xiph.org/OggOpus)). `sample_rate_hertz` must be 16000. |
 | AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE | 7 | Although the use of lossy encodings is not recommended, if a very low bitrate encoding is required, `OGG_OPUS` is highly preferred over Speex encoding. The [Speex](https://speex.org/) encoding supported by Dialogflow API has a header byte in each block, as in MIME type `audio/x-speex-with-header-byte`. It is a variant of the RTP Speex encoding defined in [RFC 5574](https://tools.ietf.org/html/rfc5574). The stream is a sequence of blocks, one block per RTP packet. Each block starts with a byte containing the length of the block, in bytes, followed by one or more frames of Speex data, padded to an integral number of bytes (octets) as specified in RFC 5574. In other words, each RTP header is replaced with a single byte containing the block length. Only Speex wideband is supported. `sample_rate_hertz` must be 16000. |
+
+
+
+<a name="ondewo.nlu.ComparisonOperator"></a>
+
+### ComparisonOperator
+Type of operator to compare
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| EQUAL | 0 | equal operator |
+| GREATER | 1 | greater operator, e.g. for numbers, dates, and strings |
+| GREATER_OR_EQUAL | 2 | greater or equal operator, e.g. for numbers, dates, and strings |
+| LESS_OR_EQUAL | 3 | less or equal operator, e.g. for numbers, dates, and strings |
+| CONTAINS | 4 | contains operator, e.g. part of string, or one of the elements in an iterable such as set or list |
+| STARTS_WITH | 5 | starts with operator for string comparison only |
+| ENDS_WITH | 6 | ends with operator for string comparison only |
 
 
 
@@ -6301,7 +6433,7 @@ Request to create user
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| user | [User](#ondewo.nlu.User) |  | User ID |
+| user | [User](#ondewo.nlu.User) |  | user_id in the User message should be given, if empty will throw an error in the backend |
 | password | [string](#string) |  | password |
 
 
@@ -6488,8 +6620,8 @@ Authentication messages
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| user_email | [string](#string) |  |  |
-| password | [string](#string) |  |  |
+| user_email | [string](#string) |  | user email |
+| password | [string](#string) |  | user password |
 
 
 
@@ -6504,8 +6636,8 @@ This message is a response of logging
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| user | [User](#ondewo.nlu.User) |  |  |
-| auth_token | [string](#string) |  |  |
+| user | [User](#ondewo.nlu.User) |  | user object - user_id must be there |
+| auth_token | [string](#string) |  | authentication token after successful login of the user to access NLU services |
 
 
 
@@ -6554,7 +6686,7 @@ Request to update user
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | user | [User](#ondewo.nlu.User) |  | user_id in the User message should be given, if empty will throw an error in the backend password and other fields in the User are optional. Only the fields to be updated should be provided |
-| password | [string](#string) |  |  |
+| password | [string](#string) |  | Password of the user |
 | update_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which fields get updated. |
 
 
@@ -6588,7 +6720,7 @@ This message contains information about user
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| user | [User](#ondewo.nlu.User) |  |  |
+| user | [User](#ondewo.nlu.User) |  | user object |
 | project_roles | [UserInfo.ProjectRolesEntry](#ondewo.nlu.UserInfo.ProjectRolesEntry) | repeated | If in GetUser, ListUser requests UserView is FULL, then the mapping is additionally provided of parent of the project and corresponding ProjectRole of the user |
 
 
@@ -7081,7 +7213,6 @@ Encapsulates entity re-annotation options
 ### Utilities
 This is collection of utility endpoints, intended to language-independent operations,
 such as code checks, regex checks, etc.
-
 Holds a collection of utility functions
 
 | Method Name | Request Type | Response Type | Description |
@@ -7209,7 +7340,7 @@ service to send requests to a webhook server
 | ----------- | ------------ | ------------- | ------------|
 | ResponseRefinement | [WebhookRequest](#ondewo.nlu.WebhookRequest) | [WebhookResponse](#ondewo.nlu.WebhookResponse) | send a request for /response_refinement/ to the webhook server fulfillment messages can be overwritten by the webhook server |
 | SlotFilling | [WebhookRequest](#ondewo.nlu.WebhookRequest) | [WebhookResponse](#ondewo.nlu.WebhookResponse) | send a request for /slot_filling/ to the webhook server parameter values can be provided & context information can be changed by the webhook server |
-| Ping | [PingRequest](#ondewo.nlu.PingRequest) | [PingResponse](#ondewo.nlu.PingResponse) | send a Ping to the webhook server to check server health will return True if http status_code==200 is detected in the response |
+| Ping | [PingRequest](#ondewo.nlu.PingRequest) | [PingResponse](#ondewo.nlu.PingResponse) | send a Ping to the webhook server to verify server health will return True if http status_code==200 is detected in the response |
 
  <!-- end services -->
 
@@ -7374,7 +7505,7 @@ The response message containing the greetings
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | f1 | [float](#float) |  | Response message of training |
-| accuracy | [float](#float) |  |  |
+| accuracy | [float](#float) |  | accuracy |
 
 
 
@@ -7414,7 +7545,7 @@ The response message containing the greetings
 <a name="ondewo.qa.UrlFilter"></a>
 
 ### UrlFilter
-
+Filters with URLs should be included and excluded from the scraping process
 
 
 | Field | Type | Label | Description |
@@ -7437,7 +7568,7 @@ The response message containing the greetings
 <a name="ondewo.qa.QA"></a>
 
 ### QA
-
+Question Answering (QA) Services ///////
 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
