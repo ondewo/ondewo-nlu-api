@@ -292,7 +292,7 @@ message GetEntityTypeRequest {
     // languages](https://dialogflow.com/docs/reference/language) are supported.
     // Note: languages must be enabled in the agent, before they can be used.
     string language_code = 2;
-
+    // A page_token allows the pagination of elements where <CURRENT_INDEX> and <PAGE_SIZE> are of type int, <SUB_FIELD> is of type str (example: `parameters`). An example for a page_token is page_size-1000
     string page_token = 5;
 
     // Optional. The resource view to apply to the returned Entity Type
@@ -434,7 +434,9 @@ enum EntityTypeCategory {
 
 }
 
+// This message contains Entity type sorting
 message EntityTypeSorting {
+    // Structure of Entity type sorting field
     enum EntityTypeSortingField {
         NO_ENTITY_TYPE_SORTING = 0;
         SORT_ENTITY_TYPE_BY_NAME = 1;
@@ -448,6 +450,7 @@ message EntityTypeSorting {
     SortingMode sorting_mode = 2;
 }
 
+// This message is a response of batch entities
 message BatchEntitiesResponse {
     message EntityStatus {
         oneof entity_or_status {
@@ -455,11 +458,13 @@ message BatchEntitiesResponse {
             string error_message = 2;
         }
     }
+    // A list of entity statuses
     repeated EntityStatus entity_statuses = 1;
     // indicates if statuses of some of the training phrases have errors
     bool has_errors = 2;
 }
 
+// This message is a request to create a batch entities
 message BatchCreateEntitiesRequest {
     message CreateEntityRequest {
         // Required. Name of the entity type in which to create the entity value. Format:
@@ -472,24 +477,29 @@ message BatchCreateEntitiesRequest {
     repeated CreateEntityRequest create_entity_requests = 1;
 }
 
+// This message is a request to update a batch of entities
 message BatchUpdateEntitiesRequest {
     // The entities to update
     repeated EntityType.Entity entities = 1;
 }
 
+// Thiss message is a request to get a batch of entities
 message BatchGetEntitiesRequest {
     // The unique identifiers of the entities. Format:
     // `projects/<Project ID>/agent/entityTypes/<Entity Type ID>/entities/<Entity ID>`.
     repeated string names = 1;
 }
 
+// This message is a request to delete a batch of entities
 message BatchDeleteEntitiesRequest {
     // The unique identifiers of the entities. Format:
     // `projects/<Project ID>/agent/entityTypes/<Entity Type ID>/entities/<Entity ID>`.
     repeated string names = 1;
 }
 
+// This message is a response of deletion of a batch of entities
 message BatchDeleteEntitiesResponse {
+    // This message contains the status of an entity deletion
     message DeleteEntityStatus {
         oneof delete_status{
             google.protobuf.Empty successfully_deleted = 1;
@@ -500,6 +510,7 @@ message BatchDeleteEntitiesResponse {
     bool has_errors = 2;
 }
 
+// This message is a request to get a list of entities
 message ListEntitiesRequest {
     // The unique identifier of the entity type. Format:
     // `projects/<Project ID>/agent/entityTypes/<Entity Type ID>
@@ -527,6 +538,7 @@ message ListEntitiesRequest {
     string search_by_pattern = 6;
 }
 
+// This message is a response of listing entities
 message ListEntitiesResponse {
     // The list of entities
     repeated EntityType.Entity entities = 1;
@@ -536,7 +548,9 @@ message ListEntitiesResponse {
     string next_page_token = 2;
 }
 
+// This message contains entity value sorting
 message EntityValueSorting {
+    // Structure of Entity value sorting field
     enum EntityValueSortingField {
         NO_ENTITY_VALUE_SORTING = 0;  // Default behaviour: Sorts by value
         SORT_ENTITY_VALUE_BY_DISPLAY_NAME = 1;

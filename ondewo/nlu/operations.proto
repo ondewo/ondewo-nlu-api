@@ -134,6 +134,7 @@ message ListOperationsRequest {
   OperationFilter operation_filter = 5;
 }
 
+// This message contains an operation filter
 message OperationFilter {
     // An operationFilter can be used in some requests to return only operations matching certain filter conditions.
     //

@@ -164,7 +164,7 @@ message OriginalDetectIntentRequest {
   // passed in the request.
   google.protobuf.Struct payload = 3;
 }
-
+// This message is a response of pinging
 message PingResponse {
   // This is the response message of a Ping request.
   // It's purpose is to report the reachability of a Webhook server.
