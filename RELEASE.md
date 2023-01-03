@@ -2,11 +2,53 @@
 
 *****************
 
+## Release ONDEWO NLU APIS 3.5.2
+
+### Bug fixes
+
+* Testing release process
+
+*****************
+
+## Release ONDEWO NLU APIS 3.5.1
+
+### Bug fixes
+
+* Not releasing JS client anymore
+
+*****************
+
+## Release ONDEWO NLU APIS 3.5.0
+
+### Improvements
+
+* [[OND211-2072]](https://ondewo.atlassian.net/browse/OND211-2072) - Added CRUD operations for labeling sessions
+
+*****************
+
+## Release ONDEWO NLU APIS 3.4.0
+
+### Improvements
+
+* [[OND211-2060]](https://ondewo.atlassian.net/browse/OND211-2060) - Added all intent tags to every fulltext search
+  response
+
+*****************
+
+## Release ONDEWO NLU APIS 3.3.0
+
+### Improvements
+
+* [[OND211-2060]](https://ondewo.atlassian.net/browse/OND211-2060) - Added all tags to tag-fulltext search response
+
+*****************
+
 ## Release ONDEWO NLU APIS 3.2.0
 
 ### Improvements
 
-* [[OND211-2057]](https://ondewo.atlassian.net/browse/OND211-2057) - Added intent/entity type display name in full text search responses
+* [[OND211-2057]](https://ondewo.atlassian.net/browse/OND211-2057) - Added intent/entity type display name in full text
+  search responses
 
 *****************
 
@@ -14,7 +56,9 @@
 
 ### Improvements
 
-* [[OND211-2056]](https://ondewo.atlassian.net/browse/OND211-2056) - Added AgentView.AGENT_VIEW_MINIMUM, EntityTypeView.ENTITY_TYPE_VIEW_MINIMUM, and IntentView.INTENT_VIEW_MINIMUM to only return the UUID of the object and the display name
+* [[OND211-2056]](https://ondewo.atlassian.net/browse/OND211-2056) - Added AgentView.AGENT_VIEW_MINIMUM,
+  EntityTypeView.ENTITY_TYPE_VIEW_MINIMUM, and IntentView.INTENT_VIEW_MINIMUM to only return the UUID of the object and
+  the display name
 
 *****************
 
@@ -31,7 +75,8 @@
 
 ### Improvements
 
-* [[OND211-2044]](https://ondewo.atlassian.net/browse/OND211-2044) - Full-Text-Search Response field type changed (from Int to String)
+* [[OND211-2044]](https://ondewo.atlassian.net/browse/OND211-2044) - Full-Text-Search Response field type changed (from
+  Int to String)
 
 *****************
 
@@ -39,9 +84,11 @@
 
 ### Improvements
 
-* [[OND211-2044]](https://ondewo.atlassian.net/browse/OND211-2044) - Update to Proto Files due to changes in Full-Text-Search
+* [[OND211-2044]](https://ondewo.atlassian.net/browse/OND211-2044) - Update to Proto Files due to changes in
+  Full-Text-Search
 
 *****************
+
 ## Release ONDEWO NLU APIS 2.13.0
 
 ### Improvements
@@ -49,11 +96,13 @@
 * [[OND211-2044]](https://ondewo.atlassian.net/browse/OND211-2044) - Adjustment to Proto Files for Full Text Search
 
 *****************
+
 ## Release ONDEWO NLU APIS 2.12.0
 
 ### Improvements
 
-* [[OND211-2044]](https://ondewo.atlassian.net/browse/OND211-2044) - Implemented new endpoints for searching intents and entities by keyword/term
+* [[OND211-2044]](https://ondewo.atlassian.net/browse/OND211-2044) - Implemented new endpoints for searching intents and
+  entities by keyword/term
 
 *****************
 

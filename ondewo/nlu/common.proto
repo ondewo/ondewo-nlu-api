@@ -18,11 +18,15 @@ package ondewo.nlu;
 
 // Sorting mode
 enum SortingMode {
+
+    // ascending sorting
     ASCENDING = 0;
+
+    // descending sorting
     DESCENDING = 1;
 }
 
-// This message is a response of status
+// statistic response
 message StatResponse {
     // Response wrapper for the "Get<Stat>" endpoints
     uint32 value = 1;

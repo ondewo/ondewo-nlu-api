@@ -314,6 +314,7 @@
     - [AddSessionLabelsRequest](#ondewo.nlu.AddSessionLabelsRequest)
     - [CreateSessionRequest](#ondewo.nlu.CreateSessionRequest)
     - [CreateSessionReviewRequest](#ondewo.nlu.CreateSessionReviewRequest)
+    - [DeleteSessionLabelsRequest](#ondewo.nlu.DeleteSessionLabelsRequest)
     - [DeleteSessionRequest](#ondewo.nlu.DeleteSessionRequest)
     - [DetectIntentRequest](#ondewo.nlu.DetectIntentRequest)
     - [DetectIntentResponse](#ondewo.nlu.DetectIntentResponse)
@@ -323,6 +324,7 @@
     - [GetSessionRequest](#ondewo.nlu.GetSessionRequest)
     - [GetSessionReviewRequest](#ondewo.nlu.GetSessionReviewRequest)
     - [InputAudioConfig](#ondewo.nlu.InputAudioConfig)
+    - [ListSessionLabelsOfAllSessionsRequest](#ondewo.nlu.ListSessionLabelsOfAllSessionsRequest)
     - [ListSessionLabelsRequest](#ondewo.nlu.ListSessionLabelsRequest)
     - [ListSessionLabelsResponse](#ondewo.nlu.ListSessionLabelsResponse)
     - [ListSessionReviewsRequest](#ondewo.nlu.ListSessionReviewsRequest)
@@ -332,7 +334,6 @@
     - [QueryInput](#ondewo.nlu.QueryInput)
     - [QueryParameters](#ondewo.nlu.QueryParameters)
     - [QueryResult](#ondewo.nlu.QueryResult)
-    - [RemoveSessionLabelsRequest](#ondewo.nlu.RemoveSessionLabelsRequest)
     - [Session](#ondewo.nlu.Session)
     - [SessionFilter](#ondewo.nlu.SessionFilter)
     - [SessionInfo](#ondewo.nlu.SessionInfo)
@@ -457,9 +458,9 @@ The most important messages is <a href="#ondewo.nlu.Agent">Agent</a> and its mos
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| parent | [string](#string) |  |  |
-| user_id | [string](#string) |  |  |
-| project_role_id | [uint32](#uint32) |  |  |
+| parent | [string](#string) |  | Required. The project that the agent to train is associated with. Format: `projects/<Project ID>`. |
+| user_id | [string](#string) |  | id of the user |
+| project_role_id | [uint32](#uint32) |  | role id of the user in the project |
 
 
 
@@ -509,13 +510,13 @@ Project/Agent messages
 <a name="ondewo.nlu.AgentSorting"></a>
 
 ### AgentSorting
-
+Sorting order of agent
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| sorting_field | [AgentSorting.AgentSortingField](#ondewo.nlu.AgentSorting.AgentSortingField) |  |  |
-| sorting_mode | [SortingMode](#ondewo.nlu.SortingMode) |  |  |
+| sorting_field | [AgentSorting.AgentSortingField](#ondewo.nlu.AgentSorting.AgentSortingField) |  | sorting field for agent sorting |
+| sorting_mode | [SortingMode](#ondewo.nlu.SortingMode) |  | Sorting mode |
 
 
 
@@ -530,8 +531,8 @@ Project/Agent messages
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| agent | [Agent](#ondewo.nlu.Agent) |  |  |
-| owner | [User](#ondewo.nlu.User) |  |  |
+| agent | [Agent](#ondewo.nlu.Agent) |  | The agent |
+| owner | [User](#ondewo.nlu.User) |  | User who created the agent |
 
 
 
@@ -547,7 +548,7 @@ The request message for [Agents.TrainAgentBuildCache][google.cloud.dialogflow.v2
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The project that the agent to build cache is associated with. Format: `projects/<Project ID>`. |
-| branch | [string](#string) |  |  |
+| branch | [string](#string) |  | Name of the branch of the agent for versioning. The default branch name is <code>develop</code>. |
 
 
 
@@ -562,7 +563,7 @@ The request message for [Agents.TrainAgentBuildCache][google.cloud.dialogflow.v2
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| agent | [Agent](#ondewo.nlu.Agent) |  |  |
+| agent | [Agent](#ondewo.nlu.Agent) |  | The agent |
 | agent_view | [AgentView](#ondewo.nlu.AgentView) |  | Optional. Specify the view of the returned agent (sparse view by default) |
 
 
@@ -595,7 +596,7 @@ The request message for [Agents.TrainAgentBuildCache][google.cloud.dialogflow.v2
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| parent | [string](#string) |  |  |
+| parent | [string](#string) |  | Required. The project that the agent to fetch is associated with. Format: `projects/<Project ID>/agents`. |
 
 
 
@@ -684,7 +685,7 @@ curl \ 'https://dialogflow.googleapis.com/v2/projects/<project_name>/agent:expor
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| agent_content | [bytes](#bytes) |  |  |
+| agent_content | [bytes](#bytes) |  | Agent responses as zip file |
 | training_phrases | [ExportBenchmarkAgentResponse.TrainingPhrasesEntry](#ondewo.nlu.ExportBenchmarkAgentResponse.TrainingPhrasesEntry) | repeated | Key is the language code, value is the corresponding ListTrainingPhrasesResponse |
 
 
@@ -915,6 +916,7 @@ curl \ 'https://dialogflow.googleapis.com/v2/projects/<project_name>/agent:expor
 | name | [string](#string) |  |  |
 | display_name | [string](#string) |  |  |
 | domain_name | [string](#string) |  |  |
+| tags | [string](#string) | repeated |  |
 | language | [string](#string) |  |  |
 
 
@@ -954,6 +956,7 @@ curl \ 'https://dialogflow.googleapis.com/v2/projects/<project_name>/agent:expor
 | name | [string](#string) |  |  |
 | intent_name | [string](#string) |  |  |
 | intent_display_name | [string](#string) |  |  |
+| tags | [string](#string) | repeated |  |
 | language | [string](#string) |  |  |
 
 
@@ -993,6 +996,7 @@ curl \ 'https://dialogflow.googleapis.com/v2/projects/<project_name>/agent:expor
 | name | [string](#string) |  |  |
 | intent_name | [string](#string) |  |  |
 | intent_display_name | [string](#string) |  |  |
+| tags | [string](#string) | repeated |  |
 | language | [string](#string) |  |  |
 
 
@@ -1033,6 +1037,7 @@ curl \ 'https://dialogflow.googleapis.com/v2/projects/<project_name>/agent:expor
 | parameter_display_name | [string](#string) |  |  |
 | intent_name | [string](#string) |  |  |
 | intent_display_name | [string](#string) |  |  |
+| tags | [string](#string) | repeated |  |
 | language | [string](#string) |  |  |
 
 
@@ -1074,6 +1079,7 @@ curl \ 'https://dialogflow.googleapis.com/v2/projects/<project_name>/agent:expor
 | response_type | [string](#string) |  |  |
 | intent_name | [string](#string) |  |  |
 | intent_display_name | [string](#string) |  |  |
+| tags | [string](#string) | repeated |  |
 | language | [string](#string) |  |  |
 
 
@@ -1114,6 +1120,7 @@ curl \ 'https://dialogflow.googleapis.com/v2/projects/<project_name>/agent:expor
 | text | [string](#string) |  |  |
 | intent_name | [string](#string) |  |  |
 | intent_display_name | [string](#string) |  |  |
+| tags | [string](#string) | repeated |  |
 | language | [string](#string) |  |  |
 
 
@@ -1157,6 +1164,7 @@ curl \ 'https://dialogflow.googleapis.com/v2/projects/<project_name>/agent:expor
 | type | [string](#string) |  |  |
 | intent_name | [string](#string) |  |  |
 | intent_display_name | [string](#string) |  |  |
+| tags | [string](#string) | repeated |  |
 | language | [string](#string) |  |  |
 
 
@@ -1189,9 +1197,9 @@ The request message for [Agents.GetAgent][google.cloud.dialogflow.v2.Agents.GetA
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The project to get statistics from. Format: `projects/<Project ID>`. |
-| format | [ReportFormat](#ondewo.nlu.ReportFormat) |  |  |
-| language_code | [string](#string) |  |  |
-| type | [ReportType](#ondewo.nlu.ReportType) |  |  |
+| format | [ReportFormat](#ondewo.nlu.ReportFormat) |  | File formats for reports |
+| language_code | [string](#string) |  | the language to calculate statistics about |
+| type | [ReportType](#ondewo.nlu.ReportType) |  | Type of reports about the domain of the agent |
 
 
 
@@ -1207,8 +1215,8 @@ The request message for [Agents.GetAgent][google.cloud.dialogflow.v2.Agents.GetA
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | reports | [bytes](#bytes) |  | Statistic info. |
-| format | [ReportFormat](#ondewo.nlu.ReportFormat) |  |  |
-| type | [ReportType](#ondewo.nlu.ReportType) |  |  |
+| format | [ReportFormat](#ondewo.nlu.ReportFormat) |  | File formats for reports |
+| type | [ReportType](#ondewo.nlu.ReportType) |  | Type of reports about the domain of the agent |
 
 
 
@@ -1251,13 +1259,13 @@ The request message for [Agents.GetAgent][google.cloud.dialogflow.v2.Agents.GetA
 <a name="ondewo.nlu.GetPlatformInfoResponse"></a>
 
 ### GetPlatformInfoResponse
-
+GIT information about the version of the server
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| version | [string](#string) |  |  |
-| commit_hash | [string](#string) |  |  |
+| version | [string](#string) |  | version of the server build |
+| commit_hash | [string](#string) |  | git commit hash of the server build |
 
 
 
@@ -1388,7 +1396,7 @@ Project permissions
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| parent | [string](#string) |  |  |
+| parent | [string](#string) |  | Required. The project that the agent to train is associated with. Format: `projects/<Project ID>`. |
 | page_token | [string](#string) |  | Optional. The next_page_token value returned from a previous list request. |
 
 
@@ -1399,7 +1407,7 @@ Project permissions
 <a name="ondewo.nlu.ListUsersInProjectResponse"></a>
 
 ### ListUsersInProjectResponse
-
+List the users in a project
 
 
 | Field | Type | Label | Description |
@@ -1440,8 +1448,8 @@ Project permissions
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| parent | [string](#string) |  |  |
-| language_codes | [string](#string) | repeated |  |
+| parent | [string](#string) |  | Required. The project that the agent to train is associated with. Format: `projects/<Project ID>`. |
+| language_codes | [string](#string) | repeated | languages that should be optimized |
 | optimization_configs | [RankingMatchOptimizationConfig](#ondewo.nlu.RankingMatchOptimizationConfig) | repeated | optimization config will contain all possible optimizations, with which we will come up in the future |
 | in_place | [bool](#bool) |  | if in_place is true then the config of the agent on the server will be updated, if False then config with optimized thresholds will be returned but not updated on the server |
 
@@ -1458,8 +1466,8 @@ Project permissions
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| optimization_info | [google.protobuf.Struct](#google.protobuf.Struct) |  |  |
-| optimized_ondewo_config | [google.protobuf.Struct](#google.protobuf.Struct) |  |  |
+| optimization_info | [google.protobuf.Struct](#google.protobuf.Struct) |  | info about optimization |
+| optimized_ondewo_config | [google.protobuf.Struct](#google.protobuf.Struct) |  | the optimized configuration of the ondewo agent e.g., optimized parameters |
 
 
 
@@ -1490,9 +1498,9 @@ Project permissions
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| language_code | [string](#string) |  |  |
-| n_splits | [int32](#int32) |  |  |
-| random_seed | [int32](#int32) |  |  |
+| language_code | [string](#string) |  | language |
+| n_splits | [int32](#int32) |  | number of splits for optimization |
+| random_seed | [int32](#int32) |  | random seed number for defining the split of train and test of training phrases for optimization |
 | initial_thresholds | [google.protobuf.Struct](#google.protobuf.Struct) |  | initial thresholds are optional, if not given will be taken from the current config example {'OndewoIntentSimilarityMatch': 0.59, 'OndewoIntentNamedSimilarityMatch': 0.39} |
 
 
@@ -1525,8 +1533,8 @@ Project permissions
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| parent | [string](#string) |  |  |
-| user_id | [string](#string) |  |  |
+| parent | [string](#string) |  | Required. The project that the agent to train is associated with. Format: `projects/<Project ID>`. |
+| user_id | [string](#string) |  | id of the user |
 
 
 
@@ -1557,7 +1565,7 @@ curl \ 'https://dialogflow.googleapis.com/v2/projects/<project_name>/agent:resto
 <a name="ondewo.nlu.SetAgentStatusRequest"></a>
 
 ### SetAgentStatusRequest
-
+status of the agent
 
 
 | Field | Type | Label | Description |
@@ -1599,8 +1607,8 @@ The request message for [Agents.TrainAgent][google.cloud.dialogflow.v2.Agents.Tr
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The project that the agent to train is associated with. Format: `projects/<Project ID>`. |
-| branch | [string](#string) |  |  |
-| initiation_protocol | [InitiationProtocol](#ondewo.nlu.InitiationProtocol) |  |  |
+| branch | [string](#string) |  | Name of the branch of the agent for versioning. The default branch name is <code>develop</code>. |
+| initiation_protocol | [InitiationProtocol](#ondewo.nlu.InitiationProtocol) |  | Defines when to initiate newly created agent when training started |
 
 
 
@@ -1615,7 +1623,7 @@ The request message for [Agents.TrainAgent][google.cloud.dialogflow.v2.Agents.Tr
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| agent | [Agent](#ondewo.nlu.Agent) |  |  |
+| agent | [Agent](#ondewo.nlu.Agent) |  | The agent |
 | agent_view | [AgentView](#ondewo.nlu.AgentView) |  | Optional. Specify the view of the returned agent (sparse view by default) |
 | update_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which fields get updated. |
 
@@ -1632,9 +1640,9 @@ The request message for [Agents.TrainAgent][google.cloud.dialogflow.v2.Agents.Tr
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| parent | [string](#string) |  | ID of the project |
+| parent | [string](#string) |  | Required. The project that the agent to train is associated with. Format: `projects/<Project ID>`. |
 | user | [User](#ondewo.nlu.User) |  | User object |
-| role_id | [uint32](#uint32) |  | ID of the project role of the user |
+| role_id | [uint32](#uint32) |  | id of the project role of the user |
 
 
 
@@ -1646,22 +1654,22 @@ The request message for [Agents.TrainAgent][google.cloud.dialogflow.v2.Agents.Tr
 <a name="ondewo.nlu.AgentSorting.AgentSortingField"></a>
 
 ### AgentSorting.AgentSortingField
-
+Sorting field
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| NO_AGENT_SORTING | 0 |  |
-| SORT_AGENT_BY_NAME | 1 |  |
-| SORT_AGENT_BY_CREATION_DATE | 2 |  |
-| SORT_AGENT_BY_LAST_UPDATED | 3 |  |
-| SORT_AGENT_BY_OWNER_NAME | 4 |  |
+| NO_AGENT_SORTING | 0 | no sorting |
+| SORT_AGENT_BY_NAME | 1 | sorting by name |
+| SORT_AGENT_BY_CREATION_DATE | 2 | sorting by creation date |
+| SORT_AGENT_BY_LAST_UPDATED | 3 | sorting by last updated date |
+| SORT_AGENT_BY_OWNER_NAME | 4 | sorting by owner, i.e. user who owns the agent which is usually the creator of the agent |
 
 
 
 <a name="ondewo.nlu.AgentStatus"></a>
 
 ### AgentStatus
-
+fixme: add endpoint to set agent owner
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
@@ -1738,20 +1746,20 @@ Defines when to initiate newly created agent when training started
 <a name="ondewo.nlu.ReportFormat"></a>
 
 ### ReportFormat
-
+File formats for reports
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| CSV | 0 |  |
-| HTML | 1 |  |
-| JSON | 2 |  |
+| CSV | 0 | CSV (comma separated values) file format |
+| HTML | 1 | HTML file format |
+| JSON | 2 | JSON file format |
 
 
 
 <a name="ondewo.nlu.ReportType"></a>
 
 ### ReportType
-
+Type of reports about the domain of the agent
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
@@ -1862,16 +1870,16 @@ Operation <response: [google.protobuf.Empty][google.protobuf.Empty], metadata: [
 | GetModelStatuses | [GetModelStatusesRequest](#ondewo.nlu.GetModelStatusesRequest) | [GetModelStatusesResponse](#ondewo.nlu.GetModelStatusesResponse) | Get statuses of models related to project |
 | GetPlatformMapping | [GetPlatformMappingRequest](#ondewo.nlu.GetPlatformMappingRequest) | [PlatformMapping](#ondewo.nlu.PlatformMapping) | Get all set platform name mappings for an Agent |
 | SetPlatformMapping | [PlatformMapping](#ondewo.nlu.PlatformMapping) | [PlatformMapping](#ondewo.nlu.PlatformMapping) | Set platform name mappings for an Agent |
-| GetFullTextSearchEntityType | [FullTextSearchRequest](#ondewo.nlu.FullTextSearchRequest) | [FullTextSearchResponseEntityType](#ondewo.nlu.FullTextSearchResponseEntityType) | Full text search endpoint |
-| GetFullTextSearchEntity | [FullTextSearchRequest](#ondewo.nlu.FullTextSearchRequest) | [FullTextSearchResponseEntity](#ondewo.nlu.FullTextSearchResponseEntity) |  |
-| GetFullTextSearchEntitySynonym | [FullTextSearchRequest](#ondewo.nlu.FullTextSearchRequest) | [FullTextSearchResponseEntitySynonym](#ondewo.nlu.FullTextSearchResponseEntitySynonym) |  |
-| GetFullTextSearchIntent | [FullTextSearchRequest](#ondewo.nlu.FullTextSearchRequest) | [FullTextSearchResponseIntent](#ondewo.nlu.FullTextSearchResponseIntent) |  |
-| GetFullTextSearchIntentContextIn | [FullTextSearchRequest](#ondewo.nlu.FullTextSearchRequest) | [FullTextSearchResponseIntentContextIn](#ondewo.nlu.FullTextSearchResponseIntentContextIn) |  |
-| GetFullTextSearchIntentContextOut | [FullTextSearchRequest](#ondewo.nlu.FullTextSearchRequest) | [FullTextSearchResponseIntentContextOut](#ondewo.nlu.FullTextSearchResponseIntentContextOut) |  |
-| GetFullTextSearchIntentUsersays | [FullTextSearchRequest](#ondewo.nlu.FullTextSearchRequest) | [FullTextSearchResponseIntentUsersays](#ondewo.nlu.FullTextSearchResponseIntentUsersays) |  |
-| GetFullTextSearchIntentTags | [FullTextSearchRequest](#ondewo.nlu.FullTextSearchRequest) | [FullTextSearchResponseIntentTags](#ondewo.nlu.FullTextSearchResponseIntentTags) |  |
-| GetFullTextSearchIntentResponse | [FullTextSearchRequest](#ondewo.nlu.FullTextSearchRequest) | [FullTextSearchResponseIntentResponse](#ondewo.nlu.FullTextSearchResponseIntentResponse) |  |
-| GetFullTextSearchIntentParameters | [FullTextSearchRequest](#ondewo.nlu.FullTextSearchRequest) | [FullTextSearchResponseIntentParameters](#ondewo.nlu.FullTextSearchResponseIntentParameters) |  |
+| GetFullTextSearchEntityType | [FullTextSearchRequest](#ondewo.nlu.FullTextSearchRequest) | [FullTextSearchResponseEntityType](#ondewo.nlu.FullTextSearchResponseEntityType) | Full text search endpoint in entity types |
+| GetFullTextSearchEntity | [FullTextSearchRequest](#ondewo.nlu.FullTextSearchRequest) | [FullTextSearchResponseEntity](#ondewo.nlu.FullTextSearchResponseEntity) | Full text search endpoint in entities |
+| GetFullTextSearchEntitySynonym | [FullTextSearchRequest](#ondewo.nlu.FullTextSearchRequest) | [FullTextSearchResponseEntitySynonym](#ondewo.nlu.FullTextSearchResponseEntitySynonym) | Full text search endpoint in entity synonyms |
+| GetFullTextSearchIntent | [FullTextSearchRequest](#ondewo.nlu.FullTextSearchRequest) | [FullTextSearchResponseIntent](#ondewo.nlu.FullTextSearchResponseIntent) | Full text search endpoint in intents |
+| GetFullTextSearchIntentContextIn | [FullTextSearchRequest](#ondewo.nlu.FullTextSearchRequest) | [FullTextSearchResponseIntentContextIn](#ondewo.nlu.FullTextSearchResponseIntentContextIn) | Full text search endpoint in context ins of intents |
+| GetFullTextSearchIntentContextOut | [FullTextSearchRequest](#ondewo.nlu.FullTextSearchRequest) | [FullTextSearchResponseIntentContextOut](#ondewo.nlu.FullTextSearchResponseIntentContextOut) | Full text search endpoint in context outs of intents |
+| GetFullTextSearchIntentUsersays | [FullTextSearchRequest](#ondewo.nlu.FullTextSearchRequest) | [FullTextSearchResponseIntentUsersays](#ondewo.nlu.FullTextSearchResponseIntentUsersays) | Full text search endpoint in user says of intents |
+| GetFullTextSearchIntentTags | [FullTextSearchRequest](#ondewo.nlu.FullTextSearchRequest) | [FullTextSearchResponseIntentTags](#ondewo.nlu.FullTextSearchResponseIntentTags) | Full text search endpoint in tags of intents |
+| GetFullTextSearchIntentResponse | [FullTextSearchRequest](#ondewo.nlu.FullTextSearchRequest) | [FullTextSearchResponseIntentResponse](#ondewo.nlu.FullTextSearchResponseIntentResponse) | Full text search endpoint in responses of intents |
+| GetFullTextSearchIntentParameters | [FullTextSearchRequest](#ondewo.nlu.FullTextSearchRequest) | [FullTextSearchResponseIntentParameters](#ondewo.nlu.FullTextSearchResponseIntentParameters) | Full text search endpoint in parameters of intents |
 | ReindexAgent | [ReindexAgentRequest](#ondewo.nlu.ReindexAgentRequest) | [Operation](#ondewo.nlu.Operation) | Force reindexing Intent and Entity data of Agent |
 
  <!-- end services -->
@@ -2495,7 +2503,7 @@ The Central class defining the ondewo ai services
 <a name="ondewo.nlu.StatResponse"></a>
 
 ### StatResponse
-
+statistic response
 
 
 | Field | Type | Label | Description |
@@ -2512,12 +2520,12 @@ The Central class defining the ondewo ai services
 <a name="ondewo.nlu.SortingMode"></a>
 
 ### SortingMode
-
+Sorting mode
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| ASCENDING | 0 |  |
-| DESCENDING | 1 |  |
+| ASCENDING | 0 | ascending sorting |
+| DESCENDING | 1 | descending sorting |
 
 
  <!-- end enums -->
@@ -5447,9 +5455,8 @@ Example: * `projects/<Project ID>/agent` |
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| session_id | [string](#string) |  |  |
-| labels | [string](#string) | repeated |  |
-| session_view | [Session.View](#ondewo.nlu.Session.View) |  |  |
+| session_id | [string](#string) |  | The id of the session |
+| labels | [string](#string) | repeated | The labels to add to the session |
 
 
 
@@ -5470,6 +5477,7 @@ Required. |
 | session_uuid | [string](#string) |  | The unique UUID of a Session Format: UUID Version 4, e.g. 2f59fad2-06bc-4730-9920-d3148f28f357
 
 Optional. If not provided, it will be auto-generated |
+| labels | [string](#string) | repeated | labels for the session - Optional |
 
 
 
@@ -5488,6 +5496,22 @@ SESSION-REVIEW RELATED MESSAGES *** //
 | parent_review_id | [string](#string) |  | Optional: The unique identifier of the parent review Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID>/reviews/<SESSION_REVIEW_ID>`. |
 | session_review | [SessionReview](#ondewo.nlu.SessionReview) |  | The reviews for all steps in the session |
 | session_review_view | [SessionReview.View](#ondewo.nlu.SessionReview.View) |  |  |
+
+
+
+
+
+
+<a name="ondewo.nlu.DeleteSessionLabelsRequest"></a>
+
+### DeleteSessionLabelsRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| session_id | [string](#string) |  | The id of the session |
+| labels | [string](#string) | repeated | The labels to delete from the session |
 
 
 
@@ -5656,6 +5680,21 @@ Instructs the speech recognizer how to process the audio content.
 
 
 
+<a name="ondewo.nlu.ListSessionLabelsOfAllSessionsRequest"></a>
+
+### ListSessionLabelsOfAllSessionsRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  | The parent for which the labels for all sessions should be listed Format: `projects/<PROJECT_ID>/agent`. |
+
+
+
+
+
+
 <a name="ondewo.nlu.ListSessionLabelsRequest"></a>
 
 ### ListSessionLabelsRequest
@@ -5664,7 +5703,7 @@ Instructs the speech recognizer how to process the audio content.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| parent | [string](#string) |  | The parent for which the labels for all sessions should be listed Format: `projects/<PROJECT_ID>/agent`. |
+| session_id | [string](#string) |  | The id of the session |
 
 
 
@@ -5679,7 +5718,7 @@ Instructs the speech recognizer how to process the audio content.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| labels | [string](#string) | repeated |  |
+| labels | [string](#string) | repeated | The labels of the session |
 
 
 
@@ -5826,23 +5865,6 @@ You should not rely on this field as it isn't guaranteed to be accurate, or even
 
 
 
-<a name="ondewo.nlu.RemoveSessionLabelsRequest"></a>
-
-### RemoveSessionLabelsRequest
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| session_id | [string](#string) |  |  |
-| labels | [string](#string) | repeated |  |
-| session_view | [Session.View](#ondewo.nlu.Session.View) |  |  |
-
-
-
-
-
-
 <a name="ondewo.nlu.Session"></a>
 
 ### Session
@@ -5893,8 +5915,8 @@ defaults to 0 if not set |
 | user_ids | [string](#string) | repeated | Match only session which had all of the following user_ids interacting with them. |
 | intent_tags | [string](#string) | repeated | Match only session which have all of the following intent tags assigned |
 | session_ids | [string](#string) | repeated | Match only sessions whose IDs are specified here |
-| input_contexts | [Context](#ondewo.nlu.Context) | repeated | Match only sessions whose session info contains at least one step having all the contexts specified here |
-| output_contexts | [Context](#ondewo.nlu.Context) | repeated |  |
+| input_contexts | [Context](#ondewo.nlu.Context) | repeated | Match only sessions whose session info contains at least one step having all the contexts specified here The input contexts are pre-conditions for detecting intents |
+| output_contexts | [Context](#ondewo.nlu.Context) | repeated | The output contexts are the result of the intent matching and track the contextual state of a conversation |
 
 
 
@@ -6236,8 +6258,9 @@ user intent and respond.
 | TrackSessionStep | [TrackSessionStepRequest](#ondewo.nlu.TrackSessionStepRequest) | [Session](#ondewo.nlu.Session) | TrackSessionStep: append to an existing session; creates it if not existing |
 | DeleteSession | [DeleteSessionRequest](#ondewo.nlu.DeleteSessionRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | DeleteSession: delete a session(=conversation) from ondewo-kb (for testing only) |
 | ListSessionLabels | [ListSessionLabelsRequest](#ondewo.nlu.ListSessionLabelsRequest) | [ListSessionLabelsResponse](#ondewo.nlu.ListSessionLabelsResponse) | SESSION-LABEL RELATED ENDPOINTS *** // |
+| ListSessionLabelsOfAllSessions | [ListSessionLabelsOfAllSessionsRequest](#ondewo.nlu.ListSessionLabelsOfAllSessionsRequest) | [ListSessionLabelsResponse](#ondewo.nlu.ListSessionLabelsResponse) |  |
 | AddSessionLabels | [AddSessionLabelsRequest](#ondewo.nlu.AddSessionLabelsRequest) | [Session](#ondewo.nlu.Session) |  |
-| RemoveSessionLabels | [RemoveSessionLabelsRequest](#ondewo.nlu.RemoveSessionLabelsRequest) | [Session](#ondewo.nlu.Session) |  |
+| DeleteSessionLabels | [DeleteSessionLabelsRequest](#ondewo.nlu.DeleteSessionLabelsRequest) | [Session](#ondewo.nlu.Session) |  |
 | ListSessionReviews | [ListSessionReviewsRequest](#ondewo.nlu.ListSessionReviewsRequest) | [ListSessionReviewsResponse](#ondewo.nlu.ListSessionReviewsResponse) | SESSION-REVIEW RELATED ENDPOINTS *** // ListSessionReviews: returns list of session reviews from ondewo-kb; by default only returns session review IDs |
 | GetSessionReview | [GetSessionReviewRequest](#ondewo.nlu.GetSessionReviewRequest) | [SessionReview](#ondewo.nlu.SessionReview) | GetSessionReview: returns a session-review from ondewo-kb or computes the first review if none exists |
 | GetLatestSessionReview | [GetLatestSessionReviewRequest](#ondewo.nlu.GetLatestSessionReviewRequest) | [SessionReview](#ondewo.nlu.SessionReview) | GetLatestSessionReview: returns a session-review from ondewo-kb or computes the first review if none exists |
