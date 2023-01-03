@@ -20,9 +20,10 @@ import "google/protobuf/empty.proto";
 import "google/api/annotations.proto";
 import "ondewo/nlu/session.proto";
 
-/////// Services ///////
 
+/////// Question Answering (QA) Services ///////
 service QA {
+
     rpc GetAnswer (GetAnswerRequest) returns (GetAnswerResponse) {
         option (google.api.http) = {
             post: "/qa"
@@ -68,6 +69,7 @@ service QA {
 
 // The request message
 message GetAnswerRequest {
+
     // Required. The name of the session this query is sent to. Format:
     // `projects/<Project ID>/agent/sessions/<Session ID>`. It's up to the API
     // caller to choose an appropriate session ID. It can be a random number or
@@ -96,23 +98,29 @@ message GetAnswerRequest {
 
     // Optional. Filters applied to the urls, to restrict the retrieved documents.
     UrlFilter url_filter = 8;
+
 }
 
 // The response message containing the greetings
 message GetAnswerResponse {
+
     // The results of the conversational query or event processing.
     ondewo.nlu.DetectIntentResponse query_result = 2;
 }
 
 message RunScraperRequest {
+
     // List of project_ids
     repeated string project_ids = 1;
 }
 
 message RunScraperResponse {
+
     message ScraperContainer {
+
         // Name of the docker container that is running the job
         string container_name = 1;
+
         // ID of the docker container that is running the scraping job
         string container_id = 2;
     }
@@ -120,12 +128,17 @@ message RunScraperResponse {
 }
 
 message RunTrainingResponse {
+
     // Response message of training
     float f1 = 1;
+
+    // accuracy
     float accuracy = 2;
 }
 
+// Filters with URLs should be included and excluded from the scraping process
 message UrlFilter {
+
     // Optional. List of values that the metadata_field 'url' is allowed to take.
     repeated string allowed_values = 1;
 
@@ -137,27 +150,33 @@ message UrlFilter {
 }
 
 message GetServerStateResponse {
+
     // Whether or not the server is ready to accept requests
     bool server_is_ready = 1;
 }
 
 message ListProjectIdsResponse {
+
     repeated string project_ids = 1;
 }
 
 message GetProjectConfigRequest {
+
     string project_id = 1;
 }
 
 message GetProjectConfigResponse {
+
     string config_serialized = 1;
 }
 
 message UpdateDatabaseRequest {
+
     // List of project_ids of which to update the database
     repeated string project_ids = 1;
 }
 
 message UpdateDatabaseResponse {
+
     repeated string error_messages = 1;
 }

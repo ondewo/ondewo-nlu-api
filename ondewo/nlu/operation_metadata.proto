@@ -21,9 +21,12 @@ import "google/protobuf/timestamp.proto";
 // Represents the metadata of the long-running operation that can be a parent operation for sub-operations or
 // can be a sub-operation itself
 message OperationMetadata {
+
     // long-running operation status code
     Status status = 1;
 
+    // Structure to set status of operation. An operation may not be started if NOT_STARTED is set, in
+    // progress if IN_PROGRESS, finished if DONE, interrupted if CANCELED or failed if FAILED.
     enum Status {
         // unspecified status code
         STATUS_UNSPECIFIED = 0;
@@ -72,23 +75,34 @@ message OperationMetadata {
     // operation type
     OperationType operation_type = 12;
 
+    // Type of operation. It can be creating, importing, exporting, deleting, restoring, building cache,
+    // training or exporting benchmark an agent
     enum OperationType {
+
         // unspecified operation type
         OPERATION_TYPE_UNSPECIFIED = 0;
+
         // create a new agent with specified configuration
         CREATE_AGENT = 1;
+
         // import agent from a zip file
         IMPORT_AGENT = 2;
+
         // export agent to a zip file
         EXPORT_AGENT = 3;
+
         // delete agent
         DELETE_AGENT = 4;
+
         // restore agent
         RESTORE_AGENT = 5;
+
         // build agent cache
         BUILD_AGENT_CACHE = 6;
+
         // train agent
         TRAIN_AGENT = 7;
+
         // export benchmark agent to a zip file
         EXPORT_BENCHMARK_AGENT = 8;
     }

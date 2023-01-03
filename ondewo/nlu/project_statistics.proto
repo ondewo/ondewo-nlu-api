@@ -21,53 +21,58 @@ import "ondewo/nlu/intent.proto";
 import "ondewo/nlu/common.proto";
 import "ondewo/nlu/entity_type.proto";
 
+// Project Root Statistics
 service ProjectStatistics {
-    // Project Root Statistics
+
+    // Returns the intent count within a project
     rpc GetIntentCount (GetIntentCountRequest) returns (StatResponse) {
         option (google.api.http) = {
             get: "/{parent=projects/*/agent}/intents:count"
         };
     }
-
+    // Returns the entity types count within a project
     rpc GetEntityTypeCount (GetEntityTypeCountRequest) returns (StatResponse) {
         option (google.api.http) = {
             get: "/{parent=projects/*/agent}/entityTypes:count"
         };
     }
 
+    // Returns the users count within a project
     rpc GetUserCount (GetProjectStatRequest) returns (StatResponse) {
         option (google.api.http) = {
             get: "/{parent=projects/*/agent}/users:count"
         };
     }
 
+    // Returns the sessions count within a project
     rpc GetSessionCount (GetProjectStatRequest) returns (StatResponse) {
         option (google.api.http) = {
             get: "/{parent=projects/*/agent}/sessions:count"
         };
     }
 
-    // Intent Statistics
+    // Returns the training phrases count within a project
     rpc GetTrainingPhraseCount (GetProjectElementStatRequest) returns (StatResponse) {
         option (google.api.http) = {
             get: "/{name=projects/*/agent/intents/*}/trainingPhrases:count"
         };
     }
 
+    // Returns the responses count within a project
     rpc GetResponseCount(GetProjectElementStatRequest) returns(StatResponse) {
         option (google.api.http) = {
             get: "/{name=projects/*/agent/intents/*}/responses:count"
         };
     }
 
-    // Entity Type Statistics
+    // Returns the entity value count within a project
     rpc GetEntityValueCount(GetProjectElementStatRequest) returns(StatResponse) {
         option (google.api.http) = {
             get: "/{name=projects/*/agent/entityTypes/*}/entities:count"
         };
     }
 
-    // Entity Value Statistics
+    // Returns the entity synonyms count within a project
     rpc GetEntitySynonymCount(GetProjectElementStatRequest) returns(StatResponse) {
         option (google.api.http) = {
             get: "/{name=projects/*/agent/entityTypes/*/entityValues/*}/entitySynonyms:count"
@@ -75,7 +80,9 @@ service ProjectStatistics {
     }
 }
 
+// Request to get the intent count
 message GetIntentCountRequest {
+
     // Required. The parent/path of the project to get the statistic from.
     //
     // Example:
@@ -86,7 +93,9 @@ message GetIntentCountRequest {
     IntentCategory filter_by_category = 2;
 }
 
+// Request to get entity type count
 message GetEntityTypeCountRequest {
+
     // Required. The parent/path of the project to get the statistic from.
     //
     // Example:
@@ -97,7 +106,9 @@ message GetEntityTypeCountRequest {
     EntityTypeCategory filter_by_category = 2;
 }
 
+// Request to get project statistics
 message GetProjectStatRequest {
+
     // Required. The parent/path of the project to get the statistic from.
     //
     // Example:
@@ -105,7 +116,9 @@ message GetProjectStatRequest {
     string parent = 1;
 }
 
+// Request to get project element statistics
 message GetProjectElementStatRequest {
+
     // Required. The name/path of the concept to get the statistic from.
     //
     // Example:

@@ -20,19 +20,24 @@ import "google/api/annotations.proto";
 import "google/protobuf/empty.proto";
 import "ondewo/nlu/common.proto";
 
+// Server project statistics
 service ServerStatistics {
+
+    // Returns the count of projects in the CAI server
     rpc GetProjectCount (google.protobuf.Empty) returns (StatResponse) {
         option (google.api.http) = {
             get: "/projects:count"
         };
     }
 
+    // Returns the count of projects of a user
     rpc GetUserProjectCount (GetUserProjectCountRequest) returns (StatResponse) {
         option (google.api.http) = {
             get: "/users/{user_identifier=*}/projects:count"
         };
     }
 
+    // Returns the users count within a project
     rpc GetUserCount (google.protobuf.Empty) returns (StatResponse) {
         option (google.api.http) = {
             get: "/users:count"
@@ -40,7 +45,9 @@ service ServerStatistics {
     }
 }
 
+// Request to get user project count
 message GetUserProjectCountRequest {
+
     // Required. The ID of the User to count the projects from
     string user_id = 1;
 }
