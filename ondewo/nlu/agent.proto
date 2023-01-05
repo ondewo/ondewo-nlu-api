@@ -942,7 +942,7 @@ message GetSessionsStatisticsRequest {
     ReportFormat format = 2;
 
     // Type of reports about the domain of the agent
-    ReportType type = 3;
+    SessionsReportType type = 3;
 
     // Optional. A filter to narrow reports based on sessions
     SessionFilter session_filter = 4;
