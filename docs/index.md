@@ -1302,7 +1302,7 @@ Request of the report of the statistics about sessions
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The project to get statistics from. Format: `projects/<Project ID>`. |
 | format | [ReportFormat](#ondewo.nlu.ReportFormat) |  | File formats for reports |
-| type | [ReportType](#ondewo.nlu.ReportType) |  | Type of reports about the domain of the agent |
+| type | [SessionsReportType](#ondewo.nlu.SessionsReportType) |  | Type of reports about the domain of the agent |
 | session_filter | [SessionFilter](#ondewo.nlu.SessionFilter) |  | Optional. A filter to narrow reports based on sessions |
 | context_filter | [ContextFilter](#ondewo.nlu.ContextFilter) | repeated |  |
 | limit | [int32](#int32) |  | Optional. limit the returned number of results |
