@@ -1831,6 +1831,11 @@ Type of reports about the domain of the agent
 | SESSION_TOP_X_TAGS | 5 | report top x tags. Supports SessionFilter to filter |
 | SESSION_TOP_X_PHONE_NUMBERS | 6 | report top x phone_numbers. Supports SessionFilter to filter |
 | SESSION_HUMAN_HANDOVERS | 7 | report on human handovers. Supports SessionFilter to filter |
+| SESSION_SQL_QUERY | 8 | report based on a query issued tables with session information
+
+Allowed tables to query are: * session * session_context * session_step * session_step_context * session_step_detect_entity * session_step_detect_intent * session_step_detect_intent_context_in * session_step_detect_intent_context_out * session_step_detect_intent_context_out * session_step_detect_intent_label * session_step_detect_intent_tag
+
+Example: <code>SELECT ... FROM session</code> <code>SELECT ... FROM session, session_steps</code> |
 
 
  <!-- end enums -->

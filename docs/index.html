@@ -6675,6 +6675,29 @@ Format: `projects/<Project ID>`. </p></td>
                 <td><p>report on human handovers. Supports SessionFilter to filter</p></td>
               </tr>
             
+              <tr>
+                <td>SESSION_SQL_QUERY</td>
+                <td>8</td>
+                <td><p>report based on a query issued tables with session information
+
+Allowed tables to query are:
+* session
+* session_context
+* session_step
+* session_step_context
+* session_step_detect_entity
+* session_step_detect_intent
+* session_step_detect_intent_context_in
+* session_step_detect_intent_context_out
+* session_step_detect_intent_context_out
+* session_step_detect_intent_label
+* session_step_detect_intent_tag
+
+Example:
+  <code>SELECT ... FROM session</code>
+  <code>SELECT ... FROM session, session_steps</code></p></td>
+              </tr>
+            
           </tbody>
         </table>
       
