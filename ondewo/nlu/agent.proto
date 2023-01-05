@@ -955,8 +955,8 @@ message GetSessionsStatisticsRequest {
     // Optional. Grouping based on named properties
     repeated string group_by = 7;
 
-    // Optional. Sorting based on named properties
-    repeated string sort_by = 8;
+    // Optional. Order based on named properties
+    repeated string order_by = 8;
 
     // Optional. The mask to control which data fields will be added to the returned data.
     // Example: path=["session.duration_in_s_min", "session.tags"]
