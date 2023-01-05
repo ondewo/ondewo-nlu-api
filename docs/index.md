@@ -1307,7 +1307,7 @@ Request of the report of the statistics about sessions
 | context_filter | [ContextFilter](#ondewo.nlu.ContextFilter) | repeated |  |
 | limit | [int32](#int32) |  | Optional. limit the returned number of results |
 | group_by | [string](#string) | repeated | Optional. Grouping based on named properties |
-| sort_by | [string](#string) | repeated | Optional. Sorting based on named properties |
+| order_by | [string](#string) | repeated | Optional. Order based on named properties |
 | field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which data fields will be added to the returned data. Example: path=["session.duration_in_s_min", "session.tags"] |
 
 
