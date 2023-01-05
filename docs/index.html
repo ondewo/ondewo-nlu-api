@@ -5409,6 +5409,13 @@ Format: `projects/<Project ID>`. </p></td>
 Example: path=["session.duration_in_s_min", "session.tags"] </p></td>
                 </tr>
               
+                <tr>
+                  <td>sql_query</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>SQL Query - only usable with specific SessionsReportType such as SessionsReportType.SESSION_SQL_QUERY </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -6678,7 +6685,8 @@ Format: `projects/<Project ID>`. </p></td>
               <tr>
                 <td>SESSION_SQL_QUERY</td>
                 <td>8</td>
-                <td><p>report based on a query issued tables with session information
+                <td><p>report based on a query issued tables with session information.
+Requires to define <code>sql_query</code> in request.
 
 Allowed tables to query are:
 * session

@@ -1309,6 +1309,7 @@ Request of the report of the statistics about sessions
 | group_by | [string](#string) | repeated | Optional. Grouping based on named properties |
 | order_by | [string](#string) | repeated | Optional. Order based on named properties |
 | field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which data fields will be added to the returned data. Example: path=["session.duration_in_s_min", "session.tags"] |
+| sql_query | [string](#string) |  | SQL Query - only usable with specific SessionsReportType such as SessionsReportType.SESSION_SQL_QUERY |
 
 
 
@@ -1831,7 +1832,7 @@ Type of reports about the domain of the agent
 | SESSION_TOP_X_TAGS | 5 | report top x tags. Supports SessionFilter to filter |
 | SESSION_TOP_X_PHONE_NUMBERS | 6 | report top x phone_numbers. Supports SessionFilter to filter |
 | SESSION_HUMAN_HANDOVERS | 7 | report on human handovers. Supports SessionFilter to filter |
-| SESSION_SQL_QUERY | 8 | report based on a query issued tables with session information
+| SESSION_SQL_QUERY | 8 | report based on a query issued tables with session information. Requires to define <code>sql_query</code> in request.
 
 Allowed tables to query are: * session * session_context * session_step * session_step_context * session_step_detect_entity * session_step_detect_intent * session_step_detect_intent_context_in * session_step_detect_intent_context_out * session_step_detect_intent_context_out * session_step_detect_intent_label * session_step_detect_intent_tag
 
