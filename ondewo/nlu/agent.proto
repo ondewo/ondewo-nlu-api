@@ -961,6 +961,9 @@ message GetSessionsStatisticsRequest {
     // Optional. The mask to control which data fields will be added to the returned data.
     // Example: path=["session.duration_in_s_min", "session.tags"]
     google.protobuf.FieldMask field_mask = 9;
+
+    // SQL Query - only usable with specific SessionsReportType such as SessionsReportType.SESSION_SQL_QUERY
+    string sql_query = 10;
 }
 
 // Report of the statistics about sessions
@@ -1003,7 +1006,8 @@ enum SessionsReportType {
     // report on human handovers. Supports SessionFilter to filter
     SESSION_HUMAN_HANDOVERS = 7;
 
-    // report based on a query issued tables with session information
+    // report based on a query issued tables with session information.
+    // Requires to define <code>sql_query</code> in request.
     //
     // Allowed tables to query are:
     // * session
