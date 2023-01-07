@@ -947,6 +947,7 @@ message GetSessionsStatisticsRequest {
     // Optional. A filter to narrow reports based on sessions
     SessionFilter session_filter = 4;
 
+    // Optional. A filter to narrow reports based on contextual information (Coming soon! Not yet implemented)
     repeated ContextFilter context_filters = 5;
 
     // Optional. limit the returned number of results
@@ -983,28 +984,34 @@ message GetSessionsStatisticsResponse {
 enum SessionsReportType {
 
     // report on sessions. Supports SessionFilter to filter
-    SESSION = 0;
+    SESSIONS = 0;
+
+    // report on session steps. Supports SessionFilter to filter
+    SESSION_STEPS = 1;
 
     // report top x detected intents in session. Supports SessionFilter to filter
-    SESSION_TOP_X_INTENTS = 1;
+    SESSION_TOP_X_INTENTS = 2;
 
-    // report top x detected entities. Supports SessionFilter to filter
-    SESSION_TOP_X_ENTITIES = 2;
+    // report top x detected entity types. Supports SessionFilter to filter
+    SESSION_TOP_X_ENTITY_TYPES = 3;
 
-    // report top x users. Supports SessionFilter to filter
-    SESSION_TOP_X_USERS = 3;
+    // report top x detected entity values Supports SessionFilter to filter
+    SESSION_TOP_X_ENTITY_VALUES = 4;
+
+    // report top x users. Supports SessionFilter to filter (Coming soon! Not yet implemented)
+    SESSION_TOP_X_USERS = 5;
 
     // report top x labels. Supports SessionFilter to filter
-    SESSION_TOP_X_LABELS = 4;
+    SESSION_TOP_X_LABELS = 6;
 
     // report top x tags. Supports SessionFilter to filter
-    SESSION_TOP_X_TAGS = 5;
+    SESSION_TOP_X_TAGS = 7;
 
-    // report top x phone_numbers. Supports SessionFilter to filter
-    SESSION_TOP_X_PHONE_NUMBERS = 6;
+    // report top x phone_numbers. Supports SessionFilter to filter (Coming soon! Not yet implemented)
+    SESSION_TOP_X_PHONE_NUMBERS = 8;
 
-    // report on human handovers. Supports SessionFilter to filter
-    SESSION_HUMAN_HANDOVERS = 7;
+    // report on human handovers. Supports SessionFilter to filter (Coming soon! Not yet implemented)
+    SESSION_HUMAN_HANDOVERS = 9;
 
     // report based on a query issued tables with session information.
     // Requires to define <code>sql_query</code> in request.
@@ -1025,7 +1032,7 @@ enum SessionsReportType {
     // Example:
     //   <code>SELECT ... FROM session</code>
     //   <code>SELECT ... FROM session, session_steps</code>
-    SESSION_SQL_QUERY = 8;
+    SESSION_SQL_QUERY = 10;
 }
 
 
