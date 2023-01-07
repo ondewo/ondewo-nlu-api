@@ -1304,10 +1304,10 @@ Request of the report of the statistics about sessions
 | format | [ReportFormat](#ondewo.nlu.ReportFormat) |  | File formats for reports |
 | type | [SessionsReportType](#ondewo.nlu.SessionsReportType) |  | Type of reports about the domain of the agent |
 | session_filter | [SessionFilter](#ondewo.nlu.SessionFilter) |  | Optional. A filter to narrow reports based on sessions |
-| context_filter | [ContextFilter](#ondewo.nlu.ContextFilter) | repeated |  |
+| context_filters | [ContextFilter](#ondewo.nlu.ContextFilter) | repeated |  |
 | limit | [int32](#int32) |  | Optional. limit the returned number of results |
-| group_by | [string](#string) | repeated | Optional. Grouping based on named properties |
-| order_by | [string](#string) | repeated | Optional. Order based on named properties |
+| group_bys | [string](#string) | repeated | Optional. Grouping based on named properties |
+| order_bys | [string](#string) | repeated | Optional. Order based on named properties |
 | field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which data fields will be added to the returned data. Example: path=["session.duration_in_s_min", "session.tags"] |
 | sql_query | [string](#string) |  | SQL Query - only usable with specific SessionsReportType such as SessionsReportType.SESSION_SQL_QUERY |
 
