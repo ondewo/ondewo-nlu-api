@@ -5377,7 +5377,7 @@ Format: `projects/<Project ID>`. </p></td>
                   <td>context_filters</td>
                   <td><a href="#ondewo.nlu.ContextFilter">ContextFilter</a></td>
                   <td>repeated</td>
-                  <td><p> </p></td>
+                  <td><p>Optional. A filter to narrow reports based on contextual information (Coming soon! Not yet implemented) </p></td>
                 </tr>
               
                 <tr>
@@ -6635,56 +6635,68 @@ Format: `projects/<Project ID>`. </p></td>
           <tbody>
             
               <tr>
-                <td>SESSION</td>
+                <td>SESSIONS</td>
                 <td>0</td>
                 <td><p>report on sessions. Supports SessionFilter to filter</p></td>
               </tr>
             
               <tr>
-                <td>SESSION_TOP_X_INTENTS</td>
+                <td>SESSION_STEPS</td>
                 <td>1</td>
+                <td><p>report on session steps. Supports SessionFilter to filter</p></td>
+              </tr>
+            
+              <tr>
+                <td>SESSION_TOP_X_INTENTS</td>
+                <td>2</td>
                 <td><p>report top x detected intents in session. Supports SessionFilter to filter</p></td>
               </tr>
             
               <tr>
-                <td>SESSION_TOP_X_ENTITIES</td>
-                <td>2</td>
-                <td><p>report top x detected entities. Supports SessionFilter to filter</p></td>
+                <td>SESSION_TOP_X_ENTITY_TYPES</td>
+                <td>3</td>
+                <td><p>report top x detected entity types. Supports SessionFilter to filter</p></td>
+              </tr>
+            
+              <tr>
+                <td>SESSION_TOP_X_ENTITY_VALUES</td>
+                <td>4</td>
+                <td><p>report top x detected entity values Supports SessionFilter to filter</p></td>
               </tr>
             
               <tr>
                 <td>SESSION_TOP_X_USERS</td>
-                <td>3</td>
-                <td><p>report top x users. Supports SessionFilter to filter</p></td>
+                <td>5</td>
+                <td><p>report top x users. Supports SessionFilter to filter (Coming soon! Not yet implemented)</p></td>
               </tr>
             
               <tr>
                 <td>SESSION_TOP_X_LABELS</td>
-                <td>4</td>
+                <td>6</td>
                 <td><p>report top x labels. Supports SessionFilter to filter</p></td>
               </tr>
             
               <tr>
                 <td>SESSION_TOP_X_TAGS</td>
-                <td>5</td>
+                <td>7</td>
                 <td><p>report top x tags. Supports SessionFilter to filter</p></td>
               </tr>
             
               <tr>
                 <td>SESSION_TOP_X_PHONE_NUMBERS</td>
-                <td>6</td>
-                <td><p>report top x phone_numbers. Supports SessionFilter to filter</p></td>
+                <td>8</td>
+                <td><p>report top x phone_numbers. Supports SessionFilter to filter (Coming soon! Not yet implemented)</p></td>
               </tr>
             
               <tr>
                 <td>SESSION_HUMAN_HANDOVERS</td>
-                <td>7</td>
-                <td><p>report on human handovers. Supports SessionFilter to filter</p></td>
+                <td>9</td>
+                <td><p>report on human handovers. Supports SessionFilter to filter (Coming soon! Not yet implemented)</p></td>
               </tr>
             
               <tr>
                 <td>SESSION_SQL_QUERY</td>
-                <td>8</td>
+                <td>10</td>
                 <td><p>report based on a query issued tables with session information.
 Requires to define <code>sql_query</code> in request.
 

@@ -1304,7 +1304,7 @@ Request of the report of the statistics about sessions
 | format | [ReportFormat](#ondewo.nlu.ReportFormat) |  | File formats for reports |
 | type | [SessionsReportType](#ondewo.nlu.SessionsReportType) |  | Type of reports about the domain of the agent |
 | session_filter | [SessionFilter](#ondewo.nlu.SessionFilter) |  | Optional. A filter to narrow reports based on sessions |
-| context_filters | [ContextFilter](#ondewo.nlu.ContextFilter) | repeated |  |
+| context_filters | [ContextFilter](#ondewo.nlu.ContextFilter) | repeated | Optional. A filter to narrow reports based on contextual information (Coming soon! Not yet implemented) |
 | limit | [int32](#int32) |  | Optional. limit the returned number of results |
 | group_bys | [string](#string) | repeated | Optional. Grouping based on named properties |
 | order_bys | [string](#string) | repeated | Optional. Order based on named properties |
@@ -1824,15 +1824,17 @@ Type of reports about the domain of the agent
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| SESSION | 0 | report on sessions. Supports SessionFilter to filter |
-| SESSION_TOP_X_INTENTS | 1 | report top x detected intents in session. Supports SessionFilter to filter |
-| SESSION_TOP_X_ENTITIES | 2 | report top x detected entities. Supports SessionFilter to filter |
-| SESSION_TOP_X_USERS | 3 | report top x users. Supports SessionFilter to filter |
-| SESSION_TOP_X_LABELS | 4 | report top x labels. Supports SessionFilter to filter |
-| SESSION_TOP_X_TAGS | 5 | report top x tags. Supports SessionFilter to filter |
-| SESSION_TOP_X_PHONE_NUMBERS | 6 | report top x phone_numbers. Supports SessionFilter to filter |
-| SESSION_HUMAN_HANDOVERS | 7 | report on human handovers. Supports SessionFilter to filter |
-| SESSION_SQL_QUERY | 8 | report based on a query issued tables with session information. Requires to define <code>sql_query</code> in request.
+| SESSIONS | 0 | report on sessions. Supports SessionFilter to filter |
+| SESSION_STEPS | 1 | report on session steps. Supports SessionFilter to filter |
+| SESSION_TOP_X_INTENTS | 2 | report top x detected intents in session. Supports SessionFilter to filter |
+| SESSION_TOP_X_ENTITY_TYPES | 3 | report top x detected entity types. Supports SessionFilter to filter |
+| SESSION_TOP_X_ENTITY_VALUES | 4 | report top x detected entity values Supports SessionFilter to filter |
+| SESSION_TOP_X_USERS | 5 | report top x users. Supports SessionFilter to filter (Coming soon! Not yet implemented) |
+| SESSION_TOP_X_LABELS | 6 | report top x labels. Supports SessionFilter to filter |
+| SESSION_TOP_X_TAGS | 7 | report top x tags. Supports SessionFilter to filter |
+| SESSION_TOP_X_PHONE_NUMBERS | 8 | report top x phone_numbers. Supports SessionFilter to filter (Coming soon! Not yet implemented) |
+| SESSION_HUMAN_HANDOVERS | 9 | report on human handovers. Supports SessionFilter to filter (Coming soon! Not yet implemented) |
+| SESSION_SQL_QUERY | 10 | report based on a query issued tables with session information. Requires to define <code>sql_query</code> in request.
 
 Allowed tables to query are: * session * session_context * session_step * session_step_context * session_step_detect_entity * session_step_detect_intent * session_step_detect_intent_context_in * session_step_detect_intent_context_out * session_step_detect_intent_context_out * session_step_detect_intent_label * session_step_detect_intent_tag
 
