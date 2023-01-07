@@ -23,6 +23,7 @@ import "ondewo/nlu/entity_type.proto";
 
 // Project Root Statistics
 service ProjectStatistics {
+
     // Returns the intent count within a project
     rpc GetIntentCount (GetIntentCountRequest) returns (StatResponse) {
         option (google.api.http) = {
@@ -81,6 +82,7 @@ service ProjectStatistics {
 
 // Request to get the intent count
 message GetIntentCountRequest {
+
     // Required. The parent/path of the project to get the statistic from.
     //
     // Example:
@@ -93,6 +95,7 @@ message GetIntentCountRequest {
 
 // Request to get entity type count
 message GetEntityTypeCountRequest {
+
     // Required. The parent/path of the project to get the statistic from.
     //
     // Example:
@@ -105,6 +108,7 @@ message GetEntityTypeCountRequest {
 
 // Request to get project statistics
 message GetProjectStatRequest {
+
     // Required. The parent/path of the project to get the statistic from.
     //
     // Example:
@@ -114,6 +118,7 @@ message GetProjectStatRequest {
 
 // Request to get project element statistics
 message GetProjectElementStatRequest {
+
     // Required. The name/path of the concept to get the statistic from.
     //
     // Example:

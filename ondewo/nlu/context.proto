@@ -63,44 +63,44 @@ service Contexts {
     // Returns the list of all contexts in the specified session.
     rpc ListContexts (ListContextsRequest) returns (ListContextsResponse) {
         option (google.api.http) = {
-          get: "/v2/{parent=projects/*/agent/sessions/*}/contexts"
+            get: "/v2/{parent=projects/*/agent/sessions/*}/contexts"
         };
     }
 
     // Retrieves the specified context.
     rpc GetContext (GetContextRequest) returns (Context) {
         option (google.api.http) = {
-          get: "/v2/{name=projects/*/agent/sessions/*/contexts/*}"
+            get: "/v2/{name=projects/*/agent/sessions/*/contexts/*}"
         };
     }
 
     // Creates a context.
     rpc CreateContext (CreateContextRequest) returns (Context) {
         option (google.api.http) = {
-      post: "/v2/{parent=projects/*/agent/sessions/*}/contexts"
-      body: "context"
-    };
+            post: "/v2/{parent=projects/*/agent/sessions/*}/contexts"
+            body: "context"
+        };
     }
 
     // Updates the specified context.
     rpc UpdateContext (UpdateContextRequest) returns (Context) {
         option (google.api.http) = {
-          patch: "/v2/{context.name=projects/*/agent/sessions/*/contexts/*}"
-          body: "context"
+            patch: "/v2/{context.name=projects/*/agent/sessions/*/contexts/*}"
+            body: "context"
         };
     }
 
     // Deletes the specified context.
     rpc DeleteContext (DeleteContextRequest) returns (google.protobuf.Empty) {
         option (google.api.http) = {
-          delete: "/v2/{name=projects/*/agent/sessions/*/contexts/*}"
+            delete: "/v2/{name=projects/*/agent/sessions/*/contexts/*}"
         };
     }
 
     // Deletes all active contexts in the specified session.
     rpc DeleteAllContexts (DeleteAllContextsRequest) returns (google.protobuf.Empty) {
         option (google.api.http) = {
-          delete: "/v2/{parent=projects/*/agent/sessions/*}/contexts"
+            delete: "/v2/{parent=projects/*/agent/sessions/*}/contexts"
         };
     }
 }
@@ -156,7 +156,7 @@ message Context {
 message ListContextsRequest {
     // Required. The session to list all contexts from.
     // Format: `projects/<Project ID>/agent/sessions/<Session ID>`.
-    string parent = 1;
+    string session_id = 1;
 
     // Optional. The next_page_token value returned from a previous list request.
     string page_token = 3;
@@ -184,7 +184,7 @@ message GetContextRequest {
 message CreateContextRequest {
     // Required. The session to create a context for.
     // Format: `projects/<Project ID>/agent/sessions/<Session ID>`.
-    string parent = 1;
+    string session_id = 1;
 
     // Required. The context to create.
     Context context = 2;
@@ -208,7 +208,8 @@ message DeleteContextRequest {
 
 // The request message for [Contexts.DeleteAllContexts][google.cloud.dialogflow.v2.Contexts.DeleteAllContexts].
 message DeleteAllContextsRequest {
-    // Required. The name of the session to delete all contexts from. Format:
-    // `projects/<Project ID>/agent/sessions/<Session ID>`.
-    string parent = 1;
+    // Required. The name of the session to delete all contexts from.
+    // Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_UUID>`.
+
+    string session_id = 1;
 }

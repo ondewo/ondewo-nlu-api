@@ -22,7 +22,8 @@ import "google/protobuf/empty.proto";
 
 // Project roles
 service ProjectRoles {
-    // Creats a project role by creating the knowledge base master
+
+    // Creates a project role by creating the knowledge base master
     rpc CreateProjectRole (CreateProjectRoleRequest) returns (ProjectRole) {
         option (google.api.http) = {
             post: "/v2/{parent=projects/*/agent}/project_roles"
@@ -30,7 +31,7 @@ service ProjectRoles {
         };
     }
 
-    // Creats a project role by getting the knowledge base master
+    // Creates a project role by getting the knowledge base master
     rpc GetProjectRole (GetProjectRoleRequest) returns (ProjectRole) {
         option (google.api.http) = {
             get: "/v2/{parent=projects/*/agent}/project_roles/{role_id=*}"
@@ -40,7 +41,7 @@ service ProjectRoles {
     // Deletes project role
     rpc DeleteProjectRole (DeleteProjectRoleRequest) returns (google.protobuf.Empty) {
         option (google.api.http) = {
-           delete: "/v2/{parent=projects/*/agent}/project_roles/{role_id=*}"
+            delete: "/v2/{parent=projects/*/agent}/project_roles/{role_id=*}"
         };
     }
 

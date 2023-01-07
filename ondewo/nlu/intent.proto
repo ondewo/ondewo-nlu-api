@@ -377,8 +377,10 @@ message Intent {
 
         // The card response message.
         message Card {
+
             // Optional. Contains information about a button.
             message Button {
+
                 // Note: One of the following is required:
                 // Optional. The text to show on the button.
                 string text = 1;
@@ -402,6 +404,7 @@ message Intent {
 
         // The simple response message containing speech or text.
         message SimpleResponse {
+
             // One of text_to_speech or ssml must be provided. The plain text of the
             // speech output. Mutually exclusive with ssml.
             string text_to_speech = 1;

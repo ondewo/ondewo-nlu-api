@@ -22,6 +22,7 @@ import "ondewo/nlu/common.proto";
 
 // Server project statistics
 service ServerStatistics {
+
     // Returns the count of projects in the CAI server
     rpc GetProjectCount (google.protobuf.Empty) returns (StatResponse) {
         option (google.api.http) = {
@@ -46,6 +47,7 @@ service ServerStatistics {
 
 // Request to get user project count
 message GetUserProjectCountRequest {
+
     // Required. The ID of the User to count the projects from
     string user_id = 1;
 }

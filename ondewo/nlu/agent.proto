@@ -39,12 +39,12 @@ import "google/api/annotations.proto";
 import "google/protobuf/field_mask.proto";
 import "google/protobuf/empty.proto";
 import "google/protobuf/struct.proto";
-import "google/protobuf/any.proto";
 import "ondewo/nlu/common.proto";
 import "ondewo/nlu/intent.proto";
 import "ondewo/nlu/user.proto";
 import "ondewo/nlu/project_role.proto";
 import "ondewo/nlu/operations.proto";
+import "ondewo/nlu/session.proto";
 import "google/protobuf/timestamp.proto";
 
 // Agents are best described as Natural Language Understanding (NLU) modules that transform user requests into actionable data. You can include agents in your app, product, or service to determine user intent and respond to the user in a natural way.
@@ -412,6 +412,12 @@ service Agents {
     rpc GetAgentStatistics (GetAgentStatisticsRequest) returns (GetAgentStatisticsResponse) {
         option (google.api.http) = {
             get: "/v2/{parent=projects/*/agent}:statistics"
+        };
+    }
+
+    rpc GetSessionsStatistics (GetSessionsStatisticsRequest) returns (GetSessionsStatisticsResponse) {
+        option (google.api.http) = {
+            get: "/v2/{parent=projects/*/agent}:session_statistics"
         };
     }
 
@@ -878,6 +884,7 @@ message RestoreAgentRequest {
 
 // Request statistics of the agent
 message GetAgentStatisticsRequest {
+
     // Required. The project to get statistics from.
     // Format: `projects/<Project ID>`.
     string parent = 1;
@@ -894,6 +901,7 @@ message GetAgentStatisticsRequest {
 
 // Response to get statistics of the agent
 message GetAgentStatisticsResponse {
+
     // Statistic info.
     bytes reports = 1;
 
@@ -922,6 +930,112 @@ enum ReportType {
     // report of statistics of the general (relevant to all supported languages) part of intent database
     INTENT_GENERAL = 4;
 }
+
+// Request of the report of the statistics about sessions
+message GetSessionsStatisticsRequest {
+
+    // Required. The project to get statistics from.
+    // Format: `projects/<Project ID>`.
+    string parent = 1;
+
+    // File formats for reports
+    ReportFormat format = 2;
+
+    // Type of reports about the domain of the agent
+    SessionsReportType type = 3;
+
+    // Optional. A filter to narrow reports based on sessions
+    SessionFilter session_filter = 4;
+
+    // Optional. A filter to narrow reports based on contextual information (Coming soon! Not yet implemented)
+    repeated ContextFilter context_filters = 5;
+
+    // Optional. limit the returned number of results
+    int32 limit = 6;
+
+    // Optional. Grouping based on named properties
+    repeated string group_bys = 7;
+
+    // Optional. Order based on named properties
+    repeated string order_bys = 8;
+
+    // Optional. The mask to control which data fields will be added to the returned data.
+    // Example: path=["session.duration_in_s_min", "session.tags"]
+    google.protobuf.FieldMask field_mask = 9;
+
+    // SQL Query - only usable with specific SessionsReportType such as SessionsReportType.SESSION_SQL_QUERY
+    string sql_query = 10;
+}
+
+// Report of the statistics about sessions
+message GetSessionsStatisticsResponse {
+
+    // Statistic info.
+    bytes reports = 1;
+
+    // File formats for reports
+    ReportFormat format = 2;
+
+    // Type of reports about the domain of the agent
+    SessionsReportType type = 3;
+}
+
+// Type of reports about the domain of the agent
+enum SessionsReportType {
+
+    // report on sessions. Supports SessionFilter to filter
+    SESSIONS = 0;
+
+    // report on session steps. Supports SessionFilter to filter
+    SESSION_STEPS = 1;
+
+    // report top x detected intents in session. Supports SessionFilter to filter
+    SESSION_TOP_X_INTENTS = 2;
+
+    // report top x detected entity types. Supports SessionFilter to filter
+    SESSION_TOP_X_ENTITY_TYPES = 3;
+
+    // report top x detected entity values Supports SessionFilter to filter
+    SESSION_TOP_X_ENTITY_VALUES = 4;
+
+    // report top x users. Supports SessionFilter to filter (Coming soon! Not yet implemented)
+    SESSION_TOP_X_USERS = 5;
+
+    // report top x labels. Supports SessionFilter to filter
+    SESSION_TOP_X_LABELS = 6;
+
+    // report top x tags. Supports SessionFilter to filter
+    SESSION_TOP_X_TAGS = 7;
+
+    // report top x phone_numbers. Supports SessionFilter to filter (Coming soon! Not yet implemented)
+    SESSION_TOP_X_PHONE_NUMBERS = 8;
+
+    // report on human handovers. Supports SessionFilter to filter (Coming soon! Not yet implemented)
+    SESSION_HUMAN_HANDOVERS = 9;
+
+    // report based on a query issued tables with session information.
+    // Requires to define <code>sql_query</code> in request.
+    //
+    // Allowed tables to query are:
+    // * session
+    // * session_context
+    // * session_step
+    // * session_step_context
+    // * session_step_detect_entity
+    // * session_step_detect_intent
+    // * session_step_detect_intent_context_in
+    // * session_step_detect_intent_context_out
+    // * session_step_detect_intent_context_out
+    // * session_step_detect_intent_label
+    // * session_step_detect_intent_tag
+    //
+    // Example:
+    //   <code>SELECT ... FROM session</code>
+    //   <code>SELECT ... FROM session, session_steps</code>
+    SESSION_SQL_QUERY = 10;
+}
+
+
 
 // File formats for reports
 enum ReportFormat {
