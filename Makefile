@@ -43,8 +43,12 @@ install_nvm: ## Install NVM, node and npm !! Forcefully closes current terminal
 	@node --version & npm --version || (kill -KILL ${PID})
 
 install_python_requirements: ## Installs python requirements flak8 and mypy
-	pip install flake8
-	pip install mypy
+	wget -q https://raw.githubusercontent.com/ondewo/ondewo-nlu-client-python/master/requirements-dev.txt -O requirements-dev.txt
+	pip install -r requirements-dev.txt
+	wget -q https://raw.githubusercontent.com/ondewo/ondewo-nlu-client-python/master/requirements.txt -O requirements.txt
+	pip install -r requirements.txt
+	wget -q https://raw.githubusercontent.com/ondewo/ondewo-nlu-client-python/master/mypy.ini -O mypy.ini
+	wget -q https://raw.githubusercontent.com/ondewo/ondewo-nlu-client-python/master/.flake8 -O .flake8
 
 install_precommit_hooks: ## Installs pre-commit hooks and sets them up for the ondewo-csi-client repo
 	pip install pre-commit
