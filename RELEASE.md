@@ -2,7 +2,7 @@
 
 *****************
 
-## Release ONDEWO NLU APIS 4.0.0
+## Release ONDEWO NLU API 4.0.0
 
 ### New Features
 
@@ -30,7 +30,7 @@
 
 *****************
 
-## Release ONDEWO NLU APIS 3.5.2
+## Release ONDEWO NLU API 3.5.2
 
 ### Bug fixes
 
@@ -38,7 +38,7 @@
 
 *****************
 
-## Release ONDEWO NLU APIS 3.5.1
+## Release ONDEWO NLU API 3.5.1
 
 ### Bug fixes
 
@@ -46,7 +46,7 @@
 
 *****************
 
-## Release ONDEWO NLU APIS 3.5.0
+## Release ONDEWO NLU API 3.5.0
 
 ### Improvements
 
@@ -54,7 +54,7 @@
 
 *****************
 
-## Release ONDEWO NLU APIS 3.4.0
+## Release ONDEWO NLU API 3.4.0
 
 ### Improvements
 
@@ -63,7 +63,7 @@
 
 *****************
 
-## Release ONDEWO NLU APIS 3.3.0
+## Release ONDEWO NLU API 3.3.0
 
 ### Improvements
 
@@ -71,7 +71,7 @@
 
 *****************
 
-## Release ONDEWO NLU APIS 3.2.0
+## Release ONDEWO NLU API 3.2.0
 
 ### Improvements
 
@@ -80,7 +80,7 @@
 
 *****************
 
-## Release ONDEWO NLU APIS 3.1.0
+## Release ONDEWO NLU API 3.1.0
 
 ### Improvements
 
@@ -90,7 +90,7 @@
 
 *****************
 
-## Release ONDEWO NLU APIS 3.0.0
+## Release ONDEWO NLU API 3.0.0
 
 ### Improvements
 
@@ -99,7 +99,7 @@
 
 *****************
 
-## Release ONDEWO NLU APIS 2.15.0
+## Release ONDEWO NLU API 2.15.0
 
 ### Improvements
 
@@ -108,7 +108,7 @@
 
 *****************
 
-## Release ONDEWO NLU APIS 2.14.0
+## Release ONDEWO NLU API 2.14.0
 
 ### Improvements
 
@@ -117,7 +117,7 @@
 
 *****************
 
-## Release ONDEWO NLU APIS 2.13.0
+## Release ONDEWO NLU API 2.13.0
 
 ### Improvements
 
@@ -125,7 +125,7 @@
 
 *****************
 
-## Release ONDEWO NLU APIS 2.12.0
+## Release ONDEWO NLU API 2.12.0
 
 ### Improvements
 
@@ -134,7 +134,7 @@
 
 *****************
 
-## Release ONDEWO NLU APIS 2.11.0
+## Release ONDEWO NLU API 2.11.0
 
 ### Improvements
 
@@ -142,7 +142,7 @@
 
 *****************
 
-## Release ONDEWO NLU APIS 2.10.0
+## Release ONDEWO NLU API 2.10.0
 
 ### Improvements
 
@@ -150,7 +150,7 @@
 
 *****************
 
-## Release ONDEWO NLU APIS 2.9.0
+## Release ONDEWO NLU API 2.9.0
 
 ### Improvements
 
@@ -160,7 +160,7 @@
 
 *****************
 
-## Release ONDEWO NLU APIS 2.8.0
+## Release ONDEWO NLU API 2.8.0
 
 ### Improvements
 
@@ -169,7 +169,7 @@
 
 *****************
 
-## Release ONDEWO NLU APIS 2.7.0
+## Release ONDEWO NLU API 2.7.0
 
 ### New features
 
@@ -183,7 +183,7 @@
 
 *****************
 
-## Release ONDEWO NLU APIS 2.6.0
+## Release ONDEWO NLU API 2.6.0
 
 ### New features
 
@@ -199,7 +199,7 @@
 
 *****************
 
-## Release ONDEWO NLU APIS 2.5.0
+## Release ONDEWO NLU API 2.5.0
 
 ### New Features
 
@@ -213,7 +213,7 @@
 
 *****************
 
-## Release ONDEWO NLU APIS 2.4.0
+## Release ONDEWO NLU API 2.4.0
 
 ### Improvements
 
@@ -223,7 +223,7 @@
 
 *****************
 
-## Release ONDEWO NLU APIS 2.3.1
+## Release ONDEWO NLU API 2.3.1
 
 ### Improvements
 
@@ -231,20 +231,20 @@
 
 *****************
 
-## Release ONDEWO NLU APIS 2.3.0
+## Release ONDEWO NLU API 2.3.0
 
 ### Improvements
 
 * [OND211-1843] Output contexts added to SessionReviewStep
 
-## Release ONDEWO NLU APIS 2.2.0
+## Release ONDEWO NLU API 2.2.0
 
 ### New Features
 
 * [OND211-1841] Add custom placeholder platforms to the Message.Platform Enum
 * [OND211-1841] Add a simple CRUD to handle the custom name mapping for Placeholder platforms (per Agent)
 
-## Release ONDEWO NLU APIS 2.1.0
+## Release ONDEWO NLU API 2.1.0
 
 ### Improvements
 
@@ -259,7 +259,7 @@
 
 *****************
 
-## Release ONDEWO NLU APIS 2.0.1
+## Release ONDEWO NLU API 2.0.1
 
 ### Improvements
 
@@ -267,7 +267,7 @@
 
 *****************
 
-## Release ONDEWO NLU APIS 2.0.0
+## Release ONDEWO NLU API 2.0.0
 
 ### New Features
 
@@ -286,7 +286,7 @@
 
 *****************
 
-## Release ONDEWO NLU APIS 1.1.0
+## Release ONDEWO NLU API 1.1.0
 
 ### New Features
 
@@ -299,7 +299,7 @@ Created a new file ondewo/nlu/utility.proto that contains the following endpoint
 
 *****************
 
-## Release ONDEWO NLU APIS 1.0.0
+## Release ONDEWO NLU API 1.0.0
 
 ### New Features
 
@@ -324,13 +324,13 @@ Created a new file ondewo/nlu/utility.proto that contains the following endpoint
 
 *****************
 
-## Release ONDEWO NLU APIS 0.2.3
+## Release ONDEWO NLU API 0.2.3
 
 ### Bug fixes
 
 * Updated licenses.
 
-## Release ONDEWO NLU APIS 0.2.2
+## Release ONDEWO NLU API 0.2.2
 
 ### Improvements
 
@@ -338,7 +338,7 @@ Created a new file ondewo/nlu/utility.proto that contains the following endpoint
 
 *****************
 
-## Release ONDEWO NLU APIS 0.2.1
+## Release ONDEWO NLU API 0.2.1
 
 ### Bug fixes
 
@@ -346,7 +346,7 @@ Created a new file ondewo/nlu/utility.proto that contains the following endpoint
 
 *****************
 
-## Release ONDEWO NLU APIS 0.2.0
+## Release ONDEWO NLU API 0.2.0
 
 ### New Features
 
@@ -362,7 +362,7 @@ Created a new file ondewo/nlu/utility.proto that contains the following endpoint
 
 *****************
 
-## Release ONDEWO NLU APIS 0.1.0
+## Release ONDEWO NLU API 0.1.0
 
 ### New Features
 
@@ -382,7 +382,7 @@ Created a new file ondewo/nlu/utility.proto that contains the following endpoint
 
 *****************
 
-## Release ONDEWO NLU APIS Template
+## Release ONDEWO NLU API Template
 
 ### New Features
 
