@@ -20,6 +20,10 @@
         * Top X tags
     * Query functionality for database tables session and session_steps for even more detailed reporting options
 
+### Improvements
+
+* [[OND211-2062]](https://ondewo.atlassian.net/browse/OND211-2062) - Improved documentation of ONDEWO NLU API
+
 ### Breaking changes
 
 * [[OND211-1979]](https://ondewo.atlassian.net/browse/OND211-1979) - Consistency improvement or Session and
@@ -95,7 +99,7 @@
 ### Improvements
 
 * [[OND211-2044]](https://ondewo.atlassian.net/browse/OND211-2044) - Added Reindex Agent Endpoint
-* Synchronize API Client Verions
+* Synchronize API Client Versions
 
 *****************
 
@@ -155,7 +159,7 @@
 ### Improvements
 
 * [[OND211-2038]](https://ondewo.atlassian.net/browse/OND211-2038) - Add SessionReview Filter for "Context in", "Context
-  out" and "Session Id"
+  out" and "Session id"
 * [[OND211-2039]](https://ondewo.atlassian.net/browse/OND211-2039) - Implemented Automatic Release Process
 
 *****************
@@ -165,7 +169,7 @@
 ### Improvements
 
 * [[OND211-2011]](https://ondewo.atlassian.net/browse/OND211-2011) - Intent. List all user says from cache incl.
-  enrichtment based on agent parent instead of project_id
+  enrichment based on agent parent instead of project_id
 
 *****************
 
@@ -175,7 +179,7 @@
 
 * [[OND211-1987]](https://ondewo.atlassian.net/browse/OND211-1987) - Operations. Added filters to ListOperations.
 * [[OND211-2011]](https://ondewo.atlassian.net/browse/OND211-2011) - Intent. List all user says from cache incl.
-  enrichtment
+  enrichment
 
 ### Improvements
 
@@ -366,7 +370,7 @@ Created a new file ondewo/nlu/utility.proto that contains the following endpoint
 
 ### New Features
 
-* Refactored individual project APIs into seperate repos.
+* Refactored individual project APIs into separate repos.
 
 ### Improvements
 
