@@ -94,7 +94,7 @@ TODOs after Pull Request was merged in:
  - Update the `ONDEWO_NLU_API_VERSION` in the `Makefile`
  - Add the new Release Notes in `RELEASE.md` in the format:
    ```
-   ## Release ONDEWO NLU APIS X.X.X       <---- Beginning of Notes
+   ## Release ONDEWO NLU API X.X.X       <---- Beginning of Notes
 
       ...<NOTES>...
 
