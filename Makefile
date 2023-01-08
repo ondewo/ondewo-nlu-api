@@ -23,7 +23,7 @@ ONDEWO_NLU_API_VERSION=4.0.0
 GITHUB_GH_TOKEN?=ENTER_YOUR_TOKEN_HERE
 
 CURRENT_RELEASE_NOTES=`cat RELEASE.md \
-	| sed -n '/Release ONDEWO NLU APIS ${ONDEWO_NLU_API_VERSION}/,/\*\*/p'`
+	| sed -n '/Release ONDEWO NLU API ${ONDEWO_NLU_API_VERSION}/,/\*\*/p'`
 
 GH_REPO="https://github.com/ondewo/ondewo-nlu-api"
 DEVOPS_ACCOUNT_GIT="ondewo-devops-accounts"
