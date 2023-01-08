@@ -34,7 +34,7 @@ IMAGE_UTILS_NAME=ondewo-nlu-api-utils:${ONDEWO_NLU_API_VERSION}
 ########################################################
 #       ONDEWO Standard Make Targets
 ########################################################
-setup_developer_environment_locally: install_python_requirements install_precommit_hooks install_nvm ## Sets up local development enviorenment !! Forcefully closes current terminal
+setup_developer_environment_locally: install_python_requirements install_precommit_hooks install_nvm ## Sets up local development environment !! Forcefully closes current terminal
 
 install_nvm: ## Install NVM, node and npm !! Forcefully closes current terminal
 	@curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
