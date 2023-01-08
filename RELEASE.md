@@ -6,18 +6,28 @@
 
 ### New Features
 
-* [[OND211-1979]](https://ondewo.atlassian.net/browse/OND211-1979) - Added labels to Added labels to QueryParameters for
-  DetectIntentRequest
-* [[OND211-2054]](https://ondewo.atlassian.net/browse/OND211-2054) - Added reporting capabilities for sessions incl.
-  ContextFilter and ComparisonOperator for detailed sessions filtering
-* [[OND211-1979]](https://ondewo.atlassian.net/browse/OND211-1979) - Added name in message SessionStep
-* [[OND211-1979]](https://ondewo.atlassian.net/browse/OND211-1979) - Added name in message SessionReviewStep
+* [[OND211-1979]](https://ondewo.atlassian.net/browse/OND211-1979) - Session API optimization and refactoring
+    * Added labels to QueryParameters for DetectIntentRequest
+    * Added name in message SessionStep
+    * Added name in message SessionReviewStep
+* [[OND211-2054]](https://ondewo.atlassian.net/browse/OND211-2054) - Added reporting capabilities for sessions and
+  session steps incl.
+  ContextFilter and ComparisonOperator for detailed sessions filtering.
+    * Dedicated reports available for
+        * Top X intents
+        * Top X entity values
+        * Top X entity types
+        * Top X tags
+    * Query functionality for database tables session and session_steps for even more detailed reporting options
 
 ### Breaking changes
 
-* [[OND211-1979]](https://ondewo.atlassian.net/browse/OND211-1979) - Consistency: Renamed message Session.session_id to Session.name
-  and in SessionReview renamed SessionReview.session_review_id to SessionReview.name
-  
+* [[OND211-1979]](https://ondewo.atlassian.net/browse/OND211-1979) - Consistency improvement or Session and
+  SessionReview messages incl.
+    * Renamed message Session.session_id to Session.name
+    * Renamed SessionReview.session_review_id to SessionReview.name
+    * Renamed RemoveSessionLabels to DeleteSessionLabels
+
 *****************
 
 ## Release ONDEWO NLU APIS 3.5.2
