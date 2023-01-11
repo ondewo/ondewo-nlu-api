@@ -2,6 +2,15 @@
 
 *****************
 
+## Release ONDEWO NLU API 4.2.0
+
+### Bug fixes
+
+* [[OND211-2084]](https://ondewo.atlassian.net/browse/OND211-2084) - Fixed protobuf sequence numbering in session.proto
+  definition
+
+*****************
+
 ## Release ONDEWO NLU API 4.1.0
 
 ### Improvements
