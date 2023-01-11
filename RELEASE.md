@@ -6,7 +6,8 @@
 
 ### Improvements
 
-* [OND211-2084] Added query_text_original to QueryResult and SessionReviewStep for post analysis of user input without
+* [[OND211-2084]](https://ondewo.atlassian.net/browse/OND211-2084) - Added query_text_original to QueryResult and
+  SessionReviewStep for post analysis of user input without
   any preprocessing
 
 *****************
