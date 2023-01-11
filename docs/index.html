@@ -16869,15 +16869,6 @@ associated with the agent. Arbitrary JSON objects are supported. </p></td>
                 </tr>
               
                 <tr>
-                  <td>language_code</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>The language that was triggered during intent detection.
-See [Language Support](https://dialogflow.com/docs/reference/language)
-for a list of the currently supported language codes. </p></td>
-                </tr>
-              
-                <tr>
                   <td>speech_recognition_confidence</td>
                   <td><a href="#float">float</a></td>
                   <td></td>
@@ -16975,11 +16966,28 @@ all fields are filled in this message, including but not limited to:
                 </tr>
               
                 <tr>
+                  <td>query_text_original</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The user input gets pre-processed by spelling correction, stop word removal etc. This property holds
+the string that is passed to the entity recognition and intent detection </p></td>
+                </tr>
+              
+                <tr>
                   <td>diagnostic_info</td>
                   <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
                   <td></td>
                   <td><p>The free-form diagnostic info. For example, this field
 could contain webhook call latency. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>language_code</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The language that was triggered during intent detection.
+See [Language Support](https://dialogflow.com/docs/reference/language)
+for a list of the currently supported language codes. </p></td>
                 </tr>
               
             </tbody>
@@ -17625,7 +17633,10 @@ Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID>/reviews/<SESSION_REVI
                   <td>annotated_usersays</td>
                   <td><a href="#ondewo.nlu.Intent.TrainingPhrase">Intent.TrainingPhrase</a></td>
                   <td></td>
-                  <td><p>The user says with markup of the detected entity types </p></td>
+                  <td><p>The user says with markup of the detected entity types after the preprocessing such as spelling correction,
+stopword removal etc. has been applied.
+
+This string represents what has been passed to the entity recognition and intent detection algorithms. </p></td>
                 </tr>
               
                 <tr>
@@ -17656,6 +17667,13 @@ Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID>/reviews/<SESSION_REVI
                   <td><p>The output contexts of this step </p></td>
                 </tr>
               
+                <tr>
+                  <td>query_text_original</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>User input without any pre-processing applied </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -17664,7 +17682,7 @@ Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID>/reviews/<SESSION_REVI
         
       
         <h3 id="ondewo.nlu.SessionStep" class="title-badge message">SessionStep</h3>
-        <p>SessionSTep is a single user interaction as part of a session</p>
+        <p>SessionStep is a single user interaction as part of a session</p>
 
         
           <table class="field-table">

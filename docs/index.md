@@ -5941,7 +5941,6 @@ Represents the result of conversational query or event processing.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | query_text | [string](#string) |  | The original conversational query text: - If natural language text was provided as input, `query_text` contains a copy of the input. - If natural language speech audio was provided as input, `query_text` contains the speech recognition result. If speech recognizer produced multiple alternatives, a particular one is picked. - If an event was provided as input, `query_text` is not set. |
-| language_code | [string](#string) |  | The language that was triggered during intent detection. See [Language Support](https://dialogflow.com/docs/reference/language) for a list of the currently supported language codes. |
 | speech_recognition_confidence | [float](#float) |  | The Speech recognition confidence between 0.0 and 1.0. A higher number indicates an estimated greater likelihood that the recognized words are correct. The default of 0.0 is a sentinel value indicating that confidence was not set.
 
 You should not rely on this field as it isn't guaranteed to be accurate, or even set. In particular this field isn't set in Webhook calls and for StreamingDetectIntent since the streaming endpoint has separate confidence estimates per portion of the audio in StreamingRecognitionResult. |
@@ -5955,7 +5954,9 @@ You should not rely on this field as it isn't guaranteed to be accurate, or even
 | output_contexts | [Context](#ondewo.nlu.Context) | repeated | The collection of output contexts. If applicable, `output_contexts.parameters` contains entries with name `<parameter name>.original` containing the original parameter values before the query. |
 | intent | [Intent](#ondewo.nlu.Intent) |  | The intent that matched the conversational query. Some, not all fields are filled in this message, including but not limited to: `name`, `display_name` and `webhook_state`. |
 | intent_detection_confidence | [float](#float) |  | The intent detection confidence. Values range from 0.0 (completely uncertain) to 1.0 (completely certain). |
+| query_text_original | [string](#string) |  | The user input gets pre-processed by spelling correction, stop word removal etc. This property holds the string that is passed to the entity recognition and intent detection |
 | diagnostic_info | [google.protobuf.Struct](#google.protobuf.Struct) |  | The free-form diagnostic info. For example, this field could contain webhook call latency. |
+| language_code | [string](#string) |  | The language that was triggered during intent detection. See [Language Support](https://dialogflow.com/docs/reference/language) for a list of the currently supported language codes. |
 
 
 
@@ -6117,11 +6118,14 @@ This message contains a session review step
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | name | [string](#string) |  | The unique identifier for the given review step Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID>/reviews/<SESSION_REVIEW_ID>/sessionreviewsteps/<SESSION_REVIEW_STEP_ID>`. |
-| annotated_usersays | [Intent.TrainingPhrase](#ondewo.nlu.Intent.TrainingPhrase) |  | The user says with markup of the detected entity types |
+| annotated_usersays | [Intent.TrainingPhrase](#ondewo.nlu.Intent.TrainingPhrase) |  | The user says with markup of the detected entity types after the preprocessing such as spelling correction, stopword removal etc. has been applied.
+
+This string represents what has been passed to the entity recognition and intent detection algorithms. |
 | language_code | [string](#string) |  | The language code |
 | detected_intents | [DetectedIntent](#ondewo.nlu.DetectedIntent) | repeated | Unique detected intents ordered by descending confidence |
 | contexts | [Context](#ondewo.nlu.Context) | repeated | The contexts which were active at the beginning of this step |
 | contexts_out | [Context](#ondewo.nlu.Context) | repeated | The output contexts of this step |
+| query_text_original | [string](#string) |  | User input without any pre-processing applied |
 
 
 
@@ -6131,7 +6135,7 @@ This message contains a session review step
 <a name="ondewo.nlu.SessionStep"></a>
 
 ### SessionStep
-SessionSTep is a single user interaction as part of a session
+SessionStep is a single user interaction as part of a session
 
 
 | Field | Type | Label | Description |
