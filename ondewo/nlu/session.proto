@@ -279,11 +279,6 @@ message QueryResult {
     // - If an event was provided as input, `query_text` is not set.
     string query_text = 1;
 
-    // The language that was triggered during intent detection.
-    // See [Language Support](https://dialogflow.com/docs/reference/language)
-    // for a list of the currently supported language codes.
-    string language_code = 15;
-
     // The Speech recognition confidence between 0.0 and 1.0. A higher number
     // indicates an estimated greater likelihood that the recognized words are
     // correct. The default of 0.0 is a sentinel value indicating that confidence
@@ -337,14 +332,21 @@ message QueryResult {
     // (completely uncertain) to 1.0 (completely certain).
     float intent_detection_confidence = 12;
 
+    // The user input gets pre-processed by spelling correction, stop word removal etc. This property holds
+    // the string that is passed to the entity recognition and intent detection
+    string query_text_original = 13;
+
     // The free-form diagnostic info. For example, this field
     // could contain webhook call latency.
     google.protobuf.Struct diagnostic_info = 14;
 
-    // The user input gets pre-processed by spelling correction, stop word removal etc. This property holds
-    // the string that is passed to the entity recognition and intent detection
-    string query_text_original = 7;
+    // The language that was triggered during intent detection.
+    // See [Language Support](https://dialogflow.com/docs/reference/language)
+    // for a list of the currently supported language codes.
+    string language_code = 15;
+
 }
+
 
 // The top-level message sent by the client to the
 // `StreamingDetectIntent` method.
