@@ -340,6 +340,10 @@ message QueryResult {
     // The free-form diagnostic info. For example, this field
     // could contain webhook call latency.
     google.protobuf.Struct diagnostic_info = 14;
+
+    // The user input gets pre-processed by spelling correction, stop word removal etc. This property holds
+    // the string that is passed to the entity recognition and intent detection
+    string query_text_original = 7;
 }
 
 // The top-level message sent by the client to the
@@ -633,7 +637,7 @@ message Session {
     }
 }
 
-// SessionSTep is a single user interaction as part of a session
+// SessionStep is a single user interaction as part of a session
 message SessionStep {
 
     // The unique identifier for the given review
@@ -1058,7 +1062,10 @@ message SessionReviewStep {
     // Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID>/reviews/<SESSION_REVIEW_ID>/sessionreviewsteps/<SESSION_REVIEW_STEP_ID>`.
     string name = 1;
 
-    // The user says with markup of the detected entity types
+    // The user says with markup of the detected entity types after the preprocessing such as spelling correction,
+    // stopword removal etc. has been applied.
+    //
+    // This string represents what has been passed to the entity recognition and intent detection algorithms.
     Intent.TrainingPhrase annotated_usersays = 2;
 
     // The language code
@@ -1072,6 +1079,9 @@ message SessionReviewStep {
 
     // The output contexts of this step
     repeated Context contexts_out = 6;
+
+    // User input without any pre-processing applied
+    string query_text_original = 7;
 }
 
 
