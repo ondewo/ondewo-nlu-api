@@ -2,6 +2,15 @@
 
 *****************
 
+## Release ONDEWO NLU API 4.1.0
+
+### Improvements
+
+* [OND211-2084] Added query_text_original to QueryResult and SessionReviewStep for post analysis of user input without
+  any preprocessing
+
+*****************
+
 ## Release ONDEWO NLU API 4.0.0
 
 ### New Features
