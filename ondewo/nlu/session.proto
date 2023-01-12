@@ -243,7 +243,7 @@ message QueryParameters {
     repeated string labels = 7;
 
     // Custom Intent.Message.Platform placeholder. Note: it will not work with non-placeholders values
-    repeated Intent.Message.Platform platform = 8;
+    repeated Intent.Message.Platform platforms = 8;
 }
 
 // Represents the query input. It can contain either:
@@ -875,7 +875,7 @@ message SessionFilter {
     float duration_in_s_rounded_max = 41;
 
     // Custom Intent.Message.Platform placeholder. Note: it will not work with non-placeholders values
-    repeated Intent.Message.Platform platform = 42;
+    repeated Intent.Message.Platform platforms = 42;
 }
 
 // This message contains information about session
