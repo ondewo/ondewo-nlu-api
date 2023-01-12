@@ -1090,6 +1090,10 @@ message SessionReviewStep {
 
     // User input without any pre-processing applied
     string query_text_original = 7;
+
+    // Custom Intent.Message.Platform placeholder.
+    // Note: it will not work with non-placeholders values
+    repeated Intent.Message.Platform platforms = 8;
 }
 
 
