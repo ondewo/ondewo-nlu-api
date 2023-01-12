@@ -6128,6 +6128,7 @@ This string represents what has been passed to the entity recognition and intent
 | contexts | [Context](#ondewo.nlu.Context) | repeated | The contexts which were active at the beginning of this step |
 | contexts_out | [Context](#ondewo.nlu.Context) | repeated | The output contexts of this step |
 | query_text_original | [string](#string) |  | User input without any pre-processing applied |
+| platforms | [Intent.Message.Platform](#ondewo.nlu.Intent.Message.Platform) | repeated | Custom Intent.Message.Platform placeholder. Note: it will not work with non-placeholders values |
 
 
 
