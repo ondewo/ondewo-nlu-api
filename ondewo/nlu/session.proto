@@ -241,6 +241,9 @@ message QueryParameters {
 
     // labels associated to this request
     repeated string labels = 7;
+
+    // Custom Intent.Message.Platform placeholder. Note: it will not work with non-placeholders values
+    repeated Intent.Message.Platform platform = 8;
 }
 
 // Represents the query input. It can contain either:
@@ -870,6 +873,9 @@ message SessionFilter {
 
     // Match only sessions for which the duration in seconds rounded are smaller or equal
     float duration_in_s_rounded_max = 41;
+
+    // Custom Intent.Message.Platform placeholder. Note: it will not work with non-placeholders values
+    repeated Intent.Message.Platform platform = 42;
 }
 
 // This message contains information about session
