@@ -5926,7 +5926,7 @@ Represents the parameters of the conversational query.
 | reset_contexts | [bool](#bool) |  | Optional. Specifies whether to delete all contexts in the current session before the new ones are activated. |
 | payload | [google.protobuf.Struct](#google.protobuf.Struct) |  | Optional. This field can be used to pass custom data into the webhook associated with the agent. Arbitrary JSON objects are supported. |
 | labels | [string](#string) | repeated | labels associated to this request |
-| platform | [Intent.Message.Platform](#ondewo.nlu.Intent.Message.Platform) | repeated | Custom Intent.Message.Platform placeholder. Note: it will not work with non-placeholders values |
+| platforms | [Intent.Message.Platform](#ondewo.nlu.Intent.Message.Platform) | repeated | Custom Intent.Message.Platform placeholder. Note: it will not work with non-placeholders values |
 
 
 
@@ -6030,7 +6030,7 @@ This message contains a session filter
 | started_time_slot_per_minute_max | [string](#string) |  | Match only sessions for which the started_time_slot_per_minute (e.g. 14:00) are smaller or equal |
 | duration_in_s_rounded_min | [float](#float) |  | Match only sessions for which the duration in seconds rounded are larger or equal |
 | duration_in_s_rounded_max | [float](#float) |  | Match only sessions for which the duration in seconds rounded are smaller or equal |
-| platform | [Intent.Message.Platform](#ondewo.nlu.Intent.Message.Platform) | repeated | Custom Intent.Message.Platform placeholder. Note: it will not work with non-placeholders values |
+| platforms | [Intent.Message.Platform](#ondewo.nlu.Intent.Message.Platform) | repeated | Custom Intent.Message.Platform placeholder. Note: it will not work with non-placeholders values |
 
 
 
