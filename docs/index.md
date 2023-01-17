@@ -328,6 +328,28 @@
     - [GetSessionRequest](#ondewo.nlu.GetSessionRequest)
     - [GetSessionReviewRequest](#ondewo.nlu.GetSessionReviewRequest)
     - [InputAudioConfig](#ondewo.nlu.InputAudioConfig)
+    - [ListAccountIdsOfAllSessionsRequest](#ondewo.nlu.ListAccountIdsOfAllSessionsRequest)
+    - [ListAccountIdsResponse](#ondewo.nlu.ListAccountIdsResponse)
+    - [ListDatastreamIdsOfAllSessionsRequest](#ondewo.nlu.ListDatastreamIdsOfAllSessionsRequest)
+    - [ListDatastreamIdsResponse](#ondewo.nlu.ListDatastreamIdsResponse)
+    - [ListIdentifiedUserIdsOfAllSessionsRequest](#ondewo.nlu.ListIdentifiedUserIdsOfAllSessionsRequest)
+    - [ListIdentifiedUserIdsResponse](#ondewo.nlu.ListIdentifiedUserIdsResponse)
+    - [ListInputContextsOfAllSessionsRequest](#ondewo.nlu.ListInputContextsOfAllSessionsRequest)
+    - [ListInputContextsResponse](#ondewo.nlu.ListInputContextsResponse)
+    - [ListLanguageCodesOfAllSessionsRequest](#ondewo.nlu.ListLanguageCodesOfAllSessionsRequest)
+    - [ListLanguageCodesResponse](#ondewo.nlu.ListLanguageCodesResponse)
+    - [ListMatchedEntityTypesOfAllSessionsRequest](#ondewo.nlu.ListMatchedEntityTypesOfAllSessionsRequest)
+    - [ListMatchedEntityTypesResponse](#ondewo.nlu.ListMatchedEntityTypesResponse)
+    - [ListMatchedIntentsOfAllSessionsRequest](#ondewo.nlu.ListMatchedIntentsOfAllSessionsRequest)
+    - [ListMatchedIntentsResponse](#ondewo.nlu.ListMatchedIntentsResponse)
+    - [ListOriginIdsOfAllSessionsRequest](#ondewo.nlu.ListOriginIdsOfAllSessionsRequest)
+    - [ListOriginIdsResponse](#ondewo.nlu.ListOriginIdsResponse)
+    - [ListOutputContextsOfAllSessionsRequest](#ondewo.nlu.ListOutputContextsOfAllSessionsRequest)
+    - [ListOutputContextsResponse](#ondewo.nlu.ListOutputContextsResponse)
+    - [ListPlatformsOfAllSessionsRequest](#ondewo.nlu.ListPlatformsOfAllSessionsRequest)
+    - [ListPlatformsResponse](#ondewo.nlu.ListPlatformsResponse)
+    - [ListPropertyIdsOfAllSessionsRequest](#ondewo.nlu.ListPropertyIdsOfAllSessionsRequest)
+    - [ListPropertyIdsResponse](#ondewo.nlu.ListPropertyIdsResponse)
     - [ListSessionLabelsOfAllSessionsRequest](#ondewo.nlu.ListSessionLabelsOfAllSessionsRequest)
     - [ListSessionLabelsRequest](#ondewo.nlu.ListSessionLabelsRequest)
     - [ListSessionLabelsResponse](#ondewo.nlu.ListSessionLabelsResponse)
@@ -335,6 +357,10 @@
     - [ListSessionReviewsResponse](#ondewo.nlu.ListSessionReviewsResponse)
     - [ListSessionsRequest](#ondewo.nlu.ListSessionsRequest)
     - [ListSessionsResponse](#ondewo.nlu.ListSessionsResponse)
+    - [ListTagsOfAllSessionsRequest](#ondewo.nlu.ListTagsOfAllSessionsRequest)
+    - [ListTagsResponse](#ondewo.nlu.ListTagsResponse)
+    - [ListUserIdsOfAllSessionsRequest](#ondewo.nlu.ListUserIdsOfAllSessionsRequest)
+    - [ListUserIdsResponse](#ondewo.nlu.ListUserIdsResponse)
     - [QueryInput](#ondewo.nlu.QueryInput)
     - [QueryParameters](#ondewo.nlu.QueryParameters)
     - [QueryResult](#ondewo.nlu.QueryResult)
@@ -5776,15 +5802,357 @@ Instructs the speech recognizer how to process the audio content.
 
 
 
+<a name="ondewo.nlu.ListAccountIdsOfAllSessionsRequest"></a>
+
+### ListAccountIdsOfAllSessionsRequest
+request to list all account_ids of all sessions
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  | The parent for which the account_ids for all sessions should be listed Format: `projects/<PROJECT_ID>/agent`. |
+| session_filter | [SessionFilter](#ondewo.nlu.SessionFilter) |  | Optional. A filter to narrow the response down to sessions of interest. |
+
+
+
+
+
+
+<a name="ondewo.nlu.ListAccountIdsResponse"></a>
+
+### ListAccountIdsResponse
+This message is a response of listing session account_ids
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| account_ids | [string](#string) | repeated | The account_ids of the session |
+
+
+
+
+
+
+<a name="ondewo.nlu.ListDatastreamIdsOfAllSessionsRequest"></a>
+
+### ListDatastreamIdsOfAllSessionsRequest
+request to list all datastream_ids of all sessions
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  | The parent for which the datastream_ids for all sessions should be listed Format: `projects/<PROJECT_ID>/agent`. |
+| session_filter | [SessionFilter](#ondewo.nlu.SessionFilter) |  | Optional. A filter to narrow the response down to sessions of interest. |
+
+
+
+
+
+
+<a name="ondewo.nlu.ListDatastreamIdsResponse"></a>
+
+### ListDatastreamIdsResponse
+This message is a response of listing session datastream_ids
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| datastream_ids | [string](#string) | repeated | The datastream_ids of the session |
+
+
+
+
+
+
+<a name="ondewo.nlu.ListIdentifiedUserIdsOfAllSessionsRequest"></a>
+
+### ListIdentifiedUserIdsOfAllSessionsRequest
+request to list all identified_user_ids of all sessions
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  | The parent for which the identified_user_ids for all sessions should be listed Format: `projects/<PROJECT_ID>/agent`. |
+| session_filter | [SessionFilter](#ondewo.nlu.SessionFilter) |  | Optional. A filter to narrow the response down to sessions of interest. |
+
+
+
+
+
+
+<a name="ondewo.nlu.ListIdentifiedUserIdsResponse"></a>
+
+### ListIdentifiedUserIdsResponse
+This message is a response of listing session identified_user_ids
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| identified_user_ids | [string](#string) | repeated | The identified_user_ids of the session |
+
+
+
+
+
+
+<a name="ondewo.nlu.ListInputContextsOfAllSessionsRequest"></a>
+
+### ListInputContextsOfAllSessionsRequest
+request to list all input_contexts of all sessions
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  | The parent for which the input_contexts for all sessions should be listed Format: `projects/<PROJECT_ID>/agent`. |
+| session_filter | [SessionFilter](#ondewo.nlu.SessionFilter) |  | Optional. A filter to narrow the response down to sessions of interest. |
+
+
+
+
+
+
+<a name="ondewo.nlu.ListInputContextsResponse"></a>
+
+### ListInputContextsResponse
+This message is a response of listing session input_contexts
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| input_contexts | [string](#string) | repeated | The input_contexts ids of the session |
+
+
+
+
+
+
+<a name="ondewo.nlu.ListLanguageCodesOfAllSessionsRequest"></a>
+
+### ListLanguageCodesOfAllSessionsRequest
+request to list all language codes of all sessions
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  | The parent for which the language_codes for all sessions should be listed Format: `projects/<PROJECT_ID>/agent`. |
+| session_filter | [SessionFilter](#ondewo.nlu.SessionFilter) |  | Optional. A filter to narrow the response down to sessions of interest. |
+
+
+
+
+
+
+<a name="ondewo.nlu.ListLanguageCodesResponse"></a>
+
+### ListLanguageCodesResponse
+This message is a response of listing session language_codes
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| language_codes | [string](#string) | repeated | The language_codes of the session |
+
+
+
+
+
+
+<a name="ondewo.nlu.ListMatchedEntityTypesOfAllSessionsRequest"></a>
+
+### ListMatchedEntityTypesOfAllSessionsRequest
+request to list all matched_entity_types of all sessions
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  | The parent for which the matched_entity_types for all sessions should be listed Format: `projects/<PROJECT_ID>/agent`. |
+| session_filter | [SessionFilter](#ondewo.nlu.SessionFilter) |  | Optional. A filter to narrow the response down to sessions of interest. |
+
+
+
+
+
+
+<a name="ondewo.nlu.ListMatchedEntityTypesResponse"></a>
+
+### ListMatchedEntityTypesResponse
+This message is a response of listing session matched_entity_types
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| matched_entity_types | [string](#string) | repeated | The matched_entity_types of the session |
+
+
+
+
+
+
+<a name="ondewo.nlu.ListMatchedIntentsOfAllSessionsRequest"></a>
+
+### ListMatchedIntentsOfAllSessionsRequest
+request to list all matched_intents of all sessions
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  | The parent for which the matched_intents for all sessions should be listed Format: `projects/<PROJECT_ID>/agent`. |
+| session_filter | [SessionFilter](#ondewo.nlu.SessionFilter) |  | Optional. A filter to narrow the response down to sessions of interest. |
+
+
+
+
+
+
+<a name="ondewo.nlu.ListMatchedIntentsResponse"></a>
+
+### ListMatchedIntentsResponse
+This message is a response of listing session matched_intents
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| matched_intents | [string](#string) | repeated | The matched_intents of the session |
+
+
+
+
+
+
+<a name="ondewo.nlu.ListOriginIdsOfAllSessionsRequest"></a>
+
+### ListOriginIdsOfAllSessionsRequest
+request to list all origin_ids of all sessions
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  | The parent for which the origin_ids for all sessions should be listed Format: `projects/<PROJECT_ID>/agent`. |
+| session_filter | [SessionFilter](#ondewo.nlu.SessionFilter) |  | Optional. A filter to narrow the response down to sessions of interest. |
+
+
+
+
+
+
+<a name="ondewo.nlu.ListOriginIdsResponse"></a>
+
+### ListOriginIdsResponse
+This message is a response of listing session origin_ids
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| origin_ids | [string](#string) | repeated | The origin_ids of the session |
+
+
+
+
+
+
+<a name="ondewo.nlu.ListOutputContextsOfAllSessionsRequest"></a>
+
+### ListOutputContextsOfAllSessionsRequest
+request to list all output_contexts of all sessions
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  | The parent for which the output_contexts for all sessions should be listed Format: `projects/<PROJECT_ID>/agent`. |
+| session_filter | [SessionFilter](#ondewo.nlu.SessionFilter) |  | Optional. A filter to narrow the response down to sessions of interest. |
+
+
+
+
+
+
+<a name="ondewo.nlu.ListOutputContextsResponse"></a>
+
+### ListOutputContextsResponse
+This message is a response of listing session output_contexts
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| output_contexts | [string](#string) | repeated | The output_contexts ids of the session |
+
+
+
+
+
+
+<a name="ondewo.nlu.ListPlatformsOfAllSessionsRequest"></a>
+
+### ListPlatformsOfAllSessionsRequest
+request to list all labels of all sessions
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  | The parent for which the platforms for all sessions should be listed Format: `projects/<PROJECT_ID>/agent`. |
+| session_filter | [SessionFilter](#ondewo.nlu.SessionFilter) |  | Optional. A filter to narrow the response down to sessions of interest. |
+
+
+
+
+
+
+<a name="ondewo.nlu.ListPlatformsResponse"></a>
+
+### ListPlatformsResponse
+This message is a response of listing session platforms
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| platforms | [string](#string) | repeated | The platforms of the session |
+
+
+
+
+
+
+<a name="ondewo.nlu.ListPropertyIdsOfAllSessionsRequest"></a>
+
+### ListPropertyIdsOfAllSessionsRequest
+request to list all property_ids of all sessions
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  | The parent for which the property_ids for all sessions should be listed Format: `projects/<PROJECT_ID>/agent`. |
+| session_filter | [SessionFilter](#ondewo.nlu.SessionFilter) |  | Optional. A filter to narrow the response down to sessions of interest. |
+
+
+
+
+
+
+<a name="ondewo.nlu.ListPropertyIdsResponse"></a>
+
+### ListPropertyIdsResponse
+This message is a response of listing session property_ids
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| property_ids | [string](#string) | repeated | The property_ids of the session |
+
+
+
+
+
+
 <a name="ondewo.nlu.ListSessionLabelsOfAllSessionsRequest"></a>
 
 ### ListSessionLabelsOfAllSessionsRequest
-
+request to list all labels of all sessions
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | The parent for which the labels for all sessions should be listed Format: `projects/<PROJECT_ID>/agent`. |
+| session_filter | [SessionFilter](#ondewo.nlu.SessionFilter) |  | Optional. A filter to narrow the response down to sessions of interest. |
 
 
 
@@ -5883,6 +6251,68 @@ This message is a response including the listing of sessions
 | ----- | ---- | ----- | ----------- |
 | sessions | [Session](#ondewo.nlu.Session) | repeated | The requested sessions |
 | next_page_token | [string](#string) |  | Token to retrieve the next page of results, or empty if there are no more results in the list |
+
+
+
+
+
+
+<a name="ondewo.nlu.ListTagsOfAllSessionsRequest"></a>
+
+### ListTagsOfAllSessionsRequest
+request to list all tags of all sessions
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  | The parent for which the tags for all sessions should be listed Format: `projects/<PROJECT_ID>/agent`. |
+| session_filter | [SessionFilter](#ondewo.nlu.SessionFilter) |  | Optional. A filter to narrow the response down to sessions of interest. |
+
+
+
+
+
+
+<a name="ondewo.nlu.ListTagsResponse"></a>
+
+### ListTagsResponse
+This message is a response of listing session tags
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| tags | [string](#string) | repeated | The tags of the session |
+
+
+
+
+
+
+<a name="ondewo.nlu.ListUserIdsOfAllSessionsRequest"></a>
+
+### ListUserIdsOfAllSessionsRequest
+request to list all user_ids of all sessions
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  | The parent for which the user_ids for all sessions should be listed Format: `projects/<PROJECT_ID>/agent`. |
+| session_filter | [SessionFilter](#ondewo.nlu.SessionFilter) |  | Optional. A filter to narrow the response down to sessions of interest. |
+
+
+
+
+
+
+<a name="ondewo.nlu.ListUserIdsResponse"></a>
+
+### ListUserIdsResponse
+This message is a response of listing session user_ids
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| user_ids | [string](#string) | repeated | The user_ids of the session |
 
 
 
@@ -6432,6 +6862,19 @@ user intent and respond.
 | DeleteSession | [DeleteSessionRequest](#ondewo.nlu.DeleteSessionRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | DeleteSession: delete a session(=conversation) from ondewo-kb (for testing only) |
 | ListSessionLabels | [ListSessionLabelsRequest](#ondewo.nlu.ListSessionLabelsRequest) | [ListSessionLabelsResponse](#ondewo.nlu.ListSessionLabelsResponse) | SESSION-LABEL RELATED ENDPOINTS *** // |
 | ListSessionLabelsOfAllSessions | [ListSessionLabelsOfAllSessionsRequest](#ondewo.nlu.ListSessionLabelsOfAllSessionsRequest) | [ListSessionLabelsResponse](#ondewo.nlu.ListSessionLabelsResponse) |  |
+| ListLanguageCodesOfAllSessions | [ListLanguageCodesOfAllSessionsRequest](#ondewo.nlu.ListLanguageCodesOfAllSessionsRequest) | [ListLanguageCodesResponse](#ondewo.nlu.ListLanguageCodesResponse) |  |
+| ListMatchedIntentsOfAllSessions | [ListMatchedIntentsOfAllSessionsRequest](#ondewo.nlu.ListMatchedIntentsOfAllSessionsRequest) | [ListMatchedIntentsResponse](#ondewo.nlu.ListMatchedIntentsResponse) |  |
+| ListMatchedEntityTypesOfAllSessions | [ListMatchedEntityTypesOfAllSessionsRequest](#ondewo.nlu.ListMatchedEntityTypesOfAllSessionsRequest) | [ListMatchedEntityTypesResponse](#ondewo.nlu.ListMatchedEntityTypesResponse) |  |
+| ListUserIdsOfAllSessions | [ListUserIdsOfAllSessionsRequest](#ondewo.nlu.ListUserIdsOfAllSessionsRequest) | [ListUserIdsResponse](#ondewo.nlu.ListUserIdsResponse) |  |
+| ListIdentifiedUserIdsOfAllSessions | [ListIdentifiedUserIdsOfAllSessionsRequest](#ondewo.nlu.ListIdentifiedUserIdsOfAllSessionsRequest) | [ListIdentifiedUserIdsResponse](#ondewo.nlu.ListIdentifiedUserIdsResponse) |  |
+| ListTagsOfAllSessions | [ListTagsOfAllSessionsRequest](#ondewo.nlu.ListTagsOfAllSessionsRequest) | [ListTagsResponse](#ondewo.nlu.ListTagsResponse) |  |
+| ListInputContextsOfAllSessions | [ListInputContextsOfAllSessionsRequest](#ondewo.nlu.ListInputContextsOfAllSessionsRequest) | [ListInputContextsResponse](#ondewo.nlu.ListInputContextsResponse) |  |
+| ListOutputContextsOfAllSessions | [ListOutputContextsOfAllSessionsRequest](#ondewo.nlu.ListOutputContextsOfAllSessionsRequest) | [ListOutputContextsResponse](#ondewo.nlu.ListOutputContextsResponse) |  |
+| ListPlatformsOfAllSessions | [ListPlatformsOfAllSessionsRequest](#ondewo.nlu.ListPlatformsOfAllSessionsRequest) | [ListPlatformsResponse](#ondewo.nlu.ListPlatformsResponse) |  |
+| ListAccountIdsOfAllSessions | [ListAccountIdsOfAllSessionsRequest](#ondewo.nlu.ListAccountIdsOfAllSessionsRequest) | [ListAccountIdsResponse](#ondewo.nlu.ListAccountIdsResponse) |  |
+| ListPropertyIdsOfAllSessions | [ListPropertyIdsOfAllSessionsRequest](#ondewo.nlu.ListPropertyIdsOfAllSessionsRequest) | [ListPropertyIdsResponse](#ondewo.nlu.ListPropertyIdsResponse) |  |
+| ListDatastreamIdsOfAllSessions | [ListDatastreamIdsOfAllSessionsRequest](#ondewo.nlu.ListDatastreamIdsOfAllSessionsRequest) | [ListDatastreamIdsResponse](#ondewo.nlu.ListDatastreamIdsResponse) |  |
+| ListOriginIdsOfAllSessions | [ListOriginIdsOfAllSessionsRequest](#ondewo.nlu.ListOriginIdsOfAllSessionsRequest) | [ListOriginIdsResponse](#ondewo.nlu.ListOriginIdsResponse) |  |
 | AddSessionLabels | [AddSessionLabelsRequest](#ondewo.nlu.AddSessionLabelsRequest) | [Session](#ondewo.nlu.Session) |  |
 | DeleteSessionLabels | [DeleteSessionLabelsRequest](#ondewo.nlu.DeleteSessionLabelsRequest) | [Session](#ondewo.nlu.Session) |  |
 | ListSessionReviews | [ListSessionReviewsRequest](#ondewo.nlu.ListSessionReviewsRequest) | [ListSessionReviewsResponse](#ondewo.nlu.ListSessionReviewsResponse) | SESSION-REVIEW RELATED ENDPOINTS *** // ListSessionReviews: returns list of session reviews from ondewo-kb; by default only returns session review IDs |
