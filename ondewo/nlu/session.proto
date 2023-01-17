@@ -121,6 +121,86 @@ service Sessions {
         };
     };
 
+    rpc ListLanguageCodesOfAllSessions (ListLanguageCodesOfAllSessionsRequest) returns (ListLanguageCodesResponse) {
+        option (google.api.http) = {
+            get: "/v2/{parent=projects/*/agent}/sessions/language_codes"
+        };
+    };
+
+    rpc ListMatchedIntentsOfAllSessions (ListMatchedIntentsOfAllSessionsRequest) returns (ListMatchedIntentsResponse) {
+        option (google.api.http) = {
+            get: "/v2/{parent=projects/*/agent}/sessions/matched_intents"
+        };
+    };
+
+    rpc ListMatchedEntityTypesOfAllSessions (ListMatchedEntityTypesOfAllSessionsRequest) returns (ListMatchedEntityTypesResponse) {
+        option (google.api.http) = {
+            get: "/v2/{parent=projects/*/agent}/sessions/matched_entity_types"
+        };
+    };
+
+    rpc ListUserIdsOfAllSessions (ListUserIdsOfAllSessionsRequest) returns (ListUserIdsResponse) {
+        option (google.api.http) = {
+            get: "/v2/{parent=projects/*/agent}/sessions/user_ids"
+        };
+    };
+
+    rpc ListIdentifiedUserIdsOfAllSessions (ListIdentifiedUserIdsOfAllSessionsRequest) returns (ListIdentifiedUserIdsResponse) {
+        option (google.api.http) = {
+            get: "/v2/{parent=projects/*/agent}/sessions/identified_user_ids"
+        };
+    };
+
+    rpc ListTagsOfAllSessions (ListTagsOfAllSessionsRequest) returns (ListTagsResponse) {
+        option (google.api.http) = {
+            get: "/v2/{parent=projects/*/agent}/sessions/tags"
+        };
+    };
+
+    rpc ListInputContextsOfAllSessions (ListInputContextsOfAllSessionsRequest) returns (ListInputContextsResponse) {
+        option (google.api.http) = {
+            get: "/v2/{parent=projects/*/agent}/sessions/input_contexts"
+        };
+    };
+
+    rpc ListOutputContextsOfAllSessions (ListOutputContextsOfAllSessionsRequest) returns (ListOutputContextsResponse) {
+        option (google.api.http) = {
+            get: "/v2/{parent=projects/*/agent}/sessions/output_contexts"
+        };
+    };
+
+    rpc ListPlatformsOfAllSessions (ListPlatformsOfAllSessionsRequest) returns (ListPlatformsResponse) {
+        option (google.api.http) = {
+            get: "/v2/{parent=projects/*/agent}/sessions/platforms"
+        };
+    };
+
+    rpc ListAccountIdsOfAllSessions (ListAccountIdsOfAllSessionsRequest) returns (ListAccountIdsResponse) {
+        option (google.api.http) = {
+            get: "/v2/{parent=projects/*/agent}/sessions/account_ids"
+        };
+    };
+
+    rpc ListPropertyIdsOfAllSessions (ListPropertyIdsOfAllSessionsRequest) returns (ListPropertyIdsResponse) {
+        option (google.api.http) = {
+            get: "/v2/{parent=projects/*/agent}/sessions/property_ids"
+        };
+    };
+
+    rpc ListDatastreamIdsOfAllSessions (ListDatastreamIdsOfAllSessionsRequest) returns (ListDatastreamIdsResponse) {
+        option (google.api.http) = {
+            get: "/v2/{parent=projects/*/agent}/sessions/datastream_ids"
+        };
+    };
+
+
+    rpc ListOriginIdsOfAllSessions (ListOriginIdsOfAllSessionsRequest) returns (ListOriginIdsResponse) {
+        option (google.api.http) = {
+            get: "/v2/{parent=projects/*/agent}/sessions/origin_ids"
+        };
+    };
+
+
     rpc AddSessionLabels (AddSessionLabelsRequest) returns (Session) {
         option (google.api.http) = {
             post: "/v2/{session_id=projects/*/agent/sessions/*}/labels:add"
@@ -1019,7 +1099,7 @@ message SessionInfo {
     // duration in seconds rounded
     float duration_in_s_rounded = 25;
 
-        // Messages for each of the Intent.Message.Platform were sent to the user
+    // Messages for each of the Intent.Message.Platform were sent to the user
     repeated Intent.Message.Platform platforms = 26;
 
     // Ids of the account, e.g. Company Ondewo,
@@ -1203,11 +1283,15 @@ message ListSessionLabelsRequest {
     string session_id = 1;
 }
 
+// request to list all labels of all sessions
 message ListSessionLabelsOfAllSessionsRequest {
 
     // The parent for which the labels for all sessions should be listed
     // Format: `projects/<PROJECT_ID>/agent`.
     string parent = 1;
+
+    // Optional. A filter to narrow the response down to sessions of interest.
+    SessionFilter session_filter = 2;
 }
 
 // This message is a response of listing session labels
@@ -1216,6 +1300,280 @@ message ListSessionLabelsResponse {
     // The labels of the session
     repeated string labels = 1;
 }
+
+// request to list all language codes of all sessions
+message ListLanguageCodesOfAllSessionsRequest {
+
+    // The parent for which the language_codes for all sessions should be listed
+    // Format: `projects/<PROJECT_ID>/agent`.
+    string parent = 1;
+
+    // Optional. A filter to narrow the response down to sessions of interest.
+    SessionFilter session_filter = 2;
+}
+
+// This message is a response of listing session language_codes
+message ListLanguageCodesResponse {
+
+    // The language_codes of the session
+    repeated string language_codes = 1;
+}
+
+
+
+// request to list all matched_intents of all sessions
+message ListMatchedIntentsOfAllSessionsRequest {
+
+    // The parent for which the matched_intents for all sessions should be listed
+    // Format: `projects/<PROJECT_ID>/agent`.
+    string parent = 1;
+
+    // Optional. A filter to narrow the response down to sessions of interest.
+    SessionFilter session_filter = 2;
+}
+
+// This message is a response of listing session matched_intents
+message ListMatchedIntentsResponse {
+
+    // The matched_intents of the session
+    repeated string matched_intents = 1;
+}
+
+
+// request to list all matched_entity_types of all sessions
+message ListMatchedEntityTypesOfAllSessionsRequest {
+
+    // The parent for which the matched_entity_types for all sessions should be listed
+    // Format: `projects/<PROJECT_ID>/agent`.
+    string parent = 1;
+
+    // Optional. A filter to narrow the response down to sessions of interest.
+    SessionFilter session_filter = 2;
+}
+
+// This message is a response of listing session matched_entity_types
+message ListMatchedEntityTypesResponse {
+
+    // The matched_entity_types of the session
+    repeated string matched_entity_types = 1;
+}
+
+
+// request to list all user_ids of all sessions
+message ListUserIdsOfAllSessionsRequest {
+
+    // The parent for which the user_ids for all sessions should be listed
+    // Format: `projects/<PROJECT_ID>/agent`.
+    string parent = 1;
+
+    // Optional. A filter to narrow the response down to sessions of interest.
+    SessionFilter session_filter = 2;
+}
+
+// This message is a response of listing session user_ids
+message ListUserIdsResponse {
+
+    // The user_ids of the session
+    repeated string user_ids = 1;
+}
+
+
+// request to list all identified_user_ids of all sessions
+message ListIdentifiedUserIdsOfAllSessionsRequest {
+
+    // The parent for which the identified_user_ids for all sessions should be listed
+    // Format: `projects/<PROJECT_ID>/agent`.
+    string parent = 1;
+
+    // Optional. A filter to narrow the response down to sessions of interest.
+    SessionFilter session_filter = 2;
+}
+
+// This message is a response of listing session identified_user_ids
+message ListIdentifiedUserIdsResponse {
+
+    // The identified_user_ids of the session
+    repeated string identified_user_ids = 1;
+}
+
+
+// request to list all tags of all sessions
+message ListTagsOfAllSessionsRequest {
+
+    // The parent for which the tags for all sessions should be listed
+    // Format: `projects/<PROJECT_ID>/agent`.
+    string parent = 1;
+
+    // Optional. A filter to narrow the response down to sessions of interest.
+    SessionFilter session_filter = 2;
+}
+
+// This message is a response of listing session tags
+message ListTagsResponse {
+
+    // The tags of the session
+    repeated string tags = 1;
+}
+
+
+// request to list all input_contexts of all sessions
+message ListInputContextsOfAllSessionsRequest {
+
+    // The parent for which the input_contexts for all sessions should be listed
+    // Format: `projects/<PROJECT_ID>/agent`.
+    string parent = 1;
+
+    // Optional. A filter to narrow the response down to sessions of interest.
+    SessionFilter session_filter = 2;
+}
+
+// This message is a response of listing session input_contexts
+message ListInputContextsResponse {
+
+    // The input_contexts ids of the session
+    repeated string input_contexts = 1;
+}
+
+
+// request to list all output_contexts of all sessions
+message ListOutputContextsOfAllSessionsRequest {
+
+    // The parent for which the output_contexts for all sessions should be listed
+    // Format: `projects/<PROJECT_ID>/agent`.
+    string parent = 1;
+
+    // Optional. A filter to narrow the response down to sessions of interest.
+    SessionFilter session_filter = 2;
+}
+
+// This message is a response of listing session output_contexts
+message ListOutputContextsResponse {
+
+    // The output_contexts ids of the session
+    repeated string output_contexts = 1;
+}
+
+
+// request to list all labels of all sessions
+message ListPlatformsOfAllSessionsRequest {
+
+    // The parent for which the platforms for all sessions should be listed
+    // Format: `projects/<PROJECT_ID>/agent`.
+    string parent = 1;
+
+    // Optional. A filter to narrow the response down to sessions of interest.
+    SessionFilter session_filter = 2;
+}
+
+// This message is a response of listing session platforms
+message ListPlatformsResponse {
+
+    // The platforms of the session
+    repeated string platforms = 1;
+}
+
+
+// request to list all account_ids of all sessions
+message ListAccountIdsOfAllSessionsRequest {
+
+    // The parent for which the account_ids for all sessions should be listed
+    // Format: `projects/<PROJECT_ID>/agent`.
+    string parent = 1;
+
+    // Optional. A filter to narrow the response down to sessions of interest.
+    SessionFilter session_filter = 2;
+}
+
+// This message is a response of listing session account_ids
+message ListAccountIdsResponse {
+
+    // The account_ids of the session
+    repeated string account_ids = 1;
+}
+
+
+// request to list all property_ids of all sessions
+message ListPropertyIdsOfAllSessionsRequest {
+
+    // The parent for which the property_ids for all sessions should be listed
+    // Format: `projects/<PROJECT_ID>/agent`.
+    string parent = 1;
+
+    // Optional. A filter to narrow the response down to sessions of interest.
+    SessionFilter session_filter = 2;
+}
+
+// This message is a response of listing session property_ids
+message ListPropertyIdsResponse {
+
+    // The property_ids of the session
+    repeated string property_ids = 1;
+}
+
+
+// request to list all datastream_ids of all sessions
+message ListDatastreamIdsOfAllSessionsRequest {
+
+    // The parent for which the datastream_ids for all sessions should be listed
+    // Format: `projects/<PROJECT_ID>/agent`.
+    string parent = 1;
+
+    // Optional. A filter to narrow the response down to sessions of interest.
+    SessionFilter session_filter = 2;
+}
+
+// This message is a response of listing session datastream_ids
+message ListDatastreamIdsResponse {
+
+    // The datastream_ids of the session
+    repeated string datastream_ids = 1;
+}
+
+
+// request to list all origin_ids of all sessions
+message ListOriginIdsOfAllSessionsRequest {
+
+    // The parent for which the origin_ids for all sessions should be listed
+    // Format: `projects/<PROJECT_ID>/agent`.
+    string parent = 1;
+
+    // Optional. A filter to narrow the response down to sessions of interest.
+    SessionFilter session_filter = 2;
+}
+
+// This message is a response of listing session origin_ids
+message ListOriginIdsResponse {
+
+    // The origin_ids of the session
+    repeated string origin_ids = 1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // This message is a request to add session labels
 message AddSessionLabelsRequest {
