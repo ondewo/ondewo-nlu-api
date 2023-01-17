@@ -1083,6 +1083,9 @@ message CreateSessionRequest {
 
     // labels for the session - Optional
     repeated string labels = 3;
+
+    // Optional. The collection of contexts to be activated before this query is executed.
+    repeated Context contexts = 4;
 }
 
 // This message is a request to delete a session
