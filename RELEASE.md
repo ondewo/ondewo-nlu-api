@@ -4,6 +4,12 @@
 
 ## Release ONDEWO NLU API 4.2.0
 
+### Improvements
+
+* [[OND211-2084]](https://ondewo.atlassian.net/browse/OND211-2084) - Added account_id, account, property_id,
+  datastream_id, origin_id and identified_user_id to improve reporting and filtering capabilities. Also Addd
+  Intent.Message.Platform platforms to SessionReviewStep.
+
 ### Bug fixes
 
 * [[OND211-2084]](https://ondewo.atlassian.net/browse/OND211-2084) - Fixed protobuf sequence numbering in session.proto
