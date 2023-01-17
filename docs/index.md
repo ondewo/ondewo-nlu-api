@@ -5926,7 +5926,16 @@ Represents the parameters of the conversational query.
 | reset_contexts | [bool](#bool) |  | Optional. Specifies whether to delete all contexts in the current session before the new ones are activated. |
 | payload | [google.protobuf.Struct](#google.protobuf.Struct) |  | Optional. This field can be used to pass custom data into the webhook associated with the agent. Arbitrary JSON objects are supported. |
 | labels | [string](#string) | repeated | labels associated to this request |
-| platforms | [Intent.Message.Platform](#ondewo.nlu.Intent.Message.Platform) | repeated | Custom Intent.Message.Platform placeholder. Note: it will not work with non-placeholders values |
+| platforms | [Intent.Message.Platform](#ondewo.nlu.Intent.Message.Platform) | repeated | Only messages for the specified Intent.Message.Platform platforms are sent to the user in the <code>DetectIntentResponse</code> |
+| account_id | [string](#string) |  | Id of the account, e.g. Company Ondewo |
+| property_id | [string](#string) |  | Id of the property of the account, e.g. Domain ondewo.com This field can also be used for a customized tracking id or tag id |
+| datastream_id | [string](#string) |  | Id of the datastream of the property of the account, e.g. Subdomain sub1.ondewo.com or sub2.ondewo.com This field can also be used for a customized tracking id or tag id |
+| origin_id | [string](#string) |  | Id of the the origin of the user request
+
+For a phone bot, this is the phone number +123456789 the user called (Note: This is not the user's phone number) For a chatbot or voicebot on the web, this is the URL on which the bo, e.g. https://ondewo.com/webchat For a voice assistant device, this is the device-id or the app id This field can also be used for a customized tracking id or tag id
+
+https://aim-develop.ondewo.com/ |
+| identified_user_id | [string](#string) |  | Id of the "identified user" e.g. for a chatbot the email address or for a phone bot the phone number of the user This field can also be used for a customized tracking id or tag id |
 
 
 
@@ -6030,7 +6039,14 @@ This message contains a session filter
 | started_time_slot_per_minute_max | [string](#string) |  | Match only sessions for which the started_time_slot_per_minute (e.g. 14:00) are smaller or equal |
 | duration_in_s_rounded_min | [float](#float) |  | Match only sessions for which the duration in seconds rounded are larger or equal |
 | duration_in_s_rounded_max | [float](#float) |  | Match only sessions for which the duration in seconds rounded are smaller or equal |
-| platforms | [Intent.Message.Platform](#ondewo.nlu.Intent.Message.Platform) | repeated | Custom Intent.Message.Platform placeholder. Note: it will not work with non-placeholders values |
+| platforms | [Intent.Message.Platform](#ondewo.nlu.Intent.Message.Platform) | repeated | Messages for each of the Intent.Message.Platform were sent to the user |
+| account_ids | [string](#string) | repeated | Ids of the account, e.g. Company Ondewo, This field can also be used for customized tracking ids or tag ids |
+| property_ids | [string](#string) | repeated | Ids of the property of the account, e.g. Domain ondewo.com This field can also be used for customized tracking ids or tag ids |
+| datastream_ids | [string](#string) | repeated | Ids of the datastream of the property of the account, e.g. Subdomain sub1.ondewo.com or sub2.ondewo.com This field can also be used for customized tracking ids or tag ids |
+| origin_ids | [string](#string) | repeated | Ids of the the origin of the user request
+
+For a phone bot, this is the phone number +123456789 the user called (Note: This is not the user's phone number) For a chatbot or voicebot on the web, this is the URL on which the bo, e.g. https://ondewo.com/webchat For a voice assistant device, this is the device-id or the app id |
+| identified_user_ids | [string](#string) | repeated | Ids of the "identified user" e.g. for a chatbot the email address or for a phone bot the phone number of the user |
 
 
 
@@ -6074,6 +6090,14 @@ All fields below are optional. Multiple fields specified at the same time are ch
 | started_time_slot_per_day_phase | [string](#string) |  | started_time_slot_per_day_phase (e.g. 14:00) |
 | started_time_slot_per_minute | [string](#string) |  | started_time_slot_per_minute (e.g. 14:00) |
 | duration_in_s_rounded | [float](#float) |  | duration in seconds rounded |
+| platforms | [Intent.Message.Platform](#ondewo.nlu.Intent.Message.Platform) | repeated | Messages for each of the Intent.Message.Platform were sent to the user |
+| account_ids | [string](#string) | repeated | Ids of the account, e.g. Company Ondewo, This field can also be used for customized tracking ids or tag ids |
+| property_ids | [string](#string) | repeated | Ids of the property of the account, e.g. Domain ondewo.com This field can also be used for customized tracking ids or tag ids |
+| datastream_ids | [string](#string) | repeated | Ids of the datastream of the property of the account, e.g. Subdomain sub1.ondewo.com or sub2.ondewo.com This field can also be used for customized tracking ids or tag ids |
+| origin_ids | [string](#string) | repeated | Ids of the the origin of the user request
+
+For a phone bot, this is the phone number +123456789 the user called (Note: This is not the user's phone number) For a chatbot or voicebot on the web, this is the URL on which the bo, e.g. https://ondewo.com/webchat For a voice assistant device, this is the device-id or the app id |
+| identified_user_ids | [string](#string) | repeated | Ids of the "identified user" e.g. for a chatbot the email address or for a phone bot the phone number of the user |
 
 
 
@@ -6128,7 +6152,7 @@ This string represents what has been passed to the entity recognition and intent
 | contexts | [Context](#ondewo.nlu.Context) | repeated | The contexts which were active at the beginning of this step |
 | contexts_out | [Context](#ondewo.nlu.Context) | repeated | The output contexts of this step |
 | query_text_original | [string](#string) |  | User input without any pre-processing applied |
-| platforms | [Intent.Message.Platform](#ondewo.nlu.Intent.Message.Platform) | repeated | Custom Intent.Message.Platform placeholder. Note: it will not work with non-placeholders values |
+| platforms | [Intent.Message.Platform](#ondewo.nlu.Intent.Message.Platform) | repeated | Messages for each of the Intent.Message.Platform were sent to the user |
 
 
 

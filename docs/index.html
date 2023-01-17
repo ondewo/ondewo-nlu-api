@@ -16842,7 +16842,53 @@ associated with the agent. Arbitrary JSON objects are supported. </p></td>
                   <td>platforms</td>
                   <td><a href="#ondewo.nlu.Intent.Message.Platform">Intent.Message.Platform</a></td>
                   <td>repeated</td>
-                  <td><p>Custom Intent.Message.Platform placeholder. Note: it will not work with non-placeholders values </p></td>
+                  <td><p>Only messages for the specified Intent.Message.Platform platforms are sent to the user in the
+<code>DetectIntentResponse</code> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>account_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Id of the account, e.g. Company Ondewo </p></td>
+                </tr>
+              
+                <tr>
+                  <td>property_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Id of the property of the account, e.g. Domain ondewo.com
+This field can also be used for a customized tracking id or tag id </p></td>
+                </tr>
+              
+                <tr>
+                  <td>datastream_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Id of the datastream of the property of the account, e.g. Subdomain sub1.ondewo.com or sub2.ondewo.com
+This field can also be used for a customized tracking id or tag id </p></td>
+                </tr>
+              
+                <tr>
+                  <td>origin_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Id of the the origin of the user request
+
+For a phone bot, this is the phone number +123456789 the user called (Note: This is not the user's phone number)
+For a chatbot or voicebot on the web, this is the URL on which the bo, e.g. https://ondewo.com/webchat
+For a voice assistant device, this is the device-id or the app id
+This field can also be used for a customized tracking id or tag id
+
+https://aim-develop.ondewo.com/ </p></td>
+                </tr>
+              
+                <tr>
+                  <td>identified_user_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Id of the "identified user" e.g. for a chatbot the email address or for a phone bot the phone number of the user
+This field can also be used for a customized tracking id or tag id </p></td>
                 </tr>
               
             </tbody>
@@ -17357,7 +17403,49 @@ The input contexts are pre-conditions for detecting intents </p></td>
                   <td>platforms</td>
                   <td><a href="#ondewo.nlu.Intent.Message.Platform">Intent.Message.Platform</a></td>
                   <td>repeated</td>
-                  <td><p>Custom Intent.Message.Platform placeholder. Note: it will not work with non-placeholders values </p></td>
+                  <td><p>Messages for each of the Intent.Message.Platform were sent to the user </p></td>
+                </tr>
+              
+                <tr>
+                  <td>account_ids</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Ids of the account, e.g. Company Ondewo,
+This field can also be used for customized tracking ids or tag ids </p></td>
+                </tr>
+              
+                <tr>
+                  <td>property_ids</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Ids of the property of the account, e.g. Domain ondewo.com
+This field can also be used for customized tracking ids or tag ids </p></td>
+                </tr>
+              
+                <tr>
+                  <td>datastream_ids</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Ids of the datastream of the property of the account, e.g. Subdomain sub1.ondewo.com or sub2.ondewo.com
+This field can also be used for customized tracking ids or tag ids </p></td>
+                </tr>
+              
+                <tr>
+                  <td>origin_ids</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Ids of the the origin of the user request
+
+For a phone bot, this is the phone number +123456789 the user called (Note: This is not the user's phone number)
+For a chatbot or voicebot on the web, this is the URL on which the bo, e.g. https://ondewo.com/webchat
+For a voice assistant device, this is the device-id or the app id </p></td>
+                </tr>
+              
+                <tr>
+                  <td>identified_user_ids</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Ids of the "identified user" e.g. for a chatbot the email address or for a phone bot the phone number of the user </p></td>
                 </tr>
               
             </tbody>
@@ -17562,6 +17650,55 @@ and not the full URL name including the project parent </p></td>
                   <td><p>duration in seconds rounded </p></td>
                 </tr>
               
+                <tr>
+                  <td>platforms</td>
+                  <td><a href="#ondewo.nlu.Intent.Message.Platform">Intent.Message.Platform</a></td>
+                  <td>repeated</td>
+                  <td><p>Messages for each of the Intent.Message.Platform were sent to the user </p></td>
+                </tr>
+              
+                <tr>
+                  <td>account_ids</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Ids of the account, e.g. Company Ondewo,
+This field can also be used for customized tracking ids or tag ids </p></td>
+                </tr>
+              
+                <tr>
+                  <td>property_ids</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Ids of the property of the account, e.g. Domain ondewo.com
+This field can also be used for customized tracking ids or tag ids </p></td>
+                </tr>
+              
+                <tr>
+                  <td>datastream_ids</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Ids of the datastream of the property of the account, e.g. Subdomain sub1.ondewo.com or sub2.ondewo.com
+This field can also be used for customized tracking ids or tag ids </p></td>
+                </tr>
+              
+                <tr>
+                  <td>origin_ids</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Ids of the the origin of the user request
+
+For a phone bot, this is the phone number +123456789 the user called (Note: This is not the user's phone number)
+For a chatbot or voicebot on the web, this is the URL on which the bo, e.g. https://ondewo.com/webchat
+For a voice assistant device, this is the device-id or the app id </p></td>
+                </tr>
+              
+                <tr>
+                  <td>identified_user_ids</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Ids of the "identified user" e.g. for a chatbot the email address or for a phone bot the phone number of the user </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -17692,8 +17829,7 @@ This string represents what has been passed to the entity recognition and intent
                   <td>platforms</td>
                   <td><a href="#ondewo.nlu.Intent.Message.Platform">Intent.Message.Platform</a></td>
                   <td>repeated</td>
-                  <td><p>Custom Intent.Message.Platform placeholder.
-Note: it will not work with non-placeholders values </p></td>
+                  <td><p>Messages for each of the Intent.Message.Platform were sent to the user </p></td>
                 </tr>
               
             </tbody>
