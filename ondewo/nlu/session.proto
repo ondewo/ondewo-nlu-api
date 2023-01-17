@@ -242,8 +242,33 @@ message QueryParameters {
     // labels associated to this request
     repeated string labels = 7;
 
-    // Custom Intent.Message.Platform placeholder. Note: it will not work with non-placeholders values
+    // Only messages for the specified Intent.Message.Platform platforms are sent to the user in the
+    // <code>DetectIntentResponse</code>
     repeated Intent.Message.Platform platforms = 8;
+
+    // Id of the account, e.g. Company Ondewo
+    string account_id = 9;
+
+    // Id of the property of the account, e.g. Domain ondewo.com
+    // This field can also be used for a customized tracking id or tag id
+    string property_id = 10;
+
+    // Id of the datastream of the property of the account, e.g. Subdomain sub1.ondewo.com or sub2.ondewo.com
+    // This field can also be used for a customized tracking id or tag id
+    string datastream_id = 11;
+
+    // Id of the the origin of the user request
+    //
+    // For a phone bot, this is the phone number +123456789 the user called (Note: This is not the user's phone number)
+    // For a chatbot or voicebot on the web, this is the URL on which the bo, e.g. https://ondewo.com/webchat
+    // For a voice assistant device, this is the device-id or the app id
+    // This field can also be used for a customized tracking id or tag id
+    string origin_id = 12; // https://aim-develop.ondewo.com/
+
+    // Id of the "identified user" e.g. for a chatbot the email address or for a phone bot the phone number of the user
+    // This field can also be used for a customized tracking id or tag id
+    string identified_user_id = 13;
+
 }
 
 // Represents the query input. It can contain either:
@@ -874,8 +899,30 @@ message SessionFilter {
     // Match only sessions for which the duration in seconds rounded are smaller or equal
     float duration_in_s_rounded_max = 41;
 
-    // Custom Intent.Message.Platform placeholder. Note: it will not work with non-placeholders values
+    // Messages for each of the Intent.Message.Platform were sent to the user
     repeated Intent.Message.Platform platforms = 42;
+
+    // Ids of the account, e.g. Company Ondewo,
+    // This field can also be used for customized tracking ids or tag ids
+    repeated string account_ids = 43;
+
+    // Ids of the property of the account, e.g. Domain ondewo.com
+    // This field can also be used for customized tracking ids or tag ids
+    repeated string property_ids = 44;
+
+    // Ids of the datastream of the property of the account, e.g. Subdomain sub1.ondewo.com or sub2.ondewo.com
+    // This field can also be used for customized tracking ids or tag ids
+    repeated string datastream_ids = 45;
+
+    // Ids of the the origin of the user request
+    //
+    // For a phone bot, this is the phone number +123456789 the user called (Note: This is not the user's phone number)
+    // For a chatbot or voicebot on the web, this is the URL on which the bo, e.g. https://ondewo.com/webchat
+    // For a voice assistant device, this is the device-id or the app id
+    repeated string origin_ids = 46;
+
+    // Ids of the "identified user" e.g. for a chatbot the email address or for a phone bot the phone number of the user
+    repeated string identified_user_ids = 47;
 }
 
 // This message contains information about session
@@ -971,6 +1018,31 @@ message SessionInfo {
 
     // duration in seconds rounded
     float duration_in_s_rounded = 25;
+
+        // Messages for each of the Intent.Message.Platform were sent to the user
+    repeated Intent.Message.Platform platforms = 26;
+
+    // Ids of the account, e.g. Company Ondewo,
+    // This field can also be used for customized tracking ids or tag ids
+    repeated string account_ids = 27;
+
+    // Ids of the property of the account, e.g. Domain ondewo.com
+    // This field can also be used for customized tracking ids or tag ids
+    repeated string property_ids = 28;
+
+    // Ids of the datastream of the property of the account, e.g. Subdomain sub1.ondewo.com or sub2.ondewo.com
+    // This field can also be used for customized tracking ids or tag ids
+    repeated string datastream_ids = 29;
+
+    // Ids of the the origin of the user request
+    //
+    // For a phone bot, this is the phone number +123456789 the user called (Note: This is not the user's phone number)
+    // For a chatbot or voicebot on the web, this is the URL on which the bo, e.g. https://ondewo.com/webchat
+    // For a voice assistant device, this is the device-id or the app id
+    repeated string origin_ids = 30;
+
+    // Ids of the "identified user" e.g. for a chatbot the email address or for a phone bot the phone number of the user
+    repeated string identified_user_ids = 31;
 }
 
 // This message is a response including the listing of sessions
@@ -1091,8 +1163,7 @@ message SessionReviewStep {
     // User input without any pre-processing applied
     string query_text_original = 7;
 
-    // Custom Intent.Message.Platform placeholder.
-    // Note: it will not work with non-placeholders values
+    // Messages for each of the Intent.Message.Platform were sent to the user
     repeated Intent.Message.Platform platforms = 8;
 }
 
