@@ -5572,6 +5572,7 @@ Required. |
 
 Optional. If not provided, it will be auto-generated |
 | labels | [string](#string) | repeated | labels for the session - Optional |
+| contexts | [Context](#ondewo.nlu.Context) | repeated | Optional. The collection of contexts to be activated before this query is executed. |
 
 
 
