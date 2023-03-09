@@ -2500,7 +2500,7 @@
 <pre>
 grpcurl -plaintext -H 'cai-token: aimp' -d '{
   "agent": {
-    "display_name": "Pizza Bot",
+    "display_name": "My Pizza Bot",
     "default_language_code": "en",
     "supported_language_codes": ["en"],
     "time_zone": "Europe/Vienna",
@@ -6846,6 +6846,42 @@ Allowed tables to query are:
 Example:
   <code>SELECT ... FROM session</code>
   <code>SELECT ... FROM session, session_steps</code></p></td>
+              </tr>
+            
+              <tr>
+                <td>SESSION_LEAST_X_INTENTS</td>
+                <td>11</td>
+                <td><p>report least x detected intents in session. Supports SessionFilter to filter</p></td>
+              </tr>
+            
+              <tr>
+                <td>SESSION_LEAST_X_ENTITY_TYPES</td>
+                <td>12</td>
+                <td><p>report least x detected entity types. Supports SessionFilter to filter</p></td>
+              </tr>
+            
+              <tr>
+                <td>SESSION_LEAST_X_ENTITY_VALUES</td>
+                <td>13</td>
+                <td><p>report least x detected entity values Supports SessionFilter to filter</p></td>
+              </tr>
+            
+              <tr>
+                <td>SESSION_LEAST_X_USERS</td>
+                <td>14</td>
+                <td><p>report least x users. Supports SessionFilter to filter (Coming soon! Not yet implemented)</p></td>
+              </tr>
+            
+              <tr>
+                <td>SESSION_LEAST_X_LABELS</td>
+                <td>15</td>
+                <td><p>report least x labels. Supports SessionFilter to filter</p></td>
+              </tr>
+            
+              <tr>
+                <td>SESSION_LEAST_X_TAGS</td>
+                <td>16</td>
+                <td><p>report least x tags. Supports SessionFilter to filter</p></td>
               </tr>
             
           </tbody>
@@ -14317,7 +14353,21 @@ The Training phrases field is populated with only a few entries and no annotatio
                   <td>description</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>description, normally needed for suboperations when type is OPERATION_TYPE_UNSPECIFIED </p></td>
+                  <td><p>description, normally needed for sub operations when type is OPERATION_TYPE_UNSPECIFIED </p></td>
+                </tr>
+              
+                <tr>
+                  <td>log</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>The log output of an operation </p></td>
+                </tr>
+              
+                <tr>
+                  <td>log_limit</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>The log output of an operation limited to the last x log entries </p></td>
                 </tr>
               
             </tbody>
