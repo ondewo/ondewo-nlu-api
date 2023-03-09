@@ -1013,6 +1013,24 @@ enum SessionsReportType {
     // report on human handovers. Supports SessionFilter to filter (Coming soon! Not yet implemented)
     SESSION_HUMAN_HANDOVERS = 9;
 
+    // report least x detected intents in session. Supports SessionFilter to filter
+    SESSION_LEAST_X_INTENTS = 10;
+
+    // report least x detected entity types. Supports SessionFilter to filter
+    SESSION_LEAST_X_ENTITY_TYPES = 11;
+
+    // report least x detected entity values Supports SessionFilter to filter
+    SESSION_LEAST_X_ENTITY_VALUES = 12;
+
+    // report least x users. Supports SessionFilter to filter (Coming soon! Not yet implemented)
+    SESSION_LEAST_X_USERS = 13;
+
+    // report least x labels. Supports SessionFilter to filter
+    SESSION_LEAST_X_LABELS = 14;
+
+    // report least x tags. Supports SessionFilter to filter
+    SESSION_LEAST_X_TAGS = 15;
+
     // report based on a query issued tables with session information.
     // Requires to define <code>sql_query</code> in request.
     //

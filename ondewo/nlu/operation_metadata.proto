@@ -116,6 +116,12 @@ message OperationMetadata {
     // maximum number of re-runs in case the operation fails
     int32 max_num_reruns = 15;
 
-    // description, normally needed for suboperations when type is OPERATION_TYPE_UNSPECIFIED
+    // description, normally needed for sub operations when type is OPERATION_TYPE_UNSPECIFIED
     string description = 16;
+
+    // The log output of an operation
+    repeated string log = 17;
+
+    // The log output of an operation limited to the last x log entries
+    int32 log_limit = 18;
 }
