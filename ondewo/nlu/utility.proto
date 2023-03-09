@@ -95,7 +95,7 @@ message ValidateEmbeddedRegexResponse {
 message CleanAllIntentsRequest {
 
     // Required. The agent to list all intents from.
-    // Format: `projects/<Project ID>/agent`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
     // Optional. The language to list training phrases, parameters and rich
@@ -141,11 +141,11 @@ message CleanAllIntentsResponse {
 message CleanIntentRequest {
 
     // Required. The agent to list all intents from.
-    // Format: `projects/<Project ID>/agent`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
     // Required. The name of the intent.
-    // Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre>
     string intent_name = 2;
 
     // Optional. The language to list training phrases, parameters and rich
@@ -280,7 +280,7 @@ message EntityTypeUpdate {
 message CleanAllEntityTypesRequest {
 
     // Required. The agent to list all intents from.
-    // Format: `projects/<Project ID>/agent`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
     // Optional. The language to list training phrases, parameters and rich
@@ -333,7 +333,7 @@ message CleanAllEntityTypesResponse {
 message CleanEntityTypeRequest {
 
     // Required. The agent to list all intents from.
-    // Format: `projects/<Project ID>/agent`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
     // Required. The name of the entity_type
@@ -389,7 +389,7 @@ message AddTrainingPhrasesRequest {
     }
 
     // Required. The agent to list all intents from.
-    // Format: `projects/<Project ID>/agent`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
     // Required. The language to list training phrases, parameters and rich
@@ -426,7 +426,7 @@ message AddTrainingPhrasesResponse {
 message AddTrainingPhrasesFromCSVRequest {
 
     // Required. The agent to list all intents from.
-    // Format: `projects/<Project ID>/agent`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
     // Required. The language to list training phrases, parameters and rich

@@ -498,7 +498,7 @@ service Agents {
 message Agent {
 
     // Required. The project of this agent.
-    // Format: `projects/<Project ID>/agent`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     // Read-only in the Agent message
     string parent = 1;
 
@@ -606,7 +606,7 @@ message UpdateAgentRequest {
 message DeleteAgentRequest {
 
     // Required. The project that the agent to fetch is associated with.
-    // Format: `projects/<Project ID>/agents`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     string parent = 1;
 }
 
@@ -614,7 +614,7 @@ message DeleteAgentRequest {
 message GetAgentRequest {
 
     // Required. The project that the agent to fetch is associated with.
-    // Format: `projects/<Project ID>/agents`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     string parent = 1;
 
     // Optional. Specify the view of the returned agent (full view by default)
@@ -674,7 +674,7 @@ enum InitiationProtocol {
 message TrainAgentRequest {
 
     // Required. The project that the agent to train is associated with.
-    // Format: `projects/<Project ID>`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
     string parent = 1;
 
     // Name of the branch of the agent for versioning. The default branch name is <code>develop</code>.
@@ -688,7 +688,7 @@ message TrainAgentRequest {
 message BuildCacheRequest {
 
     // Required. The project that the agent to build cache is associated with.
-    // Format: `projects/<Project ID>`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
     string parent = 1;
 
     // Name of the branch of the agent for versioning. The default branch name is <code>develop</code>.
@@ -698,7 +698,7 @@ message BuildCacheRequest {
 // The request message for [Agents.ExportAgent][google.cloud.dialogflow.v2.Agents.ExportAgent].
 message ExportAgentRequest {
     // Required. The project that the agent to export is associated with.
-    // Format: `projects/<Project ID>`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
     string parent = 1;
 
     // Optional. The Google Cloud Storage URI to export the agent to.
@@ -744,7 +744,7 @@ message ExportBenchmarkAgentRequest {
 
     // Agent related info
     // Required. The project that the agent to export is associated with.
-    // Format: `projects/<Project ID>`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
     string parent = 1;
 
     // Optional. The compression level of the zip file created.
@@ -779,7 +779,7 @@ message ExportBenchmarkAgentResponse {
 message OptimizeRankingMatchRequest {
 
     // Required. The project that the agent to train is associated with.
-    // Format: `projects/<Project ID>`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
     string parent = 1;
 
     // languages that should be optimized
@@ -824,7 +824,7 @@ message OptimizeRankingMatchResponse {
 message ImportAgentRequest {
 
     // Required. The project that the agent to import is associated with.
-    // Format: `projects/<Project ID>`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
     string parent = 1;
 
     // Required. The agent to import.
@@ -855,7 +855,7 @@ message ImportAgentRequest {
 message RestoreAgentRequest {
 
     // Required. The project that the agent to restore is associated with.
-    // Format: `projects/<Project ID>`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
     string parent = 1;
 
     // Required. The agent to restore.
@@ -886,7 +886,7 @@ message RestoreAgentRequest {
 message GetAgentStatisticsRequest {
 
     // Required. The project to get statistics from.
-    // Format: `projects/<Project ID>`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
     string parent = 1;
 
     // File formats for reports
@@ -935,7 +935,7 @@ enum ReportType {
 message GetSessionsStatisticsRequest {
 
     // Required. The project to get statistics from.
-    // Format: `projects/<Project ID>`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
     string parent = 1;
 
     // File formats for reports
@@ -1054,7 +1054,7 @@ enum ReportFormat {
 message AddUserToProjectRequest {
 
     // Required. The project that the agent to train is associated with.
-    // Format: `projects/<Project ID>`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
     string parent = 1;
 
     // id of the user
@@ -1068,7 +1068,7 @@ message AddUserToProjectRequest {
 message RemoveUserFromProjectRequest {
 
     // Required. The project that the agent to train is associated with.
-    // Format: `projects/<Project ID>`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
     string parent = 1;
 
     // id of the user
@@ -1079,7 +1079,7 @@ message RemoveUserFromProjectRequest {
 message ListUsersInProjectRequest {
 
     // Required. The project that the agent to train is associated with.
-    // Format: `projects/<Project ID>`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
     string parent = 1;
 
     // Optional. The next_page_token value returned from a previous list request.
@@ -1090,7 +1090,7 @@ message ListUsersInProjectRequest {
 message UserInProject {
 
     // Required. The project that the agent to train is associated with.
-    // Format: `projects/<Project ID>`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
     string parent = 1;
 
     // User object
@@ -1145,7 +1145,7 @@ message ListProjectPermissionsResponse {
 message SetAgentStatusRequest {
 
     // Required. The project of which to set the status.
-    // Format: `projects/<Project ID>/agent`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
     // Required. Status of the agent
@@ -1207,7 +1207,7 @@ message AgentSorting {
 message SetResourcesRequest {
 
     // Required. The project that the agent to fetch is associated with.
-    // Format: `projects/<Project ID>/agents`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     string parent = 1;
 
     string name = 2;
@@ -1224,7 +1224,7 @@ message SetResourcesRequest {
 message DeleteResourcesRequest {
 
     // Required. The project that the agent to fetch is associated with.
-    // Format: `projects/<Project ID>/agents`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     string parent = 1;
 
     string name = 2;
@@ -1239,7 +1239,7 @@ message DeleteResourcesRequest {
 message ExportResourcesRequest {
 
     // Required. The project that the agent to fetch is associated with.
-    // Format: `projects/<Project ID>/agents`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     string parent = 1;
 
     string name = 2;
@@ -1254,7 +1254,7 @@ message ExportResourcesRequest {
 message ExportResourcesResponse {
 
     // Required. The project that the agent to fetch is associated with.
-    // Format: `projects/<Project ID>/agents`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     string parent = 1;
 
     string name = 2;
@@ -1271,7 +1271,7 @@ message ExportResourcesResponse {
 message GetModelStatusesRequest {
 
     // Required. The project that the agent to fetch is associated with.
-    // Format: `projects/<Project ID>/agent`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
     int32 cache_version = 2;
@@ -1335,7 +1335,7 @@ message CustomPlatformInfo {
 // Request to get platform mapping
 message GetPlatformMappingRequest {
     // Required. The project that the agent is associated with.
-    // Format: `projects/<Project ID>/agent`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 }
 
@@ -1343,7 +1343,7 @@ message GetPlatformMappingRequest {
 message PlatformMapping {
 
     // Required. The project that the agent is associated with.
-    // Format: `projects/<Project ID>/agent`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
     // Required. If not set, it will set it empty.
@@ -1354,7 +1354,7 @@ message PlatformMapping {
 message FullTextSearchRequest {
 
     // Required. The project that the agent is associated with.
-    // Format: `projects/<Project ID>/agent`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
     // Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
@@ -1398,7 +1398,7 @@ message FullTextSearchRequest {
 message FullTextSearchResponseEntityType {
 
     // Required. The project that the agent to fetch is associated with.
-    // Format: `projects/<Project ID>/agents`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     string parent = 1;
 
     // Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
@@ -1429,7 +1429,7 @@ message FullTextSearchResponseEntityType {
 message FullTextSearchResponseEntity {
 
     // Required. The project that the agent to fetch is associated with.
-    // Format: `projects/<Project ID>/agents`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     string parent = 1;
 
     // Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
@@ -1464,7 +1464,7 @@ message FullTextSearchResponseEntity {
 message FullTextSearchResponseEntitySynonym {
 
     // Required. The project that the agent to fetch is associated with.
-    // Format: `projects/<Project ID>/agents`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     string parent = 1;
 
     // Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
@@ -1502,7 +1502,7 @@ message FullTextSearchResponseEntitySynonym {
 // This message is a response of full text search of intent
 message FullTextSearchResponseIntent {
     // Required. The project that the agent to fetch is associated with.
-    // Format: `projects/<Project ID>/agents`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     string parent = 1;
     // Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
     string language_code = 2;
@@ -1530,7 +1530,7 @@ message FullTextSearchResponseIntent {
 // This message is a response of full text search of intent with context in
 message FullTextSearchResponseIntentContextIn {
     // Required. The project that the agent to fetch is associated with.
-    // Format: `projects/<Project ID>/agents`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     string parent = 1;
 
     // Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
@@ -1565,7 +1565,7 @@ message FullTextSearchResponseIntentContextIn {
 message FullTextSearchResponseIntentContextOut {
 
     // Required. The project that the agent to fetch is associated with.
-    // Format: `projects/<Project ID>/agents`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     string parent = 1;
 
     // Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
@@ -1600,7 +1600,7 @@ message FullTextSearchResponseIntentContextOut {
 message FullTextSearchResponseIntentUsersays {
 
     // Required. The project that the agent to fetch is associated with.
-    // Format: `projects/<Project ID>/agents`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     string parent = 1;
 
     // Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
@@ -1643,7 +1643,7 @@ message FullTextSearchResponseIntentUsersays {
 message FullTextSearchResponseIntentTags {
 
     // Required. The project that the agent to fetch is associated with.
-    // Format: `projects/<Project ID>/agents`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     string parent = 1;
 
     // Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
@@ -1680,7 +1680,7 @@ message FullTextSearchResponseIntentTags {
 message FullTextSearchResponseIntentResponse {
 
     // Required. The project that the agent to fetch is associated with.
-    // Format: `projects/<Project ID>/agents`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     string parent = 1;
 
     // Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
@@ -1718,7 +1718,7 @@ message FullTextSearchResponseIntentResponse {
 message FullTextSearchResponseIntentParameters {
 
     // Required. The project that the agent to fetch is associated with.
-    // Format: `projects/<Project ID>/agents`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     string parent = 1;
 
     // Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
@@ -1755,7 +1755,7 @@ message FullTextSearchResponseIntentParameters {
 message ReindexAgentRequest {
 
     // Required. The project that the agent to fetch is associated with.
-    // Format: `projects/<Project ID>/agents`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     string parent = 1;
 
     // Optional, useful for versioning reasons of the agent data

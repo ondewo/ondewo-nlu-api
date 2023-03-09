@@ -124,7 +124,7 @@ message SessionEntityType {
 // The request message for [SessionEntityTypes.ListSessionEntityTypes][google.cloud.dialogflow.v2.SessionEntityTypes.ListSessionEntityTypes].
 message ListSessionEntityTypesRequest {
   // Required. The session to list all session entity types from.
-  // Format: `projects/<Project ID>/agent/sessions/<Session ID>`.
+  // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre>
   string parent = 1;
 
   // Optional. The maximum number of items to return in a single page. By
@@ -157,7 +157,7 @@ message GetSessionEntityTypeRequest {
 // The request message for [SessionEntityTypes.CreateSessionEntityType][google.cloud.dialogflow.v2.SessionEntityTypes.CreateSessionEntityType].
 message CreateSessionEntityTypeRequest {
   // Required. The session to create a session entity type for.
-  // Format: `projects/<Project ID>/agent/sessions/<Session ID>`.
+  // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre>
   string parent = 1;
 
   // Required. The session entity type to create.

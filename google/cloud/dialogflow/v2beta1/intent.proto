@@ -602,11 +602,11 @@ message Intent {
   // Represents a single followup intent in the chain.
   message FollowupIntentInfo {
     // The unique identifier of the followup intent.
-    // Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre>
     string followup_intent_name = 1;
 
     // The unique identifier of the followup intent parent.
-    // Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre>
     string parent_followup_intent_name = 2;
   }
 
@@ -626,7 +626,7 @@ message Intent {
   // Required for all methods except `create` (`create` populates the name
   // automatically.
   // The unique identifier of this intent.
-  // Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
+  // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre>
   string name = 1;
 
   // Required. The name of this intent.
@@ -668,7 +668,7 @@ message Intent {
 
   // Optional. The list of context names required for this intent to be
   // triggered.
-  // Format: `projects/<Project ID>/agent/sessions/-/contexts/<Context ID>`.
+  // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/-/contexts/&lt;context_uuid&gt;</code></pre>
   repeated string input_context_names = 7;
 
   // Optional. The collection of event names that trigger the intent.
@@ -688,7 +688,7 @@ message Intent {
   // is matched. Context messages in this collection should not set the
   // parameters field. Setting the `lifespan_count` to 0 will reset the context
   // when the intent is matched.
-  // Format: `projects/<Project ID>/agent/sessions/-/contexts/<Context ID>`.
+  // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/-/contexts/&lt;context_uuid&gt;</code></pre>
   repeated Context output_contexts = 11;
 
   // Optional. Indicates whether to delete all contexts in the current
@@ -708,13 +708,13 @@ message Intent {
 
   // The unique identifier of the root intent in the chain of followup intents.
   // It identifies the correct followup intents chain for this intent.
-  // Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
+  // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre>
   string root_followup_intent_name = 16;
 
   // The unique identifier of the parent intent in the chain of followup
   // intents.
   // It identifies the parent followup intent.
-  // Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
+  // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre>
   string parent_followup_intent_name = 17;
 
   // Optional. Collection of information about all followup intents that have
@@ -725,7 +725,7 @@ message Intent {
 // The request message for [Intents.ListIntents][google.cloud.dialogflow.v2beta1.Intents.ListIntents].
 message ListIntentsRequest {
   // Required. The agent to list all intents from.
-  // Format: `projects/<Project ID>/agent`.
+  // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
   string parent = 1;
 
   // Optional. The language to list training phrases, parameters and rich
@@ -760,7 +760,7 @@ message ListIntentsResponse {
 // The request message for [Intents.GetIntent][google.cloud.dialogflow.v2beta1.Intents.GetIntent].
 message GetIntentRequest {
   // Required. The name of the intent.
-  // Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
+  // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre>
   string name = 1;
 
   // Optional. The language to retrieve training phrases, parameters and rich
@@ -777,7 +777,7 @@ message GetIntentRequest {
 // The request message for [Intents.CreateIntent][google.cloud.dialogflow.v2beta1.Intents.CreateIntent].
 message CreateIntentRequest {
   // Required. The agent to create a intent for.
-  // Format: `projects/<Project ID>/agent`.
+  // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
   string parent = 1;
 
   // Required. The intent to create.
@@ -797,7 +797,7 @@ message CreateIntentRequest {
 // The request message for [Intents.UpdateIntent][google.cloud.dialogflow.v2beta1.Intents.UpdateIntent].
 message UpdateIntentRequest {
   // Required. The intent to update.
-  // Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
+  // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre>
   Intent intent = 1;
 
   // Optional. The language of training phrases, parameters and rich messages
@@ -817,14 +817,14 @@ message UpdateIntentRequest {
 // The request message for [Intents.DeleteIntent][google.cloud.dialogflow.v2beta1.Intents.DeleteIntent].
 message DeleteIntentRequest {
   // Required. The name of the intent to delete.
-  // Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
+  // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre>
   string name = 1;
 }
 
 // The request message for [Intents.BatchUpdateIntents][google.cloud.dialogflow.v2beta1.Intents.BatchUpdateIntents].
 message BatchUpdateIntentsRequest {
   // Required. The name of the agent to update or create intents in.
-  // Format: `projects/<Project ID>/agent`.
+  // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
   string parent = 1;
 
   // Required. The source of the intent batch.

@@ -724,7 +724,7 @@ enum AudioEncoding {
 message Session {
 
     // The unique identifier of the session
-    // Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID>
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre>
     string name = 1;
 
     // The list of all the steps of the session
@@ -751,7 +751,7 @@ message Session {
 message SessionStep {
 
     // The unique identifier for the given review
-    // Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID>/sessionsteps/<SESSION_ID>`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/steps/&lt;session_step_uuid&gt;</code></pre>
     string name = 1;
 
     // The detect intent request of the session step
@@ -769,7 +769,7 @@ message SessionStep {
 message TrackSessionStepRequest {
 
     // The unique identifier for the given review
-    // Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID>/steps/<SESSION_ID>`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/steps/&lt;session_step_uuid&gt;</code></pre>.
     string session_id = 1;
 
     // The session step to be added
@@ -783,7 +783,7 @@ message TrackSessionStepRequest {
 message ListSessionsRequest {
 
     // The parent for which sessions should be listed
-    // Format: `projects/<PROJECT_ID>/agent`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
     // An enum specifying the amount of information to be returned per session
@@ -1138,7 +1138,7 @@ message ListSessionsResponse {
 // This message is a request to get a session
 message GetSessionRequest {
     // The session to be returned
-    // Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID>`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre>
     string session_id = 1;
 
     // whether to return a full or sparse view; if unspecified full view is returned
@@ -1154,7 +1154,7 @@ message CreateSessionRequest {
 
     // Creates a session that collects all the conversation interactions between the machine and a user
     // The unique identifier of an Agent
-    // Format: `projects/<PROJECT_ID>/agent`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1; // Required.
 
     // The unique UUID of a Session
@@ -1172,7 +1172,7 @@ message CreateSessionRequest {
 message DeleteSessionRequest {
 
     // Required. The session to be deleted
-    // Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_UUID>`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre>
     string session_id = 1;
 }
 
@@ -1180,11 +1180,11 @@ message DeleteSessionRequest {
 message CreateSessionReviewRequest {
 
     // The unique identifier for the session under review
-    // Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID>`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre>
     string session_id = 1;
 
     // Optional: The unique identifier of the parent review
-    // Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID>/reviews/<SESSION_REVIEW_ID>`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/reviews/&lt;session_review_uuid&gt;</code></pre>
     string parent_review_id = 2;
 
     // The reviews for all steps in the session
@@ -1197,7 +1197,7 @@ message CreateSessionReviewRequest {
 message SessionReview {
 
     // The unique identifier for the given review
-    // Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID>/reviews/<SESSION_REVIEW_ID>`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/reviews/&lt;session_review_uuid&gt;</code></pre>
     string name = 1;
 
     // The reviews for all steps in the session
@@ -1222,7 +1222,7 @@ message SessionReview {
 message SessionReviewStep {
 
     // The unique identifier for the given review step
-    // Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID>/reviews/<SESSION_REVIEW_ID>/sessionreviewsteps/<SESSION_REVIEW_STEP_ID>`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/reviews/&lt;review_uuid&gt;/sessionreviewsteps/&lt;session_review_step_uuid&gt;</code></pre>
     string name = 1;
 
     // The user says with markup of the detected entity types after the preprocessing such as spelling correction,
@@ -1287,7 +1287,7 @@ message ListSessionLabelsRequest {
 message ListSessionLabelsOfAllSessionsRequest {
 
     // The parent for which the labels for all sessions should be listed
-    // Format: `projects/<PROJECT_ID>/agent`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
     // Optional. A filter to narrow the response down to sessions of interest.
@@ -1305,7 +1305,7 @@ message ListSessionLabelsResponse {
 message ListLanguageCodesOfAllSessionsRequest {
 
     // The parent for which the language_codes for all sessions should be listed
-    // Format: `projects/<PROJECT_ID>/agent`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
     // Optional. A filter to narrow the response down to sessions of interest.
@@ -1325,7 +1325,7 @@ message ListLanguageCodesResponse {
 message ListMatchedIntentsOfAllSessionsRequest {
 
     // The parent for which the matched_intents for all sessions should be listed
-    // Format: `projects/<PROJECT_ID>/agent`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
     // Optional. A filter to narrow the response down to sessions of interest.
@@ -1344,7 +1344,7 @@ message ListMatchedIntentsResponse {
 message ListMatchedEntityTypesOfAllSessionsRequest {
 
     // The parent for which the matched_entity_types for all sessions should be listed
-    // Format: `projects/<PROJECT_ID>/agent`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
     // Optional. A filter to narrow the response down to sessions of interest.
@@ -1363,7 +1363,7 @@ message ListMatchedEntityTypesResponse {
 message ListUserIdsOfAllSessionsRequest {
 
     // The parent for which the user_ids for all sessions should be listed
-    // Format: `projects/<PROJECT_ID>/agent`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
     // Optional. A filter to narrow the response down to sessions of interest.
@@ -1382,7 +1382,7 @@ message ListUserIdsResponse {
 message ListIdentifiedUserIdsOfAllSessionsRequest {
 
     // The parent for which the identified_user_ids for all sessions should be listed
-    // Format: `projects/<PROJECT_ID>/agent`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
     // Optional. A filter to narrow the response down to sessions of interest.
@@ -1401,7 +1401,7 @@ message ListIdentifiedUserIdsResponse {
 message ListTagsOfAllSessionsRequest {
 
     // The parent for which the tags for all sessions should be listed
-    // Format: `projects/<PROJECT_ID>/agent`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
     // Optional. A filter to narrow the response down to sessions of interest.
@@ -1420,7 +1420,7 @@ message ListTagsResponse {
 message ListInputContextsOfAllSessionsRequest {
 
     // The parent for which the input_contexts for all sessions should be listed
-    // Format: `projects/<PROJECT_ID>/agent`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
     // Optional. A filter to narrow the response down to sessions of interest.
@@ -1439,7 +1439,7 @@ message ListInputContextsResponse {
 message ListOutputContextsOfAllSessionsRequest {
 
     // The parent for which the output_contexts for all sessions should be listed
-    // Format: `projects/<PROJECT_ID>/agent`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
     // Optional. A filter to narrow the response down to sessions of interest.
@@ -1458,7 +1458,7 @@ message ListOutputContextsResponse {
 message ListPlatformsOfAllSessionsRequest {
 
     // The parent for which the platforms for all sessions should be listed
-    // Format: `projects/<PROJECT_ID>/agent`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
     // Optional. A filter to narrow the response down to sessions of interest.
@@ -1477,7 +1477,7 @@ message ListPlatformsResponse {
 message ListAccountIdsOfAllSessionsRequest {
 
     // The parent for which the account_ids for all sessions should be listed
-    // Format: `projects/<PROJECT_ID>/agent`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
     // Optional. A filter to narrow the response down to sessions of interest.
@@ -1496,7 +1496,7 @@ message ListAccountIdsResponse {
 message ListPropertyIdsOfAllSessionsRequest {
 
     // The parent for which the property_ids for all sessions should be listed
-    // Format: `projects/<PROJECT_ID>/agent`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
     // Optional. A filter to narrow the response down to sessions of interest.
@@ -1515,7 +1515,7 @@ message ListPropertyIdsResponse {
 message ListDatastreamIdsOfAllSessionsRequest {
 
     // The parent for which the datastream_ids for all sessions should be listed
-    // Format: `projects/<PROJECT_ID>/agent`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
     // Optional. A filter to narrow the response down to sessions of interest.
@@ -1534,7 +1534,7 @@ message ListDatastreamIdsResponse {
 message ListOriginIdsOfAllSessionsRequest {
 
     // The parent for which the origin_ids for all sessions should be listed
-    // Format: `projects/<PROJECT_ID>/agent`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
     // Optional. A filter to narrow the response down to sessions of interest.
@@ -1599,7 +1599,7 @@ message DeleteSessionLabelsRequest {
 message ListSessionReviewsRequest {
 
     // The unique identifier for the session for which reviews should be listed
-    // Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID>`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre>
     string session_id = 1;
 
     // An enum specifying the amount of information to be returned per session review
@@ -1632,7 +1632,7 @@ message GetSessionReviewRequest {
 message GetLatestSessionReviewRequest {
 
     // The unique identifier of the session for which the latest review should be returned
-    // Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID>`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre>
     string session_id = 1;
 
     // An enum specifying the amount of information to be returned for the desired session review

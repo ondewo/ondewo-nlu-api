@@ -104,7 +104,7 @@ message Document {
 
   // The document resource name.
   // The name must be empty when creating a document.
-  // Format: `projects/<Project ID>/knowledgeBases/<Knowledge Base
+  // Format: <pre><code>projects/&lt;project_uuid&gt;/knowledgeBases/&lt;knowledge_base_uuid&gt;</code></pre>
   // ID>/documents/<Document ID>`.
   string name = 1;
 
@@ -140,7 +140,7 @@ message Document {
 // Request message for [Documents.ListDocuments][google.cloud.dialogflow.v2beta1.Documents.ListDocuments].
 message ListDocumentsRequest {
   // Required. The knowledge base to list all documents for.
-  // Format: `projects/<Project ID>/knowledgeBases/<Knowledge Base ID>`.
+  // Format: <pre><code>projects/&lt;project_uuid&gt;/knowledgeBases/&lt;knowledge_base_uuid&gt;</code></pre>
   string parent = 1;
 
   // Optional. The maximum number of items to return in a single page. By
@@ -172,7 +172,7 @@ message GetDocumentRequest {
 // Request message for [Documents.CreateDocument][google.cloud.dialogflow.v2beta1.Documents.CreateDocument].
 message CreateDocumentRequest {
   // Required. The knoweldge base to create a document for.
-  // Format: `projects/<Project ID>/knowledgeBases/<Knowledge Base ID>`.
+  // Format: <pre><code>projects/&lt;project_uuid&gt;/knowledgeBases/&lt;knowledge_base_uuid&gt;</code></pre>
   string parent = 1;
 
   // Required. The document to create.
@@ -182,7 +182,7 @@ message CreateDocumentRequest {
 // Request message for [Documents.DeleteDocument][google.cloud.dialogflow.v2beta1.Documents.DeleteDocument].
 message DeleteDocumentRequest {
   // The name of the document to delete.
-  // Format: `projects/<Project ID>/knowledgeBases/<Knowledge Base
+  // Format: <pre><code>projects/&lt;project_uuid&gt;/knowledgeBases/&lt;knowledge_base_uuid&gt;</code></pre>
   // ID>/documents/<Document ID>`.
   string name = 1;
 }

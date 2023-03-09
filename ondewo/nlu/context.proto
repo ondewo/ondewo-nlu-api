@@ -155,7 +155,7 @@ message Context {
 // The request message for [Contexts.ListContexts][google.cloud.dialogflow.v2.Contexts.ListContexts].
 message ListContextsRequest {
     // Required. The session to list all contexts from.
-    // Format: `projects/<Project ID>/agent/sessions/<Session ID>`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre>
     string session_id = 1;
 
     // Optional. The next_page_token value returned from a previous list request.
@@ -183,7 +183,7 @@ message GetContextRequest {
 // The request message for [Contexts.CreateContext][google.cloud.dialogflow.v2.Contexts.CreateContext].
 message CreateContextRequest {
     // Required. The session to create a context for.
-    // Format: `projects/<Project ID>/agent/sessions/<Session ID>`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre>
     string session_id = 1;
 
     // Required. The context to create.
@@ -209,7 +209,7 @@ message DeleteContextRequest {
 // The request message for [Contexts.DeleteAllContexts][google.cloud.dialogflow.v2.Contexts.DeleteAllContexts].
 message DeleteAllContextsRequest {
     // Required. The name of the session to delete all contexts from.
-    // Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_UUID>`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre>
 
     string session_id = 1;
 }

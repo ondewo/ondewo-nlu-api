@@ -302,7 +302,7 @@ message KnowledgeAnswers {
     }
 
     // Indicates which Knowledge Document this answer was extracted from.
-    // Format: `projects/<Project ID>/knowledgeBases/<Knowledge Base
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/knowledgeBases/&lt;knowledge_base_uuid&gt;</code></pre>
     // ID>/documents/<Document ID>`.
     string source = 1;
 

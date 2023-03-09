@@ -114,7 +114,7 @@ message Context {
 // The request message for [Contexts.ListContexts][google.cloud.dialogflow.v2.Contexts.ListContexts].
 message ListContextsRequest {
   // Required. The session to list all contexts from.
-  // Format: `projects/<Project ID>/agent/sessions/<Session ID>`.
+  // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre>
   string parent = 1;
 
   // Optional. The maximum number of items to return in a single page. By
@@ -146,7 +146,7 @@ message GetContextRequest {
 // The request message for [Contexts.CreateContext][google.cloud.dialogflow.v2.Contexts.CreateContext].
 message CreateContextRequest {
   // Required. The session to create a context for.
-  // Format: `projects/<Project ID>/agent/sessions/<Session ID>`.
+  // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre>
   string parent = 1;
 
   // Required. The context to create.

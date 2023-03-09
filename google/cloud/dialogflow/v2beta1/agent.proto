@@ -151,7 +151,7 @@ message Agent {
   }
 
   // Required. The project of this agent.
-  // Format: `projects/<Project ID>`.
+  // Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
   string parent = 1;
 
   // Required. The name of this agent.
@@ -200,14 +200,14 @@ message Agent {
 // The request message for [Agents.GetAgent][google.cloud.dialogflow.v2beta1.Agents.GetAgent].
 message GetAgentRequest {
   // Required. The project that the agent to fetch is associated with.
-  // Format: `projects/<Project ID>`.
+  // Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
   string parent = 1;
 }
 
 // The request message for [Agents.SearchAgents][google.cloud.dialogflow.v2beta1.Agents.SearchAgents].
 message SearchAgentsRequest {
   // Required. The project to list agents from.
-  // Format: `projects/<Project ID or '-'>`.
+  // Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre> or <pre><code>'-'</code></pre> or '-'>`.
   string parent = 1;
 
   // Optional. The maximum number of items to return in a single page. By
@@ -232,14 +232,14 @@ message SearchAgentsResponse {
 // The request message for [Agents.TrainAgent][google.cloud.dialogflow.v2beta1.Agents.TrainAgent].
 message TrainAgentRequest {
   // Required. The project that the agent to train is associated with.
-  // Format: `projects/<Project ID>`.
+  // Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
   string parent = 1;
 }
 
 // The request message for [Agents.ExportAgent][google.cloud.dialogflow.v2beta1.Agents.ExportAgent].
 message ExportAgentRequest {
   // Required. The project that the agent to export is associated with.
-  // Format: `projects/<Project ID>`.
+  // Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
   string parent = 1;
 
   // Optional. The
@@ -279,7 +279,7 @@ message ExportAgentResponse {
 // The request message for [Agents.ImportAgent][google.cloud.dialogflow.v2beta1.Agents.ImportAgent].
 message ImportAgentRequest {
   // Required. The project that the agent to import is associated with.
-  // Format: `projects/<Project ID>`.
+  // Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
   string parent = 1;
 
   // Required. The agent to import.
@@ -309,7 +309,7 @@ message ImportAgentRequest {
 // The request message for [Agents.RestoreAgent][google.cloud.dialogflow.v2beta1.Agents.RestoreAgent].
 message RestoreAgentRequest {
   // Required. The project that the agent to restore is associated with.
-  // Format: `projects/<Project ID>`.
+  // Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
   string parent = 1;
 
   // Required. The agent to restore.

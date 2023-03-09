@@ -145,7 +145,7 @@ message SessionEntityType {
 // The request message for [SessionEntityTypes.ListSessionEntityTypes][google.cloud.dialogflow.v2beta1.SessionEntityTypes.ListSessionEntityTypes].
 message ListSessionEntityTypesRequest {
   // Required. The session to list all session entity types from.
-  // Format: `projects/<Project ID>/agent/sessions/<Session ID>` or
+  // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre> or
   // `projects/<Project ID>/agent/environments/<Environment ID>/users/<User ID>/
   // sessions/<Session ID>`.
   // If `Environment ID` is not specified, we assume default 'draft'
@@ -185,7 +185,7 @@ message GetSessionEntityTypeRequest {
 // The request message for [SessionEntityTypes.CreateSessionEntityType][google.cloud.dialogflow.v2beta1.SessionEntityTypes.CreateSessionEntityType].
 message CreateSessionEntityTypeRequest {
   // Required. The session to create a session entity type for.
-  // Format: `projects/<Project ID>/agent/sessions/<Session ID>` or
+  // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre> or
   // `projects/<Project ID>/agent/environments/<Environment ID>/users/<User ID>/
   // sessions/<Session ID>`. If `Environment ID` is not specified, we assume
   // default 'draft' environment. If `User ID` is not specified, we assume

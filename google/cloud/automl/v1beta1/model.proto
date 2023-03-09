@@ -57,7 +57,7 @@ message Model {
 
   // Output only.
   // Resource name of the model.
-  // Format: `projects/{project_id}/locations/{location_id}/models/{model_id}`
+  // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/locations/&lt;location_uuid&gt;</code></pre>
   string name = 1;
 
   // Required. The name of the model to show in the interface. The name can be

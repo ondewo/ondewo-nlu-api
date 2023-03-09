@@ -80,7 +80,7 @@ service KnowledgeBases {
 message KnowledgeBase {
   // The knowledge base resource name.
   // The name must be empty when creating a knowledge base.
-  // Format: `projects/<Project ID>/knowledgeBases/<Knowledge Base ID>`.
+  // Format: <pre><code>projects/&lt;project_uuid&gt;/knowledgeBases/&lt;knowledge_base_uuid&gt;</code></pre>
   string name = 1;
 
   // Required. The display name of the knowledge base. The name must be 1024
@@ -91,7 +91,7 @@ message KnowledgeBase {
 // Request message for [KnowledgeBases.ListKnowledgeBases][google.cloud.dialogflow.v2beta1.KnowledgeBases.ListKnowledgeBases].
 message ListKnowledgeBasesRequest {
   // Required. The agent to list of knowledge bases for.
-  // Format: `projects/<Project ID>/agent`.
+  // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
   string parent = 1;
 
   // Optional. The maximum number of items to return in a single page. By
@@ -122,7 +122,7 @@ message GetKnowledgeBaseRequest {
 // Request message for [KnowledgeBases.CreateKnowledgeBase][google.cloud.dialogflow.v2beta1.KnowledgeBases.CreateKnowledgeBase].
 message CreateKnowledgeBaseRequest {
   // Required. The agent to create a knowledge base for.
-  // Format: `projects/<Project ID>/agent`.
+  // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
   string parent = 1;
 
   // Required. The knowledge base to create.
@@ -132,7 +132,7 @@ message CreateKnowledgeBaseRequest {
 // Request message for [KnowledgeBases.DeleteKnowledgeBase][google.cloud.dialogflow.v2beta1.KnowledgeBases.DeleteKnowledgeBase].
 message DeleteKnowledgeBaseRequest {
   // Required. The name of the knowledge base to delete.
-  // Format: `projects/<Project ID>/knowledgeBases/<Knowledge Base ID>`.
+  // Format: <pre><code>projects/&lt;project_uuid&gt;/knowledgeBases/&lt;knowledge_base_uuid&gt;</code></pre>
   string name = 1;
 
   // Optional. Force deletes the knowledge base. When set to true, any documents
