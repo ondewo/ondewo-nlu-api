@@ -2,6 +2,15 @@
 
 *****************
 
+## Release ONDEWO NLU API 4.3.0
+
+### Improvements
+
+* [[OND211-2089]](https://ondewo.atlassian.net/browse/OND211-2089) - Added further SessionsReportType: SESSION_LEAST_X_INTENTS, SESSION_LEAST_X_ENTITY_TYPES, SESSION_LEAST_X_ENTITY_VALUES, SESSION_LEAST_X_USERS, SESSION_LEAST_X_LABELS, SESSION_LEAST_X_TAGS and TOTAL_STATISTICS
+* [[OND211-2089]](https://ondewo.atlassian.net/browse/OND211-2089) - Improved documentation for resource names
+
+*****************
+
 ## Release ONDEWO NLU API 4.2.0
 
 ### Improvements

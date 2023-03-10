@@ -960,7 +960,7 @@ message GetSessionsStatisticsRequest {
     repeated string order_bys = 8;
 
     // Optional. The mask to control which data fields will be added to the returned data.
-    // Example: path=["session.duration_in_s_min", "session.tags"]
+    // Example: paths=["duration_in_s_min", "id", "session_id", "project_id"]
     google.protobuf.FieldMask field_mask = 9;
 
     // SQL Query - only usable with specific SessionsReportType such as SessionsReportType.SESSION_SQL_QUERY
@@ -1051,7 +1051,10 @@ enum SessionsReportType {
 
     // report least x tags. Supports SessionFilter to filter
     SESSION_LEAST_X_TAGS = 16;
-    
+
+    // report total numbers of e.g. sessions, session steps, etc.
+    TOTAL_STATISTICS = 17;
+
 }
 
 
