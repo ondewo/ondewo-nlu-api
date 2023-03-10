@@ -1334,7 +1334,7 @@ Request of the report of the statistics about sessions
 | limit | [int32](#int32) |  | Optional. limit the returned number of results |
 | group_bys | [string](#string) | repeated | Optional. Grouping based on named properties |
 | order_bys | [string](#string) | repeated | Optional. Order based on named properties |
-| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which data fields will be added to the returned data. Example: path=["session.duration_in_s_min", "session.tags"] |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which data fields will be added to the returned data. Example: paths=["duration_in_s_min", "id", "session_id", "project_id"] |
 | sql_query | [string](#string) |  | SQL Query - only usable with specific SessionsReportType such as SessionsReportType.SESSION_SQL_QUERY |
 
 
@@ -1871,6 +1871,7 @@ Example: <code>SELECT ... FROM session</code> <code>SELECT ... FROM session, ses
 | SESSION_LEAST_X_USERS | 14 | report least x users. Supports SessionFilter to filter (Coming soon! Not yet implemented) |
 | SESSION_LEAST_X_LABELS | 15 | report least x labels. Supports SessionFilter to filter |
 | SESSION_LEAST_X_TAGS | 16 | report least x tags. Supports SessionFilter to filter |
+| TOTAL_STATISTICS | 17 | report total numbers of e.g. sessions, session steps, etc. |
 
 
  <!-- end enums -->

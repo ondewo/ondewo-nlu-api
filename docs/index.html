@@ -5536,7 +5536,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre> </p></td>
                   <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
                   <td></td>
                   <td><p>Optional. The mask to control which data fields will be added to the returned data.
-Example: path=["session.duration_in_s_min", "session.tags"] </p></td>
+Example: paths=["duration_in_s_min", "id", "session_id", "project_id"] </p></td>
                 </tr>
               
                 <tr>
@@ -6882,6 +6882,12 @@ Example:
                 <td>SESSION_LEAST_X_TAGS</td>
                 <td>16</td>
                 <td><p>report least x tags. Supports SessionFilter to filter</p></td>
+              </tr>
+            
+              <tr>
+                <td>TOTAL_STATISTICS</td>
+                <td>17</td>
+                <td><p>report total numbers of e.g. sessions, session steps, etc.</p></td>
               </tr>
             
           </tbody>
