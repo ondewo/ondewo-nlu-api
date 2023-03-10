@@ -1865,6 +1865,12 @@ Type of reports about the domain of the agent
 Allowed tables to query are: * session * session_context * session_step * session_step_context * session_step_detect_entity * session_step_detect_intent * session_step_detect_intent_context_in * session_step_detect_intent_context_out * session_step_detect_intent_context_out * session_step_detect_intent_label * session_step_detect_intent_tag
 
 Example: <code>SELECT ... FROM session</code> <code>SELECT ... FROM session, session_steps</code> |
+| SESSION_LEAST_X_INTENTS | 11 | report least x detected intents in session. Supports SessionFilter to filter |
+| SESSION_LEAST_X_ENTITY_TYPES | 12 | report least x detected entity types. Supports SessionFilter to filter |
+| SESSION_LEAST_X_ENTITY_VALUES | 13 | report least x detected entity values Supports SessionFilter to filter |
+| SESSION_LEAST_X_USERS | 14 | report least x users. Supports SessionFilter to filter (Coming soon! Not yet implemented) |
+| SESSION_LEAST_X_LABELS | 15 | report least x labels. Supports SessionFilter to filter |
+| SESSION_LEAST_X_TAGS | 16 | report least x tags. Supports SessionFilter to filter |
 
 
  <!-- end enums -->
@@ -1893,7 +1899,7 @@ For more information about agents, see the [Dialogflow documentation](https://di
 
 <p>Examples:</p>
 
-<pre> grpcurl -plaintext -H 'cai-token: aimp' -d '{ "agent": { "display_name": "Pizza Bot", "default_language_code": "en", "supported_language_codes": ["en"], "time_zone": "Europe/Vienna", "nlu_platform": "ONDEWO" } }' localhost:50055 ondewo.nlu.Agents.CreateAgent </pre>
+<pre> grpcurl -plaintext -H 'cai-token: aimp' -d '{ "agent": { "display_name": "My Pizza Bot", "default_language_code": "en", "supported_language_codes": ["en"], "time_zone": "Europe/Vienna", "nlu_platform": "ONDEWO" } }' localhost:50055 ondewo.nlu.Agents.CreateAgent </pre>
 
 <samp>{ "parent": "projects/76aaf4f3-a1f6-4fda-b4b3-351c64e65bc4/agent", "display_name": "Pizza Bot", "default_language_code": "en", "supported_language_codes": [ "en" ], "time_zone": "Europe/Vienna", "nlu_platform": "ONDEWO", "owner_id": "5aac51b8-668f-49dd-913f-cc683e56af34" } </samp> |
 | UpdateAgent | [UpdateAgentRequest](#ondewo.nlu.UpdateAgentRequest) | [Agent](#ondewo.nlu.Agent) | Updates the specified agent.
@@ -5001,7 +5007,9 @@ can be a sub-operation itself
 | host_name | [string](#string) |  | name of the host where the operation was executed |
 | num_reruns | [int32](#int32) |  | number of times the operation was re-run |
 | max_num_reruns | [int32](#int32) |  | maximum number of re-runs in case the operation fails |
-| description | [string](#string) |  | description, normally needed for suboperations when type is OPERATION_TYPE_UNSPECIFIED |
+| description | [string](#string) |  | description, normally needed for sub operations when type is OPERATION_TYPE_UNSPECIFIED |
+| log | [string](#string) | repeated | The log output of an operation |
+| log_limit | [int32](#int32) |  | The log output of an operation limited to the last x log entries |
 
 
 
