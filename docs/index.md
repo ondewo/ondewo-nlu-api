@@ -6487,6 +6487,8 @@ This message contains a session filter
 
 For a phone bot, this is the phone number +123456789 the user called (Note: This is not the user's phone number) For a chatbot or voicebot on the web, this is the URL on which the bo, e.g. https://ondewo.com/webchat For a voice assistant device, this is the device-id or the app id |
 | identified_user_ids | [string](#string) | repeated | Ids of the "identified user" e.g. for a chatbot the email address or for a phone bot the phone number of the user |
+| duration_interval_60s_rounded_min | [float](#float) |  | Match only sessions for which the duration in 60 seconds rounded are larger or equal |
+| duration_interval_60s_rounded_max | [float](#float) |  | Match only sessions for which the duration in 60 seconds rounded are smaller or equal |
 
 
 
@@ -6538,6 +6540,7 @@ All fields below are optional. Multiple fields specified at the same time are ch
 
 For a phone bot, this is the phone number +123456789 the user called (Note: This is not the user's phone number) For a chatbot or voicebot on the web, this is the URL on which the bo, e.g. https://ondewo.com/webchat For a voice assistant device, this is the device-id or the app id |
 | identified_user_ids | [string](#string) | repeated | Ids of the "identified user" e.g. for a chatbot the email address or for a phone bot the phone number of the user |
+| duration_interval_60s_rounded | [float](#float) |  | duration in 60 seconds intervals rounded |
 
 
 
