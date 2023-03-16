@@ -1003,6 +1003,12 @@ message SessionFilter {
 
     // Ids of the "identified user" e.g. for a chatbot the email address or for a phone bot the phone number of the user
     repeated string identified_user_ids = 47;
+
+        // Match only sessions for which the duration in 60 seconds rounded are larger or equal
+    float duration_interval_60s_rounded_min = 48;
+
+    // Match only sessions for which the duration in 60 seconds rounded are smaller or equal
+    float duration_interval_60s_rounded_max = 49;
 }
 
 // This message contains information about session
@@ -1123,6 +1129,9 @@ message SessionInfo {
 
     // Ids of the "identified user" e.g. for a chatbot the email address or for a phone bot the phone number of the user
     repeated string identified_user_ids = 31;
+
+    // duration in 60 seconds intervals rounded
+    float duration_interval_60s_rounded = 32;
 }
 
 // This message is a response including the listing of sessions

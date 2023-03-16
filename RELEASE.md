@@ -2,6 +2,14 @@
 
 *****************
 
+## Release ONDEWO NLU API 4.4.0
+
+### Improvements
+
+* Added duration_interval_60s_rounded_min, duration_interval_60s_rounded_max and duration_interval_60s_rounded for Session filtering
+
+*****************
+
 ## Release ONDEWO NLU API 4.3.0
 
 ### Improvements
