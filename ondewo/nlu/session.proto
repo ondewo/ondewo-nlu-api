@@ -874,11 +874,11 @@ message SessionFilter {
 
     // Match only sessions whose time range falls within the following range (in UNIX epochs).
     // Defaults to 0 if not set.
-    float earliest = 8;
+    double earliest = 8;
 
     // Match only sessions whose time range falls within the following range (in UNIX epochs).
     // Defaults to current epoch if not set
-    float latest = 9;
+    double latest = 9;
 
     // Match only sessions for which the number of turns (interaction steps) falls in the following range
     // Defaults to 0 if not set.
@@ -1037,11 +1037,11 @@ message SessionInfo {
 
     // The earliest date of the given session (in UNIX epochs), i.e. the time of the first interaction of a user
     // in the given session
-    float earliest = 6;
+    double earliest = 6;
 
     // The latest date of the given session (in UNIX epochs), i.e. the time of the last interaction of a user
     // in the given session
-    float latest = 7;
+    double latest = 7;
 
     // The number of turns (interaction steps) in the given session
     int32 number_turns = 8;

@@ -2,6 +2,15 @@
 
 *****************
 
+## Release ONDEWO NLU API 4.5.0
+
+### Bug fixes
+
+* SessionFilter: Use double instead of float for earliest and latest since float is too small to hold the datetime timestamp as python float
+* SessionInfo: Use double instead of float for earliest and latest since float is too small to hold the datetime timestamp as python float
+
+*****************
+
 ## Release ONDEWO NLU API 4.4.0
 
 ### Improvements
