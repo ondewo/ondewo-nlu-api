@@ -6445,8 +6445,8 @@ This message contains a session filter
 | min_intents_confidence_max | [float](#float) |  | Match only sessions where the minimum confidence for intent detection along the session falls in the following range. Defaults to +1 if not set. |
 | min_entity_types_confidence_min | [float](#float) |  | Match only sessions where the minimum confidence for entity recognition along the session falls in the following range. Defaults to -1 if not set. |
 | min_entity_types_confidence_max | [float](#float) |  | Match only sessions where the minimum confidence for entity recognition along the session falls in the following range. Defaults to +1 if not set. |
-| earliest | [float](#float) |  | Match only sessions whose time range falls within the following range (in UNIX epochs). Defaults to 0 if not set. |
-| latest | [float](#float) |  | Match only sessions whose time range falls within the following range (in UNIX epochs). Defaults to current epoch if not set |
+| earliest | [double](#double) |  | Match only sessions whose time range falls within the following range (in UNIX epochs). Defaults to 0 if not set. |
+| latest | [double](#double) |  | Match only sessions whose time range falls within the following range (in UNIX epochs). Defaults to current epoch if not set |
 | min_number_turns | [int32](#int32) |  | Match only sessions for which the number of turns (interaction steps) falls in the following range Defaults to 0 if not set. |
 | max_number_turns | [int32](#int32) |  | Match only sessions for which the number of turns (interaction steps) falls in the following range Defaults to MAXINT if not set. |
 | labels | [string](#string) | repeated | Match only session which have all of the following labels assigned |
@@ -6512,8 +6512,8 @@ All fields below are optional. Multiple fields specified at the same time are ch
 | matched_entity_types | [EntityType](#ondewo.nlu.EntityType) | repeated | A list of entity types which have been matched |
 | min_intents_confidence | [float](#float) |  | The minimum confidence for intent recognition along the session |
 | min_entity_types_confidence | [float](#float) |  | The minimum confidence for entity recognition along the session |
-| earliest | [float](#float) |  | The earliest date of the given session (in UNIX epochs), i.e. the time of the first interaction of a user in the given session |
-| latest | [float](#float) |  | The latest date of the given session (in UNIX epochs), i.e. the time of the last interaction of a user in the given session |
+| earliest | [double](#double) |  | The earliest date of the given session (in UNIX epochs), i.e. the time of the first interaction of a user in the given session |
+| latest | [double](#double) |  | The latest date of the given session (in UNIX epochs), i.e. the time of the last interaction of a user in the given session |
 | number_turns | [int32](#int32) |  | The number of turns (interaction steps) in the given session |
 | labels | [string](#string) | repeated | The list of labels of the given session |
 | user_ids | [string](#string) | repeated | The user_ids of the users which were interacting within the given session |
