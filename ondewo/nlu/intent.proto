@@ -266,7 +266,7 @@ message Intent {
         }
 
         // Required. The unique identifier of this training phrase.
-        // Format: `projects/<Project ID>/agent/intents/<Intent ID>/trainingPhrases/<Training Phrase ID>`.
+        // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;/trainingPhrases/&lt;training_phrase_uuid&gt;</code></pre>
         string name = 1;
 
         // Required. The type of the training phrase.
@@ -290,6 +290,7 @@ message Intent {
         CreatedModified created_modified = 7;
     }
 
+    // Structure of status of an Intent
     enum IntentStatus {
         ACTIVE = 0;
         INACTIVE = 1;
@@ -300,7 +301,7 @@ message Intent {
         // Represents the prompts in the parameters.
         message Prompt {
             // The unique identifier of this prompt.
-            // Format: `projects/<Project ID>/agent/intents/<Intent ID>/parameters/<Parameter ID>/prompts/<Prompt ID>`.
+            // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;/parameters/&lt;parameter_uuid&gt;/prompts/&lt;prompt_uuid&gt;</code></pre>
             string name = 1;
             // Required. Text of the prompt
             string text = 2;
@@ -310,7 +311,7 @@ message Intent {
             CreatedModified created_modified = 4;
         }
         // The unique identifier of this parameter.
-        // Format: `projects/<Project ID>/agent/intents/<Intent ID>/parameters/<Parameter ID>`.
+        // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;/parameters/&lt;parameter_uuid&gt;</code></pre>
         string name = 1;
 
         // Required. The name of the parameter.
@@ -384,8 +385,10 @@ message Intent {
 
         // The card response message.
         message Card {
+
             // Optional. Contains information about a button.
             message Button {
+
                 // Note: One of the following is required:
                 // Optional. The text to show on the button.
                 string text = 1;
@@ -409,6 +412,7 @@ message Intent {
 
         // The simple response message containing speech or text.
         message SimpleResponse {
+
             // One of text_to_speech or ssml must be provided. The plain text of the
             // speech output. Mutually exclusive with ssml.
             string text_to_speech = 1;
@@ -533,6 +537,7 @@ message Intent {
             repeated Item items = 1;
         }
 
+        // This message contains HTML text
         message HTMLText {
             // Collection of the agent's responses in HTML format
             repeated string text = 1;
@@ -701,7 +706,7 @@ message Intent {
         }
 
         // Required. The name of the return message.
-        // Format: `projects/<Project ID>/agent/intents/<Intent ID>/responseMessages/<Message ID>`.
+        // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;/responseMessages/&lt;message_uuid&gt;</code></pre>
         string name = 16;
 
         // Required. The language of the return message.
@@ -767,11 +772,11 @@ message Intent {
     // Represents a single followup intent in the chain.
     message FollowupIntentInfo {
         // The unique identifier of the followup intent.
-        // Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
+        // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre>
         string followup_intent_name = 1;
 
         // The unique identifier of the followup intent parent.
-        // Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
+        // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre>
         string parent_followup_intent_name = 2;
     }
 
@@ -791,7 +796,7 @@ message Intent {
     // Required for all methods except `create` (`create` populates the name
     // automatically.
     // The unique identifier of this intent.
-    // Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre>
     string name = 1;
 
     // Required. The name of this intent.
@@ -815,7 +820,7 @@ message Intent {
 
     // Optional. The list of context names required for this intent to be
     // triggered.
-    // Format: `projects/<Project ID>/agent/sessions/-/contexts/<Context ID>`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/-/contexts/&lt;context_uuid&gt;</code></pre>
     repeated string input_context_names = 7;
 
     // Optional. The collection of event names that trigger the intent.
@@ -834,7 +839,7 @@ message Intent {
     // is matched. Context messages in this collection should not set the
     // parameters field. Setting the `lifespan_count` to 0 will reset the context
     // when the intent is matched.
-    // Format: `projects/<Project ID>/agent/sessions/-/contexts/<Context ID>`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/-/contexts/&lt;context_uuid&gt;</code></pre>
     repeated Context output_contexts = 11;
 
     // Optional. Indicates whether to delete all contexts in the current
@@ -854,13 +859,13 @@ message Intent {
 
     // The unique identifier of the root intent in the chain of followup intents.
     // It identifies the correct followup intents chain for this intent.
-    // Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre>
     string root_followup_intent_name = 16;
 
     // The unique identifier of the parent intent in the chain of followup
     // intents.
     // It identifies the parent followup intent.
-    // Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre>
     string parent_followup_intent_name = 17;
 
     // Optional. Collection of information about all followup intents that have
@@ -902,7 +907,7 @@ message Intent {
 // The request message for [Intents.ListIntents][google.cloud.dialogflow.v2.Intents.ListIntents].
 message ListIntentsRequest {
     // Required. The agent to list all intents from.
-    // Format: `projects/<Project ID>/agent`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
     // Optional. The language to list training phrases, parameters and rich
@@ -946,7 +951,7 @@ message ListIntentsResponse {
 // The request message for [Intents.GetIntent][google.cloud.dialogflow.v2.Intents.GetIntent].
 message GetIntentRequest {
     // Required. The name of the intent.
-    // Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre>
     string name = 1;
 
     // Optional. The language to retrieve training phrases, parameters and rich
@@ -968,7 +973,7 @@ message GetIntentRequest {
 // The request message for [Intents.CreateIntent][google.cloud.dialogflow.v2.Intents.CreateIntent].
 message CreateIntentRequest {
     // Required. The agent to create a intent for.
-    // Format: `projects/<Project ID>/agent`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
     // Required. The intent to create.
@@ -988,7 +993,7 @@ message CreateIntentRequest {
 // The request message for [Intents.UpdateIntent][google.cloud.dialogflow.v2.Intents.UpdateIntent].
 message UpdateIntentRequest {
     // Required. The intent to update.
-    // Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre>
     Intent intent = 1;
 
     // Optional. The language of training phrases, parameters and rich messages
@@ -1008,14 +1013,14 @@ message UpdateIntentRequest {
 // The request message for [Intents.DeleteIntent][google.cloud.dialogflow.v2.Intents.DeleteIntent].
 message DeleteIntentRequest {
     // Required. The name of the intent to delete.
-    // Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre>
     string name = 1;
 }
 
 // The request message for [Intents.BatchUpdateIntents][google.cloud.dialogflow.v2.Intents.BatchUpdateIntents].
 message BatchUpdateIntentsRequest {
     // Required. The name of the agent to update or create intents in.
-    // Format: `projects/<Project ID>/agent`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
     // Required. The source of the intent batch.
@@ -1104,7 +1109,9 @@ enum IntentCategory {
 
 }
 
+// This message contains sorting of an intentn
 message IntentSorting {
+    // Structure of intent sorting field
     enum IntentSortingField {
         NO_INTENT_SORTING = 0;
         SORT_INTENT_BY_NAME = 1;
@@ -1119,35 +1126,42 @@ message IntentSorting {
     SortingMode sorting_mode = 2;
 }
 
+// This message is a request to get an intent tag
 message IntentTagRequest {
     // The path of the intent.
-    // Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre>
     string intent_name = 1;
     // Intent tags for this intent to operate on
     repeated string tags = 2;
 }
 
+// This message is a request to get intent tags
 message GetIntentTagsRequest {
     // The path of the intent.
-    // Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre>
     string intent_name = 1;
 }
 
+// This message is a response of getting intent tags
 message GetIntentTagsResponse {
     // All the distinct intent tags sorted
     repeated string intent_tags = 1;
 }
 
+// This message is a request to get all intent tags
 message GetAllIntentTagsRequest {
     // Required. The name of the agent to delete all entities types for. Format:
     // `projects/<Project ID>/agent`.
     string parent = 1;
 }
 
+// This message is a request to update a batch of training phrases
 message BatchUpdateTrainingPhrasesRequest {
+    // A list of training phrases
     repeated Intent.TrainingPhrase training_phrases = 1;
 }
 
+// This message containing the training phrases status
 message TrainingPhraseStatus {
     oneof phrase_or_status {
         Intent.TrainingPhrase training_phrase = 1;
@@ -1155,12 +1169,15 @@ message TrainingPhraseStatus {
     }
 }
 
+// This message is a response of the status of a batch of training phrases
 message BatchTrainingPhrasesStatusResponse {
+    // A list of training phrase statuses
     repeated TrainingPhraseStatus training_phrase_statuses = 1;
     // indicates if statuses of some of the training phrases have errors
     bool has_errors = 2;
 }
 
+// This message is a request of a creation of a batch of training phrases
 message BatchCreateTrainingPhrasesRequest {
 
     message CreateTrainingPhraseRequest {
@@ -1173,18 +1190,21 @@ message BatchCreateTrainingPhrasesRequest {
     repeated CreateTrainingPhraseRequest training_phrase_requests = 1;
 }
 
+// This message is a request to get a batch training phrases
 message BatchGetTrainingPhrasesRequest {
     // Required. The names of the training phrases.
-    // Format: `projects/<Project ID>/agent/intents/<Intent ID>/trainingPhrases/<Training Phrase ID>`
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;/trainingPhrases/&lt;training_phrase_uuid&gt;</code></pre>
     repeated string names = 1;
 }
 
+// This message is a request to delete a batch of training phrases
 message BatchDeleteTrainingPhrasesRequest {
     // Required. The names of the training phrases.
-    // Format: `projects/<Project ID>/agent/intents/<Intent ID>/trainingPhrases/<Training Phrase ID>`
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;/trainingPhrases/&lt;training_phrase_uuid&gt;</code></pre>
     repeated string names = 1;
 }
 
+// This message is a response of deleting a batch of training phrases
 message BatchDeleteTrainingPhrasesResponse {
     message DeleteTrainingPhraseStatus{
         oneof delete_status{
@@ -1200,7 +1220,7 @@ message BatchDeleteTrainingPhrasesResponse {
 // The request message for TrainingPhraseRequest
 message ListTrainingPhrasesRequest {
     // Required. The agent to list all intents from.
-    // Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre>
     string intent_name = 1;
 
     // Optional. The language to list training phrases, parameters and rich
@@ -1226,6 +1246,7 @@ message ListTrainingPhrasesResponse {
     string next_page_token = 2;
 }
 
+// This message is a response of a batch responses of message status
 message BatchResponseMessagesStatusResponse {
     message ResponseMessageStatus {
         oneof phrase_or_status {
@@ -1238,6 +1259,7 @@ message BatchResponseMessagesStatusResponse {
     bool has_errors = 2;
 }
 
+// Request to create a list of new response messages and adds it to an intent
 message BatchCreateResponseMessagesRequest {
 
     message CreateResponseMessageRequest {
@@ -1250,23 +1272,27 @@ message BatchCreateResponseMessagesRequest {
     repeated CreateResponseMessageRequest response_message_requests = 1;
 }
 
+// Request to update a response message in the specified intent
 message BatchUpdateResponseMessagesRequest {
     // The response messages to update
     repeated Intent.Message response_messages = 1;
 }
 
+// Request to retrieve a response messages
 message BatchGetResponseMessagesRequest {
     // Required. The names of the response messages.
-    // Format: `projects/<Project ID>/agent/intents/<Intent ID>/responseMessages/<Message ID>`
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;/responseMessages/&lt;message_uuid&gt;</code></pre>
     repeated string names = 1;
 }
 
+// Request to delete response messages specified by their names
 message BatchDeleteResponseMessagesRequest {
     // Required. The names of the  response messages.
-    // Format: `projects/<Project ID>/agent/intents/<Intent ID>/responseMessages/<Message ID>`
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;/responseMessages/&lt;message_uuid&gt;</code></pre>
     repeated string names = 1;
 }
 
+// Response containing list with deleted response messages
 message BatchDeleteResponseMessagesResponse {
     message DeleteResponseMessageStatus{
         oneof delete_status{
@@ -1282,7 +1308,7 @@ message BatchDeleteResponseMessagesResponse {
 // The request message for ResponseMessageRequest
 message ListResponseMessagesRequest {
     // Required. The agent to list all intents from.
-    // Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre>
     string intent_name = 1;
 
     // Optional. The language to list response messages, parameters and rich
@@ -1309,6 +1335,7 @@ message ListResponseMessagesResponse {
     string next_page_token = 2;
 }
 
+// Response containing a batch of parameters in the specified intent
 message BatchParametersStatusResponse {
     message ParameterStatus {
         oneof phrase_or_status {
@@ -1321,6 +1348,7 @@ message BatchParametersStatusResponse {
     bool has_errors = 2;
 }
 
+// Request to create a batch of parameters in the specified intent
 message BatchCreateParametersRequest {
 
     message CreateParameterRequest {
@@ -1333,23 +1361,27 @@ message BatchCreateParametersRequest {
     repeated CreateParameterRequest parameter_requests = 1;
 }
 
+// Request to update parameters and adds them to an intent
 message BatchUpdateParametersRequest {
     // The response messages to update
     repeated Intent.Parameter parameters = 1;
 }
 
+// Request to get batch of parameters in a specified intent
 message BatchGetParametersRequest {
     // Required. The names of the response messages.
-    // Format: `projects/<Project ID>/agent/intents/<Intent ID>/parameters/<Parameter ID>`
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;/parameters/&lt;parameter_uuid</code></pre>
     repeated string names = 1;
 }
 
+// Request to delete parameters specified by their names.
 message BatchDeleteParametersRequest {
     // Required. The names of the  response messages.
-    // Format: `projects/<Project ID>/agent/intents/<Intent ID>/parameters/<Parameter ID>`
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;/parameters/&lt;parameter_uuid</code></pre>
     repeated string names = 1;
 }
 
+// This message contains response of deleted parameters
 message BatchDeleteParametersResponse {
     message DeleteParameterStatus{
         oneof delete_status{
@@ -1365,7 +1397,7 @@ message BatchDeleteParametersResponse {
 // The request message for TrainingPhraseRequest
 message ListParametersRequest {
     // Required. The agent to list all intents from.
-    // Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre>
     string intent_name = 1;
 
     // Optional. The language code used to filter out prompts.
@@ -1409,7 +1441,7 @@ message ListTrainingPhrasesofIntentsWithEnrichmentRequest {
     // where <CURRENT_INDEX> and <PAGE_SIZE> are of type int, <SUB_FIELD> is of type str (example: `parameters`)
     string page_token = 4;
 }
-
+// This message contains a list of training phrases filtered by intent ids, language code and parent passed through the request
 message ListTrainingPhrasesofIntentsWithEnrichmentResponse {
     // List of user_says values. There will be a maximum number of items
     // returned based on the page_token field in the request.

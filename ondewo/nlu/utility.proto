@@ -35,8 +35,8 @@ import "ondewo/nlu/entity_type.proto";
 
 // This is collection of utility endpoints, intended to language-independent operations,
 // such as code checks, regex checks, etc.
+// Holds a collection of utility functions
 service Utilities {
-    // Holds a collection of utility functions
 
     // Validates the validity of python regexes
     rpc ValidateRegex (ValidateRegexRequest) returns (ValidateRegexResponse);
@@ -66,31 +66,36 @@ service Utilities {
 
 // The request to validate regexes.
 message ValidateRegexRequest {
+
     // String containing the regex.
     string regex = 1;
 }
 
 // The response of the regex validation
 message ValidateRegexResponse {
+
     // Error messages
     repeated string error_messages = 1;
 }
 
 // Validation request for entity type values
 message ValidateEmbeddedRegexRequest {
+
     EntityType.Entity entity_type = 1;
 }
 
 // Response of the entity type validation
 message ValidateEmbeddedRegexResponse {
+
     // List of error message from the validation
     repeated string error_messages = 1;
 }
 
 // The request to clean the all intents.
 message CleanAllIntentsRequest {
+
     // Required. The agent to list all intents from.
-    // Format: `projects/<Project ID>/agent`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
     // Optional. The language to list training phrases, parameters and rich
@@ -123,6 +128,7 @@ message CleanAllIntentsRequest {
 
 // Response corresponding to the CleanAllIntents Request
 message CleanAllIntentsResponse {
+
     // Required. List of updates performed on intents
     repeated Intent cleaned_intents = 1;
 
@@ -135,11 +141,11 @@ message CleanAllIntentsResponse {
 message CleanIntentRequest {
 
     // Required. The agent to list all intents from.
-    // Format: `projects/<Project ID>/agent`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
     // Required. The name of the intent.
-    // Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre>
     string intent_name = 2;
 
     // Optional. The language to list training phrases, parameters and rich
@@ -180,6 +186,7 @@ message CleanIntentResponse {
 
 // Options for cleaning the training phrases
 message TrainingPhraseCleanerOptions {
+
     // Whether or not to delete repeated whitespaces
     bool delete_repeated_whitespaces = 1;
 
@@ -192,30 +199,39 @@ message TrainingPhraseCleanerOptions {
 
 // Encapsulates entity re-annotation options
 enum ReannotateEntitiesOptions {
+
     // Never re-annotate training phrases
     REANNOTATE_NEVER = 0;
+
     // Always re-annotate training phrases
     REANNOTATE_ALWAYS = 1;
+
     // Re-annotate training phrases if there are no annotations
     REANNOTATE_IF_EMPTY = 2;
+
     // Re-annotate if training phrases have been deleted
     REANNOTATE_AFTER_DELETION = 3;
+
     // Re-annotate if there are no annotations or if training phrases have been deleted
     REANNOTATE_IF_EMPTY_OR_AFTER_DELETION = 4;
 }
 
 // Message to keep track of updated strings
 message StringUpdate {
+
     // New version of the string
     string new = 1;
+
     // Old version of the string
     string old = 2;
 }
 
 // Stores updates applied to an intent
 message IntentUpdate {
+
     // Message to track the updates made to a training phrase
     message TrainingPhraseUpdate {
+
         // Stores updates of training phrases
         StringUpdate training_phrase_update = 1;
 
@@ -242,15 +258,19 @@ message IntentUpdate {
 
 // Stores updates applied to an entity type
 message EntityTypeUpdate {
+
     // Stores updates applied to an entity
     message EntityUpdate {
+
         // Updates made to the entity value
         StringUpdate entity_value_update = 1;
+
         // Updates made to the entity synonyms
         repeated StringUpdate entity_synonym_updates = 2;
     }
     // The entity type name
     string entity_type_name = 1;
+
     // List of the updated entities
     repeated EntityUpdate values_update_list = 2;
 
@@ -260,7 +280,7 @@ message EntityTypeUpdate {
 message CleanAllEntityTypesRequest {
 
     // Required. The agent to list all intents from.
-    // Format: `projects/<Project ID>/agent`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
     // Optional. The language to list training phrases, parameters and rich
@@ -313,7 +333,7 @@ message CleanAllEntityTypesResponse {
 message CleanEntityTypeRequest {
 
     // Required. The agent to list all intents from.
-    // Format: `projects/<Project ID>/agent`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
     // Required. The name of the entity_type
@@ -353,9 +373,11 @@ message CleanEntityTypeResponse {
 
 // Request message to AddTrainingPhrase rpc
 message AddTrainingPhrasesRequest {
+
     // Message that contains the new training phrase, together with the intent display name
     // and, optionally the entity annotations
     message TrainingPhraseForIntent {
+
         // Required. New training phrase to be added
         string training_phrase = 1;
 
@@ -367,7 +389,7 @@ message AddTrainingPhrasesRequest {
     }
 
     // Required. The agent to list all intents from.
-    // Format: `projects/<Project ID>/agent`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
     // Required. The language to list training phrases, parameters and rich
@@ -402,8 +424,9 @@ message AddTrainingPhrasesResponse {
 
 // Request message to AddTrainingPhraseFromCSV rpc
 message AddTrainingPhrasesFromCSVRequest {
+
     // Required. The agent to list all intents from.
-    // Format: `projects/<Project ID>/agent`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
     // Required. The language to list training phrases, parameters and rich

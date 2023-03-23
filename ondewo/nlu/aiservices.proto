@@ -22,6 +22,7 @@ import "ondewo/nlu/entity_type.proto";
 
 // The Central class defining the ondewo ai services
 service AiServices {
+
     // Processes a natural language query and returns detected entities
     rpc ExtractEntities (ExtractEntitiesRequest) returns (ExtractEntitiesResponse) {
         option (google.api.http) = {
@@ -29,30 +30,35 @@ service AiServices {
             body: "*"
         };
     };
+    // Generates a list of training phrases
     rpc GenerateUserSays (GenerateUserSaysRequest) returns (GenerateUserSaysResponse) {
         option (google.api.http) = {
             post: "/v2/{parent=projects/*/agent}/generate_user_says"
             body: "*"
         };
     };
+    // Generate responses from all intents using synonyms
     rpc GenerateResponses (GenerateResponsesRequest) returns (GenerateResponsesResponse) {
         option (google.api.http) = {
             post: "/v2/{parent=projects/*/agent}/generate_responses"
             body: "*"
         };
     };
+    // Generates alternative phrase based on original phrase
     rpc GetAlternativeSentences (GetAlternativeSentencesRequest) returns (GetAlternativeSentencesResponse) {
         option (google.api.http) = {
             post: "/v2/{parent=projects/*/agent}/get_alternative:sentence"
             body: "*"
         };
     }
+    // Generates alternative training phrase based on original training phrase
     rpc GetAlternativeTrainingPhrases (GetAlternativeTrainingPhrasesRequest) returns (GetAlternativeTrainingPhrasesResponse) {
         option (google.api.http) = {
             post: "/v2/{parent=projects/*/agent}/get_alternative:training_phrases"
             body: "*"
         };
     }
+    // Generates synonyms for a certain word
     rpc GetSynonyms (GetSynonymsRequest) returns (GetSynonymsResponse) {
         option (google.api.http) = {
             post: "/v2/{parent=projects/*/agent}/get_synonyms"
@@ -60,6 +66,7 @@ service AiServices {
         };
     }
 
+    // Preprocess text and detects intents in a sentence
     rpc ClassifyIntents (ClassifyIntentsRequest) returns (ClassifyIntentsResponse) {
         option (google.api.http) = {
             post: "/v2/{parent=projects/*/agent}/classify_intent"
@@ -73,268 +80,512 @@ service AiServices {
 
 // The request to detect parameters.
 message ExtractEntitiesRequest {
+
     // the parent of the request
-    // Format: `projects/<Project ID>`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
     string parent = 1;
+
     // the input text
     string text = 2;
+
     // the input language
     string language_code = 3;
+
     // Optional. The name of the relevant intent. Used to establish preference
     // hierarchy for entities that correspond to intent parameters
-    // Format: `projects/<Project ID>/agent/intents/<Intent ID>`
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre>
     string intent_name = 4;
 }
 
+// This message is a request to extract entities with Fuzzy Entity Recognizer
 message ExtractEntitiesFuzzyRequest {
+
     // the parent of the request
-    // Format: `projects/<Project ID>`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
     string parent = 1;
+
     // The text to be analyzed
     string text = 2;
+
     // Potential entities to be extracted from the text with entity-specific configs
     repeated EntityTypeFuzzyNerConfig potential_entities = 3;
+
     // Minimal similarity score to consider entity as "matched"
     float minimal_score = 4;
+
     // Optional. Whether or not entities are allowed to overlap.
     bool allow_overlaps = 5;
 }
 
+// Configuration for Fuzzy Entity Recognizer
 message EntityTypeFuzzyNerConfig {
+
     // The Entity Type
     EntityType entity_type = 1;
+
     // Optional. Overrides the minimal score in ExtractEntitiesFuzzyRequest.
     float minimal_score = 2;
+
     // Optional. If defined, only entity value from this list are considered.
     repeated string entity_values = 3;
 
     // Enum of fuzzy ner algorithms
     enum FuzzyNerAlgorithm {
+
+        // Levenshtein algorithm for fuzzy ner matching
         PREFILTER_LEVENSHTEIN = 0;
+
+        // local maximum
         LOCAL_MAXIMUM = 1;
     }
     // Optional. Specify the Fuzzy Ner algorithm
     FuzzyNerAlgorithm algorithm = 4;
+
     // Should not use allow_overlaps here, since its default value is False
-    // bool allow_overlaps = 5;
+    bool allow_overlaps = 5;
 }
 
+// This message contains the entity detected
 message EntityDetected{
+
+    // The entity name that is detected
     Intent.TrainingPhrase.Entity entity = 1;
+
+    // The extractor name, e.g. SpacyNer
     string extraction_method = 2;
+
+    // The confidence score of the detected entity
     float score = 3;
 }
 
+// This message is a response of extracting entities
 message ExtractEntitiesResponse {
+
+    // A list of entities detected
     repeated EntityDetected entities_detected = 1;
+
+    // The text containing the entities detected
     string text = 2;
 }
 
+// Request to get alternative sentences
 message GetAlternativeSentencesRequest {
+
+    // Configuration type of the enricher
     DataEnrichmentConfig config = 1;
+
+    // The sentence from which it is desired to get alternative sentences
     string sentence = 2;
+
+    // Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
     string language_code = 4;
+
+    // the parent of the request
+    // Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
     string parent = 5;
+
+    // Protected words in the augmentation process
     repeated string protected_words = 6;
+
+    // Words to be changed in the augmentation process
     repeated string words_to_change = 7;
 }
 
+// Request to generate user sentences
 message GenerateUserSaysRequest {
+
+    // language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
     string language_code = 4;
+
+    // the parent of the request
+    // Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
     string parent = 5;
+
+    // The number of synonyms desired
     int32 n_repeat_synonym = 6;
+
+    // Git branch
     string branch = 8;
 }
+// Request to generate responses
 message GenerateResponsesRequest {
+
+    // language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
     string language_code = 4;
+
+    // the parent of the request
+    // Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
     string parent = 5;
+
+    // The number of synonyms desired
     int32 n_repeat_synonym = 7;
+
+    // Git branch
     string branch = 8;
+
     bool drop_unknown_parameters = 9;
 }
 
+// Request to get alternative training phrases
 message GetAlternativeTrainingPhrasesRequest {
+
+    // Configuration of the enricher
     DataEnrichmentConfig config = 1;
+
+    // Training phrase from which an alternative one is got
     Intent.TrainingPhrase training_phrase = 2;
+
+    // The intent tag attached to the training phrase
     string intent_name = 3;
+
+    // language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
     string language_code = 4;
+
+    // the parent of the request
+    // Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
     string parent = 5;
+
+    // Flag to determine whether entities must or not be detected
     bool detect_entities = 6;
+
     // similarity threshold defines how similar sentences should be to drop generated training phrase
     // as duplicate. Meaningful values of similarity_threshold are between 0.95 and 1.0
     float similarity_threshold = 7;
+
+    // Protected words in the augmentation process
     repeated string protected_words = 8;
+
+    // Words to be changed in the augmentation process
     repeated string words_to_change = 9;
+
+    // Git branch
     string branch = 10;
 }
 
+// Request to get synonyms
 message GetSynonymsRequest {
+
+    // Configuration of the enricher
     DataEnrichmentConfig config = 1;
+
+    // Word from which a synonym is got
     string word = 2;
+
+    // language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
     string language_code = 4;
+
+    // the parent of the request
+    // Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
     string parent = 5;
 }
 
+// Response containing synonyms
 message GetSynonymsResponse {
+
+    // A list of synonyms
     repeated Synonym synonyms = 1;
 }
 
+// This message contains a Synonym
 message Synonym {
+
+    // Synonym word
     string synonym = 1;
+
+    // Score associated to the synonym resulted
     int32 score = 2;
 }
 
+// Response containing alternative sentences
 message GetAlternativeSentencesResponse {
+
+    // A list of alternative sentences
     repeated AltSentence alternative_sentences = 1;
 }
 
+// Response containing responses
 message GenerateResponsesResponse {
-    repeated string responses = 2;
+
+    // A list of responses
+    repeated string responses = 1;
 }
 
+// Response containing user sentences
 message GenerateUserSaysResponse {
-    repeated string user_says = 2;
+
+    // A list of sampled sentences
+    repeated string user_says = 1;
 }
 
+// Response containing alternative training phrases
 message GetAlternativeTrainingPhrasesResponse {
+
+    // A list of alternative training phrases
     repeated AltTrainingPhrase alternative_training_phrases = 1;
 }
 
+// This message contains an alternative sentence
 message AltSentence {
+    // Alternative sentence
     string sentence = 1;
+    // Score associated to the alternative sentence resulted
     float score = 2;
 }
 
+// This message contains an alternative training phrase
 message AltTrainingPhrase {
+
+    // Alternative training phrase
     Intent.TrainingPhrase training_phrase = 1;
+
+    // Score associated to training_phrase
     float score = 2;
 }
 
+// This message contains the configuration of data enrichment
 message DataEnrichmentConfig {
+
+    // Entity augmenter configuration
     EntityEnrichmentConfig entity_enrichment = 1;
+
+    // Thesaurus augmenter configuration
     ThesaurusEnrichmentConfig thesaurus_enrichment = 2;
+
+    // Word2Vec augmenter configuration
     Word2VecEnrichmentConfig word2vec_enrichment = 3;
+
+    // WordNet augmenter configuration
     WordNetAugEnrichmentConfig word_net_enrichment = 4;
+
+    // GPT2 augmenter configuration
     GPT2EnrichmentConfig gpt2_enrichment = 5;
+
+    // GloVe augmenter configuration
     GloVeEnrichmentConfig glove_enrichment = 6;
+
+    // BERT augmenter configuration
     BertAugEnrichmentConfig bert_enrichment = 8;
+
+    // XLNet augmenter configuration
     XLNetAugEnrichmentConfig xlnet_enrichment = 9;
 }
 
+// Configuration for Entity enrichment
 message EntityEnrichmentConfig {
+
+    // Activation flag
     bool is_active = 1;
 
+    // Factor of enrichment
     int32 enrichment_factor = 2;
 
+    // Order of augmenter execution
     int32 execution_order = 3;
 }
+
+// Configuration for Thesaurus enrichment
 message ThesaurusEnrichmentConfig {
+
+    // Activation flag
     bool is_active = 1;
 
+    // Factor of enrichment
     int32 enrichment_factor = 2;
 
+    // Order of augmenter execution
     int32 execution_order = 3;
 }
+// Configuration for BERT augmenter enrichment
 message BertAugEnrichmentConfig {
+
+    // Activation flag
     bool is_active = 1;
 
+    // Factor of enrichment
     int32 enrichment_factor = 2;
 
+    // Order of augmenter execution
     int32 execution_order = 3;
 }
+// Configuration for GloVe enrichment
 message GloVeEnrichmentConfig {
+
+    // Activation flag
     bool is_active = 1;
 
+    // Factor of enrichment
     int32 enrichment_factor = 2;
 
+    // Order of augmenter execution
     int32 execution_order = 3;
 }
+// Configuration for GPT2 enrichment
 message GPT2EnrichmentConfig {
+
+    // Activation flag
     bool is_active = 1;
 
+    // Factor of enrichment
     int32 enrichment_factor = 2;
 
+    // Order of augmenter execution
     int32 execution_order = 3;
 }
+// Configuration for Word2Vec enrichment
 message Word2VecEnrichmentConfig {
+
+    // Activation flag
     bool is_active = 1;
 
+    // Factor of enrichment
     int32 enrichment_factor = 2;
 
+    // Order of augmenter execution
     int32 execution_order = 3;
 }
+// Configuration for WordNet augmenter enrichment
 message WordNetAugEnrichmentConfig {
+
+    // Activation flag
     bool is_active = 1;
 
+    // Factor of enrichment
     int32 enrichment_factor = 2;
 
+    // Order of augmenter execution
     int32 execution_order = 3;
 }
+// Configuration for Thesaurus enrichment
 message XLNetAugEnrichmentConfig {
+
+    // Activation flag
     bool is_active = 1;
 
+    // Factor of enrichment
     int32 enrichment_factor = 2;
 
+    // Order of augmenter execution
     int32 execution_order = 3;
 }
 
 // The request for intent classification.
 message ClassifyIntentsRequest {
-    // the parent of the request
-    // Format: `projects/<Project ID>`.
+
+    // Required. The project of this agent.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
+
     // the input text
     string text = 2;
+
     // the input language
     string language_code = 3;
+
     // Optional: if restrict classification result with input contexts listed in the field `context_names`
     bool active_contexts = 4;
+
     // Optional: names of the input contexts to restrict the classification result with.
     // Intents can only be classified if the intent's input context set is the subset of the given context set.
     repeated string context_names = 5;
+
     // Optional: Which mode to use:
     // EXCLUSIVE - skip algorithms listed in `algorithms` field,
     // INCLUSIVE - run ONLY algorithms listed in `algorithms` field,
     // UNSPECIFIED - default mode, described in agent config
     Mode mode = 6;
+
     // Optional: Algorithm list
     repeated IntentAlgorithms algorithms = 7;
 }
 
+// Type of mode
 enum Mode {
+
+    // default mode, described in agent config
     UNSPECIFIED = 0;
+
+    // skip algorithms listed in `algorithms` field,
     EXCLUSIVE = 1;
+
+    // run ONLY algorithms listed in `algorithms` field
     INCLUSIVE = 2;
 }
 
+// Type of Intent algorithm.
 enum IntentAlgorithms {
+
+    // By enabling this, a specific intent is triggered if the context and the intent name in the user says is
+    // matched. This can be used for directly triggering 'quick reply' button clicks confidence is always '1.0'.
     OndewoIntentExactContextDetector = 0;
+
+    // exact matching' of user input to user says is used to detect the intent. Confidence is always '1.0' if an
+    // 'exact match' is found.
     OndewoIntentExactMatch = 1;
+
+    // the entity synonym in the user says text is replaced by the entity and 'exact matching' of user says text
+    // is performed. Confidence is alway '1.0'.
     OndewoIntentNamedExactMatch = 2;
+
+    // the algorithm computes the similarity of the user input to all user says of all intents.
     OndewoIntentSimilarityMatch = 3;
+
+    // the entity synonyms in the user says are replaced by their Entity. Text similarity algorithms are then
+    // used to detect the intent.
     OndewoIntentNamedSimilarityMatch = 4;
+
+    // new language representation model called BERT, which stands for Bidirectional Encoder Representations
+    // from Transformers.BERT is designed to pre-train deep bidirectional representations by jointly conditioning
+    // on both left and right context in all layers. As a result, the pre-trained BERT representations can be
+    // fine-tuned for multi-class intent detection. For details seehttps://arxiv.org/abs/1810.04805
     OndewoIntentBertClassifier = 7;
+
     OndewoIntentMetaClassifier = 8;
+
+    // Maximum number of repeated fallbacks before this algorithm exists the conversation and resets contexts
     IntentExitDetector = 10;
+
+    // Algorithm to improve the interplay of the other algorithms
     OndewoIntentRankingMatch = 11;
+
+    // Ensemble calculation of used algorithms
     OndewoWeightedEnsemble = 13;
+
+    // Maximum number of repeated fallbacks before this algorithm exists the conversation and resets contexts
     OndewoIntentExitDetector = 14;
+
+    // Matches the intent based on the parameter constellation and the current user context
     OndewoIntentParameterMatch = 15;
 }
 
+// Intent classified by a certain intent classifier
 message IntentClassified {
+
     // The unique identifier of this intent.
-    // Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre>
     string intent_name = 1;
+
     // The name of the intent.
     string intent_display_name = 2;
+
+    // The name of the classifier that detected the intent
     string classifier = 3;
+
+    // Score associated to the detection of the intent by the classifier
     float score = 4;
 }
 
+// Response containing the intents classified in a sentence
 message ClassifyIntentsResponse {
+
+    // A list of intents detected
     repeated IntentClassified intents_classified = 1;
+
+    // The text containing from which the intents were detected
     string text = 2;
+
+    // Flag that enables the context through the conversation
     bool active_contexts = 3;
+
+    // The context tags associated to the intents
     repeated string context_names = 4;
 }

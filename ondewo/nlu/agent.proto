@@ -39,12 +39,12 @@ import "google/api/annotations.proto";
 import "google/protobuf/field_mask.proto";
 import "google/protobuf/empty.proto";
 import "google/protobuf/struct.proto";
-import "google/protobuf/any.proto";
 import "ondewo/nlu/common.proto";
 import "ondewo/nlu/intent.proto";
 import "ondewo/nlu/user.proto";
 import "ondewo/nlu/project_role.proto";
 import "ondewo/nlu/operations.proto";
+import "ondewo/nlu/session.proto";
 import "google/protobuf/timestamp.proto";
 
 // Agents are best described as Natural Language Understanding (NLU) modules that transform user requests into actionable data. You can include agents in your app, product, or service to determine user intent and respond to the user in a natural way.
@@ -66,7 +66,7 @@ service Agents {
     // <pre>
     // grpcurl -plaintext -H 'cai-token: aimp' -d '{
     //   "agent": {
-    //     "display_name": "Pizza Bot",
+    //     "display_name": "My Pizza Bot",
     //     "default_language_code": "en",
     //     "supported_language_codes": ["en"],
     //     "time_zone": "Europe/Vienna",
@@ -310,18 +310,21 @@ service Agents {
         };
     }
 
+    // Lists users in the project (agent)
     rpc ListUsersInProject (ListUsersInProjectRequest) returns (ListUsersInProjectResponse) {
         option (google.api.http) = {
             get: "/v2/{parent=projects/*/agent}/users"
         };
     }
 
+    // Gets information from the platform
     rpc GetPlatformInfo (google.protobuf.Empty) returns (GetPlatformInfoResponse) {
         option (google.api.http) = {
             get: "/v2/version"
         };
     }
 
+    // List permissions from the project (agent)
     rpc ListProjectPermissions (ListProjectPermissionsRequest) returns (ListProjectPermissionsResponse) {
         option (google.api.http) = {
             get: "/v2/project_permissions"
@@ -383,6 +386,8 @@ service Agents {
             body: "*"
         };
     }
+
+    // Runs optimize ranking match
     rpc OptimizeRankingMatch (OptimizeRankingMatchRequest) returns (ondewo.nlu.Operation) {
         option (google.api.http) = {
             post: "/v2/{parent=projects/*/agent}:optimize_ranking_match"
@@ -403,29 +408,43 @@ service Agents {
         };
     }
 
+    // Gets statistics for the agent
     rpc GetAgentStatistics (GetAgentStatisticsRequest) returns (GetAgentStatisticsResponse) {
         option (google.api.http) = {
             get: "/v2/{parent=projects/*/agent}:statistics"
         };
     }
 
+    rpc GetSessionsStatistics (GetSessionsStatisticsRequest) returns (GetSessionsStatisticsResponse) {
+        option (google.api.http) = {
+            get: "/v2/{parent=projects/*/agent}:session_statistics"
+        };
+    }
+
+    // Sets status for the agent
     rpc SetAgentStatus (SetAgentStatusRequest) returns (Agent) {
         option (google.api.http) = {
             post: "/v2/{parent=projects/*/agent}:status"
             body: "*"
         };
     }
+
+    // Sets resources
     rpc SetResources (SetResourcesRequest) returns (google.protobuf.Empty) {
         option (google.api.http) = {
             post: "/v2/{parent=projects/*/agent}:resources"
             body: "*"
         };
     }
+
+    // Deletes resources
     rpc DeleteResources (DeleteResourcesRequest) returns (google.protobuf.Empty) {
         option (google.api.http) = {
             delete: "/v2/{parent=projects/*/agent}:resources"
         };
     }
+
+    // Exports resources
     rpc ExportResources (ExportResourcesRequest) returns (ExportResourcesResponse) {
         option (google.api.http) = {
             post: "/v2/{parent=projects/*/agent}:resources"
@@ -441,16 +460,34 @@ service Agents {
     // Set platform name mappings for an Agent
     rpc SetPlatformMapping (PlatformMapping) returns (PlatformMapping);
 
-    // Full text search endpoint
+    // Full text search endpoint in entity types
     rpc GetFullTextSearchEntityType (FullTextSearchRequest) returns (FullTextSearchResponseEntityType);
+
+    // Full text search endpoint in entities
     rpc GetFullTextSearchEntity (FullTextSearchRequest) returns (FullTextSearchResponseEntity);
+
+    // Full text search endpoint in entity synonyms
     rpc GetFullTextSearchEntitySynonym (FullTextSearchRequest) returns (FullTextSearchResponseEntitySynonym);
+
+    // Full text search endpoint in intents
     rpc GetFullTextSearchIntent (FullTextSearchRequest) returns (FullTextSearchResponseIntent);
+
+    // Full text search endpoint in context ins of intents
     rpc GetFullTextSearchIntentContextIn (FullTextSearchRequest) returns (FullTextSearchResponseIntentContextIn);
+
+    // Full text search endpoint in context outs of intents
     rpc GetFullTextSearchIntentContextOut (FullTextSearchRequest) returns (FullTextSearchResponseIntentContextOut);
+
+    // Full text search endpoint in user says of intents
     rpc GetFullTextSearchIntentUsersays (FullTextSearchRequest) returns (FullTextSearchResponseIntentUsersays);
+
+    // Full text search endpoint in tags of intents
     rpc GetFullTextSearchIntentTags (FullTextSearchRequest) returns (FullTextSearchResponseIntentTags);
+
+    // Full text search endpoint in responses of intents
     rpc GetFullTextSearchIntentResponse (FullTextSearchRequest) returns (FullTextSearchResponseIntentResponse);
+
+    // Full text search endpoint in parameters of intents
     rpc GetFullTextSearchIntentParameters (FullTextSearchRequest) returns (FullTextSearchResponseIntentParameters);
 
     // Force reindexing Intent and Entity data of Agent
@@ -459,8 +496,9 @@ service Agents {
 
 // Project/Agent messages
 message Agent {
+
     // Required. The project of this agent.
-    // Format: `projects/<Project ID>/agent`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     // Read-only in the Agent message
     string parent = 1;
 
@@ -500,12 +538,19 @@ message Agent {
     string description = 10;
 }
 
+// This message contains the agent with owner
 message AgentWithOwner {
+
+    // The agent
     Agent agent = 1;
+
+    // User who created the agent
     User owner = 2;
 }
 
+// This message contains the agent of user with owner
 message AgentOfUserWithOwner {
+
     // Required. Agent message and User message of its owner.
     AgentWithOwner agent_with_owner = 1;
 
@@ -514,7 +559,9 @@ message AgentOfUserWithOwner {
 }
 
 
+// Structure of agent view
 enum AgentView {
+
     // Unspecified agent view: the view is defined by the call:
     // - CreateAgent: AGENT_VIEW_SHALLOW
     // - UpdateAgent: AGENT_VIEW_SHALLOW
@@ -532,14 +579,20 @@ enum AgentView {
     AGENT_VIEW_MINIMUM = 3;
 }
 
+// Request to create an agent
 message CreateAgentRequest {
+
+    // The agent
     Agent agent = 1;
 
     // Optional. Specify the view of the returned agent (sparse view by default)
     AgentView agent_view = 2;
 }
 
+// Request to update the agent
 message UpdateAgentRequest {
+
+    // The agent
     Agent agent = 1;
 
     // Optional. Specify the view of the returned agent (sparse view by default)
@@ -549,21 +602,28 @@ message UpdateAgentRequest {
     google.protobuf.FieldMask update_mask = 3;
 }
 
+// Request to delete the agent
 message DeleteAgentRequest {
+
+    // Required. The project that the agent to fetch is associated with.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     string parent = 1;
 }
 
 // The request message for [Agents.GetAgent][google.cloud.dialogflow.v2.Agents.GetAgent].
 message GetAgentRequest {
+
     // Required. The project that the agent to fetch is associated with.
-    // Format: `projects/<Project ID>/agents`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     string parent = 1;
 
     // Optional. Specify the view of the returned agent (full view by default)
     AgentView agent_view = 2;
 }
 
+// Request to get the list of agents
 message ListAgentsRequest {
+
     // Optional. Specify the view of the returned agent (full view by default)
     AgentView agent_view = 1;
 
@@ -574,7 +634,9 @@ message ListAgentsRequest {
     AgentSorting sort_by_field = 3;
 }
 
+// Get list of agents
 message ListAgentsResponse {
+
     // The list of agent and their owners. There will be a maximum number of items
     // returned based on the page_token field in the request.
     repeated AgentWithOwner agents_with_owners = 1;
@@ -584,7 +646,9 @@ message ListAgentsResponse {
     string next_page_token = 2;
 }
 
+// Get list of agents of user
 message ListAgentsOfUserResponse {
+
     // The list of agents with their owners of the given user. There will be a maximum number of items
     // returned based on the page_token field in the request.
     repeated AgentOfUserWithOwner agents_of_user_with_owners = 1;
@@ -596,34 +660,45 @@ message ListAgentsOfUserResponse {
 
 // Defines when to initiate newly created agent when training started
 enum InitiationProtocol {
+
     // after cache successfully built and after each model trained the agent will be updated
     AS_SOON_AS_POSSIBLE = 0;
+
     // after cache successfully built and all the active models successfully trained
     WHEN_TRAINED = 1;
+
     // do not initiate
     NEVER = 2;
 }
 // The request message for [Agents.TrainAgent][google.cloud.dialogflow.v2.Agents.TrainAgent].
 message TrainAgentRequest {
+
     // Required. The project that the agent to train is associated with.
-    // Format: `projects/<Project ID>`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
     string parent = 1;
+
+    // Name of the branch of the agent for versioning. The default branch name is <code>develop</code>.
     string branch = 2;
+
+    // Defines when to initiate newly created agent when training started
     InitiationProtocol initiation_protocol = 3;
 }
 
 // The request message for [Agents.TrainAgentBuildCache][google.cloud.dialogflow.v2.Agents.BuildCache].
 message BuildCacheRequest {
+
     // Required. The project that the agent to build cache is associated with.
-    // Format: `projects/<Project ID>`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
     string parent = 1;
+
+    // Name of the branch of the agent for versioning. The default branch name is <code>develop</code>.
     string branch = 2;
 }
 
 // The request message for [Agents.ExportAgent][google.cloud.dialogflow.v2.Agents.ExportAgent].
 message ExportAgentRequest {
     // Required. The project that the agent to export is associated with.
-    // Format: `projects/<Project ID>`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
     string parent = 1;
 
     // Optional. The Google Cloud Storage URI to export the agent to.
@@ -639,6 +714,7 @@ message ExportAgentRequest {
 
 // The response message for [Agents.ExportAgent][google.cloud.dialogflow.v2.Agents.ExportAgent].
 message ExportAgentResponse {
+
     // Required. The exported agent.
     oneof agent {
         // The URI to a file containing the exported agent. This field is populated
@@ -663,11 +739,14 @@ message ExportAgentResponse {
     }
 }
 
+// Request to export benchmark agent
 message ExportBenchmarkAgentRequest {
+
     // Agent related info
     // Required. The project that the agent to export is associated with.
-    // Format: `projects/<Project ID>`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
     string parent = 1;
+
     // Optional. The compression level of the zip file created.
     // Valid range 1-9; the grpc-default value 0 will be mapped to 1,
     // other values cause an error in the request validation handler.
@@ -678,46 +757,74 @@ message ExportBenchmarkAgentRequest {
     // default values come from API definition above
     // Optional: bigger than zero
     float test_size = 3;
+
     // Optional: bigger than zero
     float train_size = 4;
+
     // Optional: random seed
     int32 random_state = 5;
 }
 
+// Response to export benchmark agent
 message ExportBenchmarkAgentResponse {
+
+    // Agent responses as zip file
     bytes agent_content = 1;
+
     // Key is the language code, value is the corresponding ListTrainingPhrasesResponse
     map<string, ListTrainingPhrasesResponse> training_phrases = 2;
 }
 
+// This message is a request to run Optimize Ranking Match
 message OptimizeRankingMatchRequest {
+
+    // Required. The project that the agent to train is associated with.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
     string parent = 1;
+
+    // languages that should be optimized
     repeated string language_codes = 2;
+
     // optimization config will contain all possible optimizations, with which we will come up in the future
     repeated RankingMatchOptimizationConfig optimization_configs = 3;
+
     // if in_place is true then the config of the agent on the server will be updated, if False then config
     // with optimized thresholds will be returned but not updated on the server
     bool in_place = 4;
 }
 
+// This message contains the configuration to run Optimize Ranking Match
 message RankingMatchOptimizationConfig {
+
+    // Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
     string language_code = 1;
+
+    // number of splits for optimization
     int32 n_splits = 2;
+
+    // random seed number for defining the split of train and test of training phrases for optimization
     int32 random_seed = 3;
+
     // initial thresholds are optional, if not given will be taken from the current config
     // example {'OndewoIntentSimilarityMatch': 0.59, 'OndewoIntentNamedSimilarityMatch': 0.39}
     google.protobuf.Struct initial_thresholds = 4;
 }
 
+// This message is a response of Optimize Ranking Match
 message OptimizeRankingMatchResponse {
+
+    // info about optimization
     google.protobuf.Struct optimization_info = 1;
+
+    // the optimized configuration of the ondewo agent e.g., optimized parameters
     google.protobuf.Struct optimized_ondewo_config = 3;
 }
 
 // The request message for [Agents.ImportAgent][google.cloud.dialogflow.v2.Agents.ImportAgent].
 message ImportAgentRequest {
+
     // Required. The project that the agent to import is associated with.
-    // Format: `projects/<Project ID>`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
     string parent = 1;
 
     // Required. The agent to import.
@@ -746,8 +853,9 @@ message ImportAgentRequest {
 
 // The request message for [Agents.RestoreAgent][google.cloud.dialogflow.v2.Agents.RestoreAgent].
 message RestoreAgentRequest {
+
     // Required. The project that the agent to restore is associated with.
-    // Format: `projects/<Project ID>`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
     string parent = 1;
 
     // Required. The agent to restore.
@@ -774,60 +882,237 @@ message RestoreAgentRequest {
     }
 }
 
+// Request statistics of the agent
 message GetAgentStatisticsRequest {
+
     // Required. The project to get statistics from.
-    // Format: `projects/<Project ID>`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
     string parent = 1;
+
+    // File formats for reports
     ReportFormat format = 2;
+    // Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
+    // the language to calculate statistics about
     string language_code = 3;
+
+    // Type of reports about the domain of the agent
     ReportType type = 4;
 }
 
+// Response to get statistics of the agent
 message GetAgentStatisticsResponse {
+
     // Statistic info.
     bytes reports = 1;
+
+    // File formats for reports
     ReportFormat format = 2;
+
+    // Type of reports about the domain of the agent
     ReportType type = 3;
 }
 
+// Type of reports about the domain of the agent
 enum ReportType {
+
     // will return all reports as files of specified format compressed into a single zipfile
     ALL = 0;
+
     // statistics of the language specific part of the intent database
     INTENT_PER_LANGUAGE = 1;
+
     // statistics of the language specific part of the entity database
     ENTITY_PER_LANGUAGE = 2;
+
     // report on collision of the entity synonyms
     ENTITY_COLLISION = 3;
+
     // report of statistics of the general (relevant to all supported languages) part of intent database
     INTENT_GENERAL = 4;
 }
 
+// Request of the report of the statistics about sessions
+message GetSessionsStatisticsRequest {
+
+    // Required. The project to get statistics from.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
+    string parent = 1;
+
+    // File formats for reports
+    ReportFormat format = 2;
+
+    // Type of reports about the domain of the agent
+    SessionsReportType type = 3;
+
+    // Optional. A filter to narrow reports based on sessions
+    SessionFilter session_filter = 4;
+
+    // Optional. A filter to narrow reports based on contextual information (Coming soon! Not yet implemented)
+    repeated ContextFilter context_filters = 5;
+
+    // Optional. limit the returned number of results
+    int32 limit = 6;
+
+    // Optional. Grouping based on named properties
+    repeated string group_bys = 7;
+
+    // Optional. Order based on named properties
+    repeated string order_bys = 8;
+
+    // Optional. The mask to control which data fields will be added to the returned data.
+    // Example: paths=["duration_in_s_min", "id", "session_id", "project_id"]
+    google.protobuf.FieldMask field_mask = 9;
+
+    // SQL Query - only usable with specific SessionsReportType such as SessionsReportType.SESSION_SQL_QUERY
+    string sql_query = 10;
+}
+
+// Report of the statistics about sessions
+message GetSessionsStatisticsResponse {
+
+    // Statistic info.
+    bytes reports = 1;
+
+    // File formats for reports
+    ReportFormat format = 2;
+
+    // Type of reports about the domain of the agent
+    SessionsReportType type = 3;
+}
+
+// Type of reports about the domain of the agent
+enum SessionsReportType {
+
+    // report on sessions. Supports SessionFilter to filter
+    SESSIONS = 0;
+
+    // report on session steps. Supports SessionFilter to filter
+    SESSION_STEPS = 1;
+
+    // report top x detected intents in session. Supports SessionFilter to filter
+    SESSION_TOP_X_INTENTS = 2;
+
+    // report top x detected entity types. Supports SessionFilter to filter
+    SESSION_TOP_X_ENTITY_TYPES = 3;
+
+    // report top x detected entity values Supports SessionFilter to filter
+    SESSION_TOP_X_ENTITY_VALUES = 4;
+
+    // report top x users. Supports SessionFilter to filter (Coming soon! Not yet implemented)
+    SESSION_TOP_X_USERS = 5;
+
+    // report top x labels. Supports SessionFilter to filter
+    SESSION_TOP_X_LABELS = 6;
+
+    // report top x tags. Supports SessionFilter to filter
+    SESSION_TOP_X_TAGS = 7;
+
+    // report top x phone_numbers. Supports SessionFilter to filter (Coming soon! Not yet implemented)
+    SESSION_TOP_X_PHONE_NUMBERS = 8;
+
+    // report on human handovers. Supports SessionFilter to filter (Coming soon! Not yet implemented)
+    SESSION_HUMAN_HANDOVERS = 9;
+
+    // report based on a query issued tables with session information.
+    // Requires to define <code>sql_query</code> in request.
+    //
+    // Allowed tables to query are:
+    // * session
+    // * session_context
+    // * session_step
+    // * session_step_context
+    // * session_step_detect_entity
+    // * session_step_detect_intent
+    // * session_step_detect_intent_context_in
+    // * session_step_detect_intent_context_out
+    // * session_step_detect_intent_context_out
+    // * session_step_detect_intent_label
+    // * session_step_detect_intent_tag
+    //
+    // Example:
+    //   <code>SELECT ... FROM session</code>
+    //   <code>SELECT ... FROM session, session_steps</code>
+    SESSION_SQL_QUERY = 10;
+
+    // report least x detected intents in session. Supports SessionFilter to filter
+    SESSION_LEAST_X_INTENTS = 11;
+
+    // report least x detected entity types. Supports SessionFilter to filter
+    SESSION_LEAST_X_ENTITY_TYPES = 12;
+
+    // report least x detected entity values Supports SessionFilter to filter
+    SESSION_LEAST_X_ENTITY_VALUES = 13;
+
+    // report least x users. Supports SessionFilter to filter (Coming soon! Not yet implemented)
+    SESSION_LEAST_X_USERS = 14;
+
+    // report least x labels. Supports SessionFilter to filter
+    SESSION_LEAST_X_LABELS = 15;
+
+    // report least x tags. Supports SessionFilter to filter
+    SESSION_LEAST_X_TAGS = 16;
+
+    // report total numbers of e.g. sessions, session steps, etc.
+    TOTAL_STATISTICS = 17;
+
+}
+
+
+
+// File formats for reports
 enum ReportFormat {
+
+    // CSV (comma separated values) file format
     CSV = 0;
+
+    // HTML file format
     HTML = 1;
+
+    // JSON file format
     JSON = 2;
 }
 
+// Request to add user to project.
 message AddUserToProjectRequest {
+
+    // Required. The project that the agent to train is associated with.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
     string parent = 1;
+
+    // id of the user
     string user_id = 2;
+
+    // ID of the project role of the user
     uint32 project_role_id = 4;
 }
 
+// Request to remove user from the project.
 message RemoveUserFromProjectRequest {
+
+    // Required. The project that the agent to train is associated with.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
     string parent = 1;
+
+    // id of the user
     string user_id = 2;
 }
 
+// Request to list users in the project
 message ListUsersInProjectRequest {
+
+    // Required. The project that the agent to train is associated with.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
     string parent = 1;
+
     // Optional. The next_page_token value returned from a previous list request.
     string page_token = 2;
 }
 
+// Request to get user in project
 message UserInProject {
-    // ID of the project
+
+    // Required. The project that the agent to train is associated with.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
     string parent = 1;
 
     // User object
@@ -837,7 +1122,9 @@ message UserInProject {
     uint32 role_id = 3;
 }
 
+// List the users in a project
 message ListUsersInProjectResponse {
+
     // The list of users in a project. There will be a maximum number of items
     // returned based on the page_token field in the request.
     repeated UserInProject users = 1;
@@ -847,18 +1134,26 @@ message ListUsersInProjectResponse {
     string next_page_token = 2;
 }
 
+// GIT information about the version of the server
 message GetPlatformInfoResponse {
+
+    // version of the server build
     string version = 1;
+
+    // git commit hash of the server build
     string commit_hash = 2;
 }
 
 // Project permissions
 message ListProjectPermissionsRequest {
+
     // Optional. The next_page_token value returned from a previous list request.
     string page_token = 1;
 }
 
+// List project permissions
 message ListProjectPermissionsResponse {
+
     // The list of project permissions. There will be a maximum number of items
     // returned based on the page_token field in the request.
     repeated string permissions = 1;
@@ -868,9 +1163,11 @@ message ListProjectPermissionsResponse {
     string next_page_token = 2;
 }
 
+// Request to set status of the agent
 message SetAgentStatusRequest {
+
     // Required. The project of which to set the status.
-    // Format: `projects/<Project ID>/agent`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
     // Required. Status of the agent
@@ -880,8 +1177,9 @@ message SetAgentStatusRequest {
     AgentView agent_view = 3;
 }
 
-// fixme: add endpoint to set agent owner
+// FIXME(arath): add endpoint to set agent owner
 
+// Type of Agent / Project status
 enum AgentStatus {
     // If project is active, all its endpoints are active
     ACTIVE = 0;
@@ -898,62 +1196,128 @@ enum AgentStatus {
     // READY = 5;
 }
 
+// Sorting order of agent
 message AgentSorting {
+
+    // Sorting field
     enum AgentSortingField {
+
+        // no sorting
         NO_AGENT_SORTING = 0;
+
+        // sorting by name
         SORT_AGENT_BY_NAME = 1;
+
+        // sorting by creation date
         SORT_AGENT_BY_CREATION_DATE = 2;
+
+        // sorting by last updated date
         SORT_AGENT_BY_LAST_UPDATED = 3;
+
+        // sorting by owner, i.e. user who owns the agent which is usually the creator of the agent
         SORT_AGENT_BY_OWNER_NAME = 4;
     }
 
+    // sorting field for agent sorting
     AgentSortingField sorting_field = 1;
+
+    // Sorting mode
     SortingMode sorting_mode = 2;
 }
 
+// Request to set resources
 message SetResourcesRequest {
+
+    // Required. The project that the agent to fetch is associated with.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     string parent = 1;
+
     string name = 2;
+
     string type = 3;
+
     bytes resource_file = 4;
+
+    // Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
     string language_code = 5;
 }
 
+// Request to delete resources
 message DeleteResourcesRequest {
+
+    // Required. The project that the agent to fetch is associated with.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     string parent = 1;
+
     string name = 2;
+
     string type = 3;
+
+    // Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
     string language_code = 4;
 }
 
+// Request to export resources
 message ExportResourcesRequest {
+
+    // Required. The project that the agent to fetch is associated with.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     string parent = 1;
+
     string name = 2;
+
     string type = 3;
+
+    // Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
     string language_code = 4;
 }
 
+// Response to export resources
 message ExportResourcesResponse {
+
+    // Required. The project that the agent to fetch is associated with.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     string parent = 1;
+
     string name = 2;
+
     string type = 3;
+
+    // Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
     string language_code = 4;
+
     bytes resource_file = 5;
 }
+
+// Request to get model statuses
 message GetModelStatusesRequest {
+
     // Required. The project that the agent to fetch is associated with.
-    // Format: `projects/<Project ID>/agent`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
+
     int32 cache_version = 2;
+
+    // Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
     string language_code = 3;
+
     string model_name = 4;
 }
 
+// Status of model
 message ModelStatus {
+
+    // Cache version that contains the correspondent model
     int32 cache_version = 1;
+
+    // Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
     string language_code = 2;
+
+    // The model name
     string model_name = 3;
+
     google.protobuf.Timestamp status_set_time = 4;
+
     enum StatusName {
         UNKNOWN = 0;
         INITIALIZING = 1;
@@ -963,15 +1327,21 @@ message ModelStatus {
         TESTING = 5;
         TRAINED = 6;
     }
+
     string config = 5;
+
     StatusName status = 6;
 }
 
+// Response to get model statuses
 message GetModelStatusesResponse {
+
     repeated ModelStatus model_statuses = 1;
 }
 
+// This message contains the information of custom platform
 message CustomPlatformInfo {
+
     // Required. ID of the Platform.
     // Custom Intent.Message.Platform placeholder. Note: it will not work with non-placeholders values
     Intent.Message.Platform platform = 1;
@@ -984,29 +1354,32 @@ message CustomPlatformInfo {
     // Sorting position of the GetPlatformMappingRequest.
     uint32 position = 3;
 }
-
+// Request to get platform mapping
 message GetPlatformMappingRequest {
     // Required. The project that the agent is associated with.
-    // Format: `projects/<Project ID>/agent`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 }
 
+// This message contains the mapping of platform
 message PlatformMapping {
+
     // Required. The project that the agent is associated with.
-    // Format: `projects/<Project ID>/agent`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
-    // Required.
-    // If not set, it will set it empty.
+
+    // Required. If not set, it will set it empty.
     repeated CustomPlatformInfo platform_info = 2;
 }
 
+// This message is a request to run full text search
 message FullTextSearchRequest {
 
     // Required. The project that the agent is associated with.
-    // Format: `projects/<Project ID>/agent`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
-    // In which language to search for
+    // Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
     string language_code = 2;
 
     // What to search for in the elastic server
@@ -1015,237 +1388,486 @@ message FullTextSearchRequest {
     // Composite string: current_index-0--page_size-10
     string page_token = 4;
 
+    // Type of query
     enum QueryType {
+
         ALL = 0;  // just a placeholder, has to start with zero
+
         OndewoEntityQuery = 1;
+
         OndewoEntityTypeQuery = 2;
+
         OndewoEntitySynonymQuery = 3;
+
         OndewoIntentQuery = 4;
+
         OndewoIntentContextInQuery = 5;
+
         OndewoIntentContextOutQuery = 6;
+
         OndewoIntentUsersaysQuery = 7;
+
         OndewoIntentTagsQuery = 8;
+
         OndewoIntentParametersQuery = 9;
+
         OndewoIntentResponseQuery = 10;
+
     }
 }
 
+// This message is a response of full text search of entity type
 message FullTextSearchResponseEntityType {
+
+    // Required. The project that the agent to fetch is associated with.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     string parent = 1;
+
+    // Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
     string language_code = 2;
+
     message EntityTypeSearchResult {
+
         string name = 1;
+
         string display_name = 2;
+
         string language = 3;
+
         string created_at = 4;
+
         string modified_at = 5;
+
         string created_by = 6;
+
         string modified_by = 7;
     }
+
     repeated EntityTypeSearchResult entity_type_results = 3;
+
     string term = 4;
+
     string elastic_query = 5;
+
     float time = 6;
+
+    // The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2
     string next_page_token = 7;
 }
 
+// This message is a response of full text search of entity
 message FullTextSearchResponseEntity {
+
+    // Required. The project that the agent to fetch is associated with.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     string parent = 1;
+
+    // Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
     string language_code = 2;
+
     message EntitySearchResult {
+
         string name = 1;
+
         string display_name = 2;
+
         string entity_type_name = 3;
+
         string entity_type_display_name = 4;
+
         string language = 5;
+
         string created_at = 6;
+
         string modified_at = 7;
+
         string created_by = 8;
+
         string modified_by = 9;
     }
+
     repeated EntitySearchResult entity_results = 3;
+
     string term = 4;
+
     string elastic_query = 5;
+
     float time = 6;
+
+    // The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2
     string next_page_token = 7;
 }
 
+// This message is a response of full text search of synonym entity
 message FullTextSearchResponseEntitySynonym {
+
+    // Required. The project that the agent to fetch is associated with.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     string parent = 1;
+
+    // Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
     string language_code = 2;
+
     message EntitySynonymSearchResult {
+
         string name = 1;
+
         string display_name = 2;
+
         string entity_type_name = 3;
+
         string entity_type_display_name = 4;
+
         string entity_name = 5;
+
         string entity_display_name = 6;
+
         string language = 7;
+
         string created_at = 8;
+
         string modified_at = 9;
+
         string created_by = 10;
+
         string modified_by = 11;
     }
+
     repeated EntitySynonymSearchResult entity_synonym_results = 3;
+
     string term = 4;
+
     string elastic_query = 5;
+
     float time = 6;
+
+    // The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2
     string next_page_token = 7;
 }
 
+// This message is a response of full text search of intent
 message FullTextSearchResponseIntent {
+    // Required. The project that the agent to fetch is associated with.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     string parent = 1;
+    // Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
     string language_code = 2;
     message IntentSearchResult {
+
         string name = 1;
+
         string display_name = 2;
+
         string domain_name = 3;
-        string language = 4;
-        string created_at = 5;
-        string modified_at = 6;
-        string created_by = 7;
-        string modified_by = 8;
+
+        repeated string tags = 4;
+
+        string language = 5;
+
+        string created_at = 6;
+
+        string modified_at = 7;
+
+        string created_by = 8;
+
+        string modified_by = 9;
     }
+
     repeated IntentSearchResult intent_results = 3;
     string term = 4;
     string elastic_query = 5;
     float time = 6;
+    // The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2
     string next_page_token = 7;
 }
 
+// This message is a response of full text search of intent with context in
 message FullTextSearchResponseIntentContextIn {
+    // Required. The project that the agent to fetch is associated with.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     string parent = 1;
+
+    // Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
     string language_code = 2;
+
     message IntentContextInSearchResult {
+
         string name = 1;
+
         string intent_name = 2;
+
         string intent_display_name = 3;
-        string language = 4;
-        string created_at = 5;
-        string modified_at = 6;
-        string created_by = 7;
-        string modified_by = 8;
-    }
-    repeated IntentContextInSearchResult intent_context_in_results = 3;
-    string term = 4;
-    string elastic_query = 5;
-    float time = 6;
-    string next_page_token = 7;
-}
 
-message FullTextSearchResponseIntentContextOut {
-    string parent = 1;
-    string language_code = 2;
-    message IntentContextOutSearchResult {
-        string name = 1;
-        string intent_name = 2;
-        string intent_display_name = 3;
-        string language = 4;
-        string created_at = 5;
-        string modified_at = 6;
-        string created_by = 7;
-        string modified_by = 8;
-    }
-    repeated IntentContextOutSearchResult intent_context_out_results = 3;
-    string term = 4;
-    string elastic_query = 5;
-    float time = 6;
-    string next_page_token = 7;
-}
+        repeated string tags = 4;
 
-message FullTextSearchResponseIntentUsersays {
-    string parent = 1;
-    string language_code = 2;
-    message IntentUsersaysSearchResult {
-        string name = 1;
-        string text = 2;
-        string text_as_entity_types = 3;
-        string text_as_entity_values = 4;
-        string type = 5;
-        string intent_name = 6;
-        string intent_display_name = 7;
-        string language = 8;
-        string created_at = 9;
-        string modified_at = 10;
-        string created_by = 11;
-        string modified_by = 12;
-    }
-    repeated IntentUsersaysSearchResult intent_usersays_results = 3;
-    string term = 4;
-    string elastic_query = 5;
-    float time = 6;
-    string next_page_token = 7;
-}
-
-message FullTextSearchResponseIntentTags {
-    string parent = 1;
-    string language_code = 2;
-    message IntentTagsSearchResult {
-        string name = 1;
-        string text = 2;
-        string intent_name = 3;
-        string intent_display_name = 4;
         string language = 5;
+
         string created_at = 6;
+
         string modified_at = 7;
+
         string created_by = 8;
+
         string modified_by = 9;
+
     }
-    repeated IntentTagsSearchResult intent_tags_results = 3;
+
+    repeated IntentContextInSearchResult intent_context_in_results = 3;
+
     string term = 4;
+
     string elastic_query = 5;
+
     float time = 6;
+
+    // The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2
     string next_page_token = 7;
 }
 
-message FullTextSearchResponseIntentResponse {
+// This message is a response of full text search of intent with context out
+message FullTextSearchResponseIntentContextOut {
+
+    // Required. The project that the agent to fetch is associated with.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     string parent = 1;
+
+    // Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
     string language_code = 2;
-    message IntentResponseSearchResult {
-        string text = 1;
-        string platform = 2;
-        string response_type = 3;
-        string intent_name = 4;
-        string intent_display_name = 5;
+
+    message IntentContextOutSearchResult {
+
+        string name = 1;
+
+        string intent_name = 2;
+
+        string intent_display_name = 3;
+
+        repeated string tags = 4;
+
+        string language = 5;
+
+        string created_at = 6;
+
+        string modified_at = 7;
+
+        string created_by = 8;
+
+        string modified_by = 9;
+
+    }
+
+    repeated IntentContextOutSearchResult intent_context_out_results = 3;
+
+    string term = 4;
+
+    string elastic_query = 5;
+
+    float time = 6;
+
+    // The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2
+    string next_page_token = 7;
+}
+
+// This message is a response of full text search of intent with sentence
+message FullTextSearchResponseIntentUsersays {
+
+    // Required. The project that the agent to fetch is associated with.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
+    string parent = 1;
+
+    // Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
+    string language_code = 2;
+
+    message IntentUsersaysSearchResult {
+
+        string name = 1;
+
+        string text = 2;
+
+        string text_as_entity_types = 3;
+
+        string text_as_entity_values = 4;
+
+        string type = 5;
+
+        string intent_name = 6;
+
+        string intent_display_name = 7;
+
+        repeated string tags = 8;
+
+        string language = 9;
+
+        string created_at = 10;
+
+        string modified_at = 11;
+
+        string created_by = 12;
+
+        string modified_by = 13;
+
+    }
+
+    repeated IntentUsersaysSearchResult intent_usersays_results = 3;
+
+    string term = 4;
+
+    string elastic_query = 5;
+
+    float time = 6;
+
+    // The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2
+    string next_page_token = 7;
+}
+
+// This message is a response of full text search of intent with tags
+message FullTextSearchResponseIntentTags {
+
+    // Required. The project that the agent to fetch is associated with.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
+    string parent = 1;
+
+    // Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
+    string language_code = 2;
+
+    message IntentTagsSearchResult {
+
+        string name = 1;
+
+        string text = 2;
+
+        string intent_name = 3;
+
+        string intent_display_name = 4;
+
+        repeated string tags = 5;
+
         string language = 6;
+
         string created_at = 7;
+
         string modified_at = 8;
+
         string created_by = 9;
+
         string modified_by = 10;
     }
-    repeated IntentResponseSearchResult intent_response_results = 3;
+
+    repeated IntentTagsSearchResult intent_tags_results = 3;
+
     string term = 4;
+
     string elastic_query = 5;
+
     float time = 6;
+
+    // The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2
     string next_page_token = 7;
 }
 
-message FullTextSearchResponseIntentParameters {
+// This message is a response of full text search of intent response
+message FullTextSearchResponseIntentResponse {
+
+    // Required. The project that the agent to fetch is associated with.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     string parent = 1;
+
+    // Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
     string language_code = 2;
-    message IntentParametersSearchResult {
-        string parameter_name = 1;
-        string parameter_display_name = 2;
-        string intent_name = 3;
-        string intent_display_name = 4;
-        string language = 5;
-        string created_at = 6;
-        string modified_at = 7;
-        string created_by = 8;
-        string modified_by = 9;
+
+    message IntentResponseSearchResult {
+
+        string text = 1;
+
+        string platform = 2;
+
+        string response_type = 3;
+
+        string intent_name = 4;
+
+        string intent_display_name = 5;
+
+        repeated string tags = 6;
+
+        string language = 7;
+
+        string created_at = 8;
+
+        string modified_at = 9;
+
+        string created_by = 10;
+
+        string modified_by = 11;
+
     }
-    repeated IntentParametersSearchResult intent_parameters_results = 3;
+    repeated IntentResponseSearchResult intent_response_results = 3;
+
     string term = 4;
+
     string elastic_query = 5;
+
     float time = 6;
+
+    // The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2
     string next_page_token = 7;
 }
 
-message ReindexAgentRequest {
-    // projects/<project_id>/agent
+// This message is a response of full text search of intent with parameters
+message FullTextSearchResponseIntentParameters {
+
+    // Required. The project that the agent to fetch is associated with.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     string parent = 1;
-    // Optional, useful for versioning reasons in the future
+
+    // Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
+    string language_code = 2;
+
+    message IntentParametersSearchResult {
+
+        string parameter_name = 1;
+
+        string parameter_display_name = 2;
+
+        string intent_name = 3;
+
+        string intent_display_name = 4;
+
+        repeated string tags = 5;
+
+        string language = 6;
+
+        string created_at = 7;
+
+        string modified_at = 8;
+
+        string created_by = 9;
+
+        string modified_by = 10;
+
+    }
+
+    repeated IntentParametersSearchResult intent_parameters_results = 3;
+
+    string term = 4;
+
+    string elastic_query = 5;
+
+    float time = 6;
+
+    // The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2
+    string next_page_token = 7;
+}
+
+// This message is a request to reindex agent
+message ReindexAgentRequest {
+
+    // Required. The project that the agent to fetch is associated with.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
+    string parent = 1;
+
+    // Optional, useful for versioning reasons of the agent data
     string branch_name = 2;
+
     // Optional, useful for reindexing specific indices in the future
     repeated FullTextSearchRequest.QueryType index_types = 3;
 }

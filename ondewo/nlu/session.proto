@@ -32,13 +32,14 @@ package ondewo.nlu;
 
 import "google/api/annotations.proto";
 import "google/protobuf/empty.proto";
+import "google/protobuf/field_mask.proto";
 import "google/protobuf/struct.proto";
 import "google/rpc/status.proto";
 import "google/type/latlng.proto";
+import "ondewo/nlu/common.proto";
 import "ondewo/nlu/context.proto";
 import "ondewo/nlu/intent.proto";
 import "ondewo/nlu/entity_type.proto";
-import "ondewo/nlu/common.proto";
 
 option cc_enable_arenas = true;
 option csharp_namespace = "Google.Cloud.Dialogflow.V2";
@@ -53,6 +54,7 @@ option objc_class_prefix = "DF";
 // [StreamingDetectIntent][google.cloud.dialogflow.v2.Sessions.StreamingDetectIntent]) method to determine
 // user intent and respond.
 service Sessions {
+
     // Processes a natural language query and returns structured, actionable data
     // as a result. This method is not idempotent, because it may cause contexts
     // and session entity types to be updated, which in turn might affect
@@ -110,9 +112,95 @@ service Sessions {
     // *** SESSION-LABEL RELATED ENDPOINTS *** //
     rpc ListSessionLabels (ListSessionLabelsRequest) returns (ListSessionLabelsResponse) {
         option (google.api.http) = {
+            get: "/v2/{session_id=projects/*/agent/sessions/*}/labels"
+        };
+    };
+
+    rpc ListSessionLabelsOfAllSessions (ListSessionLabelsOfAllSessionsRequest) returns (ListSessionLabelsResponse) {
+        option (google.api.http) = {
             get: "/v2/{parent=projects/*/agent}/sessions/labels"
         };
     };
+
+    rpc ListLanguageCodesOfAllSessions (ListLanguageCodesOfAllSessionsRequest) returns (ListLanguageCodesResponse) {
+        option (google.api.http) = {
+            get: "/v2/{parent=projects/*/agent}/sessions/language_codes"
+        };
+    };
+
+    rpc ListMatchedIntentsOfAllSessions (ListMatchedIntentsOfAllSessionsRequest) returns (ListMatchedIntentsResponse) {
+        option (google.api.http) = {
+            get: "/v2/{parent=projects/*/agent}/sessions/matched_intents"
+        };
+    };
+
+    rpc ListMatchedEntityTypesOfAllSessions (ListMatchedEntityTypesOfAllSessionsRequest) returns (ListMatchedEntityTypesResponse) {
+        option (google.api.http) = {
+            get: "/v2/{parent=projects/*/agent}/sessions/matched_entity_types"
+        };
+    };
+
+    rpc ListUserIdsOfAllSessions (ListUserIdsOfAllSessionsRequest) returns (ListUserIdsResponse) {
+        option (google.api.http) = {
+            get: "/v2/{parent=projects/*/agent}/sessions/user_ids"
+        };
+    };
+
+    rpc ListIdentifiedUserIdsOfAllSessions (ListIdentifiedUserIdsOfAllSessionsRequest) returns (ListIdentifiedUserIdsResponse) {
+        option (google.api.http) = {
+            get: "/v2/{parent=projects/*/agent}/sessions/identified_user_ids"
+        };
+    };
+
+    rpc ListTagsOfAllSessions (ListTagsOfAllSessionsRequest) returns (ListTagsResponse) {
+        option (google.api.http) = {
+            get: "/v2/{parent=projects/*/agent}/sessions/tags"
+        };
+    };
+
+    rpc ListInputContextsOfAllSessions (ListInputContextsOfAllSessionsRequest) returns (ListInputContextsResponse) {
+        option (google.api.http) = {
+            get: "/v2/{parent=projects/*/agent}/sessions/input_contexts"
+        };
+    };
+
+    rpc ListOutputContextsOfAllSessions (ListOutputContextsOfAllSessionsRequest) returns (ListOutputContextsResponse) {
+        option (google.api.http) = {
+            get: "/v2/{parent=projects/*/agent}/sessions/output_contexts"
+        };
+    };
+
+    rpc ListPlatformsOfAllSessions (ListPlatformsOfAllSessionsRequest) returns (ListPlatformsResponse) {
+        option (google.api.http) = {
+            get: "/v2/{parent=projects/*/agent}/sessions/platforms"
+        };
+    };
+
+    rpc ListAccountIdsOfAllSessions (ListAccountIdsOfAllSessionsRequest) returns (ListAccountIdsResponse) {
+        option (google.api.http) = {
+            get: "/v2/{parent=projects/*/agent}/sessions/account_ids"
+        };
+    };
+
+    rpc ListPropertyIdsOfAllSessions (ListPropertyIdsOfAllSessionsRequest) returns (ListPropertyIdsResponse) {
+        option (google.api.http) = {
+            get: "/v2/{parent=projects/*/agent}/sessions/property_ids"
+        };
+    };
+
+    rpc ListDatastreamIdsOfAllSessions (ListDatastreamIdsOfAllSessionsRequest) returns (ListDatastreamIdsResponse) {
+        option (google.api.http) = {
+            get: "/v2/{parent=projects/*/agent}/sessions/datastream_ids"
+        };
+    };
+
+
+    rpc ListOriginIdsOfAllSessions (ListOriginIdsOfAllSessionsRequest) returns (ListOriginIdsResponse) {
+        option (google.api.http) = {
+            get: "/v2/{parent=projects/*/agent}/sessions/origin_ids"
+        };
+    };
+
 
     rpc AddSessionLabels (AddSessionLabelsRequest) returns (Session) {
         option (google.api.http) = {
@@ -121,9 +209,9 @@ service Sessions {
         };
     };
 
-    rpc RemoveSessionLabels (RemoveSessionLabelsRequest) returns (Session) {
+    rpc DeleteSessionLabels (DeleteSessionLabelsRequest) returns (Session) {
         option (google.api.http) = {
-            post: "/v2/{session_id=projects/*/agent/sessions/*}/labels:remove"
+            post: "/v2/{session_id=projects/*/agent/sessions/*}/labels:delete"
             body: "*"
         };
     };
@@ -166,6 +254,7 @@ service Sessions {
 
 // The request to detect user's intent.
 message DetectIntentRequest {
+
     // Required. The name of the session this query is sent to. Format:
     // `projects/<Project ID>/agent/sessions/<Session ID>`. It's up to the API
     // caller to choose an appropriate session ID. It can be a random number or
@@ -194,6 +283,7 @@ message DetectIntentRequest {
 
 // The message returned from the DetectIntent method.
 message DetectIntentResponse {
+
     // The unique identifier of the response. It can be used to
     // locate a response in the training example set or for reporting issues.
     string response_id = 1;
@@ -208,6 +298,7 @@ message DetectIntentResponse {
 
 // Represents the parameters of the conversational query.
 message QueryParameters {
+
     // Optional. The time zone of this conversational query from the
     // [time zone database](https://www.iana.org/time-zones), e.g.,
     // America/New_York, Europe/Paris. If not provided, the time zone specified in
@@ -228,6 +319,37 @@ message QueryParameters {
     // Optional. This field can be used to pass custom data into the webhook
     // associated with the agent. Arbitrary JSON objects are supported.
     google.protobuf.Struct payload = 6;
+
+    // labels associated to this request
+    repeated string labels = 7;
+
+    // Only messages for the specified Intent.Message.Platform platforms are sent to the user in the
+    // <code>DetectIntentResponse</code>
+    repeated Intent.Message.Platform platforms = 8;
+
+    // Id of the account, e.g. Company Ondewo
+    string account_id = 9;
+
+    // Id of the property of the account, e.g. Domain ondewo.com
+    // This field can also be used for a customized tracking id or tag id
+    string property_id = 10;
+
+    // Id of the datastream of the property of the account, e.g. Subdomain sub1.ondewo.com or sub2.ondewo.com
+    // This field can also be used for a customized tracking id or tag id
+    string datastream_id = 11;
+
+    // Id of the the origin of the user request
+    //
+    // For a phone bot, this is the phone number +123456789 the user called (Note: This is not the user's phone number)
+    // For a chatbot or voicebot on the web, this is the URL on which the bo, e.g. https://ondewo.com/webchat
+    // For a voice assistant device, this is the device-id or the app id
+    // This field can also be used for a customized tracking id or tag id
+    string origin_id = 12; // https://aim-develop.ondewo.com/
+
+    // Id of the "identified user" e.g. for a chatbot the email address or for a phone bot the phone number of the user
+    // This field can also be used for a customized tracking id or tag id
+    string identified_user_id = 13;
+
 }
 
 // Represents the query input. It can contain either:
@@ -239,8 +361,10 @@ message QueryParameters {
 //
 // 3.  An event that specifies which intent to trigger.
 message QueryInput {
+
     // Required. The input specification.
     oneof input {
+
         // Instructs the speech recognizer how to process the speech audio.
         InputAudioConfig audio_config = 1;
 
@@ -254,6 +378,7 @@ message QueryInput {
 
 // Represents the result of conversational query or event processing.
 message QueryResult {
+
     // The original conversational query text:
     // - If natural language text was provided as input, `query_text` contains
     //   a copy of the input.
@@ -262,11 +387,6 @@ message QueryResult {
     //   multiple alternatives, a particular one is picked.
     // - If an event was provided as input, `query_text` is not set.
     string query_text = 1;
-
-    // The language that was triggered during intent detection.
-    // See [Language Support](https://dialogflow.com/docs/reference/language)
-    // for a list of the currently supported language codes.
-    string language_code = 15;
 
     // The Speech recognition confidence between 0.0 and 1.0. A higher number
     // indicates an estimated greater likelihood that the recognized words are
@@ -321,10 +441,21 @@ message QueryResult {
     // (completely uncertain) to 1.0 (completely certain).
     float intent_detection_confidence = 12;
 
+    // The user input gets pre-processed by spelling correction, stop word removal etc. This property holds
+    // the string that is passed to the entity recognition and intent detection
+    string query_text_original = 13;
+
     // The free-form diagnostic info. For example, this field
     // could contain webhook call latency.
     google.protobuf.Struct diagnostic_info = 14;
+
+    // The language that was triggered during intent detection.
+    // See [Language Support](https://dialogflow.com/docs/reference/language)
+    // for a list of the currently supported language codes.
+    string language_code = 15;
+
 }
+
 
 // The top-level message sent by the client to the
 // `StreamingDetectIntent` method.
@@ -338,6 +469,7 @@ message QueryResult {
 //     all subsequent messages must contain only `input_audio`.
 //     Otherwise, finish the request stream.
 message StreamingDetectIntentRequest {
+
     // Required. The name of the session the query is sent to.
     // Format of the session name:
     // `projects/<Project ID>/agent/sessions/<Session ID>`. It’s up to the API
@@ -388,6 +520,7 @@ message StreamingDetectIntentRequest {
 // 2.  The next message contains `response_id`, `query_result`
 //     and optionally `webhook_status` if a WebHook was called.
 message StreamingDetectIntentResponse {
+
     // The unique identifier of the response. It can be used to
     // locate a response in the training example set or for reporting issues.
     string response_id = 1;
@@ -436,6 +569,7 @@ message StreamingDetectIntentResponse {
 //
 // *  for `MESSAGE_TYPE_END_OF_SINGLE_UTTERANCE`: only `event_type`.
 message StreamingRecognitionResult {
+
     // Type of the response message.
     enum MessageType {
         // Not specified. Should never be used.
@@ -480,6 +614,7 @@ message StreamingRecognitionResult {
 
 // Instructs the speech recognizer how to process the audio content.
 message InputAudioConfig {
+
     // Required. Audio encoding of the audio content to process.
     AudioEncoding audio_encoding = 1;
 
@@ -504,6 +639,7 @@ message InputAudioConfig {
 
 // Represents the natural language text to be processed.
 message TextInput {
+
     // Required. The UTF-8 encoded natural language text to be processed.
     // Text length must not exceed 256 bytes.
     string text = 1;
@@ -521,6 +657,7 @@ message TextInput {
 // The parameter `name` may be used by the agent in the response:
 // `“Hello #welcome_event.name! What can I do for you today?”`.
 message EventInput {
+
     // Required. The unique identifier of the event.
     string name = 1;
 
@@ -538,6 +675,7 @@ message EventInput {
 // Refer to the [Cloud Speech API documentation](/speech/docs/basics) for more
 // details.
 enum AudioEncoding {
+
     // Not specified.
     AUDIO_ENCODING_UNSPECIFIED = 0;
 
@@ -557,7 +695,7 @@ enum AudioEncoding {
     // Adaptive Multi-Rate Narrowband codec. `sample_rate_hertz` must be 8000.
     AUDIO_ENCODING_AMR = 4;
 
-    // Adaptive Multi-Rate Wideband codec. `sample_rate_hertz` must be 16000.
+    // Adaptive Multi-Rate wideband codec. `sample_rate_hertz` must be 16000.
     AUDIO_ENCODING_AMR_WB = 5;
 
     // Opus encoded audio frames in Ogg container
@@ -582,18 +720,24 @@ enum AudioEncoding {
 }
 
 // *** SESSION RELATED MESSAGES *** //
+
+// Session of a user interaction
 message Session {
+
     // The unique identifier of the session
-    string session_id = 1;
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre>
+    string name = 1;
 
     // The list of all the steps of the session
     repeated SessionStep session_steps = 2;
+
     SessionInfo session_info = 3;
 
     // Represents the options for views of a session.
     // A session can be a sizable object. Therefore, we provide a resource view that
     // does not return all data
     enum View {
+
         // Endpoints decide whether to return the full or the sparse view
         VIEW_UNSPECIFIED = 0;
 
@@ -603,28 +747,51 @@ message Session {
         // Only some fields are populated in the response.
         VIEW_SPARSE = 2;
     }
+
     // created_at, created_by,modified_at, modified_by
     CreatedModified created_modified = 4;
 }
 
+// SessionStep is a single user interaction as part of a session
 message SessionStep {
-    DetectIntentRequest detect_intent_request = 1;
-    DetectIntentResponse detect_intent_response = 2;
+
+    // The unique identifier for the given review
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/steps/&lt;session_step_uuid&gt;</code></pre>
+    string name = 1;
+
+    // The detect intent request of the session step
+    DetectIntentRequest detect_intent_request = 2;
+
+    // The detect intent response  of the session step
+    DetectIntentResponse detect_intent_response = 3;
+
     // The contexts which were active at the beginning of this step
-    repeated Context contexts = 3;
+    repeated Context contexts = 4;
+
     // created_at, created_by,modified_at, modified_by
-    CreatedModified created_modified = 4;
+    CreatedModified created_modified = 5;
+
 }
 
+// TrackSessionStepRequest stores a session step into the session
 message TrackSessionStepRequest {
+
+    // The unique identifier for the given review
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/steps/&lt;session_step_uuid&gt;</code></pre>.
     string session_id = 1;
+
+    // The session step to be added
     SessionStep session_step = 2;
+
+    // Defines which fields of the session should be returned in the response
     Session.View session_view = 3;
 }
 
+// This message is a request to list sessions
 message ListSessionsRequest {
+
     // The parent for which sessions should be listed
-    // Format: `projects/<PROJECT_ID>/agent`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
     // An enum specifying the amount of information to be returned per session
@@ -635,13 +802,57 @@ message ListSessionsRequest {
 
     // Optional. A filter to narrow the response down to sessions of interest.
     SessionFilter session_filter = 5;
+
+    // Optional. The mask to control which fields will be filled with data.
+    // Example: path=["session_info.duration_in_s_min"]
+    google.protobuf.FieldMask field_mask = 6;
 }
 
-message SessionFilter {
-    // A SessionFilter can be used in some requests to return only sessions matching certain filter conditions.
-    //
-    // All fields below are  optional. Multiple fields specified at the same time are chained via AND.
+// Message used to filter sessions based on contextual information
+message ContextFilter {
 
+    // name of the context
+    string context_name = 1;
+
+    // name of the key of the context parameter
+    string key = 2;
+
+    // value of the parameter
+    string value = 3;
+
+    ComparisonOperator operator = 4;
+}
+
+// Type of operator to compare
+enum ComparisonOperator {
+
+    // equal operator
+    EQUAL = 0;
+
+    // greater operator, e.g. for numbers, dates, and strings
+    GREATER = 1;
+
+    // greater or equal operator, e.g. for numbers, dates, and strings
+    GREATER_OR_EQUAL = 2;
+
+    // less or equal operator, e.g. for numbers, dates, and strings
+    LESS_OR_EQUAL = 3;
+
+    // contains operator, e.g. part of string, or one of the elements in an iterable such as set or list
+    CONTAINS = 4;
+
+    // starts with operator for string comparison only
+    STARTS_WITH = 5;
+
+    // ends with operator for string comparison only
+    ENDS_WITH = 6;
+}
+
+// This message contains a session filter
+message SessionFilter {
+
+    // A SessionFilter can be used in some requests to return only sessions matching certain filter conditions.
+    // All fields below are optional. Multiple fields specified at the same time are chained via AND.
     // Match only sessions with all of the following language_codes
     repeated string language_codes = 1;
 
@@ -653,21 +864,37 @@ message SessionFilter {
     // NOTE: only name and display name fields are used for comparison
     repeated EntityType matched_entity_types = 3;
 
-    // Match only sessions where the minimum confidence for intent detection along the session falls in the following range
-    float min_intents_confidence_min = 4; // defaults to -1 if not set
-    float min_intents_confidence_max = 5; // defaults to +1 if not set
+    // Match only sessions where the minimum confidence for intent detection along the session falls
+    // in the following range. Defaults to -1 if not set.
+    float min_intents_confidence_min = 4;
 
-    // Match only sessions where the minimum confidence for entity recognition along the session falls in the following range
-    float min_entity_types_confidence_min = 6; // defaults to -1 if not set
-    float min_entity_types_confidence_max = 7; // defaults to +1 if not set
+    // Match only sessions where the minimum confidence for intent detection along the session falls
+    // in the following range. Defaults to +1 if not set.
+    float min_intents_confidence_max = 5;
 
-    // Match only sessions whose time range falls within the following range (in UNIX epochs)
-    float earliest = 8; // defaults to 0 if not set
-    float latest = 9; // defaults to current epoch if not set
+    // Match only sessions where the minimum confidence for entity recognition along the session falls
+    //  in the following range. Defaults to -1 if not set.
+    float min_entity_types_confidence_min = 6;
+
+    // Match only sessions where the minimum confidence for entity recognition along the session falls
+    //  in the following range. Defaults to +1 if not set.
+    float min_entity_types_confidence_max = 7;
+
+    // Match only sessions whose time range falls within the following range (in UNIX epochs).
+    // Defaults to 0 if not set.
+    double earliest = 8;
+
+    // Match only sessions whose time range falls within the following range (in UNIX epochs).
+    // Defaults to current epoch if not set
+    double latest = 9;
 
     // Match only sessions for which the number of turns (interaction steps) falls in the following range
-    int32 min_number_turns = 10; // defaults to 0 if not set
-    int32 max_number_turns = 11; // defaults to MAXINT if not set
+    // Defaults to 0 if not set.
+    int32 min_number_turns = 10;
+
+    // Match only sessions for which the number of turns (interaction steps) falls in the following range
+    // Defaults to MAXINT if not set.
+    int32 max_number_turns = 11;
 
     // Match only session which have all of the following labels assigned
     repeated string labels = 12;
@@ -682,19 +909,125 @@ message SessionFilter {
     repeated string session_ids = 15;
 
     // Match only sessions whose session info contains at least one step having all the contexts specified here
+    // The input contexts are pre-conditions for detecting intents
     repeated Context input_contexts = 16;
+
+    // The output contexts are the result of the intent matching and track the contextual state of a conversation
     repeated Context output_contexts = 17;
+
+    // Match only sessions for which the duration in seconds are larger or equal
+    float duration_in_s_min = 18;
+
+    // Match only sessions for which the duration in seconds are smaller or equal
+    float duration_in_s_max = 19;
+
+    // Match only sessions for which the duration in minutes are larger or equal
+    float duration_in_m_min = 20;
+
+    // Match only sessions for which the duration in minutes are smaller or equal
+    float duration_in_m_max = 21;
+
+    // Match only sessions for which the duration in minutes rounded are larger or equal
+    float duration_in_m_rounded_min = 22;
+
+    // Match only sessions for which the duration in minutes rounded are smaller or equal
+    float duration_in_m_rounded_max = 23;
+
+    // Match only sessions for which the duration in 15 seconds rounded are larger or equal
+    float duration_interval_15s_rounded_min = 24;
+
+    // Match only sessions for which the duration in 15 seconds rounded are smaller or equal
+    float duration_interval_15s_rounded_max = 25;
+
+    // Match only sessions for which the duration in 30 seconds rounded are larger or equal
+    float duration_interval_30s_rounded_min = 26;
+
+    // Match only sessions for which the duration in 30 seconds rounded are smaller or equal
+    float duration_interval_30s_rounded_max = 27;
+
+    // Match only sessions for which the duration in 45 seconds rounded are larger or equal
+    float duration_interval_45s_rounded_min = 28;
+
+    // Match only sessions for which the duration in 45 seconds rounded are smaller or equal
+    float duration_interval_45s_rounded_max = 29;
+
+    // Match only sessions for which the started_time_slot_per_hour (e.g. 08:00) are larger or equal
+    string started_time_slot_per_hour_min = 30;
+
+    // Match only sessions for which the started_time_slot_per_hour (e.g. 14:00) are smaller or equal
+    string started_time_slot_per_hour_max = 31;
+
+    // Match only sessions for which the started_time_slot_per_quarter_hour (e.g. 08:00) are larger or equal
+    string started_time_slot_per_quarter_hour_min = 32;
+
+    // Match only sessions for which the started_time_slot_per_quarter_hour (e.g. 14:00) are smaller or equal
+    string started_time_slot_per_quarter_hour_max = 33;
+
+    // Match only sessions for which the started_time_slot_per_half_hour (e.g. 08:00) are larger or equal
+    string started_time_slot_per_half_hour_min = 34;
+
+    // Match only sessions for which the started_time_slot_per_half_hour (e.g. 14:00) are smaller or equal
+    string started_time_slot_per_half_hour_max = 35;
+
+    // Match only sessions for which the started_time_slot_per_day_phase (e.g. 08:00) are larger or equal
+    string started_time_slot_per_day_phase_min = 36;
+
+    // Match only sessions for which the started_time_slot_per_day_phase (e.g. 14:00) are smaller or equal
+    string started_time_slot_per_day_phase_max = 37;
+
+    // Match only sessions for which the started_time_slot_per_minute (e.g. 08:00) are larger or equal
+    string started_time_slot_per_minute_min = 38;
+
+    // Match only sessions for which the started_time_slot_per_minute (e.g. 14:00) are smaller or equal
+    string started_time_slot_per_minute_max = 39;
+
+    // Match only sessions for which the duration in seconds rounded are larger or equal
+    float duration_in_s_rounded_min = 40;
+
+    // Match only sessions for which the duration in seconds rounded are smaller or equal
+    float duration_in_s_rounded_max = 41;
+
+    // Messages for each of the Intent.Message.Platform were sent to the user
+    repeated Intent.Message.Platform platforms = 42;
+
+    // Ids of the account, e.g. Company Ondewo,
+    // This field can also be used for customized tracking ids or tag ids
+    repeated string account_ids = 43;
+
+    // Ids of the property of the account, e.g. Domain ondewo.com
+    // This field can also be used for customized tracking ids or tag ids
+    repeated string property_ids = 44;
+
+    // Ids of the datastream of the property of the account, e.g. Subdomain sub1.ondewo.com or sub2.ondewo.com
+    // This field can also be used for customized tracking ids or tag ids
+    repeated string datastream_ids = 45;
+
+    // Ids of the the origin of the user request
+    //
+    // For a phone bot, this is the phone number +123456789 the user called (Note: This is not the user's phone number)
+    // For a chatbot or voicebot on the web, this is the URL on which the bo, e.g. https://ondewo.com/webchat
+    // For a voice assistant device, this is the device-id or the app id
+    repeated string origin_ids = 46;
+
+    // Ids of the "identified user" e.g. for a chatbot the email address or for a phone bot the phone number of the user
+    repeated string identified_user_ids = 47;
+
+    // Match only sessions for which the duration in 60 seconds rounded are larger or equal
+    float duration_interval_60s_rounded_min = 48;
+
+    // Match only sessions for which the duration in 60 seconds rounded are smaller or equal
+    float duration_interval_60s_rounded_max = 49;
 }
 
-
+// This message contains information about session
 message SessionInfo {
+
     // A SessionInfo contains some general information about a session.
     //
     // This information can be returned inside a Session object for consumption by a client.
     // Or it can be used by the backend to check whether the Session matches a given SessionFilter.
     //
-    // All fields below are  optional. Multiple fields specified at the same time are chained
-
+    // All fields below are optional. Multiple fields specified at the same time are chained
     // The language codes used in the given session.
     repeated string language_codes = 1;
 
@@ -710,9 +1043,13 @@ message SessionInfo {
     // The minimum confidence for entity recognition along the session
     float min_entity_types_confidence = 5;
 
-    // The start and end dates of the given session (in UNIX epochs)
-    float earliest = 6;
-    float latest = 7;
+    // The earliest date of the given session (in UNIX epochs), i.e. the time of the first interaction of a user
+    // in the given session
+    double earliest = 6;
+
+    // The latest date of the given session (in UNIX epochs), i.e. the time of the last interaction of a user
+    // in the given session
+    double latest = 7;
 
     // The number of turns (interaction steps) in the given session
     int32 number_turns = 8;
@@ -728,14 +1065,86 @@ message SessionInfo {
 
     // The list of contexts of each step collected in an outer list
     message ContextSteps {
+
         repeated Context contexts = 1;
     }
+
+    // The input contexts that are matched in the given session. The name of the context here is the short name
+    // and not the full URL name including the project parent
     repeated ContextSteps input_context_steps = 12;
+
+    // The output contexts that are matched in the given session. The name of the context here is the short name
+    // and not the full URL name including the project parent
     repeated ContextSteps output_context_steps = 13;
 
+    //  duration in seconds
+    float duration_in_s = 14;
+
+    // duration in minutes
+    float duration_in_m = 15;
+
+    // duration in minutes rounded
+    float duration_in_m_rounded = 16;
+
+    // duration in 15 seconds intervals rounded
+    float duration_interval_15s_rounded = 17;
+
+    // duration in 30 seconds intervals rounded
+    float duration_interval_30s_rounded = 18;
+
+    // duration in 45 seconds intervals rounded
+    float duration_interval_45s_rounded = 19;
+
+    // started_time_slot_per_hour (e.g. 08:00)
+    string started_time_slot_per_hour = 20;
+
+    // started_time_slot_per_quarter_hour (e.g. 08:00)
+    string started_time_slot_per_quarter_hour = 21;
+
+    // started_time_slot_per_half_hour (e.g. 08:00)
+    string started_time_slot_per_half_hour = 22;
+
+    // started_time_slot_per_day_phase (e.g. 14:00)
+    string started_time_slot_per_day_phase = 23;
+
+    // started_time_slot_per_minute (e.g. 14:00)
+    string started_time_slot_per_minute = 24;
+
+    // duration in seconds rounded
+    float duration_in_s_rounded = 25;
+
+    // Messages for each of the Intent.Message.Platform were sent to the user
+    repeated Intent.Message.Platform platforms = 26;
+
+    // Ids of the account, e.g. Company Ondewo,
+    // This field can also be used for customized tracking ids or tag ids
+    repeated string account_ids = 27;
+
+    // Ids of the property of the account, e.g. Domain ondewo.com
+    // This field can also be used for customized tracking ids or tag ids
+    repeated string property_ids = 28;
+
+    // Ids of the datastream of the property of the account, e.g. Subdomain sub1.ondewo.com or sub2.ondewo.com
+    // This field can also be used for customized tracking ids or tag ids
+    repeated string datastream_ids = 29;
+
+    // Ids of the the origin of the user request
+    //
+    // For a phone bot, this is the phone number +123456789 the user called (Note: This is not the user's phone number)
+    // For a chatbot or voicebot on the web, this is the URL on which the bo, e.g. https://ondewo.com/webchat
+    // For a voice assistant device, this is the device-id or the app id
+    repeated string origin_ids = 30;
+
+    // Ids of the "identified user" e.g. for a chatbot the email address or for a phone bot the phone number of the user
+    repeated string identified_user_ids = 31;
+
+    // duration in 60 seconds intervals rounded
+    float duration_interval_60s_rounded = 32;
 }
 
+// This message is a response including the listing of sessions
 message ListSessionsResponse {
+
     // The requested sessions
     repeated Session sessions = 1;
 
@@ -743,40 +1152,56 @@ message ListSessionsResponse {
     string next_page_token = 2;
 }
 
+// This message is a request to get a session
 message GetSessionRequest {
     // The session to be returned
-    // Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID>`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre>
     string session_id = 1;
 
     // whether to return a full or sparse view; if unspecified full view is returned
     Session.View session_view = 2;
+
+    // Optional. The mask to control which fields will be filled with data.
+    // Example: path=["session_info.duration_in_s_min"]
+    google.protobuf.FieldMask field_mask = 6;
 }
 
+// This message is a request to create a session
 message CreateSessionRequest {
+
     // Creates a session that collects all the conversation interactions between the machine and a user
     // The unique identifier of an Agent
-    // Format: `projects/<PROJECT_ID>/agent`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1; // Required.
 
     // The unique UUID of a Session
     // Format: UUID Version 4, e.g. 2f59fad2-06bc-4730-9920-d3148f28f357
     string session_uuid = 2; // Optional. If not provided, it will be auto-generated
+
+    // labels for the session - Optional
+    repeated string labels = 3;
+
+    // Optional. The collection of contexts to be activated before this query is executed.
+    repeated Context contexts = 4;
 }
 
+// This message is a request to delete a session
 message DeleteSessionRequest {
+
     // Required. The session to be deleted
-    // Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_UUID>`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre>
     string session_id = 1;
 }
 
 // *** SESSION-REVIEW RELATED MESSAGES *** //
 message CreateSessionReviewRequest {
+
     // The unique identifier for the session under review
-    // Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID>`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre>
     string session_id = 1;
 
     // Optional: The unique identifier of the parent review
-    // Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID>/reviews/<SESSION_REVIEW_ID>`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/reviews/&lt;session_review_uuid&gt;</code></pre>
     string parent_review_id = 2;
 
     // The reviews for all steps in the session
@@ -785,10 +1210,12 @@ message CreateSessionReviewRequest {
     SessionReview.View session_review_view = 4;
 }
 
+// This message contains a session review
 message SessionReview {
+
     // The unique identifier for the given review
-    // Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID>/reviews/<SESSION_REVIEW_ID>`.
-    string session_review_id = 1;
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/reviews/&lt;session_review_uuid&gt;</code></pre>
+    string name = 1;
 
     // The reviews for all steps in the session
     repeated SessionReviewStep session_review_steps = 2;
@@ -806,31 +1233,51 @@ message SessionReview {
         // Only some fields are populated in the response.
         VIEW_SPARSE = 2;
     }
+
     // created_at, created_by,modified_at, modified_by
     CreatedModified created_modified = 3;
+
 }
 
+// This message contains a session review step
 message SessionReviewStep {
-    // The user says with markup of the detected entity types
-    Intent.TrainingPhrase annotated_usersays = 1;
+
+    // The unique identifier for the given review step
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/reviews/&lt;review_uuid&gt;/sessionreviewsteps/&lt;session_review_step_uuid&gt;</code></pre>
+    string name = 1;
+
+    // The user says with markup of the detected entity types after the preprocessing such as spelling correction,
+    // stopword removal etc. has been applied.
+    //
+    // This string represents what has been passed to the entity recognition and intent detection algorithms.
+    Intent.TrainingPhrase annotated_usersays = 2;
 
     // The language code
-    string language_code = 2;
+    string language_code = 3;
 
     // Unique detected intents ordered by descending confidence
-    repeated DetectedIntent detected_intents = 3;
+    repeated DetectedIntent detected_intents = 4;
 
     // The contexts which were active at the beginning of this step
-    repeated Context contexts = 4;
+    repeated Context contexts = 5;
 
     // The output contexts of this step
-    repeated Context contexts_out = 5;
+    repeated Context contexts_out = 6;
+
+    // User input without any pre-processing applied
+    string query_text_original = 7;
+
+    // Messages for each of the Intent.Message.Platform were sent to the user
+    repeated Intent.Message.Platform platforms = 8;
 
     // created_at, created_by,modified_at, modified_by
-    CreatedModified created_modified = 6;
+    CreatedModified created_modified = 9;
 }
 
+
+// This message contains a detected intent
 message DetectedIntent {
+
     // intent
     Intent intent = 1;
 
@@ -853,31 +1300,330 @@ message DetectedIntent {
     bool required_param_missing = 5;
 }
 
+// This message is a request to list session labels
 message ListSessionLabelsRequest {
-    // The parent for which the labels for all sessions should be listed
-    // Format: `projects/<PROJECT_ID>/agent`.
-    string parent = 1;
+
+    // The id of the session
+    string session_id = 1;
 }
 
+// request to list all labels of all sessions
+message ListSessionLabelsOfAllSessionsRequest {
+
+    // The parent for which the labels for all sessions should be listed
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Optional. A filter to narrow the response down to sessions of interest.
+    SessionFilter session_filter = 2;
+}
+
+// This message is a response of listing session labels
 message ListSessionLabelsResponse {
+
+    // The labels of the session
     repeated string labels = 1;
 }
 
+// request to list all language codes of all sessions
+message ListLanguageCodesOfAllSessionsRequest {
+
+    // The parent for which the language_codes for all sessions should be listed
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Optional. A filter to narrow the response down to sessions of interest.
+    SessionFilter session_filter = 2;
+}
+
+// This message is a response of listing session language_codes
+message ListLanguageCodesResponse {
+
+    // The language_codes of the session
+    repeated string language_codes = 1;
+}
+
+
+
+// request to list all matched_intents of all sessions
+message ListMatchedIntentsOfAllSessionsRequest {
+
+    // The parent for which the matched_intents for all sessions should be listed
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Optional. A filter to narrow the response down to sessions of interest.
+    SessionFilter session_filter = 2;
+}
+
+// This message is a response of listing session matched_intents
+message ListMatchedIntentsResponse {
+
+    // The matched_intents of the session
+    repeated string matched_intents = 1;
+}
+
+
+// request to list all matched_entity_types of all sessions
+message ListMatchedEntityTypesOfAllSessionsRequest {
+
+    // The parent for which the matched_entity_types for all sessions should be listed
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Optional. A filter to narrow the response down to sessions of interest.
+    SessionFilter session_filter = 2;
+}
+
+// This message is a response of listing session matched_entity_types
+message ListMatchedEntityTypesResponse {
+
+    // The matched_entity_types of the session
+    repeated string matched_entity_types = 1;
+}
+
+
+// request to list all user_ids of all sessions
+message ListUserIdsOfAllSessionsRequest {
+
+    // The parent for which the user_ids for all sessions should be listed
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Optional. A filter to narrow the response down to sessions of interest.
+    SessionFilter session_filter = 2;
+}
+
+// This message is a response of listing session user_ids
+message ListUserIdsResponse {
+
+    // The user_ids of the session
+    repeated string user_ids = 1;
+}
+
+
+// request to list all identified_user_ids of all sessions
+message ListIdentifiedUserIdsOfAllSessionsRequest {
+
+    // The parent for which the identified_user_ids for all sessions should be listed
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Optional. A filter to narrow the response down to sessions of interest.
+    SessionFilter session_filter = 2;
+}
+
+// This message is a response of listing session identified_user_ids
+message ListIdentifiedUserIdsResponse {
+
+    // The identified_user_ids of the session
+    repeated string identified_user_ids = 1;
+}
+
+
+// request to list all tags of all sessions
+message ListTagsOfAllSessionsRequest {
+
+    // The parent for which the tags for all sessions should be listed
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Optional. A filter to narrow the response down to sessions of interest.
+    SessionFilter session_filter = 2;
+}
+
+// This message is a response of listing session tags
+message ListTagsResponse {
+
+    // The tags of the session
+    repeated string tags = 1;
+}
+
+
+// request to list all input_contexts of all sessions
+message ListInputContextsOfAllSessionsRequest {
+
+    // The parent for which the input_contexts for all sessions should be listed
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Optional. A filter to narrow the response down to sessions of interest.
+    SessionFilter session_filter = 2;
+}
+
+// This message is a response of listing session input_contexts
+message ListInputContextsResponse {
+
+    // The input_contexts ids of the session
+    repeated string input_contexts = 1;
+}
+
+
+// request to list all output_contexts of all sessions
+message ListOutputContextsOfAllSessionsRequest {
+
+    // The parent for which the output_contexts for all sessions should be listed
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Optional. A filter to narrow the response down to sessions of interest.
+    SessionFilter session_filter = 2;
+}
+
+// This message is a response of listing session output_contexts
+message ListOutputContextsResponse {
+
+    // The output_contexts ids of the session
+    repeated string output_contexts = 1;
+}
+
+
+// request to list all labels of all sessions
+message ListPlatformsOfAllSessionsRequest {
+
+    // The parent for which the platforms for all sessions should be listed
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Optional. A filter to narrow the response down to sessions of interest.
+    SessionFilter session_filter = 2;
+}
+
+// This message is a response of listing session platforms
+message ListPlatformsResponse {
+
+    // The platforms of the session
+    repeated string platforms = 1;
+}
+
+
+// request to list all account_ids of all sessions
+message ListAccountIdsOfAllSessionsRequest {
+
+    // The parent for which the account_ids for all sessions should be listed
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Optional. A filter to narrow the response down to sessions of interest.
+    SessionFilter session_filter = 2;
+}
+
+// This message is a response of listing session account_ids
+message ListAccountIdsResponse {
+
+    // The account_ids of the session
+    repeated string account_ids = 1;
+}
+
+
+// request to list all property_ids of all sessions
+message ListPropertyIdsOfAllSessionsRequest {
+
+    // The parent for which the property_ids for all sessions should be listed
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Optional. A filter to narrow the response down to sessions of interest.
+    SessionFilter session_filter = 2;
+}
+
+// This message is a response of listing session property_ids
+message ListPropertyIdsResponse {
+
+    // The property_ids of the session
+    repeated string property_ids = 1;
+}
+
+
+// request to list all datastream_ids of all sessions
+message ListDatastreamIdsOfAllSessionsRequest {
+
+    // The parent for which the datastream_ids for all sessions should be listed
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Optional. A filter to narrow the response down to sessions of interest.
+    SessionFilter session_filter = 2;
+}
+
+// This message is a response of listing session datastream_ids
+message ListDatastreamIdsResponse {
+
+    // The datastream_ids of the session
+    repeated string datastream_ids = 1;
+}
+
+
+// request to list all origin_ids of all sessions
+message ListOriginIdsOfAllSessionsRequest {
+
+    // The parent for which the origin_ids for all sessions should be listed
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Optional. A filter to narrow the response down to sessions of interest.
+    SessionFilter session_filter = 2;
+}
+
+// This message is a response of listing session origin_ids
+message ListOriginIdsResponse {
+
+    // The origin_ids of the session
+    repeated string origin_ids = 1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// This message is a request to add session labels
 message AddSessionLabelsRequest {
+
+    // The id of the session
     string session_id = 1;
+
+    // The labels to add to the session
     repeated string labels = 2;
-    Session.View session_view = 3;
 }
 
-message RemoveSessionLabelsRequest {
+// This message is a request to delete session labels
+message DeleteSessionLabelsRequest {
+
+    // The id of the session
     string session_id = 1;
+
+    // The labels to delete from the session
     repeated string labels = 2;
-    Session.View session_view = 3;
 }
 
+// This message is a request to list session reviews
 message ListSessionReviewsRequest {
+
     // The unique identifier for the session for which reviews should be listed
-    // Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID>`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre>
     string session_id = 1;
 
     // An enum specifying the amount of information to be returned per session review
@@ -887,7 +1633,9 @@ message ListSessionReviewsRequest {
     string page_token = 4;
 }
 
+// This message is a response of listing session reviews
 message ListSessionReviewsResponse {
+
     // The requested session reviews
     repeated SessionReview session_reviews = 1;
 
@@ -895,16 +1643,20 @@ message ListSessionReviewsResponse {
     string next_page_token = 2;
 }
 
+// This message is a request to get session review
 message GetSessionReviewRequest {
+
     // The unique identifier of the session review to be returned
     string session_review_id = 1;
 
     SessionReview.View session_review_view = 2;
 }
 
+// This message is a request to get latest session review
 message GetLatestSessionReviewRequest {
+
     // The unique identifier of the session for which the latest review should be returned
-    // Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID>`.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre>
     string session_id = 1;
 
     // An enum specifying the amount of information to be returned for the desired session review

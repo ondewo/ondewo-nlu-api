@@ -17,13 +17,13 @@ export
 
 # MUST BE THE SAME AS API in Mayor and Minor Version Number
 # example: API 2.9.0 --> Client 2.9.X
-ONDEWO_NLU_API_VERSION=3.2.0
+ONDEWO_NLU_API_VERSION=4.6.0
 
 # You need to setup an access token at https://github.com/settings/tokens - permissions are important
 GITHUB_GH_TOKEN?=ENTER_YOUR_TOKEN_HERE
 
 CURRENT_RELEASE_NOTES=`cat RELEASE.md \
-	| sed -n '/Release ONDEWO NLU APIS ${ONDEWO_NLU_API_VERSION}/,/\*\*/p'`
+	| sed -n '/Release ONDEWO NLU API ${ONDEWO_NLU_API_VERSION}/,/\*\*/p'`
 
 GH_REPO="https://github.com/ondewo/ondewo-nlu-api"
 DEVOPS_ACCOUNT_GIT="ondewo-devops-accounts"
@@ -34,15 +34,21 @@ IMAGE_UTILS_NAME=ondewo-nlu-api-utils:${ONDEWO_NLU_API_VERSION}
 ########################################################
 #       ONDEWO Standard Make Targets
 ########################################################
-setup_developer_environment_locally: install_precommit_hooks install_nvm
+setup_developer_environment_locally: install_python_requirements install_precommit_hooks install_nvm ## Sets up local development environment !! Forcefully closes current terminal
 
-
-install_nvm:
+install_nvm: ## Install NVM, node and npm !! Forcefully closes current terminal
 	@curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
 	@sh install_nvm.sh
-	@echo "Node and NPM Installed !!! Closing terminal"
 	$(eval PID:=$(shell ps -ft $(ps | tail -1 | cut -c 8-13) | head -2 | tail -1 | cut -c 1-8))
-	kill -KILL ${PID}
+	@node --version & npm --version || (kill -KILL ${PID})
+
+install_python_requirements: ## Installs python requirements flak8 and mypy
+	wget -q https://raw.githubusercontent.com/ondewo/ondewo-nlu-client-python/master/requirements-dev.txt -O requirements-dev.txt
+	pip install -r requirements-dev.txt
+	wget -q https://raw.githubusercontent.com/ondewo/ondewo-nlu-client-python/master/requirements.txt -O requirements.txt
+	pip install -r requirements.txt
+	wget -q https://raw.githubusercontent.com/ondewo/ondewo-nlu-client-python/master/mypy.ini -O mypy.ini
+	wget -q https://raw.githubusercontent.com/ondewo/ondewo-nlu-client-python/master/.flake8 -O .flake8
 
 install_precommit_hooks: ## Installs pre-commit hooks and sets them up for the ondewo-csi-client repo
 	pip install pre-commit
@@ -63,9 +69,11 @@ TEST:
 	@echo ${GITHUB_GH_TOKEN}
 	@echo "\n${CURRENT_RELEASE_NOTES}"
 
+DOCS_DIR:= $(shell echo ondewo.github.io/docs/ondewo-nlu-api/${ONDEWO_NLU_API_VERSION})
 githubio_logic:
 	$(eval REPO_NAME:= $(shell echo ${GH_REPO} | cut -d "-" -f 2 ))
 	$(eval REPO_NAME_UPPER:= $(shell echo ${GH_REPO} | cut -d "-" -f 2 | sed -e 's/\(.*\)/\U\1/'))
+	$(eval TEMP_IMG:= $(shell cat  ondewo.github.io/script_image.txt))
 	@git branch | grep "*" | grep -q "master" || (echo "Not on master branch"  & rm -rf ondewo.github.io && exit 1)
 	@! cat ondewo.github.io/data.js | sed -n "/name\: '${REPO_NAME_UPPER}'/,/end\: ''/p" | grep -q "number: '${ONDEWO_NLU_API_VERSION}'" || (echo "Already Released" && exit 1)
 	$(eval VERSION_LINE:= $(shell cat -n ondewo.github.io/data.js | sed -n "/name\: '${REPO_NAME_UPPER}'/,/end\: ''/p" | grep "versions: " -A 1 | tail -1 | grep -o -E '[0-9]+' | head -1 | sed -e 's/^0\+//'))
@@ -73,20 +81,13 @@ githubio_logic:
 	@sed -i "${VERSION_LINE} i ${TEMP_TEXT}" ondewo.github.io/data.js
 	@cd ondewo.github.io && npx prettier -w --single-quote data.js
 
-	$(eval DOCS_DIR:=ondewo.github.io/docs/ondewo-${REPO_NAME}-api/${ONDEWO_NLU_API_VERSION})
-	@rm -rf ${DOCS_DIR}
-	@mkdir "${DOCS_DIR}"
-	@cp docs/* ${DOCS_DIR}
-	@sed -i "s/h1>Protocol Documentation/h1>${REPO_NAME_UPPER} ${ONDEWO_NLU_API_VERSION} Documentation/" ${DOCS_DIR}/index.html
-
-	$(eval HEADER_LINE:= $(shell cat ${DOCS_DIR}/index.html | grep -n "${REPO_NAME_UPPER} ${ONDEWO_NLU_API_VERSION} Documentation" | grep -o -E '[0-9]+' | head -1 | sed -e 's/^0\+//'))
-	$(eval TEMP_IMG:= $(shell cat  ondewo.github.io/script_image.txt))
-	$(eval TEMP_CALC:= $(shell expr ${HEADER_LINE} - 1))
-
-	sed -i '${TEMP_CALC} i ${TEMP_IMG}' ${DOCS_DIR}/index.html
+	rm -rf ${DOCS_DIR}
+	mkdir ${DOCS_DIR}
+	cp docs/* ${DOCS_DIR}
+	@sed -i 's/h1>Protocol Documentation/h1>${REPO_NAME_UPPER} ${ONDEWO_NLU_API_VERSION} Documentation/' ${DOCS_DIR}/index.html
+	sed -i '/${REPO_NAME_UPPER} ${ONDEWO_NLU_API_VERSION} Documentation/i ${TEMP_IMG}' ${DOCS_DIR}/index.html
 	head -30 ${DOCS_DIR}/index.html
 	head -20 ondewo.github.io/data.js
-
 	@git -C ondewo.github.io status
 	@git -C ondewo.github.io add data.js
 	@git -C ondewo.github.io add docs
@@ -133,10 +134,10 @@ build_gh_release: ## Generate Github Release with CLI
 
 release_all_clients: ## Releases all NLU Clients
 	@make release_python_client || (echo "Already released ${ONDEWO_NLU_API_VERSION} of Python Client")
+	@make release_angular_client || (echo "Already released ${ONDEWO_NLU_API_VERSION} of Angular Client")
 	@make release_nodejs_client || (echo "Already released ${ONDEWO_NLU_API_VERSION} of Nodejs Client")
 	@make release_typescript_client || (echo "Already released ${ONDEWO_NLU_API_VERSION} of Typescript Client")
-	@make release_angular_client || (echo "Already released ${ONDEWO_NLU_API_VERSION} of Angular Client")
-	@make release_js_client || (echo "Already released ${ONDEWO_NLU_API_VERSION} of JS Client")
+#@make release_js_client || (echo "Already released ${ONDEWO_NLU_API_VERSION} of JS Client")
 	@echo "End releasing all clients"
 
 GENERIC_CLIENT?=

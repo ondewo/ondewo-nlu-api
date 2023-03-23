@@ -22,6 +22,8 @@ import "google/protobuf/field_mask.proto";
 import "ondewo/nlu/project_role.proto";
 
 service Users {
+
+    // Creates user
     rpc CreateUser (CreateUserRequest) returns (User) {
         option (google.api.http) = {
             post: "/v2/users"
@@ -29,24 +31,28 @@ service Users {
         };
     }
 
+    // Gets user
     rpc GetUser (GetUserRequest) returns (User) {
         option (google.api.http) = {
             get: "/v2/users/{user_identifier=*}"
         };
     }
 
+    // Gets user information
     rpc GetUserInfo (GetUserRequest) returns (UserInfo) {
         option (google.api.http) = {
             get: "/v2/user_infos/{user_identifier=*}"
         };
     }
 
+    // Deletes user
     rpc DeleteUser (GetUserRequest) returns (google.protobuf.Empty) {
         option (google.api.http) = {
             delete: "/v2/users/{user_identifier=*}"
         };
     }
 
+    // Updates user
     rpc UpdateUser (UpdateUserRequest) returns (User) {
         option (google.api.http) = {
             patch: "/v2/users"
@@ -54,18 +60,21 @@ service Users {
         };
     }
 
+    // Lists users
     rpc ListUsers (ListUsersRequest) returns (ListUsersResponse) {
         option (google.api.http) = {
             get: "/v2/users"
         };
     }
 
+    // Lists users information
     rpc ListUserInfos (ListUsersRequest) returns (ListUserInfosResponse) {
         option (google.api.http) = {
             get: "/v2/users_infos"
         };
     }
 
+    // Creates server role
     rpc CreateServerRole (CreateServerRoleRequest) returns (ServerRole) {
         option (google.api.http) = {
             post: "/v2/server_roles"
@@ -73,18 +82,21 @@ service Users {
         };
     }
 
+    // Get server role
     rpc GetServerRole (GetServerRoleRequest) returns (ServerRole) {
         option (google.api.http) = {
             get: "/v2/server_roles/{role_id=*}"
         };
     }
 
+    // Deletes server role
     rpc DeleteServerRole (DeleteServerRoleRequest) returns (google.protobuf.Empty) {
         option (google.api.http) = {
             delete: "/v2/server_roles/{role_id=*}"
         };
     }
 
+    // Updates server role
     rpc UpdateServerRole (UpdateServerRoleRequest) returns (ServerRole) {
         option (google.api.http) = {
             patch: "/v2/server_roles"
@@ -92,18 +104,21 @@ service Users {
         };
     }
 
+    // Lists server roles
     rpc ListServerRoles (ListServerRolesRequest) returns (ListServerRolesResponse) {
         option (google.api.http) = {
             get: "/v2/server_roles"
         };
     }
 
+    // Lists server permissions
     rpc ListServerPermissions (ListServerPermissionsRequest) returns (ListServerPermissionsResponse) {
         option (google.api.http) = {
             get: "/v2/server_permissions"
         };
     }
 
+    // Request to login
     rpc Login (LoginRequest) returns (LoginResponse) {
         option (google.api.http) = {
             post: "/v2/login"
@@ -111,6 +126,7 @@ service Users {
         };
     }
 
+    // Checks login
     rpc CheckLogin (google.protobuf.Empty) returns (google.protobuf.Empty) {
         option (google.api.http) = {
             delete: "/v2/check_login"
@@ -122,18 +138,25 @@ service Users {
 
 // this message contains all the fields that required for user db
 message User {
+
     // when creating user user_id is empty, then it will be generated on creation time on backend
     string user_id = 2;
+
     // Optional field display_name is the name that will be used on the frontend to interact with the user
     // it shouldn't be unique. If not provided user_name will also be used as display name
     string display_name = 3;
+
     // server role type of the given user. If nothing is provided, the user is set to USER (minimum access)
     uint32 server_role_id = 6;
+
     // user e-mail should be a valid e-mail and unique
     string user_email = 7;
 }
 
+// This message contains information about user
 message UserInfo {
+
+    // user object
     User user = 1;
 
     //If in GetUser, ListUser requests UserView is FULL, then the mapping is additionally provided
@@ -141,41 +164,60 @@ message UserInfo {
     map<string, ProjectRole> project_roles = 2;
 }
 
+// Request to create user
 message CreateUserRequest {
+
+    // user_id in the User message should be given, if empty will throw an error in the backend
     User user = 1;
+
+    // password
     string password = 3;
 }
 
+// Request to update user
 message UpdateUserRequest {
+
     // user_id in the User message should be given, if empty will throw an error in the backend
     // password and other fields in the User are optional. Only the fields to be updated should be provided
     User user = 1;
+
+    // Password of the user
     string password = 4;
 
     // Optional. The mask to control which fields get updated.
     google.protobuf.FieldMask update_mask = 5;
 }
 
+// Request to get user
 message GetUserRequest {
+
     oneof user_identifier {
+
         // the user is identified by user id
         string user_id = 1;
+
         // the user can identified by their email
         string user_email = 3;
     }
 }
 
+// Request to delete user
 message DeleteUserRequest {
+
     //user is identified by user id, if empty will throw an error in the backend
     string user_id = 1;
 }
 
+// Request to list user
 message ListUsersRequest {
+
     // Optional. The next_page_token value returned from a previous list request.
     string page_token = 1;
 }
 
+// Response containing list of users
 message ListUsersResponse {
+
     // The list of users. There will be a maximum number of items
     // returned based on the page_token field in the request.
     repeated User users = 1;
@@ -185,7 +227,9 @@ message ListUsersResponse {
     string next_page_token = 2;
 }
 
+// Response containing list of users
 message ListUserInfosResponse {
+
     // The list of server roles. There will be a maximum number of items
     // returned based on the page_token field in the request.
     repeated UserInfo users = 1;
@@ -197,35 +241,47 @@ message ListUserInfosResponse {
 
 // Server Role messages
 message ServerRole {
+
     // unique identifier of the role
     uint32 role_id = 1;
+
     // unique name of the role
     string name = 2;
+
     // defines the permissions for the given role (the strings can be gotten from the ListServerPermissions)
     repeated string permissions = 3;
 }
-
+// Structure of server role
 enum DefaultServerRole {
+
     // unspecified server role
     SERVER_UNSPECIFIED = 0;
+
     // read-only access
     SERVER_USER = 1;
+
     // SERVER_USER's permissions + CRUD of projects and Users
     SERVER_MANAGER = 2;
+
     // this role can do everything
     SERVER_ADMIN = 3;
+
     // this role can do nothing. Used to set a user as inactive in the server.
     SERVER_INACTIVE = 4;
 }
 
+// Request to create server role
 message CreateServerRoleRequest {
+
     //If the role_id is not provided, an incremental value will be assigned
     //The "name" and "role_type" are mandatory values
     //The permissions all default to False if not provided specifically
     ServerRole role = 1;
 }
 
+// Request to update server role
 message UpdateServerRoleRequest {
+
     //role_id in the Role message should be given, if empty will throw an error in the backend
     //other fields in the Role are optional. Only the fields to be updated should be provided
     ServerRole role = 1;
@@ -234,12 +290,16 @@ message UpdateServerRoleRequest {
     google.protobuf.FieldMask update_mask = 2;
 }
 
+// Request to delete server role
 message DeleteServerRoleRequest {
+
     //role is identified by role id, if empty will throw an error in the backend
     uint32 role_id = 1;
 }
 
+// Request to get server role
 message GetServerRoleRequest {
+
     oneof server_role_identifier {
         // role is identified by role id
         uint32 role_id = 1;
@@ -249,12 +309,16 @@ message GetServerRoleRequest {
     }
 }
 
+// Request to list server roles
 message ListServerRolesRequest {
+
     // Optional. The next_page_token value returned from a previous list request.
     string page_token = 1;
 }
 
+// Response containing list of server roles
 message ListServerRolesResponse {
+
     // The list of server roles. There will be a maximum number of items
     // returned based on the page_token field in the request.
     repeated ServerRole server_roles = 1;
@@ -266,11 +330,14 @@ message ListServerRolesResponse {
 
 // Server permissions
 message ListServerPermissionsRequest {
+
     // Optional. The next_page_token value returned from a previous list request.
     string page_token = 1;
 }
 
+// Response containing list of server permissions
 message ListServerPermissionsResponse {
+
     // The list of server permissions. There will be a maximum number of items
     // returned based on the page_token field in the request.
     repeated string permissions = 1;
@@ -282,11 +349,20 @@ message ListServerPermissionsResponse {
 
 // Authentication messages
 message LoginRequest {
+
+    // user email
     string user_email = 1;
+
+    // user password
     string password = 2;
 }
 
+// This message is a response of logging
 message LoginResponse {
+
+    // user object - user_id must be there
     User user = 1;
+
+    // authentication token after successful login of the user to access NLU services
     string auth_token = 2;
 }

@@ -2,62 +2,204 @@
 
 *****************
 
-## Release ONDEWO NLU APIS 3.2.0
+## Release ONDEWO NLU API 4.6.0
 
 ### Improvements
 
-* [[OND211-2057]](https://ondewo.atlassian.net/browse/OND211-2057) - Added intent/entity type display name in full text search responses
+* [[OND211-2053]](https://ondewo.atlassian.net/browse/OND211-2053) - Added created at, created by, modified at and modified by properties to most important objects
 
 *****************
 
-## Release ONDEWO NLU APIS 3.1.0
+## Release ONDEWO NLU API 4.5.0
+
+### Bug fixes
+
+* SessionFilter: Use double instead of float for earliest and latest since float is too small to hold the datetime timestamp as python float
+* SessionInfo: Use double instead of float for earliest and latest since float is too small to hold the datetime timestamp as python float
+
+*****************
+
+## Release ONDEWO NLU API 4.4.0
 
 ### Improvements
 
-* [[OND211-2056]](https://ondewo.atlassian.net/browse/OND211-2056) - Added AgentView.AGENT_VIEW_MINIMUM, EntityTypeView.ENTITY_TYPE_VIEW_MINIMUM, and IntentView.INTENT_VIEW_MINIMUM to only return the UUID of the object and the display name
+* Added duration_interval_60s_rounded_min, duration_interval_60s_rounded_max and duration_interval_60s_rounded for Session filtering
 
 *****************
 
-## Release ONDEWO NLU APIS 3.0.0
+## Release ONDEWO NLU API 4.3.0
+
+### Improvements
+
+* [[OND211-2089]](https://ondewo.atlassian.net/browse/OND211-2089) - Added further SessionsReportType: SESSION_LEAST_X_INTENTS, SESSION_LEAST_X_ENTITY_TYPES, SESSION_LEAST_X_ENTITY_VALUES, SESSION_LEAST_X_USERS, SESSION_LEAST_X_LABELS, SESSION_LEAST_X_TAGS and TOTAL_STATISTICS
+* [[OND211-2089]](https://ondewo.atlassian.net/browse/OND211-2089) - Improved documentation for resource names
+
+*****************
+
+## Release ONDEWO NLU API 4.2.0
+
+### Improvements
+
+* [[OND211-2084]](https://ondewo.atlassian.net/browse/OND211-2084) - Added account_id, account, property_id,
+  datastream_id, origin_id and identified_user_id to improve reporting and filtering capabilities. Also added
+  Intent.Message.Platform platforms to SessionReviewStep.
+
+* [[OND211-2084]](https://ondewo.atlassian.net/browse/OND211-2084) - Added various listing endpoints to filter sessions
+
+### Bug fixes
+
+* [[OND211-2084]](https://ondewo.atlassian.net/browse/OND211-2084) - Fixed protobuf sequence numbering in session.proto
+  definition
+
+*****************
+
+## Release ONDEWO NLU API 4.1.0
+
+### Improvements
+
+* [[OND211-2084]](https://ondewo.atlassian.net/browse/OND211-2084) - Added query_text_original to QueryResult and
+  SessionReviewStep for post analysis of user input without
+  any preprocessing
+
+*****************
+
+## Release ONDEWO NLU API 4.0.0
+
+### New Features
+
+* [[OND211-1979]](https://ondewo.atlassian.net/browse/OND211-1979) - Session API optimization and refactoring
+    * Added labels to QueryParameters for DetectIntentRequest
+    * Added name in message SessionStep
+    * Added name in message SessionReviewStep
+* [[OND211-2054]](https://ondewo.atlassian.net/browse/OND211-2054) - Added reporting capabilities for sessions and
+  session steps incl.
+  ContextFilter and ComparisonOperator for detailed sessions filtering.
+    * Dedicated reports available for
+        * Top X intents
+        * Top X entity values
+        * Top X entity types
+        * Top X tags
+    * Query functionality for database tables session and session_steps for even more detailed reporting options
+
+### Improvements
+
+* [[OND211-2062]](https://ondewo.atlassian.net/browse/OND211-2062) - Improved documentation of ONDEWO NLU API
+
+### Breaking changes
+
+* [[OND211-1979]](https://ondewo.atlassian.net/browse/OND211-1979) - Consistency improvement or Session and
+  SessionReview messages incl.
+    * Renamed message Session.session_id to Session.name
+    * Renamed SessionReview.session_review_id to SessionReview.name
+    * Renamed RemoveSessionLabels to DeleteSessionLabels
+
+*****************
+
+## Release ONDEWO NLU API 3.5.2
+
+### Bug fixes
+
+* Testing release process
+
+*****************
+
+## Release ONDEWO NLU API 3.5.1
+
+### Bug fixes
+
+* Not releasing JS client anymore
+
+*****************
+
+## Release ONDEWO NLU API 3.5.0
+
+### Improvements
+
+* [[OND211-2072]](https://ondewo.atlassian.net/browse/OND211-2072) - Added CRUD operations for labeling sessions
+
+*****************
+
+## Release ONDEWO NLU API 3.4.0
+
+### Improvements
+
+* [[OND211-2060]](https://ondewo.atlassian.net/browse/OND211-2060) - Added all intent tags to every fulltext search
+  response
+
+*****************
+
+## Release ONDEWO NLU API 3.3.0
+
+### Improvements
+
+* [[OND211-2060]](https://ondewo.atlassian.net/browse/OND211-2060) - Added all tags to tag-fulltext search response
+
+*****************
+
+## Release ONDEWO NLU API 3.2.0
+
+### Improvements
+
+* [[OND211-2057]](https://ondewo.atlassian.net/browse/OND211-2057) - Added intent/entity type display name in full text
+  search responses
+
+*****************
+
+## Release ONDEWO NLU API 3.1.0
+
+### Improvements
+
+* [[OND211-2056]](https://ondewo.atlassian.net/browse/OND211-2056) - Added AgentView.AGENT_VIEW_MINIMUM,
+  EntityTypeView.ENTITY_TYPE_VIEW_MINIMUM, and IntentView.INTENT_VIEW_MINIMUM to only return the UUID of the object and
+  the display name
+
+*****************
+
+## Release ONDEWO NLU API 3.0.0
 
 ### Improvements
 
 * [[OND211-2044]](https://ondewo.atlassian.net/browse/OND211-2044) - Added Reindex Agent Endpoint
-* Synchronize API Client Verions
+* Synchronize API Client Versions
 
 *****************
 
-## Release ONDEWO NLU APIS 2.15.0
+## Release ONDEWO NLU API 2.15.0
 
 ### Improvements
 
-* [[OND211-2044]](https://ondewo.atlassian.net/browse/OND211-2044) - Full-Text-Search Response field type changed (from Int to String)
+* [[OND211-2044]](https://ondewo.atlassian.net/browse/OND211-2044) - Full-Text-Search Response field type changed (from
+  Int to String)
 
 *****************
 
-## Release ONDEWO NLU APIS 2.14.0
+## Release ONDEWO NLU API 2.14.0
 
 ### Improvements
 
-* [[OND211-2044]](https://ondewo.atlassian.net/browse/OND211-2044) - Update to Proto Files due to changes in Full-Text-Search
+* [[OND211-2044]](https://ondewo.atlassian.net/browse/OND211-2044) - Update to Proto Files due to changes in
+  Full-Text-Search
 
 *****************
-## Release ONDEWO NLU APIS 2.13.0
+
+## Release ONDEWO NLU API 2.13.0
 
 ### Improvements
 
 * [[OND211-2044]](https://ondewo.atlassian.net/browse/OND211-2044) - Adjustment to Proto Files for Full Text Search
 
 *****************
-## Release ONDEWO NLU APIS 2.12.0
+
+## Release ONDEWO NLU API 2.12.0
 
 ### Improvements
 
-* [[OND211-2044]](https://ondewo.atlassian.net/browse/OND211-2044) - Implemented new endpoints for searching intents and entities by keyword/term
+* [[OND211-2044]](https://ondewo.atlassian.net/browse/OND211-2044) - Implemented new endpoints for searching intents and
+  entities by keyword/term
 
 *****************
 
-## Release ONDEWO NLU APIS 2.11.0
+## Release ONDEWO NLU API 2.11.0
 
 ### Improvements
 
@@ -65,7 +207,7 @@
 
 *****************
 
-## Release ONDEWO NLU APIS 2.10.0
+## Release ONDEWO NLU API 2.10.0
 
 ### Improvements
 
@@ -73,32 +215,32 @@
 
 *****************
 
-## Release ONDEWO NLU APIS 2.9.0
+## Release ONDEWO NLU API 2.9.0
 
 ### Improvements
 
 * [[OND211-2038]](https://ondewo.atlassian.net/browse/OND211-2038) - Add SessionReview Filter for "Context in", "Context
-  out" and "Session Id"
+  out" and "Session id"
 * [[OND211-2039]](https://ondewo.atlassian.net/browse/OND211-2039) - Implemented Automatic Release Process
 
 *****************
 
-## Release ONDEWO NLU APIS 2.8.0
+## Release ONDEWO NLU API 2.8.0
 
 ### Improvements
 
 * [[OND211-2011]](https://ondewo.atlassian.net/browse/OND211-2011) - Intent. List all user says from cache incl.
-  enrichtment based on agent parent instead of project_id
+  enrichment based on agent parent instead of project_id
 
 *****************
 
-## Release ONDEWO NLU APIS 2.7.0
+## Release ONDEWO NLU API 2.7.0
 
 ### New features
 
 * [[OND211-1987]](https://ondewo.atlassian.net/browse/OND211-1987) - Operations. Added filters to ListOperations.
 * [[OND211-2011]](https://ondewo.atlassian.net/browse/OND211-2011) - Intent. List all user says from cache incl.
-  enrichtment
+  enrichment
 
 ### Improvements
 
@@ -106,7 +248,7 @@
 
 *****************
 
-## Release ONDEWO NLU APIS 2.6.0
+## Release ONDEWO NLU API 2.6.0
 
 ### New features
 
@@ -122,7 +264,7 @@
 
 *****************
 
-## Release ONDEWO NLU APIS 2.5.0
+## Release ONDEWO NLU API 2.5.0
 
 ### New Features
 
@@ -136,7 +278,7 @@
 
 *****************
 
-## Release ONDEWO NLU APIS 2.4.0
+## Release ONDEWO NLU API 2.4.0
 
 ### Improvements
 
@@ -146,7 +288,7 @@
 
 *****************
 
-## Release ONDEWO NLU APIS 2.3.1
+## Release ONDEWO NLU API 2.3.1
 
 ### Improvements
 
@@ -154,20 +296,20 @@
 
 *****************
 
-## Release ONDEWO NLU APIS 2.3.0
+## Release ONDEWO NLU API 2.3.0
 
 ### Improvements
 
 * [OND211-1843] Output contexts added to SessionReviewStep
 
-## Release ONDEWO NLU APIS 2.2.0
+## Release ONDEWO NLU API 2.2.0
 
 ### New Features
 
 * [OND211-1841] Add custom placeholder platforms to the Message.Platform Enum
 * [OND211-1841] Add a simple CRUD to handle the custom name mapping for Placeholder platforms (per Agent)
 
-## Release ONDEWO NLU APIS 2.1.0
+## Release ONDEWO NLU API 2.1.0
 
 ### Improvements
 
@@ -182,7 +324,7 @@
 
 *****************
 
-## Release ONDEWO NLU APIS 2.0.1
+## Release ONDEWO NLU API 2.0.1
 
 ### Improvements
 
@@ -190,7 +332,7 @@
 
 *****************
 
-## Release ONDEWO NLU APIS 2.0.0
+## Release ONDEWO NLU API 2.0.0
 
 ### New Features
 
@@ -209,7 +351,7 @@
 
 *****************
 
-## Release ONDEWO NLU APIS 1.1.0
+## Release ONDEWO NLU API 1.1.0
 
 ### New Features
 
@@ -222,7 +364,7 @@ Created a new file ondewo/nlu/utility.proto that contains the following endpoint
 
 *****************
 
-## Release ONDEWO NLU APIS 1.0.0
+## Release ONDEWO NLU API 1.0.0
 
 ### New Features
 
@@ -247,13 +389,13 @@ Created a new file ondewo/nlu/utility.proto that contains the following endpoint
 
 *****************
 
-## Release ONDEWO NLU APIS 0.2.3
+## Release ONDEWO NLU API 0.2.3
 
 ### Bug fixes
 
 * Updated licenses.
 
-## Release ONDEWO NLU APIS 0.2.2
+## Release ONDEWO NLU API 0.2.2
 
 ### Improvements
 
@@ -261,7 +403,7 @@ Created a new file ondewo/nlu/utility.proto that contains the following endpoint
 
 *****************
 
-## Release ONDEWO NLU APIS 0.2.1
+## Release ONDEWO NLU API 0.2.1
 
 ### Bug fixes
 
@@ -269,7 +411,7 @@ Created a new file ondewo/nlu/utility.proto that contains the following endpoint
 
 *****************
 
-## Release ONDEWO NLU APIS 0.2.0
+## Release ONDEWO NLU API 0.2.0
 
 ### New Features
 
@@ -285,11 +427,11 @@ Created a new file ondewo/nlu/utility.proto that contains the following endpoint
 
 *****************
 
-## Release ONDEWO NLU APIS 0.1.0
+## Release ONDEWO NLU API 0.1.0
 
 ### New Features
 
-* Refactored individual project APIs into seperate repos.
+* Refactored individual project APIs into separate repos.
 
 ### Improvements
 
@@ -305,7 +447,7 @@ Created a new file ondewo/nlu/utility.proto that contains the following endpoint
 
 *****************
 
-## Release ONDEWO NLU APIS Template
+## Release ONDEWO NLU API Template
 
 ### New Features
 
