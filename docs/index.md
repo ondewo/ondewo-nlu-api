@@ -124,6 +124,7 @@
     - [AiServices](#ondewo.nlu.AiServices)
   
 - [ondewo/nlu/common.proto](#ondewo/nlu/common.proto)
+    - [CreatedModified](#ondewo.nlu.CreatedModified)
     - [StatResponse](#ondewo.nlu.StatResponse)
   
     - [SortingMode](#ondewo.nlu.SortingMode)
@@ -829,6 +830,10 @@ This message is a response of full text search of entity
 | entity_type_name | [string](#string) |  |  |
 | entity_type_display_name | [string](#string) |  |  |
 | language | [string](#string) |  |  |
+| created_at | [string](#string) |  |  |
+| modified_at | [string](#string) |  |  |
+| created_by | [string](#string) |  |  |
+| modified_by | [string](#string) |  |  |
 
 
 
@@ -871,6 +876,10 @@ This message is a response of full text search of synonym entity
 | entity_name | [string](#string) |  |  |
 | entity_display_name | [string](#string) |  |  |
 | language | [string](#string) |  |  |
+| created_at | [string](#string) |  |  |
+| modified_at | [string](#string) |  |  |
+| created_by | [string](#string) |  |  |
+| modified_by | [string](#string) |  |  |
 
 
 
@@ -909,6 +918,10 @@ This message is a response of full text search of entity type
 | name | [string](#string) |  |  |
 | display_name | [string](#string) |  |  |
 | language | [string](#string) |  |  |
+| created_at | [string](#string) |  |  |
+| modified_at | [string](#string) |  |  |
+| created_by | [string](#string) |  |  |
+| modified_by | [string](#string) |  |  |
 
 
 
@@ -949,6 +962,10 @@ This message is a response of full text search of intent
 | domain_name | [string](#string) |  |  |
 | tags | [string](#string) | repeated |  |
 | language | [string](#string) |  |  |
+| created_at | [string](#string) |  |  |
+| modified_at | [string](#string) |  |  |
+| created_by | [string](#string) |  |  |
+| modified_by | [string](#string) |  |  |
 
 
 
@@ -989,6 +1006,10 @@ This message is a response of full text search of intent with context in
 | intent_display_name | [string](#string) |  |  |
 | tags | [string](#string) | repeated |  |
 | language | [string](#string) |  |  |
+| created_at | [string](#string) |  |  |
+| modified_at | [string](#string) |  |  |
+| created_by | [string](#string) |  |  |
+| modified_by | [string](#string) |  |  |
 
 
 
@@ -1029,6 +1050,10 @@ This message is a response of full text search of intent with context out
 | intent_display_name | [string](#string) |  |  |
 | tags | [string](#string) | repeated |  |
 | language | [string](#string) |  |  |
+| created_at | [string](#string) |  |  |
+| modified_at | [string](#string) |  |  |
+| created_by | [string](#string) |  |  |
+| modified_by | [string](#string) |  |  |
 
 
 
@@ -1070,6 +1095,10 @@ This message is a response of full text search of intent with parameters
 | intent_display_name | [string](#string) |  |  |
 | tags | [string](#string) | repeated |  |
 | language | [string](#string) |  |  |
+| created_at | [string](#string) |  |  |
+| modified_at | [string](#string) |  |  |
+| created_by | [string](#string) |  |  |
+| modified_by | [string](#string) |  |  |
 
 
 
@@ -1112,6 +1141,10 @@ This message is a response of full text search of intent response
 | intent_display_name | [string](#string) |  |  |
 | tags | [string](#string) | repeated |  |
 | language | [string](#string) |  |  |
+| created_at | [string](#string) |  |  |
+| modified_at | [string](#string) |  |  |
+| created_by | [string](#string) |  |  |
+| modified_by | [string](#string) |  |  |
 
 
 
@@ -1153,6 +1186,10 @@ This message is a response of full text search of intent with tags
 | intent_display_name | [string](#string) |  |  |
 | tags | [string](#string) | repeated |  |
 | language | [string](#string) |  |  |
+| created_at | [string](#string) |  |  |
+| modified_at | [string](#string) |  |  |
+| created_by | [string](#string) |  |  |
+| modified_by | [string](#string) |  |  |
 
 
 
@@ -1197,6 +1234,10 @@ This message is a response of full text search of intent with sentence
 | intent_display_name | [string](#string) |  |  |
 | tags | [string](#string) | repeated |  |
 | language | [string](#string) |  |  |
+| created_at | [string](#string) |  |  |
+| modified_at | [string](#string) |  |  |
+| created_by | [string](#string) |  |  |
+| modified_by | [string](#string) |  |  |
 
 
 
@@ -2604,6 +2645,24 @@ The Central class defining the ondewo ai services
 
 
 
+<a name="ondewo.nlu.CreatedModified"></a>
+
+### CreatedModified
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| created_at | [string](#string) |  | Read-only |
+| modified_at | [string](#string) |  | Read-only |
+| created_by | [string](#string) |  | Read-only, except import/restore agent, otherwise populated with current user |
+| modified_by | [string](#string) |  | Read-only except import/restore agent, otherwise populated wit current user |
+
+
+
+
+
+
 <a name="ondewo.nlu.StatResponse"></a>
 
 ### StatResponse
@@ -2663,6 +2722,7 @@ Note: we are deviating from the dialogflow format `projects/<Project ID>/agent/s
 | lifespan_count | [int32](#int32) |  | Optional. The number of conversational query requests after which the context expires. If set to `0` (the default) the context expires immediately. Contexts expire automatically after 10 minutes even if there are no matching queries. |
 | parameters | [Context.ParametersEntry](#ondewo.nlu.Context.ParametersEntry) | repeated | Optional. The collection of parameters associated with this context. Refer to [this doc](https://dialogflow.com/docs/actions-and-parameters) for syntax. Keys are the display names of context parameters. |
 | lifespan_time | [float](#float) |  | Optional. The time span in seconds after which the context expires. By default it does not expire. |
+| created_modified | [CreatedModified](#ondewo.nlu.CreatedModified) |  | created_at, created_by,modified_at, modified_by |
 
 
 
@@ -2681,6 +2741,7 @@ Note: we are deviating from the dialogflow format `projects/<Project ID>/agent/s
 | display_name | [string](#string) |  | The display name of the context parameter. |
 | value | [string](#string) |  | The value(s) of the context parameter. |
 | value_original | [string](#string) |  | The original value(s) of the context parameter. |
+| created_modified | [CreatedModified](#ondewo.nlu.CreatedModified) |  | created_at, created_by,modified_at, modified_by |
 
 
 
@@ -3104,6 +3165,7 @@ language queries.
 | entity_count | [int32](#int32) |  | Read-Only field. Total count of entity values of the entity type |
 | status | [EntityType.EntityTypeStatus](#ondewo.nlu.EntityType.EntityTypeStatus) |  | Indicates whether the entity type is active or not |
 | synonym_count | [int32](#int32) |  | Read-Only field. Total count of entity synonyms of the entity type |
+| created_modified | [CreatedModified](#ondewo.nlu.CreatedModified) |  | created_at, created_by,modified_at, modified_by |
 
 
 
@@ -3124,6 +3186,7 @@ Optional. Represents an entity.
 | display_name | [string](#string) |  | The name of the entity. |
 | synonym_count | [int32](#int32) |  | Optional. Total count of entity synonyms |
 | language_code | [string](#string) |  | Required. The language to list entity synonyms for. |
+| created_modified | [CreatedModified](#ondewo.nlu.CreatedModified) |  | created_at, created_by,modified_at, modified_by |
 
 
 
@@ -4038,6 +4101,7 @@ action is an extraction of a user command or sentence semantics.
 | start_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Optional. Provides information that can be used in custom scripts |
 | end_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Optional. Provides information that can be used in custom scripts |
 | tags | [string](#string) | repeated | Optional. Adds arbitrary "categories" for which one could filter the intents |
+| created_modified | [CreatedModified](#ondewo.nlu.CreatedModified) |  | created_at, created_by,modified_at, modified_by |
 
 
 
@@ -4086,6 +4150,7 @@ Corresponds to the `Response` field in the Dialogflow console.
 | audio | [Intent.Message.Audio](#ondewo.nlu.Intent.Message.Audio) |  | The Audio response |
 | platform | [Intent.Message.Platform](#ondewo.nlu.Intent.Message.Platform) |  | Optional. The platform that this message is intended for. |
 | is_prompt | [bool](#bool) |  | Read-only. States if a returned message is a prompt or not. |
+| created_modified | [CreatedModified](#ondewo.nlu.CreatedModified) |  | created_at, created_by,modified_at, modified_by |
 
 
 
@@ -4454,6 +4519,7 @@ Represents intent parameters.
 | mandatory | [bool](#bool) |  | Optional. Indicates whether the parameter is required. That is, whether the intent cannot be completed without collecting the parameter value. |
 | prompts | [Intent.Parameter.Prompt](#ondewo.nlu.Intent.Parameter.Prompt) | repeated | Optional. The collection of prompts that the agent can present to the user in order to collect value for the parameter. |
 | is_list | [bool](#bool) |  | Optional. Indicates whether the parameter represents a list of values. |
+| created_modified | [CreatedModified](#ondewo.nlu.CreatedModified) |  | created_at, created_by,modified_at, modified_by |
 
 
 
@@ -4471,6 +4537,7 @@ Represents the prompts in the parameters.
 | name | [string](#string) |  | The unique identifier of this prompt. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;/parameters/&lt;parameter_uuid&gt;/prompts/&lt;prompt_uuid&gt;</code></pre> |
 | text | [string](#string) |  | Required. Text of the prompt |
 | language_code | [string](#string) |  | The language of the prompts. If not specified, the default language code will be used. |
+| created_modified | [CreatedModified](#ondewo.nlu.CreatedModified) |  | created_at, created_by,modified_at, modified_by |
 
 
 
@@ -4491,6 +4558,7 @@ Represents an example or template that the agent is trained on.
 | entities | [Intent.TrainingPhrase.Entity](#ondewo.nlu.Intent.TrainingPhrase.Entity) | repeated | Optional. The collection of annotated entities in the training phrase. |
 | times_added_count | [int32](#int32) |  | Optional. Indicates how many times this example or template was added to the intent. Each time a developer adds an existing sample by editing an intent or training, this counter is increased. |
 | language_code | [string](#string) |  | Optional. The language of the training phrase. |
+| created_modified | [CreatedModified](#ondewo.nlu.CreatedModified) |  | created_at, created_by,modified_at, modified_by |
 
 
 
@@ -5036,6 +5104,7 @@ training or exporting benchmark an agent
 | BUILD_AGENT_CACHE | 6 | build agent cache |
 | TRAIN_AGENT | 7 | train agent |
 | EXPORT_BENCHMARK_AGENT | 8 | export benchmark agent to a zip file |
+| INDEX_AGENT | 9 | force loading agent data for full text search |
 
 
 
@@ -6424,6 +6493,7 @@ Session of a user interaction
 | name | [string](#string) |  | The unique identifier of the session Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre> |
 | session_steps | [SessionStep](#ondewo.nlu.SessionStep) | repeated | The list of all the steps of the session |
 | session_info | [SessionInfo](#ondewo.nlu.SessionInfo) |  |  |
+| created_modified | [CreatedModified](#ondewo.nlu.CreatedModified) |  | created_at, created_by,modified_at, modified_by |
 
 
 
@@ -6572,6 +6642,7 @@ This message contains a session review
 | ----- | ---- | ----- | ----------- |
 | name | [string](#string) |  | The unique identifier for the given review Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/reviews/&lt;session_review_uuid&gt;</code></pre> |
 | session_review_steps | [SessionReviewStep](#ondewo.nlu.SessionReviewStep) | repeated | The reviews for all steps in the session |
+| created_modified | [CreatedModified](#ondewo.nlu.CreatedModified) |  | created_at, created_by,modified_at, modified_by |
 
 
 
@@ -6596,6 +6667,7 @@ This string represents what has been passed to the entity recognition and intent
 | contexts_out | [Context](#ondewo.nlu.Context) | repeated | The output contexts of this step |
 | query_text_original | [string](#string) |  | User input without any pre-processing applied |
 | platforms | [Intent.Message.Platform](#ondewo.nlu.Intent.Message.Platform) | repeated | Messages for each of the Intent.Message.Platform were sent to the user |
+| created_modified | [CreatedModified](#ondewo.nlu.CreatedModified) |  | created_at, created_by,modified_at, modified_by |
 
 
 
@@ -6614,6 +6686,7 @@ SessionStep is a single user interaction as part of a session
 | detect_intent_request | [DetectIntentRequest](#ondewo.nlu.DetectIntentRequest) |  | The detect intent request of the session step |
 | detect_intent_response | [DetectIntentResponse](#ondewo.nlu.DetectIntentResponse) |  | The detect intent response of the session step |
 | contexts | [Context](#ondewo.nlu.Context) | repeated | The contexts which were active at the beginning of this step |
+| created_modified | [CreatedModified](#ondewo.nlu.CreatedModified) |  | created_at, created_by,modified_at, modified_by |
 
 
 
