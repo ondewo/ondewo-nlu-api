@@ -130,7 +130,35 @@ service EntityTypes {
             body: "*"
         };
     }
+    // Retrieves the specified entity .
+    rpc GetEntity (GetEntityRequest) returns (EntityType.Entity) {
+        option (google.api.http) = {
+            get: "/v2/{name=projects/*/agent/entityTypes/*/entities/*}"
+        };
+    }
 
+    // Creates an entity  in the specified agent.
+    rpc CreateEntity (CreateEntityRequest) returns (EntityStatus) {
+        option (google.api.http) = {
+            post: "/v2/{parent=projects/*/agent}/entityTypes/*/entities/"
+            body: "*"
+        };
+    }
+
+    // Updates the specified entity .
+    rpc UpdateEntity (UpdateEntityRequest) returns (EntityStatus) {
+        option (google.api.http) = {
+            patch: "/v2/{entity_.name=projects/*/agent/entityTypes/*/entities/*}"
+            body: "*"
+        };
+    }
+
+    // Deletes the specified entity .
+    rpc DeleteEntity (DeleteEntityRequest) returns (DeleteEntityStatus) {
+        option (google.api.http) = {
+            delete: "/v2/{name=projects/*/agent/entityTypes/*/entities/*}"
+        };
+    }
 
     // Creates an entity value in an entity type.
     rpc BatchCreateEntities (BatchCreateEntitiesRequest) returns (BatchEntitiesResponse);
@@ -450,30 +478,37 @@ message EntityTypeSorting {
     SortingMode sorting_mode = 2;
 }
 
+// This message is for the entity status
+message EntityStatus {
+    oneof entity_or_status {
+        // The entity
+        EntityType.Entity entity = 1;
+        // Error message
+        string error_message = 2;
+    }
+}
+
 // This message is a response of batch entities
 message BatchEntitiesResponse {
-    message EntityStatus {
-        oneof entity_or_status {
-            EntityType.Entity entity = 1;
-            string error_message = 2;
-        }
-    }
+
     // A list of entity statuses
     repeated EntityStatus entity_statuses = 1;
     // indicates if statuses of some of the training phrases have errors
     bool has_errors = 2;
 }
 
+message CreateEntityRequest {
+    // Required. Name of the entity type in which to create the entity value. Format:
+    // `projects/<Project ID>/agent/entityTypes/<Entity Type ID>/entities/<Entity ID>`.
+    string entity_type_name = 1;
+
+    // The entity value to create
+    EntityType.Entity entity = 2;
+}
+
 // This message is a request to create a batch entities
 message BatchCreateEntitiesRequest {
-    message CreateEntityRequest {
-        // Required. Name of the entity type in which to create the entity value. Format:
-        // `projects/<Project ID>/agent/entityTypes/<Entity Type ID>`.
-        string entity_type_name = 1;
-
-        // The entity value to create
-        EntityType.Entity entity = 2;
-    }
+    // The create entity requests in a batch
     repeated CreateEntityRequest create_entity_requests = 1;
 }
 
@@ -483,7 +518,20 @@ message BatchUpdateEntitiesRequest {
     repeated EntityType.Entity entities = 1;
 }
 
-// Thiss message is a request to get a batch of entities
+// This message is a request to update an entity
+message UpdateEntityRequest {
+    // The entity to update
+    EntityType.Entity entities = 1;
+}
+
+// This message is a request to get a an entity
+message GetEntityRequest {
+    // The unique identifiers of the entities. Format:
+    // `projects/<Project ID>/agent/entityTypes/<Entity Type ID>/entities/<Entity ID>`.
+    string name = 1;
+}
+
+// This message is a request to get a batch of entities
 message BatchGetEntitiesRequest {
     // The unique identifiers of the entities. Format:
     // `projects/<Project ID>/agent/entityTypes/<Entity Type ID>/entities/<Entity ID>`.
@@ -497,16 +545,28 @@ message BatchDeleteEntitiesRequest {
     repeated string names = 1;
 }
 
+// This message is a request to delete a batch of entities
+message DeleteEntityRequest {
+    // The unique identifiers of the entities. Format:
+    // `projects/<Project ID>/agent/entityTypes/<Entity Type ID>/entities/<Entity ID>`.
+    string name = 1;
+}
+
+// This message contains the status of an entity deletion
+message DeleteEntityStatus {
+
+    // error if any
+    oneof delete_status{
+        google.protobuf.Empty successfully_deleted = 1;
+        string error_message = 2;
+    }
+}
+
 // This message is a response of deletion of a batch of entities
 message BatchDeleteEntitiesResponse {
-    // This message contains the status of an entity deletion
-    message DeleteEntityStatus {
-        oneof delete_status{
-            google.protobuf.Empty successfully_deleted = 1;
-            string error_message = 2;
-        }
-    }
+    // status of an entity deletion
     repeated DeleteEntityStatus delete_statuses = 1;
+    // error messages
     bool has_errors = 2;
 }
 

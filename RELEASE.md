@@ -1,4 +1,11 @@
 # Release History
+*****************
+
+## Release ONDEWO NLU API 4.6.0
+
+### Improvements
+
+* Added GetEntity, CreateEntity, UpdateEntity and DeleteEntity request and responses
 
 *****************
 
