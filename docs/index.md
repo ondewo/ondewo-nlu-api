@@ -3307,7 +3307,7 @@ This message is a request to update an entity
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| entities | [EntityType.Entity](#ondewo.nlu.EntityType.Entity) |  | The entity to update |
+| entity | [EntityType.Entity](#ondewo.nlu.EntityType.Entity) |  | The entity to update |
 
 
 
