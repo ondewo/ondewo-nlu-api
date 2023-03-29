@@ -521,7 +521,7 @@ message BatchUpdateEntitiesRequest {
 // This message is a request to update an entity
 message UpdateEntityRequest {
     // The entity to update
-    EntityType.Entity entities = 1;
+    EntityType.Entity entity = 1;
 }
 
 // This message is a request to get a an entity
