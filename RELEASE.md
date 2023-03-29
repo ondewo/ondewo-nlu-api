@@ -7,6 +7,13 @@
 
 * Added GetEntity, CreateEntity, UpdateEntity and DeleteEntity request and responses
 
+### Breaking changes
+
+* Restructuring of messages
+  * From BatchEntitiesResponse.EntityStatus to EntityStatus
+  * From BatchCreateEntitiesRequest.CreateEntityRequest to CreateEntityRequest
+  * From BatchDeleteEntitiesResponse.DeleteEntityStatus to DeleteEntityStatus
+
 *****************
 
 ## Release ONDEWO NLU API 4.5.0
