@@ -1,6 +1,14 @@
 # Release History
 *****************
 
+## Release ONDEWO NLU API 4.7.0
+
+### Improvements
+
+* [[OND211-2105]](https://ondewo.atlassian.net/browse/OND211-2105) - Added timestamp session step and session review and session review step
+
+*****************
+
 ## Release ONDEWO NLU API 4.6.0
 
 ### Improvements
