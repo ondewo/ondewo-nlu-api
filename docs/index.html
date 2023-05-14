@@ -18373,7 +18373,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid
                   <td>session_info</td>
                   <td><a href="#ondewo.nlu.SessionInfo">SessionInfo</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>session information </p></td>
                 </tr>
               
             </tbody>
@@ -19147,6 +19147,13 @@ This string represents what has been passed to the entity recognition and intent
                   <td><p>Messages for each of the Intent.Message.Platform were sent to the user </p></td>
                 </tr>
               
+                <tr>
+                  <td>timestamp</td>
+                  <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
+                  <td></td>
+                  <td><p>Timestamp of session review step </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -19191,6 +19198,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid
                   <td><a href="#ondewo.nlu.Context">Context</a></td>
                   <td>repeated</td>
                   <td><p>The contexts which were active at the beginning of this step </p></td>
+                </tr>
+              
+                <tr>
+                  <td>timestamp</td>
+                  <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
+                  <td></td>
+                  <td><p>Timestamp of session step </p></td>
                 </tr>
               
             </tbody>

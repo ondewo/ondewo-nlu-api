@@ -6475,7 +6475,7 @@ Session of a user interaction
 | ----- | ---- | ----- | ----------- |
 | name | [string](#string) |  | The unique identifier of the session Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre> |
 | session_steps | [SessionStep](#ondewo.nlu.SessionStep) | repeated | The list of all the steps of the session |
-| session_info | [SessionInfo](#ondewo.nlu.SessionInfo) |  |  |
+| session_info | [SessionInfo](#ondewo.nlu.SessionInfo) |  | session information |
 
 
 
@@ -6648,6 +6648,7 @@ This string represents what has been passed to the entity recognition and intent
 | contexts_out | [Context](#ondewo.nlu.Context) | repeated | The output contexts of this step |
 | query_text_original | [string](#string) |  | User input without any pre-processing applied |
 | platforms | [Intent.Message.Platform](#ondewo.nlu.Intent.Message.Platform) | repeated | Messages for each of the Intent.Message.Platform were sent to the user |
+| timestamp | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Timestamp of session review step |
 
 
 
@@ -6666,6 +6667,7 @@ SessionStep is a single user interaction as part of a session
 | detect_intent_request | [DetectIntentRequest](#ondewo.nlu.DetectIntentRequest) |  | The detect intent request of the session step |
 | detect_intent_response | [DetectIntentResponse](#ondewo.nlu.DetectIntentResponse) |  | The detect intent response of the session step |
 | contexts | [Context](#ondewo.nlu.Context) | repeated | The contexts which were active at the beginning of this step |
+| timestamp | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Timestamp of session step |
 
 
 
