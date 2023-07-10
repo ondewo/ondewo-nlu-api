@@ -279,6 +279,11 @@ message DetectIntentRequest {
     // should be populated iff `query_input` is set to an input audio config.
     // A single request can contain up to 1 minute of speech audio data.
     bytes input_audio = 5;
+
+    // Optional. Timestamp to use for the request.
+    // This overwrites the server side timestamp.
+    google.protobuf.Timestamp timestamp = 6;
+
 }
 
 // The message returned from the DetectIntent method.

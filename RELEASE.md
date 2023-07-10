@@ -1,6 +1,14 @@
 # Release History
 *****************
 
+## Release ONDEWO NLU API 4.8.0
+
+### Improvements
+
+* [[OND211-2116]](https://ondewo.atlassian.net/browse/OND211-2116) - Add Timestamp to DetectIntentRequest to overwrite timestamp of server
+
+*****************
+
 ## Release ONDEWO NLU API 4.7.0
 
 ### Improvements
