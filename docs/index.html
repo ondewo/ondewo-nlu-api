@@ -776,6 +776,14 @@
                       
                         <li><a href="#ondewo.nlu.EntityTypes.BatchDeleteEntityTypes" class="title-badge method">BatchDeleteEntityTypes</a></li>
                       
+                        <li><a href="#ondewo.nlu.EntityTypes.GetEntity" class="title-badge method">GetEntity</a></li>
+                      
+                        <li><a href="#ondewo.nlu.EntityTypes.CreateEntity" class="title-badge method">CreateEntity</a></li>
+                      
+                        <li><a href="#ondewo.nlu.EntityTypes.UpdateEntity" class="title-badge method">UpdateEntity</a></li>
+                      
+                        <li><a href="#ondewo.nlu.EntityTypes.DeleteEntity" class="title-badge method">DeleteEntity</a></li>
+                      
                         <li><a href="#ondewo.nlu.EntityTypes.BatchCreateEntities" class="title-badge method">BatchCreateEntities</a></li>
                       
                         <li><a href="#ondewo.nlu.EntityTypes.BatchUpdateEntities" class="title-badge method">BatchUpdateEntities</a></li>
@@ -801,10 +809,6 @@
                       </li>
                     
                       <li>
-                        <a href="#ondewo.nlu.BatchCreateEntitiesRequest.CreateEntityRequest" class="title-badge message">BatchCreateEntitiesRequest.CreateEntityRequest</a>
-                      </li>
-                    
-                      <li>
                         <a href="#ondewo.nlu.BatchDeleteEntitiesRequest" class="title-badge message">BatchDeleteEntitiesRequest</a>
                       </li>
                     
@@ -813,19 +817,11 @@
                       </li>
                     
                       <li>
-                        <a href="#ondewo.nlu.BatchDeleteEntitiesResponse.DeleteEntityStatus" class="title-badge message">BatchDeleteEntitiesResponse.DeleteEntityStatus</a>
-                      </li>
-                    
-                      <li>
                         <a href="#ondewo.nlu.BatchDeleteEntityTypesRequest" class="title-badge message">BatchDeleteEntityTypesRequest</a>
                       </li>
                     
                       <li>
                         <a href="#ondewo.nlu.BatchEntitiesResponse" class="title-badge message">BatchEntitiesResponse</a>
-                      </li>
-                    
-                      <li>
-                        <a href="#ondewo.nlu.BatchEntitiesResponse.EntityStatus" class="title-badge message">BatchEntitiesResponse.EntityStatus</a>
                       </li>
                     
                       <li>
@@ -845,11 +841,27 @@
                       </li>
                     
                       <li>
+                        <a href="#ondewo.nlu.CreateEntityRequest" class="title-badge message">CreateEntityRequest</a>
+                      </li>
+                    
+                      <li>
                         <a href="#ondewo.nlu.CreateEntityTypeRequest" class="title-badge message">CreateEntityTypeRequest</a>
                       </li>
                     
                       <li>
+                        <a href="#ondewo.nlu.DeleteEntityRequest" class="title-badge message">DeleteEntityRequest</a>
+                      </li>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.DeleteEntityStatus" class="title-badge message">DeleteEntityStatus</a>
+                      </li>
+                    
+                      <li>
                         <a href="#ondewo.nlu.DeleteEntityTypeRequest" class="title-badge message">DeleteEntityTypeRequest</a>
+                      </li>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.EntityStatus" class="title-badge message">EntityStatus</a>
                       </li>
                     
                       <li>
@@ -873,6 +885,10 @@
                       </li>
                     
                       <li>
+                        <a href="#ondewo.nlu.GetEntityRequest" class="title-badge message">GetEntityRequest</a>
+                      </li>
+                    
+                      <li>
                         <a href="#ondewo.nlu.GetEntityTypeRequest" class="title-badge message">GetEntityTypeRequest</a>
                       </li>
                     
@@ -890,6 +906,10 @@
                     
                       <li>
                         <a href="#ondewo.nlu.ListEntityTypesResponse" class="title-badge message">ListEntityTypesResponse</a>
+                      </li>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.UpdateEntityRequest" class="title-badge message">UpdateEntityRequest</a>
                       </li>
                     
                       <li>
@@ -9095,6 +9115,30 @@ Operation <response: [BatchUpdateEntityTypesResponse][google.cloud.dialogflow.v2
 Operation <response: [google.protobuf.Empty][google.protobuf.Empty],
            metadata: [google.protobuf.Struct][google.protobuf.Struct]>
         
+          <h4 id="ondewo.nlu.EntityTypes.GetEntity" class="title-badge method">GetEntity</h4>
+
+          <pre>rpc GetEntity (<a href="#ondewo.nlu.GetEntityRequest">GetEntityRequest</a>) returns (<a href="#ondewo.nlu.EntityType.Entity">EntityType.Entity)</a></pre>
+
+          Retrieves the specified entity .
+        
+          <h4 id="ondewo.nlu.EntityTypes.CreateEntity" class="title-badge method">CreateEntity</h4>
+
+          <pre>rpc CreateEntity (<a href="#ondewo.nlu.CreateEntityRequest">CreateEntityRequest</a>) returns (<a href="#ondewo.nlu.EntityType.Entity">EntityType.Entity)</a></pre>
+
+          Creates an entity  in the specified agent.
+        
+          <h4 id="ondewo.nlu.EntityTypes.UpdateEntity" class="title-badge method">UpdateEntity</h4>
+
+          <pre>rpc UpdateEntity (<a href="#ondewo.nlu.UpdateEntityRequest">UpdateEntityRequest</a>) returns (<a href="#ondewo.nlu.EntityType.Entity">EntityType.Entity)</a></pre>
+
+          Updates the specified entity .
+        
+          <h4 id="ondewo.nlu.EntityTypes.DeleteEntity" class="title-badge method">DeleteEntity</h4>
+
+          <pre>rpc DeleteEntity (<a href="#ondewo.nlu.DeleteEntityRequest">DeleteEntityRequest</a>) returns (<a href="#ondewo.nlu.DeleteEntityStatus">DeleteEntityStatus)</a></pre>
+
+          Deletes the specified entity .
+        
           <h4 id="ondewo.nlu.EntityTypes.BatchCreateEntities" class="title-badge method">BatchCreateEntities</h4>
 
           <pre>rpc BatchCreateEntities (<a href="#ondewo.nlu.BatchCreateEntitiesRequest">BatchCreateEntitiesRequest</a>) returns (<a href="#ondewo.nlu.BatchEntitiesResponse">BatchEntitiesResponse)</a></pre>
@@ -9211,6 +9255,46 @@ Operation <response: [google.protobuf.Empty][google.protobuf.Empty],
               </tr>
               
             
+              
+              
+              <tr>
+                <td>GetEntity</td>
+                <td>GET</td>
+                <td>/v2/{name=projects/*/agent/entityTypes/*/entities/*}</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>CreateEntity</td>
+                <td>POST</td>
+                <td>/v2/{parent=projects/*/agent}/entityTypes/*/entities/</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>UpdateEntity</td>
+                <td>PATCH</td>
+                <td>/v2/{entity_.name=projects/*/agent/entityTypes/*/entities/*}</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>DeleteEntity</td>
+                <td>DELETE</td>
+                <td>/v2/{name=projects/*/agent/entityTypes/*/entities/*}</td>
+                <td></td>
+              </tr>
+              
+            
             </tbody>
           </table>
           
@@ -9234,41 +9318,9 @@ Operation <response: [google.protobuf.Empty][google.protobuf.Empty],
               
                 <tr>
                   <td>create_entity_requests</td>
-                  <td><a href="#ondewo.nlu.BatchCreateEntitiesRequest.CreateEntityRequest">BatchCreateEntitiesRequest.CreateEntityRequest</a></td>
+                  <td><a href="#ondewo.nlu.CreateEntityRequest">CreateEntityRequest</a></td>
                   <td>repeated</td>
-                  <td><p> </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="ondewo.nlu.BatchCreateEntitiesRequest.CreateEntityRequest" class="title-badge message">BatchCreateEntitiesRequest.CreateEntityRequest</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>entity_type_name</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Required. Name of the entity type in which to create the entity value. Format:
-`projects/<Project ID>/agent/entityTypes/<Entity Type ID>`. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>entity</td>
-                  <td><a href="#ondewo.nlu.EntityType.Entity">EntityType.Entity</a></td>
-                  <td></td>
-                  <td><p>The entity value to create </p></td>
+                  <td><p>The create entity requests in a batch </p></td>
                 </tr>
               
             </tbody>
@@ -9315,47 +9367,16 @@ Operation <response: [google.protobuf.Empty][google.protobuf.Empty],
               
                 <tr>
                   <td>delete_statuses</td>
-                  <td><a href="#ondewo.nlu.BatchDeleteEntitiesResponse.DeleteEntityStatus">BatchDeleteEntitiesResponse.DeleteEntityStatus</a></td>
+                  <td><a href="#ondewo.nlu.DeleteEntityStatus">DeleteEntityStatus</a></td>
                   <td>repeated</td>
-                  <td><p> </p></td>
+                  <td><p>status of an entity deletion </p></td>
                 </tr>
               
                 <tr>
                   <td>has_errors</td>
                   <td><a href="#bool">bool</a></td>
                   <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="ondewo.nlu.BatchDeleteEntitiesResponse.DeleteEntityStatus" class="title-badge message">BatchDeleteEntitiesResponse.DeleteEntityStatus</h3>
-        <p>This message contains the status of an entity deletion</p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>successfully_deleted</td>
-                  <td><a href="#google.protobuf.Empty">google.protobuf.Empty</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>error_message</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
+                  <td><p>error messages </p></td>
                 </tr>
               
             </tbody>
@@ -9410,7 +9431,7 @@ same agent as `parent`. </p></td>
               
                 <tr>
                   <td>entity_statuses</td>
-                  <td><a href="#ondewo.nlu.BatchEntitiesResponse.EntityStatus">BatchEntitiesResponse.EntityStatus</a></td>
+                  <td><a href="#ondewo.nlu.EntityStatus">EntityStatus</a></td>
                   <td>repeated</td>
                   <td><p>A list of entity statuses </p></td>
                 </tr>
@@ -9429,39 +9450,8 @@ same agent as `parent`. </p></td>
 
         
       
-        <h3 id="ondewo.nlu.BatchEntitiesResponse.EntityStatus" class="title-badge message">BatchEntitiesResponse.EntityStatus</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>entity</td>
-                  <td><a href="#ondewo.nlu.EntityType.Entity">EntityType.Entity</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>error_message</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
         <h3 id="ondewo.nlu.BatchGetEntitiesRequest" class="title-badge message">BatchGetEntitiesRequest</h3>
-        <p>Thiss message is a request to get a batch of entities</p>
+        <p>This message is a request to get a batch of entities</p>
 
         
           <table class="field-table">
@@ -9593,6 +9583,38 @@ Note: languages must be enabled in the agent, before they can be used. </p></td>
 
         
       
+        <h3 id="ondewo.nlu.CreateEntityRequest" class="title-badge message">CreateEntityRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>entity_type_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Name of the entity type in which to create the entity value. Format:
+`projects/<Project ID>/agent/entityTypes/<Entity Type ID>/entities/<Entity ID>`. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>entity</td>
+                  <td><a href="#ondewo.nlu.EntityType.Entity">EntityType.Entity</a></td>
+                  <td></td>
+                  <td><p>The entity value to create </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="ondewo.nlu.CreateEntityTypeRequest" class="title-badge message">CreateEntityTypeRequest</h3>
         <p>The request message for [EntityTypes.CreateEntityType][google.cloud.dialogflow.v2.EntityTypes.CreateEntityType].</p>
 
@@ -9643,6 +9665,62 @@ Note: languages must be enabled in the agent, before they can be used. </p></td>
 
         
       
+        <h3 id="ondewo.nlu.DeleteEntityRequest" class="title-badge message">DeleteEntityRequest</h3>
+        <p>This message is a request to delete a batch of entities</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The unique identifiers of the entities. Format:
+`projects/<Project ID>/agent/entityTypes/<Entity Type ID>/entities/<Entity ID>`. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="ondewo.nlu.DeleteEntityStatus" class="title-badge message">DeleteEntityStatus</h3>
+        <p>This message contains the status of an entity deletion</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>successfully_deleted</td>
+                  <td><a href="#google.protobuf.Empty">google.protobuf.Empty</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>error_message</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="ondewo.nlu.DeleteEntityTypeRequest" class="title-badge message">DeleteEntityTypeRequest</h3>
         <p>The request message for [EntityTypes.DeleteEntityType][google.cloud.dialogflow.v2.EntityTypes.DeleteEntityType].</p>
 
@@ -9659,6 +9737,37 @@ Note: languages must be enabled in the agent, before they can be used. </p></td>
                   <td></td>
                   <td><p>Required. The name of the entity type to delete.
 Format: <pre><code>projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;</code></pre> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="ondewo.nlu.EntityStatus" class="title-badge message">EntityStatus</h3>
+        <p>This message is for the entity status</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>entity</td>
+                  <td><a href="#ondewo.nlu.EntityType.Entity">EntityType.Entity</a></td>
+                  <td></td>
+                  <td><p>The entity </p></td>
+                </tr>
+              
+                <tr>
+                  <td>error_message</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Error message </p></td>
                 </tr>
               
             </tbody>
@@ -9904,6 +10013,31 @@ must contain exactly one synonym equal to `value`. </p></td>
 
         
       
+        <h3 id="ondewo.nlu.GetEntityRequest" class="title-badge message">GetEntityRequest</h3>
+        <p>This message is a request to get a an entity</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The unique identifiers of the entities. Format:
+`projects/<Project ID>/agent/entityTypes/<Entity Type ID>/entities/<Entity ID>`. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="ondewo.nlu.GetEntityTypeRequest" class="title-badge message">GetEntityTypeRequest</h3>
         <p>The request message for [EntityTypes.GetEntityType][google.cloud.dialogflow.v2.EntityTypes.GetEntityType].</p>
 
@@ -10135,6 +10269,30 @@ returned based on the page_token field in the request. </p></td>
                   <td></td>
                   <td><p>Token to retrieve the next page of results, or empty if there are no
 more results in the list. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="ondewo.nlu.UpdateEntityRequest" class="title-badge message">UpdateEntityRequest</h3>
+        <p>This message is a request to update an entity</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>entity</td>
+                  <td><a href="#ondewo.nlu.EntityType.Entity">EntityType.Entity</a></td>
+                  <td></td>
+                  <td><p>The entity to update </p></td>
                 </tr>
               
             </tbody>
@@ -18215,7 +18373,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid
                   <td>session_info</td>
                   <td><a href="#ondewo.nlu.SessionInfo">SessionInfo</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>session information </p></td>
                 </tr>
               
             </tbody>
@@ -18989,6 +19147,13 @@ This string represents what has been passed to the entity recognition and intent
                   <td><p>Messages for each of the Intent.Message.Platform were sent to the user </p></td>
                 </tr>
               
+                <tr>
+                  <td>timestamp</td>
+                  <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
+                  <td></td>
+                  <td><p>Timestamp of session review step </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -19033,6 +19198,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid
                   <td><a href="#ondewo.nlu.Context">Context</a></td>
                   <td>repeated</td>
                   <td><p>The contexts which were active at the beginning of this step </p></td>
+                </tr>
+              
+                <tr>
+                  <td>timestamp</td>
+                  <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
+                  <td></td>
+                  <td><p>Timestamp of session step </p></td>
                 </tr>
               
             </tbody>

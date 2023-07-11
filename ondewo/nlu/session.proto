@@ -34,6 +34,7 @@ import "google/api/annotations.proto";
 import "google/protobuf/empty.proto";
 import "google/protobuf/field_mask.proto";
 import "google/protobuf/struct.proto";
+import "google/protobuf/timestamp.proto";
 import "google/rpc/status.proto";
 import "google/type/latlng.proto";
 import "ondewo/nlu/common.proto";
@@ -731,6 +732,7 @@ message Session {
     // The list of all the steps of the session
     repeated SessionStep session_steps = 2;
 
+    // session information
     SessionInfo session_info = 3;
 
     // Represents the options for views of a session.
@@ -768,8 +770,11 @@ message SessionStep {
     // The contexts which were active at the beginning of this step
     repeated Context contexts = 4;
 
+    // Timestamp of session step
+    google.protobuf.Timestamp timestamp = 5;
+
     // created_at, created_by,modified_at, modified_by
-    CreatedModified created_modified = 5;
+    CreatedModified created_modified = 6;
 
 }
 
@@ -1270,8 +1275,11 @@ message SessionReviewStep {
     // Messages for each of the Intent.Message.Platform were sent to the user
     repeated Intent.Message.Platform platforms = 8;
 
+    // Timestamp of session review step
+    google.protobuf.Timestamp timestamp = 9;
+
     // created_at, created_by,modified_at, modified_by
-    CreatedModified created_modified = 9;
+    CreatedModified created_modified = 10;
 }
 
 
@@ -1571,33 +1579,6 @@ message ListOriginIdsResponse {
     // The origin_ids of the session
     repeated string origin_ids = 1;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // This message is a request to add session labels
 message AddSessionLabelsRequest {

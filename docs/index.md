@@ -144,29 +144,32 @@
   
 - [ondewo/nlu/entity_type.proto](#ondewo/nlu/entity_type.proto)
     - [BatchCreateEntitiesRequest](#ondewo.nlu.BatchCreateEntitiesRequest)
-    - [BatchCreateEntitiesRequest.CreateEntityRequest](#ondewo.nlu.BatchCreateEntitiesRequest.CreateEntityRequest)
     - [BatchDeleteEntitiesRequest](#ondewo.nlu.BatchDeleteEntitiesRequest)
     - [BatchDeleteEntitiesResponse](#ondewo.nlu.BatchDeleteEntitiesResponse)
-    - [BatchDeleteEntitiesResponse.DeleteEntityStatus](#ondewo.nlu.BatchDeleteEntitiesResponse.DeleteEntityStatus)
     - [BatchDeleteEntityTypesRequest](#ondewo.nlu.BatchDeleteEntityTypesRequest)
     - [BatchEntitiesResponse](#ondewo.nlu.BatchEntitiesResponse)
-    - [BatchEntitiesResponse.EntityStatus](#ondewo.nlu.BatchEntitiesResponse.EntityStatus)
     - [BatchGetEntitiesRequest](#ondewo.nlu.BatchGetEntitiesRequest)
     - [BatchUpdateEntitiesRequest](#ondewo.nlu.BatchUpdateEntitiesRequest)
     - [BatchUpdateEntityTypesRequest](#ondewo.nlu.BatchUpdateEntityTypesRequest)
     - [BatchUpdateEntityTypesResponse](#ondewo.nlu.BatchUpdateEntityTypesResponse)
+    - [CreateEntityRequest](#ondewo.nlu.CreateEntityRequest)
     - [CreateEntityTypeRequest](#ondewo.nlu.CreateEntityTypeRequest)
+    - [DeleteEntityRequest](#ondewo.nlu.DeleteEntityRequest)
+    - [DeleteEntityStatus](#ondewo.nlu.DeleteEntityStatus)
     - [DeleteEntityTypeRequest](#ondewo.nlu.DeleteEntityTypeRequest)
+    - [EntityStatus](#ondewo.nlu.EntityStatus)
     - [EntityType](#ondewo.nlu.EntityType)
     - [EntityType.Entity](#ondewo.nlu.EntityType.Entity)
     - [EntityTypeBatch](#ondewo.nlu.EntityTypeBatch)
     - [EntityTypeSorting](#ondewo.nlu.EntityTypeSorting)
     - [EntityValueSorting](#ondewo.nlu.EntityValueSorting)
+    - [GetEntityRequest](#ondewo.nlu.GetEntityRequest)
     - [GetEntityTypeRequest](#ondewo.nlu.GetEntityTypeRequest)
     - [ListEntitiesRequest](#ondewo.nlu.ListEntitiesRequest)
     - [ListEntitiesResponse](#ondewo.nlu.ListEntitiesResponse)
     - [ListEntityTypesRequest](#ondewo.nlu.ListEntityTypesRequest)
     - [ListEntityTypesResponse](#ondewo.nlu.ListEntityTypesResponse)
+    - [UpdateEntityRequest](#ondewo.nlu.UpdateEntityRequest)
     - [UpdateEntityTypeRequest](#ondewo.nlu.UpdateEntityTypeRequest)
   
     - [EntityType.AutoExpansionMode](#ondewo.nlu.EntityType.AutoExpansionMode)
@@ -2870,23 +2873,7 @@ This message is a request to create a batch entities
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| create_entity_requests | [BatchCreateEntitiesRequest.CreateEntityRequest](#ondewo.nlu.BatchCreateEntitiesRequest.CreateEntityRequest) | repeated |  |
-
-
-
-
-
-
-<a name="ondewo.nlu.BatchCreateEntitiesRequest.CreateEntityRequest"></a>
-
-### BatchCreateEntitiesRequest.CreateEntityRequest
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| entity_type_name | [string](#string) |  | Required. Name of the entity type in which to create the entity value. Format: `projects/<Project ID>/agent/entityTypes/<Entity Type ID>`. |
-| entity | [EntityType.Entity](#ondewo.nlu.EntityType.Entity) |  | The entity value to create |
+| create_entity_requests | [CreateEntityRequest](#ondewo.nlu.CreateEntityRequest) | repeated | The create entity requests in a batch |
 
 
 
@@ -2916,24 +2903,8 @@ This message is a response of deletion of a batch of entities
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| delete_statuses | [BatchDeleteEntitiesResponse.DeleteEntityStatus](#ondewo.nlu.BatchDeleteEntitiesResponse.DeleteEntityStatus) | repeated |  |
-| has_errors | [bool](#bool) |  |  |
-
-
-
-
-
-
-<a name="ondewo.nlu.BatchDeleteEntitiesResponse.DeleteEntityStatus"></a>
-
-### BatchDeleteEntitiesResponse.DeleteEntityStatus
-This message contains the status of an entity deletion
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| successfully_deleted | [google.protobuf.Empty](#google.protobuf.Empty) |  |  |
-| error_message | [string](#string) |  |  |
+| delete_statuses | [DeleteEntityStatus](#ondewo.nlu.DeleteEntityStatus) | repeated | status of an entity deletion |
+| has_errors | [bool](#bool) |  | error messages |
 
 
 
@@ -2964,24 +2935,8 @@ This message is a response of batch entities
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| entity_statuses | [BatchEntitiesResponse.EntityStatus](#ondewo.nlu.BatchEntitiesResponse.EntityStatus) | repeated | A list of entity statuses |
+| entity_statuses | [EntityStatus](#ondewo.nlu.EntityStatus) | repeated | A list of entity statuses |
 | has_errors | [bool](#bool) |  | indicates if statuses of some of the training phrases have errors |
-
-
-
-
-
-
-<a name="ondewo.nlu.BatchEntitiesResponse.EntityStatus"></a>
-
-### BatchEntitiesResponse.EntityStatus
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| entity | [EntityType.Entity](#ondewo.nlu.EntityType.Entity) |  |  |
-| error_message | [string](#string) |  |  |
 
 
 
@@ -2991,7 +2946,7 @@ This message is a response of batch entities
 <a name="ondewo.nlu.BatchGetEntitiesRequest"></a>
 
 ### BatchGetEntitiesRequest
-Thiss message is a request to get a batch of entities
+This message is a request to get a batch of entities
 
 
 | Field | Type | Label | Description |
@@ -3052,6 +3007,22 @@ The response message for [EntityTypes.BatchUpdateEntityTypes][google.cloud.dialo
 
 
 
+<a name="ondewo.nlu.CreateEntityRequest"></a>
+
+### CreateEntityRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| entity_type_name | [string](#string) |  | Required. Name of the entity type in which to create the entity value. Format: `projects/<Project ID>/agent/entityTypes/<Entity Type ID>/entities/<Entity ID>`. |
+| entity | [EntityType.Entity](#ondewo.nlu.EntityType.Entity) |  | The entity value to create |
+
+
+
+
+
+
 <a name="ondewo.nlu.CreateEntityTypeRequest"></a>
 
 ### CreateEntityTypeRequest
@@ -3070,6 +3041,37 @@ The request message for [EntityTypes.CreateEntityType][google.cloud.dialogflow.v
 
 
 
+<a name="ondewo.nlu.DeleteEntityRequest"></a>
+
+### DeleteEntityRequest
+This message is a request to delete a batch of entities
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The unique identifiers of the entities. Format: `projects/<Project ID>/agent/entityTypes/<Entity Type ID>/entities/<Entity ID>`. |
+
+
+
+
+
+
+<a name="ondewo.nlu.DeleteEntityStatus"></a>
+
+### DeleteEntityStatus
+This message contains the status of an entity deletion
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| successfully_deleted | [google.protobuf.Empty](#google.protobuf.Empty) |  |  |
+| error_message | [string](#string) |  |  |
+
+
+
+
+
+
 <a name="ondewo.nlu.DeleteEntityTypeRequest"></a>
 
 ### DeleteEntityTypeRequest
@@ -3079,6 +3081,22 @@ The request message for [EntityTypes.DeleteEntityType][google.cloud.dialogflow.v
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | name | [string](#string) |  | Required. The name of the entity type to delete. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;</code></pre> |
+
+
+
+
+
+
+<a name="ondewo.nlu.EntityStatus"></a>
+
+### EntityStatus
+This message is for the entity status
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| entity | [EntityType.Entity](#ondewo.nlu.EntityType.Entity) |  | The entity |
+| error_message | [string](#string) |  | Error message |
 
 
 
@@ -3177,6 +3195,21 @@ This message contains entity value sorting
 
 
 
+<a name="ondewo.nlu.GetEntityRequest"></a>
+
+### GetEntityRequest
+This message is a request to get a an entity
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The unique identifiers of the entities. Format: `projects/<Project ID>/agent/entityTypes/<Entity Type ID>/entities/<Entity ID>`. |
+
+
+
+
+
+
 <a name="ondewo.nlu.GetEntityTypeRequest"></a>
 
 ### GetEntityTypeRequest
@@ -3260,6 +3293,21 @@ The response message for [EntityTypes.ListEntityTypes][google.cloud.dialogflow.v
 | ----- | ---- | ----- | ----------- |
 | entity_types | [EntityType](#ondewo.nlu.EntityType) | repeated | The list of agent entity types. There will be a maximum number of items returned based on the page_token field in the request. |
 | next_page_token | [string](#string) |  | Token to retrieve the next page of results, or empty if there are no more results in the list. |
+
+
+
+
+
+
+<a name="ondewo.nlu.UpdateEntityRequest"></a>
+
+### UpdateEntityRequest
+This message is a request to update an entity
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| entity | [EntityType.Entity](#ondewo.nlu.EntityType.Entity) |  | The entity to update |
 
 
 
@@ -3433,6 +3481,10 @@ Operation <response: [BatchUpdateEntityTypesResponse][google.cloud.dialogflow.v2
 | BatchDeleteEntityTypes | [BatchDeleteEntityTypesRequest](#ondewo.nlu.BatchDeleteEntityTypesRequest) | [Operation](#ondewo.nlu.Operation) | Deletes entity types in the specified agent.
 
 Operation <response: [google.protobuf.Empty][google.protobuf.Empty], metadata: [google.protobuf.Struct][google.protobuf.Struct]> |
+| GetEntity | [GetEntityRequest](#ondewo.nlu.GetEntityRequest) | [EntityType.Entity](#ondewo.nlu.EntityType.Entity) | Retrieves the specified entity . |
+| CreateEntity | [CreateEntityRequest](#ondewo.nlu.CreateEntityRequest) | [EntityType.Entity](#ondewo.nlu.EntityType.Entity) | Creates an entity in the specified agent. |
+| UpdateEntity | [UpdateEntityRequest](#ondewo.nlu.UpdateEntityRequest) | [EntityType.Entity](#ondewo.nlu.EntityType.Entity) | Updates the specified entity . |
+| DeleteEntity | [DeleteEntityRequest](#ondewo.nlu.DeleteEntityRequest) | [DeleteEntityStatus](#ondewo.nlu.DeleteEntityStatus) | Deletes the specified entity . |
 | BatchCreateEntities | [BatchCreateEntitiesRequest](#ondewo.nlu.BatchCreateEntitiesRequest) | [BatchEntitiesResponse](#ondewo.nlu.BatchEntitiesResponse) | Creates an entity value in an entity type. |
 | BatchUpdateEntities | [BatchUpdateEntitiesRequest](#ondewo.nlu.BatchUpdateEntitiesRequest) | [BatchEntitiesResponse](#ondewo.nlu.BatchEntitiesResponse) | Updates a specific entity value. |
 | BatchGetEntities | [BatchGetEntitiesRequest](#ondewo.nlu.BatchGetEntitiesRequest) | [BatchEntitiesResponse](#ondewo.nlu.BatchEntitiesResponse) | Gets a specific entity value. |
@@ -6423,7 +6475,7 @@ Session of a user interaction
 | ----- | ---- | ----- | ----------- |
 | name | [string](#string) |  | The unique identifier of the session Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre> |
 | session_steps | [SessionStep](#ondewo.nlu.SessionStep) | repeated | The list of all the steps of the session |
-| session_info | [SessionInfo](#ondewo.nlu.SessionInfo) |  |  |
+| session_info | [SessionInfo](#ondewo.nlu.SessionInfo) |  | session information |
 
 
 
@@ -6596,6 +6648,7 @@ This string represents what has been passed to the entity recognition and intent
 | contexts_out | [Context](#ondewo.nlu.Context) | repeated | The output contexts of this step |
 | query_text_original | [string](#string) |  | User input without any pre-processing applied |
 | platforms | [Intent.Message.Platform](#ondewo.nlu.Intent.Message.Platform) | repeated | Messages for each of the Intent.Message.Platform were sent to the user |
+| timestamp | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Timestamp of session review step |
 
 
 
@@ -6614,6 +6667,7 @@ SessionStep is a single user interaction as part of a session
 | detect_intent_request | [DetectIntentRequest](#ondewo.nlu.DetectIntentRequest) |  | The detect intent request of the session step |
 | detect_intent_response | [DetectIntentResponse](#ondewo.nlu.DetectIntentResponse) |  | The detect intent response of the session step |
 | contexts | [Context](#ondewo.nlu.Context) | repeated | The contexts which were active at the beginning of this step |
+| timestamp | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Timestamp of session step |
 
 
 
