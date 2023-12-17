@@ -761,6 +761,10 @@
                       </li>
                     
                       <li>
+                        <a href="#ondewo.nlu.KeyValuePair" class="title-badge message">KeyValuePair</a>
+                      </li>
+                    
+                      <li>
                         <a href="#ondewo.nlu.ListNotificationsRequest" class="title-badge message">ListNotificationsRequest</a>
                       </li>
                     
@@ -2336,7 +2340,15 @@
                       </li>
                     
                       <li>
+                        <a href="#ondewo.nlu.DeleteAllUserPreferencesRequest" class="title-badge message">DeleteAllUserPreferencesRequest</a>
+                      </li>
+                    
+                      <li>
                         <a href="#ondewo.nlu.DeleteServerRoleRequest" class="title-badge message">DeleteServerRoleRequest</a>
+                      </li>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.DeleteUserPreferencesRequest" class="title-badge message">DeleteUserPreferencesRequest</a>
                       </li>
                     
                       <li>
@@ -2345,6 +2357,14 @@
                     
                       <li>
                         <a href="#ondewo.nlu.GetServerRoleRequest" class="title-badge message">GetServerRoleRequest</a>
+                      </li>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.GetUserPreferencesRequest" class="title-badge message">GetUserPreferencesRequest</a>
+                      </li>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.GetUserPreferencesResponse" class="title-badge message">GetUserPreferencesResponse</a>
                       </li>
                     
                       <li>
@@ -2372,6 +2392,14 @@
                       </li>
                     
                       <li>
+                        <a href="#ondewo.nlu.ListUserPreferencesRequest" class="title-badge message">ListUserPreferencesRequest</a>
+                      </li>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.ListUserPreferencesResponse" class="title-badge message">ListUserPreferencesResponse</a>
+                      </li>
+                    
+                      <li>
                         <a href="#ondewo.nlu.ListUsersRequest" class="title-badge message">ListUsersRequest</a>
                       </li>
                     
@@ -2389,6 +2417,10 @@
                     
                       <li>
                         <a href="#ondewo.nlu.ServerRole" class="title-badge message">ServerRole</a>
+                      </li>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.SetUserPreferencesRequest" class="title-badge message">SetUserPreferencesRequest</a>
                       </li>
                     
                       <li>
@@ -10034,6 +10066,65 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/&lt;resource_type&gt;/&lt
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>User id in form of a valid UUID. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="ondewo.nlu.KeyValuePair" class="title-badge message">KeyValuePair</h3>
+        <p>Key-Value pair message, where the value can be one of various types (int, float, double, string, etc.).</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The key of the key-value pair. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>int_value</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>The integer value (if applicable). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>float_value</td>
+                  <td><a href="#float">float</a></td>
+                  <td></td>
+                  <td><p>The float value (if applicable). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>double_value</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p>The double value (if applicable). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>string_value</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The string value (if applicable). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>created_at</td>
+                  <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
+                  <td></td>
+                  <td><p>The timestamp value (if applicable). </p></td>
                 </tr>
               
             </tbody>
@@ -23266,6 +23357,42 @@ The permissions all default to False if not provided specifically </p></td>
 
         
       
+        <h3 id="ondewo.nlu.DeleteAllUserPreferencesRequest" class="title-badge message">DeleteAllUserPreferencesRequest</h3>
+        <p>Request to delete all user preferences with an optional filter substring.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>user_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The name of the user.
+Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</code></pre> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>regex_filter</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional: Only delete keys that match the provided regular expression.
+If user does not add regex_filter, then all user preferences will be deleted
+Example:
+Only delete keys starting with DE: <code>^DE_</code>
+Only delete keys matching: <code>.*user.*</code> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="ondewo.nlu.DeleteServerRoleRequest" class="title-badge message">DeleteServerRoleRequest</h3>
         <p>Request to delete server role</p>
 
@@ -23281,6 +23408,38 @@ The permissions all default to False if not provided specifically </p></td>
                   <td><a href="#uint32">uint32</a></td>
                   <td></td>
                   <td><p>role is identified by role id, if empty will throw an error in the backend </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="ondewo.nlu.DeleteUserPreferencesRequest" class="title-badge message">DeleteUserPreferencesRequest</h3>
+        <p>Request to delete specific user preferences.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>user_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The name of the user.
+Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</code></pre> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>keys</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>List of keys to delete from user preferences. </p></td>
                 </tr>
               
             </tbody>
@@ -23336,6 +23495,70 @@ The permissions all default to False if not provided specifically </p></td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>role can also be uniquely identified by its name </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="ondewo.nlu.GetUserPreferencesRequest" class="title-badge message">GetUserPreferencesRequest</h3>
+        <p>Request to get user preferences.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>user_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The name of the user.
+Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</code></pre> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>keys</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Specific keys to retrieve from user preferences. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="ondewo.nlu.GetUserPreferencesResponse" class="title-badge message">GetUserPreferencesResponse</h3>
+        <p>Response containing user preferences.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>user_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The name of the user.
+Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</code></pre> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>key_value_pairs</td>
+                  <td><a href="#ondewo.nlu.KeyValuePair">KeyValuePair</a></td>
+                  <td>repeated</td>
+                  <td><p>List of key-value pairs representing user preferences. </p></td>
                 </tr>
               
             </tbody>
@@ -23514,6 +23737,69 @@ returned based on the page_token field in the request. </p></td>
                   <td></td>
                   <td><p>Token to retrieve the next page of results, or empty if there are no
 more results in the list. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="ondewo.nlu.ListUserPreferencesRequest" class="title-badge message">ListUserPreferencesRequest</h3>
+        <p>Request to list all user preferences for a specific user.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>user_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The name of the user.
+Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</code></pre> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>regex_filter</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional: Only list keys that match the provided regular expression </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="ondewo.nlu.ListUserPreferencesResponse" class="title-badge message">ListUserPreferencesResponse</h3>
+        <p>Response containing a list of user preferences for a specific user with an optional filter substring.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>user_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The name of the user. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>key_value_pairs</td>
+                  <td><a href="#ondewo.nlu.KeyValuePair">KeyValuePair</a></td>
+                  <td>repeated</td>
+                  <td><p>List of key-value pairs representing user preferences. </p></td>
                 </tr>
               
             </tbody>
@@ -23708,6 +23994,38 @@ more results in the list. </p></td>
 
         
       
+        <h3 id="ondewo.nlu.SetUserPreferencesRequest" class="title-badge message">SetUserPreferencesRequest</h3>
+        <p>Request to set or update user preferences.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>user_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The name of the user.
+Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</code></pre> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>key_value_pairs</td>
+                  <td><a href="#ondewo.nlu.KeyValuePair">KeyValuePair</a></td>
+                  <td>repeated</td>
+                  <td><p>List of key-value pairs to set or update. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="ondewo.nlu.UpdateServerRoleRequest" class="title-badge message">UpdateServerRoleRequest</h3>
         <p>Request to update server role</p>
 
@@ -23816,6 +24134,13 @@ it shouldn't be unique. If not provided user_name will also be used as display n
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>user e-mail should be a valid e-mail and unique </p></td>
+                </tr>
+              
+                <tr>
+                  <td>user_profile_picture</td>
+                  <td><a href="#bytes">bytes</a></td>
+                  <td></td>
+                  <td><p>user profile picture </p></td>
                 </tr>
               
                 <tr>

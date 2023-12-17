@@ -148,6 +148,7 @@
     - [AddNotificationsRequest](#ondewo.nlu.AddNotificationsRequest)
     - [AddNotificationsResponse](#ondewo.nlu.AddNotificationsResponse)
     - [Comment](#ondewo.nlu.Comment)
+    - [KeyValuePair](#ondewo.nlu.KeyValuePair)
     - [ListNotificationsRequest](#ondewo.nlu.ListNotificationsRequest)
     - [ListNotificationsResponse](#ondewo.nlu.ListNotificationsResponse)
     - [Notification](#ondewo.nlu.Notification)
@@ -441,20 +442,27 @@
 - [ondewo/nlu/user.proto](#ondewo/nlu/user.proto)
     - [CreateServerRoleRequest](#ondewo.nlu.CreateServerRoleRequest)
     - [CreateUserRequest](#ondewo.nlu.CreateUserRequest)
+    - [DeleteAllUserPreferencesRequest](#ondewo.nlu.DeleteAllUserPreferencesRequest)
     - [DeleteServerRoleRequest](#ondewo.nlu.DeleteServerRoleRequest)
+    - [DeleteUserPreferencesRequest](#ondewo.nlu.DeleteUserPreferencesRequest)
     - [DeleteUserRequest](#ondewo.nlu.DeleteUserRequest)
     - [GetServerRoleRequest](#ondewo.nlu.GetServerRoleRequest)
+    - [GetUserPreferencesRequest](#ondewo.nlu.GetUserPreferencesRequest)
+    - [GetUserPreferencesResponse](#ondewo.nlu.GetUserPreferencesResponse)
     - [GetUserRequest](#ondewo.nlu.GetUserRequest)
     - [ListServerPermissionsRequest](#ondewo.nlu.ListServerPermissionsRequest)
     - [ListServerPermissionsResponse](#ondewo.nlu.ListServerPermissionsResponse)
     - [ListServerRolesRequest](#ondewo.nlu.ListServerRolesRequest)
     - [ListServerRolesResponse](#ondewo.nlu.ListServerRolesResponse)
     - [ListUserInfosResponse](#ondewo.nlu.ListUserInfosResponse)
+    - [ListUserPreferencesRequest](#ondewo.nlu.ListUserPreferencesRequest)
+    - [ListUserPreferencesResponse](#ondewo.nlu.ListUserPreferencesResponse)
     - [ListUsersRequest](#ondewo.nlu.ListUsersRequest)
     - [ListUsersResponse](#ondewo.nlu.ListUsersResponse)
     - [LoginRequest](#ondewo.nlu.LoginRequest)
     - [LoginResponse](#ondewo.nlu.LoginResponse)
     - [ServerRole](#ondewo.nlu.ServerRole)
+    - [SetUserPreferencesRequest](#ondewo.nlu.SetUserPreferencesRequest)
     - [UpdateServerRoleRequest](#ondewo.nlu.UpdateServerRoleRequest)
     - [UpdateUserRequest](#ondewo.nlu.UpdateUserRequest)
     - [User](#ondewo.nlu.User)
@@ -3093,6 +3101,26 @@ Comment message
 | modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
 | created_by | [string](#string) |  | User id in form of a valid UUID. |
 | modified_by | [string](#string) |  | User id in form of a valid UUID. |
+
+
+
+
+
+
+<a name="ondewo.nlu.KeyValuePair"></a>
+
+### KeyValuePair
+Key-Value pair message, where the value can be one of various types (int, float, double, string, etc.).
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  | The key of the key-value pair. |
+| int_value | [int32](#int32) |  | The integer value (if applicable). |
+| float_value | [float](#float) |  | The float value (if applicable). |
+| double_value | [double](#double) |  | The double value (if applicable). |
+| string_value | [string](#string) |  | The string value (if applicable). |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | The timestamp value (if applicable). |
 
 
 
@@ -7997,6 +8025,22 @@ Request to create user
 
 
 
+<a name="ondewo.nlu.DeleteAllUserPreferencesRequest"></a>
+
+### DeleteAllUserPreferencesRequest
+Request to delete all user preferences with an optional filter substring.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| user_name | [string](#string) |  | The name of the user. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</code></pre> |
+| regex_filter | [string](#string) |  | Optional: Only delete keys that match the provided regular expression. If user does not add regex_filter, then all user preferences will be deleted Example: Only delete keys starting with DE: <code>^DE_</code> Only delete keys matching: <code>.*user.*</code> |
+
+
+
+
+
+
 <a name="ondewo.nlu.DeleteServerRoleRequest"></a>
 
 ### DeleteServerRoleRequest
@@ -8006,6 +8050,22 @@ Request to delete server role
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | role_id | [uint32](#uint32) |  | role is identified by role id, if empty will throw an error in the backend |
+
+
+
+
+
+
+<a name="ondewo.nlu.DeleteUserPreferencesRequest"></a>
+
+### DeleteUserPreferencesRequest
+Request to delete specific user preferences.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| user_name | [string](#string) |  | The name of the user. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</code></pre> |
+| keys | [string](#string) | repeated | List of keys to delete from user preferences. |
 
 
 
@@ -8037,6 +8097,38 @@ Request to get server role
 | ----- | ---- | ----- | ----------- |
 | role_id | [uint32](#uint32) |  | role is identified by role id |
 | role_name | [string](#string) |  | role can also be uniquely identified by its name |
+
+
+
+
+
+
+<a name="ondewo.nlu.GetUserPreferencesRequest"></a>
+
+### GetUserPreferencesRequest
+Request to get user preferences.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| user_name | [string](#string) |  | The name of the user. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</code></pre> |
+| keys | [string](#string) | repeated | Specific keys to retrieve from user preferences. |
+
+
+
+
+
+
+<a name="ondewo.nlu.GetUserPreferencesResponse"></a>
+
+### GetUserPreferencesResponse
+Response containing user preferences.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| user_name | [string](#string) |  | The name of the user. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</code></pre> |
+| key_value_pairs | [KeyValuePair](#ondewo.nlu.KeyValuePair) | repeated | List of key-value pairs representing user preferences. |
 
 
 
@@ -8137,6 +8229,38 @@ Response containing list of users
 
 
 
+<a name="ondewo.nlu.ListUserPreferencesRequest"></a>
+
+### ListUserPreferencesRequest
+Request to list all user preferences for a specific user.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| user_name | [string](#string) |  | The name of the user. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</code></pre> |
+| regex_filter | [string](#string) |  | Optional: Only list keys that match the provided regular expression |
+
+
+
+
+
+
+<a name="ondewo.nlu.ListUserPreferencesResponse"></a>
+
+### ListUserPreferencesResponse
+Response containing a list of user preferences for a specific user with an optional filter substring.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| user_name | [string](#string) |  | The name of the user. |
+| key_value_pairs | [KeyValuePair](#ondewo.nlu.KeyValuePair) | repeated | List of key-value pairs representing user preferences. |
+
+
+
+
+
+
 <a name="ondewo.nlu.ListUsersRequest"></a>
 
 ### ListUsersRequest
@@ -8221,6 +8345,22 @@ Server Role messages
 
 
 
+<a name="ondewo.nlu.SetUserPreferencesRequest"></a>
+
+### SetUserPreferencesRequest
+Request to set or update user preferences.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| user_name | [string](#string) |  | The name of the user. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</code></pre> |
+| key_value_pairs | [KeyValuePair](#ondewo.nlu.KeyValuePair) | repeated | List of key-value pairs to set or update. |
+
+
+
+
+
+
 <a name="ondewo.nlu.UpdateServerRoleRequest"></a>
 
 ### UpdateServerRoleRequest
@@ -8266,6 +8406,7 @@ this message contains all the fields that required for user db
 | display_name | [string](#string) |  | Optional field display_name is the name that will be used on the frontend to interact with the user it shouldn't be unique. If not provided user_name will also be used as display name |
 | server_role_id | [uint32](#uint32) |  | server role type of the given user. If nothing is provided, the user is set to USER (minimum access) |
 | user_email | [string](#string) |  | user e-mail should be a valid e-mail and unique |
+| user_profile_picture | [bytes](#bytes) |  | user profile picture |
 | created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
 | modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
 | created_by | [string](#string) |  | User id in form of a valid UUID. |
