@@ -445,6 +445,7 @@
     - [DeleteAllUserPreferencesRequest](#ondewo.nlu.DeleteAllUserPreferencesRequest)
     - [DeleteServerRoleRequest](#ondewo.nlu.DeleteServerRoleRequest)
     - [DeleteUserPreferencesRequest](#ondewo.nlu.DeleteUserPreferencesRequest)
+    - [DeleteUserPreferencesResponse](#ondewo.nlu.DeleteUserPreferencesResponse)
     - [DeleteUserRequest](#ondewo.nlu.DeleteUserRequest)
     - [GetServerRoleRequest](#ondewo.nlu.GetServerRoleRequest)
     - [GetUserPreferencesRequest](#ondewo.nlu.GetUserPreferencesRequest)
@@ -463,6 +464,7 @@
     - [LoginResponse](#ondewo.nlu.LoginResponse)
     - [ServerRole](#ondewo.nlu.ServerRole)
     - [SetUserPreferencesRequest](#ondewo.nlu.SetUserPreferencesRequest)
+    - [SetUserPreferencesResponse](#ondewo.nlu.SetUserPreferencesResponse)
     - [UpdateServerRoleRequest](#ondewo.nlu.UpdateServerRoleRequest)
     - [UpdateUserRequest](#ondewo.nlu.UpdateUserRequest)
     - [User](#ondewo.nlu.User)
@@ -8072,6 +8074,23 @@ Request to delete specific user preferences.
 
 
 
+<a name="ondewo.nlu.DeleteUserPreferencesResponse"></a>
+
+### DeleteUserPreferencesResponse
+Response to delete specific user preferences.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| user_name | [string](#string) |  | The name of the user. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</code></pre> |
+| keys | [string](#string) | repeated | List of keys to delete from user preferences. |
+| error_message | [string](#string) |  | error message if there are any. |
+
+
+
+
+
+
 <a name="ondewo.nlu.DeleteUserRequest"></a>
 
 ### DeleteUserRequest
@@ -8129,6 +8148,7 @@ Response containing user preferences.
 | ----- | ---- | ----- | ----------- |
 | user_name | [string](#string) |  | The name of the user. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</code></pre> |
 | key_value_pairs | [KeyValuePair](#ondewo.nlu.KeyValuePair) | repeated | List of key-value pairs representing user preferences. |
+| error_message | [string](#string) |  | error message if there are any. |
 
 
 
@@ -8255,6 +8275,7 @@ Response containing a list of user preferences for a specific user with an optio
 | ----- | ---- | ----- | ----------- |
 | user_name | [string](#string) |  | The name of the user. |
 | key_value_pairs | [KeyValuePair](#ondewo.nlu.KeyValuePair) | repeated | List of key-value pairs representing user preferences. |
+| error_message | [string](#string) |  | error message if there are any. |
 
 
 
@@ -8355,6 +8376,23 @@ Request to set or update user preferences.
 | ----- | ---- | ----- | ----------- |
 | user_name | [string](#string) |  | The name of the user. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</code></pre> |
 | key_value_pairs | [KeyValuePair](#ondewo.nlu.KeyValuePair) | repeated | List of key-value pairs to set or update. |
+
+
+
+
+
+
+<a name="ondewo.nlu.SetUserPreferencesResponse"></a>
+
+### SetUserPreferencesResponse
+Response to set or update user preferences.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| user_name | [string](#string) |  | The name of the user. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</code></pre> |
+| keys | [string](#string) | repeated | List of keys to delete from user preferences. |
+| error_message | [string](#string) |  | error message if there are any. |
 
 
 
@@ -8495,6 +8533,10 @@ gRPC service for managing users and server roles.
 | ListNotifications | [ListNotificationsRequest](#ondewo.nlu.ListNotificationsRequest) | [ListNotificationsResponse](#ondewo.nlu.ListNotificationsResponse) | Lists notifications based on specified filters. |
 | SetNotificationsFlaggedStatus | [SetNotificationsFlaggedStatusRequest](#ondewo.nlu.SetNotificationsFlaggedStatusRequest) | [ListNotificationsResponse](#ondewo.nlu.ListNotificationsResponse) | Sets the flagged status for multiple notifications. |
 | SetNotificationsReadStatus | [SetNotificationsReadStatusRequest](#ondewo.nlu.SetNotificationsReadStatusRequest) | [ListNotificationsResponse](#ondewo.nlu.ListNotificationsResponse) | Sets the read status for multiple notifications. |
+| GetUserPreferences | [GetUserPreferencesRequest](#ondewo.nlu.GetUserPreferencesRequest) | [GetUserPreferencesResponse](#ondewo.nlu.GetUserPreferencesResponse) | Retrieves user preferences based on the provided request. |
+| SetUserPreferences | [SetUserPreferencesRequest](#ondewo.nlu.SetUserPreferencesRequest) | [SetUserPreferencesResponse](#ondewo.nlu.SetUserPreferencesResponse) | Sets or updates user preferences based on the provided request. |
+| DeleteUserPreferences | [DeleteUserPreferencesRequest](#ondewo.nlu.DeleteUserPreferencesRequest) | [DeleteUserPreferencesResponse](#ondewo.nlu.DeleteUserPreferencesResponse) | Deletes specific user preferences based on the provided request. |
+| DeleteAllUserPreferences | [DeleteAllUserPreferencesRequest](#ondewo.nlu.DeleteAllUserPreferencesRequest) | [DeleteUserPreferencesResponse](#ondewo.nlu.DeleteUserPreferencesResponse) | Deletes all user preferences for a specific user, optionally filtered by a substring. |
 
  <!-- end services -->
 

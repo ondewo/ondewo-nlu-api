@@ -2321,6 +2321,14 @@
                       
                         <li><a href="#ondewo.nlu.Users.SetNotificationsReadStatus" class="title-badge method">SetNotificationsReadStatus</a></li>
                       
+                        <li><a href="#ondewo.nlu.Users.GetUserPreferences" class="title-badge method">GetUserPreferences</a></li>
+                      
+                        <li><a href="#ondewo.nlu.Users.SetUserPreferences" class="title-badge method">SetUserPreferences</a></li>
+                      
+                        <li><a href="#ondewo.nlu.Users.DeleteUserPreferences" class="title-badge method">DeleteUserPreferences</a></li>
+                      
+                        <li><a href="#ondewo.nlu.Users.DeleteAllUserPreferences" class="title-badge method">DeleteAllUserPreferences</a></li>
+                      
                       </ul>
                       
                     </li>
@@ -2349,6 +2357,10 @@
                     
                       <li>
                         <a href="#ondewo.nlu.DeleteUserPreferencesRequest" class="title-badge message">DeleteUserPreferencesRequest</a>
+                      </li>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.DeleteUserPreferencesResponse" class="title-badge message">DeleteUserPreferencesResponse</a>
                       </li>
                     
                       <li>
@@ -2421,6 +2433,10 @@
                     
                       <li>
                         <a href="#ondewo.nlu.SetUserPreferencesRequest" class="title-badge message">SetUserPreferencesRequest</a>
+                      </li>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.SetUserPreferencesResponse" class="title-badge message">SetUserPreferencesResponse</a>
                       </li>
                     
                       <li>
@@ -23123,6 +23139,30 @@ until the server closes the gRPC connection. This message is only sent if
 
           Sets the read status for multiple notifications.
         
+          <h4 id="ondewo.nlu.Users.GetUserPreferences" class="title-badge method">GetUserPreferences</h4>
+
+          <pre>rpc GetUserPreferences (<a href="#ondewo.nlu.GetUserPreferencesRequest">GetUserPreferencesRequest</a>) returns (<a href="#ondewo.nlu.GetUserPreferencesResponse">GetUserPreferencesResponse)</a></pre>
+
+          Retrieves user preferences based on the provided request.
+        
+          <h4 id="ondewo.nlu.Users.SetUserPreferences" class="title-badge method">SetUserPreferences</h4>
+
+          <pre>rpc SetUserPreferences (<a href="#ondewo.nlu.SetUserPreferencesRequest">SetUserPreferencesRequest</a>) returns (<a href="#ondewo.nlu.SetUserPreferencesResponse">SetUserPreferencesResponse)</a></pre>
+
+          Sets or updates user preferences based on the provided request.
+        
+          <h4 id="ondewo.nlu.Users.DeleteUserPreferences" class="title-badge method">DeleteUserPreferences</h4>
+
+          <pre>rpc DeleteUserPreferences (<a href="#ondewo.nlu.DeleteUserPreferencesRequest">DeleteUserPreferencesRequest</a>) returns (<a href="#ondewo.nlu.DeleteUserPreferencesResponse">DeleteUserPreferencesResponse)</a></pre>
+
+          Deletes specific user preferences based on the provided request.
+        
+          <h4 id="ondewo.nlu.Users.DeleteAllUserPreferences" class="title-badge method">DeleteAllUserPreferences</h4>
+
+          <pre>rpc DeleteAllUserPreferences (<a href="#ondewo.nlu.DeleteAllUserPreferencesRequest">DeleteAllUserPreferencesRequest</a>) returns (<a href="#ondewo.nlu.DeleteUserPreferencesResponse">DeleteUserPreferencesResponse)</a></pre>
+
+          Deletes all user preferences for a specific user, optionally filtered by a substring.
+        
 
         
           
@@ -23449,6 +23489,45 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</
 
         
       
+        <h3 id="ondewo.nlu.DeleteUserPreferencesResponse" class="title-badge message">DeleteUserPreferencesResponse</h3>
+        <p>Response to delete specific user preferences.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>user_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The name of the user.
+Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</code></pre> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>keys</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>List of keys to delete from user preferences. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>error_message</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>error message if there are any. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="ondewo.nlu.DeleteUserRequest" class="title-badge message">DeleteUserRequest</h3>
         <p>Request to delete user</p>
 
@@ -23559,6 +23638,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</
                   <td><a href="#ondewo.nlu.KeyValuePair">KeyValuePair</a></td>
                   <td>repeated</td>
                   <td><p>List of key-value pairs representing user preferences. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>error_message</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>error message if there are any. </p></td>
                 </tr>
               
             </tbody>
@@ -23802,6 +23888,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</
                   <td><p>List of key-value pairs representing user preferences. </p></td>
                 </tr>
               
+                <tr>
+                  <td>error_message</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>error message if there are any. </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -24017,6 +24110,45 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</
                   <td><a href="#ondewo.nlu.KeyValuePair">KeyValuePair</a></td>
                   <td>repeated</td>
                   <td><p>List of key-value pairs to set or update. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="ondewo.nlu.SetUserPreferencesResponse" class="title-badge message">SetUserPreferencesResponse</h3>
+        <p>Response to set or update user preferences.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>user_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The name of the user.
+Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</code></pre> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>keys</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>List of keys to delete from user preferences. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>error_message</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>error message if there are any. </p></td>
                 </tr>
               
             </tbody>
