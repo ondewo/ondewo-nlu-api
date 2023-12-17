@@ -347,3 +347,30 @@ message SetNotificationsReadStatusRequest {
     // Read status to set for the specified notifications.
     repeated bool flagged = 2;
 }
+
+// Key-Value pair message, where the value can be one of various types (int, float, double, string, etc.).
+message KeyValuePair {
+
+    // The key of the key-value pair.
+    string key = 1;
+
+    // The value of the key-value pair. Use one of the following fields based on the type.
+    oneof value {
+
+        // The integer value (if applicable).
+        int32 int_value = 2;
+
+        // The float value (if applicable).
+        float float_value = 3;
+
+        // The double value (if applicable).
+        double double_value = 4;
+
+        // The string value (if applicable).
+        string string_value = 5;
+
+        // The timestamp value (if applicable).
+        google.protobuf.Timestamp created_at = 6;
+
+    }
+}

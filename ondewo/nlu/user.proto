@@ -180,17 +180,20 @@ message User {
     // user e-mail should be a valid e-mail and unique
     string user_email = 7;
 
+    // user profile picture
+    bytes user_profile_picture = 8;
+
     // Creation date and time. Read-only field.
-    google.protobuf.Timestamp created_at = 8;
+    google.protobuf.Timestamp created_at = 9;
 
     // Modification date and time. Read-only field.
-    google.protobuf.Timestamp modified_at = 9;
+    google.protobuf.Timestamp modified_at = 10;
 
     // User id in form of a valid UUID.
-    string created_by = 10;
+    string created_by = 11;
 
     // User id in form of a valid UUID.
-    string modified_by = 11;
+    string modified_by = 12;
 
 }
 
@@ -200,8 +203,8 @@ message UserInfo {
     // user object
     User user = 1;
 
-    //If in GetUser, ListUser requests UserView is FULL, then the mapping is additionally provided
-    //of parent of the project and corresponding ProjectRole of the user
+    // If in GetUser, ListUser requests UserView is FULL, then the mapping is additionally provided
+    // of parent of the project and corresponding ProjectRole of the user
     map<string, ProjectRole> project_roles = 2;
 }
 
@@ -419,4 +422,84 @@ message LoginResponse {
 
     // authentication token after successful login of the user to access NLU services
     string auth_token = 2;
+}
+
+// Request to get user preferences.
+message GetUserPreferencesRequest {
+
+    // The name of the user.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</code></pre>
+    string user_name = 1;
+
+    // Specific keys to retrieve from user preferences.
+    repeated string keys = 2;
+}
+
+// Response containing user preferences.
+message GetUserPreferencesResponse {
+
+    // The name of the user.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</code></pre>
+    string user_name = 1;
+
+    // List of key-value pairs representing user preferences.
+    repeated KeyValuePair key_value_pairs = 2;
+}
+
+// Request to set or update user preferences.
+message SetUserPreferencesRequest {
+
+    // The name of the user.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</code></pre>
+    string user_name = 1;
+
+    // List of key-value pairs to set or update.
+    repeated KeyValuePair key_value_pairs = 2;
+}
+
+// Request to delete specific user preferences.
+message DeleteUserPreferencesRequest {
+
+    // The name of the user.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</code></pre>
+    string user_name = 1;
+
+    // List of keys to delete from user preferences.
+    repeated string keys = 2;
+}
+
+// Request to delete all user preferences with an optional filter substring.
+message DeleteAllUserPreferencesRequest {
+
+    // The name of the user.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</code></pre>
+    string user_name = 1;
+
+    // Optional: Only delete keys that match the provided regular expression.
+    // If user does not add regex_filter, then all user preferences will be deleted
+    // Example:
+    // Only delete keys starting with DE: <code>^DE_</code>
+    // Only delete keys matching: <code>.*user.*</code>
+    string regex_filter = 2;
+}
+
+// Request to list all user preferences for a specific user.
+message ListUserPreferencesRequest {
+
+    // The name of the user.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</code></pre>
+    string user_name = 1;
+
+    // Optional: Only list keys that match the provided regular expression
+    string regex_filter = 2;
+}
+
+// Response containing a list of user preferences for a specific user with an optional filter substring.
+message ListUserPreferencesResponse {
+
+    // The name of the user.
+    string user_name = 1;
+
+    // List of key-value pairs representing user preferences.
+    repeated KeyValuePair key_value_pairs = 2;
 }
