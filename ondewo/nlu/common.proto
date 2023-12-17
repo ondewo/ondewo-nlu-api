@@ -1,4 +1,4 @@
-// Copyright 2021 ONDEWO GmbH
+// Copyright 2020-2023 ONDEWO GmbH
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,6 +16,17 @@ syntax = "proto3";
 
 package ondewo.nlu;
 
+import "google/protobuf/field_mask.proto";
+import "google/protobuf/timestamp.proto";
+
+option cc_enable_arenas = true;
+option csharp_namespace = "Google.Cloud.Dialogflow.V2";
+option go_package = "google.golang.org/genproto/googleapis/cloud/dialogflow/v2;dialogflow";
+option java_multiple_files = true;
+option java_outer_classname = "CommonProto";
+option java_package = "com.google.cloud.dialogflow.v2";
+option objc_class_prefix = "DF";
+
 // Sorting mode
 enum SortingMode {
 
@@ -31,4 +42,307 @@ message StatResponse {
 
     // Response wrapper for the "Get<Stat>" endpoints
     uint32 value = 1;
+}
+
+// Comment message
+message Comment {
+
+    // resource name of the comment
+    string name = 1;
+
+    // text of the comment
+    string text = 2;
+
+    // User id as resource name
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</code></pre>
+    string user_id = 3;
+
+    // name of the resource for which the comment is about
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/&lt;resource_type&gt;/&lt;resource_uuid&gt;/.../</code></pre>
+    string comment_about_name = 4;
+
+    // The resource name of the parent comment. A parent comment is a reply to a certain comment.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/&lt;resource_type&gt;/&lt;resource_uuid&gt;/.../</code></pre>
+    string parent_comment_name = 5;
+
+    // Creation date and time. Read-only field.
+    google.protobuf.Timestamp created_at = 6;
+
+    // Modification date and time. Read-only field.
+    google.protobuf.Timestamp modified_at = 7;
+
+    // User id in form of a valid UUID.
+    string created_by = 8;
+
+    // User id in form of a valid UUID.
+    string modified_by = 9;
+}
+
+
+// Enumerates the possible flagged statuses for a notification.
+enum NotificationFlaggedStatus {
+    // Unspecified flagged status
+    NOTIFICATION_FLAGGED_STATUS_UNSPECIFIED = 0;
+
+    // Notification is flagged
+    NOTIFICATION_FLAGGED_STATUS_FLAGGED = 1;
+
+    // Notification is unflagged
+    NOTIFICATION_FLAGGED_STATUS_UNFLAGGED = 2;
+}
+
+// Enumerates the possible read statuses for a notification.
+enum NotificationReadStatus {
+    // Unspecified read status
+    NOTIFICATION_READ_STATUS_UNSPECIFIED = 0;
+
+    // Notification is marked as read
+    NOTIFICATION_READ_STATUS_READ = 1;
+
+    // Notification is marked as unread
+    NOTIFICATION_READ_STATUS_UNREAD = 2;
+}
+
+
+
+// Enum for notification type
+enum NotificationVisibility {
+
+    // unspecified
+    NOTIFICATION_VISIBILITY_UNSPECIFIED = 0;
+
+    // only user sees the notification - usually a notification of the user interface
+    NOTIFICATION_VISIBILITY_USER = 1;
+
+    // all members of a project see this notification
+    NOTIFICATION_VISIBILITY_PROJECT = 2;
+
+    // all admins of a project see this notification
+    NOTIFICATION_VISIBILITY_PROJECT_OWNER = 3;
+
+    // all admins of a project see this notification
+    NOTIFICATION_VISIBILITY_PROJECT_ADMIN = 4;
+
+    // all admins of a project see this notification
+    NOTIFICATION_VISIBILITY_PROJECT_DEVELOPER = 5;
+
+    // all users of a project see this notification
+    NOTIFICATION_VISIBILITY_PROJECT_USER = 6;
+
+    // all users of a project see this notification
+    NOTIFICATION_VISIBILITY_PROJECT_EXECUTOR = 7;
+
+    // all users of a project see this notification
+    NOTIFICATION_VISIBILITY_PROJECT_INACTIVE = 8;
+
+    // all admins of the server
+    NOTIFICATION_VISIBILITY_SERVER_ADMIN = 9;
+
+    // all admins of the server
+    NOTIFICATION_VISIBILITY_SERVER_MANAGER = 10;
+
+    // all admins of the server
+    NOTIFICATION_VISIBILITY_SERVER_USER = 11;
+
+    // all admins of the server
+    NOTIFICATION_VISIBILITY_SERVER_INACTIVE = 12;
+
+}
+
+// Enumerates the possible types for a notification.
+enum NotificationType {
+
+    // Unspecified notification type
+    NOTIFICATION_TYPE_UNSPECIFIED = 0;
+
+    // Debug notification type
+    NOTIFICATION_TYPE_DEBUG = 1;
+
+    // Warning notification type
+    NOTIFICATION_TYPE_WARNING = 2;
+
+    // Informational notification type
+    NOTIFICATION_TYPE_INFO = 3;
+
+    // Error notification type
+    NOTIFICATION_TYPE_ERROR = 4;
+
+    // News notification type
+    NOTIFICATION_TYPE_NEWS = 5;
+}
+
+// Enumerates the possible origins for a notification.
+enum NotificationOrigin {
+
+    // unspecified
+    NOTIFICATION_ORIGIN_UNSPECIFIED = 0;
+
+    // ondewo-aim service
+    NOTIFICATION_ORIGIN_ONDEWO_AIM = 1;
+
+    // ondewo-bpi service
+    NOTIFICATION_ORIGIN_ONDEWO_BPI = 2;
+
+    // ondewo-csi service
+    NOTIFICATION_ORIGIN_ONDEWO_CSI = 3;
+
+    // ondewo-nlu service
+    NOTIFICATION_ORIGIN_ONDEWO_NLU = 4;
+
+    // ondewo-s2t service
+    NOTIFICATION_ORIGIN_ONDEWO_S2T = 5;
+
+    // ondewo-sip service
+    NOTIFICATION_ORIGIN_ONDEWO_SIP = 6;
+
+    // ondewo-t2s service
+    NOTIFICATION_ORIGIN_ONDEWO_T2S = 7;
+
+    // ondewo-vtsi service
+    NOTIFICATION_ORIGIN_ONDEWO_VTSI = 8;
+
+    // ondewo-vtsi-rabbitmq service
+    NOTIFICATION_ORIGIN_ONDEWO_VTSI_RABBITMQ = 9;
+}
+
+// Notification message
+message Notification {
+
+    // resource name of the notification
+    string name = 1;
+
+    // User id as resource name
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</code></pre>
+    string user_name = 2;
+
+    // User id as resource name
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</code></pre>
+    string title = 3;
+
+    // A short notification text is displayed directly with max. 50 chars which is a truncated version of the long message
+    string description_short = 4;
+
+    // A long notification text
+    string description_long = 5;
+
+    // Has a notification been flagged by a specific user
+    NotificationFlaggedStatus notification_flagged_status = 6;
+
+    // When the user marked the notification as read
+    google.protobuf.Timestamp notification_flagged_timestamp = 7;
+
+    // Has a notification been read by a specific user
+    NotificationReadStatus notification_read_status = 8;
+
+    // When the user marked the notification as read, i.e. read the notification
+    google.protobuf.Timestamp notification_read_timestamp = 9;
+
+    // The origin of a notification
+    // A Notification origin can be from a product (service), e.g. ondewo-nlu, ondewo-s2t, ondewo-t2s, etc.
+    NotificationOrigin notification_origin = 10;
+
+    // The name of resource of where the notification originated
+    string origin_name = 11;
+
+    // language of the origin resource e.g. language of the nlu agent or language of the speech-to-text service
+    string origin_language = 12;
+
+    // The type of notification
+    NotificationType notification_type = 13;
+
+    // The visibility level of the notification
+    NotificationVisibility notification_visibility = 14;
+
+    // Creation date and time. Read-only field.
+    google.protobuf.Timestamp created_at = 15;
+
+    // Modification date and time. Read-only field.
+    google.protobuf.Timestamp modified_at = 16;
+
+    // User id in form of a valid UUID.
+    string created_by = 17;
+
+    // User id in form of a valid UUID.
+    string modified_by = 18;
+
+}
+
+// Message for adding notifications in a batch.
+message AddNotificationsRequest {
+    // List of notifications to be added.
+    repeated Notification notification = 1;
+}
+
+// Message containing the response to adding notifications.
+message AddNotificationsResponse {
+    // List of notifications that have been added.
+    repeated Notification notification = 1;
+}
+
+// Message for filtering notifications based on various criteria.
+message NotificationFilter {
+    // Language codes of the projects for which notifications are filtered.
+    repeated string language_codes = 1;
+
+    // Origins of the notifications to filter.
+    repeated NotificationOrigin notification_origins = 2;
+
+    // Visibilities of the notifications to filter.
+    repeated NotificationVisibility notification_visibilities = 3;
+
+    // Flagged status of the notifications to filter.
+    repeated NotificationFlaggedStatus notification_flagged_status = 4;
+
+    // Read status of the notifications to filter.
+    repeated NotificationReadStatus notification_read_status = 5;
+
+    // Filter notifications with a time range starting from the specified earliest time.
+    google.protobuf.Timestamp earliest = 6;
+
+    // Filter notifications with a time range ending at the specified latest time.
+    google.protobuf.Timestamp latest = 7;
+
+    // Resource names of users to filter notifications for.
+    repeated string user_names = 8;
+
+    // Resource names of the origin of the notification to filter notifications.
+    repeated string origin_names = 9;
+
+}
+
+// Message for listing notifications based on certain criteria.
+message ListNotificationsRequest {
+    // Optional filter to narrow the response down to specific notifications.
+    NotificationFilter notification_filter = 1;
+
+    // Optional. Token for pagination, obtained from a previous list request.
+    string page_token = 2;
+
+    // Optional. Mask to control which fields will be filled with data.
+    // Example: path=["notification.user_names"]
+    google.protobuf.FieldMask field_mask = 3;
+}
+
+// Message containing the response to a list request for notifications.
+message ListNotificationsResponse {
+    // List of notifications that meet the specified criteria.
+    repeated Notification notification = 1;
+}
+
+// Message for setting the flagged status of notifications.
+message SetNotificationsFlaggedStatusRequest {
+    // Names of notifications to set the flagged status for.
+    repeated string notification_name = 1;
+
+    // Flagged status to set for the specified notifications.
+    repeated bool flagged = 2;
+}
+
+// Message for setting the read status of notifications.
+message SetNotificationsReadStatusRequest {
+    // Names of notifications to set the read status for.
+    repeated string notification_name = 1;
+
+    // Read status to set for the specified notifications.
+    repeated bool flagged = 2;
 }

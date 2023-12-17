@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
-// Modifications Copyright 2021 ONDEWO GmbH
+// Modifications Copyright 2020-2023 ONDEWO GmbH
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -39,13 +39,14 @@ import "google/api/annotations.proto";
 import "google/protobuf/field_mask.proto";
 import "google/protobuf/empty.proto";
 import "google/protobuf/struct.proto";
+import "google/protobuf/timestamp.proto";
 import "ondewo/nlu/common.proto";
 import "ondewo/nlu/intent.proto";
 import "ondewo/nlu/user.proto";
 import "ondewo/nlu/project_role.proto";
 import "ondewo/nlu/operations.proto";
 import "ondewo/nlu/session.proto";
-import "google/protobuf/timestamp.proto";
+import "ondewo/nlu/ccai_project.proto";
 
 // Agents are best described as Natural Language Understanding (NLU) modules that transform user requests into actionable data. You can include agents in your app, product, or service to determine user intent and respond to the user in a natural way.
 //
@@ -492,6 +493,21 @@ service Agents {
 
     // Force reindexing Intent and Entity data of Agent
     rpc ReindexAgent(ReindexAgentRequest) returns (ondewo.nlu.Operation);
+
+    // RPC to create a new CCAI project
+    rpc CreateCcaiProject (CreateCcaiProjectRequest) returns (CreateCcaiProjectResponse) {}
+
+    // RPC to delete an existing CCAI project
+    rpc DeleteCcaiProject (DeleteCcaiProjectRequest) returns (DeleteCcaiProjectResponse) {}
+
+    // RPC to get details of an existing CCAI project
+    rpc GetCcaiProject (GetCcaiProjectRequest) returns (CcaiProject) {}
+
+    // RPC to list all available CCAI projects
+    rpc ListCcaiProjects (ListCcaiProjectsRequest) returns (ListCcaiProjectsResponse) {}
+
+    // RPC to update an existing CCAI project
+    rpc UpdateCcaiProject (UpdateCcaiProjectRequest) returns (UpdateCcaiProjectResponse) {}
 }
 
 // Project/Agent messages
@@ -536,6 +552,18 @@ message Agent {
     AgentStatus status = 9;
 
     string description = 10;
+
+    // Creation date and time. Read-only field.
+    google.protobuf.Timestamp created_at = 11;
+
+    // Modification date and time. Read-only field.
+    google.protobuf.Timestamp modified_at = 12;
+
+    // User id in form of a valid UUID.
+    string created_by = 13;
+
+    // User id in form of a valid UUID.
+    string modified_by = 14;
 }
 
 // This message contains the agent with owner
@@ -1433,6 +1461,18 @@ message FullTextSearchResponseEntityType {
         string display_name = 2;
 
         string language = 3;
+
+        // Creation date and time. Read-only field.
+        google.protobuf.Timestamp created_at = 4;
+
+        // Modification date and time. Read-only field.
+        google.protobuf.Timestamp modified_at = 5;
+
+        // User id in form of a valid UUID.
+        string created_by = 6;
+
+        // User id in form of a valid UUID.
+        string modified_by = 7;
     }
 
     repeated EntityTypeSearchResult entity_type_results = 3;
@@ -1468,6 +1508,18 @@ message FullTextSearchResponseEntity {
         string entity_type_display_name = 4;
 
         string language = 5;
+
+        // Creation date and time. Read-only field.
+        google.protobuf.Timestamp created_at = 6;
+
+        // Modification date and time. Read-only field.
+        google.protobuf.Timestamp modified_at = 7;
+
+        // User id in form of a valid UUID.
+        string created_by = 8;
+
+        // User id in form of a valid UUID.
+        string modified_by = 9;
     }
 
     repeated EntitySearchResult entity_results = 3;
@@ -1507,6 +1559,18 @@ message FullTextSearchResponseEntitySynonym {
         string entity_display_name = 6;
 
         string language = 7;
+
+        // Creation date and time. Read-only field.
+        google.protobuf.Timestamp created_at = 8;
+
+        // Modification date and time. Read-only field.
+        google.protobuf.Timestamp modified_at = 9;
+
+        // User id in form of a valid UUID.
+        string created_by = 10;
+
+        // User id in form of a valid UUID.
+        string modified_by = 11;
     }
 
     repeated EntitySynonymSearchResult entity_synonym_results = 3;
@@ -1528,6 +1592,7 @@ message FullTextSearchResponseIntent {
     string parent = 1;
     // Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
     string language_code = 2;
+
     message IntentSearchResult {
 
         string name = 1;
@@ -1539,6 +1604,19 @@ message FullTextSearchResponseIntent {
         repeated string tags = 4;
 
         string language = 5;
+
+        // Creation date and time. Read-only field.
+        google.protobuf.Timestamp created_at = 6;
+
+        // Modification date and time. Read-only field.
+        google.protobuf.Timestamp modified_at = 7;
+
+        // User id in form of a valid UUID.
+        string created_by = 8;
+
+        // User id in form of a valid UUID.
+        string modified_by = 9;
+
     }
 
     repeated IntentSearchResult intent_results = 3;
@@ -1569,6 +1647,19 @@ message FullTextSearchResponseIntentContextIn {
         repeated string tags = 4;
 
         string language = 5;
+
+        // Creation date and time. Read-only field.
+        google.protobuf.Timestamp created_at = 6;
+
+        // Modification date and time. Read-only field.
+        google.protobuf.Timestamp modified_at = 7;
+
+        // User id in form of a valid UUID.
+        string created_by = 8;
+
+        // User id in form of a valid UUID.
+        string modified_by = 9;
+
     }
 
     repeated IntentContextInSearchResult intent_context_in_results = 3;
@@ -1604,6 +1695,19 @@ message FullTextSearchResponseIntentContextOut {
         repeated string tags = 4;
 
         string language = 5;
+
+        // Creation date and time. Read-only field.
+        google.protobuf.Timestamp created_at = 6;
+
+        // Modification date and time. Read-only field.
+        google.protobuf.Timestamp modified_at = 7;
+
+        // User id in form of a valid UUID.
+        string created_by = 8;
+
+        // User id in form of a valid UUID.
+        string modified_by = 9;
+
     }
 
     repeated IntentContextOutSearchResult intent_context_out_results = 3;
@@ -1647,6 +1751,19 @@ message FullTextSearchResponseIntentUsersays {
         repeated string tags = 8;
 
         string language = 9;
+
+        // Creation date and time. Read-only field.
+        google.protobuf.Timestamp created_at = 10;
+
+        // Modification date and time. Read-only field.
+        google.protobuf.Timestamp modified_at = 11;
+
+        // User id in form of a valid UUID.
+        string created_by = 12;
+
+        // User id in form of a valid UUID.
+        string modified_by = 13;
+
     }
 
     repeated IntentUsersaysSearchResult intent_usersays_results = 3;
@@ -1684,6 +1801,19 @@ message FullTextSearchResponseIntentTags {
         repeated string tags = 5;
 
         string language = 6;
+
+        // Creation date and time. Read-only field.
+        google.protobuf.Timestamp created_at = 7;
+
+        // Modification date and time. Read-only field.
+        google.protobuf.Timestamp modified_at = 8;
+
+        // User id in form of a valid UUID.
+        string created_by = 9;
+
+        // User id in form of a valid UUID.
+        string modified_by = 10;
+
     }
 
     repeated IntentTagsSearchResult intent_tags_results = 3;
@@ -1723,6 +1853,19 @@ message FullTextSearchResponseIntentResponse {
         repeated string tags = 6;
 
         string language = 7;
+
+        // Creation date and time. Read-only field.
+        google.protobuf.Timestamp created_at = 8;
+
+        // Modification date and time. Read-only field.
+        google.protobuf.Timestamp modified_at = 9;
+
+        // User id in form of a valid UUID.
+        string created_by = 10;
+
+        // User id in form of a valid UUID.
+        string modified_by = 11;
+
     }
     repeated IntentResponseSearchResult intent_response_results = 3;
 
@@ -1759,6 +1902,19 @@ message FullTextSearchResponseIntentParameters {
         repeated string tags = 5;
 
         string language = 6;
+
+        // Creation date and time. Read-only field.
+        google.protobuf.Timestamp created_at = 7;
+
+        // Modification date and time. Read-only field.
+        google.protobuf.Timestamp modified_at = 8;
+
+        // User id in form of a valid UUID.
+        string created_by = 9;
+
+        // User id in form of a valid UUID.
+        string modified_by = 10;
+
     }
 
     repeated IntentParametersSearchResult intent_parameters_results = 3;

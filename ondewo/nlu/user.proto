@@ -1,4 +1,4 @@
-// Copyright 2021 ONDEWO GmbH
+// Copyright 2020-2023 ONDEWO GmbH
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -19,119 +19,147 @@ package ondewo.nlu;
 import "google/api/annotations.proto";
 import "google/protobuf/empty.proto";
 import "google/protobuf/field_mask.proto";
+import "google/protobuf/timestamp.proto";
 import "ondewo/nlu/project_role.proto";
+import "ondewo/nlu/common.proto";
 
+// gRPC service for managing users and server roles.
 service Users {
 
-    // Creates user
+    // Creates a user.
     rpc CreateUser (CreateUserRequest) returns (User) {
+        // HTTP configuration for the CreateUser RPC.
         option (google.api.http) = {
             post: "/v2/users"
             body: "*"
         };
     }
 
-    // Gets user
+    // Retrieves a user by identifier.
     rpc GetUser (GetUserRequest) returns (User) {
+        // HTTP configuration for the GetUser RPC.
         option (google.api.http) = {
             get: "/v2/users/{user_identifier=*}"
         };
     }
 
-    // Gets user information
+    // Retrieves user information by identifier.
     rpc GetUserInfo (GetUserRequest) returns (UserInfo) {
+        // HTTP configuration for the GetUserInfo RPC.
         option (google.api.http) = {
             get: "/v2/user_infos/{user_identifier=*}"
         };
     }
 
-    // Deletes user
+    // Deletes a user by identifier.
     rpc DeleteUser (GetUserRequest) returns (google.protobuf.Empty) {
+        // HTTP configuration for the DeleteUser RPC.
         option (google.api.http) = {
             delete: "/v2/users/{user_identifier=*}"
         };
     }
 
-    // Updates user
+    // Updates a user.
     rpc UpdateUser (UpdateUserRequest) returns (User) {
+        // HTTP configuration for the UpdateUser RPC.
         option (google.api.http) = {
             patch: "/v2/users"
             body: "*"
         };
     }
 
-    // Lists users
+    // Lists users.
     rpc ListUsers (ListUsersRequest) returns (ListUsersResponse) {
+        // HTTP configuration for the ListUsers RPC.
         option (google.api.http) = {
             get: "/v2/users"
         };
     }
 
-    // Lists users information
+    // Lists user information.
     rpc ListUserInfos (ListUsersRequest) returns (ListUserInfosResponse) {
+        // HTTP configuration for the ListUserInfos RPC.
         option (google.api.http) = {
             get: "/v2/users_infos"
         };
     }
 
-    // Creates server role
+    // Creates a server role.
     rpc CreateServerRole (CreateServerRoleRequest) returns (ServerRole) {
+        // HTTP configuration for the CreateServerRole RPC.
         option (google.api.http) = {
             post: "/v2/server_roles"
             body: "*"
         };
     }
 
-    // Get server role
+    // Retrieves a server role by ID.
     rpc GetServerRole (GetServerRoleRequest) returns (ServerRole) {
+        // HTTP configuration for the GetServerRole RPC.
         option (google.api.http) = {
             get: "/v2/server_roles/{role_id=*}"
         };
     }
 
-    // Deletes server role
+    // Deletes a server role by ID.
     rpc DeleteServerRole (DeleteServerRoleRequest) returns (google.protobuf.Empty) {
+        // HTTP configuration for the DeleteServerRole RPC.
         option (google.api.http) = {
             delete: "/v2/server_roles/{role_id=*}"
         };
     }
 
-    // Updates server role
+    // Updates a server role.
     rpc UpdateServerRole (UpdateServerRoleRequest) returns (ServerRole) {
+        // HTTP configuration for the UpdateServerRole RPC.
         option (google.api.http) = {
             patch: "/v2/server_roles"
             body: "*"
         };
     }
 
-    // Lists server roles
+    // Lists server roles.
     rpc ListServerRoles (ListServerRolesRequest) returns (ListServerRolesResponse) {
+        // HTTP configuration for the ListServerRoles RPC.
         option (google.api.http) = {
             get: "/v2/server_roles"
         };
     }
 
-    // Lists server permissions
+    // Lists server permissions.
     rpc ListServerPermissions (ListServerPermissionsRequest) returns (ListServerPermissionsResponse) {
+        // HTTP configuration for the ListServerPermissions RPC.
         option (google.api.http) = {
             get: "/v2/server_permissions"
         };
     }
 
-    // Request to login
+    // Requests login.
     rpc Login (LoginRequest) returns (LoginResponse) {
+        // HTTP configuration for the Login RPC.
         option (google.api.http) = {
             post: "/v2/login"
             body: "*"
         };
     }
 
-    // Checks login
+    // Checks login.
     rpc CheckLogin (google.protobuf.Empty) returns (google.protobuf.Empty) {
+        // HTTP configuration for the CheckLogin RPC.
         option (google.api.http) = {
             delete: "/v2/check_login"
         };
     }
+
+    // Lists notifications based on specified filters.
+    rpc ListNotifications (ListNotificationsRequest) returns (ListNotificationsResponse);
+
+    // Sets the flagged status for multiple notifications.
+    rpc SetNotificationsFlaggedStatus (SetNotificationsFlaggedStatusRequest) returns (ListNotificationsResponse);
+
+    // Sets the read status for multiple notifications.
+    rpc SetNotificationsReadStatus (SetNotificationsReadStatusRequest) returns (ListNotificationsResponse);
+
 }
 
 // User messages
@@ -151,6 +179,19 @@ message User {
 
     // user e-mail should be a valid e-mail and unique
     string user_email = 7;
+
+    // Creation date and time. Read-only field.
+    google.protobuf.Timestamp created_at = 8;
+
+    // Modification date and time. Read-only field.
+    google.protobuf.Timestamp modified_at = 9;
+
+    // User id in form of a valid UUID.
+    string created_by = 10;
+
+    // User id in form of a valid UUID.
+    string modified_by = 11;
+
 }
 
 // This message contains information about user
@@ -250,6 +291,19 @@ message ServerRole {
 
     // defines the permissions for the given role (the strings can be gotten from the ListServerPermissions)
     repeated string permissions = 3;
+
+    // Creation date and time. Read-only field.
+    google.protobuf.Timestamp created_at = 4;
+
+    // Modification date and time. Read-only field.
+    google.protobuf.Timestamp modified_at = 5;
+
+    // User id in form of a valid UUID.
+    string created_by = 6;
+
+    // User id in form of a valid UUID.
+    string modified_by = 7;
+
 }
 // Structure of server role
 enum DefaultServerRole {

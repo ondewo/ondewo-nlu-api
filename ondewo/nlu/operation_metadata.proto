@@ -1,4 +1,4 @@
-// Copyright 2021 ONDEWO GmbH
+// Copyright 2020-2023 ONDEWO GmbH
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -105,6 +105,8 @@ message OperationMetadata {
 
         // export benchmark agent to a zip file
         EXPORT_BENCHMARK_AGENT = 8;
+        // force loading agent data for full text search
+        INDEX_AGENT = 9;
     }
 
     // name of the host where the operation was executed
@@ -124,4 +126,17 @@ message OperationMetadata {
 
     // The log output of an operation limited to the last x log entries
     int32 log_limit = 18;
+
+    // Creation date and time. Read-only field.
+    google.protobuf.Timestamp created_at = 19;
+
+    // Modification date and time. Read-only field.
+    google.protobuf.Timestamp modified_at = 20;
+
+    // User id in form of a valid UUID.
+    string created_by = 21;
+
+    // User id in form of a valid UUID.
+    string modified_by = 22;
+
 }

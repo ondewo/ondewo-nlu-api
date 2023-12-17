@@ -1,4 +1,4 @@
-// Copyright 2021 ONDEWO GmbH
+// Copyright 2020-2023 ONDEWO GmbH
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -523,7 +523,7 @@ enum IntentAlgorithms {
     OndewoIntentExactMatch = 1;
 
     // the entity synonym in the user says text is replaced by the entity and 'exact matching' of user says text
-    // is performed. Confidence is alway '1.0'.
+    // is performed. Confidence is always '1.0'.
     OndewoIntentNamedExactMatch = 2;
 
     // the algorithm computes the similarity of the user input to all user says of all intents.
@@ -536,7 +536,7 @@ enum IntentAlgorithms {
     // new language representation model called BERT, which stands for Bidirectional Encoder Representations
     // from Transformers.BERT is designed to pre-train deep bidirectional representations by jointly conditioning
     // on both left and right context in all layers. As a result, the pre-trained BERT representations can be
-    // fine-tuned for multi-class intent detection. For details seehttps://arxiv.org/abs/1810.04805
+    // fine-tuned for multi-class intent detection. For details see https://arxiv.org/abs/1810.04805
     OndewoIntentBertClassifier = 7;
 
     OndewoIntentMetaClassifier = 8;
