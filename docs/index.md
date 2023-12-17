@@ -123,10 +123,43 @@
   
     - [AiServices](#ondewo.nlu.AiServices)
   
+- [ondewo/nlu/ccai_project.proto](#ondewo/nlu/ccai_project.proto)
+    - [CcaiProject](#ondewo.nlu.CcaiProject)
+    - [CcaiProject.CcaiServiceListsEntry](#ondewo.nlu.CcaiProject.CcaiServiceListsEntry)
+    - [CcaiProjectSorting](#ondewo.nlu.CcaiProjectSorting)
+    - [CcaiService](#ondewo.nlu.CcaiService)
+    - [CcaiServiceList](#ondewo.nlu.CcaiServiceList)
+    - [CreateCcaiProjectRequest](#ondewo.nlu.CreateCcaiProjectRequest)
+    - [CreateCcaiProjectResponse](#ondewo.nlu.CreateCcaiProjectResponse)
+    - [DeleteCcaiProjectRequest](#ondewo.nlu.DeleteCcaiProjectRequest)
+    - [DeleteCcaiProjectResponse](#ondewo.nlu.DeleteCcaiProjectResponse)
+    - [GetCcaiProjectRequest](#ondewo.nlu.GetCcaiProjectRequest)
+    - [ListCcaiProjectsRequest](#ondewo.nlu.ListCcaiProjectsRequest)
+    - [ListCcaiProjectsResponse](#ondewo.nlu.ListCcaiProjectsResponse)
+    - [UpdateCcaiProjectRequest](#ondewo.nlu.UpdateCcaiProjectRequest)
+    - [UpdateCcaiProjectResponse](#ondewo.nlu.UpdateCcaiProjectResponse)
+  
+    - [CcaiProjectSorting.CcaiProjectSortingField](#ondewo.nlu.CcaiProjectSorting.CcaiProjectSortingField)
+    - [CcaiProjectView](#ondewo.nlu.CcaiProjectView)
+    - [CcaiServiceType](#ondewo.nlu.CcaiServiceType)
+  
 - [ondewo/nlu/common.proto](#ondewo/nlu/common.proto)
-    - [CreatedModified](#ondewo.nlu.CreatedModified)
+    - [AddNotificationsRequest](#ondewo.nlu.AddNotificationsRequest)
+    - [AddNotificationsResponse](#ondewo.nlu.AddNotificationsResponse)
+    - [Comment](#ondewo.nlu.Comment)
+    - [ListNotificationsRequest](#ondewo.nlu.ListNotificationsRequest)
+    - [ListNotificationsResponse](#ondewo.nlu.ListNotificationsResponse)
+    - [Notification](#ondewo.nlu.Notification)
+    - [NotificationFilter](#ondewo.nlu.NotificationFilter)
+    - [SetNotificationsFlaggedStatusRequest](#ondewo.nlu.SetNotificationsFlaggedStatusRequest)
+    - [SetNotificationsReadStatusRequest](#ondewo.nlu.SetNotificationsReadStatusRequest)
     - [StatResponse](#ondewo.nlu.StatResponse)
   
+    - [NotificationFlaggedStatus](#ondewo.nlu.NotificationFlaggedStatus)
+    - [NotificationOrigin](#ondewo.nlu.NotificationOrigin)
+    - [NotificationReadStatus](#ondewo.nlu.NotificationReadStatus)
+    - [NotificationType](#ondewo.nlu.NotificationType)
+    - [NotificationVisibility](#ondewo.nlu.NotificationVisibility)
     - [SortingMode](#ondewo.nlu.SortingMode)
   
 - [ondewo/nlu/context.proto](#ondewo/nlu/context.proto)
@@ -318,22 +351,32 @@
     - [ServerStatistics](#ondewo.nlu.ServerStatistics)
   
 - [ondewo/nlu/session.proto](#ondewo/nlu/session.proto)
+    - [AddAudioFilesRequest](#ondewo.nlu.AddAudioFilesRequest)
+    - [AddAudioFilesResponse](#ondewo.nlu.AddAudioFilesResponse)
+    - [AddSessionCommentRequest](#ondewo.nlu.AddSessionCommentRequest)
     - [AddSessionLabelsRequest](#ondewo.nlu.AddSessionLabelsRequest)
+    - [AudioFileResource](#ondewo.nlu.AudioFileResource)
     - [ContextFilter](#ondewo.nlu.ContextFilter)
     - [CreateSessionRequest](#ondewo.nlu.CreateSessionRequest)
     - [CreateSessionReviewRequest](#ondewo.nlu.CreateSessionReviewRequest)
+    - [DeleteAudioFilesRequest](#ondewo.nlu.DeleteAudioFilesRequest)
+    - [DeleteSessionCommentsRequest](#ondewo.nlu.DeleteSessionCommentsRequest)
     - [DeleteSessionLabelsRequest](#ondewo.nlu.DeleteSessionLabelsRequest)
     - [DeleteSessionRequest](#ondewo.nlu.DeleteSessionRequest)
     - [DetectIntentRequest](#ondewo.nlu.DetectIntentRequest)
     - [DetectIntentResponse](#ondewo.nlu.DetectIntentResponse)
     - [DetectedIntent](#ondewo.nlu.DetectedIntent)
     - [EventInput](#ondewo.nlu.EventInput)
+    - [GetAudioFileOfSessionRequest](#ondewo.nlu.GetAudioFileOfSessionRequest)
+    - [GetAudioFilesRequest](#ondewo.nlu.GetAudioFilesRequest)
+    - [GetAudioFilesResponse](#ondewo.nlu.GetAudioFilesResponse)
     - [GetLatestSessionReviewRequest](#ondewo.nlu.GetLatestSessionReviewRequest)
     - [GetSessionRequest](#ondewo.nlu.GetSessionRequest)
     - [GetSessionReviewRequest](#ondewo.nlu.GetSessionReviewRequest)
     - [InputAudioConfig](#ondewo.nlu.InputAudioConfig)
     - [ListAccountIdsOfAllSessionsRequest](#ondewo.nlu.ListAccountIdsOfAllSessionsRequest)
     - [ListAccountIdsResponse](#ondewo.nlu.ListAccountIdsResponse)
+    - [ListAudioFilesRequest](#ondewo.nlu.ListAudioFilesRequest)
     - [ListDatastreamIdsOfAllSessionsRequest](#ondewo.nlu.ListDatastreamIdsOfAllSessionsRequest)
     - [ListDatastreamIdsResponse](#ondewo.nlu.ListDatastreamIdsResponse)
     - [ListIdentifiedUserIdsOfAllSessionsRequest](#ondewo.nlu.ListIdentifiedUserIdsOfAllSessionsRequest)
@@ -354,6 +397,8 @@
     - [ListPlatformsResponse](#ondewo.nlu.ListPlatformsResponse)
     - [ListPropertyIdsOfAllSessionsRequest](#ondewo.nlu.ListPropertyIdsOfAllSessionsRequest)
     - [ListPropertyIdsResponse](#ondewo.nlu.ListPropertyIdsResponse)
+    - [ListSessionCommentsRequest](#ondewo.nlu.ListSessionCommentsRequest)
+    - [ListSessionCommentsResponse](#ondewo.nlu.ListSessionCommentsResponse)
     - [ListSessionLabelsOfAllSessionsRequest](#ondewo.nlu.ListSessionLabelsOfAllSessionsRequest)
     - [ListSessionLabelsRequest](#ondewo.nlu.ListSessionLabelsRequest)
     - [ListSessionLabelsResponse](#ondewo.nlu.ListSessionLabelsResponse)
@@ -380,9 +425,12 @@
     - [StreamingRecognitionResult](#ondewo.nlu.StreamingRecognitionResult)
     - [TextInput](#ondewo.nlu.TextInput)
     - [TrackSessionStepRequest](#ondewo.nlu.TrackSessionStepRequest)
+    - [UpdateSessionCommentsRequest](#ondewo.nlu.UpdateSessionCommentsRequest)
   
     - [AudioEncoding](#ondewo.nlu.AudioEncoding)
+    - [AudioFileResourceType](#ondewo.nlu.AudioFileResourceType)
     - [ComparisonOperator](#ondewo.nlu.ComparisonOperator)
+    - [ResourceView](#ondewo.nlu.ResourceView)
     - [Session.View](#ondewo.nlu.Session.View)
     - [SessionReview.View](#ondewo.nlu.SessionReview.View)
     - [StreamingRecognitionResult.MessageType](#ondewo.nlu.StreamingRecognitionResult.MessageType)
@@ -445,11 +493,20 @@
     - [Utilities](#ondewo.nlu.Utilities)
   
 - [ondewo/nlu/webhook.proto](#ondewo/nlu/webhook.proto)
+    - [CreateSessionEntityTypeRequest](#ondewo.nlu.CreateSessionEntityTypeRequest)
+    - [DeleteSessionEntityTypeRequest](#ondewo.nlu.DeleteSessionEntityTypeRequest)
+    - [GetSessionEntityTypeRequest](#ondewo.nlu.GetSessionEntityTypeRequest)
+    - [ListSessionEntityTypesRequest](#ondewo.nlu.ListSessionEntityTypesRequest)
+    - [ListSessionEntityTypesResponse](#ondewo.nlu.ListSessionEntityTypesResponse)
     - [OriginalDetectIntentRequest](#ondewo.nlu.OriginalDetectIntentRequest)
     - [PingRequest](#ondewo.nlu.PingRequest)
     - [PingResponse](#ondewo.nlu.PingResponse)
+    - [SessionEntityType](#ondewo.nlu.SessionEntityType)
+    - [UpdateSessionEntityTypeRequest](#ondewo.nlu.UpdateSessionEntityTypeRequest)
     - [WebhookRequest](#ondewo.nlu.WebhookRequest)
     - [WebhookResponse](#ondewo.nlu.WebhookResponse)
+  
+    - [SessionEntityType.EntityOverrideMode](#ondewo.nlu.SessionEntityType.EntityOverrideMode)
   
     - [Webhook](#ondewo.nlu.Webhook)
   
@@ -520,6 +577,10 @@ Project/Agent messages
 | owner_id | [string](#string) |  | Optional. User id of the project owner. If empty, in CreateAgent call it is set to user id in the call metadata. Read-only in the Agent message |
 | status | [AgentStatus](#ondewo.nlu.AgentStatus) |  | Optional. Status of the agent Read-only in the Agent message |
 | description | [string](#string) |  |  |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
+| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
+| created_by | [string](#string) |  | User id in form of a valid UUID. |
+| modified_by | [string](#string) |  | User id in form of a valid UUID. |
 
 
 
@@ -833,10 +894,10 @@ This message is a response of full text search of entity
 | entity_type_name | [string](#string) |  |  |
 | entity_type_display_name | [string](#string) |  |  |
 | language | [string](#string) |  |  |
-| created_at | [string](#string) |  |  |
-| modified_at | [string](#string) |  |  |
-| created_by | [string](#string) |  |  |
-| modified_by | [string](#string) |  |  |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
+| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
+| created_by | [string](#string) |  | User id in form of a valid UUID. |
+| modified_by | [string](#string) |  | User id in form of a valid UUID. |
 
 
 
@@ -879,10 +940,10 @@ This message is a response of full text search of synonym entity
 | entity_name | [string](#string) |  |  |
 | entity_display_name | [string](#string) |  |  |
 | language | [string](#string) |  |  |
-| created_at | [string](#string) |  |  |
-| modified_at | [string](#string) |  |  |
-| created_by | [string](#string) |  |  |
-| modified_by | [string](#string) |  |  |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
+| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
+| created_by | [string](#string) |  | User id in form of a valid UUID. |
+| modified_by | [string](#string) |  | User id in form of a valid UUID. |
 
 
 
@@ -921,10 +982,10 @@ This message is a response of full text search of entity type
 | name | [string](#string) |  |  |
 | display_name | [string](#string) |  |  |
 | language | [string](#string) |  |  |
-| created_at | [string](#string) |  |  |
-| modified_at | [string](#string) |  |  |
-| created_by | [string](#string) |  |  |
-| modified_by | [string](#string) |  |  |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
+| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
+| created_by | [string](#string) |  | User id in form of a valid UUID. |
+| modified_by | [string](#string) |  | User id in form of a valid UUID. |
 
 
 
@@ -965,10 +1026,10 @@ This message is a response of full text search of intent
 | domain_name | [string](#string) |  |  |
 | tags | [string](#string) | repeated |  |
 | language | [string](#string) |  |  |
-| created_at | [string](#string) |  |  |
-| modified_at | [string](#string) |  |  |
-| created_by | [string](#string) |  |  |
-| modified_by | [string](#string) |  |  |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
+| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
+| created_by | [string](#string) |  | User id in form of a valid UUID. |
+| modified_by | [string](#string) |  | User id in form of a valid UUID. |
 
 
 
@@ -1009,10 +1070,10 @@ This message is a response of full text search of intent with context in
 | intent_display_name | [string](#string) |  |  |
 | tags | [string](#string) | repeated |  |
 | language | [string](#string) |  |  |
-| created_at | [string](#string) |  |  |
-| modified_at | [string](#string) |  |  |
-| created_by | [string](#string) |  |  |
-| modified_by | [string](#string) |  |  |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
+| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
+| created_by | [string](#string) |  | User id in form of a valid UUID. |
+| modified_by | [string](#string) |  | User id in form of a valid UUID. |
 
 
 
@@ -1053,10 +1114,10 @@ This message is a response of full text search of intent with context out
 | intent_display_name | [string](#string) |  |  |
 | tags | [string](#string) | repeated |  |
 | language | [string](#string) |  |  |
-| created_at | [string](#string) |  |  |
-| modified_at | [string](#string) |  |  |
-| created_by | [string](#string) |  |  |
-| modified_by | [string](#string) |  |  |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
+| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
+| created_by | [string](#string) |  | User id in form of a valid UUID. |
+| modified_by | [string](#string) |  | User id in form of a valid UUID. |
 
 
 
@@ -1098,10 +1159,10 @@ This message is a response of full text search of intent with parameters
 | intent_display_name | [string](#string) |  |  |
 | tags | [string](#string) | repeated |  |
 | language | [string](#string) |  |  |
-| created_at | [string](#string) |  |  |
-| modified_at | [string](#string) |  |  |
-| created_by | [string](#string) |  |  |
-| modified_by | [string](#string) |  |  |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
+| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
+| created_by | [string](#string) |  | User id in form of a valid UUID. |
+| modified_by | [string](#string) |  | User id in form of a valid UUID. |
 
 
 
@@ -1144,10 +1205,10 @@ This message is a response of full text search of intent response
 | intent_display_name | [string](#string) |  |  |
 | tags | [string](#string) | repeated |  |
 | language | [string](#string) |  |  |
-| created_at | [string](#string) |  |  |
-| modified_at | [string](#string) |  |  |
-| created_by | [string](#string) |  |  |
-| modified_by | [string](#string) |  |  |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
+| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
+| created_by | [string](#string) |  | User id in form of a valid UUID. |
+| modified_by | [string](#string) |  | User id in form of a valid UUID. |
 
 
 
@@ -1189,10 +1250,10 @@ This message is a response of full text search of intent with tags
 | intent_display_name | [string](#string) |  |  |
 | tags | [string](#string) | repeated |  |
 | language | [string](#string) |  |  |
-| created_at | [string](#string) |  |  |
-| modified_at | [string](#string) |  |  |
-| created_by | [string](#string) |  |  |
-| modified_by | [string](#string) |  |  |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
+| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
+| created_by | [string](#string) |  | User id in form of a valid UUID. |
+| modified_by | [string](#string) |  | User id in form of a valid UUID. |
 
 
 
@@ -1237,10 +1298,10 @@ This message is a response of full text search of intent with sentence
 | intent_display_name | [string](#string) |  |  |
 | tags | [string](#string) | repeated |  |
 | language | [string](#string) |  |  |
-| created_at | [string](#string) |  |  |
-| modified_at | [string](#string) |  |  |
-| created_by | [string](#string) |  |  |
-| modified_by | [string](#string) |  |  |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
+| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
+| created_by | [string](#string) |  | User id in form of a valid UUID. |
+| modified_by | [string](#string) |  | User id in form of a valid UUID. |
 
 
 
@@ -2030,6 +2091,11 @@ Operation <response: [google.protobuf.Empty][google.protobuf.Empty], metadata: [
 | GetFullTextSearchIntentResponse | [FullTextSearchRequest](#ondewo.nlu.FullTextSearchRequest) | [FullTextSearchResponseIntentResponse](#ondewo.nlu.FullTextSearchResponseIntentResponse) | Full text search endpoint in responses of intents |
 | GetFullTextSearchIntentParameters | [FullTextSearchRequest](#ondewo.nlu.FullTextSearchRequest) | [FullTextSearchResponseIntentParameters](#ondewo.nlu.FullTextSearchResponseIntentParameters) | Full text search endpoint in parameters of intents |
 | ReindexAgent | [ReindexAgentRequest](#ondewo.nlu.ReindexAgentRequest) | [Operation](#ondewo.nlu.Operation) | Force reindexing Intent and Entity data of Agent |
+| CreateCcaiProject | [CreateCcaiProjectRequest](#ondewo.nlu.CreateCcaiProjectRequest) | [CreateCcaiProjectResponse](#ondewo.nlu.CreateCcaiProjectResponse) | RPC to create a new CCAI project |
+| DeleteCcaiProject | [DeleteCcaiProjectRequest](#ondewo.nlu.DeleteCcaiProjectRequest) | [DeleteCcaiProjectResponse](#ondewo.nlu.DeleteCcaiProjectResponse) | RPC to delete an existing CCAI project |
+| GetCcaiProject | [GetCcaiProjectRequest](#ondewo.nlu.GetCcaiProjectRequest) | [CcaiProject](#ondewo.nlu.CcaiProject) | RPC to get details of an existing CCAI project |
+| ListCcaiProjects | [ListCcaiProjectsRequest](#ondewo.nlu.ListCcaiProjectsRequest) | [ListCcaiProjectsResponse](#ondewo.nlu.ListCcaiProjectsResponse) | RPC to list all available CCAI projects |
+| UpdateCcaiProject | [UpdateCcaiProjectRequest](#ondewo.nlu.UpdateCcaiProjectRequest) | [UpdateCcaiProjectResponse](#ondewo.nlu.UpdateCcaiProjectResponse) | RPC to update an existing CCAI project |
 
  <!-- end services -->
 
@@ -2591,10 +2657,10 @@ Type of Intent algorithm.
 | ---- | ------ | ----------- |
 | OndewoIntentExactContextDetector | 0 | By enabling this, a specific intent is triggered if the context and the intent name in the user says is matched. This can be used for directly triggering 'quick reply' button clicks confidence is always '1.0'. |
 | OndewoIntentExactMatch | 1 | exact matching' of user input to user says is used to detect the intent. Confidence is always '1.0' if an 'exact match' is found. |
-| OndewoIntentNamedExactMatch | 2 | the entity synonym in the user says text is replaced by the entity and 'exact matching' of user says text is performed. Confidence is alway '1.0'. |
+| OndewoIntentNamedExactMatch | 2 | the entity synonym in the user says text is replaced by the entity and 'exact matching' of user says text is performed. Confidence is always '1.0'. |
 | OndewoIntentSimilarityMatch | 3 | the algorithm computes the similarity of the user input to all user says of all intents. |
 | OndewoIntentNamedSimilarityMatch | 4 | the entity synonyms in the user says are replaced by their Entity. Text similarity algorithms are then used to detect the intent. |
-| OndewoIntentBertClassifier | 7 | new language representation model called BERT, which stands for Bidirectional Encoder Representations from Transformers.BERT is designed to pre-train deep bidirectional representations by jointly conditioning on both left and right context in all layers. As a result, the pre-trained BERT representations can be fine-tuned for multi-class intent detection. For details seehttps://arxiv.org/abs/1810.04805 |
+| OndewoIntentBertClassifier | 7 | new language representation model called BERT, which stands for Bidirectional Encoder Representations from Transformers.BERT is designed to pre-train deep bidirectional representations by jointly conditioning on both left and right context in all layers. As a result, the pre-trained BERT representations can be fine-tuned for multi-class intent detection. For details see https://arxiv.org/abs/1810.04805 |
 | OndewoIntentMetaClassifier | 8 |  |
 | IntentExitDetector | 10 | Maximum number of repeated fallbacks before this algorithm exists the conversation and resets contexts |
 | OndewoIntentRankingMatch | 11 | Algorithm to improve the interplay of the other algorithms |
@@ -2641,6 +2707,318 @@ The Central class defining the ondewo ai services
 
 
 
+<a name="ondewo/nlu/ccai_project.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## ondewo/nlu/ccai_project.proto
+
+
+
+<a name="ondewo.nlu.CcaiProject"></a>
+
+### CcaiProject
+Message representing a CCAI project
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | Resource name of the CCAI project |
+| ccai_service_lists | [CcaiProject.CcaiServiceListsEntry](#ondewo.nlu.CcaiProject.CcaiServiceListsEntry) | repeated | Map of two letter language codes to lists of CcaiServiceList Two-letter language codes following ISO 639-1 (see https://en.wikipedia.org/wiki/ISO_639-1) |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
+| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
+| created_by | [string](#string) |  | User id in the form of a valid UUID. |
+| modified_by | [string](#string) |  | User id in the form of a valid UUID. |
+
+
+
+
+
+
+<a name="ondewo.nlu.CcaiProject.CcaiServiceListsEntry"></a>
+
+### CcaiProject.CcaiServiceListsEntry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
+| value | [CcaiServiceList](#ondewo.nlu.CcaiServiceList) |  |  |
+
+
+
+
+
+
+<a name="ondewo.nlu.CcaiProjectSorting"></a>
+
+### CcaiProjectSorting
+This protobuf message defines the sorting order for CCAI (Virtual Test System Infrastructure) projects.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| sorting_field | [CcaiProjectSorting.CcaiProjectSortingField](#ondewo.nlu.CcaiProjectSorting.CcaiProjectSortingField) | optional | sorting field for ccai projects sorting |
+| sorting_mode | [SortingMode](#ondewo.nlu.SortingMode) | optional | Sorting mode |
+
+
+
+
+
+
+<a name="ondewo.nlu.CcaiService"></a>
+
+### CcaiService
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | Resource name of the service |
+| grpc_host | [string](#string) |  | gRPC host and port |
+| grpc_port | [int32](#int32) |  |  |
+| webgrpc_host | [string](#string) |  | Web gRPC host and port |
+| webgrpc_port | [int32](#int32) |  |  |
+| grpc_cert | [string](#string) |  | Path to the gRPC certificate |
+| host | [string](#string) |  | Additional host and ports |
+| port | [int32](#int32) |  |  |
+| port2 | [int32](#int32) |  |  |
+| account_name | [string](#string) |  | Account information |
+| password | [string](#string) |  |  |
+| api_key | [string](#string) |  | API key for the service |
+| ccai_service_type | [CcaiServiceType](#ondewo.nlu.CcaiServiceType) |  | Type of CCAI service |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
+| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
+| created_by | [string](#string) |  | User id in the form of a valid UUID. |
+| modified_by | [string](#string) |  | User id in the form of a valid UUID. |
+
+
+
+
+
+
+<a name="ondewo.nlu.CcaiServiceList"></a>
+
+### CcaiServiceList
+Message representing a list of CCAI services
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| ccai_services | [CcaiService](#ondewo.nlu.CcaiService) | repeated | CCAI services |
+
+
+
+
+
+
+<a name="ondewo.nlu.CreateCcaiProjectRequest"></a>
+
+### CreateCcaiProjectRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| ccai_project | [CcaiProject](#ondewo.nlu.CcaiProject) |  |  |
+
+
+
+
+
+
+<a name="ondewo.nlu.CreateCcaiProjectResponse"></a>
+
+### CreateCcaiProjectResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| ccai_project | [CcaiProject](#ondewo.nlu.CcaiProject) |  |  |
+| error_message | [string](#string) |  | error message if there are any. |
+
+
+
+
+
+
+<a name="ondewo.nlu.DeleteCcaiProjectRequest"></a>
+
+### DeleteCcaiProjectRequest
+Request to delete a CCAI project
+If a deployed CCAI project was deleted then it was undeployed beforehand automatically
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | CCAI project name with which to perform the call of the form <pre><code>projects/&lt;project_uuid&gt;/project</code></pre> |
+
+
+
+
+
+
+<a name="ondewo.nlu.DeleteCcaiProjectResponse"></a>
+
+### DeleteCcaiProjectResponse
+Response to delete a CCAI project
+If a deployed CCAI project was deleted then it was undeployed beforehand automatically
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | CCAI project name with which to perform the call of the form <pre><code>projects/&lt;project_uuid&gt;/project</code></pre> |
+| error_message | [string](#string) |  | error message if there are any. |
+
+
+
+
+
+
+<a name="ondewo.nlu.GetCcaiProjectRequest"></a>
+
+### GetCcaiProjectRequest
+Request to retrieve a CCAI project
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | CCAI project name with which to perform the call of the form <pre><code>projects/&lt;project_uuid&gt;/project</code></pre> |
+| ccai_project_view | [CcaiProjectView](#ondewo.nlu.CcaiProjectView) |  | Optional. Specify the view of the returned CcaiProject (full view by default) |
+
+
+
+
+
+
+<a name="ondewo.nlu.ListCcaiProjectsRequest"></a>
+
+### ListCcaiProjectsRequest
+Request to get the list of agents
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| ccai_project_view | [CcaiProjectView](#ondewo.nlu.CcaiProjectView) |  | Optional. Specify the view of the returned CcaiProject (full view by default) |
+| page_token | [string](#string) | optional | Optional. The next_page_token value returned from a previous list request. Example: "current_index-1--page_size-20" |
+| ccai_project_sorting | [CcaiProjectSorting](#ondewo.nlu.CcaiProjectSorting) | optional | Optional. Field to define the sorting of the list of CCAI projects in the response. If not specified, the default behavior is to have no sorting. |
+| nlu_agent_names | [string](#string) | repeated | Optional. Filter based on associated NLU agents Format: `projects/<Project ID>/agent`. |
+
+
+
+
+
+
+<a name="ondewo.nlu.ListCcaiProjectsResponse"></a>
+
+### ListCcaiProjectsResponse
+This is a protobuf message definition for the response of getting a list of CCAI projects.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| ccai_projects | [CcaiProject](#ondewo.nlu.CcaiProject) | repeated | The list of CCAI projects returned in the response. Use the 'repeated' keyword to indicate that this field can contain multiple instances of CcaiProject. |
+| next_page_token | [string](#string) |  | Token to retrieve the next page of results. This field is a string that holds a token for fetching the next page of results. If there are no more results in the list, this field will be empty. |
+
+
+
+
+
+
+<a name="ondewo.nlu.UpdateCcaiProjectRequest"></a>
+
+### UpdateCcaiProjectRequest
+Request to updated CCAI project
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| ccai_project | [CcaiProject](#ondewo.nlu.CcaiProject) |  | Project Configs. |
+
+
+
+
+
+
+<a name="ondewo.nlu.UpdateCcaiProjectResponse"></a>
+
+### UpdateCcaiProjectResponse
+Request to updated CCAI project
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | CCAI project name with which to perform the call of the form <pre><code>projects/&lt;project_uuid&gt;/project</code></pre> |
+| error_message | [string](#string) |  | error message if there are any. |
+
+
+
+
+
+ <!-- end messages -->
+
+
+<a name="ondewo.nlu.CcaiProjectSorting.CcaiProjectSortingField"></a>
+
+### CcaiProjectSorting.CcaiProjectSortingField
+Enum to specify the sorting field for CCAI projects.
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| NO_CCAI_PROJECT_SORTING | 0 | No sorting |
+| SORT_CCAI_PROJECT_BY_NAME | 1 | Sort by project name such as <pre><code>projects/&lt;project_uuid&gt;/project</code></pre>. |
+| SORT_CCAI_PROJECT_BY_DISPLAY_NAME | 2 | Sort by display name |
+| SORT_CCAI_PROJECT_BY_CREATION_DATE | 3 | Sort by creation date |
+| SORT_CCAI_PROJECT_BY_LAST_MODIFIED | 4 | Sort by last modified date |
+
+
+
+<a name="ondewo.nlu.CcaiProjectView"></a>
+
+### CcaiProjectView
+Structure of CCAI_PROJECT view
+- CreateCCAI_PROJECT: CCAI_PROJECT_VIEW_SHALLOW
+- UpdateCCAI_PROJECT: CCAI_PROJECT_VIEW_SHALLOW
+- GetCCAI_PROJECT: CCAI_PROJECT_VIEW_FULL
+- ListCCAI_PROJECTs: CCAI_PROJECT_VIEW_SHALLOW
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| CCAI_PROJECT_VIEW_UNSPECIFIED | 0 | Unspecified CCAI_PROJECT view: the view is defined by the call: |
+| CCAI_PROJECT_VIEW_FULL | 1 | Full CCAI_PROJECT view: populate all the fields of the CCAI_PROJECT message including configs. |
+| CCAI_PROJECT_VIEW_SHALLOW | 2 | Shallow CCAI_PROJECT view: populates all the fields except configs. |
+| CCAI_PROJECT_VIEW_MINIMUM | 3 | Minimum view including only CCAI_PROJECT UUID and CCAI_PROJECT display name |
+
+
+
+<a name="ondewo.nlu.CcaiServiceType"></a>
+
+### CcaiServiceType
+
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| CCAI_SERVICE_TYPE_UNSPECIFIED | 0 | unspecified |
+| CCAI_SERVICE_TYPE_ONDEWO_AIM | 1 | ondewo-aim service |
+| CCAI_SERVICE_TYPE_ONDEWO_BPI | 2 | ondewo-bpi service |
+| CCAI_SERVICE_TYPE_ONDEWO_CSI | 3 | ondewo-csi service |
+| CCAI_SERVICE_TYPE_ONDEWO_NLU | 4 | ondewo-nlu service |
+| CCAI_SERVICE_TYPE_ONDEWO_S2T | 5 | ondewo-s2t service |
+| CCAI_SERVICE_TYPE_ONDEWO_SIP | 6 | ondewo-sip service |
+| CCAI_SERVICE_TYPE_ONDEWO_T2S | 7 | ondewo-t2s service |
+| CCAI_SERVICE_TYPE_ONDEWO_VTSI | 8 | ondewo-vtsi service |
+| CCAI_SERVICE_TYPE_VTSI_RABBITMQ | 9 | ondewo-vtsi service |
+
+
+ <!-- end enums -->
+
+ <!-- end HasExtensions -->
+
+ <!-- end services -->
+
+
+
 <a name="ondewo/nlu/common.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
@@ -2648,18 +3026,172 @@ The Central class defining the ondewo ai services
 
 
 
-<a name="ondewo.nlu.CreatedModified"></a>
+<a name="ondewo.nlu.AddNotificationsRequest"></a>
 
-### CreatedModified
-
+### AddNotificationsRequest
+Message for adding notifications in a batch.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| created_at | [string](#string) |  | Read-only |
-| modified_at | [string](#string) |  | Read-only |
-| created_by | [string](#string) |  | Read-only, except import/restore agent, otherwise populated with current user |
-| modified_by | [string](#string) |  | Read-only except import/restore agent, otherwise populated wit current user |
+| notification | [Notification](#ondewo.nlu.Notification) | repeated | List of notifications to be added. |
+
+
+
+
+
+
+<a name="ondewo.nlu.AddNotificationsResponse"></a>
+
+### AddNotificationsResponse
+Message containing the response to adding notifications.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| notification | [Notification](#ondewo.nlu.Notification) | repeated | List of notifications that have been added. |
+
+
+
+
+
+
+<a name="ondewo.nlu.Comment"></a>
+
+### Comment
+Comment message
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | resource name of the comment |
+| text | [string](#string) |  | text of the comment |
+| user_id | [string](#string) |  | User id as resource name Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</code></pre> |
+| comment_about_name | [string](#string) |  | name of the resource for which the comment is about Format: <pre><code>projects/&lt;project_uuid&gt;/agent/&lt;resource_type&gt;/&lt;resource_uuid&gt;/.../</code></pre> |
+| parent_comment_name | [string](#string) |  | The resource name of the parent comment. A parent comment is a reply to a certain comment. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/&lt;resource_type&gt;/&lt;resource_uuid&gt;/.../</code></pre> |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
+| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
+| created_by | [string](#string) |  | User id in form of a valid UUID. |
+| modified_by | [string](#string) |  | User id in form of a valid UUID. |
+
+
+
+
+
+
+<a name="ondewo.nlu.ListNotificationsRequest"></a>
+
+### ListNotificationsRequest
+Message for listing notifications based on certain criteria.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| notification_filter | [NotificationFilter](#ondewo.nlu.NotificationFilter) |  | Optional filter to narrow the response down to specific notifications. |
+| page_token | [string](#string) |  | Optional. Token for pagination, obtained from a previous list request. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. Mask to control which fields will be filled with data. Example: path=["notification.user_names"] |
+
+
+
+
+
+
+<a name="ondewo.nlu.ListNotificationsResponse"></a>
+
+### ListNotificationsResponse
+Message containing the response to a list request for notifications.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| notification | [Notification](#ondewo.nlu.Notification) | repeated | List of notifications that meet the specified criteria. |
+
+
+
+
+
+
+<a name="ondewo.nlu.Notification"></a>
+
+### Notification
+Notification message
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | resource name of the notification |
+| user_name | [string](#string) |  | User id as resource name Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</code></pre> |
+| title | [string](#string) |  | User id as resource name Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</code></pre> |
+| description_short | [string](#string) |  | A short notification text is displayed directly with max. 50 chars which is a truncated version of the long message |
+| description_long | [string](#string) |  | A long notification text |
+| notification_flagged_status | [NotificationFlaggedStatus](#ondewo.nlu.NotificationFlaggedStatus) |  | Has a notification been flagged by a specific user |
+| notification_flagged_timestamp | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | When the user marked the notification as read |
+| notification_read_status | [NotificationReadStatus](#ondewo.nlu.NotificationReadStatus) |  | Has a notification been read by a specific user |
+| notification_read_timestamp | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | When the user marked the notification as read, i.e. read the notification |
+| notification_origin | [NotificationOrigin](#ondewo.nlu.NotificationOrigin) |  | The origin of a notification A Notification origin can be from a product (service), e.g. ondewo-nlu, ondewo-s2t, ondewo-t2s, etc. |
+| origin_name | [string](#string) |  | The name of resource of where the notification originated |
+| origin_language | [string](#string) |  | language of the origin resource e.g. language of the nlu agent or language of the speech-to-text service |
+| notification_type | [NotificationType](#ondewo.nlu.NotificationType) |  | The type of notification |
+| notification_visibility | [NotificationVisibility](#ondewo.nlu.NotificationVisibility) |  | The visibility level of the notification |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
+| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
+| created_by | [string](#string) |  | User id in form of a valid UUID. |
+| modified_by | [string](#string) |  | User id in form of a valid UUID. |
+
+
+
+
+
+
+<a name="ondewo.nlu.NotificationFilter"></a>
+
+### NotificationFilter
+Message for filtering notifications based on various criteria.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| language_codes | [string](#string) | repeated | Language codes of the projects for which notifications are filtered. |
+| notification_origins | [NotificationOrigin](#ondewo.nlu.NotificationOrigin) | repeated | Origins of the notifications to filter. |
+| notification_visibilities | [NotificationVisibility](#ondewo.nlu.NotificationVisibility) | repeated | Visibilities of the notifications to filter. |
+| notification_flagged_status | [NotificationFlaggedStatus](#ondewo.nlu.NotificationFlaggedStatus) | repeated | Flagged status of the notifications to filter. |
+| notification_read_status | [NotificationReadStatus](#ondewo.nlu.NotificationReadStatus) | repeated | Read status of the notifications to filter. |
+| earliest | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Filter notifications with a time range starting from the specified earliest time. |
+| latest | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Filter notifications with a time range ending at the specified latest time. |
+| user_names | [string](#string) | repeated | Resource names of users to filter notifications for. |
+| origin_names | [string](#string) | repeated | Resource names of the origin of the notification to filter notifications. |
+
+
+
+
+
+
+<a name="ondewo.nlu.SetNotificationsFlaggedStatusRequest"></a>
+
+### SetNotificationsFlaggedStatusRequest
+Message for setting the flagged status of notifications.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| notification_name | [string](#string) | repeated | Names of notifications to set the flagged status for. |
+| flagged | [bool](#bool) | repeated | Flagged status to set for the specified notifications. |
+
+
+
+
+
+
+<a name="ondewo.nlu.SetNotificationsReadStatusRequest"></a>
+
+### SetNotificationsReadStatusRequest
+Message for setting the read status of notifications.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| notification_name | [string](#string) | repeated | Names of notifications to set the read status for. |
+| flagged | [bool](#bool) | repeated | Read status to set for the specified notifications. |
 
 
 
@@ -2681,6 +3213,91 @@ statistic response
 
 
  <!-- end messages -->
+
+
+<a name="ondewo.nlu.NotificationFlaggedStatus"></a>
+
+### NotificationFlaggedStatus
+Enumerates the possible flagged statuses for a notification.
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| NOTIFICATION_FLAGGED_STATUS_UNSPECIFIED | 0 | Unspecified flagged status |
+| NOTIFICATION_FLAGGED_STATUS_FLAGGED | 1 | Notification is flagged |
+| NOTIFICATION_FLAGGED_STATUS_UNFLAGGED | 2 | Notification is unflagged |
+
+
+
+<a name="ondewo.nlu.NotificationOrigin"></a>
+
+### NotificationOrigin
+Enumerates the possible origins for a notification.
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| NOTIFICATION_ORIGIN_UNSPECIFIED | 0 | unspecified |
+| NOTIFICATION_ORIGIN_ONDEWO_AIM | 1 | ondewo-aim service |
+| NOTIFICATION_ORIGIN_ONDEWO_BPI | 2 | ondewo-bpi service |
+| NOTIFICATION_ORIGIN_ONDEWO_CSI | 3 | ondewo-csi service |
+| NOTIFICATION_ORIGIN_ONDEWO_NLU | 4 | ondewo-nlu service |
+| NOTIFICATION_ORIGIN_ONDEWO_S2T | 5 | ondewo-s2t service |
+| NOTIFICATION_ORIGIN_ONDEWO_SIP | 6 | ondewo-sip service |
+| NOTIFICATION_ORIGIN_ONDEWO_T2S | 7 | ondewo-t2s service |
+| NOTIFICATION_ORIGIN_ONDEWO_VTSI | 8 | ondewo-vtsi service |
+| NOTIFICATION_ORIGIN_ONDEWO_VTSI_RABBITMQ | 9 | ondewo-vtsi-rabbitmq service |
+
+
+
+<a name="ondewo.nlu.NotificationReadStatus"></a>
+
+### NotificationReadStatus
+Enumerates the possible read statuses for a notification.
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| NOTIFICATION_READ_STATUS_UNSPECIFIED | 0 | Unspecified read status |
+| NOTIFICATION_READ_STATUS_READ | 1 | Notification is marked as read |
+| NOTIFICATION_READ_STATUS_UNREAD | 2 | Notification is marked as unread |
+
+
+
+<a name="ondewo.nlu.NotificationType"></a>
+
+### NotificationType
+Enumerates the possible types for a notification.
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| NOTIFICATION_TYPE_UNSPECIFIED | 0 | Unspecified notification type |
+| NOTIFICATION_TYPE_DEBUG | 1 | Debug notification type |
+| NOTIFICATION_TYPE_WARNING | 2 | Warning notification type |
+| NOTIFICATION_TYPE_INFO | 3 | Informational notification type |
+| NOTIFICATION_TYPE_ERROR | 4 | Error notification type |
+| NOTIFICATION_TYPE_NEWS | 5 | News notification type |
+
+
+
+<a name="ondewo.nlu.NotificationVisibility"></a>
+
+### NotificationVisibility
+Enum for notification type
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| NOTIFICATION_VISIBILITY_UNSPECIFIED | 0 | unspecified |
+| NOTIFICATION_VISIBILITY_USER | 1 | only user sees the notification - usually a notification of the user interface |
+| NOTIFICATION_VISIBILITY_PROJECT | 2 | all members of a project see this notification |
+| NOTIFICATION_VISIBILITY_PROJECT_OWNER | 3 | all admins of a project see this notification |
+| NOTIFICATION_VISIBILITY_PROJECT_ADMIN | 4 | all admins of a project see this notification |
+| NOTIFICATION_VISIBILITY_PROJECT_DEVELOPER | 5 | all admins of a project see this notification |
+| NOTIFICATION_VISIBILITY_PROJECT_USER | 6 | all users of a project see this notification |
+| NOTIFICATION_VISIBILITY_PROJECT_EXECUTOR | 7 | all users of a project see this notification |
+| NOTIFICATION_VISIBILITY_PROJECT_INACTIVE | 8 | all users of a project see this notification |
+| NOTIFICATION_VISIBILITY_SERVER_ADMIN | 9 | all admins of the server |
+| NOTIFICATION_VISIBILITY_SERVER_MANAGER | 10 | all admins of the server |
+| NOTIFICATION_VISIBILITY_SERVER_USER | 11 | all admins of the server |
+| NOTIFICATION_VISIBILITY_SERVER_INACTIVE | 12 | all admins of the server |
+
 
 
 <a name="ondewo.nlu.SortingMode"></a>
@@ -2725,7 +3342,10 @@ Note: we are deviating from the dialogflow format `projects/<Project ID>/agent/s
 | lifespan_count | [int32](#int32) |  | Optional. The number of conversational query requests after which the context expires. If set to `0` (the default) the context expires immediately. Contexts expire automatically after 10 minutes even if there are no matching queries. |
 | parameters | [Context.ParametersEntry](#ondewo.nlu.Context.ParametersEntry) | repeated | Optional. The collection of parameters associated with this context. Refer to [this doc](https://dialogflow.com/docs/actions-and-parameters) for syntax. Keys are the display names of context parameters. |
 | lifespan_time | [float](#float) |  | Optional. The time span in seconds after which the context expires. By default it does not expire. |
-| created_modified | [CreatedModified](#ondewo.nlu.CreatedModified) |  | created_at, created_by,modified_at, modified_by |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
+| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
+| created_by | [string](#string) |  | User id in form of a valid UUID. |
+| modified_by | [string](#string) |  | User id in form of a valid UUID. |
 
 
 
@@ -2744,7 +3364,10 @@ Note: we are deviating from the dialogflow format `projects/<Project ID>/agent/s
 | display_name | [string](#string) |  | The display name of the context parameter. |
 | value | [string](#string) |  | The value(s) of the context parameter. |
 | value_original | [string](#string) |  | The original value(s) of the context parameter. |
-| created_modified | [CreatedModified](#ondewo.nlu.CreatedModified) |  | created_at, created_by,modified_at, modified_by |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
+| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
+| created_by | [string](#string) |  | User id in form of a valid UUID. |
+| modified_by | [string](#string) |  | User id in form of a valid UUID. |
 
 
 
@@ -3183,7 +3806,10 @@ language queries.
 | entity_count | [int32](#int32) |  | Read-Only field. Total count of entity values of the entity type |
 | status | [EntityType.EntityTypeStatus](#ondewo.nlu.EntityType.EntityTypeStatus) |  | Indicates whether the entity type is active or not |
 | synonym_count | [int32](#int32) |  | Read-Only field. Total count of entity synonyms of the entity type |
-| created_modified | [CreatedModified](#ondewo.nlu.CreatedModified) |  | created_at, created_by,modified_at, modified_by |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
+| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
+| created_by | [string](#string) |  | User id in form of a valid UUID. |
+| modified_by | [string](#string) |  | User id in form of a valid UUID. |
 
 
 
@@ -3204,7 +3830,10 @@ Optional. Represents an entity.
 | display_name | [string](#string) |  | The name of the entity. |
 | synonym_count | [int32](#int32) |  | Optional. Total count of entity synonyms |
 | language_code | [string](#string) |  | Required. The language to list entity synonyms for. |
-| created_modified | [CreatedModified](#ondewo.nlu.CreatedModified) |  | created_at, created_by,modified_at, modified_by |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
+| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
+| created_by | [string](#string) |  | User id in form of a valid UUID. |
+| modified_by | [string](#string) |  | User id in form of a valid UUID. |
 
 
 
@@ -4131,7 +4760,7 @@ action is an extraction of a user command or sentence semantics.
 | webhook_state | [Intent.WebhookState](#ondewo.nlu.Intent.WebhookState) |  | Required. Indicates whether webhooks are enabled for the intent. |
 | priority | [int32](#int32) |  | Optional. The priority of this intent. Higher numbers represent higher priorities. Zero or negative numbers mean that the intent is disabled. |
 | is_fallback | [bool](#bool) |  | Optional. Indicates whether this is a fallback intent. |
-| ml_disabled | [bool](#bool) |  | Optional. Indicates whether Machine Learning is disabled for the intent. Note: If `ml_diabled` setting is set to true, then this intent is not taken into account during inference in `ML ONLY` match mode. Also, auto-markup in the UI is turned off. |
+| ml_disabled | [bool](#bool) |  | Optional. Indicates whether Machine Learning is disabled for the intent. Note: If `ml_disabled` setting is set to true, then this intent is not taken into account during inference in `ML ONLY` match mode. Also, auto-markup in the UI is turned off. |
 | input_context_names | [string](#string) | repeated | Optional. The list of context names required for this intent to be triggered. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/-/contexts/&lt;context_uuid&gt;</code></pre> |
 | events | [string](#string) | repeated | Optional. The collection of event names that trigger the intent. If the collection of input contexts is not empty, all of the contexts must be present in the active user session for an event to trigger this intent. |
 | training_phrases | [Intent.TrainingPhrase](#ondewo.nlu.Intent.TrainingPhrase) | repeated | Optional. The collection of examples/templates that the agent is trained on. |
@@ -4153,7 +4782,10 @@ action is an extraction of a user command or sentence semantics.
 | start_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Optional. Provides information that can be used in custom scripts |
 | end_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Optional. Provides information that can be used in custom scripts |
 | tags | [string](#string) | repeated | Optional. Adds arbitrary "categories" for which one could filter the intents |
-| created_modified | [CreatedModified](#ondewo.nlu.CreatedModified) |  | created_at, created_by,modified_at, modified_by |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
+| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
+| created_by | [string](#string) |  | User id in form of a valid UUID. |
+| modified_by | [string](#string) |  | User id in form of a valid UUID. |
 
 
 
@@ -4202,7 +4834,10 @@ Corresponds to the `Response` field in the Dialogflow console.
 | audio | [Intent.Message.Audio](#ondewo.nlu.Intent.Message.Audio) |  | The Audio response |
 | platform | [Intent.Message.Platform](#ondewo.nlu.Intent.Message.Platform) |  | Optional. The platform that this message is intended for. |
 | is_prompt | [bool](#bool) |  | Read-only. States if a returned message is a prompt or not. |
-| created_modified | [CreatedModified](#ondewo.nlu.CreatedModified) |  | created_at, created_by,modified_at, modified_by |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
+| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
+| created_by | [string](#string) |  | User id in form of a valid UUID. |
+| modified_by | [string](#string) |  | User id in form of a valid UUID. |
 
 
 
@@ -4571,7 +5206,10 @@ Represents intent parameters.
 | mandatory | [bool](#bool) |  | Optional. Indicates whether the parameter is required. That is, whether the intent cannot be completed without collecting the parameter value. |
 | prompts | [Intent.Parameter.Prompt](#ondewo.nlu.Intent.Parameter.Prompt) | repeated | Optional. The collection of prompts that the agent can present to the user in order to collect value for the parameter. |
 | is_list | [bool](#bool) |  | Optional. Indicates whether the parameter represents a list of values. |
-| created_modified | [CreatedModified](#ondewo.nlu.CreatedModified) |  | created_at, created_by,modified_at, modified_by |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
+| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
+| created_by | [string](#string) |  | User id in form of a valid UUID. |
+| modified_by | [string](#string) |  | User id in form of a valid UUID. |
 
 
 
@@ -4589,7 +5227,10 @@ Represents the prompts in the parameters.
 | name | [string](#string) |  | The unique identifier of this prompt. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;/parameters/&lt;parameter_uuid&gt;/prompts/&lt;prompt_uuid&gt;</code></pre> |
 | text | [string](#string) |  | Required. Text of the prompt |
 | language_code | [string](#string) |  | The language of the prompts. If not specified, the default language code will be used. |
-| created_modified | [CreatedModified](#ondewo.nlu.CreatedModified) |  | created_at, created_by,modified_at, modified_by |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
+| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
+| created_by | [string](#string) |  | User id in form of a valid UUID. |
+| modified_by | [string](#string) |  | User id in form of a valid UUID. |
 
 
 
@@ -4610,7 +5251,10 @@ Represents an example or template that the agent is trained on.
 | entities | [Intent.TrainingPhrase.Entity](#ondewo.nlu.Intent.TrainingPhrase.Entity) | repeated | Optional. The collection of annotated entities in the training phrase. |
 | times_added_count | [int32](#int32) |  | Optional. Indicates how many times this example or template was added to the intent. Each time a developer adds an existing sample by editing an intent or training, this counter is increased. |
 | language_code | [string](#string) |  | Optional. The language of the training phrase. |
-| created_modified | [CreatedModified](#ondewo.nlu.CreatedModified) |  | created_at, created_by,modified_at, modified_by |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
+| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
+| created_by | [string](#string) |  | User id in form of a valid UUID. |
+| modified_by | [string](#string) |  | User id in form of a valid UUID. |
 
 
 
@@ -4634,6 +5278,10 @@ entity type only or both entity type and entity value.
 | end | [int32](#int32) |  | Required. Defines a character position + 1, where the entity ends in the training phrase. Example: "Meet you tomorrow" -> Entity(entity_type_display_name="sys.date", start=9, end=17) |
 | parameter_name | [string](#string) |  | Optional. The unique parameter identifier in format `projects/<Project ID>/agent/intents/<Intent ID>/parameters/<Parameter ID>` for the value extracted from the annotated part of the example. The parameter must be one of the parameters defined in the top-level intent message. Can be unset if the parameter is created in the same create/update intent request as the annotation. |
 | parameter_display_name | [string](#string) |  | Optional. The parameter name. |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
+| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
+| created_by | [string](#string) |  | User id in form of a valid UUID. |
+| modified_by | [string](#string) |  | User id in form of a valid UUID. |
 
 
 
@@ -4658,7 +5306,7 @@ This message is a wrapper around a collection of intents.
 <a name="ondewo.nlu.IntentSorting"></a>
 
 ### IntentSorting
-This message contains sorting of an intentn
+This message contains sorting of an intent
 
 
 | Field | Type | Label | Description |
@@ -5131,6 +5779,10 @@ can be a sub-operation itself
 | description | [string](#string) |  | description, normally needed for sub operations when type is OPERATION_TYPE_UNSPECIFIED |
 | log | [string](#string) | repeated | The log output of an operation |
 | log_limit | [int32](#int32) |  | The log output of an operation limited to the last x log entries |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
+| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
+| created_by | [string](#string) |  | User id in form of a valid UUID. |
+| modified_by | [string](#string) |  | User id in form of a valid UUID. |
 
 
 
@@ -5447,6 +6099,10 @@ Project Role messages
 | role_id | [uint32](#uint32) |  | unique identifier of the role |
 | name | [string](#string) |  | unique name of the role |
 | permissions | [string](#string) | repeated | defines the permissions for the given role (the strings can be gotten from the ListProjectPermissions) |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
+| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
+| created_by | [string](#string) |  | User id in form of a valid UUID. |
+| modified_by | [string](#string) |  | User id in form of a valid UUID. |
 
 
 
@@ -5480,14 +6136,12 @@ Structure of project role
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| PROJECT_UNSPECIFIED | 0 | These roles have permissions valid only on a specific project
-
-unspecified, default value depends on endpoint # TODO |
+| PROJECT_UNSPECIFIED | 0 | These roles have permissions valid only on a specific project unspecified, default value depends on endpoint |
 | PROJECT_USER | 1 | read-only access |
-| PROJECT_EXECUTOR | 2 | permissions of PROJECT_USER + execution rights (detect intent, extract entities, |
+| PROJECT_EXECUTOR | 2 | permissions of PROJECT_USER + execution rights (detect intent, extract entities, train, etc) |
 | PROJECT_DEVELOPER | 3 | permissions of PROJECT_EXECUTOR + CRUD rights |
-| PROJECT_ADMIN | 4 | this role can do everything. The creator of a project is set |
-| PROJECT_INACTIVE | 5 | This role can do nothing. |
+| PROJECT_ADMIN | 4 | this role can do everything. The creator of a project is set automatically as PROJECT_ADMIN of it. |
+| PROJECT_INACTIVE | 5 | This role can do nothing. Used to set a user as inactive inside a project |
 
 
 
@@ -5679,6 +6333,52 @@ Server project statistics
 
 
 
+<a name="ondewo.nlu.AddAudioFilesRequest"></a>
+
+### AddAudioFilesRequest
+This message is a request to add the audio files specified
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| audio_file | [AudioFileResource](#ondewo.nlu.AudioFileResource) | repeated | AudioFileResources to be added |
+
+
+
+
+
+
+<a name="ondewo.nlu.AddAudioFilesResponse"></a>
+
+### AddAudioFilesResponse
+This message is a request to add the audio files specified
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| audio_file | [AudioFileResource](#ondewo.nlu.AudioFileResource) | repeated | The unique identifier of the audio files for a specific session. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/audios/&lt;audio_uuid&gt;</code></pre> |
+
+
+
+
+
+
+<a name="ondewo.nlu.AddSessionCommentRequest"></a>
+
+### AddSessionCommentRequest
+This message is a request to add a comment to a session
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| session_id | [string](#string) |  | The id of the session |
+| comment | [Comment](#ondewo.nlu.Comment) |  | The comment to add to the session |
+
+
+
+
+
+
 <a name="ondewo.nlu.AddSessionLabelsRequest"></a>
 
 ### AddSessionLabelsRequest
@@ -5689,6 +6389,29 @@ This message is a request to add session labels
 | ----- | ---- | ----- | ----------- |
 | session_id | [string](#string) |  | The id of the session |
 | labels | [string](#string) | repeated | The labels to add to the session |
+
+
+
+
+
+
+<a name="ondewo.nlu.AudioFileResource"></a>
+
+### AudioFileResource
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) | repeated | The unique identifier of the session for which the latest review should be returned Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/audios/&lt;audio_uuid&gt;</code></pre> |
+| bytes | [bytes](#bytes) |  | Bytes of the audio file |
+| language | [string](#string) |  | Language of the audio file |
+| duration_in_s | [float](#float) |  | Duration in seconds and milliseconds of the audio file |
+| audio_file_resource_type | [AudioFileResourceType](#ondewo.nlu.AudioFileResourceType) |  | File type of an audio resource |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
+| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
+| created_by | [string](#string) |  | User id in form of a valid UUID. |
+| modified_by | [string](#string) |  | User id in form of a valid UUID. |
 
 
 
@@ -5747,6 +6470,37 @@ SESSION-REVIEW RELATED MESSAGES *** //
 | parent_review_id | [string](#string) |  | Optional: The unique identifier of the parent review Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/reviews/&lt;session_review_uuid&gt;</code></pre> |
 | session_review | [SessionReview](#ondewo.nlu.SessionReview) |  | The reviews for all steps in the session |
 | session_review_view | [SessionReview.View](#ondewo.nlu.SessionReview.View) |  |  |
+
+
+
+
+
+
+<a name="ondewo.nlu.DeleteAudioFilesRequest"></a>
+
+### DeleteAudioFilesRequest
+This message is a request to the delete audio files specified
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| names | [string](#string) | repeated | The unique identifier of the audio file of the specific session Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/audios/&lt;audio_uuid&gt;</code></pre> |
+
+
+
+
+
+
+<a name="ondewo.nlu.DeleteSessionCommentsRequest"></a>
+
+### DeleteSessionCommentsRequest
+This message is a request to delete a session comment
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| session_id | [string](#string) |  | The id of the session |
+| comment_names | [string](#string) | repeated | The comment names to delete from the session |
 
 
 
@@ -5865,6 +6619,53 @@ The parameter `name` may be used by the agent in the response:
 
 
 
+<a name="ondewo.nlu.GetAudioFileOfSessionRequest"></a>
+
+### GetAudioFileOfSessionRequest
+This message is a request to get one one file combining all audios of a specific session
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| session_id | [string](#string) |  | The unique identifier of the session for which the audio files should be combined Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/&lt</code></pre> |
+| resource_view | [ResourceView](#ondewo.nlu.ResourceView) |  | Represents the options for views of resources |
+
+
+
+
+
+
+<a name="ondewo.nlu.GetAudioFilesRequest"></a>
+
+### GetAudioFilesRequest
+This message is a request to get audio files specified
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| names | [string](#string) | repeated | The unique identifier of the audio file of the specific session Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/audios/&lt;audio_uuid&gt;</code></pre> |
+| resource_view | [ResourceView](#ondewo.nlu.ResourceView) |  | Represents the options for views of resources |
+
+
+
+
+
+
+<a name="ondewo.nlu.GetAudioFilesResponse"></a>
+
+### GetAudioFilesResponse
+This message is a request to retrieve the audio files specified
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| audio_files | [AudioFileResource](#ondewo.nlu.AudioFileResource) | repeated | The unique identifier of the audio files for a specific session. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/audios/&lt;audio_uuid&gt;</code></pre> |
+
+
+
+
+
+
 <a name="ondewo.nlu.GetLatestSessionReviewRequest"></a>
 
 ### GetLatestSessionReviewRequest
@@ -5957,6 +6758,23 @@ This message is a response of listing session account_ids
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | account_ids | [string](#string) | repeated | The account_ids of the session |
+
+
+
+
+
+
+<a name="ondewo.nlu.ListAudioFilesRequest"></a>
+
+### ListAudioFilesRequest
+This message is a request to list all available audio files of a session
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| session_id | [string](#string) |  | The unique identifier of the session for which the audio files should be listed Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/&lt</code></pre> |
+| resource_view | [ResourceView](#ondewo.nlu.ResourceView) |  | Represents the options for views of resources |
+| next_page_token | [string](#string) |  | Token to retrieve the next page of results, or empty if there are no more results in the list |
 
 
 
@@ -6273,6 +7091,38 @@ This message is a response of listing session property_ids
 
 
 
+<a name="ondewo.nlu.ListSessionCommentsRequest"></a>
+
+### ListSessionCommentsRequest
+This message is a request to list comments of a session
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| session_id | [string](#string) |  | The unique identifier for the session for which reviews should be listed Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre> |
+| page_token | [string](#string) |  | Optional. The next_page_token value returned from a previous list request. |
+
+
+
+
+
+
+<a name="ondewo.nlu.ListSessionCommentsResponse"></a>
+
+### ListSessionCommentsResponse
+This message is a request to list comments of a session
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| comment | [Comment](#ondewo.nlu.Comment) | repeated | The comments of a specific session Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/comments/&lt;comment_uuid&gt;</code></pre> |
+| page_token | [string](#string) |  | Optional. The next_page_token value returned from a previous list request. |
+
+
+
+
+
+
 <a name="ondewo.nlu.ListSessionLabelsOfAllSessionsRequest"></a>
 
 ### ListSessionLabelsOfAllSessionsRequest
@@ -6545,7 +7395,10 @@ Session of a user interaction
 | name | [string](#string) |  | The unique identifier of the session Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre> |
 | session_steps | [SessionStep](#ondewo.nlu.SessionStep) | repeated | The list of all the steps of the session |
 | session_info | [SessionInfo](#ondewo.nlu.SessionInfo) |  | session information |
-| created_modified | [CreatedModified](#ondewo.nlu.CreatedModified) |  | created_at, created_by,modified_at, modified_by |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
+| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
+| created_by | [string](#string) |  | User id in form of a valid UUID. |
+| modified_by | [string](#string) |  | User id in form of a valid UUID. |
 
 
 
@@ -6663,6 +7516,7 @@ All fields below are optional. Multiple fields specified at the same time are ch
 For a phone bot, this is the phone number +123456789 the user called (Note: This is not the user's phone number) For a chatbot or voicebot on the web, this is the URL on which the bo, e.g. https://ondewo.com/webchat For a voice assistant device, this is the device-id or the app id |
 | identified_user_ids | [string](#string) | repeated | Ids of the "identified user" e.g. for a chatbot the email address or for a phone bot the phone number of the user |
 | duration_interval_60s_rounded | [float](#float) |  | duration in 60 seconds intervals rounded |
+| parent_comment | [Comment](#ondewo.nlu.Comment) | repeated | comments about a session |
 
 
 
@@ -6694,7 +7548,10 @@ This message contains a session review
 | ----- | ---- | ----- | ----------- |
 | name | [string](#string) |  | The unique identifier for the given review Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/reviews/&lt;session_review_uuid&gt;</code></pre> |
 | session_review_steps | [SessionReviewStep](#ondewo.nlu.SessionReviewStep) | repeated | The reviews for all steps in the session |
-| created_modified | [CreatedModified](#ondewo.nlu.CreatedModified) |  | created_at, created_by,modified_at, modified_by |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
+| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
+| created_by | [string](#string) |  | User id in form of a valid UUID. |
+| modified_by | [string](#string) |  | User id in form of a valid UUID. |
 
 
 
@@ -6720,7 +7577,10 @@ This string represents what has been passed to the entity recognition and intent
 | query_text_original | [string](#string) |  | User input without any pre-processing applied |
 | platforms | [Intent.Message.Platform](#ondewo.nlu.Intent.Message.Platform) | repeated | Messages for each of the Intent.Message.Platform were sent to the user |
 | timestamp | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Timestamp of session review step |
-| created_modified | [CreatedModified](#ondewo.nlu.CreatedModified) |  | created_at, created_by,modified_at, modified_by |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
+| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
+| created_by | [string](#string) |  | User id in form of a valid UUID. |
+| modified_by | [string](#string) |  | User id in form of a valid UUID. |
 
 
 
@@ -6740,7 +7600,10 @@ SessionStep is a single user interaction as part of a session
 | detect_intent_response | [DetectIntentResponse](#ondewo.nlu.DetectIntentResponse) |  | The detect intent response of the session step |
 | contexts | [Context](#ondewo.nlu.Context) | repeated | The contexts which were active at the beginning of this step |
 | timestamp | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Timestamp of session step |
-| created_modified | [CreatedModified](#ondewo.nlu.CreatedModified) |  | created_at, created_by,modified_at, modified_by |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
+| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
+| created_by | [string](#string) |  | User id in form of a valid UUID. |
+| modified_by | [string](#string) |  | User id in form of a valid UUID. |
 
 
 
@@ -6895,6 +7758,22 @@ TrackSessionStepRequest stores a session step into the session
 
 
 
+
+<a name="ondewo.nlu.UpdateSessionCommentsRequest"></a>
+
+### UpdateSessionCommentsRequest
+This message is a request to update a session comment
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| session_id | [string](#string) |  | The id of the session |
+| comment | [Comment](#ondewo.nlu.Comment) |  | The comment of a session to be updated |
+
+
+
+
+
  <!-- end messages -->
 
 
@@ -6918,6 +7797,19 @@ details.
 
 
 
+<a name="ondewo.nlu.AudioFileResourceType"></a>
+
+### AudioFileResourceType
+File type of an audio resource
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| AUDIO_FILE_RESOURCE_TYPE_UNSPECIFIED | 0 | Unspecified audio file type |
+| AUDIO_FILE_RESOURCE_TYPE_T2S | 1 | Audio file from text to speech |
+| AUDIO_FILE_RESOURCE_TYPE_S2T | 2 | Audio file from speech to text |
+
+
+
 <a name="ondewo.nlu.ComparisonOperator"></a>
 
 ### ComparisonOperator
@@ -6932,6 +7824,20 @@ Type of operator to compare
 | CONTAINS | 4 | contains operator, e.g. part of string, or one of the elements in an iterable such as set or list |
 | STARTS_WITH | 5 | starts with operator for string comparison only |
 | ENDS_WITH | 6 | ends with operator for string comparison only |
+
+
+
+<a name="ondewo.nlu.ResourceView"></a>
+
+### ResourceView
+Represents the options for views of resources.
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| RESOURCE_VIEW_UNSPECIFIED | 0 | Resource view not specified |
+| RESOURCE_VIEW_FULL | 1 | All fields are populated including bytes e.g., for audio files |
+| RESOURCE_VIEW_PARTIAL | 2 | Fields include metadata but no bytes |
+| RESOURCE_VIEW_MINIMUM | 3 | Minimum view only without bytes and metadata |
 
 
 
@@ -7016,10 +7922,18 @@ user intent and respond.
 | ListOriginIdsOfAllSessions | [ListOriginIdsOfAllSessionsRequest](#ondewo.nlu.ListOriginIdsOfAllSessionsRequest) | [ListOriginIdsResponse](#ondewo.nlu.ListOriginIdsResponse) |  |
 | AddSessionLabels | [AddSessionLabelsRequest](#ondewo.nlu.AddSessionLabelsRequest) | [Session](#ondewo.nlu.Session) |  |
 | DeleteSessionLabels | [DeleteSessionLabelsRequest](#ondewo.nlu.DeleteSessionLabelsRequest) | [Session](#ondewo.nlu.Session) |  |
+| AddSessionComment | [AddSessionCommentRequest](#ondewo.nlu.AddSessionCommentRequest) | [Comment](#ondewo.nlu.Comment) |  |
+| DeleteSessionComments | [DeleteSessionCommentsRequest](#ondewo.nlu.DeleteSessionCommentsRequest) | [Session](#ondewo.nlu.Session) |  |
+| UpdateSessionComments | [UpdateSessionCommentsRequest](#ondewo.nlu.UpdateSessionCommentsRequest) | [Session](#ondewo.nlu.Session) |  |
+| ListSessionComments | [ListSessionCommentsRequest](#ondewo.nlu.ListSessionCommentsRequest) | [ListSessionCommentsResponse](#ondewo.nlu.ListSessionCommentsResponse) |  |
 | ListSessionReviews | [ListSessionReviewsRequest](#ondewo.nlu.ListSessionReviewsRequest) | [ListSessionReviewsResponse](#ondewo.nlu.ListSessionReviewsResponse) | SESSION-REVIEW RELATED ENDPOINTS *** // ListSessionReviews: returns list of session reviews from ondewo-kb; by default only returns session review IDs |
 | GetSessionReview | [GetSessionReviewRequest](#ondewo.nlu.GetSessionReviewRequest) | [SessionReview](#ondewo.nlu.SessionReview) | GetSessionReview: returns a session-review from ondewo-kb or computes the first review if none exists |
 | GetLatestSessionReview | [GetLatestSessionReviewRequest](#ondewo.nlu.GetLatestSessionReviewRequest) | [SessionReview](#ondewo.nlu.SessionReview) | GetLatestSessionReview: returns a session-review from ondewo-kb or computes the first review if none exists |
 | CreateSessionReview | [CreateSessionReviewRequest](#ondewo.nlu.CreateSessionReviewRequest) | [SessionReview](#ondewo.nlu.SessionReview) | CreateSessionReview: persist a session review in ondewo-kb as a side effect: also update training data in ondewo-cai |
+| GetAudioFiles | [GetAudioFilesRequest](#ondewo.nlu.GetAudioFilesRequest) | [GetAudioFilesResponse](#ondewo.nlu.GetAudioFilesResponse) | RPC to get audio files based on specified criteria. Retrieves information about audio files associated with specific sessions. Returns a response containing details of the requested audio files. |
+| AddAudioFiles | [AddAudioFilesRequest](#ondewo.nlu.AddAudioFilesRequest) | [AddAudioFilesResponse](#ondewo.nlu.AddAudioFilesResponse) | RPC to add audio files to a session. Adds new audio files to the specified session, providing details about each file. Returns a response containing information about the added audio files. |
+| DeleteAudioFiles | [DeleteAudioFilesRequest](#ondewo.nlu.DeleteAudioFilesRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | RPC to delete specified audio files. Deletes audio files associated with specific sessions based on unique identifiers. Returns an empty response indicating the successful deletion of the specified audio files. |
+| GetAudioFileOfSession | [GetAudioFileOfSessionRequest](#ondewo.nlu.GetAudioFileOfSessionRequest) | [AudioFileResource](#ondewo.nlu.AudioFileResource) | RPC to get a consolidated audio file for a specific session. Retrieves a single audio file that combines all audio files associated with the specified session. Returns details of the consolidated audio file. |
 
  <!-- end services -->
 
@@ -7277,6 +8191,10 @@ Server Role messages
 | role_id | [uint32](#uint32) |  | unique identifier of the role |
 | name | [string](#string) |  | unique name of the role |
 | permissions | [string](#string) | repeated | defines the permissions for the given role (the strings can be gotten from the ListServerPermissions) |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
+| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
+| created_by | [string](#string) |  | User id in form of a valid UUID. |
+| modified_by | [string](#string) |  | User id in form of a valid UUID. |
 
 
 
@@ -7328,6 +8246,10 @@ this message contains all the fields that required for user db
 | display_name | [string](#string) |  | Optional field display_name is the name that will be used on the frontend to interact with the user it shouldn't be unique. If not provided user_name will also be used as display name |
 | server_role_id | [uint32](#uint32) |  | server role type of the given user. If nothing is provided, the user is set to USER (minimum access) |
 | user_email | [string](#string) |  | user e-mail should be a valid e-mail and unique |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
+| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
+| created_by | [string](#string) |  | User id in form of a valid UUID. |
+| modified_by | [string](#string) |  | User id in form of a valid UUID. |
 
 
 
@@ -7390,25 +8312,28 @@ Structure of server role
 <a name="ondewo.nlu.Users"></a>
 
 ### Users
-
+gRPC service for managing users and server roles.
 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
-| CreateUser | [CreateUserRequest](#ondewo.nlu.CreateUserRequest) | [User](#ondewo.nlu.User) | Creates user |
-| GetUser | [GetUserRequest](#ondewo.nlu.GetUserRequest) | [User](#ondewo.nlu.User) | Gets user |
-| GetUserInfo | [GetUserRequest](#ondewo.nlu.GetUserRequest) | [UserInfo](#ondewo.nlu.UserInfo) | Gets user information |
-| DeleteUser | [GetUserRequest](#ondewo.nlu.GetUserRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Deletes user |
-| UpdateUser | [UpdateUserRequest](#ondewo.nlu.UpdateUserRequest) | [User](#ondewo.nlu.User) | Updates user |
-| ListUsers | [ListUsersRequest](#ondewo.nlu.ListUsersRequest) | [ListUsersResponse](#ondewo.nlu.ListUsersResponse) | Lists users |
-| ListUserInfos | [ListUsersRequest](#ondewo.nlu.ListUsersRequest) | [ListUserInfosResponse](#ondewo.nlu.ListUserInfosResponse) | Lists users information |
-| CreateServerRole | [CreateServerRoleRequest](#ondewo.nlu.CreateServerRoleRequest) | [ServerRole](#ondewo.nlu.ServerRole) | Creates server role |
-| GetServerRole | [GetServerRoleRequest](#ondewo.nlu.GetServerRoleRequest) | [ServerRole](#ondewo.nlu.ServerRole) | Get server role |
-| DeleteServerRole | [DeleteServerRoleRequest](#ondewo.nlu.DeleteServerRoleRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Deletes server role |
-| UpdateServerRole | [UpdateServerRoleRequest](#ondewo.nlu.UpdateServerRoleRequest) | [ServerRole](#ondewo.nlu.ServerRole) | Updates server role |
-| ListServerRoles | [ListServerRolesRequest](#ondewo.nlu.ListServerRolesRequest) | [ListServerRolesResponse](#ondewo.nlu.ListServerRolesResponse) | Lists server roles |
-| ListServerPermissions | [ListServerPermissionsRequest](#ondewo.nlu.ListServerPermissionsRequest) | [ListServerPermissionsResponse](#ondewo.nlu.ListServerPermissionsResponse) | Lists server permissions |
-| Login | [LoginRequest](#ondewo.nlu.LoginRequest) | [LoginResponse](#ondewo.nlu.LoginResponse) | Request to login |
-| CheckLogin | [.google.protobuf.Empty](#google.protobuf.Empty) | [.google.protobuf.Empty](#google.protobuf.Empty) | Checks login |
+| CreateUser | [CreateUserRequest](#ondewo.nlu.CreateUserRequest) | [User](#ondewo.nlu.User) | Creates a user. |
+| GetUser | [GetUserRequest](#ondewo.nlu.GetUserRequest) | [User](#ondewo.nlu.User) | Retrieves a user by identifier. |
+| GetUserInfo | [GetUserRequest](#ondewo.nlu.GetUserRequest) | [UserInfo](#ondewo.nlu.UserInfo) | Retrieves user information by identifier. |
+| DeleteUser | [GetUserRequest](#ondewo.nlu.GetUserRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Deletes a user by identifier. |
+| UpdateUser | [UpdateUserRequest](#ondewo.nlu.UpdateUserRequest) | [User](#ondewo.nlu.User) | Updates a user. |
+| ListUsers | [ListUsersRequest](#ondewo.nlu.ListUsersRequest) | [ListUsersResponse](#ondewo.nlu.ListUsersResponse) | Lists users. |
+| ListUserInfos | [ListUsersRequest](#ondewo.nlu.ListUsersRequest) | [ListUserInfosResponse](#ondewo.nlu.ListUserInfosResponse) | Lists user information. |
+| CreateServerRole | [CreateServerRoleRequest](#ondewo.nlu.CreateServerRoleRequest) | [ServerRole](#ondewo.nlu.ServerRole) | Creates a server role. |
+| GetServerRole | [GetServerRoleRequest](#ondewo.nlu.GetServerRoleRequest) | [ServerRole](#ondewo.nlu.ServerRole) | Retrieves a server role by ID. |
+| DeleteServerRole | [DeleteServerRoleRequest](#ondewo.nlu.DeleteServerRoleRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Deletes a server role by ID. |
+| UpdateServerRole | [UpdateServerRoleRequest](#ondewo.nlu.UpdateServerRoleRequest) | [ServerRole](#ondewo.nlu.ServerRole) | Updates a server role. |
+| ListServerRoles | [ListServerRolesRequest](#ondewo.nlu.ListServerRolesRequest) | [ListServerRolesResponse](#ondewo.nlu.ListServerRolesResponse) | Lists server roles. |
+| ListServerPermissions | [ListServerPermissionsRequest](#ondewo.nlu.ListServerPermissionsRequest) | [ListServerPermissionsResponse](#ondewo.nlu.ListServerPermissionsResponse) | Lists server permissions. |
+| Login | [LoginRequest](#ondewo.nlu.LoginRequest) | [LoginResponse](#ondewo.nlu.LoginResponse) | Requests login. |
+| CheckLogin | [.google.protobuf.Empty](#google.protobuf.Empty) | [.google.protobuf.Empty](#google.protobuf.Empty) | Checks login. |
+| ListNotifications | [ListNotificationsRequest](#ondewo.nlu.ListNotificationsRequest) | [ListNotificationsResponse](#ondewo.nlu.ListNotificationsResponse) | Lists notifications based on specified filters. |
+| SetNotificationsFlaggedStatus | [SetNotificationsFlaggedStatusRequest](#ondewo.nlu.SetNotificationsFlaggedStatusRequest) | [ListNotificationsResponse](#ondewo.nlu.ListNotificationsResponse) | Sets the flagged status for multiple notifications. |
+| SetNotificationsReadStatus | [SetNotificationsReadStatusRequest](#ondewo.nlu.SetNotificationsReadStatusRequest) | [ListNotificationsResponse](#ondewo.nlu.ListNotificationsResponse) | Sets the read status for multiple notifications. |
 
  <!-- end services -->
 
@@ -7859,6 +8784,90 @@ Holds a collection of utility functions
 
 
 
+<a name="ondewo.nlu.CreateSessionEntityTypeRequest"></a>
+
+### CreateSessionEntityTypeRequest
+The request message for
+[SessionEntityTypes.CreateSessionEntityType][google.cloud.dialogflow.v2.SessionEntityTypes.CreateSessionEntityType].
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  | Required. The session to create a session entity type for. Format: `projects/<Project ID>/agent/sessions/<Session ID>` or `projects/<Project ID>/agent/environments/<Environment ID>/users/<User ID>/ sessions/<Session ID>`. If `Environment ID` is not specified, we assume default 'draft' environment. If `User ID` is not specified, we assume default '-' user. |
+| session_entity_type | [SessionEntityType](#ondewo.nlu.SessionEntityType) |  | Required. The session entity type to create. |
+
+
+
+
+
+
+<a name="ondewo.nlu.DeleteSessionEntityTypeRequest"></a>
+
+### DeleteSessionEntityTypeRequest
+The request message for
+[SessionEntityTypes.DeleteSessionEntityType][google.cloud.dialogflow.v2.SessionEntityTypes.DeleteSessionEntityType].
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | Required. The name of the entity type to delete. Format: `projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type Display Name>` or `projects/<Project ID>/agent/environments/<Environment ID>/users/<User ID>/sessions/<Session ID>/entityTypes/<Entity Type Display Name>`. If `Environment ID` is not specified, we assume default 'draft' environment. If `User ID` is not specified, we assume default '-' user. |
+
+
+
+
+
+
+<a name="ondewo.nlu.GetSessionEntityTypeRequest"></a>
+
+### GetSessionEntityTypeRequest
+The request message for
+[SessionEntityTypes.GetSessionEntityType][google.cloud.dialogflow.v2.SessionEntityTypes.GetSessionEntityType].
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | Required. The name of the session entity type. Format: `projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type Display Name>` or `projects/<Project ID>/agent/environments/<Environment ID>/users/<User ID>/sessions/<Session ID>/entityTypes/<Entity Type Display Name>`. If `Environment ID` is not specified, we assume default 'draft' environment. If `User ID` is not specified, we assume default '-' user. |
+
+
+
+
+
+
+<a name="ondewo.nlu.ListSessionEntityTypesRequest"></a>
+
+### ListSessionEntityTypesRequest
+The request message for
+[SessionEntityTypes.ListSessionEntityTypes][google.cloud.dialogflow.v2.SessionEntityTypes.ListSessionEntityTypes].
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  | Required. The session to list all session entity types from. Format: `projects/<Project ID>/agent/sessions/<Session ID>` or `projects/<Project ID>/agent/environments/<Environment ID>/users/<User ID>/ sessions/<Session ID>`. If `Environment ID` is not specified, we assume default 'draft' environment. If `User ID` is not specified, we assume default '-' user. |
+| page_size | [int32](#int32) |  | Optional. The maximum number of items to return in a single page. By default 100 and at most 1000. |
+| page_token | [string](#string) |  | Optional. The next_page_token value returned from a previous list request. |
+
+
+
+
+
+
+<a name="ondewo.nlu.ListSessionEntityTypesResponse"></a>
+
+### ListSessionEntityTypesResponse
+The response message for
+[SessionEntityTypes.ListSessionEntityTypes][google.cloud.dialogflow.v2.SessionEntityTypes.ListSessionEntityTypes].
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| session_entity_types | [SessionEntityType](#ondewo.nlu.SessionEntityType) | repeated | The list of session entity types. There will be a maximum number of items returned based on the page_size field in the request. |
+| next_page_token | [string](#string) |  | Token to retrieve the next page of results, or empty if there are no more results in the list. |
+
+
+
+
+
+
 <a name="ondewo.nlu.OriginalDetectIntentRequest"></a>
 
 ### OriginalDetectIntentRequest
@@ -7868,8 +8877,10 @@ the `[Streaming]DetectIntent` call.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| source | [string](#string) |  | The source of this request, e.g., `google`, `facebook`, `slack`. It is set by Dialogflow-owned servers. |
-| payload | [google.protobuf.Struct](#google.protobuf.Struct) |  | Optional. This field is set to the value of `QueryParameters.payload` field passed in the request. |
+| source | [string](#string) |  | The source of this request, e.g., `google`, `facebook`, `slack` or other "platforms". . Used to identify the "platform" |
+| payload | [google.protobuf.Struct](#google.protobuf.Struct) |  | Optional. This field is set to the value of the `QueryParameters.payload` field passed in the request. Some integrations that query an agent may provide additional data in the payload.
+
+In particular this can be of the form: <pre>{ "a": { "b": "c" } }</pre> |
 
 
 
@@ -7906,6 +8917,49 @@ This message is a response of pinging
 
 
 
+<a name="ondewo.nlu.SessionEntityType"></a>
+
+### SessionEntityType
+A session represents a conversation between a Dialogflow agent and an
+end-user. You can create special entities, called session entities, during a
+session. Session entities can extend or replace custom entity types and only
+exist during the session that they were created for. All session data,
+including session entities, is stored by Dialogflow for 20 minutes.
+
+For more information, see the [session entity
+guide](https://cloud.google.com/dialogflow/docs/entities-session).
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | Required. The unique identifier of this session entity type. Format: `projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type Display Name>`, or `projects/<Project ID>/agent/environments/<Environment ID>/users/<User ID>/sessions/<Session ID>/entityTypes/<Entity Type Display Name>`. If `Environment ID` is not specified, we assume default 'draft' environment. If `User ID` is not specified, we assume default '-' user.
+
+`<Entity Type Display Name>` must be the display name of an existing entity type in the same agent that will be overridden or supplemented. |
+| entity_override_mode | [SessionEntityType.EntityOverrideMode](#ondewo.nlu.SessionEntityType.EntityOverrideMode) |  | Required. Indicates whether the additional data should override or supplement the custom entity type definition. |
+| entities | [EntityType.Entity](#ondewo.nlu.EntityType.Entity) | repeated | Required. The collection of entities associated with this session entity type. |
+
+
+
+
+
+
+<a name="ondewo.nlu.UpdateSessionEntityTypeRequest"></a>
+
+### UpdateSessionEntityTypeRequest
+The request message for
+[SessionEntityTypes.UpdateSessionEntityType][google.cloud.dialogflow.v2.SessionEntityTypes.UpdateSessionEntityType].
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| session_entity_type | [SessionEntityType](#ondewo.nlu.SessionEntityType) |  | Required. The session entity type to update. |
+| update_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which fields get updated. |
+
+
+
+
+
+
 <a name="ondewo.nlu.WebhookRequest"></a>
 
 ### WebhookRequest
@@ -7914,10 +8968,10 @@ The request message for a webhook call.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| session | [string](#string) |  | The unique identifier of detectIntent request session. Can be used to identify end-user inside webhook implementation. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre> |
 | response_id | [string](#string) |  | The unique identifier of the response. Contains the same value as `[Streaming]DetectIntentResponse.response_id`. |
 | query_result | [QueryResult](#ondewo.nlu.QueryResult) |  | The result of the conversational query or event processing. Contains the same value as `[Streaming]DetectIntentResponse.query_result`. |
 | original_detect_intent_request | [OriginalDetectIntentRequest](#ondewo.nlu.OriginalDetectIntentRequest) |  | Optional. The contents of the original request that was passed to `[Streaming]DetectIntent` call. |
+| session | [string](#string) |  | The unique identifier of detectIntent request session. Can be used to identify end-user inside webhook implementation. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre> |
 | headers | [google.protobuf.Struct](#google.protobuf.Struct) |  | Optional. The headers of the request message |
 
 
@@ -7941,12 +8995,28 @@ The response message for a webhook call.
 This field can be used for Actions on Google responses. It should have a structure similar to the JSON message shown here. For more information, see [Actions on Google Webhook Format](https://developers.google.com/actions/dialogflow/webhook) <pre>{ "google": { "expectUserResponse": true, "richResponse": { "items": [ { "simpleResponse": { "textToSpeech": "this is a simple response" } } ] } } }</pre> |
 | output_contexts | [Context](#ondewo.nlu.Context) | repeated | Optional. The collection of output contexts. This value is passed directly to `QueryResult.output_contexts`. |
 | followup_event_input | [EventInput](#ondewo.nlu.EventInput) |  | Optional. Makes the platform immediately invoke another `DetectIntent` call internally with the specified event as input. |
+| session_entity_types | [SessionEntityType](#ondewo.nlu.SessionEntityType) | repeated | Optional. Additional session entity types to replace or extend developer entity types with. The entity synonyms apply to all languages and persist for the session. Setting this data from a webhook overwrites the session entity types that have been set using `detectIntent` method. |
 
 
 
 
 
  <!-- end messages -->
+
+
+<a name="ondewo.nlu.SessionEntityType.EntityOverrideMode"></a>
+
+### SessionEntityType.EntityOverrideMode
+The types of modifications for a session entity type.
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| ENTITY_OVERRIDE_MODE_UNSPECIFIED | 0 | Not specified. This value should be never used. |
+| ENTITY_OVERRIDE_MODE_OVERRIDE | 1 | The collection of session entities overrides the collection of entities in the corresponding custom entity type. |
+| ENTITY_OVERRIDE_MODE_SUPPLEMENT | 2 | The collection of session entities extends the collection of entities in the corresponding custom entity type.
+
+Note: Even in this override mode calls to `ListSessionEntityTypes`, `GetSessionEntityType`, `CreateSessionEntityType` and `UpdateSessionEntityType` only return the additional entities added in this session entity type. If you want to get the supplemented list, please call [EntityTypes.GetEntityType][google.cloud.dialogflow.v2.EntityTypes.GetEntityType] on the custom entity type and merge. |
+
 
  <!-- end enums -->
 
@@ -7963,6 +9033,17 @@ service to send requests to a webhook server
 | ResponseRefinement | [WebhookRequest](#ondewo.nlu.WebhookRequest) | [WebhookResponse](#ondewo.nlu.WebhookResponse) | send a request for /response_refinement/ to the webhook server fulfillment messages can be overwritten by the webhook server |
 | SlotFilling | [WebhookRequest](#ondewo.nlu.WebhookRequest) | [WebhookResponse](#ondewo.nlu.WebhookResponse) | send a request for /slot_filling/ to the webhook server parameter values can be provided & context information can be changed by the webhook server |
 | Ping | [PingRequest](#ondewo.nlu.PingRequest) | [PingResponse](#ondewo.nlu.PingResponse) | send a Ping to the webhook server to verify server health will return True if http status_code==200 is detected in the response |
+| CreateSessionEntityType | [CreateSessionEntityTypeRequest](#ondewo.nlu.CreateSessionEntityTypeRequest) | [SessionEntityType](#ondewo.nlu.SessionEntityType) | Creates a session entity type.
+
+If the specified session entity type already exists, overrides the session entity type.
+
+This method doesn't work with Google Assistant integration. Contact Dialogflow support if you need to use session entities with Google Assistant integration. |
+| UpdateSessionEntityType | [UpdateSessionEntityTypeRequest](#ondewo.nlu.UpdateSessionEntityTypeRequest) | [SessionEntityType](#ondewo.nlu.SessionEntityType) | Updates the specified session entity type.
+
+This method doesn't work with Google Assistant integration. Contact Dialogflow support if you need to use session entities with Google Assistant integration. |
+| DeleteSessionEntityType | [DeleteSessionEntityTypeRequest](#ondewo.nlu.DeleteSessionEntityTypeRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Deletes the specified session entity type.
+
+This method doesn't work with Google Assistant integration. Contact Dialogflow support if you need to use session entities with Google Assistant integration. |
 
  <!-- end services -->
 
@@ -8000,7 +9081,7 @@ The request message
 <a name="ondewo.qa.GetAnswerResponse"></a>
 
 ### GetAnswerResponse
-The response message containing the greetings
+Message containing the response for retrieving answers.
 
 
 | Field | Type | Label | Description |
@@ -8015,12 +9096,12 @@ The response message containing the greetings
 <a name="ondewo.qa.GetProjectConfigRequest"></a>
 
 ### GetProjectConfigRequest
-
+Message for requesting the configuration of a specific project.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| project_id | [string](#string) |  |  |
+| project_id | [string](#string) |  | The ID of the project for which to retrieve the configuration. |
 
 
 
@@ -8030,12 +9111,12 @@ The response message containing the greetings
 <a name="ondewo.qa.GetProjectConfigResponse"></a>
 
 ### GetProjectConfigResponse
-
+Message containing the response for getting the configuration of a project.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| config_serialized | [string](#string) |  |  |
+| config_serialized | [string](#string) |  | Serialized configuration of the project. |
 
 
 
@@ -8045,12 +9126,12 @@ The response message containing the greetings
 <a name="ondewo.qa.GetServerStateResponse"></a>
 
 ### GetServerStateResponse
-
+Message containing the response for checking the server state.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| server_is_ready | [bool](#bool) |  | Whether or not the server is ready to accept requests |
+| server_is_ready | [bool](#bool) |  | Indicates whether the server is ready to accept requests. |
 
 
 
@@ -8060,12 +9141,12 @@ The response message containing the greetings
 <a name="ondewo.qa.ListProjectIdsResponse"></a>
 
 ### ListProjectIdsResponse
-
+Message for listing project IDs in the response.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| project_ids | [string](#string) | repeated |  |
+| project_ids | [string](#string) | repeated | List of project IDs. |
 
 
 
@@ -8075,12 +9156,12 @@ The response message containing the greetings
 <a name="ondewo.qa.RunScraperRequest"></a>
 
 ### RunScraperRequest
-
+Message for running a web scraper job.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| project_ids | [string](#string) | repeated | List of project_ids |
+| project_ids | [string](#string) | repeated | List of project IDs to run the scraper on. |
 
 
 
@@ -8090,12 +9171,12 @@ The response message containing the greetings
 <a name="ondewo.qa.RunScraperResponse"></a>
 
 ### RunScraperResponse
-
+Message containing the response for running a web scraper job.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| scraper_containers | [RunScraperResponse.ScraperContainer](#ondewo.qa.RunScraperResponse.ScraperContainer) | repeated |  |
+| scraper_containers | [RunScraperResponse.ScraperContainer](#ondewo.qa.RunScraperResponse.ScraperContainer) | repeated | List of scraper containers running the jobs. |
 
 
 
@@ -8105,13 +9186,13 @@ The response message containing the greetings
 <a name="ondewo.qa.RunScraperResponse.ScraperContainer"></a>
 
 ### RunScraperResponse.ScraperContainer
-
+Message representing a scraper container.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| container_name | [string](#string) |  | Name of the docker container that is running the job |
-| container_id | [string](#string) |  | ID of the docker container that is running the scraping job |
+| container_name | [string](#string) |  | Name of the Docker container running the job. |
+| container_id | [string](#string) |  | ID of the Docker container running the scraping job. |
 
 
 
@@ -8121,13 +9202,13 @@ The response message containing the greetings
 <a name="ondewo.qa.RunTrainingResponse"></a>
 
 ### RunTrainingResponse
-
+Message containing the response for running a training job.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| f1 | [float](#float) |  | Response message of training |
-| accuracy | [float](#float) |  | accuracy |
+| f1 | [float](#float) |  | F1 score as a response of the training. |
+| accuracy | [float](#float) |  | Accuracy as a response of the training. |
 
 
 
@@ -8137,12 +9218,12 @@ The response message containing the greetings
 <a name="ondewo.qa.UpdateDatabaseRequest"></a>
 
 ### UpdateDatabaseRequest
-
+Message for requesting a database update for specific projects.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| project_ids | [string](#string) | repeated | List of project_ids of which to update the database |
+| project_ids | [string](#string) | repeated | List of project IDs for which to update the database. |
 
 
 
@@ -8152,12 +9233,12 @@ The response message containing the greetings
 <a name="ondewo.qa.UpdateDatabaseResponse"></a>
 
 ### UpdateDatabaseResponse
-
+Message containing the response for updating the database of specific projects.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| error_messages | [string](#string) | repeated |  |
+| error_messages | [string](#string) | repeated | List of error messages encountered during the database update. |
 
 
 
@@ -8167,14 +9248,14 @@ The response message containing the greetings
 <a name="ondewo.qa.UrlFilter"></a>
 
 ### UrlFilter
-Filters with URLs should be included and excluded from the scraping process
+Message for defining URL filters to include and exclude from the scraping process.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| allowed_values | [string](#string) | repeated | Optional. List of values that the metadata_field 'url' is allowed to take. |
-| regex_filter_include | [string](#string) |  | Optional. Regular expression which must be matched by the meta data. |
-| regex_filter_exclude | [string](#string) |  | Optional. Regular expression which must not be matched by the meta data. |
+| allowed_values | [string](#string) | repeated | Optional. List of allowed values for the metadata field 'url'. |
+| regex_filter_include | [string](#string) |  | Optional. Regular expression that must be matched by the metadata. |
+| regex_filter_exclude | [string](#string) |  | Optional. Regular expression that must not be matched by the metadata. |
 
 
 
@@ -8190,17 +9271,17 @@ Filters with URLs should be included and excluded from the scraping process
 <a name="ondewo.qa.QA"></a>
 
 ### QA
-Question Answering (QA) Services ///////
+gRPC service for QA functionalities.
 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
-| GetAnswer | [GetAnswerRequest](#ondewo.qa.GetAnswerRequest) | [GetAnswerResponse](#ondewo.qa.GetAnswerResponse) |  |
-| RunScraper | [RunScraperRequest](#ondewo.qa.RunScraperRequest) | [RunScraperResponse](#ondewo.qa.RunScraperResponse) |  |
-| UpdateDatabase | [UpdateDatabaseRequest](#ondewo.qa.UpdateDatabaseRequest) | [UpdateDatabaseResponse](#ondewo.qa.UpdateDatabaseResponse) |  |
-| RunTraining | [.google.protobuf.Empty](#google.protobuf.Empty) | [RunTrainingResponse](#ondewo.qa.RunTrainingResponse) |  |
-| GetServerState | [.google.protobuf.Empty](#google.protobuf.Empty) | [GetServerStateResponse](#ondewo.qa.GetServerStateResponse) |  |
-| ListProjectIds | [.google.protobuf.Empty](#google.protobuf.Empty) | [ListProjectIdsResponse](#ondewo.qa.ListProjectIdsResponse) |  |
-| GetProjectConfig | [GetProjectConfigRequest](#ondewo.qa.GetProjectConfigRequest) | [GetProjectConfigResponse](#ondewo.qa.GetProjectConfigResponse) |  |
+| GetAnswer | [GetAnswerRequest](#ondewo.qa.GetAnswerRequest) | [GetAnswerResponse](#ondewo.qa.GetAnswerResponse) | Retrieves an answer based on the provided request. |
+| RunScraper | [RunScraperRequest](#ondewo.qa.RunScraperRequest) | [RunScraperResponse](#ondewo.qa.RunScraperResponse) | Runs a web scraper job for specified project IDs. |
+| UpdateDatabase | [UpdateDatabaseRequest](#ondewo.qa.UpdateDatabaseRequest) | [UpdateDatabaseResponse](#ondewo.qa.UpdateDatabaseResponse) | Updates the database for specified project IDs. |
+| RunTraining | [.google.protobuf.Empty](#google.protobuf.Empty) | [RunTrainingResponse](#ondewo.qa.RunTrainingResponse) | Runs a training job for the QA system. |
+| GetServerState | [.google.protobuf.Empty](#google.protobuf.Empty) | [GetServerStateResponse](#ondewo.qa.GetServerStateResponse) | Retrieves the server state for QA. |
+| ListProjectIds | [.google.protobuf.Empty](#google.protobuf.Empty) | [ListProjectIdsResponse](#ondewo.qa.ListProjectIdsResponse) | Lists project IDs associated with QA. |
+| GetProjectConfig | [GetProjectConfigRequest](#ondewo.qa.GetProjectConfigRequest) | [GetProjectConfigResponse](#ondewo.qa.GetProjectConfigResponse) | Retrieves the configuration of a specific project. |
 
  <!-- end services -->
 
