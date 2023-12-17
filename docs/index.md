@@ -126,6 +126,7 @@
 - [ondewo/nlu/ccai_project.proto](#ondewo/nlu/ccai_project.proto)
     - [CcaiProject](#ondewo.nlu.CcaiProject)
     - [CcaiProject.CcaiServiceListsEntry](#ondewo.nlu.CcaiProject.CcaiServiceListsEntry)
+    - [CcaiProjectFilter](#ondewo.nlu.CcaiProjectFilter)
     - [CcaiProjectSorting](#ondewo.nlu.CcaiProjectSorting)
     - [CcaiService](#ondewo.nlu.CcaiService)
     - [CcaiServiceList](#ondewo.nlu.CcaiServiceList)
@@ -2750,6 +2751,22 @@ Message representing a CCAI project
 
 
 
+<a name="ondewo.nlu.CcaiProjectFilter"></a>
+
+### CcaiProjectFilter
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| language_codes | [string](#string) | repeated | Language codes of the projects for which services are filtered. |
+| ccai_service_type | [CcaiServiceType](#ondewo.nlu.CcaiServiceType) | repeated | Type of CCAI service |
+
+
+
+
+
+
 <a name="ondewo.nlu.CcaiProjectSorting"></a>
 
 ### CcaiProjectSorting
@@ -2775,6 +2792,7 @@ This protobuf message defines the sorting order for CCAI (Virtual Test System In
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | name | [string](#string) |  | Resource name of the service |
+| display_name | [string](#string) |  | Display name |
 | grpc_host | [string](#string) |  | gRPC host and port |
 | grpc_port | [int32](#int32) |  |  |
 | webgrpc_host | [string](#string) |  | Web gRPC host and port |
@@ -2886,6 +2904,7 @@ Request to retrieve a CCAI project
 | ----- | ---- | ----- | ----------- |
 | name | [string](#string) |  | CCAI project name with which to perform the call of the form <pre><code>projects/&lt;project_uuid&gt;/project</code></pre> |
 | ccai_project_view | [CcaiProjectView](#ondewo.nlu.CcaiProjectView) |  | Optional. Specify the view of the returned CcaiProject (full view by default) |
+| ccai_project_filter | [CcaiProjectFilter](#ondewo.nlu.CcaiProjectFilter) |  |  |
 
 
 
@@ -2935,6 +2954,7 @@ Request to updated CCAI project
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | ccai_project | [CcaiProject](#ondewo.nlu.CcaiProject) |  | Project Configs. |
+| update_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which fields get updated. |
 
 
 

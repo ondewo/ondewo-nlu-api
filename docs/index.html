@@ -664,6 +664,10 @@
                       </li>
                     
                       <li>
+                        <a href="#ondewo.nlu.CcaiProjectFilter" class="title-badge message">CcaiProjectFilter</a>
+                      </li>
+                    
+                      <li>
                         <a href="#ondewo.nlu.CcaiProjectSorting" class="title-badge message">CcaiProjectSorting</a>
                       </li>
                     
@@ -9219,6 +9223,37 @@ Two-letter language codes following ISO 639-1 (see https://en.wikipedia.org/wiki
 
         
       
+        <h3 id="ondewo.nlu.CcaiProjectFilter" class="title-badge message">CcaiProjectFilter</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>language_codes</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Language codes of the projects for which services are filtered. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>ccai_service_type</td>
+                  <td><a href="#ondewo.nlu.CcaiServiceType">CcaiServiceType</a></td>
+                  <td>repeated</td>
+                  <td><p>Type of CCAI service </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="ondewo.nlu.CcaiProjectSorting" class="title-badge message">CcaiProjectSorting</h3>
         <p>This protobuf message defines the sorting order for CCAI (Virtual Test System Infrastructure) projects.</p>
 
@@ -9265,6 +9300,13 @@ Two-letter language codes following ISO 639-1 (see https://en.wikipedia.org/wiki
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Resource name of the service </p></td>
+                </tr>
+              
+                <tr>
+                  <td>display_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Display name </p></td>
                 </tr>
               
                 <tr>
@@ -9544,6 +9586,13 @@ Two-letter language codes following ISO 639-1 (see https://en.wikipedia.org/wiki
                   <td><p>Optional. Specify the view of the returned CcaiProject (full view by default) </p></td>
                 </tr>
               
+                <tr>
+                  <td>ccai_project_filter</td>
+                  <td><a href="#ondewo.nlu.CcaiProjectFilter">CcaiProjectFilter</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -9648,6 +9697,13 @@ If there are no more results in the list, this field will be empty. </p></td>
                   <td><a href="#ondewo.nlu.CcaiProject">CcaiProject</a></td>
                   <td></td>
                   <td><p>Project Configs. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>update_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td></td>
+                  <td><p>Optional. The mask to control which fields get updated. </p></td>
                 </tr>
               
             </tbody>
