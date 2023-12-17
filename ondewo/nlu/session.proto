@@ -1360,19 +1360,19 @@ message SessionReviewStep {
     repeated Intent.Message.Platform platforms = 8;
 
     // Timestamp of session review step
-    google.protobuf.Timestamp timestamp = 10;
+    google.protobuf.Timestamp timestamp = 9;
 
     // Creation date and time. Read-only field.
-    google.protobuf.Timestamp created_at = 11;
+    google.protobuf.Timestamp created_at = 10;
 
     // Modification date and time. Read-only field.
-    google.protobuf.Timestamp modified_at = 12;
+    google.protobuf.Timestamp modified_at = 11;
 
     // User id in form of a valid UUID.
-    string created_by = 13;
+    string created_by = 12;
 
     // User id in form of a valid UUID.
-    string modified_by = 14;
+    string modified_by = 13;
 }
 
 
