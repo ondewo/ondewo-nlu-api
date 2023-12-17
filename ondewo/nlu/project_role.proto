@@ -1,4 +1,4 @@
-// Copyright 2021 ONDEWO GmbH
+// Copyright 2020-2023 ONDEWO GmbH
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,8 +17,9 @@ syntax = "proto3";
 package ondewo.nlu;
 
 import "google/api/annotations.proto";
-import "google/protobuf/field_mask.proto";
 import "google/protobuf/empty.proto";
+import "google/protobuf/field_mask.proto";
+import "google/protobuf/timestamp.proto";
 
 // Project roles
 service ProjectRoles {
@@ -69,43 +70,63 @@ message ProjectRole {
     string name = 2;
     // defines the permissions for the given role (the strings can be gotten from the ListProjectPermissions)
     repeated string permissions = 3;
+
+    // Creation date and time. Read-only field.
+    google.protobuf.Timestamp created_at = 4;
+
+    // Modification date and time. Read-only field.
+    google.protobuf.Timestamp modified_at = 5;
+
+    // User id in form of a valid UUID.
+    string created_by = 6;
+
+    // User id in form of a valid UUID.
+    string modified_by = 7;
+
 }
 
 // Structure of project role
 enum DefaultProjectRole {
-    // These roles have permissions valid only on a specific project
-    PROJECT_UNSPECIFIED = 0; // unspecified, default value depends on endpoint # TODO
 
-    PROJECT_USER = 1; // read-only access
+    // These roles have permissions valid only on a specific project unspecified, default value depends on endpoint
+    PROJECT_UNSPECIFIED = 0;
 
-    PROJECT_EXECUTOR = 2; // permissions of PROJECT_USER + execution rights (detect intent, extract entities,
-    //   train, etc)
+    // read-only access
+    PROJECT_USER = 1;
 
-    PROJECT_DEVELOPER = 3; // permissions of PROJECT_EXECUTOR + CRUD rights
+    // permissions of PROJECT_USER + execution rights (detect intent, extract entities, train, etc)
+    PROJECT_EXECUTOR = 2;
 
-    PROJECT_ADMIN = 4; // this role can do everything. The creator of a project is set
-    //    automatically as PROJECT_ADMIN of it.
+    // permissions of PROJECT_EXECUTOR + CRUD rights
+    PROJECT_DEVELOPER = 3;
 
-    PROJECT_INACTIVE = 5; // This role can do nothing.
-    // Used to set a user as inactive inside a project
+    // this role can do everything. The creator of a project is set automatically as PROJECT_ADMIN of it.
+    PROJECT_ADMIN = 4;
+
+    // This role can do nothing.  Used to set a user as inactive inside a project
+    PROJECT_INACTIVE = 5;
 }
 
 // Structure of project role view
 enum ProjectRoleView {
+
     // The view depends on the endpoint:
     // * CreateProjectRole: FULL
     // * GetProjectRole: FULL
     // * UpdateProjectRole: FULL
     // * ListProjectRoles: FULL
     PROJECT_ROLE_VIEW_UNSPECIFIED = 0;
+
     // only role ID and name fields are populated
     PROJECT_ROLE_VIEW_SHALLOW = 1;
+
     // all fields including permissions are populated
     PROJECT_ROLE_VIEW_FULL = 2;
 }
 
 // This message is a request to create project role
 message CreateProjectRoleRequest {
+
     string parent = 1;
     //If the role_id is not provided, an incremental value will be assigned
     //The "name" and "role_type" are mandatory values

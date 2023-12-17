@@ -1,0 +1,269 @@
+// Copyright 2020-2023 ONDEWO GmbH
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+package ondewo.nlu;
+
+import "google/protobuf/field_mask.proto";
+import "google/protobuf/timestamp.proto";
+
+import "ondewo/nlu/common.proto";
+
+// Message representing a CCAI project
+message CcaiProject {
+
+    // Resource name of the CCAI project
+    string name = 1;
+
+    // Map of two letter language codes to lists of CcaiServiceList
+    // Two-letter language codes following ISO 639-1 (see https://en.wikipedia.org/wiki/ISO_639-1)
+    map<string, CcaiServiceList> ccai_service_lists = 2;
+
+    // Creation date and time. Read-only field.
+    google.protobuf.Timestamp created_at = 3;
+
+    // Modification date and time. Read-only field.
+    google.protobuf.Timestamp modified_at = 4;
+
+    // User id in the form of a valid UUID.
+    string created_by = 5;
+
+    // User id in the form of a valid UUID.
+    string modified_by = 6;
+}
+
+// Message representing a list of CCAI services
+message CcaiServiceList {
+
+    // CCAI services
+    repeated CcaiService ccai_services = 1;
+}
+
+enum CcaiServiceType {
+
+    // unspecified
+    CCAI_SERVICE_TYPE_UNSPECIFIED = 0;
+
+    // ondewo-aim service
+    CCAI_SERVICE_TYPE_ONDEWO_AIM = 1;
+
+    // ondewo-bpi service
+    CCAI_SERVICE_TYPE_ONDEWO_BPI = 2;
+
+    // ondewo-csi service
+    CCAI_SERVICE_TYPE_ONDEWO_CSI = 3;
+
+    // ondewo-nlu service
+    CCAI_SERVICE_TYPE_ONDEWO_NLU = 4;
+
+    // ondewo-s2t service
+    CCAI_SERVICE_TYPE_ONDEWO_S2T = 5;
+
+    // ondewo-sip service
+    CCAI_SERVICE_TYPE_ONDEWO_SIP = 6;
+
+    // ondewo-t2s service
+    CCAI_SERVICE_TYPE_ONDEWO_T2S = 7;
+
+    // ondewo-vtsi service
+    CCAI_SERVICE_TYPE_ONDEWO_VTSI = 8;
+
+    // ondewo-vtsi service
+    CCAI_SERVICE_TYPE_VTSI_RABBITMQ = 9;
+}
+
+message CcaiService {
+
+    // Resource name of the service
+    string name = 1;
+
+    // gRPC host and port
+    string grpc_host = 2;
+    int32 grpc_port = 3;
+
+    // Web gRPC host and port
+    string webgrpc_host = 4;
+    int32 webgrpc_port = 5;
+
+    // Path to the gRPC certificate
+    string grpc_cert = 6;
+
+    // Additional host and ports
+    string host = 7;
+    int32 port = 8;
+    int32 port2 = 9;
+
+    // Account information
+    string account_name = 10;
+    string password = 11;
+
+    // API key for the service
+    string api_key = 12;
+
+    // Type of CCAI service
+    CcaiServiceType ccai_service_type = 13;
+
+    // Creation date and time. Read-only field.
+    google.protobuf.Timestamp created_at = 14;
+
+    // Modification date and time. Read-only field.
+    google.protobuf.Timestamp modified_at = 15;
+
+    // User id in the form of a valid UUID.
+    string created_by = 16;
+
+    // User id in the form of a valid UUID.
+    string modified_by = 17;
+}
+
+message CreateCcaiProjectRequest {
+    CcaiProject ccai_project = 1;
+}
+
+message CreateCcaiProjectResponse {
+    CcaiProject ccai_project = 1;
+
+    // error message if there are any.
+    string error_message = 2;
+}
+
+
+// Request to retrieve a CCAI project
+message GetCcaiProjectRequest{
+
+    // CCAI project name with which to perform the call of the form <pre><code>projects/&lt;project_uuid&gt;/project</code></pre>
+    string name = 1;
+
+    // Optional. Specify the view of the returned CcaiProject (full view by default)
+    CcaiProjectView ccai_project_view = 2;
+}
+
+// Request to get the list of agents
+message ListCcaiProjectsRequest {
+
+    // Optional. Specify the view of the returned CcaiProject (full view by default)
+    CcaiProjectView ccai_project_view = 1;
+
+    // Optional. The next_page_token value returned from a previous list request.
+    // Example: "current_index-1--page_size-20"
+    optional string page_token = 2;
+
+    // Optional. Field to define the sorting of the list of CCAI projects in the response.
+    // If not specified, the default behavior is to have no sorting.
+    optional CcaiProjectSorting ccai_project_sorting = 3;
+
+    // Optional. Filter based on associated NLU agents
+    // Format: `projects/<Project ID>/agent`.
+    repeated string nlu_agent_names = 4;
+}
+
+// This is a protobuf message definition for the response of getting a list of CCAI projects.
+message ListCcaiProjectsResponse {
+
+    // The list of CCAI projects returned in the response.
+    // Use the 'repeated' keyword to indicate that this field can contain multiple instances of CcaiProject.
+    repeated CcaiProject ccai_projects = 1;
+
+    // Token to retrieve the next page of results.
+    // This field is a string that holds a token for fetching the next page of results.
+    // If there are no more results in the list, this field will be empty.
+    string next_page_token = 2;
+}
+
+// This protobuf message defines the sorting order for CCAI (Virtual Test System Infrastructure) projects.
+message CcaiProjectSorting {
+
+    // Enum to specify the sorting field for CCAI projects.
+    enum CcaiProjectSortingField {
+
+        // No sorting
+        NO_CCAI_PROJECT_SORTING = 0;
+
+        // Sort by project name such as <pre><code>projects/&lt;project_uuid&gt;/project</code></pre>.
+        SORT_CCAI_PROJECT_BY_NAME = 1;
+
+        // Sort by display name
+        SORT_CCAI_PROJECT_BY_DISPLAY_NAME = 2;
+
+        // Sort by creation date
+        SORT_CCAI_PROJECT_BY_CREATION_DATE = 3;
+
+        // Sort by last modified date
+        SORT_CCAI_PROJECT_BY_LAST_MODIFIED = 4;
+    }
+
+    // sorting field for ccai projects sorting
+    optional CcaiProjectSortingField sorting_field = 1;
+
+    // Sorting mode
+    optional SortingMode sorting_mode = 2;
+}
+
+
+// Structure of CCAI_PROJECT view
+// - CreateCCAI_PROJECT: CCAI_PROJECT_VIEW_SHALLOW
+// - UpdateCCAI_PROJECT: CCAI_PROJECT_VIEW_SHALLOW
+// - GetCCAI_PROJECT: CCAI_PROJECT_VIEW_FULL
+// - ListCCAI_PROJECTs: CCAI_PROJECT_VIEW_SHALLOW
+enum CcaiProjectView {
+
+    // Unspecified CCAI_PROJECT view: the view is defined by the call:
+    CCAI_PROJECT_VIEW_UNSPECIFIED = 0;
+
+    // Full CCAI_PROJECT view: populate all the fields of the CCAI_PROJECT message including configs.
+    CCAI_PROJECT_VIEW_FULL = 1;
+
+    // Shallow CCAI_PROJECT view: populates all the fields except configs.
+    CCAI_PROJECT_VIEW_SHALLOW = 2;
+
+    // Minimum view including only CCAI_PROJECT UUID and CCAI_PROJECT display name
+    CCAI_PROJECT_VIEW_MINIMUM = 3;
+}
+
+// Request to updated CCAI project
+message UpdateCcaiProjectRequest{
+
+    // Project Configs.
+    CcaiProject ccai_project = 1;
+}
+
+// Request to updated CCAI project
+message UpdateCcaiProjectResponse{
+
+    // CCAI project name with which to perform the call of the form <pre><code>projects/&lt;project_uuid&gt;/project</code></pre>
+    string name = 1;
+
+    // error message if there are any.
+    string error_message = 2;
+}
+
+// Request to delete a CCAI project
+// If a deployed CCAI project was deleted then it was undeployed beforehand automatically
+message DeleteCcaiProjectRequest{
+
+    // CCAI project name with which to perform the call of the form <pre><code>projects/&lt;project_uuid&gt;/project</code></pre>
+    string name = 1;
+}
+
+// Response to delete a CCAI project
+// If a deployed CCAI project was deleted then it was undeployed beforehand automatically
+message DeleteCcaiProjectResponse{
+
+    // CCAI project name with which to perform the call of the form <pre><code>projects/&lt;project_uuid&gt;/project</code></pre>
+    string name = 1;
+
+    // error message if there are any.
+    string error_message = 2;
+}

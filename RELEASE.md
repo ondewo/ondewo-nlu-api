@@ -1,11 +1,30 @@
 # Release History
+
+*****************
+
+## Release ONDEWO NLU API 4.8.0
+
+### New Features
+
+* [[OND211-2146]](https://ondewo.atlassian.net/browse/OND211-2146) - Added Notifications for users and projects
+* [[OND211-2147]](https://ondewo.atlassian.net/browse/OND211-2147) - Added CCAI Project Configuration
+* [[OND211-2148]](https://ondewo.atlassian.net/browse/OND211-2148) - Added User Preferences
+* [[OND211-2149]](https://ondewo.atlassian.net/browse/OND211-2149) - Added Comment functionality for SessionInfo
+* [[OND211-2150]](https://ondewo.atlassian.net/browse/OND211-2150) - Added audit information to all major objects:
+  Entity, EntityType, Intent, Operation, ProjectRole, Session, User etc.
+
+### Improvements
+
+* [[OND211-2143]](https://ondewo.atlassian.net/browse/OND211-2143) - Added documentation to webhook
+
 *****************
 
 ## Release ONDEWO NLU API 4.7.0
 
 ### Improvements
 
-* [[OND211-2105]](https://ondewo.atlassian.net/browse/OND211-2105) - Added timestamp session step and session review and session review step
+* [[OND211-2105]](https://ondewo.atlassian.net/browse/OND211-2105) - Added timestamp session step and session review and
+  session review step
 
 *****************
 
@@ -18,9 +37,9 @@
 ### Breaking changes
 
 * Restructuring of messages
-  * From BatchEntitiesResponse.EntityStatus to EntityStatus
-  * From BatchCreateEntitiesRequest.CreateEntityRequest to CreateEntityRequest
-  * From BatchDeleteEntitiesResponse.DeleteEntityStatus to DeleteEntityStatus
+    * From BatchEntitiesResponse.EntityStatus to EntityStatus
+    * From BatchCreateEntitiesRequest.CreateEntityRequest to CreateEntityRequest
+    * From BatchDeleteEntitiesResponse.DeleteEntityStatus to DeleteEntityStatus
 
 *****************
 
@@ -28,7 +47,8 @@
 
 ### Improvements
 
-* [[OND211-2053]](https://ondewo.atlassian.net/browse/OND211-2053) - Added created at, created by, modified at and modified by properties to most important objects
+* [[OND211-2053]](https://ondewo.atlassian.net/browse/OND211-2053) - Added created at, created by, modified at and
+  modified by properties to most important objects
 
 *****************
 
@@ -36,8 +56,10 @@
 
 ### Bug fixes
 
-* SessionFilter: Use double instead of float for earliest and latest since float is too small to hold the datetime timestamp as python float
-* SessionInfo: Use double instead of float for earliest and latest since float is too small to hold the datetime timestamp as python float
+* SessionFilter: Use double instead of float for earliest and latest since float is too small to hold the datetime
+  timestamp as python float
+* SessionInfo: Use double instead of float for earliest and latest since float is too small to hold the datetime
+  timestamp as python float
 
 *****************
 
@@ -45,7 +67,8 @@
 
 ### Improvements
 
-* Added duration_interval_60s_rounded_min, duration_interval_60s_rounded_max and duration_interval_60s_rounded for Session filtering
+* Added duration_interval_60s_rounded_min, duration_interval_60s_rounded_max and duration_interval_60s_rounded for
+  Session filtering
 
 *****************
 
@@ -53,7 +76,9 @@
 
 ### Improvements
 
-* [[OND211-2089]](https://ondewo.atlassian.net/browse/OND211-2089) - Added further SessionsReportType: SESSION_LEAST_X_INTENTS, SESSION_LEAST_X_ENTITY_TYPES, SESSION_LEAST_X_ENTITY_VALUES, SESSION_LEAST_X_USERS, SESSION_LEAST_X_LABELS, SESSION_LEAST_X_TAGS and TOTAL_STATISTICS
+* [[OND211-2089]](https://ondewo.atlassian.net/browse/OND211-2089) - Added further SessionsReportType:
+  SESSION_LEAST_X_INTENTS, SESSION_LEAST_X_ENTITY_TYPES, SESSION_LEAST_X_ENTITY_VALUES, SESSION_LEAST_X_USERS,
+  SESSION_LEAST_X_LABELS, SESSION_LEAST_X_TAGS and TOTAL_STATISTICS
 * [[OND211-2089]](https://ondewo.atlassian.net/browse/OND211-2089) - Improved documentation for resource names
 
 *****************
@@ -70,7 +95,7 @@
 
 ### Bug fixes
 
-* [[OND211-2084]](https://ondewo.atlassian.net/browse/OND211-2084) - Fixed protobuf sequence numbering in session.proto
+* [[OND211-2084]](https://ondewo.atlassian.net/browse/OND211-2084) - Fixed protobuf sequence numbering in session proto
   definition
 
 *****************

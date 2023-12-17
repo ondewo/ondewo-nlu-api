@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
-// Modifications Copyright 2021 ONDEWO GmbH
+// Modifications Copyright 2020-2023 ONDEWO GmbH
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -217,6 +217,33 @@ service Sessions {
         };
     };
 
+    rpc AddSessionComment (AddSessionCommentRequest) returns (Comment) {
+        option (google.api.http) = {
+            post: "/v2/{session_id=projects/*/agent/sessions/*}/comments:add"
+            body: "*"
+        };
+    };
+
+    rpc DeleteSessionComments (DeleteSessionCommentsRequest) returns (Session) {
+        option (google.api.http) = {
+            post: "/v2/{session_id=projects/*/agent/sessions/*}/comments:delete"
+            body: "*"
+        };
+    };
+
+    rpc UpdateSessionComments (UpdateSessionCommentsRequest) returns (Session) {
+        option (google.api.http) = {
+            post: "/v2/{session_id=projects/*/agent/sessions/*}/comments:update"
+            body: "*"
+        };
+    };
+
+    rpc ListSessionComments (ListSessionCommentsRequest) returns (ListSessionCommentsResponse) {
+        option (google.api.http) = {
+            get: "/v2/{session_id=projects/*/agent/sessions/*}/reviews"
+        };
+    };
+
     // *** SESSION-REVIEW RELATED ENDPOINTS *** //
     // ListSessionReviews:
     // returns list of session reviews from ondewo-kb; by default only returns session review IDs
@@ -251,6 +278,27 @@ service Sessions {
             body: "*"
         };
     };
+
+    // RPC to get audio files based on specified criteria.
+    // Retrieves information about audio files associated with specific sessions.
+    // Returns a response containing details of the requested audio files.
+    rpc GetAudioFiles (GetAudioFilesRequest) returns (GetAudioFilesResponse) {};
+
+    // RPC to add audio files to a session.
+    // Adds new audio files to the specified session, providing details about each file.
+    // Returns a response containing information about the added audio files.
+    rpc AddAudioFiles (AddAudioFilesRequest) returns (AddAudioFilesResponse) {};
+
+    // RPC to delete specified audio files.
+    // Deletes audio files associated with specific sessions based on unique identifiers.
+    // Returns an empty response indicating the successful deletion of the specified audio files.
+    rpc DeleteAudioFiles (DeleteAudioFilesRequest) returns (google.protobuf.Empty) {};
+
+    // RPC to get a consolidated audio file for a specific session.
+    // Retrieves a single audio file that combines all audio files associated with the specified session.
+    // Returns details of the consolidated audio file.
+    rpc GetAudioFileOfSession (GetAudioFileOfSessionRequest) returns (AudioFileResource) {};
+
 }
 
 // The request to detect user's intent.
@@ -754,8 +802,18 @@ message Session {
         VIEW_SPARSE = 2;
     }
 
-    // created_at, created_by,modified_at, modified_by
-    CreatedModified created_modified = 4;
+    // Creation date and time. Read-only field.
+    google.protobuf.Timestamp created_at = 4;
+
+    // Modification date and time. Read-only field.
+    google.protobuf.Timestamp modified_at = 5;
+
+    // User id in form of a valid UUID.
+    string created_by = 6;
+
+    // User id in form of a valid UUID.
+    string modified_by = 7;
+
 }
 
 // SessionStep is a single user interaction as part of a session
@@ -777,8 +835,17 @@ message SessionStep {
     // Timestamp of session step
     google.protobuf.Timestamp timestamp = 5;
 
-    // created_at, created_by,modified_at, modified_by
-    CreatedModified created_modified = 6;
+    // Creation date and time. Read-only field.
+    google.protobuf.Timestamp created_at = 6;
+
+    // Modification date and time. Read-only field.
+    google.protobuf.Timestamp modified_at = 7;
+
+    // User id in form of a valid UUID.
+    string created_by = 8;
+
+    // User id in form of a valid UUID.
+    string modified_by = 9;
 
 }
 
@@ -1149,6 +1216,10 @@ message SessionInfo {
 
     // duration in 60 seconds intervals rounded
     float duration_interval_60s_rounded = 32;
+
+    // comments about a session
+    repeated Comment parent_comment = 33;
+
 }
 
 // This message is a response including the listing of sessions
@@ -1243,8 +1314,17 @@ message SessionReview {
         VIEW_SPARSE = 2;
     }
 
-    // created_at, created_by,modified_at, modified_by
-    CreatedModified created_modified = 3;
+    // Creation date and time. Read-only field.
+    google.protobuf.Timestamp created_at = 3;
+
+    // Modification date and time. Read-only field.
+    google.protobuf.Timestamp modified_at = 4;
+
+    // User id in form of a valid UUID.
+    string created_by = 5;
+
+    // User id in form of a valid UUID.
+    string modified_by = 6;
 
 }
 
@@ -1280,10 +1360,19 @@ message SessionReviewStep {
     repeated Intent.Message.Platform platforms = 8;
 
     // Timestamp of session review step
-    google.protobuf.Timestamp timestamp = 9;
+    google.protobuf.Timestamp timestamp = 10;
 
-    // created_at, created_by,modified_at, modified_by
-    CreatedModified created_modified = 10;
+    // Creation date and time. Read-only field.
+    google.protobuf.Timestamp created_at = 11;
+
+    // Modification date and time. Read-only field.
+    google.protobuf.Timestamp modified_at = 12;
+
+    // User id in form of a valid UUID.
+    string created_by = 13;
+
+    // User id in form of a valid UUID.
+    string modified_by = 14;
 }
 
 
@@ -1546,7 +1635,6 @@ message ListPropertyIdsResponse {
     repeated string property_ids = 1;
 }
 
-
 // request to list all datastream_ids of all sessions
 message ListDatastreamIdsOfAllSessionsRequest {
 
@@ -1564,7 +1652,6 @@ message ListDatastreamIdsResponse {
     // The datastream_ids of the session
     repeated string datastream_ids = 1;
 }
-
 
 // request to list all origin_ids of all sessions
 message ListOriginIdsOfAllSessionsRequest {
@@ -1602,6 +1689,60 @@ message DeleteSessionLabelsRequest {
 
     // The labels to delete from the session
     repeated string labels = 2;
+}
+
+// This message is a request to add a comment to a session
+message AddSessionCommentRequest {
+
+    // The id of the session
+    string session_id = 1;
+
+    // The comment to add to the session
+    Comment comment = 2;
+}
+
+// This message is a request to delete a session comment
+message DeleteSessionCommentsRequest {
+
+    // The id of the session
+    string session_id = 1;
+
+    // The comment names to delete from the session
+    repeated string comment_names = 2;
+
+}
+
+// This message is a request to update a session comment
+message UpdateSessionCommentsRequest {
+
+    // The id of the session
+    string session_id = 1;
+
+    // The comment of a session to be updated
+    Comment comment = 2;
+}
+
+// This message is a request to list comments of a session
+message ListSessionCommentsRequest {
+
+    // The unique identifier for the session for which reviews should be listed
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre>
+    string session_id = 1;
+
+    // Optional. The next_page_token value returned from a previous list request.
+    string page_token = 2;
+}
+
+// This message is a request to list comments of a session
+message ListSessionCommentsResponse {
+
+    // The comments of a specific session
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/comments/&lt;comment_uuid&gt;</code></pre>
+    repeated Comment comment = 1;
+
+    // Optional. The next_page_token value returned from a previous list request.
+    string page_token = 2;
+
 }
 
 // This message is a request to list session reviews
@@ -1646,4 +1787,134 @@ message GetLatestSessionReviewRequest {
 
     // An enum specifying the amount of information to be returned for the desired session review
     SessionReview.View session_review_view = 2;
+}
+
+// Represents the options for views of resources.
+enum ResourceView {
+
+    // Resource view not specified
+    RESOURCE_VIEW_UNSPECIFIED = 0;
+
+    // All fields are populated including bytes e.g., for audio files
+    RESOURCE_VIEW_FULL = 1;
+
+    // Fields include metadata but no bytes
+    RESOURCE_VIEW_PARTIAL = 2;
+
+    // Minimum view only without bytes and metadata
+    RESOURCE_VIEW_MINIMUM = 3;
+}
+
+// File type of an audio resource
+enum AudioFileResourceType {
+
+    // Unspecified audio file type
+    AUDIO_FILE_RESOURCE_TYPE_UNSPECIFIED = 0;
+
+    // Audio file from text to speech
+    AUDIO_FILE_RESOURCE_TYPE_T2S = 1;
+
+    // Audio file from speech to text
+    AUDIO_FILE_RESOURCE_TYPE_S2T = 2;
+
+}
+
+message AudioFileResource {
+
+    // The unique identifier of the session for which the latest review should be returned
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/audios/&lt;audio_uuid&gt;</code></pre>
+    repeated string name = 1;
+
+    // Bytes of the audio file
+    bytes bytes = 2;
+
+    // Language of the audio file
+    string language = 3;
+
+    // Duration in seconds and milliseconds of the audio file
+    float duration_in_s = 4;
+
+    // File type of an audio resource
+    AudioFileResourceType audio_file_resource_type = 5;
+
+    // Creation date and time. Read-only field.
+    google.protobuf.Timestamp created_at = 6;
+
+    // Modification date and time. Read-only field.
+    google.protobuf.Timestamp modified_at = 7;
+
+    // User id in form of a valid UUID.
+    string created_by = 8;
+
+    // User id in form of a valid UUID.
+    string modified_by = 9;
+
+}
+
+// This message is a request to get audio files specified
+message GetAudioFilesRequest {
+
+    // The unique identifier of the audio file of the specific session
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/audios/&lt;audio_uuid&gt;</code></pre>
+    repeated string names = 1;
+
+    // Represents the options for views of resources
+    ResourceView resource_view = 2;
+}
+
+// This message is a request to retrieve the audio files specified
+message GetAudioFilesResponse {
+
+    // The unique identifier of the audio files for a specific session.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/audios/&lt;audio_uuid&gt;</code></pre>
+    repeated AudioFileResource audio_files = 1;
+
+}
+
+// This message is a request to add the audio files specified
+message AddAudioFilesRequest {
+
+    // AudioFileResources to be added
+    repeated AudioFileResource audio_file = 1;
+}
+
+// This message is a request to add the audio files specified
+message AddAudioFilesResponse {
+
+    // The unique identifier of the audio files for a specific session.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/audios/&lt;audio_uuid&gt;</code></pre>
+    repeated AudioFileResource audio_file = 1;
+}
+
+// This message is a request to the delete audio files specified
+message DeleteAudioFilesRequest {
+
+    // The unique identifier of the audio file of the specific session
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/audios/&lt;audio_uuid&gt;</code></pre>
+    repeated string names = 1;
+}
+
+// This message is a request to list all available audio files of a session
+message ListAudioFilesRequest {
+
+    // The unique identifier of the session for which the audio files should be listed
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/&lt</code></pre>
+    string session_id = 1;
+
+    // Represents the options for views of resources
+    ResourceView resource_view = 2;
+
+    // Token to retrieve the next page of results, or empty if there are no more results in the list
+    string next_page_token = 3;
+}
+
+// This message is a request to get one one file combining all audios of a specific session
+message GetAudioFileOfSessionRequest {
+
+    // The unique identifier of the session for which the audio files should be combined
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/&lt</code></pre>
+    string session_id = 1;
+
+    // Represents the options for views of resources
+    ResourceView resource_view = 2;
 }

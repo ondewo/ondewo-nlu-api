@@ -1,4 +1,4 @@
-// Copyright 2021 ONDEWO GmbH
+// Copyright 2020-2023 ONDEWO GmbH
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -21,51 +21,65 @@ import "google/api/annotations.proto";
 import "ondewo/nlu/session.proto";
 
 
-/////// Question Answering (QA) Services ///////
+// gRPC service for QA functionalities.
 service QA {
-
+    // Retrieves an answer based on the provided request.
     rpc GetAnswer (GetAnswerRequest) returns (GetAnswerResponse) {
+        // HTTP configuration for the GetAnswer RPC.
         option (google.api.http) = {
             post: "/qa"
             body: "*"
         };
     }
+
+    // Runs a web scraper job for specified project IDs.
     rpc RunScraper (RunScraperRequest) returns (RunScraperResponse) {
+        // HTTP configuration for the RunScraper RPC.
         option (google.api.http) = {
             get: "/qa:RunScraper"
         };
     }
 
+    // Updates the database for specified project IDs.
     rpc UpdateDatabase (UpdateDatabaseRequest) returns (UpdateDatabaseResponse) {
+        // HTTP configuration for the UpdateDatabase RPC.
         option (google.api.http) = {
             get: "/qa:UpdateDatabase"
         };
     }
 
+    // Runs a training job for the QA system.
     rpc RunTraining (google.protobuf.Empty) returns (RunTrainingResponse) {
+        // HTTP configuration for the RunTraining RPC.
         option (google.api.http) = {
             get: "/qa:RunTraining"
         };
     }
 
+    // Retrieves the server state for QA.
     rpc GetServerState (google.protobuf.Empty) returns (GetServerStateResponse) {
+        // HTTP configuration for the GetServerState RPC.
         option (google.api.http) = {
             get: "/qa:GetServerState"
         };
     }
+
+    // Lists project IDs associated with QA.
     rpc ListProjectIds (google.protobuf.Empty) returns (ListProjectIdsResponse) {
+        // HTTP configuration for the ListProjectIds RPC.
         option (google.api.http) = {
             get: "/qa:ListProjectIds"
         };
     }
+
+    // Retrieves the configuration of a specific project.
     rpc GetProjectConfig (GetProjectConfigRequest) returns (GetProjectConfigResponse) {
+        // HTTP configuration for the GetProjectConfig RPC.
         option (google.api.http) = {
             get: "/qa:ListProjectConfig"
         };
     }
 }
-
-/////// Messages ///////
 
 // The request message
 message GetAnswerRequest {
@@ -101,82 +115,97 @@ message GetAnswerRequest {
 
 }
 
-// The response message containing the greetings
+// Message containing the response for retrieving answers.
 message GetAnswerResponse {
 
     // The results of the conversational query or event processing.
     ondewo.nlu.DetectIntentResponse query_result = 2;
 }
 
+// Message for running a web scraper job.
 message RunScraperRequest {
 
-    // List of project_ids
+    // List of project IDs to run the scraper on.
     repeated string project_ids = 1;
 }
 
+// Message containing the response for running a web scraper job.
 message RunScraperResponse {
 
+    // Message representing a scraper container.
     message ScraperContainer {
 
-        // Name of the docker container that is running the job
+        // Name of the Docker container running the job.
         string container_name = 1;
 
-        // ID of the docker container that is running the scraping job
+        // ID of the Docker container running the scraping job.
         string container_id = 2;
+
     }
+
+    // List of scraper containers running the jobs.
     repeated ScraperContainer scraper_containers = 1;
 }
 
+// Message containing the response for running a training job.
 message RunTrainingResponse {
 
-    // Response message of training
+    // F1 score as a response of the training.
     float f1 = 1;
 
-    // accuracy
+    // Accuracy as a response of the training.
     float accuracy = 2;
+
 }
 
-// Filters with URLs should be included and excluded from the scraping process
+// Message for defining URL filters to include and exclude from the scraping process.
 message UrlFilter {
 
-    // Optional. List of values that the metadata_field 'url' is allowed to take.
+    // Optional. List of allowed values for the metadata field 'url'.
     repeated string allowed_values = 1;
 
-    // Optional. Regular expression which must be matched by the meta data.
+    // Optional. Regular expression that must be matched by the metadata.
     string regex_filter_include = 2;
 
-    // Optional. Regular expression which must not be matched by the meta data.
+    // Optional. Regular expression that must not be matched by the metadata.
     string regex_filter_exclude = 3;
+
 }
 
+// Message containing the response for checking the server state.
 message GetServerStateResponse {
 
-    // Whether or not the server is ready to accept requests
+    // Indicates whether the server is ready to accept requests.
     bool server_is_ready = 1;
+
 }
 
+// Message for listing project IDs in the response.
 message ListProjectIdsResponse {
-
+    // List of project IDs.
     repeated string project_ids = 1;
 }
 
+// Message for requesting the configuration of a specific project.
 message GetProjectConfigRequest {
-
+    // The ID of the project for which to retrieve the configuration.
     string project_id = 1;
 }
 
+// Message containing the response for getting the configuration of a project.
 message GetProjectConfigResponse {
-
+    // Serialized configuration of the project.
     string config_serialized = 1;
 }
 
+// Message for requesting a database update for specific projects.
 message UpdateDatabaseRequest {
-
-    // List of project_ids of which to update the database
+    // List of project IDs for which to update the database.
     repeated string project_ids = 1;
 }
 
+// Message containing the response for updating the database of specific projects.
 message UpdateDatabaseResponse {
-
+    // List of error messages encountered during the database update.
     repeated string error_messages = 1;
 }
