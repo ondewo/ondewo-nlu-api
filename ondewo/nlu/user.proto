@@ -160,6 +160,18 @@ service Users {
     // Sets the read status for multiple notifications.
     rpc SetNotificationsReadStatus (SetNotificationsReadStatusRequest) returns (ListNotificationsResponse);
 
+    // Retrieves user preferences based on the provided request.
+    rpc GetUserPreferences (GetUserPreferencesRequest) returns (GetUserPreferencesResponse);
+
+    // Sets or updates user preferences based on the provided request.
+    rpc SetUserPreferences (SetUserPreferencesRequest) returns (SetUserPreferencesResponse);
+
+    // Deletes specific user preferences based on the provided request.
+    rpc DeleteUserPreferences (DeleteUserPreferencesRequest) returns (DeleteUserPreferencesResponse);
+
+    // Deletes all user preferences for a specific user, optionally filtered by a substring.
+    rpc DeleteAllUserPreferences (DeleteAllUserPreferencesRequest) returns (DeleteUserPreferencesResponse);
+
 }
 
 // User messages
@@ -444,6 +456,9 @@ message GetUserPreferencesResponse {
 
     // List of key-value pairs representing user preferences.
     repeated KeyValuePair key_value_pairs = 2;
+
+    // error message if there are any.
+    string error_message = 3;
 }
 
 // Request to set or update user preferences.
@@ -455,7 +470,24 @@ message SetUserPreferencesRequest {
 
     // List of key-value pairs to set or update.
     repeated KeyValuePair key_value_pairs = 2;
+
 }
+
+// Response to set or update user preferences.
+message SetUserPreferencesResponse {
+
+    // The name of the user.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</code></pre>
+    string user_name = 1;
+
+    // List of keys to delete from user preferences.
+    repeated string keys = 2;
+
+    // error message if there are any.
+    string error_message = 3;
+
+}
+
 
 // Request to delete specific user preferences.
 message DeleteUserPreferencesRequest {
@@ -466,6 +498,22 @@ message DeleteUserPreferencesRequest {
 
     // List of keys to delete from user preferences.
     repeated string keys = 2;
+
+}
+
+// Response to delete specific user preferences.
+message DeleteUserPreferencesResponse {
+
+    // The name of the user.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</code></pre>
+    string user_name = 1;
+
+    // List of keys to delete from user preferences.
+    repeated string keys = 2;
+
+    // error message if there are any.
+    string error_message = 3;
+
 }
 
 // Request to delete all user preferences with an optional filter substring.
@@ -481,6 +529,7 @@ message DeleteAllUserPreferencesRequest {
     // Only delete keys starting with DE: <code>^DE_</code>
     // Only delete keys matching: <code>.*user.*</code>
     string regex_filter = 2;
+
 }
 
 // Request to list all user preferences for a specific user.
@@ -502,4 +551,8 @@ message ListUserPreferencesResponse {
 
     // List of key-value pairs representing user preferences.
     repeated KeyValuePair key_value_pairs = 2;
+
+    // error message if there are any.
+    string error_message = 3;
+
 }
