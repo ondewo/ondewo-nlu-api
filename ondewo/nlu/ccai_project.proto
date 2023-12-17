@@ -42,6 +42,7 @@ message CcaiProject {
 
     // User id in the form of a valid UUID.
     string modified_by = 6;
+
 }
 
 // Message representing a list of CCAI services
@@ -89,43 +90,46 @@ message CcaiService {
     // Resource name of the service
     string name = 1;
 
+    // Display name
+    string display_name = 2;
+
     // gRPC host and port
-    string grpc_host = 2;
-    int32 grpc_port = 3;
+    string grpc_host = 3;
+    int32 grpc_port = 4;
 
     // Web gRPC host and port
-    string webgrpc_host = 4;
-    int32 webgrpc_port = 5;
+    string webgrpc_host = 5;
+    int32 webgrpc_port = 6;
 
     // Path to the gRPC certificate
-    string grpc_cert = 6;
+    string grpc_cert = 7;
 
     // Additional host and ports
-    string host = 7;
-    int32 port = 8;
-    int32 port2 = 9;
+    string host = 8;
+    int32 port = 9;
+    int32 port2 = 10;
 
     // Account information
-    string account_name = 10;
-    string password = 11;
+    string account_name = 11;
+    string password = 12;
 
     // API key for the service
-    string api_key = 12;
+    string api_key = 13;
 
     // Type of CCAI service
-    CcaiServiceType ccai_service_type = 13;
+    CcaiServiceType ccai_service_type = 14;
 
     // Creation date and time. Read-only field.
-    google.protobuf.Timestamp created_at = 14;
+    google.protobuf.Timestamp created_at = 15;
 
     // Modification date and time. Read-only field.
-    google.protobuf.Timestamp modified_at = 15;
+    google.protobuf.Timestamp modified_at = 16;
 
     // User id in the form of a valid UUID.
-    string created_by = 16;
+    string created_by = 17;
 
     // User id in the form of a valid UUID.
-    string modified_by = 17;
+    string modified_by = 18;
 }
 
 message CreateCcaiProjectRequest {
@@ -148,6 +152,8 @@ message GetCcaiProjectRequest{
 
     // Optional. Specify the view of the returned CcaiProject (full view by default)
     CcaiProjectView ccai_project_view = 2;
+
+    CcaiProjectFilter ccai_project_filter = 3;
 }
 
 // Request to get the list of agents
@@ -232,11 +238,25 @@ enum CcaiProjectView {
     CCAI_PROJECT_VIEW_MINIMUM = 3;
 }
 
+message CcaiProjectFilter {
+
+    // Language codes of the projects for which services are filtered.
+    repeated string language_codes = 1;
+
+    // Type of CCAI service
+    repeated  CcaiServiceType ccai_service_type = 14;
+
+}
+
+
 // Request to updated CCAI project
 message UpdateCcaiProjectRequest{
 
     // Project Configs.
     CcaiProject ccai_project = 1;
+
+    // Optional. The mask to control which fields get updated.
+    google.protobuf.FieldMask update_mask = 2;
 }
 
 // Request to updated CCAI project

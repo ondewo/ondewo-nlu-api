@@ -281,6 +281,7 @@ message AddNotificationsResponse {
 
 // Message for filtering notifications based on various criteria.
 message NotificationFilter {
+
     // Language codes of the projects for which notifications are filtered.
     repeated string language_codes = 1;
 
