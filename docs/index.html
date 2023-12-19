@@ -1921,6 +1921,8 @@
                       
                         <li><a href="#ondewo.nlu.Sessions.GetAudioFileOfSession" class="title-badge method">GetAudioFileOfSession</a></li>
                       
+                        <li><a href="#ondewo.nlu.Sessions.ListAudioFiles" class="title-badge method">ListAudioFiles</a></li>
+                      
                       </ul>
                       
                     </li>
@@ -1965,6 +1967,10 @@
                     
                       <li>
                         <a href="#ondewo.nlu.DeleteAudioFilesRequest" class="title-badge message">DeleteAudioFilesRequest</a>
+                      </li>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.DeleteAudioFilesResponse" class="title-badge message">DeleteAudioFilesResponse</a>
                       </li>
                     
                       <li>
@@ -2033,6 +2039,10 @@
                     
                       <li>
                         <a href="#ondewo.nlu.ListAudioFilesRequest" class="title-badge message">ListAudioFilesRequest</a>
+                      </li>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.ListAudioFilesResponse" class="title-badge message">ListAudioFilesResponse</a>
                       </li>
                     
                       <li>
@@ -4375,7 +4385,30 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td>page_token</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Composite string: current_index-0--page_size-10 </p></td>
+                  <td><p>Composite string: current_index-0--page_size-10
+The page token to support pagination.
+Pagination allows you to retrieve a large result set in smaller, more manageable portions.
+The page token is a string representing the current index and page size.
+
+Valid page token strings:
+* "" (empty string) - Retrieves the first page.
+* "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
+* "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+
+Index starts at 0.
+
+Examples of valid page token strings:
+* ""
+* "current_index-0--page_size-20"
+* "current_index-1--page_size-20"
+* "current_index-10--page_size-20"
+
+Examples of invalid page token strings:
+* "1"
+* "current_index-0--page_size-20"
+* "current_index--1--page_size-20"
+* "current_index1--page_size-20"
+* "current_index-1--page_size--20" </p></td>
                 </tr>
               
             </tbody>
@@ -5478,7 +5511,30 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre> </p></td>
                   <td>next_page_token</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2 </p></td>
+                  <td><p>The next_page_token is used to retrieve the next page of a returned result.
+The page token to support pagination.
+Pagination allows you to retrieve a large result set in smaller, more manageable portions.
+The page token is a string representing the current index and page size.
+
+Valid page token strings:
+* "" (empty string) - Retrieves the first page.
+* "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
+* "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+
+Index starts at 0.
+
+Examples of valid page token strings:
+* ""
+* "current_index-0--page_size-20"
+* "current_index-1--page_size-20"
+* "current_index-10--page_size-20"
+
+Examples of invalid page token strings:
+* "1"
+* "current_index-0--page_size-20"
+* "current_index--1--page_size-20"
+* "current_index1--page_size-20"
+* "current_index-1--page_size--20" </p></td>
                 </tr>
               
             </tbody>
@@ -6452,7 +6508,30 @@ more results in the list. </p></td>
                   <td>page_token</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Optional. The next_page_token value returned from a previous list request. </p></td>
+                  <td><p>Optional. The next_page_token value returned from a previous list request.
+The page token to support pagination.
+Pagination allows you to retrieve a large result set in smaller, more manageable portions.
+The page token is a string representing the current index and page size.
+
+Valid page token strings:
+* "" (empty string) - Retrieves the first page.
+* "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
+* "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+
+Index starts at 0.
+
+Examples of valid page token strings:
+* ""
+* "current_index-0--page_size-20"
+* "current_index-1--page_size-20"
+* "current_index-10--page_size-20"
+
+Examples of invalid page token strings:
+* "1"
+* "current_index-0--page_size-20"
+* "current_index--1--page_size-20"
+* "current_index1--page_size-20"
+* "current_index-1--page_size--20" </p></td>
                 </tr>
               
             </tbody>
@@ -6517,7 +6596,30 @@ Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre> </p></td>
                   <td>page_token</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Optional. The next_page_token value returned from a previous list request. </p></td>
+                  <td><p>Optional. The next_page_token value returned from a previous list request.
+The page token to support pagination.
+Pagination allows you to retrieve a large result set in smaller, more manageable portions.
+The page token is a string representing the current index and page size.
+
+Valid page token strings:
+* "" (empty string) - Retrieves the first page.
+* "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
+* "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+
+Index starts at 0.
+
+Examples of valid page token strings:
+* ""
+* "current_index-0--page_size-20"
+* "current_index-1--page_size-20"
+* "current_index-10--page_size-20"
+
+Examples of invalid page token strings:
+* "1"
+* "current_index-0--page_size-20"
+* "current_index--1--page_size-20"
+* "current_index1--page_size-20"
+* "current_index-1--page_size--20" </p></td>
                 </tr>
               
             </tbody>
@@ -9670,7 +9772,30 @@ Two-letter language codes following ISO 639-1 (see https://en.wikipedia.org/wiki
                   <td><a href="#string">string</a></td>
                   <td>optional</td>
                   <td><p>Optional. The next_page_token value returned from a previous list request.
-Example: "current_index-1--page_size-20" </p></td>
+Example: "current_index-1--page_size-20"
+The page token to support pagination.
+Pagination allows you to retrieve a large result set in smaller, more manageable portions.
+The page token is a string representing the current index and page size.
+
+Valid page token strings:
+* "" (empty string) - Retrieves the first page.
+* "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
+* "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+
+Index starts at 0.
+
+Examples of valid page token strings:
+* ""
+* "current_index-0--page_size-20"
+* "current_index-1--page_size-20"
+* "current_index-10--page_size-20"
+
+Examples of invalid page token strings:
+* "1"
+* "current_index-0--page_size-20"
+* "current_index--1--page_size-20"
+* "current_index1--page_size-20"
+* "current_index-1--page_size--20" </p></td>
                 </tr>
               
                 <tr>
@@ -10171,7 +10296,30 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/&lt;resource_type&gt;/&lt
                   <td>page_token</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Optional. Token for pagination, obtained from a previous list request. </p></td>
+                  <td><p>Optional. Token for pagination, obtained from a previous list request.
+The page token to support pagination.
+Pagination allows you to retrieve a large result set in smaller, more manageable portions.
+The page token is a string representing the current index and page size.
+
+Valid page token strings:
+* "" (empty string) - Retrieves the first page.
+* "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
+* "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+
+Index starts at 0.
+
+Examples of valid page token strings:
+* ""
+* "current_index-0--page_size-20"
+* "current_index-1--page_size-20"
+* "current_index-10--page_size-20"
+
+Examples of invalid page token strings:
+* "1"
+* "current_index-0--page_size-20"
+* "current_index--1--page_size-20"
+* "current_index1--page_size-20"
+* "current_index-1--page_size--20" </p></td>
                 </tr>
               
                 <tr>
@@ -11282,7 +11430,30 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid
                   <td>page_token</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Optional. The next_page_token value returned from a previous list request. </p></td>
+                  <td><p>Optional. The next_page_token value returned from a previous list request.
+The page token to support pagination.
+Pagination allows you to retrieve a large result set in smaller, more manageable portions.
+The page token is a string representing the current index and page size.
+
+Valid page token strings:
+* "" (empty string) - Retrieves the first page.
+* "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
+* "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+
+Index starts at 0.
+
+Examples of valid page token strings:
+* ""
+* "current_index-0--page_size-20"
+* "current_index-1--page_size-20"
+* "current_index-10--page_size-20"
+
+Examples of invalid page token strings:
+* "1"
+* "current_index-0--page_size-20"
+* "current_index--1--page_size-20"
+* "current_index1--page_size-20"
+* "current_index-1--page_size--20" </p></td>
                 </tr>
               
             </tbody>
@@ -12439,7 +12610,29 @@ Note: languages must be enabled in the agent, before they can be used. </p></td>
                   <td>page_token</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>A page_token allows the pagination of elements where <CURRENT_INDEX> and <PAGE_SIZE> are of type int, <SUB_FIELD> is of type str (example: `parameters`). An example for a page_token is page_size-1000 </p></td>
+                  <td><p>The page token to support pagination.
+Pagination allows you to retrieve a large result set in smaller, more manageable portions.
+The page token is a string representing the current index and page size.
+
+Valid page token strings:
+* "" (empty string) - Retrieves the first page.
+* "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
+* "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+
+Index starts at 0.
+
+Examples of valid page token strings:
+* ""
+* "current_index-0--page_size-20"
+* "current_index-1--page_size-20"
+* "current_index-10--page_size-20"
+
+Examples of invalid page token strings:
+* "1"
+* "current_index-0--page_size-20"
+* "current_index--1--page_size-20"
+* "current_index1--page_size-20"
+* "current_index-1--page_size--20" </p></td>
                 </tr>
               
                 <tr>
@@ -12486,7 +12679,30 @@ messages for. If not specified, the agent's default language is used. </p></td>
                   <td>page_token</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Optional. The next_page_token value returned from a previous list request. </p></td>
+                  <td><p>Optional. The next_page_token value returned from a previous list request.
+The page token to support pagination.
+Pagination allows you to retrieve a large result set in smaller, more manageable portions.
+The page token is a string representing the current index and page size.
+
+Valid page token strings:
+* "" (empty string) - Retrieves the first page.
+* "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
+* "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+
+Index starts at 0.
+
+Examples of valid page token strings:
+* ""
+* "current_index-0--page_size-20"
+* "current_index-1--page_size-20"
+* "current_index-10--page_size-20"
+
+Examples of invalid page token strings:
+* "1"
+* "current_index-0--page_size-20"
+* "current_index--1--page_size-20"
+* "current_index1--page_size-20"
+* "current_index-1--page_size--20" </p></td>
                 </tr>
               
                 <tr>
@@ -12582,7 +12798,30 @@ Note: languages must be enabled in the agent, before they can be used. </p></td>
                   <td>page_token</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Optional. The next_page_token value returned from a previous list request. </p></td>
+                  <td><p>Optional. The next_page_token value returned from a previous list request.
+The page token to support pagination.
+Pagination allows you to retrieve a large result set in smaller, more manageable portions.
+The page token is a string representing the current index and page size.
+
+Valid page token strings:
+* "" (empty string) - Retrieves the first page.
+* "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
+* "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+
+Index starts at 0.
+
+Examples of valid page token strings:
+* ""
+* "current_index-0--page_size-20"
+* "current_index-1--page_size-20"
+* "current_index-10--page_size-20"
+
+Examples of invalid page token strings:
+* "1"
+* "current_index-0--page_size-20"
+* "current_index--1--page_size-20"
+* "current_index1--page_size-20"
+* "current_index-1--page_size--20" </p></td>
                 </tr>
               
                 <tr>
@@ -14251,9 +14490,29 @@ Note: languages must be enabled in the agent, before they can be used. </p></td>
                   <td>page_token</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Optional. The next_page_token value returned from a previous list request.
-Format: `current_index-<CURRENT_INDEX>--page_size-<PAGE_SIZE>`
-where <CURRENT_INDEX> and <PAGE_SIZE> are of type int </p></td>
+                  <td><p>The page token to support pagination.
+Pagination allows you to retrieve a large result set in smaller, more manageable portions.
+The page token is a string representing the current index and page size.
+
+Valid page token strings:
+* "" (empty string) - Retrieves the first page.
+* "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
+* "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+
+Index starts at 0.
+
+Examples of valid page token strings:
+* ""
+* "current_index-0--page_size-20"
+* "current_index-1--page_size-20"
+* "current_index-10--page_size-20"
+
+Examples of invalid page token strings:
+* "1"
+* "current_index-0--page_size-20"
+* "current_index--1--page_size-20"
+* "current_index1--page_size-20"
+* "current_index-1--page_size--20" </p></td>
                 </tr>
               
             </tbody>
@@ -15979,9 +16238,29 @@ Note: languages must be enabled in the agent before they can be used. </p></td>
                   <td>page_token</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Optional. The next_page_token value returned from a previous list request.
-Format: `current_index-<CURRENT_INDEX>--page_size-<PAGE_SIZE>`
-where <CURRENT_INDEX> and <PAGE_SIZE> are of type int </p></td>
+                  <td><p>Optional: The page token to support pagination.
+Pagination allows you to retrieve a large result set in smaller, more manageable portions.
+The page token is a string representing the current index and page size.
+
+Valid page token strings:
+* "" (empty string) - Retrieves the first page.
+* "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
+* "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+
+Index starts at 0.
+
+Examples of valid page token strings:
+* ""
+* "current_index-0--page_size-20"
+* "current_index-1--page_size-20"
+* "current_index-10--page_size-20"
+
+Examples of invalid page token strings:
+* "1"
+* "current_index-0--page_size-20"
+* "current_index--1--page_size-20"
+* "current_index1--page_size-20"
+* "current_index-1--page_size--20" </p></td>
                 </tr>
               
                 <tr>
@@ -16076,9 +16355,29 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&g
                   <td>page_token</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Optional. The next_page_token value returned from a previous list request.
-Format: `current_index-<CURRENT_INDEX>--page_size-<PAGE_SIZE>--sub_field-<SUB_FIELD>`
-where <CURRENT_INDEX> and <PAGE_SIZE> are of type int, <SUB_FIELD> is of type str (example: `parameters`) </p></td>
+                  <td><p>Optional: The page token to support pagination.
+Pagination allows you to retrieve a large result set in smaller, more manageable portions.
+The page token is a string representing the current index and page size.
+
+Valid page token strings:
+* "" (empty string) - Retrieves the first page.
+* "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
+* "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+
+Index starts at 0.
+
+Examples of valid page token strings:
+* ""
+* "current_index-0--page_size-20"
+* "current_index-1--page_size-20"
+* "current_index-10--page_size-20"
+
+Examples of invalid page token strings:
+* "1"
+* "current_index-0--page_size-20"
+* "current_index--1--page_size-20"
+* "current_index1--page_size-20"
+* "current_index-1--page_size--20" </p></td>
                 </tr>
               
             </tbody>
@@ -16153,9 +16452,29 @@ messages for. If not specified, the agent's default language is used. </p></td>
                   <td>page_token</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Optional. The next_page_token value returned from a previous list request.
-Format: `current_index-<CURRENT_INDEX>--page_size-<PAGE_SIZE>--sub_field-<SUB_FIELD>`
-where <CURRENT_INDEX> and <PAGE_SIZE> are of type int, <SUB_FIELD> is of type str (example: `messages`) </p></td>
+                  <td><p>Optional: The page token to support pagination.
+Pagination allows you to retrieve a large result set in smaller, more manageable portions.
+The page token is a string representing the current index and page size.
+
+Valid page token strings:
+* "" (empty string) - Retrieves the first page.
+* "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
+* "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+
+Index starts at 0.
+
+Examples of valid page token strings:
+* ""
+* "current_index-0--page_size-20"
+* "current_index-1--page_size-20"
+* "current_index-10--page_size-20"
+
+Examples of invalid page token strings:
+* "1"
+* "current_index-0--page_size-20"
+* "current_index--1--page_size-20"
+* "current_index1--page_size-20"
+* "current_index-1--page_size--20" </p></td>
                 </tr>
               
             </tbody>
@@ -16230,9 +16549,29 @@ messages for. If not specified, the agent's default language is used. </p></td>
                   <td>page_token</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Optional. The next_page_token value returned from a previous list request.
-Format: `current_index-<CURRENT_INDEX>--page_size-<PAGE_SIZE>--sub_field-<SUB_FIELD>`
-where <CURRENT_INDEX> and <PAGE_SIZE> are of type int, <SUB_FIELD> is of type str (example: `training_phrases`) </p></td>
+                  <td><p>Optional: The page token to support pagination.
+Pagination allows you to retrieve a large result set in smaller, more manageable portions.
+The page token is a string representing the current index and page size.
+
+Valid page token strings:
+* "" (empty string) - Retrieves the first page.
+* "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
+* "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+
+Index starts at 0.
+
+Examples of valid page token strings:
+* ""
+* "current_index-0--page_size-20"
+* "current_index-1--page_size-20"
+* "current_index-10--page_size-20"
+
+Examples of invalid page token strings:
+* "1"
+* "current_index-0--page_size-20"
+* "current_index--1--page_size-20"
+* "current_index1--page_size-20"
+* "current_index-1--page_size--20" </p></td>
                 </tr>
               
             </tbody>
@@ -16315,9 +16654,29 @@ If not passed, returns all </p></td>
                   <td>page_token</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Optional. The next_page_token value returned from a previous list request.
-Format: `current_index-<CURRENT_INDEX>--page_size-<PAGE_SIZE>--sub_field-<SUB_FIELD>`
-where <CURRENT_INDEX> and <PAGE_SIZE> are of type int, <SUB_FIELD> is of type str (example: `parameters`) </p></td>
+                  <td><p>Optional: The page token to support pagination.
+Pagination allows you to retrieve a large result set in smaller, more manageable portions.
+The page token is a string representing the current index and page size.
+
+Valid page token strings:
+* "" (empty string) - Retrieves the first page.
+* "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
+* "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+
+Index starts at 0.
+
+Examples of valid page token strings:
+* ""
+* "current_index-0--page_size-20"
+* "current_index-1--page_size-20"
+* "current_index-10--page_size-20"
+
+Examples of invalid page token strings:
+* "1"
+* "current_index-0--page_size-20"
+* "current_index--1--page_size-20"
+* "current_index1--page_size-20"
+* "current_index-1--page_size--20" </p></td>
                 </tr>
               
             </tbody>
@@ -17465,7 +17824,29 @@ of 1, corresponding to `Code.CANCELLED`.
                   <td>page_token</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>The standard list page token. </p></td>
+                  <td><p>Optional: The page token to support pagination.
+Pagination allows you to retrieve a large result set in smaller, more manageable portions.
+The page token is a string representing the current index and page size.
+
+Valid page token strings:
+* "" (empty string) - Retrieves the first page.
+* "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
+* "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+
+Index starts at 0.
+
+Examples of valid page token strings:
+* ""
+* "current_index-0--page_size-20"
+* "current_index-1--page_size-20"
+* "current_index-10--page_size-20"
+
+Examples of invalid page token strings:
+* "1"
+* "current_index-0--page_size-20"
+* "current_index--1--page_size-20"
+* "current_index1--page_size-20"
+* "current_index-1--page_size--20" </p></td>
                 </tr>
               
                 <tr>
@@ -17785,7 +18166,8 @@ Match operations with any of the following project parents. </p></td>
                   <td>parent</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Required. The project that the agent to fetch is associated with.
+Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre> </p></td>
                 </tr>
               
                 <tr>
@@ -17825,7 +18207,8 @@ The permissions all default to False if not provided specifically </p></td>
                   <td>parent</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Required. The project that the agent to fetch is associated with.
+Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre> </p></td>
                 </tr>
               
                 <tr>
@@ -17856,7 +18239,8 @@ The permissions all default to False if not provided specifically </p></td>
                   <td>parent</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Required. The project that the agent to fetch is associated with.
+Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre> </p></td>
                 </tr>
               
                 <tr>
@@ -17901,14 +18285,37 @@ The permissions all default to False if not provided specifically </p></td>
                   <td>parent</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Required. The project that the agent to fetch is associated with.
+Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre> </p></td>
                 </tr>
               
                 <tr>
                   <td>page_token</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Optional. The next_page_token value returned from a previous list request. </p></td>
+                  <td><p>Optional: The page token to support pagination.
+Pagination allows you to retrieve a large result set in smaller, more manageable portions.
+The page token is a string representing the current index and page size.
+
+Valid page token strings:
+* "" (empty string) - Retrieves the first page.
+* "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
+* "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+
+Index starts at 0.
+
+Examples of valid page token strings:
+* ""
+* "current_index-0--page_size-20"
+* "current_index-1--page_size-20"
+* "current_index-10--page_size-20"
+
+Examples of invalid page token strings:
+* "1"
+* "current_index-0--page_size-20"
+* "current_index--1--page_size-20"
+* "current_index1--page_size-20"
+* "current_index-1--page_size--20" </p></td>
                 </tr>
               
                 <tr>
@@ -18038,7 +18445,8 @@ more results in the list. </p></td>
                   <td>parent</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Required. The project that the agent to fetch is associated with.
+Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre> </p></td>
                 </tr>
               
                 <tr>
@@ -18345,10 +18753,8 @@ other fields in the Role are optional. Only the fields to be updated should be p
                   <td>parent</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Required. The parent/path of the project to get the statistic from.
-
-Example:
-     * `projects/<Project ID>/agent` </p></td>
+                  <td><p>Required. The project that the agent to fetch is associated with.
+Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre> </p></td>
                 </tr>
               
                 <tr>
@@ -18379,10 +18785,8 @@ Example:
                   <td>parent</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Required. The parent/path of the project to get the statistic from.
-
-Example:
-     * `projects/<Project ID>/agent` </p></td>
+                  <td><p>Required. The project that the agent to fetch is associated with.
+Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre> </p></td>
                 </tr>
               
                 <tr>
@@ -18449,10 +18853,8 @@ Example:
                   <td>parent</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Required. The parent/path of the project to get the statistic from.
-
-Example:
-     * `projects/<Project ID>/agent` </p></td>
+                  <td><p>Required. The project that the agent to fetch is associated with.
+Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre> </p></td>
                 </tr>
               
             </tbody>
@@ -18829,7 +19231,7 @@ Returns a response containing information about the added audio files.
         
           <h4 id="ondewo.nlu.Sessions.DeleteAudioFiles" class="title-badge method">DeleteAudioFiles</h4>
 
-          <pre>rpc DeleteAudioFiles (<a href="#ondewo.nlu.DeleteAudioFilesRequest">DeleteAudioFilesRequest</a>) returns (<a href="#google.protobuf.Empty">.google.protobuf.Empty)</a></pre>
+          <pre>rpc DeleteAudioFiles (<a href="#ondewo.nlu.DeleteAudioFilesRequest">DeleteAudioFilesRequest</a>) returns (<a href="#ondewo.nlu.DeleteAudioFilesResponse">DeleteAudioFilesResponse)</a></pre>
 
           RPC to delete specified audio files.
 Deletes audio files associated with specific sessions based on unique identifiers.
@@ -18842,6 +19244,13 @@ Returns an empty response indicating the successful deletion of the specified au
           RPC to get a consolidated audio file for a specific session.
 Retrieves a single audio file that combines all audio files associated with the specified session.
 Returns details of the consolidated audio file.
+        
+          <h4 id="ondewo.nlu.Sessions.ListAudioFiles" class="title-badge method">ListAudioFiles</h4>
+
+          <pre>rpc ListAudioFiles (<a href="#ondewo.nlu.ListAudioFilesRequest">ListAudioFilesRequest</a>) returns (<a href="#ondewo.nlu.ListAudioFilesResponse">ListAudioFilesResponse)</a></pre>
+
+          RPC to get a list audio files for a specific session.
+Retrieves a single audio file that combines all audio files associated with the specified session.
         
 
         
@@ -19191,6 +19600,22 @@ Returns details of the consolidated audio file.
             <tbody>
               
                 <tr>
+                  <td>parent</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The project of this agent.
+Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>session_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The unique identifier of the session for which the audio files should be listed
+Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/&lt</code></pre> </p></td>
+                </tr>
+              
+                <tr>
                   <td>audio_file</td>
                   <td><a href="#ondewo.nlu.AudioFileResource">AudioFileResource</a></td>
                   <td>repeated</td>
@@ -19220,6 +19645,13 @@ Returns details of the consolidated audio file.
                   <td>repeated</td>
                   <td><p>The unique identifier of the audio files for a specific session.
 Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/audios/&lt;audio_uuid&gt;</code></pre> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>error_message</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>error message if there are any. </p></td>
                 </tr>
               
             </tbody>
@@ -19304,7 +19736,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid
                 <tr>
                   <td>name</td>
                   <td><a href="#string">string</a></td>
-                  <td>repeated</td>
+                  <td></td>
                   <td><p>The unique identifier of the session for which the latest review should be returned
 Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/audios/&lt;audio_uuid&gt;</code></pre> </p></td>
                 </tr>
@@ -19431,11 +19863,8 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid
                   <td>parent</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Creates a session that collects all the conversation interactions between the machine and a user
-The unique identifier of an Agent
-Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-
-Required. </p></td>
+                  <td><p>Required. The project that the agent to fetch is associated with.
+Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre> </p></td>
                 </tr>
               
                 <tr>
@@ -19452,7 +19881,7 @@ Optional. If not provided, it will be auto-generated </p></td>
                   <td>labels</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
-                  <td><p>labels for the session - Optional </p></td>
+                  <td><p>Optional. labels for the session. </p></td>
                 </tr>
               
                 <tr>
@@ -19527,11 +19956,51 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid
             <tbody>
               
                 <tr>
+                  <td>parent</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The project of this agent.
+Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
+                </tr>
+              
+                <tr>
                   <td>names</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
                   <td><p>The unique identifier of the audio file of the specific session
 Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/audios/&lt;audio_uuid&gt;</code></pre> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="ondewo.nlu.DeleteAudioFilesResponse" class="title-badge message">DeleteAudioFilesResponse</h3>
+        <p>This message is a request to the delete audio files specified</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>names</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>The unique identifier of the audio file of the specific session
+Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/audios/&lt;audio_uuid&gt;</code></pre> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>error_message</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>error message if there are any. </p></td>
                 </tr>
               
             </tbody>
@@ -19836,6 +20305,14 @@ do not necessarily need to specify the same language. </p></td>
             <tbody>
               
                 <tr>
+                  <td>parent</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The project of this agent.
+Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
+                </tr>
+              
+                <tr>
                   <td>session_id</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
@@ -19868,6 +20345,14 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid
             <tbody>
               
                 <tr>
+                  <td>parent</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The project of this agent.
+Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
+                </tr>
+              
+                <tr>
                   <td>names</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
@@ -19880,6 +20365,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid
                   <td><a href="#ondewo.nlu.ResourceView">ResourceView</a></td>
                   <td></td>
                   <td><p>Represents the options for views of resources </p></td>
+                </tr>
+              
+                <tr>
+                  <td>next_page_token</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Token to retrieve the next page of results, or empty if there are no more results in the list </p></td>
                 </tr>
               
             </tbody>
@@ -19903,8 +20395,15 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid
                   <td>audio_files</td>
                   <td><a href="#ondewo.nlu.AudioFileResource">AudioFileResource</a></td>
                   <td>repeated</td>
-                  <td><p>The unique identifier of the audio files for a specific session.
+                  <td><p>The unique identifier of the audio file for a specific session.
 Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/audios/&lt;audio_uuid&gt;</code></pre> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>error_message</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>error message if there are any. </p></td>
                 </tr>
               
             </tbody>
@@ -20138,10 +20637,18 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
             <tbody>
               
                 <tr>
-                  <td>session_id</td>
+                  <td>parent</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>The unique identifier of the session for which the audio files should be listed
+                  <td><p>Required. The project of this agent.
+Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>session_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Optional: The unique identifier of the session for which the audio files should be listed
 Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/&lt</code></pre> </p></td>
                 </tr>
               
@@ -20157,6 +20664,38 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Token to retrieve the next page of results, or empty if there are no more results in the list </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="ondewo.nlu.ListAudioFilesResponse" class="title-badge message">ListAudioFilesResponse</h3>
+        <p>This message is a request to retrieve the audio files specified</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>audio_files</td>
+                  <td><a href="#ondewo.nlu.AudioFileResource">AudioFileResource</a></td>
+                  <td>repeated</td>
+                  <td><p>The requested audio files .
+Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/audios/&lt;audio_uuid&gt;</code></pre> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>error_message</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>error message if there are any. </p></td>
                 </tr>
               
             </tbody>
@@ -20748,7 +21287,29 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid
                   <td>page_token</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Optional. The next_page_token value returned from a previous list request. </p></td>
+                  <td><p>Optional: The page token to support pagination.
+Pagination allows you to retrieve a large result set in smaller, more manageable portions.
+The page token is a string representing the current index and page size.
+
+Valid page token strings:
+* "" (empty string) - Retrieves the first page.
+* "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
+* "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+
+Index starts at 0.
+
+Examples of valid page token strings:
+* ""
+* "current_index-0--page_size-20"
+* "current_index-1--page_size-20"
+* "current_index-10--page_size-20"
+
+Examples of invalid page token strings:
+* "1"
+* "current_index-0--page_size-20"
+* "current_index--1--page_size-20"
+* "current_index1--page_size-20"
+* "current_index-1--page_size--20" </p></td>
                 </tr>
               
             </tbody>
@@ -20780,7 +21341,29 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid
                   <td>page_token</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Optional. The next_page_token value returned from a previous list request. </p></td>
+                  <td><p>Optional: The page token to support pagination.
+Pagination allows you to retrieve a large result set in smaller, more manageable portions.
+The page token is a string representing the current index and page size.
+
+Valid page token strings:
+* "" (empty string) - Retrieves the first page.
+* "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
+* "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+
+Index starts at 0.
+
+Examples of valid page token strings:
+* ""
+* "current_index-0--page_size-20"
+* "current_index-1--page_size-20"
+* "current_index-10--page_size-20"
+
+Examples of invalid page token strings:
+* "1"
+* "current_index-0--page_size-20"
+* "current_index--1--page_size-20"
+* "current_index1--page_size-20"
+* "current_index-1--page_size--20" </p></td>
                 </tr>
               
             </tbody>
@@ -20899,7 +21482,29 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid
                   <td>page_token</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Optional. The next_page_token value returned from a previous list request. </p></td>
+                  <td><p>Optional: The page token to support pagination.
+Pagination allows you to retrieve a large result set in smaller, more manageable portions.
+The page token is a string representing the current index and page size.
+
+Valid page token strings:
+* "" (empty string) - Retrieves the first page.
+* "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
+* "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+
+Index starts at 0.
+
+Examples of valid page token strings:
+* ""
+* "current_index-0--page_size-20"
+* "current_index-1--page_size-20"
+* "current_index-10--page_size-20"
+
+Examples of invalid page token strings:
+* "1"
+* "current_index-0--page_size-20"
+* "current_index--1--page_size-20"
+* "current_index1--page_size-20"
+* "current_index-1--page_size--20" </p></td>
                 </tr>
               
             </tbody>
@@ -20954,8 +21559,8 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid
                   <td>parent</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>The parent for which sessions should be listed
-Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
+                  <td><p>Required. The project that the agent to fetch is associated with.
+Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre> </p></td>
                 </tr>
               
                 <tr>
@@ -20969,7 +21574,29 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td>page_token</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Optional. The next_page_token value returned from a previous list request. </p></td>
+                  <td><p>Optional: The page token to support pagination.
+Pagination allows you to retrieve a large result set in smaller, more manageable portions.
+The page token is a string representing the current index and page size.
+
+Valid page token strings:
+* "" (empty string) - Retrieves the first page.
+* "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
+* "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+
+Index starts at 0.
+
+Examples of valid page token strings:
+* ""
+* "current_index-0--page_size-20"
+* "current_index-1--page_size-20"
+* "current_index-10--page_size-20"
+
+Examples of invalid page token strings:
+* "1"
+* "current_index-0--page_size-20"
+* "current_index--1--page_size-20"
+* "current_index1--page_size-20"
+* "current_index-1--page_size--20" </p></td>
                 </tr>
               
                 <tr>
@@ -23482,6 +24109,16 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</
                   <td><p>List of keys to delete from user preferences. </p></td>
                 </tr>
               
+                <tr>
+                  <td>regex_include</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional: In addition to the keys specified also include all <pre>keys</pre> that match the provided
+<pre>regex_include</pre> regular expression.
+If user does not add regex_filter, then only the keys specified in the keys field are deleted.
+If both, a key in the keys field and in the regex_include is matched then the key is deleted without raising an error. </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -23605,7 +24242,19 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</
                   <td>keys</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
-                  <td><p>Specific keys to retrieve from user preferences. </p></td>
+                  <td><p>Specific keys to retrieve from user preferences.
+If keys are specified multiple times then only one KeyValue pair is returned </p></td>
+                </tr>
+              
+                <tr>
+                  <td>regex_include</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional: In addition to the keys specified also include all <pre>keys</pre> that match the provided
+<pre>regex_include</pre> regular expression.
+If user does not add regex_filter, then only the keys specified in the keys field are returned.
+If both, a key in the keys field and in the regex_include will be matched than only a single
+<pre>KeyValuePair</pre> is returned. </p></td>
                 </tr>
               
             </tbody>
@@ -23699,7 +24348,29 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</
                   <td>page_token</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Optional. The next_page_token value returned from a previous list request. </p></td>
+                  <td><p>Optional: The page token to support pagination.
+Pagination allows you to retrieve a large result set in smaller, more manageable portions.
+The page token is a string representing the current index and page size.
+
+Valid page token strings:
+* "" (empty string) - Retrieves the first page.
+* "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
+* "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+
+Index starts at 0.
+
+Examples of valid page token strings:
+* ""
+* "current_index-0--page_size-20"
+* "current_index-1--page_size-20"
+* "current_index-10--page_size-20"
+
+Examples of invalid page token strings:
+* "1"
+* "current_index-0--page_size-20"
+* "current_index--1--page_size-20"
+* "current_index1--page_size-20"
+* "current_index-1--page_size--20" </p></td>
                 </tr>
               
             </tbody>
@@ -23756,7 +24427,29 @@ more results in the list. </p></td>
                   <td>page_token</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Optional. The next_page_token value returned from a previous list request. </p></td>
+                  <td><p>Optional: The page token to support pagination.
+Pagination allows you to retrieve a large result set in smaller, more manageable portions.
+The page token is a string representing the current index and page size.
+
+Valid page token strings:
+* "" (empty string) - Retrieves the first page.
+* "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
+* "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+
+Index starts at 0.
+
+Examples of valid page token strings:
+* ""
+* "current_index-0--page_size-20"
+* "current_index-1--page_size-20"
+* "current_index-10--page_size-20"
+
+Examples of invalid page token strings:
+* "1"
+* "current_index-0--page_size-20"
+* "current_index--1--page_size-20"
+* "current_index1--page_size-20"
+* "current_index-1--page_size--20" </p></td>
                 </tr>
               
             </tbody>
@@ -23916,7 +24609,29 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</
                   <td>page_token</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Optional. The next_page_token value returned from a previous list request. </p></td>
+                  <td><p>Optional: The page token to support pagination.
+Pagination allows you to retrieve a large result set in smaller, more manageable portions.
+The page token is a string representing the current index and page size.
+
+Valid page token strings:
+* "" (empty string) - Retrieves the first page.
+* "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
+* "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+
+Index starts at 0.
+
+Examples of valid page token strings:
+* ""
+* "current_index-0--page_size-20"
+* "current_index-1--page_size-20"
+* "current_index-10--page_size-20"
+
+Examples of invalid page token strings:
+* "1"
+* "current_index-0--page_size-20"
+* "current_index--1--page_size-20"
+* "current_index1--page_size-20"
+* "current_index-1--page_size--20" </p></td>
                 </tr>
               
             </tbody>
@@ -25657,12 +26372,8 @@ with Google Assistant integration.
                   <td>parent</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Required. The session to create a session entity type for.
-Format: `projects/<Project ID>/agent/sessions/<Session ID>` or
-`projects/<Project ID>/agent/environments/<Environment ID>/users/<User ID>/
-sessions/<Session ID>`.
-If `Environment ID` is not specified, we assume default 'draft'
-environment. If `User ID` is not specified, we assume default '-' user. </p></td>
+                  <td><p>Required. The agent to list all intents from.
+Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 </tr>
               
                 <tr>
@@ -25670,6 +26381,23 @@ environment. If `User ID` is not specified, we assume default '-' user. </p></td
                   <td><a href="#ondewo.nlu.SessionEntityType">SessionEntityType</a></td>
                   <td></td>
                   <td><p>Required. The session entity type to create. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>session_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The session to create a session entity type for.
+Format: <pre><code>projects/&lt;project_uuid&gt;/agents/sessions/&lt;session_uuid&gt;</code></pre>
+or
+<pre><code>projects/&lt;project_uuid&gt;/agents/sessions/&lt;session_uuid&gt;</code></pre>
+`projects/<Project ID>/agent/environments/<Environment ID>/users/<User ID>/
+sessions/<Session ID>`.
+If `Environment ID` is not specified, we assume default 'draft'
+environment. If `User ID` is not specified, we assume default '-' user.
+Required. The project that the agent to fetch is associated with.
+The session to create a session entity type for.
+Format: <pre><code>projects/&lt;project_uuid&gt;/agents/sessions/&lt;session_uuid&gt;</code></pre> </p></td>
                 </tr>
               
             </tbody>
@@ -25773,7 +26501,29 @@ default 100 and at most 1000. </p></td>
                   <td>page_token</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Optional. The next_page_token value returned from a previous list request. </p></td>
+                  <td><p>Optional: The page token to support pagination.
+Pagination allows you to retrieve a large result set in smaller, more manageable portions.
+The page token is a string representing the current index and page size.
+
+Valid page token strings:
+* "" (empty string) - Retrieves the first page.
+* "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
+* "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+
+Index starts at 0.
+
+Examples of valid page token strings:
+* ""
+* "current_index-0--page_size-20"
+* "current_index-1--page_size-20"
+* "current_index-10--page_size-20"
+
+Examples of invalid page token strings:
+* "1"
+* "current_index-0--page_size-20"
+* "current_index--1--page_size-20"
+* "current_index1--page_size-20"
+* "current_index-1--page_size--20" </p></td>
                 </tr>
               
             </tbody>
