@@ -1908,6 +1908,9 @@ enum AudioFileResourceType {
     // Audio file from speech to text
     AUDIO_FILE_RESOURCE_TYPE_S2T = 2;
 
+    // Audio file from speech to text and text to speech
+    AUDIO_FILE_RESOURCE_TYPE_S2T_AND_T2S = 3;
+
 }
 
 message AudioFileResource {
