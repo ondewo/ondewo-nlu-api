@@ -6533,7 +6533,7 @@ This message is a request to add the audio files specified
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The project of this agent. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
 | session_id | [string](#string) |  | The unique identifier of the session for which the audio files should be listed Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/&lt</code></pre> |
-| audio_file | [AudioFileResource](#ondewo.nlu.AudioFileResource) | repeated | AudioFileResources to be added |
+| audio_file_resources | [AudioFileResource](#ondewo.nlu.AudioFileResource) | repeated | AudioFileResources to be added |
 
 
 
@@ -6855,7 +6855,15 @@ This message is a request to get audio files specified
 | parent | [string](#string) |  | Required. The project of this agent. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
 | names | [string](#string) | repeated | The unique identifier of the audio file of the specific session Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/audios/&lt;audio_uuid&gt;</code></pre> |
 | resource_view | [ResourceView](#ondewo.nlu.ResourceView) |  | Represents the options for views of resources |
-| next_page_token | [string](#string) |  | Token to retrieve the next page of results, or empty if there are no more results in the list |
+| page_token | [string](#string) |  | Optional: The page token to support pagination. Pagination allows you to retrieve a large result set in smaller, more manageable portions. The page token is a string representing the current index and page size.
+
+Valid page token strings: * "" (empty string) - Retrieves the first page. * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20. * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+
+Index starts at 0.
+
+Examples of valid page token strings: * "" * "current_index-0--page_size-20" * "current_index-1--page_size-20" * "current_index-10--page_size-20"
+
+Examples of invalid page token strings: * "1" * "current_index-0--page_size-20" * "current_index--1--page_size-20" * "current_index1--page_size-20" * "current_index-1--page_size--20" |
 
 
 
@@ -6872,6 +6880,7 @@ This message is a request to retrieve the audio files specified
 | ----- | ---- | ----- | ----------- |
 | audio_files | [AudioFileResource](#ondewo.nlu.AudioFileResource) | repeated | The unique identifier of the audio file for a specific session. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/audios/&lt;audio_uuid&gt;</code></pre> |
 | error_message | [string](#string) |  | error message if there are any. |
+| next_page_token | [string](#string) |  | Token to retrieve the next page of results, or empty if there are no more results in the list |
 
 
 
@@ -6987,7 +6996,15 @@ This message is a request to list all available audio files of a session
 | parent | [string](#string) |  | Required. The project of this agent. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
 | session_id | [string](#string) | repeated | Optional: The unique identifier of the session for which the audio files should be listed Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/&lt</code></pre> |
 | resource_view | [ResourceView](#ondewo.nlu.ResourceView) |  | Represents the options for views of resources |
-| next_page_token | [string](#string) |  | Token to retrieve the next page of results, or empty if there are no more results in the list |
+| page_token | [string](#string) |  | Optional: The page token to support pagination. Pagination allows you to retrieve a large result set in smaller, more manageable portions. The page token is a string representing the current index and page size.
+
+Valid page token strings: * "" (empty string) - Retrieves the first page. * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20. * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+
+Index starts at 0.
+
+Examples of valid page token strings: * "" * "current_index-0--page_size-20" * "current_index-1--page_size-20" * "current_index-10--page_size-20"
+
+Examples of invalid page token strings: * "1" * "current_index-0--page_size-20" * "current_index--1--page_size-20" * "current_index1--page_size-20" * "current_index-1--page_size--20" |
 
 
 
@@ -7003,6 +7020,7 @@ This message is a request to retrieve the audio files specified
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | audio_files | [AudioFileResource](#ondewo.nlu.AudioFileResource) | repeated | The requested audio files . Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/audios/&lt;audio_uuid&gt;</code></pre> |
+| next_page_token | [string](#string) |  | Token to retrieve the next page of results, or empty if there are no more results in the list |
 | error_message | [string](#string) |  | error message if there are any. |
 
 

@@ -19616,7 +19616,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid
                 </tr>
               
                 <tr>
-                  <td>audio_file</td>
+                  <td>audio_file_resources</td>
                   <td><a href="#ondewo.nlu.AudioFileResource">AudioFileResource</a></td>
                   <td>repeated</td>
                   <td><p>AudioFileResources to be added </p></td>
@@ -20368,10 +20368,32 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid
                 </tr>
               
                 <tr>
-                  <td>next_page_token</td>
+                  <td>page_token</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Token to retrieve the next page of results, or empty if there are no more results in the list </p></td>
+                  <td><p>Optional: The page token to support pagination.
+Pagination allows you to retrieve a large result set in smaller, more manageable portions.
+The page token is a string representing the current index and page size.
+
+Valid page token strings:
+* "" (empty string) - Retrieves the first page.
+* "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
+* "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+
+Index starts at 0.
+
+Examples of valid page token strings:
+* ""
+* "current_index-0--page_size-20"
+* "current_index-1--page_size-20"
+* "current_index-10--page_size-20"
+
+Examples of invalid page token strings:
+* "1"
+* "current_index-0--page_size-20"
+* "current_index--1--page_size-20"
+* "current_index1--page_size-20"
+* "current_index-1--page_size--20" </p></td>
                 </tr>
               
             </tbody>
@@ -20404,6 +20426,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>error message if there are any. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>next_page_token</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Token to retrieve the next page of results, or empty if there are no more results in the list </p></td>
                 </tr>
               
             </tbody>
@@ -20660,10 +20689,32 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid
                 </tr>
               
                 <tr>
-                  <td>next_page_token</td>
+                  <td>page_token</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Token to retrieve the next page of results, or empty if there are no more results in the list </p></td>
+                  <td><p>Optional: The page token to support pagination.
+Pagination allows you to retrieve a large result set in smaller, more manageable portions.
+The page token is a string representing the current index and page size.
+
+Valid page token strings:
+* "" (empty string) - Retrieves the first page.
+* "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
+* "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+
+Index starts at 0.
+
+Examples of valid page token strings:
+* ""
+* "current_index-0--page_size-20"
+* "current_index-1--page_size-20"
+* "current_index-10--page_size-20"
+
+Examples of invalid page token strings:
+* "1"
+* "current_index-0--page_size-20"
+* "current_index--1--page_size-20"
+* "current_index1--page_size-20"
+* "current_index-1--page_size--20" </p></td>
                 </tr>
               
             </tbody>
@@ -20689,6 +20740,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid
                   <td>repeated</td>
                   <td><p>The requested audio files .
 Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/audios/&lt;audio_uuid&gt;</code></pre> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>next_page_token</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Token to retrieve the next page of results, or empty if there are no more results in the list </p></td>
                 </tr>
               
                 <tr>
