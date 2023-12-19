@@ -1925,20 +1925,24 @@ message AudioFileResource {
     // Duration in seconds and milliseconds of the audio file
     float duration_in_s = 4;
 
+    // sample rate of the audio
+    int32 sample_rate = 5;
+
     // File type of an audio resource
-    AudioFileResourceType audio_file_resource_type = 5;
+    AudioFileResourceType audio_file_resource_type = 6;
 
     // Creation date and time. Read-only field.
-    google.protobuf.Timestamp created_at = 6;
+    google.protobuf.Timestamp created_at = 7;
 
     // Modification date and time. Read-only field.
-    google.protobuf.Timestamp modified_at = 7;
+    google.protobuf.Timestamp modified_at = 8;
 
     // User id in form of a valid UUID.
-    string created_by = 8;
+    string created_by = 9;
 
     // User id in form of a valid UUID.
-    string modified_by = 9;
+    string modified_by = 10;
+
 
 }
 
