@@ -301,7 +301,7 @@ service Sessions {
 
     // RPC to get a list audio files for a specific session.
     // Retrieves a single audio file that combines all audio files associated with the specified session.
-    rpc ListAudioFiles (ListAudioFilesRequest) returns (GetAudioFilesResponse) {};
+    rpc ListAudioFiles (ListAudioFilesRequest) returns (ListAudioFilesResponse) {};
 
 }
 
