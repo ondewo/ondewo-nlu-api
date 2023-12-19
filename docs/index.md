@@ -6548,7 +6548,7 @@ This message is a request to add the audio files specified
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| audio_file | [AudioFileResource](#ondewo.nlu.AudioFileResource) | repeated | The unique identifier of the audio files for a specific session. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/audios/&lt;audio_uuid&gt;</code></pre> |
+| audio_file_resources | [AudioFileResource](#ondewo.nlu.AudioFileResource) | repeated | The unique identifier of the audio files for a specific session. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/audios/&lt;audio_uuid&gt;</code></pre> |
 | error_message | [string](#string) |  | error message if there are any. |
 
 
