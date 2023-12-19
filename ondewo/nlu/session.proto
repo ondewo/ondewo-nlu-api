@@ -2017,7 +2017,7 @@ message AddAudioFilesResponse {
 
     // The unique identifier of the audio files for a specific session.
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/audios/&lt;audio_uuid&gt;</code></pre>
-    repeated AudioFileResource audio_file = 1;
+    repeated AudioFileResource audio_file_resources = 1;
 
     // error message if there are any.
     string error_message = 2;
