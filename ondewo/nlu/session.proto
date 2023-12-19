@@ -1999,6 +1999,10 @@ message GetAudioFilesResponse {
 
     // Token to retrieve the next page of results, or empty if there are no more results in the list
     string next_page_token = 3;
+
+    // sorting mode
+    SortingMode sorting_mode = 4;
+
 }
 
 // This message is a request to add the audio files specified
@@ -2088,6 +2092,9 @@ message ListAudioFilesRequest {
     // * "current_index1--page_size-20"
     // * "current_index-1--page_size--20"
     string page_token = 4;
+
+    // sorting mode
+    SortingMode sorting_mode = 5;
 
 }
 
