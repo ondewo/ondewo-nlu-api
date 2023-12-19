@@ -8089,6 +8089,7 @@ File type of an audio resource
 | AUDIO_FILE_RESOURCE_TYPE_UNSPECIFIED | 0 | Unspecified audio file type |
 | AUDIO_FILE_RESOURCE_TYPE_T2S | 1 | Audio file from text to speech |
 | AUDIO_FILE_RESOURCE_TYPE_S2T | 2 | Audio file from speech to text |
+| AUDIO_FILE_RESOURCE_TYPE_S2T_AND_T2S | 3 | Audio file from speech to text and text to speech |
 
 
 
