@@ -6600,6 +6600,7 @@ This message is a request to add session labels
 | bytes | [bytes](#bytes) |  | Bytes of the audio file |
 | language | [string](#string) |  | Language of the audio file |
 | duration_in_s | [float](#float) |  | Duration in seconds and milliseconds of the audio file |
+| sample_rate | [int32](#int32) |  | sample rate of the audio |
 | audio_file_resource_type | [AudioFileResourceType](#ondewo.nlu.AudioFileResourceType) |  | File type of an audio resource |
 | created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
 | modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
