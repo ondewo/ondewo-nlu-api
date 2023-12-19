@@ -1988,6 +1988,9 @@ message GetAudioFilesRequest {
     // * "current_index-1--page_size--20"
     string page_token = 4;
 
+    // sorting mode
+    SortingMode sorting_mode = 5;
+
 }
 
 // This message is a request to retrieve the audio files specified
@@ -2002,9 +2005,6 @@ message GetAudioFilesResponse {
 
     // Token to retrieve the next page of results, or empty if there are no more results in the list
     string next_page_token = 3;
-
-    // sorting mode
-    SortingMode sorting_mode = 4;
 
 }
 
