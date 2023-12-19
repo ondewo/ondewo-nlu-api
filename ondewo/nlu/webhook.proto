@@ -283,7 +283,29 @@ message ListSessionEntityTypesRequest {
     // default 100 and at most 1000.
     int32 page_size = 2;
 
-    // Optional. The next_page_token value returned from a previous list request.
+    // Optional: The page token to support pagination.
+    // Pagination allows you to retrieve a large result set in smaller, more manageable portions.
+    // The page token is a string representing the current index and page size.
+    //
+    // Valid page token strings:
+    // * "" (empty string) - Retrieves the first page.
+    // * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
+    // * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+    //
+    // Index starts at 0.
+    //
+    // Examples of valid page token strings:
+    // * ""
+    // * "current_index-0--page_size-20"
+    // * "current_index-1--page_size-20"
+    // * "current_index-10--page_size-20"
+    //
+    // Examples of invalid page token strings:
+    // * "1"
+    // * "current_index-0--page_size-20"
+    // * "current_index--1--page_size-20"
+    // * "current_index1--page_size-20"
+    // * "current_index-1--page_size--20"
     string page_token = 3;
 }
 
@@ -315,16 +337,25 @@ message GetSessionEntityTypeRequest {
 // The request message for
 // [SessionEntityTypes.CreateSessionEntityType][google.cloud.dialogflow.v2.SessionEntityTypes.CreateSessionEntityType].
 message CreateSessionEntityTypeRequest {
-    // Required. The session to create a session entity type for.
-    // Format: `projects/<Project ID>/agent/sessions/<Session ID>` or
-    // `projects/<Project ID>/agent/environments/<Environment ID>/users/<User ID>/
-    // sessions/<Session ID>`.
-    // If `Environment ID` is not specified, we assume default 'draft'
-    // environment. If `User ID` is not specified, we assume default '-' user.
+    // Required. The agent to list all intents from.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
     // Required. The session entity type to create.
     SessionEntityType session_entity_type = 2;
+
+    // Required. The session to create a session entity type for.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agents/sessions/&lt;session_uuid&gt;</code></pre>
+    // or
+    // <pre><code>projects/&lt;project_uuid&gt;/agents/sessions/&lt;session_uuid&gt;</code></pre>
+    // `projects/<Project ID>/agent/environments/<Environment ID>/users/<User ID>/
+    // sessions/<Session ID>`.
+    // If `Environment ID` is not specified, we assume default 'draft'
+    // environment. If `User ID` is not specified, we assume default '-' user.
+        // Required. The project that the agent to fetch is associated with.
+    // The session to create a session entity type for.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agents/sessions/&lt;session_uuid&gt;</code></pre>
+    string session_id = 1;
 }
 
 // The request message for
@@ -341,6 +372,7 @@ message UpdateSessionEntityTypeRequest {
 // The request message for
 // [SessionEntityTypes.DeleteSessionEntityType][google.cloud.dialogflow.v2.SessionEntityTypes.DeleteSessionEntityType].
 message DeleteSessionEntityTypeRequest {
+
     // Required. The name of the entity type to delete. Format:
     // `projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type
     // Display Name>` or `projects/<Project ID>/agent/environments/<Environment

@@ -267,7 +267,29 @@ message DeleteUserRequest {
 // Request to list user
 message ListUsersRequest {
 
-    // Optional. The next_page_token value returned from a previous list request.
+    // Optional: The page token to support pagination.
+    // Pagination allows you to retrieve a large result set in smaller, more manageable portions.
+    // The page token is a string representing the current index and page size.
+    //
+    // Valid page token strings:
+    // * "" (empty string) - Retrieves the first page.
+    // * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
+    // * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+    //
+    // Index starts at 0.
+    //
+    // Examples of valid page token strings:
+    // * ""
+    // * "current_index-0--page_size-20"
+    // * "current_index-1--page_size-20"
+    // * "current_index-10--page_size-20"
+    //
+    // Examples of invalid page token strings:
+    // * "1"
+    // * "current_index-0--page_size-20"
+    // * "current_index--1--page_size-20"
+    // * "current_index1--page_size-20"
+    // * "current_index-1--page_size--20"
     string page_token = 1;
 }
 
@@ -381,7 +403,29 @@ message GetServerRoleRequest {
 // Request to list server roles
 message ListServerRolesRequest {
 
-    // Optional. The next_page_token value returned from a previous list request.
+    // Optional: The page token to support pagination.
+    // Pagination allows you to retrieve a large result set in smaller, more manageable portions.
+    // The page token is a string representing the current index and page size.
+    //
+    // Valid page token strings:
+    // * "" (empty string) - Retrieves the first page.
+    // * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
+    // * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+    //
+    // Index starts at 0.
+    //
+    // Examples of valid page token strings:
+    // * ""
+    // * "current_index-0--page_size-20"
+    // * "current_index-1--page_size-20"
+    // * "current_index-10--page_size-20"
+    //
+    // Examples of invalid page token strings:
+    // * "1"
+    // * "current_index-0--page_size-20"
+    // * "current_index--1--page_size-20"
+    // * "current_index1--page_size-20"
+    // * "current_index-1--page_size--20"
     string page_token = 1;
 }
 
@@ -400,7 +444,29 @@ message ListServerRolesResponse {
 // Server permissions
 message ListServerPermissionsRequest {
 
-    // Optional. The next_page_token value returned from a previous list request.
+    // Optional: The page token to support pagination.
+    // Pagination allows you to retrieve a large result set in smaller, more manageable portions.
+    // The page token is a string representing the current index and page size.
+    //
+    // Valid page token strings:
+    // * "" (empty string) - Retrieves the first page.
+    // * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
+    // * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+    //
+    // Index starts at 0.
+    //
+    // Examples of valid page token strings:
+    // * ""
+    // * "current_index-0--page_size-20"
+    // * "current_index-1--page_size-20"
+    // * "current_index-10--page_size-20"
+    //
+    // Examples of invalid page token strings:
+    // * "1"
+    // * "current_index-0--page_size-20"
+    // * "current_index--1--page_size-20"
+    // * "current_index1--page_size-20"
+    // * "current_index-1--page_size--20"
     string page_token = 1;
 }
 
@@ -444,7 +510,16 @@ message GetUserPreferencesRequest {
     string user_name = 1;
 
     // Specific keys to retrieve from user preferences.
+    // If keys are specified multiple times then only one KeyValue pair is returned
     repeated string keys = 2;
+
+    // Optional: In addition to the keys specified also include all <pre>keys</pre> that match the provided
+    // <pre>regex_include</pre> regular expression.
+    // If user does not add regex_filter, then only the keys specified in the keys field are returned.
+    // If both, a key in the keys field and in the regex_include will be matched than only a single
+    // <pre>KeyValuePair</pre> is returned.
+    string regex_include = 3;
+
 }
 
 // Response containing user preferences.
@@ -498,6 +573,12 @@ message DeleteUserPreferencesRequest {
 
     // List of keys to delete from user preferences.
     repeated string keys = 2;
+
+    // Optional: In addition to the keys specified also include all <pre>keys</pre> that match the provided
+    // <pre>regex_include</pre> regular expression.
+    // If user does not add regex_filter, then only the keys specified in the keys field are deleted.
+    // If both, a key in the keys field and in the regex_include is matched then the key is deleted without raising an error.
+    string regex_include = 3;
 
 }
 

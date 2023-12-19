@@ -1133,6 +1133,29 @@ message ListUsersInProjectRequest {
     string parent = 1;
 
     // Optional. The next_page_token value returned from a previous list request.
+    // The page token to support pagination.
+    // Pagination allows you to retrieve a large result set in smaller, more manageable portions.
+    // The page token is a string representing the current index and page size.
+    //
+    // Valid page token strings:
+    // * "" (empty string) - Retrieves the first page.
+    // * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
+    // * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+    //
+    // Index starts at 0.
+    //
+    // Examples of valid page token strings:
+    // * ""
+    // * "current_index-0--page_size-20"
+    // * "current_index-1--page_size-20"
+    // * "current_index-10--page_size-20"
+    //
+    // Examples of invalid page token strings:
+    // * "1"
+    // * "current_index-0--page_size-20"
+    // * "current_index--1--page_size-20"
+    // * "current_index1--page_size-20"
+    // * "current_index-1--page_size--20"
     string page_token = 2;
 }
 
@@ -1176,6 +1199,29 @@ message GetPlatformInfoResponse {
 message ListProjectPermissionsRequest {
 
     // Optional. The next_page_token value returned from a previous list request.
+    // The page token to support pagination.
+    // Pagination allows you to retrieve a large result set in smaller, more manageable portions.
+    // The page token is a string representing the current index and page size.
+    //
+    // Valid page token strings:
+    // * "" (empty string) - Retrieves the first page.
+    // * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
+    // * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+    //
+    // Index starts at 0.
+    //
+    // Examples of valid page token strings:
+    // * ""
+    // * "current_index-0--page_size-20"
+    // * "current_index-1--page_size-20"
+    // * "current_index-10--page_size-20"
+    //
+    // Examples of invalid page token strings:
+    // * "1"
+    // * "current_index-0--page_size-20"
+    // * "current_index--1--page_size-20"
+    // * "current_index1--page_size-20"
+    // * "current_index-1--page_size--20"
     string page_token = 1;
 }
 
@@ -1414,6 +1460,29 @@ message FullTextSearchRequest {
     string term = 3;
 
     // Composite string: current_index-0--page_size-10
+    // The page token to support pagination.
+    // Pagination allows you to retrieve a large result set in smaller, more manageable portions.
+    // The page token is a string representing the current index and page size.
+    //
+    // Valid page token strings:
+    // * "" (empty string) - Retrieves the first page.
+    // * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
+    // * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+    //
+    // Index starts at 0.
+    //
+    // Examples of valid page token strings:
+    // * ""
+    // * "current_index-0--page_size-20"
+    // * "current_index-1--page_size-20"
+    // * "current_index-10--page_size-20"
+    //
+    // Examples of invalid page token strings:
+    // * "1"
+    // * "current_index-0--page_size-20"
+    // * "current_index--1--page_size-20"
+    // * "current_index1--page_size-20"
+    // * "current_index-1--page_size--20"
     string page_token = 4;
 
     // Type of query
@@ -1590,6 +1659,7 @@ message FullTextSearchResponseIntent {
     // Required. The project that the agent to fetch is associated with.
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     string parent = 1;
+
     // Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
     string language_code = 2;
 
@@ -1620,15 +1690,20 @@ message FullTextSearchResponseIntent {
     }
 
     repeated IntentSearchResult intent_results = 3;
+
     string term = 4;
+
     string elastic_query = 5;
+
     float time = 6;
+
     // The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2
     string next_page_token = 7;
 }
 
 // This message is a response of full text search of intent with context in
 message FullTextSearchResponseIntentContextIn {
+
     // Required. The project that the agent to fetch is associated with.
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     string parent = 1;
@@ -1875,7 +1950,30 @@ message FullTextSearchResponseIntentResponse {
 
     float time = 6;
 
-    // The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2
+    // The next_page_token is used to retrieve the next page of a returned result.
+    // The page token to support pagination.
+    // Pagination allows you to retrieve a large result set in smaller, more manageable portions.
+    // The page token is a string representing the current index and page size.
+    //
+    // Valid page token strings:
+    // * "" (empty string) - Retrieves the first page.
+    // * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
+    // * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+    //
+    // Index starts at 0.
+    //
+    // Examples of valid page token strings:
+    // * ""
+    // * "current_index-0--page_size-20"
+    // * "current_index-1--page_size-20"
+    // * "current_index-10--page_size-20"
+    //
+    // Examples of invalid page token strings:
+    // * "1"
+    // * "current_index-0--page_size-20"
+    // * "current_index--1--page_size-20"
+    // * "current_index1--page_size-20"
+    // * "current_index-1--page_size--20"
     string next_page_token = 7;
 }
 

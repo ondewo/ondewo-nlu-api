@@ -985,9 +985,29 @@ message ListIntentsRequest {
     // Optional. The resource view to apply to the returned intent.
     IntentView intent_view = 3;
 
-    // Optional. The next_page_token value returned from a previous list request.
-    // Format: `current_index-<CURRENT_INDEX>--page_size-<PAGE_SIZE>`
-    // where <CURRENT_INDEX> and <PAGE_SIZE> are of type int
+    // Optional: The page token to support pagination.
+    // Pagination allows you to retrieve a large result set in smaller, more manageable portions.
+    // The page token is a string representing the current index and page size.
+    //
+    // Valid page token strings:
+    // * "" (empty string) - Retrieves the first page.
+    // * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
+    // * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+    //
+    // Index starts at 0.
+    //
+    // Examples of valid page token strings:
+    // * ""
+    // * "current_index-0--page_size-20"
+    // * "current_index-1--page_size-20"
+    // * "current_index-10--page_size-20"
+    //
+    // Examples of invalid page token strings:
+    // * "1"
+    // * "current_index-0--page_size-20"
+    // * "current_index--1--page_size-20"
+    // * "current_index1--page_size-20"
+    // * "current_index-1--page_size--20"
     string page_token = 5;
 
     // Optional. Applies a filter to the list. Default, no filter.
@@ -1029,9 +1049,29 @@ message GetIntentRequest {
     // Optional. The resource view to apply to the returned intent.
     IntentView intent_view = 3;
 
-    // Optional. The next_page_token value returned from a previous list request.
-    // Format: `current_index-<CURRENT_INDEX>--page_size-<PAGE_SIZE>`
-    // where <CURRENT_INDEX> and <PAGE_SIZE> are of type int
+    // The page token to support pagination.
+    // Pagination allows you to retrieve a large result set in smaller, more manageable portions.
+    // The page token is a string representing the current index and page size.
+    //
+    // Valid page token strings:
+    // * "" (empty string) - Retrieves the first page.
+    // * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
+    // * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+    //
+    // Index starts at 0.
+    //
+    // Examples of valid page token strings:
+    // * ""
+    // * "current_index-0--page_size-20"
+    // * "current_index-1--page_size-20"
+    // * "current_index-10--page_size-20"
+    //
+    // Examples of invalid page token strings:
+    // * "1"
+    // * "current_index-0--page_size-20"
+    // * "current_index--1--page_size-20"
+    // * "current_index1--page_size-20"
+    // * "current_index-1--page_size--20"
     string page_token = 10;
 }
 
@@ -1292,9 +1332,29 @@ message ListTrainingPhrasesRequest {
     // messages for. If not specified, the agent's default language is used.
     string language_code = 2;
 
-    // Optional. The next_page_token value returned from a previous list request.
-    // Format: `current_index-<CURRENT_INDEX>--page_size-<PAGE_SIZE>--sub_field-<SUB_FIELD>`
-    // where <CURRENT_INDEX> and <PAGE_SIZE> are of type int, <SUB_FIELD> is of type str (example: `training_phrases`)
+    // Optional: The page token to support pagination.
+    // Pagination allows you to retrieve a large result set in smaller, more manageable portions.
+    // The page token is a string representing the current index and page size.
+    //
+    // Valid page token strings:
+    // * "" (empty string) - Retrieves the first page.
+    // * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
+    // * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+    //
+    // Index starts at 0.
+    //
+    // Examples of valid page token strings:
+    // * ""
+    // * "current_index-0--page_size-20"
+    // * "current_index-1--page_size-20"
+    // * "current_index-10--page_size-20"
+    //
+    // Examples of invalid page token strings:
+    // * "1"
+    // * "current_index-0--page_size-20"
+    // * "current_index--1--page_size-20"
+    // * "current_index1--page_size-20"
+    // * "current_index-1--page_size--20"
     string page_token = 3;
 }
 
@@ -1380,9 +1440,29 @@ message ListResponseMessagesRequest {
     // messages for. If not specified, the agent's default language is used.
     string language_code = 2;
 
-    // Optional. The next_page_token value returned from a previous list request.
-    // Format: `current_index-<CURRENT_INDEX>--page_size-<PAGE_SIZE>--sub_field-<SUB_FIELD>`
-    // where <CURRENT_INDEX> and <PAGE_SIZE> are of type int, <SUB_FIELD> is of type str (example: `messages`)
+    // Optional: The page token to support pagination.
+    // Pagination allows you to retrieve a large result set in smaller, more manageable portions.
+    // The page token is a string representing the current index and page size.
+    //
+    // Valid page token strings:
+    // * "" (empty string) - Retrieves the first page.
+    // * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
+    // * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+    //
+    // Index starts at 0.
+    //
+    // Examples of valid page token strings:
+    // * ""
+    // * "current_index-0--page_size-20"
+    // * "current_index-1--page_size-20"
+    // * "current_index-10--page_size-20"
+    //
+    // Examples of invalid page token strings:
+    // * "1"
+    // * "current_index-0--page_size-20"
+    // * "current_index--1--page_size-20"
+    // * "current_index1--page_size-20"
+    // * "current_index-1--page_size--20"
     string page_token = 3;
 }
 
@@ -1468,9 +1548,29 @@ message ListParametersRequest {
     // Optional. The language code used to filter out prompts.
     string language_code = 2;
 
-    // Optional. The next_page_token value returned from a previous list request.
-    // Format: `current_index-<CURRENT_INDEX>--page_size-<PAGE_SIZE>--sub_field-<SUB_FIELD>`
-    // where <CURRENT_INDEX> and <PAGE_SIZE> are of type int, <SUB_FIELD> is of type str (example: `parameters`)
+    // Optional: The page token to support pagination.
+    // Pagination allows you to retrieve a large result set in smaller, more manageable portions.
+    // The page token is a string representing the current index and page size.
+    //
+    // Valid page token strings:
+    // * "" (empty string) - Retrieves the first page.
+    // * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
+    // * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+    //
+    // Index starts at 0.
+    //
+    // Examples of valid page token strings:
+    // * ""
+    // * "current_index-0--page_size-20"
+    // * "current_index-1--page_size-20"
+    // * "current_index-10--page_size-20"
+    //
+    // Examples of invalid page token strings:
+    // * "1"
+    // * "current_index-0--page_size-20"
+    // * "current_index--1--page_size-20"
+    // * "current_index1--page_size-20"
+    // * "current_index-1--page_size--20"
     string page_token = 3;
 }
 
@@ -1501,11 +1601,32 @@ message ListTrainingPhrasesofIntentsWithEnrichmentRequest {
     // If not passed, returns all
     repeated string intent_ids = 3;
 
-    // Optional. The next_page_token value returned from a previous list request.
-    // Format: `current_index-<CURRENT_INDEX>--page_size-<PAGE_SIZE>--sub_field-<SUB_FIELD>`
-    // where <CURRENT_INDEX> and <PAGE_SIZE> are of type int, <SUB_FIELD> is of type str (example: `parameters`)
+    // Optional: The page token to support pagination.
+    // Pagination allows you to retrieve a large result set in smaller, more manageable portions.
+    // The page token is a string representing the current index and page size.
+    //
+    // Valid page token strings:
+    // * "" (empty string) - Retrieves the first page.
+    // * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
+    // * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+    //
+    // Index starts at 0.
+    //
+    // Examples of valid page token strings:
+    // * ""
+    // * "current_index-0--page_size-20"
+    // * "current_index-1--page_size-20"
+    // * "current_index-10--page_size-20"
+    //
+    // Examples of invalid page token strings:
+    // * "1"
+    // * "current_index-0--page_size-20"
+    // * "current_index--1--page_size-20"
+    // * "current_index1--page_size-20"
+    // * "current_index-1--page_size--20"
     string page_token = 4;
 }
+
 // This message contains a list of training phrases filtered by intent ids, language code and parent passed through the request
 message ListTrainingPhrasesofIntentsWithEnrichmentResponse {
     // List of user_says values. There will be a maximum number of items

@@ -310,6 +310,29 @@ message ListEntityTypesRequest {
     string language_code = 2;
 
     // Optional. The next_page_token value returned from a previous list request.
+    // The page token to support pagination.
+    // Pagination allows you to retrieve a large result set in smaller, more manageable portions.
+    // The page token is a string representing the current index and page size.
+    //
+    // Valid page token strings:
+    // * "" (empty string) - Retrieves the first page.
+    // * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
+    // * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+    //
+    // Index starts at 0.
+    //
+    // Examples of valid page token strings:
+    // * ""
+    // * "current_index-0--page_size-20"
+    // * "current_index-1--page_size-20"
+    // * "current_index-10--page_size-20"
+    //
+    // Examples of invalid page token strings:
+    // * "1"
+    // * "current_index-0--page_size-20"
+    // * "current_index--1--page_size-20"
+    // * "current_index1--page_size-20"
+    // * "current_index-1--page_size--20"
     string page_token = 4;
 
     // Optional. The resource view to apply to the returned entity type.
@@ -345,7 +368,30 @@ message GetEntityTypeRequest {
     // languages](https://dialogflow.com/docs/reference/language) are supported.
     // Note: languages must be enabled in the agent, before they can be used.
     string language_code = 2;
-    // A page_token allows the pagination of elements where <CURRENT_INDEX> and <PAGE_SIZE> are of type int, <SUB_FIELD> is of type str (example: `parameters`). An example for a page_token is page_size-1000
+
+    // The page token to support pagination.
+    // Pagination allows you to retrieve a large result set in smaller, more manageable portions.
+    // The page token is a string representing the current index and page size.
+    //
+    // Valid page token strings:
+    // * "" (empty string) - Retrieves the first page.
+    // * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
+    // * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+    //
+    // Index starts at 0.
+    //
+    // Examples of valid page token strings:
+    // * ""
+    // * "current_index-0--page_size-20"
+    // * "current_index-1--page_size-20"
+    // * "current_index-10--page_size-20"
+    //
+    // Examples of invalid page token strings:
+    // * "1"
+    // * "current_index-0--page_size-20"
+    // * "current_index--1--page_size-20"
+    // * "current_index1--page_size-20"
+    // * "current_index-1--page_size--20"
     string page_token = 5;
 
     // Optional. The resource view to apply to the returned Entity Type
@@ -606,6 +652,29 @@ message ListEntitiesRequest {
     string language_code = 2;
 
     // Optional. The next_page_token value returned from a previous list request.
+    // The page token to support pagination.
+    // Pagination allows you to retrieve a large result set in smaller, more manageable portions.
+    // The page token is a string representing the current index and page size.
+    //
+    // Valid page token strings:
+    // * "" (empty string) - Retrieves the first page.
+    // * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
+    // * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+    //
+    // Index starts at 0.
+    //
+    // Examples of valid page token strings:
+    // * ""
+    // * "current_index-0--page_size-20"
+    // * "current_index-1--page_size-20"
+    // * "current_index-10--page_size-20"
+    //
+    // Examples of invalid page token strings:
+    // * "1"
+    // * "current_index-0--page_size-20"
+    // * "current_index--1--page_size-20"
+    // * "current_index1--page_size-20"
+    // * "current_index-1--page_size--20"
     string page_token = 3;
 
     // Optional. Defines the sorting of the list. Default, no sorting.

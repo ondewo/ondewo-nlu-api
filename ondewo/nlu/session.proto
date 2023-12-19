@@ -292,12 +292,16 @@ service Sessions {
     // RPC to delete specified audio files.
     // Deletes audio files associated with specific sessions based on unique identifiers.
     // Returns an empty response indicating the successful deletion of the specified audio files.
-    rpc DeleteAudioFiles (DeleteAudioFilesRequest) returns (google.protobuf.Empty) {};
+    rpc DeleteAudioFiles (DeleteAudioFilesRequest) returns (DeleteAudioFilesResponse) {};
 
     // RPC to get a consolidated audio file for a specific session.
     // Retrieves a single audio file that combines all audio files associated with the specified session.
     // Returns details of the consolidated audio file.
     rpc GetAudioFileOfSession (GetAudioFileOfSessionRequest) returns (AudioFileResource) {};
+
+    // RPC to get a list audio files for a specific session.
+    // Retrieves a single audio file that combines all audio files associated with the specified session.
+    rpc ListAudioFiles (ListAudioFilesRequest) returns (GetAudioFilesResponse) {};
 
 }
 
@@ -866,14 +870,36 @@ message TrackSessionStepRequest {
 // This message is a request to list sessions
 message ListSessionsRequest {
 
-    // The parent for which sessions should be listed
-    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    // Required. The project that the agent to fetch is associated with.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     string parent = 1;
 
     // An enum specifying the amount of information to be returned per session
     Session.View session_view = 2;
 
-    // Optional. The next_page_token value returned from a previous list request.
+    // Optional: The page token to support pagination.
+    // Pagination allows you to retrieve a large result set in smaller, more manageable portions.
+    // The page token is a string representing the current index and page size.
+    //
+    // Valid page token strings:
+    // * "" (empty string) - Retrieves the first page.
+    // * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
+    // * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+    //
+    // Index starts at 0.
+    //
+    // Examples of valid page token strings:
+    // * ""
+    // * "current_index-0--page_size-20"
+    // * "current_index-1--page_size-20"
+    // * "current_index-10--page_size-20"
+    //
+    // Examples of invalid page token strings:
+    // * "1"
+    // * "current_index-0--page_size-20"
+    // * "current_index--1--page_size-20"
+    // * "current_index1--page_size-20"
+    // * "current_index-1--page_size--20"
     string page_token = 4;
 
     // Optional. A filter to narrow the response down to sessions of interest.
@@ -1249,16 +1275,15 @@ message GetSessionRequest {
 // This message is a request to create a session
 message CreateSessionRequest {
 
-    // Creates a session that collects all the conversation interactions between the machine and a user
-    // The unique identifier of an Agent
-    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    string parent = 1; // Required.
+    // Required. The project that the agent to fetch is associated with.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
+    string parent = 1;
 
     // The unique UUID of a Session
     // Format: UUID Version 4, e.g. 2f59fad2-06bc-4730-9920-d3148f28f357
     string session_uuid = 2; // Optional. If not provided, it will be auto-generated
 
-    // labels for the session - Optional
+    // Optional. labels for the session.
     repeated string labels = 3;
 
     // Optional. The collection of contexts to be activated before this query is executed.
@@ -1729,7 +1754,29 @@ message ListSessionCommentsRequest {
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre>
     string session_id = 1;
 
-    // Optional. The next_page_token value returned from a previous list request.
+    // Optional: The page token to support pagination.
+    // Pagination allows you to retrieve a large result set in smaller, more manageable portions.
+    // The page token is a string representing the current index and page size.
+    //
+    // Valid page token strings:
+    // * "" (empty string) - Retrieves the first page.
+    // * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
+    // * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+    //
+    // Index starts at 0.
+    //
+    // Examples of valid page token strings:
+    // * ""
+    // * "current_index-0--page_size-20"
+    // * "current_index-1--page_size-20"
+    // * "current_index-10--page_size-20"
+    //
+    // Examples of invalid page token strings:
+    // * "1"
+    // * "current_index-0--page_size-20"
+    // * "current_index--1--page_size-20"
+    // * "current_index1--page_size-20"
+    // * "current_index-1--page_size--20"
     string page_token = 2;
 }
 
@@ -1740,7 +1787,29 @@ message ListSessionCommentsResponse {
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/comments/&lt;comment_uuid&gt;</code></pre>
     repeated Comment comment = 1;
 
-    // Optional. The next_page_token value returned from a previous list request.
+    // Optional: The page token to support pagination.
+    // Pagination allows you to retrieve a large result set in smaller, more manageable portions.
+    // The page token is a string representing the current index and page size.
+    //
+    // Valid page token strings:
+    // * "" (empty string) - Retrieves the first page.
+    // * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
+    // * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+    //
+    // Index starts at 0.
+    //
+    // Examples of valid page token strings:
+    // * ""
+    // * "current_index-0--page_size-20"
+    // * "current_index-1--page_size-20"
+    // * "current_index-10--page_size-20"
+    //
+    // Examples of invalid page token strings:
+    // * "1"
+    // * "current_index-0--page_size-20"
+    // * "current_index--1--page_size-20"
+    // * "current_index1--page_size-20"
+    // * "current_index-1--page_size--20"
     string page_token = 2;
 
 }
@@ -1755,7 +1824,29 @@ message ListSessionReviewsRequest {
     // An enum specifying the amount of information to be returned per session review
     SessionReview.View session_review_view = 2;
 
-    // Optional. The next_page_token value returned from a previous list request.
+    // Optional: The page token to support pagination.
+    // Pagination allows you to retrieve a large result set in smaller, more manageable portions.
+    // The page token is a string representing the current index and page size.
+    //
+    // Valid page token strings:
+    // * "" (empty string) - Retrieves the first page.
+    // * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
+    // * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+    //
+    // Index starts at 0.
+    //
+    // Examples of valid page token strings:
+    // * ""
+    // * "current_index-0--page_size-20"
+    // * "current_index-1--page_size-20"
+    // * "current_index-10--page_size-20"
+    //
+    // Examples of invalid page token strings:
+    // * "1"
+    // * "current_index-0--page_size-20"
+    // * "current_index--1--page_size-20"
+    // * "current_index1--page_size-20"
+    // * "current_index-1--page_size--20"
     string page_token = 4;
 }
 
@@ -1854,28 +1945,47 @@ message AudioFileResource {
 // This message is a request to get audio files specified
 message GetAudioFilesRequest {
 
+    // Required. The project of this agent.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
     // The unique identifier of the audio file of the specific session
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/audios/&lt;audio_uuid&gt;</code></pre>
-    repeated string names = 1;
+    repeated string names = 2;
 
     // Represents the options for views of resources
-    ResourceView resource_view = 2;
+    ResourceView resource_view = 3;
+
+    // Token to retrieve the next page of results, or empty if there are no more results in the list
+    string next_page_token = 4;
+
 }
 
 // This message is a request to retrieve the audio files specified
 message GetAudioFilesResponse {
 
-    // The unique identifier of the audio files for a specific session.
+    // The unique identifier of the audio file for a specific session.
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/audios/&lt;audio_uuid&gt;</code></pre>
     repeated AudioFileResource audio_files = 1;
+
+    // error message if there are any.
+    string error_message = 2;
 
 }
 
 // This message is a request to add the audio files specified
 message AddAudioFilesRequest {
 
+    // Required. The project of this agent.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // The unique identifier of the session for which the audio files should be listed
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/&lt</code></pre>
+    string session_id = 2;
+
     // AudioFileResources to be added
-    repeated AudioFileResource audio_file = 1;
+    repeated AudioFileResource audio_file = 3;
 }
 
 // This message is a request to add the audio files specified
@@ -1884,37 +1994,78 @@ message AddAudioFilesResponse {
     // The unique identifier of the audio files for a specific session.
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/audios/&lt;audio_uuid&gt;</code></pre>
     repeated AudioFileResource audio_file = 1;
+
+    // error message if there are any.
+    string error_message = 2;
 }
 
 // This message is a request to the delete audio files specified
 message DeleteAudioFilesRequest {
 
+    // Required. The project of this agent.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // The unique identifier of the audio file of the specific session
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/audios/&lt;audio_uuid&gt;</code></pre>
+    repeated string names = 2;
+}
+
+// This message is a request to the delete audio files specified
+message DeleteAudioFilesResponse {
+
     // The unique identifier of the audio file of the specific session
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/audios/&lt;audio_uuid&gt;</code></pre>
     repeated string names = 1;
+
+    // error message if there are any.
+    string error_message = 2;
 }
 
 // This message is a request to list all available audio files of a session
 message ListAudioFilesRequest {
 
-    // The unique identifier of the session for which the audio files should be listed
+    // Required. The project of this agent.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Optional: The unique identifier of the session for which the audio files should be listed
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/&lt</code></pre>
-    string session_id = 1;
+    repeated string session_id = 2;
 
     // Represents the options for views of resources
-    ResourceView resource_view = 2;
+    ResourceView resource_view = 3;
 
     // Token to retrieve the next page of results, or empty if there are no more results in the list
-    string next_page_token = 3;
+    string next_page_token = 4;
+
 }
+
+// This message is a request to retrieve the audio files specified
+message ListAudioFilesResponse {
+
+    // The requested audio files .
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/audios/&lt;audio_uuid&gt;</code></pre>
+    repeated AudioFileResource audio_files = 1;
+
+    // error message if there are any.
+    string error_message = 2;
+
+}
+
 
 // This message is a request to get one one file combining all audios of a specific session
 message GetAudioFileOfSessionRequest {
 
+    // Required. The project of this agent.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
     // The unique identifier of the session for which the audio files should be combined
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/&lt</code></pre>
-    string session_id = 1;
+    string session_id = 2;
 
     // Represents the options for views of resources
-    ResourceView resource_view = 2;
+    ResourceView resource_view = 3;
+
 }

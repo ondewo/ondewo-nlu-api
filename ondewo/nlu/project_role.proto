@@ -127,7 +127,10 @@ enum ProjectRoleView {
 // This message is a request to create project role
 message CreateProjectRoleRequest {
 
+    // Required. The project that the agent to fetch is associated with.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     string parent = 1;
+
     //If the role_id is not provided, an incremental value will be assigned
     //The "name" and "role_type" are mandatory values
     //The permissions all default to False if not provided specifically
@@ -139,7 +142,11 @@ message CreateProjectRoleRequest {
 
 // This message is a request to update project role
 message UpdateProjectRoleRequest {
+
+    // Required. The project that the agent to fetch is associated with.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     string parent = 1;
+
     //role_id in the Role message should be given, if empty will throw an error in the backend
     //other fields in the Role are optional. Only the fields to be updated should be provided
     ProjectRole role = 2;
@@ -153,6 +160,9 @@ message UpdateProjectRoleRequest {
 
 // This message is a request to get project role
 message GetProjectRoleRequest {
+
+    // Required. The project that the agent to fetch is associated with.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     string parent = 1;
 
     oneof project_role_identifier {
@@ -168,16 +178,47 @@ message GetProjectRoleRequest {
 
 // This message is a request to delete project role
 message DeleteProjectRoleRequest {
+
+    // Required. The project that the agent to fetch is associated with.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     string parent = 1;
+
     //role is identified by role id, if empty will throw an error in the backend
     uint32 role_id = 2;
 }
 
 // This message is a request to list project role
 message ListProjectRolesRequest {
+
+    // Required. The project that the agent to fetch is associated with.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     string parent = 1;
-    // Optional. The next_page_token value returned from a previous list request.
+
+    // Optional: The page token to support pagination.
+    // Pagination allows you to retrieve a large result set in smaller, more manageable portions.
+    // The page token is a string representing the current index and page size.
+    //
+    // Valid page token strings:
+    // * "" (empty string) - Retrieves the first page.
+    // * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
+    // * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+    //
+    // Index starts at 0.
+    //
+    // Examples of valid page token strings:
+    // * ""
+    // * "current_index-0--page_size-20"
+    // * "current_index-1--page_size-20"
+    // * "current_index-10--page_size-20"
+    //
+    // Examples of invalid page token strings:
+    // * "1"
+    // * "current_index-0--page_size-20"
+    // * "current_index--1--page_size-20"
+    // * "current_index1--page_size-20"
+    // * "current_index-1--page_size--20"
     string page_token = 2;
+
     // Optional. specify the view of the project roles, PROJECT_ROLE_VIEW_FULL by default
     ProjectRoleView project_role_view = 3;
 }

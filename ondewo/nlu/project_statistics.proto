@@ -83,10 +83,8 @@ service ProjectStatistics {
 // Request to get the intent count
 message GetIntentCountRequest {
 
-    // Required. The parent/path of the project to get the statistic from.
-    //
-    // Example:
-    //      * `projects/<Project ID>/agent`
+    // Required. The project that the agent to fetch is associated with.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     string parent = 1;
 
     // Optional. Applies a filter to the list to be counted. Default, no filter.
@@ -96,10 +94,8 @@ message GetIntentCountRequest {
 // Request to get entity type count
 message GetEntityTypeCountRequest {
 
-    // Required. The parent/path of the project to get the statistic from.
-    //
-    // Example:
-    //      * `projects/<Project ID>/agent`
+    // Required. The project that the agent to fetch is associated with.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     string parent = 1;
 
     // Optional. Applies a filter to the list to be counted. Default, no filter.
@@ -109,10 +105,8 @@ message GetEntityTypeCountRequest {
 // Request to get project statistics
 message GetProjectStatRequest {
 
-    // Required. The parent/path of the project to get the statistic from.
-    //
-    // Example:
-    //      * `projects/<Project ID>/agent`
+    // Required. The project that the agent to fetch is associated with.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     string parent = 1;
 }
 
