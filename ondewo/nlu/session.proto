@@ -2066,7 +2066,7 @@ message ListAudioFilesRequest {
 
     // Optional: The unique identifier of the session for which the audio files should be listed
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/&lt</code></pre>
-    repeated string session_id = 2;
+    string session_id = 2;
 
     // Represents the options for views of resources
     ResourceView resource_view = 3;
