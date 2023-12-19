@@ -355,7 +355,7 @@ message CreateSessionEntityTypeRequest {
         // Required. The project that the agent to fetch is associated with.
     // The session to create a session entity type for.
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agents/sessions/&lt;session_uuid&gt;</code></pre>
-    string session_id = 1;
+    string session_id = 3;
 }
 
 // The request message for

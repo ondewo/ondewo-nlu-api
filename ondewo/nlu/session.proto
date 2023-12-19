@@ -1914,7 +1914,7 @@ message AudioFileResource {
 
     // The unique identifier of the session for which the latest review should be returned
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/audios/&lt;audio_uuid&gt;</code></pre>
-    repeated string name = 1;
+    string name = 1;
 
     // Bytes of the audio file
     bytes bytes = 2;
