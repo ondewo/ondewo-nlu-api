@@ -6882,6 +6882,7 @@ This message is a request to retrieve the audio files specified
 | audio_files | [AudioFileResource](#ondewo.nlu.AudioFileResource) | repeated | The unique identifier of the audio file for a specific session. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/audios/&lt;audio_uuid&gt;</code></pre> |
 | error_message | [string](#string) |  | error message if there are any. |
 | next_page_token | [string](#string) |  | Token to retrieve the next page of results, or empty if there are no more results in the list |
+| sorting_mode | [SortingMode](#ondewo.nlu.SortingMode) |  | sorting mode |
 
 
 
@@ -7006,6 +7007,7 @@ Index starts at 0.
 Examples of valid page token strings: * "" * "current_index-0--page_size-20" * "current_index-1--page_size-20" * "current_index-10--page_size-20"
 
 Examples of invalid page token strings: * "1" * "current_index-0--page_size-20" * "current_index--1--page_size-20" * "current_index1--page_size-20" * "current_index-1--page_size--20" |
+| sorting_mode | [SortingMode](#ondewo.nlu.SortingMode) |  | sorting mode |
 
 
 
