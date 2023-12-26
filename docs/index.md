@@ -3082,6 +3082,9 @@ Structure of CCAI_PROJECT view
 | CCAI_SERVICE_TYPE_ONDEWO_T2S | 7 | ondewo-t2s service |
 | CCAI_SERVICE_TYPE_ONDEWO_VTSI | 8 | ondewo-vtsi service |
 | CCAI_SERVICE_TYPE_VTSI_RABBITMQ | 9 | ondewo-vtsi service |
+| CCAI_SERVICE_TYPE_ONDEWO_NLU_QA | 10 | ondewo-nlu-qa service |
+| CCAI_SERVICE_TYPE_ONDEWO_NLU_WEBHOOK | 11 | ondewo-nlu-webhook service |
+| CCAI_SERVICE_TYPE_ONDEWO_SURVEY | 12 | ondewo-survey service |
 
 
  <!-- end enums -->
