@@ -417,6 +417,7 @@
     - [QueryInput](#ondewo.nlu.QueryInput)
     - [QueryParameters](#ondewo.nlu.QueryParameters)
     - [QueryResult](#ondewo.nlu.QueryResult)
+    - [S2tTranscription](#ondewo.nlu.S2tTranscription)
     - [Session](#ondewo.nlu.Session)
     - [SessionFilter](#ondewo.nlu.SessionFilter)
     - [SessionInfo](#ondewo.nlu.SessionInfo)
@@ -7629,6 +7630,7 @@ For a phone bot, this is the phone number +123456789 the user called (Note: This
 
 https://aim-develop.ondewo.com/ |
 | identified_user_id | [string](#string) |  | Id of the "identified user" e.g. for a chatbot the email address or for a phone bot the phone number of the user This field can also be used for a customized tracking id or tag id |
+| s2t_transcriptions | [S2tTranscription](#ondewo.nlu.S2tTranscription) | repeated | transcriptions of the user input sorted by score |
 
 
 
@@ -7660,6 +7662,24 @@ You should not rely on this field as it isn't guaranteed to be accurate, or even
 | query_text_original | [string](#string) |  | The user input gets pre-processed by spelling correction, stop word removal etc. This property holds the string that is passed to the entity recognition and intent detection |
 | diagnostic_info | [google.protobuf.Struct](#google.protobuf.Struct) |  | The free-form diagnostic info. For example, this field could contain webhook call latency. |
 | language_code | [string](#string) |  | The language that was triggered during intent detection. See [Language Support](https://dialogflow.com/docs/reference/language) for a list of the currently supported language codes. |
+
+
+
+
+
+
+<a name="ondewo.nlu.S2tTranscription"></a>
+
+### S2tTranscription
+Represents a speech-to-text transcription.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| transcription | [string](#string) |  | The transcribed text content. |
+| score | [float](#float) |  | Optional. A confidence score associated with the transcription. The score indicates the level of confidence in the accuracy of the transcription. It is a floating-point number, typically ranging from 0.0 (low confidence) to 1.0 (high confidence). |
+| language | [string](#string) |  | Optional. The detected language of the transcription. The language is represented by a string following language codes (e.g., "en" for English, "es" for Spanish). |
+| audio_resource_name | [string](#string) |  | the resource name of the audio file of the transcription |
 
 
 
