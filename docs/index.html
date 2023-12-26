@@ -2190,6 +2190,10 @@
                       </li>
                     
                       <li>
+                        <a href="#ondewo.nlu.S2tTranscription" class="title-badge message">S2tTranscription</a>
+                      </li>
+                    
+                      <li>
                         <a href="#ondewo.nlu.Session" class="title-badge message">Session</a>
                       </li>
                     
@@ -21996,6 +22000,13 @@ https://aim-develop.ondewo.com/ </p></td>
 This field can also be used for a customized tracking id or tag id </p></td>
                 </tr>
               
+                <tr>
+                  <td>s2t_transcriptions</td>
+                  <td><a href="#ondewo.nlu.S2tTranscription">S2tTranscription</a></td>
+                  <td>repeated</td>
+                  <td><p>transcriptions of the user input sorted by score </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -22146,6 +22157,54 @@ could contain webhook call latency. </p></td>
                   <td><p>The language that was triggered during intent detection.
 See [Language Support](https://dialogflow.com/docs/reference/language)
 for a list of the currently supported language codes. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="ondewo.nlu.S2tTranscription" class="title-badge message">S2tTranscription</h3>
+        <p>Represents a speech-to-text transcription.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>transcription</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The transcribed text content. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>score</td>
+                  <td><a href="#float">float</a></td>
+                  <td></td>
+                  <td><p>Optional. A confidence score associated with the transcription.
+The score indicates the level of confidence in the accuracy of the transcription.
+It is a floating-point number, typically ranging from 0.0 (low confidence) to 1.0 (high confidence). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>language</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. The detected language of the transcription.
+The language is represented by a string following language codes (e.g., "en" for English, "es" for Spanish). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>audio_resource_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>the resource name of the audio file of the transcription </p></td>
                 </tr>
               
             </tbody>
