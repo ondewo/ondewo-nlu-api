@@ -407,6 +407,25 @@ message QueryParameters {
     // This field can also be used for a customized tracking id or tag id
     string identified_user_id = 13;
 
+    // transcriptions of the user input sorted by score
+    repeated S2tTranscription s2t_transcriptions = 14;
+
+}
+
+// Represents a speech-to-text transcription.
+message S2tTranscription {
+
+    // The transcribed text content.
+    string transcription = 1;
+
+    // Optional. A confidence score associated with the transcription.
+    // The score indicates the level of confidence in the accuracy of the transcription.
+    // It is a floating-point number, typically ranging from 0.0 (low confidence) to 1.0 (high confidence).
+    float score = 2;
+
+    // Optional. The detected language of the transcription.
+    // The language is represented by a string following language codes (e.g., "en" for English, "es" for Spanish).
+    string language = 3;
 }
 
 // Represents the query input. It can contain either:
