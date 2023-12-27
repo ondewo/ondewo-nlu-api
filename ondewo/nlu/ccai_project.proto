@@ -21,27 +21,86 @@ import "google/protobuf/timestamp.proto";
 
 import "ondewo/nlu/common.proto";
 
+// Service to manage Call Center AI (CCAI) Projects.
+service CcaiProjects {
+
+    // Retrieves information about a specific CCAI project.
+    rpc GetCcaiProject (GetCcaiProjectRequest) returns (CcaiProject);
+
+    // Creates a new CCAI project based on the provided request.
+    rpc CreateCcaiProject (CreateCcaiProjectRequest) returns (CreateCcaiProjectResponse);
+
+    // Deletes a CCAI project identified by the provided request.
+    rpc DeleteCcaiProject (DeleteCcaiProjectRequest) returns (DeleteCcaiProjectResponse);
+
+    // Lists all CCAI projects based on the provided request.
+    rpc ListCcaiProjects (ListCcaiProjectsRequest) returns (ListCcaiProjectsResponse);
+
+    // Updates the information of an existing CCAI project.
+    rpc UpdateCcaiProject (UpdateCcaiProjectRequest) returns (UpdateCcaiProjectResponse);
+}
+
+
 // Message representing a CCAI project
 message CcaiProject {
 
     // Resource name of the CCAI project
     string name = 1;
 
+    // Required. The display name of this ccai project.
+    string display_name = 2;
+
+    // Optional. Resource name of the user who is the owner of the project.
+    string owner_name = 3;
+
     // Map of two letter language codes to lists of CcaiServiceList
     // Two-letter language codes following ISO 639-1 (see https://en.wikipedia.org/wiki/ISO_639-1)
-    map<string, CcaiServiceList> ccai_service_lists = 2;
+    map<string, CcaiServiceList> ccai_service_lists = 4;
+
+    // The status of the ccai project.
+    CcaiProjectStatus ccai_project_status = 5;
 
     // Creation date and time. Read-only field.
-    google.protobuf.Timestamp created_at = 3;
+    google.protobuf.Timestamp created_at = 6;
 
     // Modification date and time. Read-only field.
-    google.protobuf.Timestamp modified_at = 4;
+    google.protobuf.Timestamp modified_at = 7;
 
     // User id in the form of a valid UUID.
-    string created_by = 5;
+    string created_by = 8;
 
     // User id in the form of a valid UUID.
-    string modified_by = 6;
+    string modified_by = 9;
+
+}
+
+
+// Status of a VtsiProject.
+enum CcaiProjectStatus {
+
+    // No status specified
+    UNSPECIFIED = 0;
+
+    // Project successfully created and undeployed
+    UNDEPLOYED = 1;
+
+    // Project configuration is updating
+    UPDATING = 2;
+
+    // Project is deploying
+    DEPLOYING = 3;
+
+    // Project is deployed
+    DEPLOYED = 4;
+
+    // Project is un-deploying
+    UNDEPLOYING = 5;
+
+    // Project is currently deleting
+    DELETING = 6;
+
+    // Project is deleted
+    DELETED = 7;
 
 }
 
