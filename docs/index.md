@@ -8061,7 +8061,7 @@ Represents a speech-to-text transcription.
 | name | [string](#string) |  | resource name of the transcription |
 | text | [string](#string) |  | The transcribed text content. |
 | score | [float](#float) |  | Optional. A confidence score associated with the transcription. The score indicates the level of confidence in the accuracy of the transcription. It is a floating-point number, typically ranging from 0.0 (low confidence) to 1.0 (high confidence). |
-| language | [string](#string) |  | Optional. The detected language of the transcription. The language is represented by a string following language codes (e.g., "en" for English, "es" for Spanish). |
+| language_code | [string](#string) |  | Optional. The detected language of the transcription. The language is represented by a string following language codes (e.g., "en" for English, "es" for Spanish). |
 | audio_resource_name | [string](#string) |  | the resource name of the audio file of the transcription |
 | pipeline | [string](#string) |  | Optional. pipeline used for transcription |
 | duration_in_s | [float](#float) |  | Optional. Duration in seconds for transcription |
