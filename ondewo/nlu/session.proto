@@ -440,7 +440,7 @@ message Transcription {
 
     // Optional. The detected language of the transcription.
     // The language is represented by a string following language codes (e.g., "en" for English, "es" for Spanish).
-    string language = 4;
+    string language_code = 4;
 
     // the resource name of the audio file of the transcription
     string audio_resource_name = 5;
