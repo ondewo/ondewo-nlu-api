@@ -8058,13 +8058,14 @@ Represents a speech-to-text transcription.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | resource name of the transcription |
 | text | [string](#string) |  | The transcribed text content. |
 | score | [float](#float) |  | Optional. A confidence score associated with the transcription. The score indicates the level of confidence in the accuracy of the transcription. It is a floating-point number, typically ranging from 0.0 (low confidence) to 1.0 (high confidence). |
 | language | [string](#string) |  | Optional. The detected language of the transcription. The language is represented by a string following language codes (e.g., "en" for English, "es" for Spanish). |
 | audio_resource_name | [string](#string) |  | the resource name of the audio file of the transcription |
 | pipeline | [string](#string) |  | Optional. pipeline used for transcription |
 | duration_in_s | [float](#float) |  | Optional. Duration in seconds for transcription |
-| transcription_tye | [TranscriptionType](#ondewo.nlu.TranscriptionType) |  | Whether a speech-to-text engine or a human has transcribed the audio |
+| transcription_type | [TranscriptionType](#ondewo.nlu.TranscriptionType) |  | Whether a speech-to-text engine or a human has transcribed the audio |
 | created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
 | modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
 | created_by | [string](#string) |  | User id in form of a valid UUID. |
