@@ -141,8 +141,11 @@
     - [UpdateCcaiProjectResponse](#ondewo.nlu.UpdateCcaiProjectResponse)
   
     - [CcaiProjectSorting.CcaiProjectSortingField](#ondewo.nlu.CcaiProjectSorting.CcaiProjectSortingField)
+    - [CcaiProjectStatus](#ondewo.nlu.CcaiProjectStatus)
     - [CcaiProjectView](#ondewo.nlu.CcaiProjectView)
     - [CcaiServiceType](#ondewo.nlu.CcaiServiceType)
+  
+    - [CcaiProjects](#ondewo.nlu.CcaiProjects)
   
 - [ondewo/nlu/common.proto](#ondewo/nlu/common.proto)
     - [AddNotificationsRequest](#ondewo.nlu.AddNotificationsRequest)
@@ -2770,7 +2773,10 @@ Message representing a CCAI project
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | name | [string](#string) |  | Resource name of the CCAI project |
+| display_name | [string](#string) |  | Required. The display name of this ccai project. |
+| owner_name | [string](#string) |  | Optional. Resource name of the user who is the owner of the project. |
 | ccai_service_lists | [CcaiProject.CcaiServiceListsEntry](#ondewo.nlu.CcaiProject.CcaiServiceListsEntry) | repeated | Map of two letter language codes to lists of CcaiServiceList Two-letter language codes following ISO 639-1 (see https://en.wikipedia.org/wiki/ISO_639-1) |
+| ccai_project_status | [CcaiProjectStatus](#ondewo.nlu.CcaiProjectStatus) |  | The status of the ccai project. |
 | created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
 | modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
 | created_by | [string](#string) |  | User id in the form of a valid UUID. |
@@ -3048,6 +3054,24 @@ Enum to specify the sorting field for CCAI projects.
 
 
 
+<a name="ondewo.nlu.CcaiProjectStatus"></a>
+
+### CcaiProjectStatus
+Status of a Call Center AI (CCAI) Project.
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| CCAI_PROJECT_STATUS_UNSPECIFIED | 0 | No status specified |
+| CCAI_PROJECT_STATUS_UNDEPLOYED | 1 | Project successfully created and undeployed |
+| CCAI_PROJECT_STATUS_UPDATING | 2 | Project configuration is updating |
+| CCAI_PROJECT_STATUS_DEPLOYING | 3 | Project is deploying |
+| CCAI_PROJECT_STATUS_DEPLOYED | 4 | Project is deployed |
+| CCAI_PROJECT_STATUS_UNDEPLOYING | 5 | Project is un-deploying |
+| CCAI_PROJECT_STATUS_DELETING | 6 | Project is currently deleting |
+| CCAI_PROJECT_STATUS_DELETED | 7 | Project is deleted |
+
+
+
 <a name="ondewo.nlu.CcaiProjectView"></a>
 
 ### CcaiProjectView
@@ -3091,6 +3115,20 @@ Structure of CCAI_PROJECT view
  <!-- end enums -->
 
  <!-- end HasExtensions -->
+
+
+<a name="ondewo.nlu.CcaiProjects"></a>
+
+### CcaiProjects
+Service to manage Call Center AI (CCAI) Projects.
+
+| Method Name | Request Type | Response Type | Description |
+| ----------- | ------------ | ------------- | ------------|
+| GetCcaiProject | [GetCcaiProjectRequest](#ondewo.nlu.GetCcaiProjectRequest) | [CcaiProject](#ondewo.nlu.CcaiProject) | Retrieves information about a specific CCAI project. |
+| CreateCcaiProject | [CreateCcaiProjectRequest](#ondewo.nlu.CreateCcaiProjectRequest) | [CreateCcaiProjectResponse](#ondewo.nlu.CreateCcaiProjectResponse) | Creates a new CCAI project based on the provided request. |
+| DeleteCcaiProject | [DeleteCcaiProjectRequest](#ondewo.nlu.DeleteCcaiProjectRequest) | [DeleteCcaiProjectResponse](#ondewo.nlu.DeleteCcaiProjectResponse) | Deletes a CCAI project identified by the provided request. |
+| ListCcaiProjects | [ListCcaiProjectsRequest](#ondewo.nlu.ListCcaiProjectsRequest) | [ListCcaiProjectsResponse](#ondewo.nlu.ListCcaiProjectsResponse) | Lists all CCAI projects based on the provided request. |
+| UpdateCcaiProject | [UpdateCcaiProjectRequest](#ondewo.nlu.UpdateCcaiProjectRequest) | [UpdateCcaiProjectResponse](#ondewo.nlu.UpdateCcaiProjectResponse) | Updates the information of an existing CCAI project. |
 
  <!-- end services -->
 

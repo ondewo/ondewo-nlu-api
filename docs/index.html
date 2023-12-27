@@ -651,6 +651,31 @@
                 <a href="#ondewo/nlu/ccai_project.proto">ondewo/nlu/ccai_project.proto</a>
                 <div class="file-content">
                   
+                  <a href="#ondewo/nlu/ccai_project.proto-services">Services</a>
+                  <ul>
+                  
+                    
+                    <li>
+                      <a href="#ondewo.nlu.CcaiProjects" class="title-badge service">CcaiProjects</a>
+                      
+                      <ul>
+                      
+                        <li><a href="#ondewo.nlu.CcaiProjects.GetCcaiProject" class="title-badge method">GetCcaiProject</a></li>
+                      
+                        <li><a href="#ondewo.nlu.CcaiProjects.CreateCcaiProject" class="title-badge method">CreateCcaiProject</a></li>
+                      
+                        <li><a href="#ondewo.nlu.CcaiProjects.DeleteCcaiProject" class="title-badge method">DeleteCcaiProject</a></li>
+                      
+                        <li><a href="#ondewo.nlu.CcaiProjects.ListCcaiProjects" class="title-badge method">ListCcaiProjects</a></li>
+                      
+                        <li><a href="#ondewo.nlu.CcaiProjects.UpdateCcaiProject" class="title-badge method">UpdateCcaiProject</a></li>
+                      
+                      </ul>
+                      
+                    </li>
+                  
+                  </ul>
+                  
                   
                   <a href="#ondewo/nlu/ccai_project.proto-messages">Messages</a>
                   <ul>
@@ -723,6 +748,10 @@
                     
                       <li>
                         <a href="#ondewo.nlu.CcaiProjectSorting.CcaiProjectSortingField" class="title-badge enum">CcaiProjectSorting.CcaiProjectSortingField</a>
+                      </li>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.CcaiProjectStatus" class="title-badge enum">CcaiProjectStatus</a>
                       </li>
                     
                       <li>
@@ -9286,6 +9315,50 @@ fine-tuned for multi-class intent detection. For details see https://arxiv.org/a
       <p></p>
 
       
+      <div id="ondewo/nlu/ccai_project.proto-services" class="object-category">Services</div>
+      
+        
+        <h3 id="ondewo.nlu.CcaiProjects" class="title-badge service">CcaiProjects</h3>
+        <p>Service to manage Call Center AI (CCAI) Projects.</p>
+
+        
+        <div id="ondewo.nlu.CcaiProjects-methods" class="service-methods">Service Methods</div>
+        
+          <h4 id="ondewo.nlu.CcaiProjects.GetCcaiProject" class="title-badge method">GetCcaiProject</h4>
+
+          <pre>rpc GetCcaiProject (<a href="#ondewo.nlu.GetCcaiProjectRequest">GetCcaiProjectRequest</a>) returns (<a href="#ondewo.nlu.CcaiProject">CcaiProject)</a></pre>
+
+          Retrieves information about a specific CCAI project.
+        
+          <h4 id="ondewo.nlu.CcaiProjects.CreateCcaiProject" class="title-badge method">CreateCcaiProject</h4>
+
+          <pre>rpc CreateCcaiProject (<a href="#ondewo.nlu.CreateCcaiProjectRequest">CreateCcaiProjectRequest</a>) returns (<a href="#ondewo.nlu.CreateCcaiProjectResponse">CreateCcaiProjectResponse)</a></pre>
+
+          Creates a new CCAI project based on the provided request.
+        
+          <h4 id="ondewo.nlu.CcaiProjects.DeleteCcaiProject" class="title-badge method">DeleteCcaiProject</h4>
+
+          <pre>rpc DeleteCcaiProject (<a href="#ondewo.nlu.DeleteCcaiProjectRequest">DeleteCcaiProjectRequest</a>) returns (<a href="#ondewo.nlu.DeleteCcaiProjectResponse">DeleteCcaiProjectResponse)</a></pre>
+
+          Deletes a CCAI project identified by the provided request.
+        
+          <h4 id="ondewo.nlu.CcaiProjects.ListCcaiProjects" class="title-badge method">ListCcaiProjects</h4>
+
+          <pre>rpc ListCcaiProjects (<a href="#ondewo.nlu.ListCcaiProjectsRequest">ListCcaiProjectsRequest</a>) returns (<a href="#ondewo.nlu.ListCcaiProjectsResponse">ListCcaiProjectsResponse)</a></pre>
+
+          Lists all CCAI projects based on the provided request.
+        
+          <h4 id="ondewo.nlu.CcaiProjects.UpdateCcaiProject" class="title-badge method">UpdateCcaiProject</h4>
+
+          <pre>rpc UpdateCcaiProject (<a href="#ondewo.nlu.UpdateCcaiProjectRequest">UpdateCcaiProjectRequest</a>) returns (<a href="#ondewo.nlu.UpdateCcaiProjectResponse">UpdateCcaiProjectResponse)</a></pre>
+
+          Updates the information of an existing CCAI project.
+        
+
+        
+
+      
+      
 
       
       <div id="ondewo/nlu/ccai_project.proto-messages" class="object-category">Messages</div>
@@ -9308,11 +9381,32 @@ fine-tuned for multi-class intent detection. For details see https://arxiv.org/a
                 </tr>
               
                 <tr>
+                  <td>display_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The display name of this ccai project. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>owner_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. Resource name of the user who is the owner of the project. </p></td>
+                </tr>
+              
+                <tr>
                   <td>ccai_service_lists</td>
                   <td><a href="#ondewo.nlu.CcaiProject.CcaiServiceListsEntry">CcaiProject.CcaiServiceListsEntry</a></td>
                   <td>repeated</td>
                   <td><p>Map of two letter language codes to lists of CcaiServiceList
 Two-letter language codes following ISO 639-1 (see https://en.wikipedia.org/wiki/ISO_639-1) </p></td>
+                </tr>
+              
+                <tr>
+                  <td>ccai_project_status</td>
+                  <td><a href="#ondewo.nlu.CcaiProjectStatus">CcaiProjectStatus</a></td>
+                  <td></td>
+                  <td><p>The status of the ccai project. </p></td>
                 </tr>
               
                 <tr>
@@ -9966,6 +10060,65 @@ If there are no more results in the list, this field will be empty. </p></td>
                 <td>SORT_CCAI_PROJECT_BY_LAST_MODIFIED</td>
                 <td>4</td>
                 <td><p>Sort by last modified date</p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="ondewo.nlu.CcaiProjectStatus" class="title-badge enum">CcaiProjectStatus</h3>
+        <p>Status of a Call Center AI (CCAI) Project.</p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>CCAI_PROJECT_STATUS_UNSPECIFIED</td>
+                <td>0</td>
+                <td><p>No status specified</p></td>
+              </tr>
+            
+              <tr>
+                <td>CCAI_PROJECT_STATUS_UNDEPLOYED</td>
+                <td>1</td>
+                <td><p>Project successfully created and undeployed</p></td>
+              </tr>
+            
+              <tr>
+                <td>CCAI_PROJECT_STATUS_UPDATING</td>
+                <td>2</td>
+                <td><p>Project configuration is updating</p></td>
+              </tr>
+            
+              <tr>
+                <td>CCAI_PROJECT_STATUS_DEPLOYING</td>
+                <td>3</td>
+                <td><p>Project is deploying</p></td>
+              </tr>
+            
+              <tr>
+                <td>CCAI_PROJECT_STATUS_DEPLOYED</td>
+                <td>4</td>
+                <td><p>Project is deployed</p></td>
+              </tr>
+            
+              <tr>
+                <td>CCAI_PROJECT_STATUS_UNDEPLOYING</td>
+                <td>5</td>
+                <td><p>Project is un-deploying</p></td>
+              </tr>
+            
+              <tr>
+                <td>CCAI_PROJECT_STATUS_DELETING</td>
+                <td>6</td>
+                <td><p>Project is currently deleting</p></td>
+              </tr>
+            
+              <tr>
+                <td>CCAI_PROJECT_STATUS_DELETED</td>
+                <td>7</td>
+                <td><p>Project is deleted</p></td>
               </tr>
             
           </tbody>
