@@ -417,7 +417,6 @@
     - [QueryInput](#ondewo.nlu.QueryInput)
     - [QueryParameters](#ondewo.nlu.QueryParameters)
     - [QueryResult](#ondewo.nlu.QueryResult)
-    - [S2tTranscription](#ondewo.nlu.S2tTranscription)
     - [Session](#ondewo.nlu.Session)
     - [SessionFilter](#ondewo.nlu.SessionFilter)
     - [SessionInfo](#ondewo.nlu.SessionInfo)
@@ -430,6 +429,7 @@
     - [StreamingRecognitionResult](#ondewo.nlu.StreamingRecognitionResult)
     - [TextInput](#ondewo.nlu.TextInput)
     - [TrackSessionStepRequest](#ondewo.nlu.TrackSessionStepRequest)
+    - [Transcription](#ondewo.nlu.Transcription)
     - [UpdateSessionCommentsRequest](#ondewo.nlu.UpdateSessionCommentsRequest)
   
     - [AudioEncoding](#ondewo.nlu.AudioEncoding)
@@ -439,6 +439,7 @@
     - [Session.View](#ondewo.nlu.Session.View)
     - [SessionReview.View](#ondewo.nlu.SessionReview.View)
     - [StreamingRecognitionResult.MessageType](#ondewo.nlu.StreamingRecognitionResult.MessageType)
+    - [TranscriptionType](#ondewo.nlu.TranscriptionType)
   
     - [Sessions](#ondewo.nlu.Sessions)
   
@@ -6606,6 +6607,7 @@ This message is a request to add session labels
 | duration_in_s | [float](#float) |  | Duration in seconds and milliseconds of the audio file |
 | sample_rate | [int32](#int32) |  | sample rate of the audio |
 | audio_file_resource_type | [AudioFileResourceType](#ondewo.nlu.AudioFileResourceType) |  | File type of an audio resource |
+| transcriptions | [Transcription](#ondewo.nlu.Transcription) | repeated | transcriptions of the user input sorted by score. A transcription can be from a speech-to-text system or a human |
 | created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
 | modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
 | created_by | [string](#string) |  | User id in form of a valid UUID. |
@@ -7633,7 +7635,7 @@ For a phone bot, this is the phone number +123456789 the user called (Note: This
 
 https://aim-develop.ondewo.com/ |
 | identified_user_id | [string](#string) |  | Id of the "identified user" e.g. for a chatbot the email address or for a phone bot the phone number of the user This field can also be used for a customized tracking id or tag id |
-| s2t_transcriptions | [S2tTranscription](#ondewo.nlu.S2tTranscription) | repeated | transcriptions of the user input sorted by score |
+| transcriptions | [Transcription](#ondewo.nlu.Transcription) | repeated | transcriptions of the user input sorted by score |
 
 
 
@@ -7665,24 +7667,6 @@ You should not rely on this field as it isn't guaranteed to be accurate, or even
 | query_text_original | [string](#string) |  | The user input gets pre-processed by spelling correction, stop word removal etc. This property holds the string that is passed to the entity recognition and intent detection |
 | diagnostic_info | [google.protobuf.Struct](#google.protobuf.Struct) |  | The free-form diagnostic info. For example, this field could contain webhook call latency. |
 | language_code | [string](#string) |  | The language that was triggered during intent detection. See [Language Support](https://dialogflow.com/docs/reference/language) for a list of the currently supported language codes. |
-
-
-
-
-
-
-<a name="ondewo.nlu.S2tTranscription"></a>
-
-### S2tTranscription
-Represents a speech-to-text transcription.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| transcription | [string](#string) |  | The transcribed text content. |
-| score | [float](#float) |  | Optional. A confidence score associated with the transcription. The score indicates the level of confidence in the accuracy of the transcription. It is a floating-point number, typically ranging from 0.0 (low confidence) to 1.0 (high confidence). |
-| language | [string](#string) |  | Optional. The detected language of the transcription. The language is represented by a string following language codes (e.g., "en" for English, "es" for Spanish). |
-| audio_resource_name | [string](#string) |  | the resource name of the audio file of the transcription |
 
 
 
@@ -7886,6 +7870,7 @@ This string represents what has been passed to the entity recognition and intent
 | modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
 | created_by | [string](#string) |  | User id in form of a valid UUID. |
 | modified_by | [string](#string) |  | User id in form of a valid UUID. |
+| audio_file_resources | [AudioFileResource](#ondewo.nlu.AudioFileResource) | repeated | audio file resources associated with the session review step |
 
 
 
@@ -7909,6 +7894,7 @@ SessionStep is a single user interaction as part of a session
 | modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
 | created_by | [string](#string) |  | User id in form of a valid UUID. |
 | modified_by | [string](#string) |  | User id in form of a valid UUID. |
+| audio_file_resources | [AudioFileResource](#ondewo.nlu.AudioFileResource) | repeated | audio file resources associated with the session step |
 
 
 
@@ -8064,6 +8050,31 @@ TrackSessionStepRequest stores a session step into the session
 
 
 
+<a name="ondewo.nlu.Transcription"></a>
+
+### Transcription
+Represents a speech-to-text transcription.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| text | [string](#string) |  | The transcribed text content. |
+| score | [float](#float) |  | Optional. A confidence score associated with the transcription. The score indicates the level of confidence in the accuracy of the transcription. It is a floating-point number, typically ranging from 0.0 (low confidence) to 1.0 (high confidence). |
+| language | [string](#string) |  | Optional. The detected language of the transcription. The language is represented by a string following language codes (e.g., "en" for English, "es" for Spanish). |
+| audio_resource_name | [string](#string) |  | the resource name of the audio file of the transcription |
+| pipeline | [string](#string) |  | Optional. pipeline used for transcription |
+| duration_in_s | [float](#float) |  | Optional. Duration in seconds for transcription |
+| transcription_tye | [TranscriptionType](#ondewo.nlu.TranscriptionType) |  | Whether a speech-to-text engine or a human has transcribed the audio |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
+| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
+| created_by | [string](#string) |  | User id in form of a valid UUID. |
+| modified_by | [string](#string) |  | User id in form of a valid UUID. |
+
+
+
+
+
+
 <a name="ondewo.nlu.UpdateSessionCommentsRequest"></a>
 
 ### UpdateSessionCommentsRequest
@@ -8187,6 +8198,19 @@ Type of the response message.
 | MESSAGE_TYPE_UNSPECIFIED | 0 | Not specified. Should never be used. |
 | TRANSCRIPT | 1 | Message contains a (possibly partial) transcript. |
 | END_OF_SINGLE_UTTERANCE | 2 | Event indicates that the server has detected the end of the user's speech utterance and expects no additional speech. Therefore, the server will not process additional audio (although it may subsequently return additional results). The client should stop sending additional audio data, half-close the gRPC connection, and wait for any additional results until the server closes the gRPC connection. This message is only sent if `single_utterance` was set to `true`, and is not used otherwise. |
+
+
+
+<a name="ondewo.nlu.TranscriptionType"></a>
+
+### TranscriptionType
+
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| TRANSCRIPTION_TYPE_UNSPECIFIED | 0 | unspecified |
+| TRANSCRIPTION_TYPE_S2T | 1 | Automatic transcription by a speech to text system |
+| TRANSCRIPTION_TYPE_HUMAN | 2 | Manual human transcription |
 
 
  <!-- end enums -->
