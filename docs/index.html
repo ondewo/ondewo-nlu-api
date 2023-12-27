@@ -2190,10 +2190,6 @@
                       </li>
                     
                       <li>
-                        <a href="#ondewo.nlu.S2tTranscription" class="title-badge message">S2tTranscription</a>
-                      </li>
-                    
-                      <li>
                         <a href="#ondewo.nlu.Session" class="title-badge message">Session</a>
                       </li>
                     
@@ -2242,6 +2238,10 @@
                       </li>
                     
                       <li>
+                        <a href="#ondewo.nlu.Transcription" class="title-badge message">Transcription</a>
+                      </li>
+                    
+                      <li>
                         <a href="#ondewo.nlu.UpdateSessionCommentsRequest" class="title-badge message">UpdateSessionCommentsRequest</a>
                       </li>
                     
@@ -2277,6 +2277,10 @@
                     
                       <li>
                         <a href="#ondewo.nlu.StreamingRecognitionResult.MessageType" class="title-badge enum">StreamingRecognitionResult.MessageType</a>
+                      </li>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.TranscriptionType" class="title-badge enum">TranscriptionType</a>
                       </li>
                     
                   </ul>
@@ -19799,6 +19803,14 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid
                 </tr>
               
                 <tr>
+                  <td>transcriptions</td>
+                  <td><a href="#ondewo.nlu.Transcription">Transcription</a></td>
+                  <td>repeated</td>
+                  <td><p>transcriptions of the user input sorted by score.
+A transcription can be from a speech-to-text system or a human </p></td>
+                </tr>
+              
+                <tr>
                   <td>created_at</td>
                   <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
                   <td></td>
@@ -22019,8 +22031,8 @@ This field can also be used for a customized tracking id or tag id </p></td>
                 </tr>
               
                 <tr>
-                  <td>s2t_transcriptions</td>
-                  <td><a href="#ondewo.nlu.S2tTranscription">S2tTranscription</a></td>
+                  <td>transcriptions</td>
+                  <td><a href="#ondewo.nlu.Transcription">Transcription</a></td>
                   <td>repeated</td>
                   <td><p>transcriptions of the user input sorted by score </p></td>
                 </tr>
@@ -22175,54 +22187,6 @@ could contain webhook call latency. </p></td>
                   <td><p>The language that was triggered during intent detection.
 See [Language Support](https://dialogflow.com/docs/reference/language)
 for a list of the currently supported language codes. </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="ondewo.nlu.S2tTranscription" class="title-badge message">S2tTranscription</h3>
-        <p>Represents a speech-to-text transcription.</p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>transcription</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>The transcribed text content. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>score</td>
-                  <td><a href="#float">float</a></td>
-                  <td></td>
-                  <td><p>Optional. A confidence score associated with the transcription.
-The score indicates the level of confidence in the accuracy of the transcription.
-It is a floating-point number, typically ranging from 0.0 (low confidence) to 1.0 (high confidence). </p></td>
-                </tr>
-              
-                <tr>
-                  <td>language</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Optional. The detected language of the transcription.
-The language is represented by a string following language codes (e.g., "en" for English, "es" for Spanish). </p></td>
-                </tr>
-              
-                <tr>
-                  <td>audio_resource_name</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>the resource name of the audio file of the transcription </p></td>
                 </tr>
               
             </tbody>
@@ -23133,6 +23097,13 @@ This string represents what has been passed to the entity recognition and intent
                   <td><p>User id in form of a valid UUID. </p></td>
                 </tr>
               
+                <tr>
+                  <td>audio_file_resources</td>
+                  <td><a href="#ondewo.nlu.AudioFileResource">AudioFileResource</a></td>
+                  <td>repeated</td>
+                  <td><p>audio file resources associated with the session review step </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -23212,6 +23183,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>User id in form of a valid UUID. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>audio_file_resources</td>
+                  <td><a href="#ondewo.nlu.AudioFileResource">AudioFileResource</a></td>
+                  <td>repeated</td>
+                  <td><p>audio file resources associated with the session step </p></td>
                 </tr>
               
             </tbody>
@@ -23461,6 +23439,103 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid
                   <td><a href="#ondewo.nlu.Session.View">Session.View</a></td>
                   <td></td>
                   <td><p>Defines which fields of the session should be returned in the response </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="ondewo.nlu.Transcription" class="title-badge message">Transcription</h3>
+        <p>Represents a speech-to-text transcription.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>text</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The transcribed text content. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>score</td>
+                  <td><a href="#float">float</a></td>
+                  <td></td>
+                  <td><p>Optional. A confidence score associated with the transcription.
+The score indicates the level of confidence in the accuracy of the transcription.
+It is a floating-point number, typically ranging from 0.0 (low confidence) to 1.0 (high confidence). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>language</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. The detected language of the transcription.
+The language is represented by a string following language codes (e.g., "en" for English, "es" for Spanish). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>audio_resource_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>the resource name of the audio file of the transcription </p></td>
+                </tr>
+              
+                <tr>
+                  <td>pipeline</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. pipeline used for transcription </p></td>
+                </tr>
+              
+                <tr>
+                  <td>duration_in_s</td>
+                  <td><a href="#float">float</a></td>
+                  <td></td>
+                  <td><p>Optional. Duration in seconds for transcription </p></td>
+                </tr>
+              
+                <tr>
+                  <td>transcription_tye</td>
+                  <td><a href="#ondewo.nlu.TranscriptionType">TranscriptionType</a></td>
+                  <td></td>
+                  <td><p>Whether a speech-to-text engine or a human has transcribed the audio </p></td>
+                </tr>
+              
+                <tr>
+                  <td>created_at</td>
+                  <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
+                  <td></td>
+                  <td><p>Creation date and time. Read-only field. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>modified_at</td>
+                  <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
+                  <td></td>
+                  <td><p>Modification date and time. Read-only field. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>created_by</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>User id in form of a valid UUID. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>modified_by</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>User id in form of a valid UUID. </p></td>
                 </tr>
               
             </tbody>
@@ -23794,6 +23869,35 @@ additional results). The client should stop sending additional audio
 data, half-close the gRPC connection, and wait for any additional results
 until the server closes the gRPC connection. This message is only sent if
 `single_utterance` was set to `true`, and is not used otherwise.</p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="ondewo.nlu.TranscriptionType" class="title-badge enum">TranscriptionType</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>TRANSCRIPTION_TYPE_UNSPECIFIED</td>
+                <td>0</td>
+                <td><p>unspecified</p></td>
+              </tr>
+            
+              <tr>
+                <td>TRANSCRIPTION_TYPE_S2T</td>
+                <td>1</td>
+                <td><p>Automatic transcription by a speech to text system</p></td>
+              </tr>
+            
+              <tr>
+                <td>TRANSCRIPTION_TYPE_HUMAN</td>
+                <td>2</td>
+                <td><p>Manual human transcription</p></td>
               </tr>
             
           </tbody>
