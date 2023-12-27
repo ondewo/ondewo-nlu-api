@@ -427,41 +427,44 @@ enum TranscriptionType {
 // Represents a speech-to-text transcription.
 message Transcription {
 
+    // resource name of the transcription
+    string name = 1;
+
     // The transcribed text content.
-    string text = 1;
+    string text = 2;
 
     // Optional. A confidence score associated with the transcription.
     // The score indicates the level of confidence in the accuracy of the transcription.
     // It is a floating-point number, typically ranging from 0.0 (low confidence) to 1.0 (high confidence).
-    float score = 2;
+    float score = 3;
 
     // Optional. The detected language of the transcription.
     // The language is represented by a string following language codes (e.g., "en" for English, "es" for Spanish).
-    string language = 3;
+    string language = 4;
 
     // the resource name of the audio file of the transcription
-    string audio_resource_name = 4;
+    string audio_resource_name = 5;
 
     // Optional. pipeline used for transcription
-    string pipeline = 5;
+    string pipeline = 6;
 
     // Optional. Duration in seconds for transcription
-    float duration_in_s = 6;
+    float duration_in_s = 7;
 
     // Whether a speech-to-text engine or a human has transcribed the audio
-    TranscriptionType transcription_tye = 7;
+    TranscriptionType transcription_type = 8;
 
     // Creation date and time. Read-only field.
-    google.protobuf.Timestamp created_at = 8;
+    google.protobuf.Timestamp created_at = 9;
 
     // Modification date and time. Read-only field.
-    google.protobuf.Timestamp modified_at = 9;
+    google.protobuf.Timestamp modified_at = 10;
 
     // User id in form of a valid UUID.
-    string created_by = 10;
+    string created_by = 11;
 
     // User id in form of a valid UUID.
-    string modified_by = 11;
+    string modified_by = 12;
 
 }
 
