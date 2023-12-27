@@ -75,32 +75,32 @@ message CcaiProject {
 }
 
 
-// Status of a VtsiProject.
+// Status of a Call Center AI (CCAI) Project.
 enum CcaiProjectStatus {
 
     // No status specified
-    UNSPECIFIED = 0;
+    CCAI_PROJECT_STATUS_UNSPECIFIED = 0;
 
     // Project successfully created and undeployed
-    UNDEPLOYED = 1;
+    CCAI_PROJECT_STATUS_UNDEPLOYED = 1;
 
     // Project configuration is updating
-    UPDATING = 2;
+    CCAI_PROJECT_STATUS_UPDATING = 2;
 
     // Project is deploying
-    DEPLOYING = 3;
+    CCAI_PROJECT_STATUS_DEPLOYING = 3;
 
     // Project is deployed
-    DEPLOYED = 4;
+    CCAI_PROJECT_STATUS_DEPLOYED = 4;
 
     // Project is un-deploying
-    UNDEPLOYING = 5;
+    CCAI_PROJECT_STATUS_UNDEPLOYING = 5;
 
     // Project is currently deleting
-    DELETING = 6;
+    CCAI_PROJECT_STATUS_DELETING = 6;
 
     // Project is deleted
-    DELETED = 7;
+    CCAI_PROJECT_STATUS_DELETED = 7;
 
 }
 
