@@ -445,8 +445,8 @@ message Transcription {
     // the resource name of the audio file of the transcription
     string audio_resource_name = 5;
 
-    // Optional. pipeline used for transcription
-    string pipeline = 6;
+    // Optional. pipeline used for transcription. A pipeline ID. Example: "pipeline_1"
+    string pipeline_id = 6;
 
     // Optional. Duration in seconds for transcription
     float duration_in_s = 7;
