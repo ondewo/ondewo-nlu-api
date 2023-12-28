@@ -72,6 +72,10 @@ message CcaiProject {
     // User id in the form of a valid UUID.
     string modified_by = 9;
 
+    // Associated NLU agents
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    repeated string nlu_agent_names = 19;
+
 }
 
 
