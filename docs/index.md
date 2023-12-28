@@ -2781,6 +2781,7 @@ Message representing a CCAI project
 | modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
 | created_by | [string](#string) |  | User id in the form of a valid UUID. |
 | modified_by | [string](#string) |  | User id in the form of a valid UUID. |
+| nlu_agent_names | [string](#string) | repeated | Associated NLU agents Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
 
 
 
