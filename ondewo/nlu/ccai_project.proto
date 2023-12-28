@@ -157,7 +157,6 @@ enum CcaiServiceType {
     CCAI_SERVICE_TYPE_ONDEWO_SURVEY = 12;
 
 }
-
 // Definition of a Call Center AI (CCAI) Service.
 message CcaiService {
 
@@ -195,30 +194,35 @@ message CcaiService {
     // Another additional port for communication if required.
     int32 port2 = 11;
 
+    // Http basic auth token
+    string http_basic_auth_token = 12;
+
     // Account name for authentication.
-    string account_name = 12;
+    string account_name = 13;
 
     // Password for the specified account for authentication.
-    string account_password = 13;
+    string account_password = 14;
 
     // API key for accessing the service, if applicable.
-    string api_key = 14;
+    string api_key = 15;
 
     // Type of CCAI service (e.g., TEXT_TO_SPEECH, SPEECH_TO_TEXT).
-    CcaiServiceType ccai_service_type = 15;
+    CcaiServiceType ccai_service_type = 16;
 
     // Creation date and time of the service. Read-only field.
-    google.protobuf.Timestamp created_at = 16;
+    google.protobuf.Timestamp created_at = 17;
 
     // Modification date and time of the service. Read-only field.
-    google.protobuf.Timestamp modified_at = 17;
+    google.protobuf.Timestamp modified_at = 18;
 
     // User ID of the creator in the form of a valid UUID. Read-only field.
-    string created_by = 18;
+    string created_by = 19;
 
     // User ID of the last modifier in the form of a valid UUID. Read-only field.
-    string modified_by = 19;
+    string modified_by = 20;
+
 }
+
 
 message CreateCcaiProjectRequest {
     CcaiProject ccai_project = 1;
