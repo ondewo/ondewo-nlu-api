@@ -2863,7 +2863,7 @@ Filter which services should be included in the returned CcaiProject
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | language_codes | [string](#string) | repeated | Language codes of the projects for which services are filtered. |
-| ccai_service_type | [CcaiServiceType](#ondewo.nlu.CcaiServiceType) | repeated | Type of CCAI service |
+| ccai_service_types | [CcaiServiceType](#ondewo.nlu.CcaiServiceType) | repeated | Type of CCAI service |
 
 
 
