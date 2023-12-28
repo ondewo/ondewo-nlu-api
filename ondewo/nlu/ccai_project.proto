@@ -184,7 +184,7 @@ message CcaiService {
 
     // Account information
     string account_name = 11;
-    string password = 12;
+    string account_password = 12;
 
     // API key for the service
     string api_key = 13;
