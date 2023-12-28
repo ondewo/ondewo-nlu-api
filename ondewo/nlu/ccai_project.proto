@@ -158,51 +158,66 @@ enum CcaiServiceType {
 
 }
 
+// Definition of a Call Center AI (CCAI) Service.
 message CcaiService {
 
-    // Resource name of the service
+    // Resource name of the service. Must be unique.
     string name = 1;
 
-    // Display name
+    // Display name for better identification.
     string display_name = 2;
 
-    // gRPC host and port
-    string grpc_host = 3;
-    int32 grpc_port = 4;
+    // Language code representing the service language
+    // Format (e.g., "en" for English, "de" for German).
+    string language_code = 3;
 
-    // Web gRPC host and port
-    string webgrpc_host = 5;
-    int32 webgrpc_port = 6;
+    // gRPC host for communication with the specified port.
+    string grpc_host = 4;
 
-    // Path to the gRPC certificate
-    string grpc_cert = 7;
+    // Port for gRPC communication.
+    int32 grpc_port = 5;
 
-    // Additional host and ports
-    string host = 8;
-    int32 port = 9;
-    int32 port2 = 10;
+    // Web gRPC host for web-based communication with the specified port.
+    string webgrpc_host = 6;
 
-    // Account information
-    string account_name = 11;
-    string account_password = 12;
+    // Port for web gRPC communication.
+    int32 webgrpc_port = 7;
 
-    // API key for the service
-    string api_key = 13;
+    // Path to the gRPC certificate for secure communication.
+    string grpc_cert = 8;
 
-    // Type of CCAI service
-    CcaiServiceType ccai_service_type = 14;
+    // Additional host for communication, if needed.
+    string host = 9;
 
-    // Creation date and time. Read-only field.
-    google.protobuf.Timestamp created_at = 15;
+    // Port for additional communication.
+    int32 port = 10;
 
-    // Modification date and time. Read-only field.
-    google.protobuf.Timestamp modified_at = 16;
+    // Another additional port for communication if required.
+    int32 port2 = 11;
 
-    // User id in the form of a valid UUID.
-    string created_by = 17;
+    // Account name for authentication.
+    string account_name = 12;
 
-    // User id in the form of a valid UUID.
-    string modified_by = 18;
+    // Password for the specified account for authentication.
+    string account_password = 13;
+
+    // API key for accessing the service, if applicable.
+    string api_key = 14;
+
+    // Type of CCAI service (e.g., TEXT_TO_SPEECH, SPEECH_TO_TEXT).
+    CcaiServiceType ccai_service_type = 15;
+
+    // Creation date and time of the service. Read-only field.
+    google.protobuf.Timestamp created_at = 16;
+
+    // Modification date and time of the service. Read-only field.
+    google.protobuf.Timestamp modified_at = 17;
+
+    // User ID of the creator in the form of a valid UUID. Read-only field.
+    string created_by = 18;
+
+    // User ID of the last modifier in the form of a valid UUID. Read-only field.
+    string modified_by = 19;
 }
 
 message CreateCcaiProjectRequest {
