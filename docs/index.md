@@ -2855,6 +2855,7 @@ Definition of a Call Center AI (CCAI) Service.
 | host | [string](#string) |  | Additional host for communication, if needed. |
 | port | [int32](#int32) |  | Port for additional communication. |
 | port2 | [int32](#int32) |  | Another additional port for communication if required. |
+| http_basic_auth_token | [string](#string) |  | Http basic auth token |
 | account_name | [string](#string) |  | Account name for authentication. |
 | account_password | [string](#string) |  | Password for the specified account for authentication. |
 | api_key | [string](#string) |  | API key for accessing the service, if applicable. |
