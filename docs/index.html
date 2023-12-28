@@ -9546,7 +9546,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
         
       
         <h3 id="ondewo.nlu.CcaiService" class="title-badge message">CcaiService</h3>
-        <p></p>
+        <p>Definition of a Call Center AI (CCAI) Service.</p>
 
         
           <table class="field-table">
@@ -9559,126 +9559,134 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td>name</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Resource name of the service </p></td>
+                  <td><p>Resource name of the service. Must be unique. </p></td>
                 </tr>
               
                 <tr>
                   <td>display_name</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Display name </p></td>
+                  <td><p>Display name for better identification. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>language_code</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Language code representing the service language
+Format (e.g., "en" for English, "de" for German). </p></td>
                 </tr>
               
                 <tr>
                   <td>grpc_host</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>gRPC host and port </p></td>
+                  <td><p>gRPC host for communication with the specified port. </p></td>
                 </tr>
               
                 <tr>
                   <td>grpc_port</td>
                   <td><a href="#int32">int32</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Port for gRPC communication. </p></td>
                 </tr>
               
                 <tr>
                   <td>webgrpc_host</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Web gRPC host and port </p></td>
+                  <td><p>Web gRPC host for web-based communication with the specified port. </p></td>
                 </tr>
               
                 <tr>
                   <td>webgrpc_port</td>
                   <td><a href="#int32">int32</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Port for web gRPC communication. </p></td>
                 </tr>
               
                 <tr>
                   <td>grpc_cert</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Path to the gRPC certificate </p></td>
+                  <td><p>Path to the gRPC certificate for secure communication. </p></td>
                 </tr>
               
                 <tr>
                   <td>host</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Additional host and ports </p></td>
+                  <td><p>Additional host for communication, if needed. </p></td>
                 </tr>
               
                 <tr>
                   <td>port</td>
                   <td><a href="#int32">int32</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Port for additional communication. </p></td>
                 </tr>
               
                 <tr>
                   <td>port2</td>
                   <td><a href="#int32">int32</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Another additional port for communication if required. </p></td>
                 </tr>
               
                 <tr>
                   <td>account_name</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Account information </p></td>
+                  <td><p>Account name for authentication. </p></td>
                 </tr>
               
                 <tr>
                   <td>account_password</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Password for the specified account for authentication. </p></td>
                 </tr>
               
                 <tr>
                   <td>api_key</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>API key for the service </p></td>
+                  <td><p>API key for accessing the service, if applicable. </p></td>
                 </tr>
               
                 <tr>
                   <td>ccai_service_type</td>
                   <td><a href="#ondewo.nlu.CcaiServiceType">CcaiServiceType</a></td>
                   <td></td>
-                  <td><p>Type of CCAI service </p></td>
+                  <td><p>Type of CCAI service (e.g., TEXT_TO_SPEECH, SPEECH_TO_TEXT). </p></td>
                 </tr>
               
                 <tr>
                   <td>created_at</td>
                   <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
                   <td></td>
-                  <td><p>Creation date and time. Read-only field. </p></td>
+                  <td><p>Creation date and time of the service. Read-only field. </p></td>
                 </tr>
               
                 <tr>
                   <td>modified_at</td>
                   <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
                   <td></td>
-                  <td><p>Modification date and time. Read-only field. </p></td>
+                  <td><p>Modification date and time of the service. Read-only field. </p></td>
                 </tr>
               
                 <tr>
                   <td>created_by</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>User id in the form of a valid UUID. </p></td>
+                  <td><p>User ID of the creator in the form of a valid UUID. Read-only field. </p></td>
                 </tr>
               
                 <tr>
                   <td>modified_by</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>User id in the form of a valid UUID. </p></td>
+                  <td><p>User ID of the last modifier in the form of a valid UUID. Read-only field. </p></td>
                 </tr>
               
             </tbody>

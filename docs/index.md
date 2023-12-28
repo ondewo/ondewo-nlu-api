@@ -2839,29 +2839,30 @@ This protobuf message defines the sorting order for CCAI (Virtual Test System In
 <a name="ondewo.nlu.CcaiService"></a>
 
 ### CcaiService
-
+Definition of a Call Center AI (CCAI) Service.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| name | [string](#string) |  | Resource name of the service |
-| display_name | [string](#string) |  | Display name |
-| grpc_host | [string](#string) |  | gRPC host and port |
-| grpc_port | [int32](#int32) |  |  |
-| webgrpc_host | [string](#string) |  | Web gRPC host and port |
-| webgrpc_port | [int32](#int32) |  |  |
-| grpc_cert | [string](#string) |  | Path to the gRPC certificate |
-| host | [string](#string) |  | Additional host and ports |
-| port | [int32](#int32) |  |  |
-| port2 | [int32](#int32) |  |  |
-| account_name | [string](#string) |  | Account information |
-| account_password | [string](#string) |  |  |
-| api_key | [string](#string) |  | API key for the service |
-| ccai_service_type | [CcaiServiceType](#ondewo.nlu.CcaiServiceType) |  | Type of CCAI service |
-| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
-| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
-| created_by | [string](#string) |  | User id in the form of a valid UUID. |
-| modified_by | [string](#string) |  | User id in the form of a valid UUID. |
+| name | [string](#string) |  | Resource name of the service. Must be unique. |
+| display_name | [string](#string) |  | Display name for better identification. |
+| language_code | [string](#string) |  | Language code representing the service language Format (e.g., "en" for English, "de" for German). |
+| grpc_host | [string](#string) |  | gRPC host for communication with the specified port. |
+| grpc_port | [int32](#int32) |  | Port for gRPC communication. |
+| webgrpc_host | [string](#string) |  | Web gRPC host for web-based communication with the specified port. |
+| webgrpc_port | [int32](#int32) |  | Port for web gRPC communication. |
+| grpc_cert | [string](#string) |  | Path to the gRPC certificate for secure communication. |
+| host | [string](#string) |  | Additional host for communication, if needed. |
+| port | [int32](#int32) |  | Port for additional communication. |
+| port2 | [int32](#int32) |  | Another additional port for communication if required. |
+| account_name | [string](#string) |  | Account name for authentication. |
+| account_password | [string](#string) |  | Password for the specified account for authentication. |
+| api_key | [string](#string) |  | API key for accessing the service, if applicable. |
+| ccai_service_type | [CcaiServiceType](#ondewo.nlu.CcaiServiceType) |  | Type of CCAI service (e.g., TEXT_TO_SPEECH, SPEECH_TO_TEXT). |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time of the service. Read-only field. |
+| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time of the service. Read-only field. |
+| created_by | [string](#string) |  | User ID of the creator in the form of a valid UUID. Read-only field. |
+| modified_by | [string](#string) |  | User ID of the last modifier in the form of a valid UUID. Read-only field. |
 
 
 
