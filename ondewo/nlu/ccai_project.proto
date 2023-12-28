@@ -56,7 +56,7 @@ message CcaiProject {
 
     // Map of two letter language codes to lists of CcaiServiceList
     // Two-letter language codes following ISO 639-1 (see https://en.wikipedia.org/wiki/ISO_639-1)
-    map<string, CcaiServiceList> ccai_service_lists = 4;
+    map<string, CcaiServiceList> ccai_services_map = 4;
 
     // The status of the ccai project.
     CcaiProjectStatus ccai_project_status = 5;
