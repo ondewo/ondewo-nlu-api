@@ -38,6 +38,7 @@ service CcaiProjects {
 
     // Updates the information of an existing CCAI project.
     rpc UpdateCcaiProject (UpdateCcaiProjectRequest) returns (UpdateCcaiProjectResponse);
+
 }
 
 
@@ -243,9 +244,10 @@ message GetCcaiProjectRequest{
     string name = 1;
 
     // Optional. Specify the view of the returned CcaiProject (full view by default)
-    CcaiProjectView ccai_project_view = 2;
+    optional CcaiProjectView ccai_project_view = 2;
 
-    CcaiProjectFilter ccai_project_filter = 3;
+    // Filter which services should be included in the returned CcaiProject
+    optional CcaiServiceFilter ccai_service_filter = 3;
 }
 
 // Request to get the list of agents
@@ -353,25 +355,28 @@ enum CcaiProjectView {
     CCAI_PROJECT_VIEW_MINIMUM = 3;
 }
 
-message CcaiProjectFilter {
+// Filter which services should be included in the returned CcaiProject
+message CcaiServiceFilter {
 
     // Language codes of the projects for which services are filtered.
     repeated string language_codes = 1;
 
     // Type of CCAI service
-    repeated  CcaiServiceType ccai_service_type = 14;
+    repeated CcaiServiceType ccai_service_type = 2;
 
 }
-
 
 // Request to updated CCAI project
 message UpdateCcaiProjectRequest{
 
-    // Project Configs.
+    // The CcaiProject that should be updated
     CcaiProject ccai_project = 1;
 
+    // Filter which services should be updated in the CcaiProject
+    optional CcaiServiceFilter ccai_service_filter = 2;
+
     // Optional. The mask to control which fields get updated.
-    google.protobuf.FieldMask update_mask = 2;
+    google.protobuf.FieldMask update_mask = 3;
 }
 
 // Request to updated CCAI project
