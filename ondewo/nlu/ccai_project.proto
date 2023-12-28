@@ -73,7 +73,7 @@ message CcaiProject {
     // User id in the form of a valid UUID.
     string modified_by = 9;
 
-    // Associated NLU agent
+    // Required. Associated NLU agent
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string nlu_agent_name = 10;
 
@@ -233,6 +233,10 @@ message CreateCcaiProjectRequest {
     // The CCAI project to be created.
     CcaiProject ccai_project = 1;
 
+    // Required. The nlu agent project of this CcaiProject.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string nlu_agent_name = 4;
+
 }
 
 // Response after attempting to create a Call Center AI (CCAI) project.
@@ -258,6 +262,10 @@ message GetCcaiProjectRequest{
 
     // Filter which services should be included in the returned CcaiProject
     optional CcaiServiceFilter ccai_service_filter = 3;
+
+    // Required. The nlu agent project of this CcaiProject.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string nlu_agent_name = 4;
 
 }
 
@@ -298,7 +306,7 @@ message ListCcaiProjectsRequest {
     // If not specified, the default behavior is to have no sorting.
     optional CcaiProjectSorting ccai_project_sorting = 3;
 
-    // Optional. Filter based on associated NLU agent
+    // Required. The nlu agent project of this CcaiProject.
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string nlu_agent_name = 4;
 
@@ -393,6 +401,10 @@ message UpdateCcaiProjectRequest{
     // Optional. The mask to control which fields get updated.
     google.protobuf.FieldMask update_mask = 3;
 
+    // Required. The nlu agent project of this CcaiProject.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string nlu_agent_name = 4;
+
 }
 
 // Request to updated CCAI project
@@ -413,6 +425,10 @@ message DeleteCcaiProjectRequest{
     // CCAI project name with which to perform the call of the form <pre><code>projects/&lt;project_uuid&gt;/project</code></pre>
     string name = 1;
 
+    // Required. The nlu agent project of this CcaiProject.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string nlu_agent_name = 4;
+
 }
 
 // Response to delete a CCAI project
@@ -424,5 +440,9 @@ message DeleteCcaiProjectResponse{
 
     // error message if there are any.
     string error_message = 2;
+
+    // Required. The nlu agent project of this CcaiProject.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string nlu_agent_name = 4;
 
 }
