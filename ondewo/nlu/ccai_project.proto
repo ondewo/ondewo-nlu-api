@@ -73,9 +73,9 @@ message CcaiProject {
     // User id in the form of a valid UUID.
     string modified_by = 9;
 
-    // Associated NLU agents
+    // Associated NLU agent
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    repeated string nlu_agent_names = 19;
+    string nlu_agent_name = 10;
 
 }
 
@@ -224,16 +224,23 @@ message CcaiService {
 
 }
 
-
+// Request to create a Call Center AI (CCAI) project.
 message CreateCcaiProjectRequest {
+
+    // The CCAI project to be created.
     CcaiProject ccai_project = 1;
+
 }
 
+// Response after attempting to create a Call Center AI (CCAI) project.
 message CreateCcaiProjectResponse {
+
+    // The created CCAI project.
     CcaiProject ccai_project = 1;
 
-    // error message if there are any.
+    // Error message if the creation is unsuccessful.
     string error_message = 2;
+
 }
 
 
@@ -248,6 +255,7 @@ message GetCcaiProjectRequest{
 
     // Filter which services should be included in the returned CcaiProject
     optional CcaiServiceFilter ccai_service_filter = 3;
+
 }
 
 // Request to get the list of agents
@@ -287,9 +295,10 @@ message ListCcaiProjectsRequest {
     // If not specified, the default behavior is to have no sorting.
     optional CcaiProjectSorting ccai_project_sorting = 3;
 
-    // Optional. Filter based on associated NLU agents
-    // Format: `projects/<Project ID>/agent`.
-    repeated string nlu_agent_names = 4;
+    // Optional. Filter based on associated NLU agent
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string nlu_agent_name = 4;
+
 }
 
 // This is a protobuf message definition for the response of getting a list of CCAI projects.
@@ -303,6 +312,7 @@ message ListCcaiProjectsResponse {
     // This field is a string that holds a token for fetching the next page of results.
     // If there are no more results in the list, this field will be empty.
     string next_page_token = 2;
+
 }
 
 // This protobuf message defines the sorting order for CCAI (Virtual Test System Infrastructure) projects.
@@ -325,6 +335,7 @@ message CcaiProjectSorting {
 
         // Sort by last modified date
         SORT_CCAI_PROJECT_BY_LAST_MODIFIED = 4;
+
     }
 
     // sorting field for ccai projects sorting
@@ -353,6 +364,7 @@ enum CcaiProjectView {
 
     // Minimum view including only CCAI_PROJECT UUID and CCAI_PROJECT display name
     CCAI_PROJECT_VIEW_MINIMUM = 3;
+
 }
 
 // Filter which services should be included in the returned CcaiProject
@@ -377,6 +389,7 @@ message UpdateCcaiProjectRequest{
 
     // Optional. The mask to control which fields get updated.
     google.protobuf.FieldMask update_mask = 3;
+
 }
 
 // Request to updated CCAI project
@@ -387,6 +400,7 @@ message UpdateCcaiProjectResponse{
 
     // error message if there are any.
     string error_message = 2;
+
 }
 
 // Request to delete a CCAI project
@@ -395,6 +409,7 @@ message DeleteCcaiProjectRequest{
 
     // CCAI project name with which to perform the call of the form <pre><code>projects/&lt;project_uuid&gt;/project</code></pre>
     string name = 1;
+
 }
 
 // Response to delete a CCAI project
@@ -406,4 +421,5 @@ message DeleteCcaiProjectResponse{
 
     // error message if there are any.
     string error_message = 2;
+
 }
