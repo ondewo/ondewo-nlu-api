@@ -2781,7 +2781,7 @@ Message representing a CCAI project
 | modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
 | created_by | [string](#string) |  | User id in the form of a valid UUID. |
 | modified_by | [string](#string) |  | User id in the form of a valid UUID. |
-| nlu_agent_name | [string](#string) |  | Required. Associated NLU agent Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| nlu_project_name | [string](#string) |  | Required. Associated NLU agent Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
 
 
 
@@ -2895,7 +2895,7 @@ Request to create a Call Center AI (CCAI) project.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | ccai_project | [CcaiProject](#ondewo.nlu.CcaiProject) |  | The CCAI project to be created. |
-| nlu_agent_name | [string](#string) |  | Required. The nlu agent project of this CcaiProject. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| nlu_project_name | [string](#string) |  | Required. The nlu agent project of this CcaiProject. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
 
 
 
@@ -2928,7 +2928,7 @@ If a deployed CCAI project was deleted then it was undeployed beforehand automat
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | name | [string](#string) |  | CCAI project name with which to perform the call of the form <pre><code>projects/&lt;project_uuid&gt;/project</code></pre> |
-| nlu_agent_name | [string](#string) |  | Required. The nlu agent project of this CcaiProject. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| nlu_project_name | [string](#string) |  | Required. The nlu agent project of this CcaiProject. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
 
 
 
@@ -2946,7 +2946,7 @@ If a deployed CCAI project was deleted then it was undeployed beforehand automat
 | ----- | ---- | ----- | ----------- |
 | name | [string](#string) |  | CCAI project name with which to perform the call of the form <pre><code>projects/&lt;project_uuid&gt;/project</code></pre> |
 | error_message | [string](#string) |  | error message if there are any. |
-| nlu_agent_name | [string](#string) |  | Required. The nlu agent project of this CcaiProject. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| nlu_project_name | [string](#string) |  | Required. The nlu agent project of this CcaiProject. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
 
 
 
@@ -2964,7 +2964,7 @@ Request to retrieve a CCAI project
 | name | [string](#string) |  | CCAI project name with which to perform the call of the form <pre><code>projects/&lt;project_uuid&gt;/project</code></pre> |
 | ccai_project_view | [CcaiProjectView](#ondewo.nlu.CcaiProjectView) | optional | Optional. Specify the view of the returned CcaiProject (full view by default) |
 | ccai_service_filter | [CcaiServiceFilter](#ondewo.nlu.CcaiServiceFilter) | optional | Filter which services should be included in the returned CcaiProject |
-| nlu_agent_name | [string](#string) |  | Required. The nlu agent project of this CcaiProject. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| nlu_project_name | [string](#string) |  | Required. The nlu agent project of this CcaiProject. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
 
 
 
@@ -2990,7 +2990,7 @@ Examples of valid page token strings: * "" * "current_index-0--page_size-20" * "
 
 Examples of invalid page token strings: * "1" * "current_index-0--page_size-20" * "current_index--1--page_size-20" * "current_index1--page_size-20" * "current_index-1--page_size--20" |
 | ccai_project_sorting | [CcaiProjectSorting](#ondewo.nlu.CcaiProjectSorting) | optional | Optional. Field to define the sorting of the list of CCAI projects in the response. If not specified, the default behavior is to have no sorting. |
-| nlu_agent_name | [string](#string) |  | Required. The nlu agent project of this CcaiProject. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| nlu_project_name | [string](#string) |  | Required. The nlu agent project of this CcaiProject. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
 
 
 
@@ -3024,7 +3024,7 @@ Request to updated CCAI project
 | ccai_project | [CcaiProject](#ondewo.nlu.CcaiProject) |  | The CcaiProject that should be updated |
 | ccai_service_filter | [CcaiServiceFilter](#ondewo.nlu.CcaiServiceFilter) | optional | Filter which services should be updated in the CcaiProject |
 | update_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which fields get updated. |
-| nlu_agent_name | [string](#string) |  | Required. The nlu agent project of this CcaiProject. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| nlu_project_name | [string](#string) |  | Required. The nlu agent project of this CcaiProject. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
 
 
 
