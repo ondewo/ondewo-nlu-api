@@ -125,7 +125,7 @@
   
 - [ondewo/nlu/ccai_project.proto](#ondewo/nlu/ccai_project.proto)
     - [CcaiProject](#ondewo.nlu.CcaiProject)
-    - [CcaiProject.CcaiServiceListsEntry](#ondewo.nlu.CcaiProject.CcaiServiceListsEntry)
+    - [CcaiProject.CcaiServicesMapEntry](#ondewo.nlu.CcaiProject.CcaiServicesMapEntry)
     - [CcaiProjectSorting](#ondewo.nlu.CcaiProjectSorting)
     - [CcaiService](#ondewo.nlu.CcaiService)
     - [CcaiServiceFilter](#ondewo.nlu.CcaiServiceFilter)
@@ -2775,7 +2775,7 @@ Message representing a CCAI project
 | name | [string](#string) |  | Resource name of the CCAI project |
 | display_name | [string](#string) |  | Required. The display name of this ccai project. |
 | owner_name | [string](#string) |  | Optional. Resource name of the user who is the owner of the project. |
-| ccai_service_lists | [CcaiProject.CcaiServiceListsEntry](#ondewo.nlu.CcaiProject.CcaiServiceListsEntry) | repeated | Map of two letter language codes to lists of CcaiServiceList Two-letter language codes following ISO 639-1 (see https://en.wikipedia.org/wiki/ISO_639-1) |
+| ccai_services_map | [CcaiProject.CcaiServicesMapEntry](#ondewo.nlu.CcaiProject.CcaiServicesMapEntry) | repeated | Map of two letter language codes to lists of CcaiServiceList Two-letter language codes following ISO 639-1 (see https://en.wikipedia.org/wiki/ISO_639-1) |
 | ccai_project_status | [CcaiProjectStatus](#ondewo.nlu.CcaiProjectStatus) |  | The status of the ccai project. |
 | created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
 | modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
@@ -2788,9 +2788,9 @@ Message representing a CCAI project
 
 
 
-<a name="ondewo.nlu.CcaiProject.CcaiServiceListsEntry"></a>
+<a name="ondewo.nlu.CcaiProject.CcaiServicesMapEntry"></a>
 
-### CcaiProject.CcaiServiceListsEntry
+### CcaiProject.CcaiServicesMapEntry
 
 
 
