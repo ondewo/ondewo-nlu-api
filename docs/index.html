@@ -689,15 +689,15 @@
                       </li>
                     
                       <li>
-                        <a href="#ondewo.nlu.CcaiProjectFilter" class="title-badge message">CcaiProjectFilter</a>
-                      </li>
-                    
-                      <li>
                         <a href="#ondewo.nlu.CcaiProjectSorting" class="title-badge message">CcaiProjectSorting</a>
                       </li>
                     
                       <li>
                         <a href="#ondewo.nlu.CcaiService" class="title-badge message">CcaiService</a>
+                      </li>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.CcaiServiceFilter" class="title-badge message">CcaiServiceFilter</a>
                       </li>
                     
                       <li>
@@ -9483,37 +9483,6 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
 
         
       
-        <h3 id="ondewo.nlu.CcaiProjectFilter" class="title-badge message">CcaiProjectFilter</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>language_codes</td>
-                  <td><a href="#string">string</a></td>
-                  <td>repeated</td>
-                  <td><p>Language codes of the projects for which services are filtered. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>ccai_service_type</td>
-                  <td><a href="#ondewo.nlu.CcaiServiceType">CcaiServiceType</a></td>
-                  <td>repeated</td>
-                  <td><p>Type of CCAI service </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
         <h3 id="ondewo.nlu.CcaiProjectSorting" class="title-badge message">CcaiProjectSorting</h3>
         <p>This protobuf message defines the sorting order for CCAI (Virtual Test System Infrastructure) projects.</p>
 
@@ -9703,6 +9672,37 @@ Format (e.g., "en" for English, "de" for German). </p></td>
 
         
       
+        <h3 id="ondewo.nlu.CcaiServiceFilter" class="title-badge message">CcaiServiceFilter</h3>
+        <p>Filter which services should be included in the returned CcaiProject</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>language_codes</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Language codes of the projects for which services are filtered. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>ccai_service_type</td>
+                  <td><a href="#ondewo.nlu.CcaiServiceType">CcaiServiceType</a></td>
+                  <td>repeated</td>
+                  <td><p>Type of CCAI service </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="ondewo.nlu.CcaiServiceList" class="title-badge message">CcaiServiceList</h3>
         <p>Message representing a list of CCAI services</p>
 
@@ -9857,15 +9857,15 @@ Format (e.g., "en" for English, "de" for German). </p></td>
                 <tr>
                   <td>ccai_project_view</td>
                   <td><a href="#ondewo.nlu.CcaiProjectView">CcaiProjectView</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Specify the view of the returned CcaiProject (full view by default) </p></td>
                 </tr>
               
                 <tr>
-                  <td>ccai_project_filter</td>
-                  <td><a href="#ondewo.nlu.CcaiProjectFilter">CcaiProjectFilter</a></td>
-                  <td></td>
-                  <td><p> </p></td>
+                  <td>ccai_service_filter</td>
+                  <td><a href="#ondewo.nlu.CcaiServiceFilter">CcaiServiceFilter</a></td>
+                  <td>optional</td>
+                  <td><p>Filter which services should be included in the returned CcaiProject </p></td>
                 </tr>
               
             </tbody>
@@ -9994,7 +9994,14 @@ If there are no more results in the list, this field will be empty. </p></td>
                   <td>ccai_project</td>
                   <td><a href="#ondewo.nlu.CcaiProject">CcaiProject</a></td>
                   <td></td>
-                  <td><p>Project Configs. </p></td>
+                  <td><p>The CcaiProject that should be updated </p></td>
+                </tr>
+              
+                <tr>
+                  <td>ccai_service_filter</td>
+                  <td><a href="#ondewo.nlu.CcaiServiceFilter">CcaiServiceFilter</a></td>
+                  <td>optional</td>
+                  <td><p>Filter which services should be updated in the CcaiProject </p></td>
                 </tr>
               
                 <tr>

@@ -126,9 +126,9 @@
 - [ondewo/nlu/ccai_project.proto](#ondewo/nlu/ccai_project.proto)
     - [CcaiProject](#ondewo.nlu.CcaiProject)
     - [CcaiProject.CcaiServiceListsEntry](#ondewo.nlu.CcaiProject.CcaiServiceListsEntry)
-    - [CcaiProjectFilter](#ondewo.nlu.CcaiProjectFilter)
     - [CcaiProjectSorting](#ondewo.nlu.CcaiProjectSorting)
     - [CcaiService](#ondewo.nlu.CcaiService)
+    - [CcaiServiceFilter](#ondewo.nlu.CcaiServiceFilter)
     - [CcaiServiceList](#ondewo.nlu.CcaiServiceList)
     - [CreateCcaiProjectRequest](#ondewo.nlu.CreateCcaiProjectRequest)
     - [CreateCcaiProjectResponse](#ondewo.nlu.CreateCcaiProjectResponse)
@@ -2804,22 +2804,6 @@ Message representing a CCAI project
 
 
 
-<a name="ondewo.nlu.CcaiProjectFilter"></a>
-
-### CcaiProjectFilter
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| language_codes | [string](#string) | repeated | Language codes of the projects for which services are filtered. |
-| ccai_service_type | [CcaiServiceType](#ondewo.nlu.CcaiServiceType) | repeated | Type of CCAI service |
-
-
-
-
-
-
 <a name="ondewo.nlu.CcaiProjectSorting"></a>
 
 ### CcaiProjectSorting
@@ -2864,6 +2848,22 @@ Definition of a Call Center AI (CCAI) Service.
 | modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time of the service. Read-only field. |
 | created_by | [string](#string) |  | User ID of the creator in the form of a valid UUID. Read-only field. |
 | modified_by | [string](#string) |  | User ID of the last modifier in the form of a valid UUID. Read-only field. |
+
+
+
+
+
+
+<a name="ondewo.nlu.CcaiServiceFilter"></a>
+
+### CcaiServiceFilter
+Filter which services should be included in the returned CcaiProject
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| language_codes | [string](#string) | repeated | Language codes of the projects for which services are filtered. |
+| ccai_service_type | [CcaiServiceType](#ondewo.nlu.CcaiServiceType) | repeated | Type of CCAI service |
 
 
 
@@ -2958,8 +2958,8 @@ Request to retrieve a CCAI project
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | name | [string](#string) |  | CCAI project name with which to perform the call of the form <pre><code>projects/&lt;project_uuid&gt;/project</code></pre> |
-| ccai_project_view | [CcaiProjectView](#ondewo.nlu.CcaiProjectView) |  | Optional. Specify the view of the returned CcaiProject (full view by default) |
-| ccai_project_filter | [CcaiProjectFilter](#ondewo.nlu.CcaiProjectFilter) |  |  |
+| ccai_project_view | [CcaiProjectView](#ondewo.nlu.CcaiProjectView) | optional | Optional. Specify the view of the returned CcaiProject (full view by default) |
+| ccai_service_filter | [CcaiServiceFilter](#ondewo.nlu.CcaiServiceFilter) | optional | Filter which services should be included in the returned CcaiProject |
 
 
 
@@ -3016,7 +3016,8 @@ Request to updated CCAI project
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| ccai_project | [CcaiProject](#ondewo.nlu.CcaiProject) |  | Project Configs. |
+| ccai_project | [CcaiProject](#ondewo.nlu.CcaiProject) |  | The CcaiProject that should be updated |
+| ccai_service_filter | [CcaiServiceFilter](#ondewo.nlu.CcaiServiceFilter) | optional | Filter which services should be updated in the CcaiProject |
 | update_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which fields get updated. |
 
 
