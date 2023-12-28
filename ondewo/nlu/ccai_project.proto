@@ -374,7 +374,7 @@ message CcaiServiceFilter {
     repeated string language_codes = 1;
 
     // Type of CCAI service
-    repeated CcaiServiceType ccai_service_type = 2;
+    repeated CcaiServiceType ccai_service_types = 2;
 
 }
 
