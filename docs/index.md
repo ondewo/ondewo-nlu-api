@@ -2855,7 +2855,7 @@ This protobuf message defines the sorting order for CCAI (Virtual Test System In
 | port | [int32](#int32) |  |  |
 | port2 | [int32](#int32) |  |  |
 | account_name | [string](#string) |  | Account information |
-| password | [string](#string) |  |  |
+| account_password | [string](#string) |  |  |
 | api_key | [string](#string) |  | API key for the service |
 | ccai_service_type | [CcaiServiceType](#ondewo.nlu.CcaiServiceType) |  | Type of CCAI service |
 | created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
