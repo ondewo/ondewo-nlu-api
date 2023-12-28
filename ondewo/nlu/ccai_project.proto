@@ -75,7 +75,7 @@ message CcaiProject {
 
     // Required. Associated NLU agent
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    string nlu_agent_name = 10;
+    string nlu_project_name = 10;
 
 }
 
@@ -235,7 +235,7 @@ message CreateCcaiProjectRequest {
 
     // Required. The nlu agent project of this CcaiProject.
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    string nlu_agent_name = 4;
+    string nlu_project_name = 4;
 
 }
 
@@ -265,7 +265,7 @@ message GetCcaiProjectRequest{
 
     // Required. The nlu agent project of this CcaiProject.
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    string nlu_agent_name = 4;
+    string nlu_project_name = 4;
 
 }
 
@@ -308,7 +308,7 @@ message ListCcaiProjectsRequest {
 
     // Required. The nlu agent project of this CcaiProject.
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    string nlu_agent_name = 4;
+    string nlu_project_name = 4;
 
 }
 
@@ -403,7 +403,7 @@ message UpdateCcaiProjectRequest{
 
     // Required. The nlu agent project of this CcaiProject.
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    string nlu_agent_name = 4;
+    string nlu_project_name = 4;
 
 }
 
@@ -427,7 +427,7 @@ message DeleteCcaiProjectRequest{
 
     // Required. The nlu agent project of this CcaiProject.
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    string nlu_agent_name = 4;
+    string nlu_project_name = 4;
 
 }
 
@@ -443,6 +443,6 @@ message DeleteCcaiProjectResponse{
 
     // Required. The nlu agent project of this CcaiProject.
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    string nlu_agent_name = 4;
+    string nlu_project_name = 4;
 
 }
