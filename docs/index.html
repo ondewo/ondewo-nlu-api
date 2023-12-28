@@ -9441,7 +9441,7 @@ Two-letter language codes following ISO 639-1 (see https://en.wikipedia.org/wiki
                   <td>nlu_agent_name</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Associated NLU agent
+                  <td><p>Required. Associated NLU agent
 Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 </tr>
               
@@ -9751,6 +9751,14 @@ Format (e.g., "en" for English, "de" for German). </p></td>
                   <td><p>The CCAI project to be created. </p></td>
                 </tr>
               
+                <tr>
+                  <td>nlu_agent_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The nlu agent project of this CcaiProject.
+Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -9806,6 +9814,14 @@ Format (e.g., "en" for English, "de" for German). </p></td>
                   <td><p>CCAI project name with which to perform the call of the form <pre><code>projects/&lt;project_uuid&gt;/project</code></pre> </p></td>
                 </tr>
               
+                <tr>
+                  <td>nlu_agent_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The nlu agent project of this CcaiProject.
+Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -9835,6 +9851,14 @@ Format (e.g., "en" for English, "de" for German). </p></td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>error message if there are any. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>nlu_agent_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The nlu agent project of this CcaiProject.
+Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 </tr>
               
             </tbody>
@@ -9873,6 +9897,14 @@ Format (e.g., "en" for English, "de" for German). </p></td>
                   <td><a href="#ondewo.nlu.CcaiServiceFilter">CcaiServiceFilter</a></td>
                   <td>optional</td>
                   <td><p>Filter which services should be included in the returned CcaiProject </p></td>
+                </tr>
+              
+                <tr>
+                  <td>nlu_agent_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The nlu agent project of this CcaiProject.
+Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 </tr>
               
             </tbody>
@@ -9942,7 +9974,7 @@ If not specified, the default behavior is to have no sorting. </p></td>
                   <td>nlu_agent_name</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Optional. Filter based on associated NLU agent
+                  <td><p>Required. The nlu agent project of this CcaiProject.
 Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 </tr>
               
@@ -10016,6 +10048,14 @@ If there are no more results in the list, this field will be empty. </p></td>
                   <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
                   <td></td>
                   <td><p>Optional. The mask to control which fields get updated. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>nlu_agent_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The nlu agent project of this CcaiProject.
+Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 </tr>
               
             </tbody>
