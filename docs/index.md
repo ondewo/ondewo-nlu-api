@@ -2844,6 +2844,7 @@ Definition of a Call Center AI (CCAI) Service.
 | account_password | [string](#string) |  | Password for the specified account for authentication. |
 | api_key | [string](#string) |  | API key for accessing the service, if applicable. |
 | ccai_service_type | [CcaiServiceType](#ondewo.nlu.CcaiServiceType) |  | Type of CCAI service (e.g., TEXT_TO_SPEECH, SPEECH_TO_TEXT). |
+| ccai_project_name | [string](#string) |  | Resource name of the ccai_project the ccai_service belongs to |
 | created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time of the service. Read-only field. |
 | modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time of the service. Read-only field. |
 | created_by | [string](#string) |  | User ID of the creator in the form of a valid UUID. Read-only field. |
