@@ -2781,7 +2781,7 @@ Message representing a CCAI project
 | modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
 | created_by | [string](#string) |  | User id in the form of a valid UUID. |
 | modified_by | [string](#string) |  | User id in the form of a valid UUID. |
-| nlu_agent_names | [string](#string) | repeated | Associated NLU agents Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| nlu_agent_name | [string](#string) |  | Associated NLU agent Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
 
 
 
@@ -2888,12 +2888,12 @@ Message representing a list of CCAI services
 <a name="ondewo.nlu.CreateCcaiProjectRequest"></a>
 
 ### CreateCcaiProjectRequest
-
+Request to create a Call Center AI (CCAI) project.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| ccai_project | [CcaiProject](#ondewo.nlu.CcaiProject) |  |  |
+| ccai_project | [CcaiProject](#ondewo.nlu.CcaiProject) |  | The CCAI project to be created. |
 
 
 
@@ -2903,13 +2903,13 @@ Message representing a list of CCAI services
 <a name="ondewo.nlu.CreateCcaiProjectResponse"></a>
 
 ### CreateCcaiProjectResponse
-
+Response after attempting to create a Call Center AI (CCAI) project.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| ccai_project | [CcaiProject](#ondewo.nlu.CcaiProject) |  |  |
-| error_message | [string](#string) |  | error message if there are any. |
+| ccai_project | [CcaiProject](#ondewo.nlu.CcaiProject) |  | The created CCAI project. |
+| error_message | [string](#string) |  | Error message if the creation is unsuccessful. |
 
 
 
@@ -2985,7 +2985,7 @@ Examples of valid page token strings: * "" * "current_index-0--page_size-20" * "
 
 Examples of invalid page token strings: * "1" * "current_index-0--page_size-20" * "current_index--1--page_size-20" * "current_index1--page_size-20" * "current_index-1--page_size--20" |
 | ccai_project_sorting | [CcaiProjectSorting](#ondewo.nlu.CcaiProjectSorting) | optional | Optional. Field to define the sorting of the list of CCAI projects in the response. If not specified, the default behavior is to have no sorting. |
-| nlu_agent_names | [string](#string) | repeated | Optional. Filter based on associated NLU agents Format: `projects/<Project ID>/agent`. |
+| nlu_agent_name | [string](#string) |  | Optional. Filter based on associated NLU agent Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
 
 
 

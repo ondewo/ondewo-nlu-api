@@ -9438,10 +9438,10 @@ Two-letter language codes following ISO 639-1 (see https://en.wikipedia.org/wiki
                 </tr>
               
                 <tr>
-                  <td>nlu_agent_names</td>
+                  <td>nlu_agent_name</td>
                   <td><a href="#string">string</a></td>
-                  <td>repeated</td>
-                  <td><p>Associated NLU agents
+                  <td></td>
+                  <td><p>Associated NLU agent
 Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 </tr>
               
@@ -9728,7 +9728,7 @@ Format (e.g., "en" for English, "de" for German). </p></td>
         
       
         <h3 id="ondewo.nlu.CreateCcaiProjectRequest" class="title-badge message">CreateCcaiProjectRequest</h3>
-        <p></p>
+        <p>Request to create a Call Center AI (CCAI) project.</p>
 
         
           <table class="field-table">
@@ -9741,7 +9741,7 @@ Format (e.g., "en" for English, "de" for German). </p></td>
                   <td>ccai_project</td>
                   <td><a href="#ondewo.nlu.CcaiProject">CcaiProject</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>The CCAI project to be created. </p></td>
                 </tr>
               
             </tbody>
@@ -9752,7 +9752,7 @@ Format (e.g., "en" for English, "de" for German). </p></td>
         
       
         <h3 id="ondewo.nlu.CreateCcaiProjectResponse" class="title-badge message">CreateCcaiProjectResponse</h3>
-        <p></p>
+        <p>Response after attempting to create a Call Center AI (CCAI) project.</p>
 
         
           <table class="field-table">
@@ -9765,14 +9765,14 @@ Format (e.g., "en" for English, "de" for German). </p></td>
                   <td>ccai_project</td>
                   <td><a href="#ondewo.nlu.CcaiProject">CcaiProject</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>The created CCAI project. </p></td>
                 </tr>
               
                 <tr>
                   <td>error_message</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>error message if there are any. </p></td>
+                  <td><p>Error message if the creation is unsuccessful. </p></td>
                 </tr>
               
             </tbody>
@@ -9932,11 +9932,11 @@ If not specified, the default behavior is to have no sorting. </p></td>
                 </tr>
               
                 <tr>
-                  <td>nlu_agent_names</td>
+                  <td>nlu_agent_name</td>
                   <td><a href="#string">string</a></td>
-                  <td>repeated</td>
-                  <td><p>Optional. Filter based on associated NLU agents
-Format: `projects/<Project ID>/agent`. </p></td>
+                  <td></td>
+                  <td><p>Optional. Filter based on associated NLU agent
+Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 </tr>
               
             </tbody>
