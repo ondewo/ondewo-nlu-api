@@ -210,17 +210,20 @@ message CcaiService {
     // Type of CCAI service (e.g., TEXT_TO_SPEECH, SPEECH_TO_TEXT).
     CcaiServiceType ccai_service_type = 16;
 
+    // Resource name of the ccai_project the ccai_service belongs to
+    string ccai_project_name = 17;
+
     // Creation date and time of the service. Read-only field.
-    google.protobuf.Timestamp created_at = 17;
+    google.protobuf.Timestamp created_at = 18;
 
     // Modification date and time of the service. Read-only field.
-    google.protobuf.Timestamp modified_at = 18;
+    google.protobuf.Timestamp modified_at = 19;
 
     // User ID of the creator in the form of a valid UUID. Read-only field.
-    string created_by = 19;
+    string created_by = 20;
 
     // User ID of the last modifier in the form of a valid UUID. Read-only field.
-    string modified_by = 20;
+    string modified_by = 21;
 
 }
 
