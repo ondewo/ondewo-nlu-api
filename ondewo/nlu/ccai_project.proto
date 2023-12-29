@@ -17,6 +17,7 @@ syntax = "proto3";
 package ondewo.nlu;
 
 import "google/protobuf/field_mask.proto";
+import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
 
 import "ondewo/nlu/common.proto";
@@ -213,17 +214,20 @@ message CcaiService {
     // Resource name of the ccai_project the ccai_service belongs to
     string ccai_project_name = 17;
 
+    // Detailed configuration of the CcaiService
+    google.protobuf.Struct ccai_service_config = 18;
+
     // Creation date and time of the service. Read-only field.
-    google.protobuf.Timestamp created_at = 18;
+    google.protobuf.Timestamp created_at = 19;
 
     // Modification date and time of the service. Read-only field.
-    google.protobuf.Timestamp modified_at = 19;
+    google.protobuf.Timestamp modified_at = 20;
 
     // User ID of the creator in the form of a valid UUID. Read-only field.
-    string created_by = 20;
+    string created_by = 21;
 
     // User ID of the last modifier in the form of a valid UUID. Read-only field.
-    string modified_by = 21;
+    string modified_by = 22;
 
 }
 
@@ -361,11 +365,7 @@ message CcaiProjectSorting {
 }
 
 
-// Structure of CCAI_PROJECT view
-// - CreateCCAI_PROJECT: CCAI_PROJECT_VIEW_SHALLOW
-// - UpdateCCAI_PROJECT: CCAI_PROJECT_VIEW_SHALLOW
-// - GetCCAI_PROJECT: CCAI_PROJECT_VIEW_FULL
-// - ListCCAI_PROJECTs: CCAI_PROJECT_VIEW_SHALLOW
+// CcaiProjectView defines what the CcaiProject message contains
 enum CcaiProjectView {
 
     // Unspecified CCAI_PROJECT view: the view is defined by the call:
