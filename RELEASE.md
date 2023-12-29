@@ -7,7 +7,8 @@
 ### New Features
 
 * [[OND211-2146]](https://ondewo.atlassian.net/browse/OND211-2146) - Added Notifications for users and projects
-* [[OND211-2147]](https://ondewo.atlassian.net/browse/OND211-2147) - Added CCAI Project Configuration
+* [[OND211-2147]](https://ondewo.atlassian.net/browse/OND211-2147) - Added CcaiProject and CcaiServices objects and
+  handling methods
 * [[OND211-2148]](https://ondewo.atlassian.net/browse/OND211-2148) - Added User Preferences
 * [[OND211-2149]](https://ondewo.atlassian.net/browse/OND211-2149) - Added Comment functionality for SessionInfo
 * [[OND211-2150]](https://ondewo.atlassian.net/browse/OND211-2150) - Added audit information to all major objects:

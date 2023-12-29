@@ -403,6 +403,7 @@ message UpdateCcaiProjectRequest{
     optional CcaiServiceFilter ccai_service_filter = 2;
 
     // Optional. The mask to control which fields get updated.
+    // Note: Not implemented yet
     optional google.protobuf.FieldMask update_mask = 3;
 
     // Required. The nlu agent project of this CcaiProject.
