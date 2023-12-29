@@ -9932,6 +9932,21 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 </tr>
               
                 <tr>
+                  <td>ccai_service_filter</td>
+                  <td><a href="#ondewo.nlu.CcaiServiceFilter">CcaiServiceFilter</a></td>
+                  <td>optional</td>
+                  <td><p>Filter which services should be included in the CcaiProject </p></td>
+                </tr>
+              
+                <tr>
+                  <td>ccai_project_sorting</td>
+                  <td><a href="#ondewo.nlu.CcaiProjectSorting">CcaiProjectSorting</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. Field to define the sorting of the list of CCAI projects in the response.
+If not specified, the default behavior is to have no sorting. </p></td>
+                </tr>
+              
+                <tr>
                   <td>page_token</td>
                   <td><a href="#string">string</a></td>
                   <td>optional</td>
@@ -9960,14 +9975,6 @@ Examples of invalid page token strings:
 * "current_index--1--page_size-20"
 * "current_index1--page_size-20"
 * "current_index-1--page_size--20" </p></td>
-                </tr>
-              
-                <tr>
-                  <td>ccai_project_sorting</td>
-                  <td><a href="#ondewo.nlu.CcaiProjectSorting">CcaiProjectSorting</a></td>
-                  <td>optional</td>
-                  <td><p>Optional. Field to define the sorting of the list of CCAI projects in the response.
-If not specified, the default behavior is to have no sorting. </p></td>
                 </tr>
               
                 <tr>
