@@ -2845,6 +2845,7 @@ Definition of a Call Center AI (CCAI) Service.
 | api_key | [string](#string) |  | API key for accessing the service, if applicable. |
 | ccai_service_type | [CcaiServiceType](#ondewo.nlu.CcaiServiceType) |  | Type of CCAI service (e.g., TEXT_TO_SPEECH, SPEECH_TO_TEXT). |
 | ccai_project_name | [string](#string) |  | Resource name of the ccai_project the ccai_service belongs to |
+| ccai_service_config | [google.protobuf.Struct](#google.protobuf.Struct) |  | Detailed configuration of the CcaiService |
 | created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time of the service. Read-only field. |
 | modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time of the service. Read-only field. |
 | created_by | [string](#string) |  | User ID of the creator in the form of a valid UUID. Read-only field. |
@@ -3086,11 +3087,7 @@ Status of a Call Center AI (CCAI) Project.
 <a name="ondewo.nlu.CcaiProjectView"></a>
 
 ### CcaiProjectView
-Structure of CCAI_PROJECT view
-- CreateCCAI_PROJECT: CCAI_PROJECT_VIEW_SHALLOW
-- UpdateCCAI_PROJECT: CCAI_PROJECT_VIEW_SHALLOW
-- GetCCAI_PROJECT: CCAI_PROJECT_VIEW_FULL
-- ListCCAI_PROJECTs: CCAI_PROJECT_VIEW_SHALLOW
+CcaiProjectView defines what the CcaiProject message contains
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
