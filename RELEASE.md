@@ -12,6 +12,7 @@
 
 * [[OND211-2053]](https://ondewo.atlassian.net/browse/OND211-2053) - BatchUpdateIntents now returns a
   BatchUpdateIntentsResponse
+* [[OND211-2053]](https://ondewo.atlassian.net/browse/OND211-2053) - Added audit information on CustomPlatformInfo
 
 *****************
 
