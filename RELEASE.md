@@ -2,6 +2,19 @@
 
 *****************
 
+## Release ONDEWO NLU API 4.8.1
+
+### New Features
+
+*
+
+### Improvements
+
+* [[OND211-2053]](https://ondewo.atlassian.net/browse/OND211-2053) - BatchUpdateIntents now returns a
+  BatchUpdateIntentsResponse
+
+*****************
+
 ## Release ONDEWO NLU API 4.8.0
 
 ### New Features

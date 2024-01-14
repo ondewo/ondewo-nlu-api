@@ -111,7 +111,7 @@ service Intents {
     // Updates/Creates multiple intents in the specified agent.
     //
     // Operation <response: [BatchUpdateIntentsResponse][google.cloud.dialogflow.v2.BatchUpdateIntentsResponse]>
-    rpc BatchUpdateIntents (BatchUpdateIntentsRequest) returns (ondewo.nlu.Operation) {
+    rpc BatchUpdateIntents (BatchUpdateIntentsRequest) returns (BatchUpdateIntentsResponse) {
         option (google.api.http) = {
             post: "/v2/{parent=projects/*/agent}/intents:batchUpdate"
             body: "*"
