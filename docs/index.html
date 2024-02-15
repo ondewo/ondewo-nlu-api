@@ -2219,6 +2219,10 @@
                       </li>
                     
                       <li>
+                        <a href="#ondewo.nlu.S2tTranscription" class="title-badge message">S2tTranscription</a>
+                      </li>
+                    
+                      <li>
                         <a href="#ondewo.nlu.Session" class="title-badge message">Session</a>
                       </li>
                     
@@ -2264,10 +2268,6 @@
                     
                       <li>
                         <a href="#ondewo.nlu.TrackSessionStepRequest" class="title-badge message">TrackSessionStepRequest</a>
-                      </li>
-                    
-                      <li>
-                        <a href="#ondewo.nlu.Transcription" class="title-badge message">Transcription</a>
                       </li>
                     
                       <li>
@@ -20077,7 +20077,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid
               
                 <tr>
                   <td>transcriptions</td>
-                  <td><a href="#ondewo.nlu.Transcription">Transcription</a></td>
+                  <td><a href="#ondewo.nlu.S2tTranscription">S2tTranscription</a></td>
                   <td>repeated</td>
                   <td><p>transcriptions of the user input sorted by score.
 A transcription can be from a speech-to-text system or a human </p></td>
@@ -22305,7 +22305,7 @@ This field can also be used for a customized tracking id or tag id </p></td>
               
                 <tr>
                   <td>transcriptions</td>
-                  <td><a href="#ondewo.nlu.Transcription">Transcription</a></td>
+                  <td><a href="#ondewo.nlu.S2tTranscription">S2tTranscription</a></td>
                   <td>repeated</td>
                   <td><p>transcriptions of the user input sorted by score </p></td>
                 </tr>
@@ -22460,6 +22460,110 @@ could contain webhook call latency. </p></td>
                   <td><p>The language that was triggered during intent detection.
 See [Language Support](https://dialogflow.com/docs/reference/language)
 for a list of the currently supported language codes. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="ondewo.nlu.S2tTranscription" class="title-badge message">S2tTranscription</h3>
+        <p>Represents a speech-to-text transcription.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>resource name of the transcription </p></td>
+                </tr>
+              
+                <tr>
+                  <td>text</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The transcribed text content. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>score</td>
+                  <td><a href="#float">float</a></td>
+                  <td></td>
+                  <td><p>Optional. A confidence score associated with the transcription.
+The score indicates the level of confidence in the accuracy of the transcription.
+It is a floating-point number, typically ranging from 0.0 (low confidence) to 1.0 (high confidence). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>language_code</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. The detected language of the transcription.
+The language is represented by a string following language codes (e.g., "en" for English, "es" for Spanish). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>audio_resource_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>the resource name of the audio file of the transcription </p></td>
+                </tr>
+              
+                <tr>
+                  <td>pipeline_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. pipeline used for transcription. A pipeline ID. Example: "pipeline_1" </p></td>
+                </tr>
+              
+                <tr>
+                  <td>duration_in_s</td>
+                  <td><a href="#float">float</a></td>
+                  <td></td>
+                  <td><p>Optional. Duration in seconds for transcription </p></td>
+                </tr>
+              
+                <tr>
+                  <td>transcription_type</td>
+                  <td><a href="#ondewo.nlu.TranscriptionType">TranscriptionType</a></td>
+                  <td></td>
+                  <td><p>Whether a speech-to-text engine or a human has transcribed the audio </p></td>
+                </tr>
+              
+                <tr>
+                  <td>created_at</td>
+                  <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
+                  <td></td>
+                  <td><p>Creation date and time. Read-only field. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>modified_at</td>
+                  <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
+                  <td></td>
+                  <td><p>Modification date and time. Read-only field. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>created_by</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>User id in form of a valid UUID. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>modified_by</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>User id in form of a valid UUID. </p></td>
                 </tr>
               
             </tbody>
@@ -23712,110 +23816,6 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid
                   <td><a href="#ondewo.nlu.Session.View">Session.View</a></td>
                   <td></td>
                   <td><p>Defines which fields of the session should be returned in the response </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="ondewo.nlu.Transcription" class="title-badge message">Transcription</h3>
-        <p>Represents a speech-to-text transcription.</p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>name</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>resource name of the transcription </p></td>
-                </tr>
-              
-                <tr>
-                  <td>text</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>The transcribed text content. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>score</td>
-                  <td><a href="#float">float</a></td>
-                  <td></td>
-                  <td><p>Optional. A confidence score associated with the transcription.
-The score indicates the level of confidence in the accuracy of the transcription.
-It is a floating-point number, typically ranging from 0.0 (low confidence) to 1.0 (high confidence). </p></td>
-                </tr>
-              
-                <tr>
-                  <td>language_code</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Optional. The detected language of the transcription.
-The language is represented by a string following language codes (e.g., "en" for English, "es" for Spanish). </p></td>
-                </tr>
-              
-                <tr>
-                  <td>audio_resource_name</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>the resource name of the audio file of the transcription </p></td>
-                </tr>
-              
-                <tr>
-                  <td>pipeline_id</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Optional. pipeline used for transcription. A pipeline ID. Example: "pipeline_1" </p></td>
-                </tr>
-              
-                <tr>
-                  <td>duration_in_s</td>
-                  <td><a href="#float">float</a></td>
-                  <td></td>
-                  <td><p>Optional. Duration in seconds for transcription </p></td>
-                </tr>
-              
-                <tr>
-                  <td>transcription_type</td>
-                  <td><a href="#ondewo.nlu.TranscriptionType">TranscriptionType</a></td>
-                  <td></td>
-                  <td><p>Whether a speech-to-text engine or a human has transcribed the audio </p></td>
-                </tr>
-              
-                <tr>
-                  <td>created_at</td>
-                  <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
-                  <td></td>
-                  <td><p>Creation date and time. Read-only field. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>modified_at</td>
-                  <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
-                  <td></td>
-                  <td><p>Modification date and time. Read-only field. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>created_by</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>User id in form of a valid UUID. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>modified_by</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>User id in form of a valid UUID. </p></td>
                 </tr>
               
             </tbody>
