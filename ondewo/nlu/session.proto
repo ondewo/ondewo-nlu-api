@@ -408,7 +408,7 @@ message QueryParameters {
     string identified_user_id = 13;
 
     // transcriptions of the user input sorted by score
-    repeated Transcription transcriptions = 14;
+    repeated S2tTranscription transcriptions = 14;
 
 }
 
@@ -425,7 +425,7 @@ enum TranscriptionType {
 }
 
 // Represents a speech-to-text transcription.
-message Transcription {
+message S2tTranscription {
 
     // resource name of the transcription
     string name = 1;
@@ -2002,7 +2002,7 @@ message AudioFileResource {
 
     // transcriptions of the user input sorted by score.
     // A transcription can be from a speech-to-text system or a human
-    repeated Transcription transcriptions = 7;
+    repeated S2tTranscription transcriptions = 7;
 
     // Creation date and time. Read-only field.
     google.protobuf.Timestamp created_at = 8;

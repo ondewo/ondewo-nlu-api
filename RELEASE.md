@@ -2,6 +2,14 @@
 
 *****************
 
+## Release ONDEWO NLU API 5.0.0
+
+### Bug Fixes
+
+* [[OND211-2162]](https://ondewo.atlassian.net/browse/OND211-2162) Renamed Transcription to S2tTranscription
+
+*****************
+
 ## Release ONDEWO NLU API 4.9.0
 
 ### Improvements
