@@ -3491,7 +3491,7 @@ Represents a context.
 | ----- | ---- | ----- | ----------- |
 | name | [string](#string) |  | Required. The display name of the context (must be unique per session).
 
-Note: we are deviating from the dialogflow format `projects/<Project ID>/agent/sessions/<Session ID>/contexts/<Context ID>`.
+Note: we are deviating from the dialogflow format `projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/contexts/&lt;context_uuid&gt;`.
 
 - DetectIntent only returns - the short display name in the "name" field in query_result.output_contexts - only expects the short display name in the "name" field in query_parameters.contexts - Also inside the persisted session object only the short display name is used. - SessionStep.contexts only contains the short display name - SessionReviewStep.contexts only contains the short display name |
 | lifespan_count | [int32](#int32) |  | Optional. The number of conversational query requests after which the context expires. If set to `0` (the default) the context expires immediately. Contexts expire automatically after 10 minutes even if there are no matching queries. |
@@ -3587,7 +3587,7 @@ The request message for [Contexts.DeleteContext][google.cloud.dialogflow.v2.Cont
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| name | [string](#string) |  | Required. The name of the context to delete. Format: `projects/<Project ID>/agent/sessions/<Session ID>/contexts/<Context ID>`. |
+| name | [string](#string) |  | Required. The name of the context to delete. Format: `projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/contexts/&lt;context_uuid&gt;`. |
 
 
 
@@ -3602,7 +3602,7 @@ The request message for [Contexts.GetContext][google.cloud.dialogflow.v2.Context
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| name | [string](#string) |  | Required. The name of the context. Format: `projects/<Project ID>/agent/sessions/<Session ID>/contexts/<Context ID>`. |
+| name | [string](#string) |  | Required. The name of the context. Format: `projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/contexts/&lt;context_uuid&gt;`. |
 
 
 
@@ -3735,7 +3735,7 @@ This message is a request to delete a batch of entities
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| names | [string](#string) | repeated | The unique identifiers of the entities. Format: `projects/<Project ID>/agent/entityTypes/<Entity Type ID>/entities/<Entity ID>`. |
+| names | [string](#string) | repeated | The unique identifiers of the entities. Format: `projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;/entities/&lt;entity_uuid&gt;`. |
 
 
 
@@ -3766,7 +3766,7 @@ The request message for [EntityTypes.BatchDeleteEntityTypes][google.cloud.dialog
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| parent | [string](#string) |  | Required. The name of the agent to delete all entities types for. Format: `projects/<Project ID>/agent`. |
+| parent | [string](#string) |  | Required. The name of the agent to delete all entities types for. Format: `projects/&lt;project_uuid&gt;/agent`. |
 | entity_type_names | [string](#string) | repeated | Required. The names entity types to delete. All names must point to the same agent as `parent`. |
 
 
@@ -3798,7 +3798,7 @@ This message is a request to get a batch of entities
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| names | [string](#string) | repeated | The unique identifiers of the entities. Format: `projects/<Project ID>/agent/entityTypes/<Entity Type ID>/entities/<Entity ID>`. |
+| names | [string](#string) | repeated | The unique identifiers of the entities. Format: `projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;/entities/&lt;entity_uuid&gt;`. |
 
 
 
@@ -3862,7 +3862,7 @@ The response message for [EntityTypes.BatchUpdateEntityTypes][google.cloud.dialo
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| entity_type_name | [string](#string) |  | Required. Name of the entity type in which to create the entity value. Format: `projects/<Project ID>/agent/entityTypes/<Entity Type ID>/entities/<Entity ID>`. |
+| entity_type_name | [string](#string) |  | Required. Name of the entity type in which to create the entity value. Format: `projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;/entities/&lt;entity_uuid&gt;`. |
 | entity | [EntityType.Entity](#ondewo.nlu.EntityType.Entity) |  | The entity value to create |
 
 
@@ -3896,7 +3896,7 @@ This message is a request to delete a batch of entities
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| name | [string](#string) |  | The unique identifiers of the entities. Format: `projects/<Project ID>/agent/entityTypes/<Entity Type ID>/entities/<Entity ID>`. |
+| name | [string](#string) |  | The unique identifiers of the entities. Format: `projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;/entities/&lt;entity_uuid&gt;`. |
 
 
 
@@ -3960,7 +3960,7 @@ language queries.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| name | [string](#string) |  | Required for all methods except `create` (`create` populates the name automatically. The unique identifier of the entity type. Format: `projects/<Project ID>/agent/entityTypes/<Entity Type ID>`. |
+| name | [string](#string) |  | Required for all methods except `create` (`create` populates the name automatically. The unique identifier of the entity type. Format: `projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;`. |
 | display_name | [string](#string) |  | Required. The name of the entity type. |
 | kind | [EntityType.Kind](#ondewo.nlu.EntityType.Kind) |  | Required. Indicates the kind of entity type. |
 | auto_expansion_mode | [EntityType.AutoExpansionMode](#ondewo.nlu.EntityType.AutoExpansionMode) |  | Optional. Indicates whether the entity type can be automatically expanded. |
@@ -4002,7 +4002,7 @@ All processing options are:
 Required. A collection of synonyms. For `KIND_LIST` entity types this must contain exactly one synonym equal to `value`. Synonyms can be regex expressions, i.e. regular expressions, that are python compatible. See here for supported regex: https://docs.python.org/3/library/re.html Examples are:
 
  <pre><code> * regex('[a-zA-Z]+') => just letters * regex('\d{1,5}') => just numbers * regex('^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$') => mix of numbers, letters and dot * regex('(?i)(^|\s)(0\s{0,3}') => with matching groups and case insensitivity </code></pre> |
-| name | [string](#string) |  | The unique identifier of the entity. Format: `projects/<Project ID>/agent/entityTypes/<Entity Type ID>/entities/<Entity ID>`. |
+| name | [string](#string) |  | The unique identifier of the entity. Format: `projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;/entities/&lt;entity_uuid&gt;`. |
 | display_name | [string](#string) |  | The name of the entity. |
 | synonym_count | [int32](#int32) |  | Optional. Total count of entity synonyms |
 | language_code | [string](#string) |  | Required. The language to list entity synonyms for. |
@@ -4071,7 +4071,7 @@ This message is a request to get a an entity
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| name | [string](#string) |  | The unique identifiers of the entities. Format: `projects/<Project ID>/agent/entityTypes/<Entity Type ID>/entities/<Entity ID>`. |
+| name | [string](#string) |  | The unique identifiers of the entities. Format: `projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;/entities/&lt;entity_uuid&gt;`. |
 
 
 
@@ -4112,7 +4112,7 @@ This message is a request to get a list of entities
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| entity_type_name | [string](#string) |  | The unique identifier of the entity type. Format: `projects/<Project ID>/agent/entityTypes/<Entity Type ID> |
+| entity_type_name | [string](#string) |  | The unique identifier of the entity type. Format: `projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt; |
 | language_code | [string](#string) |  | Optional. The language to list training phrases, parameters and rich messages for. If not specified, the agent's default language is used. |
 | page_token | [string](#string) |  | Optional. The next_page_token value returned from a previous list request. The page token to support pagination. Pagination allows you to retrieve a large result set in smaller, more manageable portions. The page token is a string representing the current index and page size.
 
@@ -4495,7 +4495,7 @@ The request message for [Intents.BatchDeleteIntents][google.cloud.dialogflow.v2.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| parent | [string](#string) |  | Required. The name of the agent to delete all entities types for. Format: `projects/<Project ID>/agent`. |
+| parent | [string](#string) |  | Required. The name of the agent to delete all entities types for. Format: `projects/&lt;project_uuid&gt;/agent`. |
 | intents | [Intent](#ondewo.nlu.Intent) | repeated | Required. The collection of intents to delete. Only intent `name` must be filled in. |
 
 
@@ -4890,7 +4890,7 @@ This message is a request to get all intent tags
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| parent | [string](#string) |  | Required. The name of the agent to delete all entities types for. Format: `projects/<Project ID>/agent`. |
+| parent | [string](#string) |  | Required. The name of the agent to delete all entities types for. Format: `projects/&lt;project_uuid&gt;/agent`. |
 
 
 
@@ -5409,7 +5409,7 @@ Represents intent parameters.
 | display_name | [string](#string) |  | Required. The name of the parameter. |
 | value | [string](#string) |  | Optional. The definition of the parameter value. It can be: - a constant string, - a parameter value defined as `$parameter_name`, - an original parameter value defined as `$parameter_name.original`, - a parameter value from some context defined as `#context_name.parameter_name`. |
 | default_value | [string](#string) |  | Optional. The default value to use when the `value` yields an empty result. Default values can be extracted from contexts by using the following syntax: `#context_name.parameter_name`. |
-| entity_type_name | [string](#string) |  | Optional. The unique identifier of the entity type in format `projects/<Project ID>/agent/entityTypes/<Entity Type ID>` that describes values of the parameter. If the parameter is required, this must be provided. |
+| entity_type_name | [string](#string) |  | Optional. The unique identifier of the entity type in format `projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;` that describes values of the parameter. If the parameter is required, this must be provided. |
 | entity_type_display_name | [string](#string) |  | Optional. The name of the entity type that describes values of the parameter. If the parameter is required, this must be provided. |
 | mandatory | [bool](#bool) |  | Optional. Indicates whether the parameter is required. That is, whether the intent cannot be completed without collecting the parameter value. |
 | prompts | [Intent.Parameter.Prompt](#ondewo.nlu.Intent.Parameter.Prompt) | repeated | Optional. The collection of prompts that the agent can present to the user in order to collect value for the parameter. |
@@ -5478,13 +5478,13 @@ entity type only or both entity type and entity value.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| entity_type_name | [string](#string) |  | Required. The unique entity type identifier in format `projects/<Project ID>/agent/entityTypes/<Entity Type ID>`. |
+| entity_type_name | [string](#string) |  | Required. The unique entity type identifier in format `projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;`. |
 | entity_type_display_name | [string](#string) |  | Optional. The entity type name. |
-| entity_value_name | [string](#string) |  | Optional. The unique entity value identifier in format `projects/<Project ID>/agent/entityTypes/<Entity Type ID>/entities/<Entity ID>`. The entity value must belong to the entity type defined in entity_type_name |
+| entity_value_name | [string](#string) |  | Optional. The unique entity value identifier in format `projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;/entities/&lt;entity_uuid&gt;`. The entity value must belong to the entity type defined in entity_type_name. |
 | entity_value_display_name | [string](#string) |  | Optional. The entity value name. |
 | start | [int32](#int32) |  | Required. Defines a character position, where the entity starts in the training phrase text (0-indexed). |
 | end | [int32](#int32) |  | Required. Defines a character position + 1, where the entity ends in the training phrase. Example: "Meet you tomorrow" -> Entity(entity_type_display_name="sys.date", start=9, end=17) |
-| parameter_name | [string](#string) |  | Optional. The unique parameter identifier in format `projects/<Project ID>/agent/intents/<Intent ID>/parameters/<Parameter ID>` for the value extracted from the annotated part of the example. The parameter must be one of the parameters defined in the top-level intent message. Can be unset if the parameter is created in the same create/update intent request as the annotation. |
+| parameter_name | [string](#string) |  | Optional. The unique parameter identifier in format `projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;/parameters/&lt;parameter_uuid&gt;` for the value extracted from the annotated part of the example. The parameter must be one of the parameters defined in the top-level intent message. Can be unset if the parameter is created in the same create/update intent request as the annotation. |
 | parameter_display_name | [string](#string) |  | Optional. The parameter name. |
 | created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
 | modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
@@ -5719,7 +5719,7 @@ The request message for TrainingPhraseRequest
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| parent | [string](#string) |  | Required. The name of the agent to delete all entities types for. Format: `projects/<Project ID>/agent`. |
+| parent | [string](#string) |  | Required. The name of the agent to delete all entities types for. Format: `projects/&lt;project_uuid&gt;/agent`. |
 | language_code | [string](#string) |  | Optional. The language code used to filter out prompts. |
 | intent_ids | [string](#string) | repeated | Optional. List of intent uuids to filter by. Only training phrases that have this intent uuid will be returned If not passed, returns all |
 | page_token | [string](#string) |  | Optional: The page token to support pagination. Pagination allows you to retrieve a large result set in smaller, more manageable portions. The page token is a string representing the current index and page size.
@@ -6490,10 +6490,8 @@ Request to get project element statistics
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| name | [string](#string) |  | Required. The name/path of the concept to get the statistic from.
-
-Example: * `projects/<Project ID>/agent/intents/<Intent ID>` * `projects/<Project ID>/agent/entityTypes/<Entity Type ID>` * `projects/<Project ID>/agent/entityTypes/<Entity Type ID>/entityValues/<Entity Value ID>` |
-| language_code | [string](#string) |  |  |
+| name | [string](#string) |  | Required. The name/path of the concept to get the statistic from. Example: <pre><code> * projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt; * projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt; * projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;/entityValues&lt;entity_value_uuid&gt; </code></pre> |
+| language_code | [string](#string) |  | Language code |
 
 
 
@@ -6824,7 +6822,7 @@ The request to detect user's intent.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| session | [string](#string) |  | Required. The name of the session this query is sent to. Format: `projects/<Project ID>/agent/sessions/<Session ID>`. It's up to the API caller to choose an appropriate session ID. It can be a random number or some type of user identifier (preferably hashed). The length of the session ID must not exceed 36 bytes. |
+| session | [string](#string) |  | Required. The name of the session this query is sent to. Format: `projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;`. It's up to the API caller to choose an appropriate session ID. It can be a random number or some type of user identifier (preferably hashed). The length of the session ID must not exceed 36 bytes. |
 | query_params | [QueryParameters](#ondewo.nlu.QueryParameters) |  | Optional. The parameters of this query. |
 | query_input | [QueryInput](#ondewo.nlu.QueryInput) |  | Required. The input specification. It can be set to:
 
@@ -8008,7 +8006,7 @@ Multiple request messages should be sent in order:
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| session | [string](#string) |  | Required. The name of the session the query is sent to. Format of the session name: `projects/<Project ID>/agent/sessions/<Session ID>`. It’s up to the API caller to choose an appropriate <Session ID>. It can be a random number or some type of user identifier (preferably hashed). The length of the session ID must not exceed 36 characters. |
+| session | [string](#string) |  | Required. The name of the session the query is sent to. Format of the session name: `projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;`. It’s up to the API caller to choose an appropriate &lt;session_uuid&gt;. It can be a random number or some type of user identifier (preferably hashed). The length of the session ID must not exceed 36 characters. |
 | query_params | [QueryParameters](#ondewo.nlu.QueryParameters) |  | Optional. The parameters of this query. |
 | query_input | [QueryInput](#ondewo.nlu.QueryInput) |  | Required. The input specification. It can be set to:
 
@@ -9369,7 +9367,7 @@ The request message for
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The agent to list all intents from. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
 | session_entity_type | [SessionEntityType](#ondewo.nlu.SessionEntityType) |  | Required. The session entity type to create. |
-| session_id | [string](#string) |  | Required. The session to create a session entity type for. Format: <pre><code>projects/&lt;project_uuid&gt;/agents/sessions/&lt;session_uuid&gt;</code></pre> or <pre><code>projects/&lt;project_uuid&gt;/agents/sessions/&lt;session_uuid&gt;</code></pre> `projects/<Project ID>/agent/environments/<Environment ID>/users/<User ID>/ sessions/<Session ID>`. If `Environment ID` is not specified, we assume default 'draft' environment. If `User ID` is not specified, we assume default '-' user. Required. The project that the agent to fetch is associated with. The session to create a session entity type for. Format: <pre><code>projects/&lt;project_uuid&gt;/agents/sessions/&lt;session_uuid&gt;</code></pre> |
+| session_id | [string](#string) |  | Required. The session to create a session entity type for. Format: <pre><code>projects/&lt;project_uuid&gt;/agents/sessions/&lt;session_uuid&gt;</code></pre> or <pre><code>projects/&lt;project_uuid&gt;/agents/sessions/&lt;session_uuid&gt;</code></pre> `projects/&lt;project_uuid&gt;/agent/environments/&lt;environment_uuid&gt;/users/&lt;user_uuid&gt;/ sessions/&lt;session_uuid&gt;`. If `Environment ID` is not specified, we assume default 'draft' environment. If `User ID` is not specified, we assume default '-' user. Required. The project that the agent to fetch is associated with. The session to create a session entity type for. Format: <pre><code>projects/&lt;project_uuid&gt;/agents/sessions/&lt;session_uuid&gt;</code></pre> |
 
 
 
@@ -9385,7 +9383,7 @@ The request message for
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| name | [string](#string) |  | Required. The name of the entity type to delete. Format: `projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type Display Name>` or `projects/<Project ID>/agent/environments/<Environment ID>/users/<User ID>/sessions/<Session ID>/entityTypes/<Entity Type Display Name>`. If `Environment ID` is not specified, we assume default 'draft' environment. If `User ID` is not specified, we assume default '-' user. |
+| name | [string](#string) |  | Required. The name of the entity type to delete. Format: `projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/entityTypes/<Entity Type Display Name>` or `projects/&lt;project_uuid&gt;/agent/environments/ <&lt;environment_uuid&gt;/users/&lt;user_uuid&gt;/sessions/&lt;session_uuid&gt;/entityTypes/<Entity Type Display Name>`. If `Environment ID` is not specified, we assume default 'draft' environment. If `User ID` is not specified, we assume default '-' user. |
 
 
 
@@ -9401,7 +9399,7 @@ The request message for
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| name | [string](#string) |  | Required. The name of the session entity type. Format: `projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type Display Name>` or `projects/<Project ID>/agent/environments/<Environment ID>/users/<User ID>/sessions/<Session ID>/entityTypes/<Entity Type Display Name>`. If `Environment ID` is not specified, we assume default 'draft' environment. If `User ID` is not specified, we assume default '-' user. |
+| name | [string](#string) |  | Required. The name of the session entity type. Format: `projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/entityTypes/<Entity Type Display Name>` or `projects/&lt;project_uuid&gt;/agent/environments/ <&lt;environment_uuid&gt;/users/&lt;user_uuid&gt;/sessions/&lt;session_uuid&gt;/entityTypes/<Entity Type Display Name>`. If `Environment ID` is not specified, we assume default 'draft' environment. If `User ID` is not specified, we assume default '-' user. |
 
 
 
@@ -9417,7 +9415,7 @@ The request message for
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| parent | [string](#string) |  | Required. The session to list all session entity types from. Format: `projects/<Project ID>/agent/sessions/<Session ID>` or `projects/<Project ID>/agent/environments/<Environment ID>/users/<User ID>/ sessions/<Session ID>`. If `Environment ID` is not specified, we assume default 'draft' environment. If `User ID` is not specified, we assume default '-' user. |
+| parent | [string](#string) |  | Required. The session to list all session entity types from. Format: `projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;` or `projects/&lt;project_uuid&gt;/agent/environments/&lt;environment_uuid&gt;/users/&lt;user_uuid&gt;/ sessions/&lt;session_uuid&gt;`. If `Environment ID` is not specified, we assume default 'draft' environment. If `User ID` is not specified, we assume default '-' user. |
 | page_size | [int32](#int32) |  | Optional. The maximum number of items to return in a single page. By default 100 and at most 1000. |
 | page_token | [string](#string) |  | Optional: The page token to support pagination. Pagination allows you to retrieve a large result set in smaller, more manageable portions. The page token is a string representing the current index and page size.
 
@@ -9515,7 +9513,7 @@ guide](https://cloud.google.com/dialogflow/docs/entities-session).
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| name | [string](#string) |  | Required. The unique identifier of this session entity type. Format: `projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type Display Name>`, or `projects/<Project ID>/agent/environments/<Environment ID>/users/<User ID>/sessions/<Session ID>/entityTypes/<Entity Type Display Name>`. If `Environment ID` is not specified, we assume default 'draft' environment. If `User ID` is not specified, we assume default '-' user.
+| name | [string](#string) |  | Required. The unique identifier of this session entity type. Format: `projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/entityTypes/<Entity Type Display Name>`, or `projects/&lt;project_uuid&gt;/agent/environments/ <&lt;environment_uuid&gt;/users/&lt;user_uuid&gt;/sessions/&lt;session_uuid&gt;/entityTypes/<Entity Type Display Name>`. If `Environment ID` is not specified, we assume default 'draft' environment. If `User ID` is not specified, we assume default '-' user.
 
 `<Entity Type Display Name>` must be the display name of an existing entity type in the same agent that will be overridden or supplemented. |
 | entity_override_mode | [SessionEntityType.EntityOverrideMode](#ondewo.nlu.SessionEntityType.EntityOverrideMode) |  | Required. Indicates whether the additional data should override or supplement the custom entity type definition. |
