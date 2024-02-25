@@ -309,7 +309,7 @@ service Sessions {
 message DetectIntentRequest {
 
     // Required. The name of the session this query is sent to. Format:
-    // `projects/<Project ID>/agent/sessions/<Session ID>`. It's up to the API
+    // `projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;`. It's up to the API
     // caller to choose an appropriate session ID. It can be a random number or
     // some type of user identifier (preferably hashed). The length of the session
     // ID must not exceed 36 bytes.
@@ -588,8 +588,8 @@ message StreamingDetectIntentRequest {
 
     // Required. The name of the session the query is sent to.
     // Format of the session name:
-    // `projects/<Project ID>/agent/sessions/<Session ID>`. It’s up to the API
-    // caller to choose an appropriate <Session ID>. It can be a random number or
+    // `projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;`. It’s up to the API
+    // caller to choose an appropriate &lt;session_uuid&gt;. It can be a random number or
     // some type of user identifier (preferably hashed). The length of the session
     // ID must not exceed 36 characters.
     string session = 1;

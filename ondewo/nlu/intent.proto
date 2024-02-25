@@ -220,15 +220,15 @@ message Intent {
         message Entity {
 
             // Required. The unique entity type identifier in format
-            // `projects/<Project ID>/agent/entityTypes/<Entity Type ID>`.
+            // `projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;`.
             string entity_type_name = 1;
 
             // Optional. The entity type name.
             string entity_type_display_name = 3;
 
             // Optional. The unique entity value identifier in format
-            // `projects/<Project ID>/agent/entityTypes/<Entity Type ID>/entities/<Entity ID>`. The entity
-            // value must belong to the entity type defined in entity_type_name
+            // `projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;/entities/&lt;entity_uuid&gt;`.
+            // The entity value must belong to the entity type defined in entity_type_name.
             string entity_value_name = 4;
 
             // Optional. The entity value name.
@@ -243,9 +243,9 @@ message Intent {
             int32 end = 7;
 
             // Optional. The unique parameter identifier in format
-            // `projects/<Project ID>/agent/intents/<Intent ID>/parameters/<Parameter ID>` for the value
-            // extracted from the annotated part of the example. The parameter must be one of the parameters
-            // defined in the top-level intent message.
+            // `projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;/parameters/&lt;parameter_uuid&gt;`
+            // for the value extracted from the annotated part of the example. The parameter must be one of the
+            // parameters defined in the top-level intent message.
             // Can be unset if the parameter is created in the same create/update intent request as the
             // annotation.
             string parameter_name = 8;
@@ -370,8 +370,8 @@ message Intent {
         string default_value = 4;
 
         // Optional. The unique identifier of the entity type in format
-        // `projects/<Project ID>/agent/entityTypes/<Entity Type ID>` that describes values of the parameter.
-        // If the parameter is required, this must be provided.
+        // `projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;` that describes values
+        // of the parameter. If the parameter is required, this must be provided.
         string entity_type_name = 5;
 
         // Optional. The name of the entity type that describes values of the parameter. If the parameter is
@@ -1162,7 +1162,7 @@ message BatchUpdateIntentsResponse {
 // The request message for [Intents.BatchDeleteIntents][google.cloud.dialogflow.v2.Intents.BatchDeleteIntents].
 message BatchDeleteIntentsRequest {
     // Required. The name of the agent to delete all entities types for. Format:
-    // `projects/<Project ID>/agent`.
+    // `projects/&lt;project_uuid&gt;/agent`.
     string parent = 1;
 
     // Required. The collection of intents to delete. Only intent `name` must be
@@ -1256,7 +1256,7 @@ message GetIntentTagsResponse {
 // This message is a request to get all intent tags
 message GetAllIntentTagsRequest {
     // Required. The name of the agent to delete all entities types for. Format:
-    // `projects/<Project ID>/agent`.
+    // `projects/&lt;project_uuid&gt;/agent`.
     string parent = 1;
 }
 
@@ -1590,7 +1590,7 @@ message ListParametersResponse {
 // The request message for TrainingPhraseRequest
 message ListTrainingPhrasesofIntentsWithEnrichmentRequest {
     // Required. The name of the agent to delete all entities types for. Format:
-    // `projects/<Project ID>/agent`.
+    // `projects/&lt;project_uuid&gt;/agent`.
     string parent = 1;
 
     // Optional. The language code used to filter out prompts.

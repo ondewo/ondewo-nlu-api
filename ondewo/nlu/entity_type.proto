@@ -230,7 +230,7 @@ message EntityType {
         repeated string synonyms = 2;
 
         // The unique identifier of the entity. Format:
-        // `projects/<Project ID>/agent/entityTypes/<Entity Type ID>/entities/<Entity ID>`.
+        // `projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;/entities/&lt;entity_uuid&gt;`.
         string name = 3;
 
         // The name of the entity.
@@ -290,7 +290,7 @@ message EntityType {
     // Required for all methods except `create` (`create` populates the name
     // automatically.
     // The unique identifier of the entity type. Format:
-    // `projects/<Project ID>/agent/entityTypes/<Entity Type ID>`.
+    // `projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;`.
     string name = 1;
 
     // Required. The name of the entity type.
@@ -521,7 +521,7 @@ message BatchUpdateEntityTypesResponse {
 // The request message for [EntityTypes.BatchDeleteEntityTypes][google.cloud.dialogflow.v2.EntityTypes.BatchDeleteEntityTypes].
 message BatchDeleteEntityTypesRequest {
     // Required. The name of the agent to delete all entities types for. Format:
-    // `projects/<Project ID>/agent`.
+    // `projects/&lt;project_uuid&gt;/agent`.
     string parent = 1;
 
     // Required. The names entity types to delete. All names must point to the
@@ -604,7 +604,7 @@ message BatchEntitiesResponse {
 
 message CreateEntityRequest {
     // Required. Name of the entity type in which to create the entity value. Format:
-    // `projects/<Project ID>/agent/entityTypes/<Entity Type ID>/entities/<Entity ID>`.
+    // `projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;/entities/&lt;entity_uuid&gt;`.
     string entity_type_name = 1;
 
     // The entity value to create
@@ -632,28 +632,28 @@ message UpdateEntityRequest {
 // This message is a request to get a an entity
 message GetEntityRequest {
     // The unique identifiers of the entities. Format:
-    // `projects/<Project ID>/agent/entityTypes/<Entity Type ID>/entities/<Entity ID>`.
+    // `projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;/entities/&lt;entity_uuid&gt;`.
     string name = 1;
 }
 
 // This message is a request to get a batch of entities
 message BatchGetEntitiesRequest {
     // The unique identifiers of the entities. Format:
-    // `projects/<Project ID>/agent/entityTypes/<Entity Type ID>/entities/<Entity ID>`.
+    // `projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;/entities/&lt;entity_uuid&gt;`.
     repeated string names = 1;
 }
 
 // This message is a request to delete a batch of entities
 message BatchDeleteEntitiesRequest {
     // The unique identifiers of the entities. Format:
-    // `projects/<Project ID>/agent/entityTypes/<Entity Type ID>/entities/<Entity ID>`.
+    // `projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;/entities/&lt;entity_uuid&gt;`.
     repeated string names = 1;
 }
 
 // This message is a request to delete a batch of entities
 message DeleteEntityRequest {
     // The unique identifiers of the entities. Format:
-    // `projects/<Project ID>/agent/entityTypes/<Entity Type ID>/entities/<Entity ID>`.
+    // `projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;/entities/&lt;entity_uuid&gt;`.
     string name = 1;
 }
 
@@ -678,7 +678,7 @@ message BatchDeleteEntitiesResponse {
 // This message is a request to get a list of entities
 message ListEntitiesRequest {
     // The unique identifier of the entity type. Format:
-    // `projects/<Project ID>/agent/entityTypes/<Entity Type ID>
+    // `projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;
     string entity_type_name = 1;
 
     // Optional. The language to list training phrases, parameters and rich
