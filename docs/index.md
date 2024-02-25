@@ -3987,8 +3987,21 @@ Optional. Represents an entity.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| value | [string](#string) |  | Required. For `KIND_MAP` entity types: A canonical name to be used in place of synonyms. For `KIND_LIST` entity types: A string that can contain references to other entity types (with or without aliases). |
-| synonyms | [string](#string) | repeated | Required. A collection of synonyms. For `KIND_LIST` entity types this must contain exactly one synonym equal to `value`. |
+| synonyms | [string](#string) | repeated | Required. For `KIND_MAP` entity types: </br> A canonical name to be used in place of synonyms.</br> For `KIND_LIST` entity types:</br> A string that can contain references to other entity types (with or without aliases). </br>
+
+Values can also be described as regexes with postprocessing options such as:
+
+ <pre><code> * regex('//1') => references the first group match of the regex defined as a synonym * regex('//2') => references the second group match of the regex defined as a synonym * regex('//1') => references the first group match of the regex defined as a synonym </code></pre>
+
+Values can also be described as regexes with one or more postprocessing options such as one postprocessing option to remove all whitespaces <code>regex('&lt;#RW#&gt;\\1')</code> or by a combination of several postprocessing options such as remove all whitespaces and lower casing <code>regex('&lt;#RW#&gt;&lt;#LC#&gt;\\1') </code>.
+
+All processing options are:
+
+ <pre><code> * regex('&lt;#TW&gt;//1') => matches 1st group and trims duplicated whitespaces to one single space * regex('&lt;#RW&gt;//1') => matches 1st group and removes all whitespaces * regex('&lt;#UC&gt;//1') => matches 1st group and converts to upper case * regex('&lt;#LC&gt;//1') => matches 1st group and converts to lower case * regex('&lt;#CC&gt;//1') => matches 1st group and converts to camelCase * regex('&lt;#SC&gt;//1') => matches 1st group and converts to snake_case </code></pre>
+
+Required. A collection of synonyms. For `KIND_LIST` entity types this must contain exactly one synonym equal to `value`. Synonyms can be regex expressions, i.e. regular expressions, that are python compatible. See here for supported regex: https://docs.python.org/3/library/re.html Examples are:
+
+ <pre><code> * regex('[a-zA-Z]+') => just letters * regex('\d{1,5}') => just numbers * regex('^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$') => mix of numbers, letters and dot * regex('(?i)(^|\s)(0\s{0,3}') => with matching groups and case insensitivity </code></pre> |
 | name | [string](#string) |  | The unique identifier of the entity. Format: `projects/<Project ID>/agent/entityTypes/<Entity Type ID>/entities/<Entity ID>`. |
 | display_name | [string](#string) |  | The name of the entity. |
 | synonym_count | [int32](#int32) |  | Optional. Total count of entity synonyms |
