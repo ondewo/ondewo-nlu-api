@@ -928,8 +928,8 @@ message Intent {
     // name of this intent as a root_name.
     repeated FollowupIntentInfo followup_intent_info = 18;
 
-    // Format: `current_index-<CURRENT_INDEX>--page_size-<PAGE_SIZE>`
-    // where <CURRENT_INDEX> and <PAGE_SIZE> are of type int
+    // The next_page_token is used to retrieve the next page of a returned result,
+    // e.g. next_page_token is current_index-2
     string next_page_token = 30;
 
     // Optional. Domain to which the intent belongs
@@ -1026,10 +1026,8 @@ message ListIntentsResponse {
     // returned based on the page_token field in the request.
     repeated Intent intents = 1;
 
-    // Token to retrieve the next page of results, or empty if there are no
-    // more results in the list.
-    // Format: `current_index-<CURRENT_INDEX>--page_size-<PAGE_SIZE>`
-    // where <CURRENT_INDEX> and <PAGE_SIZE> are of type int
+    // The next_page_token is used to retrieve the next page of a returned result,
+    // e.g. next_page_token is current_index-2
     string next_page_token = 2;
 }
 

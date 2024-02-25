@@ -195,7 +195,8 @@ message ListOperationsResponse {
     // A list of operations that matches the specified filter in the request.
     repeated Operation operations = 1;
 
-    // The standard List next-page token.
+    // The next_page_token is used to retrieve the next page of a returned result,
+    // e.g. next_page_token is current_index-2
     string next_page_token = 2;
 }
 

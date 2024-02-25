@@ -669,8 +669,8 @@ message ListAgentsResponse {
     // returned based on the page_token field in the request.
     repeated AgentWithOwner agents_with_owners = 1;
 
-    // Token to retrieve the next page of results, or empty if there are no
-    // more results in the list.
+    // The next_page_token is used to retrieve the next page of a returned result,
+    // e.g. next_page_token is current_index-2
     string next_page_token = 2;
 }
 
@@ -681,8 +681,8 @@ message ListAgentsOfUserResponse {
     // returned based on the page_token field in the request.
     repeated AgentOfUserWithOwner agents_of_user_with_owners = 1;
 
-    // Token to retrieve the next page of results, or empty if there are no
-    // more results in the list.
+    // The next_page_token is used to retrieve the next page of a returned result,
+    // e.g. next_page_token is current_index-2
     string next_page_token = 2;
 }
 
@@ -1180,8 +1180,8 @@ message ListUsersInProjectResponse {
     // returned based on the page_token field in the request.
     repeated UserInProject users = 1;
 
-    // Token to retrieve the next page of results, or empty if there are no
-    // more results in the list.
+    // The next_page_token is used to retrieve the next page of a returned result,
+    // e.g. next_page_token is current_index-2
     string next_page_token = 2;
 }
 
@@ -1232,8 +1232,8 @@ message ListProjectPermissionsResponse {
     // returned based on the page_token field in the request.
     repeated string permissions = 1;
 
-    // Token to retrieve the next page of results, or empty if there are no
-    // more results in the list.
+    // The next_page_token is used to retrieve the next page of a returned result,
+    // e.g. next_page_token is current_index-2
     string next_page_token = 2;
 }
 
@@ -1565,7 +1565,8 @@ message FullTextSearchResponseEntityType {
 
     float time = 6;
 
-    // The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2
+    // The next_page_token is used to retrieve the next page of a returned result,
+    // e.g. next_page_token is current_index-2
     string next_page_token = 7;
 }
 
@@ -1612,7 +1613,8 @@ message FullTextSearchResponseEntity {
 
     float time = 6;
 
-    // The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2
+    // The next_page_token is used to retrieve the next page of a returned result,
+    // e.g. next_page_token is current_index-2
     string next_page_token = 7;
 }
 
@@ -1663,7 +1665,8 @@ message FullTextSearchResponseEntitySynonym {
 
     float time = 6;
 
-    // The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2
+    // The next_page_token is used to retrieve the next page of a returned result,
+    // e.g. next_page_token is current_index-2
     string next_page_token = 7;
 }
 
@@ -1710,7 +1713,8 @@ message FullTextSearchResponseIntent {
 
     float time = 6;
 
-    // The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2
+    // The next_page_token is used to retrieve the next page of a returned result,
+    // e.g. next_page_token is current_index-2
     string next_page_token = 7;
 }
 
@@ -1758,7 +1762,8 @@ message FullTextSearchResponseIntentContextIn {
 
     float time = 6;
 
-    // The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2
+    // The next_page_token is used to retrieve the next page of a returned result,
+    // e.g. next_page_token is current_index-2
     string next_page_token = 7;
 }
 
@@ -1806,7 +1811,8 @@ message FullTextSearchResponseIntentContextOut {
 
     float time = 6;
 
-    // The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2
+    // The next_page_token is used to retrieve the next page of a returned result,
+    // e.g. next_page_token is current_index-2
     string next_page_token = 7;
 }
 
@@ -1862,7 +1868,8 @@ message FullTextSearchResponseIntentUsersays {
 
     float time = 6;
 
-    // The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2
+    // The next_page_token is used to retrieve the next page of a returned result,
+    // e.g. next_page_token is current_index-2
     string next_page_token = 7;
 }
 
@@ -1912,7 +1919,8 @@ message FullTextSearchResponseIntentTags {
 
     float time = 6;
 
-    // The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2
+    // The next_page_token is used to retrieve the next page of a returned result,
+    // e.g. next_page_token is current_index-2
     string next_page_token = 7;
 }
 
@@ -2036,7 +2044,8 @@ message FullTextSearchResponseIntentParameters {
 
     float time = 6;
 
-    // The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2
+    // The next_page_token is used to retrieve the next page of a returned result,
+    // e.g. next_page_token is current_index-2
     string next_page_token = 7;
 }
 

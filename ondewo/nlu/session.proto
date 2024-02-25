@@ -1316,7 +1316,8 @@ message ListSessionsResponse {
     // The requested sessions
     repeated Session sessions = 1;
 
-    // Token to retrieve the next page of results, or empty if there are no more results in the list
+    // The next_page_token is used to retrieve the next page of a returned result,
+    // e.g. next_page_token is current_index-2
     string next_page_token = 2;
 }
 
@@ -1922,7 +1923,8 @@ message ListSessionReviewsResponse {
     // The requested session reviews
     repeated SessionReview session_reviews = 1;
 
-    // Token to retrieve the next page of results, or empty if there are no more results in the list
+    // The next_page_token is used to retrieve the next page of a returned result,
+    // e.g. next_page_token is current_index-2
     string next_page_token = 2;
 }
 
@@ -2072,7 +2074,8 @@ message GetAudioFilesResponse {
     // error message if there are any.
     string error_message = 2;
 
-    // Token to retrieve the next page of results, or empty if there are no more results in the list
+    // The next_page_token is used to retrieve the next page of a returned result,
+    // e.g. next_page_token is current_index-2
     string next_page_token = 3;
 
 }
@@ -2177,7 +2180,8 @@ message ListAudioFilesResponse {
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/audios/&lt;audio_uuid&gt;</code></pre>
     repeated AudioFileResource audio_files = 1;
 
-    // Token to retrieve the next page of results, or empty if there are no more results in the list
+    // The next_page_token is used to retrieve the next page of a returned result,
+    // e.g. next_page_token is current_index-2
     string next_page_token = 2;
 
     // error message if there are any.

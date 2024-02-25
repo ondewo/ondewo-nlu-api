@@ -306,6 +306,8 @@ message EntityType {
     // Optional. The collection of entities associated with the entity type.
     repeated Entity entities = 6;
 
+    // The next_page_token is used to retrieve the next page of a returned result,
+    // e.g. next_page_token is current_index-2
     string next_page_token = 10;
 
     // Read-Only field. Total count of entity values of the entity type
@@ -385,8 +387,8 @@ message ListEntityTypesResponse {
     // returned based on the page_token field in the request.
     repeated EntityType entity_types = 1;
 
-    // Token to retrieve the next page of results, or empty if there are no
-    // more results in the list.
+    // The next_page_token is used to retrieve the next page of a returned result,
+    // e.g. next_page_token is current_index-2
     string next_page_token = 2;
 }
 
@@ -731,8 +733,8 @@ message ListEntitiesResponse {
     // The list of entities
     repeated EntityType.Entity entities = 1;
 
-    // Token to retrieve the next page of results, or empty if there are no
-    // more results in the list.
+    // The next_page_token is used to retrieve the next page of a returned result,
+    // e.g. next_page_token is current_index-2
     string next_page_token = 2;
 }
 

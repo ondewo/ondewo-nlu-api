@@ -300,8 +300,8 @@ message ListUsersResponse {
     // returned based on the page_token field in the request.
     repeated User users = 1;
 
-    // Token to retrieve the next page of results, or empty if there are no
-    // more results in the list.
+    // The next_page_token is used to retrieve the next page of a returned result,
+    // e.g. next_page_token is current_index-2
     string next_page_token = 2;
 }
 
@@ -312,8 +312,8 @@ message ListUserInfosResponse {
     // returned based on the page_token field in the request.
     repeated UserInfo users = 1;
 
-    // Token to retrieve the next page of results, or empty if there are no
-    // more results in the list.
+    // The next_page_token is used to retrieve the next page of a returned result,
+    // e.g. next_page_token is current_index-2
     string next_page_token = 2;
 }
 
@@ -436,8 +436,8 @@ message ListServerRolesResponse {
     // returned based on the page_token field in the request.
     repeated ServerRole server_roles = 1;
 
-    // Token to retrieve the next page of results, or empty if there are no
-    // more results in the list.
+    // The next_page_token is used to retrieve the next page of a returned result,
+    // e.g. next_page_token is current_index-2
     string next_page_token = 2;
 }
 
@@ -477,8 +477,8 @@ message ListServerPermissionsResponse {
     // returned based on the page_token field in the request.
     repeated string permissions = 1;
 
-    // Token to retrieve the next page of results, or empty if there are no
-    // more results in the list.
+    // The next_page_token is used to retrieve the next page of a returned result,
+    // e.g. next_page_token is current_index-2
     string next_page_token = 2;
 }
 
