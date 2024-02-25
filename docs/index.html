@@ -11425,7 +11425,8 @@ A Notification origin can be from a product (service), e.g. ondewo-nlu, ondewo-s
                   <td></td>
                   <td><p>Required. The display name of the context (must be unique per session).
 
-Note: we are deviating from the dialogflow format `projects/<Project ID>/agent/sessions/<Session ID>/contexts/<Context ID>`.
+Note: we are deviating from the dialogflow format
+`projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/contexts/&lt;context_uuid&gt;`.
 
 - DetectIntent only returns
    - the short display name in the "name" field in query_result.output_contexts
@@ -11672,7 +11673,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Required. The name of the context to delete. Format:
-`projects/<Project ID>/agent/sessions/<Session ID>/contexts/<Context ID>`. </p></td>
+`projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/contexts/&lt;context_uuid&gt;`. </p></td>
                 </tr>
               
             </tbody>
@@ -11697,7 +11698,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Required. The name of the context. Format:
-`projects/<Project ID>/agent/sessions/<Session ID>/contexts/<Context ID>`. </p></td>
+`projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/contexts/&lt;context_uuid&gt;`. </p></td>
                 </tr>
               
             </tbody>
@@ -12127,7 +12128,7 @@ Operation <response: [google.protobuf.Empty][google.protobuf.Empty],
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
                   <td><p>The unique identifiers of the entities. Format:
-`projects/<Project ID>/agent/entityTypes/<Entity Type ID>/entities/<Entity ID>`. </p></td>
+`projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;/entities/&lt;entity_uuid&gt;`. </p></td>
                 </tr>
               
             </tbody>
@@ -12183,7 +12184,7 @@ Operation <response: [google.protobuf.Empty][google.protobuf.Empty],
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Required. The name of the agent to delete all entities types for. Format:
-`projects/<Project ID>/agent`. </p></td>
+`projects/&lt;project_uuid&gt;/agent`. </p></td>
                 </tr>
               
                 <tr>
@@ -12247,7 +12248,7 @@ same agent as `parent`. </p></td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
                   <td><p>The unique identifiers of the entities. Format:
-`projects/<Project ID>/agent/entityTypes/<Entity Type ID>/entities/<Entity ID>`. </p></td>
+`projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;/entities/&lt;entity_uuid&gt;`. </p></td>
                 </tr>
               
             </tbody>
@@ -12380,7 +12381,7 @@ Note: languages must be enabled in the agent, before they can be used. </p></td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Required. Name of the entity type in which to create the entity value. Format:
-`projects/<Project ID>/agent/entityTypes/<Entity Type ID>/entities/<Entity ID>`. </p></td>
+`projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;/entities/&lt;entity_uuid&gt;`. </p></td>
                 </tr>
               
                 <tr>
@@ -12462,7 +12463,7 @@ Note: languages must be enabled in the agent, before they can be used. </p></td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>The unique identifiers of the entities. Format:
-`projects/<Project ID>/agent/entityTypes/<Entity Type ID>/entities/<Entity ID>`. </p></td>
+`projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;/entities/&lt;entity_uuid&gt;`. </p></td>
                 </tr>
               
             </tbody>
@@ -12576,7 +12577,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_ty
                   <td><p>Required for all methods except `create` (`create` populates the name
 automatically.
 The unique identifier of the entity type. Format:
-`projects/<Project ID>/agent/entityTypes/<Entity Type ID>`. </p></td>
+`projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;`. </p></td>
                 </tr>
               
                 <tr>
@@ -12734,7 +12735,7 @@ Examples are:
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>The unique identifier of the entity. Format:
-`projects/<Project ID>/agent/entityTypes/<Entity Type ID>/entities/<Entity ID>`. </p></td>
+`projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;/entities/&lt;entity_uuid&gt;`. </p></td>
                 </tr>
               
                 <tr>
@@ -12894,7 +12895,7 @@ Examples are:
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>The unique identifiers of the entities. Format:
-`projects/<Project ID>/agent/entityTypes/<Entity Type ID>/entities/<Entity ID>`. </p></td>
+`projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;/entities/&lt;entity_uuid&gt;`. </p></td>
                 </tr>
               
             </tbody>
@@ -12991,7 +12992,7 @@ Examples of invalid page token strings:
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>The unique identifier of the entity type. Format:
-`projects/<Project ID>/agent/entityTypes/<Entity Type ID> </p></td>
+`projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt; </p></td>
                 </tr>
               
                 <tr>
@@ -14006,7 +14007,7 @@ Operation <response: [google.protobuf.Empty][google.protobuf.Empty]>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Required. The name of the agent to delete all entities types for. Format:
-`projects/<Project ID>/agent`. </p></td>
+`projects/&lt;project_uuid&gt;/agent`. </p></td>
                 </tr>
               
                 <tr>
@@ -14767,7 +14768,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&g
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Required. The name of the agent to delete all entities types for. Format:
-`projects/<Project ID>/agent`. </p></td>
+`projects/&lt;project_uuid&gt;/agent`. </p></td>
                 </tr>
               
             </tbody>
@@ -16099,8 +16100,8 @@ syntax: `#context_name.parameter_name`. </p></td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Optional. The unique identifier of the entity type in format
-`projects/<Project ID>/agent/entityTypes/<Entity Type ID>` that describes values of the parameter.
-If the parameter is required, this must be provided. </p></td>
+`projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;` that describes values
+of the parameter. If the parameter is required, this must be provided. </p></td>
                 </tr>
               
                 <tr>
@@ -16342,7 +16343,7 @@ intent or training, this counter is increased. </p></td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Required. The unique entity type identifier in format
-`projects/<Project ID>/agent/entityTypes/<Entity Type ID>`. </p></td>
+`projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;`. </p></td>
                 </tr>
               
                 <tr>
@@ -16357,8 +16358,8 @@ intent or training, this counter is increased. </p></td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Optional. The unique entity value identifier in format
-`projects/<Project ID>/agent/entityTypes/<Entity Type ID>/entities/<Entity ID>`. The entity
-value must belong to the entity type defined in entity_type_name </p></td>
+`projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;/entities/&lt;entity_uuid&gt;`.
+The entity value must belong to the entity type defined in entity_type_name. </p></td>
                 </tr>
               
                 <tr>
@@ -16389,9 +16390,9 @@ Example: "Meet you tomorrow" -> Entity(entity_type_display_name="sys.date", star
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Optional. The unique parameter identifier in format
-`projects/<Project ID>/agent/intents/<Intent ID>/parameters/<Parameter ID>` for the value
-extracted from the annotated part of the example. The parameter must be one of the parameters
-defined in the top-level intent message.
+`projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;/parameters/&lt;parameter_uuid&gt;`
+for the value extracted from the annotated part of the example. The parameter must be one of the
+parameters defined in the top-level intent message.
 Can be unset if the parameter is created in the same create/update intent request as the
 annotation. </p></td>
                 </tr>
@@ -16958,7 +16959,7 @@ where <CURRENT_INDEX> and <PAGE_SIZE> are of type int, <SUB_FIELD> is of type st
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Required. The name of the agent to delete all entities types for. Format:
-`projects/<Project ID>/agent`. </p></td>
+`projects/&lt;project_uuid&gt;/agent`. </p></td>
                 </tr>
               
                 <tr>
@@ -19145,18 +19146,19 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre> </p></td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Required. The name/path of the concept to get the statistic from.
-
 Example:
-     * `projects/<Project ID>/agent/intents/<Intent ID>`
-     * `projects/<Project ID>/agent/entityTypes/<Entity Type ID>`
-     * `projects/<Project ID>/agent/entityTypes/<Entity Type ID>/entityValues/<Entity Value ID>` </p></td>
+<pre><code>
+* projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;
+* projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;
+* projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;/entityValues&lt;entity_value_uuid&gt;
+</code></pre> </p></td>
                 </tr>
               
                 <tr>
                   <td>language_code</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Language code </p></td>
                 </tr>
               
             </tbody>
@@ -20454,7 +20456,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Required. The name of the session this query is sent to. Format:
-`projects/<Project ID>/agent/sessions/<Session ID>`. It's up to the API
+`projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;`. It's up to the API
 caller to choose an appropriate session ID. It can be a random number or
 some type of user identifier (preferably hashed). The length of the session
 ID must not exceed 36 bytes. </p></td>
@@ -23620,8 +23622,8 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid
                   <td></td>
                   <td><p>Required. The name of the session the query is sent to.
 Format of the session name:
-`projects/<Project ID>/agent/sessions/<Session ID>`. It’s up to the API
-caller to choose an appropriate <Session ID>. It can be a random number or
+`projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;`. It’s up to the API
+caller to choose an appropriate &lt;session_uuid&gt;. It can be a random number or
 some type of user identifier (preferably hashed). The length of the session
 ID must not exceed 36 characters. </p></td>
                 </tr>
@@ -26965,8 +26967,8 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
 Format: <pre><code>projects/&lt;project_uuid&gt;/agents/sessions/&lt;session_uuid&gt;</code></pre>
 or
 <pre><code>projects/&lt;project_uuid&gt;/agents/sessions/&lt;session_uuid&gt;</code></pre>
-`projects/<Project ID>/agent/environments/<Environment ID>/users/<User ID>/
-sessions/<Session ID>`.
+`projects/&lt;project_uuid&gt;/agent/environments/&lt;environment_uuid&gt;/users/&lt;user_uuid&gt;/
+sessions/&lt;session_uuid&gt;`.
 If `Environment ID` is not specified, we assume default 'draft'
 environment. If `User ID` is not specified, we assume default '-' user.
 Required. The project that the agent to fetch is associated with.
@@ -26996,9 +26998,9 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agents/sessions/&lt;session_uui
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Required. The name of the entity type to delete. Format:
-`projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type
-Display Name>` or `projects/<Project ID>/agent/environments/<Environment
-ID>/users/<User ID>/sessions/<Session ID>/entityTypes/<Entity Type Display
+`projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/entityTypes/<Entity Type
+Display Name>` or `projects/&lt;project_uuid&gt;/agent/environments/
+<&lt;environment_uuid&gt;/users/&lt;user_uuid&gt;/sessions/&lt;session_uuid&gt;/entityTypes/<Entity Type Display
 Name>`.
 If `Environment ID` is not specified, we assume default 'draft'
 environment. If `User ID` is not specified, we assume default '-' user. </p></td>
@@ -27026,9 +27028,9 @@ environment. If `User ID` is not specified, we assume default '-' user. </p></td
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Required. The name of the session entity type. Format:
-`projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type
-Display Name>` or `projects/<Project ID>/agent/environments/<Environment
-ID>/users/<User ID>/sessions/<Session ID>/entityTypes/<Entity Type Display
+`projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/entityTypes/<Entity Type
+Display Name>` or `projects/&lt;project_uuid&gt;/agent/environments/
+<&lt;environment_uuid&gt;/users/&lt;user_uuid&gt;/sessions/&lt;session_uuid&gt;/entityTypes/<Entity Type Display
 Name>`.
 If `Environment ID` is not specified, we assume default 'draft'
 environment. If `User ID` is not specified, we assume default '-' user. </p></td>
@@ -27056,9 +27058,9 @@ environment. If `User ID` is not specified, we assume default '-' user. </p></td
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Required. The session to list all session entity types from.
-Format: `projects/<Project ID>/agent/sessions/<Session ID>` or
-`projects/<Project ID>/agent/environments/<Environment ID>/users/<User ID>/
-sessions/<Session ID>`.
+Format: `projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;` or
+`projects/&lt;project_uuid&gt;/agent/environments/&lt;environment_uuid&gt;/users/&lt;user_uuid&gt;/
+sessions/&lt;session_uuid&gt;`.
 If `Environment ID` is not specified, we assume default 'draft'
 environment. If `User ID` is not specified, we assume default '-' user. </p></td>
                 </tr>
@@ -27245,9 +27247,9 @@ It's purpose is to report the reachability of a Webhook server. </p></td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Required. The unique identifier of this session entity type. Format:
-`projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type
-Display Name>`, or `projects/<Project ID>/agent/environments/<Environment
-ID>/users/<User ID>/sessions/<Session ID>/entityTypes/<Entity Type Display
+`projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/entityTypes/<Entity Type
+Display Name>`, or `projects/&lt;project_uuid&gt;/agent/environments/
+<&lt;environment_uuid&gt;/users/&lt;user_uuid&gt;/sessions/&lt;session_uuid&gt;/entityTypes/<Entity Type Display
 Name>`.
 If `Environment ID` is not specified, we assume default 'draft'
 environment. If `User ID` is not specified, we assume default '-' user.
