@@ -1532,7 +1532,7 @@ Get list of agents of user
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | agents_of_user_with_owners | [AgentOfUserWithOwner](#ondewo.nlu.AgentOfUserWithOwner) | repeated | The list of agents with their owners of the given user. There will be a maximum number of items returned based on the page_token field in the request. |
-| next_page_token | [string](#string) |  | Token to retrieve the next page of results, or empty if there are no more results in the list. |
+| next_page_token | [string](#string) |  | The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2 |
 
 
 
@@ -1565,7 +1565,7 @@ Get list of agents
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | agents_with_owners | [AgentWithOwner](#ondewo.nlu.AgentWithOwner) | repeated | The list of agent and their owners. There will be a maximum number of items returned based on the page_token field in the request. |
-| next_page_token | [string](#string) |  | Token to retrieve the next page of results, or empty if there are no more results in the list. |
+| next_page_token | [string](#string) |  | The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2 |
 
 
 
@@ -1604,7 +1604,7 @@ List project permissions
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | permissions | [string](#string) | repeated | The list of project permissions. There will be a maximum number of items returned based on the page_token field in the request. |
-| next_page_token | [string](#string) |  | Token to retrieve the next page of results, or empty if there are no more results in the list. |
+| next_page_token | [string](#string) |  | The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2 |
 
 
 
@@ -1644,7 +1644,7 @@ List the users in a project
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | users | [UserInProject](#ondewo.nlu.UserInProject) | repeated | The list of users in a project. There will be a maximum number of items returned based on the page_token field in the request. |
-| next_page_token | [string](#string) |  | Token to retrieve the next page of results, or empty if there are no more results in the list. |
+| next_page_token | [string](#string) |  | The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2 |
 
 
 
@@ -3012,7 +3012,7 @@ This is a protobuf message definition for the response of getting a list of CCAI
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | ccai_projects | [CcaiProject](#ondewo.nlu.CcaiProject) | repeated | The list of CCAI projects returned in the response. Use the 'repeated' keyword to indicate that this field can contain multiple instances of CcaiProject. |
-| next_page_token | [string](#string) |  | Token to retrieve the next page of results. This field is a string that holds a token for fetching the next page of results. If there are no more results in the list, this field will be empty. |
+| next_page_token | [string](#string) |  | The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2 |
 
 
 
@@ -3642,7 +3642,7 @@ The response message for [Contexts.ListContexts][google.cloud.dialogflow.v2.Cont
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | contexts | [Context](#ondewo.nlu.Context) | repeated | The list of contexts. There will be a maximum number of items returned based on the page_token field in the request. |
-| next_page_token | [string](#string) |  | Token to retrieve the next page of results, or empty if there are no more results in the list. |
+| next_page_token | [string](#string) |  | The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2 |
 
 
 
@@ -3965,7 +3965,7 @@ language queries.
 | kind | [EntityType.Kind](#ondewo.nlu.EntityType.Kind) |  | Required. Indicates the kind of entity type. |
 | auto_expansion_mode | [EntityType.AutoExpansionMode](#ondewo.nlu.EntityType.AutoExpansionMode) |  | Optional. Indicates whether the entity type can be automatically expanded. |
 | entities | [EntityType.Entity](#ondewo.nlu.EntityType.Entity) | repeated | Optional. The collection of entities associated with the entity type. |
-| next_page_token | [string](#string) |  |  |
+| next_page_token | [string](#string) |  | The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2 |
 | entity_count | [int32](#int32) |  | Read-Only field. Total count of entity values of the entity type |
 | status | [EntityType.EntityTypeStatus](#ondewo.nlu.EntityType.EntityTypeStatus) |  | Indicates whether the entity type is active or not |
 | synonym_count | [int32](#int32) |  | Read-Only field. Total count of entity synonyms of the entity type |
@@ -4140,7 +4140,7 @@ This message is a response of listing entities
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | entities | [EntityType.Entity](#ondewo.nlu.EntityType.Entity) | repeated | The list of entities |
-| next_page_token | [string](#string) |  | Token to retrieve the next page of results, or empty if there are no more results in the list. |
+| next_page_token | [string](#string) |  | The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2 |
 
 
 
@@ -4184,7 +4184,7 @@ The response message for [EntityTypes.ListEntityTypes][google.cloud.dialogflow.v
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | entity_types | [EntityType](#ondewo.nlu.EntityType) | repeated | The list of agent entity types. There will be a maximum number of items returned based on the page_token field in the request. |
-| next_page_token | [string](#string) |  | Token to retrieve the next page of results, or empty if there are no more results in the list. |
+| next_page_token | [string](#string) |  | The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2 |
 
 
 
@@ -4981,7 +4981,7 @@ action is an extraction of a user command or sentence semantics.
 | root_followup_intent_name | [string](#string) |  | The unique identifier of the root intent in the chain of followup intents. It identifies the correct followup intents chain for this intent. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre> |
 | parent_followup_intent_name | [string](#string) |  | The unique identifier of the parent intent in the chain of followup intents. It identifies the parent followup intent. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre> |
 | followup_intent_info | [Intent.FollowupIntentInfo](#ondewo.nlu.Intent.FollowupIntentInfo) | repeated | Optional. Collection of information about all followup intents that have name of this intent as a root_name. |
-| next_page_token | [string](#string) |  | Format: `current_index-<CURRENT_INDEX>--page_size-<PAGE_SIZE>` where <CURRENT_INDEX> and <PAGE_SIZE> are of type int |
+| next_page_token | [string](#string) |  | The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2 |
 | domain_name | [string](#string) |  | Optional. Domain to which the intent belongs |
 | is_start_of_deviation | [bool](#bool) |  | Optional. Indicates whether the intent starts a deviation in conversation flow |
 | is_end_of_deviation | [bool](#bool) |  | Optional. Indicates whether the intent ends a deviation in conversation flow |
@@ -5581,7 +5581,7 @@ The response message for [Intents.ListIntents][google.cloud.dialogflow.v2.Intent
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | intents | [Intent](#ondewo.nlu.Intent) | repeated | The list of agent intents. There will be a maximum number of items returned based on the page_token field in the request. |
-| next_page_token | [string](#string) |  | Token to retrieve the next page of results, or empty if there are no more results in the list. Format: `current_index-<CURRENT_INDEX>--page_size-<PAGE_SIZE>` where <CURRENT_INDEX> and <PAGE_SIZE> are of type int |
+| next_page_token | [string](#string) |  | The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2 |
 
 
 
@@ -6172,7 +6172,7 @@ The response message for [Operations.ListOperations][ondewo.nlu.Operations.ListO
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | operations | [Operation](#ondewo.nlu.Operation) | repeated | A list of operations that matches the specified filter in the request. |
-| next_page_token | [string](#string) |  | The standard List next-page token. |
+| next_page_token | [string](#string) |  | The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2 |
 
 
 
@@ -6345,7 +6345,7 @@ This message is a response of listing project role
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | project_roles | [ProjectRole](#ondewo.nlu.ProjectRole) | repeated | The list of project roles. There will be a maximum number of items returned based on the page_token field in the request. |
-| next_page_token | [string](#string) |  | Token to retrieve the next page of results, or empty if there are no more results in the list. |
+| next_page_token | [string](#string) |  | The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2 |
 
 
 
@@ -6949,7 +6949,7 @@ This message is a request to retrieve the audio files specified
 | ----- | ---- | ----- | ----------- |
 | audio_files | [AudioFileResource](#ondewo.nlu.AudioFileResource) | repeated | The unique identifier of the audio file for a specific session. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/audios/&lt;audio_uuid&gt;</code></pre> |
 | error_message | [string](#string) |  | error message if there are any. |
-| next_page_token | [string](#string) |  | Token to retrieve the next page of results, or empty if there are no more results in the list |
+| next_page_token | [string](#string) |  | The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2 |
 
 
 
@@ -7090,7 +7090,7 @@ This message is a request to retrieve the audio files specified
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | audio_files | [AudioFileResource](#ondewo.nlu.AudioFileResource) | repeated | The requested audio files . Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/audios/&lt;audio_uuid&gt;</code></pre> |
-| next_page_token | [string](#string) |  | Token to retrieve the next page of results, or empty if there are no more results in the list |
+| next_page_token | [string](#string) |  | The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2 |
 | error_message | [string](#string) |  | error message if there are any. |
 
 
@@ -7536,7 +7536,7 @@ This message is a response of listing session reviews
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | session_reviews | [SessionReview](#ondewo.nlu.SessionReview) | repeated | The requested session reviews |
-| next_page_token | [string](#string) |  | Token to retrieve the next page of results, or empty if there are no more results in the list |
+| next_page_token | [string](#string) |  | The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2 |
 
 
 
@@ -7579,7 +7579,7 @@ This message is a response including the listing of sessions
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | sessions | [Session](#ondewo.nlu.Session) | repeated | The requested sessions |
-| next_page_token | [string](#string) |  | Token to retrieve the next page of results, or empty if there are no more results in the list |
+| next_page_token | [string](#string) |  | The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2 |
 
 
 
@@ -8548,7 +8548,7 @@ Response containing list of server permissions
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | permissions | [string](#string) | repeated | The list of server permissions. There will be a maximum number of items returned based on the page_token field in the request. |
-| next_page_token | [string](#string) |  | Token to retrieve the next page of results, or empty if there are no more results in the list. |
+| next_page_token | [string](#string) |  | The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2 |
 
 
 
@@ -8587,7 +8587,7 @@ Response containing list of server roles
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | server_roles | [ServerRole](#ondewo.nlu.ServerRole) | repeated | The list of server roles. There will be a maximum number of items returned based on the page_token field in the request. |
-| next_page_token | [string](#string) |  | Token to retrieve the next page of results, or empty if there are no more results in the list. |
+| next_page_token | [string](#string) |  | The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2 |
 
 
 
@@ -8603,7 +8603,7 @@ Response containing list of users
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | users | [UserInfo](#ondewo.nlu.UserInfo) | repeated | The list of server roles. There will be a maximum number of items returned based on the page_token field in the request. |
-| next_page_token | [string](#string) |  | Token to retrieve the next page of results, or empty if there are no more results in the list. |
+| next_page_token | [string](#string) |  | The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2 |
 
 
 
@@ -8675,7 +8675,7 @@ Response containing list of users
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | users | [User](#ondewo.nlu.User) | repeated | The list of users. There will be a maximum number of items returned based on the page_token field in the request. |
-| next_page_token | [string](#string) |  | Token to retrieve the next page of results, or empty if there are no more results in the list. |
+| next_page_token | [string](#string) |  | The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2 |
 
 
 
@@ -9442,7 +9442,7 @@ The response message for
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | session_entity_types | [SessionEntityType](#ondewo.nlu.SessionEntityType) | repeated | The list of session entity types. There will be a maximum number of items returned based on the page_size field in the request. |
-| next_page_token | [string](#string) |  | Token to retrieve the next page of results, or empty if there are no more results in the list. |
+| next_page_token | [string](#string) |  | The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2 |
 
 
 
