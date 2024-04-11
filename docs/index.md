@@ -2145,11 +2145,6 @@ Operation <response: [google.protobuf.Empty][google.protobuf.Empty], metadata: [
 | GetFullTextSearchIntentResponse | [FullTextSearchRequest](#ondewo.nlu.FullTextSearchRequest) | [FullTextSearchResponseIntentResponse](#ondewo.nlu.FullTextSearchResponseIntentResponse) | Full text search endpoint in responses of intents |
 | GetFullTextSearchIntentParameters | [FullTextSearchRequest](#ondewo.nlu.FullTextSearchRequest) | [FullTextSearchResponseIntentParameters](#ondewo.nlu.FullTextSearchResponseIntentParameters) | Full text search endpoint in parameters of intents |
 | ReindexAgent | [ReindexAgentRequest](#ondewo.nlu.ReindexAgentRequest) | [Operation](#ondewo.nlu.Operation) | Force reindexing Intent and Entity data of Agent |
-| CreateCcaiProject | [CreateCcaiProjectRequest](#ondewo.nlu.CreateCcaiProjectRequest) | [CreateCcaiProjectResponse](#ondewo.nlu.CreateCcaiProjectResponse) | RPC to create a new CCAI project |
-| DeleteCcaiProject | [DeleteCcaiProjectRequest](#ondewo.nlu.DeleteCcaiProjectRequest) | [DeleteCcaiProjectResponse](#ondewo.nlu.DeleteCcaiProjectResponse) | RPC to delete an existing CCAI project |
-| GetCcaiProject | [GetCcaiProjectRequest](#ondewo.nlu.GetCcaiProjectRequest) | [CcaiProject](#ondewo.nlu.CcaiProject) | RPC to get details of an existing CCAI project |
-| ListCcaiProjects | [ListCcaiProjectsRequest](#ondewo.nlu.ListCcaiProjectsRequest) | [ListCcaiProjectsResponse](#ondewo.nlu.ListCcaiProjectsResponse) | RPC to list all available CCAI projects |
-| UpdateCcaiProject | [UpdateCcaiProjectRequest](#ondewo.nlu.UpdateCcaiProjectRequest) | [UpdateCcaiProjectResponse](#ondewo.nlu.UpdateCcaiProjectResponse) | RPC to update an existing CCAI project |
 
  <!-- end services -->
 
