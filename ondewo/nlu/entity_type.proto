@@ -213,7 +213,8 @@ message EntityType {
         //    * regex('&lt;#CC&gt;//1') => matches 1st group and converts to camelCase
         //    * regex('&lt;#SC&gt;//1') => matches 1st group and converts to snake_case
         //   </code></pre>
-        //
+        string value = 1;
+
         // Required. A collection of synonyms. For `KIND_LIST` entity types this
         // must contain exactly one synonym equal to `value`.
         // Synonyms can be regex expressions, i.e. regular expressions, that are python compatible.
