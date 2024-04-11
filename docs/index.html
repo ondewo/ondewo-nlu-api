@@ -12692,9 +12692,9 @@ e.g. next_page_token is current_index-2 </p></td>
             <tbody>
               
                 <tr>
-                  <td>synonyms</td>
+                  <td>value</td>
                   <td><a href="#string">string</a></td>
-                  <td>repeated</td>
+                  <td></td>
                   <td><p>Required.
 For `KIND_MAP` entity types: </br>
   A canonical name to be used in place of synonyms.</br>
@@ -12723,9 +12723,14 @@ All processing options are:
    * regex('&lt;#LC&gt;//1') => matches 1st group and converts to lower case
    * regex('&lt;#CC&gt;//1') => matches 1st group and converts to camelCase
    * regex('&lt;#SC&gt;//1') => matches 1st group and converts to snake_case
-  </code></pre>
-
-Required. A collection of synonyms. For `KIND_LIST` entity types this
+  </code></pre> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>synonyms</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Required. A collection of synonyms. For `KIND_LIST` entity types this
 must contain exactly one synonym equal to `value`.
 Synonyms can be regex expressions, i.e. regular expressions, that are python compatible.
 See here for supported regex: https://docs.python.org/3/library/re.html
