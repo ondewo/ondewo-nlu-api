@@ -62,6 +62,7 @@ service Utilities {
 
     // Creates new training phrases corresponding to intent specified by its intent display name from csv file
     rpc AddTrainingPhrasesFromCSV (AddTrainingPhrasesFromCSVRequest) returns (AddTrainingPhrasesResponse);
+
 }
 
 // The request to validate regexes.

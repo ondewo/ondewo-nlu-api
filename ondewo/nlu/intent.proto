@@ -205,6 +205,7 @@ service Intents {
 
     // List Training phrases (of a specific intent).
     rpc ListTrainingPhrasesofIntentsWithEnrichment (ListTrainingPhrasesofIntentsWithEnrichmentRequest) returns (ListTrainingPhrasesofIntentsWithEnrichmentResponse);
+
 }
 
 // Represents an intent.
