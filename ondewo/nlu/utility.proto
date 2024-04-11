@@ -43,25 +43,25 @@ service Utilities {
 
     // Validate that entity types with group references have synonyms with
     // capturing groups.
-    rpc ValidateEmbeddedRegex(ValidateEmbeddedRegexRequest) returns (ValidateEmbeddedRegexResponse);
+    rpc ValidateEmbeddedRegex (ValidateEmbeddedRegexRequest) returns (ValidateEmbeddedRegexResponse);
 
     // Cleans all intent training phrases and entity annotations of parent
-    rpc CleanAllIntents(CleanAllIntentsRequest) returns (CleanAllIntentsResponse);
+    rpc CleanAllIntents (CleanAllIntentsRequest) returns (CleanAllIntentsResponse);
 
     // Cleans single intent training phrases and entity annotations
-    rpc CleanIntent(CleanIntentRequest) returns (CleanIntentResponse);
+    rpc CleanIntent (CleanIntentRequest) returns (CleanIntentResponse);
 
     // Cleans all entity types of parent
-    rpc CleanAllEntityTypes(CleanAllEntityTypesRequest) returns (CleanAllEntityTypesResponse);
+    rpc CleanAllEntityTypes (CleanAllEntityTypesRequest) returns (CleanAllEntityTypesResponse);
 
     // Cleans entity type
-    rpc CleanEntityType(CleanEntityTypeRequest) returns (CleanEntityTypeResponse);
+    rpc CleanEntityType (CleanEntityTypeRequest) returns (CleanEntityTypeResponse);
 
     // Creates new training phrases corresponding to intent specified by its intent display name
-    rpc AddTrainingPhrases(AddTrainingPhrasesRequest) returns (AddTrainingPhrasesResponse);
+    rpc AddTrainingPhrases (AddTrainingPhrasesRequest) returns (AddTrainingPhrasesResponse);
 
     // Creates new training phrases corresponding to intent specified by its intent display name from csv file
-    rpc AddTrainingPhrasesFromCSV(AddTrainingPhrasesFromCSVRequest) returns (AddTrainingPhrasesResponse);
+    rpc AddTrainingPhrasesFromCSV (AddTrainingPhrasesFromCSVRequest) returns (AddTrainingPhrasesResponse);
 }
 
 // The request to validate regexes.

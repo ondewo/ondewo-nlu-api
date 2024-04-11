@@ -165,7 +165,7 @@ service Intents {
     rpc BatchDeleteTrainingPhrases (BatchDeleteTrainingPhrasesRequest) returns (BatchDeleteTrainingPhrasesResponse);
 
     // List training phrases (of a specific intent).
-    rpc ListTrainingPhrases(ListTrainingPhrasesRequest) returns (ListTrainingPhrasesResponse);
+    rpc ListTrainingPhrases (ListTrainingPhrasesRequest) returns (ListTrainingPhrasesResponse);
 
 
     /************************* Response RPC Endpoints ****************************/
@@ -183,7 +183,7 @@ service Intents {
     rpc BatchDeleteResponseMessages (BatchDeleteResponseMessagesRequest) returns (BatchDeleteResponseMessagesResponse);
 
     // List messages (of a specific intent).
-    rpc ListResponseMessages(ListResponseMessagesRequest) returns (ListResponseMessagesResponse);
+    rpc ListResponseMessages (ListResponseMessagesRequest) returns (ListResponseMessagesResponse);
 
 
     /************************* Parameter RPC Endpoints ****************************/
@@ -201,10 +201,10 @@ service Intents {
     rpc BatchDeleteParameters (BatchDeleteParametersRequest) returns (BatchDeleteParametersResponse);
 
     // List messages (of a specific intent).
-    rpc ListParameters(ListParametersRequest) returns (ListParametersResponse);
+    rpc ListParameters (ListParametersRequest) returns (ListParametersResponse);
 
     // List Training phrases (of a specific intent).
-    rpc ListTrainingPhrasesofIntentsWithEnrichment(ListTrainingPhrasesofIntentsWithEnrichmentRequest) returns (ListTrainingPhrasesofIntentsWithEnrichmentResponse);
+    rpc ListTrainingPhrasesofIntentsWithEnrichment (ListTrainingPhrasesofIntentsWithEnrichmentRequest) returns (ListTrainingPhrasesofIntentsWithEnrichmentResponse);
 }
 
 // Represents an intent.

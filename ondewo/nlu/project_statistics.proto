@@ -59,21 +59,21 @@ service ProjectStatistics {
     }
 
     // Returns the responses count within a project
-    rpc GetResponseCount(GetProjectElementStatRequest) returns(StatResponse) {
+    rpc GetResponseCount (GetProjectElementStatRequest) returns(StatResponse) {
         option (google.api.http) = {
             get: "/{name=projects/*/agent/intents/*}/responses:count"
         };
     }
 
     // Returns the entity value count within a project
-    rpc GetEntityValueCount(GetProjectElementStatRequest) returns(StatResponse) {
+    rpc GetEntityValueCount (GetProjectElementStatRequest) returns(StatResponse) {
         option (google.api.http) = {
             get: "/{name=projects/*/agent/entityTypes/*}/entities:count"
         };
     }
 
     // Returns the entity synonyms count within a project
-    rpc GetEntitySynonymCount(GetProjectElementStatRequest) returns(StatResponse) {
+    rpc GetEntitySynonymCount (GetProjectElementStatRequest) returns(StatResponse) {
         option (google.api.http) = {
             get: "/{name=projects/*/agent/entityTypes/*/entityValues/*}/entitySynonyms:count"
         };

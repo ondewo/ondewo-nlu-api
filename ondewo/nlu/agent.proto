@@ -492,7 +492,7 @@ service Agents {
     rpc GetFullTextSearchIntentParameters (FullTextSearchRequest) returns (FullTextSearchResponseIntentParameters);
 
     // Force reindexing Intent and Entity data of Agent
-    rpc ReindexAgent(ReindexAgentRequest) returns (ondewo.nlu.Operation);
+    rpc ReindexAgent (ReindexAgentRequest) returns (ondewo.nlu.Operation);
 
     // RPC to create a new CCAI project
     rpc CreateCcaiProject (CreateCcaiProjectRequest) returns (CreateCcaiProjectResponse) {}

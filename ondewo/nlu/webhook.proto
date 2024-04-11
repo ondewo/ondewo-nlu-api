@@ -77,24 +77,21 @@ service Webhook {
     // This method doesn't work with Google Assistant integration.
     // Contact Dialogflow support if you need to use session entities
     // with Google Assistant integration.
-    rpc CreateSessionEntityType(CreateSessionEntityTypeRequest)
-        returns (SessionEntityType);
+    rpc CreateSessionEntityType (CreateSessionEntityTypeRequest) returns (SessionEntityType);
 
     // Updates the specified session entity type.
     //
     // This method doesn't work with Google Assistant integration.
     // Contact Dialogflow support if you need to use session entities
     // with Google Assistant integration.
-    rpc UpdateSessionEntityType(UpdateSessionEntityTypeRequest)
-        returns (SessionEntityType);
+    rpc UpdateSessionEntityType(UpdateSessionEntityTypeRequest) returns (SessionEntityType);
 
     // Deletes the specified session entity type.
     //
     // This method doesn't work with Google Assistant integration.
     // Contact Dialogflow support if you need to use session entities
     // with Google Assistant integration.
-    rpc DeleteSessionEntityType(DeleteSessionEntityTypeRequest)
-        returns (google.protobuf.Empty);
+    rpc DeleteSessionEntityType(DeleteSessionEntityTypeRequest) returns (google.protobuf.Empty);
 }
 
 // request sent for webhook ping
