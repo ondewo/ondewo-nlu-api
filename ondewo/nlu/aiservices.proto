@@ -495,7 +495,7 @@ message LlmAugEnrichmentConfig {
     // API key for accessing the service, if applicable.
     string api_key = 7;
 
-    // API key for accessing the service, if applicable.
+    // Define system role.
     string system_role = 8;
 
     // Set the input text prompt.
