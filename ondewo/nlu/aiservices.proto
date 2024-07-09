@@ -368,6 +368,9 @@ message DataEnrichmentConfig {
 
     // XLNet augmenter configuration
     XLNetAugEnrichmentConfig xlnet_enrichment = 9;
+
+    // Llm augmenter configuration
+    LlmAugEnrichmentConfig llm_enrichment = 10;
 }
 
 // Configuration for Entity enrichment
@@ -455,7 +458,7 @@ message WordNetAugEnrichmentConfig {
     // Order of augmenter execution
     int32 execution_order = 3;
 }
-// Configuration for Thesaurus enrichment
+// Configuration for XLNet enrichment
 message XLNetAugEnrichmentConfig {
 
     // Activation flag
@@ -466,6 +469,62 @@ message XLNetAugEnrichmentConfig {
 
     // Order of augmenter execution
     int32 execution_order = 3;
+}
+
+// Configuration for Large Language Models (LLM) enrichment
+message LlmAugEnrichmentConfig {
+
+    // Activation flag
+    bool is_active = 1;
+
+    // Factor of enrichment
+    int32 enrichment_factor = 2;
+
+    // Order of augmenter execution
+    int32 execution_order = 3;
+
+    // Additional host for communication, if needed.
+    string host = 4;
+
+    // Port for additional communication.
+    int32 port = 5;
+
+    // Http basic auth token
+    string http_basic_auth_token = 6;
+
+    // API key for accessing the service, if applicable.
+    string api_key = 7;
+
+    // API key for accessing the service, if applicable.
+    string system_role = 8;
+
+    // Set the input text prompt.
+    string prompt = 9;
+
+    // Set do_sample flag to activate logits sampling.
+    bool do_sample = 10;
+
+    // Define maximum number of generated tokens.
+    int32 max_new_tokens = 11;
+
+    // Set whether to prepend the prompt to the generated text.
+    bool return_full_text = 12;
+
+    // List of string to stop generating tokens if a member of `stop_sequences` is generated
+    repeated string stop_sequences = 13;
+
+    // Set temperature value to module the logits distribution.
+    float temperature = 14;
+
+    // Set top_k value for highest probability vocabulary tokens to keep for top-k-filtering.
+    float top_k = 15;
+
+    // If set to < 1, only the smallest set of most probable tokens with probabilities that add up to `top_p` or
+    // higher are kept for generation.
+    float top_p = 16;
+
+    // Truncate inputs tokens to the given size.
+    int32 truncate = 17;
 }
 
 // The request for intent classification.
