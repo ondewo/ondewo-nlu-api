@@ -120,7 +120,7 @@ service Sessions {
     };
 
     // DeleteSessionStep: deletes an existing session step from the session
-    rpc DeleteSessionStep (DeleteSessionStepRequest) returns (SessionStep) {
+    rpc DeleteSessionStep (DeleteSessionStepRequest) returns (google.protobuf.Empty) {
         option (google.api.http) = {
             post: "/v2/{session_id=projects/*/agent/sessions/*}:deleteSessionStep"
             body: "*"
