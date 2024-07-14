@@ -103,10 +103,26 @@ service Sessions {
         };
     };
 
-    // TrackSessionStep: append to an existing session; creates it if not existing
+    // GetSessionStep: gets an existing session step of a session
+    rpc GetSessionStep (UpdateSessionStepRequest) returns (SessionStep) {
+        option (google.api.http) = {
+            post: "/v2/{session_id=projects/*/agent/sessions/*}:getSessionStep"
+            body: "*"
+        };
+    };
+
+    // UpdateSessionStep: updates an existing session step in a session
     rpc UpdateSessionStep (UpdateSessionStepRequest) returns (SessionStep) {
         option (google.api.http) = {
             post: "/v2/{session_id=projects/*/agent/sessions/*}:updateSessionStep"
+            body: "*"
+        };
+    };
+
+    // DeleteSessionStep: deletes an existing session step from the session
+    rpc DeleteSessionStep (DeleteSessionStepRequest) returns (SessionStep) {
+        option (google.api.http) = {
+            post: "/v2/{session_id=projects/*/agent/sessions/*}:deleteSessionStep"
             body: "*"
         };
     };
@@ -963,6 +979,16 @@ message UpdateSessionStepRequest {
     // Optional. The mask to control which fields will be filled with data.
     // Example: path=["session_step.detect_intent_response.query_result.fulfillment_messages"]
     google.protobuf.FieldMask field_mask = 3;
+
+}
+
+// This message is a request to delete a session step of a session
+message DeleteSessionStepRequest {
+
+    // The unique identifier for the given session step
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/steps/&lt;session_step_uuid&gt;</code></pre>.
+    string session_step_name = 1;
+
 }
 
 // This message is a request to list sessions

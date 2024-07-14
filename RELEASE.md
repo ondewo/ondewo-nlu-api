@@ -6,8 +6,8 @@
 
 ### Feature
 
-* [[OND211-2199]](https://ondewo.atlassian.net/browse/OND211-2199) Add UpdateSessionStep and GetSessionStep to Session
-  endpoint, i.e., session.proto
+* [[OND211-2199]](https://ondewo.atlassian.net/browse/OND211-2199) Add `GetSessionStep`, `UpdateSessionStep` and
+  `DeleteSessionStep` as `Session` endpoints
 
 *****************
 
@@ -15,7 +15,7 @@
 
 ### Bug Fixes
 
-* [[OND211-2162]](https://ondewo.atlassian.net/browse/OND211-2162) Renamed Transcription to S2tTranscription
+* [[OND211-2162]](https://ondewo.atlassian.net/browse/OND211-2162) Renamed `Transcription` to `S2tTranscription`
 
 *****************
 
@@ -23,9 +23,9 @@
 
 ### Improvements
 
-* [[OND211-2053]](https://ondewo.atlassian.net/browse/OND211-2053) - BatchUpdateIntents now returns a
+* [[OND211-2053]](https://ondewo.atlassian.net/browse/OND211-2053) - `BatchUpdateIntents` now returns a
   BatchUpdateIntentsResponse
-* [[OND211-2053]](https://ondewo.atlassian.net/browse/OND211-2053) - Added audit information on CustomPlatformInfo
+* [[OND211-2053]](https://ondewo.atlassian.net/browse/OND211-2053) - Added audit information on `CustomPlatformInfo`
 
 *****************
 
@@ -33,13 +33,13 @@
 
 ### New Features
 
-* [[OND211-2146]](https://ondewo.atlassian.net/browse/OND211-2146) - Added Notifications for users and projects
-* [[OND211-2147]](https://ondewo.atlassian.net/browse/OND211-2147) - Added CcaiProject and CcaiServices objects and
+* [[OND211-2146]](https://ondewo.atlassian.net/browse/OND211-2146) - Added `Notifications` for users and projects
+* [[OND211-2147]](https://ondewo.atlassian.net/browse/OND211-2147) - Added `CcaiProject` and `CcaiServices` objects and
   handling methods
 * [[OND211-2148]](https://ondewo.atlassian.net/browse/OND211-2148) - Added User Preferences
-* [[OND211-2149]](https://ondewo.atlassian.net/browse/OND211-2149) - Added Comment functionality for SessionInfo
+* [[OND211-2149]](https://ondewo.atlassian.net/browse/OND211-2149) - Added Comment functionality for `SessionInfo`
 * [[OND211-2150]](https://ondewo.atlassian.net/browse/OND211-2150) - Added audit information to all major objects:
-  Entity, EntityType, Intent, Operation, ProjectRole, Session, User etc.
+  `Entity`, `EntityType`, `Intent`, `Operation`, `ProjectRole`, `Session`, `User` etc.
 
 ### Improvements
 
@@ -60,14 +60,14 @@
 
 ### Improvements
 
-* Added GetEntity, CreateEntity, UpdateEntity and DeleteEntity request and responses
+* Added `GetEntity`, `CreateEntity`, `UpdateEntity` and `DeleteEntity` request and responses
 
 ### Breaking changes
 
 * Restructuring of messages
-    * From BatchEntitiesResponse.EntityStatus to EntityStatus
-    * From BatchCreateEntitiesRequest.CreateEntityRequest to CreateEntityRequest
-    * From BatchDeleteEntitiesResponse.DeleteEntityStatus to DeleteEntityStatus
+    * From `BatchEntitiesResponse.EntityStatus` to `EntityStatus`
+    * From `BatchCreateEntitiesRequest.CreateEntityRequest` to `CreateEntityRequest`
+    * From `BatchDeleteEntitiesResponse.DeleteEntityStatus` to `DeleteEntityStatus`
 
 *****************
 
@@ -84,9 +84,9 @@
 
 ### Bug fixes
 
-* SessionFilter: Use double instead of float for earliest and latest since float is too small to hold the datetime
+* `SessionFilter`: Use double instead of float for earliest and latest since float is too small to hold the datetime
   timestamp as python float
-* SessionInfo: Use double instead of float for earliest and latest since float is too small to hold the datetime
+* `SessionInfo`: Use double instead of float for earliest and latest since float is too small to hold the datetime
   timestamp as python float
 
 *****************
@@ -104,9 +104,9 @@
 
 ### Improvements
 
-* [[OND211-2089]](https://ondewo.atlassian.net/browse/OND211-2089) - Added further SessionsReportType:
-  SESSION_LEAST_X_INTENTS, SESSION_LEAST_X_ENTITY_TYPES, SESSION_LEAST_X_ENTITY_VALUES, SESSION_LEAST_X_USERS,
-  SESSION_LEAST_X_LABELS, SESSION_LEAST_X_TAGS and TOTAL_STATISTICS
+* [[OND211-2089]](https://ondewo.atlassian.net/browse/OND211-2089) - Added further `SessionsReportType`:
+  `SESSION_LEAST_X_INTENTS`, `SESSION_LEAST_X_ENTITY_TYPES`, `SESSION_LEAST_X_ENTITY_VALUES`, `SESSION_LEAST_X_USERS`,
+  `SESSION_LEAST_X_LABELS`, `SESSION_LEAST_X_TAGS` and `TOTAL_STATISTICS`
 * [[OND211-2089]](https://ondewo.atlassian.net/browse/OND211-2089) - Improved documentation for resource names
 
 *****************
@@ -133,7 +133,7 @@
 ### Improvements
 
 * [[OND211-2084]](https://ondewo.atlassian.net/browse/OND211-2084) - Added query_text_original to QueryResult and
-  SessionReviewStep for post analysis of user input without
+  `SessionReviewStep` for post analysis of user input without
   any preprocessing
 
 *****************
@@ -143,12 +143,12 @@
 ### New Features
 
 * [[OND211-1979]](https://ondewo.atlassian.net/browse/OND211-1979) - Session API optimization and refactoring
-    * Added labels to QueryParameters for DetectIntentRequest
-    * Added name in message SessionStep
-    * Added name in message SessionReviewStep
+    * Added labels to `QueryParameters` for `DetectIntentRequest`
+    * Added name in message `SessionStep`
+    * Added name in message `SessionReviewStep`
 * [[OND211-2054]](https://ondewo.atlassian.net/browse/OND211-2054) - Added reporting capabilities for sessions and
   session steps incl.
-  ContextFilter and ComparisonOperator for detailed sessions filtering.
+  `ContextFilter` and `ComparisonOperator` for detailed sessions filtering.
     * Dedicated reports available for
         * Top X intents
         * Top X entity values
@@ -164,9 +164,9 @@
 
 * [[OND211-1979]](https://ondewo.atlassian.net/browse/OND211-1979) - Consistency improvement or Session and
   SessionReview messages incl.
-    * Renamed message Session.session_id to Session.name
-    * Renamed SessionReview.session_review_id to SessionReview.name
-    * Renamed RemoveSessionLabels to DeleteSessionLabels
+    * Renamed message `Session.session_id` to Session.name
+    * Renamed `SessionReview.session_review_id` to `SessionReview.name`
+    * Renamed `RemoveSessionLabels` to `DeleteSessionLabels`
 
 *****************
 
@@ -224,8 +224,9 @@
 
 ### Improvements
 
-* [[OND211-2056]](https://ondewo.atlassian.net/browse/OND211-2056) - Added AgentView.AGENT_VIEW_MINIMUM,
-  EntityTypeView.ENTITY_TYPE_VIEW_MINIMUM, and IntentView.INTENT_VIEW_MINIMUM to only return the UUID of the object and
+* [[OND211-2056]](https://ondewo.atlassian.net/browse/OND211-2056) - Added `AgentView.AGENT_VIEW_MINIMUM`,
+  `EntityTypeView.ENTITY_TYPE_VIEW_MINIMUM`, and `IntentView.INTENT_VIEW_MINIMUM` to only return the UUID of the object
+  and
   the display name
 
 *****************
@@ -278,7 +279,8 @@
 
 ### Improvements
 
-* [[OND211-2050]](https://ondewo.atlassian.net/browse/OND211-2050) - Changed metadata from Any to OperationMetadata type
+* [[OND211-2050]](https://ondewo.atlassian.net/browse/OND211-2050) - Changed metadata from Any to `OperationMetadata`
+  type
 
 *****************
 
@@ -294,7 +296,8 @@
 
 ### Improvements
 
-* [[OND211-2038]](https://ondewo.atlassian.net/browse/OND211-2038) - Add SessionReview Filter for "Context in", "Context
+* [[OND211-2038]](https://ondewo.atlassian.net/browse/OND211-2038) - Add `SessionReview` Filter for "Context in", "
+  Context
   out" and "Session id"
 * [[OND211-2039]](https://ondewo.atlassian.net/browse/OND211-2039) - Implemented Automatic Release Process
 
@@ -313,7 +316,7 @@
 
 ### New features
 
-* [[OND211-1987]](https://ondewo.atlassian.net/browse/OND211-1987) - Operations. Added filters to ListOperations.
+* [[OND211-1987]](https://ondewo.atlassian.net/browse/OND211-1987) - Operations. Added filters to `ListOperations`.
 * [[OND211-2011]](https://ondewo.atlassian.net/browse/OND211-2011) - Intent. List all user says from cache incl.
   enrichment
 
@@ -327,7 +330,8 @@
 
 ### New features
 
-* [[OND211-1959]](https://ondewo.atlassian.net/browse/OND211-1959) - Intents. GetAllTags and GetAllIntentTags endpoints.
+* [[OND211-1959]](https://ondewo.atlassian.net/browse/OND211-1959) - Intents. `GetAllTags` and `GetAllIntentTags`
+  endpoints.
 
 *
 
@@ -349,7 +353,7 @@
 
 * [OND211-1940] Session Review. Allow the filtering of sessions by intent tags
 * [OND211-1942] Intents. Allow the addition/deletion of multiple tags at a time
-* [OND211-1942] Intents. Rename of the IntentTagMessage to IntentTagRequest
+* [OND211-1942] Intents. Rename of the `IntentTagMessage` to `IntentTagRequest`
 
 *****************
 
@@ -359,7 +363,7 @@
 
 * [OND211-1836] Support intent tags with filtering
 * [OND211-1850] Allow sorting and searching of entity values on listing
-* [OND211-1850] Add Entity Type View to the Entity Type CRUD
+* [OND211-1850] Add `EntityTypeView` to the `EntityType` CRUD
 
 *****************
 
@@ -375,7 +379,7 @@
 
 ### Improvements
 
-* [OND211-1843] Output contexts added to SessionReviewStep
+* [OND211-1843] Output contexts added to `SessionReviewStep`
 
 ## Release ONDEWO NLU API 2.2.0
 
@@ -388,10 +392,10 @@
 
 ### Improvements
 
-* [OND211-1832] Extend Intent message definition to include the optional fields "start_date" and "end_date"
-* [OND211-1785] Add CreateSession endpoint to the Session Servicer
-* [OND211-1799] Add ExtractEntitiesFuzzy endpoint to the AIServices Servicer
-* [OND211-1734] Add ExportBenchmarkAgent endpoint to the Agent Servicer
+* [OND211-1832] Extend Intent message definition to include the optional fields "`start_date`" and "`end_date`"
+* [OND211-1785] Add `CreateSession` endpoint to the Session Servicer
+* [OND211-1799] Add `ExtractEntitiesFuzzy` endpoint to the AIServices Servicer
+* [OND211-1734] Add `ExportBenchmarkAgent` endpoint to the Agent Servicer
 * [XXX002-38] Add endpoint to list project ids to qa.proto.
 * [XXX002-35] Add endpoint to update retriever database to qa.proto.
 * [XXX002-35] Add endpoint to get project config to qa.proto.
@@ -413,9 +417,8 @@
 
 * [OND211-1774] Implement endpoints to directly create/update/get/delete and list parameters.
 * [OND211-1773] Implement endpoints to directly create/update/get/delete and list responses (=intent messages).
-* [OND211-354] Establish a clear hierarchy for the merging
-  of entities within the generalized waterfall strategy. Include intent parameters to entity selection criteria.
-
+* [OND211-354] Establish a clear hierarchy for the merging of entities within the generalized waterfall strategy.
+  Include intent parameters to entity selection criteria.
 * [OND211-1767] Change the training phrase message to include a language_code field
 * [OND211-1766] Make training phrases endpoints work with batches.
 * [OND211-1760] Implement endpoint to directly list training phrases.
@@ -447,18 +450,18 @@ Created a new file ondewo/nlu/utility.proto that contains the following endpoint
 
 ### Improvements
 
-* Type definition for Parameters improved (`context.proto`)
-* Intent View variants clarification
+* Type definition for `Parameters` improved (`context.proto`)
+* `IntentView` variants clarification
 * Renaming of Q&A's score field
 * Polish `README.md`
 
 ### Breaking Changes
 
-* Type definition for Parameters improved (`context.proto`)
+* Type definition for `Parameters` improved (`context.proto`)
 
 ### Migration Guide
 
-* Usages of the Context Parameters must be adapted to the new typed structure
+* Usages of the `ContextParameters` must be adapted to the new typed structure
 
 *****************
 
@@ -535,5 +538,3 @@ Created a new file ondewo/nlu/utility.proto that contains the following endpoint
 ### Known issues not covered in this release
 
 ### Migration Guide
-
-*****************
