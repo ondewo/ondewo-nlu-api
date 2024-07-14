@@ -958,7 +958,7 @@ message GetSessionStepRequest {
 
     // The unique identifier for the given session step
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/steps/&lt;session_step_uuid&gt;
-    string session_step_name = 1;
+    string name = 1;
 
     // Optional. The mask to control which fields will be filled with data.
     // Example: path=["session_step.detect_intent_response.query_result.fulfillment_messages"]
@@ -983,7 +983,7 @@ message DeleteSessionStepRequest {
 
     // The unique identifier for the given session step
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/steps/&lt;session_step_uuid&gt;</code></pre>.
-    string session_step_name = 1;
+    string name = 1;
 
 }
 
