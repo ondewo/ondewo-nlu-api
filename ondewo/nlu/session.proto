@@ -103,6 +103,14 @@ service Sessions {
         };
     };
 
+    // TrackSessionStep: append to an existing session; creates it if not existing
+    rpc UpdateSessionStep (UpdateSessionStepRequest) returns (SessionStep) {
+        option (google.api.http) = {
+            post: "/v2/{session_id=projects/*/agent/sessions/*}:updateSessionStep"
+            body: "*"
+        };
+    };
+
     // DeleteSession: delete a session(=conversation) from ondewo-kb (for testing only)
     rpc DeleteSession (DeleteSessionRequest) returns (google.protobuf.Empty) {
         option (google.api.http) = {
@@ -927,6 +935,34 @@ message TrackSessionStepRequest {
 
     // Defines which fields of the session should be returned in the response
     Session.View session_view = 3;
+}
+
+// This message is a request to get a session step
+message GetSessionStepRequest {
+
+    // The unique identifier for the given session step
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/steps/&lt;session_step_uuid&gt;
+    string session_step_name = 1;
+
+    // Optional. The mask to control which fields will be filled with data.
+    // Example: path=["session_step.detect_intent_response.query_result.fulfillment_messages"]
+    google.protobuf.FieldMask field_mask = 2;
+
+}
+
+// UpdateSessionStepRequest stores a session step into the session
+message UpdateSessionStepRequest {
+
+    // The unique identifier for the given session step
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/steps/&lt;session_step_uuid&gt;</code></pre>.
+    string session_step_name = 1;
+
+    // The session step to be updated
+    SessionStep session_step = 2;
+
+    // Optional. The mask to control which fields will be filled with data.
+    // Example: path=["session_step.detect_intent_response.query_result.fulfillment_messages"]
+    google.protobuf.FieldMask field_mask = 3;
 }
 
 // This message is a request to list sessions

@@ -2,6 +2,15 @@
 
 *****************
 
+## Release ONDEWO NLU API 5.1.0
+
+### Feature
+
+* [[OND211-2199]](https://ondewo.atlassian.net/browse/OND211-2199) Add UpdateSessionStep and GetSessionStep to Session
+  endpoint, i.e., session.proto
+
+*****************
+
 ## Release ONDEWO NLU API 5.0.0
 
 ### Bug Fixes
