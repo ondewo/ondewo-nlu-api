@@ -6819,7 +6819,7 @@ This message is a request to delete a session step of a session
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| name | [string](#string) |  | The unique identifier for the given session step Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/steps/&lt;session_step_uuid&gt;</code></pre>. |
+| name | [string](#string) |  | The unique identifier for the given session step Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/sessionsteps/&lt;session_step_uuid&gt;</code></pre>. |
 
 
 
@@ -7025,7 +7025,7 @@ This message is a request to get a session step
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| name | [string](#string) |  | The unique identifier for the given session step Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/steps/&lt;session_step_uuid&gt; |
+| name | [string](#string) |  | The unique identifier for the given session step Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/sessionsteps/&lt;session_step_uuid&gt; |
 | field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which fields will be filled with data. Example: path=["session_step.detect_intent_response.query_result.fulfillment_messages"] |
 
 
@@ -8000,7 +8000,7 @@ SessionStep is a single user interaction as part of a session
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| name | [string](#string) |  | The unique identifier for the given review Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/steps/&lt;session_step_uuid&gt;</code></pre> |
+| name | [string](#string) |  | The unique identifier for the given review Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/sessionsteps/&lt;session_step_uuid&gt;</code></pre> |
 | detect_intent_request | [DetectIntentRequest](#ondewo.nlu.DetectIntentRequest) |  | The detect intent request of the session step |
 | detect_intent_response | [DetectIntentResponse](#ondewo.nlu.DetectIntentResponse) |  | The detect intent response of the session step |
 | contexts | [Context](#ondewo.nlu.Context) | repeated | The contexts which were active at the beginning of this step |
@@ -8156,7 +8156,7 @@ TrackSessionStepRequest stores a session step into the session
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| session_id | [string](#string) |  | The unique identifier for the given review Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/steps/&lt;session_step_uuid&gt;</code></pre>. |
+| session_id | [string](#string) |  | The unique identifier for the given review Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/sessionsteps/&lt;session_step_uuid&gt;</code></pre>. |
 | session_step | [SessionStep](#ondewo.nlu.SessionStep) |  | The session step to be added |
 | session_view | [Session.View](#ondewo.nlu.Session.View) |  | Defines which fields of the session should be returned in the response |
 
