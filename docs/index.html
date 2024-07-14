@@ -1880,6 +1880,12 @@
                       
                         <li><a href="#ondewo.nlu.Sessions.TrackSessionStep" class="title-badge method">TrackSessionStep</a></li>
                       
+                        <li><a href="#ondewo.nlu.Sessions.GetSessionStep" class="title-badge method">GetSessionStep</a></li>
+                      
+                        <li><a href="#ondewo.nlu.Sessions.UpdateSessionStep" class="title-badge method">UpdateSessionStep</a></li>
+                      
+                        <li><a href="#ondewo.nlu.Sessions.DeleteSessionStep" class="title-badge method">DeleteSessionStep</a></li>
+                      
                         <li><a href="#ondewo.nlu.Sessions.DeleteSession" class="title-badge method">DeleteSession</a></li>
                       
                         <li><a href="#ondewo.nlu.Sessions.ListSessionLabels" class="title-badge method">ListSessionLabels</a></li>
@@ -2005,6 +2011,10 @@
                       </li>
                     
                       <li>
+                        <a href="#ondewo.nlu.DeleteSessionStepRequest" class="title-badge message">DeleteSessionStepRequest</a>
+                      </li>
+                    
+                      <li>
                         <a href="#ondewo.nlu.DetectIntentRequest" class="title-badge message">DetectIntentRequest</a>
                       </li>
                     
@@ -2042,6 +2052,10 @@
                     
                       <li>
                         <a href="#ondewo.nlu.GetSessionReviewRequest" class="title-badge message">GetSessionReviewRequest</a>
+                      </li>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.GetSessionStepRequest" class="title-badge message">GetSessionStepRequest</a>
                       </li>
                     
                       <li>
@@ -2262,6 +2276,10 @@
                     
                       <li>
                         <a href="#ondewo.nlu.UpdateSessionCommentsRequest" class="title-badge message">UpdateSessionCommentsRequest</a>
+                      </li>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.UpdateSessionStepRequest" class="title-badge message">UpdateSessionStepRequest</a>
                       </li>
                     
                   </ul>
@@ -19353,6 +19371,24 @@ ListSessions: returns list of sessions from ondewo-kb; by default returns only s
 
           TrackSessionStep: append to an existing session; creates it if not existing
         
+          <h4 id="ondewo.nlu.Sessions.GetSessionStep" class="title-badge method">GetSessionStep</h4>
+
+          <pre>rpc GetSessionStep (<a href="#ondewo.nlu.UpdateSessionStepRequest">UpdateSessionStepRequest</a>) returns (<a href="#ondewo.nlu.SessionStep">SessionStep)</a></pre>
+
+          GetSessionStep: gets an existing session step of a session
+        
+          <h4 id="ondewo.nlu.Sessions.UpdateSessionStep" class="title-badge method">UpdateSessionStep</h4>
+
+          <pre>rpc UpdateSessionStep (<a href="#ondewo.nlu.UpdateSessionStepRequest">UpdateSessionStepRequest</a>) returns (<a href="#ondewo.nlu.SessionStep">SessionStep)</a></pre>
+
+          UpdateSessionStep: updates an existing session step in a session
+        
+          <h4 id="ondewo.nlu.Sessions.DeleteSessionStep" class="title-badge method">DeleteSessionStep</h4>
+
+          <pre>rpc DeleteSessionStep (<a href="#ondewo.nlu.DeleteSessionStepRequest">DeleteSessionStepRequest</a>) returns (<a href="#google.protobuf.Empty">.google.protobuf.Empty)</a></pre>
+
+          DeleteSessionStep: deletes an existing session step from the session
+        
           <h4 id="ondewo.nlu.Sessions.DeleteSession" class="title-badge method">DeleteSession</h4>
 
           <pre>rpc DeleteSession (<a href="#ondewo.nlu.DeleteSessionRequest">DeleteSessionRequest</a>) returns (<a href="#google.protobuf.Empty">.google.protobuf.Empty)</a></pre>
@@ -19616,6 +19652,36 @@ Retrieves a single audio file that combines all audio files associated with the 
                 <td>TrackSessionStep</td>
                 <td>POST</td>
                 <td>/v2/{session_id=projects/*/agent/sessions/*}:trackSessionStep</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetSessionStep</td>
+                <td>POST</td>
+                <td>/v2/{session_id=projects/*/agent/sessions/*}:getSessionStep</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>UpdateSessionStep</td>
+                <td>POST</td>
+                <td>/v2/{session_id=projects/*/agent/sessions/*}:updateSessionStep</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>DeleteSessionStep</td>
+                <td>POST</td>
+                <td>/v2/{session_id=projects/*/agent/sessions/*}:deleteSessionStep</td>
                 <td>*</td>
               </tr>
               
@@ -20414,6 +20480,31 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid
 
         
       
+        <h3 id="ondewo.nlu.DeleteSessionStepRequest" class="title-badge message">DeleteSessionStepRequest</h3>
+        <p>This message is a request to delete a session step of a session</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The unique identifier for the given session step
+Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/steps/&lt;session_step_uuid&gt;</code></pre>. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="ondewo.nlu.DetectIntentRequest" class="title-badge message">DetectIntentRequest</h3>
         <p>The request to detect user's intent.</p>
 
@@ -20861,6 +20952,39 @@ Example: path=["session_info.duration_in_s_min"] </p></td>
                   <td><a href="#ondewo.nlu.SessionReview.View">SessionReview.View</a></td>
                   <td></td>
                   <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="ondewo.nlu.GetSessionStepRequest" class="title-badge message">GetSessionStepRequest</h3>
+        <p>This message is a request to get a session step</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The unique identifier for the given session step
+Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/steps/&lt;session_step_uuid&gt; </p></td>
+                </tr>
+              
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td></td>
+                  <td><p>Optional. The mask to control which fields will be filled with data.
+Example: path=["session_step.detect_intent_response.query_result.fulfillment_messages"] </p></td>
                 </tr>
               
             </tbody>
@@ -23854,6 +23978,46 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid
                   <td><a href="#ondewo.nlu.Comment">Comment</a></td>
                   <td></td>
                   <td><p>The comment of a session to be updated </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="ondewo.nlu.UpdateSessionStepRequest" class="title-badge message">UpdateSessionStepRequest</h3>
+        <p>UpdateSessionStepRequest stores a session step into the session</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>session_step</td>
+                  <td><a href="#ondewo.nlu.SessionStep">SessionStep</a></td>
+                  <td></td>
+                  <td><p>The session step to be updated </p></td>
+                </tr>
+              
+                <tr>
+                  <td>update_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td></td>
+                  <td><p>Optional. The mask to control which fields will be updated.
+Example: path=["session_step.detect_intent_response.query_result.fulfillment_messages"] </p></td>
+                </tr>
+              
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td></td>
+                  <td><p>Optional. The mask to control which fields will be filled with data.
+Example: path=["session_step.detect_intent_response.query_result.fulfillment_messages"] </p></td>
                 </tr>
               
             </tbody>
