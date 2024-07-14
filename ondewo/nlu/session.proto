@@ -907,7 +907,7 @@ message Session {
 message SessionStep {
 
     // The unique identifier for the given review
-    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/steps/&lt;session_step_uuid&gt;</code></pre>
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/sessionsteps/&lt;session_step_uuid&gt;</code></pre>
     string name = 1;
 
     // The detect intent request of the session step
@@ -943,7 +943,7 @@ message SessionStep {
 message TrackSessionStepRequest {
 
     // The unique identifier for the given review
-    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/steps/&lt;session_step_uuid&gt;</code></pre>.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/sessionsteps/&lt;session_step_uuid&gt;</code></pre>.
     string session_id = 1;
 
     // The session step to be added
@@ -957,7 +957,7 @@ message TrackSessionStepRequest {
 message GetSessionStepRequest {
 
     // The unique identifier for the given session step
-    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/steps/&lt;session_step_uuid&gt;
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/sessionsteps/&lt;session_step_uuid&gt;
     string name = 1;
 
     // Optional. The mask to control which fields will be filled with data.
@@ -986,7 +986,7 @@ message UpdateSessionStepRequest {
 message DeleteSessionStepRequest {
 
     // The unique identifier for the given session step
-    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/steps/&lt;session_step_uuid&gt;</code></pre>.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/sessionsteps/&lt;session_step_uuid&gt;</code></pre>.
     string name = 1;
 
 }
