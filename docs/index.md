@@ -6792,7 +6792,7 @@ CreateSessionStepRequest stores a session step into the session
 | ----- | ---- | ----- | ----------- |
 | session_id | [string](#string) |  | The unique identifier for the given review Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/sessionsteps/&lt;session_step_uuid&gt;</code></pre>. |
 | session_step | [SessionStep](#ondewo.nlu.SessionStep) |  | The session step to be added |
-| session_view | [Session.View](#ondewo.nlu.Session.View) |  | Defines which fields of the session should be returned in the response |
+| session_view | [Session.View](#ondewo.nlu.Session.View) | optional | Defines which fields of the session should be returned in the response |
 
 
 
