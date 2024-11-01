@@ -660,6 +660,8 @@
                       
                         <li><a href="#ondewo.nlu.CcaiProjects.UpdateCcaiProject" class="title-badge method">UpdateCcaiProject</a></li>
                       
+                        <li><a href="#ondewo.nlu.CcaiProjects.GetCcaiService" class="title-badge method">GetCcaiService</a></li>
+                      
                       </ul>
                       
                     </li>
@@ -715,6 +717,10 @@
                       </li>
                     
                       <li>
+                        <a href="#ondewo.nlu.GetCcaiServiceRequest" class="title-badge message">GetCcaiServiceRequest</a>
+                      </li>
+                    
+                      <li>
                         <a href="#ondewo.nlu.ListCcaiProjectsRequest" class="title-badge message">ListCcaiProjectsRequest</a>
                       </li>
                     
@@ -746,6 +752,10 @@
                     
                       <li>
                         <a href="#ondewo.nlu.CcaiProjectView" class="title-badge enum">CcaiProjectView</a>
+                      </li>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.CcaiServiceProvider" class="title-badge enum">CcaiServiceProvider</a>
                       </li>
                     
                       <li>
@@ -9334,7 +9344,7 @@ fine-tuned for multi-class intent detection. For details see https://arxiv.org/a
       
         
         <h3 id="ondewo.nlu.CcaiProjects" class="title-badge service">CcaiProjects</h3>
-        <p>Service to manage Call Center AI (CCAI) Projects.</p>
+        <p>Service to manage Call Center AI (CCAI service) Projects.</p>
 
         
         <div id="ondewo.nlu.CcaiProjects-methods" class="service-methods">Service Methods</div>
@@ -9343,31 +9353,37 @@ fine-tuned for multi-class intent detection. For details see https://arxiv.org/a
 
           <pre>rpc GetCcaiProject (<a href="#ondewo.nlu.GetCcaiProjectRequest">GetCcaiProjectRequest</a>) returns (<a href="#ondewo.nlu.CcaiProject">CcaiProject)</a></pre>
 
-          Retrieves information about a specific CCAI project.
+          Retrieves information about a specific CCAI service project.
         
           <h4 id="ondewo.nlu.CcaiProjects.CreateCcaiProject" class="title-badge method">CreateCcaiProject</h4>
 
           <pre>rpc CreateCcaiProject (<a href="#ondewo.nlu.CreateCcaiProjectRequest">CreateCcaiProjectRequest</a>) returns (<a href="#ondewo.nlu.CreateCcaiProjectResponse">CreateCcaiProjectResponse)</a></pre>
 
-          Creates a new CCAI project based on the provided request.
+          Creates a new CCAI service project based on the provided request.
         
           <h4 id="ondewo.nlu.CcaiProjects.DeleteCcaiProject" class="title-badge method">DeleteCcaiProject</h4>
 
           <pre>rpc DeleteCcaiProject (<a href="#ondewo.nlu.DeleteCcaiProjectRequest">DeleteCcaiProjectRequest</a>) returns (<a href="#ondewo.nlu.DeleteCcaiProjectResponse">DeleteCcaiProjectResponse)</a></pre>
 
-          Deletes a CCAI project identified by the provided request.
+          Deletes a CCAI service project identified by the provided request.
         
           <h4 id="ondewo.nlu.CcaiProjects.ListCcaiProjects" class="title-badge method">ListCcaiProjects</h4>
 
           <pre>rpc ListCcaiProjects (<a href="#ondewo.nlu.ListCcaiProjectsRequest">ListCcaiProjectsRequest</a>) returns (<a href="#ondewo.nlu.ListCcaiProjectsResponse">ListCcaiProjectsResponse)</a></pre>
 
-          Lists all CCAI projects based on the provided request.
+          Lists all CCAI service projects based on the provided request.
         
           <h4 id="ondewo.nlu.CcaiProjects.UpdateCcaiProject" class="title-badge method">UpdateCcaiProject</h4>
 
           <pre>rpc UpdateCcaiProject (<a href="#ondewo.nlu.UpdateCcaiProjectRequest">UpdateCcaiProjectRequest</a>) returns (<a href="#ondewo.nlu.UpdateCcaiProjectResponse">UpdateCcaiProjectResponse)</a></pre>
 
-          Updates the information of an existing CCAI project.
+          Updates the information of an existing CCAI service project.
+        
+          <h4 id="ondewo.nlu.CcaiProjects.GetCcaiService" class="title-badge method">GetCcaiService</h4>
+
+          <pre>rpc GetCcaiService (<a href="#ondewo.nlu.GetCcaiServiceRequest">GetCcaiServiceRequest</a>) returns (<a href="#ondewo.nlu.CcaiService">CcaiService)</a></pre>
+
+          Retrieves information about a specific CCAI service.
         
 
         
@@ -9379,7 +9395,7 @@ fine-tuned for multi-class intent detection. For details see https://arxiv.org/a
       <div id="ondewo/nlu/ccai_project.proto-messages" class="object-category">Messages</div>
       
         <h3 id="ondewo.nlu.CcaiProject" class="title-badge message">CcaiProject</h3>
-        <p>Message representing a CCAI project</p>
+        <p>Message representing a CCAI service project</p>
 
         
           <table class="field-table">
@@ -9392,7 +9408,7 @@ fine-tuned for multi-class intent detection. For details see https://arxiv.org/a
                   <td>name</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Resource name of the CCAI project </p></td>
+                  <td><p>Resource name of the CCAI service project </p></td>
                 </tr>
               
                 <tr>
@@ -9499,7 +9515,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
         
       
         <h3 id="ondewo.nlu.CcaiProjectSorting" class="title-badge message">CcaiProjectSorting</h3>
-        <p>This protobuf message defines the sorting order for CCAI (Virtual Test System Infrastructure) projects.</p>
+        <p>This protobuf message defines the sorting order for CCAI service (Virtual Test System Infrastructure) projects.</p>
 
         
           <table class="field-table">
@@ -9530,7 +9546,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
         
       
         <h3 id="ondewo.nlu.CcaiService" class="title-badge message">CcaiService</h3>
-        <p>Definition of a Call Center AI (CCAI) Service.</p>
+        <p>Definition of a Call Center AI (CCAI service) Service.</p>
 
         
           <table class="field-table">
@@ -9649,7 +9665,7 @@ Format (e.g., "en" for English, "de" for German). </p></td>
                   <td>ccai_service_type</td>
                   <td><a href="#ondewo.nlu.CcaiServiceType">CcaiServiceType</a></td>
                   <td></td>
-                  <td><p>Type of CCAI service (e.g., TEXT_TO_SPEECH, SPEECH_TO_TEXT). </p></td>
+                  <td><p>Type of CCAI service service (e.g., TEXT_TO_SPEECH, SPEECH_TO_TEXT). </p></td>
                 </tr>
               
                 <tr>
@@ -9694,6 +9710,43 @@ Format (e.g., "en" for English, "de" for German). </p></td>
                   <td><p>User ID of the last modifier in the form of a valid UUID. Read-only field. </p></td>
                 </tr>
               
+                <tr>
+                  <td>headers</td>
+                  <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. The headers of the request message </p></td>
+                </tr>
+              
+                <tr>
+                  <td>ccai_service_provider</td>
+                  <td><a href="#ondewo.nlu.CcaiServiceProvider">CcaiServiceProvider</a></td>
+                  <td>optional</td>
+                  <td><p>Provider of the ccai service </p></td>
+                </tr>
+              
+                <tr>
+                  <td>service_hierarchy</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p>Index indicating the hierarchical position of a service within the service hierarchy.
+The index follows a tree-like structure, where each level of depth is separated by a "_".
+For example:
+- "1" represents a top-level service
+- "1_1" represents a sub-service under "1"
+- "1_1_1" represents a sub-service under "1.1"
+This structure allows for easy representation and organization of services in nested workflows.
+
+If CcaiService have the same service_hierarchy they are executed in parallel.
+For example:
+- "1" Service A
+- "1_1" Service B
+- "1_1" Service C
+
+Service B and C will be executed in parallel and the Service A receives both results of service B and C.
+The variable for the return value of a service is {{OUTPUT_SERVICE_service_hierarchy}}. So in the example
+above the outputs of the services are {{OUTPUT_SERVICE_1}}, {{OUTPUT_SERVICE_1_1}}, and {{OUTPUT_SERVICE_1_2}}. </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -9722,7 +9775,7 @@ Format (e.g., "en" for English, "de" for German). </p></td>
                   <td>ccai_service_types</td>
                   <td><a href="#ondewo.nlu.CcaiServiceType">CcaiServiceType</a></td>
                   <td>repeated</td>
-                  <td><p>Type of CCAI service </p></td>
+                  <td><p>Type of CCAI service service </p></td>
                 </tr>
               
             </tbody>
@@ -9733,7 +9786,7 @@ Format (e.g., "en" for English, "de" for German). </p></td>
         
       
         <h3 id="ondewo.nlu.CcaiServiceList" class="title-badge message">CcaiServiceList</h3>
-        <p>Message representing a list of CCAI services</p>
+        <p>Message representing a list of CCAI service services</p>
 
         
           <table class="field-table">
@@ -9746,7 +9799,7 @@ Format (e.g., "en" for English, "de" for German). </p></td>
                   <td>ccai_services</td>
                   <td><a href="#ondewo.nlu.CcaiService">CcaiService</a></td>
                   <td>repeated</td>
-                  <td><p>CCAI services </p></td>
+                  <td><p>CCAI service services </p></td>
                 </tr>
               
             </tbody>
@@ -9757,7 +9810,7 @@ Format (e.g., "en" for English, "de" for German). </p></td>
         
       
         <h3 id="ondewo.nlu.CreateCcaiProjectRequest" class="title-badge message">CreateCcaiProjectRequest</h3>
-        <p>Request to create a Call Center AI (CCAI) project.</p>
+        <p>Request to create a Call Center AI (CCAI service) project.</p>
 
         
           <table class="field-table">
@@ -9770,7 +9823,7 @@ Format (e.g., "en" for English, "de" for German). </p></td>
                   <td>ccai_project</td>
                   <td><a href="#ondewo.nlu.CcaiProject">CcaiProject</a></td>
                   <td></td>
-                  <td><p>The CCAI project to be created. </p></td>
+                  <td><p>The CCAI service project to be created. </p></td>
                 </tr>
               
                 <tr>
@@ -9789,7 +9842,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
         
       
         <h3 id="ondewo.nlu.CreateCcaiProjectResponse" class="title-badge message">CreateCcaiProjectResponse</h3>
-        <p>Response after attempting to create a Call Center AI (CCAI) project.</p>
+        <p>Response after attempting to create a Call Center AI (CCAI service) project.</p>
 
         
           <table class="field-table">
@@ -9802,7 +9855,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td>ccai_project</td>
                   <td><a href="#ondewo.nlu.CcaiProject">CcaiProject</a></td>
                   <td></td>
-                  <td><p>The created CCAI project. </p></td>
+                  <td><p>The created CCAI service project. </p></td>
                 </tr>
               
                 <tr>
@@ -9820,7 +9873,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
         
       
         <h3 id="ondewo.nlu.DeleteCcaiProjectRequest" class="title-badge message">DeleteCcaiProjectRequest</h3>
-        <p>Request to delete a CCAI project</p><p>If a deployed CCAI project was deleted then it was undeployed beforehand automatically</p>
+        <p>Request to delete a CCAI service project</p><p>If a deployed CCAI service project was deleted then it was undeployed beforehand automatically</p>
 
         
           <table class="field-table">
@@ -9833,7 +9886,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td>name</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>CCAI project name with which to perform the call of the form <pre><code>projects/&lt;project_uuid&gt;/project</code></pre> </p></td>
+                  <td><p>CCAI service project name with which to perform the call of the form <pre><code>projects/&lt;project_uuid&gt;/project</code></pre> </p></td>
                 </tr>
               
                 <tr>
@@ -9852,7 +9905,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
         
       
         <h3 id="ondewo.nlu.DeleteCcaiProjectResponse" class="title-badge message">DeleteCcaiProjectResponse</h3>
-        <p>Response to delete a CCAI project</p><p>If a deployed CCAI project was deleted then it was undeployed beforehand automatically</p>
+        <p>Response to delete a CCAI service project</p><p>If a deployed CCAI service project was deleted then it was undeployed beforehand automatically</p>
 
         
           <table class="field-table">
@@ -9865,7 +9918,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td>name</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>CCAI project name with which to perform the call of the form <pre><code>projects/&lt;project_uuid&gt;/project</code></pre> </p></td>
+                  <td><p>CCAI service project name with which to perform the call of the form <pre><code>projects/&lt;project_uuid&gt;/project</code></pre> </p></td>
                 </tr>
               
                 <tr>
@@ -9891,7 +9944,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
         
       
         <h3 id="ondewo.nlu.GetCcaiProjectRequest" class="title-badge message">GetCcaiProjectRequest</h3>
-        <p>Request to retrieve a CCAI project</p>
+        <p>Request to retrieve a CCAI service project</p>
 
         
           <table class="field-table">
@@ -9904,7 +9957,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td>name</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>CCAI project name with which to perform the call of the form <pre><code>projects/&lt;project_uuid&gt;/project</code></pre> </p></td>
+                  <td><p>CCAI service project name with which to perform the call of the form <pre><code>projects/&lt;project_uuid&gt;/project</code></pre> </p></td>
                 </tr>
               
                 <tr>
@@ -9919,6 +9972,39 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td><a href="#ondewo.nlu.CcaiServiceFilter">CcaiServiceFilter</a></td>
                   <td>optional</td>
                   <td><p>Filter which services should be included in the returned CcaiProject </p></td>
+                </tr>
+              
+                <tr>
+                  <td>nlu_project_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The nlu agent project of this CcaiProject.
+Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="ondewo.nlu.GetCcaiServiceRequest" class="title-badge message">GetCcaiServiceRequest</h3>
+        <p>Request to retrieve a CCAI service project</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>CCAI service project name with which to perform the call of the form
+<pre><code>projects/&lt;project_uuid&gt;/ccai/services/&lt;service_uuid&gt;</code></pre> </p></td>
                 </tr>
               
                 <tr>
@@ -9964,7 +10050,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td>ccai_project_sorting</td>
                   <td><a href="#ondewo.nlu.CcaiProjectSorting">CcaiProjectSorting</a></td>
                   <td>optional</td>
-                  <td><p>Optional. Field to define the sorting of the list of CCAI projects in the response.
+                  <td><p>Optional. Field to define the sorting of the list of CCAI service projects in the response.
 If not specified, the default behavior is to have no sorting. </p></td>
                 </tr>
               
@@ -10015,7 +10101,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
         
       
         <h3 id="ondewo.nlu.ListCcaiProjectsResponse" class="title-badge message">ListCcaiProjectsResponse</h3>
-        <p>This is a protobuf message definition for the response of getting a list of CCAI projects.</p>
+        <p>This is a protobuf message definition for the response of getting a list of CCAI service projects.</p>
 
         
           <table class="field-table">
@@ -10028,7 +10114,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td>ccai_projects</td>
                   <td><a href="#ondewo.nlu.CcaiProject">CcaiProject</a></td>
                   <td>repeated</td>
-                  <td><p>The list of CCAI projects returned in the response.
+                  <td><p>The list of CCAI service projects returned in the response.
 Use the 'repeated' keyword to indicate that this field can contain multiple instances of CcaiProject. </p></td>
                 </tr>
               
@@ -10048,7 +10134,7 @@ e.g. next_page_token is current_index-2 </p></td>
         
       
         <h3 id="ondewo.nlu.UpdateCcaiProjectRequest" class="title-badge message">UpdateCcaiProjectRequest</h3>
-        <p>Request to updated CCAI project</p>
+        <p>Request to updated CCAI service project</p>
 
         
           <table class="field-table">
@@ -10095,7 +10181,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
         
       
         <h3 id="ondewo.nlu.UpdateCcaiProjectResponse" class="title-badge message">UpdateCcaiProjectResponse</h3>
-        <p>Request to updated CCAI project</p>
+        <p>Request to updated CCAI service project</p>
 
         
           <table class="field-table">
@@ -10108,7 +10194,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td>name</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>CCAI project name with which to perform the call of the form <pre><code>projects/&lt;project_uuid&gt;/project</code></pre> </p></td>
+                  <td><p>CCAI service project name with which to perform the call of the form <pre><code>projects/&lt;project_uuid&gt;/project</code></pre> </p></td>
                 </tr>
               
                 <tr>
@@ -10131,7 +10217,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
       <div id="ondewo/nlu/ccai_project.proto-enums" class="object-category">Enums</div>
       
         <h3 id="ondewo.nlu.CcaiProjectSorting.CcaiProjectSortingField" class="title-badge enum">CcaiProjectSorting.CcaiProjectSortingField</h3>
-        <p>Enum to specify the sorting field for CCAI projects.</p>
+        <p>Enum to specify the sorting field for CCAI service projects.</p>
         <table class="enum-table">
           <thead>
             <tr><td>Name</td><td>Number</td><td>Description</td></tr>
@@ -10172,7 +10258,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
         </table>
       
         <h3 id="ondewo.nlu.CcaiProjectStatus" class="title-badge enum">CcaiProjectStatus</h3>
-        <p>Status of a Call Center AI (CCAI) Project.</p>
+        <p>Status of a Call Center AI (CCAI service) Project.</p>
         <table class="enum-table">
           <thead>
             <tr><td>Name</td><td>Number</td><td>Description</td></tr>
@@ -10265,6 +10351,95 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
           </tbody>
         </table>
       
+        <h3 id="ondewo.nlu.CcaiServiceProvider" class="title-badge enum">CcaiServiceProvider</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>NO_CCAI_SERVICE_PROVIDER</td>
+                <td>0</td>
+                <td><p>No specified provider or placeholder</p></td>
+              </tr>
+            
+              <tr>
+                <td>CCAI_SERVICE_PROVIDER_ONDEWO</td>
+                <td>1</td>
+                <td><p>ONDEWO provider for CCAI service services</p></td>
+              </tr>
+            
+              <tr>
+                <td>CCAI_SERVICE_PROVIDER_GOOGLE_GEMINI</td>
+                <td>2</td>
+                <td><p>Google as the CCAI service provider, utilizing Google’s conversational AI capabilities</p></td>
+              </tr>
+            
+              <tr>
+                <td>CCAI_SERVICE_PROVIDER_MICROSOFT_AZURE_OPENAI</td>
+                <td>3</td>
+                <td><p>Microsoft Azure as the CCAI service provider, using Microsoft's Azure cognitive services</p></td>
+              </tr>
+            
+              <tr>
+                <td>CCAI_SERVICE_PROVIDER_MICROSOFT_AUTOGEN</td>
+                <td>4</td>
+                <td><p>LangChain as the CCAI service provider</p></td>
+              </tr>
+            
+              <tr>
+                <td>CCAI_SERVICE_PROVIDER_OLLAMA</td>
+                <td>5</td>
+                <td><p>Ollama as the CCAI service provider, typically associated with specific OLLAMA AI tools</p></td>
+              </tr>
+            
+              <tr>
+                <td>CCAI_SERVICE_PROVIDER_OPENAI</td>
+                <td>6</td>
+                <td><p>OpenAI as the CCAI service provider, commonly used for models such as GPT</p></td>
+              </tr>
+            
+              <tr>
+                <td>CCAI_SERVICE_PROVIDER_ANTHROPIC</td>
+                <td>7</td>
+                <td><p>Anthropic as the CCAI service provider, used with AI models from Anthropic</p></td>
+              </tr>
+            
+              <tr>
+                <td>CCAI_SERVICE_PROVIDER_HUGGING_FACE</td>
+                <td>8</td>
+                <td><p>Hugging Face as the CCAI service provider, often used for open-source NLP models</p></td>
+              </tr>
+            
+              <tr>
+                <td>CCAI_SERVICE_PROVIDER_IBM</td>
+                <td>9</td>
+                <td><p>IBM as the CCAI service provider, such as IBM Watson for conversational AI</p></td>
+              </tr>
+            
+              <tr>
+                <td>CCAI_SERVICE_PROVIDER_HAYSTACK</td>
+                <td>10</td>
+                <td><p>Haystack as the CCAI service provider, e.g. for question and answering, conversations</p></td>
+              </tr>
+            
+              <tr>
+                <td>CCAI_SERVICE_PROVIDER_LANGCHAIN</td>
+                <td>11</td>
+                <td><p>LangChain as the CCAI service provider</p></td>
+              </tr>
+            
+              <tr>
+                <td>CCAI_SERVICE_PROVIDER_AMAZON</td>
+                <td>12</td>
+                <td><p>Amazon AWS as the CCAI service provider, using Amazon's AI/ML services</p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
         <h3 id="ondewo.nlu.CcaiServiceType" class="title-badge enum">CcaiServiceType</h3>
         <p></p>
         <table class="enum-table">
@@ -10328,7 +10503,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
               </tr>
             
               <tr>
-                <td>CCAI_SERVICE_TYPE_VTSI_RABBITMQ</td>
+                <td>CCAI_SERVICE_TYPE_ONDEWO_VTSI_RABBITMQ</td>
                 <td>9</td>
                 <td><p>ondewo-vtsi service</p></td>
               </tr>
@@ -10349,6 +10524,12 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 <td>CCAI_SERVICE_TYPE_ONDEWO_SURVEY</td>
                 <td>12</td>
                 <td><p>ondewo-survey service</p></td>
+              </tr>
+            
+              <tr>
+                <td>CCAI_SERVICE_TYPE_ONDEWO_NLU_LLM</td>
+                <td>13</td>
+                <td><p>ondewo-nlu-llm service</p></td>
               </tr>
             
           </tbody>

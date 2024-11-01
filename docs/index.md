@@ -135,6 +135,7 @@
     - [DeleteCcaiProjectRequest](#ondewo.nlu.DeleteCcaiProjectRequest)
     - [DeleteCcaiProjectResponse](#ondewo.nlu.DeleteCcaiProjectResponse)
     - [GetCcaiProjectRequest](#ondewo.nlu.GetCcaiProjectRequest)
+    - [GetCcaiServiceRequest](#ondewo.nlu.GetCcaiServiceRequest)
     - [ListCcaiProjectsRequest](#ondewo.nlu.ListCcaiProjectsRequest)
     - [ListCcaiProjectsResponse](#ondewo.nlu.ListCcaiProjectsResponse)
     - [UpdateCcaiProjectRequest](#ondewo.nlu.UpdateCcaiProjectRequest)
@@ -143,6 +144,7 @@
     - [CcaiProjectSorting.CcaiProjectSortingField](#ondewo.nlu.CcaiProjectSorting.CcaiProjectSortingField)
     - [CcaiProjectStatus](#ondewo.nlu.CcaiProjectStatus)
     - [CcaiProjectView](#ondewo.nlu.CcaiProjectView)
+    - [CcaiServiceProvider](#ondewo.nlu.CcaiServiceProvider)
     - [CcaiServiceType](#ondewo.nlu.CcaiServiceType)
   
     - [CcaiProjects](#ondewo.nlu.CcaiProjects)
@@ -2769,12 +2771,12 @@ The Central class defining the ondewo ai services
 <a name="ondewo.nlu.CcaiProject"></a>
 
 ### CcaiProject
-Message representing a CCAI project
+Message representing a CCAI service project
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| name | [string](#string) |  | Resource name of the CCAI project |
+| name | [string](#string) |  | Resource name of the CCAI service project |
 | display_name | [string](#string) |  | Required. The display name of this ccai project. |
 | owner_name | [string](#string) |  | Optional. Resource name of the user who is the owner of the project. |
 | ccai_services_map | [CcaiProject.CcaiServicesMapEntry](#ondewo.nlu.CcaiProject.CcaiServicesMapEntry) | repeated | Map of two letter language codes to lists of CcaiServiceList Two-letter language codes following ISO 639-1 (see https://en.wikipedia.org/wiki/ISO_639-1) |
@@ -2809,7 +2811,7 @@ Message representing a CCAI project
 <a name="ondewo.nlu.CcaiProjectSorting"></a>
 
 ### CcaiProjectSorting
-This protobuf message defines the sorting order for CCAI (Virtual Test System Infrastructure) projects.
+This protobuf message defines the sorting order for CCAI service (Virtual Test System Infrastructure) projects.
 
 
 | Field | Type | Label | Description |
@@ -2825,7 +2827,7 @@ This protobuf message defines the sorting order for CCAI (Virtual Test System In
 <a name="ondewo.nlu.CcaiService"></a>
 
 ### CcaiService
-Definition of a Call Center AI (CCAI) Service.
+Definition of a Call Center AI (CCAI service) Service.
 
 
 | Field | Type | Label | Description |
@@ -2845,13 +2847,20 @@ Definition of a Call Center AI (CCAI) Service.
 | account_name | [string](#string) |  | Account name for authentication. |
 | account_password | [string](#string) |  | Password for the specified account for authentication. |
 | api_key | [string](#string) |  | API key for accessing the service, if applicable. |
-| ccai_service_type | [CcaiServiceType](#ondewo.nlu.CcaiServiceType) |  | Type of CCAI service (e.g., TEXT_TO_SPEECH, SPEECH_TO_TEXT). |
+| ccai_service_type | [CcaiServiceType](#ondewo.nlu.CcaiServiceType) |  | Type of CCAI service service (e.g., TEXT_TO_SPEECH, SPEECH_TO_TEXT). |
 | ccai_project_name | [string](#string) |  | Resource name of the ccai_project the ccai_service belongs to |
 | ccai_service_config | [google.protobuf.Struct](#google.protobuf.Struct) |  | Detailed configuration of the CcaiService |
 | created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time of the service. Read-only field. |
 | modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time of the service. Read-only field. |
 | created_by | [string](#string) |  | User ID of the creator in the form of a valid UUID. Read-only field. |
 | modified_by | [string](#string) |  | User ID of the last modifier in the form of a valid UUID. Read-only field. |
+| headers | [google.protobuf.Struct](#google.protobuf.Struct) | optional | Optional. The headers of the request message |
+| ccai_service_provider | [CcaiServiceProvider](#ondewo.nlu.CcaiServiceProvider) | optional | Provider of the ccai service |
+| service_hierarchy | [string](#string) | optional | Index indicating the hierarchical position of a service within the service hierarchy. The index follows a tree-like structure, where each level of depth is separated by a "_". For example: - "1" represents a top-level service - "1_1" represents a sub-service under "1" - "1_1_1" represents a sub-service under "1.1" This structure allows for easy representation and organization of services in nested workflows.
+
+If CcaiService have the same service_hierarchy they are executed in parallel. For example: - "1" Service A - "1_1" Service B - "1_1" Service C
+
+Service B and C will be executed in parallel and the Service A receives both results of service B and C. The variable for the return value of a service is {{OUTPUT_SERVICE_service_hierarchy}}. So in the example above the outputs of the services are {{OUTPUT_SERVICE_1}}, {{OUTPUT_SERVICE_1_1}}, and {{OUTPUT_SERVICE_1_2}}. |
 
 
 
@@ -2867,7 +2876,7 @@ Filter which services should be included in the returned CcaiProject
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | language_codes | [string](#string) | repeated | Language codes of the projects for which services are filtered. |
-| ccai_service_types | [CcaiServiceType](#ondewo.nlu.CcaiServiceType) | repeated | Type of CCAI service |
+| ccai_service_types | [CcaiServiceType](#ondewo.nlu.CcaiServiceType) | repeated | Type of CCAI service service |
 
 
 
@@ -2877,12 +2886,12 @@ Filter which services should be included in the returned CcaiProject
 <a name="ondewo.nlu.CcaiServiceList"></a>
 
 ### CcaiServiceList
-Message representing a list of CCAI services
+Message representing a list of CCAI service services
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| ccai_services | [CcaiService](#ondewo.nlu.CcaiService) | repeated | CCAI services |
+| ccai_services | [CcaiService](#ondewo.nlu.CcaiService) | repeated | CCAI service services |
 
 
 
@@ -2892,12 +2901,12 @@ Message representing a list of CCAI services
 <a name="ondewo.nlu.CreateCcaiProjectRequest"></a>
 
 ### CreateCcaiProjectRequest
-Request to create a Call Center AI (CCAI) project.
+Request to create a Call Center AI (CCAI service) project.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| ccai_project | [CcaiProject](#ondewo.nlu.CcaiProject) |  | The CCAI project to be created. |
+| ccai_project | [CcaiProject](#ondewo.nlu.CcaiProject) |  | The CCAI service project to be created. |
 | nlu_project_name | [string](#string) |  | Required. The nlu agent project of this CcaiProject. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
 
 
@@ -2908,12 +2917,12 @@ Request to create a Call Center AI (CCAI) project.
 <a name="ondewo.nlu.CreateCcaiProjectResponse"></a>
 
 ### CreateCcaiProjectResponse
-Response after attempting to create a Call Center AI (CCAI) project.
+Response after attempting to create a Call Center AI (CCAI service) project.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| ccai_project | [CcaiProject](#ondewo.nlu.CcaiProject) |  | The created CCAI project. |
+| ccai_project | [CcaiProject](#ondewo.nlu.CcaiProject) |  | The created CCAI service project. |
 | error_message | [string](#string) |  | Error message if the creation is unsuccessful. |
 
 
@@ -2924,13 +2933,13 @@ Response after attempting to create a Call Center AI (CCAI) project.
 <a name="ondewo.nlu.DeleteCcaiProjectRequest"></a>
 
 ### DeleteCcaiProjectRequest
-Request to delete a CCAI project
-If a deployed CCAI project was deleted then it was undeployed beforehand automatically
+Request to delete a CCAI service project
+If a deployed CCAI service project was deleted then it was undeployed beforehand automatically
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| name | [string](#string) |  | CCAI project name with which to perform the call of the form <pre><code>projects/&lt;project_uuid&gt;/project</code></pre> |
+| name | [string](#string) |  | CCAI service project name with which to perform the call of the form <pre><code>projects/&lt;project_uuid&gt;/project</code></pre> |
 | nlu_project_name | [string](#string) |  | Required. The nlu agent project of this CcaiProject. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
 
 
@@ -2941,13 +2950,13 @@ If a deployed CCAI project was deleted then it was undeployed beforehand automat
 <a name="ondewo.nlu.DeleteCcaiProjectResponse"></a>
 
 ### DeleteCcaiProjectResponse
-Response to delete a CCAI project
-If a deployed CCAI project was deleted then it was undeployed beforehand automatically
+Response to delete a CCAI service project
+If a deployed CCAI service project was deleted then it was undeployed beforehand automatically
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| name | [string](#string) |  | CCAI project name with which to perform the call of the form <pre><code>projects/&lt;project_uuid&gt;/project</code></pre> |
+| name | [string](#string) |  | CCAI service project name with which to perform the call of the form <pre><code>projects/&lt;project_uuid&gt;/project</code></pre> |
 | error_message | [string](#string) |  | error message if there are any. |
 | nlu_project_name | [string](#string) |  | Required. The nlu agent project of this CcaiProject. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
 
@@ -2959,14 +2968,30 @@ If a deployed CCAI project was deleted then it was undeployed beforehand automat
 <a name="ondewo.nlu.GetCcaiProjectRequest"></a>
 
 ### GetCcaiProjectRequest
-Request to retrieve a CCAI project
+Request to retrieve a CCAI service project
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| name | [string](#string) |  | CCAI project name with which to perform the call of the form <pre><code>projects/&lt;project_uuid&gt;/project</code></pre> |
+| name | [string](#string) |  | CCAI service project name with which to perform the call of the form <pre><code>projects/&lt;project_uuid&gt;/project</code></pre> |
 | ccai_project_view | [CcaiProjectView](#ondewo.nlu.CcaiProjectView) | optional | Optional. Specify the view of the returned CcaiProject (full view by default) |
 | ccai_service_filter | [CcaiServiceFilter](#ondewo.nlu.CcaiServiceFilter) | optional | Filter which services should be included in the returned CcaiProject |
+| nlu_project_name | [string](#string) |  | Required. The nlu agent project of this CcaiProject. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+
+
+
+
+
+
+<a name="ondewo.nlu.GetCcaiServiceRequest"></a>
+
+### GetCcaiServiceRequest
+Request to retrieve a CCAI service project
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | CCAI service project name with which to perform the call of the form <pre><code>projects/&lt;project_uuid&gt;/ccai/services/&lt;service_uuid&gt;</code></pre> |
 | nlu_project_name | [string](#string) |  | Required. The nlu agent project of this CcaiProject. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
 
 
@@ -2984,7 +3009,7 @@ Request to get the list of agents
 | ----- | ---- | ----- | ----------- |
 | ccai_project_view | [CcaiProjectView](#ondewo.nlu.CcaiProjectView) |  | Optional. Specify the view of the returned CcaiProject (full view by default) |
 | ccai_service_filter | [CcaiServiceFilter](#ondewo.nlu.CcaiServiceFilter) | optional | Filter which services should be included in the CcaiProject |
-| ccai_project_sorting | [CcaiProjectSorting](#ondewo.nlu.CcaiProjectSorting) | optional | Optional. Field to define the sorting of the list of CCAI projects in the response. If not specified, the default behavior is to have no sorting. |
+| ccai_project_sorting | [CcaiProjectSorting](#ondewo.nlu.CcaiProjectSorting) | optional | Optional. Field to define the sorting of the list of CCAI service projects in the response. If not specified, the default behavior is to have no sorting. |
 | page_token | [string](#string) | optional | Optional. The next_page_token value returned from a previous list request. Example: "current_index-1--page_size-20" The page token to support pagination. Pagination allows you to retrieve a large result set in smaller, more manageable portions. The page token is a string representing the current index and page size.
 
 Valid page token strings: * "" (empty string) - Retrieves the first page. * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20. * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
@@ -3004,12 +3029,12 @@ Examples of invalid page token strings: * "1" * "current_index-0--page_size-20" 
 <a name="ondewo.nlu.ListCcaiProjectsResponse"></a>
 
 ### ListCcaiProjectsResponse
-This is a protobuf message definition for the response of getting a list of CCAI projects.
+This is a protobuf message definition for the response of getting a list of CCAI service projects.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| ccai_projects | [CcaiProject](#ondewo.nlu.CcaiProject) | repeated | The list of CCAI projects returned in the response. Use the 'repeated' keyword to indicate that this field can contain multiple instances of CcaiProject. |
+| ccai_projects | [CcaiProject](#ondewo.nlu.CcaiProject) | repeated | The list of CCAI service projects returned in the response. Use the 'repeated' keyword to indicate that this field can contain multiple instances of CcaiProject. |
 | next_page_token | [string](#string) |  | The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2 |
 
 
@@ -3020,7 +3045,7 @@ This is a protobuf message definition for the response of getting a list of CCAI
 <a name="ondewo.nlu.UpdateCcaiProjectRequest"></a>
 
 ### UpdateCcaiProjectRequest
-Request to updated CCAI project
+Request to updated CCAI service project
 
 
 | Field | Type | Label | Description |
@@ -3038,12 +3063,12 @@ Request to updated CCAI project
 <a name="ondewo.nlu.UpdateCcaiProjectResponse"></a>
 
 ### UpdateCcaiProjectResponse
-Request to updated CCAI project
+Request to updated CCAI service project
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| name | [string](#string) |  | CCAI project name with which to perform the call of the form <pre><code>projects/&lt;project_uuid&gt;/project</code></pre> |
+| name | [string](#string) |  | CCAI service project name with which to perform the call of the form <pre><code>projects/&lt;project_uuid&gt;/project</code></pre> |
 | error_message | [string](#string) |  | error message if there are any. |
 
 
@@ -3056,7 +3081,7 @@ Request to updated CCAI project
 <a name="ondewo.nlu.CcaiProjectSorting.CcaiProjectSortingField"></a>
 
 ### CcaiProjectSorting.CcaiProjectSortingField
-Enum to specify the sorting field for CCAI projects.
+Enum to specify the sorting field for CCAI service projects.
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
@@ -3071,7 +3096,7 @@ Enum to specify the sorting field for CCAI projects.
 <a name="ondewo.nlu.CcaiProjectStatus"></a>
 
 ### CcaiProjectStatus
-Status of a Call Center AI (CCAI) Project.
+Status of a Call Center AI (CCAI service) Project.
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
@@ -3100,6 +3125,29 @@ CcaiProjectView defines what the CcaiProject message contains
 
 
 
+<a name="ondewo.nlu.CcaiServiceProvider"></a>
+
+### CcaiServiceProvider
+
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| NO_CCAI_SERVICE_PROVIDER | 0 | No specified provider or placeholder |
+| CCAI_SERVICE_PROVIDER_ONDEWO | 1 | ONDEWO provider for CCAI service services |
+| CCAI_SERVICE_PROVIDER_GOOGLE_GEMINI | 2 | Google as the CCAI service provider, utilizing Google’s conversational AI capabilities |
+| CCAI_SERVICE_PROVIDER_MICROSOFT_AZURE_OPENAI | 3 | Microsoft Azure as the CCAI service provider, using Microsoft's Azure cognitive services |
+| CCAI_SERVICE_PROVIDER_MICROSOFT_AUTOGEN | 4 | LangChain as the CCAI service provider |
+| CCAI_SERVICE_PROVIDER_OLLAMA | 5 | Ollama as the CCAI service provider, typically associated with specific OLLAMA AI tools |
+| CCAI_SERVICE_PROVIDER_OPENAI | 6 | OpenAI as the CCAI service provider, commonly used for models such as GPT |
+| CCAI_SERVICE_PROVIDER_ANTHROPIC | 7 | Anthropic as the CCAI service provider, used with AI models from Anthropic |
+| CCAI_SERVICE_PROVIDER_HUGGING_FACE | 8 | Hugging Face as the CCAI service provider, often used for open-source NLP models |
+| CCAI_SERVICE_PROVIDER_IBM | 9 | IBM as the CCAI service provider, such as IBM Watson for conversational AI |
+| CCAI_SERVICE_PROVIDER_HAYSTACK | 10 | Haystack as the CCAI service provider, e.g. for question and answering, conversations |
+| CCAI_SERVICE_PROVIDER_LANGCHAIN | 11 | LangChain as the CCAI service provider |
+| CCAI_SERVICE_PROVIDER_AMAZON | 12 | Amazon AWS as the CCAI service provider, using Amazon's AI/ML services |
+
+
+
 <a name="ondewo.nlu.CcaiServiceType"></a>
 
 ### CcaiServiceType
@@ -3116,10 +3164,11 @@ CcaiProjectView defines what the CcaiProject message contains
 | CCAI_SERVICE_TYPE_ONDEWO_SIP | 6 | ondewo-sip service |
 | CCAI_SERVICE_TYPE_ONDEWO_T2S | 7 | ondewo-t2s service |
 | CCAI_SERVICE_TYPE_ONDEWO_VTSI | 8 | ondewo-vtsi service |
-| CCAI_SERVICE_TYPE_VTSI_RABBITMQ | 9 | ondewo-vtsi service |
+| CCAI_SERVICE_TYPE_ONDEWO_VTSI_RABBITMQ | 9 | ondewo-vtsi service |
 | CCAI_SERVICE_TYPE_ONDEWO_NLU_QA | 10 | ondewo-nlu-qa service |
 | CCAI_SERVICE_TYPE_ONDEWO_NLU_WEBHOOK | 11 | ondewo-nlu-webhook service |
 | CCAI_SERVICE_TYPE_ONDEWO_SURVEY | 12 | ondewo-survey service |
+| CCAI_SERVICE_TYPE_ONDEWO_NLU_LLM | 13 | ondewo-nlu-llm service |
 
 
  <!-- end enums -->
@@ -3130,15 +3179,16 @@ CcaiProjectView defines what the CcaiProject message contains
 <a name="ondewo.nlu.CcaiProjects"></a>
 
 ### CcaiProjects
-Service to manage Call Center AI (CCAI) Projects.
+Service to manage Call Center AI (CCAI service) Projects.
 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
-| GetCcaiProject | [GetCcaiProjectRequest](#ondewo.nlu.GetCcaiProjectRequest) | [CcaiProject](#ondewo.nlu.CcaiProject) | Retrieves information about a specific CCAI project. |
-| CreateCcaiProject | [CreateCcaiProjectRequest](#ondewo.nlu.CreateCcaiProjectRequest) | [CreateCcaiProjectResponse](#ondewo.nlu.CreateCcaiProjectResponse) | Creates a new CCAI project based on the provided request. |
-| DeleteCcaiProject | [DeleteCcaiProjectRequest](#ondewo.nlu.DeleteCcaiProjectRequest) | [DeleteCcaiProjectResponse](#ondewo.nlu.DeleteCcaiProjectResponse) | Deletes a CCAI project identified by the provided request. |
-| ListCcaiProjects | [ListCcaiProjectsRequest](#ondewo.nlu.ListCcaiProjectsRequest) | [ListCcaiProjectsResponse](#ondewo.nlu.ListCcaiProjectsResponse) | Lists all CCAI projects based on the provided request. |
-| UpdateCcaiProject | [UpdateCcaiProjectRequest](#ondewo.nlu.UpdateCcaiProjectRequest) | [UpdateCcaiProjectResponse](#ondewo.nlu.UpdateCcaiProjectResponse) | Updates the information of an existing CCAI project. |
+| GetCcaiProject | [GetCcaiProjectRequest](#ondewo.nlu.GetCcaiProjectRequest) | [CcaiProject](#ondewo.nlu.CcaiProject) | Retrieves information about a specific CCAI service project. |
+| CreateCcaiProject | [CreateCcaiProjectRequest](#ondewo.nlu.CreateCcaiProjectRequest) | [CreateCcaiProjectResponse](#ondewo.nlu.CreateCcaiProjectResponse) | Creates a new CCAI service project based on the provided request. |
+| DeleteCcaiProject | [DeleteCcaiProjectRequest](#ondewo.nlu.DeleteCcaiProjectRequest) | [DeleteCcaiProjectResponse](#ondewo.nlu.DeleteCcaiProjectResponse) | Deletes a CCAI service project identified by the provided request. |
+| ListCcaiProjects | [ListCcaiProjectsRequest](#ondewo.nlu.ListCcaiProjectsRequest) | [ListCcaiProjectsResponse](#ondewo.nlu.ListCcaiProjectsResponse) | Lists all CCAI service projects based on the provided request. |
+| UpdateCcaiProject | [UpdateCcaiProjectRequest](#ondewo.nlu.UpdateCcaiProjectRequest) | [UpdateCcaiProjectResponse](#ondewo.nlu.UpdateCcaiProjectResponse) | Updates the information of an existing CCAI service project. |
+| GetCcaiService | [GetCcaiServiceRequest](#ondewo.nlu.GetCcaiServiceRequest) | [CcaiService](#ondewo.nlu.CcaiService) | Retrieves information about a specific CCAI service. |
 
  <!-- end services -->
 
