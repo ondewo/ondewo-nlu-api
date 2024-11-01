@@ -360,6 +360,7 @@
     - [AddAudioFilesResponse](#ondewo.nlu.AddAudioFilesResponse)
     - [AddSessionCommentRequest](#ondewo.nlu.AddSessionCommentRequest)
     - [AddSessionLabelsRequest](#ondewo.nlu.AddSessionLabelsRequest)
+    - [AddSessionStepRequest](#ondewo.nlu.AddSessionStepRequest)
     - [AudioFileResource](#ondewo.nlu.AudioFileResource)
     - [ContextFilter](#ondewo.nlu.ContextFilter)
     - [CreateSessionRequest](#ondewo.nlu.CreateSessionRequest)
@@ -434,7 +435,6 @@
     - [StreamingDetectIntentResponse](#ondewo.nlu.StreamingDetectIntentResponse)
     - [StreamingRecognitionResult](#ondewo.nlu.StreamingRecognitionResult)
     - [TextInput](#ondewo.nlu.TextInput)
-    - [TrackSessionStepRequest](#ondewo.nlu.TrackSessionStepRequest)
     - [UpdateSessionCommentsRequest](#ondewo.nlu.UpdateSessionCommentsRequest)
     - [UpdateSessionStepRequest](#ondewo.nlu.UpdateSessionStepRequest)
   
@@ -6651,6 +6651,23 @@ This message is a request to add session labels
 
 
 
+<a name="ondewo.nlu.AddSessionStepRequest"></a>
+
+### AddSessionStepRequest
+AddSessionStepRequest stores a session step into the session
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| session_id | [string](#string) |  | The unique identifier for the given review Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/sessionsteps/&lt;session_step_uuid&gt;</code></pre>. |
+| session_step | [SessionStep](#ondewo.nlu.SessionStep) |  | The session step to be added |
+| session_view | [Session.View](#ondewo.nlu.Session.View) |  | Defines which fields of the session should be returned in the response |
+
+
+
+
+
+
 <a name="ondewo.nlu.AudioFileResource"></a>
 
 ### AudioFileResource
@@ -8148,23 +8165,6 @@ Represents the natural language text to be processed.
 
 
 
-<a name="ondewo.nlu.TrackSessionStepRequest"></a>
-
-### TrackSessionStepRequest
-TrackSessionStepRequest stores a session step into the session
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| session_id | [string](#string) |  | The unique identifier for the given review Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/sessionsteps/&lt;session_step_uuid&gt;</code></pre>. |
-| session_step | [SessionStep](#ondewo.nlu.SessionStep) |  | The session step to be added |
-| session_view | [Session.View](#ondewo.nlu.Session.View) |  | Defines which fields of the session should be returned in the response |
-
-
-
-
-
-
 <a name="ondewo.nlu.UpdateSessionCommentsRequest"></a>
 
 ### UpdateSessionCommentsRequest
@@ -8340,7 +8340,7 @@ user intent and respond.
 | ListSessions | [ListSessionsRequest](#ondewo.nlu.ListSessionsRequest) | [ListSessionsResponse](#ondewo.nlu.ListSessionsResponse) | SESSION RELATED ENDPOINTS *** // ListSessions: returns list of sessions from ondewo-kb; by default returns only session IDs |
 | GetSession | [GetSessionRequest](#ondewo.nlu.GetSessionRequest) | [Session](#ondewo.nlu.Session) | GetSession: returns a session(=conversation) from ondewo-kb |
 | CreateSession | [CreateSessionRequest](#ondewo.nlu.CreateSessionRequest) | [Session](#ondewo.nlu.Session) | CreateSession: creates and returns a session(=conversation) from ondewo-kb |
-| TrackSessionStep | [TrackSessionStepRequest](#ondewo.nlu.TrackSessionStepRequest) | [Session](#ondewo.nlu.Session) | TrackSessionStep: append to an existing session; creates it if not existing |
+| AddSessionStep | [AddSessionStepRequest](#ondewo.nlu.AddSessionStepRequest) | [Session](#ondewo.nlu.Session) | AddSessionStep: append to an existing session; creates it if not existing |
 | GetSessionStep | [UpdateSessionStepRequest](#ondewo.nlu.UpdateSessionStepRequest) | [SessionStep](#ondewo.nlu.SessionStep) | GetSessionStep: gets an existing session step of a session |
 | UpdateSessionStep | [UpdateSessionStepRequest](#ondewo.nlu.UpdateSessionStepRequest) | [SessionStep](#ondewo.nlu.SessionStep) | UpdateSessionStep: updates an existing session step in a session |
 | DeleteSessionStep | [DeleteSessionStepRequest](#ondewo.nlu.DeleteSessionStepRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | DeleteSessionStep: deletes an existing session step from the session |
