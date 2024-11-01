@@ -104,7 +104,7 @@ service Sessions {
     };
 
     // GetSessionStep: gets an existing session step of a session
-    rpc GetSessionStep (UpdateSessionStepRequest) returns (SessionStep) {
+    rpc GetSessionStep (GetSessionStepRequest) returns (SessionStep) {
         option (google.api.http) = {
             post: "/v2/{session_id=projects/*/agent/sessions/*}:getSessionStep"
             body: "*"
