@@ -1878,7 +1878,7 @@
                       
                         <li><a href="#ondewo.nlu.Sessions.CreateSession" class="title-badge method">CreateSession</a></li>
                       
-                        <li><a href="#ondewo.nlu.Sessions.TrackSessionStep" class="title-badge method">TrackSessionStep</a></li>
+                        <li><a href="#ondewo.nlu.Sessions.AddSessionStep" class="title-badge method">AddSessionStep</a></li>
                       
                         <li><a href="#ondewo.nlu.Sessions.GetSessionStep" class="title-badge method">GetSessionStep</a></li>
                       
@@ -1972,6 +1972,10 @@
                     
                       <li>
                         <a href="#ondewo.nlu.AddSessionLabelsRequest" class="title-badge message">AddSessionLabelsRequest</a>
+                      </li>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.AddSessionStepRequest" class="title-badge message">AddSessionStepRequest</a>
                       </li>
                     
                       <li>
@@ -2268,10 +2272,6 @@
                     
                       <li>
                         <a href="#ondewo.nlu.TextInput" class="title-badge message">TextInput</a>
-                      </li>
-                    
-                      <li>
-                        <a href="#ondewo.nlu.TrackSessionStepRequest" class="title-badge message">TrackSessionStepRequest</a>
                       </li>
                     
                       <li>
@@ -19365,11 +19365,11 @@ ListSessions: returns list of sessions from ondewo-kb; by default returns only s
 
           CreateSession: creates and returns a session(=conversation) from ondewo-kb
         
-          <h4 id="ondewo.nlu.Sessions.TrackSessionStep" class="title-badge method">TrackSessionStep</h4>
+          <h4 id="ondewo.nlu.Sessions.AddSessionStep" class="title-badge method">AddSessionStep</h4>
 
-          <pre>rpc TrackSessionStep (<a href="#ondewo.nlu.TrackSessionStepRequest">TrackSessionStepRequest</a>) returns (<a href="#ondewo.nlu.Session">Session)</a></pre>
+          <pre>rpc AddSessionStep (<a href="#ondewo.nlu.AddSessionStepRequest">AddSessionStepRequest</a>) returns (<a href="#ondewo.nlu.Session">Session)</a></pre>
 
-          TrackSessionStep: append to an existing session; creates it if not existing
+          AddSessionStep: append to an existing session; creates it if not existing
         
           <h4 id="ondewo.nlu.Sessions.GetSessionStep" class="title-badge method">GetSessionStep</h4>
 
@@ -19649,9 +19649,9 @@ Retrieves a single audio file that combines all audio files associated with the 
               
               
               <tr>
-                <td>TrackSessionStep</td>
+                <td>AddSessionStep</td>
                 <td>POST</td>
-                <td>/v2/{session_id=projects/*/agent/sessions/*}:trackSessionStep</td>
+                <td>/v2/{session_id=projects/*/agent/sessions/*}:addSessionStep</td>
                 <td>*</td>
               </tr>
               
@@ -20082,6 +20082,45 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
                   <td><p>The labels to add to the session </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="ondewo.nlu.AddSessionStepRequest" class="title-badge message">AddSessionStepRequest</h3>
+        <p>AddSessionStepRequest stores a session step into the session</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>session_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The unique identifier for the given review
+Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/sessionsteps/&lt;session_step_uuid&gt;</code></pre>. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>session_step</td>
+                  <td><a href="#ondewo.nlu.SessionStep">SessionStep</a></td>
+                  <td></td>
+                  <td><p>The session step to be added </p></td>
+                </tr>
+              
+                <tr>
+                  <td>session_view</td>
+                  <td><a href="#ondewo.nlu.Session.View">Session.View</a></td>
+                  <td></td>
+                  <td><p>Defines which fields of the session should be returned in the response </p></td>
                 </tr>
               
             </tbody>
@@ -23908,45 +23947,6 @@ Text length must not exceed 256 bytes. </p></td>
 Support](https://dialogflow.com/docs/languages) for a list of the
 currently supported language codes. Note that queries in the same session
 do not necessarily need to specify the same language. </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="ondewo.nlu.TrackSessionStepRequest" class="title-badge message">TrackSessionStepRequest</h3>
-        <p>TrackSessionStepRequest stores a session step into the session</p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>session_id</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>The unique identifier for the given review
-Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/sessionsteps/&lt;session_step_uuid&gt;</code></pre>. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>session_step</td>
-                  <td><a href="#ondewo.nlu.SessionStep">SessionStep</a></td>
-                  <td></td>
-                  <td><p>The session step to be added </p></td>
-                </tr>
-              
-                <tr>
-                  <td>session_view</td>
-                  <td><a href="#ondewo.nlu.Session.View">Session.View</a></td>
-                  <td></td>
-                  <td><p>Defines which fields of the session should be returned in the response </p></td>
                 </tr>
               
             </tbody>
