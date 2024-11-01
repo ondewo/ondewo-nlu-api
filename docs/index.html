@@ -1888,6 +1888,8 @@
                       
                         <li><a href="#ondewo.nlu.Sessions.CreateSession" class="title-badge method">CreateSession</a></li>
                       
+                        <li><a href="#ondewo.nlu.Sessions.CreateSessionStep" class="title-badge method">CreateSessionStep</a></li>
+                      
                         <li><a href="#ondewo.nlu.Sessions.GetSessionStep" class="title-badge method">GetSessionStep</a></li>
                       
                         <li><a href="#ondewo.nlu.Sessions.UpdateSessionStep" class="title-badge method">UpdateSessionStep</a></li>
@@ -1895,8 +1897,6 @@
                         <li><a href="#ondewo.nlu.Sessions.DeleteSessionStep" class="title-badge method">DeleteSessionStep</a></li>
                       
                         <li><a href="#ondewo.nlu.Sessions.DeleteSession" class="title-badge method">DeleteSession</a></li>
-                      
-                        <li><a href="#ondewo.nlu.Sessions.CreateSessionStep" class="title-badge method">CreateSessionStep</a></li>
                       
                         <li><a href="#ondewo.nlu.Sessions.ListSessionLabels" class="title-badge method">ListSessionLabels</a></li>
                       
@@ -19546,6 +19546,12 @@ ListSessions: returns list of sessions from ondewo-kb; by default returns only s
 
           CreateSession: creates and returns a session(=conversation) from ondewo-kb
         
+          <h4 id="ondewo.nlu.Sessions.CreateSessionStep" class="title-badge method">CreateSessionStep</h4>
+
+          <pre>rpc CreateSessionStep (<a href="#ondewo.nlu.CreateSessionStepRequest">CreateSessionStepRequest</a>) returns (<a href="#ondewo.nlu.Session">Session)</a></pre>
+
+          CreateSessionStep: creates a new session step for a session
+        
           <h4 id="ondewo.nlu.Sessions.GetSessionStep" class="title-badge method">GetSessionStep</h4>
 
           <pre>rpc GetSessionStep (<a href="#ondewo.nlu.GetSessionStepRequest">GetSessionStepRequest</a>) returns (<a href="#ondewo.nlu.SessionStep">SessionStep)</a></pre>
@@ -19569,12 +19575,6 @@ ListSessions: returns list of sessions from ondewo-kb; by default returns only s
           <pre>rpc DeleteSession (<a href="#ondewo.nlu.DeleteSessionRequest">DeleteSessionRequest</a>) returns (<a href="#google.protobuf.Empty">.google.protobuf.Empty)</a></pre>
 
           DeleteSession: delete a session(=conversation) from ondewo-kb (for testing only)
-        
-          <h4 id="ondewo.nlu.Sessions.CreateSessionStep" class="title-badge method">CreateSessionStep</h4>
-
-          <pre>rpc CreateSessionStep (<a href="#ondewo.nlu.CreateSessionStepRequest">CreateSessionStepRequest</a>) returns (<a href="#ondewo.nlu.Session">Session)</a></pre>
-
-          CreateSessionStep: append to an existing session; creates it if not existing
         
           <h4 id="ondewo.nlu.Sessions.ListSessionLabels" class="title-badge method">ListSessionLabels</h4>
 
@@ -19864,16 +19864,6 @@ Retrieves a single audio file that combines all audio files associated with the 
                 <td>DELETE</td>
                 <td>/v2/{session_id=projects/*/agent/sessions/*}</td>
                 <td></td>
-              </tr>
-              
-            
-              
-              
-              <tr>
-                <td>CreateSessionStep</td>
-                <td>POST</td>
-                <td>/v2/{session_id=projects/*/agent/sessions/*}:createSessionStep</td>
-                <td>*</td>
               </tr>
               
             
