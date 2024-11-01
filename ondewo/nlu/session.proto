@@ -95,10 +95,10 @@ service Sessions {
         };
     };
 
-    // TrackSessionStep: append to an existing session; creates it if not existing
-    rpc TrackSessionStep (TrackSessionStepRequest) returns (Session) {
+    // AddSessionStep: append to an existing session; creates it if not existing
+    rpc AddSessionStep (AddSessionStepRequest) returns (Session) {
         option (google.api.http) = {
-            post: "/v2/{session_id=projects/*/agent/sessions/*}:trackSessionStep"
+            post: "/v2/{session_id=projects/*/agent/sessions/*}:addSessionStep"
             body: "*"
         };
     };
@@ -939,8 +939,8 @@ message SessionStep {
 
 }
 
-// TrackSessionStepRequest stores a session step into the session
-message TrackSessionStepRequest {
+// AddSessionStepRequest stores a session step into the session
+message AddSessionStepRequest {
 
     // The unique identifier for the given review
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/sessionsteps/&lt;session_step_uuid&gt;</code></pre>.

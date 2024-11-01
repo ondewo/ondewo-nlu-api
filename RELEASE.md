@@ -2,12 +2,12 @@
 
 *****************
 
-## Release ONDEWO NLU API 5.1.0
+## Release ONDEWO NLU API 6.0.0
 
 ### Feature
 
 * [[OND211-2199]](https://ondewo.atlassian.net/browse/OND211-2199) Add `GetSessionStep`, `UpdateSessionStep` and
-  `DeleteSessionStep` as `Session` endpoints
+  `DeleteSessionStep` as `Session` endpoints. Rename `TrackSessionStep` to `AddSessionStep`.
 
 *****************
 
