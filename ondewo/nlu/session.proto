@@ -95,6 +95,9 @@ service Sessions {
         };
     };
 
+    // CreateSessionStep: creates a new session step for a session
+    rpc CreateSessionStep (CreateSessionStepRequest) returns (Session) {};
+
     // GetSessionStep: gets an existing session step of a session
     rpc GetSessionStep (GetSessionStepRequest) returns (SessionStep) {
         option (google.api.http) = {
@@ -123,14 +126,6 @@ service Sessions {
     rpc DeleteSession (DeleteSessionRequest) returns (google.protobuf.Empty) {
         option (google.api.http) = {
             delete: "/v2/{session_id=projects/*/agent/sessions/*}"
-        };
-    };
-
-    // CreateSessionStep: append to an existing session; creates it if not existing
-    rpc CreateSessionStep (CreateSessionStepRequest) returns (Session) {
-        option (google.api.http) = {
-            post: "/v2/{session_id=projects/*/agent/sessions/*}:createSessionStep"
-            body: "*"
         };
     };
 
@@ -989,6 +984,7 @@ message CreateSessionStepRequest {
 
     // Defines which fields of the session should be returned in the response
     Session.View session_view = 3;
+
 }
 
 // This message is a request to list sessions
