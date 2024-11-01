@@ -22,31 +22,34 @@ import "google/protobuf/timestamp.proto";
 
 import "ondewo/nlu/common.proto";
 
-// Service to manage Call Center AI (CCAI) Projects.
+// Service to manage Call Center AI (CCAI service) Projects.
 service CcaiProjects {
 
-    // Retrieves information about a specific CCAI project.
+    // Retrieves information about a specific CCAI service project.
     rpc GetCcaiProject (GetCcaiProjectRequest) returns (CcaiProject);
 
-    // Creates a new CCAI project based on the provided request.
+    // Creates a new CCAI service project based on the provided request.
     rpc CreateCcaiProject (CreateCcaiProjectRequest) returns (CreateCcaiProjectResponse);
 
-    // Deletes a CCAI project identified by the provided request.
+    // Deletes a CCAI service project identified by the provided request.
     rpc DeleteCcaiProject (DeleteCcaiProjectRequest) returns (DeleteCcaiProjectResponse);
 
-    // Lists all CCAI projects based on the provided request.
+    // Lists all CCAI service projects based on the provided request.
     rpc ListCcaiProjects (ListCcaiProjectsRequest) returns (ListCcaiProjectsResponse);
 
-    // Updates the information of an existing CCAI project.
+    // Updates the information of an existing CCAI service project.
     rpc UpdateCcaiProject (UpdateCcaiProjectRequest) returns (UpdateCcaiProjectResponse);
+
+    // Retrieves information about a specific CCAI service.
+    rpc GetCcaiService (GetCcaiServiceRequest) returns (CcaiService);
 
 }
 
 
-// Message representing a CCAI project
+// Message representing a CCAI service project
 message CcaiProject {
 
-    // Resource name of the CCAI project
+    // Resource name of the CCAI service project
     string name = 1;
 
     // Required. The display name of this ccai project.
@@ -81,7 +84,7 @@ message CcaiProject {
 }
 
 
-// Status of a Call Center AI (CCAI) Project.
+// Status of a Call Center AI (CCAI service) Project.
 enum CcaiProjectStatus {
 
     // No status specified
@@ -110,10 +113,10 @@ enum CcaiProjectStatus {
 
 }
 
-// Message representing a list of CCAI services
+// Message representing a list of CCAI service services
 message CcaiServiceList {
 
-    // CCAI services
+    // CCAI service services
     repeated CcaiService ccai_services = 1;
 }
 
@@ -147,7 +150,7 @@ enum CcaiServiceType {
     CCAI_SERVICE_TYPE_ONDEWO_VTSI = 8;
 
     // ondewo-vtsi service
-    CCAI_SERVICE_TYPE_VTSI_RABBITMQ = 9;
+    CCAI_SERVICE_TYPE_ONDEWO_VTSI_RABBITMQ = 9;
 
     // ondewo-nlu-qa service
     CCAI_SERVICE_TYPE_ONDEWO_NLU_QA = 10;
@@ -158,8 +161,11 @@ enum CcaiServiceType {
     // ondewo-survey service
     CCAI_SERVICE_TYPE_ONDEWO_SURVEY = 12;
 
+    // ondewo-nlu-llm service
+    CCAI_SERVICE_TYPE_ONDEWO_NLU_LLM = 13;
+
 }
-// Definition of a Call Center AI (CCAI) Service.
+// Definition of a Call Center AI (CCAI service) Service.
 message CcaiService {
 
     // Resource name of the service. Must be unique.
@@ -208,7 +214,7 @@ message CcaiService {
     // API key for accessing the service, if applicable.
     string api_key = 15;
 
-    // Type of CCAI service (e.g., TEXT_TO_SPEECH, SPEECH_TO_TEXT).
+    // Type of CCAI service service (e.g., TEXT_TO_SPEECH, SPEECH_TO_TEXT).
     CcaiServiceType ccai_service_type = 16;
 
     // Resource name of the ccai_project the ccai_service belongs to
@@ -229,12 +235,81 @@ message CcaiService {
     // User ID of the last modifier in the form of a valid UUID. Read-only field.
     string modified_by = 22;
 
+    // Optional. The headers of the request message
+    optional google.protobuf.Struct headers = 23;
+
+    // Provider of the ccai service
+    optional CcaiServiceProvider ccai_service_provider = 24;
+
+    // Index indicating the hierarchical position of a service within the service hierarchy.
+    // The index follows a tree-like structure, where each level of depth is separated by a "_".
+    // For example:
+    // - "1" represents a top-level service
+    // - "1_1" represents a sub-service under "1"
+    // - "1_1_1" represents a sub-service under "1.1"
+    // This structure allows for easy representation and organization of services in nested workflows.
+    //
+    // If CcaiService have the same service_hierarchy they are executed in parallel.
+    // For example:
+    // - "1" Service A
+    // - "1_1" Service B
+    // - "1_1" Service C
+    //
+    // Service B and C will be executed in parallel and the Service A receives both results of service B and C.
+    // The variable for the return value of a service is {{OUTPUT_SERVICE_service_hierarchy}}. So in the example
+    // above the outputs of the services are {{OUTPUT_SERVICE_1}}, {{OUTPUT_SERVICE_1_1}}, and {{OUTPUT_SERVICE_1_2}}.
+    optional string service_hierarchy = 25;
+
 }
 
-// Request to create a Call Center AI (CCAI) project.
+enum CcaiServiceProvider {
+
+    // No specified provider or placeholder
+    NO_CCAI_SERVICE_PROVIDER = 0;
+
+    // ONDEWO provider for CCAI service services
+    CCAI_SERVICE_PROVIDER_ONDEWO = 1;
+
+    // Google as the CCAI service provider, utilizing Google’s conversational AI capabilities
+    CCAI_SERVICE_PROVIDER_GOOGLE_GEMINI = 2;
+
+    // Microsoft Azure as the CCAI service provider, using Microsoft's Azure cognitive services
+    CCAI_SERVICE_PROVIDER_MICROSOFT_AZURE_OPENAI = 3;
+
+    // LangChain as the CCAI service provider
+    CCAI_SERVICE_PROVIDER_MICROSOFT_AUTOGEN = 4;
+
+    // Ollama as the CCAI service provider, typically associated with specific OLLAMA AI tools
+    CCAI_SERVICE_PROVIDER_OLLAMA = 5;
+
+    // OpenAI as the CCAI service provider, commonly used for models such as GPT
+    CCAI_SERVICE_PROVIDER_OPENAI = 6;
+
+    // Anthropic as the CCAI service provider, used with AI models from Anthropic
+    CCAI_SERVICE_PROVIDER_ANTHROPIC = 7;
+
+    // Hugging Face as the CCAI service provider, often used for open-source NLP models
+    CCAI_SERVICE_PROVIDER_HUGGING_FACE = 8;
+
+    // IBM as the CCAI service provider, such as IBM Watson for conversational AI
+    CCAI_SERVICE_PROVIDER_IBM = 9;
+
+    // Haystack as the CCAI service provider, e.g. for question and answering, conversations
+    CCAI_SERVICE_PROVIDER_HAYSTACK = 10;
+
+    // LangChain as the CCAI service provider
+    CCAI_SERVICE_PROVIDER_LANGCHAIN = 11;
+
+    // Amazon AWS as the CCAI service provider, using Amazon's AI/ML services
+    CCAI_SERVICE_PROVIDER_AMAZON = 12;
+
+}
+
+
+// Request to create a Call Center AI (CCAI service) project.
 message CreateCcaiProjectRequest {
 
-    // The CCAI project to be created.
+    // The CCAI service project to be created.
     CcaiProject ccai_project = 1;
 
     // Required. The nlu agent project of this CcaiProject.
@@ -243,10 +318,10 @@ message CreateCcaiProjectRequest {
 
 }
 
-// Response after attempting to create a Call Center AI (CCAI) project.
+// Response after attempting to create a Call Center AI (CCAI service) project.
 message CreateCcaiProjectResponse {
 
-    // The created CCAI project.
+    // The created CCAI service project.
     CcaiProject ccai_project = 1;
 
     // Error message if the creation is unsuccessful.
@@ -255,10 +330,10 @@ message CreateCcaiProjectResponse {
 }
 
 
-// Request to retrieve a CCAI project
+// Request to retrieve a CCAI service project
 message GetCcaiProjectRequest{
 
-    // CCAI project name with which to perform the call of the form <pre><code>projects/&lt;project_uuid&gt;/project</code></pre>
+    // CCAI service project name with which to perform the call of the form <pre><code>projects/&lt;project_uuid&gt;/project</code></pre>
     string name = 1;
 
     // Optional. Specify the view of the returned CcaiProject (full view by default)
@@ -273,6 +348,20 @@ message GetCcaiProjectRequest{
 
 }
 
+// Request to retrieve a CCAI service project
+message GetCcaiServiceRequest{
+
+    // CCAI service project name with which to perform the call of the form
+    // <pre><code>projects/&lt;project_uuid&gt;/ccai/services/&lt;service_uuid&gt;</code></pre>
+    string name = 1;
+
+    // Required. The nlu agent project of this CcaiProject.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string nlu_project_name = 4;
+
+}
+
+
 // Request to get the list of agents
 message ListCcaiProjectsRequest {
 
@@ -282,7 +371,7 @@ message ListCcaiProjectsRequest {
     // Filter which services should be included in the CcaiProject
     optional CcaiServiceFilter ccai_service_filter = 2;
 
-    // Optional. Field to define the sorting of the list of CCAI projects in the response.
+    // Optional. Field to define the sorting of the list of CCAI service projects in the response.
     // If not specified, the default behavior is to have no sorting.
     optional CcaiProjectSorting ccai_project_sorting = 3;
 
@@ -320,10 +409,10 @@ message ListCcaiProjectsRequest {
 
 }
 
-// This is a protobuf message definition for the response of getting a list of CCAI projects.
+// This is a protobuf message definition for the response of getting a list of CCAI service projects.
 message ListCcaiProjectsResponse {
 
-    // The list of CCAI projects returned in the response.
+    // The list of CCAI service projects returned in the response.
     // Use the 'repeated' keyword to indicate that this field can contain multiple instances of CcaiProject.
     repeated CcaiProject ccai_projects = 1;
 
@@ -333,10 +422,10 @@ message ListCcaiProjectsResponse {
 
 }
 
-// This protobuf message defines the sorting order for CCAI (Virtual Test System Infrastructure) projects.
+// This protobuf message defines the sorting order for CCAI service (Virtual Test System Infrastructure) projects.
 message CcaiProjectSorting {
 
-    // Enum to specify the sorting field for CCAI projects.
+    // Enum to specify the sorting field for CCAI service projects.
     enum CcaiProjectSortingField {
 
         // No sorting
@@ -361,6 +450,7 @@ message CcaiProjectSorting {
 
     // Sorting mode
     optional SortingMode sorting_mode = 2;
+
 }
 
 
@@ -387,12 +477,12 @@ message CcaiServiceFilter {
     // Language codes of the projects for which services are filtered.
     repeated string language_codes = 1;
 
-    // Type of CCAI service
+    // Type of CCAI service service
     repeated CcaiServiceType ccai_service_types = 2;
 
 }
 
-// Request to updated CCAI project
+// Request to updated CCAI service project
 message UpdateCcaiProjectRequest{
 
     // The CcaiProject that should be updated
@@ -411,10 +501,10 @@ message UpdateCcaiProjectRequest{
 
 }
 
-// Request to updated CCAI project
+// Request to updated CCAI service project
 message UpdateCcaiProjectResponse{
 
-    // CCAI project name with which to perform the call of the form <pre><code>projects/&lt;project_uuid&gt;/project</code></pre>
+    // CCAI service project name with which to perform the call of the form <pre><code>projects/&lt;project_uuid&gt;/project</code></pre>
     string name = 1;
 
     // error message if there are any.
@@ -422,11 +512,11 @@ message UpdateCcaiProjectResponse{
 
 }
 
-// Request to delete a CCAI project
-// If a deployed CCAI project was deleted then it was undeployed beforehand automatically
+// Request to delete a CCAI service project
+// If a deployed CCAI service project was deleted then it was undeployed beforehand automatically
 message DeleteCcaiProjectRequest{
 
-    // CCAI project name with which to perform the call of the form <pre><code>projects/&lt;project_uuid&gt;/project</code></pre>
+    // CCAI service project name with which to perform the call of the form <pre><code>projects/&lt;project_uuid&gt;/project</code></pre>
     string name = 1;
 
     // Required. The nlu agent project of this CcaiProject.
@@ -435,11 +525,11 @@ message DeleteCcaiProjectRequest{
 
 }
 
-// Response to delete a CCAI project
-// If a deployed CCAI project was deleted then it was undeployed beforehand automatically
+// Response to delete a CCAI service project
+// If a deployed CCAI service project was deleted then it was undeployed beforehand automatically
 message DeleteCcaiProjectResponse{
 
-    // CCAI project name with which to perform the call of the form <pre><code>projects/&lt;project_uuid&gt;/project</code></pre>
+    // CCAI service project name with which to perform the call of the form <pre><code>projects/&lt;project_uuid&gt;/project</code></pre>
     string name = 1;
 
     // error message if there are any.

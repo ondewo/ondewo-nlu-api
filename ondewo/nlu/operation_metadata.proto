@@ -28,18 +28,25 @@ message OperationMetadata {
     // Structure to set status of operation. An operation may not be started if NOT_STARTED is set, in
     // progress if IN_PROGRESS, finished if DONE, interrupted if CANCELED or failed if FAILED.
     enum Status {
+
         // unspecified status code
         STATUS_UNSPECIFIED = 0;
+
         // operation haven't started yet
         NOT_STARTED = 1;
+
         // operation currently in progress
         IN_PROGRESS = 2;
+
         // operation has completed without any error
         DONE = 3;
+
         // operation has completed with cancellation by user
         CANCELLED = 4;
+
         // operation has completed with errors
         FAILED = 5;
+
     }
 
     // optional parent operation name
@@ -105,8 +112,10 @@ message OperationMetadata {
 
         // export benchmark agent to a zip file
         EXPORT_BENCHMARK_AGENT = 8;
+
         // force loading agent data for full text search
         INDEX_AGENT = 9;
+
     }
 
     // name of the host where the operation was executed

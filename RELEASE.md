@@ -4,10 +4,15 @@
 
 ## Release ONDEWO NLU API 6.0.0
 
-### Feature
+### New Features
 
 * [[OND211-2199]](https://ondewo.atlassian.net/browse/OND211-2199) Add `GetSessionStep`, `UpdateSessionStep` and
   `DeleteSessionStep` as `Session` endpoints. Rename `TrackSessionStep` to `AddSessionStep`.
+* [[OND211-2199]](https://ondewo.atlassian.net/browse/OND211-2199) Add `service_hierarchy` to CcaiService for enabling a
+  tree-like execution structure of services. Add `headers` to CcaiService for adding headers to the request message when
+  calling a service.
+* [[OND211-2199]](https://ondewo.atlassian.net/browse/OND211-2199) Add `GetCcaiService` to CcaiProjects endpoint to
+  retrieve information about a specific CCAI service
 
 *****************
 
