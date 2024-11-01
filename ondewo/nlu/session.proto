@@ -95,14 +95,6 @@ service Sessions {
         };
     };
 
-    // AddSessionStep: append to an existing session; creates it if not existing
-    rpc AddSessionStep (AddSessionStepRequest) returns (Session) {
-        option (google.api.http) = {
-            post: "/v2/{session_id=projects/*/agent/sessions/*}:addSessionStep"
-            body: "*"
-        };
-    };
-
     // GetSessionStep: gets an existing session step of a session
     rpc GetSessionStep (GetSessionStepRequest) returns (SessionStep) {
         option (google.api.http) = {
@@ -131,6 +123,14 @@ service Sessions {
     rpc DeleteSession (DeleteSessionRequest) returns (google.protobuf.Empty) {
         option (google.api.http) = {
             delete: "/v2/{session_id=projects/*/agent/sessions/*}"
+        };
+    };
+
+    // CreateSessionStep: append to an existing session; creates it if not existing
+    rpc CreateSessionStep (CreateSessionStepRequest) returns (Session) {
+        option (google.api.http) = {
+            post: "/v2/{session_id=projects/*/agent/sessions/*}:createSessionStep"
+            body: "*"
         };
     };
 
@@ -939,20 +939,6 @@ message SessionStep {
 
 }
 
-// AddSessionStepRequest stores a session step into the session
-message AddSessionStepRequest {
-
-    // The unique identifier for the given review
-    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/sessionsteps/&lt;session_step_uuid&gt;</code></pre>.
-    string session_id = 1;
-
-    // The session step to be added
-    SessionStep session_step = 2;
-
-    // Defines which fields of the session should be returned in the response
-    Session.View session_view = 3;
-}
-
 // This message is a request to get a session step
 message GetSessionStepRequest {
 
@@ -989,6 +975,20 @@ message DeleteSessionStepRequest {
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/sessionsteps/&lt;session_step_uuid&gt;</code></pre>.
     string name = 1;
 
+}
+
+// CreateSessionStepRequest stores a session step into the session
+message CreateSessionStepRequest {
+
+    // The unique identifier for the given review
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/sessionsteps/&lt;session_step_uuid&gt;</code></pre>.
+    string session_id = 1;
+
+    // The session step to be added
+    SessionStep session_step = 2;
+
+    // Defines which fields of the session should be returned in the response
+    Session.View session_view = 3;
 }
 
 // This message is a request to list sessions
