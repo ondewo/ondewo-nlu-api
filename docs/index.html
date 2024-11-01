@@ -1888,8 +1888,6 @@
                       
                         <li><a href="#ondewo.nlu.Sessions.CreateSession" class="title-badge method">CreateSession</a></li>
                       
-                        <li><a href="#ondewo.nlu.Sessions.AddSessionStep" class="title-badge method">AddSessionStep</a></li>
-                      
                         <li><a href="#ondewo.nlu.Sessions.GetSessionStep" class="title-badge method">GetSessionStep</a></li>
                       
                         <li><a href="#ondewo.nlu.Sessions.UpdateSessionStep" class="title-badge method">UpdateSessionStep</a></li>
@@ -1897,6 +1895,8 @@
                         <li><a href="#ondewo.nlu.Sessions.DeleteSessionStep" class="title-badge method">DeleteSessionStep</a></li>
                       
                         <li><a href="#ondewo.nlu.Sessions.DeleteSession" class="title-badge method">DeleteSession</a></li>
+                      
+                        <li><a href="#ondewo.nlu.Sessions.CreateSessionStep" class="title-badge method">CreateSessionStep</a></li>
                       
                         <li><a href="#ondewo.nlu.Sessions.ListSessionLabels" class="title-badge method">ListSessionLabels</a></li>
                       
@@ -1985,10 +1985,6 @@
                       </li>
                     
                       <li>
-                        <a href="#ondewo.nlu.AddSessionStepRequest" class="title-badge message">AddSessionStepRequest</a>
-                      </li>
-                    
-                      <li>
                         <a href="#ondewo.nlu.AudioFileResource" class="title-badge message">AudioFileResource</a>
                       </li>
                     
@@ -2002,6 +1998,10 @@
                     
                       <li>
                         <a href="#ondewo.nlu.CreateSessionReviewRequest" class="title-badge message">CreateSessionReviewRequest</a>
+                      </li>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.CreateSessionStepRequest" class="title-badge message">CreateSessionStepRequest</a>
                       </li>
                     
                       <li>
@@ -19546,12 +19546,6 @@ ListSessions: returns list of sessions from ondewo-kb; by default returns only s
 
           CreateSession: creates and returns a session(=conversation) from ondewo-kb
         
-          <h4 id="ondewo.nlu.Sessions.AddSessionStep" class="title-badge method">AddSessionStep</h4>
-
-          <pre>rpc AddSessionStep (<a href="#ondewo.nlu.AddSessionStepRequest">AddSessionStepRequest</a>) returns (<a href="#ondewo.nlu.Session">Session)</a></pre>
-
-          AddSessionStep: append to an existing session; creates it if not existing
-        
           <h4 id="ondewo.nlu.Sessions.GetSessionStep" class="title-badge method">GetSessionStep</h4>
 
           <pre>rpc GetSessionStep (<a href="#ondewo.nlu.GetSessionStepRequest">GetSessionStepRequest</a>) returns (<a href="#ondewo.nlu.SessionStep">SessionStep)</a></pre>
@@ -19575,6 +19569,12 @@ ListSessions: returns list of sessions from ondewo-kb; by default returns only s
           <pre>rpc DeleteSession (<a href="#ondewo.nlu.DeleteSessionRequest">DeleteSessionRequest</a>) returns (<a href="#google.protobuf.Empty">.google.protobuf.Empty)</a></pre>
 
           DeleteSession: delete a session(=conversation) from ondewo-kb (for testing only)
+        
+          <h4 id="ondewo.nlu.Sessions.CreateSessionStep" class="title-badge method">CreateSessionStep</h4>
+
+          <pre>rpc CreateSessionStep (<a href="#ondewo.nlu.CreateSessionStepRequest">CreateSessionStepRequest</a>) returns (<a href="#ondewo.nlu.Session">Session)</a></pre>
+
+          CreateSessionStep: append to an existing session; creates it if not existing
         
           <h4 id="ondewo.nlu.Sessions.ListSessionLabels" class="title-badge method">ListSessionLabels</h4>
 
@@ -19830,16 +19830,6 @@ Retrieves a single audio file that combines all audio files associated with the 
               
               
               <tr>
-                <td>AddSessionStep</td>
-                <td>POST</td>
-                <td>/v2/{session_id=projects/*/agent/sessions/*}:addSessionStep</td>
-                <td>*</td>
-              </tr>
-              
-            
-              
-              
-              <tr>
                 <td>GetSessionStep</td>
                 <td>POST</td>
                 <td>/v2/{session_id=projects/*/agent/sessions/*}:getSessionStep</td>
@@ -19874,6 +19864,16 @@ Retrieves a single audio file that combines all audio files associated with the 
                 <td>DELETE</td>
                 <td>/v2/{session_id=projects/*/agent/sessions/*}</td>
                 <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>CreateSessionStep</td>
+                <td>POST</td>
+                <td>/v2/{session_id=projects/*/agent/sessions/*}:createSessionStep</td>
+                <td>*</td>
               </tr>
               
             
@@ -20272,45 +20272,6 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid
 
         
       
-        <h3 id="ondewo.nlu.AddSessionStepRequest" class="title-badge message">AddSessionStepRequest</h3>
-        <p>AddSessionStepRequest stores a session step into the session</p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>session_id</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>The unique identifier for the given review
-Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/sessionsteps/&lt;session_step_uuid&gt;</code></pre>. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>session_step</td>
-                  <td><a href="#ondewo.nlu.SessionStep">SessionStep</a></td>
-                  <td></td>
-                  <td><p>The session step to be added </p></td>
-                </tr>
-              
-                <tr>
-                  <td>session_view</td>
-                  <td><a href="#ondewo.nlu.Session.View">Session.View</a></td>
-                  <td></td>
-                  <td><p>Defines which fields of the session should be returned in the response </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
         <h3 id="ondewo.nlu.AudioFileResource" class="title-badge message">AudioFileResource</h3>
         <p></p>
 
@@ -20539,6 +20500,45 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid
                   <td><a href="#ondewo.nlu.SessionReview.View">SessionReview.View</a></td>
                   <td></td>
                   <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="ondewo.nlu.CreateSessionStepRequest" class="title-badge message">CreateSessionStepRequest</h3>
+        <p>CreateSessionStepRequest stores a session step into the session</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>session_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The unique identifier for the given review
+Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/sessionsteps/&lt;session_step_uuid&gt;</code></pre>. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>session_step</td>
+                  <td><a href="#ondewo.nlu.SessionStep">SessionStep</a></td>
+                  <td></td>
+                  <td><p>The session step to be added </p></td>
+                </tr>
+              
+                <tr>
+                  <td>session_view</td>
+                  <td><a href="#ondewo.nlu.Session.View">Session.View</a></td>
+                  <td></td>
+                  <td><p>Defines which fields of the session should be returned in the response </p></td>
                 </tr>
               
             </tbody>
