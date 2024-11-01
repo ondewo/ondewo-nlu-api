@@ -983,7 +983,7 @@ message CreateSessionStepRequest {
     SessionStep session_step = 2;
 
     // Defines which fields of the session should be returned in the response
-    Session.View session_view = 3;
+    optional Session.View session_view = 3;
 
 }
 
