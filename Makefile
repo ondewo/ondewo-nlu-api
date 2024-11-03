@@ -34,6 +34,7 @@ IMAGE_UTILS_NAME=ondewo-nlu-api-utils:${ONDEWO_NLU_API_VERSION}
 ########################################################
 #       ONDEWO Standard Make Targets
 ########################################################
+
 setup_developer_environment_locally: install_python_requirements install_precommit_hooks install_nvm ## Sets up local development environment !! Forcefully closes current terminal
 
 install_nvm: ## Install NVM, node and npm !! Forcefully closes current terminal
@@ -50,7 +51,7 @@ install_python_requirements: ## Installs python requirements flak8 and mypy
 	wget -q https://raw.githubusercontent.com/ondewo/ondewo-nlu-client-python/master/mypy.ini -O mypy.ini
 	wget -q https://raw.githubusercontent.com/ondewo/ondewo-nlu-client-python/master/.flake8 -O .flake8
 
-install_precommit_hooks: ## Installs pre-commit hooks and sets them up for the ondewo-csi-client repo
+install_precommit_hooks: ## Installs pre-commit hooks and sets them up for the repo
 	pip install pre-commit
 	pre-commit install
 	pre-commit install --hook-type commit-msg
@@ -58,16 +59,22 @@ install_precommit_hooks: ## Installs pre-commit hooks and sets them up for the o
 precommit_hooks_run_all_files: ## Runs all pre-commit hooks on all files and not just the changed ones
 	pre-commit run --all-file
 
+mypy:
+	mypy
+
+flake8:
+	flake8
+
 help: ## Print usage info about help targets
 	# (first comment after target starting with double hashes ##)
-	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' Makefile | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' Makefile | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-40s\033[0m %s\n", $$1, $$2}'
 
 makefile_chapters: ## Shows all sections of Makefile
 	@echo `cat Makefile| grep "########################################################" -A 1 | grep -v "########################################################"`
 
 TEST:
-	@echo ${GITHUB_GH_TOKEN}
-	@echo "\n${CURRENT_RELEASE_NOTES}"
+	@echo "----------------------------------------------\nGITHUB_GH_TOKEN\n----------------------------------------------\n{GITHUB_GH_TOKEN}\n"
+	@echo "----------------------------------------------\nCURRENT_RELEASE_NOTES\n----------------------------------------------\n${CURRENT_RELEASE_NOTES}\n"
 
 DOCS_DIR:= $(shell echo ondewo.github.io/docs/ondewo-nlu-api/${ONDEWO_NLU_API_VERSION})
 githubio_logic:
@@ -104,14 +111,6 @@ update_githubio:
 ########################################################
 #       Repo Specific Make Targets
 ########################################################
-#		Build
-
-build_utils_docker_image:  ## Build utils docker image
-	docker build -f Dockerfile.utils -t ${IMAGE_UTILS_NAME} .
-
-build_and_release_to_github_via_docker: build_utils_docker_image release_to_github_via_docker_image  ## Release automation for building and releasing on GitHub via a docker image
-
-########################################################
 #		Release
 
 release: create_release_branch create_release_tag build_and_release_to_github_via_docker  ## Automate the entire release process
@@ -137,7 +136,7 @@ release_all_clients: ## Releases all NLU Clients
 	@make release_angular_client || (echo "Already released ${ONDEWO_NLU_API_VERSION} of Angular Client")
 	@make release_nodejs_client || (echo "Already released ${ONDEWO_NLU_API_VERSION} of Nodejs Client")
 	@make release_typescript_client || (echo "Already released ${ONDEWO_NLU_API_VERSION} of Typescript Client")
-#@make release_js_client || (echo "Already released ${ONDEWO_NLU_API_VERSION} of JS Client")
+	@make release_js_client || (echo "Already released ${ONDEWO_NLU_API_VERSION} of JS Client")
 	@echo "End releasing all clients"
 
 GENERIC_CLIENT?=
@@ -171,6 +170,7 @@ release_client: ## Generic Function to Release a Client
 
 # Release
 	make -C ${REPO_DIR} ondewo_release | tee build_log_${REPO_NAME}.txt
+	make -C ${REPO_DIR} TEST
 # Remove everything from Release
 	sudo rm -rf ${REPO_DIR}
 	rm -f temp-notes
@@ -214,8 +214,13 @@ release_js_client: ## Release JS Client
 ########################################################
 #		GITHUB
 
+build_utils_docker_image:  ## Build utils docker image
+	docker build -f Dockerfile.utils -t ${IMAGE_UTILS_NAME} .
+
 push_to_gh: login_to_gh build_gh_release ## Logs into GitHub CLI and Releases
 	@echo 'Released to Github'
+
+build_and_release_to_github_via_docker: build_utils_docker_image release_to_github_via_docker_image  ## Release automation for building and releasing on GitHub via a docker image
 
 release_to_github_via_docker_image:  ## Release to Github via docker
 	docker run --rm \
