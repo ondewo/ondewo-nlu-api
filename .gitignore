@@ -1,5 +1,7 @@
 # release automation
+ondewo.github.io
 ondewo-devops-accounts
+build_log_*.txt
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
