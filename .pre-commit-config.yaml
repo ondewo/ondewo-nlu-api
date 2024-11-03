@@ -49,13 +49,13 @@ repos:
       - id: check-json  # Attempt to load json files to verify syntax
       - id: check-xml  # Attempt to load xml files to verify syntax
       - id: check-yaml  # Attempt to load yaml files to verify syntax
-        exclude: google/firestore/v1beta1/firestore_gapic.yaml
+        exclude: google
       - id: check-merge-conflict  # Check for files that contain merge conflict strings
       - id: check-symlinks  # Check for broken symlinks
       - id: debug-statements  # Check for debugger imports and py37+ breakpoint() calls
       - id: detect-private-key  # Check for the existence of private keys
       - id: check-executables-have-shebangs
-        exclude: googleapis
+        exclude: google
       - id: trailing-whitespace  # Trim trailing whitespace.
       - id: end-of-file-fixer # makes sure files end in a newline and only a newline
       - id: pretty-format-json # autoformat json files (e.g. sorting keys)
@@ -63,7 +63,7 @@ repos:
       - id: name-tests-test # name pytest files correctly
         args: [ --pytest-test-first ]
       - id: requirements-txt-fixer  # Sorts the requirement.txt files' content
-        files: 'requirements/requirements.*\.txt$'
+        files: 'requirements.*\.txt$'
 
   - repo: https://github.com/pycqa/flake8
     rev: 7.1.1
@@ -71,12 +71,13 @@ repos:
       - id: flake8
 
   - repo: https://github.com/milin/giticket
-    rev: d4a4c3b943892add7ee86d0d54a1e41c76b1fced
+    rev: v1.4
     hooks:
       - id: giticket  # Prepend the commit message with the JIRA ticket
         args: [ '--regex=(?:(?:feature|bugfix|support|hotfix)/)?(OND[0-9]{3}-[0-9]{1,5})[_-][\w-]+',
                 '--format=[{ticket}] {commit_msg}',
                 '--mode=regex_match' ]
+
   - repo: local
     hooks:
       - id: githubio-version

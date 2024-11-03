@@ -1,5 +1,4 @@
 export
-
 # ---------------- BEFORE RELEASE ----------------
 # 1 - Update Version Number
 # 2 - Update RELEASE.md
@@ -59,11 +58,19 @@ install_precommit_hooks: ## Installs pre-commit hooks and sets them up for the r
 precommit_hooks_run_all_files: ## Runs all pre-commit hooks on all files and not just the changed ones
 	pre-commit run --all-file
 
-mypy:
-	mypy
+flake8: ## Runs flake8
+	flake8 --config .flake8 .
 
-flake8:
-	flake8
+mypy: ## Run mypy static code checking
+	@echo "---------------------------------------------"
+	@echo "START: Run mypy in pre-commit hook ..."
+	pre-commit run mypy --all-files
+	@echo "DONE: Run mypy in pre-commit hook."
+	@echo "---------------------------------------------"
+	@echo "START: Run mypy directly ..."
+	mypy --config-file=mypy.ini .
+	@echo "DONE: Run mypy directly"
+	@echo "---------------------------------------------"
 
 help: ## Print usage info about help targets
 	# (first comment after target starting with double hashes ##)
@@ -113,7 +120,7 @@ update_githubio:
 ########################################################
 #		Release
 
-release: create_release_branch create_release_tag build_and_release_to_github_via_docker  ## Automate the entire release process
+release: create_release_branch create_release_tag build_and_release_to_github_via_docker ## Automate the entire release process
 	@echo "Release Finished"
 
 create_release_branch: ## Create Release Branch and push it to origin
@@ -214,15 +221,15 @@ release_js_client: ## Release JS Client
 ########################################################
 #		GITHUB
 
-build_and_release_to_github_via_docker: build_utils_docker_image release_to_github_via_docker_image  ## Release automation for building and releasing on GitHub via a docker image
+build_and_release_to_github_via_docker: build_utils_docker_image release_to_github_via_docker_image ## Release automation for building and releasing on GitHub via a docker image
 
-build_utils_docker_image:  ## Build utils docker image
+build_utils_docker_image: ## Build utils docker image
 	docker build -f Dockerfile.utils -t ${IMAGE_UTILS_NAME} .
 
 push_to_gh: login_to_gh build_gh_release ## Logs into GitHub CLI and Releases
 	@echo 'Released to Github'
 
-release_to_github_via_docker_image:  ## Release to Github via docker
+release_to_github_via_docker_image: ## Release to Github via docker
 	docker run --rm \
 		-e GITHUB_GH_TOKEN=${GITHUB_GH_TOKEN} \
 		${IMAGE_UTILS_NAME} make push_to_gh
