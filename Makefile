@@ -110,7 +110,7 @@ githubio_logic:
 	@git -C ondewo.github.io push
 
 update_githubio:
-	@rm -rf ondewo.github.io
+	-@rm -rf ondewo.github.io
 	@git clone git@github.com:ondewo/ondewo.github.io.git
 	@make githubio_logic || (echo "Done")
 	@rm -rf ondewo.github.io
