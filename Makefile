@@ -94,7 +94,6 @@ githubio_logic:
 	$(eval TEMP_TEXT:= $(shell cat ondewo.github.io/script_object.txt | sed -e "s/VERSION/${ONDEWO_NLU_API_VERSION}/g" -e "s/TECHNOLOGY/${REPO_NAME}/g"))
 	@sed -i "${VERSION_LINE} i ${TEMP_TEXT}" ondewo.github.io/data.js
 	@cd ondewo.github.io && npx prettier -w --single-quote data.js
-
 	rm -rf ${DOCS_DIR}
 	mkdir ${DOCS_DIR}
 	cp docs/* ${DOCS_DIR}
@@ -110,7 +109,10 @@ githubio_logic:
 	@git -C ondewo.github.io push
 
 update_githubio:
-	-@rm -rf ondewo.github.io
+	@if [ -d "ondewo.github.io" ]; then \
+		echo "Removing existing directory ondewo.github.io"; \
+		rm -rf ondewo.github.io; sleep 3s; \
+	fi
 	@git clone git@github.com:ondewo/ondewo.github.io.git
 	@make githubio_logic || (echo "Done")
 	@rm -rf ondewo.github.io
