@@ -173,9 +173,9 @@ release_client: ## Generic Function to Release a Client
 # Change Version Number and RELEASE NOTES
 	cd ${REPO_DIR} && sed -i -e '/Release History/r ../temp-notes' ${RELEASEMD}
 	cd ${REPO_DIR} && head -20 ${RELEASEMD}
-	cd ${REPO_DIR} && sed -i -e 's/ONDEWO_NLU_VERSION.*=.*[0-9]*.[0-9]*.[0-9]/ONDEWO_NLU_VERSION = ${ONDEWO_NLU_API_VERSION}/' Makefile
-	cd ${REPO_DIR} && sed -i -e 's/ONDEWO_PROTO_COMPILER_GIT_BRANCH.*=.*tags\/[0-9]*.[0-9]*.[0-9]/ONDEWO_PROTO_COMPILER_GIT_BRANCH=tags\/${PROTO_COMPILER}/' Makefile
-	cd ${REPO_DIR} && sed -i -e 's/NLU_API_GIT_BRANCH=tags\/[0-9]*.[0-9]*.[0-9]/NLU_API_GIT_BRANCH=tags\/${ONDEWO_NLU_API_VERSION}/' Makefile && head -30 Makefile
+	cd ${REPO_DIR} && sed -i -e 's/ONDEWO_NLU_VERSION.*=.*/ONDEWO_NLU_VERSION = ${ONDEWO_NLU_API_VERSION}/' Makefile
+	cd ${REPO_DIR} && sed -i -e 's/ONDEWO_PROTO_COMPILER_GIT_BRANCH.*=.*/ONDEWO_PROTO_COMPILER_GIT_BRANCH=tags\/${PROTO_COMPILER}/' Makefile
+	cd ${REPO_DIR} && sed -i -e 's/NLU_API_GIT_BRANCH.*=.*/NLU_API_GIT_BRANCH=tags\/${ONDEWO_NLU_API_VERSION}/' Makefile && head -30 Makefile
 
 # Release
 	make -C ${REPO_DIR} ondewo_release | tee build_log_${REPO_NAME}.txt
