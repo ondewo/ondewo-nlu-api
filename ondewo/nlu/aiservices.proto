@@ -144,7 +144,7 @@ message LlmModel {
 
     // The display name of the model.
     // This is a human-readable name used for identifying the model in other requests,
-    // such as <pre><code>LlmGenerateRequest</code></pre> and <pre><code>LlmGenerateStreamRequest</code></pre>.
+    // such as <pre><code>LlmGenerateRequest</code></pre> and <pre><code>StreamingLlmGenerateRequest</code></pre>.
     string display_name = 2;
 
     // The description of the model.
