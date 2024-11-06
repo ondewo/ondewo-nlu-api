@@ -79,15 +79,18 @@ help: ## Print usage info about help targets
 makefile_chapters: ## Shows all sections of Makefile
 	@echo `cat Makefile| grep "########################################################" -A 1 | grep -v "########################################################"`
 
-TEST:
-	@echo "----------------------------------------------\nGITHUB_GH_TOKEN\n----------------------------------------------\n{GITHUB_GH_TOKEN}\n"
-	@echo "----------------------------------------------\nCURRENT_RELEASE_NOTES\n----------------------------------------------\n${CURRENT_RELEASE_NOTES}\n"
+TEST: ## Prints some important variables
+	@echo "Release Notes: \n \n$(CURRENT_RELEASE_NOTES)"
+	@echo "GH Token: \t $(GITHUB_GH_TOKEN)"
+	@echo "NPM Name: \t $(NPM_USERNAME)"
+	@echo "NPM Password: \t $(NPM_PASSWORD)"
 
 githubio_logic_pre:
 	$(eval REPO_NAME:= $(shell echo ${GH_REPO} | cut -d "-" -f 2 ))
 	$(eval REPO_NAME_UPPER:= $(shell echo ${GH_REPO} | cut -d "-" -f 2 | sed -e 's/\(.*\)/\U\1/'))
 	$(eval DOCS_DIR:=ondewo.github.io/docs/ondewo-${REPO_NAME}-api/${ONDEWO_NLU_API_VERSION})
 	@rm -rf ${DOCS_DIR}
+	sed -i "/{ number: '${ONDEWO_NLU_API_VERSION}', link: 'ondewo-${REPO_NAME}-api\/${ONDEWO_NLU_API_VERSION}\/' },/d" ondewo.github.io/data.js
 	@mkdir "${DOCS_DIR}"
 	@cp docs/* ${DOCS_DIR}
 	@sed -i "s/h1>Protocol Documentation/h1>${REPO_NAME_UPPER} ${ONDEWO_NLU_API_VERSION} Documentation/" ${DOCS_DIR}/index.html
