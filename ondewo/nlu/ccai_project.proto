@@ -80,7 +80,6 @@ message CcaiProject {
     // Required. Associated NLU agent
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string nlu_project_name = 10;
-
 }
 
 
