@@ -2624,7 +2624,7 @@ The request message to list available LLM models for a specified CCAI service.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| ccai_service | [CcaiService](#ondewo.nlu.CcaiService) |  | The CCAI service for which to list models. Format: <pre><code>projects/&lt;project_uuid&gt;/ccai/services/&lt;service_uuid&gt;</code></pre> This field specifies the service context in which the models are deployed and should be in the specified format to identify the correct project and service. |
+| ccai_service_name | [string](#string) |  | The CCAI service for which to list models. Format: <pre><code>projects/&lt;project_uuid&gt;/ccai/services/&lt;service_uuid&gt;</code></pre> |
 
 
 
@@ -2673,7 +2673,7 @@ The request message to generate a response from a Large Language Model (LLM).
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | llm_generation_request | [google.protobuf.Struct](#google.protobuf.Struct) |  | The request payload for the LLM, structured according to the specific requirements of the large language model provider. The payload must fit the format expected by the specified LLM provider, as defined by <pre><code>CcaiServiceProvider</code></pre>. |
-| ccai_service | [CcaiService](#ondewo.nlu.CcaiService) |  | The CCAI service to be used for processing the request. This specifies which large language model provider and model settings will handle the request. Format: <pre><code>projects/&lt;project_uuid&gt;/ccai/services/&lt;service_uuid&gt;</code></pre> |
+| ccai_service_name | [string](#string) |  | The CCAI service to be used for processing the request. This specifies which large language model provider and model settings will handle the request. Format: <pre><code>projects/&lt;project_uuid&gt;/ccai/services/&lt;service_uuid&gt;</code></pre> |
 | file_resource | [FileResource](#ondewo.nlu.FileResource) | repeated | Files as input for the generation request |
 
 
