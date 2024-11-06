@@ -82,7 +82,7 @@ repos:
     hooks:
       - id: githubio-version
         name: githubio-version
-        entry: bash -c "make update_githubio"
+        entry: bash -c "ls -l && make update_githubio"
         language: system
 
         # only on branches matching "release/*"
