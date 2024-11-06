@@ -43,12 +43,12 @@ install_nvm: ## Install NVM, node and npm !! Forcefully closes current terminal
 	@node --version & npm --version || (kill -KILL ${PID})
 
 install_python_requirements: ## Installs python requirements flak8 and mypy
-	wget -q https://raw.githubusercontent.com/ondewo/ondewo-nlu-client-python/master/requirements-dev.txt -O requirements-dev.txt
 	wget -q https://raw.githubusercontent.com/ondewo/ondewo-nlu-client-python/master/requirements.txt -O requirements.txt
+	wget -q https://raw.githubusercontent.com/ondewo/ondewo-nlu-client-python/master/requirements-dev.txt -O requirements-dev.txt
 	wget -q https://raw.githubusercontent.com/ondewo/ondewo-nlu-client-python/master/.flake8 -O .flake8
 	wget -q https://raw.githubusercontent.com/ondewo/ondewo-nlu-client-python/master/mypy.ini -O mypy.ini
-	pip install -r requirements-dev.txt
 	pip install -r requirements.txt
+	pip install -r requirements-dev.txt
 
 install_precommit_hooks: ## Installs pre-commit hooks and sets them up for the repo
 	pip install pre-commit
@@ -83,13 +83,12 @@ TEST:
 	@echo "----------------------------------------------\nGITHUB_GH_TOKEN\n----------------------------------------------\n{GITHUB_GH_TOKEN}\n"
 	@echo "----------------------------------------------\nCURRENT_RELEASE_NOTES\n----------------------------------------------\n${CURRENT_RELEASE_NOTES}\n"
 
-
 githubio_logic_pre:
 	$(eval REPO_NAME:= $(shell echo ${GH_REPO} | cut -d "-" -f 2 ))
 	$(eval REPO_NAME_UPPER:= $(shell echo ${GH_REPO} | cut -d "-" -f 2 | sed -e 's/\(.*\)/\U\1/'))
 	$(eval DOCS_DIR:=ondewo.github.io/docs/ondewo-${REPO_NAME}-api/${ONDEWO_NLU_API_VERSION})
+	@sed -i "/{ number: '${ONDEWO_NLU_API_VERSION}', link: 'ondewo-${REPO_NAME}-api\/${ONDEWO_NLU_API_VERSION}\/' },/d" ondewo.github.io/data.js
 	@rm -rf ${DOCS_DIR}
-	sed -i "/{ number: '${ONDEWO_NLU_API_VERSION}', link: 'ondewo-${REPO_NAME}-api\/${ONDEWO_NLU_API_VERSION}\/' },/d" ondewo.github.io/data.js
 	@mkdir "${DOCS_DIR}"
 	@cp docs/* ${DOCS_DIR}
 	@sed -i "s/h1>Protocol Documentation/h1>${REPO_NAME_UPPER} ${ONDEWO_NLU_API_VERSION} Documentation/" ${DOCS_DIR}/index.html
