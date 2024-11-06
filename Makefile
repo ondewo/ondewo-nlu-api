@@ -113,6 +113,7 @@ update_githubio:
 		echo "Removing existing directory ondewo.github.io"; \
 		rm -rf ondewo.github.io; sleep 3s; \
 	fi
+	ls -l
 	@git clone git@github.com:ondewo/ondewo.github.io.git
 	make githubio_logic || (echo "Done")
 	@rm -rf ondewo.github.io
