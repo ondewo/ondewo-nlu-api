@@ -2706,7 +2706,7 @@ Represents an individual LLM model available within a CCAI service.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | name | [string](#string) |  | The resource name of the model. Format: <pre><code>projects/&lt;project_uuid&gt;/ccai/services/&lt;service_uuid&gt;/model/&lt;model_uuid&gt;</code></pre> This is a unique identifier for the model, specifying its project, service, and model ID. |
-| display_name | [string](#string) |  | The display name of the model. This is a human-readable name used for identifying the model in other requests, such as <pre><code>LlmGenerateRequest</code></pre> and <pre><code>LlmGenerateStreamRequest</code></pre>. |
+| display_name | [string](#string) |  | The display name of the model. This is a human-readable name used for identifying the model in other requests, such as <pre><code>LlmGenerateRequest</code></pre> and <pre><code>StreamingLlmGenerateRequest</code></pre>. |
 | description | [string](#string) |  | The description of the model. Provides additional details about the model, such as its purpose, architecture, or any other relevant information. |
 | ccai_service_name | [string](#string) |  | The resource name of the CCAI service to which the model belongs. This field links the model to its service context, helping clients understand which service hosts the model. |
 | provider | [CcaiServiceProvider](#ondewo.nlu.CcaiServiceProvider) |  | The provider of the CCAI service that offers this model. Specifies the LLM provider (e.g., Ollama, OpenAI, Google, etc.), indicating the origin or vendor of the model. |
