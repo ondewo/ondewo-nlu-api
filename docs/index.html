@@ -482,6 +482,12 @@
                       
                         <li><a href="#ondewo.nlu.AiServices.ExtractEntitiesFuzzy" class="title-badge method">ExtractEntitiesFuzzy</a></li>
                       
+                        <li><a href="#ondewo.nlu.AiServices.LlmGenerate" class="title-badge method">LlmGenerate</a></li>
+                      
+                        <li><a href="#ondewo.nlu.AiServices.LlmGenerateStream" class="title-badge method">LlmGenerateStream</a></li>
+                      
+                        <li><a href="#ondewo.nlu.AiServices.ListLlmModels" class="title-badge method">ListLlmModels</a></li>
+                      
                       </ul>
                       
                     </li>
@@ -590,6 +596,34 @@
                     
                       <li>
                         <a href="#ondewo.nlu.IntentClassified" class="title-badge message">IntentClassified</a>
+                      </li>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.ListLlmModelsRequest" class="title-badge message">ListLlmModelsRequest</a>
+                      </li>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.ListLlmModelsResponse" class="title-badge message">ListLlmModelsResponse</a>
+                      </li>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.LlmGenerateRequest" class="title-badge message">LlmGenerateRequest</a>
+                      </li>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.LlmGenerateResponse" class="title-badge message">LlmGenerateResponse</a>
+                      </li>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.LlmGenerateStreamRequest" class="title-badge message">LlmGenerateStreamRequest</a>
+                      </li>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.LlmGenerateStreamResponse" class="title-badge message">LlmGenerateStreamResponse</a>
+                      </li>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.LlmModel" class="title-badge message">LlmModel</a>
                       </li>
                     
                       <li>
@@ -7816,6 +7850,30 @@ Example:
 
           Processes a natural language query and returns detected entities
         
+          <h4 id="ondewo.nlu.AiServices.LlmGenerate" class="title-badge method">LlmGenerate</h4>
+
+          <pre>rpc LlmGenerate (<a href="#ondewo.nlu.LlmGenerateRequest">LlmGenerateRequest</a>) returns (<a href="#ondewo.nlu.LlmGenerateResponse">LlmGenerateResponse)</a></pre>
+
+          Generates a single response from a Large Language Model (LLM).
+This RPC method allows a client to make a request to the LLM and receive
+a single complete response based on the input parameters provided.
+        
+          <h4 id="ondewo.nlu.AiServices.LlmGenerateStream" class="title-badge method">LlmGenerateStream</h4>
+
+          <pre>rpc LlmGenerateStream (stream <a href="#ondewo.nlu.LlmGenerateStreamRequest">LlmGenerateStreamRequest</a>) returns (stream <a href="#ondewo.nlu.LlmGenerateStreamResponse">LlmGenerateStreamResponse)</a></pre>
+
+          Generates a response from the LLM in a streaming format.
+This RPC allows continuous streaming of responses from the model,
+which is useful for real-time applications or large outputs.
+        
+          <h4 id="ondewo.nlu.AiServices.ListLlmModels" class="title-badge method">ListLlmModels</h4>
+
+          <pre>rpc ListLlmModels (<a href="#ondewo.nlu.ListLlmModelsRequest">ListLlmModelsRequest</a>) returns (<a href="#ondewo.nlu.ListLlmModelsResponse">ListLlmModelsResponse)</a></pre>
+
+          Lists available Large Language Models (LLMs) for a specified CCAI service.
+This RPC method allows clients to retrieve metadata about all LLM models associated
+with a particular service within a project, including model names, descriptions, and providers.
+        
 
         
           
@@ -7898,6 +7956,26 @@ Example:
                 <td>ClassifyIntents</td>
                 <td>POST</td>
                 <td>/v2/{parent=projects/*/agent}/classify_intent</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>LlmGenerate</td>
+                <td>POST</td>
+                <td>/v2/{parent=projects/*/agent}/llm_generate</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ListLlmModels</td>
+                <td>POST</td>
+                <td>/v2/{parent=projects/*/agent}/list_llm_models</td>
                 <td>*</td>
               </tr>
               
@@ -8989,6 +9067,245 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&g
                   <td><a href="#float">float</a></td>
                   <td></td>
                   <td><p>Score associated to the detection of the intent by the classifier </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="ondewo.nlu.ListLlmModelsRequest" class="title-badge message">ListLlmModelsRequest</h3>
+        <p>The request message to list available LLM models for a specified CCAI service.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>ccai_service</td>
+                  <td><a href="#ondewo.nlu.CcaiService">CcaiService</a></td>
+                  <td></td>
+                  <td><p>The CCAI service for which to list models.
+Format: <pre><code>projects/&lt;project_uuid&gt;/ccai/services/&lt;service_uuid&gt;</code></pre>
+This field specifies the service context in which the models are deployed and
+should be in the specified format to identify the correct project and service. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="ondewo.nlu.ListLlmModelsResponse" class="title-badge message">ListLlmModelsResponse</h3>
+        <p>The response message containing a list of available LLM models.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>llm_models</td>
+                  <td><a href="#ondewo.nlu.LlmModel">LlmModel</a></td>
+                  <td>repeated</td>
+                  <td><p>A list of LLM models associated with the specified CCAI service.
+Each model in this list represents an individual language model that can
+be used within the service, including details such as name, provider, and description. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="ondewo.nlu.LlmGenerateRequest" class="title-badge message">LlmGenerateRequest</h3>
+        <p>The request message to generate a response from a Large Language Model (LLM).</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>llm_generation_request</td>
+                  <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
+                  <td></td>
+                  <td><p>The request payload for the LLM, structured according to the specific
+requirements of the large language model provider.
+The payload must fit the format expected by the specified LLM provider,
+as defined by <pre><code>CcaiServiceProvider</code></pre>. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>ccai_service</td>
+                  <td><a href="#ondewo.nlu.CcaiService">CcaiService</a></td>
+                  <td></td>
+                  <td><p>The CCAI service to be used for processing the request.
+This specifies which large language model provider and model settings
+will handle the request.
+Format: <pre><code>projects/&lt;project_uuid&gt;/ccai/services/&lt;service_uuid&gt;</code></pre> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="ondewo.nlu.LlmGenerateResponse" class="title-badge message">LlmGenerateResponse</h3>
+        <p>The response message containing the generated output from a Large Language Model (LLM).</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>llm_generation_response</td>
+                  <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
+                  <td></td>
+                  <td><p>The response data from the LLM, returned as a structured payload.
+This can contain the text generation, embeddings, or other outputs
+based on the specific request made to the LLM provider. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="ondewo.nlu.LlmGenerateStreamRequest" class="title-badge message">LlmGenerateStreamRequest</h3>
+        <p>The request message for streaming generation from a Large Language Model (LLM).</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>llm_generation_stream_request</td>
+                  <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
+                  <td></td>
+                  <td><p>The request payload for the LLM, structured according to the specific
+requirements of the large language model provider.
+The payload must fit the format expected by the specified LLM provider,
+as defined by <pre><code>CcaiServiceProvider</code></pre>. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>ccai_service</td>
+                  <td><a href="#ondewo.nlu.CcaiService">CcaiService</a></td>
+                  <td></td>
+                  <td><p>The CCAI service to be used for processing the request.
+This specifies which large language model provider and model settings
+will handle the request.
+Format: <pre><code>projects/&lt;project_uuid&gt;/ccai/services/&lt;service_uuid&gt;</code></pre> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="ondewo.nlu.LlmGenerateStreamResponse" class="title-badge message">LlmGenerateStreamResponse</h3>
+        <p>The response message for streaming generation from a Large Language Model (LLM).</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>llm_generation_stream_response</td>
+                  <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
+                  <td></td>
+                  <td><p>The response data from the LLM in a streaming format, returned as a structured payload.
+This response is part of a continuous stream of data from the LLM, allowing
+incremental results to be sent as they are generated. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="ondewo.nlu.LlmModel" class="title-badge message">LlmModel</h3>
+        <p>Represents an individual LLM model available within a CCAI service.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The resource name of the model.
+Format: <pre><code>projects/&lt;project_uuid&gt;/ccai/services/&lt;service_uuid&gt;/model/&lt;model_uuid&gt;</code></pre>
+This is a unique identifier for the model, specifying its project, service, and model ID. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>display_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The display name of the model.
+This is a human-readable name used for identifying the model in other requests,
+such as <pre><code>LlmGenerateRequest</code></pre> and <pre><code>LlmGenerateStreamRequest</code></pre>. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>description</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The description of the model.
+Provides additional details about the model, such as its purpose, architecture, or any other relevant information. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>ccai_service_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The resource name of the CCAI service to which the model belongs.
+This field links the model to its service context, helping clients understand
+which service hosts the model. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>provider</td>
+                  <td><a href="#ondewo.nlu.CcaiServiceProvider">CcaiServiceProvider</a></td>
+                  <td></td>
+                  <td><p>The provider of the CCAI service that offers this model.
+Specifies the LLM provider (e.g., Ollama, OpenAI, Google, etc.), indicating the origin or vendor of the model. </p></td>
                 </tr>
               
             </tbody>

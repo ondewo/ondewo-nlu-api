@@ -111,6 +111,13 @@
     - [GetSynonymsResponse](#ondewo.nlu.GetSynonymsResponse)
     - [GloVeEnrichmentConfig](#ondewo.nlu.GloVeEnrichmentConfig)
     - [IntentClassified](#ondewo.nlu.IntentClassified)
+    - [ListLlmModelsRequest](#ondewo.nlu.ListLlmModelsRequest)
+    - [ListLlmModelsResponse](#ondewo.nlu.ListLlmModelsResponse)
+    - [LlmGenerateRequest](#ondewo.nlu.LlmGenerateRequest)
+    - [LlmGenerateResponse](#ondewo.nlu.LlmGenerateResponse)
+    - [LlmGenerateStreamRequest](#ondewo.nlu.LlmGenerateStreamRequest)
+    - [LlmGenerateStreamResponse](#ondewo.nlu.LlmGenerateStreamResponse)
+    - [LlmModel](#ondewo.nlu.LlmModel)
     - [Synonym](#ondewo.nlu.Synonym)
     - [ThesaurusEnrichmentConfig](#ondewo.nlu.ThesaurusEnrichmentConfig)
     - [Word2VecEnrichmentConfig](#ondewo.nlu.Word2VecEnrichmentConfig)
@@ -2604,6 +2611,117 @@ Intent classified by a certain intent classifier
 
 
 
+<a name="ondewo.nlu.ListLlmModelsRequest"></a>
+
+### ListLlmModelsRequest
+The request message to list available LLM models for a specified CCAI service.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| ccai_service | [CcaiService](#ondewo.nlu.CcaiService) |  | The CCAI service for which to list models. Format: <pre><code>projects/&lt;project_uuid&gt;/ccai/services/&lt;service_uuid&gt;</code></pre> This field specifies the service context in which the models are deployed and should be in the specified format to identify the correct project and service. |
+
+
+
+
+
+
+<a name="ondewo.nlu.ListLlmModelsResponse"></a>
+
+### ListLlmModelsResponse
+The response message containing a list of available LLM models.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| llm_models | [LlmModel](#ondewo.nlu.LlmModel) | repeated | A list of LLM models associated with the specified CCAI service. Each model in this list represents an individual language model that can be used within the service, including details such as name, provider, and description. |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmGenerateRequest"></a>
+
+### LlmGenerateRequest
+The request message to generate a response from a Large Language Model (LLM).
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| llm_generation_request | [google.protobuf.Struct](#google.protobuf.Struct) |  | The request payload for the LLM, structured according to the specific requirements of the large language model provider. The payload must fit the format expected by the specified LLM provider, as defined by <pre><code>CcaiServiceProvider</code></pre>. |
+| ccai_service | [CcaiService](#ondewo.nlu.CcaiService) |  | The CCAI service to be used for processing the request. This specifies which large language model provider and model settings will handle the request. Format: <pre><code>projects/&lt;project_uuid&gt;/ccai/services/&lt;service_uuid&gt;</code></pre> |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmGenerateResponse"></a>
+
+### LlmGenerateResponse
+The response message containing the generated output from a Large Language Model (LLM).
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| llm_generation_response | [google.protobuf.Struct](#google.protobuf.Struct) |  | The response data from the LLM, returned as a structured payload. This can contain the text generation, embeddings, or other outputs based on the specific request made to the LLM provider. |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmGenerateStreamRequest"></a>
+
+### LlmGenerateStreamRequest
+The request message for streaming generation from a Large Language Model (LLM).
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| llm_generation_stream_request | [google.protobuf.Struct](#google.protobuf.Struct) |  | The request payload for the LLM, structured according to the specific requirements of the large language model provider. The payload must fit the format expected by the specified LLM provider, as defined by <pre><code>CcaiServiceProvider</code></pre>. |
+| ccai_service | [CcaiService](#ondewo.nlu.CcaiService) |  | The CCAI service to be used for processing the request. This specifies which large language model provider and model settings will handle the request. Format: <pre><code>projects/&lt;project_uuid&gt;/ccai/services/&lt;service_uuid&gt;</code></pre> |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmGenerateStreamResponse"></a>
+
+### LlmGenerateStreamResponse
+The response message for streaming generation from a Large Language Model (LLM).
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| llm_generation_stream_response | [google.protobuf.Struct](#google.protobuf.Struct) |  | The response data from the LLM in a streaming format, returned as a structured payload. This response is part of a continuous stream of data from the LLM, allowing incremental results to be sent as they are generated. |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmModel"></a>
+
+### LlmModel
+Represents an individual LLM model available within a CCAI service.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The resource name of the model. Format: <pre><code>projects/&lt;project_uuid&gt;/ccai/services/&lt;service_uuid&gt;/model/&lt;model_uuid&gt;</code></pre> This is a unique identifier for the model, specifying its project, service, and model ID. |
+| display_name | [string](#string) |  | The display name of the model. This is a human-readable name used for identifying the model in other requests, such as <pre><code>LlmGenerateRequest</code></pre> and <pre><code>LlmGenerateStreamRequest</code></pre>. |
+| description | [string](#string) |  | The description of the model. Provides additional details about the model, such as its purpose, architecture, or any other relevant information. |
+| ccai_service_name | [string](#string) |  | The resource name of the CCAI service to which the model belongs. This field links the model to its service context, helping clients understand which service hosts the model. |
+| provider | [CcaiServiceProvider](#ondewo.nlu.CcaiServiceProvider) |  | The provider of the CCAI service that offers this model. Specifies the LLM provider (e.g., Ollama, OpenAI, Google, etc.), indicating the origin or vendor of the model. |
+
+
+
+
+
+
 <a name="ondewo.nlu.Synonym"></a>
 
 ### Synonym
@@ -2756,6 +2874,9 @@ The Central class defining the ondewo ai services
 | GetSynonyms | [GetSynonymsRequest](#ondewo.nlu.GetSynonymsRequest) | [GetSynonymsResponse](#ondewo.nlu.GetSynonymsResponse) | Generates synonyms for a certain word |
 | ClassifyIntents | [ClassifyIntentsRequest](#ondewo.nlu.ClassifyIntentsRequest) | [ClassifyIntentsResponse](#ondewo.nlu.ClassifyIntentsResponse) | Preprocess text and detects intents in a sentence |
 | ExtractEntitiesFuzzy | [ExtractEntitiesFuzzyRequest](#ondewo.nlu.ExtractEntitiesFuzzyRequest) | [ExtractEntitiesResponse](#ondewo.nlu.ExtractEntitiesResponse) | Processes a natural language query and returns detected entities |
+| LlmGenerate | [LlmGenerateRequest](#ondewo.nlu.LlmGenerateRequest) | [LlmGenerateResponse](#ondewo.nlu.LlmGenerateResponse) | Generates a single response from a Large Language Model (LLM). This RPC method allows a client to make a request to the LLM and receive a single complete response based on the input parameters provided. |
+| LlmGenerateStream | [LlmGenerateStreamRequest](#ondewo.nlu.LlmGenerateStreamRequest) stream | [LlmGenerateStreamResponse](#ondewo.nlu.LlmGenerateStreamResponse) stream | Generates a response from the LLM in a streaming format. This RPC allows continuous streaming of responses from the model, which is useful for real-time applications or large outputs. |
+| ListLlmModels | [ListLlmModelsRequest](#ondewo.nlu.ListLlmModelsRequest) | [ListLlmModelsResponse](#ondewo.nlu.ListLlmModelsResponse) | Lists available Large Language Models (LLMs) for a specified CCAI service. This RPC method allows clients to retrieve metadata about all LLM models associated with a particular service within a project, including model names, descriptions, and providers. |
 
  <!-- end services -->
 
