@@ -9182,10 +9182,12 @@ be used within the service, including details such as name, provider, and descri
                 </tr>
               
                 <tr>
-                  <td>ccai_service</td>
-                  <td><a href="#ondewo.nlu.CcaiService">CcaiService</a></td>
+                  <td>ccai_service_name</td>
+                  <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>The ccai service used to enrich </p></td>
+                  <td><p>The CCAI service to be used to enrich
+This specifies which large language model provider and model settings will handle the request.
+Format: <pre><code>projects/&lt;project_uuid&gt;/ccai/services/&lt;service_uuid&gt;</code></pre> </p></td>
                 </tr>
               
             </tbody>

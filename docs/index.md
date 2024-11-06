@@ -2657,7 +2657,7 @@ Configuration for large language model (LLM) enrichment
 | is_active | [bool](#bool) |  | Activation flag |
 | enrichment_factor | [int32](#int32) |  | Factor of enrichment |
 | execution_order | [int32](#int32) |  | Order of augmenter execution |
-| ccai_service | [CcaiService](#ondewo.nlu.CcaiService) |  | The ccai service used to enrich |
+| ccai_service_name | [string](#string) |  | The CCAI service to be used to enrich This specifies which large language model provider and model settings will handle the request. Format: <pre><code>projects/&lt;project_uuid&gt;/ccai/services/&lt;service_uuid&gt;</code></pre> |
 
 
 
