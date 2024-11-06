@@ -639,8 +639,10 @@ message LlmEnrichmentConfig {
     // Order of augmenter execution
     int32 execution_order = 3;
 
-    // The ccai service used to enrich
-    CcaiService ccai_service = 4;
+    // The CCAI service to be used to enrich
+    // This specifies which large language model provider and model settings will handle the request.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/ccai/services/&lt;service_uuid&gt;</code></pre>
+    string ccai_service_name = 4;
 
 }
 
