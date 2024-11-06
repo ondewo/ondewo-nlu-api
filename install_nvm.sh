@@ -6,5 +6,3 @@ export NVM_DIR="$HOME/.nvm"
 nvm install $NVM_VERSION_DEFAULT
 nvm use $NVM_VERSION_DEFAULT
 nvm alias default $NVM_VERSION_DEFAULT
-
-npm install -g prettier
