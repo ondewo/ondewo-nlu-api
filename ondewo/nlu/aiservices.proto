@@ -18,9 +18,11 @@ package ondewo.nlu;
 
 import "google/api/annotations.proto";
 import "google/protobuf/struct.proto";
+
 import "ondewo/nlu/ccai_project.proto";
 import "ondewo/nlu/intent.proto";
 import "ondewo/nlu/entity_type.proto";
+import "ondewo/nlu/session.proto";
 
 // The Central class defining the ondewo ai services
 service AiServices {
@@ -97,7 +99,7 @@ service AiServices {
     // Generates a response from the LLM in a streaming format.
     // This RPC allows continuous streaming of responses from the model,
     // which is useful for real-time applications or large outputs.
-    rpc LlmGenerateStream (stream LlmGenerateStreamRequest) returns (stream LlmGenerateStreamResponse);
+    rpc StreamingLlmGenerate (LlmGenerateRequest) returns (stream StreamingLlmGenerateResponse);
 
     // Lists available Large Language Models (LLMs) for a specified CCAI service.
     // This RPC method allows clients to retrieve metadata about all LLM models associated
@@ -119,6 +121,7 @@ message ListLlmModelsRequest {
     // This field specifies the service context in which the models are deployed and
     // should be in the specified format to identify the correct project and service.
     CcaiService ccai_service = 1;
+
 }
 
 // The response message containing a list of available LLM models.
@@ -128,6 +131,7 @@ message ListLlmModelsResponse {
     // Each model in this list represents an individual language model that can
     // be used within the service, including details such as name, provider, and description.
     repeated LlmModel llm_models = 1;
+
 }
 
 // Represents an individual LLM model available within a CCAI service.
@@ -155,6 +159,7 @@ message LlmModel {
     // The provider of the CCAI service that offers this model.
     // Specifies the LLM provider (e.g., Ollama, OpenAI, Google, etc.), indicating the origin or vendor of the model.
     CcaiServiceProvider provider = 5;
+
 }
 
 // The request message to generate a response from a Large Language Model (LLM).
@@ -171,6 +176,10 @@ message LlmGenerateRequest {
     // will handle the request.
     // Format: <pre><code>projects/&lt;project_uuid&gt;/ccai/services/&lt;service_uuid&gt;</code></pre>
     CcaiService ccai_service = 2;
+
+    // Files as input for the generation request
+    repeated FileResource file_resource = 3;
+
 }
 
 // The response message containing the generated output from a Large Language Model (LLM).
@@ -180,31 +189,20 @@ message LlmGenerateResponse {
     // This can contain the text generation, embeddings, or other outputs
     // based on the specific request made to the LLM provider.
     google.protobuf.Struct llm_generation_response = 1;
-}
 
-// The request message for streaming generation from a Large Language Model (LLM).
-message LlmGenerateStreamRequest {
+    // Files as input for the generation request, e.g., generated pictures, audio or video
+    repeated FileResource file_resource = 2;
 
-    // The request payload for the LLM, structured according to the specific
-    // requirements of the large language model provider.
-    // The payload must fit the format expected by the specified LLM provider,
-    // as defined by <pre><code>CcaiServiceProvider</code></pre>.
-    google.protobuf.Struct llm_generation_stream_request = 1;
-
-    // The CCAI service to be used for processing the request.
-    // This specifies which large language model provider and model settings
-    // will handle the request.
-    // Format: <pre><code>projects/&lt;project_uuid&gt;/ccai/services/&lt;service_uuid&gt;</code></pre>
-    CcaiService ccai_service = 2;
 }
 
 // The response message for streaming generation from a Large Language Model (LLM).
-message LlmGenerateStreamResponse {
+message StreamingLlmGenerateResponse {
 
     // The response data from the LLM in a streaming format, returned as a structured payload.
     // This response is part of a continuous stream of data from the LLM, allowing
     // incremental results to be sent as they are generated.
     google.protobuf.Struct llm_generation_stream_response = 1;
+
 }
 
 // The request to detect parameters.
@@ -224,6 +222,7 @@ message ExtractEntitiesRequest {
     // hierarchy for entities that correspond to intent parameters
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre>
     string intent_name = 4;
+
 }
 
 // This message is a request to extract entities with Fuzzy Entity Recognizer
@@ -244,6 +243,7 @@ message ExtractEntitiesFuzzyRequest {
 
     // Optional. Whether or not entities are allowed to overlap.
     bool allow_overlaps = 5;
+
 }
 
 // Configuration for Fuzzy Entity Recognizer
@@ -272,6 +272,7 @@ message EntityTypeFuzzyNerConfig {
 
     // Should not use allow_overlaps here, since its default value is False
     bool allow_overlaps = 5;
+
 }
 
 // This message contains the entity detected
@@ -285,6 +286,7 @@ message EntityDetected{
 
     // The confidence score of the detected entity
     float score = 3;
+
 }
 
 // This message is a response of extracting entities
@@ -295,6 +297,7 @@ message ExtractEntitiesResponse {
 
     // The text containing the entities detected
     string text = 2;
+
 }
 
 // Request to get alternative sentences
@@ -306,7 +309,7 @@ message GetAlternativeSentencesRequest {
     // The sentence from which it is desired to get alternative sentences
     string sentence = 2;
 
-    // Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
+    // Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc.
     string language_code = 4;
 
     // the parent of the request
@@ -318,12 +321,13 @@ message GetAlternativeSentencesRequest {
 
     // Words to be changed in the augmentation process
     repeated string words_to_change = 7;
+
 }
 
 // Request to generate user sentences
 message GenerateUserSaysRequest {
 
-    // language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
+    // language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc.
     string language_code = 4;
 
     // the parent of the request
@@ -335,11 +339,13 @@ message GenerateUserSaysRequest {
 
     // Git branch
     string branch = 8;
+
 }
+
 // Request to generate responses
 message GenerateResponsesRequest {
 
-    // language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
+    // language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc.
     string language_code = 4;
 
     // the parent of the request
@@ -353,6 +359,7 @@ message GenerateResponsesRequest {
     string branch = 8;
 
     bool drop_unknown_parameters = 9;
+
 }
 
 // Request to get alternative training phrases
@@ -367,7 +374,7 @@ message GetAlternativeTrainingPhrasesRequest {
     // The intent tag attached to the training phrase
     string intent_name = 3;
 
-    // language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
+    // language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc.
     string language_code = 4;
 
     // the parent of the request
@@ -389,6 +396,7 @@ message GetAlternativeTrainingPhrasesRequest {
 
     // Git branch
     string branch = 10;
+
 }
 
 // Request to get synonyms
@@ -400,12 +408,13 @@ message GetSynonymsRequest {
     // Word from which a synonym is got
     string word = 2;
 
-    // language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
+    // language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc.
     string language_code = 4;
 
     // the parent of the request
     // Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
     string parent = 5;
+
 }
 
 // Response containing synonyms
@@ -423,6 +432,7 @@ message Synonym {
 
     // Score associated to the synonym resulted
     int32 score = 2;
+
 }
 
 // Response containing alternative sentences
@@ -430,6 +440,7 @@ message GetAlternativeSentencesResponse {
 
     // A list of alternative sentences
     repeated AltSentence alternative_sentences = 1;
+
 }
 
 // Response containing responses
@@ -437,6 +448,7 @@ message GenerateResponsesResponse {
 
     // A list of responses
     repeated string responses = 1;
+
 }
 
 // Response containing user sentences
@@ -444,6 +456,7 @@ message GenerateUserSaysResponse {
 
     // A list of sampled sentences
     repeated string user_says = 1;
+
 }
 
 // Response containing alternative training phrases
@@ -451,14 +464,18 @@ message GetAlternativeTrainingPhrasesResponse {
 
     // A list of alternative training phrases
     repeated AltTrainingPhrase alternative_training_phrases = 1;
+
 }
 
 // This message contains an alternative sentence
 message AltSentence {
+
     // Alternative sentence
     string sentence = 1;
+
     // Score associated to the alternative sentence resulted
     float score = 2;
+
 }
 
 // This message contains an alternative training phrase
@@ -469,6 +486,7 @@ message AltTrainingPhrase {
 
     // Score associated to training_phrase
     float score = 2;
+
 }
 
 // This message contains the configuration of data enrichment
@@ -497,6 +515,10 @@ message DataEnrichmentConfig {
 
     // XLNet augmenter configuration
     XLNetAugEnrichmentConfig xlnet_enrichment = 9;
+
+    // Large language model (LLM) augmenter configuration
+    LlmEnrichmentConfig llm_enrichment = 10;
+
 }
 
 // Configuration for Entity enrichment
@@ -510,6 +532,7 @@ message EntityEnrichmentConfig {
 
     // Order of augmenter execution
     int32 execution_order = 3;
+
 }
 
 // Configuration for Thesaurus enrichment
@@ -523,6 +546,7 @@ message ThesaurusEnrichmentConfig {
 
     // Order of augmenter execution
     int32 execution_order = 3;
+
 }
 // Configuration for BERT augmenter enrichment
 message BertAugEnrichmentConfig {
@@ -535,6 +559,7 @@ message BertAugEnrichmentConfig {
 
     // Order of augmenter execution
     int32 execution_order = 3;
+
 }
 // Configuration for GloVe enrichment
 message GloVeEnrichmentConfig {
@@ -547,7 +572,9 @@ message GloVeEnrichmentConfig {
 
     // Order of augmenter execution
     int32 execution_order = 3;
+
 }
+
 // Configuration for GPT2 enrichment
 message GPT2EnrichmentConfig {
 
@@ -559,7 +586,9 @@ message GPT2EnrichmentConfig {
 
     // Order of augmenter execution
     int32 execution_order = 3;
+
 }
+
 // Configuration for Word2Vec enrichment
 message Word2VecEnrichmentConfig {
 
@@ -572,6 +601,7 @@ message Word2VecEnrichmentConfig {
     // Order of augmenter execution
     int32 execution_order = 3;
 }
+
 // Configuration for WordNet augmenter enrichment
 message WordNetAugEnrichmentConfig {
 
@@ -583,8 +613,10 @@ message WordNetAugEnrichmentConfig {
 
     // Order of augmenter execution
     int32 execution_order = 3;
+
 }
-// Configuration for Thesaurus enrichment
+
+// Configuration for XLNet enrichment
 message XLNetAugEnrichmentConfig {
 
     // Activation flag
@@ -595,6 +627,24 @@ message XLNetAugEnrichmentConfig {
 
     // Order of augmenter execution
     int32 execution_order = 3;
+
+}
+
+// Configuration for large language model (LLM) enrichment
+message LlmEnrichmentConfig {
+
+    // Activation flag
+    bool is_active = 1;
+
+    // Factor of enrichment
+    int32 enrichment_factor = 2;
+
+    // Order of augmenter execution
+    int32 execution_order = 3;
+
+    // The ccai service used to enrich
+    CcaiService ccai_service = 4;
+
 }
 
 // The request for intent classification.
@@ -625,6 +675,7 @@ message ClassifyIntentsRequest {
 
     // Optional: Algorithm list
     repeated IntentAlgorithms algorithms = 7;
+
 }
 
 // Type of mode
@@ -638,6 +689,7 @@ enum Mode {
 
     // run ONLY algorithms listed in `algorithms` field
     INCLUSIVE = 2;
+
 }
 
 // Type of Intent algorithm.
@@ -684,6 +736,7 @@ enum IntentAlgorithms {
 
     // Matches the intent based on the parameter constellation and the current user context
     OndewoIntentParameterMatch = 15;
+
 }
 
 // Intent classified by a certain intent classifier
@@ -701,6 +754,7 @@ message IntentClassified {
 
     // Score associated to the detection of the intent by the classifier
     float score = 4;
+
 }
 
 // Response containing the intents classified in a sentence
@@ -717,4 +771,5 @@ message ClassifyIntentsResponse {
 
     // The context tags associated to the intents
     repeated string context_names = 4;
+
 }

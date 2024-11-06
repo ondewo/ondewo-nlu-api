@@ -303,6 +303,9 @@ enum CcaiServiceProvider {
     // Amazon AWS as the CCAI service provider, using Amazon's AI/ML services
     CCAI_SERVICE_PROVIDER_AMAZON = 12;
 
+    // Mistral as the CCAI service provider, using Mistrals services
+    CCAI_SERVICE_PROVIDER_MISTRAL = 13;
+
 }
 
 

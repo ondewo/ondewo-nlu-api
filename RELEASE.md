@@ -14,9 +14,14 @@
 * [[OND211-2199]](https://ondewo.atlassian.net/browse/OND211-2199) Add `GetCcaiService` to CcaiProjects endpoint to
   retrieve information about a specific CCAI service
 * [[OND211-2199]](https://ondewo.atlassian.net/browse/OND211-2199) AiServices: Add large language models (LLM) support
-  by adding `LlmGenerate`, `LlmGenerateStream` and `ListLlmModels` endpoints. New messages added to support these
+  by adding `LlmGenerate`, `StreamingLlmGenerate` and `ListLlmModels` endpoints. New messages added to support these
   endpoints are  `ListLlmModelsRequest`, `ListLlmModelsResponse`, `LlmModel`, `LlmGenerateRequest`,
-  `LlmGenerateResponse`, `LlmGenerateStreamRequest`, and `LlmGenerateStreamResponse`.
+  `LlmGenerateResponse`, and `StreamingLlmGenerateResponse`.
+* [[OND211-2199]](https://ondewo.atlassian.net/browse/OND211-2199) Add `FileResource` types such as
+  `DocumentFileResource`, `AudioFileResource`, `ImageFileResource`, and `VideoFileResource`.
+* [[OND211-2199]](https://ondewo.atlassian.net/browse/OND211-2199) SessionServices: Add `FileResource` as part of
+  `QueryInput` in `DetectIntent` and in `StreamingDetectIntent`, and as part of `QueryResult` in `DetectIntentResponse`
+  and in `StreamingDetectIntentResponse`.
 
 *****************
 

@@ -93,7 +93,7 @@ githubio_logic:
 	$(eval VERSION_LINE:= $(shell cat -n ondewo.github.io/data.js | sed -n "/name\: '${REPO_NAME_UPPER}'/,/end\: ''/p" | grep "versions: " -A 1 | tail -1 | grep -o -E '[0-9]+' | head -1 | sed -e 's/^0\+//'))
 	$(eval TEMP_TEXT:= $(shell cat ondewo.github.io/script_object.txt | sed -e "s/VERSION/${ONDEWO_NLU_API_VERSION}/g" -e "s/TECHNOLOGY/${REPO_NAME}/g"))
 	@sed -i "${VERSION_LINE} i ${TEMP_TEXT}" ondewo.github.io/data.js
-	@cd ondewo.github.io && npx prettier -w --single-quote data.js
+	@source ~/.nvm/nvm.sh && cd ondewo.github.io && npx prettier -w --single-quote data.js
 	rm -rf ${DOCS_DIR}
 	mkdir ${DOCS_DIR}
 	cp docs/* ${DOCS_DIR}
@@ -114,7 +114,7 @@ update_githubio:
 		rm -rf ondewo.github.io; sleep 3s; \
 	fi
 	@git clone git@github.com:ondewo/ondewo.github.io.git
-	@make githubio_logic || (echo "Done")
+	make githubio_logic || (echo "Done")
 	@rm -rf ondewo.github.io
 
 ########################################################

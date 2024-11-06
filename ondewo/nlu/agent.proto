@@ -809,7 +809,7 @@ message OptimizeRankingMatchRequest {
 // This message contains the configuration to run Optimize Ranking Match
 message RankingMatchOptimizationConfig {
 
-    // Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
+    // Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc.
     string language_code = 1;
 
     // number of splits for optimization
@@ -904,7 +904,7 @@ message GetAgentStatisticsRequest {
 
     // File formats for reports
     ReportFormat format = 2;
-    // Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
+    // Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc.
     // the language to calculate statistics about
     string language_code = 3;
 
@@ -1297,7 +1297,7 @@ message SetResourcesRequest {
 
     bytes resource_file = 4;
 
-    // Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
+    // Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc.
     string language_code = 5;
 }
 
@@ -1312,7 +1312,7 @@ message DeleteResourcesRequest {
 
     string type = 3;
 
-    // Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
+    // Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc.
     string language_code = 4;
 }
 
@@ -1327,7 +1327,7 @@ message ExportResourcesRequest {
 
     string type = 3;
 
-    // Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
+    // Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc.
     string language_code = 4;
 }
 
@@ -1342,7 +1342,7 @@ message ExportResourcesResponse {
 
     string type = 3;
 
-    // Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
+    // Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc.
     string language_code = 4;
 
     bytes resource_file = 5;
@@ -1357,7 +1357,7 @@ message GetModelStatusesRequest {
 
     int32 cache_version = 2;
 
-    // Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
+    // Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc.
     string language_code = 3;
 
     string model_name = 4;
@@ -1369,7 +1369,7 @@ message ModelStatus {
     // Cache version that contains the correspondent model
     int32 cache_version = 1;
 
-    // Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
+    // Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc.
     string language_code = 2;
 
     // The model name
@@ -1451,7 +1451,7 @@ message FullTextSearchRequest {
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
-    // Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
+    // Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc.
     string language_code = 2;
 
     // What to search for in the elastic server
@@ -1518,7 +1518,7 @@ message FullTextSearchResponseEntityType {
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     string parent = 1;
 
-    // Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
+    // Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc.
     string language_code = 2;
 
     message EntityTypeSearchResult {
@@ -1562,7 +1562,7 @@ message FullTextSearchResponseEntity {
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     string parent = 1;
 
-    // Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
+    // Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc.
     string language_code = 2;
 
     message EntitySearchResult {
@@ -1610,7 +1610,7 @@ message FullTextSearchResponseEntitySynonym {
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     string parent = 1;
 
-    // Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
+    // Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc.
     string language_code = 2;
 
     message EntitySynonymSearchResult {
@@ -1661,7 +1661,7 @@ message FullTextSearchResponseIntent {
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     string parent = 1;
 
-    // Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
+    // Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc.
     string language_code = 2;
 
     message IntentSearchResult {
@@ -1710,7 +1710,7 @@ message FullTextSearchResponseIntentContextIn {
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     string parent = 1;
 
-    // Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
+    // Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc.
     string language_code = 2;
 
     message IntentContextInSearchResult {
@@ -1759,7 +1759,7 @@ message FullTextSearchResponseIntentContextOut {
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     string parent = 1;
 
-    // Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
+    // Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc.
     string language_code = 2;
 
     message IntentContextOutSearchResult {
@@ -1808,7 +1808,7 @@ message FullTextSearchResponseIntentUsersays {
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     string parent = 1;
 
-    // Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
+    // Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc.
     string language_code = 2;
 
     message IntentUsersaysSearchResult {
@@ -1865,7 +1865,7 @@ message FullTextSearchResponseIntentTags {
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     string parent = 1;
 
-    // Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
+    // Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc.
     string language_code = 2;
 
     message IntentTagsSearchResult {
@@ -1916,7 +1916,7 @@ message FullTextSearchResponseIntentResponse {
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     string parent = 1;
 
-    // Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
+    // Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc.
     string language_code = 2;
 
     message IntentResponseSearchResult {
@@ -1990,7 +1990,7 @@ message FullTextSearchResponseIntentParameters {
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     string parent = 1;
 
-    // Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
+    // Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc.
     string language_code = 2;
 
     message IntentParametersSearchResult {
