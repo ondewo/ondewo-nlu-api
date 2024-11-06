@@ -113,11 +113,11 @@
     - [IntentClassified](#ondewo.nlu.IntentClassified)
     - [ListLlmModelsRequest](#ondewo.nlu.ListLlmModelsRequest)
     - [ListLlmModelsResponse](#ondewo.nlu.ListLlmModelsResponse)
+    - [LlmEnrichmentConfig](#ondewo.nlu.LlmEnrichmentConfig)
     - [LlmGenerateRequest](#ondewo.nlu.LlmGenerateRequest)
     - [LlmGenerateResponse](#ondewo.nlu.LlmGenerateResponse)
-    - [LlmGenerateStreamRequest](#ondewo.nlu.LlmGenerateStreamRequest)
-    - [LlmGenerateStreamResponse](#ondewo.nlu.LlmGenerateStreamResponse)
     - [LlmModel](#ondewo.nlu.LlmModel)
+    - [StreamingLlmGenerateResponse](#ondewo.nlu.StreamingLlmGenerateResponse)
     - [Synonym](#ondewo.nlu.Synonym)
     - [ThesaurusEnrichmentConfig](#ondewo.nlu.ThesaurusEnrichmentConfig)
     - [Word2VecEnrichmentConfig](#ondewo.nlu.Word2VecEnrichmentConfig)
@@ -383,7 +383,9 @@
     - [DetectIntentRequest](#ondewo.nlu.DetectIntentRequest)
     - [DetectIntentResponse](#ondewo.nlu.DetectIntentResponse)
     - [DetectedIntent](#ondewo.nlu.DetectedIntent)
+    - [DocumentFileResource](#ondewo.nlu.DocumentFileResource)
     - [EventInput](#ondewo.nlu.EventInput)
+    - [FileResource](#ondewo.nlu.FileResource)
     - [GetAudioFileOfSessionRequest](#ondewo.nlu.GetAudioFileOfSessionRequest)
     - [GetAudioFilesRequest](#ondewo.nlu.GetAudioFilesRequest)
     - [GetAudioFilesResponse](#ondewo.nlu.GetAudioFilesResponse)
@@ -391,6 +393,7 @@
     - [GetSessionRequest](#ondewo.nlu.GetSessionRequest)
     - [GetSessionReviewRequest](#ondewo.nlu.GetSessionReviewRequest)
     - [GetSessionStepRequest](#ondewo.nlu.GetSessionStepRequest)
+    - [ImageFileResource](#ondewo.nlu.ImageFileResource)
     - [InputAudioConfig](#ondewo.nlu.InputAudioConfig)
     - [ListAccountIdsOfAllSessionsRequest](#ondewo.nlu.ListAccountIdsOfAllSessionsRequest)
     - [ListAccountIdsResponse](#ondewo.nlu.ListAccountIdsResponse)
@@ -446,6 +449,7 @@
     - [TextInput](#ondewo.nlu.TextInput)
     - [UpdateSessionCommentsRequest](#ondewo.nlu.UpdateSessionCommentsRequest)
     - [UpdateSessionStepRequest](#ondewo.nlu.UpdateSessionStepRequest)
+    - [VideoFileResource](#ondewo.nlu.VideoFileResource)
   
     - [AudioEncoding](#ondewo.nlu.AudioEncoding)
     - [AudioFileResourceType](#ondewo.nlu.AudioFileResourceType)
@@ -744,7 +748,7 @@ Request to delete resources
 | parent | [string](#string) |  | Required. The project that the agent to fetch is associated with. Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre> |
 | name | [string](#string) |  |  |
 | type | [string](#string) |  |  |
-| language_code | [string](#string) |  | Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru |
+| language_code | [string](#string) |  | Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc. |
 
 
 
@@ -850,7 +854,7 @@ Request to export resources
 | parent | [string](#string) |  | Required. The project that the agent to fetch is associated with. Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre> |
 | name | [string](#string) |  |  |
 | type | [string](#string) |  |  |
-| language_code | [string](#string) |  | Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru |
+| language_code | [string](#string) |  | Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc. |
 
 
 
@@ -868,7 +872,7 @@ Response to export resources
 | parent | [string](#string) |  | Required. The project that the agent to fetch is associated with. Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre> |
 | name | [string](#string) |  |  |
 | type | [string](#string) |  |  |
-| language_code | [string](#string) |  | Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru |
+| language_code | [string](#string) |  | Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc. |
 | resource_file | [bytes](#bytes) |  |  |
 
 
@@ -885,7 +889,7 @@ This message is a request to run full text search
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The project that the agent is associated with. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
-| language_code | [string](#string) |  | Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru |
+| language_code | [string](#string) |  | Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc. |
 | term | [string](#string) |  | What to search for in the elastic server |
 | page_token | [string](#string) |  | Composite string: current_index-0--page_size-10 The page token to support pagination. Pagination allows you to retrieve a large result set in smaller, more manageable portions. The page token is a string representing the current index and page size.
 
@@ -911,7 +915,7 @@ This message is a response of full text search of entity
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The project that the agent to fetch is associated with. Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre> |
-| language_code | [string](#string) |  | Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru |
+| language_code | [string](#string) |  | Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc. |
 | entity_results | [FullTextSearchResponseEntity.EntitySearchResult](#ondewo.nlu.FullTextSearchResponseEntity.EntitySearchResult) | repeated |  |
 | term | [string](#string) |  |  |
 | elastic_query | [string](#string) |  |  |
@@ -955,7 +959,7 @@ This message is a response of full text search of synonym entity
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The project that the agent to fetch is associated with. Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre> |
-| language_code | [string](#string) |  | Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru |
+| language_code | [string](#string) |  | Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc. |
 | entity_synonym_results | [FullTextSearchResponseEntitySynonym.EntitySynonymSearchResult](#ondewo.nlu.FullTextSearchResponseEntitySynonym.EntitySynonymSearchResult) | repeated |  |
 | term | [string](#string) |  |  |
 | elastic_query | [string](#string) |  |  |
@@ -1001,7 +1005,7 @@ This message is a response of full text search of entity type
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The project that the agent to fetch is associated with. Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre> |
-| language_code | [string](#string) |  | Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru |
+| language_code | [string](#string) |  | Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc. |
 | entity_type_results | [FullTextSearchResponseEntityType.EntityTypeSearchResult](#ondewo.nlu.FullTextSearchResponseEntityType.EntityTypeSearchResult) | repeated |  |
 | term | [string](#string) |  |  |
 | elastic_query | [string](#string) |  |  |
@@ -1043,7 +1047,7 @@ This message is a response of full text search of intent
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The project that the agent to fetch is associated with. Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre> |
-| language_code | [string](#string) |  | Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru |
+| language_code | [string](#string) |  | Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc. |
 | intent_results | [FullTextSearchResponseIntent.IntentSearchResult](#ondewo.nlu.FullTextSearchResponseIntent.IntentSearchResult) | repeated |  |
 | term | [string](#string) |  |  |
 | elastic_query | [string](#string) |  |  |
@@ -1087,7 +1091,7 @@ This message is a response of full text search of intent with context in
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The project that the agent to fetch is associated with. Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre> |
-| language_code | [string](#string) |  | Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru |
+| language_code | [string](#string) |  | Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc. |
 | intent_context_in_results | [FullTextSearchResponseIntentContextIn.IntentContextInSearchResult](#ondewo.nlu.FullTextSearchResponseIntentContextIn.IntentContextInSearchResult) | repeated |  |
 | term | [string](#string) |  |  |
 | elastic_query | [string](#string) |  |  |
@@ -1131,7 +1135,7 @@ This message is a response of full text search of intent with context out
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The project that the agent to fetch is associated with. Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre> |
-| language_code | [string](#string) |  | Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru |
+| language_code | [string](#string) |  | Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc. |
 | intent_context_out_results | [FullTextSearchResponseIntentContextOut.IntentContextOutSearchResult](#ondewo.nlu.FullTextSearchResponseIntentContextOut.IntentContextOutSearchResult) | repeated |  |
 | term | [string](#string) |  |  |
 | elastic_query | [string](#string) |  |  |
@@ -1175,7 +1179,7 @@ This message is a response of full text search of intent with parameters
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The project that the agent to fetch is associated with. Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre> |
-| language_code | [string](#string) |  | Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru |
+| language_code | [string](#string) |  | Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc. |
 | intent_parameters_results | [FullTextSearchResponseIntentParameters.IntentParametersSearchResult](#ondewo.nlu.FullTextSearchResponseIntentParameters.IntentParametersSearchResult) | repeated |  |
 | term | [string](#string) |  |  |
 | elastic_query | [string](#string) |  |  |
@@ -1220,7 +1224,7 @@ This message is a response of full text search of intent response
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The project that the agent to fetch is associated with. Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre> |
-| language_code | [string](#string) |  | Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru |
+| language_code | [string](#string) |  | Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc. |
 | intent_response_results | [FullTextSearchResponseIntentResponse.IntentResponseSearchResult](#ondewo.nlu.FullTextSearchResponseIntentResponse.IntentResponseSearchResult) | repeated |  |
 | term | [string](#string) |  |  |
 | elastic_query | [string](#string) |  |  |
@@ -1274,7 +1278,7 @@ This message is a response of full text search of intent with tags
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The project that the agent to fetch is associated with. Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre> |
-| language_code | [string](#string) |  | Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru |
+| language_code | [string](#string) |  | Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc. |
 | intent_tags_results | [FullTextSearchResponseIntentTags.IntentTagsSearchResult](#ondewo.nlu.FullTextSearchResponseIntentTags.IntentTagsSearchResult) | repeated |  |
 | term | [string](#string) |  |  |
 | elastic_query | [string](#string) |  |  |
@@ -1319,7 +1323,7 @@ This message is a response of full text search of intent with sentence
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The project that the agent to fetch is associated with. Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre> |
-| language_code | [string](#string) |  | Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru |
+| language_code | [string](#string) |  | Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc. |
 | intent_usersays_results | [FullTextSearchResponseIntentUsersays.IntentUsersaysSearchResult](#ondewo.nlu.FullTextSearchResponseIntentUsersays.IntentUsersaysSearchResult) | repeated |  |
 | term | [string](#string) |  |  |
 | elastic_query | [string](#string) |  |  |
@@ -1384,7 +1388,7 @@ Request statistics of the agent
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The project to get statistics from. Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre> |
 | format | [ReportFormat](#ondewo.nlu.ReportFormat) |  | File formats for reports |
-| language_code | [string](#string) |  | Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru the language to calculate statistics about |
+| language_code | [string](#string) |  | Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc. the language to calculate statistics about |
 | type | [ReportType](#ondewo.nlu.ReportType) |  | Type of reports about the domain of the agent |
 
 
@@ -1419,7 +1423,7 @@ Request to get model statuses
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The project that the agent to fetch is associated with. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
 | cache_version | [int32](#int32) |  |  |
-| language_code | [string](#string) |  | Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru |
+| language_code | [string](#string) |  | Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc. |
 | model_name | [string](#string) |  |  |
 
 
@@ -1672,7 +1676,7 @@ Status of model
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | cache_version | [int32](#int32) |  | Cache version that contains the correspondent model |
-| language_code | [string](#string) |  | Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru |
+| language_code | [string](#string) |  | Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc. |
 | model_name | [string](#string) |  | The model name |
 | status_set_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  |  |
 | config | [string](#string) |  |  |
@@ -1741,7 +1745,7 @@ This message contains the configuration to run Optimize Ranking Match
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| language_code | [string](#string) |  | Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru |
+| language_code | [string](#string) |  | Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc. |
 | n_splits | [int32](#int32) |  | number of splits for optimization |
 | random_seed | [int32](#int32) |  | random seed number for defining the split of train and test of training phrases for optimization |
 | initial_thresholds | [google.protobuf.Struct](#google.protobuf.Struct) |  | initial thresholds are optional, if not given will be taken from the current config example {'OndewoIntentSimilarityMatch': 0.59, 'OndewoIntentNamedSimilarityMatch': 0.39} |
@@ -1834,7 +1838,7 @@ Request to set resources
 | name | [string](#string) |  |  |
 | type | [string](#string) |  |  |
 | resource_file | [bytes](#bytes) |  |  |
-| language_code | [string](#string) |  | Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru |
+| language_code | [string](#string) |  | Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc. |
 
 
 
@@ -2273,6 +2277,7 @@ This message contains the configuration of data enrichment
 | glove_enrichment | [GloVeEnrichmentConfig](#ondewo.nlu.GloVeEnrichmentConfig) |  | GloVe augmenter configuration |
 | bert_enrichment | [BertAugEnrichmentConfig](#ondewo.nlu.BertAugEnrichmentConfig) |  | BERT augmenter configuration |
 | xlnet_enrichment | [XLNetAugEnrichmentConfig](#ondewo.nlu.XLNetAugEnrichmentConfig) |  | XLNet augmenter configuration |
+| llm_enrichment | [LlmEnrichmentConfig](#ondewo.nlu.LlmEnrichmentConfig) |  | Large language model (LLM) augmenter configuration |
 
 
 
@@ -2410,7 +2415,7 @@ Request to generate responses
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| language_code | [string](#string) |  | language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru |
+| language_code | [string](#string) |  | language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc. |
 | parent | [string](#string) |  | the parent of the request Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre> |
 | n_repeat_synonym | [int32](#int32) |  | The number of synonyms desired |
 | branch | [string](#string) |  | Git branch |
@@ -2444,7 +2449,7 @@ Request to generate user sentences
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| language_code | [string](#string) |  | language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru |
+| language_code | [string](#string) |  | language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc. |
 | parent | [string](#string) |  | the parent of the request Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre> |
 | n_repeat_synonym | [int32](#int32) |  | The number of synonyms desired |
 | branch | [string](#string) |  | Git branch |
@@ -2479,7 +2484,7 @@ Request to get alternative sentences
 | ----- | ---- | ----- | ----------- |
 | config | [DataEnrichmentConfig](#ondewo.nlu.DataEnrichmentConfig) |  | Configuration type of the enricher |
 | sentence | [string](#string) |  | The sentence from which it is desired to get alternative sentences |
-| language_code | [string](#string) |  | Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru |
+| language_code | [string](#string) |  | Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc. |
 | parent | [string](#string) |  | the parent of the request Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre> |
 | protected_words | [string](#string) | repeated | Protected words in the augmentation process |
 | words_to_change | [string](#string) | repeated | Words to be changed in the augmentation process |
@@ -2515,7 +2520,7 @@ Request to get alternative training phrases
 | config | [DataEnrichmentConfig](#ondewo.nlu.DataEnrichmentConfig) |  | Configuration of the enricher |
 | training_phrase | [Intent.TrainingPhrase](#ondewo.nlu.Intent.TrainingPhrase) |  | Training phrase from which an alternative one is got |
 | intent_name | [string](#string) |  | The intent tag attached to the training phrase |
-| language_code | [string](#string) |  | language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru |
+| language_code | [string](#string) |  | language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc. |
 | parent | [string](#string) |  | the parent of the request Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre> |
 | detect_entities | [bool](#bool) |  | Flag to determine whether entities must or not be detected |
 | similarity_threshold | [float](#float) |  | similarity threshold defines how similar sentences should be to drop generated training phrase as duplicate. Meaningful values of similarity_threshold are between 0.95 and 1.0 |
@@ -2553,7 +2558,7 @@ Request to get synonyms
 | ----- | ---- | ----- | ----------- |
 | config | [DataEnrichmentConfig](#ondewo.nlu.DataEnrichmentConfig) |  | Configuration of the enricher |
 | word | [string](#string) |  | Word from which a synonym is got |
-| language_code | [string](#string) |  | language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru |
+| language_code | [string](#string) |  | language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc. |
 | parent | [string](#string) |  | the parent of the request Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre> |
 
 
@@ -2641,6 +2646,24 @@ The response message containing a list of available LLM models.
 
 
 
+<a name="ondewo.nlu.LlmEnrichmentConfig"></a>
+
+### LlmEnrichmentConfig
+Configuration for large language model (LLM) enrichment
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| is_active | [bool](#bool) |  | Activation flag |
+| enrichment_factor | [int32](#int32) |  | Factor of enrichment |
+| execution_order | [int32](#int32) |  | Order of augmenter execution |
+| ccai_service | [CcaiService](#ondewo.nlu.CcaiService) |  | The ccai service used to enrich |
+
+
+
+
+
+
 <a name="ondewo.nlu.LlmGenerateRequest"></a>
 
 ### LlmGenerateRequest
@@ -2651,6 +2674,7 @@ The request message to generate a response from a Large Language Model (LLM).
 | ----- | ---- | ----- | ----------- |
 | llm_generation_request | [google.protobuf.Struct](#google.protobuf.Struct) |  | The request payload for the LLM, structured according to the specific requirements of the large language model provider. The payload must fit the format expected by the specified LLM provider, as defined by <pre><code>CcaiServiceProvider</code></pre>. |
 | ccai_service | [CcaiService](#ondewo.nlu.CcaiService) |  | The CCAI service to be used for processing the request. This specifies which large language model provider and model settings will handle the request. Format: <pre><code>projects/&lt;project_uuid&gt;/ccai/services/&lt;service_uuid&gt;</code></pre> |
+| file_resource | [FileResource](#ondewo.nlu.FileResource) | repeated | Files as input for the generation request |
 
 
 
@@ -2666,37 +2690,7 @@ The response message containing the generated output from a Large Language Model
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | llm_generation_response | [google.protobuf.Struct](#google.protobuf.Struct) |  | The response data from the LLM, returned as a structured payload. This can contain the text generation, embeddings, or other outputs based on the specific request made to the LLM provider. |
-
-
-
-
-
-
-<a name="ondewo.nlu.LlmGenerateStreamRequest"></a>
-
-### LlmGenerateStreamRequest
-The request message for streaming generation from a Large Language Model (LLM).
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| llm_generation_stream_request | [google.protobuf.Struct](#google.protobuf.Struct) |  | The request payload for the LLM, structured according to the specific requirements of the large language model provider. The payload must fit the format expected by the specified LLM provider, as defined by <pre><code>CcaiServiceProvider</code></pre>. |
-| ccai_service | [CcaiService](#ondewo.nlu.CcaiService) |  | The CCAI service to be used for processing the request. This specifies which large language model provider and model settings will handle the request. Format: <pre><code>projects/&lt;project_uuid&gt;/ccai/services/&lt;service_uuid&gt;</code></pre> |
-
-
-
-
-
-
-<a name="ondewo.nlu.LlmGenerateStreamResponse"></a>
-
-### LlmGenerateStreamResponse
-The response message for streaming generation from a Large Language Model (LLM).
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| llm_generation_stream_response | [google.protobuf.Struct](#google.protobuf.Struct) |  | The response data from the LLM in a streaming format, returned as a structured payload. This response is part of a continuous stream of data from the LLM, allowing incremental results to be sent as they are generated. |
+| file_resource | [FileResource](#ondewo.nlu.FileResource) | repeated | Files as input for the generation request, e.g., generated pictures, audio or video |
 
 
 
@@ -2716,6 +2710,21 @@ Represents an individual LLM model available within a CCAI service.
 | description | [string](#string) |  | The description of the model. Provides additional details about the model, such as its purpose, architecture, or any other relevant information. |
 | ccai_service_name | [string](#string) |  | The resource name of the CCAI service to which the model belongs. This field links the model to its service context, helping clients understand which service hosts the model. |
 | provider | [CcaiServiceProvider](#ondewo.nlu.CcaiServiceProvider) |  | The provider of the CCAI service that offers this model. Specifies the LLM provider (e.g., Ollama, OpenAI, Google, etc.), indicating the origin or vendor of the model. |
+
+
+
+
+
+
+<a name="ondewo.nlu.StreamingLlmGenerateResponse"></a>
+
+### StreamingLlmGenerateResponse
+The response message for streaming generation from a Large Language Model (LLM).
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| llm_generation_stream_response | [google.protobuf.Struct](#google.protobuf.Struct) |  | The response data from the LLM in a streaming format, returned as a structured payload. This response is part of a continuous stream of data from the LLM, allowing incremental results to be sent as they are generated. |
 
 
 
@@ -2792,7 +2801,7 @@ Configuration for WordNet augmenter enrichment
 <a name="ondewo.nlu.XLNetAugEnrichmentConfig"></a>
 
 ### XLNetAugEnrichmentConfig
-Configuration for Thesaurus enrichment
+Configuration for XLNet enrichment
 
 
 | Field | Type | Label | Description |
@@ -2875,7 +2884,7 @@ The Central class defining the ondewo ai services
 | ClassifyIntents | [ClassifyIntentsRequest](#ondewo.nlu.ClassifyIntentsRequest) | [ClassifyIntentsResponse](#ondewo.nlu.ClassifyIntentsResponse) | Preprocess text and detects intents in a sentence |
 | ExtractEntitiesFuzzy | [ExtractEntitiesFuzzyRequest](#ondewo.nlu.ExtractEntitiesFuzzyRequest) | [ExtractEntitiesResponse](#ondewo.nlu.ExtractEntitiesResponse) | Processes a natural language query and returns detected entities |
 | LlmGenerate | [LlmGenerateRequest](#ondewo.nlu.LlmGenerateRequest) | [LlmGenerateResponse](#ondewo.nlu.LlmGenerateResponse) | Generates a single response from a Large Language Model (LLM). This RPC method allows a client to make a request to the LLM and receive a single complete response based on the input parameters provided. |
-| LlmGenerateStream | [LlmGenerateStreamRequest](#ondewo.nlu.LlmGenerateStreamRequest) stream | [LlmGenerateStreamResponse](#ondewo.nlu.LlmGenerateStreamResponse) stream | Generates a response from the LLM in a streaming format. This RPC allows continuous streaming of responses from the model, which is useful for real-time applications or large outputs. |
+| StreamingLlmGenerate | [LlmGenerateRequest](#ondewo.nlu.LlmGenerateRequest) | [StreamingLlmGenerateResponse](#ondewo.nlu.StreamingLlmGenerateResponse) stream | Generates a response from the LLM in a streaming format. This RPC allows continuous streaming of responses from the model, which is useful for real-time applications or large outputs. |
 | ListLlmModels | [ListLlmModelsRequest](#ondewo.nlu.ListLlmModelsRequest) | [ListLlmModelsResponse](#ondewo.nlu.ListLlmModelsResponse) | Lists available Large Language Models (LLMs) for a specified CCAI service. This RPC method allows clients to retrieve metadata about all LLM models associated with a particular service within a project, including model names, descriptions, and providers. |
 
  <!-- end services -->
@@ -3266,6 +3275,7 @@ CcaiProjectView defines what the CcaiProject message contains
 | CCAI_SERVICE_PROVIDER_HAYSTACK | 10 | Haystack as the CCAI service provider, e.g. for question and answering, conversations |
 | CCAI_SERVICE_PROVIDER_LANGCHAIN | 11 | LangChain as the CCAI service provider |
 | CCAI_SERVICE_PROVIDER_AMAZON | 12 | Amazon AWS as the CCAI service provider, using Amazon's AI/ML services |
+| CCAI_SERVICE_PROVIDER_MISTRAL | 13 | Mistral as the CCAI service provider, using Mistrals services |
 
 
 
@@ -6841,6 +6851,7 @@ This message is a request to add session labels
 | modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
 | created_by | [string](#string) |  | User id in form of a valid UUID. |
 | modified_by | [string](#string) |  | User id in form of a valid UUID. |
+| display_name | [string](#string) |  | Bytes of the audio file |
 
 
 
@@ -7074,6 +7085,27 @@ This message contains a detected intent
 
 
 
+<a name="ondewo.nlu.DocumentFileResource"></a>
+
+### DocumentFileResource
+Represents a document file resource (e.g., text, markdown, PDF, DOCX).
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The unique identifier for the document file resource. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/documents/&lt;document_uuid&gt;</code></pre> |
+| display_name | [string](#string) |  | The display name of the document file, which can be the file name (e.g., "report.pdf") or a user-assigned name. |
+| bytes | [bytes](#bytes) |  | The raw bytes of the document file (e.g., PDF, DOCX, TXT). |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time of the document file. This is a read-only field. |
+| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | The last modification date and time of the document file. This is a read-only field. |
+| created_by | [string](#string) |  | The UUID of the user who created the document file. |
+| modified_by | [string](#string) |  | The UUID of the user who last modified the document file. |
+
+
+
+
+
+
 <a name="ondewo.nlu.EventInput"></a>
 
 ### EventInput
@@ -7089,6 +7121,24 @@ The parameter `name` may be used by the agent in the response:
 | name | [string](#string) |  | Required. The unique identifier of the event. |
 | parameters | [google.protobuf.Struct](#google.protobuf.Struct) |  | Optional. The collection of parameters associated with the event. |
 | language_code | [string](#string) |  | Required. The language of this query. See [Language Support](https://dialogflow.com/docs/languages) for a list of the currently supported language codes. Note that queries in the same session do not necessarily need to specify the same language. |
+
+
+
+
+
+
+<a name="ondewo.nlu.FileResource"></a>
+
+### FileResource
+Represents a file resource that can either be an image, audio, document, or video file.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| document_file_resource | [DocumentFileResource](#ondewo.nlu.DocumentFileResource) |  | Document file resource (e.g., markdown, text, word, powerpoint, pdf, excel etc.). |
+| audio_file_resource | [AudioFileResource](#ondewo.nlu.AudioFileResource) |  | An audio file resource, such as a recording or sound file. |
+| image_file_resource | [ImageFileResource](#ondewo.nlu.ImageFileResource) |  | An image file resource, such as a JPEG, PNG, etc. |
+| video_file_resource | [VideoFileResource](#ondewo.nlu.VideoFileResource) |  | A video file resource, such as an MP4 or AVI file. |
 
 
 
@@ -7215,6 +7265,27 @@ This message is a request to get a session step
 | ----- | ---- | ----- | ----------- |
 | name | [string](#string) |  | The unique identifier for the given session step Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/sessionsteps/&lt;session_step_uuid&gt; |
 | field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which fields will be filled with data. Example: path=["session_step.detect_intent_response.query_result.fulfillment_messages"] |
+
+
+
+
+
+
+<a name="ondewo.nlu.ImageFileResource"></a>
+
+### ImageFileResource
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The unique identifier of the session for which the latest review should be returned Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/images/&lt;image_uuid&gt;</code></pre> |
+| display_name | [string](#string) |  | File name of the image, e.g., MyPicture.jpg, or a user assigned display name |
+| bytes | [bytes](#bytes) |  | Bytes of the audio file |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
+| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
+| created_by | [string](#string) |  | User id in form of a valid UUID. |
+| modified_by | [string](#string) |  | User id in form of a valid UUID. |
 
 
 
@@ -7882,6 +7953,7 @@ Represents the query input. It can contain either:
 | audio_config | [InputAudioConfig](#ondewo.nlu.InputAudioConfig) |  | Instructs the speech recognizer how to process the speech audio. |
 | text | [TextInput](#ondewo.nlu.TextInput) |  | The natural language text to be processed. |
 | event | [EventInput](#ondewo.nlu.EventInput) |  | The event to be processed. |
+| file_resource | [FileResource](#ondewo.nlu.FileResource) | repeated | Files as input for the detect intent request, e.g., image, document, audio, video etc. |
 
 
 
@@ -7944,6 +8016,7 @@ You should not rely on this field as it isn't guaranteed to be accurate, or even
 | query_text_original | [string](#string) |  | The user input gets pre-processed by spelling correction, stop word removal etc. This property holds the string that is passed to the entity recognition and intent detection |
 | diagnostic_info | [google.protobuf.Struct](#google.protobuf.Struct) |  | The free-form diagnostic info. For example, this field could contain webhook call latency. |
 | language_code | [string](#string) |  | The language that was triggered during intent detection. See [Language Support](https://dialogflow.com/docs/reference/language) for a list of the currently supported language codes. |
+| file_resource | [FileResource](#ondewo.nlu.FileResource) | repeated | Generated or attached files, e.g., llm generates a picture or file attachment |
 
 
 
@@ -8363,6 +8436,30 @@ UpdateSessionStepRequest stores a session step into the session
 | session_step | [SessionStep](#ondewo.nlu.SessionStep) |  | The session step to be updated |
 | update_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which fields will be updated. Example: path=["session_step.detect_intent_response.query_result.fulfillment_messages"] |
 | field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which fields will be filled with data. Example: path=["session_step.detect_intent_response.query_result.fulfillment_messages"] |
+
+
+
+
+
+
+<a name="ondewo.nlu.VideoFileResource"></a>
+
+### VideoFileResource
+Represents a video file resource (e.g., MP4, AVI).
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The unique identifier for the video file resource. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/videos/&lt;video_uuid&gt;</code></pre> |
+| display_name | [string](#string) |  | The display name of the video file, which can be a user-assigned label. |
+| bytes | [bytes](#bytes) |  | The raw bytes representing the video file (e.g., MP4, AVI). |
+| duration_in_s | [float](#float) |  | The duration of the video file in seconds. |
+| resolution | [string](#string) |  | The resolution of the video (e.g., "1920x1080" for Full HD). |
+| frame_rate | [float](#float) |  | The frame rate of the video (e.g., 30 fps). |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time of the video file. This is a read-only field. |
+| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | The last modification date and time of the video file. This is a read-only field. |
+| created_by | [string](#string) |  | The UUID of the user who created the video file. |
+| modified_by | [string](#string) |  | The UUID of the user who last modified the video file. |
 
 
 

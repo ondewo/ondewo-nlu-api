@@ -484,7 +484,7 @@
                       
                         <li><a href="#ondewo.nlu.AiServices.LlmGenerate" class="title-badge method">LlmGenerate</a></li>
                       
-                        <li><a href="#ondewo.nlu.AiServices.LlmGenerateStream" class="title-badge method">LlmGenerateStream</a></li>
+                        <li><a href="#ondewo.nlu.AiServices.StreamingLlmGenerate" class="title-badge method">StreamingLlmGenerate</a></li>
                       
                         <li><a href="#ondewo.nlu.AiServices.ListLlmModels" class="title-badge method">ListLlmModels</a></li>
                       
@@ -607,6 +607,10 @@
                       </li>
                     
                       <li>
+                        <a href="#ondewo.nlu.LlmEnrichmentConfig" class="title-badge message">LlmEnrichmentConfig</a>
+                      </li>
+                    
+                      <li>
                         <a href="#ondewo.nlu.LlmGenerateRequest" class="title-badge message">LlmGenerateRequest</a>
                       </li>
                     
@@ -615,15 +619,11 @@
                       </li>
                     
                       <li>
-                        <a href="#ondewo.nlu.LlmGenerateStreamRequest" class="title-badge message">LlmGenerateStreamRequest</a>
-                      </li>
-                    
-                      <li>
-                        <a href="#ondewo.nlu.LlmGenerateStreamResponse" class="title-badge message">LlmGenerateStreamResponse</a>
-                      </li>
-                    
-                      <li>
                         <a href="#ondewo.nlu.LlmModel" class="title-badge message">LlmModel</a>
+                      </li>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.StreamingLlmGenerateResponse" class="title-badge message">StreamingLlmGenerateResponse</a>
                       </li>
                     
                       <li>
@@ -2075,7 +2075,15 @@
                       </li>
                     
                       <li>
+                        <a href="#ondewo.nlu.DocumentFileResource" class="title-badge message">DocumentFileResource</a>
+                      </li>
+                    
+                      <li>
                         <a href="#ondewo.nlu.EventInput" class="title-badge message">EventInput</a>
+                      </li>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.FileResource" class="title-badge message">FileResource</a>
                       </li>
                     
                       <li>
@@ -2104,6 +2112,10 @@
                     
                       <li>
                         <a href="#ondewo.nlu.GetSessionStepRequest" class="title-badge message">GetSessionStepRequest</a>
+                      </li>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.ImageFileResource" class="title-badge message">ImageFileResource</a>
                       </li>
                     
                       <li>
@@ -2324,6 +2336,10 @@
                     
                       <li>
                         <a href="#ondewo.nlu.UpdateSessionStepRequest" class="title-badge message">UpdateSessionStepRequest</a>
+                      </li>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.VideoFileResource" class="title-badge message">VideoFileResource</a>
                       </li>
                     
                   </ul>
@@ -4118,7 +4134,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre> </p></td>
                   <td>language_code</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru </p></td>
+                  <td><p>Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc. </p></td>
                 </tr>
               
             </tbody>
@@ -4373,7 +4389,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre> </p></td>
                   <td>language_code</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru </p></td>
+                  <td><p>Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc. </p></td>
                 </tr>
               
             </tbody>
@@ -4419,7 +4435,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre> </p></td>
                   <td>language_code</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru </p></td>
+                  <td><p>Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc. </p></td>
                 </tr>
               
                 <tr>
@@ -4458,7 +4474,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td>language_code</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru </p></td>
+                  <td><p>Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc. </p></td>
                 </tr>
               
                 <tr>
@@ -4527,7 +4543,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre> </p></td>
                   <td>language_code</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru </p></td>
+                  <td><p>Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc. </p></td>
                 </tr>
               
                 <tr>
@@ -4675,7 +4691,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre> </p></td>
                   <td>language_code</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru </p></td>
+                  <td><p>Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc. </p></td>
                 </tr>
               
                 <tr>
@@ -4837,7 +4853,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre> </p></td>
                   <td>language_code</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru </p></td>
+                  <td><p>Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc. </p></td>
                 </tr>
               
                 <tr>
@@ -4971,7 +4987,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre> </p></td>
                   <td>language_code</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru </p></td>
+                  <td><p>Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc. </p></td>
                 </tr>
               
                 <tr>
@@ -5119,7 +5135,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre> </p></td>
                   <td>language_code</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru </p></td>
+                  <td><p>Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc. </p></td>
                 </tr>
               
                 <tr>
@@ -5267,7 +5283,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre> </p></td>
                   <td>language_code</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru </p></td>
+                  <td><p>Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc. </p></td>
                 </tr>
               
                 <tr>
@@ -5415,7 +5431,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre> </p></td>
                   <td>language_code</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru </p></td>
+                  <td><p>Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc. </p></td>
                 </tr>
               
                 <tr>
@@ -5570,7 +5586,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre> </p></td>
                   <td>language_code</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru </p></td>
+                  <td><p>Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc. </p></td>
                 </tr>
               
                 <tr>
@@ -5754,7 +5770,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre> </p></td>
                   <td>language_code</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru </p></td>
+                  <td><p>Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc. </p></td>
                 </tr>
               
                 <tr>
@@ -5909,7 +5925,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre> </p></td>
                   <td>language_code</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru </p></td>
+                  <td><p>Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc. </p></td>
                 </tr>
               
                 <tr>
@@ -6124,7 +6140,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre> </p></td>
                   <td>language_code</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
+                  <td><p>Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc.
 the language to calculate statistics about </p></td>
                 </tr>
               
@@ -6209,7 +6225,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td>language_code</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru </p></td>
+                  <td><p>Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc. </p></td>
                 </tr>
               
                 <tr>
@@ -6779,7 +6795,7 @@ e.g. next_page_token is current_index-2 </p></td>
                   <td>language_code</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru </p></td>
+                  <td><p>Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc. </p></td>
                 </tr>
               
                 <tr>
@@ -6941,7 +6957,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td>language_code</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru </p></td>
+                  <td><p>Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc. </p></td>
                 </tr>
               
                 <tr>
@@ -7179,7 +7195,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre> </p></td>
                   <td>language_code</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru </p></td>
+                  <td><p>Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc. </p></td>
                 </tr>
               
             </tbody>
@@ -7858,9 +7874,9 @@ Example:
 This RPC method allows a client to make a request to the LLM and receive
 a single complete response based on the input parameters provided.
         
-          <h4 id="ondewo.nlu.AiServices.LlmGenerateStream" class="title-badge method">LlmGenerateStream</h4>
+          <h4 id="ondewo.nlu.AiServices.StreamingLlmGenerate" class="title-badge method">StreamingLlmGenerate</h4>
 
-          <pre>rpc LlmGenerateStream (stream <a href="#ondewo.nlu.LlmGenerateStreamRequest">LlmGenerateStreamRequest</a>) returns (stream <a href="#ondewo.nlu.LlmGenerateStreamResponse">LlmGenerateStreamResponse)</a></pre>
+          <pre>rpc StreamingLlmGenerate (<a href="#ondewo.nlu.LlmGenerateRequest">LlmGenerateRequest</a>) returns (stream <a href="#ondewo.nlu.StreamingLlmGenerateResponse">StreamingLlmGenerateResponse)</a></pre>
 
           Generates a response from the LLM in a streaming format.
 This RPC allows continuous streaming of responses from the model,
@@ -8273,6 +8289,13 @@ UNSPECIFIED - default mode, described in agent config </p></td>
                   <td><p>XLNet augmenter configuration </p></td>
                 </tr>
               
+                <tr>
+                  <td>llm_enrichment</td>
+                  <td><a href="#ondewo.nlu.LlmEnrichmentConfig">LlmEnrichmentConfig</a></td>
+                  <td></td>
+                  <td><p>Large language model (LLM) augmenter configuration </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -8592,7 +8615,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&g
                   <td>language_code</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru </p></td>
+                  <td><p>language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc. </p></td>
                 </tr>
               
                 <tr>
@@ -8669,7 +8692,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre> </p></td>
                   <td>language_code</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru </p></td>
+                  <td><p>language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc. </p></td>
                 </tr>
               
                 <tr>
@@ -8753,7 +8776,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre> </p></td>
                   <td>language_code</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru </p></td>
+                  <td><p>Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc. </p></td>
                 </tr>
               
                 <tr>
@@ -8844,7 +8867,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre> </p></td>
                   <td>language_code</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru </p></td>
+                  <td><p>language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc. </p></td>
                 </tr>
               
                 <tr>
@@ -8950,7 +8973,7 @@ as duplicate. Meaningful values of similarity_threshold are between 0.95 and 1.0
                   <td>language_code</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru </p></td>
+                  <td><p>language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc. </p></td>
                 </tr>
               
                 <tr>
@@ -9129,6 +9152,51 @@ be used within the service, including details such as name, provider, and descri
 
         
       
+        <h3 id="ondewo.nlu.LlmEnrichmentConfig" class="title-badge message">LlmEnrichmentConfig</h3>
+        <p>Configuration for large language model (LLM) enrichment</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>is_active</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Activation flag </p></td>
+                </tr>
+              
+                <tr>
+                  <td>enrichment_factor</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>Factor of enrichment </p></td>
+                </tr>
+              
+                <tr>
+                  <td>execution_order</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>Order of augmenter execution </p></td>
+                </tr>
+              
+                <tr>
+                  <td>ccai_service</td>
+                  <td><a href="#ondewo.nlu.CcaiService">CcaiService</a></td>
+                  <td></td>
+                  <td><p>The ccai service used to enrich </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="ondewo.nlu.LlmGenerateRequest" class="title-badge message">LlmGenerateRequest</h3>
         <p>The request message to generate a response from a Large Language Model (LLM).</p>
 
@@ -9159,6 +9227,13 @@ will handle the request.
 Format: <pre><code>projects/&lt;project_uuid&gt;/ccai/services/&lt;service_uuid&gt;</code></pre> </p></td>
                 </tr>
               
+                <tr>
+                  <td>file_resource</td>
+                  <td><a href="#ondewo.nlu.FileResource">FileResource</a></td>
+                  <td>repeated</td>
+                  <td><p>Files as input for the generation request </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -9185,67 +9260,11 @@ This can contain the text generation, embeddings, or other outputs
 based on the specific request made to the LLM provider. </p></td>
                 </tr>
               
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="ondewo.nlu.LlmGenerateStreamRequest" class="title-badge message">LlmGenerateStreamRequest</h3>
-        <p>The request message for streaming generation from a Large Language Model (LLM).</p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
                 <tr>
-                  <td>llm_generation_stream_request</td>
-                  <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
-                  <td></td>
-                  <td><p>The request payload for the LLM, structured according to the specific
-requirements of the large language model provider.
-The payload must fit the format expected by the specified LLM provider,
-as defined by <pre><code>CcaiServiceProvider</code></pre>. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>ccai_service</td>
-                  <td><a href="#ondewo.nlu.CcaiService">CcaiService</a></td>
-                  <td></td>
-                  <td><p>The CCAI service to be used for processing the request.
-This specifies which large language model provider and model settings
-will handle the request.
-Format: <pre><code>projects/&lt;project_uuid&gt;/ccai/services/&lt;service_uuid&gt;</code></pre> </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="ondewo.nlu.LlmGenerateStreamResponse" class="title-badge message">LlmGenerateStreamResponse</h3>
-        <p>The response message for streaming generation from a Large Language Model (LLM).</p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>llm_generation_stream_response</td>
-                  <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
-                  <td></td>
-                  <td><p>The response data from the LLM in a streaming format, returned as a structured payload.
-This response is part of a continuous stream of data from the LLM, allowing
-incremental results to be sent as they are generated. </p></td>
+                  <td>file_resource</td>
+                  <td><a href="#ondewo.nlu.FileResource">FileResource</a></td>
+                  <td>repeated</td>
+                  <td><p>Files as input for the generation request, e.g., generated pictures, audio or video </p></td>
                 </tr>
               
             </tbody>
@@ -9306,6 +9325,32 @@ which service hosts the model. </p></td>
                   <td></td>
                   <td><p>The provider of the CCAI service that offers this model.
 Specifies the LLM provider (e.g., Ollama, OpenAI, Google, etc.), indicating the origin or vendor of the model. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="ondewo.nlu.StreamingLlmGenerateResponse" class="title-badge message">StreamingLlmGenerateResponse</h3>
+        <p>The response message for streaming generation from a Large Language Model (LLM).</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>llm_generation_stream_response</td>
+                  <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
+                  <td></td>
+                  <td><p>The response data from the LLM in a streaming format, returned as a structured payload.
+This response is part of a continuous stream of data from the LLM, allowing
+incremental results to be sent as they are generated. </p></td>
                 </tr>
               
             </tbody>
@@ -9461,7 +9506,7 @@ Specifies the LLM provider (e.g., Ollama, OpenAI, Google, etc.), indicating the 
         
       
         <h3 id="ondewo.nlu.XLNetAugEnrichmentConfig" class="title-badge message">XLNetAugEnrichmentConfig</h3>
-        <p>Configuration for Thesaurus enrichment</p>
+        <p>Configuration for XLNet enrichment</p>
 
         
           <table class="field-table">
@@ -10752,6 +10797,12 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 <td>CCAI_SERVICE_PROVIDER_AMAZON</td>
                 <td>12</td>
                 <td><p>Amazon AWS as the CCAI service provider, using Amazon's AI/ML services</p></td>
+              </tr>
+            
+              <tr>
+                <td>CCAI_SERVICE_PROVIDER_MISTRAL</td>
+                <td>13</td>
+                <td><p>Mistral as the CCAI service provider, using Mistrals services</p></td>
               </tr>
             
           </tbody>
@@ -20668,6 +20719,13 @@ A transcription can be from a speech-to-text system or a human </p></td>
                   <td><p>User id in form of a valid UUID. </p></td>
                 </tr>
               
+                <tr>
+                  <td>display_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Bytes of the audio file </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -21188,6 +21246,74 @@ This field is set only for the first detected intent. For the rest of the intent
 
         
       
+        <h3 id="ondewo.nlu.DocumentFileResource" class="title-badge message">DocumentFileResource</h3>
+        <p>Represents a document file resource (e.g., text, markdown, PDF, DOCX).</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The unique identifier for the document file resource.
+Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/documents/&lt;document_uuid&gt;</code></pre> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>display_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The display name of the document file, which can be the file name (e.g., "report.pdf")
+or a user-assigned name. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>bytes</td>
+                  <td><a href="#bytes">bytes</a></td>
+                  <td></td>
+                  <td><p>The raw bytes of the document file (e.g., PDF, DOCX, TXT). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>created_at</td>
+                  <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
+                  <td></td>
+                  <td><p>Creation date and time of the document file. This is a read-only field. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>modified_at</td>
+                  <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
+                  <td></td>
+                  <td><p>The last modification date and time of the document file. This is a read-only field. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>created_by</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The UUID of the user who created the document file. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>modified_by</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The UUID of the user who last modified the document file. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="ondewo.nlu.EventInput" class="title-badge message">EventInput</h3>
         <p>Events allow for matching intents by event name instead of the natural</p><p>language input. For instance, input `<event: { name: “welcome_event”,</p><p>parameters: { name: “Sam” } }>` can trigger a personalized welcome response.</p><p>The parameter `name` may be used by the agent in the response:</p><p>`“Hello #welcome_event.name! What can I do for you today?”`.</p>
 
@@ -21220,6 +21346,51 @@ This field is set only for the first detected intent. For the rest of the intent
 Support](https://dialogflow.com/docs/languages) for a list of the
 currently supported language codes. Note that queries in the same session
 do not necessarily need to specify the same language. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="ondewo.nlu.FileResource" class="title-badge message">FileResource</h3>
+        <p>Represents a file resource that can either be an image, audio, document, or video file.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>document_file_resource</td>
+                  <td><a href="#ondewo.nlu.DocumentFileResource">DocumentFileResource</a></td>
+                  <td></td>
+                  <td><p>Document file resource (e.g., markdown, text, word, powerpoint, pdf, excel etc.). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>audio_file_resource</td>
+                  <td><a href="#ondewo.nlu.AudioFileResource">AudioFileResource</a></td>
+                  <td></td>
+                  <td><p>An audio file resource, such as a recording or sound file. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>image_file_resource</td>
+                  <td><a href="#ondewo.nlu.ImageFileResource">ImageFileResource</a></td>
+                  <td></td>
+                  <td><p>An image file resource, such as a JPEG, PNG, etc. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>video_file_resource</td>
+                  <td><a href="#ondewo.nlu.VideoFileResource">VideoFileResource</a></td>
+                  <td></td>
+                  <td><p>A video file resource, such as an MP4 or AVI file. </p></td>
                 </tr>
               
             </tbody>
@@ -21512,6 +21683,73 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid
                   <td></td>
                   <td><p>Optional. The mask to control which fields will be filled with data.
 Example: path=["session_step.detect_intent_response.query_result.fulfillment_messages"] </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="ondewo.nlu.ImageFileResource" class="title-badge message">ImageFileResource</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The unique identifier of the session for which the latest review should be returned
+Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/images/&lt;image_uuid&gt;</code></pre> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>display_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>File name of the image, e.g., MyPicture.jpg, or a user assigned display name </p></td>
+                </tr>
+              
+                <tr>
+                  <td>bytes</td>
+                  <td><a href="#bytes">bytes</a></td>
+                  <td></td>
+                  <td><p>Bytes of the audio file </p></td>
+                </tr>
+              
+                <tr>
+                  <td>created_at</td>
+                  <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
+                  <td></td>
+                  <td><p>Creation date and time. Read-only field. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>modified_at</td>
+                  <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
+                  <td></td>
+                  <td><p>Modification date and time. Read-only field. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>created_by</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>User id in form of a valid UUID. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>modified_by</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>User id in form of a valid UUID. </p></td>
                 </tr>
               
             </tbody>
@@ -22839,6 +23077,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td><p>The event to be processed. </p></td>
                 </tr>
               
+                <tr>
+                  <td>file_resource</td>
+                  <td><a href="#ondewo.nlu.FileResource">FileResource</a></td>
+                  <td>repeated</td>
+                  <td><p>Files as input for the detect intent request, e.g., image, document, audio, video etc. </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -23118,6 +23363,13 @@ could contain webhook call latency. </p></td>
                   <td><p>The language that was triggered during intent detection.
 See [Language Support](https://dialogflow.com/docs/reference/language)
 for a list of the currently supported language codes. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>file_resource</td>
+                  <td><a href="#ondewo.nlu.FileResource">FileResource</a></td>
+                  <td>repeated</td>
+                  <td><p>Generated or attached files, e.g., llm generates a picture or file attachment </p></td>
                 </tr>
               
             </tbody>
@@ -24506,6 +24758,94 @@ Example: path=["session_step.detect_intent_response.query_result.fulfillment_mes
                   <td></td>
                   <td><p>Optional. The mask to control which fields will be filled with data.
 Example: path=["session_step.detect_intent_response.query_result.fulfillment_messages"] </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="ondewo.nlu.VideoFileResource" class="title-badge message">VideoFileResource</h3>
+        <p>Represents a video file resource (e.g., MP4, AVI).</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The unique identifier for the video file resource.
+Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/videos/&lt;video_uuid&gt;</code></pre> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>display_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The display name of the video file, which can be a user-assigned label. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>bytes</td>
+                  <td><a href="#bytes">bytes</a></td>
+                  <td></td>
+                  <td><p>The raw bytes representing the video file (e.g., MP4, AVI). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>duration_in_s</td>
+                  <td><a href="#float">float</a></td>
+                  <td></td>
+                  <td><p>The duration of the video file in seconds. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>resolution</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The resolution of the video (e.g., "1920x1080" for Full HD). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>frame_rate</td>
+                  <td><a href="#float">float</a></td>
+                  <td></td>
+                  <td><p>The frame rate of the video (e.g., 30 fps). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>created_at</td>
+                  <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
+                  <td></td>
+                  <td><p>Creation date and time of the video file. This is a read-only field. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>modified_at</td>
+                  <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
+                  <td></td>
+                  <td><p>The last modification date and time of the video file. This is a read-only field. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>created_by</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The UUID of the user who created the video file. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>modified_by</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The UUID of the user who last modified the video file. </p></td>
                 </tr>
               
             </tbody>
