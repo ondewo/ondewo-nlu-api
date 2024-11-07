@@ -3276,6 +3276,10 @@ CcaiProjectView defines what the CcaiProject message contains
 | CCAI_SERVICE_PROVIDER_LANGCHAIN | 11 | LangChain as the CCAI service provider |
 | CCAI_SERVICE_PROVIDER_AMAZON | 12 | Amazon AWS as the CCAI service provider, using Amazon's AI/ML services |
 | CCAI_SERVICE_PROVIDER_MISTRAL | 13 | Mistral as the CCAI service provider, using Mistrals services |
+| CCAI_SERVICE_PROVIDER_DUCKDUCKGO | 14 | DuckDuckGo Websearch API |
+| CCAI_SERVICE_PROVIDER_GOOGLE_PSE | 15 | Google PSE Websearch API |
+| CCAI_SERVICE_PROVIDER_JINA | 16 | Jina Websearch API |
+| CCAI_SERVICE_PROVIDER_TAVILY | 17 | Tavily Websearch API |
 
 
 
@@ -3300,6 +3304,7 @@ CcaiProjectView defines what the CcaiProject message contains
 | CCAI_SERVICE_TYPE_ONDEWO_NLU_WEBHOOK | 11 | ondewo-nlu-webhook service |
 | CCAI_SERVICE_TYPE_ONDEWO_SURVEY | 12 | ondewo-survey service |
 | CCAI_SERVICE_TYPE_ONDEWO_NLU_LLM | 13 | ondewo-nlu-llm service |
+| CCAI_SERVICE_TYPE_ONDEWO_NLU_WEBSEARCH | 14 | ondewo-nlu-websearch service |
 
 
  <!-- end enums -->
