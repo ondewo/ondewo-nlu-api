@@ -163,6 +163,9 @@ enum CcaiServiceType {
     // ondewo-nlu-llm service
     CCAI_SERVICE_TYPE_ONDEWO_NLU_LLM = 13;
 
+    // ondewo-nlu-websearch service
+    CCAI_SERVICE_TYPE_ONDEWO_NLU_WEBSEARCH = 14;
+
 }
 // Definition of a Call Center AI (CCAI service) Service.
 message CcaiService {
@@ -304,6 +307,18 @@ enum CcaiServiceProvider {
 
     // Mistral as the CCAI service provider, using Mistrals services
     CCAI_SERVICE_PROVIDER_MISTRAL = 13;
+
+    // DuckDuckGo Websearch API
+    CCAI_SERVICE_PROVIDER_DUCKDUCKGO = 14;
+
+    // Google PSE Websearch API
+    CCAI_SERVICE_PROVIDER_GOOGLE_PSE = 15;
+
+    // Jina Websearch API
+    CCAI_SERVICE_PROVIDER_JINA = 16;
+
+    // Tavily Websearch API
+    CCAI_SERVICE_PROVIDER_TAVILY = 17;
 
 }
 

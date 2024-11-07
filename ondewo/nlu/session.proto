@@ -2055,7 +2055,7 @@ message FileResource {
 
     // Oneof to specify either an image, audio, document, or video file resource.
     // Only one of the file types will be set at a time.
-    oneof file {
+    oneof file_resource {
 
         // Document file resource (e.g., markdown, text, word, powerpoint, pdf, excel etc.).
         DocumentFileResource document_file_resource = 1;
