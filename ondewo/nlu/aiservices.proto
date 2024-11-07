@@ -156,7 +156,7 @@ message LlmModel {
 
     // The provider of the CCAI service that offers this model.
     // Specifies the LLM provider (e.g., Ollama, OpenAI, Google, etc.), indicating the origin or vendor of the model.
-    CcaiServiceProvider provider = 5;
+    CcaiServiceProvider ccai_service_provider = 5;
 
 }
 
