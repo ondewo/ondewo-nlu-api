@@ -3270,7 +3270,7 @@ CcaiProjectView defines what the CcaiProject message contains
 | CCAI_SERVICE_PROVIDER_OLLAMA | 5 | Ollama as the CCAI service provider, typically associated with specific OLLAMA AI tools |
 | CCAI_SERVICE_PROVIDER_OPENAI | 6 | OpenAI as the CCAI service provider, commonly used for models such as GPT |
 | CCAI_SERVICE_PROVIDER_ANTHROPIC | 7 | Anthropic as the CCAI service provider, used with AI models from Anthropic |
-| CCAI_SERVICE_PROVIDER_HUGGING_FACE | 8 | Hugging Face as the CCAI service provider, often used for open-source NLP models |
+| CCAI_SERVICE_PROVIDER_HUGGINGFACE | 8 | Hugging Face as the CCAI service provider, often used for open-source NLP models |
 | CCAI_SERVICE_PROVIDER_IBM | 9 | IBM as the CCAI service provider, such as IBM Watson for conversational AI |
 | CCAI_SERVICE_PROVIDER_HAYSTACK | 10 | Haystack as the CCAI service provider, e.g. for question and answering, conversations |
 | CCAI_SERVICE_PROVIDER_LANGCHAIN | 11 | LangChain as the CCAI service provider |
@@ -3280,6 +3280,10 @@ CcaiProjectView defines what the CcaiProject message contains
 | CCAI_SERVICE_PROVIDER_GOOGLE_PSE | 15 | Google PSE Websearch API |
 | CCAI_SERVICE_PROVIDER_JINA | 16 | Jina Websearch API |
 | CCAI_SERVICE_PROVIDER_TAVILY | 17 | Tavily Websearch API |
+| CCAI_SERVICE_PROVIDER_ELASTICSEARCH | 18 | Elastic Search vector database service |
+| CCAI_SERVICE_PROVIDER_MILVUS | 19 | Milvus vector database service |
+| CCAI_SERVICE_PROVIDER_QDRANT | 20 | Qdrant vector database service |
+| CCAI_SERVICE_PROVIDER_CHROMA | 21 | Chroma vector database service |
 
 
 
@@ -3305,6 +3309,9 @@ CcaiProjectView defines what the CcaiProject message contains
 | CCAI_SERVICE_TYPE_ONDEWO_SURVEY | 12 | ondewo-survey service |
 | CCAI_SERVICE_TYPE_ONDEWO_NLU_LLM | 13 | ondewo-nlu-llm service |
 | CCAI_SERVICE_TYPE_ONDEWO_NLU_WEBSEARCH | 14 | ondewo-nlu-websearch service |
+| CCAI_SERVICE_TYPE_ONDEWO_AIM_WEBCHAT | 15 | ondewo-aim-webchat service |
+| CCAI_SERVICE_TYPE_ONDEWO_AIM_WEBPHONE | 16 | ondewo-aim-webphone service |
+| CCAI_SERVICE_TYPE_ONDEWO_NLU_VECTORSTORE | 17 | ondewo-nlu-vectorstore service |
 
 
  <!-- end enums -->
