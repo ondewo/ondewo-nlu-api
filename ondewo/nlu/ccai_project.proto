@@ -166,6 +166,15 @@ enum CcaiServiceType {
     // ondewo-nlu-websearch service
     CCAI_SERVICE_TYPE_ONDEWO_NLU_WEBSEARCH = 14;
 
+    // ondewo-aim-webchat service
+    CCAI_SERVICE_TYPE_ONDEWO_AIM_WEBCHAT = 15;
+
+    // ondewo-aim-webphone service
+    CCAI_SERVICE_TYPE_ONDEWO_AIM_WEBPHONE = 16;
+
+    // ondewo-nlu-vectorstore service
+    CCAI_SERVICE_TYPE_ONDEWO_NLU_VECTORSTORE = 17;
+
 }
 // Definition of a Call Center AI (CCAI service) Service.
 message CcaiService {
@@ -291,7 +300,7 @@ enum CcaiServiceProvider {
     CCAI_SERVICE_PROVIDER_ANTHROPIC = 7;
 
     // Hugging Face as the CCAI service provider, often used for open-source NLP models
-    CCAI_SERVICE_PROVIDER_HUGGING_FACE = 8;
+    CCAI_SERVICE_PROVIDER_HUGGINGFACE = 8;
 
     // IBM as the CCAI service provider, such as IBM Watson for conversational AI
     CCAI_SERVICE_PROVIDER_IBM = 9;
@@ -319,6 +328,18 @@ enum CcaiServiceProvider {
 
     // Tavily Websearch API
     CCAI_SERVICE_PROVIDER_TAVILY = 17;
+
+    // Elastic Search vector database service
+    CCAI_SERVICE_PROVIDER_ELASTICSEARCH = 18;
+
+    // Milvus vector database service
+    CCAI_SERVICE_PROVIDER_MILVUS = 19;
+
+    // Qdrant vector database service
+    CCAI_SERVICE_PROVIDER_QDRANT = 20;
+
+    // Chroma vector database service
+    CCAI_SERVICE_PROVIDER_CHROMA = 21;
 
 }
 
