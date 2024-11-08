@@ -22,6 +22,9 @@
 * [[OND211-2199]](https://ondewo.atlassian.net/browse/OND211-2199) SessionServices: Add `FileResource` as part of
   `QueryInput` in `DetectIntent` and in `StreamingDetectIntent`, and as part of `QueryResult` in `DetectIntentResponse`
   and in `StreamingDetectIntentResponse`.
+* [[OND211-2199]](https://ondewo.atlassian.net/browse/OND211-2199) Added further `CcaiServiceTypes`:
+  `CCAI_SERVICE_TYPE_ONDEWO_AIM_WEBSEARCH`, `CCAI_SERVICE_TYPE_ONDEWO_AIM_WEBCHAT`,
+  `CCAI_SERVICE_TYPE_ONDEWO_AIM_WEBPHONE`, and `CCAI_SERVICE_TYPE_ONDEWO_NLU_VECTORSTORE`
 
 *****************
 
