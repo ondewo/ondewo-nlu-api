@@ -96,7 +96,7 @@ service Sessions {
     };
 
     // CreateSessionStep: creates a new session step for a session
-    rpc CreateSessionStep (CreateSessionStepRequest) returns (Session) {};
+    rpc CreateSessionStep (CreateSessionStepRequest) returns (SessionStep) {};
 
     // GetSessionStep: gets an existing session step of a session
     rpc GetSessionStep (GetSessionStepRequest) returns (SessionStep) {
