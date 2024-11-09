@@ -993,9 +993,6 @@ message CreateSessionStepRequest {
     // The session step to be added
     SessionStep session_step = 2;
 
-    // Defines which fields of the session should be returned in the response
-    optional Session.View session_view = 3;
-
 }
 
 // This message is a request to list sessions
