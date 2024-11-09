@@ -8620,7 +8620,7 @@ user intent and respond.
 | ListSessions | [ListSessionsRequest](#ondewo.nlu.ListSessionsRequest) | [ListSessionsResponse](#ondewo.nlu.ListSessionsResponse) | SESSION RELATED ENDPOINTS *** // ListSessions: returns list of sessions from ondewo-kb; by default returns only session IDs |
 | GetSession | [GetSessionRequest](#ondewo.nlu.GetSessionRequest) | [Session](#ondewo.nlu.Session) | GetSession: returns a session(=conversation) from ondewo-kb |
 | CreateSession | [CreateSessionRequest](#ondewo.nlu.CreateSessionRequest) | [Session](#ondewo.nlu.Session) | CreateSession: creates and returns a session(=conversation) from ondewo-kb |
-| CreateSessionStep | [CreateSessionStepRequest](#ondewo.nlu.CreateSessionStepRequest) | [Session](#ondewo.nlu.Session) | CreateSessionStep: creates a new session step for a session |
+| CreateSessionStep | [CreateSessionStepRequest](#ondewo.nlu.CreateSessionStepRequest) | [SessionStep](#ondewo.nlu.SessionStep) | CreateSessionStep: creates a new session step for a session |
 | GetSessionStep | [GetSessionStepRequest](#ondewo.nlu.GetSessionStepRequest) | [SessionStep](#ondewo.nlu.SessionStep) | GetSessionStep: gets an existing session step of a session |
 | UpdateSessionStep | [UpdateSessionStepRequest](#ondewo.nlu.UpdateSessionStepRequest) | [SessionStep](#ondewo.nlu.SessionStep) | UpdateSessionStep: updates an existing session step in a session |
 | DeleteSessionStep | [DeleteSessionStepRequest](#ondewo.nlu.DeleteSessionStepRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | DeleteSessionStep: deletes an existing session step from the session |
