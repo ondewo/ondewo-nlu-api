@@ -993,6 +993,9 @@ message CreateSessionStepRequest {
     // The session step to be added
     SessionStep session_step = 2;
 
+    // field mask specifying what the request should return, e.g. only name, created_at etc.
+    google.protobuf.FieldMask field_mask = 3;
+
 }
 
 // This message is a request to list sessions
