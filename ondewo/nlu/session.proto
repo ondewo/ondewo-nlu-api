@@ -2278,6 +2278,11 @@ message AddAudioFilesRequest {
 
     // AudioFileResources to be added
     repeated AudioFileResource audio_file_resources = 3;
+
+    // The unique identifier of the session step for which the audio files should be listed
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/sessionsteps/&lt;session_step_uuid&gt;/&lt</code></pre>
+    string session_step_id = 4;
+
 }
 
 // This message is a request to add the audio files specified
@@ -2289,6 +2294,7 @@ message AddAudioFilesResponse {
 
     // error message if there are any.
     string error_message = 2;
+
 }
 
 // This message is a request to the delete audio files specified
@@ -2301,6 +2307,7 @@ message DeleteAudioFilesRequest {
     // The unique identifier of the audio file of the specific session
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/audios/&lt;audio_uuid&gt;</code></pre>
     repeated string names = 2;
+
 }
 
 // This message is a request to the delete audio files specified
@@ -2312,6 +2319,7 @@ message DeleteAudioFilesResponse {
 
     // error message if there are any.
     string error_message = 2;
+
 }
 
 // This message is a request to list all available audio files of a session
