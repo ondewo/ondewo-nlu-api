@@ -2674,7 +2674,7 @@ The request message to generate a response from a Large Language Model (LLM).
 | ----- | ---- | ----- | ----------- |
 | llm_generation_request | [google.protobuf.Struct](#google.protobuf.Struct) |  | The request payload for the LLM, structured according to the specific requirements of the large language model provider. The payload must fit the format expected by the specified LLM provider, as defined by <pre><code>CcaiServiceProvider</code></pre>. |
 | ccai_service_name | [string](#string) |  | The CCAI service to be used for processing the request. This specifies which large language model provider and model settings will handle the request. Format: <pre><code>projects/&lt;project_uuid&gt;/ccai/services/&lt;service_uuid&gt;</code></pre> |
-| file_resource | [FileResource](#ondewo.nlu.FileResource) | repeated | Files as input for the generation request |
+| file_resources | [FileResource](#ondewo.nlu.FileResource) | repeated | Files as input for the generation request |
 
 
 
@@ -2690,7 +2690,7 @@ The response message containing the generated output from a Large Language Model
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | llm_generation_response | [google.protobuf.Struct](#google.protobuf.Struct) |  | The response data from the LLM, returned as a structured payload. This can contain the text generation, embeddings, or other outputs based on the specific request made to the LLM provider. |
-| file_resource | [FileResource](#ondewo.nlu.FileResource) | repeated | Files as input for the generation request, e.g., generated pictures, audio or video |
+| file_resources | [FileResource](#ondewo.nlu.FileResource) | repeated | Files as input for the generation request, e.g., generated pictures, audio or video |
 
 
 
@@ -3352,7 +3352,7 @@ Message for adding notifications in a batch.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| notification | [Notification](#ondewo.nlu.Notification) | repeated | List of notifications to be added. |
+| notifications | [Notification](#ondewo.nlu.Notification) | repeated | List of notifications to be added. |
 
 
 
@@ -3367,7 +3367,7 @@ Message containing the response to adding notifications.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| notification | [Notification](#ondewo.nlu.Notification) | repeated | List of notifications that have been added. |
+| notifications | [Notification](#ondewo.nlu.Notification) | repeated | List of notifications that have been added. |
 
 
 
@@ -3450,7 +3450,7 @@ Message containing the response to a list request for notifications.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| notification | [Notification](#ondewo.nlu.Notification) | repeated | List of notifications that meet the specified criteria. |
+| notifications | [Notification](#ondewo.nlu.Notification) | repeated | List of notifications that meet the specified criteria. |
 
 
 
@@ -3520,7 +3520,7 @@ Message for setting the flagged status of notifications.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| notification_name | [string](#string) | repeated | Names of notifications to set the flagged status for. |
+| notification_names | [string](#string) | repeated | Names of notifications to set the flagged status for. |
 | flagged | [bool](#bool) | repeated | Flagged status to set for the specified notifications. |
 
 
@@ -3536,7 +3536,7 @@ Message for setting the read status of notifications.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| notification_name | [string](#string) | repeated | Names of notifications to set the read status for. |
+| notification_names | [string](#string) | repeated | Names of notifications to set the read status for. |
 | flagged | [bool](#bool) | repeated | Read status to set for the specified notifications. |
 
 
@@ -7965,7 +7965,7 @@ Represents the query input. It can contain either:
 | audio_config | [InputAudioConfig](#ondewo.nlu.InputAudioConfig) |  | Instructs the speech recognizer how to process the speech audio. |
 | text | [TextInput](#ondewo.nlu.TextInput) |  | The natural language text to be processed. |
 | event | [EventInput](#ondewo.nlu.EventInput) |  | The event to be processed. |
-| file_resource | [FileResource](#ondewo.nlu.FileResource) | repeated | Files as input for the detect intent request, e.g., image, document, audio, video etc. |
+| file_resources | [FileResource](#ondewo.nlu.FileResource) | repeated | Files as input for the detect intent request, e.g., image, document, audio, video etc. |
 
 
 
@@ -8028,7 +8028,7 @@ You should not rely on this field as it isn't guaranteed to be accurate, or even
 | query_text_original | [string](#string) |  | The user input gets pre-processed by spelling correction, stop word removal etc. This property holds the string that is passed to the entity recognition and intent detection |
 | diagnostic_info | [google.protobuf.Struct](#google.protobuf.Struct) |  | The free-form diagnostic info. For example, this field could contain webhook call latency. |
 | language_code | [string](#string) |  | The language that was triggered during intent detection. See [Language Support](https://dialogflow.com/docs/reference/language) for a list of the currently supported language codes. |
-| file_resource | [FileResource](#ondewo.nlu.FileResource) | repeated | Generated or attached files, e.g., llm generates a picture or file attachment |
+| file_resources | [FileResource](#ondewo.nlu.FileResource) | repeated | Generated or attached files, e.g., llm generates a picture or file attachment |
 
 
 
