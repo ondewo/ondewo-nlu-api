@@ -512,7 +512,7 @@ message QueryInput {
     }
 
     // Files as input for the detect intent request, e.g., image, document, audio, video etc.
-    repeated FileResource file_resource = 4;
+    repeated FileResource file_resources = 4;
 
 }
 
@@ -595,7 +595,7 @@ message QueryResult {
     string language_code = 15;
 
     // Generated or attached files, e.g., llm generates a picture or file attachment
-    repeated FileResource file_resource = 16;
+    repeated FileResource file_resources = 16;
 
 }
 
