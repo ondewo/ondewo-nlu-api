@@ -6790,6 +6790,7 @@ This message is a request to add the audio files specified
 | parent | [string](#string) |  | Required. The project of this agent. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
 | session_id | [string](#string) |  | The unique identifier of the session for which the audio files should be listed Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/&lt</code></pre> |
 | audio_file_resources | [AudioFileResource](#ondewo.nlu.AudioFileResource) | repeated | AudioFileResources to be added |
+| session_step_id | [string](#string) |  | The unique identifier of the session step for which the audio files should be listed Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/sessionsteps/&lt;session_step_uuid&gt;/&lt</code></pre> |
 
 
 
