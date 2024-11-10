@@ -269,14 +269,16 @@ message Notification {
 
 // Message for adding notifications in a batch.
 message AddNotificationsRequest {
+
     // List of notifications to be added.
-    repeated Notification notification = 1;
+    repeated Notification notifications = 1;
 }
 
 // Message containing the response to adding notifications.
 message AddNotificationsResponse {
+
     // List of notifications that have been added.
-    repeated Notification notification = 1;
+    repeated Notification notifications = 1;
 }
 
 // Message for filtering notifications based on various criteria.
@@ -352,14 +354,14 @@ message ListNotificationsRequest {
 message ListNotificationsResponse {
 
     // List of notifications that meet the specified criteria.
-    repeated Notification notification = 1;
+    repeated Notification notifications = 1;
 }
 
 // Message for setting the flagged status of notifications.
 message SetNotificationsFlaggedStatusRequest {
 
     // Names of notifications to set the flagged status for.
-    repeated string notification_name = 1;
+    repeated string notification_names = 1;
 
     // Flagged status to set for the specified notifications.
     repeated bool flagged = 2;
@@ -369,7 +371,7 @@ message SetNotificationsFlaggedStatusRequest {
 message SetNotificationsReadStatusRequest {
 
     // Names of notifications to set the read status for.
-    repeated string notification_name = 1;
+    repeated string notification_names = 1;
 
     // Read status to set for the specified notifications.
     repeated bool flagged = 2;

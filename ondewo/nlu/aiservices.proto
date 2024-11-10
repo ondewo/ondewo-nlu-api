@@ -175,7 +175,7 @@ message LlmGenerateRequest {
     string ccai_service_name = 2;
 
     // Files as input for the generation request
-    repeated FileResource file_resource = 3;
+    repeated FileResource file_resources = 3;
 
 }
 
@@ -188,7 +188,7 @@ message LlmGenerateResponse {
     google.protobuf.Struct llm_generation_response = 1;
 
     // Files as input for the generation request, e.g., generated pictures, audio or video
-    repeated FileResource file_resource = 2;
+    repeated FileResource file_resources = 2;
 
 }
 
