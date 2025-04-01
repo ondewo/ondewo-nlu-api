@@ -386,8 +386,13 @@ service Agents {
             body: "*"
         };
     }
+    rpc MigrateAgent (MigrateAgentRequest) returns (ondewo.nlu.Operation) {
+        option (google.api.http) = {
+            post: "/v2/{parent=projects/*/agent}:migrate"
+            body: "*"
+        };
+    }
 
-    // Runs optimize ranking match
     rpc OptimizeRankingMatch (OptimizeRankingMatchRequest) returns (ondewo.nlu.Operation) {
         option (google.api.http) = {
             post: "/v2/{parent=projects/*/agent}:optimize_ranking_match"
@@ -893,6 +898,14 @@ message RestoreAgentRequest {
         //    }" \
         bytes agent_content = 3;
     }
+}
+
+// Request to migrate an agent
+message MigrateAgentRequest {
+
+    // The agent to migrate as zip file
+    bytes agent_content = 1;
+
 }
 
 // Request statistics of the agent
