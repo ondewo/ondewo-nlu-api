@@ -59,6 +59,7 @@
     - [ListProjectPermissionsResponse](#ondewo.nlu.ListProjectPermissionsResponse)
     - [ListUsersInProjectRequest](#ondewo.nlu.ListUsersInProjectRequest)
     - [ListUsersInProjectResponse](#ondewo.nlu.ListUsersInProjectResponse)
+    - [MigrateAgentRequest](#ondewo.nlu.MigrateAgentRequest)
     - [ModelStatus](#ondewo.nlu.ModelStatus)
     - [OptimizeRankingMatchRequest](#ondewo.nlu.OptimizeRankingMatchRequest)
     - [OptimizeRankingMatchResponse](#ondewo.nlu.OptimizeRankingMatchResponse)
@@ -1667,6 +1668,21 @@ List the users in a project
 
 
 
+<a name="ondewo.nlu.MigrateAgentRequest"></a>
+
+### MigrateAgentRequest
+Request to migrate an agent
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| agent_content | [bytes](#bytes) |  | The agent to migrate as zip file |
+
+
+
+
+
+
 <a name="ondewo.nlu.ModelStatus"></a>
 
 ### ModelStatus
@@ -2135,7 +2151,8 @@ Operation <response: [ExportAgentResponse][google.cloud.dialogflow.v2.ExportAgen
 Uploads new intents and entity types without deleting the existing ones. Intents and entity types with the same name are replaced with the new versions from ImportAgentRequest.
 
 Operation <response: [google.protobuf.Empty][google.protobuf.Empty], metadata: [google.protobuf.Struct][google.protobuf.Struct]> |
-| OptimizeRankingMatch | [OptimizeRankingMatchRequest](#ondewo.nlu.OptimizeRankingMatchRequest) | [Operation](#ondewo.nlu.Operation) | Runs optimize ranking match |
+| MigrateAgent | [MigrateAgentRequest](#ondewo.nlu.MigrateAgentRequest) | [Operation](#ondewo.nlu.Operation) |  |
+| OptimizeRankingMatch | [OptimizeRankingMatchRequest](#ondewo.nlu.OptimizeRankingMatchRequest) | [Operation](#ondewo.nlu.Operation) |  |
 | RestoreAgent | [RestoreAgentRequest](#ondewo.nlu.RestoreAgentRequest) | [Operation](#ondewo.nlu.Operation) | Restores the specified agent from a ZIP file.
 
 Replaces the current agent version with a new one. All the intents and entity types in the older version are deleted.
@@ -3263,27 +3280,34 @@ CcaiProjectView defines what the CcaiProject message contains
 | Name | Number | Description |
 | ---- | ------ | ----------- |
 | NO_CCAI_SERVICE_PROVIDER | 0 | No specified provider or placeholder |
-| CCAI_SERVICE_PROVIDER_ONDEWO | 1 | ONDEWO provider for CCAI service services |
-| CCAI_SERVICE_PROVIDER_GOOGLE_GEMINI | 2 | Google as the CCAI service provider, utilizing Google’s conversational AI capabilities |
-| CCAI_SERVICE_PROVIDER_MICROSOFT_AZURE_OPENAI | 3 | Microsoft Azure as the CCAI service provider, using Microsoft's Azure cognitive services |
-| CCAI_SERVICE_PROVIDER_MICROSOFT_AUTOGEN | 4 | LangChain as the CCAI service provider |
-| CCAI_SERVICE_PROVIDER_OLLAMA | 5 | Ollama as the CCAI service provider, typically associated with specific OLLAMA AI tools |
-| CCAI_SERVICE_PROVIDER_OPENAI | 6 | OpenAI as the CCAI service provider, commonly used for models such as GPT |
-| CCAI_SERVICE_PROVIDER_ANTHROPIC | 7 | Anthropic as the CCAI service provider, used with AI models from Anthropic |
-| CCAI_SERVICE_PROVIDER_HUGGINGFACE | 8 | Hugging Face as the CCAI service provider, often used for open-source NLP models |
-| CCAI_SERVICE_PROVIDER_IBM | 9 | IBM as the CCAI service provider, such as IBM Watson for conversational AI |
-| CCAI_SERVICE_PROVIDER_HAYSTACK | 10 | Haystack as the CCAI service provider, e.g. for question and answering, conversations |
-| CCAI_SERVICE_PROVIDER_LANGCHAIN | 11 | LangChain as the CCAI service provider |
-| CCAI_SERVICE_PROVIDER_AMAZON | 12 | Amazon AWS as the CCAI service provider, using Amazon's AI/ML services |
-| CCAI_SERVICE_PROVIDER_MISTRAL | 13 | Mistral as the CCAI service provider, using Mistrals services |
-| CCAI_SERVICE_PROVIDER_DUCKDUCKGO | 14 | DuckDuckGo Websearch API |
-| CCAI_SERVICE_PROVIDER_GOOGLE_PSE | 15 | Google PSE Websearch API |
-| CCAI_SERVICE_PROVIDER_JINA | 16 | Jina Websearch API |
-| CCAI_SERVICE_PROVIDER_TAVILY | 17 | Tavily Websearch API |
-| CCAI_SERVICE_PROVIDER_ELASTICSEARCH | 18 | Elastic Search vector database service |
-| CCAI_SERVICE_PROVIDER_MILVUS | 19 | Milvus vector database service |
-| CCAI_SERVICE_PROVIDER_QDRANT | 20 | Qdrant vector database service |
-| CCAI_SERVICE_PROVIDER_CHROMA | 21 | Chroma vector database service |
+| CCAI_SERVICE_PROVIDER_ONDEWO | 1 | ONDEWO provider for CCAI service services [ONDEWO](https://www.ondewo.com/) |
+| CCAI_SERVICE_PROVIDER_GOOGLE_GEMINI | 2 | Google as the CCAI service provider, utilizing Google’s conversational AI capabilities [Google Gemini](https://deepmind.google/technologies/gemini/) |
+| CCAI_SERVICE_PROVIDER_MICROSOFT_AZURE_OPENAI | 3 | Microsoft Azure as the CCAI service provider, using Microsoft's Azure cognitive services [Azure OpenAI](https://azure.microsoft.com/en-us/products/cognitive-services/openai-service/) |
+| CCAI_SERVICE_PROVIDER_MICROSOFT_AUTOGEN | 4 | Microsoft AutoGen as the CCAI service provider [AutoGen](https://github.com/microsoft/autogen) |
+| CCAI_SERVICE_PROVIDER_OLLAMA | 5 | Ollama as the CCAI service provider, typically associated with specific OLLAMA AI tools [Ollama](https://github.com/ollama/ollama) |
+| CCAI_SERVICE_PROVIDER_OPENAI | 6 | OpenAI as the CCAI service provider, commonly used for models such as GPT [OpenAI](https://openai.com/) |
+| CCAI_SERVICE_PROVIDER_ANTHROPIC | 7 | Anthropic as the CCAI service provider, used with AI models from Anthropic [Anthropic](https://www.anthropic.com/) |
+| CCAI_SERVICE_PROVIDER_HUGGINGFACE | 8 | Hugging Face as the CCAI service provider, often used for open-source NLP models [Hugging Face](https://huggingface.co/) |
+| CCAI_SERVICE_PROVIDER_IBM | 9 | IBM as the CCAI service provider, such as IBM Watson for conversational AI [IBM Watson](https://www.ibm.com/watson) |
+| CCAI_SERVICE_PROVIDER_HAYSTACK | 10 | Haystack as the CCAI service provider, e.g., for question answering and conversations [Haystack](https://github.com/deepset-ai/haystack) |
+| CCAI_SERVICE_PROVIDER_LANGCHAIN | 11 | LangChain as the CCAI service provider [LangChain](https://github.com/langchain-ai/langchain) |
+| CCAI_SERVICE_PROVIDER_AMAZON | 12 | Amazon AWS as the CCAI service provider, using Amazon's AI/ML services [AWS AI Services](https://aws.amazon.com/machine-learning/) |
+| CCAI_SERVICE_PROVIDER_MISTRAL | 13 | Mistral as the CCAI service provider, using Mistral’s services [Mistral](https://mistral.ai/) |
+| CCAI_SERVICE_PROVIDER_DUCKDUCKGO | 14 | DuckDuckGo Websearch API [DuckDuckGo API](https://duckduckgo.com/api) |
+| CCAI_SERVICE_PROVIDER_GOOGLE_PSE | 15 | Google PSE Websearch API [Google Programmable Search Engine](https://programmablesearchengine.google.com/) |
+| CCAI_SERVICE_PROVIDER_JINA | 16 | Jina Websearch API [Jina AI](https://github.com/jina-ai/jina) |
+| CCAI_SERVICE_PROVIDER_TAVILY | 17 | Tavily Websearch API [Tavily API](https://tavily.com/) |
+| CCAI_SERVICE_PROVIDER_ELASTICSEARCH | 18 | ElasticSearch vector database service [ElasticSearch](https://www.elastic.co/) |
+| CCAI_SERVICE_PROVIDER_MILVUS | 19 | Milvus vector database service [Milvus](https://milvus.io/) |
+| CCAI_SERVICE_PROVIDER_QDRANT | 20 | Qdrant vector database service [Qdrant](https://qdrant.tech/) |
+| CCAI_SERVICE_PROVIDER_CHROMA | 21 | Chroma vector database service [ChromaDB](https://github.com/chroma-core/chroma) |
+| CCAI_SERVICE_PROVIDER_GOOGLE | 22 | Google CCAI service provider [Google Cloud AI](https://cloud.google.com/ai) |
+| CCAI_SERVICE_PROVIDER_MICROSOFT | 23 | Microsoft CCAI service provider [Microsoft AI](https://www.microsoft.com/en-us/ai) |
+| CCAI_SERVICE_PROVIDER_DEEPGRAM | 24 | Deepgram as the CCAI service provider for speech processing [Deepgram](https://deepgram.com/) |
+| CCAI_SERVICE_PROVIDER_ELEVENLABS | 25 | ElevenLabs as the CCAI service provider for voice synthesis [ElevenLabs](https://elevenlabs.io/) |
+| CCAI_SERVICE_PROVIDER_HUGGINGFACE_TGI | 26 | Hugging Face Text Generation Inference (TGI) as the CCAI service provider [Text Generation Inference](https://github.com/huggingface/text-generation-inference) |
+| CCAI_SERVICE_PROVIDER_HUGGINGFACE_TGE | 27 | Hugging Face Text Embedding Inference (TGE) as the CCAI service provider [Text Embeddings Inference](https://github.com/huggingface/text-embeddings-inference) |
+| CCAI_SERVICE_PROVIDER_HUGGINGFACE_SMOLAGENTS | 28 | Hugging Face SmolAgents as the CCAI service provider [SmolAgents](https://github.com/huggingface/smolagents) |
 
 
 
@@ -3312,6 +3336,7 @@ CcaiProjectView defines what the CcaiProject message contains
 | CCAI_SERVICE_TYPE_ONDEWO_AIM_WEBCHAT | 15 | ondewo-aim-webchat service |
 | CCAI_SERVICE_TYPE_ONDEWO_AIM_WEBPHONE | 16 | ondewo-aim-webphone service |
 | CCAI_SERVICE_TYPE_ONDEWO_NLU_VECTORSTORE | 17 | ondewo-nlu-vectorstore service |
+| CCAI_SERVICE_TYPE_ONDEWO_NLU_LLM_AGENT | 18 | ondewo-nlu-llm-agent service |
 
 
  <!-- end enums -->
