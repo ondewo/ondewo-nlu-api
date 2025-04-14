@@ -2,6 +2,19 @@
 
 *****************
 
+## Release ONDEWO NLU API 6.1.0
+
+### New Features
+
+* [[OND211-1645]](https://ondewo.atlassian.net/browse/OND211-1645) Add `MigrateAgent` with `MigrateAgentRequest` to
+  migrate an NLU agent from a version to the latest version of the ondewo-nlu-cai server.
+* [[OND211-2264]](https://ondewo.atlassian.net/browse/OND211-2264) Added new `CcaiServiceProviders`:
+  `CcaiServiceProvider.CCAI_SERVICE_PROVIDER_GOOGLE`, `CcaiServiceProvider.CCAI_SERVICE_PROVIDER_MICROSOFT`,
+  `CcaiServiceProvider.CCAI_SERVICE_PROVIDER_DEEPGRAM`, `CcaiServiceProvider.CCAI_SERVICE_PROVIDER_ELEVENLABS`, and
+  `CcaiServiceProvider.CCAI_SERVICE_PROVIDER_HUGGINGFACE_TGI`
+
+*****************
+
 ## Release ONDEWO NLU API 6.0.0
 
 ### New Features
