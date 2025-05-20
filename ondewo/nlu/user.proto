@@ -228,9 +228,6 @@ message CreateUserRequest {
 
     // password
     string password = 3;
-
-    // Field mask to specify which fields to return
-    google.protobuf.FieldMask field_mask = 4;
 }
 
 // Request to update user
@@ -258,6 +255,8 @@ message GetUserRequest {
         // the user can identified by their email
         string user_email = 3;
     }
+    // Optional field mask to specify which fields to return in the response
+    google.protobuf.FieldMask response_field_mask = 2;
 }
 
 // Request to delete user
