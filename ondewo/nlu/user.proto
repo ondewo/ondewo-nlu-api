@@ -228,6 +228,9 @@ message CreateUserRequest {
 
     // password
     string password = 3;
+
+    // Field mask to specify which fields to return
+    google.protobuf.FieldMask field_mask = 4;
 }
 
 // Request to update user
