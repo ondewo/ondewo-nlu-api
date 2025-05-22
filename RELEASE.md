@@ -13,6 +13,13 @@
   `CcaiServiceProvider.CCAI_SERVICE_PROVIDER_DEEPGRAM`, `CcaiServiceProvider.CCAI_SERVICE_PROVIDER_ELEVENLABS`, and
   `CcaiServiceProvider.CCAI_SERVICE_PROVIDER_HUGGINGFACE_TGI`
 
+ ### Improvements
+
+* [[OND211-2261]](https://ondewo.atlassian.net/browse/OND211-2261) `GetUserInfo` optimize with field mask which elements
+  added to UserInfo return object
+* [[OND211-2419]](https://ondewo.atlassian.net/browse/OND211-2419) `GetUserInfo` optimize session review with field mask
+  NLU API
+
 *****************
 
 ## Release ONDEWO NLU API 6.0.0
