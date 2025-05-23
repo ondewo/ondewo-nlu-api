@@ -15,10 +15,10 @@
 
  ### Improvements
 
-* [[OND211-2261]](https://ondewo.atlassian.net/browse/OND211-2261) `GetUserInfo` optimize with field mask which elements
-  added to UserInfo return object
-* [[OND211-2419]](https://ondewo.atlassian.net/browse/OND211-2419) `GetUserInfo` optimize session review with field mask
-  NLU API
+* [[OND211-2261]](https://ondewo.atlassian.net/browse/OND211-2261) Added response_field_mask to `GetUserRequest` to
+  enable selective field retrieval based on the specified field mask.
+* [[OND211-2419]](https://ondewo.atlassian.net/browse/OND211-2419) Added response_field_mask to `GetUserRequest` to
+  enable selective field retrieval based on the specified field mask.
 
 *****************
 
