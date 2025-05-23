@@ -13,6 +13,13 @@
   `CcaiServiceProvider.CCAI_SERVICE_PROVIDER_DEEPGRAM`, `CcaiServiceProvider.CCAI_SERVICE_PROVIDER_ELEVENLABS`, and
   `CcaiServiceProvider.CCAI_SERVICE_PROVIDER_HUGGINGFACE_TGI`
 
+ ### Improvements
+
+* [[OND211-2261]](https://ondewo.atlassian.net/browse/OND211-2261) Added response_field_mask to `GetUserRequest` to
+  enable selective field retrieval based on the specified field mask.
+* [[OND211-2419]](https://ondewo.atlassian.net/browse/OND211-2419) Added response_field_mask to `GetUserRequest` to
+  enable selective field retrieval based on the specified field mask.
+
 *****************
 
 ## Release ONDEWO NLU API 6.0.0
