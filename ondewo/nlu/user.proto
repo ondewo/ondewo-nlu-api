@@ -256,7 +256,7 @@ message GetUserRequest {
         string user_email = 3;
     }
     // Optional field mask to specify which fields to return in the response
-    google.protobuf.FieldMask response_field_mask = 2;
+    google.protobuf.FieldMask response_field_mask = 4;
 }
 
 // Request to delete user
