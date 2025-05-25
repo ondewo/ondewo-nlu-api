@@ -1,4 +1,4 @@
-// Copyright 2020-2023 ONDEWO GmbH
+// Copyright 2020-2025 ONDEWO GmbH
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -256,7 +256,7 @@ message GetUserRequest {
         string user_email = 3;
     }
     // Optional field mask to specify which fields to return in the response
-    google.protobuf.FieldMask response_field_mask = 4;
+    google.protobuf.FieldMask field_mask = 4;
 }
 
 // Request to delete user
