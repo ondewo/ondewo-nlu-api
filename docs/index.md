@@ -8864,7 +8864,7 @@ Request to get user
 | ----- | ---- | ----- | ----------- |
 | user_id | [string](#string) |  | the user is identified by user id |
 | user_email | [string](#string) |  | the user can identified by their email |
-| response_field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional field mask to specify which fields to return in the response |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional field mask to specify which fields to return in the response |
 
 
 
