@@ -10,10 +10,12 @@
   migrate an NLU agent from a version to the latest version of the ondewo-nlu-cai server.
 * [[OND211-2264]](https://ondewo.atlassian.net/browse/OND211-2264) Added new `CcaiServiceProviders`:
   `CcaiServiceProvider.CCAI_SERVICE_PROVIDER_GOOGLE`, `CcaiServiceProvider.CCAI_SERVICE_PROVIDER_MICROSOFT`,
-  `CcaiServiceProvider.CCAI_SERVICE_PROVIDER_DEEPGRAM`, `CcaiServiceProvider.CCAI_SERVICE_PROVIDER_ELEVENLABS`, and
-  `CcaiServiceProvider.CCAI_SERVICE_PROVIDER_HUGGINGFACE_TGI`
+  `CcaiServiceProvider.CCAI_SERVICE_PROVIDER_DEEPGRAM`, `CcaiServiceProvider.CCAI_SERVICE_PROVIDER_ELEVENLABS`,
+  `CcaiServiceProvider.CCAI_SERVICE_PROVIDER_HUGGINGFACE_TGI`,
+  `CcaiServiceProvider.CCAI_SERVICE_PROVIDER_GOOGLE_AGENT_DEVELOPMENT_KIT`, and
+  `CcaiServiceProvider.CCAI_SERVICE_PROVIDER_MODEL_CONTEXT_PROTOCOL`.
 
- ### Improvements
+### Improvements
 
 * [[OND211-2261]](https://ondewo.atlassian.net/browse/OND211-2261) Added response_field_mask to `GetUserRequest` to
   enable selective field retrieval based on the specified field mask.
