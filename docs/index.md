@@ -1373,6 +1373,7 @@ The request message for [Agents.GetAgent][google.cloud.dialogflow.v2.Agents.GetA
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The project that the agent to fetch is associated with. Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre> |
 | agent_view | [AgentView](#ondewo.nlu.AgentView) |  | Optional. Specify the view of the returned agent (full view by default) |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. A mask to control which fields are returned in the response. |
 
 
 
