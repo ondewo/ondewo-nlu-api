@@ -637,6 +637,9 @@ message GetAgentRequest {
 
     // Optional. Specify the view of the returned agent (full view by default)
     AgentView agent_view = 2;
+
+    // Optional. A mask to control which fields are returned in the response.
+    google.protobuf.FieldMask field_mask = 3;
 }
 
 // Request to get the list of agents

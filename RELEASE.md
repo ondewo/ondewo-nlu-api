@@ -2,6 +2,15 @@
 
 *****************
 
+## Release ONDEWO NLU API 6.2.0
+
+### Improvements
+
+* [[OND211-2294]](https://ondewo.atlassian.net/browse/OND211-2294) Added field_mask to `GetAgentRequest` to
+  enable selective field retrieval based on the specified field mask.
+
+*****************
+
 ## Release ONDEWO NLU API 6.1.0
 
 ### New Features
