@@ -1402,6 +1402,7 @@ message GetSessionRequest {
     // Optional. The mask to control which fields will be filled with data.
     // Example: path=["session_info.duration_in_s_min"]
     google.protobuf.FieldMask field_mask = 6;
+
 }
 
 // This message is a request to create a session
@@ -1578,6 +1579,10 @@ message ListSessionLabelsOfAllSessionsRequest {
 
     // Optional. A filter to narrow the response down to sessions of interest.
     SessionFilter session_filter = 2;
+
+    // Optional. The mask to control which fields gets returned.
+    optional google.protobuf.FieldMask field_mask = 3;
+
 }
 
 // This message is a response of listing session labels
@@ -1596,6 +1601,10 @@ message ListLanguageCodesOfAllSessionsRequest {
 
     // Optional. A filter to narrow the response down to sessions of interest.
     SessionFilter session_filter = 2;
+
+    // Optional. The mask to control which fields gets returned.
+    optional google.protobuf.FieldMask field_mask = 3;
+
 }
 
 // This message is a response of listing session language_codes
@@ -1616,6 +1625,9 @@ message ListMatchedIntentsOfAllSessionsRequest {
 
     // Optional. A filter to narrow the response down to sessions of interest.
     SessionFilter session_filter = 2;
+
+    // Optional. The mask to control which fields gets returned.
+    optional google.protobuf.FieldMask field_mask = 3;
 }
 
 // This message is a response of listing session matched_intents
@@ -1635,6 +1647,10 @@ message ListMatchedEntityTypesOfAllSessionsRequest {
 
     // Optional. A filter to narrow the response down to sessions of interest.
     SessionFilter session_filter = 2;
+
+    // Optional. The mask to control which fields gets returned.
+    optional google.protobuf.FieldMask field_mask = 3;
+
 }
 
 // This message is a response of listing session matched_entity_types
@@ -1654,6 +1670,10 @@ message ListUserIdsOfAllSessionsRequest {
 
     // Optional. A filter to narrow the response down to sessions of interest.
     SessionFilter session_filter = 2;
+
+    // Optional. The mask to control which fields gets returned.
+    optional google.protobuf.FieldMask field_mask = 3;
+
 }
 
 // This message is a response of listing session user_ids
@@ -1673,6 +1693,10 @@ message ListIdentifiedUserIdsOfAllSessionsRequest {
 
     // Optional. A filter to narrow the response down to sessions of interest.
     SessionFilter session_filter = 2;
+
+    // Optional. The mask to control which fields gets returned.
+    optional google.protobuf.FieldMask field_mask = 3;
+
 }
 
 // This message is a response of listing session identified_user_ids
@@ -1692,6 +1716,10 @@ message ListTagsOfAllSessionsRequest {
 
     // Optional. A filter to narrow the response down to sessions of interest.
     SessionFilter session_filter = 2;
+
+    // Optional. The mask to control which fields gets returned.
+    optional google.protobuf.FieldMask field_mask = 3;
+
 }
 
 // This message is a response of listing session tags
@@ -1711,6 +1739,10 @@ message ListInputContextsOfAllSessionsRequest {
 
     // Optional. A filter to narrow the response down to sessions of interest.
     SessionFilter session_filter = 2;
+
+    // Optional. The mask to control which fields gets returned.
+    optional google.protobuf.FieldMask field_mask = 3;
+
 }
 
 // This message is a response of listing session input_contexts
@@ -1730,6 +1762,10 @@ message ListOutputContextsOfAllSessionsRequest {
 
     // Optional. A filter to narrow the response down to sessions of interest.
     SessionFilter session_filter = 2;
+
+    // Optional. The mask to control which fields gets returned.
+    optional google.protobuf.FieldMask field_mask = 3;
+
 }
 
 // This message is a response of listing session output_contexts
@@ -1749,6 +1785,10 @@ message ListPlatformsOfAllSessionsRequest {
 
     // Optional. A filter to narrow the response down to sessions of interest.
     SessionFilter session_filter = 2;
+
+    // Optional. The mask to control which fields gets returned.
+    optional google.protobuf.FieldMask field_mask = 3;
+
 }
 
 // This message is a response of listing session platforms
@@ -1768,6 +1808,10 @@ message ListAccountIdsOfAllSessionsRequest {
 
     // Optional. A filter to narrow the response down to sessions of interest.
     SessionFilter session_filter = 2;
+
+    // Optional. The mask to control which fields gets returned.
+    optional google.protobuf.FieldMask field_mask = 3;
+
 }
 
 // This message is a response of listing session account_ids
@@ -1823,6 +1867,10 @@ message ListOriginIdsOfAllSessionsRequest {
 
     // Optional. A filter to narrow the response down to sessions of interest.
     SessionFilter session_filter = 2;
+
+    // Optional. The mask to control which fields gets returned.
+    optional google.protobuf.FieldMask field_mask = 3;
+
 }
 
 // This message is a response of listing session origin_ids
@@ -1914,6 +1962,10 @@ message ListSessionCommentsRequest {
     // * "current_index1--page_size-20"
     // * "current_index-1--page_size--20"
     string page_token = 2;
+
+    // Optional. The mask to control which fields gets returned.
+    optional google.protobuf.FieldMask field_mask = 3;
+
 }
 
 // This message is a request to list comments of a session
@@ -2003,7 +2055,12 @@ message GetSessionReviewRequest {
     // The unique identifier of the session review to be returned
     string session_review_id = 1;
 
+    // The view of the session review to be returned
     SessionReview.View session_review_view = 2;
+
+    // Optional. The mask to control which fields gets returned.
+    optional google.protobuf.FieldMask field_mask = 3;
+
 }
 
 // This message is a request to get latest session review
@@ -2015,6 +2072,10 @@ message GetLatestSessionReviewRequest {
 
     // An enum specifying the amount of information to be returned for the desired session review
     SessionReview.View session_review_view = 2;
+
+    // Optional. The mask to control which fields gets returned.
+    optional google.protobuf.FieldMask field_mask = 3;
+
 }
 
 // Represents the options for views of resources.
@@ -2247,6 +2308,9 @@ message GetAudioFilesRequest {
     // sorting mode
     SortingMode sorting_mode = 5;
 
+    // Optional. The mask to control which fields gets returned.
+    optional google.protobuf.FieldMask field_mask = 6;
+
 }
 
 // This message is a request to retrieve the audio files specified
@@ -2364,6 +2428,9 @@ message ListAudioFilesRequest {
     // sorting mode
     SortingMode sorting_mode = 5;
 
+    // Optional. The mask to control which fields gets returned.
+    optional google.protobuf.FieldMask field_mask = 6;
+
 }
 
 // This message is a request to retrieve the audio files specified
@@ -2396,5 +2463,8 @@ message GetAudioFileOfSessionRequest {
 
     // Represents the options for views of resources
     ResourceView resource_view = 3;
+
+    // Optional. The mask to control which fields gets returned.
+    optional google.protobuf.FieldMask field_mask = 4;
 
 }

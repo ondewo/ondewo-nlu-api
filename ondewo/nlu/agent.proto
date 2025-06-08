@@ -653,6 +653,10 @@ message ListAgentsRequest {
 
     // Optional. Defines the sorting of the list. Default, no sorting.
     AgentSorting sort_by_field = 3;
+
+    // Optional. The mask to control which fields gets returned.
+    optional google.protobuf.FieldMask field_mask = 4;
+
 }
 
 // Get list of agents
@@ -665,6 +669,7 @@ message ListAgentsResponse {
     // The next_page_token is used to retrieve the next page of a returned result,
     // e.g. next_page_token is current_index-2
     string next_page_token = 2;
+
 }
 
 // Get list of agents of user
@@ -1158,6 +1163,10 @@ message ListUsersInProjectRequest {
     // * "current_index1--page_size-20"
     // * "current_index-1--page_size--20"
     string page_token = 2;
+
+    // Optional. The mask to control which fields gets returned.
+    optional google.protobuf.FieldMask field_mask = 3;
+
 }
 
 // Request to get user in project
@@ -1172,6 +1181,7 @@ message UserInProject {
 
     // ID of the project role of the user
     uint32 role_id = 3;
+
 }
 
 // List the users in a project
@@ -1184,6 +1194,7 @@ message ListUsersInProjectResponse {
     // The next_page_token is used to retrieve the next page of a returned result,
     // e.g. next_page_token is current_index-2
     string next_page_token = 2;
+
 }
 
 // GIT information about the version of the server
@@ -1194,6 +1205,7 @@ message GetPlatformInfoResponse {
 
     // git commit hash of the server build
     string commit_hash = 2;
+
 }
 
 // Project permissions
@@ -1224,6 +1236,10 @@ message ListProjectPermissionsRequest {
     // * "current_index1--page_size-20"
     // * "current_index-1--page_size--20"
     string page_token = 1;
+
+    // Optional. The mask to control which fields gets returned.
+    optional google.protobuf.FieldMask field_mask = 2;
+
 }
 
 // List project permissions
@@ -1406,6 +1422,7 @@ message ModelStatus {
     string config = 5;
 
     StatusName status = 6;
+
 }
 
 // Response to get model statuses

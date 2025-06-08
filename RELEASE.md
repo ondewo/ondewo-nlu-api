@@ -6,7 +6,7 @@
 
 ### Improvements
 
-* [[OND211-2294]](https://ondewo.atlassian.net/browse/OND211-2294) Added field_mask to `GetAgentRequest` to
+* [[OND211-2294]](https://ondewo.atlassian.net/browse/OND211-2294) Added field_mask to `GetAgentRequest` and others to
   enable selective field retrieval based on the specified field mask.
 
 *****************

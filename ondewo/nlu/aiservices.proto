@@ -17,6 +17,7 @@ syntax = "proto3";
 package ondewo.nlu;
 
 import "google/api/annotations.proto";
+import "google/protobuf/field_mask.proto";
 import "google/protobuf/struct.proto";
 
 import "ondewo/nlu/ccai_project.proto";
@@ -120,6 +121,9 @@ message ListLlmModelsRequest {
     // Format: <pre><code>projects/&lt;project_uuid&gt;/ccai/services/&lt;service_uuid&gt;</code></pre>
     string ccai_service_name = 1;
 
+    // Optional. The mask to control which fields gets returned.
+    optional google.protobuf.FieldMask field_mask = 2;
+
 }
 
 // The response message containing a list of available LLM models.
@@ -177,6 +181,9 @@ message LlmGenerateRequest {
     // Files as input for the generation request
     repeated FileResource file_resources = 3;
 
+    // Optional. The mask to control which fields gets returned.
+    optional google.protobuf.FieldMask field_mask = 4;
+
 }
 
 // The response message containing the generated output from a Large Language Model (LLM).
@@ -220,6 +227,9 @@ message ExtractEntitiesRequest {
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre>
     string intent_name = 4;
 
+    // Optional. The mask to control which fields gets returned.
+    optional google.protobuf.FieldMask field_mask = 5;
+
 }
 
 // This message is a request to extract entities with Fuzzy Entity Recognizer
@@ -240,6 +250,9 @@ message ExtractEntitiesFuzzyRequest {
 
     // Optional. Whether or not entities are allowed to overlap.
     bool allow_overlaps = 5;
+
+    // Optional. The mask to control which fields gets returned.
+    optional google.protobuf.FieldMask field_mask = 6;
 
 }
 
@@ -319,6 +332,9 @@ message GetAlternativeSentencesRequest {
     // Words to be changed in the augmentation process
     repeated string words_to_change = 7;
 
+    // Optional. The mask to control which fields gets returned.
+    optional google.protobuf.FieldMask field_mask = 8;
+
 }
 
 // Request to generate user sentences
@@ -336,6 +352,9 @@ message GenerateUserSaysRequest {
 
     // Git branch
     string branch = 8;
+
+    // Optional. The mask to control which fields gets returned.
+    optional google.protobuf.FieldMask field_mask = 9;
 
 }
 
@@ -356,6 +375,9 @@ message GenerateResponsesRequest {
     string branch = 8;
 
     bool drop_unknown_parameters = 9;
+
+    // Optional. The mask to control which fields gets returned.
+    optional google.protobuf.FieldMask field_mask = 10;
 
 }
 
@@ -394,6 +416,9 @@ message GetAlternativeTrainingPhrasesRequest {
     // Git branch
     string branch = 10;
 
+    // Optional. The mask to control which fields gets returned.
+    optional google.protobuf.FieldMask field_mask = 11;
+
 }
 
 // Request to get synonyms
@@ -411,6 +436,9 @@ message GetSynonymsRequest {
     // the parent of the request
     // Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
     string parent = 5;
+
+    // Optional. The mask to control which fields gets returned.
+    optional google.protobuf.FieldMask field_mask = 6;
 
 }
 
@@ -674,6 +702,9 @@ message ClassifyIntentsRequest {
 
     // Optional: Algorithm list
     repeated IntentAlgorithms algorithms = 7;
+
+    // Optional. The mask to control which fields gets returned.
+    optional google.protobuf.FieldMask field_mask = 8;
 
 }
 

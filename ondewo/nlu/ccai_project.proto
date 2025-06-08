@@ -181,6 +181,15 @@ enum CcaiServiceType {
     // ondewo-nlu-llm-mcp service
     CCAI_SERVICE_TYPE_ONDEWO_NLU_LLM_MCP = 19;
 
+    // ondewo-nlu-llm-rag service
+    CCAI_SERVICE_TYPE_ONDEWO_NLU_LLM_RAG = 20;
+
+    // ondewo-analytics service
+    CCAI_SERVICE_TYPE_ONDEWO_ANALYTICS = 21;
+
+    // ondewo-analytics-dashboard service
+    CCAI_SERVICE_TYPE_ONDEWO_ANALYTICS_DASHBOARD = 22;
+
 }
 
 // Definition of a Call Center AI (CCAI service) Service.
@@ -406,6 +415,18 @@ enum CcaiServiceProvider {
     // [MCP](https://modelcontextprotocol.io/introduction)
     CCAI_SERVICE_PROVIDER_MODEL_CONTEXT_PROTOCOL = 30;
 
+    // Opensearch as the CCAI service provider, enabling integration with Opensearch vector database and search services
+    // [Opensearch](https://opensearch.org/)
+    CCAI_SERVICE_PROVIDER_OPENSEARCH = 31;
+
+    // Grok as the CCAI service provider, commonly used for models such as Grok-1
+    // [Grok](https://grok.x.ai/)
+    CCAI_SERVICE_PROVIDER_GROK = 32;
+
+    // PostgreSQL as the CCAI service provider, enabling integration with PostgreSQL databases
+    // [PostgreSQL](https://www.postgresql.org/)
+    CCAI_SERVICE_PROVIDER_POSTGRES = 33;
+
 }
 
 
@@ -450,6 +471,9 @@ message GetCcaiProjectRequest{
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string nlu_project_name = 4;
 
+    // Optional. The mask to control which fields gets returned.
+    optional google.protobuf.FieldMask field_mask = 5;
+
 }
 
 // Request to retrieve a CCAI service project
@@ -462,6 +486,9 @@ message GetCcaiServiceRequest{
     // Required. The nlu agent project of this CcaiProject.
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string nlu_project_name = 4;
+
+    // Optional. The mask to control which fields gets returned.
+    optional google.protobuf.FieldMask field_mask = 5;
 
 }
 
@@ -510,6 +537,9 @@ message ListCcaiProjectsRequest {
     // Required. The nlu agent project of this CcaiProject.
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string nlu_project_name = 5;
+
+    // Optional. The mask to control which fields gets returned.
+    optional google.protobuf.FieldMask field_mask = 6;
 
 }
 
@@ -584,6 +614,9 @@ message CcaiServiceFilter {
     // Type of CCAI service service
     repeated CcaiServiceType ccai_service_types = 2;
 
+    // Type of CCAI service providers
+    repeated CcaiServiceProvider ccai_service_providers = 3;
+
 }
 
 // Request to updated CCAI service project
@@ -596,7 +629,6 @@ message UpdateCcaiProjectRequest{
     optional CcaiServiceFilter ccai_service_filter = 2;
 
     // Optional. The mask to control which fields get updated.
-    // Note: Not implemented yet
     optional google.protobuf.FieldMask update_mask = 3;
 
     // Required. The nlu agent project of this CcaiProject.

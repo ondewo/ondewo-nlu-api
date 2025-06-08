@@ -257,6 +257,7 @@ message GetUserRequest {
     }
     // Optional field mask to specify which fields to return in the response
     google.protobuf.FieldMask field_mask = 4;
+
 }
 
 // Request to delete user
@@ -293,6 +294,10 @@ message ListUsersRequest {
     // * "current_index1--page_size-20"
     // * "current_index-1--page_size--20"
     string page_token = 1;
+
+    // Optional. The mask to control which fields gets returned.
+    optional google.protobuf.FieldMask field_mask = 2;
+
 }
 
 // Response containing list of users
@@ -400,6 +405,10 @@ message GetServerRoleRequest {
         // role can also be uniquely identified by its name
         string role_name = 2;
     }
+
+    // Optional. The mask to control which fields gets returned.
+    optional google.protobuf.FieldMask field_mask = 3;
+
 }
 
 // Request to list server roles
@@ -429,6 +438,10 @@ message ListServerRolesRequest {
     // * "current_index1--page_size-20"
     // * "current_index-1--page_size--20"
     string page_token = 1;
+
+    // Optional. The mask to control which fields gets returned.
+    optional google.protobuf.FieldMask field_mask = 2;
+
 }
 
 // Response containing list of server roles
@@ -470,6 +483,10 @@ message ListServerPermissionsRequest {
     // * "current_index1--page_size-20"
     // * "current_index-1--page_size--20"
     string page_token = 1;
+
+    // Optional. The mask to control which fields gets returned.
+    optional google.protobuf.FieldMask field_mask = 2;
+
 }
 
 // Response containing list of server permissions
@@ -492,6 +509,10 @@ message LoginRequest {
 
     // user password
     string password = 2;
+
+    // Optional. The mask to control which fields gets returned.
+    optional google.protobuf.FieldMask field_mask = 3;
+
 }
 
 // This message is a response of logging
@@ -521,6 +542,9 @@ message GetUserPreferencesRequest {
     // If both, a key in the keys field and in the regex_include will be matched than only a single
     // <pre>KeyValuePair</pre> is returned.
     string regex_include = 3;
+
+    // Optional. The mask to control which fields gets returned.
+    optional google.protobuf.FieldMask field_mask = 4;
 
 }
 
@@ -624,6 +648,10 @@ message ListUserPreferencesRequest {
 
     // Optional: Only list keys that match the provided regular expression
     string regex_filter = 2;
+
+    // Optional. The mask to control which fields gets returned.
+    optional google.protobuf.FieldMask field_mask = 3;
+
 }
 
 // Response containing a list of user preferences for a specific user with an optional filter substring.

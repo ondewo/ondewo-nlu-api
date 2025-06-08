@@ -174,6 +174,10 @@ message GetProjectRoleRequest {
 
     // Optional. specify the view of the project role, PROJECT_ROLE_VIEW_FULL by default
     ProjectRoleView project_role_view = 4;
+
+    // Optional. The mask to control which fields gets returned.
+    optional google.protobuf.FieldMask field_mask = 5;
+
 }
 
 // This message is a request to delete project role
@@ -221,6 +225,10 @@ message ListProjectRolesRequest {
 
     // Optional. specify the view of the project roles, PROJECT_ROLE_VIEW_FULL by default
     ProjectRoleView project_role_view = 3;
+
+    // Optional. The mask to control which fields gets returned.
+    optional google.protobuf.FieldMask field_mask = 4;
+
 }
 
 // This message is a response of listing project role
