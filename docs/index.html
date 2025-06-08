@@ -6595,6 +6595,13 @@ e.g. next_page_token is current_index-2 </p></td>
                   <td><p>Optional. Defines the sorting of the list. Default, no sorting. </p></td>
                 </tr>
               
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. The mask to control which fields gets returned. </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -6673,6 +6680,13 @@ Examples of invalid page token strings:
 * "current_index--1--page_size-20"
 * "current_index1--page_size-20"
 * "current_index-1--page_size--20" </p></td>
+                </tr>
+              
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. The mask to control which fields gets returned. </p></td>
                 </tr>
               
             </tbody>
@@ -6761,6 +6775,13 @@ Examples of invalid page token strings:
 * "current_index--1--page_size-20"
 * "current_index1--page_size-20"
 * "current_index-1--page_size--20" </p></td>
+                </tr>
+              
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. The mask to control which fields gets returned. </p></td>
                 </tr>
               
             </tbody>
@@ -8224,6 +8245,13 @@ UNSPECIFIED - default mode, described in agent config </p></td>
                   <td><p>Optional: Algorithm list </p></td>
                 </tr>
               
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. The mask to control which fields gets returned. </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -8530,6 +8558,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre> </p></td>
                   <td><p>Optional. Whether or not entities are allowed to overlap. </p></td>
                 </tr>
               
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. The mask to control which fields gets returned. </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -8576,6 +8611,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre> </p></td>
                   <td><p>Optional. The name of the relevant intent. Used to establish preference
 hierarchy for entities that correspond to intent parameters
 Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. The mask to control which fields gets returned. </p></td>
                 </tr>
               
             </tbody>
@@ -8700,6 +8742,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre> </p></td>
                   <td><p> </p></td>
                 </tr>
               
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. The mask to control which fields gets returned. </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -8768,6 +8817,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre> </p></td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Git branch </p></td>
+                </tr>
+              
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. The mask to control which fields gets returned. </p></td>
                 </tr>
               
             </tbody>
@@ -8852,6 +8908,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre> </p></td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
                   <td><p>Words to be changed in the augmentation process </p></td>
+                </tr>
+              
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. The mask to control which fields gets returned. </p></td>
                 </tr>
               
             </tbody>
@@ -8967,6 +9030,13 @@ as duplicate. Meaningful values of similarity_threshold are between 0.95 and 1.0
                   <td><p>Git branch </p></td>
                 </tr>
               
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. The mask to control which fields gets returned. </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -9035,6 +9105,13 @@ as duplicate. Meaningful values of similarity_threshold are between 0.95 and 1.0
                   <td></td>
                   <td><p>the parent of the request
 Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. The mask to control which fields gets returned. </p></td>
                 </tr>
               
             </tbody>
@@ -9170,6 +9247,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&g
 Format: <pre><code>projects/&lt;project_uuid&gt;/ccai/services/&lt;service_uuid&gt;</code></pre> </p></td>
                 </tr>
               
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. The mask to control which fields gets returned. </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -9284,6 +9368,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/ccai/services/&lt;service_uuid&
                   <td><a href="#ondewo.nlu.FileResource">FileResource</a></td>
                   <td>repeated</td>
                   <td><p>Files as input for the generation request </p></td>
+                </tr>
+              
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. The mask to control which fields gets returned. </p></td>
                 </tr>
               
             </tbody>
@@ -10192,6 +10283,13 @@ above the outputs of the services are {{OUTPUT_SERVICE_1}}, {{OUTPUT_SERVICE_1_1
                   <td><p>Type of CCAI service service </p></td>
                 </tr>
               
+                <tr>
+                  <td>ccai_service_providers</td>
+                  <td><a href="#ondewo.nlu.CcaiServiceProvider">CcaiServiceProvider</a></td>
+                  <td>repeated</td>
+                  <td><p>Type of CCAI service providers </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -10396,6 +10494,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
 Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 </tr>
               
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. The mask to control which fields gets returned. </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -10427,6 +10532,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td></td>
                   <td><p>Required. The nlu agent project of this CcaiProject.
 Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. The mask to control which fields gets returned. </p></td>
                 </tr>
               
             </tbody>
@@ -10507,6 +10619,13 @@ Examples of invalid page token strings:
 Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 </tr>
               
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. The mask to control which fields gets returned. </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -10575,8 +10694,7 @@ e.g. next_page_token is current_index-2 </p></td>
                   <td>update_mask</td>
                   <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
                   <td>optional</td>
-                  <td><p>Optional. The mask to control which fields get updated.
-Note: Not implemented yet </p></td>
+                  <td><p>Optional. The mask to control which fields get updated. </p></td>
                 </tr>
               
                 <tr>
@@ -10990,6 +11108,27 @@ the Model Context Protocol standard.
 [MCP](https://modelcontextprotocol.io/introduction)</p></td>
               </tr>
             
+              <tr>
+                <td>CCAI_SERVICE_PROVIDER_OPENSEARCH</td>
+                <td>31</td>
+                <td><p>Opensearch as the CCAI service provider, enabling integration with Opensearch vector database and search services
+[Opensearch](https://opensearch.org/)</p></td>
+              </tr>
+            
+              <tr>
+                <td>CCAI_SERVICE_PROVIDER_GROK</td>
+                <td>32</td>
+                <td><p>Grok as the CCAI service provider, commonly used for models such as Grok-1
+[Grok](https://grok.x.ai/)</p></td>
+              </tr>
+            
+              <tr>
+                <td>CCAI_SERVICE_PROVIDER_POSTGRES</td>
+                <td>33</td>
+                <td><p>PostgreSQL as the CCAI service provider, enabling integration with PostgreSQL databases
+[PostgreSQL](https://www.postgresql.org/)</p></td>
+              </tr>
+            
           </tbody>
         </table>
       
@@ -11119,6 +11258,24 @@ the Model Context Protocol standard.
                 <td>CCAI_SERVICE_TYPE_ONDEWO_NLU_LLM_MCP</td>
                 <td>19</td>
                 <td><p>ondewo-nlu-llm-mcp service</p></td>
+              </tr>
+            
+              <tr>
+                <td>CCAI_SERVICE_TYPE_ONDEWO_NLU_LLM_RAG</td>
+                <td>20</td>
+                <td><p>ondewo-nlu-llm-rag service</p></td>
+              </tr>
+            
+              <tr>
+                <td>CCAI_SERVICE_TYPE_ONDEWO_ANALYTICS</td>
+                <td>21</td>
+                <td><p>ondewo-analytics service</p></td>
+              </tr>
+            
+              <tr>
+                <td>CCAI_SERVICE_TYPE_ONDEWO_ANALYTICS_DASHBOARD</td>
+                <td>22</td>
+                <td><p>ondewo-analytics-dashboard service</p></td>
               </tr>
             
           </tbody>
@@ -18870,6 +19027,13 @@ of 1, corresponding to `Code.CANCELLED`.
                   <td><p>The name of the operation resource. </p></td>
                 </tr>
               
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. The mask to control which fields gets returned. </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -18942,6 +19106,13 @@ Examples of invalid page token strings:
                   <td><a href="#ondewo.nlu.OperationFilter">OperationFilter</a></td>
                   <td></td>
                   <td><p>Optional. A filter to narrow the response down to operations of interest. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. The mask to control which fields gets returned. </p></td>
                 </tr>
               
             </tbody>
@@ -19353,6 +19524,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre> </p></td>
                   <td><p>Optional. specify the view of the project role, PROJECT_ROLE_VIEW_FULL by default </p></td>
                 </tr>
               
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. The mask to control which fields gets returned. </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -19412,6 +19590,13 @@ Examples of invalid page token strings:
                   <td><a href="#ondewo.nlu.ProjectRoleView">ProjectRoleView</a></td>
                   <td></td>
                   <td><p>Optional. specify the view of the project roles, PROJECT_ROLE_VIEW_FULL by default </p></td>
+                </tr>
+              
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. The mask to control which fields gets returned. </p></td>
                 </tr>
               
             </tbody>
@@ -21662,6 +21847,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid
                   <td><p>Represents the options for views of resources </p></td>
                 </tr>
               
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. The mask to control which fields gets returned. </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -21738,6 +21930,13 @@ Examples of invalid page token strings:
                   <td><p>sorting mode </p></td>
                 </tr>
               
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. The mask to control which fields gets returned. </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -21810,6 +22009,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid
                   <td><p>An enum specifying the amount of information to be returned for the desired session review </p></td>
                 </tr>
               
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. The mask to control which fields gets returned. </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -21878,7 +22084,14 @@ Example: path=["session_info.duration_in_s_min"] </p></td>
                   <td>session_review_view</td>
                   <td><a href="#ondewo.nlu.SessionReview.View">SessionReview.View</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>The view of the session review to be returned </p></td>
+                </tr>
+              
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. The mask to control which fields gets returned. </p></td>
                 </tr>
               
             </tbody>
@@ -22067,6 +22280,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td><p>Optional. A filter to narrow the response down to sessions of interest. </p></td>
                 </tr>
               
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. The mask to control which fields gets returned. </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -22165,6 +22385,13 @@ Examples of invalid page token strings:
                   <td><a href="#ondewo.nlu.SortingMode">SortingMode</a></td>
                   <td></td>
                   <td><p>sorting mode </p></td>
+                </tr>
+              
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. The mask to control which fields gets returned. </p></td>
                 </tr>
               
             </tbody>
@@ -22295,6 +22522,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td><p>Optional. A filter to narrow the response down to sessions of interest. </p></td>
                 </tr>
               
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. The mask to control which fields gets returned. </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -22349,6 +22583,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td><a href="#ondewo.nlu.SessionFilter">SessionFilter</a></td>
                   <td></td>
                   <td><p>Optional. A filter to narrow the response down to sessions of interest. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. The mask to control which fields gets returned. </p></td>
                 </tr>
               
             </tbody>
@@ -22407,6 +22648,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td><p>Optional. A filter to narrow the response down to sessions of interest. </p></td>
                 </tr>
               
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. The mask to control which fields gets returned. </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -22461,6 +22709,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td><a href="#ondewo.nlu.SessionFilter">SessionFilter</a></td>
                   <td></td>
                   <td><p>Optional. A filter to narrow the response down to sessions of interest. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. The mask to control which fields gets returned. </p></td>
                 </tr>
               
             </tbody>
@@ -22519,6 +22774,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td><p>Optional. A filter to narrow the response down to sessions of interest. </p></td>
                 </tr>
               
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. The mask to control which fields gets returned. </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -22573,6 +22835,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td><a href="#ondewo.nlu.SessionFilter">SessionFilter</a></td>
                   <td></td>
                   <td><p>Optional. A filter to narrow the response down to sessions of interest. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. The mask to control which fields gets returned. </p></td>
                 </tr>
               
             </tbody>
@@ -22631,6 +22900,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td><p>Optional. A filter to narrow the response down to sessions of interest. </p></td>
                 </tr>
               
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. The mask to control which fields gets returned. </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -22685,6 +22961,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td><a href="#ondewo.nlu.SessionFilter">SessionFilter</a></td>
                   <td></td>
                   <td><p>Optional. A filter to narrow the response down to sessions of interest. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. The mask to control which fields gets returned. </p></td>
                 </tr>
               
             </tbody>
@@ -22821,6 +23104,13 @@ Examples of invalid page token strings:
 * "current_index-1--page_size--20" </p></td>
                 </tr>
               
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. The mask to control which fields gets returned. </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -22905,6 +23195,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td><a href="#ondewo.nlu.SessionFilter">SessionFilter</a></td>
                   <td></td>
                   <td><p>Optional. A filter to narrow the response down to sessions of interest. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. The mask to control which fields gets returned. </p></td>
                 </tr>
               
             </tbody>
@@ -23188,6 +23485,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td><p>Optional. A filter to narrow the response down to sessions of interest. </p></td>
                 </tr>
               
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. The mask to control which fields gets returned. </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -23242,6 +23546,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td><a href="#ondewo.nlu.SessionFilter">SessionFilter</a></td>
                   <td></td>
                   <td><p>Optional. A filter to narrow the response down to sessions of interest. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. The mask to control which fields gets returned. </p></td>
                 </tr>
               
             </tbody>
@@ -25987,6 +26298,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</
                   <td><p>role can also be uniquely identified by its name </p></td>
                 </tr>
               
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. The mask to control which fields gets returned. </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -26029,6 +26347,13 @@ If keys are specified multiple times then only one KeyValue pair is returned </p
 If user does not add regex_filter, then only the keys specified in the keys field are returned.
 If both, a key in the keys field and in the regex_include will be matched than only a single
 <pre>KeyValuePair</pre> is returned. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. The mask to control which fields gets returned. </p></td>
                 </tr>
               
             </tbody>
@@ -26154,6 +26479,13 @@ Examples of invalid page token strings:
 * "current_index-1--page_size--20" </p></td>
                 </tr>
               
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. The mask to control which fields gets returned. </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -26231,6 +26563,13 @@ Examples of invalid page token strings:
 * "current_index--1--page_size-20"
 * "current_index1--page_size-20"
 * "current_index-1--page_size--20" </p></td>
+                </tr>
+              
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. The mask to control which fields gets returned. </p></td>
                 </tr>
               
             </tbody>
@@ -26331,6 +26670,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</
                   <td><p>Optional: Only list keys that match the provided regular expression </p></td>
                 </tr>
               
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. The mask to control which fields gets returned. </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -26415,6 +26761,13 @@ Examples of invalid page token strings:
 * "current_index-1--page_size--20" </p></td>
                 </tr>
               
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. The mask to control which fields gets returned. </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -26477,6 +26830,13 @@ e.g. next_page_token is current_index-2 </p></td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>user password </p></td>
+                </tr>
+              
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. The mask to control which fields gets returned. </p></td>
                 </tr>
               
             </tbody>
