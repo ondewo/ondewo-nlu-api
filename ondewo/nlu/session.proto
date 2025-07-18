@@ -390,7 +390,9 @@ message QueryParameters {
     bool reset_contexts = 4;
 
     // Optional. This field can be used to pass custom data into the webhook
-    // associated with the agent. Following <code>key:value<code> pairs are supported in the JSON objects:
+    // associated with the agent.
+    //
+    // Following <code>key:value</code> pairs are supported in the JSON objects:
     //
     // key: <code>language</code>
     // <pre>language=LanguageCode.de.value</pre>
