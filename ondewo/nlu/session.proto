@@ -390,18 +390,19 @@ message QueryParameters {
     bool reset_contexts = 4;
 
     // Optional. This field can be used to pass custom data into the webhook
-    // associated with the agent. Arbitrary JSON objects are supported.
+    // associated with the agent. Following <code>key:value<code> pairs are supported in the JSON objects:
+    //
     // key: <code>language</code>
     // <pre>language=LanguageCode.de.value</pre>
     // key: <code>timestamp</code>
-    // <pre>timestamp=time.time()</pre>
+    // <pre>timestamp=time.time() # float python timestamp in seconds since epoch </pre>
     // key: <code>source</code>
     // <pre>source='https://ondewo.com'</pre>
     // key: <code>configuration</code>
     // <pre>configuration='config_example_123'</pre>
     // key: <code>single_intent_algorithm</code>
     // <pre>single_intent_algorithm='IntentClassifierType.OndewoIntentAgent'</pre>
-    // => allowed other values for 'single_intent_algorithm':
+    // => allowed other values for <code>single_intent_algorithm</code>:
     // <pre>
     //  IntentClassifierType.DefaultFallBackAlgorithm
     //  IntentClassifierType.DeviationEndingDetection
@@ -425,7 +426,7 @@ message QueryParameters {
     // key: <code>single_ner_algorithm</code>
     // <pre>single_ner_algorithm='NerMethodType.OndewoNerRegex'</pre>
     // <pre>
-    // => allowed other values for 'single_ner_algorithm':
+    // => allowed other values for <code>single_ner_algorithm</code>:
     //  NerMethodType.OndewoNerBert
     //  NerMethodType.OndewoNerDateNer
     //  NerMethodType.OndewoNerDictionary
