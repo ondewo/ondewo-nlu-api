@@ -6,6 +6,9 @@ node_modules
 package.json
 package-lock.json
 
+# documentation builder
+.tmp-protoc-gen-doc-action
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

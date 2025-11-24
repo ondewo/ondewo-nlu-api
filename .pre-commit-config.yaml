@@ -57,6 +57,7 @@ repos:
       - id: check-executables-have-shebangs
         exclude: google
       - id: trailing-whitespace  # Trim trailing whitespace.
+        exclude: docs
       - id: end-of-file-fixer # makes sure files end in a newline and only a newline
       - id: pretty-format-json # autoformat json files (e.g. sorting keys)
         args: [ --autofix, --indent=4 ]
