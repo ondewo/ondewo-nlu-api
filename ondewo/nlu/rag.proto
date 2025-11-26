@@ -55,13 +55,13 @@ service Rags {
     // RAGFlow endpoint: PUT /api/v1/datasets/<dataset_id>
 
     // Update an existing dataset's configuration.<br>
-    // Cannot change <code>embedding_model</code> if dataset has chunks.
+    // Cannot change embedding_model if dataset has chunks.
     rpc UpdateDataset(UpdateDatasetRequest) returns (Dataset);
 
     // RAGFlow endpoint: DELETE /api/v1/datasets
 
     // Delete one or more datasets (batch operation).<br>
-    // If <code>ids</code> is null or empty, deletes all user's datasets.<br>
+    // If ids is null or empty, deletes all user's datasets.<br>
     // Deletes all associated documents, files, and chunks.
     rpc DeleteDatasets(DeleteDatasetsRequest) returns (PartialSuccess);
 
@@ -91,13 +91,13 @@ service Rags {
     // RAGFlow endpoint: POST /api/v1/datasets/<dataset_id>/documents
 
     // Upload one or more documents to a dataset.<br>
-    // Documents start in <code>UNSTART</code> state and must be parsed.
+    // Documents start in UNSTART state and must be parsed.
     rpc UploadDocuments(stream UploadDocumentsRequest) returns (DocumentList);
 
     // RAGFlow endpoint: PUT /api/v1/datasets/<dataset_id>/documents/<document_id>
 
     // Update document metadata and configuration.<br>
-    // Changing <code>chunk_method</code> resets document to <code>UNSTART</code> and deletes chunks.
+    // Changing chunk_method resets document to UNSTART and deletes chunks.
     rpc UpdateDocument(UpdateDocumentRequest) returns (Document);
 
     // RAGFlow endpoint: GET /api/v1/datasets/<dataset_id>/documents/<document_id>
@@ -116,7 +116,7 @@ service Rags {
     // RAGFlow endpoint: DELETE /api/v1/datasets/<dataset_id>/documents
 
     // Delete one or more documents from a dataset (batch operation).<br>
-    // If <code>ids</code> empty, deletes all documents. Removes chunks and storage files.
+    // If ids empty, deletes all documents. Removes chunks and storage files.
     rpc DeleteDocuments(DeleteDocumentsRequest) returns (PartialSuccess);
 
     // ========================================================================
@@ -128,14 +128,14 @@ service Rags {
     // RAGFlow endpoint: POST /api/v1/datasets/<dataset_id>/chunks
 
     // Start parsing documents into chunks.<br>
-    // Cannot parse documents currently being processed (0 &lt; <code>progress</code> &lt; 1).<br>
+    // Cannot parse documents currently being processed (0 < progress < 1).<br>
     // Queues documents for background processing.
     rpc ParseDocuments(ParseDocumentsRequest) returns (PartialSuccess);
 
     // RAGFlow endpoint: DELETE /api/v1/datasets/<dataset_id>/chunks
 
     // Stop parsing documents.<br>
-    // Can only stop documents with <code>progress</code> between 0 and 1.
+    // Can only stop documents with progress between 0 and 1.
     rpc StopParsing(StopParsingRequest) returns (PartialSuccess);
 
     // RAGFlow endpoint: GET /api/v1/datasets/<dataset_id>/documents/<document_id>/chunks
@@ -153,7 +153,7 @@ service Rags {
     // RAGFlow endpoint: DELETE /api/v1/datasets/<dataset_id>/documents/<document_id>/chunks
 
     // Remove one or more chunks from a document.<br>
-    // If <code>chunk_ids</code> empty, removes all chunks from document.
+    // If chunk_ids empty, removes all chunks from document.
     rpc RemoveChunks(RemoveChunksRequest) returns (PartialSuccess);
 
     // RAGFlow endpoint: PUT /api/v1/datasets/<dataset_id>/documents/<document_id>/chunks/<chunk_id>
@@ -178,7 +178,7 @@ service Rags {
     // RAGFlow endpoint: POST /api/v1/chats
 
     // Create a new chat assistant.<br>
-    // All datasets must have parsed files (<code>chunk_num</code> &gt; 0).<br>
+    // All datasets must have parsed files (chunk_num > 0).<br>
     // All datasets must use the same embedding model.
     rpc CreateChat(CreateChatRequest) returns (Chat);
 
@@ -191,7 +191,7 @@ service Rags {
     // RAGFlow endpoint: DELETE /api/v1/chats
 
     // Delete one or more chat assistants (batch operation).<br>
-    // If <code>ids</code> empty, deletes all user's chats (soft delete).
+    // If ids empty, deletes all user's chats (soft delete).
     rpc DeleteChats(DeleteChatsRequest) returns (PartialSuccess);
 
     // RAGFlow endpoint: GET /api/v1/chats
@@ -216,7 +216,7 @@ service Rags {
     // RAGFlow endpoint: POST /api/v1/agents/<agent_id>/sessions
 
     // Create a new agent session.<br>
-    // Initializes <code>Canvas</code> with agent's DSL configuration.
+    // Initializes Canvas with agent's DSL configuration.
     rpc CreateAgentSession(CreateAgentSessionRequest) returns (AgentSession);
 
     // RAGFlow endpoint: PUT /api/v1/chats/<chat_id>/sessions/<session_id>
@@ -240,13 +240,13 @@ service Rags {
     // RAGFlow endpoint: DELETE /api/v1/chats/<chat_id>/sessions
 
     // Delete one or more chat sessions (batch operation).<br>
-    // If <code>ids</code> empty, deletes all sessions for the chat (hard delete).
+    // If ids empty, deletes all sessions for the chat (hard delete).
     rpc DeleteChatSessions(DeleteChatSessionsRequest) returns (PartialSuccess);
 
     // RAGFlow endpoint: DELETE /api/v1/agents/<agent_id>/sessions
 
     // Delete one or more agent sessions (batch operation).<br>
-    // If <code>ids</code> empty, deletes all sessions for the agent (hard delete).
+    // If ids empty, deletes all sessions for the agent (hard delete).
     rpc DeleteAgentSessions(DeleteAgentSessionsRequest) returns (PartialSuccess);
 
     // ========================================================================
@@ -260,14 +260,14 @@ service Rags {
     // RAGFlow endpoint: POST /api/v1/chats/<chat_id>/completions
 
     // Generate chat completion with RAG (server streaming).<br>
-    // Creates new session if <code>session_id</code> not provided.
+    // Creates new session if session_id not provided.
     rpc ChatCompletion(ChatCompletionRequest) returns (stream ChatCompletionResponse);
 
     // RAGFlow endpoint: POST /api/v1/chats_openai/<chat_id>/chat/completions
 
     // OpenAI-compatible chat completion endpoint (server streaming).<br>
     // Compatible with OpenAI Python client.<br>
-    // Supports reasoning content in <code>&lt;think&gt;</code> tags.
+    // Supports reasoning content in <think> tags.
     rpc OpenAIChatCompletion(OpenAIChatCompletionRequest) returns (stream OpenAIChatCompletionResponse);
 
     // RAGFlow endpoint: POST /api/v1/agents/<agent_id>/completions
@@ -342,7 +342,7 @@ service Rags {
 
     // Get user's root folder information.<br>
     // Each tenant has a unique root folder.
-    rpc GetRootFolder(google.protobuf.Empty) returns (GetRootFolderResponse);
+    rpc GetRootFolder(GetRootFolderRequest) returns (GetRootFolderResponse);
 
     // RAGFlow endpoint: GET /api/v1/file/parent_folder
 
@@ -385,7 +385,7 @@ service Rags {
 
     // Convert files to documents and add to datasets.<br>
     // Handles folders recursively (converts all inner files).<br>
-    // Links files to multiple datasets if multiple <code>dataset_ids</code> provided.
+    // Links files to multiple datasets if multiple dataset_ids provided.
     rpc FileToDocument(FileToDocumentRequest) returns (FileToDocumentList);
 
     // ========================================================================
@@ -439,7 +439,7 @@ service Rags {
     // RAGFlow endpoint: GET /api/v1/agentbots/<agent_id>/inputs
 
     // Get agent input form configuration for embedded UI.<br>
-    // Returns input schema from <code>"begin"</code> component in DSL.
+    // Returns input schema from "begin" component in DSL.
     rpc AgentbotInputs(AgentbotInputsRequest) returns (AgentbotInputsResponse);
 
     // RAGFlow endpoint: POST /api/v1/searchbots/ask
@@ -2547,6 +2547,14 @@ message GetAllParentFoldersResponse {
 
     // All parent folders in the hierarchy, from immediate parent to root folder.
     repeated File parent_folders = 1;
+}
+
+// Request message for getting the root folder of the project
+message GetRootFolderRequest {
+
+    // Required. The agent to get the parent folder for.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
 }
 
 // Request message for getting the parent folder of a file.
