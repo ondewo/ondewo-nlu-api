@@ -73,7 +73,7 @@
     - [TrainAgentRequest](#ondewo.nlu.TrainAgentRequest)
     - [UpdateAgentRequest](#ondewo.nlu.UpdateAgentRequest)
     - [UserInProject](#ondewo.nlu.UserInProject)
-
+  
     - [AgentSorting.AgentSortingField](#ondewo.nlu.AgentSorting.AgentSortingField)
     - [AgentStatus](#ondewo.nlu.AgentStatus)
     - [AgentView](#ondewo.nlu.AgentView)
@@ -83,9 +83,9 @@
     - [ReportFormat](#ondewo.nlu.ReportFormat)
     - [ReportType](#ondewo.nlu.ReportType)
     - [SessionsReportType](#ondewo.nlu.SessionsReportType)
-
+  
     - [Agents](#ondewo.nlu.Agents)
-
+  
 - [ondewo/nlu/aiservices.proto](#ondewo/nlu/aiservices.proto)
     - [AltSentence](#ondewo.nlu.AltSentence)
     - [AltTrainingPhrase](#ondewo.nlu.AltTrainingPhrase)
@@ -124,13 +124,13 @@
     - [Word2VecEnrichmentConfig](#ondewo.nlu.Word2VecEnrichmentConfig)
     - [WordNetAugEnrichmentConfig](#ondewo.nlu.WordNetAugEnrichmentConfig)
     - [XLNetAugEnrichmentConfig](#ondewo.nlu.XLNetAugEnrichmentConfig)
-
+  
     - [EntityTypeFuzzyNerConfig.FuzzyNerAlgorithm](#ondewo.nlu.EntityTypeFuzzyNerConfig.FuzzyNerAlgorithm)
     - [IntentAlgorithms](#ondewo.nlu.IntentAlgorithms)
     - [Mode](#ondewo.nlu.Mode)
-
+  
     - [AiServices](#ondewo.nlu.AiServices)
-
+  
 - [ondewo/nlu/ccai_project.proto](#ondewo/nlu/ccai_project.proto)
     - [CcaiProject](#ondewo.nlu.CcaiProject)
     - [CcaiProject.CcaiServicesMapEntry](#ondewo.nlu.CcaiProject.CcaiServicesMapEntry)
@@ -148,15 +148,15 @@
     - [ListCcaiProjectsResponse](#ondewo.nlu.ListCcaiProjectsResponse)
     - [UpdateCcaiProjectRequest](#ondewo.nlu.UpdateCcaiProjectRequest)
     - [UpdateCcaiProjectResponse](#ondewo.nlu.UpdateCcaiProjectResponse)
-
+  
     - [CcaiProjectSorting.CcaiProjectSortingField](#ondewo.nlu.CcaiProjectSorting.CcaiProjectSortingField)
     - [CcaiProjectStatus](#ondewo.nlu.CcaiProjectStatus)
     - [CcaiProjectView](#ondewo.nlu.CcaiProjectView)
     - [CcaiServiceProvider](#ondewo.nlu.CcaiServiceProvider)
     - [CcaiServiceType](#ondewo.nlu.CcaiServiceType)
-
+  
     - [CcaiProjects](#ondewo.nlu.CcaiProjects)
-
+  
 - [ondewo/nlu/common.proto](#ondewo/nlu/common.proto)
     - [AddNotificationsRequest](#ondewo.nlu.AddNotificationsRequest)
     - [AddNotificationsResponse](#ondewo.nlu.AddNotificationsResponse)
@@ -169,14 +169,14 @@
     - [SetNotificationsFlaggedStatusRequest](#ondewo.nlu.SetNotificationsFlaggedStatusRequest)
     - [SetNotificationsReadStatusRequest](#ondewo.nlu.SetNotificationsReadStatusRequest)
     - [StatResponse](#ondewo.nlu.StatResponse)
-
+  
     - [NotificationFlaggedStatus](#ondewo.nlu.NotificationFlaggedStatus)
     - [NotificationOrigin](#ondewo.nlu.NotificationOrigin)
     - [NotificationReadStatus](#ondewo.nlu.NotificationReadStatus)
     - [NotificationType](#ondewo.nlu.NotificationType)
     - [NotificationVisibility](#ondewo.nlu.NotificationVisibility)
     - [SortingMode](#ondewo.nlu.SortingMode)
-
+  
 - [ondewo/nlu/context.proto](#ondewo/nlu/context.proto)
     - [Context](#ondewo.nlu.Context)
     - [Context.Parameter](#ondewo.nlu.Context.Parameter)
@@ -188,9 +188,9 @@
     - [ListContextsRequest](#ondewo.nlu.ListContextsRequest)
     - [ListContextsResponse](#ondewo.nlu.ListContextsResponse)
     - [UpdateContextRequest](#ondewo.nlu.UpdateContextRequest)
-
+  
     - [Contexts](#ondewo.nlu.Contexts)
-
+  
 - [ondewo/nlu/entity_type.proto](#ondewo/nlu/entity_type.proto)
     - [BatchCreateEntitiesRequest](#ondewo.nlu.BatchCreateEntitiesRequest)
     - [BatchDeleteEntitiesRequest](#ondewo.nlu.BatchDeleteEntitiesRequest)
@@ -220,7 +220,7 @@
     - [ListEntityTypesResponse](#ondewo.nlu.ListEntityTypesResponse)
     - [UpdateEntityRequest](#ondewo.nlu.UpdateEntityRequest)
     - [UpdateEntityTypeRequest](#ondewo.nlu.UpdateEntityTypeRequest)
-
+  
     - [EntityType.AutoExpansionMode](#ondewo.nlu.EntityType.AutoExpansionMode)
     - [EntityType.EntityTypeStatus](#ondewo.nlu.EntityType.EntityTypeStatus)
     - [EntityType.Kind](#ondewo.nlu.EntityType.Kind)
@@ -228,9 +228,9 @@
     - [EntityTypeSorting.EntityTypeSortingField](#ondewo.nlu.EntityTypeSorting.EntityTypeSortingField)
     - [EntityTypeView](#ondewo.nlu.EntityTypeView)
     - [EntityValueSorting.EntityValueSortingField](#ondewo.nlu.EntityValueSorting.EntityValueSortingField)
-
+  
     - [EntityTypes](#ondewo.nlu.EntityTypes)
-
+  
 - [ondewo/nlu/intent.proto](#ondewo/nlu/intent.proto)
     - [BatchCreateParametersRequest](#ondewo.nlu.BatchCreateParametersRequest)
     - [BatchCreateParametersRequest.CreateParameterRequest](#ondewo.nlu.BatchCreateParametersRequest.CreateParameterRequest)
@@ -310,7 +310,7 @@
     - [ListTrainingPhrasesofIntentsWithEnrichmentResponse](#ondewo.nlu.ListTrainingPhrasesofIntentsWithEnrichmentResponse)
     - [TrainingPhraseStatus](#ondewo.nlu.TrainingPhraseStatus)
     - [UpdateIntentRequest](#ondewo.nlu.UpdateIntentRequest)
-
+  
     - [Intent.IntentStatus](#ondewo.nlu.Intent.IntentStatus)
     - [Intent.Message.Platform](#ondewo.nlu.Intent.Message.Platform)
     - [Intent.TrainingPhrase.Type](#ondewo.nlu.Intent.TrainingPhrase.Type)
@@ -318,15 +318,15 @@
     - [IntentCategory](#ondewo.nlu.IntentCategory)
     - [IntentSorting.IntentSortingField](#ondewo.nlu.IntentSorting.IntentSortingField)
     - [IntentView](#ondewo.nlu.IntentView)
-
+  
     - [Intents](#ondewo.nlu.Intents)
-
+  
 - [ondewo/nlu/operation_metadata.proto](#ondewo/nlu/operation_metadata.proto)
     - [OperationMetadata](#ondewo.nlu.OperationMetadata)
-
+  
     - [OperationMetadata.OperationType](#ondewo.nlu.OperationMetadata.OperationType)
     - [OperationMetadata.Status](#ondewo.nlu.OperationMetadata.Status)
-
+  
 - [ondewo/nlu/operations.proto](#ondewo/nlu/operations.proto)
     - [CancelOperationRequest](#ondewo.nlu.CancelOperationRequest)
     - [DeleteOperationRequest](#ondewo.nlu.DeleteOperationRequest)
@@ -335,9 +335,9 @@
     - [ListOperationsResponse](#ondewo.nlu.ListOperationsResponse)
     - [Operation](#ondewo.nlu.Operation)
     - [OperationFilter](#ondewo.nlu.OperationFilter)
-
+  
     - [Operations](#ondewo.nlu.Operations)
-
+  
 - [ondewo/nlu/project_role.proto](#ondewo/nlu/project_role.proto)
     - [CreateProjectRoleRequest](#ondewo.nlu.CreateProjectRoleRequest)
     - [DeleteProjectRoleRequest](#ondewo.nlu.DeleteProjectRoleRequest)
@@ -346,20 +346,20 @@
     - [ListProjectRolesResponse](#ondewo.nlu.ListProjectRolesResponse)
     - [ProjectRole](#ondewo.nlu.ProjectRole)
     - [UpdateProjectRoleRequest](#ondewo.nlu.UpdateProjectRoleRequest)
-
+  
     - [DefaultProjectRole](#ondewo.nlu.DefaultProjectRole)
     - [ProjectRoleView](#ondewo.nlu.ProjectRoleView)
-
+  
     - [ProjectRoles](#ondewo.nlu.ProjectRoles)
-
+  
 - [ondewo/nlu/project_statistics.proto](#ondewo/nlu/project_statistics.proto)
     - [GetEntityTypeCountRequest](#ondewo.nlu.GetEntityTypeCountRequest)
     - [GetIntentCountRequest](#ondewo.nlu.GetIntentCountRequest)
     - [GetProjectElementStatRequest](#ondewo.nlu.GetProjectElementStatRequest)
     - [GetProjectStatRequest](#ondewo.nlu.GetProjectStatRequest)
-
+  
     - [ProjectStatistics](#ondewo.nlu.ProjectStatistics)
-
+  
 - [ondewo/nlu/rag.proto](#ondewo/nlu/rag.proto)
     - [AddChunkRequest](#ondewo.nlu.AddChunkRequest)
     - [AddChunkResponse](#ondewo.nlu.AddChunkResponse)
@@ -476,20 +476,20 @@
     - [UploadDocumentsRequest.Metadata](#ondewo.nlu.UploadDocumentsRequest.Metadata)
     - [UploadFilesRequest](#ondewo.nlu.UploadFilesRequest)
     - [UploadFilesRequest.Metadata](#ondewo.nlu.UploadFilesRequest.Metadata)
-
+  
     - [AgentEventType](#ondewo.nlu.AgentEventType)
     - [ChunkMethod](#ondewo.nlu.ChunkMethod)
     - [DocumentStatus](#ondewo.nlu.DocumentStatus)
     - [MessageRole](#ondewo.nlu.MessageRole)
     - [Permission](#ondewo.nlu.Permission)
-
+  
     - [Rags](#ondewo.nlu.Rags)
-
+  
 - [ondewo/nlu/server_statistics.proto](#ondewo/nlu/server_statistics.proto)
     - [GetUserProjectCountRequest](#ondewo.nlu.GetUserProjectCountRequest)
-
+  
     - [ServerStatistics](#ondewo.nlu.ServerStatistics)
-
+  
 - [ondewo/nlu/session.proto](#ondewo/nlu/session.proto)
     - [AddAudioFilesRequest](#ondewo.nlu.AddAudioFilesRequest)
     - [AddAudioFilesResponse](#ondewo.nlu.AddAudioFilesResponse)
@@ -576,7 +576,7 @@
     - [UpdateSessionCommentsRequest](#ondewo.nlu.UpdateSessionCommentsRequest)
     - [UpdateSessionStepRequest](#ondewo.nlu.UpdateSessionStepRequest)
     - [VideoFileResource](#ondewo.nlu.VideoFileResource)
-
+  
     - [AudioEncoding](#ondewo.nlu.AudioEncoding)
     - [AudioFileResourceType](#ondewo.nlu.AudioFileResourceType)
     - [ComparisonOperator](#ondewo.nlu.ComparisonOperator)
@@ -585,9 +585,9 @@
     - [SessionReview.View](#ondewo.nlu.SessionReview.View)
     - [StreamingRecognitionResult.MessageType](#ondewo.nlu.StreamingRecognitionResult.MessageType)
     - [TranscriptionType](#ondewo.nlu.TranscriptionType)
-
+  
     - [Sessions](#ondewo.nlu.Sessions)
-
+  
 - [ondewo/nlu/user.proto](#ondewo/nlu/user.proto)
     - [CreateServerRoleRequest](#ondewo.nlu.CreateServerRoleRequest)
     - [CreateUserRequest](#ondewo.nlu.CreateUserRequest)
@@ -619,11 +619,11 @@
     - [User](#ondewo.nlu.User)
     - [UserInfo](#ondewo.nlu.UserInfo)
     - [UserInfo.ProjectRolesEntry](#ondewo.nlu.UserInfo.ProjectRolesEntry)
-
+  
     - [DefaultServerRole](#ondewo.nlu.DefaultServerRole)
-
+  
     - [Users](#ondewo.nlu.Users)
-
+  
 - [ondewo/nlu/utility.proto](#ondewo/nlu/utility.proto)
     - [AddTrainingPhrasesFromCSVRequest](#ondewo.nlu.AddTrainingPhrasesFromCSVRequest)
     - [AddTrainingPhrasesRequest](#ondewo.nlu.AddTrainingPhrasesRequest)
@@ -647,11 +647,11 @@
     - [ValidateEmbeddedRegexResponse](#ondewo.nlu.ValidateEmbeddedRegexResponse)
     - [ValidateRegexRequest](#ondewo.nlu.ValidateRegexRequest)
     - [ValidateRegexResponse](#ondewo.nlu.ValidateRegexResponse)
-
+  
     - [ReannotateEntitiesOptions](#ondewo.nlu.ReannotateEntitiesOptions)
-
+  
     - [Utilities](#ondewo.nlu.Utilities)
-
+  
 - [ondewo/nlu/webhook.proto](#ondewo/nlu/webhook.proto)
     - [CreateSessionEntityTypeRequest](#ondewo.nlu.CreateSessionEntityTypeRequest)
     - [DeleteSessionEntityTypeRequest](#ondewo.nlu.DeleteSessionEntityTypeRequest)
@@ -665,11 +665,11 @@
     - [UpdateSessionEntityTypeRequest](#ondewo.nlu.UpdateSessionEntityTypeRequest)
     - [WebhookRequest](#ondewo.nlu.WebhookRequest)
     - [WebhookResponse](#ondewo.nlu.WebhookResponse)
-
+  
     - [SessionEntityType.EntityOverrideMode](#ondewo.nlu.SessionEntityType.EntityOverrideMode)
-
+  
     - [Webhook](#ondewo.nlu.Webhook)
-
+  
 - [ondewo/qa/qa.proto](#ondewo/qa/qa.proto)
     - [GetAnswerRequest](#ondewo.qa.GetAnswerRequest)
     - [GetAnswerResponse](#ondewo.qa.GetAnswerResponse)
@@ -684,9 +684,9 @@
     - [UpdateDatabaseRequest](#ondewo.qa.UpdateDatabaseRequest)
     - [UpdateDatabaseResponse](#ondewo.qa.UpdateDatabaseResponse)
     - [UrlFilter](#ondewo.qa.UrlFilter)
-
+  
     - [QA](#ondewo.qa.QA)
-
+  
 - [Scalar Value Types](#scalar-value-types)
 
 
@@ -9304,36 +9304,36 @@ Covers all entpoints of the <a href="https://github.com/ondewo/ragflow">RAGFlow<
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
 | CreateDataset | [CreateDatasetRequest](#ondewo.nlu.CreateDatasetRequest) | [Dataset](#ondewo.nlu.Dataset) | Create a new dataset (knowledge base).<br> Uses tenant's default embedding model if not specified. |
-| UpdateDataset | [UpdateDatasetRequest](#ondewo.nlu.UpdateDatasetRequest) | [Dataset](#ondewo.nlu.Dataset) | Update an existing dataset's configuration.<br> Cannot change embedding_model if dataset has chunks. |
-| DeleteDatasets | [DeleteDatasetsRequest](#ondewo.nlu.DeleteDatasetsRequest) | [PartialSuccess](#ondewo.nlu.PartialSuccess) | Delete one or more datasets (batch operation).<br> If ids is null or empty, deletes all user's datasets.<br> Deletes all associated documents, files, and chunks. |
+| UpdateDataset | [UpdateDatasetRequest](#ondewo.nlu.UpdateDatasetRequest) | [Dataset](#ondewo.nlu.Dataset) | Update an existing dataset's configuration.<br> Cannot change <code>embedding_model</code> if dataset has chunks. |
+| DeleteDatasets | [DeleteDatasetsRequest](#ondewo.nlu.DeleteDatasetsRequest) | [PartialSuccess](#ondewo.nlu.PartialSuccess) | Delete one or more datasets (batch operation).<br> If <code>ids</code> is null or empty, deletes all user's datasets.<br> Deletes all associated documents, files, and chunks. |
 | ListDatasets | [ListDatasetsRequest](#ondewo.nlu.ListDatasetsRequest) | [DatasetList](#ondewo.nlu.DatasetList) | List datasets with pagination and filtering.<br> Returns datasets from all tenants the user has access to. |
 | GetKnowledgeGraph | [GetKnowledgeGraphRequest](#ondewo.nlu.GetKnowledgeGraphRequest) | [GetKnowledgeGraphResponse](#ondewo.nlu.GetKnowledgeGraphResponse) | Get the knowledge graph for a dataset.<br> Returns graph structure with nodes (max 256) and edges (max 128). |
 | DeleteKnowledgeGraph | [DeleteKnowledgeGraphRequest](#ondewo.nlu.DeleteKnowledgeGraphRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Delete the knowledge graph for a dataset.<br> Deletes graph-related chunks but not the dataset itself. |
-| UploadDocuments | [UploadDocumentsRequest](#ondewo.nlu.UploadDocumentsRequest) stream | [DocumentList](#ondewo.nlu.DocumentList) | Upload one or more documents to a dataset.<br> Documents start in UNSTART state and must be parsed. |
-| UpdateDocument | [UpdateDocumentRequest](#ondewo.nlu.UpdateDocumentRequest) | [Document](#ondewo.nlu.Document) | Update document metadata and configuration.<br> Changing chunk_method resets document to UNSTART and deletes chunks. |
+| UploadDocuments | [UploadDocumentsRequest](#ondewo.nlu.UploadDocumentsRequest) stream | [DocumentList](#ondewo.nlu.DocumentList) | Upload one or more documents to a dataset.<br> Documents start in <code>UNSTART</code> state and must be parsed. |
+| UpdateDocument | [UpdateDocumentRequest](#ondewo.nlu.UpdateDocumentRequest) | [Document](#ondewo.nlu.Document) | Update document metadata and configuration.<br> Changing <code>chunk_method</code> resets document to <code>UNSTART</code> and deletes chunks. |
 | DownloadDocument | [DownloadDocumentRequest](#ondewo.nlu.DownloadDocumentRequest) | [FileChunk](#ondewo.nlu.FileChunk) stream | Download the original document file.<br> Returns binary file stream from storage.<br> First chunk contains metadata, subsequent chunks only contain data. |
 | ListDocuments | [ListDocumentsRequest](#ondewo.nlu.ListDocumentsRequest) | [ListDocumentsResponse](#ondewo.nlu.ListDocumentsResponse) | List documents in a dataset with pagination and filtering.<br> Supports time range filtering and keyword search. |
-| DeleteDocuments | [DeleteDocumentsRequest](#ondewo.nlu.DeleteDocumentsRequest) | [PartialSuccess](#ondewo.nlu.PartialSuccess) | Delete one or more documents from a dataset (batch operation).<br> If ids empty, deletes all documents. Removes chunks and storage files. |
-| ParseDocuments | [ParseDocumentsRequest](#ondewo.nlu.ParseDocumentsRequest) | [PartialSuccess](#ondewo.nlu.PartialSuccess) | Start parsing documents into chunks.<br> Cannot parse documents currently being processed (0 < progress < 1).<br> Queues documents for background processing. |
-| StopParsing | [StopParsingRequest](#ondewo.nlu.StopParsingRequest) | [PartialSuccess](#ondewo.nlu.PartialSuccess) | Stop parsing documents.<br> Can only stop documents with progress between 0 and 1. |
+| DeleteDocuments | [DeleteDocumentsRequest](#ondewo.nlu.DeleteDocumentsRequest) | [PartialSuccess](#ondewo.nlu.PartialSuccess) | Delete one or more documents from a dataset (batch operation).<br> If <code>ids</code> empty, deletes all documents. Removes chunks and storage files. |
+| ParseDocuments | [ParseDocumentsRequest](#ondewo.nlu.ParseDocumentsRequest) | [PartialSuccess](#ondewo.nlu.PartialSuccess) | Start parsing documents into chunks.<br> Cannot parse documents currently being processed (0 &lt; <code>progress</code> &lt; 1).<br> Queues documents for background processing. |
+| StopParsing | [StopParsingRequest](#ondewo.nlu.StopParsingRequest) | [PartialSuccess](#ondewo.nlu.PartialSuccess) | Stop parsing documents.<br> Can only stop documents with <code>progress</code> between 0 and 1. |
 | ListChunks | [ListChunksRequest](#ondewo.nlu.ListChunksRequest) | [ListChunksResponse](#ondewo.nlu.ListChunksResponse) | List chunks of a document with pagination.<br> Supports keyword search with content highlighting. |
 | AddChunk | [AddChunkRequest](#ondewo.nlu.AddChunkRequest) | [AddChunkResponse](#ondewo.nlu.AddChunkResponse) | Manually add a chunk to a document.<br> Automatically tokenizes content and generates embeddings. |
-| RemoveChunks | [RemoveChunksRequest](#ondewo.nlu.RemoveChunksRequest) | [PartialSuccess](#ondewo.nlu.PartialSuccess) | Remove one or more chunks from a document.<br> If chunk_ids empty, removes all chunks from document. |
+| RemoveChunks | [RemoveChunksRequest](#ondewo.nlu.RemoveChunksRequest) | [PartialSuccess](#ondewo.nlu.PartialSuccess) | Remove one or more chunks from a document.<br> If <code>chunk_ids</code> empty, removes all chunks from document. |
 | UpdateChunk | [UpdateChunkRequest](#ondewo.nlu.UpdateChunkRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Update an existing chunk's content and metadata.<br> Re-tokenizes content and re-generates embeddings if content changed. |
 | Retrieval | [RetrievalRequest](#ondewo.nlu.RetrievalRequest) | [RetrievalResponse](#ondewo.nlu.RetrievalResponse) | Retrieve chunks using vector similarity search.<br> All datasets must use the same embedding model.<br> Supports reranking, metadata filtering, and knowledge graph retrieval. |
-| CreateChat | [CreateChatRequest](#ondewo.nlu.CreateChatRequest) | [Chat](#ondewo.nlu.Chat) | Create a new chat assistant.<br> All datasets must have parsed files (chunk_num > 0).<br> All datasets must use the same embedding model. |
+| CreateChat | [CreateChatRequest](#ondewo.nlu.CreateChatRequest) | [Chat](#ondewo.nlu.Chat) | Create a new chat assistant.<br> All datasets must have parsed files (<code>chunk_num</code> &gt; 0).<br> All datasets must use the same embedding model. |
 | UpdateChat | [UpdateChatRequest](#ondewo.nlu.UpdateChatRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Update an existing chat assistant's configuration.<br> LLM and prompt configs are merged with existing values. |
-| DeleteChats | [DeleteChatsRequest](#ondewo.nlu.DeleteChatsRequest) | [PartialSuccess](#ondewo.nlu.PartialSuccess) | Delete one or more chat assistants (batch operation).<br> If ids empty, deletes all user's chats (soft delete). |
+| DeleteChats | [DeleteChatsRequest](#ondewo.nlu.DeleteChatsRequest) | [PartialSuccess](#ondewo.nlu.PartialSuccess) | Delete one or more chat assistants (batch operation).<br> If <code>ids</code> empty, deletes all user's chats (soft delete). |
 | ListChats | [ListChatsRequest](#ondewo.nlu.ListChatsRequest) | [ChatList](#ondewo.nlu.ChatList) | List chat assistants with pagination.<br> Returns full dataset objects (not just IDs). |
 | CreateChatSession | [CreateChatSessionRequest](#ondewo.nlu.CreateChatSessionRequest) | [ChatSession](#ondewo.nlu.ChatSession) | Create a new chat session (conversation).<br> Session initialized with assistant's prologue message. |
-| CreateAgentSession | [CreateAgentSessionRequest](#ondewo.nlu.CreateAgentSessionRequest) | [AgentSession](#ondewo.nlu.AgentSession) | Create a new agent session.<br> Initializes Canvas with agent's DSL configuration. |
+| CreateAgentSession | [CreateAgentSessionRequest](#ondewo.nlu.CreateAgentSessionRequest) | [AgentSession](#ondewo.nlu.AgentSession) | Create a new agent session.<br> Initializes <code>Canvas</code> with agent's DSL configuration. |
 | UpdateChatSession | [UpdateChatSessionRequest](#ondewo.nlu.UpdateChatSessionRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Update a chat session's metadata (name only).<br> Cannot update message or reference fields. |
 | ListChatSessions | [ListChatSessionsRequest](#ondewo.nlu.ListChatSessionsRequest) | [ChatSessionList](#ondewo.nlu.ChatSessionList) | List sessions for a chat assistant.<br> Returns message history with embedded chunk references. |
 | ListAgentSessions | [ListAgentSessionsRequest](#ondewo.nlu.ListAgentSessionsRequest) | [AgentSessionList](#ondewo.nlu.AgentSessionList) | List sessions for an agent.<br> Can optionally exclude DSL from response for performance. |
-| DeleteChatSessions | [DeleteChatSessionsRequest](#ondewo.nlu.DeleteChatSessionsRequest) | [PartialSuccess](#ondewo.nlu.PartialSuccess) | Delete one or more chat sessions (batch operation).<br> If ids empty, deletes all sessions for the chat (hard delete). |
-| DeleteAgentSessions | [DeleteAgentSessionsRequest](#ondewo.nlu.DeleteAgentSessionsRequest) | [PartialSuccess](#ondewo.nlu.PartialSuccess) | Delete one or more agent sessions (batch operation).<br> If ids empty, deletes all sessions for the agent (hard delete). |
-| ChatCompletion | [ChatCompletionRequest](#ondewo.nlu.ChatCompletionRequest) | [ChatCompletionResponse](#ondewo.nlu.ChatCompletionResponse) stream | Generate chat completion with RAG (server streaming).<br> Creates new session if session_id not provided. |
-| OpenAIChatCompletion | [OpenAIChatCompletionRequest](#ondewo.nlu.OpenAIChatCompletionRequest) | [OpenAIChatCompletionResponse](#ondewo.nlu.OpenAIChatCompletionResponse) stream | OpenAI-compatible chat completion endpoint (server streaming).<br> Compatible with OpenAI Python client.<br> Supports reasoning content in <think> tags. |
+| DeleteChatSessions | [DeleteChatSessionsRequest](#ondewo.nlu.DeleteChatSessionsRequest) | [PartialSuccess](#ondewo.nlu.PartialSuccess) | Delete one or more chat sessions (batch operation).<br> If <code>ids</code> empty, deletes all sessions for the chat (hard delete). |
+| DeleteAgentSessions | [DeleteAgentSessionsRequest](#ondewo.nlu.DeleteAgentSessionsRequest) | [PartialSuccess](#ondewo.nlu.PartialSuccess) | Delete one or more agent sessions (batch operation).<br> If <code>ids</code> empty, deletes all sessions for the agent (hard delete). |
+| ChatCompletion | [ChatCompletionRequest](#ondewo.nlu.ChatCompletionRequest) | [ChatCompletionResponse](#ondewo.nlu.ChatCompletionResponse) stream | Generate chat completion with RAG (server streaming).<br> Creates new session if <code>session_id</code> not provided. |
+| OpenAIChatCompletion | [OpenAIChatCompletionRequest](#ondewo.nlu.OpenAIChatCompletionRequest) | [OpenAIChatCompletionResponse](#ondewo.nlu.OpenAIChatCompletionResponse) stream | OpenAI-compatible chat completion endpoint (server streaming).<br> Compatible with OpenAI Python client.<br> Supports reasoning content in <code>&lt;think&gt;</code> tags. |
 | AgentCompletion | [AgentCompletionRequest](#ondewo.nlu.AgentCompletionRequest) | [AgentCompletionResponse](#ondewo.nlu.AgentCompletionResponse) stream | Generate agent completion (server streaming).<br> Filters events to only return message-related events. |
 | OpenAIAgentCompletion | [OpenAIAgentCompletionRequest](#ondewo.nlu.OpenAIAgentCompletionRequest) | [OpenAIChatCompletionResponse](#ondewo.nlu.OpenAIChatCompletionResponse) stream | OpenAI-compatible agent completion endpoint (server streaming).<br> Uses tiktoken for token counting. |
 | CreateAgent | [CreateRagAgentRequest](#ondewo.nlu.CreateRagAgentRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Create a new agent with DSL configuration.<br> Title must be unique for the user. |
@@ -9350,14 +9350,14 @@ Covers all entpoints of the <a href="https://github.com/ondewo/ragflow">RAGFlow<
 | RenameFile | [RenameFileRequest](#ondewo.nlu.RenameFileRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Rename a file or folder.<br> Cannot change file extension. Duplicate names not allowed. |
 | GetFile | [GetFileRequest](#ondewo.nlu.GetFileRequest) | [FileChunk](#ondewo.nlu.FileChunk) stream | Download a file.<br> Retrieves from MinIO/S3 storage.<br> First chunk contains metadata, subsequent chunks only contain data. |
 | MoveFile | [MoveFileRequest](#ondewo.nlu.MoveFileRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Move one or more files to another folder.<br> Validates all files and destination exist. |
-| FileToDocument | [FileToDocumentRequest](#ondewo.nlu.FileToDocumentRequest) | [FileToDocumentList](#ondewo.nlu.FileToDocumentList) | Convert files to documents and add to datasets.<br> Handles folders recursively (converts all inner files).<br> Links files to multiple datasets if multiple dataset_ids provided. |
+| FileToDocument | [FileToDocumentRequest](#ondewo.nlu.FileToDocumentRequest) | [FileToDocumentList](#ondewo.nlu.FileToDocumentList) | Convert files to documents and add to datasets.<br> Handles folders recursively (converts all inner files).<br> Links files to multiple datasets if multiple <code>dataset_ids</code> provided. |
 | DifyRetrieval | [DifyRetrievalRequest](#ondewo.nlu.DifyRetrievalRequest) | [DifyRecordList](#ondewo.nlu.DifyRecordList) | Retrieve chunks in Dify-compatible format.<br> Uses API key authentication (not Bearer token). |
 | Ask | [AskRequest](#ondewo.nlu.AskRequest) | [AskResponse](#ondewo.nlu.AskResponse) stream | Ask a question across datasets without a chat assistant.<br> Streaming only. All datasets must have parsed files. |
 | RelatedQuestions | [RelatedQuestionsRequest](#ondewo.nlu.RelatedQuestionsRequest) | [RelatedQuestionsResponse](#ondewo.nlu.RelatedQuestionsResponse) | Generate related search terms for a question.<br> Returns 5-10 suggestions considering industry context. |
 | ChatbotCompletion | [ChatbotCompletionRequest](#ondewo.nlu.ChatbotCompletionRequest) | [ChatCompletionResponse](#ondewo.nlu.ChatCompletionResponse) stream | Chat completion for iframe/embedded chatbot (server streaming).<br> Uses API key from APIToken table. |
 | ChatbotInfo | [ChatbotInfoRequest](#ondewo.nlu.ChatbotInfoRequest) | [ChatbotInfoResponse](#ondewo.nlu.ChatbotInfoResponse) | Get chatbot information for embedded UI initialization.<br> Returns title, avatar, and prologue. |
 | AgentbotCompletion | [AgentbotCompletionRequest](#ondewo.nlu.AgentbotCompletionRequest) | [AgentCompletionResponse](#ondewo.nlu.AgentCompletionResponse) stream | Agent completion for iframe/embedded agentbot (server streaming).<br> Uses API key authentication. |
-| AgentbotInputs | [AgentbotInputsRequest](#ondewo.nlu.AgentbotInputsRequest) | [AgentbotInputsResponse](#ondewo.nlu.AgentbotInputsResponse) | Get agent input form configuration for embedded UI.<br> Returns input schema from "begin" component in DSL. |
+| AgentbotInputs | [AgentbotInputsRequest](#ondewo.nlu.AgentbotInputsRequest) | [AgentbotInputsResponse](#ondewo.nlu.AgentbotInputsResponse) | Get agent input form configuration for embedded UI.<br> Returns input schema from <code>"begin"</code> component in DSL. |
 | SearchbotAsk | [SearchbotAskRequest](#ondewo.nlu.SearchbotAskRequest) | [AskResponse](#ondewo.nlu.AskResponse) stream | Ask question in searchbot with search app configuration.<br> Uses search app config if provided. |
 | SearchbotRetrieval | [SearchbotRetrievalRequest](#ondewo.nlu.SearchbotRetrievalRequest) | [SearchbotRetrievalResponse](#ondewo.nlu.SearchbotRetrievalResponse) | Test retrieval with searchbot configuration.<br> Supports search app configuration with auto metadata filtering. |
 | SearchbotRelatedQuestions | [SearchbotRelatedQuestionsRequest](#ondewo.nlu.SearchbotRelatedQuestionsRequest) | [RelatedQuestionsResponse](#ondewo.nlu.RelatedQuestionsResponse) | Generate related questions for searchbot.<br> Uses search app LLM config if available. |
