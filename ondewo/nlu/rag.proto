@@ -1,0 +1,3138 @@
+// Copyright 2018 Google Inc.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+// Modifications Copyright 2020-2023 ONDEWO GmbH
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+// File-level comment for <code>ondewo/nlu/rags.proto</code>.
+// This file contains a single service <a href="#ondewo.nlu.Rags">Rags</a>. The Rags service provides integration with RAGFlow for Retrieval-Augmented Generation (RAG), including dataset management, document processing, chunk retrieval, conversational AI with chat and agent assistants, and file management. Key message types include <a href="#ondewo.nlu.RagDataset">RagDataset</a>, <a href="#ondewo.nlu.RagChat">RagChat</a>, and <a href="#ondewo.nlu.RagAgent">RagAgent</a>.
+syntax = "proto3";
+
+package ondewo.nlu;
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/struct.proto";
+
+// TODO change Github link if changes to RAGFlow are merged to upstream
+
+// Provides an interface for interacting with the RAGFlow RAG engine.
+// Covers all entpoints of the <a href="https://github.com/ondewo/ragflow">RAGFlow</a> HTTP API. For more information on RAGFlow refer to the <a href="https://ragflow.io/docs/dev/">official documentation</a>
+service Rags {
+
+    // ===========================================
+    // Dataset Management (6 methods)
+    // REST: /api/v1/datasets
+    // ===========================================
+
+    // RAGFlow endpoint: POST /api/v1/datasets
+
+    // Create a new dataset (knowledge base).<br>
+    // Uses tenant's default embedding model if not specified.
+    rpc RagCreateDataset(RagCreateDatasetRequest) returns (RagDataset);
+
+    // RAGFlow endpoint: PUT /api/v1/datasets/<dataset_id>
+
+    // Update an existing dataset's configuration.<br>
+    // Cannot change embedding_model if dataset has chunks.
+    rpc RagUpdateDataset(RagUpdateDatasetRequest) returns (RagDataset);
+
+    // RAGFlow endpoint: DELETE /api/v1/datasets
+
+    // Delete one or more datasets (batch operation).<br>
+    // If ids is null or empty, deletes all user's datasets.<br>
+    // Deletes all associated documents, files, and chunks.
+    rpc RagDeleteDatasets(RagDeleteDatasetsRequest) returns (RagPartialSuccess);
+
+    // RAGFlow endpoint: GET /api/v1/datasets
+
+    // List datasets with pagination and filtering.<br>
+    // Returns datasets from all tenants the user has access to.
+    rpc RagListDatasets(RagListDatasetsRequest) returns (RagDatasetList);
+
+    // RAGFlow endpoint: GET /api/v1/datasets/<dataset_id>/knowledge_graph
+
+    // Get the knowledge graph for a dataset.<br>
+    // Returns graph structure with nodes (max 256) and edges (max 128).
+    rpc RagGetKnowledgeGraph(RagGetKnowledgeGraphRequest) returns (RagGetKnowledgeGraphResponse);
+
+    // RAGFlow endpoint: DELETE /api/v1/datasets/<dataset_id>/knowledge_graph
+
+    // Delete the knowledge graph for a dataset.<br>
+    // Deletes graph-related chunks but not the dataset itself.
+    rpc RagDeleteKnowledgeGraph(RagDeleteKnowledgeGraphRequest) returns (google.protobuf.Empty);
+
+    // ========================================================================
+    // Document Management (5 methods)
+    // REST: /api/v1/datasets/<dataset_id>/documents
+    // ========================================================================
+
+    // RAGFlow endpoint: POST /api/v1/datasets/<dataset_id>/documents
+
+    // Upload one or more documents to a dataset.<br>
+    // Documents start in UNSTART state and must be parsed.
+    rpc RagUploadDocuments(stream RagUploadDocumentsRequest) returns (RagDocumentList);
+
+    // RAGFlow endpoint: PUT /api/v1/datasets/<dataset_id>/documents/<document_id>
+
+    // Update document metadata and configuration.<br>
+    // Changing chunk_method resets document to UNSTART and deletes chunks.
+    rpc RagUpdateDocument(RagUpdateDocumentRequest) returns (RagDocument);
+
+    // RAGFlow endpoint: GET /api/v1/datasets/<dataset_id>/documents/<document_id>
+
+    // Download the original document file.<br>
+    // Returns binary file stream from storage.<br>
+    // First chunk contains metadata, subsequent chunks only contain data.
+    rpc RagDownloadDocument(RagDownloadDocumentRequest) returns (stream RagFileChunk);
+
+    // RAGFlow endpoint: GET /api/v1/datasets/<dataset_id>/documents
+
+    // List documents in a dataset with pagination and filtering.<br>
+    // Supports time range filtering and keyword search.
+    rpc RagListDocuments(RagListDocumentsRequest) returns (RagListDocumentsResponse);
+
+    // RAGFlow endpoint: DELETE /api/v1/datasets/<dataset_id>/documents
+
+    // Delete one or more documents from a dataset (batch operation).<br>
+    // If ids empty, deletes all documents. Removes chunks and storage files.
+    rpc RagDeleteDocuments(RagDeleteDocumentsRequest) returns (RagPartialSuccess);
+
+    // ========================================================================
+    // Chunk Management (7 methods)
+    // Chunks are text segments extracted from documents for retrieval.
+    // REST: /api/v1/datasets/<dataset_id>/chunks
+    // ========================================================================
+
+    // RAGFlow endpoint: POST /api/v1/datasets/<dataset_id>/chunks
+
+    // Start parsing documents into chunks.<br>
+    // Cannot parse documents currently being processed (0 < progress < 1).<br>
+    // Queues documents for background processing.
+    rpc RagParseDocuments(RagParseDocumentsRequest) returns (RagPartialSuccess);
+
+    // RAGFlow endpoint: DELETE /api/v1/datasets/<dataset_id>/chunks
+
+    // Stop parsing documents.<br>
+    // Can only stop documents with progress between 0 and 1.
+    rpc RagStopParsing(RagStopParsingRequest) returns (RagPartialSuccess);
+
+    // RAGFlow endpoint: GET /api/v1/datasets/<dataset_id>/documents/<document_id>/chunks
+
+    // List chunks of a document with pagination.<br>
+    // Supports keyword search with content highlighting.
+    rpc RagListChunks(RagListChunksRequest) returns (RagListChunksResponse);
+
+    // RAGFlow endpoint: POST /api/v1/datasets/<dataset_id>/documents/<document_id>/chunks
+
+    // Manually add a chunk to a document.<br>
+    // Automatically tokenizes content and generates embeddings.
+    rpc RagAddChunk(RagAddChunkRequest) returns (RagAddChunkResponse);
+
+    // RAGFlow endpoint: DELETE /api/v1/datasets/<dataset_id>/documents/<document_id>/chunks
+
+    // Remove one or more chunks from a document.<br>
+    // If chunk_ids empty, removes all chunks from document.
+    rpc RagRemoveChunks(RagRemoveChunksRequest) returns (RagPartialSuccess);
+
+    // RAGFlow endpoint: PUT /api/v1/datasets/<dataset_id>/documents/<document_id>/chunks/<chunk_id>
+
+    // Update an existing chunk's content and metadata.<br>
+    // Re-tokenizes content and re-generates embeddings if content changed.
+    rpc RagUpdateChunk(RagUpdateChunkRequest) returns (google.protobuf.Empty);
+
+    // RAGFlow endpoint: POST /api/v1/retrieval
+
+    // Retrieve chunks using vector similarity search.<br>
+    // All datasets must use the same embedding model.<br>
+    // Supports reranking, metadata filtering, and knowledge graph retrieval.
+    rpc RagRetrieval(RagRetrievalRequest) returns (RagRetrievalResponse);
+
+    // ========================================================================
+    // Chat Management (4 methods)
+    // Chat assistants are RAG-powered conversational agents.
+    // REST: /api/v1/chats
+    // ========================================================================
+
+    // RAGFlow endpoint: POST /api/v1/chats
+
+    // Create a new chat assistant.<br>
+    // All datasets must have parsed files (chunk_num > 0).<br>
+    // All datasets must use the same embedding model.
+    rpc RagCreateChat(RagCreateChatRequest) returns (RagChat);
+
+    // RAGFlow endpoint: PUT /api/v1/chats/<chat_id>
+
+    // Update an existing chat assistant's configuration.<br>
+    // LLM and prompt configs are merged with existing values.
+    rpc RagUpdateChat(RagUpdateChatRequest) returns (google.protobuf.Empty);
+
+    // RAGFlow endpoint: DELETE /api/v1/chats
+
+    // Delete one or more chat assistants (batch operation).<br>
+    // If ids empty, deletes all user's chats (soft delete).
+    rpc RagDeleteChats(RagDeleteChatsRequest) returns (RagPartialSuccess);
+
+    // RAGFlow endpoint: GET /api/v1/chats
+
+    // List chat assistants with pagination.<br>
+    // Returns full dataset objects (not just IDs).
+    rpc RagListChats(RagListChatsRequest) returns (RagChatList);
+
+    // ========================================================================
+    // Session Management (7 methods)
+    // Sessions are conversation instances for chats and agents.
+    // REST: /api/v1/chats/<chat_id>/sessions,
+    // /api/v1/agents/<agent_id>/sessions
+    // ========================================================================
+
+    // RAGFlow endpoint: POST /api/v1/chats/<chat_id>/sessions
+
+    // Create a new chat session (conversation).<br>
+    // Session initialized with assistant's prologue message.
+    rpc RagCreateChatSession(RagCreateChatSessionRequest) returns (RagChatSession);
+
+    // RAGFlow endpoint: POST /api/v1/agents/<agent_id>/sessions
+
+    // Create a new agent session.<br>
+    // Initializes Canvas with agent's DSL configuration.
+    rpc RagCreateAgentSession(RagCreateAgentSessionRequest) returns (RagAgentSession);
+
+    // RAGFlow endpoint: PUT /api/v1/chats/<chat_id>/sessions/<session_id>
+
+    // Update a chat session's metadata (name only).<br>
+    // Cannot update message or reference fields.
+    rpc RagUpdateChatSession(RagUpdateChatSessionRequest) returns (google.protobuf.Empty);
+
+    // RAGFlow endpoint: GET /api/v1/chats/<chat_id>/sessions
+
+    // List sessions for a chat assistant.<br>
+    // Returns message history with embedded chunk references.
+    rpc RagListChatSessions(RagListChatSessionsRequest) returns (RagChatSessionList);
+
+    // RAGFlow endpoint: GET /api/v1/agents/<agent_id>/sessions
+
+    // List sessions for an agent.<br>
+    // Can optionally exclude DSL from response for performance.
+    rpc RagListAgentSessions(RagListAgentSessionsRequest) returns (RagAgentSessionList);
+
+    // RAGFlow endpoint: DELETE /api/v1/chats/<chat_id>/sessions
+
+    // Delete one or more chat sessions (batch operation).<br>
+    // If ids empty, deletes all sessions for the chat (hard delete).
+    rpc RagDeleteChatSessions(RagDeleteChatSessionsRequest) returns (RagPartialSuccess);
+
+    // RAGFlow endpoint: DELETE /api/v1/agents/<agent_id>/sessions
+
+    // Delete one or more agent sessions (batch operation).<br>
+    // If ids empty, deletes all sessions for the agent (hard delete).
+    rpc RagDeleteAgentSessions(RagDeleteAgentSessionsRequest) returns (RagPartialSuccess);
+
+    // ========================================================================
+    // Completion (4 streaming methods)
+    // Generate responses using RAG and LLMs.
+    // All methods support server-side streaming.
+    // REST: /api/v1/chats/<id>/completions,
+    // /api/v1/agents/<id>/completions
+    // ========================================================================
+
+    // RAGFlow endpoint: POST /api/v1/chats/<chat_id>/completions
+
+    // Generate chat completion with RAG (server streaming).<br>
+    // Creates new session if session_id not provided.
+    rpc RagChatCompletion(RagChatCompletionRequest) returns (stream RagChatCompletionResponse);
+
+    // RAGFlow endpoint: POST /api/v1/chats_openai/<chat_id>/chat/completions
+
+    // OpenAI-compatible chat completion endpoint (server streaming).<br>
+    // Compatible with OpenAI Python client.<br>
+    // Supports reasoning content in <think> tags.
+    rpc RagOpenAiChatCompletion(RagOpenAiChatCompletionRequest) returns (stream RagOpenAiChatCompletionResponse);
+
+    // RAGFlow endpoint: POST /api/v1/agents/<agent_id>/completions
+
+    // Generate agent completion (server streaming).<br>
+    // Filters events to only return message-related events.
+    rpc RagAgentCompletion(RagAgentCompletionRequest) returns (stream RagAgentCompletionResponse);
+
+    // RAGFlow endpoint: POST /api/v1/agents_openai/<agent_id>/chat/completions
+
+    // OpenAI-compatible agent completion endpoint (server streaming).<br>
+    // Uses tiktoken for token counting.
+    rpc RagOpenAiAgentCompletion(RagOpenAiAgentCompletionRequest) returns (stream RagOpenAiChatCompletionResponse);
+
+    // ========================================================================
+    // Agent Management (4 methods)
+    // Agents are workflow-based AI assistants with DSL configuration.
+    // REST: /api/v1/agents
+    // ========================================================================
+
+    // RAGFlow endpoint: POST /api/v1/agents
+
+    // Create a new agent with DSL configuration.<br>
+    // Title must be unique for the user.
+    rpc RagCreateAgent(RagCreateAgentRequest) returns (google.protobuf.Empty);
+
+    // RAGFlow endpoint: PUT /api/v1/agents/<agent_id>
+
+    // Update an existing agent.<br>
+    // DSL updates create new version snapshot. Only owner can update.
+    rpc RagUpdateAgent(RagUpdateAgentRequest) returns (google.protobuf.Empty);
+
+    // RAGFlow endpoint: DELETE /api/v1/agents/<agent_id>
+
+    // Delete an agent (hard delete).<br>
+    // Only owner can delete.
+    rpc RagDeleteAgent(RagDeleteAgentRequest) returns (google.protobuf.Empty);
+
+    // RAGFlow endpoint: GET /api/v1/agents
+
+    // List agents with pagination.<br>
+    // Only returns user's own agents.
+    rpc RagListAgents(RagListAgentsRequest) returns (RagAgentList);
+
+    // ========================================================================
+    // File Management (11 methods)
+    // Manage files and folders in RAGFlow's file system.
+    // Files can be converted to dataset documents.
+    // REST: /api/v1/file/*
+    // ========================================================================
+
+    // RAGFlow endpoint: POST /api/v1/file/upload
+
+    // Upload one or more files via multipart form data.<br>
+    // Supports nested folder paths in filename.<br>
+    // Auto-creates intermediate folders.
+    rpc RagUploadFiles(stream RagUploadFilesRequest) returns (RagFileList);
+
+    // RAGFlow endpoint: POST /api/v1/file/create
+
+    // Create a new folder.<br>
+    // Duplicate names in same folder not allowed.
+    rpc RagCreateFile(RagCreateFileRequest) returns (RagFile);
+
+    // RAGFlow endpoint: GET /api/v1/file/list
+
+    // List files in a folder with pagination.<br>
+    // Supports keyword search. Auto-initializes knowledgebase docs folder.
+    rpc RagListFiles(RagListFilesRequest) returns (RagListFilesResponse);
+
+    // RAGFlow endpoint: GET /api/v1/file/root_folder
+
+    // Get user's root folder information.<br>
+    // Each tenant has a unique root folder.
+    rpc RagGetRootFolder(RagGetRootFolderRequest) returns (RagGetRootFolderResponse);
+
+    // RAGFlow endpoint: GET /api/v1/file/parent_folder
+
+    // Get the parent folder of a file.<br>
+    // Returns 404 if file or parent not found.
+    rpc RagGetParentFolder(RagGetParentFolderRequest) returns (RagGetParentFolderResponse);
+
+    // RAGFlow endpoint: GET /api/v1/file/all_parent_folder
+
+    // Get all parent folders (breadcrumb path) of a file.<br>
+    // Returns array from file itself to root (includes the file, ordered deepest to root).
+    rpc RagGetAllParentFolders(RagGetAllParentFoldersRequest) returns (RagGetAllParentFoldersResponse);
+
+    // RAGFlow endpoint: POST /api/v1/file/rm
+
+    // Delete one or more files/folders (hard delete).<br>
+    // Recursively deletes folder contents. Removes from storage.
+    rpc RagDeleteFiles(RagDeleteFilesRequest) returns (google.protobuf.Empty);
+
+    // RAGFlow endpoint: POST /api/v1/file/rename
+
+    // Rename a file or folder.<br>
+    // Cannot change file extension. Duplicate names not allowed.
+    rpc RagRenameFile(RagRenameFileRequest) returns (google.protobuf.Empty);
+
+    // RAGFlow endpoint: GET /api/v1/file/get/<file_id>
+
+    // Download a file.<br>
+    // Retrieves from MinIO/S3 storage.<br>
+    // First chunk contains metadata, subsequent chunks only contain data.
+    rpc RagGetFile(RagGetFileRequest) returns (stream RagFileChunk);
+
+    // RAGFlow endpoint: POST /api/v1/file/mv
+
+    // Move one or more files to another folder.<br>
+    // Validates all files and destination exist.
+    rpc RagMoveFile(RagMoveFileRequest) returns (google.protobuf.Empty);
+
+    // RAGFlow endpoint: POST /api/v1/file/convert
+
+    // Convert files to documents and add to datasets.<br>
+    // Handles folders recursively (converts all inner files).<br>
+    // Links files to multiple datasets if multiple dataset_ids provided.
+    rpc RagFileToDocument(RagFileToDocumentRequest) returns (RagFileToDocumentList);
+
+    // ========================================================================
+    // Dify Integration (1 method)
+    // Integration with Dify platform.
+    // REST: /api/v1/dify/retrieval
+    // ========================================================================
+
+    // RAGFlow endpoint: POST /api/v1/dify/retrieval
+
+    // Retrieve chunks in Dify-compatible format.<br>
+    // Uses API key authentication (not Bearer token).
+    rpc RagDifyRetrieval(RagDifyRetrievalRequest) returns (RagDifyRecordList);
+
+    // ========================================================================
+    // Bot API (11 methods)
+    // Use API key authentication (not Bearer token).
+    // REST: /api/v1/chatbots/*, /api/v1/agentbots/*, /api/v1/searchbots/*
+    // ========================================================================
+
+    // RAGFlow endpoint: POST /api/v1/sessions/ask
+
+    // Ask a question across datasets without a chat assistant.<br>
+    // Streaming only. All datasets must have parsed files.
+    rpc RagAsk(RagAskRequest) returns (stream RagAskResponse);
+
+    // RAGFlow endpoint: POST /api/v1/sessions/related_questions
+
+    // Generate related search terms for a question.<br>
+    // Returns 5-10 suggestions considering industry context.
+    rpc RagRelatedQuestions(RagRelatedQuestionsRequest) returns (RagRelatedQuestionsResponse);
+
+    // RAGFlow endpoint: POST /api/v1/chatbots/<dialog_id>/completions
+
+    // Chat completion for iframe/embedded chatbot (server streaming).<br>
+    // Uses API key from APIToken table.
+    rpc RagChatbotCompletion(RagChatbotCompletionRequest) returns (stream RagChatCompletionResponse);
+
+    // RAGFlow endpoint: GET /api/v1/chatbots/<dialog_id>/info
+
+    // Get chatbot information for embedded UI initialization.<br>
+    // Returns title, avatar, and prologue.
+    rpc RagChatbotInfo(RagChatbotInfoRequest) returns (RagChatbotInfoResponse);
+
+    // RAGFlow endpoint: POST /api/v1/agentbots/<agent_id>/completions
+
+    // Agent completion for iframe/embedded agentbot (server streaming).<br>
+    // Uses API key authentication.
+    rpc RagAgentbotCompletion(RagAgentbotCompletionRequest) returns (stream RagAgentCompletionResponse);
+
+    // RAGFlow endpoint: GET /api/v1/agentbots/<agent_id>/inputs
+
+    // Get agent input form configuration for embedded UI.<br>
+    // Returns input schema from "begin" component in DSL.
+    rpc RagAgentbotInputs(RagAgentbotInputsRequest) returns (RagAgentbotInputsResponse);
+
+    // RAGFlow endpoint: POST /api/v1/searchbots/ask
+
+    // Ask question in searchbot with search app configuration.<br>
+    // Uses search app config if provided.
+    rpc RagSearchbotAsk(RagSearchbotAskRequest) returns (stream RagAskResponse);
+
+    // RAGFlow endpoint: POST /api/v1/searchbots/retrieval_test
+
+    // Test retrieval with searchbot configuration.<br>
+    // Supports search app configuration with auto metadata filtering.
+    rpc RagSearchbotRetrieval(RagSearchbotRetrievalRequest) returns (RagSearchbotRetrievalResponse);
+
+    // RAGFlow endpoint: POST /api/v1/searchbots/related_questions
+
+    // Generate related questions for searchbot.<br>
+    // Uses search app LLM config if available.
+    rpc RagSearchbotRelatedQuestions(RagSearchbotRelatedQuestionsRequest) returns (RagRelatedQuestionsResponse);
+
+    // RAGFlow endpoint: GET /api/v1/searchbots/detail
+
+    // Get search app configuration details.<br>
+    // Requires user to have access to search app.
+    rpc RagSearchbotDetail(RagSearchbotDetailRequest) returns (RagSearchbotDetailResponse);
+
+    // RAGFlow endpoint: POST /api/v1/searchbots/mindmap
+
+    // Generate mindmap for a question.<br>
+    // Uses search app config if provided.
+    rpc RagSearchbotMindmap(RagSearchbotMindmapRequest) returns (google.protobuf.Struct);
+}
+
+// ============================================================================
+// Common Types
+// Shared types used across multiple services.
+// ============================================================================
+
+// Pagination parameters for list requests.
+message RagPagination {
+
+    // Page number (1-indexed, default: 1).
+    int32 page = 1;
+
+    // Number of items per page (default varies by endpoint).
+    int32 page_size = 2;
+}
+
+// File metadata for streaming uploads/downloads.
+message RagFileMetadata {
+
+    // Filename.
+    string file_name = 1;
+
+    // MIME type (e.g., <code>"application/pdf"</code>, <code>"image/png"</code>).
+    string content_type = 2;
+
+    // File size in bytes (if known, 0 if unknown).
+    int64 size = 3;
+}
+
+// File chunk for streaming downloads.<br>
+// First chunk contains metadata, subsequent chunks only contain data.
+message RagFileChunk {
+
+    // Chunk of file content.
+    bytes data = 1;
+
+    // File metadata (only in first chunk).
+    RagFileMetadata metadata = 2;
+}
+
+// Upload chunk for streaming uploads.
+// Used to stream file data after metadata is sent in first message.
+message RagUploadChunk {
+    // Not actually optional but `optional` keyword is needed to enable presence tracking.
+    // Without it, it is impossible to distinguish between `0` and not present.
+    // Index into metadata.files array (0-based).
+    optional int32 file_index = 1;
+
+    // Chunk of file content, null indicates EOF.
+    bytes data = 2;
+}
+
+// On complete success: no fields set (empty message).
+// On partial success/failure: both fields set.
+message RagPartialSuccess {
+    // Number of successful operations.
+    int32 success_count = 1;
+
+    // Error messages for failed operations.
+    repeated string errors = 2;
+}
+
+// ============================================================================
+// Dataset Management Types
+// Datasets are knowledge bases containing documents and their chunks.
+// ============================================================================
+
+// Dataset containing documents for RAG.
+message RagDataset {
+
+    // Dataset UUID.
+    string id = 1;
+
+    // Dataset name.
+    string name = 2;
+
+    // Dataset description.
+    string description = 3;
+
+    // Base64-encoded avatar image.
+    string avatar = 4;
+
+    // Dataset language (e.g. <code>"English"</code>).
+    string language = 5;
+
+    // Access permission.
+    RagPermission permission = 6;
+
+    // Number of documents in the dataset.
+    int32 document_count = 7;
+
+    // Number of chunks of all documents in the dataset.
+    int32 chunk_count = 8;
+
+    // Default chunking method for documents in this dataset.
+    RagChunkMethod chunk_method = 9;
+
+    // Document parser configuration (auto-generated based on chunk_method).
+    RagParserConfig parser_config = 10;
+
+    // Embedding model name.
+    string embedding_model = 11;
+
+    // Creation timestamp (Unix timestamp in milliseconds).
+    int64 create_time = 12;
+
+    // Creation date (ISO 8601 datetime).
+    string create_date = 13;
+
+    // Last update timestamp (Unix timestamp in milliseconds).
+    int64 update_time = 14;
+
+    // Last update date (ISO 8601 datetime).
+    string update_date = 15;
+
+    // Number of tokens across all documents.
+    int32 token_count = 16;
+
+    // Default similarity threshold (0.0-1.0).
+    float similarity_threshold = 17;
+
+    // Default vector similarity weight (0.0-1.0).
+    float vector_similarity_weight = 18;
+
+    // Additional fields returned by RAGFlow.
+    google.protobuf.Struct additional_fields = 19;
+}
+
+// Request message for creating a new dataset.
+message RagCreateDatasetRequest {
+
+    // Required. The agent to create the dataset for.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Required. Unique name of the dataset to create. Must follow these requirements:
+    // <ul>
+    //     <li>contain only characters from the basic multilingual Unicode plane</li>
+    //     <li>maximum 128 characters</li>
+    //     <li>case-insensitive</li>
+    // </ul>
+    string name = 2;
+
+    // Optional. Dataset description. Maximum 65,535 characters.
+    string description = 3;
+
+    // Optional. Base64-encoded avatar image. Maximum 65,535 characters.
+    string avatar = 4;
+
+    // Optional. Access permission for new dataset
+    RagPermission permission = 5;
+
+    // Optional. Default chunking method for documents in this dataset.
+    RagChunkMethod chunk_method = 6;
+
+    // Optional. Configuration settings for the dataset parser. The used fields vary depending on the selected <code>chunk_method</code>.
+    RagParserConfig parser_config = 7;
+
+    // Optional. Embedding model name (uses user's default if not specified).
+    string embedding_model = 8;
+
+    // Optional. Additional fields to pass through to RAGFlow.
+    google.protobuf.Struct additional_fields = 9;
+}
+
+// Access permissions for a dataset
+enum RagPermission {
+
+    // Only the current user can manage the dataset (default).
+    me = 0;
+
+    // All team members of the current user can manage the dataset.
+    team = 1;
+}
+
+// Chunking method for documents. See <a href="https://ragflow.io/docs/dev/configure_knowledge_base#select-chunking-method">https://ragflow.io/docs/dev/configure_knowledge_base#select-chunking-method</a> for details.
+enum RagChunkMethod {
+
+    // General (default).
+    naive = 0;
+
+    // Book.
+    book = 1;
+
+    // Email.
+    email = 2;
+
+    // Laws.
+    laws = 3;
+
+    // Manual.
+    manual = 4;
+
+    // One.
+    one = 5;
+
+    // Paper.
+    paper = 6;
+
+    // Picture.
+    picture = 7;
+
+    // Presentation.
+    presentation = 8;
+
+    // Q&A.
+    qa = 9;
+
+    // Table.
+    table = 10;
+
+    // Tag.
+    tag = 11;
+}
+
+// Document processing status.
+enum RagDocumentStatus {
+
+    // Document has not started processing.
+    UNSTART = 0;
+
+    // Document is currently being processed.
+    RUNNING = 1;
+
+    // Document processing was cancelled.
+    CANCEL = 2;
+
+    // Document processing completed successfully.
+    DONE = 3;
+
+    // Document processing failed.
+    FAIL = 4;
+}
+
+// Role of message sender in conversation.
+enum RagMessageRole {
+
+    // Message from user.
+    user = 0;
+
+    // Message from AI assistant.
+    assistant = 1;
+
+    // System message.
+    system = 2;
+}
+
+// Agent completion event type.
+enum RagAgentEventType {
+
+    // Regular message event.
+    message = 0;
+
+    // Message completion event.
+    message_end = 1;
+}
+
+// Document parser configuration.
+//
+// Used fields depend on the chunking method of the document.
+// <ul>
+//     <li><code>naive</code>: uses the following fields (all optional)</li>
+//     <ul>
+//         <li><code>auto_keywords</code></li>
+//         <li><code>auto_questions</code></li>
+//         <li><code>chunk_token_num</code></li>
+//         <li><code>delimiter</code></li>
+//         <li><code>html4excel</code></li>
+//         <li><code>layout_recognize</code></li>
+//         <li><code>tag_kb_ids</code></li>
+//         <li><code>task_page_size</code></li>
+//         <li><code>rapter</code></li>
+//         <li><code>graphrag</code></li>
+//     </ul>
+//     <li><code>qa</code>, <code>manual</code>, <code>paper</code>, <code>book</code>, <code>laws</code>, <code>presentation</code>: uses only the <code>raptor</code> field</li>
+//     <li><code>table</code>, <code>picture</code>, <code>one</code>, <code>email</code>: does not use any field (expects empty message)</li>
+// </ul>
+message RagParserConfig {
+
+    // Optional. Minimum 0, maximum 32, default 0. See <a href="https://ragflow.io/docs/dev/autokeyword_autoquestion">https://ragflow.io/docs/dev/autokeyword_autoquestion</a> for details.
+    int32 auto_keyword = 1;
+
+    // Optional. Minimum 0, maximum 10, default 0. See <a href="https://ragflow.io/docs/dev/autokeyword_autoquestion">https://ragflow.io/docs/dev/autokeyword_autoquestion</a> for details.
+    int32 auto_questions = 2;
+
+    // Optional. Minimum 1, maximum 2048, default 512.
+    int32 chunk_token_num = 3;
+
+    // Optional. Default <code>"\n"</code>.
+    string delimiter = 4;
+
+    // Optional. Convert Excel documents to HTML. Default <code>false</code>.
+    bool html4excel = 5;
+
+    // Optional. Default <code>"DeepDOC"</code>
+    string layout_recognize = 6;
+
+    // Optional. List of dataset IDs. See <a href="https://ragflow.io/docs/dev/use_tag_sets">https://ragflow.io/docs/dev/use_tag_sets</a> for details.
+    repeated string tag_kb_ids = 7;
+
+    // Optional. Minimum 1, default 12. Only applies to PDFs.
+    int32 task_page_size = 8;
+
+    // Optional. RAPTOR-specific settings. Default <code>{ "use_raptor": false }</code>.
+    google.protobuf.Struct raptor = 9;
+
+    // Optional. GRAPHRAG-specific settings. Default <code>{ "use_graphrag": false }</code>.
+    google.protobuf.Struct graphrag = 10;
+}
+
+// Request message for updating an existing dataset.
+message RagUpdateDatasetRequest {
+
+    // Required. The agent to update the dataset for.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Required. Dataset ID.
+    string dataset_id = 2;
+
+    // Optional. New dataset name.
+    string name = 3;
+
+    // Optional. New dataset description.
+    string description = 4;
+
+    // Optional. New avatar image.
+    string avatar = 5;
+
+    // Optional. New access permission.
+    RagPermission permission = 6;
+
+    // Optional. New chunk method.
+    RagChunkMethod chunk_method = 7;
+
+    // Optional. New parser config (deep merged with existing).
+    RagParserConfig parser_config = 8;
+
+    // Optional. New embedding model (cannot change if chunk_count > 0).
+    string embedding_model = 9;
+
+    // Optional. PageRank value (only for elasticsearch).
+    int32 pagerank = 10;
+
+    // Optional. Additional fields to pass through to RAGFlow.
+    google.protobuf.Struct additional_fields = 11;
+}
+
+// Request message for deleting one or more datasets.
+message RagDeleteDatasetsRequest {
+
+    // Required. The agent to delete datasets from.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Optional. Dataset IDs to delete. If empty and <code>delete_all</code> is <code>true</code>, deletes all datasets.
+    repeated string ids = 2;
+
+    // Optional. Delete all datasets (needed because protobuf cannot represent <code>ids=null</code>).
+    optional bool delete_all = 3;
+}
+
+// Request message for listing datasets with pagination and filtering.
+message RagListDatasetsRequest {
+
+    // Required. The agent to list all datasets from.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Optional. Pagination parameters.
+    RagPagination pagination = 2;
+
+    // Optional. Filter by dataset ID.
+    string id = 3;
+
+    // Optional. Filter by dataset name.
+    string name = 4;
+
+    // Optional. Sort field (default: <code>create_time</code>).
+    string orderby = 5;
+
+    // Optional. Sort descending (default: <code>true</code>).
+    optional bool desc = 6;
+
+    // Optional. Additional fields to pass through to RAGFlow.
+    google.protobuf.Struct additional_fields = 7;
+}
+
+// Response message for listing datasets.
+message RagDatasetList {
+
+    // List of datasets.
+    repeated RagDataset datasets = 1;
+}
+
+// Request message for getting a dataset's knowledge graph.
+message RagGetKnowledgeGraphRequest {
+
+    // Required. The agent to get knowledge graph for.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Required. Dataset ID.
+    string dataset_id = 2;
+}
+
+// Response message for getting a dataset's knowledge graph.
+message RagGetKnowledgeGraphResponse {
+
+    // Graph structure with nodes (max 256) and edges (max 128).<br>
+    // Format: <code>{nodes: [{id, pagerank}], edges: [{source, target, weight}]}</code>
+    google.protobuf.Struct graph = 1;
+
+    // Mind map structure (optional).
+    google.protobuf.Struct mind_map = 2;
+
+    // Additional fields to pass through to RAGFlow.
+    google.protobuf.Struct additional_fields = 3;
+}
+
+// Request message for deleting a dataset's knowledge graph.
+message RagDeleteKnowledgeGraphRequest {
+
+    // Required. The agent to delete knowledge graph for.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Required. Dataset ID.
+    string dataset_id = 2;
+}
+
+// ============================================================================
+// Document Management Types
+// Documents are files uploaded to datasets that are parsed into chunks.
+// ============================================================================
+
+// Document uploaded to a dataset.
+message RagDocument {
+
+    // Document UUID.
+    string id = 1;
+
+    // Parent dataset ID.
+    string dataset_id = 2;
+
+    // Document filename.
+    string name = 3;
+
+    // File type or extension (e.g., <code>"pdf"</code>, <code>"docx"</code>, <code>"txt"</code>).
+    string type = 4;
+
+    // File size in bytes.
+    int64 size = 5;
+
+    // Number of chunks extracted from this document (initially <code>0</code> until parsed).
+    int32 chunk_count = 6;
+
+    // Number of tokens across all chunks in this document.
+    int32 token_count = 7;
+
+    // Chunking method used for this document.
+    RagChunkMethod chunk_method = 8;
+
+    // Parser configuration used for chunking this document.
+    RagParserConfig parser_config = 9;
+
+    // Source type indicating how the document was added (e.g., <code>"local"</code> for direct uploads, <code>"knowledgebase"</code> for file system imports).
+    string source_type = 10;
+
+    // Document processing status.
+    RagDocumentStatus run = 11;
+
+    // Processing progress as a decimal value between <code>0.0</code> (not started) and <code>1.0</code> (complete).
+    float progress = 12;
+
+    // Human-readable progress message describing current processing state.
+    string progress_msg = 13;
+
+    // Total processing duration in seconds.
+    float process_duration = 14;
+
+    // Creation timestamp (Unix timestamp in milliseconds).
+    int64 create_time = 15;
+
+    // Creation date (ISO 8601 datetime string).
+    string create_date = 16;
+
+    // Last update timestamp (Unix timestamp in milliseconds).
+    int64 update_time = 17;
+
+    // Last update date (ISO 8601 datetime string).
+    string update_date = 18;
+
+    // Custom metadata fields specific to this document (arbitrary key-value pairs).
+    google.protobuf.Struct meta_fields = 19;
+
+    // Base64-encoded thumbnail image for preview.
+    string thumbnail = 20;
+
+    // Storage location path in the backend file system or object storage.
+    string location = 21;
+
+    // Processing start timestamp (ISO 8601 datetime string).
+    string process_begin_at = 22;
+
+    // Actual file extension extracted from the file (may differ from filename extension).
+    string suffix = 23;
+
+    // Validation status indicating if document is enabled (<code>"1"</code>=valid/enabled, <code>"0"</code>=invalid/disabled).
+    string status = 24;
+
+    // Additional fields returned by RAGFlow not explicitly defined above.
+    google.protobuf.Struct additional_fields = 25;
+}
+
+// Request message for uploading documents to a dataset.<br>
+// Documents are uploaded via streaming multipart form data.
+message RagUploadDocumentsRequest {
+
+    // Required. The agent to upload documents for.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Metadata for the upload (first message only).
+    message RagMetadata {
+
+        // Required. Target dataset ID to upload documents to.
+        string dataset_id = 1;
+
+        // Required. Metadata for all files being uploaded in this stream.
+        repeated RagFileMetadata files = 2;
+    }
+
+    // First message must contain metadata, subsequent messages contain chunks.
+    oneof payload {
+
+        // First message: declares all files to be uploaded.
+        RagMetadata metadata = 2;
+
+        // Subsequent messages: stream file data chunks.
+        RagUploadChunk chunk = 3;
+    }
+}
+
+// Response message containing a list of documents.
+message RagDocumentList {
+
+    // List of documents.
+    repeated RagDocument documents = 1;
+}
+
+// Request message for updating an existing document's metadata and configuration.
+message RagUpdateDocumentRequest {
+
+    // Required. The agent to update the document for.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Required. Dataset ID containing the document.
+    string dataset_id = 2;
+
+    // Required. Document ID to update.
+    string document_id = 3;
+
+    // Optional. New document name (file extension must remain the same).
+    string name = 4;
+
+    // Optional. New chunking method (resets document to <code>UNSTART</code> status and deletes all existing chunks).
+    RagChunkMethod chunk_method = 5;
+
+    // Optional. New parser configuration (deep merged with existing configuration).
+    RagParserConfig parser_config = 6;
+
+    // Optional. Document enabled/disabled status.
+    optional bool enabled = 7;
+
+    // Optional. Custom metadata fields for document-specific metadata (replaces existing metadata).
+    google.protobuf.Struct meta_fields = 8;
+
+    // Optional. Additional fields to pass through to RAGFlow.
+    google.protobuf.Struct additional_fields = 9;
+}
+
+// Request message for downloading the original document file.
+message RagDownloadDocumentRequest {
+
+    // Required. The agent to download the document from.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Required. Dataset ID containing the document.
+    string dataset_id = 2;
+
+    // Required. Document ID to download.
+    string document_id = 3;
+}
+
+// Request message for listing documents in a dataset with pagination and filtering.
+message RagListDocumentsRequest {
+
+    // Required. The agent to list documents from.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Required. Dataset ID to list documents from.
+    string dataset_id = 2;
+
+    // Optional. Pagination parameters.
+    RagPagination pagination = 3;
+
+    // Optional. Filter by specific document ID.
+    string id = 4;
+
+    // Optional. Filter by document name (exact match).
+    string name = 5;
+
+    // Optional. Search keywords to filter documents (searches in document name and metadata).
+    string keywords = 6;
+
+    // Optional. Sort field (default: <code>"create_time"</code>). Accepted values include <code>"create_time"</code> and <code>"update_time"</code>.
+    string orderby = 7;
+
+    // Optional. Sort in descending order (default: <code>true</code>).
+    optional bool desc = 8;
+
+    // Optional. Filter by creation time start (Unix timestamp in milliseconds, <code>0</code> = no filter).
+    int64 create_time_from = 9;
+
+    // Optional. Filter by creation time end (Unix timestamp in milliseconds, <code>0</code> = no filter).
+    int64 create_time_to = 10;
+
+    // Optional. Additional fields to pass through to RAGFlow.
+    google.protobuf.Struct additional_fields = 11;
+}
+
+// Response message for listing documents.
+message RagListDocumentsResponse {
+
+    // Total number of documents matching the filter criteria (not limited by pagination).
+    int32 total = 1;
+
+    // List of documents for the current page.
+    repeated RagDocument docs = 2;
+}
+
+// Request message for deleting one or more documents from a dataset.
+message RagDeleteDocumentsRequest {
+
+    // Required. The agent to delete documents from.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Required. Dataset ID containing the documents to delete.
+    string dataset_id = 2;
+
+    // Optional. Document IDs to delete. If empty and <code>delete_all</code> is <code>true</code>, deletes all documents in the dataset.
+    repeated string ids = 3;
+
+    // Optional. Delete all documents in the dataset (needed because protobuf cannot represent <code>ids=null</code>).
+    optional bool delete_all = 4;
+}
+
+// ============================================================================
+// Chunk Management Types
+// Chunks are text segments extracted from documents for vector retrieval.
+// ============================================================================
+
+// Chunk of text extracted from a document.<br>
+// Chunks are the basic retrieval units used for vector similarity search in RAG.
+message RagChunk {
+
+    // Chunk ID (computed as xxhash of content combined with document_id).
+    string id = 1;
+
+    // Parent dataset ID.
+    string dataset_id = 2;
+
+    // Parent document ID.
+    string document_id = 3;
+
+    // Chunk text content (the actual text segment extracted from the document).
+    string content = 4;
+
+    // Document name keyword used for filtering and identification.
+    string docnm_kwd = 5;
+
+    // Important keywords extracted from or manually assigned to this chunk.
+    repeated string important_keywords = 6;
+
+    // Associated questions for Q&amp;A chunks (used when <code>chunk_method=qa</code>).
+    repeated string questions = 7;
+
+    // Associated image ID if this chunk references an image.
+    string image_id = 8;
+
+    // Availability status indicating if the chunk is active and can be retrieved (can be disabled without deletion).
+    optional bool available = 9;
+
+    // Position information in the original document.<br>
+    // Each position is an array of 5 integers representing location data (format varies by document type).
+    repeated google.protobuf.ListValue positions = 10;
+
+    // Creation timestamp (ISO 8601 datetime string).
+    string create_time = 11;
+
+    // Creation timestamp as a floating-point Unix timestamp.
+    float create_timestamp = 12;
+
+    // Document name used as a keyword for retrieval.
+    string document_keyword = 13;
+
+    // Similarity score between <code>0.0</code> and <code>1.0</code> (only populated in retrieval responses).
+    float similarity = 14;
+
+    // Embedding vector for this chunk (optional, rarely included in responses for performance reasons).
+    google.protobuf.Struct vector = 15;
+
+    // Additional fields returned by RAGFlow not explicitly defined above.
+    google.protobuf.Struct additional_fields = 16;
+}
+
+// Request message for starting document parsing.<br>
+// Parsing extracts chunks from documents using the configured chunk method.
+message RagParseDocumentsRequest {
+
+    // Required. The agent to parse documents for.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Required. Dataset ID containing the documents to parse.
+    string dataset_id = 2;
+
+    // Required. Document IDs to parse into chunks (queues documents for background processing).
+    repeated string document_ids = 3;
+}
+
+// Request message for stopping document parsing.<br>
+// Only documents currently being processed can be stopped.
+message RagStopParsingRequest {
+
+    // Required. The agent to stop parsing for.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Required. Dataset ID containing the documents to stop parsing.
+    string dataset_id = 2;
+
+    // Required. Document IDs to stop parsing (only stops documents with progress between <code>0</code> and <code>1</code>).
+    repeated string document_ids = 3;
+}
+
+// Request message for listing chunks of a document with pagination.
+message RagListChunksRequest {
+
+    // Required. The agent to list chunks from.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Required. Dataset ID containing the document.
+    string dataset_id = 2;
+
+    // Required. Document ID to list chunks from.
+    string document_id = 3;
+
+    // Optional. Pagination parameters.
+    RagPagination pagination = 4;
+
+    // Optional. Search keywords to filter chunks (supports content highlighting in results).
+    string keywords = 5;
+
+    // Optional. Filter by specific chunk ID.
+    string id = 6;
+
+    // Optional. Additional fields to pass through to RAGFlow.
+    google.protobuf.Struct additional_fields = 7;
+}
+
+// Response message for listing chunks.
+message RagListChunksResponse {
+
+    // Total number of chunks matching the filter criteria (not limited by pagination).
+    int32 total = 1;
+
+    // List of chunks for the current page.
+    repeated RagChunk chunks = 2;
+
+    // Document details for the parent document.
+    RagDocument doc = 3;
+}
+
+// Request message for manually adding a chunk to a document.<br>
+// The chunk content is automatically tokenized and embeddings are generated.
+message RagAddChunkRequest {
+
+    // Required. The agent to add the chunk for.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Required. Dataset ID containing the document.
+    string dataset_id = 2;
+
+    // Required. Document ID to add the chunk to.
+    string document_id = 3;
+
+    // Required. Chunk text content.
+    string content = 4;
+
+    // Optional. Important keywords to associate with this chunk.
+    repeated string important_keywords = 5;
+
+    // Optional. Associated questions for this chunk (useful for Q&amp;A-style retrieval).
+    repeated string questions = 6;
+
+    // Optional. Additional fields to pass through to RAGFlow.
+    google.protobuf.Struct additional_fields = 7;
+}
+
+// Response message for adding a chunk.
+message RagAddChunkResponse {
+
+    // The newly created chunk.
+    RagChunk chunk = 1;
+}
+
+// Request message for removing one or more chunks from a document.
+message RagRemoveChunksRequest {
+
+    // Required. The agent to remove chunks from.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Required. Dataset ID containing the document.
+    string dataset_id = 2;
+
+    // Required. Document ID to remove chunks from.
+    string document_id = 3;
+
+    // Required. Chunk IDs to remove. If empty, removes all chunks from the document.
+    repeated string chunk_ids = 4;
+}
+
+// Request message for updating an existing chunk's content and metadata.<br>
+// Content changes trigger re-tokenization and re-generation of embeddings.
+message RagUpdateChunkRequest {
+
+    // Required. The agent to update the chunk for.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Required. Dataset ID containing the document.
+    string dataset_id = 2;
+
+    // Required. Document ID containing the chunk.
+    string document_id = 3;
+
+    // Required. Chunk ID to update.
+    string chunk_id = 4;
+
+    // Optional. New chunk content (re-tokenizes and re-generates embeddings if changed).
+    string content = 5;
+
+    // Optional. Updated important keywords for this chunk.
+    repeated string important_keywords = 6;
+
+    // Optional. Updated questions associated with this chunk.
+    repeated string questions = 7;
+
+    // Optional. Availability status (disable chunk without deleting it).
+    optional bool available = 8;
+
+    // Optional. Additional fields to pass through to RAGFlow.
+    google.protobuf.Struct additional_fields = 9;
+}
+
+// Request message for retrieving chunks using vector similarity search.<br>
+// Supports hybrid search combining vector similarity with keyword matching.
+message RagRetrievalRequest {
+
+    // Required. The agent to retrieve chunks for.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Optional. Pagination parameters.
+    RagPagination pagination = 2;
+
+    // Required. Dataset IDs to search (all datasets must use the same embedding model).
+    repeated string dataset_ids = 3;
+
+    // Required. Query string to search for.
+    string question = 4;
+
+    // Optional. Filter by specific document IDs within the datasets.
+    repeated string document_ids = 5;
+
+    // Optional. Minimum similarity score threshold between <code>0.0</code> and <code>1.0</code> (default: <code>0.2</code>).
+    float similarity_threshold = 6;
+
+    // Optional. Weight for vector similarity versus keyword matching between <code>0.0</code> and <code>1.0</code> (default: <code>0.3</code>).<br>
+    // Higher values favor vector similarity, lower values favor keyword matching.
+    float vector_similarity_weight = 7;
+
+    // Optional. Maximum number of chunks to retrieve before reranking (default: <code>1024</code>).
+    int32 top_k = 8;
+
+    // Optional. Whether to highlight matched content in the returned chunks.
+    optional bool highlight = 9;
+
+    // Optional. Metadata filter condition to restrict results based on document metadata.
+    google.protobuf.Struct metadata_condition = 10;
+
+    // Optional. Include knowledge graph retrieval to enhance results with graph relationships.
+    optional bool use_kg = 11;
+
+    // Optional. Cross-language translation codes to enable multilingual retrieval.
+    repeated string cross_languages = 12;
+
+    // Optional. Extract additional keywords from the query to improve retrieval.
+    optional bool keyword = 13;
+
+    // Optional. Rerank model ID to reorder results after initial retrieval.
+    string rerank_id = 14;
+
+    // Optional. Additional fields to pass through to RAGFlow.
+    google.protobuf.Struct additional_fields = 15;
+}
+
+// Response message for chunk retrieval.
+message RagRetrievalResponse {
+
+    // Retrieved chunks with similarity scores populated (ordered by relevance).
+    repeated RagChunk chunks = 1;
+
+    // Document aggregations providing statistics about which documents matched.
+    repeated google.protobuf.Struct doc_aggs = 2;
+
+    // Total number of chunks matching the query (not limited by pagination).
+    int32 total = 3;
+
+    // Additional fields returned by RAGFlow not explicitly defined above.
+    google.protobuf.Struct additional_fields = 4;
+}
+
+// ============================================================================
+// Chat Management Types
+// Chat assistants are RAG-powered conversational agents.
+// ============================================================================
+
+// Chat assistant configuration.
+message RagChat {
+
+    // Chat UUID.
+    string id = 1;
+
+    // Chat name (required, unique).
+    string name = 2;
+
+    // Optional description.
+    string description = 3;
+
+    // Base64-encoded avatar image.
+    string avatar = 4;
+
+    // Dataset IDs (used for requests).
+    repeated string dataset_ids = 5;
+
+    // Full dataset objects (used for list responses).
+    repeated RagDataset datasets = 6;
+
+    // LLM configuration.
+    RagLLMSetting llm = 7;
+
+    // Prompt and retrieval configuration.
+    RagPromptConfig prompt = 8;
+
+    // Creation timestamp (Unix timestamp in milliseconds).
+    int64 create_time = 9;
+
+    // Creation date (ISO 8601 datetime).
+    string create_date = 10;
+
+    // Last update timestamp (Unix timestamp in milliseconds).
+    int64 update_time = 11;
+
+    // Last update date (ISO 8601 datetime).
+    string update_date = 12;
+
+    // Whether to insert reference index into answer. <code>"1"</code> yes, <code>"0"</code> no
+    string do_refer = 13;
+
+    // Lanugage of the chat
+    string language = 14;
+
+    // Prompt type. Either <code>"simple"</code> or <code>"advanced"</code>
+    string prompt_type = 15;
+
+    // Validation status indicating if chat is enabled (<code>"1"</code>=valid/enabled, <code>"0"</code>=invalid/disabled).
+    string status = 16;
+
+    // Tenant ID.
+    string tenant_id = 17;
+
+    // Top K setting for retrieval.
+    int32 top_k = 18;
+
+    // Additional fields returned by RAGFlow.
+    google.protobuf.Struct additional_fields = 19;
+}
+
+// LLM configuration for chat assistant.
+message RagLLMSetting {
+
+    // LLM model name (required).
+    string model_name = 1;
+
+    // Sampling temperature (0.0-2.0). Controls randomness in responses.
+    float temperature = 2;
+
+    // Nucleus sampling parameter (0.0-1.0). Filters token choices by cumulative probability.
+    float top_p = 3;
+
+    // Frequency penalty (-2.0 to 2.0). Reduces repetition of frequent tokens.
+    float frequency_penalty = 4;
+
+    // Presence penalty (-2.0 to 2.0). Reduces repetition of any tokens already used.
+    float presence_penalty = 5;
+
+    // Additional fields to pass through to RAGFlow.
+    google.protobuf.Struct additional_fields = 6;
+}
+
+// Prompt and retrieval configuration for chat assistant.
+message RagPromptConfig {
+
+    // System prompt (RAGFlow provides default if not specified).
+    string prompt = 1;
+
+    // Prompt template variables for dynamic content insertion.
+    repeated RagPromptVariable variables = 2;
+
+    // Opening message displayed at conversation start.
+    string opener = 3;
+
+    // Show quotations from retrieved source chunks in responses.
+    optional bool show_quote = 4;
+
+    // Response to return when no relevant chunks are found in the knowledge base.
+    string empty_response = 5;
+
+    // Enable text-to-speech for responses.
+    optional bool tts = 6;
+
+    // Refine and optimize multi-turn conversation context.
+    optional bool refine_multiturn = 7;
+
+    // Minimum similarity score for chunk retrieval (0.0-1.0).
+    float similarity_threshold = 8;
+
+    // Weight for keywords versus vector similarity in hybrid search (0.0-1.0).
+    float keywords_similarity_weight = 9;
+
+    // Number of chunks to retrieve after reranking.
+    int32 top_n = 10;
+
+    // Maximum chunks to retrieve before reranking.
+    int32 top_k = 11;
+
+    // Rerank model ID for reordering retrieved chunks.
+    string rerank_model = 12;
+
+    // Additional fields to pass through to RAGFlow.
+    google.protobuf.Struct additional_fields = 13;
+}
+
+// Prompt template variable for dynamic content insertion.
+message RagPromptVariable {
+
+    // Variable name used in prompt template.
+    string key = 1;
+
+    // Whether this variable is optional in the template.
+    optional bool optional = 2;
+}
+
+// Request message for creating a new chat assistant.
+message RagCreateChatRequest {
+
+    // Required. The agent to create a chat assistant for.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Required. Unique name for the chat assistant. Must be unique within the agent.
+    string name = 2;
+
+    // Optional. Description of the chat assistant's purpose.
+    string description = 3;
+
+    // Optional. Base64-encoded avatar image.
+    string avatar = 4;
+
+    // Required. Dataset IDs to use as knowledge base (all datasets must have parsed files and use the same embedding model).
+    repeated string dataset_ids = 5;
+
+    // Optional. LLM configuration settings.
+    RagLLMSetting llm = 6;
+
+    // Optional. Prompt and retrieval configuration settings.
+    RagPromptConfig prompt = 7;
+
+    // Optional. Additional fields to pass through to RAGFlow.
+    google.protobuf.Struct additional_fields = 8;
+}
+
+// Request message for updating an existing chat assistant.
+message RagUpdateChatRequest {
+
+    // Required. The agent containing the chat assistant to update.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Required. UUID of the chat assistant to update.
+    string chat_id = 2;
+
+    // Optional. New name (must be unique within the agent).
+    string name = 3;
+
+    // Optional. New description.
+    string description = 4;
+
+    // Optional. New base64-encoded avatar image.
+    string avatar = 5;
+
+    // Optional. New dataset IDs (all datasets must have parsed files and use the same embedding model).
+    repeated string dataset_ids = 6;
+
+    // Optional. New LLM configuration settings (merged with existing configuration).
+    RagLLMSetting llm = 7;
+
+    // Optional. New prompt configuration settings (merged with existing configuration).
+    RagPromptConfig prompt = 8;
+
+    // Optional. Additional fields to pass through to RAGFlow.
+    google.protobuf.Struct additional_fields = 9;
+}
+
+// Request message for deleting chat assistants.
+message RagDeleteChatsRequest {
+
+    // Required. The agent to delete chat assistants from.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Optional. Chat assistant IDs to delete. Specify either this field or <code>delete_all</code>.
+    repeated string ids = 2;
+
+    // Optional. Delete all chat assistants (needed because protobuf cannot represent <code>ids=null</code>).
+    optional bool delete_all = 3;
+}
+
+// Request message for listing chat assistants.
+message RagListChatsRequest {
+
+    // Required. The agent to list chat assistants from.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Optional. Pagination parameters for paging through results.
+    RagPagination pagination = 2;
+
+    // Optional. Filter by chat assistant UUID.
+    string id = 3;
+
+    // Optional. Filter by chat assistant name.
+    string name = 4;
+
+    // Sort field (default: <code>"create_time"</code>).
+    string orderby = 5;
+
+    // Optional. Sort in descending order (default: <code>true</code>).
+    optional bool desc = 6;
+
+    // Optional. Additional fields to pass through to RAGFlow.
+    google.protobuf.Struct additional_fields = 7;
+}
+
+// Response message for listing chat assistants.
+message RagChatList {
+
+    // List of chat assistants (with full dataset objects embedded).
+    repeated RagChat chats = 1;
+}
+
+// ============================================================================
+// Session Management Types
+// Sessions are conversation instances for chats and agents.
+// ============================================================================
+
+// Chat session containing conversation history for a chat assistant.
+message RagChatSession {
+
+    // Session UUID.
+    string id = 1;
+
+    // Parent chat assistant UUID.
+    string chat_id = 2;
+
+    // Session name (default: <code>"New session"</code>).
+    string name = 3;
+
+    // Message history in chronological order.
+    repeated RagMessage messages = 4;
+
+    // Creation timestamp (Unix timestamp in milliseconds).
+    int64 create_time = 6;
+
+    // Creation date (ISO 8601 datetime).
+    string create_date = 7;
+
+    // Last update timestamp (Unix timestamp in milliseconds).
+    int64 update_time = 8;
+
+    // Last update date (ISO 8601 datetime).
+    string update_date = 9;
+
+    // Additional fields returned by RAGFlow.
+    google.protobuf.Struct additional_fields = 10;
+}
+
+// Message in a conversation session.
+message RagMessage {
+
+    // Role of the message sender.
+    RagMessageRole role = 1;
+
+    // Message content text.
+    string content = 2;
+}
+
+// Request message for creating a new chat session.
+message RagCreateChatSessionRequest {
+
+    // Required. The agent to create a chat session for.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Required. Parent chat assistant UUID.
+    string chat_id = 2;
+
+    // Optional. Session name (default: <code>"New session"</code>).
+    string name = 3;
+
+    // Optional. User identifier for tracking conversation ownership.
+    string user_id = 4;
+
+    // Optional. Additional fields to pass through to RAGFlow.
+    google.protobuf.Struct additional_fields = 5;
+}
+
+// Agent session containing conversation history for an agent workflow.
+message RagAgentSession {
+
+    // Session UUID.
+    string id = 1;
+
+    // RAGFlow agent UUID.
+    string agent_id = 2;
+
+    // User identifier.
+    string user_id = 3;
+
+    // Message history in chronological order.
+    repeated RagMessage message = 4;
+
+    // Session source.
+    string source = 5;
+
+    // Agent DSL (Domain Specific Language) workflow configuration.
+    google.protobuf.Struct dsl = 6;
+
+    // Creation timestamp (Unix timestamp in milliseconds).
+    int64 create_time = 7;
+
+    // Creation date (ISO 8601 datetime).
+    string create_date = 8;
+
+    // Last update timestamp (Unix timestamp in milliseconds).
+    int64 update_time = 9;
+
+    // Last update date (ISO 8601 datetime).
+    string update_date = 10;
+
+    // Additional fields returned by RAGFlow.
+    google.protobuf.Struct additional_fields = 11;
+}
+// Request message for creating a new agent session.
+message RagCreateAgentSessionRequest {
+
+    // Required. The agent to create an agent session for.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Required. RAGFlow agent UUID.
+    string agent_id = 2;
+
+    // Optional. User identifier (defaults to <code>tenant_id</code> if not specified).
+    string user_id = 3;
+
+    // Optional. Additional fields to pass through to RAGFlow.
+    google.protobuf.Struct additional_fields = 4;
+}
+
+// Request message for updating an existing chat session.
+message RagUpdateChatSessionRequest {
+
+    // Required. The agent containing the chat session to update.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Required. Chat assistant UUID.
+    string chat_id = 2;
+
+    // Required. Session UUID to update.
+    string session_id = 3;
+
+    // Optional. New session name.
+    string name = 4;
+
+    // Optional. User identifier.
+    string user_id = 5;
+
+    // Optional. Additional fields to pass through to RAGFlow.
+    google.protobuf.Struct additional_fields = 6;
+}
+
+// Request message for listing chat sessions.
+message RagListChatSessionsRequest {
+
+    // Required. The agent to list chat sessions from.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Required. Chat assistant UUID.
+    string chat_id = 2;
+
+    // Optional. Pagination parameters for paging through results.
+    RagPagination pagination = 3;
+
+    // Sort field (default: <code>"create_time"</code>).
+    string orderby = 4;
+
+    // Optional. Sort in descending order (default: <code>true</code>).
+    optional bool desc = 5;
+
+    // Optional. Filter by session name.
+    string name = 6;
+
+    // Optional. Filter by session UUID.
+    string id = 7;
+
+    // Optional. Filter by user identifier.
+    string user_id = 8;
+
+    // Optional. Additional fields to pass through to RAGFlow.
+    google.protobuf.Struct additional_fields = 9;
+}
+
+// Response message for listing chat sessions.
+message RagChatSessionList {
+
+    // List of chat sessions (no pagination metadata included).
+    repeated RagChatSession chat_sessions = 1;
+}
+
+// Request message for listing agent sessions.
+message RagListAgentSessionsRequest {
+
+    // Required. The agent to list agent sessions from.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Required. RAGFlow agent UUID.
+    string agent_id = 2;
+
+    // Optional. Pagination parameters for paging through results.
+    RagPagination pagination = 3;
+
+    // Sort field (default: <code>"update_time"</code>).
+    string orderby = 4;
+
+    // Optional. Sort in descending order (default: <code>true</code>).
+    optional bool desc = 5;
+
+    // Optional. Filter by session UUID.
+    string id = 6;
+
+    // Optional. Filter by user identifier.
+    string user_id = 7;
+
+    // Optional. Include DSL (Domain Specific Language) workflow configuration in response.
+    optional bool dsl = 8;
+
+    // Optional. Additional fields to pass through to RAGFlow.
+    google.protobuf.Struct additional_fields = 9;
+}
+
+// Response message for listing agent sessions.
+message RagAgentSessionList {
+
+    // List of agent sessions (no pagination metadata included).
+    repeated RagAgentSession agent_sessions = 1;
+}
+
+// Request message for deleting chat sessions.
+message RagDeleteChatSessionsRequest {
+
+    // Required. The agent to delete chat sessions from.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Required. Chat assistant UUID.
+    string chat_id = 2;
+
+    // Optional. Session UUIDs to delete. Specify either this field or <code>delete_all</code>.
+    repeated string ids = 3;
+
+    // Optional. Delete all sessions for this chat (needed because protobuf cannot represent <code>ids=null</code>).
+    optional bool delete_all = 4;
+}
+
+// Request message for deleting agent sessions.
+message RagDeleteAgentSessionsRequest {
+
+    // Required. The agent to delete agent sessions from.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Required. RAGFlow agent UUID.
+    string agent_id = 2;
+
+    // Optional. Session UUIDs to delete. Specify either this field or <code>delete_all</code>.
+    repeated string ids = 3;
+
+    // Optional. Delete all sessions for this agent (needed because protobuf cannot represent <code>ids=null</code>).
+    optional bool delete_all = 4;
+}
+
+// ============================================================================
+// Completion Types (Streaming)
+// Generate responses using RAG and LLMs. All methods support streaming.
+// ============================================================================
+
+// Request message for generating a chat completion.
+message RagChatCompletionRequest {
+
+    // Required. The agent to generate the chat completion for.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Required. Chat assistant ID to use for generating the completion.
+    string chat_id = 2;
+
+    // Optional. Session ID to continue an existing conversation. If not provided, a new session will be created.
+    string session_id = 3;
+
+    // Required. User question or message to send to the chat assistant.
+    string question = 4;
+
+    // Optional. Enable streaming mode. If <code>true</code>, the response will be streamed as Server-Sent Events (SSE).
+    // Default: <code>true</code>.
+    optional bool stream = 5;
+
+    // Optional. Additional fields to pass through to RAGFlow API.
+    google.protobuf.Struct additional_fields = 6;
+}
+
+// Response message for chat completion.
+// <ul>
+//     <li>For streaming: Each message represents one Server-Sent Event's data field with incremental content.</li>
+//     <li>For non-streaming: Single message containing the complete response.</li>
+// </ul>
+message RagChatCompletionResponse {
+
+    // Response text. Incremental for streaming mode, complete for non-streaming mode.
+    string answer = 1;
+
+    // Source references including document chunks used to generate the response.
+    // Contains a <code>chunks</code> array with metadata about retrieved documents.
+    google.protobuf.Struct reference = 2;
+
+    // Optional. Base64-encoded audio response when text-to-speech is enabled.
+    string audio_binary = 3;
+
+    // Message ID uniquely identifying this response.
+    string id = 4;
+
+    // Session ID for the conversation.
+    string session_id = 5;
+
+    // Prompt used for generation. Usually empty string.
+    string prompt = 6;
+
+    // Creation timestamp (Unix timestamp in seconds).
+    double created_at = 7;
+
+    // Additional fields returned by RAGFlow API.
+    google.protobuf.Struct additional_fields = 8;
+}
+
+// Request message for OpenAI-compatible chat completion.
+// Follows OpenAI Chat Completions API format. All string fields must remain as strings to maintain OpenAI API compatibility.
+message RagOpenAiChatCompletionRequest {
+
+    // Required. The agent to generate the chat completion for.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Required. Chat assistant ID to use for generating the completion.
+    string chat_id = 2;
+
+    // Required. Model identifier. Required for OpenAI API compatibility but value is typically ignored by RAGFlow.
+    string model = 3;
+
+    // Required. Conversation history as an array of messages with roles (system, user, assistant).
+    repeated RagMessage messages = 4;
+
+    // Optional. Enable streaming mode. If <code>true</code>, the response will be streamed as Server-Sent Events (SSE).
+    // Default: <code>true</code>.
+    optional bool stream = 5;
+
+    // Optional. Include source references in the response. If <code>true</code>, the <code>reference</code> field will be populated in the last message.
+    // Default: <code>false</code>.
+    optional bool reference = 6;
+
+    // Optional. Additional fields to pass through to RAGFlow API (e.g., <code>temperature</code>, <code>max_tokens</code>).
+    google.protobuf.Struct additional_fields = 7;
+}
+
+// Response message for OpenAI-compatible chat completion.
+// Follows OpenAI Chat Completions API format. All string fields must remain as strings to maintain OpenAI API compatibility.
+// <ul>
+//     <li>For streaming: Each message represents one Server-Sent Event with <code>delta</code> populated in choices.</li>
+//     <li>For non-streaming: Single message with <code>message</code> populated in choices containing the complete response.</li>
+// </ul>
+message RagOpenAiChatCompletionResponse {
+
+    // Completion ID in format <code>"chatcmpl-{chat_id}"</code>.
+    string id = 1;
+
+    // Object type indicating response format. Value is <code>"chat.completion.chunk"</code> for streaming or <code>"chat.completion"</code> for non-streaming.
+    // This field must remain a string for OpenAI API compatibility.
+    string object = 2;
+
+    // Creation timestamp (Unix timestamp in seconds).
+    int64 created = 3;
+
+    // Model name used for completion.
+    string model = 4;
+
+    // System fingerprint for backend configuration. Usually empty string.
+    string system_fingerprint = 5;
+
+    // Array of generated choices. Typically contains one choice.
+    repeated RagOpenAiChatChoice choices = 6;
+
+    // Token usage statistics. Only populated in the final chunk for streaming mode or in the single response for non-streaming mode.
+    RagOpenAiChatUsage usage = 7;
+
+    // Additional fields returned by RAGFlow API.
+    google.protobuf.Struct additional_fields = 8;
+}
+
+// Choice in OpenAI-compatible chat completion response.
+// Follows OpenAI Chat Completions API format.
+message RagOpenAiChatChoice {
+
+    // Choice index in the array. Zero-based.
+    int32 index = 1;
+
+    oneof content {
+        // Non-streaming: Complete message with full content.
+        RagOpenAiChatContent message = 2;
+
+        // Streaming: Incremental delta containing partial content.
+        RagOpenAiChatContent delta = 3;
+    }
+
+    // Reason why the completion finished. Common values include <code>"stop"</code> (natural completion), <code>"length"</code> (max tokens reached).
+    // Only present in the final chunk for streaming mode or in the single response for non-streaming mode.
+    // This field must remain a string for OpenAI API compatibility.
+    string finish_reason = 4;
+
+    // Log probabilities for the generated tokens. Usually <code>null</code>.
+    google.protobuf.Value logprobs = 5;
+
+    // Additional fields returned by RAGFlow API.
+    google.protobuf.Struct additional_fields = 6;
+}
+
+// Message or delta content in OpenAI-compatible response.
+// Follows OpenAI Chat Completions API format.
+// <ul>
+//     <li>For streaming (delta): Contains incremental content. The <code>role</code> field is only present in the first chunk.</li>
+//     <li>For non-streaming (message): Contains complete content with all fields populated.</li>
+// </ul>
+message RagOpenAiChatContent {
+
+    // Message role. Value is typically <code>"assistant"</code>. For streaming, only present in the first chunk.
+    // This field must remain a string for OpenAI API compatibility (not the <code>MessageRole</code> enum).
+    string role = 1;
+
+    // Response text content. Incremental for streaming mode, complete for non-streaming mode.
+    string content = 2;
+
+    // Reasoning content extracted from <code>&lt;think&gt;...&lt;/think&gt;</code> tags if present in the model's response.
+    string reasoning_content = 3;
+
+    // Function call information. Usually <code>null</code>.
+    google.protobuf.Value function_call = 4;
+
+    // Tool calls information. Usually <code>null</code>.
+    google.protobuf.Value tool_calls = 5;
+
+    // Source references including document chunks. Only present in the last chunk if <code>reference=true</code> was set in the request.
+    google.protobuf.Value reference = 6;
+
+    // Complete accumulated response text. Only present in the last chunk for streaming mode.
+    string final_content = 7;
+
+    // Additional fields returned by RAGFlow API.
+    google.protobuf.Struct additional_fields = 8;
+}
+
+// Token usage statistics in OpenAI format.
+// Only populated in the final chunk for streaming mode or in the single response for non-streaming mode.
+message RagOpenAiChatUsage {
+
+    // Number of tokens in the prompt (input).
+    int32 prompt_tokens = 1;
+
+    // Number of tokens in the completion (output).
+    int32 completion_tokens = 2;
+
+    // Total tokens used (sum of <code>prompt_tokens</code> and <code>completion_tokens</code>).
+    int32 total_tokens = 3;
+
+    // Additional fields returned by RAGFlow API.
+    google.protobuf.Struct additional_fields = 8;
+}
+
+// Request message for generating an agent completion.
+// Agents are workflow-based AI assistants with Domain Specific Language (DSL) configuration.
+message RagAgentCompletionRequest {
+
+    // Required. The agent to generate the completion for.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Required. RAGFlow agent ID to use for generating the completion.
+    string agent_id = 2;
+
+    // Optional. Session ID to continue an existing conversation. If not provided, a new session will be created.
+    string session_id = 3;
+
+    // Required. User question or message to send to the agent.
+    string question = 4;
+
+    // Optional. Enable streaming mode. If <code>true</code>, the response will be streamed as Server-Sent Events (SSE).
+    // Default: <code>true</code>.
+    optional bool stream = 5;
+
+    // Optional. Files to include in the agent's context for processing.
+    repeated RagFile files = 6;
+
+    // Optional. Input form data to pass to the agent workflow. The structure depends on the agent's DSL configuration.
+    google.protobuf.Struct inputs = 7;
+
+    // Optional. User identifier for tracking and personalization.
+    string user_id = 8;
+
+    // Optional. Additional fields to pass through to RAGFlow API.
+    google.protobuf.Struct additional_fields = 9;
+}
+
+// Response message for agent completion.
+// <ul>
+//     <li>For streaming: Each message represents one Server-Sent Event with <code>event</code> indicating the event type (e.g., <code>"message"</code>, <code>"message_end"</code>).</li>
+//     <li>For non-streaming: Single message with accumulated content.</li>
+// </ul>
+message RagAgentCompletionResponse {
+
+    // Event type indicating the kind of event in the stream.
+    RagAgentEventType event = 1;
+
+    // Message ID uniquely identifying this response.
+    string message_id = 2;
+
+    // Creation timestamp (Unix timestamp in milliseconds).
+    int64 created_at = 3;
+
+    // Task ID associated with this agent workflow execution.
+    string task_id = 4;
+
+    // Event data payload containing the actual response content.
+    RagAgentCompletionData data = 5;
+
+    // Session ID for the conversation.
+    string session_id = 6;
+
+    // Additional fields returned by RAGFlow API.
+    google.protobuf.Struct additional_fields = 7;
+}
+
+// Data payload in agent completion response.
+message RagAgentCompletionData {
+
+    // Response text content. Incremental for streaming mode, complete for non-streaming mode.
+    string content = 1;
+
+    // Input data that was passed to the agent workflow.
+    google.protobuf.Struct inputs = 2;
+
+    // Output data produced by the agent workflow. Structure depends on the agent's DSL configuration.
+    google.protobuf.Struct outputs = 3;
+
+    // Source references including document chunks used to generate the response.
+    google.protobuf.Struct reference = 4;
+
+    // Additional fields returned by RAGFlow API.
+    google.protobuf.Struct additional_fields = 5;
+}
+
+// Request message for OpenAI-compatible agent completion.
+// Follows OpenAI Chat Completions API format. All string fields must remain as strings to maintain OpenAI API compatibility.
+// Agents are workflow-based AI assistants with Domain Specific Language (DSL) configuration.
+message RagOpenAiAgentCompletionRequest {
+
+    // Required. The agent to generate the completion for.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Required. RAGFlow agent ID to use for generating the completion.
+    string agent_id = 2;
+
+    // Required. Model identifier. Required for OpenAI API compatibility but value is typically ignored by RAGFlow.
+    string model = 3;
+
+    // Required. Conversation history as an array of messages. Only user and assistant role messages are processed; system messages are filtered out.
+    repeated RagMessage messages = 4;
+
+    // Optional. Enable streaming mode. If <code>true</code>, the response will be streamed as Server-Sent Events (SSE).
+    // Default: <code>true</code>.
+    optional bool stream = 5;
+
+    // Optional. Session ID to continue an existing conversation. Can alternatively be passed in <code>additional_fields.metadata.id</code>.
+    string session_id = 6;
+
+    // Optional. Custom identifier field for the request.
+    string id = 7;
+
+    // Optional. Additional fields to pass through to RAGFlow API (e.g., <code>temperature</code>, <code>max_tokens</code>, <code>metadata</code> with session info).
+    google.protobuf.Struct additional_fields = 8;
+}
+
+// ============================================================================
+// Agent Management Types
+// Agents are workflow-based AI assistants with DSL configuration.
+// ============================================================================
+
+// RAGFlow agent (workflow-based AI assistant).
+// Agents are workflow-based AI assistants configured using Domain Specific Language (DSL).
+message RagAgent {
+
+    // Agent UUID uniquely identifying this agent.
+    string id = 1;
+
+    // Agent title. Must be unique within the project.
+    string title = 2;
+
+    // Optional. Agent description providing details about the agent's purpose and functionality.
+    string description = 3;
+
+    // Optional. Base64-encoded avatar image for visual identification.
+    string avatar = 4;
+
+    // Domain Specific Language (DSL) configuration defining the agent's workflow, logic, and behavior.
+    // The DSL structure determines how the agent processes requests and generates responses.
+    google.protobuf.Struct dsl = 5;
+
+    // Creation timestamp (Unix timestamp in milliseconds).
+    int64 create_time = 6;
+
+    // Creation date in ISO 8601 datetime format.
+    string create_date = 7;
+
+    // Last update timestamp (Unix timestamp in milliseconds).
+    int64 update_time = 8;
+
+    // Last update date in ISO 8601 datetime format.
+    string update_date = 9;
+
+    // User ID of the agent owner.
+    string user_id = 10;
+
+    // Canvas type for the agent's workflow visualization.
+    string canvas_type = 11;
+
+    // Additional fields returned by RAGFlow API.
+    google.protobuf.Struct additional_fields = 12;
+}
+
+// Request message for creating a new RAGFlow agent.
+message RagCreateAgentRequest {
+
+    // Required. The agent to create the RAGFlow agent for.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Required. Unique agent title. Must be unique within the project.
+    string title = 2;
+
+    // Optional. Agent description providing details about the agent's purpose and functionality.
+    string description = 3;
+
+    // Required. Domain Specific Language (DSL) configuration defining the agent's workflow.
+    // A version snapshot is automatically created when the agent is created.
+    google.protobuf.Struct dsl = 4;
+
+    // Optional. Additional fields to pass through to RAGFlow API.
+    google.protobuf.Struct additional_fields = 5;
+}
+
+// Request message for updating an existing RAGFlow agent.
+message RagUpdateAgentRequest {
+
+    // Required. The agent to update the RAGFlow agent for.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Required. ID of the RAGFlow agent to update.
+    string agent_id = 2;
+
+    // Optional. New agent title. If provided, must be unique within the project.
+    string title = 3;
+
+    // Optional. New agent description.
+    string description = 4;
+
+    // Optional. New Domain Specific Language (DSL) configuration.
+    // A version snapshot is automatically created when the DSL is updated.
+    // Only the agent owner can update the DSL.
+    google.protobuf.Struct dsl = 5;
+
+    // Optional. Additional fields to pass through to RAGFlow API.
+    google.protobuf.Struct additional_fields = 6;
+}
+
+// Request message for deleting a RAGFlow agent.
+message RagDeleteAgentRequest {
+
+    // Required. The agent to delete the RAGFlow agent from.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Required. ID of the RAGFlow agent to delete.
+    // Only the agent owner can delete the agent.
+    string agent_id = 2;
+}
+
+// Request message for listing RAGFlow agents.
+message RagListAgentsRequest {
+
+    // Required. The agent to list RAGFlow agents from.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Optional. Pagination parameters to control the number and offset of results.
+    RagPagination pagination = 2;
+
+    // Optional. Filter results by agent title. Only agents with matching titles will be returned.
+    string title = 3;
+
+    // Optional. Sort field for ordering results. Default: <code>"update_time"</code>.
+    string orderby = 4;
+
+    // Optional. Sort in descending order. If <code>true</code>, results are sorted from highest to lowest.
+    // Default: <code>true</code>.
+    optional bool desc = 5;
+
+    // Optional. Filter results by specific agent ID.
+    string id = 6;
+
+    // Optional. Additional fields to pass through to RAGFlow API.
+    google.protobuf.Struct additional_fields = 7;
+}
+
+// Response message containing a list of RAGFlow agents.
+message RagAgentList {
+
+    // List of RAGFlow agents owned by the user.
+    // Note: No pagination metadata is included in this response.
+    repeated RagAgent agents = 1;
+}
+
+// ============================================================================
+// File Management Types
+// Files and folders in RAGFlow's file system. Can be converted to documents.
+// ============================================================================
+
+// File or folder in RAGFlow file system.
+message RagFile {
+
+    // File or folder UUID.
+    string id = 1;
+
+    // File or folder name.
+    string name = 2;
+
+    // File type/extension or <code>"folder"</code> for directories. Check <code>type == "folder"</code> to distinguish folders from files.
+    string type = 3;
+
+    // File size in bytes (0 for folders).
+    int64 size = 4;
+
+    // Parent folder ID. Empty string for root-level items.
+    string parent_id = 5;
+
+    // Creation timestamp (Unix timestamp in milliseconds).
+    int64 create_time = 6;
+
+    // Creation date (ISO 8601 datetime format).
+    string create_date = 7;
+
+    // Last update timestamp (Unix timestamp in milliseconds).
+    int64 update_time = 8;
+
+    // Last update date (ISO 8601 datetime format).
+    string update_date = 9;
+
+    // Storage location path within the RAGFlow file system.
+    string location = 10;
+
+    // Source type indicating file origin (e.g., <code>"local"</code> for uploaded files).
+    string source_type = 11;
+
+    // Additional fields returned by RAGFlow.
+    google.protobuf.Struct additional_fields = 12;
+}
+
+// Request message for uploading files via streaming multipart form data.
+// RAGFlow supports individual and bulk file uploads. Files can be uploaded to a specific folder
+// or to the root directory if no parent folder is specified.
+message RagUploadFilesRequest {
+
+    // Required. The agent to upload files for.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Metadata for the upload operation (must be sent in first message only).
+    message RagMetadata {
+
+        // Optional. Parent folder ID. If not provided, files will be uploaded to root directory.
+        string parent_id = 1;
+
+        // Required. Metadata for all files being uploaded in this request.
+        repeated RagFileMetadata files = 2;
+    }
+
+    // First message must contain metadata; subsequent messages contain file data chunks.
+    oneof payload {
+
+        // First message: declares all files to be uploaded.
+        RagMetadata metadata = 2;
+
+        // Subsequent messages: stream file data in chunks.
+        RagUploadChunk chunk = 3;
+    }
+}
+
+// Response message containing a list of files.
+message RagFileList {
+
+    // Uploaded files. RAGFlow automatically creates intermediate folders as needed during upload.
+    repeated RagFile files = 1;
+}
+
+// Request message for creating a file or folder in RAGFlow.
+message RagCreateFileRequest {
+
+    // Required. The agent to create the file for.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Required. Name of the file or folder to create.
+    string name = 2;
+
+    // Optional. Parent folder ID. If not provided, creates in root directory.
+    string parent_id = 3;
+
+    // Required. Type of item to create: <code>"folder"</code> for directories or <code>"virtual"</code> for virtual files.
+    string type = 4;
+
+    // Optional. Additional fields to pass through to RAGFlow.
+    google.protobuf.Struct additional_fields = 5;
+}
+
+// Request message for listing files and folders.
+message RagListFilesRequest {
+
+    // Required. The agent to list files from.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Optional. Folder ID to list contents from. If not provided, lists root directory contents.
+    string parent_id = 2;
+
+    // Optional. Pagination parameters. Default page size is 15 items per page.
+    RagPagination pagination = 3;
+
+    // Optional. Search keywords to filter files by name or other searchable attributes.
+    string keywords = 4;
+
+    // Optional. Field to sort results by. Common values include <code>"create_time"</code> (default) and <code>"update_time"</code>.
+    string orderby = 5;
+
+    // Optional. Sort in descending order. Default is <code>true</code> (newest first).
+    optional bool desc = 6;
+
+    // Optional. Additional fields to pass through to RAGFlow.
+    google.protobuf.Struct additional_fields = 7;
+}
+
+// Response message for listing files and folders.
+message RagListFilesResponse {
+
+    // Total number of files and folders matching the query (before pagination).
+    int32 total = 1;
+
+    // List of files and folders in the current page.
+    repeated RagFile files = 2;
+
+    // Information about the parent folder being listed.
+    RagFile parent_folder = 3;
+}
+
+// Response message for getting the root folder.
+message RagGetRootFolderResponse {
+
+    // The root folder of the file system.
+    RagFile root_folder = 1;
+}
+
+// Response message for getting the parent folder of a file.
+message RagGetParentFolderResponse {
+
+    // The immediate parent folder of the requested file.
+    RagFile parent_folder = 1;
+}
+
+// Response message for getting all parent folders in the hierarchy.
+message RagGetAllParentFoldersResponse {
+
+    // All parent folders in the hierarchy, from immediate parent to root folder.
+    repeated RagFile parent_folders = 1;
+}
+
+// Request message for getting the root folder of the project
+message RagGetRootFolderRequest {
+
+    // Required. The agent to get the parent folder for.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+}
+
+// Request message for getting the parent folder of a file.
+message RagGetParentFolderRequest {
+
+    // Required. The agent to get the parent folder for.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Required. UUID of the file to get the parent folder for.
+    string file_id = 2;
+}
+
+// Request message for getting all parent folders in the hierarchy.
+message RagGetAllParentFoldersRequest {
+
+    // Required. The agent to get all parent folders for.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Required. UUID of the file to get all parent folders for.
+    string file_id = 2;
+}
+
+// Request message for getting file details.
+message RagGetFileRequest {
+
+    // Required. The agent to get the file from.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Required. UUID of the file to retrieve.
+    string file_id = 2;
+}
+
+// Deprecated: Use GetParentFolderRequest, GetAllParentFoldersRequest, or GetFileRequest instead.
+message RagFileID {
+    // File ID (required).
+    string file_id = 1;
+}
+
+// Request message for deleting files or folders.
+message RagDeleteFilesRequest {
+
+    // Required. The agent to delete files from.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Required. UUIDs of files or folders to delete. Supports batch deletion.
+    repeated string file_ids = 2;
+}
+
+// Request message for renaming a file or folder.
+message RagRenameFileRequest {
+
+    // Required. The agent to rename the file for.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Required. UUID of the file or folder to rename.
+    string file_id = 2;
+
+    // Required. New name for the file or folder. For files, the extension must remain the same.
+    string name = 3;
+}
+
+// Request message for moving files or folders.
+message RagMoveFileRequest {
+
+    // Required. The agent to move files for.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Required. UUIDs of source files or folders to move. Supports batch move operations.
+    repeated string src_file_ids = 2;
+
+    // Required. UUID of the destination folder.
+    string dest_file_id = 3;
+}
+
+// Request message for converting files to documents and linking them to datasets.
+// RAGFlow allows linking uploaded files to multiple target datasets for RAG operations.
+message RagFileToDocumentRequest {
+
+    // Required. The agent to convert files to documents for.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Required. UUIDs of files to convert. If folders are provided, processes contents recursively.
+    repeated string file_ids = 2;
+
+    // Required. Target dataset IDs (knowledge base IDs). A single file can be linked to multiple datasets.
+    repeated string kb_ids = 3;
+
+    // Optional. Additional fields to pass through to RAGFlow.
+    google.protobuf.Struct additional_fields = 4;
+}
+
+// Association between a file and a document in a dataset.
+// Tracks the relationship when files are converted to documents for use in RAG operations.
+message RagFileToDocument {
+
+    // UUID of the file-to-document association.
+    string id = 1;
+
+    // UUID of the source file.
+    string file_id = 2;
+
+    // UUID of the generated document in the dataset.
+    string document_id = 3;
+
+    // Creation timestamp (Unix timestamp in milliseconds).
+    int64 create_time = 4;
+
+    // Creation date (ISO 8601 datetime format).
+    string create_date = 5;
+
+    // Last update timestamp (Unix timestamp in milliseconds).
+    int64 update_time = 6;
+
+    // Last update date (ISO 8601 datetime format).
+    string update_date = 7;
+
+    // Additional fields returned by RAGFlow.
+    google.protobuf.Struct additional_fields = 8;
+}
+
+// Response message containing a list of file-to-document associations.
+message RagFileToDocumentList {
+
+    // List of file-to-document associations created during the conversion operation.
+    repeated RagFileToDocument filesToDocuments = 1;
+}
+
+// ============================================================================
+// Dify Integration Types
+// Integration with Dify platform (uses API key authentication).
+// ============================================================================
+
+// Request message for retrieving data from RAGFlow using Dify-compatible format.
+// This provides compatibility with Dify's knowledge retrieval API structure.
+message RagDifyRetrievalRequest {
+
+    // Required. The agent to retrieve data for.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Required. Dataset ID (called <code>knowledge_id</code> in Dify API format).
+    // This is the UUID of the dataset to search within.
+    string knowledge_id = 2;
+
+    // Required. Search query string for retrieving relevant chunks.
+    string query = 3;
+
+    // Optional. Retrieval configuration settings including score threshold and result limit.
+    RagDifyRetrievalSetting retrieval_setting = 4;
+
+    // Optional. Metadata filter conditions to narrow down search results.
+    // Structure depends on your metadata schema.
+    google.protobuf.Struct metadata_condition = 5;
+
+    // Optional. Whether to use knowledge graph for enhanced retrieval.
+    // Knowledge graphs can improve context and relationships between entities.
+    optional bool use_kg = 6;
+
+    // Optional. Additional fields to pass through to RAGFlow.
+    google.protobuf.Struct additional_fields = 7;
+}
+
+// Configuration settings for Dify-compatible retrieval operations.
+message RagDifyRetrievalSetting {
+
+    // Minimum similarity score threshold for including results (0.0-1.0).
+    // Default: 0.0 (no filtering by score).
+    float score_threshold = 1;
+
+    // Maximum number of results to return.
+    // Default: 1024.
+    int32 top_k = 2;
+
+    // Optional. Additional fields to pass through to RAGFlow.
+    google.protobuf.Struct additional_fields = 3;
+}
+
+// Response message containing a list of retrieved records in Dify-compatible format.
+message RagDifyRecordList {
+
+    // List of retrieved records matching the query.
+    repeated RagDifyRecord records = 1;
+}
+
+// Individual record structure in Dify-compatible format representing a retrieved chunk.
+message RagDifyRecord {
+
+    // Text content of the retrieved chunk.
+    string content = 1;
+
+    // Similarity score indicating relevance to the query (0.0-1.0).
+    // Higher scores indicate better matches.
+    float score = 2;
+
+    // Title of the source document containing this chunk.
+    string title = 3;
+
+    // Additional metadata associated with this chunk.
+    // May include document ID, page numbers, timestamps, or custom fields.
+    google.protobuf.Struct metadata = 4;
+
+    // Optional. Additional fields to pass through to RAGFlow.
+    google.protobuf.Struct additional_fields = 5;
+}
+
+// ============================================================================
+// Bot API Types
+// ============================================================================
+
+// Request message for asking a question using RAGFlow's basic QA endpoint.
+// This endpoint searches specified datasets and returns an answer.
+message RagAskRequest {
+
+    // Required. The agent to ask the question for.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Required. User question to be answered.
+    string question = 2;
+
+    // Required. List of dataset IDs to search for relevant information.
+    // The system will search across all specified datasets.
+    repeated string dataset_ids = 3;
+
+    // Optional. Additional fields to pass through to RAGFlow.
+    google.protobuf.Struct additional_fields = 4;
+}
+
+// Response message containing the answer to a user's question.
+message RagAskResponse {
+
+    // Generated answer text based on the retrieved information.
+    // When streaming is enabled, this field contains incremental text chunks.
+    string answer = 1;
+
+    // Source references and citations for the generated answer.
+    // Typically includes chunk information, document titles, and similarity scores.
+    google.protobuf.Struct reference = 2;
+
+    // Optional. Additional fields returned by RAGFlow.
+    google.protobuf.Struct additional_fields = 3;
+}
+
+// Request message for generating related questions based on a user's query.
+// This helps improve user experience by suggesting follow-up questions.
+message RagRelatedQuestionsRequest {
+
+    // Required. The agent to generate related questions for.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Required. Original user question to generate related questions from.
+    string question = 2;
+
+    // Optional. Industry context to focus the related questions.
+    // Helps tailor suggestions to specific domains (e.g., "healthcare", "finance").
+    string industry = 3;
+
+    // Optional. Additional fields to pass through to RAGFlow.
+    google.protobuf.Struct additional_fields = 4;
+}
+
+// Response message containing a list of suggested related questions.
+message RagRelatedQuestionsResponse {
+
+    // List of 5-10 related question suggestions based on the original query.
+    // These can be used to guide users toward additional relevant information.
+    repeated string questions = 1;
+}
+
+// Request message for generating chat completions using a configured chatbot.
+// Corresponds to RAGFlow's <code>POST /api/v1/chats/{chat_id}/completions</code> endpoint.
+message RagChatbotCompletionRequest {
+
+    // Required. The agent to generate chatbot completion for.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Required. Chat dialog ID identifying the specific chatbot configuration.
+    // This corresponds to <code>chat_id</code> in RAGFlow's API.
+    string dialog_id = 2;
+
+    // Required. User question or message to be processed by the chatbot.
+    string question = 3;
+
+    // Optional. Enable streaming responses for real-time interaction.
+    // Default: true. When enabled, response chunks are sent incrementally.
+    optional bool stream = 4;
+
+    // Optional. Session ID for maintaining conversation context across multiple turns.
+    // If not provided, a new session will be created.
+    string session_id = 5;
+
+    // Optional. Additional fields to pass through to RAGFlow.
+    google.protobuf.Struct additional_fields = 6;
+}
+
+// Request message for retrieving chatbot configuration and initialization data.
+// Used to obtain display information for the chat interface.
+message RagChatbotInfoRequest {
+
+    // Required. The agent to get chatbot information for.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Required. Chat dialog ID identifying the chatbot.
+    string dialog_id = 2;
+}
+
+// Response message containing chatbot display and initialization information.
+message RagChatbotInfoResponse {
+
+    // Chat display name for UI presentation.
+    string title = 1;
+
+    // Base64-encoded avatar image or URL for the chatbot.
+    string avatar = 2;
+
+    // Opening greeting message displayed when starting a new conversation.
+    string prologue = 3;
+}
+
+// Request message for generating completions using a RAGFlow agent.
+// Agents are workflow-based systems that can combine multiple operations and tools.
+// Corresponds to RAGFlow's <code>POST /api/v1/agents/{agent_id}/completions</code> endpoint.
+message RagAgentbotCompletionRequest {
+
+    // Required. The agent to generate agentbot completion for.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Required. RAGFlow agent ID identifying the specific agent configuration.
+    // Agents support workflow-based processing with multiple steps.
+    string agent_id = 2;
+
+    // Required. User question or input to be processed by the agent.
+    string question = 3;
+
+    // Optional. Enable streaming responses for real-time interaction.
+    // Default: true. When enabled, response chunks are sent incrementally.
+    optional bool stream = 4;
+
+    // Optional. Session ID for maintaining conversation context across multiple turns.
+    // Agents maintain session state for multi-turn interactions.
+    string session_id = 5;
+
+    // Optional. Additional fields to pass through to RAGFlow.
+    google.protobuf.Struct additional_fields = 6;
+}
+
+// Request message for retrieving agent input configuration.
+// Returns the form configuration and initialization data for an agent.
+message RagAgentbotInputsRequest {
+
+    // Required. The agent to get agentbot input configuration for.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Required. RAGFlow agent ID to retrieve input configuration for.
+    string agent_id = 2;
+}
+
+// Response message containing agent input configuration and display information.
+message RagAgentbotInputsResponse {
+
+    // Agent display name for UI presentation.
+    string title = 1;
+
+    // Base64-encoded avatar image or URL for the agent.
+    string avatar = 2;
+
+    // Input form field configurations extracted from the "begin" component in agent DSL.
+    // Each struct defines form fields that users must provide before starting interaction.
+    repeated google.protobuf.Struct inputs = 3;
+
+    // Opening greeting message displayed when starting a new agent session.
+    string prologue = 4;
+
+    // Agent operational mode.
+    string mode = 5;
+}
+
+// Request message for asking questions using RAGFlow's search application.
+// Search apps provide advanced retrieval with configurable settings.
+message RagSearchbotAskRequest {
+
+    // Required. The agent to ask searchbot question for.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Required. User question to search for and answer.
+    string question = 2;
+
+    // Required. List of dataset IDs (knowledge base IDs) to search within.
+    // Called <code>kb_ids</code> in RAGFlow's internal API.
+    repeated string kb_ids = 3;
+
+    // Optional. Search application ID to load predefined configuration.
+    // If provided, uses the search app's retrieval settings and metadata filters.
+    string search_id = 4;
+
+    // Optional. Additional fields to pass through to RAGFlow.
+    google.protobuf.Struct additional_fields = 5;
+}
+
+// Request message for advanced search retrieval with extensive configuration options.
+// Provides fine-grained control over the search and ranking process.
+message RagSearchbotRetrievalRequest {
+
+    // Required. The agent to retrieve searchbot results for.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Required. List of dataset IDs (knowledge base IDs) to search.
+    // Called <code>dataset_ids</code> in RAGFlow's response format.
+    repeated string kb_id = 2;
+
+    // Required. Search query string.
+    string question = 3;
+
+    // Optional. Page number for pagination.
+    // Default: 1.
+    int32 page = 4;
+
+    // Optional. Number of results per page.
+    // Default: 30.
+    int32 size = 5;
+
+    // Optional. Filter results to specific document IDs only.
+    // Useful for searching within a subset of documents.
+    repeated string doc_ids = 6;
+
+    // Optional. Minimum similarity score threshold (0.0-1.0).
+    // Default: 0.0 (no filtering by score).
+    float similarity_threshold = 7;
+
+    // Optional. Weight balance between vector similarity and keyword matching (0.0-1.0).
+    // Higher values favor vector similarity, lower values favor keyword matching.
+    // Default: 0.3.
+    float vector_similarity_weight = 8;
+
+    // Optional. Whether to use knowledge graph for enhanced retrieval.
+    // Knowledge graphs can improve context and entity relationships.
+    optional bool use_kg = 9;
+
+    // Optional. Maximum number of results to retrieve before reranking.
+    // Default: 1024.
+    int32 top_k = 10;
+
+    // Optional. Languages to enable cross-language translation.
+    // Called <code>langs</code> in RAGFlow's internal API.
+    repeated string cross_languages = 11;
+
+    // Optional. Whether to extract and return additional keywords from the query.
+    optional bool keyword = 12;
+
+    // Optional. Rerank model ID for post-processing retrieved results.
+    // Reranking can improve relevance of final results.
+    string rerank_id = 13;
+
+    // Optional. Search application ID to load predefined metadata filters.
+    string search_id = 14;
+
+    // Optional. Whether to highlight matched content in the returned chunks.
+    optional bool highlight = 15;
+
+    // Optional. Additional fields to pass through to RAGFlow.
+    google.protobuf.Struct additional_fields = 16;
+}
+
+// Response message containing search retrieval results with metadata.
+message RagSearchbotRetrievalResponse {
+
+    // List of retrieved chunks with similarity scores and content.
+    repeated RagChunk chunks = 1;
+
+    // Document aggregations providing statistics per source document.
+    // Typically includes document IDs and match counts.
+    repeated google.protobuf.Struct doc_aggs = 2;
+
+    // Total number of matching chunks across all pages.
+    // Used for pagination calculations.
+    int32 total = 3;
+
+    // Extracted labels or categories from the results.
+    repeated string labels = 4;
+
+    // Optional. Additional fields returned by RAGFlow.
+    google.protobuf.Struct additional_fields = 5;
+}
+
+// Request message for generating related questions using a search application.
+// Uses the search app's LLM configuration for question generation.
+message RagSearchbotRelatedQuestionsRequest {
+
+    // Required. The agent to generate searchbot related questions for.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Required. Original user question to generate related questions from.
+    string question = 2;
+
+    // Optional. Search application ID to load LLM configuration.
+    // If provided, uses the search app's configured language model for generation.
+    string search_id = 3;
+
+    // Optional. Additional fields to pass through to RAGFlow.
+    google.protobuf.Struct additional_fields = 4;
+}
+
+// Request message for retrieving detailed information about a search application.
+message RagSearchbotDetailRequest {
+
+    // Required. The agent to get searchbot detail for.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Required. Search application ID to retrieve details for.
+    string search_id = 2;
+}
+
+// Response message containing detailed information about a search application.
+message RagSearchbotDetailResponse {
+
+    // Search application UUID.
+    string id = 1;
+
+    // Base64-encoded avatar image or URL for the search app.
+    string avatar = 2;
+
+    // Tenant ID that owns this search application.
+    string tenant_id = 3;
+
+    // Search application name.
+    string name = 4;
+
+    // Search application description.
+    string description = 5;
+
+    // User ID of the creator.
+    string create_by = 6;
+
+    // Complete search configuration including retrieval settings, filters, and LLM configuration.
+    google.protobuf.Struct search_config = 7;
+
+    // Last update timestamp (Unix timestamp in milliseconds).
+    int64 update_time = 8;
+
+    // Display name (nickname) of the creator.
+    string nickname = 9;
+
+    // Base64-encoded avatar image or URL for the tenant.
+    string tenant_avatar = 10;
+
+    // Optional. Additional fields returned by RAGFlow.
+    google.protobuf.Struct additional_fields = 11;
+}
+
+// Request message for generating a mindmap visualization from search results.
+// Mindmaps organize retrieved information into hierarchical visual structures.
+message RagSearchbotMindmapRequest {
+
+    // Required. The agent to generate searchbot mindmap for.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Required. User question to generate mindmap around.
+    string question = 2;
+
+    // Required. List of dataset IDs (knowledge base IDs) to search for mindmap content.
+    repeated string kb_ids = 3;
+
+    // Optional. Search application ID to load predefined configuration.
+    // If provided, uses the search app's retrieval and LLM settings.
+    string search_id = 4;
+
+    // Optional. Additional fields to pass through to RAGFlow.
+    google.protobuf.Struct additional_fields = 5;
+}
+
+// Response message containing the generated mindmap structure.
+message RagSearchbotMindmapResponse {
+
+    // Generated mindmap structure in hierarchical format.
+    // The structure organizes retrieved information into nodes and relationships.
+    google.protobuf.Struct mindmap = 1;
+}
