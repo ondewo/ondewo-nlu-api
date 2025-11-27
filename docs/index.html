@@ -2248,6 +2248,10 @@
                       </li>
                     
                       <li>
+                        <a href="#ondewo.nlu.GetRootFolderRequest" class="title-badge message">GetRootFolderRequest</a>
+                      </li>
+                    
+                      <li>
                         <a href="#ondewo.nlu.GetRootFolderResponse" class="title-badge message">GetRootFolderResponse</a>
                       </li>
                     
@@ -20810,14 +20814,14 @@ Uses tenant's default embedding model if not specified.
           <pre>rpc UpdateDataset (<a href="#ondewo.nlu.UpdateDatasetRequest">UpdateDatasetRequest</a>) returns (<a href="#ondewo.nlu.Dataset">Dataset)</a></pre>
 
           Update an existing dataset's configuration.<br>
-Cannot change <code>embedding_model</code> if dataset has chunks.
+Cannot change embedding_model if dataset has chunks.
         
           <h4 id="ondewo.nlu.Rags.DeleteDatasets" class="title-badge method">DeleteDatasets</h4>
 
           <pre>rpc DeleteDatasets (<a href="#ondewo.nlu.DeleteDatasetsRequest">DeleteDatasetsRequest</a>) returns (<a href="#ondewo.nlu.PartialSuccess">PartialSuccess)</a></pre>
 
           Delete one or more datasets (batch operation).<br>
-If <code>ids</code> is null or empty, deletes all user's datasets.<br>
+If ids is null or empty, deletes all user's datasets.<br>
 Deletes all associated documents, files, and chunks.
         
           <h4 id="ondewo.nlu.Rags.ListDatasets" class="title-badge method">ListDatasets</h4>
@@ -20846,14 +20850,14 @@ Deletes graph-related chunks but not the dataset itself.
           <pre>rpc UploadDocuments (stream <a href="#ondewo.nlu.UploadDocumentsRequest">UploadDocumentsRequest</a>) returns (<a href="#ondewo.nlu.DocumentList">DocumentList)</a></pre>
 
           Upload one or more documents to a dataset.<br>
-Documents start in <code>UNSTART</code> state and must be parsed.
+Documents start in UNSTART state and must be parsed.
         
           <h4 id="ondewo.nlu.Rags.UpdateDocument" class="title-badge method">UpdateDocument</h4>
 
           <pre>rpc UpdateDocument (<a href="#ondewo.nlu.UpdateDocumentRequest">UpdateDocumentRequest</a>) returns (<a href="#ondewo.nlu.Document">Document)</a></pre>
 
           Update document metadata and configuration.<br>
-Changing <code>chunk_method</code> resets document to <code>UNSTART</code> and deletes chunks.
+Changing chunk_method resets document to UNSTART and deletes chunks.
         
           <h4 id="ondewo.nlu.Rags.DownloadDocument" class="title-badge method">DownloadDocument</h4>
 
@@ -20875,14 +20879,14 @@ Supports time range filtering and keyword search.
           <pre>rpc DeleteDocuments (<a href="#ondewo.nlu.DeleteDocumentsRequest">DeleteDocumentsRequest</a>) returns (<a href="#ondewo.nlu.PartialSuccess">PartialSuccess)</a></pre>
 
           Delete one or more documents from a dataset (batch operation).<br>
-If <code>ids</code> empty, deletes all documents. Removes chunks and storage files.
+If ids empty, deletes all documents. Removes chunks and storage files.
         
           <h4 id="ondewo.nlu.Rags.ParseDocuments" class="title-badge method">ParseDocuments</h4>
 
           <pre>rpc ParseDocuments (<a href="#ondewo.nlu.ParseDocumentsRequest">ParseDocumentsRequest</a>) returns (<a href="#ondewo.nlu.PartialSuccess">PartialSuccess)</a></pre>
 
           Start parsing documents into chunks.<br>
-Cannot parse documents currently being processed (0 &lt; <code>progress</code> &lt; 1).<br>
+Cannot parse documents currently being processed (0 < progress < 1).<br>
 Queues documents for background processing.
         
           <h4 id="ondewo.nlu.Rags.StopParsing" class="title-badge method">StopParsing</h4>
@@ -20890,7 +20894,7 @@ Queues documents for background processing.
           <pre>rpc StopParsing (<a href="#ondewo.nlu.StopParsingRequest">StopParsingRequest</a>) returns (<a href="#ondewo.nlu.PartialSuccess">PartialSuccess)</a></pre>
 
           Stop parsing documents.<br>
-Can only stop documents with <code>progress</code> between 0 and 1.
+Can only stop documents with progress between 0 and 1.
         
           <h4 id="ondewo.nlu.Rags.ListChunks" class="title-badge method">ListChunks</h4>
 
@@ -20911,7 +20915,7 @@ Automatically tokenizes content and generates embeddings.
           <pre>rpc RemoveChunks (<a href="#ondewo.nlu.RemoveChunksRequest">RemoveChunksRequest</a>) returns (<a href="#ondewo.nlu.PartialSuccess">PartialSuccess)</a></pre>
 
           Remove one or more chunks from a document.<br>
-If <code>chunk_ids</code> empty, removes all chunks from document.
+If chunk_ids empty, removes all chunks from document.
         
           <h4 id="ondewo.nlu.Rags.UpdateChunk" class="title-badge method">UpdateChunk</h4>
 
@@ -20933,7 +20937,7 @@ Supports reranking, metadata filtering, and knowledge graph retrieval.
           <pre>rpc CreateChat (<a href="#ondewo.nlu.CreateChatRequest">CreateChatRequest</a>) returns (<a href="#ondewo.nlu.Chat">Chat)</a></pre>
 
           Create a new chat assistant.<br>
-All datasets must have parsed files (<code>chunk_num</code> &gt; 0).<br>
+All datasets must have parsed files (chunk_num > 0).<br>
 All datasets must use the same embedding model.
         
           <h4 id="ondewo.nlu.Rags.UpdateChat" class="title-badge method">UpdateChat</h4>
@@ -20948,7 +20952,7 @@ LLM and prompt configs are merged with existing values.
           <pre>rpc DeleteChats (<a href="#ondewo.nlu.DeleteChatsRequest">DeleteChatsRequest</a>) returns (<a href="#ondewo.nlu.PartialSuccess">PartialSuccess)</a></pre>
 
           Delete one or more chat assistants (batch operation).<br>
-If <code>ids</code> empty, deletes all user's chats (soft delete).
+If ids empty, deletes all user's chats (soft delete).
         
           <h4 id="ondewo.nlu.Rags.ListChats" class="title-badge method">ListChats</h4>
 
@@ -20969,7 +20973,7 @@ Session initialized with assistant's prologue message.
           <pre>rpc CreateAgentSession (<a href="#ondewo.nlu.CreateAgentSessionRequest">CreateAgentSessionRequest</a>) returns (<a href="#ondewo.nlu.AgentSession">AgentSession)</a></pre>
 
           Create a new agent session.<br>
-Initializes <code>Canvas</code> with agent's DSL configuration.
+Initializes Canvas with agent's DSL configuration.
         
           <h4 id="ondewo.nlu.Rags.UpdateChatSession" class="title-badge method">UpdateChatSession</h4>
 
@@ -20997,21 +21001,21 @@ Can optionally exclude DSL from response for performance.
           <pre>rpc DeleteChatSessions (<a href="#ondewo.nlu.DeleteChatSessionsRequest">DeleteChatSessionsRequest</a>) returns (<a href="#ondewo.nlu.PartialSuccess">PartialSuccess)</a></pre>
 
           Delete one or more chat sessions (batch operation).<br>
-If <code>ids</code> empty, deletes all sessions for the chat (hard delete).
+If ids empty, deletes all sessions for the chat (hard delete).
         
           <h4 id="ondewo.nlu.Rags.DeleteAgentSessions" class="title-badge method">DeleteAgentSessions</h4>
 
           <pre>rpc DeleteAgentSessions (<a href="#ondewo.nlu.DeleteAgentSessionsRequest">DeleteAgentSessionsRequest</a>) returns (<a href="#ondewo.nlu.PartialSuccess">PartialSuccess)</a></pre>
 
           Delete one or more agent sessions (batch operation).<br>
-If <code>ids</code> empty, deletes all sessions for the agent (hard delete).
+If ids empty, deletes all sessions for the agent (hard delete).
         
           <h4 id="ondewo.nlu.Rags.ChatCompletion" class="title-badge method">ChatCompletion</h4>
 
           <pre>rpc ChatCompletion (<a href="#ondewo.nlu.ChatCompletionRequest">ChatCompletionRequest</a>) returns (stream <a href="#ondewo.nlu.ChatCompletionResponse">ChatCompletionResponse)</a></pre>
 
           Generate chat completion with RAG (server streaming).<br>
-Creates new session if <code>session_id</code> not provided.
+Creates new session if session_id not provided.
         
           <h4 id="ondewo.nlu.Rags.OpenAIChatCompletion" class="title-badge method">OpenAIChatCompletion</h4>
 
@@ -21019,7 +21023,7 @@ Creates new session if <code>session_id</code> not provided.
 
           OpenAI-compatible chat completion endpoint (server streaming).<br>
 Compatible with OpenAI Python client.<br>
-Supports reasoning content in <code>&lt;think&gt;</code> tags.
+Supports reasoning content in <think> tags.
         
           <h4 id="ondewo.nlu.Rags.AgentCompletion" class="title-badge method">AgentCompletion</h4>
 
@@ -21087,7 +21091,7 @@ Supports keyword search. Auto-initializes knowledgebase docs folder.
         
           <h4 id="ondewo.nlu.Rags.GetRootFolder" class="title-badge method">GetRootFolder</h4>
 
-          <pre>rpc GetRootFolder (<a href="#google.protobuf.Empty">.google.protobuf.Empty</a>) returns (<a href="#ondewo.nlu.GetRootFolderResponse">GetRootFolderResponse)</a></pre>
+          <pre>rpc GetRootFolder (<a href="#ondewo.nlu.GetRootFolderRequest">GetRootFolderRequest</a>) returns (<a href="#ondewo.nlu.GetRootFolderResponse">GetRootFolderResponse)</a></pre>
 
           Get user's root folder information.<br>
 Each tenant has a unique root folder.
@@ -21141,7 +21145,7 @@ Validates all files and destination exist.
 
           Convert files to documents and add to datasets.<br>
 Handles folders recursively (converts all inner files).<br>
-Links files to multiple datasets if multiple <code>dataset_ids</code> provided.
+Links files to multiple datasets if multiple dataset_ids provided.
         
           <h4 id="ondewo.nlu.Rags.DifyRetrieval" class="title-badge method">DifyRetrieval</h4>
 
@@ -21190,7 +21194,7 @@ Uses API key authentication.
           <pre>rpc AgentbotInputs (<a href="#ondewo.nlu.AgentbotInputsRequest">AgentbotInputsRequest</a>) returns (<a href="#ondewo.nlu.AgentbotInputsResponse">AgentbotInputsResponse)</a></pre>
 
           Get agent input form configuration for embedded UI.<br>
-Returns input schema from <code>"begin"</code> component in DSL.
+Returns input schema from "begin" component in DSL.
         
           <h4 id="ondewo.nlu.Rags.SearchbotAsk" class="title-badge method">SearchbotAsk</h4>
 
@@ -21569,7 +21573,7 @@ Default: <code>true</code>. </p></td>
                   <td>source</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>TODO: Document this field - session source returned by RAGFlow API. </p></td>
+                  <td><p>Session source. </p></td>
                 </tr>
               
                 <tr>
@@ -21660,8 +21664,7 @@ Default: <code>true</code>. </p></td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Required. The agent to generate agentbot completion for.
-Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-TODO: Verify exact resource path format for RAG operations. </p></td>
+Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 </tr>
               
                 <tr>
@@ -21724,8 +21727,7 @@ Agents maintain session state for multi-turn interactions. </p></td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Required. The agent to get agentbot input configuration for.
-Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-TODO: Verify exact resource path format for RAG operations. </p></td>
+Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 </tr>
               
                 <tr>
@@ -21785,8 +21787,7 @@ Each struct defines form fields that users must provide before starting interact
                   <td>mode</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Agent operational mode.
-TODO: Document possible mode values and their meanings. </p></td>
+                  <td><p>Agent operational mode. </p></td>
                 </tr>
               
             </tbody>
@@ -21811,8 +21812,7 @@ TODO: Document possible mode values and their meanings. </p></td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Required. The agent to ask the question for.
-Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-TODO: Verify exact resource path format for RAG operations. </p></td>
+Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 </tr>
               
                 <tr>
@@ -21982,28 +21982,28 @@ Typically includes chunk information, document titles, and similarity scores. </
                   <td>do_refer</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>TODO: Document this field - reference mode setting returned by RAGFlow API. </p></td>
+                  <td><p>Whether to insert reference index into answer. <code>"1"</code> yes, <code>"0"</code> no </p></td>
                 </tr>
               
                 <tr>
                   <td>language</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>TODO: Document this field - language setting returned by RAGFlow API. </p></td>
+                  <td><p>Lanugage of the chat </p></td>
                 </tr>
               
                 <tr>
                   <td>prompt_type</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>TODO: Document this field - prompt type setting returned by RAGFlow API. </p></td>
+                  <td><p>Prompt type. Either <code>"simple"</code> or <code>"advanced"</code> </p></td>
                 </tr>
               
                 <tr>
                   <td>status</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>TODO: Document this field - chat status returned by RAGFlow API. </p></td>
+                  <td><p>Validation status indicating if chat is enabled (<code>"1"</code>=valid/enabled, <code>"0"</code>=invalid/disabled). </p></td>
                 </tr>
               
                 <tr>
@@ -22312,8 +22312,7 @@ Contains a <code>chunks</code> array with metadata about retrieved documents. </
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Required. The agent to generate chatbot completion for.
-Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-TODO: Verify exact resource path format for RAG operations. </p></td>
+Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 </tr>
               
                 <tr>
@@ -22376,8 +22375,7 @@ If not provided, a new session will be created. </p></td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Required. The agent to get chatbot information for.
-Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-TODO: Verify exact resource path format for RAG operations. </p></td>
+Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 </tr>
               
                 <tr>
@@ -22857,8 +22855,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td>type</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Required. Type of item to create: <code>"folder"</code> for directories or <code>"virtual"</code> for virtual files.
-TODO(RAGFlow): Document the purpose and behavior of "virtual" file type. </p></td>
+                  <td><p>Required. Type of item to create: <code>"folder"</code> for directories or <code>"virtual"</code> for virtual files. </p></td>
                 </tr>
               
                 <tr>
@@ -23509,8 +23506,7 @@ May include document ID, page numbers, timestamps, or custom fields. </p></td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Required. The agent to retrieve data for.
-Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-TODO: Verify exact resource path format for RAG operations. </p></td>
+Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 </tr>
               
                 <tr>
@@ -23682,8 +23678,7 @@ Default: 1024. </p></td>
                   <td>source_type</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>TODO: Define enum for source_type values or document accepted values.
-Source type indicating how the document was added (e.g., <code>"local"</code> for direct uploads, <code>"knowledgebase"</code> for file system imports). </p></td>
+                  <td><p>Source type indicating how the document was added (e.g., <code>"local"</code> for direct uploads, <code>"knowledgebase"</code> for file system imports). </p></td>
                 </tr>
               
                 <tr>
@@ -23781,8 +23776,7 @@ Source type indicating how the document was added (e.g., <code>"local"</code> fo
                   <td>status</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>TODO: Define enum for status values or document accepted values.
-Validation status indicating if document is enabled (<code>"1"</code>=valid/enabled, <code>"0"</code>=invalid/disabled). </p></td>
+                  <td><p>Validation status indicating if document is enabled (<code>"1"</code>=valid/enabled, <code>"0"</code>=invalid/disabled). </p></td>
                 </tr>
               
                 <tr>
@@ -23890,8 +23884,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td>type</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>File type/extension or <code>"folder"</code> for directories. Check <code>type == "folder"</code> to distinguish folders from files.
-TODO(RAGFlow): Document complete list of supported file types/extensions. </p></td>
+                  <td><p>File type/extension or <code>"folder"</code> for directories. Check <code>type == "folder"</code> to distinguish folders from files. </p></td>
                 </tr>
               
                 <tr>
@@ -23947,8 +23940,7 @@ TODO(RAGFlow): Document complete list of supported file types/extensions. </p></
                   <td>source_type</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Source type indicating file origin (e.g., <code>"local"</code> for uploaded files).
-TODO(RAGFlow): Document complete list of possible source_type values. </p></td>
+                  <td><p>Source type indicating file origin (e.g., <code>"local"</code> for uploaded files). </p></td>
                 </tr>
               
                 <tr>
@@ -24440,6 +24432,31 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
 
         
       
+        <h3 id="ondewo.nlu.GetRootFolderRequest" class="title-badge message">GetRootFolderRequest</h3>
+        <p>Request message for getting the root folder of the project</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>parent</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The agent to get the parent folder for.
+Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="ondewo.nlu.GetRootFolderResponse" class="title-badge message">GetRootFolderResponse</h3>
         <p>Response message for getting the root folder.</p>
 
@@ -24559,7 +24576,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td>orderby</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>TODO: Document this field - sort field specification returned by RAGFlow API (default: <code>"update_time"</code>). </p></td>
+                  <td><p>Sort field (default: <code>"update_time"</code>). </p></td>
                 </tr>
               
                 <tr>
@@ -24640,7 +24657,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td>orderby</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>TODO: Document this field - sort field specification returned by RAGFlow API (default: <code>"create_time"</code>). </p></td>
+                  <td><p>Sort field (default: <code>"create_time"</code>). </p></td>
                 </tr>
               
                 <tr>
@@ -24728,7 +24745,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td>orderby</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>TODO: Document this field - sort field specification returned by RAGFlow API (default: <code>"create_time"</code>). </p></td>
+                  <td><p>Sort field (default: <code>"create_time"</code>). </p></td>
                 </tr>
               
                 <tr>
@@ -24900,8 +24917,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td>orderby</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Optional. Sort field (default: <code>"create_time"</code>).
-TODO: Define enum for valid orderby values or document accepted field names. </p></td>
+                  <td><p>Optional. Sort field (default: <code>create_time</code>). </p></td>
                 </tr>
               
                 <tr>
@@ -24982,8 +24998,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td>orderby</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>TODO: Define enum for orderby values or document accepted field names.
-Optional. Sort field (default: <code>"create_time"</code>). Accepted values include <code>"create_time"</code> and <code>"update_time"</code>. </p></td>
+                  <td><p>Optional. Sort field (default: <code>"create_time"</code>). Accepted values include <code>"create_time"</code> and <code>"update_time"</code>. </p></td>
                 </tr>
               
                 <tr>
@@ -25095,8 +25110,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td>orderby</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Optional. Field to sort results by. Common values include <code>"create_time"</code> (default) and <code>"update_time"</code>.
-TODO(RAGFlow): Document complete list of valid orderby field values. </p></td>
+                  <td><p>Optional. Field to sort results by. Common values include <code>"create_time"</code> (default) and <code>"update_time"</code>. </p></td>
                 </tr>
               
                 <tr>
@@ -25194,9 +25208,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td>orderby</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Optional. Sort field for ordering results.
-Default: <code>"update_time"</code>.
-TODO: Document available sort fields from RAGFlow documentation. </p></td>
+                  <td><p>Optional. Sort field for ordering results. Default: <code>"update_time"</code>. </p></td>
                 </tr>
               
                 <tr>
@@ -26108,8 +26120,7 @@ The DSL structure determines how the agent processes requests and generates resp
                   <td>canvas_type</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Canvas type for the agent's workflow visualization.
-TODO: Document possible canvas type values from RAGFlow documentation. </p></td>
+                  <td><p>Canvas type for the agent's workflow visualization. </p></td>
                 </tr>
               
                 <tr>
@@ -26166,8 +26177,7 @@ Note: No pagination metadata is included in this response. </p></td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Required. The agent to generate related questions for.
-Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-TODO: Verify exact resource path format for RAG operations. </p></td>
+Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 </tr>
               
                 <tr>
@@ -26493,8 +26503,7 @@ Higher values favor vector similarity, lower values favor keyword matching. </p>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Required. The agent to ask searchbot question for.
-Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-TODO: Verify exact resource path format for RAG operations. </p></td>
+Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 </tr>
               
                 <tr>
@@ -26549,8 +26558,7 @@ If provided, uses the search app's retrieval settings and metadata filters. </p>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Required. The agent to get searchbot detail for.
-Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-TODO: Verify exact resource path format for RAG operations. </p></td>
+Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 </tr>
               
                 <tr>
@@ -26676,8 +26684,7 @@ TODO: Verify exact resource path format for RAG operations. </p></td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Required. The agent to generate searchbot mindmap for.
-Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-TODO: Verify exact resource path format for RAG operations. </p></td>
+Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 </tr>
               
                 <tr>
@@ -26731,8 +26738,7 @@ If provided, uses the search app's retrieval and LLM settings. </p></td>
                   <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
                   <td></td>
                   <td><p>Generated mindmap structure in hierarchical format.
-The structure organizes retrieved information into nodes and relationships.
-TODO: Document the expected schema of the mindmap structure. </p></td>
+The structure organizes retrieved information into nodes and relationships. </p></td>
                 </tr>
               
             </tbody>
@@ -26757,8 +26763,7 @@ TODO: Document the expected schema of the mindmap structure. </p></td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Required. The agent to generate searchbot related questions for.
-Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-TODO: Verify exact resource path format for RAG operations. </p></td>
+Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 </tr>
               
                 <tr>
@@ -26805,8 +26810,7 @@ If provided, uses the search app's configured language model for generation. </p
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Required. The agent to retrieve searchbot results for.
-Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-TODO: Verify exact resource path format for RAG operations. </p></td>
+Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 </tr>
               
                 <tr>

@@ -727,8 +727,6 @@ enum AgentEventType {
 
     // Message completion event.
     message_end = 1;
-
-    // TODO: Add more event types as documented in RAGFlow
 }
 
 // Document parser configuration.
@@ -852,8 +850,7 @@ message ListDatasetsRequest {
     // Optional. Filter by dataset name.
     string name = 4;
 
-    // Optional. Sort field (default: <code>"create_time"</code>).
-    // TODO: Define enum for valid orderby values or document accepted field names.
+    // Optional. Sort field (default: <code>create_time</code>).
     string orderby = 5;
 
     // Optional. Sort descending (default: <code>true</code>).
@@ -941,7 +938,6 @@ message Document {
     // Parser configuration used for chunking this document.
     ParserConfig parser_config = 9;
 
-    // TODO: Define enum for source_type values or document accepted values.
     // Source type indicating how the document was added (e.g., <code>"local"</code> for direct uploads, <code>"knowledgebase"</code> for file system imports).
     string source_type = 10;
 
@@ -984,7 +980,6 @@ message Document {
     // Actual file extension extracted from the file (may differ from filename extension).
     string suffix = 23;
 
-    // TODO: Define enum for status values or document accepted values.
     // Validation status indicating if document is enabled (<code>"1"</code>=valid/enabled, <code>"0"</code>=invalid/disabled).
     string status = 24;
 
@@ -1096,7 +1091,6 @@ message ListDocumentsRequest {
     // Optional. Search keywords to filter documents (searches in document name and metadata).
     string keywords = 6;
 
-    // TODO: Define enum for orderby values or document accepted field names.
     // Optional. Sort field (default: <code>"create_time"</code>). Accepted values include <code>"create_time"</code> and <code>"update_time"</code>.
     string orderby = 7;
 
@@ -1464,16 +1458,16 @@ message Chat {
     // Last update date (ISO 8601 datetime).
     string update_date = 12;
 
-    // TODO: Document this field - reference mode setting returned by RAGFlow API.
+    // Whether to insert reference index into answer. <code>"1"</code> yes, <code>"0"</code> no
     string do_refer = 13;
 
-    // TODO: Document this field - language setting returned by RAGFlow API.
+    // Lanugage of the chat
     string language = 14;
 
-    // TODO: Document this field - prompt type setting returned by RAGFlow API.
+    // Prompt type. Either <code>"simple"</code> or <code>"advanced"</code>
     string prompt_type = 15;
 
-    // TODO: Document this field - chat status returned by RAGFlow API.
+    // Validation status indicating if chat is enabled (<code>"1"</code>=valid/enabled, <code>"0"</code>=invalid/disabled).
     string status = 16;
 
     // Tenant ID.
@@ -1652,7 +1646,7 @@ message ListChatsRequest {
     // Optional. Filter by chat assistant name.
     string name = 4;
 
-    // TODO: Document this field - sort field specification returned by RAGFlow API (default: <code>"create_time"</code>).
+    // Sort field (default: <code>"create_time"</code>).
     string orderby = 5;
 
     // Optional. Sort in descending order (default: <code>true</code>).
@@ -1750,7 +1744,7 @@ message AgentSession {
     // Message history in chronological order.
     repeated Message message = 4;
 
-    // TODO: Document this field - session source returned by RAGFlow API.
+    // Session source.
     string source = 5;
 
     // Agent DSL (Domain Specific Language) workflow configuration.
@@ -1824,7 +1818,7 @@ message ListChatSessionsRequest {
     // Optional. Pagination parameters for paging through results.
     Pagination pagination = 3;
 
-    // TODO: Document this field - sort field specification returned by RAGFlow API (default: <code>"create_time"</code>).
+    // Sort field (default: <code>"create_time"</code>).
     string orderby = 4;
 
     // Optional. Sort in descending order (default: <code>true</code>).
@@ -1863,7 +1857,7 @@ message ListAgentSessionsRequest {
     // Optional. Pagination parameters for paging through results.
     Pagination pagination = 3;
 
-    // TODO: Document this field - sort field specification returned by RAGFlow API (default: <code>"update_time"</code>).
+    // Sort field (default: <code>"update_time"</code>).
     string orderby = 4;
 
     // Optional. Sort in descending order (default: <code>true</code>).
@@ -2281,7 +2275,6 @@ message RagAgent {
     string user_id = 10;
 
     // Canvas type for the agent's workflow visualization.
-    // TODO: Document possible canvas type values from RAGFlow documentation.
     string canvas_type = 11;
 
     // Additional fields returned by RAGFlow API.
@@ -2359,9 +2352,7 @@ message ListRagAgentsRequest {
     // Optional. Filter results by agent title. Only agents with matching titles will be returned.
     string title = 3;
 
-    // Optional. Sort field for ordering results.
-    // Default: <code>"update_time"</code>.
-    // TODO: Document available sort fields from RAGFlow documentation.
+    // Optional. Sort field for ordering results. Default: <code>"update_time"</code>.
     string orderby = 4;
 
     // Optional. Sort in descending order. If <code>true</code>, results are sorted from highest to lowest.
@@ -2398,7 +2389,6 @@ message File {
     string name = 2;
 
     // File type/extension or <code>"folder"</code> for directories. Check <code>type == "folder"</code> to distinguish folders from files.
-    // TODO(RAGFlow): Document complete list of supported file types/extensions.
     string type = 3;
 
     // File size in bytes (0 for folders).
@@ -2423,7 +2413,6 @@ message File {
     string location = 10;
 
     // Source type indicating file origin (e.g., <code>"local"</code> for uploaded files).
-    // TODO(RAGFlow): Document complete list of possible source_type values.
     string source_type = 11;
 
     // Additional fields returned by RAGFlow.
@@ -2481,7 +2470,6 @@ message CreateFileRequest {
     string parent_id = 3;
 
     // Required. Type of item to create: <code>"folder"</code> for directories or <code>"virtual"</code> for virtual files.
-    // TODO(RAGFlow): Document the purpose and behavior of "virtual" file type.
     string type = 4;
 
     // Optional. Additional fields to pass through to RAGFlow.
@@ -2505,7 +2493,6 @@ message ListFilesRequest {
     string keywords = 4;
 
     // Optional. Field to sort results by. Common values include <code>"create_time"</code> (default) and <code>"update_time"</code>.
-    // TODO(RAGFlow): Document complete list of valid orderby field values.
     string orderby = 5;
 
     // Optional. Sort in descending order. Default is <code>true</code> (newest first).
@@ -2700,7 +2687,6 @@ message DifyRetrievalRequest {
 
     // Required. The agent to retrieve data for.
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    // TODO: Verify exact resource path format for RAG operations.
     string parent = 1;
 
     // Required. Dataset ID (called <code>knowledge_id</code> in Dify API format).
@@ -2778,7 +2764,6 @@ message AskRequest {
 
     // Required. The agent to ask the question for.
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    // TODO: Verify exact resource path format for RAG operations.
     string parent = 1;
 
     // Required. User question to be answered.
@@ -2813,7 +2798,6 @@ message RelatedQuestionsRequest {
 
     // Required. The agent to generate related questions for.
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    // TODO: Verify exact resource path format for RAG operations.
     string parent = 1;
 
     // Required. Original user question to generate related questions from.
@@ -2841,7 +2825,6 @@ message ChatbotCompletionRequest {
 
     // Required. The agent to generate chatbot completion for.
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    // TODO: Verify exact resource path format for RAG operations.
     string parent = 1;
 
     // Required. Chat dialog ID identifying the specific chatbot configuration.
@@ -2869,7 +2852,6 @@ message ChatbotInfoRequest {
 
     // Required. The agent to get chatbot information for.
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    // TODO: Verify exact resource path format for RAG operations.
     string parent = 1;
 
     // Required. Chat dialog ID identifying the chatbot.
@@ -2896,7 +2878,6 @@ message AgentbotCompletionRequest {
 
     // Required. The agent to generate agentbot completion for.
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    // TODO: Verify exact resource path format for RAG operations.
     string parent = 1;
 
     // Required. RAGFlow agent ID identifying the specific agent configuration.
@@ -2924,7 +2905,6 @@ message AgentbotInputsRequest {
 
     // Required. The agent to get agentbot input configuration for.
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    // TODO: Verify exact resource path format for RAG operations.
     string parent = 1;
 
     // Required. RAGFlow agent ID to retrieve input configuration for.
@@ -2948,7 +2928,6 @@ message AgentbotInputsResponse {
     string prologue = 4;
 
     // Agent operational mode.
-    // TODO: Document possible mode values and their meanings.
     string mode = 5;
 }
 
@@ -2958,7 +2937,6 @@ message SearchbotAskRequest {
 
     // Required. The agent to ask searchbot question for.
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    // TODO: Verify exact resource path format for RAG operations.
     string parent = 1;
 
     // Required. User question to search for and answer.
@@ -2982,7 +2960,6 @@ message SearchbotRetrievalRequest {
 
     // Required. The agent to retrieve searchbot results for.
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    // TODO: Verify exact resource path format for RAG operations.
     string parent = 1;
 
     // Required. List of dataset IDs (knowledge base IDs) to search.
@@ -3069,7 +3046,6 @@ message SearchbotRelatedQuestionsRequest {
 
     // Required. The agent to generate searchbot related questions for.
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    // TODO: Verify exact resource path format for RAG operations.
     string parent = 1;
 
     // Required. Original user question to generate related questions from.
@@ -3088,7 +3064,6 @@ message SearchbotDetailRequest {
 
     // Required. The agent to get searchbot detail for.
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    // TODO: Verify exact resource path format for RAG operations.
     string parent = 1;
 
     // Required. Search application ID to retrieve details for.
@@ -3138,7 +3113,6 @@ message SearchbotMindmapRequest {
 
     // Required. The agent to generate searchbot mindmap for.
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    // TODO: Verify exact resource path format for RAG operations.
     string parent = 1;
 
     // Required. User question to generate mindmap around.
@@ -3160,6 +3134,5 @@ message SearchbotMindmapResponse {
 
     // Generated mindmap structure in hierarchical format.
     // The structure organizes retrieved information into nodes and relationships.
-    // TODO: Document the expected schema of the mindmap structure.
     google.protobuf.Struct mindmap = 1;
 }

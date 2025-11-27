@@ -421,6 +421,7 @@
     - [GetKnowledgeGraphResponse](#ondewo.nlu.GetKnowledgeGraphResponse)
     - [GetParentFolderRequest](#ondewo.nlu.GetParentFolderRequest)
     - [GetParentFolderResponse](#ondewo.nlu.GetParentFolderResponse)
+    - [GetRootFolderRequest](#ondewo.nlu.GetRootFolderRequest)
     - [GetRootFolderResponse](#ondewo.nlu.GetRootFolderResponse)
     - [LLMSetting](#ondewo.nlu.LLMSetting)
     - [ListAgentSessionsRequest](#ondewo.nlu.ListAgentSessionsRequest)
@@ -7035,7 +7036,7 @@ Agent session containing conversation history for an agent workflow.
 | agent_id | [string](#string) |  | RAGFlow agent UUID. |
 | user_id | [string](#string) |  | User identifier. |
 | message | [Message](#ondewo.nlu.Message) | repeated | Message history in chronological order. |
-| source | [string](#string) |  | TODO: Document this field - session source returned by RAGFlow API. |
+| source | [string](#string) |  | Session source. |
 | dsl | [google.protobuf.Struct](#google.protobuf.Struct) |  | Agent DSL (Domain Specific Language) workflow configuration. |
 | create_time | [int64](#int64) |  | Creation timestamp (Unix timestamp in milliseconds). |
 | create_date | [string](#string) |  | Creation date (ISO 8601 datetime). |
@@ -7073,7 +7074,7 @@ Corresponds to RAGFlow's <code>POST /api/v1/agents/{agent_id}/completions</code>
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| parent | [string](#string) |  | Required. The agent to generate agentbot completion for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> TODO: Verify exact resource path format for RAG operations. |
+| parent | [string](#string) |  | Required. The agent to generate agentbot completion for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
 | agent_id | [string](#string) |  | Required. RAGFlow agent ID identifying the specific agent configuration. Agents support workflow-based processing with multiple steps. |
 | question | [string](#string) |  | Required. User question or input to be processed by the agent. |
 | stream | [bool](#bool) | optional | Optional. Enable streaming responses for real-time interaction. Default: true. When enabled, response chunks are sent incrementally. |
@@ -7094,7 +7095,7 @@ Returns the form configuration and initialization data for an agent.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| parent | [string](#string) |  | Required. The agent to get agentbot input configuration for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> TODO: Verify exact resource path format for RAG operations. |
+| parent | [string](#string) |  | Required. The agent to get agentbot input configuration for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
 | agent_id | [string](#string) |  | Required. RAGFlow agent ID to retrieve input configuration for. |
 
 
@@ -7114,7 +7115,7 @@ Response message containing agent input configuration and display information.
 | avatar | [string](#string) |  | Base64-encoded avatar image or URL for the agent. |
 | inputs | [google.protobuf.Struct](#google.protobuf.Struct) | repeated | Input form field configurations extracted from the "begin" component in agent DSL. Each struct defines form fields that users must provide before starting interaction. |
 | prologue | [string](#string) |  | Opening greeting message displayed when starting a new agent session. |
-| mode | [string](#string) |  | Agent operational mode. TODO: Document possible mode values and their meanings. |
+| mode | [string](#string) |  | Agent operational mode. |
 
 
 
@@ -7130,7 +7131,7 @@ This endpoint searches specified datasets and returns an answer.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| parent | [string](#string) |  | Required. The agent to ask the question for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> TODO: Verify exact resource path format for RAG operations. |
+| parent | [string](#string) |  | Required. The agent to ask the question for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
 | question | [string](#string) |  | Required. User question to be answered. |
 | dataset_ids | [string](#string) | repeated | Required. List of dataset IDs to search for relevant information. The system will search across all specified datasets. |
 | additional_fields | [google.protobuf.Struct](#google.protobuf.Struct) |  | Optional. Additional fields to pass through to RAGFlow. |
@@ -7177,10 +7178,10 @@ Chat assistant configuration.
 | create_date | [string](#string) |  | Creation date (ISO 8601 datetime). |
 | update_time | [int64](#int64) |  | Last update timestamp (Unix timestamp in milliseconds). |
 | update_date | [string](#string) |  | Last update date (ISO 8601 datetime). |
-| do_refer | [string](#string) |  | TODO: Document this field - reference mode setting returned by RAGFlow API. |
-| language | [string](#string) |  | TODO: Document this field - language setting returned by RAGFlow API. |
-| prompt_type | [string](#string) |  | TODO: Document this field - prompt type setting returned by RAGFlow API. |
-| status | [string](#string) |  | TODO: Document this field - chat status returned by RAGFlow API. |
+| do_refer | [string](#string) |  | Whether to insert reference index into answer. <code>"1"</code> yes, <code>"0"</code> no |
+| language | [string](#string) |  | Lanugage of the chat |
+| prompt_type | [string](#string) |  | Prompt type. Either <code>"simple"</code> or <code>"advanced"</code> |
+| status | [string](#string) |  | Validation status indicating if chat is enabled (<code>"1"</code>=valid/enabled, <code>"0"</code>=invalid/disabled). |
 | tenant_id | [string](#string) |  | Tenant ID. |
 | top_k | [int32](#int32) |  | Top K setting for retrieval. |
 | additional_fields | [google.protobuf.Struct](#google.protobuf.Struct) |  | Additional fields returned by RAGFlow. |
@@ -7298,7 +7299,7 @@ Corresponds to RAGFlow's <code>POST /api/v1/chats/{chat_id}/completions</code> e
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| parent | [string](#string) |  | Required. The agent to generate chatbot completion for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> TODO: Verify exact resource path format for RAG operations. |
+| parent | [string](#string) |  | Required. The agent to generate chatbot completion for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
 | dialog_id | [string](#string) |  | Required. Chat dialog ID identifying the specific chatbot configuration. This corresponds to <code>chat_id</code> in RAGFlow's API. |
 | question | [string](#string) |  | Required. User question or message to be processed by the chatbot. |
 | stream | [bool](#bool) | optional | Optional. Enable streaming responses for real-time interaction. Default: true. When enabled, response chunks are sent incrementally. |
@@ -7319,7 +7320,7 @@ Used to obtain display information for the chat interface.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| parent | [string](#string) |  | Required. The agent to get chatbot information for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> TODO: Verify exact resource path format for RAG operations. |
+| parent | [string](#string) |  | Required. The agent to get chatbot information for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
 | dialog_id | [string](#string) |  | Required. Chat dialog ID identifying the chatbot. |
 
 
@@ -7468,7 +7469,7 @@ Request message for creating a file or folder in RAGFlow.
 | parent | [string](#string) |  | Required. The agent to create the file for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
 | name | [string](#string) |  | Required. Name of the file or folder to create. |
 | parent_id | [string](#string) |  | Optional. Parent folder ID. If not provided, creates in root directory. |
-| type | [string](#string) |  | Required. Type of item to create: <code>"folder"</code> for directories or <code>"virtual"</code> for virtual files. TODO(RAGFlow): Document the purpose and behavior of "virtual" file type. |
+| type | [string](#string) |  | Required. Type of item to create: <code>"folder"</code> for directories or <code>"virtual"</code> for virtual files. |
 | additional_fields | [google.protobuf.Struct](#google.protobuf.Struct) |  | Optional. Additional fields to pass through to RAGFlow. |
 
 
@@ -7722,7 +7723,7 @@ This provides compatibility with Dify's knowledge retrieval API structure.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| parent | [string](#string) |  | Required. The agent to retrieve data for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> TODO: Verify exact resource path format for RAG operations. |
+| parent | [string](#string) |  | Required. The agent to retrieve data for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
 | knowledge_id | [string](#string) |  | Required. Dataset ID (called <code>knowledge_id</code> in Dify API format). This is the UUID of the dataset to search within. |
 | query | [string](#string) |  | Required. Search query string for retrieving relevant chunks. |
 | retrieval_setting | [DifyRetrievalSetting](#ondewo.nlu.DifyRetrievalSetting) |  | Optional. Retrieval configuration settings including score threshold and result limit. |
@@ -7769,7 +7770,7 @@ Document uploaded to a dataset.
 | token_count | [int32](#int32) |  | Number of tokens across all chunks in this document. |
 | chunk_method | [ChunkMethod](#ondewo.nlu.ChunkMethod) |  | Chunking method used for this document. |
 | parser_config | [ParserConfig](#ondewo.nlu.ParserConfig) |  | Parser configuration used for chunking this document. |
-| source_type | [string](#string) |  | TODO: Define enum for source_type values or document accepted values. Source type indicating how the document was added (e.g., <code>"local"</code> for direct uploads, <code>"knowledgebase"</code> for file system imports). |
+| source_type | [string](#string) |  | Source type indicating how the document was added (e.g., <code>"local"</code> for direct uploads, <code>"knowledgebase"</code> for file system imports). |
 | run | [DocumentStatus](#ondewo.nlu.DocumentStatus) |  | Document processing status. |
 | progress | [float](#float) |  | Processing progress as a decimal value between <code>0.0</code> (not started) and <code>1.0</code> (complete). |
 | progress_msg | [string](#string) |  | Human-readable progress message describing current processing state. |
@@ -7783,7 +7784,7 @@ Document uploaded to a dataset.
 | location | [string](#string) |  | Storage location path in the backend file system or object storage. |
 | process_begin_at | [string](#string) |  | Processing start timestamp (ISO 8601 datetime string). |
 | suffix | [string](#string) |  | Actual file extension extracted from the file (may differ from filename extension). |
-| status | [string](#string) |  | TODO: Define enum for status values or document accepted values. Validation status indicating if document is enabled (<code>"1"</code>=valid/enabled, <code>"0"</code>=invalid/disabled). |
+| status | [string](#string) |  | Validation status indicating if document is enabled (<code>"1"</code>=valid/enabled, <code>"0"</code>=invalid/disabled). |
 | additional_fields | [google.protobuf.Struct](#google.protobuf.Struct) |  | Additional fields returned by RAGFlow not explicitly defined above. |
 
 
@@ -7833,7 +7834,7 @@ File or folder in RAGFlow file system.
 | ----- | ---- | ----- | ----------- |
 | id | [string](#string) |  | File or folder UUID. |
 | name | [string](#string) |  | File or folder name. |
-| type | [string](#string) |  | File type/extension or <code>"folder"</code> for directories. Check <code>type == "folder"</code> to distinguish folders from files. TODO(RAGFlow): Document complete list of supported file types/extensions. |
+| type | [string](#string) |  | File type/extension or <code>"folder"</code> for directories. Check <code>type == "folder"</code> to distinguish folders from files. |
 | size | [int64](#int64) |  | File size in bytes (0 for folders). |
 | parent_id | [string](#string) |  | Parent folder ID. Empty string for root-level items. |
 | create_time | [int64](#int64) |  | Creation timestamp (Unix timestamp in milliseconds). |
@@ -7841,7 +7842,7 @@ File or folder in RAGFlow file system.
 | update_time | [int64](#int64) |  | Last update timestamp (Unix timestamp in milliseconds). |
 | update_date | [string](#string) |  | Last update date (ISO 8601 datetime format). |
 | location | [string](#string) |  | Storage location path within the RAGFlow file system. |
-| source_type | [string](#string) |  | Source type indicating file origin (e.g., <code>"local"</code> for uploaded files). TODO(RAGFlow): Document complete list of possible source_type values. |
+| source_type | [string](#string) |  | Source type indicating file origin (e.g., <code>"local"</code> for uploaded files). |
 | additional_fields | [google.protobuf.Struct](#google.protobuf.Struct) |  | Additional fields returned by RAGFlow. |
 
 
@@ -8081,6 +8082,21 @@ Response message for getting the parent folder of a file.
 
 
 
+<a name="ondewo.nlu.GetRootFolderRequest"></a>
+
+### GetRootFolderRequest
+Request message for getting the root folder of the project
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  | Required. The agent to get the parent folder for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+
+
+
+
+
+
 <a name="ondewo.nlu.GetRootFolderResponse"></a>
 
 ### GetRootFolderResponse
@@ -8127,7 +8143,7 @@ Request message for listing agent sessions.
 | parent | [string](#string) |  | Required. The agent to list agent sessions from. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
 | agent_id | [string](#string) |  | Required. RAGFlow agent UUID. |
 | pagination | [Pagination](#ondewo.nlu.Pagination) |  | Optional. Pagination parameters for paging through results. |
-| orderby | [string](#string) |  | TODO: Document this field - sort field specification returned by RAGFlow API (default: <code>"update_time"</code>). |
+| orderby | [string](#string) |  | Sort field (default: <code>"update_time"</code>). |
 | desc | [bool](#bool) | optional | Optional. Sort in descending order (default: <code>true</code>). |
 | id | [string](#string) |  | Optional. Filter by session UUID. |
 | user_id | [string](#string) |  | Optional. Filter by user identifier. |
@@ -8150,7 +8166,7 @@ Request message for listing chat sessions.
 | parent | [string](#string) |  | Required. The agent to list chat sessions from. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
 | chat_id | [string](#string) |  | Required. Chat assistant UUID. |
 | pagination | [Pagination](#ondewo.nlu.Pagination) |  | Optional. Pagination parameters for paging through results. |
-| orderby | [string](#string) |  | TODO: Document this field - sort field specification returned by RAGFlow API (default: <code>"create_time"</code>). |
+| orderby | [string](#string) |  | Sort field (default: <code>"create_time"</code>). |
 | desc | [bool](#bool) | optional | Optional. Sort in descending order (default: <code>true</code>). |
 | name | [string](#string) |  | Optional. Filter by session name. |
 | id | [string](#string) |  | Optional. Filter by session UUID. |
@@ -8174,7 +8190,7 @@ Request message for listing chat assistants.
 | pagination | [Pagination](#ondewo.nlu.Pagination) |  | Optional. Pagination parameters for paging through results. |
 | id | [string](#string) |  | Optional. Filter by chat assistant UUID. |
 | name | [string](#string) |  | Optional. Filter by chat assistant name. |
-| orderby | [string](#string) |  | TODO: Document this field - sort field specification returned by RAGFlow API (default: <code>"create_time"</code>). |
+| orderby | [string](#string) |  | Sort field (default: <code>"create_time"</code>). |
 | desc | [bool](#bool) | optional | Optional. Sort in descending order (default: <code>true</code>). |
 | additional_fields | [google.protobuf.Struct](#google.protobuf.Struct) |  | Optional. Additional fields to pass through to RAGFlow. |
 
@@ -8233,7 +8249,7 @@ Request message for listing datasets with pagination and filtering.
 | pagination | [Pagination](#ondewo.nlu.Pagination) |  | Optional. Pagination parameters. |
 | id | [string](#string) |  | Optional. Filter by dataset ID. |
 | name | [string](#string) |  | Optional. Filter by dataset name. |
-| orderby | [string](#string) |  | Optional. Sort field (default: <code>"create_time"</code>). TODO: Define enum for valid orderby values or document accepted field names. |
+| orderby | [string](#string) |  | Optional. Sort field (default: <code>create_time</code>). |
 | desc | [bool](#bool) | optional | Optional. Sort descending (default: <code>true</code>). |
 | additional_fields | [google.protobuf.Struct](#google.protobuf.Struct) |  | Optional. Additional fields to pass through to RAGFlow. |
 
@@ -8256,7 +8272,7 @@ Request message for listing documents in a dataset with pagination and filtering
 | id | [string](#string) |  | Optional. Filter by specific document ID. |
 | name | [string](#string) |  | Optional. Filter by document name (exact match). |
 | keywords | [string](#string) |  | Optional. Search keywords to filter documents (searches in document name and metadata). |
-| orderby | [string](#string) |  | TODO: Define enum for orderby values or document accepted field names. Optional. Sort field (default: <code>"create_time"</code>). Accepted values include <code>"create_time"</code> and <code>"update_time"</code>. |
+| orderby | [string](#string) |  | Optional. Sort field (default: <code>"create_time"</code>). Accepted values include <code>"create_time"</code> and <code>"update_time"</code>. |
 | desc | [bool](#bool) | optional | Optional. Sort in descending order (default: <code>true</code>). |
 | create_time_from | [int64](#int64) |  | Optional. Filter by creation time start (Unix timestamp in milliseconds, <code>0</code> = no filter). |
 | create_time_to | [int64](#int64) |  | Optional. Filter by creation time end (Unix timestamp in milliseconds, <code>0</code> = no filter). |
@@ -8295,7 +8311,7 @@ Request message for listing files and folders.
 | parent_id | [string](#string) |  | Optional. Folder ID to list contents from. If not provided, lists root directory contents. |
 | pagination | [Pagination](#ondewo.nlu.Pagination) |  | Optional. Pagination parameters. Default page size is 15 items per page. |
 | keywords | [string](#string) |  | Optional. Search keywords to filter files by name or other searchable attributes. |
-| orderby | [string](#string) |  | Optional. Field to sort results by. Common values include <code>"create_time"</code> (default) and <code>"update_time"</code>. TODO(RAGFlow): Document complete list of valid orderby field values. |
+| orderby | [string](#string) |  | Optional. Field to sort results by. Common values include <code>"create_time"</code> (default) and <code>"update_time"</code>. |
 | desc | [bool](#bool) | optional | Optional. Sort in descending order. Default is <code>true</code> (newest first). |
 | additional_fields | [google.protobuf.Struct](#google.protobuf.Struct) |  | Optional. Additional fields to pass through to RAGFlow. |
 
@@ -8332,7 +8348,7 @@ Request message for listing RAGFlow agents.
 | parent | [string](#string) |  | Required. The agent to list RAGFlow agents from. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
 | pagination | [Pagination](#ondewo.nlu.Pagination) |  | Optional. Pagination parameters to control the number and offset of results. |
 | title | [string](#string) |  | Optional. Filter results by agent title. Only agents with matching titles will be returned. |
-| orderby | [string](#string) |  | Optional. Sort field for ordering results. Default: <code>"update_time"</code>. TODO: Document available sort fields from RAGFlow documentation. |
+| orderby | [string](#string) |  | Optional. Sort field for ordering results. Default: <code>"update_time"</code>. |
 | desc | [bool](#bool) | optional | Optional. Sort in descending order. If <code>true</code>, results are sorted from highest to lowest. Default: <code>true</code>. |
 | id | [string](#string) |  | Optional. Filter results by specific agent ID. |
 | additional_fields | [google.protobuf.Struct](#google.protobuf.Struct) |  | Optional. Additional fields to pass through to RAGFlow API. |
@@ -8671,7 +8687,7 @@ Agents are workflow-based AI assistants configured using Domain Specific Languag
 | update_time | [int64](#int64) |  | Last update timestamp (Unix timestamp in milliseconds). |
 | update_date | [string](#string) |  | Last update date in ISO 8601 datetime format. |
 | user_id | [string](#string) |  | User ID of the agent owner. |
-| canvas_type | [string](#string) |  | Canvas type for the agent's workflow visualization. TODO: Document possible canvas type values from RAGFlow documentation. |
+| canvas_type | [string](#string) |  | Canvas type for the agent's workflow visualization. |
 | additional_fields | [google.protobuf.Struct](#google.protobuf.Struct) |  | Additional fields returned by RAGFlow API. |
 
 
@@ -8703,7 +8719,7 @@ This helps improve user experience by suggesting follow-up questions.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| parent | [string](#string) |  | Required. The agent to generate related questions for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> TODO: Verify exact resource path format for RAG operations. |
+| parent | [string](#string) |  | Required. The agent to generate related questions for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
 | question | [string](#string) |  | Required. Original user question to generate related questions from. |
 | industry | [string](#string) |  | Optional. Industry context to focus the related questions. Helps tailor suggestions to specific domains (e.g., "healthcare", "finance"). |
 | additional_fields | [google.protobuf.Struct](#google.protobuf.Struct) |  | Optional. Additional fields to pass through to RAGFlow. |
@@ -8820,7 +8836,7 @@ Search apps provide advanced retrieval with configurable settings.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| parent | [string](#string) |  | Required. The agent to ask searchbot question for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> TODO: Verify exact resource path format for RAG operations. |
+| parent | [string](#string) |  | Required. The agent to ask searchbot question for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
 | question | [string](#string) |  | Required. User question to search for and answer. |
 | kb_ids | [string](#string) | repeated | Required. List of dataset IDs (knowledge base IDs) to search within. Called <code>kb_ids</code> in RAGFlow's internal API. |
 | search_id | [string](#string) |  | Optional. Search application ID to load predefined configuration. If provided, uses the search app's retrieval settings and metadata filters. |
@@ -8839,7 +8855,7 @@ Request message for retrieving detailed information about a search application.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| parent | [string](#string) |  | Required. The agent to get searchbot detail for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> TODO: Verify exact resource path format for RAG operations. |
+| parent | [string](#string) |  | Required. The agent to get searchbot detail for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
 | search_id | [string](#string) |  | Required. Search application ID to retrieve details for. |
 
 
@@ -8881,7 +8897,7 @@ Mindmaps organize retrieved information into hierarchical visual structures.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| parent | [string](#string) |  | Required. The agent to generate searchbot mindmap for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> TODO: Verify exact resource path format for RAG operations. |
+| parent | [string](#string) |  | Required. The agent to generate searchbot mindmap for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
 | question | [string](#string) |  | Required. User question to generate mindmap around. |
 | kb_ids | [string](#string) | repeated | Required. List of dataset IDs (knowledge base IDs) to search for mindmap content. |
 | search_id | [string](#string) |  | Optional. Search application ID to load predefined configuration. If provided, uses the search app's retrieval and LLM settings. |
@@ -8900,7 +8916,7 @@ Response message containing the generated mindmap structure.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| mindmap | [google.protobuf.Struct](#google.protobuf.Struct) |  | Generated mindmap structure in hierarchical format. The structure organizes retrieved information into nodes and relationships. TODO: Document the expected schema of the mindmap structure. |
+| mindmap | [google.protobuf.Struct](#google.protobuf.Struct) |  | Generated mindmap structure in hierarchical format. The structure organizes retrieved information into nodes and relationships. |
 
 
 
@@ -8916,7 +8932,7 @@ Uses the search app's LLM configuration for question generation.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| parent | [string](#string) |  | Required. The agent to generate searchbot related questions for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> TODO: Verify exact resource path format for RAG operations. |
+| parent | [string](#string) |  | Required. The agent to generate searchbot related questions for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
 | question | [string](#string) |  | Required. Original user question to generate related questions from. |
 | search_id | [string](#string) |  | Optional. Search application ID to load LLM configuration. If provided, uses the search app's configured language model for generation. |
 | additional_fields | [google.protobuf.Struct](#google.protobuf.Struct) |  | Optional. Additional fields to pass through to RAGFlow. |
@@ -8935,7 +8951,7 @@ Provides fine-grained control over the search and ranking process.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| parent | [string](#string) |  | Required. The agent to retrieve searchbot results for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> TODO: Verify exact resource path format for RAG operations. |
+| parent | [string](#string) |  | Required. The agent to retrieve searchbot results for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
 | kb_id | [string](#string) | repeated | Required. List of dataset IDs (knowledge base IDs) to search. Called <code>dataset_ids</code> in RAGFlow's response format. |
 | question | [string](#string) |  | Required. Search query string. |
 | page | [int32](#int32) |  | Optional. Page number for pagination. Default: 1. |
@@ -9304,36 +9320,36 @@ Covers all entpoints of the <a href="https://github.com/ondewo/ragflow">RAGFlow<
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
 | CreateDataset | [CreateDatasetRequest](#ondewo.nlu.CreateDatasetRequest) | [Dataset](#ondewo.nlu.Dataset) | Create a new dataset (knowledge base).<br> Uses tenant's default embedding model if not specified. |
-| UpdateDataset | [UpdateDatasetRequest](#ondewo.nlu.UpdateDatasetRequest) | [Dataset](#ondewo.nlu.Dataset) | Update an existing dataset's configuration.<br> Cannot change <code>embedding_model</code> if dataset has chunks. |
-| DeleteDatasets | [DeleteDatasetsRequest](#ondewo.nlu.DeleteDatasetsRequest) | [PartialSuccess](#ondewo.nlu.PartialSuccess) | Delete one or more datasets (batch operation).<br> If <code>ids</code> is null or empty, deletes all user's datasets.<br> Deletes all associated documents, files, and chunks. |
+| UpdateDataset | [UpdateDatasetRequest](#ondewo.nlu.UpdateDatasetRequest) | [Dataset](#ondewo.nlu.Dataset) | Update an existing dataset's configuration.<br> Cannot change embedding_model if dataset has chunks. |
+| DeleteDatasets | [DeleteDatasetsRequest](#ondewo.nlu.DeleteDatasetsRequest) | [PartialSuccess](#ondewo.nlu.PartialSuccess) | Delete one or more datasets (batch operation).<br> If ids is null or empty, deletes all user's datasets.<br> Deletes all associated documents, files, and chunks. |
 | ListDatasets | [ListDatasetsRequest](#ondewo.nlu.ListDatasetsRequest) | [DatasetList](#ondewo.nlu.DatasetList) | List datasets with pagination and filtering.<br> Returns datasets from all tenants the user has access to. |
 | GetKnowledgeGraph | [GetKnowledgeGraphRequest](#ondewo.nlu.GetKnowledgeGraphRequest) | [GetKnowledgeGraphResponse](#ondewo.nlu.GetKnowledgeGraphResponse) | Get the knowledge graph for a dataset.<br> Returns graph structure with nodes (max 256) and edges (max 128). |
 | DeleteKnowledgeGraph | [DeleteKnowledgeGraphRequest](#ondewo.nlu.DeleteKnowledgeGraphRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Delete the knowledge graph for a dataset.<br> Deletes graph-related chunks but not the dataset itself. |
-| UploadDocuments | [UploadDocumentsRequest](#ondewo.nlu.UploadDocumentsRequest) stream | [DocumentList](#ondewo.nlu.DocumentList) | Upload one or more documents to a dataset.<br> Documents start in <code>UNSTART</code> state and must be parsed. |
-| UpdateDocument | [UpdateDocumentRequest](#ondewo.nlu.UpdateDocumentRequest) | [Document](#ondewo.nlu.Document) | Update document metadata and configuration.<br> Changing <code>chunk_method</code> resets document to <code>UNSTART</code> and deletes chunks. |
+| UploadDocuments | [UploadDocumentsRequest](#ondewo.nlu.UploadDocumentsRequest) stream | [DocumentList](#ondewo.nlu.DocumentList) | Upload one or more documents to a dataset.<br> Documents start in UNSTART state and must be parsed. |
+| UpdateDocument | [UpdateDocumentRequest](#ondewo.nlu.UpdateDocumentRequest) | [Document](#ondewo.nlu.Document) | Update document metadata and configuration.<br> Changing chunk_method resets document to UNSTART and deletes chunks. |
 | DownloadDocument | [DownloadDocumentRequest](#ondewo.nlu.DownloadDocumentRequest) | [FileChunk](#ondewo.nlu.FileChunk) stream | Download the original document file.<br> Returns binary file stream from storage.<br> First chunk contains metadata, subsequent chunks only contain data. |
 | ListDocuments | [ListDocumentsRequest](#ondewo.nlu.ListDocumentsRequest) | [ListDocumentsResponse](#ondewo.nlu.ListDocumentsResponse) | List documents in a dataset with pagination and filtering.<br> Supports time range filtering and keyword search. |
-| DeleteDocuments | [DeleteDocumentsRequest](#ondewo.nlu.DeleteDocumentsRequest) | [PartialSuccess](#ondewo.nlu.PartialSuccess) | Delete one or more documents from a dataset (batch operation).<br> If <code>ids</code> empty, deletes all documents. Removes chunks and storage files. |
-| ParseDocuments | [ParseDocumentsRequest](#ondewo.nlu.ParseDocumentsRequest) | [PartialSuccess](#ondewo.nlu.PartialSuccess) | Start parsing documents into chunks.<br> Cannot parse documents currently being processed (0 &lt; <code>progress</code> &lt; 1).<br> Queues documents for background processing. |
-| StopParsing | [StopParsingRequest](#ondewo.nlu.StopParsingRequest) | [PartialSuccess](#ondewo.nlu.PartialSuccess) | Stop parsing documents.<br> Can only stop documents with <code>progress</code> between 0 and 1. |
+| DeleteDocuments | [DeleteDocumentsRequest](#ondewo.nlu.DeleteDocumentsRequest) | [PartialSuccess](#ondewo.nlu.PartialSuccess) | Delete one or more documents from a dataset (batch operation).<br> If ids empty, deletes all documents. Removes chunks and storage files. |
+| ParseDocuments | [ParseDocumentsRequest](#ondewo.nlu.ParseDocumentsRequest) | [PartialSuccess](#ondewo.nlu.PartialSuccess) | Start parsing documents into chunks.<br> Cannot parse documents currently being processed (0 < progress < 1).<br> Queues documents for background processing. |
+| StopParsing | [StopParsingRequest](#ondewo.nlu.StopParsingRequest) | [PartialSuccess](#ondewo.nlu.PartialSuccess) | Stop parsing documents.<br> Can only stop documents with progress between 0 and 1. |
 | ListChunks | [ListChunksRequest](#ondewo.nlu.ListChunksRequest) | [ListChunksResponse](#ondewo.nlu.ListChunksResponse) | List chunks of a document with pagination.<br> Supports keyword search with content highlighting. |
 | AddChunk | [AddChunkRequest](#ondewo.nlu.AddChunkRequest) | [AddChunkResponse](#ondewo.nlu.AddChunkResponse) | Manually add a chunk to a document.<br> Automatically tokenizes content and generates embeddings. |
-| RemoveChunks | [RemoveChunksRequest](#ondewo.nlu.RemoveChunksRequest) | [PartialSuccess](#ondewo.nlu.PartialSuccess) | Remove one or more chunks from a document.<br> If <code>chunk_ids</code> empty, removes all chunks from document. |
+| RemoveChunks | [RemoveChunksRequest](#ondewo.nlu.RemoveChunksRequest) | [PartialSuccess](#ondewo.nlu.PartialSuccess) | Remove one or more chunks from a document.<br> If chunk_ids empty, removes all chunks from document. |
 | UpdateChunk | [UpdateChunkRequest](#ondewo.nlu.UpdateChunkRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Update an existing chunk's content and metadata.<br> Re-tokenizes content and re-generates embeddings if content changed. |
 | Retrieval | [RetrievalRequest](#ondewo.nlu.RetrievalRequest) | [RetrievalResponse](#ondewo.nlu.RetrievalResponse) | Retrieve chunks using vector similarity search.<br> All datasets must use the same embedding model.<br> Supports reranking, metadata filtering, and knowledge graph retrieval. |
-| CreateChat | [CreateChatRequest](#ondewo.nlu.CreateChatRequest) | [Chat](#ondewo.nlu.Chat) | Create a new chat assistant.<br> All datasets must have parsed files (<code>chunk_num</code> &gt; 0).<br> All datasets must use the same embedding model. |
+| CreateChat | [CreateChatRequest](#ondewo.nlu.CreateChatRequest) | [Chat](#ondewo.nlu.Chat) | Create a new chat assistant.<br> All datasets must have parsed files (chunk_num > 0).<br> All datasets must use the same embedding model. |
 | UpdateChat | [UpdateChatRequest](#ondewo.nlu.UpdateChatRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Update an existing chat assistant's configuration.<br> LLM and prompt configs are merged with existing values. |
-| DeleteChats | [DeleteChatsRequest](#ondewo.nlu.DeleteChatsRequest) | [PartialSuccess](#ondewo.nlu.PartialSuccess) | Delete one or more chat assistants (batch operation).<br> If <code>ids</code> empty, deletes all user's chats (soft delete). |
+| DeleteChats | [DeleteChatsRequest](#ondewo.nlu.DeleteChatsRequest) | [PartialSuccess](#ondewo.nlu.PartialSuccess) | Delete one or more chat assistants (batch operation).<br> If ids empty, deletes all user's chats (soft delete). |
 | ListChats | [ListChatsRequest](#ondewo.nlu.ListChatsRequest) | [ChatList](#ondewo.nlu.ChatList) | List chat assistants with pagination.<br> Returns full dataset objects (not just IDs). |
 | CreateChatSession | [CreateChatSessionRequest](#ondewo.nlu.CreateChatSessionRequest) | [ChatSession](#ondewo.nlu.ChatSession) | Create a new chat session (conversation).<br> Session initialized with assistant's prologue message. |
-| CreateAgentSession | [CreateAgentSessionRequest](#ondewo.nlu.CreateAgentSessionRequest) | [AgentSession](#ondewo.nlu.AgentSession) | Create a new agent session.<br> Initializes <code>Canvas</code> with agent's DSL configuration. |
+| CreateAgentSession | [CreateAgentSessionRequest](#ondewo.nlu.CreateAgentSessionRequest) | [AgentSession](#ondewo.nlu.AgentSession) | Create a new agent session.<br> Initializes Canvas with agent's DSL configuration. |
 | UpdateChatSession | [UpdateChatSessionRequest](#ondewo.nlu.UpdateChatSessionRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Update a chat session's metadata (name only).<br> Cannot update message or reference fields. |
 | ListChatSessions | [ListChatSessionsRequest](#ondewo.nlu.ListChatSessionsRequest) | [ChatSessionList](#ondewo.nlu.ChatSessionList) | List sessions for a chat assistant.<br> Returns message history with embedded chunk references. |
 | ListAgentSessions | [ListAgentSessionsRequest](#ondewo.nlu.ListAgentSessionsRequest) | [AgentSessionList](#ondewo.nlu.AgentSessionList) | List sessions for an agent.<br> Can optionally exclude DSL from response for performance. |
-| DeleteChatSessions | [DeleteChatSessionsRequest](#ondewo.nlu.DeleteChatSessionsRequest) | [PartialSuccess](#ondewo.nlu.PartialSuccess) | Delete one or more chat sessions (batch operation).<br> If <code>ids</code> empty, deletes all sessions for the chat (hard delete). |
-| DeleteAgentSessions | [DeleteAgentSessionsRequest](#ondewo.nlu.DeleteAgentSessionsRequest) | [PartialSuccess](#ondewo.nlu.PartialSuccess) | Delete one or more agent sessions (batch operation).<br> If <code>ids</code> empty, deletes all sessions for the agent (hard delete). |
-| ChatCompletion | [ChatCompletionRequest](#ondewo.nlu.ChatCompletionRequest) | [ChatCompletionResponse](#ondewo.nlu.ChatCompletionResponse) stream | Generate chat completion with RAG (server streaming).<br> Creates new session if <code>session_id</code> not provided. |
-| OpenAIChatCompletion | [OpenAIChatCompletionRequest](#ondewo.nlu.OpenAIChatCompletionRequest) | [OpenAIChatCompletionResponse](#ondewo.nlu.OpenAIChatCompletionResponse) stream | OpenAI-compatible chat completion endpoint (server streaming).<br> Compatible with OpenAI Python client.<br> Supports reasoning content in <code>&lt;think&gt;</code> tags. |
+| DeleteChatSessions | [DeleteChatSessionsRequest](#ondewo.nlu.DeleteChatSessionsRequest) | [PartialSuccess](#ondewo.nlu.PartialSuccess) | Delete one or more chat sessions (batch operation).<br> If ids empty, deletes all sessions for the chat (hard delete). |
+| DeleteAgentSessions | [DeleteAgentSessionsRequest](#ondewo.nlu.DeleteAgentSessionsRequest) | [PartialSuccess](#ondewo.nlu.PartialSuccess) | Delete one or more agent sessions (batch operation).<br> If ids empty, deletes all sessions for the agent (hard delete). |
+| ChatCompletion | [ChatCompletionRequest](#ondewo.nlu.ChatCompletionRequest) | [ChatCompletionResponse](#ondewo.nlu.ChatCompletionResponse) stream | Generate chat completion with RAG (server streaming).<br> Creates new session if session_id not provided. |
+| OpenAIChatCompletion | [OpenAIChatCompletionRequest](#ondewo.nlu.OpenAIChatCompletionRequest) | [OpenAIChatCompletionResponse](#ondewo.nlu.OpenAIChatCompletionResponse) stream | OpenAI-compatible chat completion endpoint (server streaming).<br> Compatible with OpenAI Python client.<br> Supports reasoning content in <think> tags. |
 | AgentCompletion | [AgentCompletionRequest](#ondewo.nlu.AgentCompletionRequest) | [AgentCompletionResponse](#ondewo.nlu.AgentCompletionResponse) stream | Generate agent completion (server streaming).<br> Filters events to only return message-related events. |
 | OpenAIAgentCompletion | [OpenAIAgentCompletionRequest](#ondewo.nlu.OpenAIAgentCompletionRequest) | [OpenAIChatCompletionResponse](#ondewo.nlu.OpenAIChatCompletionResponse) stream | OpenAI-compatible agent completion endpoint (server streaming).<br> Uses tiktoken for token counting. |
 | CreateAgent | [CreateRagAgentRequest](#ondewo.nlu.CreateRagAgentRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Create a new agent with DSL configuration.<br> Title must be unique for the user. |
@@ -9343,21 +9359,21 @@ Covers all entpoints of the <a href="https://github.com/ondewo/ragflow">RAGFlow<
 | UploadFiles | [UploadFilesRequest](#ondewo.nlu.UploadFilesRequest) stream | [FileList](#ondewo.nlu.FileList) | Upload one or more files via multipart form data.<br> Supports nested folder paths in filename.<br> Auto-creates intermediate folders. |
 | CreateFile | [CreateFileRequest](#ondewo.nlu.CreateFileRequest) | [File](#ondewo.nlu.File) | Create a new folder.<br> Duplicate names in same folder not allowed. |
 | ListFiles | [ListFilesRequest](#ondewo.nlu.ListFilesRequest) | [ListFilesResponse](#ondewo.nlu.ListFilesResponse) | List files in a folder with pagination.<br> Supports keyword search. Auto-initializes knowledgebase docs folder. |
-| GetRootFolder | [.google.protobuf.Empty](#google.protobuf.Empty) | [GetRootFolderResponse](#ondewo.nlu.GetRootFolderResponse) | Get user's root folder information.<br> Each tenant has a unique root folder. |
+| GetRootFolder | [GetRootFolderRequest](#ondewo.nlu.GetRootFolderRequest) | [GetRootFolderResponse](#ondewo.nlu.GetRootFolderResponse) | Get user's root folder information.<br> Each tenant has a unique root folder. |
 | GetParentFolder | [GetParentFolderRequest](#ondewo.nlu.GetParentFolderRequest) | [GetParentFolderResponse](#ondewo.nlu.GetParentFolderResponse) | Get the parent folder of a file.<br> Returns 404 if file or parent not found. |
 | GetAllParentFolders | [GetAllParentFoldersRequest](#ondewo.nlu.GetAllParentFoldersRequest) | [GetAllParentFoldersResponse](#ondewo.nlu.GetAllParentFoldersResponse) | Get all parent folders (breadcrumb path) of a file.<br> Returns array from file itself to root (includes the file, ordered deepest to root). |
 | DeleteFiles | [DeleteFilesRequest](#ondewo.nlu.DeleteFilesRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Delete one or more files/folders (hard delete).<br> Recursively deletes folder contents. Removes from storage. |
 | RenameFile | [RenameFileRequest](#ondewo.nlu.RenameFileRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Rename a file or folder.<br> Cannot change file extension. Duplicate names not allowed. |
 | GetFile | [GetFileRequest](#ondewo.nlu.GetFileRequest) | [FileChunk](#ondewo.nlu.FileChunk) stream | Download a file.<br> Retrieves from MinIO/S3 storage.<br> First chunk contains metadata, subsequent chunks only contain data. |
 | MoveFile | [MoveFileRequest](#ondewo.nlu.MoveFileRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Move one or more files to another folder.<br> Validates all files and destination exist. |
-| FileToDocument | [FileToDocumentRequest](#ondewo.nlu.FileToDocumentRequest) | [FileToDocumentList](#ondewo.nlu.FileToDocumentList) | Convert files to documents and add to datasets.<br> Handles folders recursively (converts all inner files).<br> Links files to multiple datasets if multiple <code>dataset_ids</code> provided. |
+| FileToDocument | [FileToDocumentRequest](#ondewo.nlu.FileToDocumentRequest) | [FileToDocumentList](#ondewo.nlu.FileToDocumentList) | Convert files to documents and add to datasets.<br> Handles folders recursively (converts all inner files).<br> Links files to multiple datasets if multiple dataset_ids provided. |
 | DifyRetrieval | [DifyRetrievalRequest](#ondewo.nlu.DifyRetrievalRequest) | [DifyRecordList](#ondewo.nlu.DifyRecordList) | Retrieve chunks in Dify-compatible format.<br> Uses API key authentication (not Bearer token). |
 | Ask | [AskRequest](#ondewo.nlu.AskRequest) | [AskResponse](#ondewo.nlu.AskResponse) stream | Ask a question across datasets without a chat assistant.<br> Streaming only. All datasets must have parsed files. |
 | RelatedQuestions | [RelatedQuestionsRequest](#ondewo.nlu.RelatedQuestionsRequest) | [RelatedQuestionsResponse](#ondewo.nlu.RelatedQuestionsResponse) | Generate related search terms for a question.<br> Returns 5-10 suggestions considering industry context. |
 | ChatbotCompletion | [ChatbotCompletionRequest](#ondewo.nlu.ChatbotCompletionRequest) | [ChatCompletionResponse](#ondewo.nlu.ChatCompletionResponse) stream | Chat completion for iframe/embedded chatbot (server streaming).<br> Uses API key from APIToken table. |
 | ChatbotInfo | [ChatbotInfoRequest](#ondewo.nlu.ChatbotInfoRequest) | [ChatbotInfoResponse](#ondewo.nlu.ChatbotInfoResponse) | Get chatbot information for embedded UI initialization.<br> Returns title, avatar, and prologue. |
 | AgentbotCompletion | [AgentbotCompletionRequest](#ondewo.nlu.AgentbotCompletionRequest) | [AgentCompletionResponse](#ondewo.nlu.AgentCompletionResponse) stream | Agent completion for iframe/embedded agentbot (server streaming).<br> Uses API key authentication. |
-| AgentbotInputs | [AgentbotInputsRequest](#ondewo.nlu.AgentbotInputsRequest) | [AgentbotInputsResponse](#ondewo.nlu.AgentbotInputsResponse) | Get agent input form configuration for embedded UI.<br> Returns input schema from <code>"begin"</code> component in DSL. |
+| AgentbotInputs | [AgentbotInputsRequest](#ondewo.nlu.AgentbotInputsRequest) | [AgentbotInputsResponse](#ondewo.nlu.AgentbotInputsResponse) | Get agent input form configuration for embedded UI.<br> Returns input schema from "begin" component in DSL. |
 | SearchbotAsk | [SearchbotAskRequest](#ondewo.nlu.SearchbotAskRequest) | [AskResponse](#ondewo.nlu.AskResponse) stream | Ask question in searchbot with search app configuration.<br> Uses search app config if provided. |
 | SearchbotRetrieval | [SearchbotRetrievalRequest](#ondewo.nlu.SearchbotRetrievalRequest) | [SearchbotRetrievalResponse](#ondewo.nlu.SearchbotRetrievalResponse) | Test retrieval with searchbot configuration.<br> Supports search app configuration with auto metadata filtering. |
 | SearchbotRelatedQuestions | [SearchbotRelatedQuestionsRequest](#ondewo.nlu.SearchbotRelatedQuestionsRequest) | [RelatedQuestionsResponse](#ondewo.nlu.RelatedQuestionsResponse) | Generate related questions for searchbot.<br> Uses search app LLM config if available. |
