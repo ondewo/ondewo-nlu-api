@@ -361,128 +361,128 @@
     - [ProjectStatistics](#ondewo.nlu.ProjectStatistics)
   
 - [ondewo/nlu/rag.proto](#ondewo/nlu/rag.proto)
-    - [AddChunkRequest](#ondewo.nlu.AddChunkRequest)
-    - [AddChunkResponse](#ondewo.nlu.AddChunkResponse)
-    - [AgentCompletionData](#ondewo.nlu.AgentCompletionData)
-    - [AgentCompletionRequest](#ondewo.nlu.AgentCompletionRequest)
-    - [AgentCompletionResponse](#ondewo.nlu.AgentCompletionResponse)
-    - [AgentSession](#ondewo.nlu.AgentSession)
-    - [AgentSessionList](#ondewo.nlu.AgentSessionList)
-    - [AgentbotCompletionRequest](#ondewo.nlu.AgentbotCompletionRequest)
-    - [AgentbotInputsRequest](#ondewo.nlu.AgentbotInputsRequest)
-    - [AgentbotInputsResponse](#ondewo.nlu.AgentbotInputsResponse)
-    - [AskRequest](#ondewo.nlu.AskRequest)
-    - [AskResponse](#ondewo.nlu.AskResponse)
-    - [Chat](#ondewo.nlu.Chat)
-    - [ChatCompletionRequest](#ondewo.nlu.ChatCompletionRequest)
-    - [ChatCompletionResponse](#ondewo.nlu.ChatCompletionResponse)
-    - [ChatList](#ondewo.nlu.ChatList)
-    - [ChatSession](#ondewo.nlu.ChatSession)
-    - [ChatSessionList](#ondewo.nlu.ChatSessionList)
-    - [ChatbotCompletionRequest](#ondewo.nlu.ChatbotCompletionRequest)
-    - [ChatbotInfoRequest](#ondewo.nlu.ChatbotInfoRequest)
-    - [ChatbotInfoResponse](#ondewo.nlu.ChatbotInfoResponse)
-    - [Chunk](#ondewo.nlu.Chunk)
-    - [CreateAgentSessionRequest](#ondewo.nlu.CreateAgentSessionRequest)
-    - [CreateChatRequest](#ondewo.nlu.CreateChatRequest)
-    - [CreateChatSessionRequest](#ondewo.nlu.CreateChatSessionRequest)
-    - [CreateDatasetRequest](#ondewo.nlu.CreateDatasetRequest)
-    - [CreateFileRequest](#ondewo.nlu.CreateFileRequest)
-    - [CreateRagAgentRequest](#ondewo.nlu.CreateRagAgentRequest)
-    - [Dataset](#ondewo.nlu.Dataset)
-    - [DatasetList](#ondewo.nlu.DatasetList)
-    - [DeleteAgentSessionsRequest](#ondewo.nlu.DeleteAgentSessionsRequest)
-    - [DeleteChatSessionsRequest](#ondewo.nlu.DeleteChatSessionsRequest)
-    - [DeleteChatsRequest](#ondewo.nlu.DeleteChatsRequest)
-    - [DeleteDatasetsRequest](#ondewo.nlu.DeleteDatasetsRequest)
-    - [DeleteDocumentsRequest](#ondewo.nlu.DeleteDocumentsRequest)
-    - [DeleteFilesRequest](#ondewo.nlu.DeleteFilesRequest)
-    - [DeleteKnowledgeGraphRequest](#ondewo.nlu.DeleteKnowledgeGraphRequest)
-    - [DeleteRagAgentRequest](#ondewo.nlu.DeleteRagAgentRequest)
-    - [DifyRecord](#ondewo.nlu.DifyRecord)
-    - [DifyRecordList](#ondewo.nlu.DifyRecordList)
-    - [DifyRetrievalRequest](#ondewo.nlu.DifyRetrievalRequest)
-    - [DifyRetrievalSetting](#ondewo.nlu.DifyRetrievalSetting)
-    - [Document](#ondewo.nlu.Document)
-    - [DocumentList](#ondewo.nlu.DocumentList)
-    - [DownloadDocumentRequest](#ondewo.nlu.DownloadDocumentRequest)
-    - [File](#ondewo.nlu.File)
-    - [FileChunk](#ondewo.nlu.FileChunk)
-    - [FileID](#ondewo.nlu.FileID)
-    - [FileList](#ondewo.nlu.FileList)
-    - [FileMetadata](#ondewo.nlu.FileMetadata)
-    - [FileToDocument](#ondewo.nlu.FileToDocument)
-    - [FileToDocumentList](#ondewo.nlu.FileToDocumentList)
-    - [FileToDocumentRequest](#ondewo.nlu.FileToDocumentRequest)
-    - [GetAllParentFoldersRequest](#ondewo.nlu.GetAllParentFoldersRequest)
-    - [GetAllParentFoldersResponse](#ondewo.nlu.GetAllParentFoldersResponse)
-    - [GetFileRequest](#ondewo.nlu.GetFileRequest)
-    - [GetKnowledgeGraphRequest](#ondewo.nlu.GetKnowledgeGraphRequest)
-    - [GetKnowledgeGraphResponse](#ondewo.nlu.GetKnowledgeGraphResponse)
-    - [GetParentFolderRequest](#ondewo.nlu.GetParentFolderRequest)
-    - [GetParentFolderResponse](#ondewo.nlu.GetParentFolderResponse)
-    - [GetRootFolderRequest](#ondewo.nlu.GetRootFolderRequest)
-    - [GetRootFolderResponse](#ondewo.nlu.GetRootFolderResponse)
-    - [LLMSetting](#ondewo.nlu.LLMSetting)
-    - [ListAgentSessionsRequest](#ondewo.nlu.ListAgentSessionsRequest)
-    - [ListChatSessionsRequest](#ondewo.nlu.ListChatSessionsRequest)
-    - [ListChatsRequest](#ondewo.nlu.ListChatsRequest)
-    - [ListChunksRequest](#ondewo.nlu.ListChunksRequest)
-    - [ListChunksResponse](#ondewo.nlu.ListChunksResponse)
-    - [ListDatasetsRequest](#ondewo.nlu.ListDatasetsRequest)
-    - [ListDocumentsRequest](#ondewo.nlu.ListDocumentsRequest)
-    - [ListDocumentsResponse](#ondewo.nlu.ListDocumentsResponse)
-    - [ListFilesRequest](#ondewo.nlu.ListFilesRequest)
-    - [ListFilesResponse](#ondewo.nlu.ListFilesResponse)
-    - [ListRagAgentsRequest](#ondewo.nlu.ListRagAgentsRequest)
-    - [Message](#ondewo.nlu.Message)
-    - [MoveFileRequest](#ondewo.nlu.MoveFileRequest)
-    - [OpenAIAgentCompletionRequest](#ondewo.nlu.OpenAIAgentCompletionRequest)
-    - [OpenAIChatChoice](#ondewo.nlu.OpenAIChatChoice)
-    - [OpenAIChatCompletionRequest](#ondewo.nlu.OpenAIChatCompletionRequest)
-    - [OpenAIChatCompletionResponse](#ondewo.nlu.OpenAIChatCompletionResponse)
-    - [OpenAIChatContent](#ondewo.nlu.OpenAIChatContent)
-    - [OpenAIChatUsage](#ondewo.nlu.OpenAIChatUsage)
-    - [Pagination](#ondewo.nlu.Pagination)
-    - [ParseDocumentsRequest](#ondewo.nlu.ParseDocumentsRequest)
-    - [ParserConfig](#ondewo.nlu.ParserConfig)
-    - [PartialSuccess](#ondewo.nlu.PartialSuccess)
-    - [PromptConfig](#ondewo.nlu.PromptConfig)
-    - [PromptVariable](#ondewo.nlu.PromptVariable)
+    - [RagAddChunkRequest](#ondewo.nlu.RagAddChunkRequest)
+    - [RagAddChunkResponse](#ondewo.nlu.RagAddChunkResponse)
     - [RagAgent](#ondewo.nlu.RagAgent)
+    - [RagAgentCompletionData](#ondewo.nlu.RagAgentCompletionData)
+    - [RagAgentCompletionRequest](#ondewo.nlu.RagAgentCompletionRequest)
+    - [RagAgentCompletionResponse](#ondewo.nlu.RagAgentCompletionResponse)
     - [RagAgentList](#ondewo.nlu.RagAgentList)
-    - [RelatedQuestionsRequest](#ondewo.nlu.RelatedQuestionsRequest)
-    - [RelatedQuestionsResponse](#ondewo.nlu.RelatedQuestionsResponse)
-    - [RemoveChunksRequest](#ondewo.nlu.RemoveChunksRequest)
-    - [RenameFileRequest](#ondewo.nlu.RenameFileRequest)
-    - [RetrievalRequest](#ondewo.nlu.RetrievalRequest)
-    - [RetrievalResponse](#ondewo.nlu.RetrievalResponse)
-    - [SearchbotAskRequest](#ondewo.nlu.SearchbotAskRequest)
-    - [SearchbotDetailRequest](#ondewo.nlu.SearchbotDetailRequest)
-    - [SearchbotDetailResponse](#ondewo.nlu.SearchbotDetailResponse)
-    - [SearchbotMindmapRequest](#ondewo.nlu.SearchbotMindmapRequest)
-    - [SearchbotMindmapResponse](#ondewo.nlu.SearchbotMindmapResponse)
-    - [SearchbotRelatedQuestionsRequest](#ondewo.nlu.SearchbotRelatedQuestionsRequest)
-    - [SearchbotRetrievalRequest](#ondewo.nlu.SearchbotRetrievalRequest)
-    - [SearchbotRetrievalResponse](#ondewo.nlu.SearchbotRetrievalResponse)
-    - [StopParsingRequest](#ondewo.nlu.StopParsingRequest)
-    - [UpdateChatRequest](#ondewo.nlu.UpdateChatRequest)
-    - [UpdateChatSessionRequest](#ondewo.nlu.UpdateChatSessionRequest)
-    - [UpdateChunkRequest](#ondewo.nlu.UpdateChunkRequest)
-    - [UpdateDatasetRequest](#ondewo.nlu.UpdateDatasetRequest)
-    - [UpdateDocumentRequest](#ondewo.nlu.UpdateDocumentRequest)
-    - [UpdateRagAgentRequest](#ondewo.nlu.UpdateRagAgentRequest)
-    - [UploadChunk](#ondewo.nlu.UploadChunk)
-    - [UploadDocumentsRequest](#ondewo.nlu.UploadDocumentsRequest)
-    - [UploadDocumentsRequest.Metadata](#ondewo.nlu.UploadDocumentsRequest.Metadata)
-    - [UploadFilesRequest](#ondewo.nlu.UploadFilesRequest)
-    - [UploadFilesRequest.Metadata](#ondewo.nlu.UploadFilesRequest.Metadata)
+    - [RagAgentSession](#ondewo.nlu.RagAgentSession)
+    - [RagAgentSessionList](#ondewo.nlu.RagAgentSessionList)
+    - [RagAgentbotCompletionRequest](#ondewo.nlu.RagAgentbotCompletionRequest)
+    - [RagAgentbotInputsRequest](#ondewo.nlu.RagAgentbotInputsRequest)
+    - [RagAgentbotInputsResponse](#ondewo.nlu.RagAgentbotInputsResponse)
+    - [RagAskRequest](#ondewo.nlu.RagAskRequest)
+    - [RagAskResponse](#ondewo.nlu.RagAskResponse)
+    - [RagChat](#ondewo.nlu.RagChat)
+    - [RagChatCompletionRequest](#ondewo.nlu.RagChatCompletionRequest)
+    - [RagChatCompletionResponse](#ondewo.nlu.RagChatCompletionResponse)
+    - [RagChatList](#ondewo.nlu.RagChatList)
+    - [RagChatSession](#ondewo.nlu.RagChatSession)
+    - [RagChatSessionList](#ondewo.nlu.RagChatSessionList)
+    - [RagChatbotCompletionRequest](#ondewo.nlu.RagChatbotCompletionRequest)
+    - [RagChatbotInfoRequest](#ondewo.nlu.RagChatbotInfoRequest)
+    - [RagChatbotInfoResponse](#ondewo.nlu.RagChatbotInfoResponse)
+    - [RagChunk](#ondewo.nlu.RagChunk)
+    - [RagCreateAgentRequest](#ondewo.nlu.RagCreateAgentRequest)
+    - [RagCreateAgentSessionRequest](#ondewo.nlu.RagCreateAgentSessionRequest)
+    - [RagCreateChatRequest](#ondewo.nlu.RagCreateChatRequest)
+    - [RagCreateChatSessionRequest](#ondewo.nlu.RagCreateChatSessionRequest)
+    - [RagCreateDatasetRequest](#ondewo.nlu.RagCreateDatasetRequest)
+    - [RagCreateFileRequest](#ondewo.nlu.RagCreateFileRequest)
+    - [RagDataset](#ondewo.nlu.RagDataset)
+    - [RagDatasetList](#ondewo.nlu.RagDatasetList)
+    - [RagDeleteAgentRequest](#ondewo.nlu.RagDeleteAgentRequest)
+    - [RagDeleteAgentSessionsRequest](#ondewo.nlu.RagDeleteAgentSessionsRequest)
+    - [RagDeleteChatSessionsRequest](#ondewo.nlu.RagDeleteChatSessionsRequest)
+    - [RagDeleteChatsRequest](#ondewo.nlu.RagDeleteChatsRequest)
+    - [RagDeleteDatasetsRequest](#ondewo.nlu.RagDeleteDatasetsRequest)
+    - [RagDeleteDocumentsRequest](#ondewo.nlu.RagDeleteDocumentsRequest)
+    - [RagDeleteFilesRequest](#ondewo.nlu.RagDeleteFilesRequest)
+    - [RagDeleteKnowledgeGraphRequest](#ondewo.nlu.RagDeleteKnowledgeGraphRequest)
+    - [RagDifyRecord](#ondewo.nlu.RagDifyRecord)
+    - [RagDifyRecordList](#ondewo.nlu.RagDifyRecordList)
+    - [RagDifyRetrievalRequest](#ondewo.nlu.RagDifyRetrievalRequest)
+    - [RagDifyRetrievalSetting](#ondewo.nlu.RagDifyRetrievalSetting)
+    - [RagDocument](#ondewo.nlu.RagDocument)
+    - [RagDocumentList](#ondewo.nlu.RagDocumentList)
+    - [RagDownloadDocumentRequest](#ondewo.nlu.RagDownloadDocumentRequest)
+    - [RagFile](#ondewo.nlu.RagFile)
+    - [RagFileChunk](#ondewo.nlu.RagFileChunk)
+    - [RagFileID](#ondewo.nlu.RagFileID)
+    - [RagFileList](#ondewo.nlu.RagFileList)
+    - [RagFileMetadata](#ondewo.nlu.RagFileMetadata)
+    - [RagFileToDocument](#ondewo.nlu.RagFileToDocument)
+    - [RagFileToDocumentList](#ondewo.nlu.RagFileToDocumentList)
+    - [RagFileToDocumentRequest](#ondewo.nlu.RagFileToDocumentRequest)
+    - [RagGetAllParentFoldersRequest](#ondewo.nlu.RagGetAllParentFoldersRequest)
+    - [RagGetAllParentFoldersResponse](#ondewo.nlu.RagGetAllParentFoldersResponse)
+    - [RagGetFileRequest](#ondewo.nlu.RagGetFileRequest)
+    - [RagGetKnowledgeGraphRequest](#ondewo.nlu.RagGetKnowledgeGraphRequest)
+    - [RagGetKnowledgeGraphResponse](#ondewo.nlu.RagGetKnowledgeGraphResponse)
+    - [RagGetParentFolderRequest](#ondewo.nlu.RagGetParentFolderRequest)
+    - [RagGetParentFolderResponse](#ondewo.nlu.RagGetParentFolderResponse)
+    - [RagGetRootFolderRequest](#ondewo.nlu.RagGetRootFolderRequest)
+    - [RagGetRootFolderResponse](#ondewo.nlu.RagGetRootFolderResponse)
+    - [RagLLMSetting](#ondewo.nlu.RagLLMSetting)
+    - [RagListAgentSessionsRequest](#ondewo.nlu.RagListAgentSessionsRequest)
+    - [RagListAgentsRequest](#ondewo.nlu.RagListAgentsRequest)
+    - [RagListChatSessionsRequest](#ondewo.nlu.RagListChatSessionsRequest)
+    - [RagListChatsRequest](#ondewo.nlu.RagListChatsRequest)
+    - [RagListChunksRequest](#ondewo.nlu.RagListChunksRequest)
+    - [RagListChunksResponse](#ondewo.nlu.RagListChunksResponse)
+    - [RagListDatasetsRequest](#ondewo.nlu.RagListDatasetsRequest)
+    - [RagListDocumentsRequest](#ondewo.nlu.RagListDocumentsRequest)
+    - [RagListDocumentsResponse](#ondewo.nlu.RagListDocumentsResponse)
+    - [RagListFilesRequest](#ondewo.nlu.RagListFilesRequest)
+    - [RagListFilesResponse](#ondewo.nlu.RagListFilesResponse)
+    - [RagMessage](#ondewo.nlu.RagMessage)
+    - [RagMoveFileRequest](#ondewo.nlu.RagMoveFileRequest)
+    - [RagOpenAiAgentCompletionRequest](#ondewo.nlu.RagOpenAiAgentCompletionRequest)
+    - [RagOpenAiChatChoice](#ondewo.nlu.RagOpenAiChatChoice)
+    - [RagOpenAiChatCompletionRequest](#ondewo.nlu.RagOpenAiChatCompletionRequest)
+    - [RagOpenAiChatCompletionResponse](#ondewo.nlu.RagOpenAiChatCompletionResponse)
+    - [RagOpenAiChatContent](#ondewo.nlu.RagOpenAiChatContent)
+    - [RagOpenAiChatUsage](#ondewo.nlu.RagOpenAiChatUsage)
+    - [RagPagination](#ondewo.nlu.RagPagination)
+    - [RagParseDocumentsRequest](#ondewo.nlu.RagParseDocumentsRequest)
+    - [RagParserConfig](#ondewo.nlu.RagParserConfig)
+    - [RagPartialSuccess](#ondewo.nlu.RagPartialSuccess)
+    - [RagPromptConfig](#ondewo.nlu.RagPromptConfig)
+    - [RagPromptVariable](#ondewo.nlu.RagPromptVariable)
+    - [RagRelatedQuestionsRequest](#ondewo.nlu.RagRelatedQuestionsRequest)
+    - [RagRelatedQuestionsResponse](#ondewo.nlu.RagRelatedQuestionsResponse)
+    - [RagRemoveChunksRequest](#ondewo.nlu.RagRemoveChunksRequest)
+    - [RagRenameFileRequest](#ondewo.nlu.RagRenameFileRequest)
+    - [RagRetrievalRequest](#ondewo.nlu.RagRetrievalRequest)
+    - [RagRetrievalResponse](#ondewo.nlu.RagRetrievalResponse)
+    - [RagSearchbotAskRequest](#ondewo.nlu.RagSearchbotAskRequest)
+    - [RagSearchbotDetailRequest](#ondewo.nlu.RagSearchbotDetailRequest)
+    - [RagSearchbotDetailResponse](#ondewo.nlu.RagSearchbotDetailResponse)
+    - [RagSearchbotMindmapRequest](#ondewo.nlu.RagSearchbotMindmapRequest)
+    - [RagSearchbotMindmapResponse](#ondewo.nlu.RagSearchbotMindmapResponse)
+    - [RagSearchbotRelatedQuestionsRequest](#ondewo.nlu.RagSearchbotRelatedQuestionsRequest)
+    - [RagSearchbotRetrievalRequest](#ondewo.nlu.RagSearchbotRetrievalRequest)
+    - [RagSearchbotRetrievalResponse](#ondewo.nlu.RagSearchbotRetrievalResponse)
+    - [RagStopParsingRequest](#ondewo.nlu.RagStopParsingRequest)
+    - [RagUpdateAgentRequest](#ondewo.nlu.RagUpdateAgentRequest)
+    - [RagUpdateChatRequest](#ondewo.nlu.RagUpdateChatRequest)
+    - [RagUpdateChatSessionRequest](#ondewo.nlu.RagUpdateChatSessionRequest)
+    - [RagUpdateChunkRequest](#ondewo.nlu.RagUpdateChunkRequest)
+    - [RagUpdateDatasetRequest](#ondewo.nlu.RagUpdateDatasetRequest)
+    - [RagUpdateDocumentRequest](#ondewo.nlu.RagUpdateDocumentRequest)
+    - [RagUploadChunk](#ondewo.nlu.RagUploadChunk)
+    - [RagUploadDocumentsRequest](#ondewo.nlu.RagUploadDocumentsRequest)
+    - [RagUploadDocumentsRequest.RagMetadata](#ondewo.nlu.RagUploadDocumentsRequest.RagMetadata)
+    - [RagUploadFilesRequest](#ondewo.nlu.RagUploadFilesRequest)
+    - [RagUploadFilesRequest.RagMetadata](#ondewo.nlu.RagUploadFilesRequest.RagMetadata)
   
-    - [AgentEventType](#ondewo.nlu.AgentEventType)
-    - [ChunkMethod](#ondewo.nlu.ChunkMethod)
-    - [DocumentStatus](#ondewo.nlu.DocumentStatus)
-    - [MessageRole](#ondewo.nlu.MessageRole)
-    - [Permission](#ondewo.nlu.Permission)
+    - [RagAgentEventType](#ondewo.nlu.RagAgentEventType)
+    - [RagChunkMethod](#ondewo.nlu.RagChunkMethod)
+    - [RagDocumentStatus](#ondewo.nlu.RagDocumentStatus)
+    - [RagMessageRole](#ondewo.nlu.RagMessageRole)
+    - [RagPermission](#ondewo.nlu.RagPermission)
   
     - [Rags](#ondewo.nlu.Rags)
   
@@ -6916,12 +6916,12 @@ Project Root Statistics
 
 ## ondewo/nlu/rag.proto
 File-level comment for <code>ondewo/nlu/rags.proto</code>.
-This file contains a single service <a href="#ondewo.nlu.Rags">Rags</a>. The Rags service provides integration with RAGFlow for Retrieval-Augmented Generation (RAG), including dataset management, document processing, chunk retrieval, conversational AI with chat and agent assistants, and file management. Key message types include <a href="#ondewo.nlu.Dataset">Dataset</a>, <a href="#ondewo.nlu.Chat">Chat</a>, and <a href="#ondewo.nlu.Agent">Agent</a>.
+This file contains a single service <a href="#ondewo.nlu.Rags">Rags</a>. The Rags service provides integration with RAGFlow for Retrieval-Augmented Generation (RAG), including dataset management, document processing, chunk retrieval, conversational AI with chat and agent assistants, and file management. Key message types include <a href="#ondewo.nlu.RagDataset">RagDataset</a>, <a href="#ondewo.nlu.RagChat">RagChat</a>, and <a href="#ondewo.nlu.RagAgent">RagAgent</a>.
 
 
-<a name="ondewo.nlu.AddChunkRequest"></a>
+<a name="ondewo.nlu.RagAddChunkRequest"></a>
 
-### AddChunkRequest
+### RagAddChunkRequest
 Request message for manually adding a chunk to a document.<br>
 The chunk content is automatically tokenized and embeddings are generated.
 
@@ -6941,24 +6941,51 @@ The chunk content is automatically tokenized and embeddings are generated.
 
 
 
-<a name="ondewo.nlu.AddChunkResponse"></a>
+<a name="ondewo.nlu.RagAddChunkResponse"></a>
 
-### AddChunkResponse
+### RagAddChunkResponse
 Response message for adding a chunk.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| chunk | [Chunk](#ondewo.nlu.Chunk) |  | The newly created chunk. |
+| chunk | [RagChunk](#ondewo.nlu.RagChunk) |  | The newly created chunk. |
 
 
 
 
 
 
-<a name="ondewo.nlu.AgentCompletionData"></a>
+<a name="ondewo.nlu.RagAgent"></a>
 
-### AgentCompletionData
+### RagAgent
+RAGFlow agent (workflow-based AI assistant).
+Agents are workflow-based AI assistants configured using Domain Specific Language (DSL).
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| id | [string](#string) |  | Agent UUID uniquely identifying this agent. |
+| title | [string](#string) |  | Agent title. Must be unique within the project. |
+| description | [string](#string) |  | Optional. Agent description providing details about the agent's purpose and functionality. |
+| avatar | [string](#string) |  | Optional. Base64-encoded avatar image for visual identification. |
+| dsl | [google.protobuf.Struct](#google.protobuf.Struct) |  | Domain Specific Language (DSL) configuration defining the agent's workflow, logic, and behavior. The DSL structure determines how the agent processes requests and generates responses. |
+| create_time | [int64](#int64) |  | Creation timestamp (Unix timestamp in milliseconds). |
+| create_date | [string](#string) |  | Creation date in ISO 8601 datetime format. |
+| update_time | [int64](#int64) |  | Last update timestamp (Unix timestamp in milliseconds). |
+| update_date | [string](#string) |  | Last update date in ISO 8601 datetime format. |
+| user_id | [string](#string) |  | User ID of the agent owner. |
+| canvas_type | [string](#string) |  | Canvas type for the agent's workflow visualization. |
+| additional_fields | [google.protobuf.Struct](#google.protobuf.Struct) |  | Additional fields returned by RAGFlow API. |
+
+
+
+
+
+
+<a name="ondewo.nlu.RagAgentCompletionData"></a>
+
+### RagAgentCompletionData
 Data payload in agent completion response.
 
 
@@ -6975,9 +7002,9 @@ Data payload in agent completion response.
 
 
 
-<a name="ondewo.nlu.AgentCompletionRequest"></a>
+<a name="ondewo.nlu.RagAgentCompletionRequest"></a>
 
-### AgentCompletionRequest
+### RagAgentCompletionRequest
 Request message for generating an agent completion.
 Agents are workflow-based AI assistants with Domain Specific Language (DSL) configuration.
 
@@ -6989,7 +7016,7 @@ Agents are workflow-based AI assistants with Domain Specific Language (DSL) conf
 | session_id | [string](#string) |  | Optional. Session ID to continue an existing conversation. If not provided, a new session will be created. |
 | question | [string](#string) |  | Required. User question or message to send to the agent. |
 | stream | [bool](#bool) | optional | Optional. Enable streaming mode. If <code>true</code>, the response will be streamed as Server-Sent Events (SSE). Default: <code>true</code>. |
-| files | [File](#ondewo.nlu.File) | repeated | Optional. Files to include in the agent's context for processing. |
+| files | [RagFile](#ondewo.nlu.RagFile) | repeated | Optional. Files to include in the agent's context for processing. |
 | inputs | [google.protobuf.Struct](#google.protobuf.Struct) |  | Optional. Input form data to pass to the agent workflow. The structure depends on the agent's DSL configuration. |
 | user_id | [string](#string) |  | Optional. User identifier for tracking and personalization. |
 | additional_fields | [google.protobuf.Struct](#google.protobuf.Struct) |  | Optional. Additional fields to pass through to RAGFlow API. |
@@ -6999,9 +7026,9 @@ Agents are workflow-based AI assistants with Domain Specific Language (DSL) conf
 
 
 
-<a name="ondewo.nlu.AgentCompletionResponse"></a>
+<a name="ondewo.nlu.RagAgentCompletionResponse"></a>
 
-### AgentCompletionResponse
+### RagAgentCompletionResponse
 Response message for agent completion.
 <ul>
     <li>For streaming: Each message represents one Server-Sent Event with <code>event</code> indicating the event type (e.g., <code>"message"</code>, <code>"message_end"</code>).</li>
@@ -7011,11 +7038,11 @@ Response message for agent completion.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| event | [AgentEventType](#ondewo.nlu.AgentEventType) |  | Event type indicating the kind of event in the stream. |
+| event | [RagAgentEventType](#ondewo.nlu.RagAgentEventType) |  | Event type indicating the kind of event in the stream. |
 | message_id | [string](#string) |  | Message ID uniquely identifying this response. |
 | created_at | [int64](#int64) |  | Creation timestamp (Unix timestamp in milliseconds). |
 | task_id | [string](#string) |  | Task ID associated with this agent workflow execution. |
-| data | [AgentCompletionData](#ondewo.nlu.AgentCompletionData) |  | Event data payload containing the actual response content. |
+| data | [RagAgentCompletionData](#ondewo.nlu.RagAgentCompletionData) |  | Event data payload containing the actual response content. |
 | session_id | [string](#string) |  | Session ID for the conversation. |
 | additional_fields | [google.protobuf.Struct](#google.protobuf.Struct) |  | Additional fields returned by RAGFlow API. |
 
@@ -7024,9 +7051,24 @@ Response message for agent completion.
 
 
 
-<a name="ondewo.nlu.AgentSession"></a>
+<a name="ondewo.nlu.RagAgentList"></a>
 
-### AgentSession
+### RagAgentList
+Response message containing a list of RAGFlow agents.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| agents | [RagAgent](#ondewo.nlu.RagAgent) | repeated | List of RAGFlow agents owned by the user. Note: No pagination metadata is included in this response. |
+
+
+
+
+
+
+<a name="ondewo.nlu.RagAgentSession"></a>
+
+### RagAgentSession
 Agent session containing conversation history for an agent workflow.
 
 
@@ -7035,7 +7077,7 @@ Agent session containing conversation history for an agent workflow.
 | id | [string](#string) |  | Session UUID. |
 | agent_id | [string](#string) |  | RAGFlow agent UUID. |
 | user_id | [string](#string) |  | User identifier. |
-| message | [Message](#ondewo.nlu.Message) | repeated | Message history in chronological order. |
+| message | [RagMessage](#ondewo.nlu.RagMessage) | repeated | Message history in chronological order. |
 | source | [string](#string) |  | Session source. |
 | dsl | [google.protobuf.Struct](#google.protobuf.Struct) |  | Agent DSL (Domain Specific Language) workflow configuration. |
 | create_time | [int64](#int64) |  | Creation timestamp (Unix timestamp in milliseconds). |
@@ -7049,24 +7091,24 @@ Agent session containing conversation history for an agent workflow.
 
 
 
-<a name="ondewo.nlu.AgentSessionList"></a>
+<a name="ondewo.nlu.RagAgentSessionList"></a>
 
-### AgentSessionList
+### RagAgentSessionList
 Response message for listing agent sessions.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| agent_sessions | [AgentSession](#ondewo.nlu.AgentSession) | repeated | List of agent sessions (no pagination metadata included). |
+| agent_sessions | [RagAgentSession](#ondewo.nlu.RagAgentSession) | repeated | List of agent sessions (no pagination metadata included). |
 
 
 
 
 
 
-<a name="ondewo.nlu.AgentbotCompletionRequest"></a>
+<a name="ondewo.nlu.RagAgentbotCompletionRequest"></a>
 
-### AgentbotCompletionRequest
+### RagAgentbotCompletionRequest
 Request message for generating completions using a RAGFlow agent.
 Agents are workflow-based systems that can combine multiple operations and tools.
 Corresponds to RAGFlow's <code>POST /api/v1/agents/{agent_id}/completions</code> endpoint.
@@ -7086,9 +7128,9 @@ Corresponds to RAGFlow's <code>POST /api/v1/agents/{agent_id}/completions</code>
 
 
 
-<a name="ondewo.nlu.AgentbotInputsRequest"></a>
+<a name="ondewo.nlu.RagAgentbotInputsRequest"></a>
 
-### AgentbotInputsRequest
+### RagAgentbotInputsRequest
 Request message for retrieving agent input configuration.
 Returns the form configuration and initialization data for an agent.
 
@@ -7103,9 +7145,9 @@ Returns the form configuration and initialization data for an agent.
 
 
 
-<a name="ondewo.nlu.AgentbotInputsResponse"></a>
+<a name="ondewo.nlu.RagAgentbotInputsResponse"></a>
 
-### AgentbotInputsResponse
+### RagAgentbotInputsResponse
 Response message containing agent input configuration and display information.
 
 
@@ -7122,9 +7164,9 @@ Response message containing agent input configuration and display information.
 
 
 
-<a name="ondewo.nlu.AskRequest"></a>
+<a name="ondewo.nlu.RagAskRequest"></a>
 
-### AskRequest
+### RagAskRequest
 Request message for asking a question using RAGFlow's basic QA endpoint.
 This endpoint searches specified datasets and returns an answer.
 
@@ -7141,9 +7183,9 @@ This endpoint searches specified datasets and returns an answer.
 
 
 
-<a name="ondewo.nlu.AskResponse"></a>
+<a name="ondewo.nlu.RagAskResponse"></a>
 
-### AskResponse
+### RagAskResponse
 Response message containing the answer to a user's question.
 
 
@@ -7158,9 +7200,9 @@ Response message containing the answer to a user's question.
 
 
 
-<a name="ondewo.nlu.Chat"></a>
+<a name="ondewo.nlu.RagChat"></a>
 
-### Chat
+### RagChat
 Chat assistant configuration.
 
 
@@ -7171,9 +7213,9 @@ Chat assistant configuration.
 | description | [string](#string) |  | Optional description. |
 | avatar | [string](#string) |  | Base64-encoded avatar image. |
 | dataset_ids | [string](#string) | repeated | Dataset IDs (used for requests). |
-| datasets | [Dataset](#ondewo.nlu.Dataset) | repeated | Full dataset objects (used for list responses). |
-| llm | [LLMSetting](#ondewo.nlu.LLMSetting) |  | LLM configuration. |
-| prompt | [PromptConfig](#ondewo.nlu.PromptConfig) |  | Prompt and retrieval configuration. |
+| datasets | [RagDataset](#ondewo.nlu.RagDataset) | repeated | Full dataset objects (used for list responses). |
+| llm | [RagLLMSetting](#ondewo.nlu.RagLLMSetting) |  | LLM configuration. |
+| prompt | [RagPromptConfig](#ondewo.nlu.RagPromptConfig) |  | Prompt and retrieval configuration. |
 | create_time | [int64](#int64) |  | Creation timestamp (Unix timestamp in milliseconds). |
 | create_date | [string](#string) |  | Creation date (ISO 8601 datetime). |
 | update_time | [int64](#int64) |  | Last update timestamp (Unix timestamp in milliseconds). |
@@ -7191,9 +7233,9 @@ Chat assistant configuration.
 
 
 
-<a name="ondewo.nlu.ChatCompletionRequest"></a>
+<a name="ondewo.nlu.RagChatCompletionRequest"></a>
 
-### ChatCompletionRequest
+### RagChatCompletionRequest
 Request message for generating a chat completion.
 
 
@@ -7211,9 +7253,9 @@ Request message for generating a chat completion.
 
 
 
-<a name="ondewo.nlu.ChatCompletionResponse"></a>
+<a name="ondewo.nlu.RagChatCompletionResponse"></a>
 
-### ChatCompletionResponse
+### RagChatCompletionResponse
 Response message for chat completion.
 <ul>
     <li>For streaming: Each message represents one Server-Sent Event's data field with incremental content.</li>
@@ -7237,24 +7279,24 @@ Response message for chat completion.
 
 
 
-<a name="ondewo.nlu.ChatList"></a>
+<a name="ondewo.nlu.RagChatList"></a>
 
-### ChatList
+### RagChatList
 Response message for listing chat assistants.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| chats | [Chat](#ondewo.nlu.Chat) | repeated | List of chat assistants (with full dataset objects embedded). |
+| chats | [RagChat](#ondewo.nlu.RagChat) | repeated | List of chat assistants (with full dataset objects embedded). |
 
 
 
 
 
 
-<a name="ondewo.nlu.ChatSession"></a>
+<a name="ondewo.nlu.RagChatSession"></a>
 
-### ChatSession
+### RagChatSession
 Chat session containing conversation history for a chat assistant.
 
 
@@ -7263,7 +7305,7 @@ Chat session containing conversation history for a chat assistant.
 | id | [string](#string) |  | Session UUID. |
 | chat_id | [string](#string) |  | Parent chat assistant UUID. |
 | name | [string](#string) |  | Session name (default: <code>"New session"</code>). |
-| messages | [Message](#ondewo.nlu.Message) | repeated | Message history in chronological order. |
+| messages | [RagMessage](#ondewo.nlu.RagMessage) | repeated | Message history in chronological order. |
 | create_time | [int64](#int64) |  | Creation timestamp (Unix timestamp in milliseconds). |
 | create_date | [string](#string) |  | Creation date (ISO 8601 datetime). |
 | update_time | [int64](#int64) |  | Last update timestamp (Unix timestamp in milliseconds). |
@@ -7275,24 +7317,24 @@ Chat session containing conversation history for a chat assistant.
 
 
 
-<a name="ondewo.nlu.ChatSessionList"></a>
+<a name="ondewo.nlu.RagChatSessionList"></a>
 
-### ChatSessionList
+### RagChatSessionList
 Response message for listing chat sessions.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| chat_sessions | [ChatSession](#ondewo.nlu.ChatSession) | repeated | List of chat sessions (no pagination metadata included). |
+| chat_sessions | [RagChatSession](#ondewo.nlu.RagChatSession) | repeated | List of chat sessions (no pagination metadata included). |
 
 
 
 
 
 
-<a name="ondewo.nlu.ChatbotCompletionRequest"></a>
+<a name="ondewo.nlu.RagChatbotCompletionRequest"></a>
 
-### ChatbotCompletionRequest
+### RagChatbotCompletionRequest
 Request message for generating chat completions using a configured chatbot.
 Corresponds to RAGFlow's <code>POST /api/v1/chats/{chat_id}/completions</code> endpoint.
 
@@ -7311,9 +7353,9 @@ Corresponds to RAGFlow's <code>POST /api/v1/chats/{chat_id}/completions</code> e
 
 
 
-<a name="ondewo.nlu.ChatbotInfoRequest"></a>
+<a name="ondewo.nlu.RagChatbotInfoRequest"></a>
 
-### ChatbotInfoRequest
+### RagChatbotInfoRequest
 Request message for retrieving chatbot configuration and initialization data.
 Used to obtain display information for the chat interface.
 
@@ -7328,9 +7370,9 @@ Used to obtain display information for the chat interface.
 
 
 
-<a name="ondewo.nlu.ChatbotInfoResponse"></a>
+<a name="ondewo.nlu.RagChatbotInfoResponse"></a>
 
-### ChatbotInfoResponse
+### RagChatbotInfoResponse
 Response message containing chatbot display and initialization information.
 
 
@@ -7345,9 +7387,9 @@ Response message containing chatbot display and initialization information.
 
 
 
-<a name="ondewo.nlu.Chunk"></a>
+<a name="ondewo.nlu.RagChunk"></a>
 
-### Chunk
+### RagChunk
 Chunk of text extracted from a document.<br>
 Chunks are the basic retrieval units used for vector similarity search in RAG.
 
@@ -7376,110 +7418,9 @@ Chunks are the basic retrieval units used for vector similarity search in RAG.
 
 
 
-<a name="ondewo.nlu.CreateAgentSessionRequest"></a>
+<a name="ondewo.nlu.RagCreateAgentRequest"></a>
 
-### CreateAgentSessionRequest
-Request message for creating a new agent session.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| parent | [string](#string) |  | Required. The agent to create an agent session for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
-| agent_id | [string](#string) |  | Required. RAGFlow agent UUID. |
-| user_id | [string](#string) |  | Optional. User identifier (defaults to <code>tenant_id</code> if not specified). |
-| additional_fields | [google.protobuf.Struct](#google.protobuf.Struct) |  | Optional. Additional fields to pass through to RAGFlow. |
-
-
-
-
-
-
-<a name="ondewo.nlu.CreateChatRequest"></a>
-
-### CreateChatRequest
-Request message for creating a new chat assistant.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| parent | [string](#string) |  | Required. The agent to create a chat assistant for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
-| name | [string](#string) |  | Required. Unique name for the chat assistant. Must be unique within the agent. |
-| description | [string](#string) |  | Optional. Description of the chat assistant's purpose. |
-| avatar | [string](#string) |  | Optional. Base64-encoded avatar image. |
-| dataset_ids | [string](#string) | repeated | Required. Dataset IDs to use as knowledge base (all datasets must have parsed files and use the same embedding model). |
-| llm | [LLMSetting](#ondewo.nlu.LLMSetting) |  | Optional. LLM configuration settings. |
-| prompt | [PromptConfig](#ondewo.nlu.PromptConfig) |  | Optional. Prompt and retrieval configuration settings. |
-| additional_fields | [google.protobuf.Struct](#google.protobuf.Struct) |  | Optional. Additional fields to pass through to RAGFlow. |
-
-
-
-
-
-
-<a name="ondewo.nlu.CreateChatSessionRequest"></a>
-
-### CreateChatSessionRequest
-Request message for creating a new chat session.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| parent | [string](#string) |  | Required. The agent to create a chat session for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
-| chat_id | [string](#string) |  | Required. Parent chat assistant UUID. |
-| name | [string](#string) |  | Optional. Session name (default: <code>"New session"</code>). |
-| user_id | [string](#string) |  | Optional. User identifier for tracking conversation ownership. |
-| additional_fields | [google.protobuf.Struct](#google.protobuf.Struct) |  | Optional. Additional fields to pass through to RAGFlow. |
-
-
-
-
-
-
-<a name="ondewo.nlu.CreateDatasetRequest"></a>
-
-### CreateDatasetRequest
-Request message for creating a new dataset.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| parent | [string](#string) |  | Required. The agent to create the dataset for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
-| name | [string](#string) |  | Required. Unique name of the dataset to create. Must follow these requirements: <ul> <li>contain only characters from the basic multilingual Unicode plane</li> <li>maximum 128 characters</li> <li>case-insensitive</li> </ul> |
-| description | [string](#string) |  | Optional. Dataset description. Maximum 65,535 characters. |
-| avatar | [string](#string) |  | Optional. Base64-encoded avatar image. Maximum 65,535 characters. |
-| permission | [Permission](#ondewo.nlu.Permission) |  | Optional. Access permission for new dataset |
-| chunk_method | [ChunkMethod](#ondewo.nlu.ChunkMethod) |  | Optional. Default chunking method for documents in this dataset. |
-| parser_config | [ParserConfig](#ondewo.nlu.ParserConfig) |  | Optional. Configuration settings for the dataset parser. The used fields vary depending on the selected <code>chunk_method</code>. |
-| embedding_model | [string](#string) |  | Optional. Embedding model name (uses user's default if not specified). |
-| additional_fields | [google.protobuf.Struct](#google.protobuf.Struct) |  | Optional. Additional fields to pass through to RAGFlow. |
-
-
-
-
-
-
-<a name="ondewo.nlu.CreateFileRequest"></a>
-
-### CreateFileRequest
-Request message for creating a file or folder in RAGFlow.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| parent | [string](#string) |  | Required. The agent to create the file for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
-| name | [string](#string) |  | Required. Name of the file or folder to create. |
-| parent_id | [string](#string) |  | Optional. Parent folder ID. If not provided, creates in root directory. |
-| type | [string](#string) |  | Required. Type of item to create: <code>"folder"</code> for directories or <code>"virtual"</code> for virtual files. |
-| additional_fields | [google.protobuf.Struct](#google.protobuf.Struct) |  | Optional. Additional fields to pass through to RAGFlow. |
-
-
-
-
-
-
-<a name="ondewo.nlu.CreateRagAgentRequest"></a>
-
-### CreateRagAgentRequest
+### RagCreateAgentRequest
 Request message for creating a new RAGFlow agent.
 
 
@@ -7496,9 +7437,110 @@ Request message for creating a new RAGFlow agent.
 
 
 
-<a name="ondewo.nlu.Dataset"></a>
+<a name="ondewo.nlu.RagCreateAgentSessionRequest"></a>
 
-### Dataset
+### RagCreateAgentSessionRequest
+Request message for creating a new agent session.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  | Required. The agent to create an agent session for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| agent_id | [string](#string) |  | Required. RAGFlow agent UUID. |
+| user_id | [string](#string) |  | Optional. User identifier (defaults to <code>tenant_id</code> if not specified). |
+| additional_fields | [google.protobuf.Struct](#google.protobuf.Struct) |  | Optional. Additional fields to pass through to RAGFlow. |
+
+
+
+
+
+
+<a name="ondewo.nlu.RagCreateChatRequest"></a>
+
+### RagCreateChatRequest
+Request message for creating a new chat assistant.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  | Required. The agent to create a chat assistant for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| name | [string](#string) |  | Required. Unique name for the chat assistant. Must be unique within the agent. |
+| description | [string](#string) |  | Optional. Description of the chat assistant's purpose. |
+| avatar | [string](#string) |  | Optional. Base64-encoded avatar image. |
+| dataset_ids | [string](#string) | repeated | Required. Dataset IDs to use as knowledge base (all datasets must have parsed files and use the same embedding model). |
+| llm | [RagLLMSetting](#ondewo.nlu.RagLLMSetting) |  | Optional. LLM configuration settings. |
+| prompt | [RagPromptConfig](#ondewo.nlu.RagPromptConfig) |  | Optional. Prompt and retrieval configuration settings. |
+| additional_fields | [google.protobuf.Struct](#google.protobuf.Struct) |  | Optional. Additional fields to pass through to RAGFlow. |
+
+
+
+
+
+
+<a name="ondewo.nlu.RagCreateChatSessionRequest"></a>
+
+### RagCreateChatSessionRequest
+Request message for creating a new chat session.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  | Required. The agent to create a chat session for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| chat_id | [string](#string) |  | Required. Parent chat assistant UUID. |
+| name | [string](#string) |  | Optional. Session name (default: <code>"New session"</code>). |
+| user_id | [string](#string) |  | Optional. User identifier for tracking conversation ownership. |
+| additional_fields | [google.protobuf.Struct](#google.protobuf.Struct) |  | Optional. Additional fields to pass through to RAGFlow. |
+
+
+
+
+
+
+<a name="ondewo.nlu.RagCreateDatasetRequest"></a>
+
+### RagCreateDatasetRequest
+Request message for creating a new dataset.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  | Required. The agent to create the dataset for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| name | [string](#string) |  | Required. Unique name of the dataset to create. Must follow these requirements: <ul> <li>contain only characters from the basic multilingual Unicode plane</li> <li>maximum 128 characters</li> <li>case-insensitive</li> </ul> |
+| description | [string](#string) |  | Optional. Dataset description. Maximum 65,535 characters. |
+| avatar | [string](#string) |  | Optional. Base64-encoded avatar image. Maximum 65,535 characters. |
+| permission | [RagPermission](#ondewo.nlu.RagPermission) |  | Optional. Access permission for new dataset |
+| chunk_method | [RagChunkMethod](#ondewo.nlu.RagChunkMethod) |  | Optional. Default chunking method for documents in this dataset. |
+| parser_config | [RagParserConfig](#ondewo.nlu.RagParserConfig) |  | Optional. Configuration settings for the dataset parser. The used fields vary depending on the selected <code>chunk_method</code>. |
+| embedding_model | [string](#string) |  | Optional. Embedding model name (uses user's default if not specified). |
+| additional_fields | [google.protobuf.Struct](#google.protobuf.Struct) |  | Optional. Additional fields to pass through to RAGFlow. |
+
+
+
+
+
+
+<a name="ondewo.nlu.RagCreateFileRequest"></a>
+
+### RagCreateFileRequest
+Request message for creating a file or folder in RAGFlow.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  | Required. The agent to create the file for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| name | [string](#string) |  | Required. Name of the file or folder to create. |
+| parent_id | [string](#string) |  | Optional. Parent folder ID. If not provided, creates in root directory. |
+| type | [string](#string) |  | Required. Type of item to create: <code>"folder"</code> for directories or <code>"virtual"</code> for virtual files. |
+| additional_fields | [google.protobuf.Struct](#google.protobuf.Struct) |  | Optional. Additional fields to pass through to RAGFlow. |
+
+
+
+
+
+
+<a name="ondewo.nlu.RagDataset"></a>
+
+### RagDataset
 Dataset containing documents for RAG.
 
 
@@ -7509,11 +7551,11 @@ Dataset containing documents for RAG.
 | description | [string](#string) |  | Dataset description. |
 | avatar | [string](#string) |  | Base64-encoded avatar image. |
 | language | [string](#string) |  | Dataset language (e.g. <code>"English"</code>). |
-| permission | [Permission](#ondewo.nlu.Permission) |  | Access permission. |
+| permission | [RagPermission](#ondewo.nlu.RagPermission) |  | Access permission. |
 | document_count | [int32](#int32) |  | Number of documents in the dataset. |
 | chunk_count | [int32](#int32) |  | Number of chunks of all documents in the dataset. |
-| chunk_method | [ChunkMethod](#ondewo.nlu.ChunkMethod) |  | Default chunking method for documents in this dataset. |
-| parser_config | [ParserConfig](#ondewo.nlu.ParserConfig) |  | Document parser configuration (auto-generated based on chunk_method). |
+| chunk_method | [RagChunkMethod](#ondewo.nlu.RagChunkMethod) |  | Default chunking method for documents in this dataset. |
+| parser_config | [RagParserConfig](#ondewo.nlu.RagParserConfig) |  | Document parser configuration (auto-generated based on chunk_method). |
 | embedding_model | [string](#string) |  | Embedding model name. |
 | create_time | [int64](#int64) |  | Creation timestamp (Unix timestamp in milliseconds). |
 | create_date | [string](#string) |  | Creation date (ISO 8601 datetime). |
@@ -7529,24 +7571,40 @@ Dataset containing documents for RAG.
 
 
 
-<a name="ondewo.nlu.DatasetList"></a>
+<a name="ondewo.nlu.RagDatasetList"></a>
 
-### DatasetList
+### RagDatasetList
 Response message for listing datasets.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| datasets | [Dataset](#ondewo.nlu.Dataset) | repeated | List of datasets. |
+| datasets | [RagDataset](#ondewo.nlu.RagDataset) | repeated | List of datasets. |
 
 
 
 
 
 
-<a name="ondewo.nlu.DeleteAgentSessionsRequest"></a>
+<a name="ondewo.nlu.RagDeleteAgentRequest"></a>
 
-### DeleteAgentSessionsRequest
+### RagDeleteAgentRequest
+Request message for deleting a RAGFlow agent.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  | Required. The agent to delete the RAGFlow agent from. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| agent_id | [string](#string) |  | Required. ID of the RAGFlow agent to delete. Only the agent owner can delete the agent. |
+
+
+
+
+
+
+<a name="ondewo.nlu.RagDeleteAgentSessionsRequest"></a>
+
+### RagDeleteAgentSessionsRequest
 Request message for deleting agent sessions.
 
 
@@ -7562,9 +7620,9 @@ Request message for deleting agent sessions.
 
 
 
-<a name="ondewo.nlu.DeleteChatSessionsRequest"></a>
+<a name="ondewo.nlu.RagDeleteChatSessionsRequest"></a>
 
-### DeleteChatSessionsRequest
+### RagDeleteChatSessionsRequest
 Request message for deleting chat sessions.
 
 
@@ -7580,9 +7638,9 @@ Request message for deleting chat sessions.
 
 
 
-<a name="ondewo.nlu.DeleteChatsRequest"></a>
+<a name="ondewo.nlu.RagDeleteChatsRequest"></a>
 
-### DeleteChatsRequest
+### RagDeleteChatsRequest
 Request message for deleting chat assistants.
 
 
@@ -7597,9 +7655,9 @@ Request message for deleting chat assistants.
 
 
 
-<a name="ondewo.nlu.DeleteDatasetsRequest"></a>
+<a name="ondewo.nlu.RagDeleteDatasetsRequest"></a>
 
-### DeleteDatasetsRequest
+### RagDeleteDatasetsRequest
 Request message for deleting one or more datasets.
 
 
@@ -7614,9 +7672,9 @@ Request message for deleting one or more datasets.
 
 
 
-<a name="ondewo.nlu.DeleteDocumentsRequest"></a>
+<a name="ondewo.nlu.RagDeleteDocumentsRequest"></a>
 
-### DeleteDocumentsRequest
+### RagDeleteDocumentsRequest
 Request message for deleting one or more documents from a dataset.
 
 
@@ -7632,9 +7690,9 @@ Request message for deleting one or more documents from a dataset.
 
 
 
-<a name="ondewo.nlu.DeleteFilesRequest"></a>
+<a name="ondewo.nlu.RagDeleteFilesRequest"></a>
 
-### DeleteFilesRequest
+### RagDeleteFilesRequest
 Request message for deleting files or folders.
 
 
@@ -7648,9 +7706,9 @@ Request message for deleting files or folders.
 
 
 
-<a name="ondewo.nlu.DeleteKnowledgeGraphRequest"></a>
+<a name="ondewo.nlu.RagDeleteKnowledgeGraphRequest"></a>
 
-### DeleteKnowledgeGraphRequest
+### RagDeleteKnowledgeGraphRequest
 Request message for deleting a dataset's knowledge graph.
 
 
@@ -7664,25 +7722,9 @@ Request message for deleting a dataset's knowledge graph.
 
 
 
-<a name="ondewo.nlu.DeleteRagAgentRequest"></a>
+<a name="ondewo.nlu.RagDifyRecord"></a>
 
-### DeleteRagAgentRequest
-Request message for deleting a RAGFlow agent.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| parent | [string](#string) |  | Required. The agent to delete the RAGFlow agent from. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
-| agent_id | [string](#string) |  | Required. ID of the RAGFlow agent to delete. Only the agent owner can delete the agent. |
-
-
-
-
-
-
-<a name="ondewo.nlu.DifyRecord"></a>
-
-### DifyRecord
+### RagDifyRecord
 Individual record structure in Dify-compatible format representing a retrieved chunk.
 
 
@@ -7699,24 +7741,24 @@ Individual record structure in Dify-compatible format representing a retrieved c
 
 
 
-<a name="ondewo.nlu.DifyRecordList"></a>
+<a name="ondewo.nlu.RagDifyRecordList"></a>
 
-### DifyRecordList
+### RagDifyRecordList
 Response message containing a list of retrieved records in Dify-compatible format.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| records | [DifyRecord](#ondewo.nlu.DifyRecord) | repeated | List of retrieved records matching the query. |
+| records | [RagDifyRecord](#ondewo.nlu.RagDifyRecord) | repeated | List of retrieved records matching the query. |
 
 
 
 
 
 
-<a name="ondewo.nlu.DifyRetrievalRequest"></a>
+<a name="ondewo.nlu.RagDifyRetrievalRequest"></a>
 
-### DifyRetrievalRequest
+### RagDifyRetrievalRequest
 Request message for retrieving data from RAGFlow using Dify-compatible format.
 This provides compatibility with Dify's knowledge retrieval API structure.
 
@@ -7726,7 +7768,7 @@ This provides compatibility with Dify's knowledge retrieval API structure.
 | parent | [string](#string) |  | Required. The agent to retrieve data for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
 | knowledge_id | [string](#string) |  | Required. Dataset ID (called <code>knowledge_id</code> in Dify API format). This is the UUID of the dataset to search within. |
 | query | [string](#string) |  | Required. Search query string for retrieving relevant chunks. |
-| retrieval_setting | [DifyRetrievalSetting](#ondewo.nlu.DifyRetrievalSetting) |  | Optional. Retrieval configuration settings including score threshold and result limit. |
+| retrieval_setting | [RagDifyRetrievalSetting](#ondewo.nlu.RagDifyRetrievalSetting) |  | Optional. Retrieval configuration settings including score threshold and result limit. |
 | metadata_condition | [google.protobuf.Struct](#google.protobuf.Struct) |  | Optional. Metadata filter conditions to narrow down search results. Structure depends on your metadata schema. |
 | use_kg | [bool](#bool) | optional | Optional. Whether to use knowledge graph for enhanced retrieval. Knowledge graphs can improve context and relationships between entities. |
 | additional_fields | [google.protobuf.Struct](#google.protobuf.Struct) |  | Optional. Additional fields to pass through to RAGFlow. |
@@ -7736,9 +7778,9 @@ This provides compatibility with Dify's knowledge retrieval API structure.
 
 
 
-<a name="ondewo.nlu.DifyRetrievalSetting"></a>
+<a name="ondewo.nlu.RagDifyRetrievalSetting"></a>
 
-### DifyRetrievalSetting
+### RagDifyRetrievalSetting
 Configuration settings for Dify-compatible retrieval operations.
 
 
@@ -7753,9 +7795,9 @@ Configuration settings for Dify-compatible retrieval operations.
 
 
 
-<a name="ondewo.nlu.Document"></a>
+<a name="ondewo.nlu.RagDocument"></a>
 
-### Document
+### RagDocument
 Document uploaded to a dataset.
 
 
@@ -7768,10 +7810,10 @@ Document uploaded to a dataset.
 | size | [int64](#int64) |  | File size in bytes. |
 | chunk_count | [int32](#int32) |  | Number of chunks extracted from this document (initially <code>0</code> until parsed). |
 | token_count | [int32](#int32) |  | Number of tokens across all chunks in this document. |
-| chunk_method | [ChunkMethod](#ondewo.nlu.ChunkMethod) |  | Chunking method used for this document. |
-| parser_config | [ParserConfig](#ondewo.nlu.ParserConfig) |  | Parser configuration used for chunking this document. |
+| chunk_method | [RagChunkMethod](#ondewo.nlu.RagChunkMethod) |  | Chunking method used for this document. |
+| parser_config | [RagParserConfig](#ondewo.nlu.RagParserConfig) |  | Parser configuration used for chunking this document. |
 | source_type | [string](#string) |  | Source type indicating how the document was added (e.g., <code>"local"</code> for direct uploads, <code>"knowledgebase"</code> for file system imports). |
-| run | [DocumentStatus](#ondewo.nlu.DocumentStatus) |  | Document processing status. |
+| run | [RagDocumentStatus](#ondewo.nlu.RagDocumentStatus) |  | Document processing status. |
 | progress | [float](#float) |  | Processing progress as a decimal value between <code>0.0</code> (not started) and <code>1.0</code> (complete). |
 | progress_msg | [string](#string) |  | Human-readable progress message describing current processing state. |
 | process_duration | [float](#float) |  | Total processing duration in seconds. |
@@ -7792,24 +7834,24 @@ Document uploaded to a dataset.
 
 
 
-<a name="ondewo.nlu.DocumentList"></a>
+<a name="ondewo.nlu.RagDocumentList"></a>
 
-### DocumentList
+### RagDocumentList
 Response message containing a list of documents.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| documents | [Document](#ondewo.nlu.Document) | repeated | List of documents. |
+| documents | [RagDocument](#ondewo.nlu.RagDocument) | repeated | List of documents. |
 
 
 
 
 
 
-<a name="ondewo.nlu.DownloadDocumentRequest"></a>
+<a name="ondewo.nlu.RagDownloadDocumentRequest"></a>
 
-### DownloadDocumentRequest
+### RagDownloadDocumentRequest
 Request message for downloading the original document file.
 
 
@@ -7824,9 +7866,9 @@ Request message for downloading the original document file.
 
 
 
-<a name="ondewo.nlu.File"></a>
+<a name="ondewo.nlu.RagFile"></a>
 
-### File
+### RagFile
 File or folder in RAGFlow file system.
 
 
@@ -7850,9 +7892,9 @@ File or folder in RAGFlow file system.
 
 
 
-<a name="ondewo.nlu.FileChunk"></a>
+<a name="ondewo.nlu.RagFileChunk"></a>
 
-### FileChunk
+### RagFileChunk
 File chunk for streaming downloads.<br>
 First chunk contains metadata, subsequent chunks only contain data.
 
@@ -7860,16 +7902,16 @@ First chunk contains metadata, subsequent chunks only contain data.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | data | [bytes](#bytes) |  | Chunk of file content. |
-| metadata | [FileMetadata](#ondewo.nlu.FileMetadata) |  | File metadata (only in first chunk). |
+| metadata | [RagFileMetadata](#ondewo.nlu.RagFileMetadata) |  | File metadata (only in first chunk). |
 
 
 
 
 
 
-<a name="ondewo.nlu.FileID"></a>
+<a name="ondewo.nlu.RagFileID"></a>
 
-### FileID
+### RagFileID
 Deprecated: Use GetParentFolderRequest, GetAllParentFoldersRequest, or GetFileRequest instead.
 
 
@@ -7882,24 +7924,24 @@ Deprecated: Use GetParentFolderRequest, GetAllParentFoldersRequest, or GetFileRe
 
 
 
-<a name="ondewo.nlu.FileList"></a>
+<a name="ondewo.nlu.RagFileList"></a>
 
-### FileList
+### RagFileList
 Response message containing a list of files.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| files | [File](#ondewo.nlu.File) | repeated | Uploaded files. RAGFlow automatically creates intermediate folders as needed during upload. |
+| files | [RagFile](#ondewo.nlu.RagFile) | repeated | Uploaded files. RAGFlow automatically creates intermediate folders as needed during upload. |
 
 
 
 
 
 
-<a name="ondewo.nlu.FileMetadata"></a>
+<a name="ondewo.nlu.RagFileMetadata"></a>
 
-### FileMetadata
+### RagFileMetadata
 File metadata for streaming uploads/downloads.
 
 
@@ -7914,9 +7956,9 @@ File metadata for streaming uploads/downloads.
 
 
 
-<a name="ondewo.nlu.FileToDocument"></a>
+<a name="ondewo.nlu.RagFileToDocument"></a>
 
-### FileToDocument
+### RagFileToDocument
 Association between a file and a document in a dataset.
 Tracks the relationship when files are converted to documents for use in RAG operations.
 
@@ -7937,24 +7979,24 @@ Tracks the relationship when files are converted to documents for use in RAG ope
 
 
 
-<a name="ondewo.nlu.FileToDocumentList"></a>
+<a name="ondewo.nlu.RagFileToDocumentList"></a>
 
-### FileToDocumentList
+### RagFileToDocumentList
 Response message containing a list of file-to-document associations.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| filesToDocuments | [FileToDocument](#ondewo.nlu.FileToDocument) | repeated | List of file-to-document associations created during the conversion operation. |
+| filesToDocuments | [RagFileToDocument](#ondewo.nlu.RagFileToDocument) | repeated | List of file-to-document associations created during the conversion operation. |
 
 
 
 
 
 
-<a name="ondewo.nlu.FileToDocumentRequest"></a>
+<a name="ondewo.nlu.RagFileToDocumentRequest"></a>
 
-### FileToDocumentRequest
+### RagFileToDocumentRequest
 Request message for converting files to documents and linking them to datasets.
 RAGFlow allows linking uploaded files to multiple target datasets for RAG operations.
 
@@ -7971,9 +8013,9 @@ RAGFlow allows linking uploaded files to multiple target datasets for RAG operat
 
 
 
-<a name="ondewo.nlu.GetAllParentFoldersRequest"></a>
+<a name="ondewo.nlu.RagGetAllParentFoldersRequest"></a>
 
-### GetAllParentFoldersRequest
+### RagGetAllParentFoldersRequest
 Request message for getting all parent folders in the hierarchy.
 
 
@@ -7987,24 +8029,24 @@ Request message for getting all parent folders in the hierarchy.
 
 
 
-<a name="ondewo.nlu.GetAllParentFoldersResponse"></a>
+<a name="ondewo.nlu.RagGetAllParentFoldersResponse"></a>
 
-### GetAllParentFoldersResponse
+### RagGetAllParentFoldersResponse
 Response message for getting all parent folders in the hierarchy.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| parent_folders | [File](#ondewo.nlu.File) | repeated | All parent folders in the hierarchy, from immediate parent to root folder. |
+| parent_folders | [RagFile](#ondewo.nlu.RagFile) | repeated | All parent folders in the hierarchy, from immediate parent to root folder. |
 
 
 
 
 
 
-<a name="ondewo.nlu.GetFileRequest"></a>
+<a name="ondewo.nlu.RagGetFileRequest"></a>
 
-### GetFileRequest
+### RagGetFileRequest
 Request message for getting file details.
 
 
@@ -8018,9 +8060,9 @@ Request message for getting file details.
 
 
 
-<a name="ondewo.nlu.GetKnowledgeGraphRequest"></a>
+<a name="ondewo.nlu.RagGetKnowledgeGraphRequest"></a>
 
-### GetKnowledgeGraphRequest
+### RagGetKnowledgeGraphRequest
 Request message for getting a dataset's knowledge graph.
 
 
@@ -8034,9 +8076,9 @@ Request message for getting a dataset's knowledge graph.
 
 
 
-<a name="ondewo.nlu.GetKnowledgeGraphResponse"></a>
+<a name="ondewo.nlu.RagGetKnowledgeGraphResponse"></a>
 
-### GetKnowledgeGraphResponse
+### RagGetKnowledgeGraphResponse
 Response message for getting a dataset's knowledge graph.
 
 
@@ -8051,9 +8093,9 @@ Response message for getting a dataset's knowledge graph.
 
 
 
-<a name="ondewo.nlu.GetParentFolderRequest"></a>
+<a name="ondewo.nlu.RagGetParentFolderRequest"></a>
 
-### GetParentFolderRequest
+### RagGetParentFolderRequest
 Request message for getting the parent folder of a file.
 
 
@@ -8067,24 +8109,24 @@ Request message for getting the parent folder of a file.
 
 
 
-<a name="ondewo.nlu.GetParentFolderResponse"></a>
+<a name="ondewo.nlu.RagGetParentFolderResponse"></a>
 
-### GetParentFolderResponse
+### RagGetParentFolderResponse
 Response message for getting the parent folder of a file.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| parent_folder | [File](#ondewo.nlu.File) |  | The immediate parent folder of the requested file. |
+| parent_folder | [RagFile](#ondewo.nlu.RagFile) |  | The immediate parent folder of the requested file. |
 
 
 
 
 
 
-<a name="ondewo.nlu.GetRootFolderRequest"></a>
+<a name="ondewo.nlu.RagGetRootFolderRequest"></a>
 
-### GetRootFolderRequest
+### RagGetRootFolderRequest
 Request message for getting the root folder of the project
 
 
@@ -8097,24 +8139,24 @@ Request message for getting the root folder of the project
 
 
 
-<a name="ondewo.nlu.GetRootFolderResponse"></a>
+<a name="ondewo.nlu.RagGetRootFolderResponse"></a>
 
-### GetRootFolderResponse
+### RagGetRootFolderResponse
 Response message for getting the root folder.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| root_folder | [File](#ondewo.nlu.File) |  | The root folder of the file system. |
+| root_folder | [RagFile](#ondewo.nlu.RagFile) |  | The root folder of the file system. |
 
 
 
 
 
 
-<a name="ondewo.nlu.LLMSetting"></a>
+<a name="ondewo.nlu.RagLLMSetting"></a>
 
-### LLMSetting
+### RagLLMSetting
 LLM configuration for chat assistant.
 
 
@@ -8132,9 +8174,9 @@ LLM configuration for chat assistant.
 
 
 
-<a name="ondewo.nlu.ListAgentSessionsRequest"></a>
+<a name="ondewo.nlu.RagListAgentSessionsRequest"></a>
 
-### ListAgentSessionsRequest
+### RagListAgentSessionsRequest
 Request message for listing agent sessions.
 
 
@@ -8142,7 +8184,7 @@ Request message for listing agent sessions.
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The agent to list agent sessions from. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
 | agent_id | [string](#string) |  | Required. RAGFlow agent UUID. |
-| pagination | [Pagination](#ondewo.nlu.Pagination) |  | Optional. Pagination parameters for paging through results. |
+| pagination | [RagPagination](#ondewo.nlu.RagPagination) |  | Optional. Pagination parameters for paging through results. |
 | orderby | [string](#string) |  | Sort field (default: <code>"update_time"</code>). |
 | desc | [bool](#bool) | optional | Optional. Sort in descending order (default: <code>true</code>). |
 | id | [string](#string) |  | Optional. Filter by session UUID. |
@@ -8155,9 +8197,30 @@ Request message for listing agent sessions.
 
 
 
-<a name="ondewo.nlu.ListChatSessionsRequest"></a>
+<a name="ondewo.nlu.RagListAgentsRequest"></a>
 
-### ListChatSessionsRequest
+### RagListAgentsRequest
+Request message for listing RAGFlow agents.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  | Required. The agent to list RAGFlow agents from. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| pagination | [RagPagination](#ondewo.nlu.RagPagination) |  | Optional. Pagination parameters to control the number and offset of results. |
+| title | [string](#string) |  | Optional. Filter results by agent title. Only agents with matching titles will be returned. |
+| orderby | [string](#string) |  | Optional. Sort field for ordering results. Default: <code>"update_time"</code>. |
+| desc | [bool](#bool) | optional | Optional. Sort in descending order. If <code>true</code>, results are sorted from highest to lowest. Default: <code>true</code>. |
+| id | [string](#string) |  | Optional. Filter results by specific agent ID. |
+| additional_fields | [google.protobuf.Struct](#google.protobuf.Struct) |  | Optional. Additional fields to pass through to RAGFlow API. |
+
+
+
+
+
+
+<a name="ondewo.nlu.RagListChatSessionsRequest"></a>
+
+### RagListChatSessionsRequest
 Request message for listing chat sessions.
 
 
@@ -8165,7 +8228,7 @@ Request message for listing chat sessions.
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The agent to list chat sessions from. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
 | chat_id | [string](#string) |  | Required. Chat assistant UUID. |
-| pagination | [Pagination](#ondewo.nlu.Pagination) |  | Optional. Pagination parameters for paging through results. |
+| pagination | [RagPagination](#ondewo.nlu.RagPagination) |  | Optional. Pagination parameters for paging through results. |
 | orderby | [string](#string) |  | Sort field (default: <code>"create_time"</code>). |
 | desc | [bool](#bool) | optional | Optional. Sort in descending order (default: <code>true</code>). |
 | name | [string](#string) |  | Optional. Filter by session name. |
@@ -8178,16 +8241,16 @@ Request message for listing chat sessions.
 
 
 
-<a name="ondewo.nlu.ListChatsRequest"></a>
+<a name="ondewo.nlu.RagListChatsRequest"></a>
 
-### ListChatsRequest
+### RagListChatsRequest
 Request message for listing chat assistants.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The agent to list chat assistants from. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
-| pagination | [Pagination](#ondewo.nlu.Pagination) |  | Optional. Pagination parameters for paging through results. |
+| pagination | [RagPagination](#ondewo.nlu.RagPagination) |  | Optional. Pagination parameters for paging through results. |
 | id | [string](#string) |  | Optional. Filter by chat assistant UUID. |
 | name | [string](#string) |  | Optional. Filter by chat assistant name. |
 | orderby | [string](#string) |  | Sort field (default: <code>"create_time"</code>). |
@@ -8199,9 +8262,9 @@ Request message for listing chat assistants.
 
 
 
-<a name="ondewo.nlu.ListChunksRequest"></a>
+<a name="ondewo.nlu.RagListChunksRequest"></a>
 
-### ListChunksRequest
+### RagListChunksRequest
 Request message for listing chunks of a document with pagination.
 
 
@@ -8210,7 +8273,7 @@ Request message for listing chunks of a document with pagination.
 | parent | [string](#string) |  | Required. The agent to list chunks from. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
 | dataset_id | [string](#string) |  | Required. Dataset ID containing the document. |
 | document_id | [string](#string) |  | Required. Document ID to list chunks from. |
-| pagination | [Pagination](#ondewo.nlu.Pagination) |  | Optional. Pagination parameters. |
+| pagination | [RagPagination](#ondewo.nlu.RagPagination) |  | Optional. Pagination parameters. |
 | keywords | [string](#string) |  | Optional. Search keywords to filter chunks (supports content highlighting in results). |
 | id | [string](#string) |  | Optional. Filter by specific chunk ID. |
 | additional_fields | [google.protobuf.Struct](#google.protobuf.Struct) |  | Optional. Additional fields to pass through to RAGFlow. |
@@ -8220,33 +8283,33 @@ Request message for listing chunks of a document with pagination.
 
 
 
-<a name="ondewo.nlu.ListChunksResponse"></a>
+<a name="ondewo.nlu.RagListChunksResponse"></a>
 
-### ListChunksResponse
+### RagListChunksResponse
 Response message for listing chunks.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | total | [int32](#int32) |  | Total number of chunks matching the filter criteria (not limited by pagination). |
-| chunks | [Chunk](#ondewo.nlu.Chunk) | repeated | List of chunks for the current page. |
-| doc | [Document](#ondewo.nlu.Document) |  | Document details for the parent document. |
+| chunks | [RagChunk](#ondewo.nlu.RagChunk) | repeated | List of chunks for the current page. |
+| doc | [RagDocument](#ondewo.nlu.RagDocument) |  | Document details for the parent document. |
 
 
 
 
 
 
-<a name="ondewo.nlu.ListDatasetsRequest"></a>
+<a name="ondewo.nlu.RagListDatasetsRequest"></a>
 
-### ListDatasetsRequest
+### RagListDatasetsRequest
 Request message for listing datasets with pagination and filtering.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The agent to list all datasets from. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
-| pagination | [Pagination](#ondewo.nlu.Pagination) |  | Optional. Pagination parameters. |
+| pagination | [RagPagination](#ondewo.nlu.RagPagination) |  | Optional. Pagination parameters. |
 | id | [string](#string) |  | Optional. Filter by dataset ID. |
 | name | [string](#string) |  | Optional. Filter by dataset name. |
 | orderby | [string](#string) |  | Optional. Sort field (default: <code>create_time</code>). |
@@ -8258,9 +8321,9 @@ Request message for listing datasets with pagination and filtering.
 
 
 
-<a name="ondewo.nlu.ListDocumentsRequest"></a>
+<a name="ondewo.nlu.RagListDocumentsRequest"></a>
 
-### ListDocumentsRequest
+### RagListDocumentsRequest
 Request message for listing documents in a dataset with pagination and filtering.
 
 
@@ -8268,7 +8331,7 @@ Request message for listing documents in a dataset with pagination and filtering
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The agent to list documents from. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
 | dataset_id | [string](#string) |  | Required. Dataset ID to list documents from. |
-| pagination | [Pagination](#ondewo.nlu.Pagination) |  | Optional. Pagination parameters. |
+| pagination | [RagPagination](#ondewo.nlu.RagPagination) |  | Optional. Pagination parameters. |
 | id | [string](#string) |  | Optional. Filter by specific document ID. |
 | name | [string](#string) |  | Optional. Filter by document name (exact match). |
 | keywords | [string](#string) |  | Optional. Search keywords to filter documents (searches in document name and metadata). |
@@ -8283,25 +8346,25 @@ Request message for listing documents in a dataset with pagination and filtering
 
 
 
-<a name="ondewo.nlu.ListDocumentsResponse"></a>
+<a name="ondewo.nlu.RagListDocumentsResponse"></a>
 
-### ListDocumentsResponse
+### RagListDocumentsResponse
 Response message for listing documents.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | total | [int32](#int32) |  | Total number of documents matching the filter criteria (not limited by pagination). |
-| docs | [Document](#ondewo.nlu.Document) | repeated | List of documents for the current page. |
+| docs | [RagDocument](#ondewo.nlu.RagDocument) | repeated | List of documents for the current page. |
 
 
 
 
 
 
-<a name="ondewo.nlu.ListFilesRequest"></a>
+<a name="ondewo.nlu.RagListFilesRequest"></a>
 
-### ListFilesRequest
+### RagListFilesRequest
 Request message for listing files and folders.
 
 
@@ -8309,7 +8372,7 @@ Request message for listing files and folders.
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The agent to list files from. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
 | parent_id | [string](#string) |  | Optional. Folder ID to list contents from. If not provided, lists root directory contents. |
-| pagination | [Pagination](#ondewo.nlu.Pagination) |  | Optional. Pagination parameters. Default page size is 15 items per page. |
+| pagination | [RagPagination](#ondewo.nlu.RagPagination) |  | Optional. Pagination parameters. Default page size is 15 items per page. |
 | keywords | [string](#string) |  | Optional. Search keywords to filter files by name or other searchable attributes. |
 | orderby | [string](#string) |  | Optional. Field to sort results by. Common values include <code>"create_time"</code> (default) and <code>"update_time"</code>. |
 | desc | [bool](#bool) | optional | Optional. Sort in descending order. Default is <code>true</code> (newest first). |
@@ -8320,53 +8383,32 @@ Request message for listing files and folders.
 
 
 
-<a name="ondewo.nlu.ListFilesResponse"></a>
+<a name="ondewo.nlu.RagListFilesResponse"></a>
 
-### ListFilesResponse
+### RagListFilesResponse
 Response message for listing files and folders.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | total | [int32](#int32) |  | Total number of files and folders matching the query (before pagination). |
-| files | [File](#ondewo.nlu.File) | repeated | List of files and folders in the current page. |
-| parent_folder | [File](#ondewo.nlu.File) |  | Information about the parent folder being listed. |
+| files | [RagFile](#ondewo.nlu.RagFile) | repeated | List of files and folders in the current page. |
+| parent_folder | [RagFile](#ondewo.nlu.RagFile) |  | Information about the parent folder being listed. |
 
 
 
 
 
 
-<a name="ondewo.nlu.ListRagAgentsRequest"></a>
+<a name="ondewo.nlu.RagMessage"></a>
 
-### ListRagAgentsRequest
-Request message for listing RAGFlow agents.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| parent | [string](#string) |  | Required. The agent to list RAGFlow agents from. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
-| pagination | [Pagination](#ondewo.nlu.Pagination) |  | Optional. Pagination parameters to control the number and offset of results. |
-| title | [string](#string) |  | Optional. Filter results by agent title. Only agents with matching titles will be returned. |
-| orderby | [string](#string) |  | Optional. Sort field for ordering results. Default: <code>"update_time"</code>. |
-| desc | [bool](#bool) | optional | Optional. Sort in descending order. If <code>true</code>, results are sorted from highest to lowest. Default: <code>true</code>. |
-| id | [string](#string) |  | Optional. Filter results by specific agent ID. |
-| additional_fields | [google.protobuf.Struct](#google.protobuf.Struct) |  | Optional. Additional fields to pass through to RAGFlow API. |
-
-
-
-
-
-
-<a name="ondewo.nlu.Message"></a>
-
-### Message
+### RagMessage
 Message in a conversation session.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| role | [MessageRole](#ondewo.nlu.MessageRole) |  | Role of the message sender. |
+| role | [RagMessageRole](#ondewo.nlu.RagMessageRole) |  | Role of the message sender. |
 | content | [string](#string) |  | Message content text. |
 
 
@@ -8374,9 +8416,9 @@ Message in a conversation session.
 
 
 
-<a name="ondewo.nlu.MoveFileRequest"></a>
+<a name="ondewo.nlu.RagMoveFileRequest"></a>
 
-### MoveFileRequest
+### RagMoveFileRequest
 Request message for moving files or folders.
 
 
@@ -8391,9 +8433,9 @@ Request message for moving files or folders.
 
 
 
-<a name="ondewo.nlu.OpenAIAgentCompletionRequest"></a>
+<a name="ondewo.nlu.RagOpenAiAgentCompletionRequest"></a>
 
-### OpenAIAgentCompletionRequest
+### RagOpenAiAgentCompletionRequest
 Request message for OpenAI-compatible agent completion.
 Follows OpenAI Chat Completions API format. All string fields must remain as strings to maintain OpenAI API compatibility.
 Agents are workflow-based AI assistants with Domain Specific Language (DSL) configuration.
@@ -8404,7 +8446,7 @@ Agents are workflow-based AI assistants with Domain Specific Language (DSL) conf
 | parent | [string](#string) |  | Required. The agent to generate the completion for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
 | agent_id | [string](#string) |  | Required. RAGFlow agent ID to use for generating the completion. |
 | model | [string](#string) |  | Required. Model identifier. Required for OpenAI API compatibility but value is typically ignored by RAGFlow. |
-| messages | [Message](#ondewo.nlu.Message) | repeated | Required. Conversation history as an array of messages. Only user and assistant role messages are processed; system messages are filtered out. |
+| messages | [RagMessage](#ondewo.nlu.RagMessage) | repeated | Required. Conversation history as an array of messages. Only user and assistant role messages are processed; system messages are filtered out. |
 | stream | [bool](#bool) | optional | Optional. Enable streaming mode. If <code>true</code>, the response will be streamed as Server-Sent Events (SSE). Default: <code>true</code>. |
 | session_id | [string](#string) |  | Optional. Session ID to continue an existing conversation. Can alternatively be passed in <code>additional_fields.metadata.id</code>. |
 | id | [string](#string) |  | Optional. Custom identifier field for the request. |
@@ -8415,9 +8457,9 @@ Agents are workflow-based AI assistants with Domain Specific Language (DSL) conf
 
 
 
-<a name="ondewo.nlu.OpenAIChatChoice"></a>
+<a name="ondewo.nlu.RagOpenAiChatChoice"></a>
 
-### OpenAIChatChoice
+### RagOpenAiChatChoice
 Choice in OpenAI-compatible chat completion response.
 Follows OpenAI Chat Completions API format.
 
@@ -8425,8 +8467,8 @@ Follows OpenAI Chat Completions API format.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | index | [int32](#int32) |  | Choice index in the array. Zero-based. |
-| message | [OpenAIChatContent](#ondewo.nlu.OpenAIChatContent) |  | Non-streaming: Complete message with full content. |
-| delta | [OpenAIChatContent](#ondewo.nlu.OpenAIChatContent) |  | Streaming: Incremental delta containing partial content. |
+| message | [RagOpenAiChatContent](#ondewo.nlu.RagOpenAiChatContent) |  | Non-streaming: Complete message with full content. |
+| delta | [RagOpenAiChatContent](#ondewo.nlu.RagOpenAiChatContent) |  | Streaming: Incremental delta containing partial content. |
 | finish_reason | [string](#string) |  | Reason why the completion finished. Common values include <code>"stop"</code> (natural completion), <code>"length"</code> (max tokens reached). Only present in the final chunk for streaming mode or in the single response for non-streaming mode. This field must remain a string for OpenAI API compatibility. |
 | logprobs | [google.protobuf.Value](#google.protobuf.Value) |  | Log probabilities for the generated tokens. Usually <code>null</code>. |
 | additional_fields | [google.protobuf.Struct](#google.protobuf.Struct) |  | Additional fields returned by RAGFlow API. |
@@ -8436,9 +8478,9 @@ Follows OpenAI Chat Completions API format.
 
 
 
-<a name="ondewo.nlu.OpenAIChatCompletionRequest"></a>
+<a name="ondewo.nlu.RagOpenAiChatCompletionRequest"></a>
 
-### OpenAIChatCompletionRequest
+### RagOpenAiChatCompletionRequest
 Request message for OpenAI-compatible chat completion.
 Follows OpenAI Chat Completions API format. All string fields must remain as strings to maintain OpenAI API compatibility.
 
@@ -8448,7 +8490,7 @@ Follows OpenAI Chat Completions API format. All string fields must remain as str
 | parent | [string](#string) |  | Required. The agent to generate the chat completion for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
 | chat_id | [string](#string) |  | Required. Chat assistant ID to use for generating the completion. |
 | model | [string](#string) |  | Required. Model identifier. Required for OpenAI API compatibility but value is typically ignored by RAGFlow. |
-| messages | [Message](#ondewo.nlu.Message) | repeated | Required. Conversation history as an array of messages with roles (system, user, assistant). |
+| messages | [RagMessage](#ondewo.nlu.RagMessage) | repeated | Required. Conversation history as an array of messages with roles (system, user, assistant). |
 | stream | [bool](#bool) | optional | Optional. Enable streaming mode. If <code>true</code>, the response will be streamed as Server-Sent Events (SSE). Default: <code>true</code>. |
 | reference | [bool](#bool) | optional | Optional. Include source references in the response. If <code>true</code>, the <code>reference</code> field will be populated in the last message. Default: <code>false</code>. |
 | additional_fields | [google.protobuf.Struct](#google.protobuf.Struct) |  | Optional. Additional fields to pass through to RAGFlow API (e.g., <code>temperature</code>, <code>max_tokens</code>). |
@@ -8458,9 +8500,9 @@ Follows OpenAI Chat Completions API format. All string fields must remain as str
 
 
 
-<a name="ondewo.nlu.OpenAIChatCompletionResponse"></a>
+<a name="ondewo.nlu.RagOpenAiChatCompletionResponse"></a>
 
-### OpenAIChatCompletionResponse
+### RagOpenAiChatCompletionResponse
 Response message for OpenAI-compatible chat completion.
 Follows OpenAI Chat Completions API format. All string fields must remain as strings to maintain OpenAI API compatibility.
 <ul>
@@ -8476,8 +8518,8 @@ Follows OpenAI Chat Completions API format. All string fields must remain as str
 | created | [int64](#int64) |  | Creation timestamp (Unix timestamp in seconds). |
 | model | [string](#string) |  | Model name used for completion. |
 | system_fingerprint | [string](#string) |  | System fingerprint for backend configuration. Usually empty string. |
-| choices | [OpenAIChatChoice](#ondewo.nlu.OpenAIChatChoice) | repeated | Array of generated choices. Typically contains one choice. |
-| usage | [OpenAIChatUsage](#ondewo.nlu.OpenAIChatUsage) |  | Token usage statistics. Only populated in the final chunk for streaming mode or in the single response for non-streaming mode. |
+| choices | [RagOpenAiChatChoice](#ondewo.nlu.RagOpenAiChatChoice) | repeated | Array of generated choices. Typically contains one choice. |
+| usage | [RagOpenAiChatUsage](#ondewo.nlu.RagOpenAiChatUsage) |  | Token usage statistics. Only populated in the final chunk for streaming mode or in the single response for non-streaming mode. |
 | additional_fields | [google.protobuf.Struct](#google.protobuf.Struct) |  | Additional fields returned by RAGFlow API. |
 
 
@@ -8485,9 +8527,9 @@ Follows OpenAI Chat Completions API format. All string fields must remain as str
 
 
 
-<a name="ondewo.nlu.OpenAIChatContent"></a>
+<a name="ondewo.nlu.RagOpenAiChatContent"></a>
 
-### OpenAIChatContent
+### RagOpenAiChatContent
 Message or delta content in OpenAI-compatible response.
 Follows OpenAI Chat Completions API format.
 <ul>
@@ -8512,9 +8554,9 @@ Follows OpenAI Chat Completions API format.
 
 
 
-<a name="ondewo.nlu.OpenAIChatUsage"></a>
+<a name="ondewo.nlu.RagOpenAiChatUsage"></a>
 
-### OpenAIChatUsage
+### RagOpenAiChatUsage
 Token usage statistics in OpenAI format.
 Only populated in the final chunk for streaming mode or in the single response for non-streaming mode.
 
@@ -8531,9 +8573,9 @@ Only populated in the final chunk for streaming mode or in the single response f
 
 
 
-<a name="ondewo.nlu.Pagination"></a>
+<a name="ondewo.nlu.RagPagination"></a>
 
-### Pagination
+### RagPagination
 Pagination parameters for list requests.
 
 
@@ -8547,9 +8589,9 @@ Pagination parameters for list requests.
 
 
 
-<a name="ondewo.nlu.ParseDocumentsRequest"></a>
+<a name="ondewo.nlu.RagParseDocumentsRequest"></a>
 
-### ParseDocumentsRequest
+### RagParseDocumentsRequest
 Request message for starting document parsing.<br>
 Parsing extracts chunks from documents using the configured chunk method.
 
@@ -8565,9 +8607,9 @@ Parsing extracts chunks from documents using the configured chunk method.
 
 
 
-<a name="ondewo.nlu.ParserConfig"></a>
+<a name="ondewo.nlu.RagParserConfig"></a>
 
-### ParserConfig
+### RagParserConfig
 Document parser configuration.
 
 Used fields depend on the chunking method of the document.
@@ -8608,9 +8650,9 @@ Used fields depend on the chunking method of the document.
 
 
 
-<a name="ondewo.nlu.PartialSuccess"></a>
+<a name="ondewo.nlu.RagPartialSuccess"></a>
 
-### PartialSuccess
+### RagPartialSuccess
 On complete success: no fields set (empty message).
 On partial success/failure: both fields set.
 
@@ -8625,16 +8667,16 @@ On partial success/failure: both fields set.
 
 
 
-<a name="ondewo.nlu.PromptConfig"></a>
+<a name="ondewo.nlu.RagPromptConfig"></a>
 
-### PromptConfig
+### RagPromptConfig
 Prompt and retrieval configuration for chat assistant.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | prompt | [string](#string) |  | System prompt (RAGFlow provides default if not specified). |
-| variables | [PromptVariable](#ondewo.nlu.PromptVariable) | repeated | Prompt template variables for dynamic content insertion. |
+| variables | [RagPromptVariable](#ondewo.nlu.RagPromptVariable) | repeated | Prompt template variables for dynamic content insertion. |
 | opener | [string](#string) |  | Opening message displayed at conversation start. |
 | show_quote | [bool](#bool) | optional | Show quotations from retrieved source chunks in responses. |
 | empty_response | [string](#string) |  | Response to return when no relevant chunks are found in the knowledge base. |
@@ -8652,9 +8694,9 @@ Prompt and retrieval configuration for chat assistant.
 
 
 
-<a name="ondewo.nlu.PromptVariable"></a>
+<a name="ondewo.nlu.RagPromptVariable"></a>
 
-### PromptVariable
+### RagPromptVariable
 Prompt template variable for dynamic content insertion.
 
 
@@ -8668,51 +8710,9 @@ Prompt template variable for dynamic content insertion.
 
 
 
-<a name="ondewo.nlu.RagAgent"></a>
+<a name="ondewo.nlu.RagRelatedQuestionsRequest"></a>
 
-### RagAgent
-RAGFlow agent (workflow-based AI assistant).
-Agents are workflow-based AI assistants configured using Domain Specific Language (DSL).
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| id | [string](#string) |  | Agent UUID uniquely identifying this agent. |
-| title | [string](#string) |  | Agent title. Must be unique within the project. |
-| description | [string](#string) |  | Optional. Agent description providing details about the agent's purpose and functionality. |
-| avatar | [string](#string) |  | Optional. Base64-encoded avatar image for visual identification. |
-| dsl | [google.protobuf.Struct](#google.protobuf.Struct) |  | Domain Specific Language (DSL) configuration defining the agent's workflow, logic, and behavior. The DSL structure determines how the agent processes requests and generates responses. |
-| create_time | [int64](#int64) |  | Creation timestamp (Unix timestamp in milliseconds). |
-| create_date | [string](#string) |  | Creation date in ISO 8601 datetime format. |
-| update_time | [int64](#int64) |  | Last update timestamp (Unix timestamp in milliseconds). |
-| update_date | [string](#string) |  | Last update date in ISO 8601 datetime format. |
-| user_id | [string](#string) |  | User ID of the agent owner. |
-| canvas_type | [string](#string) |  | Canvas type for the agent's workflow visualization. |
-| additional_fields | [google.protobuf.Struct](#google.protobuf.Struct) |  | Additional fields returned by RAGFlow API. |
-
-
-
-
-
-
-<a name="ondewo.nlu.RagAgentList"></a>
-
-### RagAgentList
-Response message containing a list of RAGFlow agents.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| agents | [RagAgent](#ondewo.nlu.RagAgent) | repeated | List of RAGFlow agents owned by the user. Note: No pagination metadata is included in this response. |
-
-
-
-
-
-
-<a name="ondewo.nlu.RelatedQuestionsRequest"></a>
-
-### RelatedQuestionsRequest
+### RagRelatedQuestionsRequest
 Request message for generating related questions based on a user's query.
 This helps improve user experience by suggesting follow-up questions.
 
@@ -8729,9 +8729,9 @@ This helps improve user experience by suggesting follow-up questions.
 
 
 
-<a name="ondewo.nlu.RelatedQuestionsResponse"></a>
+<a name="ondewo.nlu.RagRelatedQuestionsResponse"></a>
 
-### RelatedQuestionsResponse
+### RagRelatedQuestionsResponse
 Response message containing a list of suggested related questions.
 
 
@@ -8744,9 +8744,9 @@ Response message containing a list of suggested related questions.
 
 
 
-<a name="ondewo.nlu.RemoveChunksRequest"></a>
+<a name="ondewo.nlu.RagRemoveChunksRequest"></a>
 
-### RemoveChunksRequest
+### RagRemoveChunksRequest
 Request message for removing one or more chunks from a document.
 
 
@@ -8762,9 +8762,9 @@ Request message for removing one or more chunks from a document.
 
 
 
-<a name="ondewo.nlu.RenameFileRequest"></a>
+<a name="ondewo.nlu.RagRenameFileRequest"></a>
 
-### RenameFileRequest
+### RagRenameFileRequest
 Request message for renaming a file or folder.
 
 
@@ -8779,9 +8779,9 @@ Request message for renaming a file or folder.
 
 
 
-<a name="ondewo.nlu.RetrievalRequest"></a>
+<a name="ondewo.nlu.RagRetrievalRequest"></a>
 
-### RetrievalRequest
+### RagRetrievalRequest
 Request message for retrieving chunks using vector similarity search.<br>
 Supports hybrid search combining vector similarity with keyword matching.
 
@@ -8789,7 +8789,7 @@ Supports hybrid search combining vector similarity with keyword matching.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The agent to retrieve chunks for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
-| pagination | [Pagination](#ondewo.nlu.Pagination) |  | Optional. Pagination parameters. |
+| pagination | [RagPagination](#ondewo.nlu.RagPagination) |  | Optional. Pagination parameters. |
 | dataset_ids | [string](#string) | repeated | Required. Dataset IDs to search (all datasets must use the same embedding model). |
 | question | [string](#string) |  | Required. Query string to search for. |
 | document_ids | [string](#string) | repeated | Optional. Filter by specific document IDs within the datasets. |
@@ -8809,15 +8809,15 @@ Supports hybrid search combining vector similarity with keyword matching.
 
 
 
-<a name="ondewo.nlu.RetrievalResponse"></a>
+<a name="ondewo.nlu.RagRetrievalResponse"></a>
 
-### RetrievalResponse
+### RagRetrievalResponse
 Response message for chunk retrieval.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| chunks | [Chunk](#ondewo.nlu.Chunk) | repeated | Retrieved chunks with similarity scores populated (ordered by relevance). |
+| chunks | [RagChunk](#ondewo.nlu.RagChunk) | repeated | Retrieved chunks with similarity scores populated (ordered by relevance). |
 | doc_aggs | [google.protobuf.Struct](#google.protobuf.Struct) | repeated | Document aggregations providing statistics about which documents matched. |
 | total | [int32](#int32) |  | Total number of chunks matching the query (not limited by pagination). |
 | additional_fields | [google.protobuf.Struct](#google.protobuf.Struct) |  | Additional fields returned by RAGFlow not explicitly defined above. |
@@ -8827,9 +8827,9 @@ Response message for chunk retrieval.
 
 
 
-<a name="ondewo.nlu.SearchbotAskRequest"></a>
+<a name="ondewo.nlu.RagSearchbotAskRequest"></a>
 
-### SearchbotAskRequest
+### RagSearchbotAskRequest
 Request message for asking questions using RAGFlow's search application.
 Search apps provide advanced retrieval with configurable settings.
 
@@ -8847,9 +8847,9 @@ Search apps provide advanced retrieval with configurable settings.
 
 
 
-<a name="ondewo.nlu.SearchbotDetailRequest"></a>
+<a name="ondewo.nlu.RagSearchbotDetailRequest"></a>
 
-### SearchbotDetailRequest
+### RagSearchbotDetailRequest
 Request message for retrieving detailed information about a search application.
 
 
@@ -8863,9 +8863,9 @@ Request message for retrieving detailed information about a search application.
 
 
 
-<a name="ondewo.nlu.SearchbotDetailResponse"></a>
+<a name="ondewo.nlu.RagSearchbotDetailResponse"></a>
 
-### SearchbotDetailResponse
+### RagSearchbotDetailResponse
 Response message containing detailed information about a search application.
 
 
@@ -8888,9 +8888,9 @@ Response message containing detailed information about a search application.
 
 
 
-<a name="ondewo.nlu.SearchbotMindmapRequest"></a>
+<a name="ondewo.nlu.RagSearchbotMindmapRequest"></a>
 
-### SearchbotMindmapRequest
+### RagSearchbotMindmapRequest
 Request message for generating a mindmap visualization from search results.
 Mindmaps organize retrieved information into hierarchical visual structures.
 
@@ -8908,9 +8908,9 @@ Mindmaps organize retrieved information into hierarchical visual structures.
 
 
 
-<a name="ondewo.nlu.SearchbotMindmapResponse"></a>
+<a name="ondewo.nlu.RagSearchbotMindmapResponse"></a>
 
-### SearchbotMindmapResponse
+### RagSearchbotMindmapResponse
 Response message containing the generated mindmap structure.
 
 
@@ -8923,9 +8923,9 @@ Response message containing the generated mindmap structure.
 
 
 
-<a name="ondewo.nlu.SearchbotRelatedQuestionsRequest"></a>
+<a name="ondewo.nlu.RagSearchbotRelatedQuestionsRequest"></a>
 
-### SearchbotRelatedQuestionsRequest
+### RagSearchbotRelatedQuestionsRequest
 Request message for generating related questions using a search application.
 Uses the search app's LLM configuration for question generation.
 
@@ -8942,9 +8942,9 @@ Uses the search app's LLM configuration for question generation.
 
 
 
-<a name="ondewo.nlu.SearchbotRetrievalRequest"></a>
+<a name="ondewo.nlu.RagSearchbotRetrievalRequest"></a>
 
-### SearchbotRetrievalRequest
+### RagSearchbotRetrievalRequest
 Request message for advanced search retrieval with extensive configuration options.
 Provides fine-grained control over the search and ranking process.
 
@@ -8973,15 +8973,15 @@ Provides fine-grained control over the search and ranking process.
 
 
 
-<a name="ondewo.nlu.SearchbotRetrievalResponse"></a>
+<a name="ondewo.nlu.RagSearchbotRetrievalResponse"></a>
 
-### SearchbotRetrievalResponse
+### RagSearchbotRetrievalResponse
 Response message containing search retrieval results with metadata.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| chunks | [Chunk](#ondewo.nlu.Chunk) | repeated | List of retrieved chunks with similarity scores and content. |
+| chunks | [RagChunk](#ondewo.nlu.RagChunk) | repeated | List of retrieved chunks with similarity scores and content. |
 | doc_aggs | [google.protobuf.Struct](#google.protobuf.Struct) | repeated | Document aggregations providing statistics per source document. Typically includes document IDs and match counts. |
 | total | [int32](#int32) |  | Total number of matching chunks across all pages. Used for pagination calculations. |
 | labels | [string](#string) | repeated | Extracted labels or categories from the results. |
@@ -8992,9 +8992,9 @@ Response message containing search retrieval results with metadata.
 
 
 
-<a name="ondewo.nlu.StopParsingRequest"></a>
+<a name="ondewo.nlu.RagStopParsingRequest"></a>
 
-### StopParsingRequest
+### RagStopParsingRequest
 Request message for stopping document parsing.<br>
 Only documents currently being processed can be stopped.
 
@@ -9010,9 +9010,29 @@ Only documents currently being processed can be stopped.
 
 
 
-<a name="ondewo.nlu.UpdateChatRequest"></a>
+<a name="ondewo.nlu.RagUpdateAgentRequest"></a>
 
-### UpdateChatRequest
+### RagUpdateAgentRequest
+Request message for updating an existing RAGFlow agent.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  | Required. The agent to update the RAGFlow agent for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| agent_id | [string](#string) |  | Required. ID of the RAGFlow agent to update. |
+| title | [string](#string) |  | Optional. New agent title. If provided, must be unique within the project. |
+| description | [string](#string) |  | Optional. New agent description. |
+| dsl | [google.protobuf.Struct](#google.protobuf.Struct) |  | Optional. New Domain Specific Language (DSL) configuration. A version snapshot is automatically created when the DSL is updated. Only the agent owner can update the DSL. |
+| additional_fields | [google.protobuf.Struct](#google.protobuf.Struct) |  | Optional. Additional fields to pass through to RAGFlow API. |
+
+
+
+
+
+
+<a name="ondewo.nlu.RagUpdateChatRequest"></a>
+
+### RagUpdateChatRequest
 Request message for updating an existing chat assistant.
 
 
@@ -9024,8 +9044,8 @@ Request message for updating an existing chat assistant.
 | description | [string](#string) |  | Optional. New description. |
 | avatar | [string](#string) |  | Optional. New base64-encoded avatar image. |
 | dataset_ids | [string](#string) | repeated | Optional. New dataset IDs (all datasets must have parsed files and use the same embedding model). |
-| llm | [LLMSetting](#ondewo.nlu.LLMSetting) |  | Optional. New LLM configuration settings (merged with existing configuration). |
-| prompt | [PromptConfig](#ondewo.nlu.PromptConfig) |  | Optional. New prompt configuration settings (merged with existing configuration). |
+| llm | [RagLLMSetting](#ondewo.nlu.RagLLMSetting) |  | Optional. New LLM configuration settings (merged with existing configuration). |
+| prompt | [RagPromptConfig](#ondewo.nlu.RagPromptConfig) |  | Optional. New prompt configuration settings (merged with existing configuration). |
 | additional_fields | [google.protobuf.Struct](#google.protobuf.Struct) |  | Optional. Additional fields to pass through to RAGFlow. |
 
 
@@ -9033,9 +9053,9 @@ Request message for updating an existing chat assistant.
 
 
 
-<a name="ondewo.nlu.UpdateChatSessionRequest"></a>
+<a name="ondewo.nlu.RagUpdateChatSessionRequest"></a>
 
-### UpdateChatSessionRequest
+### RagUpdateChatSessionRequest
 Request message for updating an existing chat session.
 
 
@@ -9053,9 +9073,9 @@ Request message for updating an existing chat session.
 
 
 
-<a name="ondewo.nlu.UpdateChunkRequest"></a>
+<a name="ondewo.nlu.RagUpdateChunkRequest"></a>
 
-### UpdateChunkRequest
+### RagUpdateChunkRequest
 Request message for updating an existing chunk's content and metadata.<br>
 Content changes trigger re-tokenization and re-generation of embeddings.
 
@@ -9077,9 +9097,9 @@ Content changes trigger re-tokenization and re-generation of embeddings.
 
 
 
-<a name="ondewo.nlu.UpdateDatasetRequest"></a>
+<a name="ondewo.nlu.RagUpdateDatasetRequest"></a>
 
-### UpdateDatasetRequest
+### RagUpdateDatasetRequest
 Request message for updating an existing dataset.
 
 
@@ -9090,9 +9110,9 @@ Request message for updating an existing dataset.
 | name | [string](#string) |  | Optional. New dataset name. |
 | description | [string](#string) |  | Optional. New dataset description. |
 | avatar | [string](#string) |  | Optional. New avatar image. |
-| permission | [Permission](#ondewo.nlu.Permission) |  | Optional. New access permission. |
-| chunk_method | [ChunkMethod](#ondewo.nlu.ChunkMethod) |  | Optional. New chunk method. |
-| parser_config | [ParserConfig](#ondewo.nlu.ParserConfig) |  | Optional. New parser config (deep merged with existing). |
+| permission | [RagPermission](#ondewo.nlu.RagPermission) |  | Optional. New access permission. |
+| chunk_method | [RagChunkMethod](#ondewo.nlu.RagChunkMethod) |  | Optional. New chunk method. |
+| parser_config | [RagParserConfig](#ondewo.nlu.RagParserConfig) |  | Optional. New parser config (deep merged with existing). |
 | embedding_model | [string](#string) |  | Optional. New embedding model (cannot change if chunk_count > 0). |
 | pagerank | [int32](#int32) |  | Optional. PageRank value (only for elasticsearch). |
 | additional_fields | [google.protobuf.Struct](#google.protobuf.Struct) |  | Optional. Additional fields to pass through to RAGFlow. |
@@ -9102,9 +9122,9 @@ Request message for updating an existing dataset.
 
 
 
-<a name="ondewo.nlu.UpdateDocumentRequest"></a>
+<a name="ondewo.nlu.RagUpdateDocumentRequest"></a>
 
-### UpdateDocumentRequest
+### RagUpdateDocumentRequest
 Request message for updating an existing document's metadata and configuration.
 
 
@@ -9114,8 +9134,8 @@ Request message for updating an existing document's metadata and configuration.
 | dataset_id | [string](#string) |  | Required. Dataset ID containing the document. |
 | document_id | [string](#string) |  | Required. Document ID to update. |
 | name | [string](#string) |  | Optional. New document name (file extension must remain the same). |
-| chunk_method | [ChunkMethod](#ondewo.nlu.ChunkMethod) |  | Optional. New chunking method (resets document to <code>UNSTART</code> status and deletes all existing chunks). |
-| parser_config | [ParserConfig](#ondewo.nlu.ParserConfig) |  | Optional. New parser configuration (deep merged with existing configuration). |
+| chunk_method | [RagChunkMethod](#ondewo.nlu.RagChunkMethod) |  | Optional. New chunking method (resets document to <code>UNSTART</code> status and deletes all existing chunks). |
+| parser_config | [RagParserConfig](#ondewo.nlu.RagParserConfig) |  | Optional. New parser configuration (deep merged with existing configuration). |
 | enabled | [bool](#bool) | optional | Optional. Document enabled/disabled status. |
 | meta_fields | [google.protobuf.Struct](#google.protobuf.Struct) |  | Optional. Custom metadata fields for document-specific metadata (replaces existing metadata). |
 | additional_fields | [google.protobuf.Struct](#google.protobuf.Struct) |  | Optional. Additional fields to pass through to RAGFlow. |
@@ -9125,29 +9145,9 @@ Request message for updating an existing document's metadata and configuration.
 
 
 
-<a name="ondewo.nlu.UpdateRagAgentRequest"></a>
+<a name="ondewo.nlu.RagUploadChunk"></a>
 
-### UpdateRagAgentRequest
-Request message for updating an existing RAGFlow agent.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| parent | [string](#string) |  | Required. The agent to update the RAGFlow agent for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
-| agent_id | [string](#string) |  | Required. ID of the RAGFlow agent to update. |
-| title | [string](#string) |  | Optional. New agent title. If provided, must be unique within the project. |
-| description | [string](#string) |  | Optional. New agent description. |
-| dsl | [google.protobuf.Struct](#google.protobuf.Struct) |  | Optional. New Domain Specific Language (DSL) configuration. A version snapshot is automatically created when the DSL is updated. Only the agent owner can update the DSL. |
-| additional_fields | [google.protobuf.Struct](#google.protobuf.Struct) |  | Optional. Additional fields to pass through to RAGFlow API. |
-
-
-
-
-
-
-<a name="ondewo.nlu.UploadChunk"></a>
-
-### UploadChunk
+### RagUploadChunk
 Upload chunk for streaming uploads.
 Used to stream file data after metadata is sent in first message.
 
@@ -9162,9 +9162,9 @@ Used to stream file data after metadata is sent in first message.
 
 
 
-<a name="ondewo.nlu.UploadDocumentsRequest"></a>
+<a name="ondewo.nlu.RagUploadDocumentsRequest"></a>
 
-### UploadDocumentsRequest
+### RagUploadDocumentsRequest
 Request message for uploading documents to a dataset.<br>
 Documents are uploaded via streaming multipart form data.
 
@@ -9172,33 +9172,33 @@ Documents are uploaded via streaming multipart form data.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The agent to upload documents for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
-| metadata | [UploadDocumentsRequest.Metadata](#ondewo.nlu.UploadDocumentsRequest.Metadata) |  | First message: declares all files to be uploaded. |
-| chunk | [UploadChunk](#ondewo.nlu.UploadChunk) |  | Subsequent messages: stream file data chunks. |
+| metadata | [RagUploadDocumentsRequest.RagMetadata](#ondewo.nlu.RagUploadDocumentsRequest.RagMetadata) |  | First message: declares all files to be uploaded. |
+| chunk | [RagUploadChunk](#ondewo.nlu.RagUploadChunk) |  | Subsequent messages: stream file data chunks. |
 
 
 
 
 
 
-<a name="ondewo.nlu.UploadDocumentsRequest.Metadata"></a>
+<a name="ondewo.nlu.RagUploadDocumentsRequest.RagMetadata"></a>
 
-### UploadDocumentsRequest.Metadata
+### RagUploadDocumentsRequest.RagMetadata
 Metadata for the upload (first message only).
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | dataset_id | [string](#string) |  | Required. Target dataset ID to upload documents to. |
-| files | [FileMetadata](#ondewo.nlu.FileMetadata) | repeated | Required. Metadata for all files being uploaded in this stream. |
+| files | [RagFileMetadata](#ondewo.nlu.RagFileMetadata) | repeated | Required. Metadata for all files being uploaded in this stream. |
 
 
 
 
 
 
-<a name="ondewo.nlu.UploadFilesRequest"></a>
+<a name="ondewo.nlu.RagUploadFilesRequest"></a>
 
-### UploadFilesRequest
+### RagUploadFilesRequest
 Request message for uploading files via streaming multipart form data.
 RAGFlow supports individual and bulk file uploads. Files can be uploaded to a specific folder
 or to the root directory if no parent folder is specified.
@@ -9207,24 +9207,24 @@ or to the root directory if no parent folder is specified.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The agent to upload files for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
-| metadata | [UploadFilesRequest.Metadata](#ondewo.nlu.UploadFilesRequest.Metadata) |  | First message: declares all files to be uploaded. |
-| chunk | [UploadChunk](#ondewo.nlu.UploadChunk) |  | Subsequent messages: stream file data in chunks. |
+| metadata | [RagUploadFilesRequest.RagMetadata](#ondewo.nlu.RagUploadFilesRequest.RagMetadata) |  | First message: declares all files to be uploaded. |
+| chunk | [RagUploadChunk](#ondewo.nlu.RagUploadChunk) |  | Subsequent messages: stream file data in chunks. |
 
 
 
 
 
 
-<a name="ondewo.nlu.UploadFilesRequest.Metadata"></a>
+<a name="ondewo.nlu.RagUploadFilesRequest.RagMetadata"></a>
 
-### UploadFilesRequest.Metadata
+### RagUploadFilesRequest.RagMetadata
 Metadata for the upload operation (must be sent in first message only).
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent_id | [string](#string) |  | Optional. Parent folder ID. If not provided, files will be uploaded to root directory. |
-| files | [FileMetadata](#ondewo.nlu.FileMetadata) | repeated | Required. Metadata for all files being uploaded in this request. |
+| files | [RagFileMetadata](#ondewo.nlu.RagFileMetadata) | repeated | Required. Metadata for all files being uploaded in this request. |
 
 
 
@@ -9233,9 +9233,9 @@ Metadata for the upload operation (must be sent in first message only).
  <!-- end messages -->
 
 
-<a name="ondewo.nlu.AgentEventType"></a>
+<a name="ondewo.nlu.RagAgentEventType"></a>
 
-### AgentEventType
+### RagAgentEventType
 Agent completion event type.
 
 | Name | Number | Description |
@@ -9245,9 +9245,9 @@ Agent completion event type.
 
 
 
-<a name="ondewo.nlu.ChunkMethod"></a>
+<a name="ondewo.nlu.RagChunkMethod"></a>
 
-### ChunkMethod
+### RagChunkMethod
 Chunking method for documents. See <a href="https://ragflow.io/docs/dev/configure_knowledge_base#select-chunking-method">https://ragflow.io/docs/dev/configure_knowledge_base#select-chunking-method</a> for details.
 
 | Name | Number | Description |
@@ -9267,9 +9267,9 @@ Chunking method for documents. See <a href="https://ragflow.io/docs/dev/configur
 
 
 
-<a name="ondewo.nlu.DocumentStatus"></a>
+<a name="ondewo.nlu.RagDocumentStatus"></a>
 
-### DocumentStatus
+### RagDocumentStatus
 Document processing status.
 
 | Name | Number | Description |
@@ -9282,9 +9282,9 @@ Document processing status.
 
 
 
-<a name="ondewo.nlu.MessageRole"></a>
+<a name="ondewo.nlu.RagMessageRole"></a>
 
-### MessageRole
+### RagMessageRole
 Role of message sender in conversation.
 
 | Name | Number | Description |
@@ -9295,9 +9295,9 @@ Role of message sender in conversation.
 
 
 
-<a name="ondewo.nlu.Permission"></a>
+<a name="ondewo.nlu.RagPermission"></a>
 
-### Permission
+### RagPermission
 Access permissions for a dataset
 
 | Name | Number | Description |
@@ -9319,66 +9319,66 @@ Covers all entpoints of the <a href="https://github.com/ondewo/ragflow">RAGFlow<
 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
-| CreateDataset | [CreateDatasetRequest](#ondewo.nlu.CreateDatasetRequest) | [Dataset](#ondewo.nlu.Dataset) | Create a new dataset (knowledge base).<br> Uses tenant's default embedding model if not specified. |
-| UpdateDataset | [UpdateDatasetRequest](#ondewo.nlu.UpdateDatasetRequest) | [Dataset](#ondewo.nlu.Dataset) | Update an existing dataset's configuration.<br> Cannot change embedding_model if dataset has chunks. |
-| DeleteDatasets | [DeleteDatasetsRequest](#ondewo.nlu.DeleteDatasetsRequest) | [PartialSuccess](#ondewo.nlu.PartialSuccess) | Delete one or more datasets (batch operation).<br> If ids is null or empty, deletes all user's datasets.<br> Deletes all associated documents, files, and chunks. |
-| ListDatasets | [ListDatasetsRequest](#ondewo.nlu.ListDatasetsRequest) | [DatasetList](#ondewo.nlu.DatasetList) | List datasets with pagination and filtering.<br> Returns datasets from all tenants the user has access to. |
-| GetKnowledgeGraph | [GetKnowledgeGraphRequest](#ondewo.nlu.GetKnowledgeGraphRequest) | [GetKnowledgeGraphResponse](#ondewo.nlu.GetKnowledgeGraphResponse) | Get the knowledge graph for a dataset.<br> Returns graph structure with nodes (max 256) and edges (max 128). |
-| DeleteKnowledgeGraph | [DeleteKnowledgeGraphRequest](#ondewo.nlu.DeleteKnowledgeGraphRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Delete the knowledge graph for a dataset.<br> Deletes graph-related chunks but not the dataset itself. |
-| UploadDocuments | [UploadDocumentsRequest](#ondewo.nlu.UploadDocumentsRequest) stream | [DocumentList](#ondewo.nlu.DocumentList) | Upload one or more documents to a dataset.<br> Documents start in UNSTART state and must be parsed. |
-| UpdateDocument | [UpdateDocumentRequest](#ondewo.nlu.UpdateDocumentRequest) | [Document](#ondewo.nlu.Document) | Update document metadata and configuration.<br> Changing chunk_method resets document to UNSTART and deletes chunks. |
-| DownloadDocument | [DownloadDocumentRequest](#ondewo.nlu.DownloadDocumentRequest) | [FileChunk](#ondewo.nlu.FileChunk) stream | Download the original document file.<br> Returns binary file stream from storage.<br> First chunk contains metadata, subsequent chunks only contain data. |
-| ListDocuments | [ListDocumentsRequest](#ondewo.nlu.ListDocumentsRequest) | [ListDocumentsResponse](#ondewo.nlu.ListDocumentsResponse) | List documents in a dataset with pagination and filtering.<br> Supports time range filtering and keyword search. |
-| DeleteDocuments | [DeleteDocumentsRequest](#ondewo.nlu.DeleteDocumentsRequest) | [PartialSuccess](#ondewo.nlu.PartialSuccess) | Delete one or more documents from a dataset (batch operation).<br> If ids empty, deletes all documents. Removes chunks and storage files. |
-| ParseDocuments | [ParseDocumentsRequest](#ondewo.nlu.ParseDocumentsRequest) | [PartialSuccess](#ondewo.nlu.PartialSuccess) | Start parsing documents into chunks.<br> Cannot parse documents currently being processed (0 < progress < 1).<br> Queues documents for background processing. |
-| StopParsing | [StopParsingRequest](#ondewo.nlu.StopParsingRequest) | [PartialSuccess](#ondewo.nlu.PartialSuccess) | Stop parsing documents.<br> Can only stop documents with progress between 0 and 1. |
-| ListChunks | [ListChunksRequest](#ondewo.nlu.ListChunksRequest) | [ListChunksResponse](#ondewo.nlu.ListChunksResponse) | List chunks of a document with pagination.<br> Supports keyword search with content highlighting. |
-| AddChunk | [AddChunkRequest](#ondewo.nlu.AddChunkRequest) | [AddChunkResponse](#ondewo.nlu.AddChunkResponse) | Manually add a chunk to a document.<br> Automatically tokenizes content and generates embeddings. |
-| RemoveChunks | [RemoveChunksRequest](#ondewo.nlu.RemoveChunksRequest) | [PartialSuccess](#ondewo.nlu.PartialSuccess) | Remove one or more chunks from a document.<br> If chunk_ids empty, removes all chunks from document. |
-| UpdateChunk | [UpdateChunkRequest](#ondewo.nlu.UpdateChunkRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Update an existing chunk's content and metadata.<br> Re-tokenizes content and re-generates embeddings if content changed. |
-| Retrieval | [RetrievalRequest](#ondewo.nlu.RetrievalRequest) | [RetrievalResponse](#ondewo.nlu.RetrievalResponse) | Retrieve chunks using vector similarity search.<br> All datasets must use the same embedding model.<br> Supports reranking, metadata filtering, and knowledge graph retrieval. |
-| CreateChat | [CreateChatRequest](#ondewo.nlu.CreateChatRequest) | [Chat](#ondewo.nlu.Chat) | Create a new chat assistant.<br> All datasets must have parsed files (chunk_num > 0).<br> All datasets must use the same embedding model. |
-| UpdateChat | [UpdateChatRequest](#ondewo.nlu.UpdateChatRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Update an existing chat assistant's configuration.<br> LLM and prompt configs are merged with existing values. |
-| DeleteChats | [DeleteChatsRequest](#ondewo.nlu.DeleteChatsRequest) | [PartialSuccess](#ondewo.nlu.PartialSuccess) | Delete one or more chat assistants (batch operation).<br> If ids empty, deletes all user's chats (soft delete). |
-| ListChats | [ListChatsRequest](#ondewo.nlu.ListChatsRequest) | [ChatList](#ondewo.nlu.ChatList) | List chat assistants with pagination.<br> Returns full dataset objects (not just IDs). |
-| CreateChatSession | [CreateChatSessionRequest](#ondewo.nlu.CreateChatSessionRequest) | [ChatSession](#ondewo.nlu.ChatSession) | Create a new chat session (conversation).<br> Session initialized with assistant's prologue message. |
-| CreateAgentSession | [CreateAgentSessionRequest](#ondewo.nlu.CreateAgentSessionRequest) | [AgentSession](#ondewo.nlu.AgentSession) | Create a new agent session.<br> Initializes Canvas with agent's DSL configuration. |
-| UpdateChatSession | [UpdateChatSessionRequest](#ondewo.nlu.UpdateChatSessionRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Update a chat session's metadata (name only).<br> Cannot update message or reference fields. |
-| ListChatSessions | [ListChatSessionsRequest](#ondewo.nlu.ListChatSessionsRequest) | [ChatSessionList](#ondewo.nlu.ChatSessionList) | List sessions for a chat assistant.<br> Returns message history with embedded chunk references. |
-| ListAgentSessions | [ListAgentSessionsRequest](#ondewo.nlu.ListAgentSessionsRequest) | [AgentSessionList](#ondewo.nlu.AgentSessionList) | List sessions for an agent.<br> Can optionally exclude DSL from response for performance. |
-| DeleteChatSessions | [DeleteChatSessionsRequest](#ondewo.nlu.DeleteChatSessionsRequest) | [PartialSuccess](#ondewo.nlu.PartialSuccess) | Delete one or more chat sessions (batch operation).<br> If ids empty, deletes all sessions for the chat (hard delete). |
-| DeleteAgentSessions | [DeleteAgentSessionsRequest](#ondewo.nlu.DeleteAgentSessionsRequest) | [PartialSuccess](#ondewo.nlu.PartialSuccess) | Delete one or more agent sessions (batch operation).<br> If ids empty, deletes all sessions for the agent (hard delete). |
-| ChatCompletion | [ChatCompletionRequest](#ondewo.nlu.ChatCompletionRequest) | [ChatCompletionResponse](#ondewo.nlu.ChatCompletionResponse) stream | Generate chat completion with RAG (server streaming).<br> Creates new session if session_id not provided. |
-| OpenAIChatCompletion | [OpenAIChatCompletionRequest](#ondewo.nlu.OpenAIChatCompletionRequest) | [OpenAIChatCompletionResponse](#ondewo.nlu.OpenAIChatCompletionResponse) stream | OpenAI-compatible chat completion endpoint (server streaming).<br> Compatible with OpenAI Python client.<br> Supports reasoning content in <think> tags. |
-| AgentCompletion | [AgentCompletionRequest](#ondewo.nlu.AgentCompletionRequest) | [AgentCompletionResponse](#ondewo.nlu.AgentCompletionResponse) stream | Generate agent completion (server streaming).<br> Filters events to only return message-related events. |
-| OpenAIAgentCompletion | [OpenAIAgentCompletionRequest](#ondewo.nlu.OpenAIAgentCompletionRequest) | [OpenAIChatCompletionResponse](#ondewo.nlu.OpenAIChatCompletionResponse) stream | OpenAI-compatible agent completion endpoint (server streaming).<br> Uses tiktoken for token counting. |
-| CreateAgent | [CreateRagAgentRequest](#ondewo.nlu.CreateRagAgentRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Create a new agent with DSL configuration.<br> Title must be unique for the user. |
-| UpdateAgent | [UpdateRagAgentRequest](#ondewo.nlu.UpdateRagAgentRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Update an existing agent.<br> DSL updates create new version snapshot. Only owner can update. |
-| DeleteAgent | [DeleteRagAgentRequest](#ondewo.nlu.DeleteRagAgentRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Delete an agent (hard delete).<br> Only owner can delete. |
-| ListAgents | [ListRagAgentsRequest](#ondewo.nlu.ListRagAgentsRequest) | [RagAgentList](#ondewo.nlu.RagAgentList) | List agents with pagination.<br> Only returns user's own agents. |
-| UploadFiles | [UploadFilesRequest](#ondewo.nlu.UploadFilesRequest) stream | [FileList](#ondewo.nlu.FileList) | Upload one or more files via multipart form data.<br> Supports nested folder paths in filename.<br> Auto-creates intermediate folders. |
-| CreateFile | [CreateFileRequest](#ondewo.nlu.CreateFileRequest) | [File](#ondewo.nlu.File) | Create a new folder.<br> Duplicate names in same folder not allowed. |
-| ListFiles | [ListFilesRequest](#ondewo.nlu.ListFilesRequest) | [ListFilesResponse](#ondewo.nlu.ListFilesResponse) | List files in a folder with pagination.<br> Supports keyword search. Auto-initializes knowledgebase docs folder. |
-| GetRootFolder | [GetRootFolderRequest](#ondewo.nlu.GetRootFolderRequest) | [GetRootFolderResponse](#ondewo.nlu.GetRootFolderResponse) | Get user's root folder information.<br> Each tenant has a unique root folder. |
-| GetParentFolder | [GetParentFolderRequest](#ondewo.nlu.GetParentFolderRequest) | [GetParentFolderResponse](#ondewo.nlu.GetParentFolderResponse) | Get the parent folder of a file.<br> Returns 404 if file or parent not found. |
-| GetAllParentFolders | [GetAllParentFoldersRequest](#ondewo.nlu.GetAllParentFoldersRequest) | [GetAllParentFoldersResponse](#ondewo.nlu.GetAllParentFoldersResponse) | Get all parent folders (breadcrumb path) of a file.<br> Returns array from file itself to root (includes the file, ordered deepest to root). |
-| DeleteFiles | [DeleteFilesRequest](#ondewo.nlu.DeleteFilesRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Delete one or more files/folders (hard delete).<br> Recursively deletes folder contents. Removes from storage. |
-| RenameFile | [RenameFileRequest](#ondewo.nlu.RenameFileRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Rename a file or folder.<br> Cannot change file extension. Duplicate names not allowed. |
-| GetFile | [GetFileRequest](#ondewo.nlu.GetFileRequest) | [FileChunk](#ondewo.nlu.FileChunk) stream | Download a file.<br> Retrieves from MinIO/S3 storage.<br> First chunk contains metadata, subsequent chunks only contain data. |
-| MoveFile | [MoveFileRequest](#ondewo.nlu.MoveFileRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Move one or more files to another folder.<br> Validates all files and destination exist. |
-| FileToDocument | [FileToDocumentRequest](#ondewo.nlu.FileToDocumentRequest) | [FileToDocumentList](#ondewo.nlu.FileToDocumentList) | Convert files to documents and add to datasets.<br> Handles folders recursively (converts all inner files).<br> Links files to multiple datasets if multiple dataset_ids provided. |
-| DifyRetrieval | [DifyRetrievalRequest](#ondewo.nlu.DifyRetrievalRequest) | [DifyRecordList](#ondewo.nlu.DifyRecordList) | Retrieve chunks in Dify-compatible format.<br> Uses API key authentication (not Bearer token). |
-| Ask | [AskRequest](#ondewo.nlu.AskRequest) | [AskResponse](#ondewo.nlu.AskResponse) stream | Ask a question across datasets without a chat assistant.<br> Streaming only. All datasets must have parsed files. |
-| RelatedQuestions | [RelatedQuestionsRequest](#ondewo.nlu.RelatedQuestionsRequest) | [RelatedQuestionsResponse](#ondewo.nlu.RelatedQuestionsResponse) | Generate related search terms for a question.<br> Returns 5-10 suggestions considering industry context. |
-| ChatbotCompletion | [ChatbotCompletionRequest](#ondewo.nlu.ChatbotCompletionRequest) | [ChatCompletionResponse](#ondewo.nlu.ChatCompletionResponse) stream | Chat completion for iframe/embedded chatbot (server streaming).<br> Uses API key from APIToken table. |
-| ChatbotInfo | [ChatbotInfoRequest](#ondewo.nlu.ChatbotInfoRequest) | [ChatbotInfoResponse](#ondewo.nlu.ChatbotInfoResponse) | Get chatbot information for embedded UI initialization.<br> Returns title, avatar, and prologue. |
-| AgentbotCompletion | [AgentbotCompletionRequest](#ondewo.nlu.AgentbotCompletionRequest) | [AgentCompletionResponse](#ondewo.nlu.AgentCompletionResponse) stream | Agent completion for iframe/embedded agentbot (server streaming).<br> Uses API key authentication. |
-| AgentbotInputs | [AgentbotInputsRequest](#ondewo.nlu.AgentbotInputsRequest) | [AgentbotInputsResponse](#ondewo.nlu.AgentbotInputsResponse) | Get agent input form configuration for embedded UI.<br> Returns input schema from "begin" component in DSL. |
-| SearchbotAsk | [SearchbotAskRequest](#ondewo.nlu.SearchbotAskRequest) | [AskResponse](#ondewo.nlu.AskResponse) stream | Ask question in searchbot with search app configuration.<br> Uses search app config if provided. |
-| SearchbotRetrieval | [SearchbotRetrievalRequest](#ondewo.nlu.SearchbotRetrievalRequest) | [SearchbotRetrievalResponse](#ondewo.nlu.SearchbotRetrievalResponse) | Test retrieval with searchbot configuration.<br> Supports search app configuration with auto metadata filtering. |
-| SearchbotRelatedQuestions | [SearchbotRelatedQuestionsRequest](#ondewo.nlu.SearchbotRelatedQuestionsRequest) | [RelatedQuestionsResponse](#ondewo.nlu.RelatedQuestionsResponse) | Generate related questions for searchbot.<br> Uses search app LLM config if available. |
-| SearchbotDetail | [SearchbotDetailRequest](#ondewo.nlu.SearchbotDetailRequest) | [SearchbotDetailResponse](#ondewo.nlu.SearchbotDetailResponse) | Get search app configuration details.<br> Requires user to have access to search app. |
-| SearchbotMindmap | [SearchbotMindmapRequest](#ondewo.nlu.SearchbotMindmapRequest) | [.google.protobuf.Struct](#google.protobuf.Struct) | Generate mindmap for a question.<br> Uses search app config if provided. |
+| RagCreateDataset | [RagCreateDatasetRequest](#ondewo.nlu.RagCreateDatasetRequest) | [RagDataset](#ondewo.nlu.RagDataset) | Create a new dataset (knowledge base).<br> Uses tenant's default embedding model if not specified. |
+| RagUpdateDataset | [RagUpdateDatasetRequest](#ondewo.nlu.RagUpdateDatasetRequest) | [RagDataset](#ondewo.nlu.RagDataset) | Update an existing dataset's configuration.<br> Cannot change embedding_model if dataset has chunks. |
+| RagDeleteDatasets | [RagDeleteDatasetsRequest](#ondewo.nlu.RagDeleteDatasetsRequest) | [RagPartialSuccess](#ondewo.nlu.RagPartialSuccess) | Delete one or more datasets (batch operation).<br> If ids is null or empty, deletes all user's datasets.<br> Deletes all associated documents, files, and chunks. |
+| RagListDatasets | [RagListDatasetsRequest](#ondewo.nlu.RagListDatasetsRequest) | [RagDatasetList](#ondewo.nlu.RagDatasetList) | List datasets with pagination and filtering.<br> Returns datasets from all tenants the user has access to. |
+| RagGetKnowledgeGraph | [RagGetKnowledgeGraphRequest](#ondewo.nlu.RagGetKnowledgeGraphRequest) | [RagGetKnowledgeGraphResponse](#ondewo.nlu.RagGetKnowledgeGraphResponse) | Get the knowledge graph for a dataset.<br> Returns graph structure with nodes (max 256) and edges (max 128). |
+| RagDeleteKnowledgeGraph | [RagDeleteKnowledgeGraphRequest](#ondewo.nlu.RagDeleteKnowledgeGraphRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Delete the knowledge graph for a dataset.<br> Deletes graph-related chunks but not the dataset itself. |
+| RagUploadDocuments | [RagUploadDocumentsRequest](#ondewo.nlu.RagUploadDocumentsRequest) stream | [RagDocumentList](#ondewo.nlu.RagDocumentList) | Upload one or more documents to a dataset.<br> Documents start in UNSTART state and must be parsed. |
+| RagUpdateDocument | [RagUpdateDocumentRequest](#ondewo.nlu.RagUpdateDocumentRequest) | [RagDocument](#ondewo.nlu.RagDocument) | Update document metadata and configuration.<br> Changing chunk_method resets document to UNSTART and deletes chunks. |
+| RagDownloadDocument | [RagDownloadDocumentRequest](#ondewo.nlu.RagDownloadDocumentRequest) | [RagFileChunk](#ondewo.nlu.RagFileChunk) stream | Download the original document file.<br> Returns binary file stream from storage.<br> First chunk contains metadata, subsequent chunks only contain data. |
+| RagListDocuments | [RagListDocumentsRequest](#ondewo.nlu.RagListDocumentsRequest) | [RagListDocumentsResponse](#ondewo.nlu.RagListDocumentsResponse) | List documents in a dataset with pagination and filtering.<br> Supports time range filtering and keyword search. |
+| RagDeleteDocuments | [RagDeleteDocumentsRequest](#ondewo.nlu.RagDeleteDocumentsRequest) | [RagPartialSuccess](#ondewo.nlu.RagPartialSuccess) | Delete one or more documents from a dataset (batch operation).<br> If ids empty, deletes all documents. Removes chunks and storage files. |
+| RagParseDocuments | [RagParseDocumentsRequest](#ondewo.nlu.RagParseDocumentsRequest) | [RagPartialSuccess](#ondewo.nlu.RagPartialSuccess) | Start parsing documents into chunks.<br> Cannot parse documents currently being processed (0 < progress < 1).<br> Queues documents for background processing. |
+| RagStopParsing | [RagStopParsingRequest](#ondewo.nlu.RagStopParsingRequest) | [RagPartialSuccess](#ondewo.nlu.RagPartialSuccess) | Stop parsing documents.<br> Can only stop documents with progress between 0 and 1. |
+| RagListChunks | [RagListChunksRequest](#ondewo.nlu.RagListChunksRequest) | [RagListChunksResponse](#ondewo.nlu.RagListChunksResponse) | List chunks of a document with pagination.<br> Supports keyword search with content highlighting. |
+| RagAddChunk | [RagAddChunkRequest](#ondewo.nlu.RagAddChunkRequest) | [RagAddChunkResponse](#ondewo.nlu.RagAddChunkResponse) | Manually add a chunk to a document.<br> Automatically tokenizes content and generates embeddings. |
+| RagRemoveChunks | [RagRemoveChunksRequest](#ondewo.nlu.RagRemoveChunksRequest) | [RagPartialSuccess](#ondewo.nlu.RagPartialSuccess) | Remove one or more chunks from a document.<br> If chunk_ids empty, removes all chunks from document. |
+| RagUpdateChunk | [RagUpdateChunkRequest](#ondewo.nlu.RagUpdateChunkRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Update an existing chunk's content and metadata.<br> Re-tokenizes content and re-generates embeddings if content changed. |
+| RagRetrieval | [RagRetrievalRequest](#ondewo.nlu.RagRetrievalRequest) | [RagRetrievalResponse](#ondewo.nlu.RagRetrievalResponse) | Retrieve chunks using vector similarity search.<br> All datasets must use the same embedding model.<br> Supports reranking, metadata filtering, and knowledge graph retrieval. |
+| RagCreateChat | [RagCreateChatRequest](#ondewo.nlu.RagCreateChatRequest) | [RagChat](#ondewo.nlu.RagChat) | Create a new chat assistant.<br> All datasets must have parsed files (chunk_num > 0).<br> All datasets must use the same embedding model. |
+| RagUpdateChat | [RagUpdateChatRequest](#ondewo.nlu.RagUpdateChatRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Update an existing chat assistant's configuration.<br> LLM and prompt configs are merged with existing values. |
+| RagDeleteChats | [RagDeleteChatsRequest](#ondewo.nlu.RagDeleteChatsRequest) | [RagPartialSuccess](#ondewo.nlu.RagPartialSuccess) | Delete one or more chat assistants (batch operation).<br> If ids empty, deletes all user's chats (soft delete). |
+| RagListChats | [RagListChatsRequest](#ondewo.nlu.RagListChatsRequest) | [RagChatList](#ondewo.nlu.RagChatList) | List chat assistants with pagination.<br> Returns full dataset objects (not just IDs). |
+| RagCreateChatSession | [RagCreateChatSessionRequest](#ondewo.nlu.RagCreateChatSessionRequest) | [RagChatSession](#ondewo.nlu.RagChatSession) | Create a new chat session (conversation).<br> Session initialized with assistant's prologue message. |
+| RagCreateAgentSession | [RagCreateAgentSessionRequest](#ondewo.nlu.RagCreateAgentSessionRequest) | [RagAgentSession](#ondewo.nlu.RagAgentSession) | Create a new agent session.<br> Initializes Canvas with agent's DSL configuration. |
+| RagUpdateChatSession | [RagUpdateChatSessionRequest](#ondewo.nlu.RagUpdateChatSessionRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Update a chat session's metadata (name only).<br> Cannot update message or reference fields. |
+| RagListChatSessions | [RagListChatSessionsRequest](#ondewo.nlu.RagListChatSessionsRequest) | [RagChatSessionList](#ondewo.nlu.RagChatSessionList) | List sessions for a chat assistant.<br> Returns message history with embedded chunk references. |
+| RagListAgentSessions | [RagListAgentSessionsRequest](#ondewo.nlu.RagListAgentSessionsRequest) | [RagAgentSessionList](#ondewo.nlu.RagAgentSessionList) | List sessions for an agent.<br> Can optionally exclude DSL from response for performance. |
+| RagDeleteChatSessions | [RagDeleteChatSessionsRequest](#ondewo.nlu.RagDeleteChatSessionsRequest) | [RagPartialSuccess](#ondewo.nlu.RagPartialSuccess) | Delete one or more chat sessions (batch operation).<br> If ids empty, deletes all sessions for the chat (hard delete). |
+| RagDeleteAgentSessions | [RagDeleteAgentSessionsRequest](#ondewo.nlu.RagDeleteAgentSessionsRequest) | [RagPartialSuccess](#ondewo.nlu.RagPartialSuccess) | Delete one or more agent sessions (batch operation).<br> If ids empty, deletes all sessions for the agent (hard delete). |
+| RagChatCompletion | [RagChatCompletionRequest](#ondewo.nlu.RagChatCompletionRequest) | [RagChatCompletionResponse](#ondewo.nlu.RagChatCompletionResponse) stream | Generate chat completion with RAG (server streaming).<br> Creates new session if session_id not provided. |
+| RagOpenAiChatCompletion | [RagOpenAiChatCompletionRequest](#ondewo.nlu.RagOpenAiChatCompletionRequest) | [RagOpenAiChatCompletionResponse](#ondewo.nlu.RagOpenAiChatCompletionResponse) stream | OpenAI-compatible chat completion endpoint (server streaming).<br> Compatible with OpenAI Python client.<br> Supports reasoning content in <think> tags. |
+| RagAgentCompletion | [RagAgentCompletionRequest](#ondewo.nlu.RagAgentCompletionRequest) | [RagAgentCompletionResponse](#ondewo.nlu.RagAgentCompletionResponse) stream | Generate agent completion (server streaming).<br> Filters events to only return message-related events. |
+| RagOpenAiAgentCompletion | [RagOpenAiAgentCompletionRequest](#ondewo.nlu.RagOpenAiAgentCompletionRequest) | [RagOpenAiChatCompletionResponse](#ondewo.nlu.RagOpenAiChatCompletionResponse) stream | OpenAI-compatible agent completion endpoint (server streaming).<br> Uses tiktoken for token counting. |
+| RagCreateAgent | [RagCreateAgentRequest](#ondewo.nlu.RagCreateAgentRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Create a new agent with DSL configuration.<br> Title must be unique for the user. |
+| RagUpdateAgent | [RagUpdateAgentRequest](#ondewo.nlu.RagUpdateAgentRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Update an existing agent.<br> DSL updates create new version snapshot. Only owner can update. |
+| RagDeleteAgent | [RagDeleteAgentRequest](#ondewo.nlu.RagDeleteAgentRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Delete an agent (hard delete).<br> Only owner can delete. |
+| RagListAgents | [RagListAgentsRequest](#ondewo.nlu.RagListAgentsRequest) | [RagAgentList](#ondewo.nlu.RagAgentList) | List agents with pagination.<br> Only returns user's own agents. |
+| RagUploadFiles | [RagUploadFilesRequest](#ondewo.nlu.RagUploadFilesRequest) stream | [RagFileList](#ondewo.nlu.RagFileList) | Upload one or more files via multipart form data.<br> Supports nested folder paths in filename.<br> Auto-creates intermediate folders. |
+| RagCreateFile | [RagCreateFileRequest](#ondewo.nlu.RagCreateFileRequest) | [RagFile](#ondewo.nlu.RagFile) | Create a new folder.<br> Duplicate names in same folder not allowed. |
+| RagListFiles | [RagListFilesRequest](#ondewo.nlu.RagListFilesRequest) | [RagListFilesResponse](#ondewo.nlu.RagListFilesResponse) | List files in a folder with pagination.<br> Supports keyword search. Auto-initializes knowledgebase docs folder. |
+| RagGetRootFolder | [RagGetRootFolderRequest](#ondewo.nlu.RagGetRootFolderRequest) | [RagGetRootFolderResponse](#ondewo.nlu.RagGetRootFolderResponse) | Get user's root folder information.<br> Each tenant has a unique root folder. |
+| RagGetParentFolder | [RagGetParentFolderRequest](#ondewo.nlu.RagGetParentFolderRequest) | [RagGetParentFolderResponse](#ondewo.nlu.RagGetParentFolderResponse) | Get the parent folder of a file.<br> Returns 404 if file or parent not found. |
+| RagGetAllParentFolders | [RagGetAllParentFoldersRequest](#ondewo.nlu.RagGetAllParentFoldersRequest) | [RagGetAllParentFoldersResponse](#ondewo.nlu.RagGetAllParentFoldersResponse) | Get all parent folders (breadcrumb path) of a file.<br> Returns array from file itself to root (includes the file, ordered deepest to root). |
+| RagDeleteFiles | [RagDeleteFilesRequest](#ondewo.nlu.RagDeleteFilesRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Delete one or more files/folders (hard delete).<br> Recursively deletes folder contents. Removes from storage. |
+| RagRenameFile | [RagRenameFileRequest](#ondewo.nlu.RagRenameFileRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Rename a file or folder.<br> Cannot change file extension. Duplicate names not allowed. |
+| RagGetFile | [RagGetFileRequest](#ondewo.nlu.RagGetFileRequest) | [RagFileChunk](#ondewo.nlu.RagFileChunk) stream | Download a file.<br> Retrieves from MinIO/S3 storage.<br> First chunk contains metadata, subsequent chunks only contain data. |
+| RagMoveFile | [RagMoveFileRequest](#ondewo.nlu.RagMoveFileRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Move one or more files to another folder.<br> Validates all files and destination exist. |
+| RagFileToDocument | [RagFileToDocumentRequest](#ondewo.nlu.RagFileToDocumentRequest) | [RagFileToDocumentList](#ondewo.nlu.RagFileToDocumentList) | Convert files to documents and add to datasets.<br> Handles folders recursively (converts all inner files).<br> Links files to multiple datasets if multiple dataset_ids provided. |
+| RagDifyRetrieval | [RagDifyRetrievalRequest](#ondewo.nlu.RagDifyRetrievalRequest) | [RagDifyRecordList](#ondewo.nlu.RagDifyRecordList) | Retrieve chunks in Dify-compatible format.<br> Uses API key authentication (not Bearer token). |
+| RagAsk | [RagAskRequest](#ondewo.nlu.RagAskRequest) | [RagAskResponse](#ondewo.nlu.RagAskResponse) stream | Ask a question across datasets without a chat assistant.<br> Streaming only. All datasets must have parsed files. |
+| RagRelatedQuestions | [RagRelatedQuestionsRequest](#ondewo.nlu.RagRelatedQuestionsRequest) | [RagRelatedQuestionsResponse](#ondewo.nlu.RagRelatedQuestionsResponse) | Generate related search terms for a question.<br> Returns 5-10 suggestions considering industry context. |
+| RagChatbotCompletion | [RagChatbotCompletionRequest](#ondewo.nlu.RagChatbotCompletionRequest) | [RagChatCompletionResponse](#ondewo.nlu.RagChatCompletionResponse) stream | Chat completion for iframe/embedded chatbot (server streaming).<br> Uses API key from APIToken table. |
+| RagChatbotInfo | [RagChatbotInfoRequest](#ondewo.nlu.RagChatbotInfoRequest) | [RagChatbotInfoResponse](#ondewo.nlu.RagChatbotInfoResponse) | Get chatbot information for embedded UI initialization.<br> Returns title, avatar, and prologue. |
+| RagAgentbotCompletion | [RagAgentbotCompletionRequest](#ondewo.nlu.RagAgentbotCompletionRequest) | [RagAgentCompletionResponse](#ondewo.nlu.RagAgentCompletionResponse) stream | Agent completion for iframe/embedded agentbot (server streaming).<br> Uses API key authentication. |
+| RagAgentbotInputs | [RagAgentbotInputsRequest](#ondewo.nlu.RagAgentbotInputsRequest) | [RagAgentbotInputsResponse](#ondewo.nlu.RagAgentbotInputsResponse) | Get agent input form configuration for embedded UI.<br> Returns input schema from "begin" component in DSL. |
+| RagSearchbotAsk | [RagSearchbotAskRequest](#ondewo.nlu.RagSearchbotAskRequest) | [RagAskResponse](#ondewo.nlu.RagAskResponse) stream | Ask question in searchbot with search app configuration.<br> Uses search app config if provided. |
+| RagSearchbotRetrieval | [RagSearchbotRetrievalRequest](#ondewo.nlu.RagSearchbotRetrievalRequest) | [RagSearchbotRetrievalResponse](#ondewo.nlu.RagSearchbotRetrievalResponse) | Test retrieval with searchbot configuration.<br> Supports search app configuration with auto metadata filtering. |
+| RagSearchbotRelatedQuestions | [RagSearchbotRelatedQuestionsRequest](#ondewo.nlu.RagSearchbotRelatedQuestionsRequest) | [RagRelatedQuestionsResponse](#ondewo.nlu.RagRelatedQuestionsResponse) | Generate related questions for searchbot.<br> Uses search app LLM config if available. |
+| RagSearchbotDetail | [RagSearchbotDetailRequest](#ondewo.nlu.RagSearchbotDetailRequest) | [RagSearchbotDetailResponse](#ondewo.nlu.RagSearchbotDetailResponse) | Get search app configuration details.<br> Requires user to have access to search app. |
+| RagSearchbotMindmap | [RagSearchbotMindmapRequest](#ondewo.nlu.RagSearchbotMindmapRequest) | [.google.protobuf.Struct](#google.protobuf.Struct) | Generate mindmap for a question.<br> Uses search app config if provided. |
 
  <!-- end services -->
 
