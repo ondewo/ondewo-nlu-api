@@ -21573,7 +21573,7 @@ Default: <code>true</code>. </p></td>
                   <td>source</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>TODO: Document this field - session source returned by RAGFlow API. </p></td>
+                  <td><p>Session source. </p></td>
                 </tr>
               
                 <tr>
@@ -21664,8 +21664,7 @@ Default: <code>true</code>. </p></td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Required. The agent to generate agentbot completion for.
-Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-TODO: Verify exact resource path format for RAG operations. </p></td>
+Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 </tr>
               
                 <tr>
@@ -21728,8 +21727,7 @@ Agents maintain session state for multi-turn interactions. </p></td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Required. The agent to get agentbot input configuration for.
-Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-TODO: Verify exact resource path format for RAG operations. </p></td>
+Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 </tr>
               
                 <tr>
@@ -21789,8 +21787,7 @@ Each struct defines form fields that users must provide before starting interact
                   <td>mode</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Agent operational mode.
-TODO: Document possible mode values and their meanings. </p></td>
+                  <td><p>Agent operational mode. </p></td>
                 </tr>
               
             </tbody>
@@ -21815,8 +21812,7 @@ TODO: Document possible mode values and their meanings. </p></td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Required. The agent to ask the question for.
-Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-TODO: Verify exact resource path format for RAG operations. </p></td>
+Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 </tr>
               
                 <tr>
@@ -21986,28 +21982,28 @@ Typically includes chunk information, document titles, and similarity scores. </
                   <td>do_refer</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>TODO: Document this field - reference mode setting returned by RAGFlow API. </p></td>
+                  <td><p>Whether to insert reference index into answer. <code>"1"</code> yes, <code>"0"</code> no </p></td>
                 </tr>
               
                 <tr>
                   <td>language</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>TODO: Document this field - language setting returned by RAGFlow API. </p></td>
+                  <td><p>Lanugage of the chat </p></td>
                 </tr>
               
                 <tr>
                   <td>prompt_type</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>TODO: Document this field - prompt type setting returned by RAGFlow API. </p></td>
+                  <td><p>Prompt type. Either <code>"simple"</code> or <code>"advanced"</code> </p></td>
                 </tr>
               
                 <tr>
                   <td>status</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>TODO: Document this field - chat status returned by RAGFlow API. </p></td>
+                  <td><p>Validation status indicating if chat is enabled (<code>"1"</code>=valid/enabled, <code>"0"</code>=invalid/disabled). </p></td>
                 </tr>
               
                 <tr>
@@ -22316,8 +22312,7 @@ Contains a <code>chunks</code> array with metadata about retrieved documents. </
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Required. The agent to generate chatbot completion for.
-Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-TODO: Verify exact resource path format for RAG operations. </p></td>
+Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 </tr>
               
                 <tr>
@@ -22380,8 +22375,7 @@ If not provided, a new session will be created. </p></td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Required. The agent to get chatbot information for.
-Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-TODO: Verify exact resource path format for RAG operations. </p></td>
+Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 </tr>
               
                 <tr>
@@ -22861,8 +22855,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td>type</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Required. Type of item to create: <code>"folder"</code> for directories or <code>"virtual"</code> for virtual files.
-TODO(RAGFlow): Document the purpose and behavior of "virtual" file type. </p></td>
+                  <td><p>Required. Type of item to create: <code>"folder"</code> for directories or <code>"virtual"</code> for virtual files. </p></td>
                 </tr>
               
                 <tr>
@@ -23513,8 +23506,7 @@ May include document ID, page numbers, timestamps, or custom fields. </p></td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Required. The agent to retrieve data for.
-Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-TODO: Verify exact resource path format for RAG operations. </p></td>
+Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 </tr>
               
                 <tr>
@@ -23686,8 +23678,7 @@ Default: 1024. </p></td>
                   <td>source_type</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>TODO: Define enum for source_type values or document accepted values.
-Source type indicating how the document was added (e.g., <code>"local"</code> for direct uploads, <code>"knowledgebase"</code> for file system imports). </p></td>
+                  <td><p>Source type indicating how the document was added (e.g., <code>"local"</code> for direct uploads, <code>"knowledgebase"</code> for file system imports). </p></td>
                 </tr>
               
                 <tr>
@@ -23785,8 +23776,7 @@ Source type indicating how the document was added (e.g., <code>"local"</code> fo
                   <td>status</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>TODO: Define enum for status values or document accepted values.
-Validation status indicating if document is enabled (<code>"1"</code>=valid/enabled, <code>"0"</code>=invalid/disabled). </p></td>
+                  <td><p>Validation status indicating if document is enabled (<code>"1"</code>=valid/enabled, <code>"0"</code>=invalid/disabled). </p></td>
                 </tr>
               
                 <tr>
@@ -23894,8 +23884,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td>type</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>File type/extension or <code>"folder"</code> for directories. Check <code>type == "folder"</code> to distinguish folders from files.
-TODO(RAGFlow): Document complete list of supported file types/extensions. </p></td>
+                  <td><p>File type/extension or <code>"folder"</code> for directories. Check <code>type == "folder"</code> to distinguish folders from files. </p></td>
                 </tr>
               
                 <tr>
@@ -23951,8 +23940,7 @@ TODO(RAGFlow): Document complete list of supported file types/extensions. </p></
                   <td>source_type</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Source type indicating file origin (e.g., <code>"local"</code> for uploaded files).
-TODO(RAGFlow): Document complete list of possible source_type values. </p></td>
+                  <td><p>Source type indicating file origin (e.g., <code>"local"</code> for uploaded files). </p></td>
                 </tr>
               
                 <tr>
@@ -24588,7 +24576,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td>orderby</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>TODO: Document this field - sort field specification returned by RAGFlow API (default: <code>"update_time"</code>). </p></td>
+                  <td><p>Sort field (default: <code>"update_time"</code>). </p></td>
                 </tr>
               
                 <tr>
@@ -24669,7 +24657,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td>orderby</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>TODO: Document this field - sort field specification returned by RAGFlow API (default: <code>"create_time"</code>). </p></td>
+                  <td><p>Sort field (default: <code>"create_time"</code>). </p></td>
                 </tr>
               
                 <tr>
@@ -24757,7 +24745,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td>orderby</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>TODO: Document this field - sort field specification returned by RAGFlow API (default: <code>"create_time"</code>). </p></td>
+                  <td><p>Sort field (default: <code>"create_time"</code>). </p></td>
                 </tr>
               
                 <tr>
@@ -24929,8 +24917,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td>orderby</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Optional. Sort field (default: <code>"create_time"</code>).
-TODO: Define enum for valid orderby values or document accepted field names. </p></td>
+                  <td><p>Optional. Sort field (default: <code>create_time</code>). </p></td>
                 </tr>
               
                 <tr>
@@ -25011,8 +24998,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td>orderby</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>TODO: Define enum for orderby values or document accepted field names.
-Optional. Sort field (default: <code>"create_time"</code>). Accepted values include <code>"create_time"</code> and <code>"update_time"</code>. </p></td>
+                  <td><p>Optional. Sort field (default: <code>"create_time"</code>). Accepted values include <code>"create_time"</code> and <code>"update_time"</code>. </p></td>
                 </tr>
               
                 <tr>
@@ -25124,8 +25110,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td>orderby</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Optional. Field to sort results by. Common values include <code>"create_time"</code> (default) and <code>"update_time"</code>.
-TODO(RAGFlow): Document complete list of valid orderby field values. </p></td>
+                  <td><p>Optional. Field to sort results by. Common values include <code>"create_time"</code> (default) and <code>"update_time"</code>. </p></td>
                 </tr>
               
                 <tr>
@@ -25223,9 +25208,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td>orderby</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Optional. Sort field for ordering results.
-Default: <code>"update_time"</code>.
-TODO: Document available sort fields from RAGFlow documentation. </p></td>
+                  <td><p>Optional. Sort field for ordering results. Default: <code>"update_time"</code>. </p></td>
                 </tr>
               
                 <tr>
@@ -26137,8 +26120,7 @@ The DSL structure determines how the agent processes requests and generates resp
                   <td>canvas_type</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Canvas type for the agent's workflow visualization.
-TODO: Document possible canvas type values from RAGFlow documentation. </p></td>
+                  <td><p>Canvas type for the agent's workflow visualization. </p></td>
                 </tr>
               
                 <tr>
@@ -26195,8 +26177,7 @@ Note: No pagination metadata is included in this response. </p></td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Required. The agent to generate related questions for.
-Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-TODO: Verify exact resource path format for RAG operations. </p></td>
+Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 </tr>
               
                 <tr>
@@ -26522,8 +26503,7 @@ Higher values favor vector similarity, lower values favor keyword matching. </p>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Required. The agent to ask searchbot question for.
-Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-TODO: Verify exact resource path format for RAG operations. </p></td>
+Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 </tr>
               
                 <tr>
@@ -26578,8 +26558,7 @@ If provided, uses the search app's retrieval settings and metadata filters. </p>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Required. The agent to get searchbot detail for.
-Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-TODO: Verify exact resource path format for RAG operations. </p></td>
+Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 </tr>
               
                 <tr>
@@ -26705,8 +26684,7 @@ TODO: Verify exact resource path format for RAG operations. </p></td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Required. The agent to generate searchbot mindmap for.
-Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-TODO: Verify exact resource path format for RAG operations. </p></td>
+Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 </tr>
               
                 <tr>
@@ -26760,8 +26738,7 @@ If provided, uses the search app's retrieval and LLM settings. </p></td>
                   <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
                   <td></td>
                   <td><p>Generated mindmap structure in hierarchical format.
-The structure organizes retrieved information into nodes and relationships.
-TODO: Document the expected schema of the mindmap structure. </p></td>
+The structure organizes retrieved information into nodes and relationships. </p></td>
                 </tr>
               
             </tbody>
@@ -26786,8 +26763,7 @@ TODO: Document the expected schema of the mindmap structure. </p></td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Required. The agent to generate searchbot related questions for.
-Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-TODO: Verify exact resource path format for RAG operations. </p></td>
+Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 </tr>
               
                 <tr>
@@ -26834,8 +26810,7 @@ If provided, uses the search app's configured language model for generation. </p
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Required. The agent to retrieve searchbot results for.
-Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-TODO: Verify exact resource path format for RAG operations. </p></td>
+Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 </tr>
               
                 <tr>
