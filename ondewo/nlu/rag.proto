@@ -785,17 +785,17 @@ message RagUpdateDatasetRequest {
     int32 pagerank = 10;
 }
 
-// Request message for deleting one or more datasets.
+// Request message for deleting one or more of a RAGFlow resource.
 message RagDeleteRequest {
 
     // Required. The agent to delete datasets from.
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
-    // Optional. Dataset IDs to delete. If empty and <code>delete_all</code> is <code>true</code>, deletes all datasets. Duplicate IDs are not allowed.
+    // Optional. IDs of resources to delete. If empty and <code>delete_all</code> is <code>true</code>, deletes all. Duplicate IDs are not allowed.
     repeated string ids = 2;
 
-    // Optional. Delete all datasets (needed because protobuf cannot represent <code>ids=null</code>).
+    // Optional. Delete all (needed because protobuf cannot represent <code>ids=null</code>).
     optional bool delete_all = 3;
 }
 
