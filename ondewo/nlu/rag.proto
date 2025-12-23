@@ -493,7 +493,7 @@ message RagCreateDatasetRequest {
     // Optional. Configuration settings for the dataset parser. The used fields vary depending on the selected <code>chunk_method</code>.
     RagParserConfig parser_config = 7;
 
-    // Optional. Embedding model name in the format "&lt;model_name&gt;@&lt;factory_name&gt;" (uses user's default if not specified).
+    // Optional. Embedding model name in the format "&lt;model_name&gt;@&lt;factory_name&gt;" (uses user's default if not specified). Maximum length 255.
     string embedding_model = 8;
 }
 
@@ -607,7 +607,7 @@ message RagParserConfig {
 }
 
 // RAPTOR configuration. Refer to <a href="https://arxiv.org/html/2401.18059v1">RAPTOR paper</a> for more information about RAPTOR.
-message RaptorConfig {
+message RagRaptorConfig {
 
     // Optional. Default <code>false</code>. Whether to use RAPTOR for this dataset.
     bool use_raptor = 1;
@@ -630,7 +630,7 @@ message RaptorConfig {
 }
 
 // GraphRAG configuration.
-message GraphRagConfig {
+message RagGraphRagConfig {
 
     // Optional. Default <code>false</code>.
     bool use_graphrag = 1;
@@ -1420,14 +1420,14 @@ message RagRetrievalRequest {
 }
 
 // List of document metadata conditions.
-message MetadataConditions {
+message RagMetadataConditions {
 
     // Optional. List of conditions.
     repeated MetadataCondition conditions = 1;
 }
 
 // Condition to filter document metadata on.
-message MetadataCondition {
+message RagMetadataCondition {
 
     // Required. Metadata field name.
     string name = 1;
