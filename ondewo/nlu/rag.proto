@@ -600,10 +600,10 @@ message RagParserConfig {
     int32 task_page_size = 10;
 
     // Optional. RAPTOR-specific settings. Default <code>{ "use_raptor": false }</code>.
-    RaptorConfig raptor = 11;
+    RagRaptorConfig raptor = 11;
 
     // Optional. GRAPHRAG-specific settings. Default <code>{ "use_graphrag": false }</code>.
-    GraphRagConfig graphrag = 12;
+    RagGraphRagConfig graphrag = 12;
 }
 
 // RAPTOR configuration. Refer to <a href="https://arxiv.org/html/2401.18059v1">RAPTOR paper</a> for more information about RAPTOR.
@@ -639,7 +639,7 @@ message RagGraphRagConfig {
     repeated string entity_types = 2;
 
     // Optional. Default <code>light</code>.
-    GraphRagMethod method = 3;
+    RagGraphRagMethod method = 3;
 
     // Optional. Default <code>false</code>.
     bool community = 4;
@@ -649,7 +649,7 @@ message RagGraphRagConfig {
 }
 
 // Knowledge graph construction methods.
-enum GraphRagMethod {
+enum RagGraphRagMethod {
 
     // Use prompts provided by <a href="https://github.com/HKUDS/LightRAG">LightRAG</a>.
     light = 0;
@@ -1397,7 +1397,7 @@ message RagRetrievalRequest {
     repeated string cross_languages = 7;
 
     // Optional. Metadata filter condition to restrict results based on document metadata.
-    MetadataConditions metadata_condition = 8;
+    RagMetadataConditions metadata_condition = 8;
 
     // Optional. Minimum similarity score threshold between <code>0.0</code> and <code>1.0</code> (default: <code>0.2</code>).
     float similarity_threshold = 9;
@@ -1423,7 +1423,7 @@ message RagRetrievalRequest {
 message RagMetadataConditions {
 
     // Optional. List of conditions.
-    repeated MetadataCondition conditions = 1;
+    repeated RagMetadataCondition conditions = 1;
 }
 
 // Condition to filter document metadata on.
