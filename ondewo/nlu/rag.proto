@@ -617,7 +617,7 @@ message RagRaptorConfig {
     string prompt = 2;
 
     // Optional. Minimum 1. Maximum 2048. Default 256.
-    int32 max_tokens = 3;
+    int32 max_token = 3;
 
     // Optional. Minimum 0.0. Maximum 1.0. Default 0.1.
     float threshold = 4;
