@@ -28,6 +28,7 @@
 
 // File-level comment for <code>ondewo/nlu/rag.proto</code>.
 // This file contains a single service <a href="#ondewo.nlu.Rags">Rags</a>. The Rags service provides integration with RAGFlow for Retrieval-Augmented Generation (RAG), including dataset management, document processing, chunk retrieval, conversational AI with chat and agent assistants, and file management. Key message types include <a href="#ondewo.nlu.RagDataset">RagDataset</a>, <a href="#ondewo.nlu.RagChat">RagChat</a>, and <a href="#ondewo.nlu.RagAgent">RagAgent</a>.
+// All message fields that are marked as <code>optional</code> are not actually optional but marked as such to enable presence tracking so that it is possible to distinguish between null and default value fields. Without the <code>optional</code> keyword it would for instance not be possible to distinguish between an integer <code>0</code> and <code>null</code>.
 syntax = "proto3";
 
 package ondewo.nlu;
@@ -403,10 +404,10 @@ service Rags {
 // Pagination parameters for list requests.
 message RagPagination {
 
-    // Optional. Page number (1-indexed, default: 1).
+    // Optional. Minimum 1. Page number (1-indexed, default: 1).
     int32 page = 1;
 
-    // Optional. Number of items per page (default varies by endpoint).
+    // Optional. Minimum 1. Number of items per page (default varies by endpoint).
     int32 page_size = 2;
 }
 
@@ -485,10 +486,10 @@ message RagCreateDatasetRequest {
     string avatar = 4;
 
     // Optional. Access permission for new dataset.
-    RagPermission permission = 5;
+    optional RagPermission permission = 5;
 
     // Optional. Default chunking method for documents in this dataset.
-    RagChunkMethod chunk_method = 6;
+    optional RagChunkMethod chunk_method = 6;
 
     // Optional. Configuration settings for the dataset parser. The used fields vary depending on the selected <code>chunk_method</code>.
     RagParserConfig parser_config = 7;
@@ -573,7 +574,7 @@ message RagParserConfig {
     int32 auto_keywords = 1;
 
     // Optional. Minimum 0, maximum 10, default 0. See <a href="https://ragflow.io/docs/dev/autokeyword_autoquestion">https://ragflow.io/docs/dev/autokeyword_autoquestion</a> for details.
-    int32 auto_questions = 2;
+    optional int32 auto_questions = 2;
 
     // Optional. Minimum 1, maximum 2048, default 512.
     int32 chunk_token_num = 3;
@@ -594,7 +595,7 @@ message RagParserConfig {
     int32 topn_tags = 8;
 
     // Optional. Minimum 0.0. Maximum 1.0. Default 0.1.
-    float filename_embd_weight = 9;
+    optional float filename_embd_weight = 9;
 
     // Optional. Minimum 1, default 12. Only applies to PDFs.
     int32 task_page_size = 10;
@@ -620,13 +621,13 @@ message RagRaptorConfig {
     int32 max_token = 3;
 
     // Optional. Minimum 0.0. Maximum 1.0. Default 0.1.
-    float threshold = 4;
+    optional float threshold = 4;
 
     // Optional. Minimum 1. Maximum 1024. Default 64.
     int32 max_cluster = 5;
 
     // Optional. Minimum 0. Default 0.
-    int64 random_seed = 6;
+    optional int64 random_seed = 6;
 }
 
 // GraphRAG configuration.
@@ -639,7 +640,7 @@ message RagGraphRagConfig {
     repeated string entity_types = 2;
 
     // Optional. Default <code>light</code>.
-    RagGraphRagMethod method = 3;
+    optional RagGraphRagMethod method = 3;
 
     // Optional. Default <code>false</code>.
     bool community = 4;
@@ -683,28 +684,28 @@ message RagDataset {
     string embedding_model = 7;
 
     // Access permission.
-    RagPermission permission = 8;
+    optional RagPermission permission = 8;
 
     // ID of RAGFlow user who created the dataset.
     string created_by = 9;
 
     // Number of documents in the dataset.
-    int32 document_count = 10;
+    optional int32 document_count = 10;
 
     // Number of tokens in the dataset.
-    int32 token_num = 11;
+    optional int32 token_num = 11;
 
     // Number of chunks of all documents in the dataset.
-    int32 chunk_count = 12;
+    optional int32 chunk_count = 12;
 
     // Default similarity threshold (0.0-1.0).
-    float similarity_threshold = 13;
+    optional float similarity_threshold = 13;
 
     // Default vector similarity weight (0.0-1.0).
-    float vector_similarity_weight = 14;
+    optional float vector_similarity_weight = 14;
 
     // Default chunking method for documents in this dataset.
-    RagChunkMethod chunk_method = 15;
+    optional RagChunkMethod chunk_method = 15;
 
     // Optional. Pipeline ID.
     string pipeline_id = 16;
@@ -713,7 +714,7 @@ message RagDataset {
     RagParserConfig parser_config = 17;
 
     // Pagerank.
-    int32 pagerank = 18;
+    optional int32 pagerank = 18;
 
     // Optional. GraphRAG task ID.
     string graphrag_task_id = 19;
@@ -734,7 +735,7 @@ message RagDataset {
     string mindmap_task_finish_at = 24;
 
     // Optional. Status of dataset (<code>"0"</code>: inactive, <code>"1"</code>: active).
-    string status = 25;
+    optional string status = 25;
 
     // Creation timestamp (Unix timestamp in milliseconds).
     int64 create_time = 26;
@@ -770,10 +771,10 @@ message RagUpdateDatasetRequest {
     string avatar = 5;
 
     // Optional. New access permission.
-    RagPermission permission = 6;
+    optional RagPermission permission = 6;
 
     // Optional. New chunk method.
-    RagChunkMethod chunk_method = 7;
+    optional RagChunkMethod chunk_method = 7;
 
     // Optional. New parser config (deep merged with existing).
     RagParserConfig parser_config = 8;
@@ -782,7 +783,7 @@ message RagUpdateDatasetRequest {
     string embedding_model = 9;
 
     // Optional. PageRank value.
-    int32 pagerank = 10;
+    optional int32 pagerank = 10;
 }
 
 // Request message for deleting one or more of a RAGFlow resource.
@@ -871,31 +872,31 @@ message RagTaskStatus {
     string doc_id = 2;
 
     // Start page.
-    int32 from_page = 3;
+    optional int32 from_page = 3;
 
     // End page.
-    int32 to_page = 4;
+    optional int32 to_page = 4;
 
     // Task type.
     string task_type = 5;
 
     // Priority.
-    int32 priority = 6;
+    optional int32 priority = 6;
 
     // Optional. Start time of the task (ISO 8601 datetime).
     string begin_at = 7;
 
     // Current duration of the task (in seconds).
-    float process_duration = 8;
+    optional float process_duration = 8;
 
     // Task progress (0.0 - 1.0).
-    float progress = 9;
+    optional float progress = 9;
 
     // Task progress message.
     string progress_msg = 10;
 
     // Retry count.
-    int32 retry_count = 11;
+    optional int32 retry_count = 11;
 
     // Digest.
     string digest = 12;
@@ -965,7 +966,7 @@ message RagDocument {
     string dataset_id = 3;
 
     // Chunking method used for this document.
-    RagChunkMethod chunk_method = 4;
+    optional RagChunkMethod chunk_method = 4;
 
     // Pipeline ID.
     string pipeline_id = 5;
@@ -989,16 +990,16 @@ message RagDocument {
     string location = 11;
 
     // File size in bytes.
-    int64 size = 12;
+    optional int64 size = 12;
 
     // Number of chunks extracted from this document (initially <code>0</code> until parsed).
-    int32 chunk_count = 13;
+    optional int32 chunk_count = 13;
 
     // Number of tokens across all chunks in this document.
-    int32 token_count = 14;
+    optional int32 token_count = 14;
 
     // Processing progress as a decimal value between <code>0.0</code> (not started) and <code>1.0</code> (complete).
-    float progress = 15;
+    optional float progress = 15;
 
     // Human-readable progress message describing current processing state.
     string progress_msg = 16;
@@ -1007,7 +1008,7 @@ message RagDocument {
     string process_begin_at = 17;
 
     // Total processing duration in seconds.
-    float process_duration = 18;
+    optional float process_duration = 18;
 
     // Custom metadata fields specific to this document (arbitrary key-value pairs).
     google.protobuf.Struct meta_fields = 19;
@@ -1016,7 +1017,7 @@ message RagDocument {
     string suffix = 20;
 
     // Document processing status.
-    RagDocumentStatus run = 21;
+    optional RagDocumentStatus run = 21;
 
     // Validation status indicating if document is enabled (<code>"1"</code>=valid/enabled, <code>"0"</code>=invalid/disabled).
     string status = 22;
@@ -1070,7 +1071,7 @@ message RagUpdateDocumentRequest {
     string name = 4;
 
     // Optional. New chunking method (resets document to <code>UNSTART</code> status and deletes all existing chunks).
-    RagChunkMethod chunk_method = 5;
+    optional RagChunkMethod chunk_method = 5;
 
     // Optional. New parser configuration (deep merged with existing configuration).
     RagParserConfig parser_config = 6;
@@ -1141,7 +1142,7 @@ message RagListDocumentsRequest {
 message RagListDocumentsResponse {
 
     // Total number of documents matching the filter criteria (not limited by pagination).
-    int32 total = 1;
+    optional int32 total = 1;
 
     // List of documents for the current page.
     repeated RagDocument docs = 2;
@@ -1225,7 +1226,7 @@ message RagListChunksRequest {
 message RagListChunksResponse {
 
     // Total number of chunks matching the filter criteria (before pagination).
-    int32 total = 1;
+    optional int32 total = 1;
 
     // List of chunks for the current page.
     repeated RagChunk chunks = 2;
@@ -1279,7 +1280,7 @@ message RagChunk {
     string document_keyword = 13;
 
     // Similarity score between <code>0.0</code> and <code>1.0</code> (only populated in retrieval responses).
-    float similarity = 14;
+    optional float similarity = 14;
 
     // Embedding vector for this chunk (optional, rarely included in responses for performance reasons).
     google.protobuf.Struct vector = 15;
@@ -1404,9 +1405,9 @@ message RagRetrievalRequest {
 
     // Optional. Weight for vector similarity versus keyword matching between <code>0.0</code> and <code>1.0</code> (default: <code>0.3</code>).<br>
     // Higher values favor vector similarity, lower values favor keyword matching.
-    float vector_similarity_weight = 10;
+    optional float vector_similarity_weight = 10;
 
-    // Optional. Maximum number of chunks to retrieve before reranking (default: <code>1024</code>).
+    // Optional. Minimum 1. Maximum number of chunks to retrieve before reranking (default: <code>1024</code>).
     int32 top_k = 11;
 
     // Optional. Rerank model ID to reorder results after initial retrieval.
@@ -1449,7 +1450,7 @@ message RagRetrievalResponse {
     repeated google.protobuf.Struct doc_aggs = 2;
 
     // Total number of chunks matching the query (before pagination).
-    int32 total = 3;
+    optional int32 total = 3;
 
     // Additional fields returned by RAGFlow not explicitly defined above.
     google.protobuf.Struct additional_fields = 4;
@@ -1517,7 +1518,7 @@ message RagFile {
     string location = 6;
 
     // File size in bytes (0 for folders).
-    int64 size = 7;
+    optional int64 size = 7;
 
     // File type/extension or <code>"folder"</code> for directories. Check <code>type == "folder"</code> to distinguish folders from files.
     string type = 8;
@@ -1552,7 +1553,7 @@ message RagCreateFileRequest {
     string parent_id = 3;
 
     // Required. Type of item to create: <code>"folder"</code> for directories or <code>"virtual"</code> for virtual files.
-    RagCreateFileFileType type = 4;
+    optional RagCreateFileFileType type = 4;
 }
 
 // Available file types for file creation.
@@ -1592,7 +1593,7 @@ message RagListFilesRequest {
 message RagListFilesResponse {
 
     // Total number of files and folders matching the query (before pagination).
-    int32 total = 1;
+    optional int32 total = 1;
 
     // List of files and folders in the current page.
     repeated RagFile files = 2;
@@ -1768,18 +1769,18 @@ message RagLlmSetting {
     string model_name = 1;
 
     // Optional. Minimum 0.0. Maximum 2.0. Default 0.1. Sampling temperature. Controls randomness in responses.
-    float temperature = 2;
+    optional float temperature = 2;
 
     // Optional. Minimum 0.0. Maximum 1.0. Default 0.3. Nucleus sampling parameter. Filters token choices by cumulative probability.
-    float top_p = 3;
+    optional float top_p = 3;
 
     // Optional. Minimum -2.0. Maximum 2.0. Default 0.4. Frequency penalty. Reduces repetition of frequent tokens.
-    float frequency_penalty = 4;
+    optional float frequency_penalty = 4;
 
     // Optional. Minimum -2.0. Maximum 2.0. Default 0.7. Presence penalty. Reduces repetition of any tokens already used.
-    float presence_penalty = 5;
+    optional float presence_penalty = 5;
 
-    // Optional. Maximum number of tokens to generate.
+    // Optional. Minimum 1. Maximum number of tokens to generate.
     int32 max_tokens = 6;
 
     // Optional. Additional fields to pass through to RAGFlow.
@@ -1811,15 +1812,15 @@ message RagPromptConfig {
     optional bool refine_multiturn = 7;
 
     // Optional. Minimum 0.0. Maximum 1.0. Default 0.2. Minimum similarity score for chunk retrieval.
-    float similarity_threshold = 8;
+    optional float similarity_threshold = 8;
 
     // Optional. Minimum 0.0. Maximum 1.0. Default 0.7. Weight for keywords versus vector similarity in hybrid search.
-    float keywords_similarity_weight = 9;
+    optional float keywords_similarity_weight = 9;
 
-    // Optional. Default 6. Number of chunks to retrieve after reranking.
+    // Optional. Minimum 1. Default 6. Number of chunks to retrieve after reranking.
     int32 top_n = 10;
 
-    // Optional. Default 1024. Maximum chunks to retrieve before reranking.
+    // Optional. Minimum 1. Default 1024. Maximum chunks to retrieve before reranking.
     int32 top_k = 11;
 
     // Optional. Rerank model ID for reordering retrieved chunks. If not specified, cosine similarity is used.
@@ -1870,7 +1871,7 @@ message RagChatAssistant {
     RagLlmSetting llm = 9;
 
     // Prompt type.
-    RagPromptType prompt_type = 10;
+    optional RagPromptType prompt_type = 10;
 
     // Prompt and retrieval configuration.
     RagPromptConfig prompt = 11;
@@ -1990,16 +1991,16 @@ message RagCreateAgentRequest {
     string title = 3;
 
     // Optional. Default <code>me</code>
-    RagPermission permission = 4;
+    optional RagPermission permission = 4;
 
     // Optional. Agent description providing details about the agent's purpose and functionality.
     string description = 5;
 
     // Optional. Max length 32. Canvas type.
-    string canvas_type = 6;
+    optional string canvas_type = 6;
 
     // Optional. Canvas category.
-    RagCanvasCategory canvas_category = 7;
+    optional RagCanvasCategory canvas_category = 7;
 
     // Required. Canvas DSL configuration defining the agent's workflow.
     google.protobuf.Struct dsl = 8;
@@ -2032,16 +2033,16 @@ message RagUpdateAgentRequest {
     string title = 4;
 
     // Optional. Default <code>me</code>
-    RagPermission permission = 5;
+    optional RagPermission permission = 5;
 
     // Optional. Agent description providing details about the agent's purpose and functionality.
     string description = 6;
 
     // Optional. Max length 32. Canvas type.
-    string canvas_type = 7;
+    optional string canvas_type = 7;
 
     // Optional. Canvas category.
-    RagCanvasCategory canvas_category = 8;
+    optional RagCanvasCategory canvas_category = 8;
 
     // Optional. Canvas DSL configuration defining the agent's workflow.
     google.protobuf.Struct dsl = 9;
@@ -2106,16 +2107,16 @@ message RagAgent {
     string title = 4;
 
     // Agent access permissions
-    RagPermission permission = 5;
+    optional RagPermission permission = 5;
 
     // Agent description providing details about the agent's purpose and functionality.
     string description = 6;
 
     // Canvas type.
-    string canvas_type = 7;
+    optional string canvas_type = 7;
 
     // Canvas category.
-    RagCanvasCategory canvas_category = 8;
+    optional RagCanvasCategory canvas_category = 8;
 
     // Canvas DSL configuration defining the agent's workflow.
     google.protobuf.Struct dsl = 9;
@@ -2186,7 +2187,7 @@ message RagChatSession {
 message RagMessage {
 
     // Role of the message sender.
-    RagMessageRole role = 1;
+    optional RagMessageRole role = 1;
 
     // Message content text.
     string content = 2;
@@ -2333,10 +2334,10 @@ message RagAgentSession {
     repeated RagMessage messages = 4;
 
     // Number of tokens used.
-    int32 tokens = 5;
+    optional int32 tokens = 5;
 
     // Session source.
-    RagSessionSource source = 6;
+    optional RagSessionSource source = 6;
 
     // Agent DSL (Domain Specific Language) workflow configuration.
     google.protobuf.Struct dsl = 7;
@@ -2345,10 +2346,10 @@ message RagAgentSession {
     float duration = 8;
 
     // Conversation round.
-    int32 round = 9;
+    optional int32 round = 9;
 
     // Number of likes.
-    int32 thumb_up = 10;
+    optional int32 thumb_up = 10;
 
     // Optional. Error messages.
     string errors = 11;
@@ -2505,7 +2506,7 @@ message RagAgentCompletionRequest {
 message RagAgentCompletionResponse {
 
     // Event type indicating the kind of event in the stream.
-    RagAgentEventType event = 1;
+    optional RagAgentEventType event = 1;
 
     // Message ID uniquely identifying this response.
     string message_id = 2;

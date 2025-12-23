@@ -1990,18 +1990,6 @@
                   <ul>
                     
                       <li>
-                        <a href="#ondewo.nlu.GraphRagConfig" class="title-badge message">GraphRagConfig</a>
-                      </li>
-                    
-                      <li>
-                        <a href="#ondewo.nlu.MetadataCondition" class="title-badge message">MetadataCondition</a>
-                      </li>
-                    
-                      <li>
-                        <a href="#ondewo.nlu.MetadataConditions" class="title-badge message">MetadataConditions</a>
-                      </li>
-                    
-                      <li>
                         <a href="#ondewo.nlu.RagAddChunkRequest" class="title-badge message">RagAddChunkRequest</a>
                       </li>
                     
@@ -2198,6 +2186,10 @@
                       </li>
                     
                       <li>
+                        <a href="#ondewo.nlu.RagGraphRagConfig" class="title-badge message">RagGraphRagConfig</a>
+                      </li>
+                    
+                      <li>
                         <a href="#ondewo.nlu.RagListAgentSessionsRequest" class="title-badge message">RagListAgentSessionsRequest</a>
                       </li>
                     
@@ -2250,6 +2242,14 @@
                       </li>
                     
                       <li>
+                        <a href="#ondewo.nlu.RagMetadataCondition" class="title-badge message">RagMetadataCondition</a>
+                      </li>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.RagMetadataConditions" class="title-badge message">RagMetadataConditions</a>
+                      </li>
+                    
+                      <li>
                         <a href="#ondewo.nlu.RagMoveFileRequest" class="title-badge message">RagMoveFileRequest</a>
                       </li>
                     
@@ -2279,6 +2279,10 @@
                     
                       <li>
                         <a href="#ondewo.nlu.RagPromptVariable" class="title-badge message">RagPromptVariable</a>
+                      </li>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.RagRaptorConfig" class="title-badge message">RagRaptorConfig</a>
                       </li>
                     
                       <li>
@@ -2357,19 +2361,11 @@
                         <a href="#ondewo.nlu.RagUploadFilesRequest.RagMetadata" class="title-badge message">RagUploadFilesRequest.RagMetadata</a>
                       </li>
                     
-                      <li>
-                        <a href="#ondewo.nlu.RaptorConfig" class="title-badge message">RaptorConfig</a>
-                      </li>
-                    
                   </ul>
                   
                   
                   <a href="#ondewo/nlu/rag.proto-enums">Enums</a>
                   <ul>
-                    
-                      <li>
-                        <a href="#ondewo.nlu.GraphRagMethod" class="title-badge enum">GraphRagMethod</a>
-                      </li>
                     
                       <li>
                         <a href="#ondewo.nlu.RagAgentEventType" class="title-badge enum">RagAgentEventType</a>
@@ -2389,6 +2385,10 @@
                     
                       <li>
                         <a href="#ondewo.nlu.RagDocumentStatus" class="title-badge enum">RagDocumentStatus</a>
+                      </li>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.RagGraphRagMethod" class="title-badge enum">RagGraphRagMethod</a>
                       </li>
                     
                       <li>
@@ -20700,7 +20700,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre> </p></td>
       <div class="file-heading">
         <h2 id="ondewo/nlu/rag.proto">ondewo/nlu/rag.proto</h2><a href="#top">Top</a>
       </div>
-      <p>File-level comment for <code>ondewo/nlu/rag.proto</code>.</p><p>This file contains a single service <a href="#ondewo.nlu.Rags">Rags</a>. The Rags service provides integration with RAGFlow for Retrieval-Augmented Generation (RAG), including dataset management, document processing, chunk retrieval, conversational AI with chat and agent assistants, and file management. Key message types include <a href="#ondewo.nlu.RagDataset">RagDataset</a>, <a href="#ondewo.nlu.RagChat">RagChat</a>, and <a href="#ondewo.nlu.RagAgent">RagAgent</a>.</p>
+      <p>File-level comment for <code>ondewo/nlu/rag.proto</code>.</p><p>This file contains a single service <a href="#ondewo.nlu.Rags">Rags</a>. The Rags service provides integration with RAGFlow for Retrieval-Augmented Generation (RAG), including dataset management, document processing, chunk retrieval, conversational AI with chat and agent assistants, and file management. Key message types include <a href="#ondewo.nlu.RagDataset">RagDataset</a>, <a href="#ondewo.nlu.RagChat">RagChat</a>, and <a href="#ondewo.nlu.RagAgent">RagAgent</a>.</p><p>All message fields that are marked as <code>optional</code> are not actually optional but marked as such to enable presence tracking so that it is possible to distinguish between null and default value fields. Without the <code>optional</code> keyword it would for instance not be possible to distinguish between an integer <code>0</code> and <code>null</code>.</p>
 
       
       <div id="ondewo/nlu/rag.proto-services" class="object-category">Services</div>
@@ -21084,120 +21084,6 @@ Returns 5-10 suggestions considering industry context.
       
       <div id="ondewo/nlu/rag.proto-messages" class="object-category">Messages</div>
       
-        <h3 id="ondewo.nlu.GraphRagConfig" class="title-badge message">GraphRagConfig</h3>
-        <p>GraphRAG configuration.</p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>use_graphrag</td>
-                  <td><a href="#bool">bool</a></td>
-                  <td></td>
-                  <td><p>Optional. Default <code>false</code>. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>entity_types</td>
-                  <td><a href="#string">string</a></td>
-                  <td>repeated</td>
-                  <td><p>Optional. Default <code>["organization", "person", "geo", "event", "category"]</code>. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>method</td>
-                  <td><a href="#ondewo.nlu.GraphRagMethod">GraphRagMethod</a></td>
-                  <td></td>
-                  <td><p>Optional. Default <code>light</code>. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>community</td>
-                  <td><a href="#bool">bool</a></td>
-                  <td></td>
-                  <td><p>Optional. Default <code>false</code>. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>resolution</td>
-                  <td><a href="#bool">bool</a></td>
-                  <td></td>
-                  <td><p>Optional. Default <code>false</code>. </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="ondewo.nlu.MetadataCondition" class="title-badge message">MetadataCondition</h3>
-        <p>Condition to filter document metadata on.</p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>name</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Required. Metadata field name. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>comparison_operator</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Required. Comparison operator. Can be one of: <code>"contains"</code>, <code>"not contains"</code>, <code>"start with"</code>, <code>"empty"</code>, <code>"not empty"</code>, <code>"="</code>, <code>"≠"</code>, <code>"&lt;"</code>, <code>"&gt;</code>, <code>"≥"</code>, <code>"≤"</code> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>value</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Required. Value to compare to. </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="ondewo.nlu.MetadataConditions" class="title-badge message">MetadataConditions</h3>
-        <p>List of document metadata conditions.</p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>conditions</td>
-                  <td><a href="#ondewo.nlu.MetadataCondition">MetadataCondition</a></td>
-                  <td>repeated</td>
-                  <td><p>Optional. List of conditions. </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
         <h3 id="ondewo.nlu.RagAddChunkRequest" class="title-badge message">RagAddChunkRequest</h3>
         <p>Request message for manually adding a chunk to a document.<br></p><p>The chunk content is automatically tokenized and embeddings are generated.</p>
 
@@ -21323,7 +21209,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 <tr>
                   <td>permission</td>
                   <td><a href="#ondewo.nlu.RagPermission">RagPermission</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Agent access permissions </p></td>
                 </tr>
               
@@ -21337,14 +21223,14 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 <tr>
                   <td>canvas_type</td>
                   <td><a href="#string">string</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Canvas type. </p></td>
                 </tr>
               
                 <tr>
                   <td>canvas_category</td>
                   <td><a href="#ondewo.nlu.RagCanvasCategory">RagCanvasCategory</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Canvas category. </p></td>
                 </tr>
               
@@ -21537,7 +21423,7 @@ Default: <code>true</code>. </p></td>
                 <tr>
                   <td>event</td>
                   <td><a href="#ondewo.nlu.RagAgentEventType">RagAgentEventType</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Event type indicating the kind of event in the stream. </p></td>
                 </tr>
               
@@ -21655,14 +21541,14 @@ Default: <code>true</code>. </p></td>
                 <tr>
                   <td>tokens</td>
                   <td><a href="#int32">int32</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Number of tokens used. </p></td>
                 </tr>
               
                 <tr>
                   <td>source</td>
                   <td><a href="#ondewo.nlu.RagSessionSource">RagSessionSource</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Session source. </p></td>
                 </tr>
               
@@ -21683,14 +21569,14 @@ Default: <code>true</code>. </p></td>
                 <tr>
                   <td>round</td>
                   <td><a href="#int32">int32</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Conversation round. </p></td>
                 </tr>
               
                 <tr>
                   <td>thumb_up</td>
                   <td><a href="#int32">int32</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Number of likes. </p></td>
                 </tr>
               
@@ -21909,7 +21795,7 @@ Typically includes chunk information, document titles, and similarity scores. </
                 <tr>
                   <td>prompt_type</td>
                   <td><a href="#ondewo.nlu.RagPromptType">RagPromptType</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Prompt type. </p></td>
                 </tr>
               
@@ -22351,7 +22237,7 @@ Each position is an array of 5 integers representing location data (format varie
                 <tr>
                   <td>similarity</td>
                   <td><a href="#float">float</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Similarity score between <code>0.0</code> and <code>1.0</code> (only populated in retrieval responses). </p></td>
                 </tr>
               
@@ -22459,7 +22345,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 <tr>
                   <td>permission</td>
                   <td><a href="#ondewo.nlu.RagPermission">RagPermission</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Default <code>me</code> </p></td>
                 </tr>
               
@@ -22473,14 +22359,14 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 <tr>
                   <td>canvas_type</td>
                   <td><a href="#string">string</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Max length 32. Canvas type. </p></td>
                 </tr>
               
                 <tr>
                   <td>canvas_category</td>
                   <td><a href="#ondewo.nlu.RagCanvasCategory">RagCanvasCategory</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Canvas category. </p></td>
                 </tr>
               
@@ -22665,14 +22551,14 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 <tr>
                   <td>permission</td>
                   <td><a href="#ondewo.nlu.RagPermission">RagPermission</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Access permission for new dataset. </p></td>
                 </tr>
               
                 <tr>
                   <td>chunk_method</td>
                   <td><a href="#ondewo.nlu.RagChunkMethod">RagChunkMethod</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Default chunking method for documents in this dataset. </p></td>
                 </tr>
               
@@ -22687,7 +22573,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td>embedding_model</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Optional. Embedding model name in the format "&lt;model_name&gt;@&lt;factory_name&gt;" (uses user's default if not specified). </p></td>
+                  <td><p>Optional. Embedding model name in the format "&lt;model_name&gt;@&lt;factory_name&gt;" (uses user's default if not specified). Maximum length 255. </p></td>
                 </tr>
               
             </tbody>
@@ -22732,7 +22618,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 <tr>
                   <td>type</td>
                   <td><a href="#ondewo.nlu.RagCreateFileFileType">RagCreateFileFileType</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Required. Type of item to create: <code>"folder"</code> for directories or <code>"virtual"</code> for virtual files. </p></td>
                 </tr>
               
@@ -22805,7 +22691,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 <tr>
                   <td>permission</td>
                   <td><a href="#ondewo.nlu.RagPermission">RagPermission</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Access permission. </p></td>
                 </tr>
               
@@ -22819,42 +22705,42 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 <tr>
                   <td>document_count</td>
                   <td><a href="#int32">int32</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Number of documents in the dataset. </p></td>
                 </tr>
               
                 <tr>
                   <td>token_num</td>
                   <td><a href="#int32">int32</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Number of tokens in the dataset. </p></td>
                 </tr>
               
                 <tr>
                   <td>chunk_count</td>
                   <td><a href="#int32">int32</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Number of chunks of all documents in the dataset. </p></td>
                 </tr>
               
                 <tr>
                   <td>similarity_threshold</td>
                   <td><a href="#float">float</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Default similarity threshold (0.0-1.0). </p></td>
                 </tr>
               
                 <tr>
                   <td>vector_similarity_weight</td>
                   <td><a href="#float">float</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Default vector similarity weight (0.0-1.0). </p></td>
                 </tr>
               
                 <tr>
                   <td>chunk_method</td>
                   <td><a href="#ondewo.nlu.RagChunkMethod">RagChunkMethod</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Default chunking method for documents in this dataset. </p></td>
                 </tr>
               
@@ -22875,7 +22761,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 <tr>
                   <td>pagerank</td>
                   <td><a href="#int32">int32</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Pagerank. </p></td>
                 </tr>
               
@@ -22924,7 +22810,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 <tr>
                   <td>status</td>
                   <td><a href="#string">string</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Status of dataset (<code>"0"</code>: inactive, <code>"1"</code>: active). </p></td>
                 </tr>
               
@@ -23222,7 +23108,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
         
       
         <h3 id="ondewo.nlu.RagDeleteRequest" class="title-badge message">RagDeleteRequest</h3>
-        <p>Request message for deleting one or more datasets.</p>
+        <p>Request message for deleting one or more of a RAGFlow resource.</p>
 
         
           <table class="field-table">
@@ -23243,14 +23129,14 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td>ids</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
-                  <td><p>Optional. Dataset IDs to delete. If empty and <code>delete_all</code> is <code>true</code>, deletes all datasets. Duplicate IDs are not allowed. </p></td>
+                  <td><p>Optional. IDs of resources to delete. If empty and <code>delete_all</code> is <code>true</code>, deletes all. Duplicate IDs are not allowed. </p></td>
                 </tr>
               
                 <tr>
                   <td>delete_all</td>
                   <td><a href="#bool">bool</a></td>
                   <td>optional</td>
-                  <td><p>Optional. Delete all datasets (needed because protobuf cannot represent <code>ids=null</code>). </p></td>
+                  <td><p>Optional. Delete all (needed because protobuf cannot represent <code>ids=null</code>). </p></td>
                 </tr>
               
             </tbody>
@@ -23294,7 +23180,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 <tr>
                   <td>chunk_method</td>
                   <td><a href="#ondewo.nlu.RagChunkMethod">RagChunkMethod</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Chunking method used for this document. </p></td>
                 </tr>
               
@@ -23350,28 +23236,28 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 <tr>
                   <td>size</td>
                   <td><a href="#int64">int64</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>File size in bytes. </p></td>
                 </tr>
               
                 <tr>
                   <td>chunk_count</td>
                   <td><a href="#int32">int32</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Number of chunks extracted from this document (initially <code>0</code> until parsed). </p></td>
                 </tr>
               
                 <tr>
                   <td>token_count</td>
                   <td><a href="#int32">int32</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Number of tokens across all chunks in this document. </p></td>
                 </tr>
               
                 <tr>
                   <td>progress</td>
                   <td><a href="#float">float</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Processing progress as a decimal value between <code>0.0</code> (not started) and <code>1.0</code> (complete). </p></td>
                 </tr>
               
@@ -23392,7 +23278,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 <tr>
                   <td>process_duration</td>
                   <td><a href="#float">float</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Total processing duration in seconds. </p></td>
                 </tr>
               
@@ -23413,7 +23299,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 <tr>
                   <td>run</td>
                   <td><a href="#ondewo.nlu.RagDocumentStatus">RagDocumentStatus</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Document processing status. </p></td>
                 </tr>
               
@@ -23577,7 +23463,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 <tr>
                   <td>size</td>
                   <td><a href="#int64">int64</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>File size in bytes (0 for folders). </p></td>
                 </tr>
               
@@ -23996,6 +23882,58 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
 
         
       
+        <h3 id="ondewo.nlu.RagGraphRagConfig" class="title-badge message">RagGraphRagConfig</h3>
+        <p>GraphRAG configuration.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>use_graphrag</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Optional. Default <code>false</code>. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>entity_types</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Optional. Default <code>["organization", "person", "geo", "event", "category"]</code>. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>method</td>
+                  <td><a href="#ondewo.nlu.RagGraphRagMethod">RagGraphRagMethod</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. Default <code>light</code>. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>community</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Optional. Default <code>false</code>. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>resolution</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Optional. Default <code>false</code>. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="ondewo.nlu.RagListAgentSessionsRequest" class="title-badge message">RagListAgentSessionsRequest</h3>
         <p>Request message for listing agent sessions.</p>
 
@@ -24345,7 +24283,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 <tr>
                   <td>total</td>
                   <td><a href="#int32">int32</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Total number of chunks matching the filter criteria (before pagination). </p></td>
                 </tr>
               
@@ -24545,7 +24483,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 <tr>
                   <td>total</td>
                   <td><a href="#int32">int32</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Total number of documents matching the filter criteria (not limited by pagination). </p></td>
                 </tr>
               
@@ -24636,7 +24574,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 <tr>
                   <td>total</td>
                   <td><a href="#int32">int32</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Total number of files and folders matching the query (before pagination). </p></td>
                 </tr>
               
@@ -24681,28 +24619,28 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 <tr>
                   <td>temperature</td>
                   <td><a href="#float">float</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Minimum 0.0. Maximum 2.0. Default 0.1. Sampling temperature. Controls randomness in responses. </p></td>
                 </tr>
               
                 <tr>
                   <td>top_p</td>
                   <td><a href="#float">float</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Minimum 0.0. Maximum 1.0. Default 0.3. Nucleus sampling parameter. Filters token choices by cumulative probability. </p></td>
                 </tr>
               
                 <tr>
                   <td>frequency_penalty</td>
                   <td><a href="#float">float</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Minimum -2.0. Maximum 2.0. Default 0.4. Frequency penalty. Reduces repetition of frequent tokens. </p></td>
                 </tr>
               
                 <tr>
                   <td>presence_penalty</td>
                   <td><a href="#float">float</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Minimum -2.0. Maximum 2.0. Default 0.7. Presence penalty. Reduces repetition of any tokens already used. </p></td>
                 </tr>
               
@@ -24710,7 +24648,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td>max_tokens</td>
                   <td><a href="#int32">int32</a></td>
                   <td></td>
-                  <td><p>Optional. Maximum number of tokens to generate. </p></td>
+                  <td><p>Optional. Minimum 1. Maximum number of tokens to generate. </p></td>
                 </tr>
               
                 <tr>
@@ -24740,7 +24678,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 <tr>
                   <td>role</td>
                   <td><a href="#ondewo.nlu.RagMessageRole">RagMessageRole</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Role of the message sender. </p></td>
                 </tr>
               
@@ -24756,6 +24694,68 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
                   <td></td>
                   <td><p>Additional fields returned by RAGFlow. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="ondewo.nlu.RagMetadataCondition" class="title-badge message">RagMetadataCondition</h3>
+        <p>Condition to filter document metadata on.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Metadata field name. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>comparison_operator</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Comparison operator. Can be one of: <code>"contains"</code>, <code>"not contains"</code>, <code>"start with"</code>, <code>"empty"</code>, <code>"not empty"</code>, <code>"="</code>, <code>"≠"</code>, <code>"&lt;"</code>, <code>"&gt;</code>, <code>"≥"</code>, <code>"≤"</code> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Value to compare to. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="ondewo.nlu.RagMetadataConditions" class="title-badge message">RagMetadataConditions</h3>
+        <p>List of document metadata conditions.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>conditions</td>
+                  <td><a href="#ondewo.nlu.RagMetadataCondition">RagMetadataCondition</a></td>
+                  <td>repeated</td>
+                  <td><p>Optional. List of conditions. </p></td>
                 </tr>
               
             </tbody>
@@ -24818,14 +24818,14 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td>page</td>
                   <td><a href="#int32">int32</a></td>
                   <td></td>
-                  <td><p>Optional. Page number (1-indexed, default: 1). </p></td>
+                  <td><p>Optional. Minimum 1. Page number (1-indexed, default: 1). </p></td>
                 </tr>
               
                 <tr>
                   <td>page_size</td>
                   <td><a href="#int32">int32</a></td>
                   <td></td>
-                  <td><p>Optional. Number of items per page (default varies by endpoint). </p></td>
+                  <td><p>Optional. Minimum 1. Number of items per page (default varies by endpoint). </p></td>
                 </tr>
               
             </tbody>
@@ -24918,7 +24918,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 <tr>
                   <td>auto_questions</td>
                   <td><a href="#int32">int32</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Minimum 0, maximum 10, default 0. See <a href="https://ragflow.io/docs/dev/autokeyword_autoquestion">https://ragflow.io/docs/dev/autokeyword_autoquestion</a> for details. </p></td>
                 </tr>
               
@@ -24967,7 +24967,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 <tr>
                   <td>filename_embd_weight</td>
                   <td><a href="#float">float</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Minimum 0.0. Maximum 1.0. Default 0.1. </p></td>
                 </tr>
               
@@ -24980,14 +24980,14 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
               
                 <tr>
                   <td>raptor</td>
-                  <td><a href="#ondewo.nlu.RaptorConfig">RaptorConfig</a></td>
+                  <td><a href="#ondewo.nlu.RagRaptorConfig">RagRaptorConfig</a></td>
                   <td></td>
                   <td><p>Optional. RAPTOR-specific settings. Default <code>{ "use_raptor": false }</code>. </p></td>
                 </tr>
               
                 <tr>
                   <td>graphrag</td>
-                  <td><a href="#ondewo.nlu.GraphRagConfig">GraphRagConfig</a></td>
+                  <td><a href="#ondewo.nlu.RagGraphRagConfig">RagGraphRagConfig</a></td>
                   <td></td>
                   <td><p>Optional. GRAPHRAG-specific settings. Default <code>{ "use_graphrag": false }</code>. </p></td>
                 </tr>
@@ -25092,14 +25092,14 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 <tr>
                   <td>similarity_threshold</td>
                   <td><a href="#float">float</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Minimum 0.0. Maximum 1.0. Default 0.2. Minimum similarity score for chunk retrieval. </p></td>
                 </tr>
               
                 <tr>
                   <td>keywords_similarity_weight</td>
                   <td><a href="#float">float</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Minimum 0.0. Maximum 1.0. Default 0.7. Weight for keywords versus vector similarity in hybrid search. </p></td>
                 </tr>
               
@@ -25107,14 +25107,14 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td>top_n</td>
                   <td><a href="#int32">int32</a></td>
                   <td></td>
-                  <td><p>Optional. Default 6. Number of chunks to retrieve after reranking. </p></td>
+                  <td><p>Optional. Minimum 1. Default 6. Number of chunks to retrieve after reranking. </p></td>
                 </tr>
               
                 <tr>
                   <td>top_k</td>
                   <td><a href="#int32">int32</a></td>
                   <td></td>
-                  <td><p>Optional. Default 1024. Maximum chunks to retrieve before reranking. </p></td>
+                  <td><p>Optional. Minimum 1. Default 1024. Maximum chunks to retrieve before reranking. </p></td>
                 </tr>
               
                 <tr>
@@ -25160,6 +25160,66 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td><a href="#bool">bool</a></td>
                   <td>optional</td>
                   <td><p>Whether this variable is optional in the template. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="ondewo.nlu.RagRaptorConfig" class="title-badge message">RagRaptorConfig</h3>
+        <p>RAPTOR configuration. Refer to <a href="https://arxiv.org/html/2401.18059v1">RAPTOR paper</a> for more information about RAPTOR.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>use_raptor</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Optional. Default <code>false</code>. Whether to use RAPTOR for this dataset. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>prompt</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. Prompt to use for RAPTOR. Default:<br>
+<code>"Please summarize the following paragraphs. Be careful with the numbers, do not make things up. Paragraphs as following:\n      {cluster_content}\nThe above is the content you need to summarize."</code> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>max_token</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>Optional. Minimum 1. Maximum 2048. Default 256. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>threshold</td>
+                  <td><a href="#float">float</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. Minimum 0.0. Maximum 1.0. Default 0.1. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>max_cluster</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>Optional. Minimum 1. Maximum 1024. Default 64. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>random_seed</td>
+                  <td><a href="#int64">int64</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. Minimum 0. Default 0. </p></td>
                 </tr>
               
             </tbody>
@@ -25380,7 +25440,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
               
                 <tr>
                   <td>metadata_condition</td>
-                  <td><a href="#ondewo.nlu.MetadataConditions">MetadataConditions</a></td>
+                  <td><a href="#ondewo.nlu.RagMetadataConditions">RagMetadataConditions</a></td>
                   <td></td>
                   <td><p>Optional. Metadata filter condition to restrict results based on document metadata. </p></td>
                 </tr>
@@ -25395,7 +25455,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 <tr>
                   <td>vector_similarity_weight</td>
                   <td><a href="#float">float</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Weight for vector similarity versus keyword matching between <code>0.0</code> and <code>1.0</code> (default: <code>0.3</code>).<br>
 Higher values favor vector similarity, lower values favor keyword matching. </p></td>
                 </tr>
@@ -25404,7 +25464,7 @@ Higher values favor vector similarity, lower values favor keyword matching. </p>
                   <td>top_k</td>
                   <td><a href="#int32">int32</a></td>
                   <td></td>
-                  <td><p>Optional. Maximum number of chunks to retrieve before reranking (default: <code>1024</code>). </p></td>
+                  <td><p>Optional. Minimum 1. Maximum number of chunks to retrieve before reranking (default: <code>1024</code>). </p></td>
                 </tr>
               
                 <tr>
@@ -25462,7 +25522,7 @@ Higher values favor vector similarity, lower values favor keyword matching. </p>
                 <tr>
                   <td>total</td>
                   <td><a href="#int32">int32</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Total number of chunks matching the query (before pagination). </p></td>
                 </tr>
               
@@ -25546,14 +25606,14 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 <tr>
                   <td>from_page</td>
                   <td><a href="#int32">int32</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Start page. </p></td>
                 </tr>
               
                 <tr>
                   <td>to_page</td>
                   <td><a href="#int32">int32</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>End page. </p></td>
                 </tr>
               
@@ -25567,7 +25627,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 <tr>
                   <td>priority</td>
                   <td><a href="#int32">int32</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Priority. </p></td>
                 </tr>
               
@@ -25581,14 +25641,14 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 <tr>
                   <td>process_duration</td>
                   <td><a href="#float">float</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Current duration of the task (in seconds). </p></td>
                 </tr>
               
                 <tr>
                   <td>progress</td>
                   <td><a href="#float">float</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Task progress (0.0 - 1.0). </p></td>
                 </tr>
               
@@ -25602,7 +25662,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 <tr>
                   <td>retry_count</td>
                   <td><a href="#int32">int32</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Retry count. </p></td>
                 </tr>
               
@@ -25669,7 +25729,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 <tr>
                   <td>permission</td>
                   <td><a href="#ondewo.nlu.RagPermission">RagPermission</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Default <code>me</code> </p></td>
                 </tr>
               
@@ -25683,14 +25743,14 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 <tr>
                   <td>canvas_type</td>
                   <td><a href="#string">string</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Max length 32. Canvas type. </p></td>
                 </tr>
               
                 <tr>
                   <td>canvas_category</td>
                   <td><a href="#ondewo.nlu.RagCanvasCategory">RagCanvasCategory</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Canvas category. </p></td>
                 </tr>
               
@@ -25973,14 +26033,14 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 <tr>
                   <td>permission</td>
                   <td><a href="#ondewo.nlu.RagPermission">RagPermission</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. New access permission. </p></td>
                 </tr>
               
                 <tr>
                   <td>chunk_method</td>
                   <td><a href="#ondewo.nlu.RagChunkMethod">RagChunkMethod</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. New chunk method. </p></td>
                 </tr>
               
@@ -26001,7 +26061,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 <tr>
                   <td>pagerank</td>
                   <td><a href="#int32">int32</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. PageRank value. </p></td>
                 </tr>
               
@@ -26054,7 +26114,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 <tr>
                   <td>chunk_method</td>
                   <td><a href="#ondewo.nlu.RagChunkMethod">RagChunkMethod</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. New chunking method (resets document to <code>UNSTART</code> status and deletes all existing chunks). </p></td>
                 </tr>
               
@@ -26259,93 +26319,10 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
 
         
       
-        <h3 id="ondewo.nlu.RaptorConfig" class="title-badge message">RaptorConfig</h3>
-        <p>RAPTOR configuration. Refer to <a href="https://arxiv.org/html/2401.18059v1">RAPTOR paper</a> for more information about RAPTOR.</p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>use_raptor</td>
-                  <td><a href="#bool">bool</a></td>
-                  <td></td>
-                  <td><p>Optional. Default <code>false</code>. Whether to use RAPTOR for this dataset. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>prompt</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Optional. Prompt to use for RAPTOR. Default:<br>
-<code>"Please summarize the following paragraphs. Be careful with the numbers, do not make things up. Paragraphs as following:\n      {cluster_content}\nThe above is the content you need to summarize."</code> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>max_tokens</td>
-                  <td><a href="#int32">int32</a></td>
-                  <td></td>
-                  <td><p>Optional. Minimum 1. Maximum 2048. Default 256. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>threshold</td>
-                  <td><a href="#float">float</a></td>
-                  <td></td>
-                  <td><p>Optional. Minimum 0.0. Maximum 1.0. Default 0.1. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>max_cluster</td>
-                  <td><a href="#int32">int32</a></td>
-                  <td></td>
-                  <td><p>Optional. Minimum 1. Maximum 1024. Default 64. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>random_seed</td>
-                  <td><a href="#int64">int64</a></td>
-                  <td></td>
-                  <td><p>Optional. Minimum 0. Default 0. </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
       
 
       
       <div id="ondewo/nlu/rag.proto-enums" class="object-category">Enums</div>
-      
-        <h3 id="ondewo.nlu.GraphRagMethod" class="title-badge enum">GraphRagMethod</h3>
-        <p>Knowledge graph construction methods.</p>
-        <table class="enum-table">
-          <thead>
-            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
-          </thead>
-          <tbody>
-            
-              <tr>
-                <td>light</td>
-                <td>0</td>
-                <td><p>Use prompts provided by <a href="https://github.com/HKUDS/LightRAG">LightRAG</a>.</p></td>
-              </tr>
-            
-              <tr>
-                <td>general</td>
-                <td>1</td>
-                <td><p>Use prompts provided by <a href="https://github.com/microsoft/graphrag">GraphRAG</a>.</p></td>
-              </tr>
-            
-          </tbody>
-        </table>
       
         <h3 id="ondewo.nlu.RagAgentEventType" class="title-badge enum">RagAgentEventType</h3>
         <p>Agent completion event type.</p>
@@ -26535,6 +26512,29 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 <td>FAIL</td>
                 <td>4</td>
                 <td><p>Document processing failed.</p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="ondewo.nlu.RagGraphRagMethod" class="title-badge enum">RagGraphRagMethod</h3>
+        <p>Knowledge graph construction methods.</p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>light</td>
+                <td>0</td>
+                <td><p>Use prompts provided by <a href="https://github.com/HKUDS/LightRAG">LightRAG</a>.</p></td>
+              </tr>
+            
+              <tr>
+                <td>general</td>
+                <td>1</td>
+                <td><p>Use prompts provided by <a href="https://github.com/microsoft/graphrag">GraphRAG</a>.</p></td>
               </tr>
             
           </tbody>

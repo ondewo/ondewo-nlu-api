@@ -361,9 +361,6 @@
     - [ProjectStatistics](#ondewo.nlu.ProjectStatistics)
   
 - [ondewo/nlu/rag.proto](#ondewo/nlu/rag.proto)
-    - [GraphRagConfig](#ondewo.nlu.GraphRagConfig)
-    - [MetadataCondition](#ondewo.nlu.MetadataCondition)
-    - [MetadataConditions](#ondewo.nlu.MetadataConditions)
     - [RagAddChunkRequest](#ondewo.nlu.RagAddChunkRequest)
     - [RagAddChunkResponse](#ondewo.nlu.RagAddChunkResponse)
     - [RagAgent](#ondewo.nlu.RagAgent)
@@ -413,6 +410,7 @@
     - [RagGetParentFolderResponse](#ondewo.nlu.RagGetParentFolderResponse)
     - [RagGetRootFolderRequest](#ondewo.nlu.RagGetRootFolderRequest)
     - [RagGetRootFolderResponse](#ondewo.nlu.RagGetRootFolderResponse)
+    - [RagGraphRagConfig](#ondewo.nlu.RagGraphRagConfig)
     - [RagListAgentSessionsRequest](#ondewo.nlu.RagListAgentSessionsRequest)
     - [RagListAgentsRequest](#ondewo.nlu.RagListAgentsRequest)
     - [RagListChatAssistantsRequest](#ondewo.nlu.RagListChatAssistantsRequest)
@@ -426,6 +424,8 @@
     - [RagListFilesResponse](#ondewo.nlu.RagListFilesResponse)
     - [RagLlmSetting](#ondewo.nlu.RagLlmSetting)
     - [RagMessage](#ondewo.nlu.RagMessage)
+    - [RagMetadataCondition](#ondewo.nlu.RagMetadataCondition)
+    - [RagMetadataConditions](#ondewo.nlu.RagMetadataConditions)
     - [RagMoveFileRequest](#ondewo.nlu.RagMoveFileRequest)
     - [RagPagination](#ondewo.nlu.RagPagination)
     - [RagParentFoldersList](#ondewo.nlu.RagParentFoldersList)
@@ -434,6 +434,7 @@
     - [RagPartialSuccess](#ondewo.nlu.RagPartialSuccess)
     - [RagPromptConfig](#ondewo.nlu.RagPromptConfig)
     - [RagPromptVariable](#ondewo.nlu.RagPromptVariable)
+    - [RagRaptorConfig](#ondewo.nlu.RagRaptorConfig)
     - [RagRelatedQuestionsRequest](#ondewo.nlu.RagRelatedQuestionsRequest)
     - [RagRelatedQuestionsResponse](#ondewo.nlu.RagRelatedQuestionsResponse)
     - [RagRemoveChunksRequest](#ondewo.nlu.RagRemoveChunksRequest)
@@ -453,14 +454,13 @@
     - [RagUploadDocumentsRequest.RagMetadata](#ondewo.nlu.RagUploadDocumentsRequest.RagMetadata)
     - [RagUploadFilesRequest](#ondewo.nlu.RagUploadFilesRequest)
     - [RagUploadFilesRequest.RagMetadata](#ondewo.nlu.RagUploadFilesRequest.RagMetadata)
-    - [RaptorConfig](#ondewo.nlu.RaptorConfig)
   
-    - [GraphRagMethod](#ondewo.nlu.GraphRagMethod)
     - [RagAgentEventType](#ondewo.nlu.RagAgentEventType)
     - [RagCanvasCategory](#ondewo.nlu.RagCanvasCategory)
     - [RagChunkMethod](#ondewo.nlu.RagChunkMethod)
     - [RagCreateFileFileType](#ondewo.nlu.RagCreateFileFileType)
     - [RagDocumentStatus](#ondewo.nlu.RagDocumentStatus)
+    - [RagGraphRagMethod](#ondewo.nlu.RagGraphRagMethod)
     - [RagMessageRole](#ondewo.nlu.RagMessageRole)
     - [RagPermission](#ondewo.nlu.RagPermission)
     - [RagPromptType](#ondewo.nlu.RagPromptType)
@@ -6899,57 +6899,7 @@ Project Root Statistics
 ## ondewo/nlu/rag.proto
 File-level comment for <code>ondewo/nlu/rag.proto</code>.
 This file contains a single service <a href="#ondewo.nlu.Rags">Rags</a>. The Rags service provides integration with RAGFlow for Retrieval-Augmented Generation (RAG), including dataset management, document processing, chunk retrieval, conversational AI with chat and agent assistants, and file management. Key message types include <a href="#ondewo.nlu.RagDataset">RagDataset</a>, <a href="#ondewo.nlu.RagChat">RagChat</a>, and <a href="#ondewo.nlu.RagAgent">RagAgent</a>.
-
-
-<a name="ondewo.nlu.GraphRagConfig"></a>
-
-### GraphRagConfig
-GraphRAG configuration.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| use_graphrag | [bool](#bool) |  | Optional. Default <code>false</code>. |
-| entity_types | [string](#string) | repeated | Optional. Default <code>["organization", "person", "geo", "event", "category"]</code>. |
-| method | [GraphRagMethod](#ondewo.nlu.GraphRagMethod) |  | Optional. Default <code>light</code>. |
-| community | [bool](#bool) |  | Optional. Default <code>false</code>. |
-| resolution | [bool](#bool) |  | Optional. Default <code>false</code>. |
-
-
-
-
-
-
-<a name="ondewo.nlu.MetadataCondition"></a>
-
-### MetadataCondition
-Condition to filter document metadata on.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| name | [string](#string) |  | Required. Metadata field name. |
-| comparison_operator | [string](#string) |  | Required. Comparison operator. Can be one of: <code>"contains"</code>, <code>"not contains"</code>, <code>"start with"</code>, <code>"empty"</code>, <code>"not empty"</code>, <code>"="</code>, <code>"≠"</code>, <code>"&lt;"</code>, <code>"&gt;</code>, <code>"≥"</code>, <code>"≤"</code> |
-| value | [string](#string) |  | Required. Value to compare to. |
-
-
-
-
-
-
-<a name="ondewo.nlu.MetadataConditions"></a>
-
-### MetadataConditions
-List of document metadata conditions.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| conditions | [MetadataCondition](#ondewo.nlu.MetadataCondition) | repeated | Optional. List of conditions. |
-
-
-
-
+All message fields that are marked as <code>optional</code> are not actually optional but marked as such to enable presence tracking so that it is possible to distinguish between null and default value fields. Without the <code>optional</code> keyword it would for instance not be possible to distinguish between an integer <code>0</code> and <code>null</code>.
 
 
 <a name="ondewo.nlu.RagAddChunkRequest"></a>
@@ -7001,10 +6951,10 @@ Agents are workflow-based AI assistants configured using Canvas DSL.
 | avatar | [string](#string) |  | Optional. Base64-encoded icon in the format <code>"data:image/[png|jpeg];base64,&lt;base64_string&gt;"</code>. |
 | user_id | [string](#string) |  | User ID of the agent owner. |
 | title | [string](#string) |  | Unique agent title. |
-| permission | [RagPermission](#ondewo.nlu.RagPermission) |  | Agent access permissions |
+| permission | [RagPermission](#ondewo.nlu.RagPermission) | optional | Agent access permissions |
 | description | [string](#string) |  | Agent description providing details about the agent's purpose and functionality. |
-| canvas_type | [string](#string) |  | Canvas type. |
-| canvas_category | [RagCanvasCategory](#ondewo.nlu.RagCanvasCategory) |  | Canvas category. |
+| canvas_type | [string](#string) | optional | Canvas type. |
+| canvas_category | [RagCanvasCategory](#ondewo.nlu.RagCanvasCategory) | optional | Canvas category. |
 | dsl | [google.protobuf.Struct](#google.protobuf.Struct) |  | Canvas DSL configuration defining the agent's workflow. |
 | create_time | [int64](#int64) |  | Creation timestamp (Unix timestamp in milliseconds). |
 | create_date | [string](#string) |  | Creation date in ISO 8601 datetime format. |
@@ -7071,7 +7021,7 @@ Response message for agent completion.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| event | [RagAgentEventType](#ondewo.nlu.RagAgentEventType) |  | Event type indicating the kind of event in the stream. |
+| event | [RagAgentEventType](#ondewo.nlu.RagAgentEventType) | optional | Event type indicating the kind of event in the stream. |
 | message_id | [string](#string) |  | Message ID uniquely identifying this response. |
 | created_at | [int64](#int64) |  | Creation timestamp (Unix timestamp in milliseconds). |
 | task_id | [string](#string) |  | Task ID associated with this agent workflow execution. |
@@ -7111,12 +7061,12 @@ Agent session containing conversation history for an agent workflow.
 | agent_id | [string](#string) |  | RAGFlow agent UUID. |
 | user_id | [string](#string) |  | User identifier. |
 | messages | [RagMessage](#ondewo.nlu.RagMessage) | repeated | Message history in chronological order. |
-| tokens | [int32](#int32) |  | Number of tokens used. |
-| source | [RagSessionSource](#ondewo.nlu.RagSessionSource) |  | Session source. |
+| tokens | [int32](#int32) | optional | Number of tokens used. |
+| source | [RagSessionSource](#ondewo.nlu.RagSessionSource) | optional | Session source. |
 | dsl | [google.protobuf.Struct](#google.protobuf.Struct) |  | Agent DSL (Domain Specific Language) workflow configuration. |
 | duration | [float](#float) |  | Session duration in seconds. |
-| round | [int32](#int32) |  | Conversation round. |
-| thumb_up | [int32](#int32) |  | Number of likes. |
+| round | [int32](#int32) | optional | Conversation round. |
+| thumb_up | [int32](#int32) | optional | Number of likes. |
 | errors | [string](#string) |  | Optional. Error messages. |
 | create_time | [int64](#int64) |  | Creation timestamp (Unix timestamp in milliseconds). |
 | create_date | [string](#string) |  | Creation date (ISO 8601 datetime). |
@@ -7193,7 +7143,7 @@ Chat assistant configuration.
 | dataset_ids | [string](#string) | repeated | Dataset IDs. |
 | datasets | [RagDataset](#ondewo.nlu.RagDataset) | repeated | Full dataset objects. |
 | llm | [RagLlmSetting](#ondewo.nlu.RagLlmSetting) |  | LLM configuration. |
-| prompt_type | [RagPromptType](#ondewo.nlu.RagPromptType) |  | Prompt type. |
+| prompt_type | [RagPromptType](#ondewo.nlu.RagPromptType) | optional | Prompt type. |
 | prompt | [RagPromptConfig](#ondewo.nlu.RagPromptConfig) |  | Prompt and retrieval configuration. |
 | meta_data_filter | [google.protobuf.Struct](#google.protobuf.Struct) |  | Metadata filter. |
 | do_refer | [string](#string) |  | Whether to insert reference index into answer. <code>"1"</code> yes, <code>"0"</code> no. |
@@ -7330,7 +7280,7 @@ Chunks are the basic retrieval units used for vector similarity search in RAG.
 | create_time | [string](#string) |  | Creation timestamp (ISO 8601 datetime string). |
 | create_timestamp | [float](#float) |  | Creation timestamp as a floating-point Unix timestamp. |
 | document_keyword | [string](#string) |  | Document name used as a keyword for retrieval. |
-| similarity | [float](#float) |  | Similarity score between <code>0.0</code> and <code>1.0</code> (only populated in retrieval responses). |
+| similarity | [float](#float) | optional | Similarity score between <code>0.0</code> and <code>1.0</code> (only populated in retrieval responses). |
 | vector | [google.protobuf.Struct](#google.protobuf.Struct) |  | Embedding vector for this chunk (optional, rarely included in responses for performance reasons). |
 | additional_fields | [google.protobuf.Struct](#google.protobuf.Struct) |  | Additional fields returned by RAGFlow not explicitly defined above. |
 
@@ -7380,10 +7330,10 @@ Request message for creating a new RAGFlow agent.
 | parent | [string](#string) |  | Required. The agent to create the RAGFlow agent for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
 | avatar | [string](#string) |  | Optional. Base64-encoded icon in the format <code>"data:image/[png|jpeg];base64,&lt;base64_string&gt;"</code>. |
 | title | [string](#string) |  | Required. Maximum length 255. Unique agent title. Must be unique within the project. |
-| permission | [RagPermission](#ondewo.nlu.RagPermission) |  | Optional. Default <code>me</code> |
+| permission | [RagPermission](#ondewo.nlu.RagPermission) | optional | Optional. Default <code>me</code> |
 | description | [string](#string) |  | Optional. Agent description providing details about the agent's purpose and functionality. |
-| canvas_type | [string](#string) |  | Optional. Max length 32. Canvas type. |
-| canvas_category | [RagCanvasCategory](#ondewo.nlu.RagCanvasCategory) |  | Optional. Canvas category. |
+| canvas_type | [string](#string) | optional | Optional. Max length 32. Canvas type. |
+| canvas_category | [RagCanvasCategory](#ondewo.nlu.RagCanvasCategory) | optional | Optional. Canvas category. |
 | dsl | [google.protobuf.Struct](#google.protobuf.Struct) |  | Required. Canvas DSL configuration defining the agent's workflow. |
 
 
@@ -7443,10 +7393,10 @@ Request message for creating a new dataset.
 | name | [string](#string) |  | Required. Unique name of the dataset to create. Must follow these requirements: <ul> <li>contain only characters from the basic multilingual Unicode plane</li> <li>maximum 128 characters</li> <li>case-insensitive</li> </ul> |
 | description | [string](#string) |  | Optional. Dataset description. Maximum 65,535 characters. |
 | avatar | [string](#string) |  | Optional. Base64-encoded avatar image in the format <code>"data:image/[png|jpeg];base64,&lt;base64_string&gt;"</code>. Maximum 65,535 characters. |
-| permission | [RagPermission](#ondewo.nlu.RagPermission) |  | Optional. Access permission for new dataset. |
-| chunk_method | [RagChunkMethod](#ondewo.nlu.RagChunkMethod) |  | Optional. Default chunking method for documents in this dataset. |
+| permission | [RagPermission](#ondewo.nlu.RagPermission) | optional | Optional. Access permission for new dataset. |
+| chunk_method | [RagChunkMethod](#ondewo.nlu.RagChunkMethod) | optional | Optional. Default chunking method for documents in this dataset. |
 | parser_config | [RagParserConfig](#ondewo.nlu.RagParserConfig) |  | Optional. Configuration settings for the dataset parser. The used fields vary depending on the selected <code>chunk_method</code>. |
-| embedding_model | [string](#string) |  | Optional. Embedding model name in the format "&lt;model_name&gt;@&lt;factory_name&gt;" (uses user's default if not specified). |
+| embedding_model | [string](#string) |  | Optional. Embedding model name in the format "&lt;model_name&gt;@&lt;factory_name&gt;" (uses user's default if not specified). Maximum length 255. |
 
 
 
@@ -7464,7 +7414,7 @@ Request message for creating a file or folder in RAGFlow.
 | parent | [string](#string) |  | Required. The agent to create the file for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
 | name | [string](#string) |  | Required. Maximum length 255. Name of the file or folder to create. |
 | parent_id | [string](#string) |  | Optional. Parent folder ID. If not provided, creates in root directory. |
-| type | [RagCreateFileFileType](#ondewo.nlu.RagCreateFileFileType) |  | Required. Type of item to create: <code>"folder"</code> for directories or <code>"virtual"</code> for virtual files. |
+| type | [RagCreateFileFileType](#ondewo.nlu.RagCreateFileFileType) | optional | Required. Type of item to create: <code>"folder"</code> for directories or <code>"virtual"</code> for virtual files. |
 
 
 
@@ -7486,24 +7436,24 @@ Dataset containing documents for RAG.
 | language | [string](#string) |  | Dataset language (e.g. <code>"English"</code>). |
 | description | [string](#string) |  | Dataset description. |
 | embedding_model | [string](#string) |  | Embedding model name. |
-| permission | [RagPermission](#ondewo.nlu.RagPermission) |  | Access permission. |
+| permission | [RagPermission](#ondewo.nlu.RagPermission) | optional | Access permission. |
 | created_by | [string](#string) |  | ID of RAGFlow user who created the dataset. |
-| document_count | [int32](#int32) |  | Number of documents in the dataset. |
-| token_num | [int32](#int32) |  | Number of tokens in the dataset. |
-| chunk_count | [int32](#int32) |  | Number of chunks of all documents in the dataset. |
-| similarity_threshold | [float](#float) |  | Default similarity threshold (0.0-1.0). |
-| vector_similarity_weight | [float](#float) |  | Default vector similarity weight (0.0-1.0). |
-| chunk_method | [RagChunkMethod](#ondewo.nlu.RagChunkMethod) |  | Default chunking method for documents in this dataset. |
+| document_count | [int32](#int32) | optional | Number of documents in the dataset. |
+| token_num | [int32](#int32) | optional | Number of tokens in the dataset. |
+| chunk_count | [int32](#int32) | optional | Number of chunks of all documents in the dataset. |
+| similarity_threshold | [float](#float) | optional | Default similarity threshold (0.0-1.0). |
+| vector_similarity_weight | [float](#float) | optional | Default vector similarity weight (0.0-1.0). |
+| chunk_method | [RagChunkMethod](#ondewo.nlu.RagChunkMethod) | optional | Default chunking method for documents in this dataset. |
 | pipeline_id | [string](#string) |  | Optional. Pipeline ID. |
 | parser_config | [RagParserConfig](#ondewo.nlu.RagParserConfig) |  | Document parser configuration (auto-generated based on chunk_method). |
-| pagerank | [int32](#int32) |  | Pagerank. |
+| pagerank | [int32](#int32) | optional | Pagerank. |
 | graphrag_task_id | [string](#string) |  | Optional. GraphRAG task ID. |
 | graphrag_task_finish_at | [string](#string) |  | Optional. Finish time of GraphRAG task (ISO 8601 datetime). |
 | raptor_task_id | [string](#string) |  | Optional. RAPTOR task ID. |
 | raptor_task_finish_at | [string](#string) |  | Optional. Finish time of RAPTOR task (ISO 8601 datetime). |
 | mindmap_task_id | [string](#string) |  | Optional. Mindmap task ID. |
 | mindmap_task_finish_at | [string](#string) |  | Optional. Finish time of Mindmap task (ISO 8601 datetime). |
-| status | [string](#string) |  | Optional. Status of dataset (<code>"0"</code>: inactive, <code>"1"</code>: active). |
+| status | [string](#string) | optional | Optional. Status of dataset (<code>"0"</code>: inactive, <code>"1"</code>: active). |
 | create_time | [int64](#int64) |  | Creation timestamp (Unix timestamp in milliseconds). |
 | create_date | [string](#string) |  | Creation date (ISO 8601 datetime). |
 | update_time | [int64](#int64) |  | Last update timestamp (Unix timestamp in milliseconds). |
@@ -7634,14 +7584,14 @@ Request message for deleting files or folders.
 <a name="ondewo.nlu.RagDeleteRequest"></a>
 
 ### RagDeleteRequest
-Request message for deleting one or more datasets.
+Request message for deleting one or more of a RAGFlow resource.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The agent to delete datasets from. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
-| ids | [string](#string) | repeated | Optional. Dataset IDs to delete. If empty and <code>delete_all</code> is <code>true</code>, deletes all datasets. Duplicate IDs are not allowed. |
-| delete_all | [bool](#bool) | optional | Optional. Delete all datasets (needed because protobuf cannot represent <code>ids=null</code>). |
+| ids | [string](#string) | repeated | Optional. IDs of resources to delete. If empty and <code>delete_all</code> is <code>true</code>, deletes all. Duplicate IDs are not allowed. |
+| delete_all | [bool](#bool) | optional | Optional. Delete all (needed because protobuf cannot represent <code>ids=null</code>). |
 
 
 
@@ -7659,7 +7609,7 @@ Document uploaded to a dataset.
 | id | [string](#string) |  | Document UUID. |
 | thumbnail | [string](#string) |  | Base64-encoded thumbnail image in the format <code>"data:image/[png|jpeg];base64,&lt;base64_string&gt;"</code>. Maximum 65,535 characters. |
 | dataset_id | [string](#string) |  | Parent dataset ID. |
-| chunk_method | [RagChunkMethod](#ondewo.nlu.RagChunkMethod) |  | Chunking method used for this document. |
+| chunk_method | [RagChunkMethod](#ondewo.nlu.RagChunkMethod) | optional | Chunking method used for this document. |
 | pipeline_id | [string](#string) |  | Pipeline ID. |
 | parser_config | [RagParserConfig](#ondewo.nlu.RagParserConfig) |  | Parser configuration used for chunking this document. |
 | source_type | [string](#string) |  | Source type indicating how the document was added (e.g., <code>"local"</code> for direct uploads, <code>"knowledgebase"</code> for file system imports). |
@@ -7667,16 +7617,16 @@ Document uploaded to a dataset.
 | created_by | [string](#string) |  | ID of the user who created the document. |
 | name | [string](#string) |  | Document filename. |
 | location | [string](#string) |  | Storage location path in the backend file system or object storage. |
-| size | [int64](#int64) |  | File size in bytes. |
-| chunk_count | [int32](#int32) |  | Number of chunks extracted from this document (initially <code>0</code> until parsed). |
-| token_count | [int32](#int32) |  | Number of tokens across all chunks in this document. |
-| progress | [float](#float) |  | Processing progress as a decimal value between <code>0.0</code> (not started) and <code>1.0</code> (complete). |
+| size | [int64](#int64) | optional | File size in bytes. |
+| chunk_count | [int32](#int32) | optional | Number of chunks extracted from this document (initially <code>0</code> until parsed). |
+| token_count | [int32](#int32) | optional | Number of tokens across all chunks in this document. |
+| progress | [float](#float) | optional | Processing progress as a decimal value between <code>0.0</code> (not started) and <code>1.0</code> (complete). |
 | progress_msg | [string](#string) |  | Human-readable progress message describing current processing state. |
 | process_begin_at | [string](#string) |  | Processing start timestamp (ISO 8601 datetime string). |
-| process_duration | [float](#float) |  | Total processing duration in seconds. |
+| process_duration | [float](#float) | optional | Total processing duration in seconds. |
 | meta_fields | [google.protobuf.Struct](#google.protobuf.Struct) |  | Custom metadata fields specific to this document (arbitrary key-value pairs). |
 | suffix | [string](#string) |  | Actual file extension extracted from the file (may differ from filename extension). |
-| run | [RagDocumentStatus](#ondewo.nlu.RagDocumentStatus) |  | Document processing status. |
+| run | [RagDocumentStatus](#ondewo.nlu.RagDocumentStatus) | optional | Document processing status. |
 | status | [string](#string) |  | Validation status indicating if document is enabled (<code>"1"</code>=valid/enabled, <code>"0"</code>=invalid/disabled). |
 | create_time | [int64](#int64) |  | Creation timestamp (Unix timestamp in milliseconds). |
 | create_date | [string](#string) |  | Creation date (ISO 8601 datetime string). |
@@ -7734,7 +7684,7 @@ File or folder in RAGFlow file system.
 | created_by | [string](#string) |  | ID of the user who created the file. |
 | name | [string](#string) |  | File or folder name. |
 | location | [string](#string) |  | Storage location path within the RAGFlow file system. |
-| size | [int64](#int64) |  | File size in bytes (0 for folders). |
+| size | [int64](#int64) | optional | File size in bytes (0 for folders). |
 | type | [string](#string) |  | File type/extension or <code>"folder"</code> for directories. Check <code>type == "folder"</code> to distinguish folders from files. |
 | source_type | [string](#string) |  | Source type indicating file origin (e.g., <code>"local"</code> for uploaded files). |
 | create_time | [int64](#int64) |  | Creation timestamp (Unix timestamp in milliseconds). |
@@ -7929,6 +7879,25 @@ Response message for getting the root folder.
 
 
 
+<a name="ondewo.nlu.RagGraphRagConfig"></a>
+
+### RagGraphRagConfig
+GraphRAG configuration.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| use_graphrag | [bool](#bool) |  | Optional. Default <code>false</code>. |
+| entity_types | [string](#string) | repeated | Optional. Default <code>["organization", "person", "geo", "event", "category"]</code>. |
+| method | [RagGraphRagMethod](#ondewo.nlu.RagGraphRagMethod) | optional | Optional. Default <code>light</code>. |
+| community | [bool](#bool) |  | Optional. Default <code>false</code>. |
+| resolution | [bool](#bool) |  | Optional. Default <code>false</code>. |
+
+
+
+
+
+
 <a name="ondewo.nlu.RagListAgentSessionsRequest"></a>
 
 ### RagListAgentSessionsRequest
@@ -8042,7 +8011,7 @@ Response message for listing chunks.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| total | [int32](#int32) |  | Total number of chunks matching the filter criteria (before pagination). |
+| total | [int32](#int32) | optional | Total number of chunks matching the filter criteria (before pagination). |
 | chunks | [RagChunk](#ondewo.nlu.RagChunk) | repeated | List of chunks for the current page. |
 | doc | [RagDocument](#ondewo.nlu.RagDocument) |  | Document details for the parent document. |
 
@@ -8105,7 +8074,7 @@ Response message for listing documents.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| total | [int32](#int32) |  | Total number of documents matching the filter criteria (not limited by pagination). |
+| total | [int32](#int32) | optional | Total number of documents matching the filter criteria (not limited by pagination). |
 | docs | [RagDocument](#ondewo.nlu.RagDocument) | repeated | List of documents for the current page. |
 
 
@@ -8141,7 +8110,7 @@ Response message for listing files and folders.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| total | [int32](#int32) |  | Total number of files and folders matching the query (before pagination). |
+| total | [int32](#int32) | optional | Total number of files and folders matching the query (before pagination). |
 | files | [RagFile](#ondewo.nlu.RagFile) | repeated | List of files and folders in the current page. |
 | parent_folder | [RagFile](#ondewo.nlu.RagFile) |  | Information about the parent folder being listed. |
 
@@ -8159,11 +8128,11 @@ LLM configuration for chat assistant.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | model_name | [string](#string) |  | Optional. LLM model name. If not set, the user's default model will be used. |
-| temperature | [float](#float) |  | Optional. Minimum 0.0. Maximum 2.0. Default 0.1. Sampling temperature. Controls randomness in responses. |
-| top_p | [float](#float) |  | Optional. Minimum 0.0. Maximum 1.0. Default 0.3. Nucleus sampling parameter. Filters token choices by cumulative probability. |
-| frequency_penalty | [float](#float) |  | Optional. Minimum -2.0. Maximum 2.0. Default 0.4. Frequency penalty. Reduces repetition of frequent tokens. |
-| presence_penalty | [float](#float) |  | Optional. Minimum -2.0. Maximum 2.0. Default 0.7. Presence penalty. Reduces repetition of any tokens already used. |
-| max_tokens | [int32](#int32) |  | Optional. Maximum number of tokens to generate. |
+| temperature | [float](#float) | optional | Optional. Minimum 0.0. Maximum 2.0. Default 0.1. Sampling temperature. Controls randomness in responses. |
+| top_p | [float](#float) | optional | Optional. Minimum 0.0. Maximum 1.0. Default 0.3. Nucleus sampling parameter. Filters token choices by cumulative probability. |
+| frequency_penalty | [float](#float) | optional | Optional. Minimum -2.0. Maximum 2.0. Default 0.4. Frequency penalty. Reduces repetition of frequent tokens. |
+| presence_penalty | [float](#float) | optional | Optional. Minimum -2.0. Maximum 2.0. Default 0.7. Presence penalty. Reduces repetition of any tokens already used. |
+| max_tokens | [int32](#int32) |  | Optional. Minimum 1. Maximum number of tokens to generate. |
 | additional_fields | [google.protobuf.Struct](#google.protobuf.Struct) |  | Optional. Additional fields to pass through to RAGFlow. |
 
 
@@ -8179,9 +8148,41 @@ Message in a conversation session.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| role | [RagMessageRole](#ondewo.nlu.RagMessageRole) |  | Role of the message sender. |
+| role | [RagMessageRole](#ondewo.nlu.RagMessageRole) | optional | Role of the message sender. |
 | content | [string](#string) |  | Message content text. |
 | additional_fields | [google.protobuf.Struct](#google.protobuf.Struct) |  | Additional fields returned by RAGFlow. |
+
+
+
+
+
+
+<a name="ondewo.nlu.RagMetadataCondition"></a>
+
+### RagMetadataCondition
+Condition to filter document metadata on.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | Required. Metadata field name. |
+| comparison_operator | [string](#string) |  | Required. Comparison operator. Can be one of: <code>"contains"</code>, <code>"not contains"</code>, <code>"start with"</code>, <code>"empty"</code>, <code>"not empty"</code>, <code>"="</code>, <code>"≠"</code>, <code>"&lt;"</code>, <code>"&gt;</code>, <code>"≥"</code>, <code>"≤"</code> |
+| value | [string](#string) |  | Required. Value to compare to. |
+
+
+
+
+
+
+<a name="ondewo.nlu.RagMetadataConditions"></a>
+
+### RagMetadataConditions
+List of document metadata conditions.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| conditions | [RagMetadataCondition](#ondewo.nlu.RagMetadataCondition) | repeated | Optional. List of conditions. |
 
 
 
@@ -8213,8 +8214,8 @@ Pagination parameters for list requests.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| page | [int32](#int32) |  | Optional. Page number (1-indexed, default: 1). |
-| page_size | [int32](#int32) |  | Optional. Number of items per page (default varies by endpoint). |
+| page | [int32](#int32) |  | Optional. Minimum 1. Page number (1-indexed, default: 1). |
+| page_size | [int32](#int32) |  | Optional. Minimum 1. Number of items per page (default varies by endpoint). |
 
 
 
@@ -8282,17 +8283,17 @@ Used fields depend on the chunking method of the document.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | auto_keywords | [int32](#int32) |  | Optional. Minimum 0, maximum 32, default 0. See <a href="https://ragflow.io/docs/dev/autokeyword_autoquestion">https://ragflow.io/docs/dev/autokeyword_autoquestion</a> for details. |
-| auto_questions | [int32](#int32) |  | Optional. Minimum 0, maximum 10, default 0. See <a href="https://ragflow.io/docs/dev/autokeyword_autoquestion">https://ragflow.io/docs/dev/autokeyword_autoquestion</a> for details. |
+| auto_questions | [int32](#int32) | optional | Optional. Minimum 0, maximum 10, default 0. See <a href="https://ragflow.io/docs/dev/autokeyword_autoquestion">https://ragflow.io/docs/dev/autokeyword_autoquestion</a> for details. |
 | chunk_token_num | [int32](#int32) |  | Optional. Minimum 1, maximum 2048, default 512. |
 | delimiter | [string](#string) |  | Optional. Default <code>"\n"</code>. |
 | html4excel | [bool](#bool) |  | Optional. Convert Excel documents to HTML. Default <code>false</code>. |
 | layout_recognize | [string](#string) |  | Optional. Default <code>"DeepDOC"</code>. |
 | tag_kb_ids | [string](#string) | repeated | Optional. List of dataset IDs. See <a href="https://ragflow.io/docs/dev/use_tag_sets">https://ragflow.io/docs/dev/use_tag_sets</a> for details. |
 | topn_tags | [int32](#int32) |  | Optional. Minimum 1. Maximum 10. Default 1. |
-| filename_embd_weight | [float](#float) |  | Optional. Minimum 0.0. Maximum 1.0. Default 0.1. |
+| filename_embd_weight | [float](#float) | optional | Optional. Minimum 0.0. Maximum 1.0. Default 0.1. |
 | task_page_size | [int32](#int32) |  | Optional. Minimum 1, default 12. Only applies to PDFs. |
-| raptor | [RaptorConfig](#ondewo.nlu.RaptorConfig) |  | Optional. RAPTOR-specific settings. Default <code>{ "use_raptor": false }</code>. |
-| graphrag | [GraphRagConfig](#ondewo.nlu.GraphRagConfig) |  | Optional. GRAPHRAG-specific settings. Default <code>{ "use_graphrag": false }</code>. |
+| raptor | [RagRaptorConfig](#ondewo.nlu.RagRaptorConfig) |  | Optional. RAPTOR-specific settings. Default <code>{ "use_raptor": false }</code>. |
+| graphrag | [RagGraphRagConfig](#ondewo.nlu.RagGraphRagConfig) |  | Optional. GRAPHRAG-specific settings. Default <code>{ "use_graphrag": false }</code>. |
 
 
 
@@ -8331,10 +8332,10 @@ Prompt and retrieval configuration for chat assistant.
 | empty_response | [string](#string) |  | Optional. Response to return when no relevant chunks are found in the knowledge base. |
 | tts | [bool](#bool) | optional | Optional. Default <code>false</code>. Enable text-to-speech for responses. |
 | refine_multiturn | [bool](#bool) | optional | Optional. Default <code>true</code>. Refine and optimize multi-turn conversation context. |
-| similarity_threshold | [float](#float) |  | Optional. Minimum 0.0. Maximum 1.0. Default 0.2. Minimum similarity score for chunk retrieval. |
-| keywords_similarity_weight | [float](#float) |  | Optional. Minimum 0.0. Maximum 1.0. Default 0.7. Weight for keywords versus vector similarity in hybrid search. |
-| top_n | [int32](#int32) |  | Optional. Default 6. Number of chunks to retrieve after reranking. |
-| top_k | [int32](#int32) |  | Optional. Default 1024. Maximum chunks to retrieve before reranking. |
+| similarity_threshold | [float](#float) | optional | Optional. Minimum 0.0. Maximum 1.0. Default 0.2. Minimum similarity score for chunk retrieval. |
+| keywords_similarity_weight | [float](#float) | optional | Optional. Minimum 0.0. Maximum 1.0. Default 0.7. Weight for keywords versus vector similarity in hybrid search. |
+| top_n | [int32](#int32) |  | Optional. Minimum 1. Default 6. Number of chunks to retrieve after reranking. |
+| top_k | [int32](#int32) |  | Optional. Minimum 1. Default 1024. Maximum chunks to retrieve before reranking. |
 | rerank_model | [string](#string) |  | Optional. Rerank model ID for reordering retrieved chunks. If not specified, cosine similarity is used. |
 | additional_fields | [google.protobuf.Struct](#google.protobuf.Struct) |  | Optional. Additional fields to pass through to RAGFlow. |
 
@@ -8353,6 +8354,26 @@ Prompt template variable for dynamic content insertion.
 | ----- | ---- | ----- | ----------- |
 | key | [string](#string) |  | Variable name used in prompt template. |
 | optional | [bool](#bool) | optional | Whether this variable is optional in the template. |
+
+
+
+
+
+
+<a name="ondewo.nlu.RagRaptorConfig"></a>
+
+### RagRaptorConfig
+RAPTOR configuration. Refer to <a href="https://arxiv.org/html/2401.18059v1">RAPTOR paper</a> for more information about RAPTOR.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| use_raptor | [bool](#bool) |  | Optional. Default <code>false</code>. Whether to use RAPTOR for this dataset. |
+| prompt | [string](#string) |  | Optional. Prompt to use for RAPTOR. Default:<br> <code>"Please summarize the following paragraphs. Be careful with the numbers, do not make things up. Paragraphs as following:\n {cluster_content}\nThe above is the content you need to summarize."</code> |
+| max_token | [int32](#int32) |  | Optional. Minimum 1. Maximum 2048. Default 256. |
+| threshold | [float](#float) | optional | Optional. Minimum 0.0. Maximum 1.0. Default 0.1. |
+| max_cluster | [int32](#int32) |  | Optional. Minimum 1. Maximum 1024. Default 64. |
+| random_seed | [int64](#int64) | optional | Optional. Minimum 0. Default 0. |
 
 
 
@@ -8442,10 +8463,10 @@ Supports hybrid search combining vector similarity with keyword matching.
 | document_ids | [string](#string) | repeated | Optional. Filter by specific document IDs within the datasets. |
 | use_kg | [bool](#bool) | optional | Optional. Include knowledge graph retrieval to enhance results with graph relationships. |
 | cross_languages | [string](#string) | repeated | Optional. Cross-language translation codes to enable multilingual retrieval. |
-| metadata_condition | [MetadataConditions](#ondewo.nlu.MetadataConditions) |  | Optional. Metadata filter condition to restrict results based on document metadata. |
+| metadata_condition | [RagMetadataConditions](#ondewo.nlu.RagMetadataConditions) |  | Optional. Metadata filter condition to restrict results based on document metadata. |
 | similarity_threshold | [float](#float) |  | Optional. Minimum similarity score threshold between <code>0.0</code> and <code>1.0</code> (default: <code>0.2</code>). |
-| vector_similarity_weight | [float](#float) |  | Optional. Weight for vector similarity versus keyword matching between <code>0.0</code> and <code>1.0</code> (default: <code>0.3</code>).<br> Higher values favor vector similarity, lower values favor keyword matching. |
-| top_k | [int32](#int32) |  | Optional. Maximum number of chunks to retrieve before reranking (default: <code>1024</code>). |
+| vector_similarity_weight | [float](#float) | optional | Optional. Weight for vector similarity versus keyword matching between <code>0.0</code> and <code>1.0</code> (default: <code>0.3</code>).<br> Higher values favor vector similarity, lower values favor keyword matching. |
+| top_k | [int32](#int32) |  | Optional. Minimum 1. Maximum number of chunks to retrieve before reranking (default: <code>1024</code>). |
 | rerank_id | [string](#string) |  | Optional. Rerank model ID to reorder results after initial retrieval. |
 | highlight | [bool](#bool) | optional | Optional. Whether to highlight matched content in the returned chunks. |
 | keyword | [bool](#bool) | optional | Optional. Extract additional keywords from the query to improve retrieval. |
@@ -8465,7 +8486,7 @@ Response message for chunk retrieval.
 | ----- | ---- | ----- | ----------- |
 | chunks | [RagChunk](#ondewo.nlu.RagChunk) | repeated | Retrieved chunks with similarity scores populated (ordered by relevance). |
 | doc_aggs | [google.protobuf.Struct](#google.protobuf.Struct) | repeated | Document aggregations providing statistics about which documents matched. |
-| total | [int32](#int32) |  | Total number of chunks matching the query (before pagination). |
+| total | [int32](#int32) | optional | Total number of chunks matching the query (before pagination). |
 | additional_fields | [google.protobuf.Struct](#google.protobuf.Struct) |  | Additional fields returned by RAGFlow not explicitly defined above. |
 
 
@@ -8501,15 +8522,15 @@ Status of a task.
 | ----- | ---- | ----- | ----------- |
 | id | [string](#string) |  | Task ID. |
 | doc_id | [string](#string) |  | Document ID. |
-| from_page | [int32](#int32) |  | Start page. |
-| to_page | [int32](#int32) |  | End page. |
+| from_page | [int32](#int32) | optional | Start page. |
+| to_page | [int32](#int32) | optional | End page. |
 | task_type | [string](#string) |  | Task type. |
-| priority | [int32](#int32) |  | Priority. |
+| priority | [int32](#int32) | optional | Priority. |
 | begin_at | [string](#string) |  | Optional. Start time of the task (ISO 8601 datetime). |
-| process_duration | [float](#float) |  | Current duration of the task (in seconds). |
-| progress | [float](#float) |  | Task progress (0.0 - 1.0). |
+| process_duration | [float](#float) | optional | Current duration of the task (in seconds). |
+| progress | [float](#float) | optional | Task progress (0.0 - 1.0). |
 | progress_msg | [string](#string) |  | Task progress message. |
-| retry_count | [int32](#int32) |  | Retry count. |
+| retry_count | [int32](#int32) | optional | Retry count. |
 | digest | [string](#string) |  | Digest. |
 | chunk_ids | [string](#string) |  | List of document chunk IDs as a string. |
 
@@ -8530,10 +8551,10 @@ Request message for updating an existing RAGFlow agent.
 | agent_id | [string](#string) |  | Required. ID of the RAGFlow agent to update. |
 | avatar | [string](#string) |  | Optional. Base64-encoded icon in the format <code>"data:image/[png|jpeg];base64,&lt;base64_string&gt;"</code>. |
 | title | [string](#string) |  | Optional. Maximum length 255. Unique agent title. Must be unique within the project. |
-| permission | [RagPermission](#ondewo.nlu.RagPermission) |  | Optional. Default <code>me</code> |
+| permission | [RagPermission](#ondewo.nlu.RagPermission) | optional | Optional. Default <code>me</code> |
 | description | [string](#string) |  | Optional. Agent description providing details about the agent's purpose and functionality. |
-| canvas_type | [string](#string) |  | Optional. Max length 32. Canvas type. |
-| canvas_category | [RagCanvasCategory](#ondewo.nlu.RagCanvasCategory) |  | Optional. Canvas category. |
+| canvas_type | [string](#string) | optional | Optional. Max length 32. Canvas type. |
+| canvas_category | [RagCanvasCategory](#ondewo.nlu.RagCanvasCategory) | optional | Optional. Canvas category. |
 | dsl | [google.protobuf.Struct](#google.protobuf.Struct) |  | Optional. Canvas DSL configuration defining the agent's workflow. |
 
 
@@ -8621,11 +8642,11 @@ The same field constraints as for <code>RagCreateDatasetRequest</code> apply her
 | name | [string](#string) |  | Optional. New dataset name. |
 | description | [string](#string) |  | Optional. New dataset description. |
 | avatar | [string](#string) |  | Optional. New avatar image. |
-| permission | [RagPermission](#ondewo.nlu.RagPermission) |  | Optional. New access permission. |
-| chunk_method | [RagChunkMethod](#ondewo.nlu.RagChunkMethod) |  | Optional. New chunk method. |
+| permission | [RagPermission](#ondewo.nlu.RagPermission) | optional | Optional. New access permission. |
+| chunk_method | [RagChunkMethod](#ondewo.nlu.RagChunkMethod) | optional | Optional. New chunk method. |
 | parser_config | [RagParserConfig](#ondewo.nlu.RagParserConfig) |  | Optional. New parser config (deep merged with existing). |
 | embedding_model | [string](#string) |  | Optional. New embedding model (cannot change if chunk_count > 0). |
-| pagerank | [int32](#int32) |  | Optional. PageRank value. |
+| pagerank | [int32](#int32) | optional | Optional. PageRank value. |
 
 
 
@@ -8644,7 +8665,7 @@ Request message for updating an existing document's metadata and configuration.
 | dataset_id | [string](#string) |  | Required. Dataset ID containing the document. |
 | document_id | [string](#string) |  | Required. Document ID to update. |
 | name | [string](#string) |  | Optional. Maximum length 255. New document name (file extension must remain the same). |
-| chunk_method | [RagChunkMethod](#ondewo.nlu.RagChunkMethod) |  | Optional. New chunking method (resets document to <code>UNSTART</code> status and deletes all existing chunks). |
+| chunk_method | [RagChunkMethod](#ondewo.nlu.RagChunkMethod) | optional | Optional. New chunking method (resets document to <code>UNSTART</code> status and deletes all existing chunks). |
 | parser_config | [RagParserConfig](#ondewo.nlu.RagParserConfig) |  | Optional. New parser configuration (deep merged with existing configuration). |
 | enabled | [bool](#bool) | optional | Optional. Document enabled/disabled status. |
 | meta_fields | [google.protobuf.Struct](#google.protobuf.Struct) |  | Optional. Custom metadata fields for document-specific metadata (replaces existing metadata). |
@@ -8738,39 +8759,7 @@ Metadata for the upload operation (must be sent in first message only).
 
 
 
-
-<a name="ondewo.nlu.RaptorConfig"></a>
-
-### RaptorConfig
-RAPTOR configuration. Refer to <a href="https://arxiv.org/html/2401.18059v1">RAPTOR paper</a> for more information about RAPTOR.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| use_raptor | [bool](#bool) |  | Optional. Default <code>false</code>. Whether to use RAPTOR for this dataset. |
-| prompt | [string](#string) |  | Optional. Prompt to use for RAPTOR. Default:<br> <code>"Please summarize the following paragraphs. Be careful with the numbers, do not make things up. Paragraphs as following:\n {cluster_content}\nThe above is the content you need to summarize."</code> |
-| max_tokens | [int32](#int32) |  | Optional. Minimum 1. Maximum 2048. Default 256. |
-| threshold | [float](#float) |  | Optional. Minimum 0.0. Maximum 1.0. Default 0.1. |
-| max_cluster | [int32](#int32) |  | Optional. Minimum 1. Maximum 1024. Default 64. |
-| random_seed | [int64](#int64) |  | Optional. Minimum 0. Default 0. |
-
-
-
-
-
  <!-- end messages -->
-
-
-<a name="ondewo.nlu.GraphRagMethod"></a>
-
-### GraphRagMethod
-Knowledge graph construction methods.
-
-| Name | Number | Description |
-| ---- | ------ | ----------- |
-| light | 0 | Use prompts provided by <a href="https://github.com/HKUDS/LightRAG">LightRAG</a>. |
-| general | 1 | Use prompts provided by <a href="https://github.com/microsoft/graphrag">GraphRAG</a>. |
-
 
 
 <a name="ondewo.nlu.RagAgentEventType"></a>
@@ -8843,6 +8832,18 @@ Document processing status.
 | CANCEL | 2 | Document processing was cancelled. |
 | DONE | 3 | Document processing completed successfully. |
 | FAIL | 4 | Document processing failed. |
+
+
+
+<a name="ondewo.nlu.RagGraphRagMethod"></a>
+
+### RagGraphRagMethod
+Knowledge graph construction methods.
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| light | 0 | Use prompts provided by <a href="https://github.com/HKUDS/LightRAG">LightRAG</a>. |
+| general | 1 | Use prompts provided by <a href="https://github.com/microsoft/graphrag">GraphRAG</a>. |
 
 
 
