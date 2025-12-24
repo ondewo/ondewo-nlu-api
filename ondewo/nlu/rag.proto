@@ -571,7 +571,7 @@ enum RagChunkMethod {
 message RagParserConfig {
 
     // Optional. Minimum 0, maximum 32, default 0. See <a href="https://ragflow.io/docs/dev/autokeyword_autoquestion">https://ragflow.io/docs/dev/autokeyword_autoquestion</a> for details.
-    int32 auto_keywords = 1;
+    optional int32 auto_keywords = 1;
 
     // Optional. Minimum 0, maximum 10, default 0. See <a href="https://ragflow.io/docs/dev/autokeyword_autoquestion">https://ragflow.io/docs/dev/autokeyword_autoquestion</a> for details.
     optional int32 auto_questions = 2;
