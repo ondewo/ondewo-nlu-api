@@ -921,28 +921,28 @@ message RagConstructRaptorResponse {
 // Documents are uploaded via streaming multipart form data.
 message RagUploadDocumentsRequest {
 
-    // Required. The agent to upload documents for.
-    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    string parent = 1;
-
     // Metadata for the upload (first message only).
     message RagMetadata {
 
+        // Required. The agent to upload documents for.
+        // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+        string parent = 1;
+
         // Required. Target dataset ID to upload documents to.
-        string dataset_id = 1;
+        string dataset_id = 2;
 
         // Required. Metadata for all files being uploaded in this stream.
-        repeated RagFileMetadata files = 2;
+        repeated RagFileMetadata files = 3;
     }
 
     // First message must contain metadata, subsequent messages contain chunks.
     oneof payload {
 
         // First message: declares all files to be uploaded.
-        RagMetadata metadata = 2;
+        RagMetadata metadata = 1;
 
         // Subsequent messages: stream file data chunks.
-        RagUploadChunk chunk = 3;
+        RagUploadChunk chunk = 2;
     }
 }
 
@@ -1464,28 +1464,28 @@ message RagRetrievalResponse {
 // RAGFlow supports individual and bulk file uploads. Files can be uploaded to a specific folder or to the root directory if no parent folder is specified.
 message RagUploadFilesRequest {
 
-    // Required. The agent to upload files for.
-    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    string parent = 1;
-
     // Metadata for the upload operation (must be sent in first message only).
     message RagMetadata {
 
+        // Required. The agent to upload files for.
+        // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+        string parent = 1;
+
         // Optional. Parent folder ID. If not provided, files will be uploaded to root directory.
-        string parent_id = 1;
+        string parent_id = 2;
 
         // Required. Metadata for all files being uploaded in this request.
-        repeated RagFileMetadata files = 2;
+        repeated RagFileMetadata files = 3;
     }
 
     // First message must contain metadata; subsequent messages contain file data chunks.
     oneof payload {
 
         // First message: declares all files to be uploaded.
-        RagMetadata metadata = 2;
+        RagMetadata metadata = 1;
 
         // Subsequent messages: stream file data in chunks.
-        RagUploadChunk chunk = 3;
+        RagUploadChunk chunk = 2;
     }
 }
 
