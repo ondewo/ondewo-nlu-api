@@ -73,6 +73,7 @@ service Sessions {
     rpc StreamingDetectIntent (stream StreamingDetectIntentRequest) returns (stream StreamingDetectIntentResponse);
 
     // *** SESSION RELATED ENDPOINTS *** //
+
     // ListSessions: returns list of sessions from ondewo-kb; by default returns only session IDs
     rpc ListSessions (ListSessionsRequest) returns (ListSessionsResponse) {
         option (google.api.http) = {
@@ -130,6 +131,7 @@ service Sessions {
     };
 
     // *** SESSION-LABEL RELATED ENDPOINTS *** //
+
     rpc ListSessionLabels (ListSessionLabelsRequest) returns (ListSessionLabelsResponse) {
         option (google.api.http) = {
             get: "/v2/{session_id=projects/*/agent/sessions/*}/labels"
@@ -264,6 +266,7 @@ service Sessions {
     };
 
     // *** SESSION-REVIEW RELATED ENDPOINTS *** //
+
     // ListSessionReviews:
     // returns list of session reviews from ondewo-kb; by default only returns session review IDs
     rpc ListSessionReviews (ListSessionReviewsRequest) returns (ListSessionReviewsResponse) {
@@ -1476,6 +1479,7 @@ message DeleteSessionRequest {
 }
 
 // *** SESSION-REVIEW RELATED MESSAGES *** //
+
 message CreateSessionReviewRequest {
 
     // The unique identifier for the session under review
