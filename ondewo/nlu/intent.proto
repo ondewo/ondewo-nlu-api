@@ -1,3 +1,4 @@
+
 // Copyright 2018 Google Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -39,53 +40,55 @@ import "google/protobuf/timestamp.proto";
 import "google/protobuf/field_mask.proto";
 import "google/protobuf/struct.proto";
 
-// An intent represents a mapping between input from a user and an action to
+// <p>An intent represents a mapping between input from a user and an action to
 // be taken by your application. When you pass user input to the
-// [DetectIntent][google.cloud.dialogflow.v2.Sessions.DetectIntent] (or
-// [StreamingDetectIntent][google.cloud.dialogflow.v2.Sessions.StreamingDetectIntent]) method, the
+// <a href="index.html#google.cloud.dialogflow.v2.Sessions.DetectIntent">DetectIntent</a> (or
+// <a href="index.html#google.cloud.dialogflow.v2.Sessions.StreamingDetectIntent">StreamingDetectIntent</a>) method, the
 // Dialogflow API analyzes the input and searches
 // for a matching intent. If no match is found, the Dialogflow API returns a
-// fallback intent (`is_fallback` = true).
+// fallback intent (<code>is_fallback</code> = true).</p>
 //
-// You can provide additional information for the Dialogflow API to use to
-// match user input to an intent by adding the following to your intent.
+// <p>You can provide additional information for the Dialogflow API to use to
+// match user input to an intent by adding the following to your intent.</p>
 //
-// *   **Contexts** - provide additional context for intent analysis. For
+// <ul>
+//   <li><strong>Contexts</strong> - provide additional context for intent analysis. For
 //     example, if an intent is related to an object in your application that
 //     plays music, you can provide a context to determine when to match the
-//     intent if the user input is “turn it off”.  You can include a context
+//     intent if the user input is &quot;turn it off&quot;.  You can include a context
 //     that matches the intent when there is previous user input of
-//     "play music", and not when there is previous user input of
-//     "turn on the light".
+//     &quot;play music&quot;, and not when there is previous user input of
+//     &quot;turn on the light&quot;.</li>
 //
-// *   **Events** - allow for matching an intent by using an event name
+//   <li><strong>Events</strong> - allow for matching an intent by using an event name
 //     instead of user input. Your application can provide an event name and
 //     related parameters to the Dialogflow API to match an intent. For
 //     example, when your application starts, you can send a welcome event
 //     with a user name parameter to the Dialogflow API to match an intent with
-//     a personalized welcome message for the user.
+//     a personalized welcome message for the user.</li>
 //
-// *   **Training phrases** - provide examples of user input to train the
-//     Dialogflow API agent to better match intents.
+//   <li><strong>Training phrases</strong> - provide examples of user input to train the
+//     Dialogflow API agent to better match intents.</li>
+// </ul>
 //
-// For more information about intents, see the
-// [Dialogflow documentation](https://dialogflow.com/docs/intents).
+// <p>For more information about intents, see the
+// <a href="https://dialogflow.com/docs/intents">Dialogflow documentation</a>.</p>
 service Intents {
-    // Returns the list of all intents in the specified agent.
+    // <p>Returns the list of all intents in the specified agent.</p>
     rpc ListIntents (ListIntentsRequest) returns (ListIntentsResponse) {
         option (google.api.http) = {
             get: "/v2/{parent=projects/*/agent}/intents"
         };
     }
 
-    // Retrieves the specified intent.
+    // <p>Retrieves the specified intent.</p>
     rpc GetIntent (GetIntentRequest) returns (Intent) {
         option (google.api.http) = {
             get: "/v2/{name=projects/*/agent/intents/*}"
         };
     }
 
-    // Creates an intent in the specified agent.
+    // <p>Creates an intent in the specified agent.</p>
     rpc CreateIntent (CreateIntentRequest) returns (Intent) {
         option (google.api.http) = {
             post: "/v2/{parent=projects/*/agent}/intents"
@@ -93,7 +96,7 @@ service Intents {
         };
     }
 
-    // Updates the specified intent.
+    // <p>Updates the specified intent.</p>
     rpc UpdateIntent (UpdateIntentRequest) returns (Intent) {
         option (google.api.http) = {
             patch: "/v2/{intent.name=projects/*/agent/intents/*}"
@@ -101,16 +104,16 @@ service Intents {
         };
     }
 
-    // Deletes the specified intent.
+    // <p>Deletes the specified intent.</p>
     rpc DeleteIntent (DeleteIntentRequest) returns (google.protobuf.Empty) {
         option (google.api.http) = {
             delete: "/v2/{name=projects/*/agent/intents/*}"
         };
     }
 
-    // Updates/Creates multiple intents in the specified agent.
+    // <p>Updates/Creates multiple intents in the specified agent.</p>
     //
-    // Operation <response: [BatchUpdateIntentsResponse][google.cloud.dialogflow.v2.BatchUpdateIntentsResponse]>
+    // <p>Operation &lt;response: <a href="index.html#google.cloud.dialogflow.v2.BatchUpdateIntentsResponse">BatchUpdateIntentsResponse</a>&gt;</p>
     rpc BatchUpdateIntents (BatchUpdateIntentsRequest) returns (BatchUpdateIntentsResponse) {
         option (google.api.http) = {
             post: "/v2/{parent=projects/*/agent}/intents:batchUpdate"
@@ -118,9 +121,9 @@ service Intents {
         };
     }
 
-    // Deletes intents in the specified agent.
+    // <p>Deletes intents in the specified agent.</p>
     //
-    // Operation <response: [google.protobuf.Empty][google.protobuf.Empty]>
+    // <p>Operation &lt;response: <a href="index.html#google.protobuf.Empty">google.protobuf.Empty</a>&gt;</p>
     rpc BatchDeleteIntents (BatchDeleteIntentsRequest) returns (ondewo.nlu.Operation) {
         option (google.api.http) = {
             post: "/v2/{parent=projects/*/agent}/intents:batchDelete"
@@ -128,7 +131,7 @@ service Intents {
         };
     }
 
-    // Tags a specific intent with tag(s)
+    // <p>Tags a specific intent with tag(s)</p>
     rpc TagIntent (IntentTagRequest) returns (google.protobuf.Empty) {
         option (google.api.http) = {
             post: "/v2/{parent=projects/*/agent}/intents:tagIntent"
@@ -136,7 +139,7 @@ service Intents {
         };
     }
 
-    // Deletes tag(s) for a specific intent
+    // <p>Deletes tag(s) for a specific intent</p>
     rpc DeleteIntentTag (IntentTagRequest) returns (google.protobuf.Empty) {
         option (google.api.http) = {
             post: "/v2/{parent=projects/*/agent}/intents:deleteIntentTag"
@@ -144,572 +147,574 @@ service Intents {
         };
     }
 
-    // Gets all the tags for a specific intent
+    // <p>Gets all the tags for a specific intent</p>
     rpc GetIntentTags (GetIntentTagsRequest) returns (GetIntentTagsResponse) {}
 
-    // Gets all the tags for all the intents
+    // <p>Gets all the tags for all the intents</p>
     rpc GetAllIntentTags (GetAllIntentTagsRequest) returns (GetIntentTagsResponse) {}
 
     /************************* Training Phrase RPC Endpoints ****************************/
 
-    // Creates batch of training phrases
+    // <p>Creates batch of training phrases</p>
     rpc BatchCreateTrainingPhrases (BatchCreateTrainingPhrasesRequest) returns (BatchTrainingPhrasesStatusResponse);
 
-    // Retrieve a training phrases batch of the specified names.
+    // <p>Retrieve a training phrases batch of the specified names.</p>
     rpc BatchGetTrainingPhrases (BatchGetTrainingPhrasesRequest) returns (BatchTrainingPhrasesStatusResponse);
 
-    // Updates batch of training phrases
+    // <p>Updates batch of training phrases</p>
     rpc BatchUpdateTrainingPhrases (BatchUpdateTrainingPhrasesRequest) returns (BatchTrainingPhrasesStatusResponse);
 
-    // Delete a training phrases batch of the specified names.
+    // <p>Delete a training phrases batch of the specified names.</p>
     rpc BatchDeleteTrainingPhrases (BatchDeleteTrainingPhrasesRequest) returns (BatchDeleteTrainingPhrasesResponse);
 
-    // List training phrases (of a specific intent).
+    // <p>List training phrases (of a specific intent).</p>
     rpc ListTrainingPhrases (ListTrainingPhrasesRequest) returns (ListTrainingPhrasesResponse);
 
 
     /************************* Response RPC Endpoints ****************************/
 
-    // Creates batch of intent messages
+    // <p>Creates batch of intent messages</p>
     rpc BatchCreateResponseMessages (BatchCreateResponseMessagesRequest) returns (BatchResponseMessagesStatusResponse);
 
-    // Retrieve a intent messages batch of the specified names.
+    // <p>Retrieve a intent messages batch of the specified names.</p>
     rpc BatchGetResponseMessages (BatchGetResponseMessagesRequest) returns (BatchResponseMessagesStatusResponse);
 
-    // Updates batch of intent messages
+    // <p>Updates batch of intent messages</p>
     rpc BatchUpdateResponseMessages (BatchUpdateResponseMessagesRequest) returns (BatchResponseMessagesStatusResponse);
 
-    // Delete a intent messages batch of the specified names.
+    // <p>Delete a intent messages batch of the specified names.</p>
     rpc BatchDeleteResponseMessages (BatchDeleteResponseMessagesRequest) returns (BatchDeleteResponseMessagesResponse);
 
-    // List messages (of a specific intent).
+    // <p>List messages (of a specific intent).</p>
     rpc ListResponseMessages (ListResponseMessagesRequest) returns (ListResponseMessagesResponse);
 
 
     /************************* Parameter RPC Endpoints ****************************/
 
-    // Creates batch of intent messages
+    // <p>Creates batch of intent messages</p>
     rpc BatchCreateParameters (BatchCreateParametersRequest) returns (BatchParametersStatusResponse);
 
-    // Retrieve a intent messages batch of the specified names.
+    // <p>Retrieve a intent messages batch of the specified names.</p>
     rpc BatchGetParameters (BatchGetParametersRequest) returns (BatchParametersStatusResponse);
 
-    // Updates batch of intent messages
+    // <p>Updates batch of intent messages</p>
     rpc BatchUpdateParameters (BatchUpdateParametersRequest) returns (BatchParametersStatusResponse);
 
-    // Delete a intent messages batch of the specified names.
+    // <p>Delete a intent messages batch of the specified names.</p>
     rpc BatchDeleteParameters (BatchDeleteParametersRequest) returns (BatchDeleteParametersResponse);
 
-    // List messages (of a specific intent).
+    // <p>List messages (of a specific intent).</p>
     rpc ListParameters (ListParametersRequest) returns (ListParametersResponse);
 
-    // List Training phrases (of a specific intent).
+    // <p>List Training phrases (of a specific intent).</p>
     rpc ListTrainingPhrasesofIntentsWithEnrichment (ListTrainingPhrasesofIntentsWithEnrichmentRequest) returns (ListTrainingPhrasesofIntentsWithEnrichmentResponse);
 
 }
 
-// Represents an intent.
-// Intents convert a number of user expressions or patterns into an action. An
-// action is an extraction of a user command or sentence semantics.
+// <p>Represents an intent.</p>
+// <p>Intents convert a number of user expressions or patterns into an action. An
+// action is an extraction of a user command or sentence semantics.</p>
 message Intent {
 
-    // Represents an example or template that the agent is trained on.
+    // <p>Represents an example or template that the agent is trained on.</p>
     message TrainingPhrase {
 
-        // Represents an entity annotation in a training phrase. The entity can be annotated on the level of
-        // entity type only or both entity type and entity value.
+        // <p>Represents an entity annotation in a training phrase. The entity can be annotated on the level of
+        // entity type only or both entity type and entity value.</p>
         message Entity {
 
-            // Required. The unique entity type identifier in format
-            // `projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;`.
+            // <p>Required. The unique entity type identifier in format
+            // <code>projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;</code>.</p>
             string entity_type_name = 1;
 
-            // Optional. The entity type name.
+            // <p>Optional. The entity type name.</p>
             string entity_type_display_name = 3;
 
-            // Optional. The unique entity value identifier in format
-            // `projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;/entities/&lt;entity_uuid&gt;`.
-            // The entity value must belong to the entity type defined in entity_type_name.
+            // <p>Optional. The unique entity value identifier in format
+            // <code>projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;/entities/&lt;entity_uuid&gt;</code>.</p>
+            // <p>The entity value must belong to the entity type defined in entity_type_name.</p>
             string entity_value_name = 4;
 
-            // Optional. The entity value name.
+            // <p>Optional. The entity value name.</p>
             string entity_value_display_name = 5;
 
-            // Required. Defines a character position, where the entity starts in the training phrase text
-            // (0-indexed).
+            // <p>Required. Defines a character position, where the entity starts in the training phrase text
+            // (0-indexed).</p>
             int32 start = 6;
 
-            // Required. Defines a character position + 1, where the entity ends in the training phrase.
-            // Example: "Meet you tomorrow" -> Entity(entity_type_display_name="sys.date", start=9, end=17)
+            // <p>Required. Defines a character position + 1, where the entity ends in the training phrase.</p>
+            // <p>Example: &quot;Meet you tomorrow&quot; -&gt; Entity(entity_type_display_name=&quot;sys.date&quot;, start=9, end=17)</p>
             int32 end = 7;
 
-            // Optional. The unique parameter identifier in format
-            // `projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;/parameters/&lt;parameter_uuid&gt;`
+            // <p>Optional. The unique parameter identifier in format
+            // <code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;/parameters/&lt;parameter_uuid&gt;</code>
             // for the value extracted from the annotated part of the example. The parameter must be one of the
-            // parameters defined in the top-level intent message.
-            // Can be unset if the parameter is created in the same create/update intent request as the
-            // annotation.
+            // parameters defined in the top-level intent message.</p>
+            // <p>Can be unset if the parameter is created in the same create/update intent request as the
+            // annotation.</p>
             string parameter_name = 8;
 
-            // Optional. The parameter name.
+            // <p>Optional. The parameter name.</p>
             string parameter_display_name = 9;
 
-            // Creation date and time. Read-only field.
+            // <p>Creation date and time. Read-only field.</p>
             google.protobuf.Timestamp created_at = 10;
 
-            // Modification date and time. Read-only field.
+            // <p>Modification date and time. Read-only field.</p>
             google.protobuf.Timestamp modified_at = 11;
 
-            // User id in form of a valid UUID.
+            // <p>User id in form of a valid UUID.</p>
             string created_by = 12;
 
-            // User id in form of a valid UUID.
+            // <p>User id in form of a valid UUID.</p>
             string modified_by = 13;
         }
 
-        // Represents different types of training phrases.
+        // <p>Represents different types of training phrases.</p>
         enum Type {
-            // Not specified. This value should never be used.
+            // <p>Not specified. This value should never be used.</p>
             TYPE_UNSPECIFIED = 0;
 
-            // Examples do not contain @-prefixed entity type names, but example parts
-            // can be annotated with entity types.
+            // <p>Examples do not contain @-prefixed entity type names, but example parts
+            // can be annotated with entity types.</p>
             EXAMPLE = 1;
 
-            // Templates are not annotated with entity types, but they can contain
-            // @-prefixed entity type names as substrings.
+            // <p>Templates are not annotated with entity types, but they can contain
+            // @-prefixed entity type names as substrings.</p>
             TEMPLATE = 2;
         }
 
-        // Required. The unique identifier of this training phrase.
-        // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;/trainingPhrases/&lt;training_phrase_uuid&gt;</code></pre>
+        // <p>Required. The unique identifier of this training phrase.</p>
+        // <p>Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;/trainingPhrases/&lt;training_phrase_uuid&gt;</code></pre></p>
         string name = 1;
 
-        // Required. The type of the training phrase.
+        // <p>Required. The type of the training phrase.</p>
         Type type = 2;
 
-        // Required. The text of the training phrase.
+        // <p>Required. The text of the training phrase.</p>
         string text = 3;
 
-        // Optional. The collection of annotated entities in the training phrase.
+        // <p>Optional. The collection of annotated entities in the training phrase.</p>
         repeated Entity entities = 4;
 
-        // Optional. Indicates how many times this example or template was added to
+        // <p>Optional. Indicates how many times this example or template was added to
         // the intent. Each time a developer adds an existing sample by editing an
-        // intent or training, this counter is increased.
+        // intent or training, this counter is increased.</p>
         int32 times_added_count = 5;
 
-        // Optional. The language of the training phrase.
+        // <p>Optional. The language of the training phrase.</p>
         string language_code = 6;
 
-        // Creation date and time. Read-only field.
+        // <p>Creation date and time. Read-only field.</p>
         google.protobuf.Timestamp created_at = 7;
 
-        // Modification date and time. Read-only field.
+        // <p>Modification date and time. Read-only field.</p>
         google.protobuf.Timestamp modified_at = 8;
 
-        // User id in form of a valid UUID.
+        // <p>User id in form of a valid UUID.</p>
         string created_by = 9;
 
-        // User id in form of a valid UUID.
+        // <p>User id in form of a valid UUID.</p>
         string modified_by = 10;
     }
 
-    // Structure of status of an Intent
+    // <p>Structure of status of an Intent</p>
     enum IntentStatus {
         ACTIVE = 0;
         INACTIVE = 1;
     }
 
-    // Represents intent parameters.
+    // <p>Represents intent parameters.</p>
     message Parameter {
 
-        // Represents the prompts in the parameters.
+        // <p>Represents the prompts in the parameters.</p>
         message Prompt {
 
-            // The unique identifier of this prompt.
-            // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;/parameters/&lt;parameter_uuid&gt;/prompts/&lt;prompt_uuid&gt;</code></pre>
+            // <p>The unique identifier of this prompt.</p>
+            // <p>Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;/parameters/&lt;parameter_uuid&gt;/prompts/&lt;prompt_uuid&gt;</code></pre></p>
             string name = 1;
 
-            // Required. Text of the prompt
+            // <p>Required. Text of the prompt</p>
             string text = 2;
 
-            // The language of the prompts. If not specified, the default language code will be used.
+            // <p>The language of the prompts. If not specified, the default language code will be used.</p>
             string language_code = 3;
 
-            // Creation date and time. Read-only field.
+            // <p>Creation date and time. Read-only field.</p>
             google.protobuf.Timestamp created_at = 4;
 
-            // Modification date and time. Read-only field.
+            // <p>Modification date and time. Read-only field.</p>
             google.protobuf.Timestamp modified_at = 5;
 
-            // User id in form of a valid UUID.
+            // <p>User id in form of a valid UUID.</p>
             string created_by = 6 ;
 
-            // User id in form of a valid UUID.
+            // <p>User id in form of a valid UUID.</p>
             string modified_by = 7;
         }
-        // The unique identifier of this parameter.
-        // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;/parameters/&lt;parameter_uuid&gt;</code></pre>
+        // <p>The unique identifier of this parameter.</p>
+        // <p>Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;/parameters/&lt;parameter_uuid&gt;</code></pre></p>
         string name = 1;
 
-        // Required. The name of the parameter.
+        // <p>Required. The name of the parameter.</p>
         string display_name = 2;
 
-        // Optional. The definition of the parameter value. It can be:
-        // - a constant string,
-        // - a parameter value defined as `$parameter_name`,
-        // - an original parameter value defined as `$parameter_name.original`,
-        // - a parameter value from some context defined as
-        //   `#context_name.parameter_name`.
+        // <p>Optional. The definition of the parameter value. It can be:</p>
+        // <ul>
+        //   <li>a constant string,</li>
+        //   <li>a parameter value defined as <code>$parameter_name</code>,</li>
+        //   <li>an original parameter value defined as <code>$parameter_name.original</code>,</li>
+        //   <li>a parameter value from some context defined as
+        //     <code>#context_name.parameter_name</code>.</li>
+        // </ul>
         string value = 3;
 
-        // Optional. The default value to use when the `value` yields an empty
-        // result.
-        // Default values can be extracted from contexts by using the following
-        // syntax: `#context_name.parameter_name`.
+        // <p>Optional. The default value to use when the <code>value</code> yields an empty
+        // result.</p>
+        // <p>Default values can be extracted from contexts by using the following
+        // syntax: <code>#context_name.parameter_name</code>.</p>
         string default_value = 4;
 
-        // Optional. The unique identifier of the entity type in format
-        // `projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;` that describes values
-        // of the parameter. If the parameter is required, this must be provided.
+        // <p>Optional. The unique identifier of the entity type in format
+        // <code>projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;</code> that describes values
+        // of the parameter. If the parameter is required, this must be provided.</p>
         string entity_type_name = 5;
 
-        // Optional. The name of the entity type that describes values of the parameter. If the parameter is
-        // required, this must be provided.
+        // <p>Optional. The name of the entity type that describes values of the parameter. If the parameter is
+        // required, this must be provided.</p>
         string entity_type_display_name = 6;
 
-        // Optional. Indicates whether the parameter is required. That is,
+        // <p>Optional. Indicates whether the parameter is required. That is,
         // whether the intent cannot be completed without collecting the parameter
-        // value.
+        // value.</p>
         bool mandatory = 7;
 
-        // Optional. The collection of prompts that the agent can present to the
-        // user in order to collect value for the parameter.
+        // <p>Optional. The collection of prompts that the agent can present to the
+        // user in order to collect value for the parameter.</p>
         repeated Prompt prompts = 8;
 
-        // Optional. Indicates whether the parameter represents a list of values.
+        // <p>Optional. Indicates whether the parameter represents a list of values.</p>
         bool is_list = 9;
 
-        // Creation date and time. Read-only field.
+        // <p>Creation date and time. Read-only field.</p>
         google.protobuf.Timestamp created_at = 10;
 
-        // Modification date and time. Read-only field.
+        // <p>Modification date and time. Read-only field.</p>
         google.protobuf.Timestamp modified_at = 11;
 
-        // User id in form of a valid UUID.
+        // <p>User id in form of a valid UUID.</p>
         string created_by = 12;
 
-        // User id in form of a valid UUID.
+        // <p>User id in form of a valid UUID.</p>
         string modified_by = 13;
     }
 
-    // Corresponds to the `Response` field in the Dialogflow console.
+    // <p>Corresponds to the <code>Response</code> field in the Dialogflow console.</p>
     message Message {
-        // The text response message.
+        // <p>The text response message.</p>
         message Text {
-            // Optional. The collection of the agent's responses.
+            // <p>Optional. The collection of the agent&apos;s responses.</p>
             repeated string text = 1;
         }
 
-        // The image response message.
+        // <p>The image response message.</p>
         message Image {
-            // Optional. The public URI to an image file.
+            // <p>Optional. The public URI to an image file.</p>
             string image_uri = 1;
 
-            // Optional. A text description of the image to be used for accessibility,
-            // e.g., screen readers.
+            // <p>Optional. A text description of the image to be used for accessibility,
+            // e.g., screen readers.</p>
             string accessibility_text = 2;
         }
 
-        // The quick replies response message.
+        // <p>The quick replies response message.</p>
         message QuickReplies {
-            // Optional. The title of the collection of quick replies.
+            // <p>Optional. The title of the collection of quick replies.</p>
             string title = 1;
 
-            // Optional. The collection of quick replies.
+            // <p>Optional. The collection of quick replies.</p>
             repeated string quick_replies = 2;
         }
 
-        // The card response message.
+        // <p>The card response message.</p>
         message Card {
 
-            // Optional. Contains information about a button.
+            // <p>Optional. Contains information about a button.</p>
             message Button {
 
-                // Note: One of the following is required:
-                // Optional. The text to show on the button.
+                // <p>Note: One of the following is required:</p>
+                // <p>Optional. The text to show on the button.</p>
                 string text = 1;
 
-                // Optional. The text to send back to the Dialogflow API or a URI to open.
+                // <p>Optional. The text to send back to the Dialogflow API or a URI to open.</p>
                 string postback = 2;
             }
 
-            // Optional. The title of the card.
+            // <p>Optional. The title of the card.</p>
             string title = 1;
 
-            // Optional. The subtitle of the card.
+            // <p>Optional. The subtitle of the card.</p>
             string subtitle = 2;
 
-            // Optional. The public URI to an image file for the card.
+            // <p>Optional. The public URI to an image file for the card.</p>
             string image_uri = 3;
 
-            // Optional. The collection of card buttons.
+            // <p>Optional. The collection of card buttons.</p>
             repeated Button buttons = 4;
         }
 
-        // The simple response message containing speech or text.
+        // <p>The simple response message containing speech or text.</p>
         message SimpleResponse {
 
-            // One of text_to_speech or ssml must be provided. The plain text of the
-            // speech output. Mutually exclusive with ssml.
+            // <p>One of text_to_speech or ssml must be provided. The plain text of the
+            // speech output. Mutually exclusive with ssml.</p>
             string text_to_speech = 1;
 
-            // One of text_to_speech or ssml must be provided. Structured spoken
+            // <p>One of text_to_speech or ssml must be provided. Structured spoken
             // response to the user in the SSML format. Mutually exclusive with
-            // text_to_speech.
+            // text_to_speech.</p>
             string ssml = 2;
 
-            // Optional. The text to display.
+            // <p>Optional. The text to display.</p>
             string display_text = 3;
         }
 
-        // The collection of simple response candidates.
-        // This message in `QueryResult.fulfillment_messages` and
-        // `WebhookResponse.fulfillment_messages` should contain only one
-        // `SimpleResponse`.
+        // <p>The collection of simple response candidates.</p>
+        // <p>This message in <code>QueryResult.fulfillment_messages</code> and
+        // <code>WebhookResponse.fulfillment_messages</code> should contain only one
+        // <code>SimpleResponse</code>.</p>
         message SimpleResponses {
-            // Required. The list of simple responses.
+            // <p>Required. The list of simple responses.</p>
             repeated SimpleResponse simple_responses = 1;
         }
 
-        // The basic card message. Useful for displaying information.
+        // <p>The basic card message. Useful for displaying information.</p>
         message BasicCard {
-            // The button object that appears at the bottom of a card.
+            // <p>The button object that appears at the bottom of a card.</p>
             message Button {
-                // Opens the given URI.
+                // <p>Opens the given URI.</p>
                 message OpenUriAction {
-                    // Required. The HTTP or HTTPS scheme URI.
+                    // <p>Required. The HTTP or HTTPS scheme URI.</p>
                     string uri = 1;
                 }
 
-                // Required. The title of the button.
+                // <p>Required. The title of the button.</p>
                 string title = 1;
 
-                // Required. Action to take when a user taps on the button.
+                // <p>Required. Action to take when a user taps on the button.</p>
                 OpenUriAction open_uri_action = 2;
             }
 
-            // Optional. The title of the card.
+            // <p>Optional. The title of the card.</p>
             string title = 1;
 
-            // Optional. The subtitle of the card.
+            // <p>Optional. The subtitle of the card.</p>
             string subtitle = 2;
 
-            // Required, unless image is present. The body text of the card.
+            // <p>Required, unless image is present. The body text of the card.</p>
             string formatted_text = 3;
 
-            // Optional. The image for the card.
+            // <p>Optional. The image for the card.</p>
             Image image = 4;
 
-            // Optional. The collection of card buttons.
+            // <p>Optional. The collection of card buttons.</p>
             repeated Button buttons = 5;
         }
 
-        // The suggestion chip message that the user can tap to quickly post a reply
-        // to the conversation.
+        // <p>The suggestion chip message that the user can tap to quickly post a reply
+        // to the conversation.</p>
         message Suggestion {
-            // Required. The text shown the in the suggestion chip.
+            // <p>Required. The text shown the in the suggestion chip.</p>
             string title = 1;
         }
 
-        // The collection of suggestions.
+        // <p>The collection of suggestions.</p>
         message Suggestions {
-            // Required. The list of suggested replies.
+            // <p>Required. The list of suggested replies.</p>
             repeated Suggestion suggestions = 1;
         }
 
-        // The suggestion chip message that allows the user to jump out to the app
-        // or website associated with this agent.
+        // <p>The suggestion chip message that allows the user to jump out to the app
+        // or website associated with this agent.</p>
         message LinkOutSuggestion {
-            // Required. The name of the app or site this chip is linking to.
+            // <p>Required. The name of the app or site this chip is linking to.</p>
             string destination_name = 1;
 
-            // Required. The URI of the app or site to open when the user taps the
-            // suggestion chip.
+            // <p>Required. The URI of the app or site to open when the user taps the
+            // suggestion chip.</p>
             string uri = 2;
         }
 
-        // The card for presenting a list of options to select from.
+        // <p>The card for presenting a list of options to select from.</p>
         message ListSelect {
-            // An item in the list.
+            // <p>An item in the list.</p>
             message Item {
-                // Required. Additional information about this option.
+                // <p>Required. Additional information about this option.</p>
                 SelectItemInfo info = 1;
 
-                // Required. The title of the list item.
+                // <p>Required. The title of the list item.</p>
                 string title = 2;
 
-                // Optional. The main text describing the item.
+                // <p>Optional. The main text describing the item.</p>
                 string description = 3;
 
-                // Optional. The image to display.
+                // <p>Optional. The image to display.</p>
                 Image image = 4;
             }
 
-            // Optional. The overall title of the list.
+            // <p>Optional. The overall title of the list.</p>
             string title = 1;
 
-            // Required. List items.
+            // <p>Required. List items.</p>
             repeated Item items = 2;
         }
 
-        // The card for presenting a carousel of options to select from.
+        // <p>The card for presenting a carousel of options to select from.</p>
         message CarouselSelect {
-            // An item in the carousel.
+            // <p>An item in the carousel.</p>
             message Item {
-                // Required. Additional info about the option item.
+                // <p>Required. Additional info about the option item.</p>
                 SelectItemInfo info = 1;
 
-                // Required. Title of the carousel item.
+                // <p>Required. Title of the carousel item.</p>
                 string title = 2;
 
-                // Optional. The body text of the card.
+                // <p>Optional. The body text of the card.</p>
                 string description = 3;
 
-                // Optional. The image to display.
+                // <p>Optional. The image to display.</p>
                 Image image = 4;
             }
 
-            // Required. Carousel items.
+            // <p>Required. Carousel items.</p>
             repeated Item items = 1;
         }
 
-        // This message contains HTML text
+        // <p>This message contains HTML text</p>
         message HTMLText {
-            // Collection of the agent's responses in HTML format
+            // <p>Collection of the agent&apos;s responses in HTML format</p>
             repeated string text = 1;
         }
 
-        // The Video response message.
+        // <p>The Video response message.</p>
         message Video {
-            // Optional. The public URI to a video file.
+            // <p>Optional. The public URI to a video file.</p>
             string uri = 1;
 
-            // Optional. A text description of the video to be used for accessibility,
-            // e.g., screen readers.
+            // <p>Optional. A text description of the video to be used for accessibility,
+            // e.g., screen readers.</p>
             string accessibility_text = 2;
         }
 
-        // The Audio response message.
+        // <p>The Audio response message.</p>
         message Audio {
-            // Optional. The public URI to an audio file.
+            // <p>Optional. The public URI to an audio file.</p>
             string uri = 1;
 
-            // Optional. A text description of the audio to be used for accessibility,
-            // e.g., screen readers.
+            // <p>Optional. A text description of the audio to be used for accessibility,
+            // e.g., screen readers.</p>
             string accessibility_text = 2;
         }
 
-        // Additional info about the select item for when it is triggered in a
-        // dialog.
+        // <p>Additional info about the select item for when it is triggered in a
+        // dialog.</p>
         message SelectItemInfo {
-            // Required. A unique key that will be sent back to the agent if this
-            // response is given.
+            // <p>Required. A unique key that will be sent back to the agent if this
+            // response is given.</p>
             string key = 1;
 
-            // Optional. A list of synonyms that can also be used to trigger this
-            // item in dialog.
+            // <p>Optional. A list of synonyms that can also be used to trigger this
+            // item in dialog.</p>
             repeated string synonyms = 2;
         }
 
-        // Represents different platforms that a rich message can be intended for.
+        // <p>Represents different platforms that a rich message can be intended for.</p>
         enum Platform {
-            // Not specified.
+            // <p>Not specified.</p>
             PLATFORM_UNSPECIFIED = 0;
 
-            // Facebook.
+            // <p>Facebook.</p>
             FACEBOOK = 1;
 
-            // Slack.
+            // <p>Slack.</p>
             SLACK = 2;
 
-            // Telegram.
+            // <p>Telegram.</p>
             TELEGRAM = 3;
 
-            // Kik.
+            // <p>Kik.</p>
             KIK = 4;
 
-            // Skype.
+            // <p>Skype.</p>
             SKYPE = 5;
 
-            // Line.
+            // <p>Line.</p>
             LINE = 6;
 
-            // Viber.
+            // <p>Viber.</p>
             VIBER = 7;
 
-            // Actions on Google.
-            // When using Actions on Google, you can choose one of the specific
+            // <p>Actions on Google.</p>
+            // <p>When using Actions on Google, you can choose one of the specific
             // Intent.Message types that mention support for Actions on Google,
-            // or you can use the advanced Intent.Message.payload field.
-            // The payload field provides access to AoG features not available in the
-            // specific message types.
-            // If using the Intent.Message.payload field, it should have a structure
+            // or you can use the advanced Intent.Message.payload field.</p>
+            // <p>The payload field provides access to AoG features not available in the
+            // specific message types.</p>
+            // <p>If using the Intent.Message.payload field, it should have a structure
             // similar to the JSON message shown here. For more information, see
-            // [Actions on Google Webhook
-            // Format](https://developers.google.com/actions/dialogflow/webhook)
-            // <pre>{
-            //   "expectUserResponse": true,
-            //   "isSsml": false,
-            //   "noInputPrompts": [],
-            //   "richResponse": {
-            //     "items": [
+            // <a href="https://developers.google.com/actions/dialogflow/webhook">Actions on Google Webhook
+            // Format</a></p>
+            // <pre><code>{
+            //   &quot;expectUserResponse&quot;: true,
+            //   &quot;isSsml&quot;: false,
+            //   &quot;noInputPrompts&quot;: [],
+            //   &quot;richResponse&quot;: {
+            //     &quot;items&quot;: [
             //       {
-            //         "simpleResponse": {
-            //           "displayText": "hi",
-            //           "textToSpeech": "hello"
+            //         &quot;simpleResponse&quot;: {
+            //           &quot;displayText&quot;: &quot;hi&quot;,
+            //           &quot;textToSpeech&quot;: &quot;hello&quot;
             //         }
             //       }
             //     ],
-            //     "suggestions": [
+            //     &quot;suggestions&quot;: [
             //       {
-            //         "title": "Say this"
+            //         &quot;title&quot;: &quot;Say this&quot;
             //       },
             //       {
-            //         "title": "or this"
+            //         &quot;title&quot;: &quot;or this&quot;
             //       }
             //     ]
             //   },
-            //   "systemIntent": {
-            //     "data": {
-            //       "@type": "type.googleapis.com/google.actions.v2.OptionValueSpec",
-            //       "listSelect": {
-            //         "items": [
+            //   &quot;systemIntent&quot;: {
+            //     &quot;data&quot;: {
+            //       &quot;@type&quot;: &quot;type.googleapis.com/google.actions.v2.OptionValueSpec&quot;,
+            //       &quot;listSelect&quot;: {
+            //         &quot;items&quot;: [
             //           {
-            //             "optionInfo": {
-            //               "key": "key1",
-            //               "synonyms": [
-            //                 "key one"
+            //             &quot;optionInfo&quot;: {
+            //               &quot;key&quot;: &quot;key1&quot;,
+            //               &quot;synonyms&quot;: [
+            //                 &quot;key one&quot;
             //               ]
             //             },
-            //             "title": "must not be empty, but unique"
+            //             &quot;title&quot;: &quot;must not be empty, but unique&quot;
             //           },
             //           {
-            //             "optionInfo": {
-            //               "key": "key2",
-            //               "synonyms": [
-            //                 "key two"
+            //             &quot;optionInfo&quot;: {
+            //               &quot;key&quot;: &quot;key2&quot;,
+            //               &quot;synonyms&quot;: [
+            //                 &quot;key two&quot;
             //               ]
             //             },
-            //             "title": "must not be empty, but unique"
+            //             &quot;title&quot;: &quot;must not be empty, but unique&quot;
             //           }
             //         ]
             //       }
             //     },
-            //     "intent": "actions.intent.OPTION"
+            //     &quot;intent&quot;: &quot;actions.intent.OPTION&quot;
             //   }
-            // }</pre>
+            // }</code></pre>
             ACTIONS_ON_GOOGLE = 8;
 
             PLACEHOLDER_1 = 9;
@@ -753,64 +758,64 @@ message Intent {
             PLACEHOLDER_20 = 28;
         }
 
-        // Required. The name of the return message.
-        // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;/responseMessages/&lt;message_uuid&gt;</code></pre>
+        // <p>Required. The name of the return message.</p>
+        // <p>Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;/responseMessages/&lt;message_uuid&gt;</code></pre></p>
         string name = 16;
 
-        // Required. The language of the return message.
+        // <p>Required. The language of the return message.</p>
         string language_code = 17;
 
-        // Required. The rich response message.
+        // <p>Required. The rich response message.</p>
         oneof message {
-            // The text response.
+            // <p>The text response.</p>
             Text text = 1;
 
-            // The image response.
+            // <p>The image response.</p>
             Image image = 2;
 
-            // The quick replies response.
+            // <p>The quick replies response.</p>
             QuickReplies quick_replies = 3;
 
-            // The card response.
+            // <p>The card response.</p>
             Card card = 4;
 
-            // Returns a response containing a custom, platform-specific payload.
-            // See the Intent.Message.Platform type for a description of the
-            // structure that may be required for your platform.
+            // <p>Returns a response containing a custom, platform-specific payload.</p>
+            // <p>See the Intent.Message.Platform type for a description of the
+            // structure that may be required for your platform.</p>
             google.protobuf.Struct payload = 5;
 
-            // The voice and text-only responses for Actions on Google.
+            // <p>The voice and text-only responses for Actions on Google.</p>
             SimpleResponses simple_responses = 7;
 
-            // The basic card response for Actions on Google.
+            // <p>The basic card response for Actions on Google.</p>
             BasicCard basic_card = 8;
 
-            // The suggestion chips for Actions on Google.
+            // <p>The suggestion chips for Actions on Google.</p>
             Suggestions suggestions = 9;
 
-            // The link out suggestion chip for Actions on Google.
+            // <p>The link out suggestion chip for Actions on Google.</p>
             LinkOutSuggestion link_out_suggestion = 10;
 
-            // The list card response for Actions on Google.
+            // <p>The list card response for Actions on Google.</p>
             ListSelect list_select = 11;
 
-            // The carousel card response for Actions on Google.
+            // <p>The carousel card response for Actions on Google.</p>
             CarouselSelect carousel_select = 12;
 
-            // The HTML text response
+            // <p>The HTML text response</p>
             HTMLText html_text = 13;
 
-            // The Video response
+            // <p>The Video response</p>
             Video video = 14;
 
-            // The Audio response
+            // <p>The Audio response</p>
             Audio audio = 15;
         }
 
-        // Optional. The platform that this message is intended for.
+        // <p>Optional. The platform that this message is intended for.</p>
         Platform platform = 6;
 
-        // Read-only. States if a returned message is a prompt or not.
+        // <p>Read-only. States if a returned message is a prompt or not.</p>
         bool is_prompt = 18;
 
         // Creation date and time. Read-only field.
@@ -826,323 +831,338 @@ message Intent {
         string modified_by = 22;
     }
 
-    // Represents a single followup intent in the chain.
+    // <p>Represents a single followup intent in the chain.</p>
     message FollowupIntentInfo {
-        // The unique identifier of the followup intent.
-        // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre>
+        // <p>The unique identifier of the followup intent.</p>
+        // <p>Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre></p>
         string followup_intent_name = 1;
 
-        // The unique identifier of the followup intent parent.
-        // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre>
+        // <p>The unique identifier of the followup intent parent.</p>
+        // <p>Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre></p>
         string parent_followup_intent_name = 2;
     }
 
-    // Represents the different states that webhooks can be in.
+    // <p>Represents the different states that webhooks can be in.</p>
     enum WebhookState {
-        // Webhook is disabled in the agent and in the intent.
+        // <p>Webhook is disabled in the agent and in the intent.</p>
         WEBHOOK_STATE_UNSPECIFIED = 0;
 
-        // Webhook is enabled in the agent and in the intent.
+        // <p>Webhook is enabled in the agent and in the intent.</p>
         WEBHOOK_STATE_ENABLED = 1;
 
-        // Webhook is enabled in the agent and in the intent. Also, each slot
-        // filling prompt is forwarded to the webhook.
+        // <p>Webhook is enabled in the agent and in the intent. Also, each slot
+        // filling prompt is forwarded to the webhook.</p>
         WEBHOOK_STATE_ENABLED_FOR_SLOT_FILLING = 2;
     }
 
-    // Required for all methods except `create` (`create` populates the name
-    // automatically.
-    // The unique identifier of this intent.
-    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre>
+    // <p>Required for all methods except <code>create</code> (<code>create</code> populates the name
+    // automatically.</p>
+    // <p>The unique identifier of this intent.</p>
+    // <p>Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre></p>
     string name = 1;
 
-    // Required. The name of this intent.
+    // <p>Required. The name of this intent.</p>
     string display_name = 2;
 
-    // Required. Indicates whether webhooks are enabled for the intent.
+    // <p>Required. Indicates whether webhooks are enabled for the intent.</p>
     WebhookState webhook_state = 6;
 
-    // Optional. The priority of this intent. Higher numbers represent higher
-    // priorities. Zero or negative numbers mean that the intent is disabled.
+    // <p>Optional. The priority of this intent. Higher numbers represent higher
+    // priorities. Zero or negative numbers mean that the intent is disabled.</p>
     int32 priority = 3;
 
-    // Optional. Indicates whether this is a fallback intent.
+    // <p>Optional. Indicates whether this is a fallback intent.</p>
     bool is_fallback = 4;
 
-    // Optional. Indicates whether Machine Learning is disabled for the intent.
-    // Note: If `ml_disabled` setting is set to true, then this intent is not
-    // taken into account during inference in `ML ONLY` match mode. Also,
-    // auto-markup in the UI is turned off.
+    // <p>Optional. Indicates whether Machine Learning is disabled for the intent.</p>
+    // <p>Note: If <code>ml_disabled</code> setting is set to true, then this intent is not
+    // taken into account during inference in <code>ML ONLY</code> match mode. Also,
+    // auto-markup in the UI is turned off.</p>
     bool ml_disabled = 19;
 
-    // Optional. The list of context names required for this intent to be
-    // triggered.
-    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/-/contexts/&lt;context_uuid&gt;</code></pre>
+    // <p>Optional. The list of context names required for this intent to be
+    // triggered.</p>
+    // <p>Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/-/contexts/&lt;context_uuid&gt;</code></pre></p>
     repeated string input_context_names = 7;
 
-    // Optional. The collection of event names that trigger the intent.
-    // If the collection of input contexts is not empty, all of the contexts must
-    // be present in the active user session for an event to trigger this intent.
+    // <p>Optional. The collection of event names that trigger the intent.</p>
+    // <p>If the collection of input contexts is not empty, all of the contexts must
+    // be present in the active user session for an event to trigger this intent.</p>
     repeated string events = 8;
 
-    // Optional. The collection of examples/templates that the agent is
-    // trained on.
+    // <p>Optional. The collection of examples/templates that the agent is
+    // trained on.</p>
     repeated TrainingPhrase training_phrases = 9;
 
-    // Optional. The name of the action associated with the intent.
+    // <p>Optional. The name of the action associated with the intent.</p>
     string action = 10;
 
-    // Optional. The collection of contexts that are activated when the intent
+    // <p>Optional. The collection of contexts that are activated when the intent
     // is matched. Context messages in this collection should not set the
-    // parameters field. Setting the `lifespan_count` to 0 will reset the context
-    // when the intent is matched.
-    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/-/contexts/&lt;context_uuid&gt;</code></pre>
+    // parameters field. Setting the <code>lifespan_count</code> to 0 will reset the context
+    // when the intent is matched.</p>
+    // <p>Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/-/contexts/&lt;context_uuid&gt;</code></pre></p>
     repeated Context output_contexts = 11;
 
-    // Optional. Indicates whether to delete all contexts in the current
-    // session when this intent is matched.
+    // <p>Optional. Indicates whether to delete all contexts in the current
+    // session when this intent is matched.</p>
     bool reset_contexts = 12;
 
-    // Optional. The collection of parameters associated with the intent.
+    // <p>Optional. The collection of parameters associated with the intent.</p>
     repeated Parameter parameters = 13;
 
-    // Optional. The collection of rich messages corresponding to the
-    // `Response` field in the Dialogflow console.
+    // <p>Optional. The collection of rich messages corresponding to the
+    // <code>Response</code> field in the Dialogflow console.</p>
     repeated Message messages = 14;
 
-    // Optional. The list of platforms for which the first response will be
-    // taken from among the messages assigned to the DEFAULT_PLATFORM.
+    // <p>Optional. The list of platforms for which the first response will be
+    // taken from among the messages assigned to the DEFAULT_PLATFORM.</p>
     repeated Message.Platform default_response_platforms = 15;
 
-    // The unique identifier of the root intent in the chain of followup intents.
-    // It identifies the correct followup intents chain for this intent.
-    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre>
+    // <p>The unique identifier of the root intent in the chain of followup intents.</p>
+    // <p>It identifies the correct followup intents chain for this intent.</p>
+    // <p>Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre></p>
     string root_followup_intent_name = 16;
 
-    // The unique identifier of the parent intent in the chain of followup
-    // intents.
-    // It identifies the parent followup intent.
-    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre>
+    // <p>The unique identifier of the parent intent in the chain of followup
+    // intents.</p>
+    // <p>It identifies the parent followup intent.</p>
+    // <p>Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre></p>
     string parent_followup_intent_name = 17;
 
-    // Optional. Collection of information about all followup intents that have
-    // name of this intent as a root_name.
+    // <p>Optional. Collection of information about all followup intents that have
+    // name of this intent as a root_name.</p>
     repeated FollowupIntentInfo followup_intent_info = 18;
 
-    // The next_page_token is used to retrieve the next page of a returned result,
-    // e.g. next_page_token is current_index-2
+    // <p>The next_page_token is used to retrieve the next page of a returned result,
+    // e.g. next_page_token is current_index-2</p>
     string next_page_token = 30;
 
-    // Optional. Domain to which the intent belongs
+    // <p>Optional. Domain to which the intent belongs</p>
     string domain_name = 31;
 
-    // Optional. Indicates whether the intent starts a deviation in conversation flow
+    // <p>Optional. Indicates whether the intent starts a deviation in conversation flow</p>
     bool is_start_of_deviation = 32;
 
-    // Optional. Indicates whether the intent ends a deviation in conversation flow
+    // <p>Optional. Indicates whether the intent ends a deviation in conversation flow</p>
     bool is_end_of_deviation = 33;
 
-    // Optional. Total count of training phrases associated to the intent.
+    // <p>Optional. Total count of training phrases associated to the intent.</p>
     int32 training_phrase_count = 34;
 
-    // Indicates whether the intent is active or not
+    // <p>Indicates whether the intent is active or not</p>
     IntentStatus status = 35;
 
-    // Optional. Provides information that can be used in custom scripts
+    // <p>Optional. Provides information that can be used in custom scripts</p>
     google.protobuf.Timestamp start_date = 36;
 
-    // Optional. Provides information that can be used in custom scripts
+    // <p>Optional. Provides information that can be used in custom scripts</p>
     google.protobuf.Timestamp end_date = 37;
 
-    // Optional. Adds arbitrary "categories" for which one could filter the intents
+    // <p>Optional. Adds arbitrary &quot;categories&quot; for which one could filter the intents</p>
     repeated string tags = 38;
 
-    // Creation date and time. Read-only field.
+    // <p>Creation date and time. Read-only field.</p>
     google.protobuf.Timestamp created_at = 39;
 
-    // Modification date and time. Read-only field.
+    // <p>Modification date and time. Read-only field.</p>
     google.protobuf.Timestamp modified_at = 40;
 
-    // User id in form of a valid UUID.
+    // <p>User id in form of a valid UUID.</p>
     string created_by = 41;
 
-    // User id in form of a valid UUID.
+    // <p>User id in form of a valid UUID.</p>
     string modified_by = 42;
 }
 
-// The request message for [Intents.ListIntents][google.cloud.dialogflow.v2.Intents.ListIntents].
+// <p>The request message for <a href="index.html#google.cloud.dialogflow.v2.Intents.ListIntents">Intents.ListIntents</a>.</p>
 message ListIntentsRequest {
-    // Required. The agent to list all intents from.
-    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    // <p>Required. The agent to list all intents from.</p>
+    // <p>Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre></p>
     string parent = 1;
 
-    // Optional. The language to list training phrases, parameters and rich
-    // messages for. If not specified, the agent's default language is used.
-    // [More than a dozen
-    // languages](https://dialogflow.com/docs/reference/language) are supported.
-    // Note: languages must be enabled in the agent before they can be used.
+    // <p>Optional. The language to list training phrases, parameters and rich
+    // messages for. If not specified, the agent&apos;s default language is used.</p>
+    // <p><a href="https://dialogflow.com/docs/reference/language">More than a dozen
+    // languages</a> are supported.</p>
+    // <p>Note: languages must be enabled in the agent before they can be used.</p>
     string language_code = 2;
 
-    // Optional. The resource view to apply to the returned intent.
+    // <p>Optional. The resource view to apply to the returned intent.</p>
     IntentView intent_view = 3;
 
-    // Optional: The page token to support pagination.
-    // Pagination allows you to retrieve a large result set in smaller, more manageable portions.
-    // The page token is a string representing the current index and page size.
+    // <p>Optional: The page token to support pagination.</p>
+    // <p>Pagination allows you to retrieve a large result set in smaller, more manageable portions.</p>
+    // <p>The page token is a string representing the current index and page size.</p>
     //
-    // Valid page token strings:
-    // * "" (empty string) - Retrieves the first page.
-    // * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
-    // * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+    // <p>Valid page token strings:</p>
+    // <ul>
+    //   <li>&quot;&quot; (empty string) - Retrieves the first page.</li>
+    //   <li>&quot;current_index-0--page_size-20&quot; - Retrieves the first page with a page size of 20.</li>
+    //   <li>&quot;current_index-1--page_size-20&quot; - Retrieves the second page with a page size of 20.</li>
+    // </ul>
     //
-    // Index starts at 0.
+    // <p>Index starts at 0.</p>
     //
-    // Examples of valid page token strings:
-    // * ""
-    // * "current_index-0--page_size-20"
-    // * "current_index-1--page_size-20"
-    // * "current_index-10--page_size-20"
+    // <p>Examples of valid page token strings:</p>
+    // <ul>
+    //   <li>&quot;&quot;</li>
+    //   <li>&quot;current_index-0--page_size-20&quot;</li>
+    //   <li>&quot;current_index-1--page_size-20&quot;</li>
+    //   <li>&quot;current_index-10--page_size-20&quot;</li>
+    // </ul>
     //
-    // Examples of invalid page token strings:
-    // * "1"
-    // * "current_index-0--page_size-20"
-    // * "current_index--1--page_size-20"
-    // * "current_index1--page_size-20"
-    // * "current_index-1--page_size--20"
+    // <p>Examples of invalid page token strings:</p>
+    // <ul>
+    //   <li>&quot;1&quot;</li>
+    //   <li>&quot;current_index-0--page_size-20&quot;</li>
+    //   <li>&quot;current_index--1--page_size-20&quot;</li>
+    //   <li>&quot;current_index1--page_size-20&quot;</li>
+    //   <li>&quot;current_index-1--page_size--20&quot;</li>
+    // </ul>
     string page_token = 5;
 
-    // Optional. Applies a filter to the list. Default, no filter.
+    // <p>Optional. Applies a filter to the list. Default, no filter.</p>
     IntentCategory filter_by_category = 6;
 
-    // Optional. Defines the sorting of the list. Default, no sorting.
+    // <p>Optional. Defines the sorting of the list. Default, no sorting.</p>
     IntentSorting sort_by_field = 7;
 
-    // Optional. Applies a filter to the list by tags. Default, no filter.
+    // <p>Optional. Applies a filter to the list by tags. Default, no filter.</p>
     repeated string filter_by_tags = 8;
 }
 
-// The response message for [Intents.ListIntents][google.cloud.dialogflow.v2.Intents.ListIntents].
+// <p>The response message for <a href="index.html#google.cloud.dialogflow.v2.Intents.ListIntents">Intents.ListIntents</a>.</p>
 message ListIntentsResponse {
-    // The list of agent intents. There will be a maximum number of items
-    // returned based on the page_token field in the request.
+    // <p>The list of agent intents. There will be a maximum number of items
+    // returned based on the page_token field in the request.</p>
     repeated Intent intents = 1;
 
-    // The next_page_token is used to retrieve the next page of a returned result,
-    // e.g. next_page_token is current_index-2
+    // <p>The next_page_token is used to retrieve the next page of a returned result,
+    // e.g. next_page_token is current_index-2</p>
     string next_page_token = 2;
 }
 
-// The request message for [Intents.GetIntent][google.cloud.dialogflow.v2.Intents.GetIntent].
+// <p>The request message for <a href="index.html#google.cloud.dialogflow.v2.Intents.GetIntent">Intents.GetIntent</a>.</p>
 message GetIntentRequest {
-    // Required. The name of the intent.
-    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre>
+    // <p>Required. The name of the intent.</p>
+    // <p>Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre></p>
     string name = 1;
 
-    // Optional. The language to retrieve training phrases, parameters and rich
-    // messages for. If not specified, the agent's default language is used.
-    // [More than a dozen
-    // languages](https://dialogflow.com/docs/reference/language) are supported.
-    // Note: languages must be enabled in the agent, before they can be used.
+    // <p>Optional. The language to retrieve training phrases, parameters and rich
+    // messages for. If not specified, the agent&apos;s default language is used.</p>
+    // <p><a href="https://dialogflow.com/docs/reference/language">More than a dozen
+    // languages</a> are supported.</p>
+    // <p>Note: languages must be enabled in the agent, before they can be used.</p>
     string language_code = 2;
 
-    // Optional. The resource view to apply to the returned intent.
+    // <p>Optional. The resource view to apply to the returned intent.</p>
     IntentView intent_view = 3;
 
-    // The page token to support pagination.
-    // Pagination allows you to retrieve a large result set in smaller, more manageable portions.
-    // The page token is a string representing the current index and page size.
+    // <p>The page token to support pagination.</p>
+    // <p>Pagination allows you to retrieve a large result set in smaller, more manageable portions.</p>
+    // <p>The page token is a string representing the current index and page size.</p>
     //
-    // Valid page token strings:
-    // * "" (empty string) - Retrieves the first page.
-    // * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
-    // * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+    // <p>Valid page token strings:</p>
+    // <ul>
+    //   <li>&quot;&quot; (empty string) - Retrieves the first page.</li>
+    //   <li>&quot;current_index-0--page_size-20&quot; - Retrieves the first page with a page size of 20.</li>
+    //   <li>&quot;current_index-1--page_size-20&quot; - Retrieves the second page with a page size of 20.</li>
+    // </ul>
     //
-    // Index starts at 0.
+    // <p>Index starts at 0.</p>
     //
-    // Examples of valid page token strings:
-    // * ""
-    // * "current_index-0--page_size-20"
-    // * "current_index-1--page_size-20"
-    // * "current_index-10--page_size-20"
+    // <p>Examples of valid page token strings:</p>
+    // <ul>
+    //   <li>&quot;&quot;</li>
+    //   <li>&quot;current_index-0--page_size-20&quot;</li>
+    //   <li>&quot;current_index-1--page_size-20&quot;</li>
+    //   <li>&quot;current_index-10--page_size-20&quot;</li>
+    // </ul>
     //
-    // Examples of invalid page token strings:
-    // * "1"
-    // * "current_index-0--page_size-20"
-    // * "current_index--1--page_size-20"
-    // * "current_index1--page_size-20"
-    // * "current_index-1--page_size--20"
+    // <p>Examples of invalid page token strings:</p>
+    // <ul>
+    //   <li>&quot;1&quot;</li>
+    //   <li>&quot;current_index-0--page_size-20&quot;</li>
+    //   <li>&quot;current_index--1--page_size-20&quot;</li>
+    //   <li>&quot;current_index1--page_size-20&quot;</li>
+    //   <li>&quot;current_index-1--page_size--20&quot;</li>
+    // </ul>
     string page_token = 10;
 }
 
-// The request message for [Intents.CreateIntent][google.cloud.dialogflow.v2.Intents.CreateIntent].
+// <p>The request message for <a href="index.html#google.cloud.dialogflow.v2.Intents.CreateIntent">Intents.CreateIntent</a>.</p>
 message CreateIntentRequest {
-    // Required. The agent to create a intent for.
-    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    // <p>Required. The agent to create a intent for.</p>
+    // <p>Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre></p>
     string parent = 1;
 
-    // Required. The intent to create.
+    // <p>Required. The intent to create.</p>
     Intent intent = 2;
 
-    // Optional. The language of training phrases, parameters and rich messages
-    // defined in `intent`. If not specified, the agent's default language is
-    // used. [More than a dozen
-    // languages](https://dialogflow.com/docs/reference/language) are supported.
-    // Note: languages must be enabled in the agent, before they can be used.
+    // <p>Optional. The language of training phrases, parameters and rich messages
+    // defined in <code>intent</code>. If not specified, the agent&apos;s default language is
+    // used.</p>
+    // <p><a href="https://dialogflow.com/docs/reference/language">More than a dozen
+    // languages</a> are supported.</p>
+    // <p>Note: languages must be enabled in the agent, before they can be used.</p>
     string language_code = 3;
 
-    // Optional. The resource view to apply to the returned intent.
+    // <p>Optional. The resource view to apply to the returned intent.</p>
     IntentView intent_view = 4;
 }
 
-// The request message for [Intents.UpdateIntent][google.cloud.dialogflow.v2.Intents.UpdateIntent].
+// <p>The request message for <a href="index.html#google.cloud.dialogflow.v2.Intents.UpdateIntent">Intents.UpdateIntent</a>.</p>
 message UpdateIntentRequest {
-    // Required. The intent to update.
-    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre>
+    // <p>Required. The intent to update.</p>
+    // <p>Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre></p>
     Intent intent = 1;
 
-    // Optional. The language of training phrases, parameters and rich messages
-    // defined in `intent`. If not specified, the agent's default language is
-    // used. [More than a dozen
-    // languages](https://dialogflow.com/docs/reference/language) are supported.
-    // Note: languages must be enabled in the agent, before they can be used.
+    // <p>Optional. The language of training phrases, parameters and rich messages
+    // defined in <code>intent</code>. If not specified, the agent&apos;s default language is
+    // used.</p>
+    // <p><a href="https://dialogflow.com/docs/reference/language">More than a dozen
+    // languages</a> are supported.</p>
+    // <p>Note: languages must be enabled in the agent, before they can be used.</p>
     string language_code = 2;
 
-    // Optional. The mask to control which fields get updated.
+    // <p>Optional. The mask to control which fields get updated.</p>
     google.protobuf.FieldMask update_mask = 3;
 
-    // Optional. The resource view to apply to the returned intent.
+    // <p>Optional. The resource view to apply to the returned intent.</p>
     IntentView intent_view = 4;
 }
 
-// The request message for [Intents.DeleteIntent][google.cloud.dialogflow.v2.Intents.DeleteIntent].
+// <p>The request message for <a href="index.html#google.cloud.dialogflow.v2.Intents.DeleteIntent">Intents.DeleteIntent</a>.</p>
 message DeleteIntentRequest {
-    // Required. The name of the intent to delete.
-    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre>
+    // <p>Required. The name of the intent to delete.</p>
+    // <p>Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre></p>
     string name = 1;
 }
 
-// The request message for [Intents.BatchUpdateIntents][google.cloud.dialogflow.v2.Intents.BatchUpdateIntents].
+// <p>The request message for <a href="index.html#google.cloud.dialogflow.v2.Intents.BatchUpdateIntents">Intents.BatchUpdateIntents</a>.</p>
 message BatchUpdateIntentsRequest {
-    // Required. The name of the agent to update or create intents in.
-    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    // <p>Required. The name of the agent to update or create intents in.</p>
+    // <p>Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre></p>
     string parent = 1;
 
-    // Required. The source of the intent batch.
+    // <p>Required. The source of the intent batch.</p>
     oneof intent_batch {
-        // The URI to a Google Cloud Storage file containing intents to update or
+        // <p>The URI to a Google Cloud Storage file containing intents to update or
         // create. The file format can either be a serialized proto (of IntentBatch
-        // type) or JSON object. Note: The URI must start with "gs://".
+        // type) or JSON object. Note: The URI must start with &quot;gs://&quot;.</p>
         string intent_batch_uri = 2;
 
-        // The collection of intents to update or create.
+        // <p>The collection of intents to update or create.</p>
         IntentBatch intent_batch_inline = 3;
     }
 
-    // Optional. The language of training phrases, parameters and rich messages
-    // defined in `intents`. If not specified, the agent's default language is
-    // used. [More than a dozen
-    // languages](https://dialogflow.com/docs/reference/language) are supported.
-    // Note: languages must be enabled in the agent, before they can be used.
+    // <p>Optional. The language of training phrases, parameters and rich messages
+    // defined in <code>intents</code>. If not specified, the agent&apos;s default language is
+    // used.</p>
+    // <p><a href="https://dialogflow.com/docs/reference/language">More than a dozen
+    // languages</a> are supported.</p>
+    // <p>Note: languages must be enabled in the agent, before they can be used.</p>
     string language_code = 4;
 
     // Optional. The mask to control which fields get updated.
@@ -1152,70 +1172,70 @@ message BatchUpdateIntentsRequest {
     IntentView intent_view = 6;
 }
 
-// The response message for [Intents.BatchUpdateIntents][google.cloud.dialogflow.v2.Intents.BatchUpdateIntents].
+// <p>The response message for <a href="index.html#google.cloud.dialogflow.v2.Intents.BatchUpdateIntents">Intents.BatchUpdateIntents</a>.</p>
 message BatchUpdateIntentsResponse {
-    // The collection of updated or created intents.
+    // <p>The collection of updated or created intents.</p>
     repeated Intent intents = 1;
 }
 
-// The request message for [Intents.BatchDeleteIntents][google.cloud.dialogflow.v2.Intents.BatchDeleteIntents].
+// <p>The request message for <a href="index.html#google.cloud.dialogflow.v2.Intents.BatchDeleteIntents">Intents.BatchDeleteIntents</a>.</p>
 message BatchDeleteIntentsRequest {
-    // Required. The name of the agent to delete all entities types for. Format:
-    // `projects/&lt;project_uuid&gt;/agent`.
+    // <p>Required. The name of the agent to delete all entities types for. Format:
+    // <code>projects/&lt;project_uuid&gt;/agent</code>.</p>
     string parent = 1;
 
-    // Required. The collection of intents to delete. Only intent `name` must be
-    // filled in.
+    // <p>Required. The collection of intents to delete. Only intent <code>name</code> must be
+    // filled in.</p>
     repeated Intent intents = 2;
 }
 
-// This message is a wrapper around a collection of intents.
+// <p>This message is a wrapper around a collection of intents.</p>
 message IntentBatch {
-    // A collection of intents.
+    // <p>A collection of intents.</p>
     repeated Intent intents = 1;
 }
 
-// Represents the options for views of an intent.
-// An intent can be a sizable object. Therefore, we provide a resource view that
-// does not return training phrases in the response by default.
+// <p>Represents the options for views of an intent.</p>
+// <p>An intent can be a sizable object. Therefore, we provide a resource view that
+// does not return training phrases in the response by default.</p>
 enum IntentView {
-    // Same as INTENT_VIEW_FULL
+    // <p>Same as INTENT_VIEW_FULL</p>
     INTENT_VIEW_UNSPECIFIED = 0;
 
-    // All fields are populated.
+    // <p>All fields are populated.</p>
     INTENT_VIEW_FULL = 1;
 
-    // The only nested structures populated are Contexts and Training phrases.
-    // The Training phrases field is populated with only a few entries and no annotations.
+    // <p>The only nested structures populated are Contexts and Training phrases.</p>
+    // <p>The Training phrases field is populated with only a few entries and no annotations.</p>
     INTENT_VIEW_PARTIAL = 2;
 
-    // All nested structures are not populated (no training phrases, nor contexts, nor parameters, ...)
+    // <p>All nested structures are not populated (no training phrases, nor contexts, nor parameters, ...)</p>
     INTENT_VIEW_SHALLOW = 3;
 
-    // Minimum view including only intent UUID and intent display name
+    // <p>Minimum view including only intent UUID and intent display name</p>
     INTENT_VIEW_MINIMUM = 4;
 }
 
-// Represents the type of intents to filter by in the "List Intents" request
+// <p>Represents the type of intents to filter by in the &quot;List Intents&quot; request</p>
 enum IntentCategory {
-    // represent all intents
+    // <p>represent all intents</p>
     ALL_INTENTS = 0;
-    // represent the default intents
+    // <p>represent the default intents</p>
     DEFAULT_INTENTS = 1;
-    // represent the user defined (custom) intents
+    // <p>represent the user defined (custom) intents</p>
     USER_DEFINED_INTENTS = 2;
-    // represents the intents that had its end_date elapsed
+    // <p>represents the intents that had its end_date elapsed</p>
     DATE_EXPIRED_INTENTS = 3;
-    // represents the intents that its start_date began but had not yet expired
+    // <p>represents the intents that its start_date began but had not yet expired</p>
     DATE_ACTIVE_INTENTS = 4;
-    // represent the intents that are still expecting its start_date to begin
+    // <p>represent the intents that are still expecting its start_date to begin</p>
     DATE_UPCOMING_INTENTS = 5;
 
 }
 
-// This message contains sorting of an intent
+// <p>This message contains sorting of an intent</p>
 message IntentSorting {
-    // Structure of intent sorting field
+    // <p>Structure of intent sorting field</p>
     enum IntentSortingField {
         NO_INTENT_SORTING = 0;
         SORT_INTENT_BY_NAME = 1;
@@ -1230,42 +1250,42 @@ message IntentSorting {
     SortingMode sorting_mode = 2;
 }
 
-// This message is a request to get an intent tag
+// <p>This message is a request to get an intent tag</p>
 message IntentTagRequest {
-    // The path of the intent.
-    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre>
+    // <p>The path of the intent.</p>
+    // <p>Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre></p>
     string intent_name = 1;
-    // Intent tags for this intent to operate on
+    // <p>Intent tags for this intent to operate on</p>
     repeated string tags = 2;
 }
 
-// This message is a request to get intent tags
+// <p>This message is a request to get intent tags</p>
 message GetIntentTagsRequest {
-    // The path of the intent.
-    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre>
+    // <p>The path of the intent.</p>
+    // <p>Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre></p>
     string intent_name = 1;
 }
 
-// This message is a response of getting intent tags
+// <p>This message is a response of getting intent tags</p>
 message GetIntentTagsResponse {
-    // All the distinct intent tags sorted
+    // <p>All the distinct intent tags sorted</p>
     repeated string intent_tags = 1;
 }
 
-// This message is a request to get all intent tags
+// <p>This message is a request to get all intent tags</p>
 message GetAllIntentTagsRequest {
-    // Required. The name of the agent to delete all entities types for. Format:
-    // `projects/&lt;project_uuid&gt;/agent`.
+    // <p>Required. The name of the agent to delete all entities types for. Format:
+    // <code>projects/&lt;project_uuid&gt;/agent</code>.</p>
     string parent = 1;
 }
 
-// This message is a request to update a batch of training phrases
+// <p>This message is a request to update a batch of training phrases</p>
 message BatchUpdateTrainingPhrasesRequest {
-    // A list of training phrases
+    // <p>A list of training phrases</p>
     repeated Intent.TrainingPhrase training_phrases = 1;
 }
 
-// This message containing the training phrases status
+// <p>This message containing the training phrases status</p>
 message TrainingPhraseStatus {
     oneof phrase_or_status {
         Intent.TrainingPhrase training_phrase = 1;
@@ -1273,42 +1293,42 @@ message TrainingPhraseStatus {
     }
 }
 
-// This message is a response of the status of a batch of training phrases
+// <p>This message is a response of the status of a batch of training phrases</p>
 message BatchTrainingPhrasesStatusResponse {
-    // A list of training phrase statuses
+    // <p>A list of training phrase statuses</p>
     repeated TrainingPhraseStatus training_phrase_statuses = 1;
-    // indicates if statuses of some of the training phrases have errors
+    // <p>indicates if statuses of some of the training phrases have errors</p>
     bool has_errors = 2;
 }
 
-// This message is a request of a creation of a batch of training phrases
+// <p>This message is a request of a creation of a batch of training phrases</p>
 message BatchCreateTrainingPhrasesRequest {
 
     message CreateTrainingPhraseRequest {
-        // Required. The name of the intent for which to create a training phrase for.
+        // <p>Required. The name of the intent for which to create a training phrase for.</p>
         string intent_name = 1;
 
-        // Required. The training phrase to create.
+        // <p>Required. The training phrase to create.</p>
         Intent.TrainingPhrase training_phrase = 2;
     };
     repeated CreateTrainingPhraseRequest training_phrase_requests = 1;
 }
 
-// This message is a request to get a batch training phrases
+// <p>This message is a request to get a batch training phrases</p>
 message BatchGetTrainingPhrasesRequest {
-    // Required. The names of the training phrases.
-    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;/trainingPhrases/&lt;training_phrase_uuid&gt;</code></pre>
+    // <p>Required. The names of the training phrases.</p>
+    // <p>Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;/trainingPhrases/&lt;training_phrase_uuid&gt;</code></pre></p>
     repeated string names = 1;
 }
 
-// This message is a request to delete a batch of training phrases
+// <p>This message is a request to delete a batch of training phrases</p>
 message BatchDeleteTrainingPhrasesRequest {
-    // Required. The names of the training phrases.
-    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;/trainingPhrases/&lt;training_phrase_uuid&gt;</code></pre>
+    // <p>Required. The names of the training phrases.</p>
+    // <p>Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;/trainingPhrases/&lt;training_phrase_uuid&gt;</code></pre></p>
     repeated string names = 1;
 }
 
-// This message is a response of deleting a batch of training phrases
+// <p>This message is a response of deleting a batch of training phrases</p>
 message BatchDeleteTrainingPhrasesResponse {
     message DeleteTrainingPhraseStatus{
         oneof delete_status{
@@ -1321,56 +1341,62 @@ message BatchDeleteTrainingPhrasesResponse {
 }
 
 
-// The request message for TrainingPhraseRequest
+// <p>The request message for TrainingPhraseRequest</p>
 message ListTrainingPhrasesRequest {
-    // Required. The agent to list all intents from.
-    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre>
+    // <p>Required. The agent to list all intents from.</p>
+    // <p>Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre></p>
     string intent_name = 1;
 
-    // Optional. The language to list training phrases, parameters and rich
-    // messages for. If not specified, the agent's default language is used.
+    // <p>Optional. The language to list training phrases, parameters and rich
+    // messages for. If not specified, the agent&apos;s default language is used.</p>
     string language_code = 2;
 
-    // Optional: The page token to support pagination.
-    // Pagination allows you to retrieve a large result set in smaller, more manageable portions.
-    // The page token is a string representing the current index and page size.
+    // <p>Optional: The page token to support pagination.</p>
+    // <p>Pagination allows you to retrieve a large result set in smaller, more manageable portions.</p>
+    // <p>The page token is a string representing the current index and page size.</p>
     //
-    // Valid page token strings:
-    // * "" (empty string) - Retrieves the first page.
-    // * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
-    // * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+    // <p>Valid page token strings:</p>
+    // <ul>
+    //   <li>&quot;&quot; (empty string) - Retrieves the first page.</li>
+    //   <li>&quot;current_index-0--page_size-20&quot; - Retrieves the first page with a page size of 20.</li>
+    //   <li>&quot;current_index-1--page_size-20&quot; - Retrieves the second page with a page size of 20.</li>
+    // </ul>
     //
-    // Index starts at 0.
+    // <p>Index starts at 0.</p>
     //
-    // Examples of valid page token strings:
-    // * ""
-    // * "current_index-0--page_size-20"
-    // * "current_index-1--page_size-20"
-    // * "current_index-10--page_size-20"
+    // <p>Examples of valid page token strings:</p>
+    // <ul>
+    //   <li>&quot;&quot;</li>
+    //   <li>&quot;current_index-0--page_size-20&quot;</li>
+    //   <li>&quot;current_index-1--page_size-20&quot;</li>
+    //   <li>&quot;current_index-10--page_size-20&quot;</li>
+    // </ul>
     //
-    // Examples of invalid page token strings:
-    // * "1"
-    // * "current_index-0--page_size-20"
-    // * "current_index--1--page_size-20"
-    // * "current_index1--page_size-20"
-    // * "current_index-1--page_size--20"
+    // <p>Examples of invalid page token strings:</p>
+    // <ul>
+    //   <li>&quot;1&quot;</li>
+    //   <li>&quot;current_index-0--page_size-20&quot;</li>
+    //   <li>&quot;current_index--1--page_size-20&quot;</li>
+    //   <li>&quot;current_index1--page_size-20&quot;</li>
+    //   <li>&quot;current_index-1--page_size--20&quot;</li>
+    // </ul>
     string page_token = 3;
 }
 
-// The response message for ListTrainingPhrase
+// <p>The response message for ListTrainingPhrase</p>
 message ListTrainingPhrasesResponse {
-    // The list of training phrases. There will be a maximum number of items
-    // returned based on the page_token field in the request.
+    // <p>The list of training phrases. There will be a maximum number of items
+    // returned based on the page_token field in the request.</p>
     repeated Intent.TrainingPhrase training_phrases = 1;
 
-    // Token to retrieve the next page of results, or empty if there are no
-    // more results in the list.
-    // Format: `current_index-<CURRENT_INDEX>--page_size-<PAGE_SIZE>--sub_field-<SUB_FIELD>`
-    // where <CURRENT_INDEX> and <PAGE_SIZE> are of type int, <SUB_FIELD> is of type str (example: `training_phrases`)
+    // <p>Token to retrieve the next page of results, or empty if there are no
+    // more results in the list.</p>
+    // <p>Format: <code>current_index-&lt;CURRENT_INDEX&gt;--page_size-&lt;PAGE_SIZE&gt;--sub_field-&lt;SUB_FIELD&gt;</code>
+    // where &lt;CURRENT_INDEX&gt; and &lt;PAGE_SIZE&gt; are of type int, &lt;SUB_FIELD&gt; is of type str (example: <code>training_phrases</code>)</p>
     string next_page_token = 2;
 }
 
-// This message is a response of a batch responses of message status
+// <p>This message is a response of a batch responses of message status</p>
 message BatchResponseMessagesStatusResponse {
     message ResponseMessageStatus {
         oneof phrase_or_status {
@@ -1383,40 +1409,40 @@ message BatchResponseMessagesStatusResponse {
     bool has_errors = 2;
 }
 
-// Request to create a list of new response messages and adds it to an intent
+// <p>Request to create a list of new response messages and adds it to an intent</p>
 message BatchCreateResponseMessagesRequest {
 
     message CreateResponseMessageRequest {
-        // Required. The name of the intent for which to create a response message for.
+        // <p>Required. The name of the intent for which to create a response message for.</p>
         string intent_name = 1;
 
-        // Required. The response message.
+        // <p>Required. The response message.</p>
         Intent.Message response_message = 2;
     };
     repeated CreateResponseMessageRequest response_message_requests = 1;
 }
 
-// Request to update a response message in the specified intent
+// <p>Request to update a response message in the specified intent</p>
 message BatchUpdateResponseMessagesRequest {
-    // The response messages to update
+    // <p>The response messages to update</p>
     repeated Intent.Message response_messages = 1;
 }
 
-// Request to retrieve a response messages
+// <p>Request to retrieve a response messages</p>
 message BatchGetResponseMessagesRequest {
-    // Required. The names of the response messages.
-    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;/responseMessages/&lt;message_uuid&gt;</code></pre>
+    // <p>Required. The names of the response messages.</p>
+    // <p>Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;/responseMessages/&lt;message_uuid&gt;</code></pre></p>
     repeated string names = 1;
 }
 
-// Request to delete response messages specified by their names
+// <p>Request to delete response messages specified by their names</p>
 message BatchDeleteResponseMessagesRequest {
     // Required. The names of the  response messages.
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;/responseMessages/&lt;message_uuid&gt;</code></pre>
     repeated string names = 1;
 }
 
-// Response containing list with deleted response messages
+// <p>Response containing list with deleted response messages</p>
 message BatchDeleteResponseMessagesResponse {
     message DeleteResponseMessageStatus{
         oneof delete_status{
@@ -1429,57 +1455,63 @@ message BatchDeleteResponseMessagesResponse {
 }
 
 
-// The request message for ResponseMessageRequest
+// <p>The request message for ResponseMessageRequest</p>
 message ListResponseMessagesRequest {
-    // Required. The agent to list all intents from.
-    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre>
+    // <p>Required. The agent to list all intents from.</p>
+    // <p>Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre></p>
     string intent_name = 1;
 
-    // Optional. The language to list response messages, parameters and rich
-    // messages for. If not specified, the agent's default language is used.
+    // <p>Optional. The language to list response messages, parameters and rich
+    // messages for. If not specified, the agent&apos;s default language is used.</p>
     string language_code = 2;
 
-    // Optional: The page token to support pagination.
-    // Pagination allows you to retrieve a large result set in smaller, more manageable portions.
-    // The page token is a string representing the current index and page size.
+    // <p>Optional: The page token to support pagination.</p>
+    // <p>Pagination allows you to retrieve a large result set in smaller, more manageable portions.</p>
+    // <p>The page token is a string representing the current index and page size.</p>
     //
-    // Valid page token strings:
-    // * "" (empty string) - Retrieves the first page.
-    // * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
-    // * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+    // <p>Valid page token strings:</p>
+    // <ul>
+    //   <li>&quot;&quot; (empty string) - Retrieves the first page.</li>
+    //   <li>&quot;current_index-0--page_size-20&quot; - Retrieves the first page with a page size of 20.</li>
+    //   <li>&quot;current_index-1--page_size-20&quot; - Retrieves the second page with a page size of 20.</li>
+    // </ul>
     //
-    // Index starts at 0.
+    // <p>Index starts at 0.</p>
     //
-    // Examples of valid page token strings:
-    // * ""
-    // * "current_index-0--page_size-20"
-    // * "current_index-1--page_size-20"
-    // * "current_index-10--page_size-20"
+    // <p>Examples of valid page token strings:</p>
+    // <ul>
+    //   <li>&quot;&quot;</li>
+    //   <li>&quot;current_index-0--page_size-20&quot;</li>
+    //   <li>&quot;current_index-1--page_size-20&quot;</li>
+    //   <li>&quot;current_index-10--page_size-20&quot;</li>
+    // </ul>
     //
-    // Examples of invalid page token strings:
-    // * "1"
-    // * "current_index-0--page_size-20"
-    // * "current_index--1--page_size-20"
-    // * "current_index1--page_size-20"
-    // * "current_index-1--page_size--20"
+    // <p>Examples of invalid page token strings:</p>
+    // <ul>
+    //   <li>&quot;1&quot;</li>
+    //   <li>&quot;current_index-0--page_size-20&quot;</li>
+    //   <li>&quot;current_index--1--page_size-20&quot;</li>
+    //   <li>&quot;current_index1--page_size-20&quot;</li>
+    //   <li>&quot;current_index-1--page_size--20&quot;</li>
+    // </ul>
     string page_token = 3;
 }
 
 
-// The response message for ListResponseMessage
+// <p>The response message for ListResponseMessage</p>
 message ListResponseMessagesResponse {
-    // The list of response messages. There will be a maximum number of items
-    // returned based on the page_token field in the request.
+    // <p>The list of response messages. There will be a maximum number of items
+    // returned based on the page_token field in the request.</p>
     repeated Intent.Message response_messages = 1;
 
-    // Token to retrieve the next page of results, or empty if there are no
-    // more results in the list.
-    // Format: `current_index-<CURRENT_INDEX>--page_size-<PAGE_SIZE>--sub_field-<SUB_FIELD>`
-    // where <CURRENT_INDEX> and <PAGE_SIZE> are of type int, <SUB_FIELD> is of type str (example: `messages`)
+    // <p>Token to retrieve the next page of results, or empty if there are no
+    // more results in the list.</p>
+    // <p>Format: <code>current_index-&lt;CURRENT_INDEX&gt;--page_size-&lt;PAGE_SIZE&gt;--sub_field-&lt;SUB_FIELD&gt;</code>
+    // where &lt;CURRENT_INDEX&gt; and &lt;PAGE_SIZE&gt; are of type int, &lt;SUB_FIELD&gt; is of type str (example: <code>messages</code>)</p>
     string next_page_token = 2;
 }
 
-// Response containing a batch of parameters in the specified intent
+// <p>Response containing a batch of parameters in the specified intent</p>
 message BatchParametersStatusResponse {
     message ParameterStatus {
         oneof phrase_or_status {
@@ -1488,44 +1520,44 @@ message BatchParametersStatusResponse {
         }
     }
     repeated ParameterStatus parameter_statuses = 1;
-    // indicates if statuses of some of the parameters have errors
+    // <p>indicates if statuses of some of the parameters have errors</p>
     bool has_errors = 2;
 }
 
-// Request to create a batch of parameters in the specified intent
+// <p>Request to create a batch of parameters in the specified intent</p>
 message BatchCreateParametersRequest {
 
     message CreateParameterRequest {
-        // Required. The name of the intent for which to create a training phrase for.
+        // <p>Required. The name of the intent for which to create a training phrase for.</p>
         string intent_name = 1;
 
-        // Required. The response message.
+        // <p>Required. The response message.</p>
         Intent.Parameter parameter = 2;
     };
     repeated CreateParameterRequest parameter_requests = 1;
 }
 
-// Request to update parameters and adds them to an intent
+// <p>Request to update parameters and adds them to an intent</p>
 message BatchUpdateParametersRequest {
-    // The response messages to update
+    // <p>The response messages to update</p>
     repeated Intent.Parameter parameters = 1;
 }
 
-// Request to get batch of parameters in a specified intent
+// <p>Request to get batch of parameters in a specified intent</p>
 message BatchGetParametersRequest {
-    // Required. The names of the response messages.
-    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;/parameters/&lt;parameter_uuid</code></pre>
+    // <p>Required. The names of the response messages.</p>
+    // <p>Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;/parameters/&lt;parameter_uuid&gt;</code></pre></p>
     repeated string names = 1;
 }
 
-// Request to delete parameters specified by their names.
+// <p>Request to delete parameters specified by their names.</p>
 message BatchDeleteParametersRequest {
     // Required. The names of the  response messages.
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;/parameters/&lt;parameter_uuid</code></pre>
     repeated string names = 1;
 }
 
-// This message contains response of deleted parameters
+// <p>This message contains response of deleted parameters</p>
 message BatchDeleteParametersResponse {
     message DeleteParameterStatus{
         oneof delete_status{
@@ -1538,102 +1570,114 @@ message BatchDeleteParametersResponse {
 }
 
 
-// The request message for TrainingPhraseRequest
+// <p>The request message for TrainingPhraseRequest</p>
 message ListParametersRequest {
-    // Required. The agent to list all intents from.
-    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre>
+    // <p>Required. The agent to list all intents from.</p>
+    // <p>Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre></p>
     string intent_name = 1;
 
-    // Optional. The language code used to filter out prompts.
+    // <p>Optional. The language code used to filter out prompts.</p>
     string language_code = 2;
 
-    // Optional: The page token to support pagination.
-    // Pagination allows you to retrieve a large result set in smaller, more manageable portions.
-    // The page token is a string representing the current index and page size.
+    // <p>Optional: The page token to support pagination.</p>
+    // <p>Pagination allows you to retrieve a large result set in smaller, more manageable portions.</p>
+    // <p>The page token is a string representing the current index and page size.</p>
     //
-    // Valid page token strings:
-    // * "" (empty string) - Retrieves the first page.
-    // * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
-    // * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+    // <p>Valid page token strings:</p>
+    // <ul>
+    //   <li>&quot;&quot; (empty string) - Retrieves the first page.</li>
+    //   <li>&quot;current_index-0--page_size-20&quot; - Retrieves the first page with a page size of 20.</li>
+    //   <li>&quot;current_index-1--page_size-20&quot; - Retrieves the second page with a page size of 20.</li>
+    // </ul>
     //
-    // Index starts at 0.
+    // <p>Index starts at 0.</p>
     //
-    // Examples of valid page token strings:
-    // * ""
-    // * "current_index-0--page_size-20"
-    // * "current_index-1--page_size-20"
-    // * "current_index-10--page_size-20"
+    // <p>Examples of valid page token strings:</p>
+    // <ul>
+    //   <li>&quot;&quot;</li>
+    //   <li>&quot;current_index-0--page_size-20&quot;</li>
+    //   <li>&quot;current_index-1--page_size-20&quot;</li>
+    //   <li>&quot;current_index-10--page_size-20&quot;</li>
+    // </ul>
     //
-    // Examples of invalid page token strings:
-    // * "1"
-    // * "current_index-0--page_size-20"
-    // * "current_index--1--page_size-20"
-    // * "current_index1--page_size-20"
-    // * "current_index-1--page_size--20"
+    // <p>Examples of invalid page token strings:</p>
+    // <ul>
+    //   <li>&quot;1&quot;</li>
+    //   <li>&quot;current_index-0--page_size-20&quot;</li>
+    //   <li>&quot;current_index--1--page_size-20&quot;</li>
+    //   <li>&quot;current_index1--page_size-20&quot;</li>
+    //   <li>&quot;current_index-1--page_size--20&quot;</li>
+    // </ul>
     string page_token = 3;
 }
 
-// The response message for ListTrainingPhrase
+// <p>The response message for ListTrainingPhrase</p>
 message ListParametersResponse {
-    // The list of parameters. There will be a maximum number of items
-    // returned based on the page_token field in the request.
+    // <p>The list of parameters. There will be a maximum number of items
+    // returned based on the page_token field in the request.</p>
     repeated Intent.Parameter parameters = 1;
 
-    // Token to retrieve the next page of results, or empty if there are no
-    // more results in the list.
-    // Format: `current_index-<CURRENT_INDEX>--page_size-<PAGE_SIZE>--sub_field-<SUB_FIELD>`
-    // where <CURRENT_INDEX> and <PAGE_SIZE> are of type int, <SUB_FIELD> is of type str (example: `parameters`)
+    // <p>Token to retrieve the next page of results, or empty if there are no
+    // more results in the list.</p>
+    // <p>Format: <code>current_index-&lt;CURRENT_INDEX&gt;--page_size-&lt;PAGE_SIZE&gt;--sub_field-&lt;SUB_FIELD&gt;</code>
+    // where &lt;CURRENT_INDEX&gt; and &lt;PAGE_SIZE&gt; are of type int, &lt;SUB_FIELD&gt; is of type str (example: <code>parameters</code>)</p>
     string next_page_token = 2;
 }
 
-// The request message for TrainingPhraseRequest
+// <p>The request message for TrainingPhraseRequest</p>
 message ListTrainingPhrasesofIntentsWithEnrichmentRequest {
-    // Required. The name of the agent to delete all entities types for. Format:
-    // `projects/&lt;project_uuid&gt;/agent`.
+    // <p>Required. The name of the agent to delete all entities types for. Format:
+    // <code>projects/&lt;project_uuid&gt;/agent</code>.</p>
     string parent = 1;
 
-    // Optional. The language code used to filter out prompts.
+    // <p>Optional. The language code used to filter out prompts.</p>
     string language_code = 2;
 
-    // Optional. List of intent uuids to filter by. Only training phrases
-    // that have this intent uuid will be returned
-    // If not passed, returns all
+    // <p>Optional. List of intent uuids to filter by. Only training phrases
+    // that have this intent uuid will be returned</p>
+    // <p>If not passed, returns all</p>
     repeated string intent_ids = 3;
 
-    // Optional: The page token to support pagination.
-    // Pagination allows you to retrieve a large result set in smaller, more manageable portions.
-    // The page token is a string representing the current index and page size.
+    // <p>Optional: The page token to support pagination.</p>
+    // <p>Pagination allows you to retrieve a large result set in smaller, more manageable portions.</p>
+    // <p>The page token is a string representing the current index and page size.</p>
     //
-    // Valid page token strings:
-    // * "" (empty string) - Retrieves the first page.
-    // * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
-    // * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+    // <p>Valid page token strings:</p>
+    // <ul>
+    //   <li>&quot;&quot; (empty string) - Retrieves the first page.</li>
+    //   <li>&quot;current_index-0--page_size-20&quot; - Retrieves the first page with a page size of 20.</li>
+    //   <li>&quot;current_index-1--page_size-20&quot; - Retrieves the second page with a page size of 20.</li>
+    // </ul>
     //
-    // Index starts at 0.
+    // <p>Index starts at 0.</p>
     //
-    // Examples of valid page token strings:
-    // * ""
-    // * "current_index-0--page_size-20"
-    // * "current_index-1--page_size-20"
-    // * "current_index-10--page_size-20"
+    // <p>Examples of valid page token strings:</p>
+    // <ul>
+    //   <li>&quot;&quot;</li>
+    //   <li>&quot;current_index-0--page_size-20&quot;</li>
+    //   <li>&quot;current_index-1--page_size-20&quot;</li>
+    //   <li>&quot;current_index-10--page_size-20&quot;</li>
+    // </ul>
     //
-    // Examples of invalid page token strings:
-    // * "1"
-    // * "current_index-0--page_size-20"
-    // * "current_index--1--page_size-20"
-    // * "current_index1--page_size-20"
-    // * "current_index-1--page_size--20"
+    // <p>Examples of invalid page token strings:</p>
+    // <ul>
+    //   <li>&quot;1&quot;</li>
+    //   <li>&quot;current_index-0--page_size-20&quot;</li>
+    //   <li>&quot;current_index--1--page_size-20&quot;</li>
+    //   <li>&quot;current_index1--page_size-20&quot;</li>
+    //   <li>&quot;current_index-1--page_size--20&quot;</li>
+    // </ul>
     string page_token = 4;
 }
 
-// This message contains a list of training phrases filtered by intent ids, language code and parent passed through the request
+// <p>This message contains a list of training phrases filtered by intent ids, language code and parent passed through the request</p>
 message ListTrainingPhrasesofIntentsWithEnrichmentResponse {
-    // List of user_says values. There will be a maximum number of items
-    // returned based on the page_token field in the request.
+    // <p>List of user_says values. There will be a maximum number of items
+    // returned based on the page_token field in the request.</p>
     repeated string training_phrases = 1;
 
-    // Optional. The next_page_token value returned from a previous list request.
-    // Format: `current_index-<CURRENT_INDEX>--page_size-<PAGE_SIZE>--sub_field-<SUB_FIELD>`
-    // where <CURRENT_INDEX> and <PAGE_SIZE> are of type int, <SUB_FIELD> is of type str (example: `parameters`)
+    // <p>Optional. The next_page_token value returned from a previous list request.</p>
+    // <p>Format: <code>current_index-&lt;CURRENT_INDEX&gt;--page_size-&lt;PAGE_SIZE&gt;--sub_field-&lt;SUB_FIELD&gt;</code>
+    // where &lt;CURRENT_INDEX&gt; and &lt;PAGE_SIZE&gt; are of type int, &lt;SUB_FIELD&gt; is of type str (example: <code>parameters</code>)</p>
     string next_page_token = 2;
 }

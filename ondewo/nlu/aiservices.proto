@@ -25,10 +25,10 @@ import "ondewo/nlu/intent.proto";
 import "ondewo/nlu/entity_type.proto";
 import "ondewo/nlu/session.proto";
 
-// The Central class defining the ondewo ai services
+// <p>The Central class defining the ondewo ai services</p>
 service AiServices {
 
-    // Processes a natural language query and returns detected entities
+    // <p>Processes a natural language query and returns detected entities</p>
     rpc ExtractEntities (ExtractEntitiesRequest) returns (ExtractEntitiesResponse) {
         option (google.api.http) = {
             post: "/v2/{parent=projects/*/agent}/entities:extract"
@@ -36,7 +36,7 @@ service AiServices {
         };
     };
 
-    // Generates a list of training phrases
+    // <p>Generates a list of training phrases</p>
     rpc GenerateUserSays (GenerateUserSaysRequest) returns (GenerateUserSaysResponse) {
         option (google.api.http) = {
             post: "/v2/{parent=projects/*/agent}/generate_user_says"
@@ -44,7 +44,7 @@ service AiServices {
         };
     };
 
-    // Generate responses from all intents using synonyms
+    // <p>Generate responses from all intents using synonyms</p>
     rpc GenerateResponses (GenerateResponsesRequest) returns (GenerateResponsesResponse) {
         option (google.api.http) = {
             post: "/v2/{parent=projects/*/agent}/generate_responses"
@@ -52,7 +52,7 @@ service AiServices {
         };
     };
 
-    // Generates alternative phrase based on original phrase
+    // <p>Generates alternative phrase based on original phrase</p>
     rpc GetAlternativeSentences (GetAlternativeSentencesRequest) returns (GetAlternativeSentencesResponse) {
         option (google.api.http) = {
             post: "/v2/{parent=projects/*/agent}/get_alternative:sentence"
@@ -60,7 +60,7 @@ service AiServices {
         };
     }
 
-    // Generates alternative training phrase based on original training phrase
+    // <p>Generates alternative training phrase based on original training phrase</p>
     rpc GetAlternativeTrainingPhrases (GetAlternativeTrainingPhrasesRequest) returns (GetAlternativeTrainingPhrasesResponse) {
         option (google.api.http) = {
             post: "/v2/{parent=projects/*/agent}/get_alternative:training_phrases"
@@ -68,7 +68,7 @@ service AiServices {
         };
     }
 
-    // Generates synonyms for a certain word
+    // <p>Generates synonyms for a certain word</p>
     rpc GetSynonyms (GetSynonymsRequest) returns (GetSynonymsResponse) {
         option (google.api.http) = {
             post: "/v2/{parent=projects/*/agent}/get_synonyms"
@@ -76,7 +76,7 @@ service AiServices {
         };
     }
 
-    // Preprocess text and detects intents in a sentence
+    // <p>Preprocess text and detects intents in a sentence</p>
     rpc ClassifyIntents (ClassifyIntentsRequest) returns (ClassifyIntentsResponse) {
         option (google.api.http) = {
             post: "/v2/{parent=projects/*/agent}/classify_intent"
@@ -84,12 +84,12 @@ service AiServices {
         };
     }
 
-    // Processes a natural language query and returns detected entities
+    // <p>Processes a natural language query and returns detected entities</p>
     rpc ExtractEntitiesFuzzy (ExtractEntitiesFuzzyRequest) returns (ExtractEntitiesResponse);
 
-    // Generates a single response from a Large Language Model (LLM).
+    // <p>Generates a single response from a Large Language Model (LLM).
     // This RPC method allows a client to make a request to the LLM and receive
-    // a single complete response based on the input parameters provided.
+    // a single complete response based on the input parameters provided.</p>
     rpc LlmGenerate (LlmGenerateRequest) returns (LlmGenerateResponse) {
         option (google.api.http) = {
             post: "/v2/{parent=projects/*/agent}/llm_generate"
@@ -97,14 +97,14 @@ service AiServices {
         };
     }
 
-    // Generates a response from the LLM in a streaming format.
+    // <p>Generates a response from the LLM in a streaming format.
     // This RPC allows continuous streaming of responses from the model,
-    // which is useful for real-time applications or large outputs.
+    // which is useful for real-time applications or large outputs.</p>
     rpc StreamingLlmGenerate (LlmGenerateRequest) returns (stream StreamingLlmGenerateResponse);
 
-    // Lists available Large Language Models (LLMs) for a specified CCAI service.
+    // <p>Lists available Large Language Models (LLMs) for a specified CCAI service.
     // This RPC method allows clients to retrieve metadata about all LLM models associated
-    // with a particular service within a project, including model names, descriptions, and providers.
+    // with a particular service within a project, including model names, descriptions, and providers.</p>
     rpc ListLlmModels (ListLlmModelsRequest) returns (ListLlmModelsResponse) {
         option (google.api.http) = {
             post: "/v2/{parent=projects/*/agent}/list_llm_models"
@@ -114,7 +114,7 @@ service AiServices {
 
 }
 
-// The request message to list available LLM models for a specified CCAI service.
+// <p>The request message to list available LLM models for a specified CCAI service.</p>
 message ListLlmModelsRequest {
 
     // The CCAI service for which to list models.
@@ -126,36 +126,36 @@ message ListLlmModelsRequest {
 
 }
 
-// The response message containing a list of available LLM models.
+// <p>The response message containing a list of available LLM models.</p>
 message ListLlmModelsResponse {
 
-    // A list of LLM models associated with the specified CCAI service.
+    // <p>A list of LLM models associated with the specified CCAI service.
     // Each model in this list represents an individual language model that can
-    // be used within the service, including details such as name, provider, and description.
+    // be used within the service, including details such as name, provider, and description.</p>
     repeated LlmModel llm_models = 1;
 
 }
 
-// Represents an individual LLM model available within a CCAI service.
+// <p>Represents an individual LLM model available within a CCAI service.</p>
 message LlmModel {
 
-    // The resource name of the model.
-    // Format: <pre><code>projects/&lt;project_uuid&gt;/ccai/services/&lt;service_uuid&gt;/model/&lt;model_uuid&gt;</code></pre>
-    // This is a unique identifier for the model, specifying its project, service, and model ID.
+    // <p>The resource name of the model.</p>
+    // <p>Format: <pre><code>projects/&lt;project_uuid&gt;/ccai/services/&lt;service_uuid&gt;/model/&lt;model_uuid&gt;</code></pre></p>
+    // <p>This is a unique identifier for the model, specifying its project, service, and model ID.</p>
     string name = 1;
 
-    // The display name of the model.
-    // This is a human-readable name used for identifying the model in other requests,
-    // such as <pre><code>LlmGenerateRequest</code></pre> and <pre><code>StreamingLlmGenerateRequest</code></pre>.
+    // <p>The display name of the model.</p>
+    // <p>This is a human-readable name used for identifying the model in other requests,
+    // such as <pre><code>LlmGenerateRequest</code></pre> and <pre><code>StreamingLlmGenerateRequest</code></pre>.</p>
     string display_name = 2;
 
-    // The description of the model.
-    // Provides additional details about the model, such as its purpose, architecture, or any other relevant information.
+    // <p>The description of the model.</p>
+    // <p>Provides additional details about the model, such as its purpose, architecture, or any other relevant information.</p>
     string description = 3;
 
-    // The resource name of the CCAI service to which the model belongs.
-    // This field links the model to its service context, helping clients understand
-    // which service hosts the model.
+    // <p>The resource name of the CCAI service to which the model belongs.</p>
+    // <p>This field links the model to its service context, helping clients understand
+    // which service hosts the model.</p>
     string ccai_service_name = 4;
 
     // The provider of the CCAI service that offers this model.
@@ -164,13 +164,13 @@ message LlmModel {
 
 }
 
-// The request message to generate a response from a Large Language Model (LLM).
+// <p>The request message to generate a response from a Large Language Model (LLM).</p>
 message LlmGenerateRequest {
 
-    // The request payload for the LLM, structured according to the specific
-    // requirements of the large language model provider.
-    // The payload must fit the format expected by the specified LLM provider,
-    // as defined by <pre><code>CcaiServiceProvider</code></pre>.
+    // <p>The request payload for the LLM, structured according to the specific
+    // requirements of the large language model provider.</p>
+    // <p>The payload must fit the format expected by the specified LLM provider,
+    // as defined by <pre><code>CcaiServiceProvider</code></pre>.</p>
     google.protobuf.Struct llm_generation_request = 1;
 
     // The CCAI service to be used for processing the request.
@@ -186,7 +186,7 @@ message LlmGenerateRequest {
 
 }
 
-// The response message containing the generated output from a Large Language Model (LLM).
+// <p>The response message containing the generated output from a Large Language Model (LLM).</p>
 message LlmGenerateResponse {
 
     // The response data from the LLM, returned as a structured payload.
@@ -199,7 +199,7 @@ message LlmGenerateResponse {
 
 }
 
-// The response message for streaming generation from a Large Language Model (LLM).
+// <p>The response message for streaming generation from a Large Language Model (LLM).</p>
 message StreamingLlmGenerateResponse {
 
     // The response data from the LLM in a streaming format, returned as a structured payload.
@@ -209,7 +209,7 @@ message StreamingLlmGenerateResponse {
 
 }
 
-// The request to detect parameters.
+// <p>The request to detect parameters.</p>
 message ExtractEntitiesRequest {
 
     // the parent of the request
@@ -232,7 +232,7 @@ message ExtractEntitiesRequest {
 
 }
 
-// This message is a request to extract entities with Fuzzy Entity Recognizer
+// <p>This message is a request to extract entities with Fuzzy Entity Recognizer</p>
 message ExtractEntitiesFuzzyRequest {
 
     // the parent of the request
@@ -256,7 +256,7 @@ message ExtractEntitiesFuzzyRequest {
 
 }
 
-// Configuration for Fuzzy Entity Recognizer
+// <p>Configuration for Fuzzy Entity Recognizer</p>
 message EntityTypeFuzzyNerConfig {
 
     // The Entity Type
@@ -271,10 +271,10 @@ message EntityTypeFuzzyNerConfig {
     // Enum of fuzzy ner algorithms
     enum FuzzyNerAlgorithm {
 
-        // Levenshtein algorithm for fuzzy ner matching
+        // <p>Levenshtein algorithm for fuzzy ner matching</p>
         PREFILTER_LEVENSHTEIN = 0;
 
-        // local maximum
+        // <p>local maximum</p>
         LOCAL_MAXIMUM = 1;
     }
     // Optional. Specify the Fuzzy Ner algorithm
@@ -285,7 +285,7 @@ message EntityTypeFuzzyNerConfig {
 
 }
 
-// This message contains the entity detected
+// <p>This message contains the entity detected</p>
 message EntityDetected{
 
     // The entity name that is detected
@@ -299,7 +299,7 @@ message EntityDetected{
 
 }
 
-// This message is a response of extracting entities
+// <p>This message is a response of extracting entities</p>
 message ExtractEntitiesResponse {
 
     // A list of entities detected
@@ -310,7 +310,7 @@ message ExtractEntitiesResponse {
 
 }
 
-// Request to get alternative sentences
+// <p>Request to get alternative sentences</p>
 message GetAlternativeSentencesRequest {
 
     // Configuration type of the enricher
@@ -337,7 +337,7 @@ message GetAlternativeSentencesRequest {
 
 }
 
-// Request to generate user sentences
+// <p>Request to generate user sentences</p>
 message GenerateUserSaysRequest {
 
     // language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc.
@@ -358,7 +358,7 @@ message GenerateUserSaysRequest {
 
 }
 
-// Request to generate responses
+// <p>Request to generate responses</p>
 message GenerateResponsesRequest {
 
     // language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc.
@@ -381,7 +381,7 @@ message GenerateResponsesRequest {
 
 }
 
-// Request to get alternative training phrases
+// <p>Request to get alternative training phrases</p>
 message GetAlternativeTrainingPhrasesRequest {
 
     // Configuration of the enricher
@@ -421,7 +421,7 @@ message GetAlternativeTrainingPhrasesRequest {
 
 }
 
-// Request to get synonyms
+// <p>Request to get synonyms</p>
 message GetSynonymsRequest {
 
     // Configuration of the enricher
@@ -442,14 +442,14 @@ message GetSynonymsRequest {
 
 }
 
-// Response containing synonyms
+// <p>Response containing synonyms</p>
 message GetSynonymsResponse {
 
     // A list of synonyms
     repeated Synonym synonyms = 1;
 }
 
-// This message contains a Synonym
+// <p>This message contains a Synonym</p>
 message Synonym {
 
     // Synonym word
@@ -460,7 +460,7 @@ message Synonym {
 
 }
 
-// Response containing alternative sentences
+// <p>Response containing alternative sentences</p>
 message GetAlternativeSentencesResponse {
 
     // A list of alternative sentences
@@ -468,7 +468,7 @@ message GetAlternativeSentencesResponse {
 
 }
 
-// Response containing responses
+// <p>Response containing responses</p>
 message GenerateResponsesResponse {
 
     // A list of responses
@@ -476,7 +476,7 @@ message GenerateResponsesResponse {
 
 }
 
-// Response containing user sentences
+// <p>Response containing user sentences</p>
 message GenerateUserSaysResponse {
 
     // A list of sampled sentences
@@ -484,7 +484,7 @@ message GenerateUserSaysResponse {
 
 }
 
-// Response containing alternative training phrases
+// <p>Response containing alternative training phrases</p>
 message GetAlternativeTrainingPhrasesResponse {
 
     // A list of alternative training phrases
@@ -492,7 +492,7 @@ message GetAlternativeTrainingPhrasesResponse {
 
 }
 
-// This message contains an alternative sentence
+// <p>This message contains an alternative sentence</p>
 message AltSentence {
 
     // Alternative sentence
@@ -503,7 +503,7 @@ message AltSentence {
 
 }
 
-// This message contains an alternative training phrase
+// <p>This message contains an alternative training phrase</p>
 message AltTrainingPhrase {
 
     // Alternative training phrase
@@ -514,7 +514,7 @@ message AltTrainingPhrase {
 
 }
 
-// This message contains the configuration of data enrichment
+// <p>This message contains the configuration of data enrichment</p>
 message DataEnrichmentConfig {
 
     // Entity augmenter configuration
@@ -546,7 +546,7 @@ message DataEnrichmentConfig {
 
 }
 
-// Configuration for Entity enrichment
+// <p>Configuration for Entity enrichment</p>
 message EntityEnrichmentConfig {
 
     // Activation flag
@@ -560,7 +560,7 @@ message EntityEnrichmentConfig {
 
 }
 
-// Configuration for Thesaurus enrichment
+// <p>Configuration for Thesaurus enrichment</p>
 message ThesaurusEnrichmentConfig {
 
     // Activation flag
@@ -573,7 +573,7 @@ message ThesaurusEnrichmentConfig {
     int32 execution_order = 3;
 
 }
-// Configuration for BERT augmenter enrichment
+// <p>Configuration for BERT augmenter enrichment</p>
 message BertAugEnrichmentConfig {
 
     // Activation flag
@@ -586,7 +586,7 @@ message BertAugEnrichmentConfig {
     int32 execution_order = 3;
 
 }
-// Configuration for GloVe enrichment
+// <p>Configuration for GloVe enrichment</p>
 message GloVeEnrichmentConfig {
 
     // Activation flag
@@ -600,7 +600,7 @@ message GloVeEnrichmentConfig {
 
 }
 
-// Configuration for GPT2 enrichment
+// <p>Configuration for GPT2 enrichment</p>
 message GPT2EnrichmentConfig {
 
     // Activation flag
@@ -614,7 +614,7 @@ message GPT2EnrichmentConfig {
 
 }
 
-// Configuration for Word2Vec enrichment
+// <p>Configuration for Word2Vec enrichment</p>
 message Word2VecEnrichmentConfig {
 
     // Activation flag
@@ -627,7 +627,7 @@ message Word2VecEnrichmentConfig {
     int32 execution_order = 3;
 }
 
-// Configuration for WordNet augmenter enrichment
+// <p>Configuration for WordNet augmenter enrichment</p>
 message WordNetAugEnrichmentConfig {
 
     // Activation flag
@@ -641,7 +641,7 @@ message WordNetAugEnrichmentConfig {
 
 }
 
-// Configuration for XLNet enrichment
+// <p>Configuration for XLNet enrichment</p>
 message XLNetAugEnrichmentConfig {
 
     // Activation flag
@@ -655,7 +655,7 @@ message XLNetAugEnrichmentConfig {
 
 }
 
-// Configuration for large language model (LLM) enrichment
+// <p>Configuration for large language model (LLM) enrichment</p>
 message LlmEnrichmentConfig {
 
     // Activation flag
@@ -674,7 +674,7 @@ message LlmEnrichmentConfig {
 
 }
 
-// The request for intent classification.
+// <p>The request for intent classification.</p>
 message ClassifyIntentsRequest {
 
     // Required. The project of this agent.
@@ -687,17 +687,19 @@ message ClassifyIntentsRequest {
     // the input language
     string language_code = 3;
 
-    // Optional: if restrict classification result with input contexts listed in the field `context_names`
+    // Optional: if restrict classification result with input contexts listed in the field <code>context_names</code>
     bool active_contexts = 4;
 
     // Optional: names of the input contexts to restrict the classification result with.
     // Intents can only be classified if the intent's input context set is the subset of the given context set.
     repeated string context_names = 5;
 
-    // Optional: Which mode to use:
-    // EXCLUSIVE - skip algorithms listed in `algorithms` field,
-    // INCLUSIVE - run ONLY algorithms listed in `algorithms` field,
-    // UNSPECIFIED - default mode, described in agent config
+    // <p>Optional: Which mode to use:</p>
+    // <ul>
+    //   <li>EXCLUSIVE - skip algorithms listed in <code>algorithms</code> field,</li>
+    //   <li>INCLUSIVE - run ONLY algorithms listed in <code>algorithms</code> field,</li>
+    //   <li>UNSPECIFIED - default mode, described in agent config</li>
+    // </ul>
     Mode mode = 6;
 
     // Optional: Algorithm list
@@ -708,68 +710,68 @@ message ClassifyIntentsRequest {
 
 }
 
-// Type of mode
+// <p>Type of mode</p>
 enum Mode {
 
-    // default mode, described in agent config
+    // <p>default mode, described in agent config</p>
     UNSPECIFIED = 0;
 
-    // skip algorithms listed in `algorithms` field,
+    // <p>skip algorithms listed in <code>algorithms</code> field,</p>
     EXCLUSIVE = 1;
 
-    // run ONLY algorithms listed in `algorithms` field
+    // <p>run ONLY algorithms listed in <code>algorithms</code> field</p>
     INCLUSIVE = 2;
 
 }
 
-// Type of Intent algorithm.
+// <p>Type of Intent algorithm.</p>
 enum IntentAlgorithms {
 
-    // By enabling this, a specific intent is triggered if the context and the intent name in the user says is
-    // matched. This can be used for directly triggering 'quick reply' button clicks confidence is always '1.0'.
+    // <p>By enabling this, a specific intent is triggered if the context and the intent name in the user says is
+    // matched. This can be used for directly triggering &apos;quick reply&apos; button clicks confidence is always &apos;1.0&apos;.</p>
     OndewoIntentExactContextDetector = 0;
 
-    // exact matching' of user input to user says is used to detect the intent. Confidence is always '1.0' if an
-    // 'exact match' is found.
+    // <p>exact matching&apos; of user input to user says is used to detect the intent. Confidence is always &apos;1.0&apos; if an
+    // &apos;exact match&apos; is found.</p>
     OndewoIntentExactMatch = 1;
 
-    // the entity synonym in the user says text is replaced by the entity and 'exact matching' of user says text
-    // is performed. Confidence is always '1.0'.
+    // <p>the entity synonym in the user says text is replaced by the entity and &apos;exact matching&apos; of user says text
+    // is performed. Confidence is always &apos;1.0&apos;.</p>
     OndewoIntentNamedExactMatch = 2;
 
-    // the algorithm computes the similarity of the user input to all user says of all intents.
+    // <p>the algorithm computes the similarity of the user input to all user says of all intents.</p>
     OndewoIntentSimilarityMatch = 3;
 
-    // the entity synonyms in the user says are replaced by their Entity. Text similarity algorithms are then
-    // used to detect the intent.
+    // <p>the entity synonyms in the user says are replaced by their Entity. Text similarity algorithms are then
+    // used to detect the intent.</p>
     OndewoIntentNamedSimilarityMatch = 4;
 
-    // new language representation model called BERT, which stands for Bidirectional Encoder Representations
+    // <p>new language representation model called BERT, which stands for Bidirectional Encoder Representations
     // from Transformers.BERT is designed to pre-train deep bidirectional representations by jointly conditioning
     // on both left and right context in all layers. As a result, the pre-trained BERT representations can be
-    // fine-tuned for multi-class intent detection. For details see https://arxiv.org/abs/1810.04805
+    // fine-tuned for multi-class intent detection. For details see <a href="https://arxiv.org/abs/1810.04805">https://arxiv.org/abs/1810.04805</a></p>
     OndewoIntentBertClassifier = 7;
 
     OndewoIntentMetaClassifier = 8;
 
-    // Maximum number of repeated fallbacks before this algorithm exists the conversation and resets contexts
+    // <p>Maximum number of repeated fallbacks before this algorithm exists the conversation and resets contexts</p>
     IntentExitDetector = 10;
 
-    // Algorithm to improve the interplay of the other algorithms
+    // <p>Algorithm to improve the interplay of the other algorithms</p>
     OndewoIntentRankingMatch = 11;
 
-    // Ensemble calculation of used algorithms
+    // <p>Ensemble calculation of used algorithms</p>
     OndewoWeightedEnsemble = 13;
 
-    // Maximum number of repeated fallbacks before this algorithm exists the conversation and resets contexts
+    // <p>Maximum number of repeated fallbacks before this algorithm exists the conversation and resets contexts</p>
     OndewoIntentExitDetector = 14;
 
-    // Matches the intent based on the parameter constellation and the current user context
+    // <p>Matches the intent based on the parameter constellation and the current user context</p>
     OndewoIntentParameterMatch = 15;
 
 }
 
-// Intent classified by a certain intent classifier
+// <p>Intent classified by a certain intent classifier</p>
 message IntentClassified {
 
     // The unique identifier of this intent.
@@ -787,7 +789,7 @@ message IntentClassified {
 
 }
 
-// Response containing the intents classified in a sentence
+// <p>Response containing the intents classified in a sentence</p>
 message ClassifyIntentsResponse {
 
     // A list of intents detected
