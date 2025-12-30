@@ -25,14 +25,14 @@ message OperationMetadata {
     // long-running operation status code
     Status status = 1;
 
-    // Structure to set status of operation. An operation may not be started if NOT_STARTED is set, in
-    // progress if IN_PROGRESS, finished if DONE, interrupted if CANCELED or failed if FAILED.
+    // Structure to set status of operation. 
+    // An operation may not be started if NOT_STARTED is set, in progress if IN_PROGRESS, finished if DONE, interrupted if CANCELED or failed if FAILED.
     enum Status {
 
         // unspecified status code
         STATUS_UNSPECIFIED = 0;
 
-        // operation haven't started yet
+        // operation haven&apos;t started yet
         NOT_STARTED = 1;
 
         // operation currently in progress
@@ -52,7 +52,7 @@ message OperationMetadata {
     // optional parent operation name
     string parent_operation_name = 2;
 
-    // list of the sub-operations' names of the operation
+    // list of the sub-operations&apos; names of the operation
     repeated string sub_operation_names = 3;
 
     // the time the operation was submitted.
@@ -76,14 +76,14 @@ message OperationMetadata {
     // id of the user who cancelled the operation
     string user_id_cancelled = 10;
 
-    // project parent name, e.g. "projects/pepper/agent"
+    // project parent name, e.g. &quot;projects/pepper/agent&quot;
     string project_parent = 11;
 
     // operation type
     OperationType operation_type = 12;
 
-    // Type of operation. It can be creating, importing, exporting, deleting, restoring, building cache,
-    // training or exporting benchmark an agent
+    // Type of operation. 
+    // It can be creating, importing, exporting, deleting, restoring, building cache, training or exporting benchmark an agent
     enum OperationType {
 
         // unspecified operation type

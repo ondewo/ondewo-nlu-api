@@ -27,24 +27,24 @@ option java_outer_classname = "CommonProto";
 option java_package = "com.google.cloud.dialogflow.v2";
 option objc_class_prefix = "DF";
 
-// <p>Sorting mode</p>
+// Sorting mode
 enum SortingMode {
 
-    // <p>ascending sorting</p>
+    // ascending sorting
     ASCENDING = 0;
 
-    // <p>descending sorting</p>
+    // descending sorting
     DESCENDING = 1;
 }
 
-// <p>statistic response</p>
+// statistic response
 message StatResponse {
 
-    // <p>Response wrapper for the &quot;Get&lt;Stat&gt;&quot; endpoints</p>
+    // Response wrapper for the &quot;Get&lt;Stat&gt;&quot; endpoints
     uint32 value = 1;
 }
 
-// <p>Comment message</p>
+// Comment message
 message Comment {
 
     // resource name of the comment
@@ -53,16 +53,16 @@ message Comment {
     // text of the comment
     string text = 2;
 
-    // <p>User id as resource name</p>
-    // <p>Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</code></pre></p>
+    // User id as resource name.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</code></pre>
     string user_id = 3;
 
-    // <p>name of the resource for which the comment is about</p>
-    // <p>Format: <pre><code>projects/&lt;project_uuid&gt;/agent/&lt;resource_type&gt;/&lt;resource_uuid&gt;/.../</code></pre></p>
+    // name of the resource for which the comment is about.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/&lt;resource_type&gt;/&lt;resource_uuid&gt;/.../</code></pre>
     string comment_about_name = 4;
 
-    // <p>The resource name of the parent comment. A parent comment is a reply to a certain comment.</p>
-    // <p>Format: <pre><code>projects/&lt;project_uuid&gt;/agent/&lt;resource_type&gt;/&lt;resource_uuid&gt;/.../</code></pre></p>
+    // The resource name of the parent comment. A parent comment is a reply to a certain comment.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/&lt;resource_type&gt;/&lt;resource_uuid&gt;/.../</code></pre>
     string parent_comment_name = 5;
 
     // Creation date and time. Read-only field.
@@ -79,144 +79,144 @@ message Comment {
 }
 
 
-// <p>Enumerates the possible flagged statuses for a notification.</p>
+// Enumerates the possible flagged statuses for a notification.
 enum NotificationFlaggedStatus {
-    // <p>Unspecified flagged status</p>
+    // Unspecified flagged status
     NOTIFICATION_FLAGGED_STATUS_UNSPECIFIED = 0;
 
-    // <p>Notification is flagged</p>
+    // Notification is flagged
     NOTIFICATION_FLAGGED_STATUS_FLAGGED = 1;
 
-    // <p>Notification is unflagged</p>
+    // Notification is unflagged
     NOTIFICATION_FLAGGED_STATUS_UNFLAGGED = 2;
 }
 
-// <p>Enumerates the possible read statuses for a notification.</p>
+// Enumerates the possible read statuses for a notification.
 enum NotificationReadStatus {
-    // <p>Unspecified read status</p>
+    // Unspecified read status
     NOTIFICATION_READ_STATUS_UNSPECIFIED = 0;
 
-    // <p>Notification is marked as read</p>
+    // Notification is marked as read
     NOTIFICATION_READ_STATUS_READ = 1;
 
-    // <p>Notification is marked as unread</p>
+    // Notification is marked as unread
     NOTIFICATION_READ_STATUS_UNREAD = 2;
 }
 
 
 
-// <p>Enum for notification type</p>
+// Enum for notification type
 enum NotificationVisibility {
 
-    // <p>unspecified</p>
+    // unspecified
     NOTIFICATION_VISIBILITY_UNSPECIFIED = 0;
 
-    // <p>only user sees the notification - usually a notification of the user interface</p>
+    // only user sees the notification - usually a notification of the user interface
     NOTIFICATION_VISIBILITY_USER = 1;
 
-    // <p>all members of a project see this notification</p>
+    // all members of a project see this notification
     NOTIFICATION_VISIBILITY_PROJECT = 2;
 
-    // <p>all admins of a project see this notification</p>
+    // all admins of a project see this notification
     NOTIFICATION_VISIBILITY_PROJECT_OWNER = 3;
 
-    // <p>all admins of a project see this notification</p>
+    // all admins of a project see this notification
     NOTIFICATION_VISIBILITY_PROJECT_ADMIN = 4;
 
-    // <p>all admins of a project see this notification</p>
+    // all admins of a project see this notification
     NOTIFICATION_VISIBILITY_PROJECT_DEVELOPER = 5;
 
-    // <p>all users of a project see this notification</p>
+    // all users of a project see this notification
     NOTIFICATION_VISIBILITY_PROJECT_USER = 6;
 
-    // <p>all users of a project see this notification</p>
+    // all users of a project see this notification
     NOTIFICATION_VISIBILITY_PROJECT_EXECUTOR = 7;
 
-    // <p>all users of a project see this notification</p>
+    // all users of a project see this notification
     NOTIFICATION_VISIBILITY_PROJECT_INACTIVE = 8;
 
-    // <p>all admins of the server</p>
+    // all admins of the server
     NOTIFICATION_VISIBILITY_SERVER_ADMIN = 9;
 
-    // <p>all admins of the server</p>
+    // all admins of the server
     NOTIFICATION_VISIBILITY_SERVER_MANAGER = 10;
 
-    // <p>all admins of the server</p>
+    // all admins of the server
     NOTIFICATION_VISIBILITY_SERVER_USER = 11;
 
-    // <p>all admins of the server</p>
+    // all admins of the server
     NOTIFICATION_VISIBILITY_SERVER_INACTIVE = 12;
 
 }
 
-// <p>Enumerates the possible types for a notification.</p>
+// Enumerates the possible types for a notification.
 enum NotificationType {
 
-    // <p>Unspecified notification type</p>
+    // Unspecified notification type
     NOTIFICATION_TYPE_UNSPECIFIED = 0;
 
-    // <p>Debug notification type</p>
+    // Debug notification type
     NOTIFICATION_TYPE_DEBUG = 1;
 
-    // <p>Warning notification type</p>
+    // Warning notification type
     NOTIFICATION_TYPE_WARNING = 2;
 
-    // <p>Informational notification type</p>
+    // Informational notification type
     NOTIFICATION_TYPE_INFO = 3;
 
-    // <p>Error notification type</p>
+    // Error notification type
     NOTIFICATION_TYPE_ERROR = 4;
 
-    // <p>News notification type</p>
+    // News notification type
     NOTIFICATION_TYPE_NEWS = 5;
 }
 
-// <p>Enumerates the possible origins for a notification.</p>
+// Enumerates the possible origins for a notification.
 enum NotificationOrigin {
 
-    // <p>unspecified</p>
+    // unspecified
     NOTIFICATION_ORIGIN_UNSPECIFIED = 0;
 
-    // <p>ondewo-aim service</p>
+    // ondewo-aim service
     NOTIFICATION_ORIGIN_ONDEWO_AIM = 1;
 
-    // <p>ondewo-bpi service</p>
+    // ondewo-bpi service
     NOTIFICATION_ORIGIN_ONDEWO_BPI = 2;
 
-    // <p>ondewo-csi service</p>
+    // ondewo-csi service
     NOTIFICATION_ORIGIN_ONDEWO_CSI = 3;
 
-    // <p>ondewo-nlu service</p>
+    // ondewo-nlu service
     NOTIFICATION_ORIGIN_ONDEWO_NLU = 4;
 
-    // <p>ondewo-s2t service</p>
+    // ondewo-s2t service
     NOTIFICATION_ORIGIN_ONDEWO_S2T = 5;
 
-    // <p>ondewo-sip service</p>
+    // ondewo-sip service
     NOTIFICATION_ORIGIN_ONDEWO_SIP = 6;
 
-    // <p>ondewo-t2s service</p>
+    // ondewo-t2s service
     NOTIFICATION_ORIGIN_ONDEWO_T2S = 7;
 
-    // <p>ondewo-vtsi service</p>
+    // ondewo-vtsi service
     NOTIFICATION_ORIGIN_ONDEWO_VTSI = 8;
 
-    // <p>ondewo-vtsi-rabbitmq service</p>
+    // ondewo-vtsi-rabbitmq service
     NOTIFICATION_ORIGIN_ONDEWO_VTSI_RABBITMQ = 9;
 }
 
-// <p>Notification message</p>
+// Notification message
 message Notification {
 
     // resource name of the notification
     string name = 1;
 
-    // <p>User id as resource name</p>
-    // <p>Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</code></pre></p>
+    // User id as resource name.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</code></pre>
     string user_name = 2;
 
-    // <p>User id as resource name</p>
-    // <p>Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</code></pre></p>
+    // User id as resource name.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</code></pre>
     string title = 3;
 
     // A short notification text is displayed directly with max. 50 chars which is a truncated version of the long message
@@ -237,8 +237,8 @@ message Notification {
     // When the user marked the notification as read, i.e. read the notification
     google.protobuf.Timestamp notification_read_timestamp = 9;
 
-    // <p>The origin of a notification</p>
-    // <p>A Notification origin can be from a product (service), e.g. ondewo-nlu, ondewo-s2t, ondewo-t2s, etc.</p>
+    // The origin of a notification.
+    // A Notification origin can be from a product (service), e.g. ondewo-nlu, ondewo-s2t, ondewo-t2s, etc.
     NotificationOrigin notification_origin = 10;
 
     // The name of resource of where the notification originated
@@ -267,21 +267,21 @@ message Notification {
 
 }
 
-// <p>Message for adding notifications in a batch.</p>
+// Message for adding notifications in a batch.
 message AddNotificationsRequest {
 
     // List of notifications to be added.
     repeated Notification notifications = 1;
 }
 
-// <p>Message containing the response to adding notifications.</p>
+// Message containing the response to adding notifications.
 message AddNotificationsResponse {
 
     // List of notifications that have been added.
     repeated Notification notifications = 1;
 }
 
-// <p>Message for filtering notifications based on various criteria.</p>
+// Message for filtering notifications based on various criteria.
 message NotificationFilter {
 
     // Language codes of the projects for which notifications are filtered.
@@ -313,27 +313,27 @@ message NotificationFilter {
 
 }
 
-// <p>Message for listing notifications based on certain criteria.</p>
+// Message for listing notifications based on certain criteria.
 message ListNotificationsRequest {
 
     // Optional filter to narrow the response down to specific notifications.
     NotificationFilter notification_filter = 1;
 
-    // <p>Optional. Token for pagination, obtained from a previous list request.</p>
-    // <p>The page token to support pagination.</p>
-    // <p>Pagination allows you to retrieve a large result set in smaller, more manageable portions.</p>
-    // <p>The page token is a string representing the current index and page size.</p>
+    // Optional. Token for pagination, obtained from a previous list request.
+    // The page token to support pagination.
+    // Pagination allows you to retrieve a large result set in smaller, more manageable portions.
+    // The page token is a string representing the current index and page size.
     //
-    // <p>Valid page token strings:</p>
+    // Valid page token strings:
     // <ul>
     //   <li>&quot;&quot; (empty string) - Retrieves the first page.</li>
     //   <li>&quot;current_index-0--page_size-20&quot; - Retrieves the first page with a page size of 20.</li>
     //   <li>&quot;current_index-1--page_size-20&quot; - Retrieves the second page with a page size of 20.</li>
     // </ul>
     //
-    // <p>Index starts at 0.</p>
+    // Index starts at 0.
     //
-    // <p>Examples of valid page token strings:</p>
+    // Examples of valid page token strings:
     // <ul>
     //   <li>&quot;&quot;</li>
     //   <li>&quot;current_index-0--page_size-20&quot;</li>
@@ -341,7 +341,7 @@ message ListNotificationsRequest {
     //   <li>&quot;current_index-10--page_size-20&quot;</li>
     // </ul>
     //
-    // <p>Examples of invalid page token strings:</p>
+    // Examples of invalid page token strings:
     // <ul>
     //   <li>&quot;1&quot;</li>
     //   <li>&quot;current_index-0--page_size-20&quot;</li>
@@ -356,14 +356,14 @@ message ListNotificationsRequest {
     google.protobuf.FieldMask field_mask = 3;
 }
 
-// <p>Message containing the response to a list request for notifications.</p>
+// Message containing the response to a list request for notifications.
 message ListNotificationsResponse {
 
     // List of notifications that meet the specified criteria.
     repeated Notification notifications = 1;
 }
 
-// <p>Message for setting the flagged status of notifications.</p>
+// Message for setting the flagged status of notifications.
 message SetNotificationsFlaggedStatusRequest {
 
     // Names of notifications to set the flagged status for.
@@ -373,7 +373,7 @@ message SetNotificationsFlaggedStatusRequest {
     repeated bool flagged = 2;
 }
 
-// <p>Message for setting the read status of notifications.</p>
+// Message for setting the read status of notifications.
 message SetNotificationsReadStatusRequest {
 
     // Names of notifications to set the read status for.
@@ -383,7 +383,7 @@ message SetNotificationsReadStatusRequest {
     repeated bool flagged = 2;
 }
 
-// <p>Key-Value pair message, where the value can be one of various types (int, float, double, string, etc.).</p>
+// Key-Value pair message, where the value can be one of various types (int, float, double, string, etc.).
 message KeyValuePair {
 
     // The key of the key-value pair.

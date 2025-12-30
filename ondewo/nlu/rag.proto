@@ -27,7 +27,7 @@
 // limitations under the License.
 
 // File-level comment for <code>ondewo/nlu/rags.proto</code>.
-// This file contains a single service <a href="#ondewo.nlu.Rags">Rags</a>. The Rags service provides integration with RAGFlow for Retrieval-Augmented Generation (RAG), including dataset management, document processing, chunk retrieval, conversational AI with chat and agent assistants, and file management. Key message types include <a href="#ondewo.nlu.RagDataset">RagDataset</a>, <a href="#ondewo.nlu.RagChat">RagChat</a>, and <a href="#ondewo.nlu.RagAgent">RagAgent</a>.
+// This file contains a single service <a href="index.html#ondewo.nlu.Rags">Rags</a>. The Rags service provides integration with RAGFlow for Retrieval-Augmented Generation (RAG), including dataset management, document processing, chunk retrieval, conversational AI with chat and agent assistants, and file management. Key message types include <a href="index.html#ondewo.nlu.RagDataset">RagDataset</a>, <a href="index.html#ondewo.nlu.RagChat">RagChat</a>, and <a href="index.html#ondewo.nlu.RagAgent">RagAgent</a>.
 syntax = "proto3";
 
 package ondewo.nlu;
@@ -49,19 +49,19 @@ service Rags {
     // RAGFlow endpoint: POST /api/v1/datasets
 
     // Create a new dataset (knowledge base).<br>
-    // Uses tenant's default embedding model if not specified.
+    // Uses tenant&apos;s default embedding model if not specified.
     rpc RagCreateDataset(RagCreateDatasetRequest) returns (RagDataset);
 
-    // RAGFlow endpoint: PUT /api/v1/datasets/<dataset_id>
+    // RAGFlow endpoint: PUT /api/v1/datasets/&lt;dataset_id&gt;
 
-    // Update an existing dataset's configuration.<br>
+    // Update an existing dataset&apos;s configuration.<br>
     // Cannot change embedding_model if dataset has chunks.
     rpc RagUpdateDataset(RagUpdateDatasetRequest) returns (RagDataset);
 
     // RAGFlow endpoint: DELETE /api/v1/datasets
 
     // Delete one or more datasets (batch operation).<br>
-    // If ids is null or empty, deletes all user's datasets.<br>
+    // If ids is null or empty, deletes all user&apos;s datasets.<br>
     // Deletes all associated documents, files, and chunks.
     rpc RagDeleteDatasets(RagDeleteDatasetsRequest) returns (RagPartialSuccess);
 
@@ -71,13 +71,13 @@ service Rags {
     // Returns datasets from all tenants the user has access to.
     rpc RagListDatasets(RagListDatasetsRequest) returns (RagDatasetList);
 
-    // RAGFlow endpoint: GET /api/v1/datasets/<dataset_id>/knowledge_graph
+    // RAGFlow endpoint: GET /api/v1/datasets/&lt;dataset_id&gt;/knowledge_graph
 
     // Get the knowledge graph for a dataset.<br>
     // Returns graph structure with nodes (max 256) and edges (max 128).
     rpc RagGetKnowledgeGraph(RagGetKnowledgeGraphRequest) returns (RagGetKnowledgeGraphResponse);
 
-    // RAGFlow endpoint: DELETE /api/v1/datasets/<dataset_id>/knowledge_graph
+    // RAGFlow endpoint: DELETE /api/v1/datasets/&lt;dataset_id&gt;/knowledge_graph
 
     // Delete the knowledge graph for a dataset.<br>
     // Deletes graph-related chunks but not the dataset itself.
@@ -88,32 +88,32 @@ service Rags {
     // REST: /api/v1/datasets/<dataset_id>/documents
     // ========================================================================
 
-    // RAGFlow endpoint: POST /api/v1/datasets/<dataset_id>/documents
+    // RAGFlow endpoint: POST /api/v1/datasets/&lt;dataset_id&gt;/documents
 
     // Upload one or more documents to a dataset.<br>
     // Documents start in UNSTART state and must be parsed.
     rpc RagUploadDocuments(stream RagUploadDocumentsRequest) returns (RagDocumentList);
 
-    // RAGFlow endpoint: PUT /api/v1/datasets/<dataset_id>/documents/<document_id>
+    // RAGFlow endpoint: PUT /api/v1/datasets/&lt;dataset_id&gt;/documents/&lt;document_id&gt;
 
     // Update document metadata and configuration.<br>
     // Changing chunk_method resets document to UNSTART and deletes chunks.
     rpc RagUpdateDocument(RagUpdateDocumentRequest) returns (RagDocument);
 
-    // RAGFlow endpoint: GET /api/v1/datasets/<dataset_id>/documents/<document_id>
+    // RAGFlow endpoint: GET /api/v1/datasets/&lt;dataset_id&gt;/documents/&lt;document_id&gt;
 
     // Download the original document file.<br>
     // Returns binary file stream from storage.<br>
     // First chunk contains metadata, subsequent chunks only contain data.
     rpc RagDownloadDocument(RagDownloadDocumentRequest) returns (stream RagFileChunk);
 
-    // RAGFlow endpoint: GET /api/v1/datasets/<dataset_id>/documents
+    // RAGFlow endpoint: GET /api/v1/datasets/&lt;dataset_id&gt;/documents
 
     // List documents in a dataset with pagination and filtering.<br>
     // Supports time range filtering and keyword search.
     rpc RagListDocuments(RagListDocumentsRequest) returns (RagListDocumentsResponse);
 
-    // RAGFlow endpoint: DELETE /api/v1/datasets/<dataset_id>/documents
+    // RAGFlow endpoint: DELETE /api/v1/datasets/&lt;dataset_id&gt;/documents
 
     // Delete one or more documents from a dataset (batch operation).<br>
     // If ids empty, deletes all documents. Removes chunks and storage files.
@@ -122,43 +122,43 @@ service Rags {
     // ========================================================================
     // Chunk Management (7 methods)
     // Chunks are text segments extracted from documents for retrieval.
-    // REST: /api/v1/datasets/<dataset_id>/chunks
+    // REST: /api/v1/datasets/&lt;dataset_id&gt;/chunks
     // ========================================================================
 
-    // RAGFlow endpoint: POST /api/v1/datasets/<dataset_id>/chunks
+    // RAGFlow endpoint: POST /api/v1/datasets/&lt;dataset_id&gt;/chunks
 
     // Start parsing documents into chunks.<br>
-    // Cannot parse documents currently being processed (0 < progress < 1).<br>
+    // Cannot parse documents currently being processed (0 &lt; progress &lt; 1).<br>
     // Queues documents for background processing.
     rpc RagParseDocuments(RagParseDocumentsRequest) returns (RagPartialSuccess);
 
-    // RAGFlow endpoint: DELETE /api/v1/datasets/<dataset_id>/chunks
+    // RAGFlow endpoint: DELETE /api/v1/datasets/&lt;dataset_id&gt;/chunks
 
     // Stop parsing documents.<br>
     // Can only stop documents with progress between 0 and 1.
     rpc RagStopParsing(RagStopParsingRequest) returns (RagPartialSuccess);
 
-    // RAGFlow endpoint: GET /api/v1/datasets/<dataset_id>/documents/<document_id>/chunks
+    // RAGFlow endpoint: GET /api/v1/datasets/&lt;dataset_id&gt;/documents/&lt;document_id&gt;/chunks
 
     // List chunks of a document with pagination.<br>
     // Supports keyword search with content highlighting.
     rpc RagListChunks(RagListChunksRequest) returns (RagListChunksResponse);
 
-    // RAGFlow endpoint: POST /api/v1/datasets/<dataset_id>/documents/<document_id>/chunks
+    // RAGFlow endpoint: POST /api/v1/datasets/&lt;dataset_id&gt;/documents/&lt;document_id&gt;/chunks
 
     // Manually add a chunk to a document.<br>
     // Automatically tokenizes content and generates embeddings.
     rpc RagAddChunk(RagAddChunkRequest) returns (RagAddChunkResponse);
 
-    // RAGFlow endpoint: DELETE /api/v1/datasets/<dataset_id>/documents/<document_id>/chunks
+    // RAGFlow endpoint: DELETE /api/v1/datasets/&lt;dataset_id&gt;/documents/&lt;document_id&gt;/chunks
 
     // Remove one or more chunks from a document.<br>
     // If chunk_ids empty, removes all chunks from document.
     rpc RagRemoveChunks(RagRemoveChunksRequest) returns (RagPartialSuccess);
 
-    // RAGFlow endpoint: PUT /api/v1/datasets/<dataset_id>/documents/<document_id>/chunks/<chunk_id>
+    // RAGFlow endpoint: PUT /api/v1/datasets/&lt;dataset_id&gt;/documents/&lt;document_id&gt;/chunks/&lt;chunk_id&gt;
 
-    // Update an existing chunk's content and metadata.<br>
+    // Update an existing chunk&apos;s content and metadata.<br>
     // Re-tokenizes content and re-generates embeddings if content changed.
     rpc RagUpdateChunk(RagUpdateChunkRequest) returns (google.protobuf.Empty);
 
@@ -178,20 +178,20 @@ service Rags {
     // RAGFlow endpoint: POST /api/v1/chats
 
     // Create a new chat assistant.<br>
-    // All datasets must have parsed files (chunk_num > 0).<br>
+    // All datasets must have parsed files (chunk_num &gt; 0).<br>
     // All datasets must use the same embedding model.
     rpc RagCreateChat(RagCreateChatRequest) returns (RagChat);
 
-    // RAGFlow endpoint: PUT /api/v1/chats/<chat_id>
+    // RAGFlow endpoint: PUT /api/v1/chats/&lt;chat_id&gt;
 
-    // Update an existing chat assistant's configuration.<br>
+    // Update an existing chat assistant&apos;s configuration.<br>
     // LLM and prompt configs are merged with existing values.
     rpc RagUpdateChat(RagUpdateChatRequest) returns (google.protobuf.Empty);
 
     // RAGFlow endpoint: DELETE /api/v1/chats
 
     // Delete one or more chat assistants (batch operation).<br>
-    // If ids empty, deletes all user's chats (soft delete).
+    // If ids empty, deletes all user&apos;s chats (soft delete).
     rpc RagDeleteChats(RagDeleteChatsRequest) returns (RagPartialSuccess);
 
     // RAGFlow endpoint: GET /api/v1/chats
@@ -203,47 +203,47 @@ service Rags {
     // ========================================================================
     // Session Management (7 methods)
     // Sessions are conversation instances for chats and agents.
-    // REST: /api/v1/chats/<chat_id>/sessions,
-    // /api/v1/agents/<agent_id>/sessions
+    // REST: /api/v1/chats/&lt;chat_id&gt;/sessions,
+    // /api/v1/agents/&lt;agent_id&gt;/sessions
     // ========================================================================
 
-    // RAGFlow endpoint: POST /api/v1/chats/<chat_id>/sessions
+    // RAGFlow endpoint: POST /api/v1/chats/&lt;chat_id&gt;/sessions
 
     // Create a new chat session (conversation).<br>
-    // Session initialized with assistant's prologue message.
+    // Session initialized with assistant&apos;s prologue message.
     rpc RagCreateChatSession(RagCreateChatSessionRequest) returns (RagChatSession);
 
-    // RAGFlow endpoint: POST /api/v1/agents/<agent_id>/sessions
+    // RAGFlow endpoint: POST /api/v1/agents/&lt;agent_id&gt;/sessions
 
     // Create a new agent session.<br>
-    // Initializes Canvas with agent's DSL configuration.
+    // Initializes Canvas with agent&apos;s DSL configuration.
     rpc RagCreateAgentSession(RagCreateAgentSessionRequest) returns (RagAgentSession);
 
-    // RAGFlow endpoint: PUT /api/v1/chats/<chat_id>/sessions/<session_id>
+    // RAGFlow endpoint: PUT /api/v1/chats/&lt;chat_id&gt;/sessions/&lt;session_id&gt;
 
-    // Update a chat session's metadata (name only).<br>
+    // Update a chat session&apos;s metadata (name only).<br>
     // Cannot update message or reference fields.
     rpc RagUpdateChatSession(RagUpdateChatSessionRequest) returns (google.protobuf.Empty);
 
-    // RAGFlow endpoint: GET /api/v1/chats/<chat_id>/sessions
+    // RAGFlow endpoint: GET /api/v1/chats/&lt;chat_id&gt;/sessions
 
     // List sessions for a chat assistant.<br>
     // Returns message history with embedded chunk references.
     rpc RagListChatSessions(RagListChatSessionsRequest) returns (RagChatSessionList);
 
-    // RAGFlow endpoint: GET /api/v1/agents/<agent_id>/sessions
+    // RAGFlow endpoint: GET /api/v1/agents/&lt;agent_id&gt;/sessions
 
     // List sessions for an agent.<br>
     // Can optionally exclude DSL from response for performance.
     rpc RagListAgentSessions(RagListAgentSessionsRequest) returns (RagAgentSessionList);
 
-    // RAGFlow endpoint: DELETE /api/v1/chats/<chat_id>/sessions
+    // RAGFlow endpoint: DELETE /api/v1/chats/&lt;chat_id&gt;/sessions
 
     // Delete one or more chat sessions (batch operation).<br>
     // If ids empty, deletes all sessions for the chat (hard delete).
     rpc RagDeleteChatSessions(RagDeleteChatSessionsRequest) returns (RagPartialSuccess);
 
-    // RAGFlow endpoint: DELETE /api/v1/agents/<agent_id>/sessions
+    // RAGFlow endpoint: DELETE /api/v1/agents/&lt;agent_id&gt;/sessions
 
     // Delete one or more agent sessions (batch operation).<br>
     // If ids empty, deletes all sessions for the agent (hard delete).
@@ -253,30 +253,30 @@ service Rags {
     // Completion (4 streaming methods)
     // Generate responses using RAG and LLMs.
     // All methods support server-side streaming.
-    // REST: /api/v1/chats/<id>/completions,
-    // /api/v1/agents/<id>/completions
+    // REST: /api/v1/chats/&lt;id&gt;/completions,
+    // /api/v1/agents/&lt;id&gt;/completions
     // ========================================================================
 
-    // RAGFlow endpoint: POST /api/v1/chats/<chat_id>/completions
+    // RAGFlow endpoint: POST /api/v1/chats/&lt;chat_id&gt;/completions
 
     // Generate chat completion with RAG (server streaming).<br>
     // Creates new session if session_id not provided.
     rpc RagChatCompletion(RagChatCompletionRequest) returns (stream RagChatCompletionResponse);
 
-    // RAGFlow endpoint: POST /api/v1/chats_openai/<chat_id>/chat/completions
+    // RAGFlow endpoint: POST /api/v1/chats_openai/&lt;chat_id&gt;/chat/completions
 
     // OpenAI-compatible chat completion endpoint (server streaming).<br>
     // Compatible with OpenAI Python client.<br>
-    // Supports reasoning content in <think> tags.
+    // Supports reasoning content in &lt;redacted_reasoning&gt; tags.
     rpc RagOpenAiChatCompletion(RagOpenAiChatCompletionRequest) returns (stream RagOpenAiChatCompletionResponse);
 
-    // RAGFlow endpoint: POST /api/v1/agents/<agent_id>/completions
+    // RAGFlow endpoint: POST /api/v1/agents/&lt;agent_id&gt;/completions
 
     // Generate agent completion (server streaming).<br>
     // Filters events to only return message-related events.
     rpc RagAgentCompletion(RagAgentCompletionRequest) returns (stream RagAgentCompletionResponse);
 
-    // RAGFlow endpoint: POST /api/v1/agents_openai/<agent_id>/chat/completions
+    // RAGFlow endpoint: POST /api/v1/agents_openai/&lt;agent_id&gt;/chat/completions
 
     // OpenAI-compatible agent completion endpoint (server streaming).<br>
     // Uses tiktoken for token counting.
@@ -294,13 +294,13 @@ service Rags {
     // Title must be unique for the user.
     rpc RagCreateAgent(RagCreateAgentRequest) returns (google.protobuf.Empty);
 
-    // RAGFlow endpoint: PUT /api/v1/agents/<agent_id>
+    // RAGFlow endpoint: PUT /api/v1/agents/&lt;agent_id&gt;
 
     // Update an existing agent.<br>
     // DSL updates create new version snapshot. Only owner can update.
     rpc RagUpdateAgent(RagUpdateAgentRequest) returns (google.protobuf.Empty);
 
-    // RAGFlow endpoint: DELETE /api/v1/agents/<agent_id>
+    // RAGFlow endpoint: DELETE /api/v1/agents/&lt;agent_id&gt;
 
     // Delete an agent (hard delete).<br>
     // Only owner can delete.
@@ -309,12 +309,12 @@ service Rags {
     // RAGFlow endpoint: GET /api/v1/agents
 
     // List agents with pagination.<br>
-    // Only returns user's own agents.
+    // Only returns user&apos;s own agents.
     rpc RagListAgents(RagListAgentsRequest) returns (RagAgentList);
 
     // ========================================================================
     // File Management (11 methods)
-    // Manage files and folders in RAGFlow's file system.
+    // Manage files and folders in RAGFlow&apos;s file system.
     // Files can be converted to dataset documents.
     // REST: /api/v1/file/*
     // ========================================================================
@@ -340,7 +340,7 @@ service Rags {
 
     // RAGFlow endpoint: GET /api/v1/file/root_folder
 
-    // Get user's root folder information.<br>
+    // Get user&apos;s root folder information.<br>
     // Each tenant has a unique root folder.
     rpc RagGetRootFolder(RagGetRootFolderRequest) returns (RagGetRootFolderResponse);
 
@@ -368,7 +368,7 @@ service Rags {
     // Cannot change file extension. Duplicate names not allowed.
     rpc RagRenameFile(RagRenameFileRequest) returns (google.protobuf.Empty);
 
-    // RAGFlow endpoint: GET /api/v1/file/get/<file_id>
+    // RAGFlow endpoint: GET /api/v1/file/get/&lt;file_id&gt;
 
     // Download a file.<br>
     // Retrieves from MinIO/S3 storage.<br>
@@ -418,28 +418,28 @@ service Rags {
     // Returns 5-10 suggestions considering industry context.
     rpc RagRelatedQuestions(RagRelatedQuestionsRequest) returns (RagRelatedQuestionsResponse);
 
-    // RAGFlow endpoint: POST /api/v1/chatbots/<dialog_id>/completions
+    // RAGFlow endpoint: POST /api/v1/chatbots/&lt;dialog_id&gt;/completions
 
     // Chat completion for iframe/embedded chatbot (server streaming).<br>
     // Uses API key from APIToken table.
     rpc RagChatbotCompletion(RagChatbotCompletionRequest) returns (stream RagChatCompletionResponse);
 
-    // RAGFlow endpoint: GET /api/v1/chatbots/<dialog_id>/info
+    // RAGFlow endpoint: GET /api/v1/chatbots/&lt;dialog_id&gt;/info
 
     // Get chatbot information for embedded UI initialization.<br>
     // Returns title, avatar, and prologue.
     rpc RagChatbotInfo(RagChatbotInfoRequest) returns (RagChatbotInfoResponse);
 
-    // RAGFlow endpoint: POST /api/v1/agentbots/<agent_id>/completions
+    // RAGFlow endpoint: POST /api/v1/agentbots/&lt;agent_id&gt;/completions
 
     // Agent completion for iframe/embedded agentbot (server streaming).<br>
     // Uses API key authentication.
     rpc RagAgentbotCompletion(RagAgentbotCompletionRequest) returns (stream RagAgentCompletionResponse);
 
-    // RAGFlow endpoint: GET /api/v1/agentbots/<agent_id>/inputs
+    // RAGFlow endpoint: GET /api/v1/agentbots/&lt;agent_id&gt;/inputs
 
     // Get agent input form configuration for embedded UI.<br>
-    // Returns input schema from "begin" component in DSL.
+    // Returns input schema from &quot;begin&quot; component in DSL.
     rpc RagAgentbotInputs(RagAgentbotInputsRequest) returns (RagAgentbotInputsResponse);
 
     // RAGFlow endpoint: POST /api/v1/searchbots/ask
@@ -494,7 +494,7 @@ message RagFileMetadata {
     // Filename.
     string file_name = 1;
 
-    // MIME type (e.g., <code>"application/pdf"</code>, <code>"image/png"</code>).
+    // MIME type (e.g., <code>&quot;application/pdf&quot;</code>, <code>&quot;image/png&quot;</code>).
     string content_type = 2;
 
     // File size in bytes (if known, 0 if unknown).
@@ -515,8 +515,8 @@ message RagFileChunk {
 // Upload chunk for streaming uploads.
 // Used to stream file data after metadata is sent in first message.
 message RagUploadChunk {
-    // Not actually optional but `optional` keyword is needed to enable presence tracking.
-    // Without it, it is impossible to distinguish between `0` and not present.
+    // Not actually optional but <code>optional</code> keyword is needed to enable presence tracking.
+    // Without it, it is impossible to distinguish between <code>0</code> and not present.
     // Index into metadata.files array (0-based).
     optional int32 file_index = 1;
 
@@ -554,7 +554,7 @@ message RagDataset {
     // Base64-encoded avatar image.
     string avatar = 4;
 
-    // Dataset language (e.g. <code>"English"</code>).
+    // Dataset language (e.g. <code>&quot;English&quot;</code>).
     string language = 5;
 
     // Access permission.
@@ -630,7 +630,7 @@ message RagCreateDatasetRequest {
     // Optional. Configuration settings for the dataset parser. The used fields vary depending on the selected <code>chunk_method</code>.
     RagParserConfig parser_config = 7;
 
-    // Optional. Embedding model name (uses user's default if not specified).
+    // Optional. Embedding model name (uses user&apos;s default if not specified).
     string embedding_model = 8;
 
     // Optional. Additional fields to pass through to RAGFlow.
@@ -677,7 +677,7 @@ enum RagChunkMethod {
     // Presentation.
     presentation = 8;
 
-    // Q&A.
+    // Q&amp;A.
     qa = 9;
 
     // Table.
@@ -760,13 +760,13 @@ message RagParserConfig {
     // Optional. Minimum 1, maximum 2048, default 512.
     int32 chunk_token_num = 3;
 
-    // Optional. Default <code>"\n"</code>.
+    // Optional. Default <code>&quot;\n&quot;</code>.
     string delimiter = 4;
 
     // Optional. Convert Excel documents to HTML. Default <code>false</code>.
     bool html4excel = 5;
 
-    // Optional. Default <code>"DeepDOC"</code>
+    // Optional. Default <code>&quot;DeepDOC&quot;</code>
     string layout_recognize = 6;
 
     // Optional. List of dataset IDs. See <a href="https://ragflow.io/docs/dev/use_tag_sets">https://ragflow.io/docs/dev/use_tag_sets</a> for details.
@@ -775,10 +775,10 @@ message RagParserConfig {
     // Optional. Minimum 1, default 12. Only applies to PDFs.
     int32 task_page_size = 8;
 
-    // Optional. RAPTOR-specific settings. Default <code>{ "use_raptor": false }</code>.
+    // Optional. RAPTOR-specific settings. Default <code>{ &quot;use_raptor&quot;: false }</code>.
     google.protobuf.Struct raptor = 9;
 
-    // Optional. GRAPHRAG-specific settings. Default <code>{ "use_graphrag": false }</code>.
+    // Optional. GRAPHRAG-specific settings. Default <code>{ &quot;use_graphrag&quot;: false }</code>.
     google.protobuf.Struct graphrag = 10;
 }
 
@@ -810,7 +810,7 @@ message RagUpdateDatasetRequest {
     // Optional. New parser config (deep merged with existing).
     RagParserConfig parser_config = 8;
 
-    // Optional. New embedding model (cannot change if chunk_count > 0).
+    // Optional. New embedding model (cannot change if chunk_count &gt; 0).
     string embedding_model = 9;
 
     // Optional. PageRank value (only for elasticsearch).
@@ -920,7 +920,7 @@ message RagDocument {
     // Document filename.
     string name = 3;
 
-    // File type or extension (e.g., <code>"pdf"</code>, <code>"docx"</code>, <code>"txt"</code>).
+    // File type or extension (e.g., <code>&quot;pdf&quot;</code>, <code>&quot;docx&quot;</code>, <code>&quot;txt&quot;</code>).
     string type = 4;
 
     // File size in bytes.
@@ -938,7 +938,7 @@ message RagDocument {
     // Parser configuration used for chunking this document.
     RagParserConfig parser_config = 9;
 
-    // Source type indicating how the document was added (e.g., <code>"local"</code> for direct uploads, <code>"knowledgebase"</code> for file system imports).
+    // Source type indicating how the document was added (e.g., <code>&quot;local&quot;</code> for direct uploads, <code>&quot;knowledgebase&quot;</code> for file system imports).
     string source_type = 10;
 
     // Document processing status.
@@ -980,7 +980,7 @@ message RagDocument {
     // Actual file extension extracted from the file (may differ from filename extension).
     string suffix = 23;
 
-    // Validation status indicating if document is enabled (<code>"1"</code>=valid/enabled, <code>"0"</code>=invalid/disabled).
+    // Validation status indicating if document is enabled (<code>&quot;1&quot;</code>=valid/enabled, <code>&quot;0&quot;</code>=invalid/disabled).
     string status = 24;
 
     // Additional fields returned by RAGFlow not explicitly defined above.
@@ -1313,7 +1313,7 @@ message RagRemoveChunksRequest {
     repeated string chunk_ids = 4;
 }
 
-// Request message for updating an existing chunk's content and metadata.<br>
+// Request message for updating an existing chunk&apos;s content and metadata.<br>
 // Content changes trigger re-tokenization and re-generation of embeddings.
 message RagUpdateChunkRequest {
 
@@ -1467,7 +1467,7 @@ message RagChat {
     // Prompt type. Either <code>"simple"</code> or <code>"advanced"</code>
     string prompt_type = 15;
 
-    // Validation status indicating if chat is enabled (<code>"1"</code>=valid/enabled, <code>"0"</code>=invalid/disabled).
+    // Validation status indicating if chat is enabled (<code>&quot;1&quot;</code>=valid/enabled, <code>&quot;0&quot;</code>=invalid/disabled).
     string status = 16;
 
     // Tenant ID.
@@ -1646,7 +1646,7 @@ message RagListChatsRequest {
     // Optional. Filter by chat assistant name.
     string name = 4;
 
-    // Sort field (default: <code>"create_time"</code>).
+    // Sort field (default: <code>&quot;create_time&quot;</code>).
     string orderby = 5;
 
     // Optional. Sort in descending order (default: <code>true</code>).
@@ -1677,7 +1677,7 @@ message RagChatSession {
     // Parent chat assistant UUID.
     string chat_id = 2;
 
-    // Session name (default: <code>"New session"</code>).
+    // Session name (default: <code>&quot;New session&quot;</code>).
     string name = 3;
 
     // Message history in chronological order.
@@ -1818,7 +1818,7 @@ message RagListChatSessionsRequest {
     // Optional. Pagination parameters for paging through results.
     RagPagination pagination = 3;
 
-    // Sort field (default: <code>"create_time"</code>).
+    // Sort field (default: <code>&quot;create_time&quot;</code>).
     string orderby = 4;
 
     // Optional. Sort in descending order (default: <code>true</code>).
@@ -1857,7 +1857,7 @@ message RagListAgentSessionsRequest {
     // Optional. Pagination parameters for paging through results.
     RagPagination pagination = 3;
 
-    // Sort field (default: <code>"update_time"</code>).
+    // Sort field (default: <code>&quot;update_time&quot;</code>).
     string orderby = 4;
 
     // Optional. Sort in descending order (default: <code>true</code>).
@@ -2016,10 +2016,10 @@ message RagOpenAiChatCompletionRequest {
 // </ul>
 message RagOpenAiChatCompletionResponse {
 
-    // Completion ID in format <code>"chatcmpl-{chat_id}"</code>.
+    // Completion ID in format <code>&quot;chatcmpl-{chat_id}&quot;</code>.
     string id = 1;
 
-    // Object type indicating response format. Value is <code>"chat.completion.chunk"</code> for streaming or <code>"chat.completion"</code> for non-streaming.
+    // Object type indicating response format. Value is <code>&quot;chat.completion.chunk&quot;</code> for streaming or <code>&quot;chat.completion&quot;</code> for non-streaming.
     // This field must remain a string for OpenAI API compatibility.
     string object = 2;
 
@@ -2057,7 +2057,7 @@ message RagOpenAiChatChoice {
         RagOpenAiChatContent delta = 3;
     }
 
-    // Reason why the completion finished. Common values include <code>"stop"</code> (natural completion), <code>"length"</code> (max tokens reached).
+    // Reason why the completion finished. Common values include <code>&quot;stop&quot;</code> (natural completion), <code>&quot;length&quot;</code> (max tokens reached).
     // Only present in the final chunk for streaming mode or in the single response for non-streaming mode.
     // This field must remain a string for OpenAI API compatibility.
     string finish_reason = 4;
@@ -2077,14 +2077,14 @@ message RagOpenAiChatChoice {
 // </ul>
 message RagOpenAiChatContent {
 
-    // Message role. Value is typically <code>"assistant"</code>. For streaming, only present in the first chunk.
+    // Message role. Value is typically <code>&quot;assistant&quot;</code>. For streaming, only present in the first chunk.
     // This field must remain a string for OpenAI API compatibility (not the <code>MessageRole</code> enum).
     string role = 1;
 
     // Response text content. Incremental for streaming mode, complete for non-streaming mode.
     string content = 2;
 
-    // Reasoning content extracted from <code>&lt;think&gt;...&lt;/think&gt;</code> tags if present in the model's response.
+    // Reasoning content extracted from <code>&lt;think&gt;...&lt;/think&gt;</code> tags if present in the model&apos;s response.
     string reasoning_content = 3;
 
     // Function call information. Usually <code>null</code>.
@@ -2376,7 +2376,7 @@ message RagAgentList {
 
 // ============================================================================
 // File Management Types
-// Files and folders in RAGFlow's file system. Can be converted to documents.
+// Files and folders in RAGFlow&apos;s file system. Can be converted to documents.
 // ============================================================================
 
 // File or folder in RAGFlow file system.
@@ -2388,7 +2388,7 @@ message RagFile {
     // File or folder name.
     string name = 2;
 
-    // File type/extension or <code>"folder"</code> for directories. Check <code>type == "folder"</code> to distinguish folders from files.
+    // File type/extension or <code>&quot;folder&quot;</code> for directories. Check <code>type == &quot;folder&quot;</code> to distinguish folders from files.
     string type = 3;
 
     // File size in bytes (0 for folders).
@@ -2412,7 +2412,7 @@ message RagFile {
     // Storage location path within the RAGFlow file system.
     string location = 10;
 
-    // Source type indicating file origin (e.g., <code>"local"</code> for uploaded files).
+    // Source type indicating file origin (e.g., <code>&quot;local&quot;</code> for uploaded files).
     string source_type = 11;
 
     // Additional fields returned by RAGFlow.
@@ -2469,7 +2469,7 @@ message RagCreateFileRequest {
     // Optional. Parent folder ID. If not provided, creates in root directory.
     string parent_id = 3;
 
-    // Required. Type of item to create: <code>"folder"</code> for directories or <code>"virtual"</code> for virtual files.
+    // Required. Type of item to create: <code>&quot;folder&quot;</code> for directories or <code>&quot;virtual&quot;</code> for virtual files.
     string type = 4;
 
     // Optional. Additional fields to pass through to RAGFlow.
@@ -2682,7 +2682,7 @@ message RagFileToDocumentList {
 // ============================================================================
 
 // Request message for retrieving data from RAGFlow using Dify-compatible format.
-// This provides compatibility with Dify's knowledge retrieval API structure.
+// This provides compatibility with Dify&apos;s knowledge retrieval API structure.
 message RagDifyRetrievalRequest {
 
     // Required. The agent to retrieve data for.
@@ -2758,7 +2758,7 @@ message RagDifyRecord {
 // Bot API Types
 // ============================================================================
 
-// Request message for asking a question using RAGFlow's basic QA endpoint.
+// Request message for asking a question using RAGFlow&apos;s basic QA endpoint.
 // This endpoint searches specified datasets and returns an answer.
 message RagAskRequest {
 
@@ -2792,7 +2792,7 @@ message RagAskResponse {
     google.protobuf.Struct additional_fields = 3;
 }
 
-// Request message for generating related questions based on a user's query.
+// Request message for generating related questions based on a user&apos;s query.
 // This helps improve user experience by suggesting follow-up questions.
 message RagRelatedQuestionsRequest {
 
@@ -2820,7 +2820,7 @@ message RagRelatedQuestionsResponse {
 }
 
 // Request message for generating chat completions using a configured chatbot.
-// Corresponds to RAGFlow's <code>POST /api/v1/chats/{chat_id}/completions</code> endpoint.
+// Corresponds to RAGFlow&apos;s <code>POST /api/v1/chats/{chat_id}/completions</code> endpoint.
 message RagChatbotCompletionRequest {
 
     // Required. The agent to generate chatbot completion for.
@@ -2828,7 +2828,7 @@ message RagChatbotCompletionRequest {
     string parent = 1;
 
     // Required. Chat dialog ID identifying the specific chatbot configuration.
-    // This corresponds to <code>chat_id</code> in RAGFlow's API.
+    // This corresponds to <code>chat_id</code> in RAGFlow&apos;s API.
     string dialog_id = 2;
 
     // Required. User question or message to be processed by the chatbot.
@@ -2873,7 +2873,7 @@ message RagChatbotInfoResponse {
 
 // Request message for generating completions using a RAGFlow agent.
 // Agents are workflow-based systems that can combine multiple operations and tools.
-// Corresponds to RAGFlow's <code>POST /api/v1/agents/{agent_id}/completions</code> endpoint.
+// Corresponds to RAGFlow&apos;s <code>POST /api/v1/agents/{agent_id}/completions</code> endpoint.
 message RagAgentbotCompletionRequest {
 
     // Required. The agent to generate agentbot completion for.
@@ -2931,7 +2931,7 @@ message RagAgentbotInputsResponse {
     string mode = 5;
 }
 
-// Request message for asking questions using RAGFlow's search application.
+// Request message for asking questions using RAGFlow&apos;s search application.
 // Search apps provide advanced retrieval with configurable settings.
 message RagSearchbotAskRequest {
 
@@ -2943,7 +2943,7 @@ message RagSearchbotAskRequest {
     string question = 2;
 
     // Required. List of dataset IDs (knowledge base IDs) to search within.
-    // Called <code>kb_ids</code> in RAGFlow's internal API.
+    // Called <code>kb_ids</code> in RAGFlow&apos;s internal API.
     repeated string kb_ids = 3;
 
     // Optional. Search application ID to load predefined configuration.
@@ -2963,7 +2963,7 @@ message RagSearchbotRetrievalRequest {
     string parent = 1;
 
     // Required. List of dataset IDs (knowledge base IDs) to search.
-    // Called <code>dataset_ids</code> in RAGFlow's response format.
+    // Called <code>dataset_ids</code> in RAGFlow&apos;s response format.
     repeated string kb_id = 2;
 
     // Required. Search query string.
@@ -2999,7 +2999,7 @@ message RagSearchbotRetrievalRequest {
     int32 top_k = 10;
 
     // Optional. Languages to enable cross-language translation.
-    // Called <code>langs</code> in RAGFlow's internal API.
+    // Called <code>langs</code> in RAGFlow&apos;s internal API.
     repeated string cross_languages = 11;
 
     // Optional. Whether to extract and return additional keywords from the query.
@@ -3041,7 +3041,7 @@ message RagSearchbotRetrievalResponse {
 }
 
 // Request message for generating related questions using a search application.
-// Uses the search app's LLM configuration for question generation.
+// Uses the search app&apos;s LLM configuration for question generation.
 message RagSearchbotRelatedQuestionsRequest {
 
     // Required. The agent to generate searchbot related questions for.

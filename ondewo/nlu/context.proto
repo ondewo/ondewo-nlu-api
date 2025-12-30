@@ -43,27 +43,27 @@ option java_outer_classname = "ContextProto";
 option java_package = "com.google.cloud.dialogflow.v2";
 option objc_class_prefix = "DF";
 
-// <p>A context represents additional information included with user input or with an intent returned by the Dialogflow API. Contexts are helpful for differentiating user input which may be vague or have a different meaning depending on additional details from your application such as user setting and preferences, previous user input, where the user is in your application, geographic location, and so on.</p>
+// A context represents additional information included with user input or with an intent returned by the Dialogflow API. Contexts are helpful for differentiating user input which may be vague or have a different meaning depending on additional details from your application such as user setting and preferences, previous user input, where the user is in your application, geographic location, and so on.
 //
-// <p>You can include contexts as input parameters of a <a href="index.html#google.cloud.dialogflow.v2.Sessions.DetectIntent">DetectIntent</a> (or <a href="index.html#google.cloud.dialogflow.v2.Sessions.StreamingDetectIntent">StreamingDetectIntent</a>) request, or as output contexts included in the returned intent.</p>
-// <p>Contexts expire when an intent is matched, after the number of <code>DetectIntent</code> requests specified by the <code>lifespan_count</code> parameter, or after 10 minutes if no intents are matched for a <code>DetectIntent</code> request.</p>
-// <p>For more information about contexts, see the <a href="https://dialogflow.com/docs/contexts">Dialogflow documentation</a>.</p>
+// You can include contexts as input parameters of a <a href="index.html#google.cloud.dialogflow.v2.Sessions.DetectIntent">DetectIntent</a> (or <a href="index.html#google.cloud.dialogflow.v2.Sessions.StreamingDetectIntent">StreamingDetectIntent</a>) request, or as output contexts included in the returned intent.
+// Contexts expire when an intent is matched, after the number of <code>DetectIntent</code> requests specified by the <code>lifespan_count</code> parameter, or after 10 minutes if no intents are matched for a <code>DetectIntent</code> request.
+// For more information about contexts, see the <a href="https://dialogflow.com/docs/contexts">Dialogflow documentation</a>.
 service Contexts {
-    // <p>Returns the list of all contexts in the specified session.</p>
+    // Returns the list of all contexts in the specified session.
     rpc ListContexts (ListContextsRequest) returns (ListContextsResponse) {
         option (google.api.http) = {
             get: "/v2/{parent=projects/*/agent/sessions/*}/contexts"
         };
     }
 
-    // <p>Retrieves the specified context.</p>
+    // Retrieves the specified context.
     rpc GetContext (GetContextRequest) returns (Context) {
         option (google.api.http) = {
             get: "/v2/{name=projects/*/agent/sessions/*/contexts/*}"
         };
     }
 
-    // <p>Creates a context.</p>
+    // Creates a context.
     rpc CreateContext (CreateContextRequest) returns (Context) {
         option (google.api.http) = {
             post: "/v2/{parent=projects/*/agent/sessions/*}/contexts"
@@ -71,7 +71,7 @@ service Contexts {
         };
     }
 
-    // <p>Updates the specified context.</p>
+    // Updates the specified context.
     rpc UpdateContext (UpdateContextRequest) returns (Context) {
         option (google.api.http) = {
             patch: "/v2/{context.name=projects/*/agent/sessions/*/contexts/*}"
@@ -79,14 +79,14 @@ service Contexts {
         };
     }
 
-    // <p>Deletes the specified context.</p>
+    // Deletes the specified context.
     rpc DeleteContext (DeleteContextRequest) returns (google.protobuf.Empty) {
         option (google.api.http) = {
             delete: "/v2/{name=projects/*/agent/sessions/*/contexts/*}"
         };
     }
 
-    // <p>Deletes all active contexts in the specified session.</p>
+    // Deletes all active contexts in the specified session.
     rpc DeleteAllContexts (DeleteAllContextsRequest) returns (google.protobuf.Empty) {
         option (google.api.http) = {
             delete: "/v2/{parent=projects/*/agent/sessions/*}/contexts"
@@ -94,7 +94,7 @@ service Contexts {
     }
 }
 
-// <p>Represents a context.</p>
+// Represents a context.
 message Context {
 
     message Parameter {
@@ -125,10 +125,10 @@ message Context {
 
     }
 
-    // <p>Required. The display name of the context (must be unique per session).</p>
+    // Required. The display name of the context (must be unique per session).
     //
-    // <p>Note: we are deviating from the dialogflow format
-    // <code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/contexts/&lt;context_uuid&gt;</code>.</p>
+    // Note: we are deviating from the dialogflow format
+    // <code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/contexts/&lt;context_uuid&gt;</code>.
     //
     // <ul>
     //   <li>DetectIntent only returns
@@ -146,16 +146,16 @@ message Context {
     // </ul>
     string name = 1;
 
-    // <p>Optional. The number of conversational query requests after which the
+    // Optional. The number of conversational query requests after which the
     // context expires. If set to <code>0</code> (the default) the context expires
     // immediately. Contexts expire automatically after 10 minutes even if there
-    // are no matching queries.</p>
+    // are no matching queries.
     int32 lifespan_count = 2;
 
-    // <p>Optional. The collection of parameters associated with this context.</p>
-    // <p>Refer to <a href="https://dialogflow.com/docs/actions-and-parameters">this doc</a> for
-    // syntax.</p>
-    // <p>Keys are the display names of context parameters.</p>
+    // Optional. The collection of parameters associated with this context.
+    // Refer to <a href="https://dialogflow.com/docs/actions-and-parameters">this doc</a> for
+    // syntax.
+    // Keys are the display names of context parameters.
     map<string, Parameter> parameters = 3;
 
     // Optional. The time span in seconds after which the context expires. By default it does not expire.
@@ -174,27 +174,27 @@ message Context {
     string modified_by = 8;
 }
 
-// <p>The request message for <a href="index.html#google.cloud.dialogflow.v2.Contexts.ListContexts">Contexts.ListContexts</a>.</p>
+// The request message for <a href="index.html#google.cloud.dialogflow.v2.Contexts.ListContexts">Contexts.ListContexts</a>.
 message ListContextsRequest {
-    // <p>Required. The session to list all contexts from.</p>
-    // <p>Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre></p>
+    // Required. The session to list all contexts from.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre>
     string session_id = 1;
 
-    // <p>Optional. The next_page_token value returned from a previous list request.</p>
-    // <p>The page token to support pagination.</p>
-    // <p>Pagination allows you to retrieve a large result set in smaller, more manageable portions.</p>
-    // <p>The page token is a string representing the current index and page size.</p>
+    // Optional. The next_page_token value returned from a previous list request.
+    // The page token to support pagination.
+    // Pagination allows you to retrieve a large result set in smaller, more manageable portions.
+    // The page token is a string representing the current index and page size.
     //
-    // <p>Valid page token strings:</p>
+    // Valid page token strings:
     // <ul>
     //   <li>&quot;&quot; (empty string) - Retrieves the first page.</li>
     //   <li>&quot;current_index-0--page_size-20&quot; - Retrieves the first page with a page size of 20.</li>
     //   <li>&quot;current_index-1--page_size-20&quot; - Retrieves the second page with a page size of 20.</li>
     // </ul>
     //
-    // <p>Index starts at 0.</p>
+    // Index starts at 0.
     //
-    // <p>Examples of valid page token strings:</p>
+    // Examples of valid page token strings:
     // <ul>
     //   <li>&quot;&quot;</li>
     //   <li>&quot;current_index-0--page_size-20&quot;</li>
@@ -202,7 +202,7 @@ message ListContextsRequest {
     //   <li>&quot;current_index-10--page_size-20&quot;</li>
     // </ul>
     //
-    // <p>Examples of invalid page token strings:</p>
+    // Examples of invalid page token strings:
     // <ul>
     //   <li>&quot;1&quot;</li>
     //   <li>&quot;current_index-0--page_size-20&quot;</li>
@@ -213,35 +213,35 @@ message ListContextsRequest {
     string page_token = 3;
 }
 
-// <p>The response message for <a href="index.html#google.cloud.dialogflow.v2.Contexts.ListContexts">Contexts.ListContexts</a>.</p>
+// The response message for <a href="index.html#google.cloud.dialogflow.v2.Contexts.ListContexts">Contexts.ListContexts</a>.
 message ListContextsResponse {
-    // <p>The list of contexts. There will be a maximum number of items
-    // returned based on the page_token field in the request.</p>
+    // The list of contexts. There will be a maximum number of items
+    // returned based on the page_token field in the request.
     repeated Context contexts = 1;
 
-    // <p>The next_page_token is used to retrieve the next page of a returned result,
-    // e.g. next_page_token is current_index-2</p>
+    // The next_page_token is used to retrieve the next page of a returned result,
+    // e.g. next_page_token is current_index-2
     string next_page_token = 2;
 }
 
-// <p>The request message for <a href="index.html#google.cloud.dialogflow.v2.Contexts.GetContext">Contexts.GetContext</a>.</p>
+// The request message for <a href="index.html#google.cloud.dialogflow.v2.Contexts.GetContext">Contexts.GetContext</a>.
 message GetContextRequest {
-    // <p>Required. The name of the context. Format:
-    // <code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/contexts/&lt;context_uuid&gt;</code>.</p>
+    // Required. The name of the context. Format:
+    // <code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/contexts/&lt;context_uuid&gt;</code>.
     string name = 1;
 }
 
-// <p>The request message for <a href="index.html#google.cloud.dialogflow.v2.Contexts.CreateContext">Contexts.CreateContext</a>.</p>
+// The request message for <a href="index.html#google.cloud.dialogflow.v2.Contexts.CreateContext">Contexts.CreateContext</a>.
 message CreateContextRequest {
-    // <p>Required. The session to create a context for.</p>
-    // <p>Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre></p>
+    // Required. The session to create a context for.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre>
     string session_id = 1;
 
     // Required. The context to create.
     Context context = 2;
 }
 
-// <p>The request message for <a href="index.html#google.cloud.dialogflow.v2.Contexts.UpdateContext">Contexts.UpdateContext</a>.</p>
+// The request message for <a href="index.html#google.cloud.dialogflow.v2.Contexts.UpdateContext">Contexts.UpdateContext</a>.
 message UpdateContextRequest {
     // Required. The context to update.
     Context context = 1;
@@ -250,17 +250,17 @@ message UpdateContextRequest {
     google.protobuf.FieldMask update_mask = 2;
 }
 
-// <p>The request message for <a href="index.html#google.cloud.dialogflow.v2.Contexts.DeleteContext">Contexts.DeleteContext</a>.</p>
+// The request message for <a href="index.html#google.cloud.dialogflow.v2.Contexts.DeleteContext">Contexts.DeleteContext</a>.
 message DeleteContextRequest {
-    // <p>Required. The name of the context to delete. Format:
-    // <code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/contexts/&lt;context_uuid&gt;</code>.</p>
+    // Required. The name of the context to delete. Format:
+    // <code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/contexts/&lt;context_uuid&gt;</code>.
     string name = 1;
 }
 
-// <p>The request message for <a href="index.html#google.cloud.dialogflow.v2.Contexts.DeleteAllContexts">Contexts.DeleteAllContexts</a>.</p>
+// The request message for <a href="index.html#google.cloud.dialogflow.v2.Contexts.DeleteAllContexts">Contexts.DeleteAllContexts</a>.
 message DeleteAllContextsRequest {
-    // <p>Required. The name of the session to delete all contexts from.</p>
-    // <p>Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre></p>
+    // Required. The name of the session to delete all contexts from.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre>
 
     string session_id = 1;
 }

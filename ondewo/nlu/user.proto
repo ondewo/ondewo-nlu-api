@@ -183,7 +183,7 @@ message User {
     string user_id = 2;
 
     // Optional field display_name is the name that will be used on the frontend to interact with the user
-    // it shouldn't be unique. If not provided user_name will also be used as display name
+    // it shouldn&apos;t be unique. If not provided user_name will also be used as display name
     string display_name = 3;
 
     // server role type of the given user. If nothing is provided, the user is set to USER (minimum access)
@@ -263,7 +263,7 @@ message GetUserRequest {
 // Request to delete user
 message DeleteUserRequest {
 
-    //user is identified by user id, if empty will throw an error in the backend
+    // user is identified by user id, if empty will throw an error in the backend
     string user_id = 1;
 }
 
@@ -275,24 +275,30 @@ message ListUsersRequest {
     // The page token is a string representing the current index and page size.
     //
     // Valid page token strings:
-    // * "" (empty string) - Retrieves the first page.
-    // * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
-    // * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+    // <ul>
+    //     <li><code>&quot;&quot;</code> (empty string) - Retrieves the first page.</li>
+    //     <li><code>&quot;current_index-0--page_size-20&quot;</code> - Retrieves the first page with a page size of 20.</li>
+    //     <li><code>&quot;current_index-1--page_size-20&quot;</code> - Retrieves the second page with a page size of 20.</li>
+    // </ul>
     //
     // Index starts at 0.
     //
     // Examples of valid page token strings:
-    // * ""
-    // * "current_index-0--page_size-20"
-    // * "current_index-1--page_size-20"
-    // * "current_index-10--page_size-20"
+    // <ul>
+    //     <li><code>&quot;&quot;</code></li>
+    //     <li><code>&quot;current_index-0--page_size-20&quot;</code></li>
+    //     <li><code>&quot;current_index-1--page_size-20&quot;</code></li>
+    //     <li><code>&quot;current_index-10--page_size-20&quot;</code></li>
+    // </ul>
     //
     // Examples of invalid page token strings:
-    // * "1"
-    // * "current_index-0--page_size-20"
-    // * "current_index--1--page_size-20"
-    // * "current_index1--page_size-20"
-    // * "current_index-1--page_size--20"
+    // <ul>
+    //     <li><code>&quot;1&quot;</code></li>
+    //     <li><code>&quot;current_index-0--page_size-20&quot;</code></li>
+    //     <li><code>&quot;current_index--1--page_size-20&quot;</code></li>
+    //     <li><code>&quot;current_index1--page_size-20&quot;</code></li>
+    //     <li><code>&quot;current_index-1--page_size--20&quot;</code></li>
+    // </ul>
     string page_token = 1;
 
     // Optional. The mask to control which fields gets returned.
@@ -358,7 +364,7 @@ enum DefaultServerRole {
     // read-only access
     SERVER_USER = 1;
 
-    // SERVER_USER's permissions + CRUD of projects and Users
+    // SERVER_USER&apos;s permissions + CRUD of projects and Users
     SERVER_MANAGER = 2;
 
     // this role can do everything
@@ -371,17 +377,17 @@ enum DefaultServerRole {
 // Request to create server role
 message CreateServerRoleRequest {
 
-    //If the role_id is not provided, an incremental value will be assigned
-    //The "name" and "role_type" are mandatory values
-    //The permissions all default to False if not provided specifically
+    // If the role_id is not provided, an incremental value will be assigned
+    // The &quot;name&quot; and &quot;role_type&quot; are mandatory values
+    // The permissions all default to False if not provided specifically
     ServerRole role = 1;
 }
 
 // Request to update server role
 message UpdateServerRoleRequest {
 
-    //role_id in the Role message should be given, if empty will throw an error in the backend
-    //other fields in the Role are optional. Only the fields to be updated should be provided
+    // role_id in the Role message should be given, if empty will throw an error in the backend
+    // other fields in the Role are optional. Only the fields to be updated should be provided
     ServerRole role = 1;
 
     // Optional. The mask to control which fields get updated.
@@ -391,7 +397,7 @@ message UpdateServerRoleRequest {
 // Request to delete server role
 message DeleteServerRoleRequest {
 
-    //role is identified by role id, if empty will throw an error in the backend
+    // role is identified by role id, if empty will throw an error in the backend
     uint32 role_id = 1;
 }
 
@@ -419,24 +425,30 @@ message ListServerRolesRequest {
     // The page token is a string representing the current index and page size.
     //
     // Valid page token strings:
-    // * "" (empty string) - Retrieves the first page.
-    // * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
-    // * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+    // <ul>
+    //     <li><code>&quot;&quot;</code> (empty string) - Retrieves the first page.</li>
+    //     <li><code>&quot;current_index-0--page_size-20&quot;</code> - Retrieves the first page with a page size of 20.</li>
+    //     <li><code>&quot;current_index-1--page_size-20&quot;</code> - Retrieves the second page with a page size of 20.</li>
+    // </ul>
     //
     // Index starts at 0.
     //
     // Examples of valid page token strings:
-    // * ""
-    // * "current_index-0--page_size-20"
-    // * "current_index-1--page_size-20"
-    // * "current_index-10--page_size-20"
+    // <ul>
+    //     <li><code>&quot;&quot;</code></li>
+    //     <li><code>&quot;current_index-0--page_size-20&quot;</code></li>
+    //     <li><code>&quot;current_index-1--page_size-20&quot;</code></li>
+    //     <li><code>&quot;current_index-10--page_size-20&quot;</code></li>
+    // </ul>
     //
     // Examples of invalid page token strings:
-    // * "1"
-    // * "current_index-0--page_size-20"
-    // * "current_index--1--page_size-20"
-    // * "current_index1--page_size-20"
-    // * "current_index-1--page_size--20"
+    // <ul>
+    //     <li><code>&quot;1&quot;</code></li>
+    //     <li><code>&quot;current_index-0--page_size-20&quot;</code></li>
+    //     <li><code>&quot;current_index--1--page_size-20&quot;</code></li>
+    //     <li><code>&quot;current_index1--page_size-20&quot;</code></li>
+    //     <li><code>&quot;current_index-1--page_size--20&quot;</code></li>
+    // </ul>
     string page_token = 1;
 
     // Optional. The mask to control which fields gets returned.
@@ -464,24 +476,30 @@ message ListServerPermissionsRequest {
     // The page token is a string representing the current index and page size.
     //
     // Valid page token strings:
-    // * "" (empty string) - Retrieves the first page.
-    // * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
-    // * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+    // <ul>
+    //     <li><code>&quot;&quot;</code> (empty string) - Retrieves the first page.</li>
+    //     <li><code>&quot;current_index-0--page_size-20&quot;</code> - Retrieves the first page with a page size of 20.</li>
+    //     <li><code>&quot;current_index-1--page_size-20&quot;</code> - Retrieves the second page with a page size of 20.</li>
+    // </ul>
     //
     // Index starts at 0.
     //
     // Examples of valid page token strings:
-    // * ""
-    // * "current_index-0--page_size-20"
-    // * "current_index-1--page_size-20"
-    // * "current_index-10--page_size-20"
+    // <ul>
+    //     <li><code>&quot;&quot;</code></li>
+    //     <li><code>&quot;current_index-0--page_size-20&quot;</code></li>
+    //     <li><code>&quot;current_index-1--page_size-20&quot;</code></li>
+    //     <li><code>&quot;current_index-10--page_size-20&quot;</code></li>
+    // </ul>
     //
     // Examples of invalid page token strings:
-    // * "1"
-    // * "current_index-0--page_size-20"
-    // * "current_index--1--page_size-20"
-    // * "current_index1--page_size-20"
-    // * "current_index-1--page_size--20"
+    // <ul>
+    //     <li><code>&quot;1&quot;</code></li>
+    //     <li><code>&quot;current_index-0--page_size-20&quot;</code></li>
+    //     <li><code>&quot;current_index--1--page_size-20&quot;</code></li>
+    //     <li><code>&quot;current_index1--page_size-20&quot;</code></li>
+    //     <li><code>&quot;current_index-1--page_size--20&quot;</code></li>
+    // </ul>
     string page_token = 1;
 
     // Optional. The mask to control which fields gets returned.
@@ -536,11 +554,11 @@ message GetUserPreferencesRequest {
     // If keys are specified multiple times then only one KeyValue pair is returned
     repeated string keys = 2;
 
-    // Optional: In addition to the keys specified also include all <pre>keys</pre> that match the provided
-    // <pre>regex_include</pre> regular expression.
+    // Optional: In addition to the keys specified also include all <code>keys</code> that match the provided
+    // <code>regex_include</code> regular expression.
     // If user does not add regex_filter, then only the keys specified in the keys field are returned.
     // If both, a key in the keys field and in the regex_include will be matched than only a single
-    // <pre>KeyValuePair</pre> is returned.
+    // <code>KeyValuePair</code> is returned.
     string regex_include = 3;
 
     // Optional. The mask to control which fields gets returned.
@@ -600,8 +618,8 @@ message DeleteUserPreferencesRequest {
     // List of keys to delete from user preferences.
     repeated string keys = 2;
 
-    // Optional: In addition to the keys specified also include all <pre>keys</pre> that match the provided
-    // <pre>regex_include</pre> regular expression.
+    // Optional: In addition to the keys specified also include all <code>keys</code> that match the provided
+    // <code>regex_include</code> regular expression.
     // If user does not add regex_filter, then only the keys specified in the keys field are deleted.
     // If both, a key in the keys field and in the regex_include is matched then the key is deleted without raising an error.
     string regex_include = 3;

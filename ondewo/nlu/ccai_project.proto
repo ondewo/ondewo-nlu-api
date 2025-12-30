@@ -22,31 +22,31 @@ import "google/protobuf/timestamp.proto";
 
 import "ondewo/nlu/common.proto";
 
-// <p>Service to manage Call Center AI (CCAI service) Projects.</p>
+// Service to manage Call Center AI (CCAI service) Projects.
 service CcaiProjects {
 
-    // <p>Retrieves information about a specific CCAI service project.</p>
+    // Retrieves information about a specific CCAI service project.
     rpc GetCcaiProject (GetCcaiProjectRequest) returns (CcaiProject);
 
-    // <p>Creates a new CCAI service project based on the provided request.</p>
+    // Creates a new CCAI service project based on the provided request.
     rpc CreateCcaiProject (CreateCcaiProjectRequest) returns (CreateCcaiProjectResponse);
 
-    // <p>Deletes a CCAI service project identified by the provided request.</p>
+    // Deletes a CCAI service project identified by the provided request.
     rpc DeleteCcaiProject (DeleteCcaiProjectRequest) returns (DeleteCcaiProjectResponse);
 
-    // <p>Lists all CCAI service projects based on the provided request.</p>
+    // Lists all CCAI service projects based on the provided request.
     rpc ListCcaiProjects (ListCcaiProjectsRequest) returns (ListCcaiProjectsResponse);
 
-    // <p>Updates the information of an existing CCAI service project.</p>
+    // Updates the information of an existing CCAI service project.
     rpc UpdateCcaiProject (UpdateCcaiProjectRequest) returns (UpdateCcaiProjectResponse);
 
-    // <p>Retrieves information about a specific CCAI service.</p>
+    // Retrieves information about a specific CCAI service.
     rpc GetCcaiService (GetCcaiServiceRequest) returns (CcaiService);
 
 }
 
 
-// <p>Message representing a CCAI service project</p>
+// Message representing a CCAI service project
 message CcaiProject {
 
     // Resource name of the CCAI service project
@@ -58,8 +58,8 @@ message CcaiProject {
     // Optional. Resource name of the user who is the owner of the project.
     string owner_name = 3;
 
-    // <p>Map of two letter language codes to lists of CcaiServiceList</p>
-    // <p>Two-letter language codes following ISO 639-1 (see <a href="https://en.wikipedia.org/wiki/ISO_639-1">https://en.wikipedia.org/wiki/ISO_639-1</a>)</p>
+    // Map of two letter language codes to lists of CcaiServiceList
+    // Two-letter language codes following ISO 639-1 (see <a href="https://en.wikipedia.org/wiki/ISO_639-1">https://en.wikipedia.org/wiki/ISO_639-1</a>)
     map<string, CcaiServiceList> ccai_services_map = 4;
 
     // The status of the ccai project.
@@ -83,36 +83,36 @@ message CcaiProject {
 }
 
 
-// <p>Status of a Call Center AI (CCAI service) Project.</p>
+// Status of a Call Center AI (CCAI service) Project.
 enum CcaiProjectStatus {
 
-    // <p>No status specified</p>
+    // No status specified
     CCAI_PROJECT_STATUS_UNSPECIFIED = 0;
 
-    // <p>Project successfully created and undeployed</p>
+    // Project successfully created and undeployed
     CCAI_PROJECT_STATUS_UNDEPLOYED = 1;
 
-    // <p>Project configuration is updating</p>
+    // Project configuration is updating
     CCAI_PROJECT_STATUS_UPDATING = 2;
 
-    // <p>Project is deploying</p>
+    // Project is deploying
     CCAI_PROJECT_STATUS_DEPLOYING = 3;
 
-    // <p>Project is deployed</p>
+    // Project is deployed
     CCAI_PROJECT_STATUS_DEPLOYED = 4;
 
-    // <p>Project is un-deploying</p>
+    // Project is un-deploying
     CCAI_PROJECT_STATUS_UNDEPLOYING = 5;
 
-    // <p>Project is currently deleting</p>
+    // Project is currently deleting
     CCAI_PROJECT_STATUS_DELETING = 6;
 
-    // <p>Project is deleted</p>
+    // Project is deleted
     CCAI_PROJECT_STATUS_DELETED = 7;
 
 }
 
-// <p>Message representing a list of CCAI service services</p>
+// Message representing a list of CCAI service services
 message CcaiServiceList {
 
     // CCAI service services
@@ -121,78 +121,78 @@ message CcaiServiceList {
 
 enum CcaiServiceType {
 
-    // <p>unspecified</p>
+    // unspecified
     CCAI_SERVICE_TYPE_UNSPECIFIED = 0;
 
-    // <p>ondewo-aim service</p>
+    // ondewo-aim service
     CCAI_SERVICE_TYPE_ONDEWO_AIM = 1;
 
-    // <p>ondewo-bpi service</p>
+    // ondewo-bpi service
     CCAI_SERVICE_TYPE_ONDEWO_BPI = 2;
 
-    // <p>ondewo-csi service</p>
+    // ondewo-csi service
     CCAI_SERVICE_TYPE_ONDEWO_CSI = 3;
 
-    // <p>ondewo-nlu service</p>
+    // ondewo-nlu service
     CCAI_SERVICE_TYPE_ONDEWO_NLU = 4;
 
-    // <p>ondewo-s2t service</p>
+    // ondewo-s2t service
     CCAI_SERVICE_TYPE_ONDEWO_S2T = 5;
 
-    // <p>ondewo-sip service</p>
+    // ondewo-sip service
     CCAI_SERVICE_TYPE_ONDEWO_SIP = 6;
 
-    // <p>ondewo-t2s service</p>
+    // ondewo-t2s service
     CCAI_SERVICE_TYPE_ONDEWO_T2S = 7;
 
-    // <p>ondewo-vtsi service</p>
+    // ondewo-vtsi service
     CCAI_SERVICE_TYPE_ONDEWO_VTSI = 8;
 
-    // <p>ondewo-vtsi service</p>
+    // ondewo-vtsi service
     CCAI_SERVICE_TYPE_ONDEWO_VTSI_RABBITMQ = 9;
 
-    // <p>ondewo-nlu-qa service</p>
+    // ondewo-nlu-qa service
     CCAI_SERVICE_TYPE_ONDEWO_NLU_QA = 10;
 
-    // <p>ondewo-nlu-webhook service</p>
+    // ondewo-nlu-webhook service
     CCAI_SERVICE_TYPE_ONDEWO_NLU_WEBHOOK = 11;
 
-    // <p>ondewo-survey service</p>
+    // ondewo-survey service
     CCAI_SERVICE_TYPE_ONDEWO_SURVEY = 12;
 
-    // <p>ondewo-nlu-llm service</p>
+    // ondewo-nlu-llm service
     CCAI_SERVICE_TYPE_ONDEWO_NLU_LLM = 13;
 
-    // <p>ondewo-nlu-websearch service</p>
+    // ondewo-nlu-websearch service
     CCAI_SERVICE_TYPE_ONDEWO_NLU_WEBSEARCH = 14;
 
-    // <p>ondewo-aim-webchat service</p>
+    // ondewo-aim-webchat service
     CCAI_SERVICE_TYPE_ONDEWO_AIM_WEBCHAT = 15;
 
-    // <p>ondewo-aim-webphone service</p>
+    // ondewo-aim-webphone service
     CCAI_SERVICE_TYPE_ONDEWO_AIM_WEBPHONE = 16;
 
-    // <p>ondewo-nlu-vectorstore service</p>
+    // ondewo-nlu-vectorstore service
     CCAI_SERVICE_TYPE_ONDEWO_NLU_VECTORSTORE = 17;
 
-    // <p>ondewo-nlu-llm-agent service</p>
+    // ondewo-nlu-llm-agent service
     CCAI_SERVICE_TYPE_ONDEWO_NLU_LLM_AGENT = 18;
 
-    // <p>ondewo-nlu-llm-mcp service</p>
+    // ondewo-nlu-llm-mcp service
     CCAI_SERVICE_TYPE_ONDEWO_NLU_LLM_MCP = 19;
 
-    // <p>ondewo-nlu-llm-rag service</p>
+    // ondewo-nlu-llm-rag service
     CCAI_SERVICE_TYPE_ONDEWO_NLU_LLM_RAG = 20;
 
-    // <p>ondewo-analytics service</p>
+    // ondewo-analytics service
     CCAI_SERVICE_TYPE_ONDEWO_ANALYTICS = 21;
 
-    // <p>ondewo-analytics-dashboard service</p>
+    // ondewo-analytics-dashboard service
     CCAI_SERVICE_TYPE_ONDEWO_ANALYTICS_DASHBOARD = 22;
 
 }
 
-// <p>Definition of a Call Center AI (CCAI service) Service.</p>
+// Definition of a Call Center AI (CCAI service) Service.
 message CcaiService {
 
     // Resource name of the service. Must be unique.
@@ -268,174 +268,174 @@ message CcaiService {
     // Provider of the ccai service
     optional CcaiServiceProvider ccai_service_provider = 24;
 
-    // <p>Index indicating the hierarchical position of a service within the service hierarchy.</p>
-    // <p>The index follows a tree-like structure, where each level of depth is separated by a &quot;_&quot;.</p>
-    // <p>For example:</p>
+    // Index indicating the hierarchical position of a service within the service hierarchy.
+    // The index follows a tree-like structure, where each level of depth is separated by a &quot;_&quot;.
+    // For example:
     // <ul>
     //   <li>&quot;1&quot; represents a top-level service</li>
     //   <li>&quot;1_1&quot; represents a sub-service under &quot;1&quot;</li>
     //   <li>&quot;1_1_1&quot; represents a sub-service under &quot;1.1&quot;</li>
     // </ul>
-    // <p>This structure allows for easy representation and organization of services in nested workflows.</p>
+    // This structure allows for easy representation and organization of services in nested workflows.
     //
-    // <p>If CcaiService have the same service_hierarchy they are executed in parallel.</p>
-    // <p>For example:</p>
+    // If CcaiService have the same service_hierarchy they are executed in parallel.
+    // For example:
     // <ul>
     //   <li>&quot;1&quot; Service A</li>
     //   <li>&quot;1_1&quot; Service B</li>
     //   <li>&quot;1_1&quot; Service C</li>
     // </ul>
     //
-    // <p>Service B and C will be executed in parallel and the Service A receives both results of service B and C.</p>
-    // <p>The variable for the return value of a service is {{OUTPUT_SERVICE_service_hierarchy}}. So in the example
-    // above the outputs of the services are {{OUTPUT_SERVICE_1}}, {{OUTPUT_SERVICE_1_1}}, and {{OUTPUT_SERVICE_1_2}}.</p>
+    // Service B and C will be executed in parallel and the Service A receives both results of service B and C.
+    // The variable for the return value of a service is {{OUTPUT_SERVICE_service_hierarchy}}. So in the example
+    // above the outputs of the services are {{OUTPUT_SERVICE_1}}, {{OUTPUT_SERVICE_1_1}}, and {{OUTPUT_SERVICE_1_2}}.
     optional string service_hierarchy = 25;
 
 }
 
 enum CcaiServiceProvider {
 
-    // <p>No specified provider or placeholder</p>
+    // No specified provider or placeholder
     NO_CCAI_SERVICE_PROVIDER = 0;
 
-    // <p>ONDEWO provider for CCAI service services</p>
-    // <p><a href="https://www.ondewo.com/">ONDEWO</a></p>
+    // ONDEWO provider for CCAI service services
+    // <a href="https://www.ondewo.com/">ONDEWO</a>
     CCAI_SERVICE_PROVIDER_ONDEWO = 1;
 
-    // <p>Google as the CCAI service provider, utilizing Google&apos;s conversational AI capabilities</p>
-    // <p><a href="https://deepmind.google/technologies/gemini/">Google Gemini</a></p>
+    // Google as the CCAI service provider, utilizing Google&apos;s conversational AI capabilities
+    // <a href="https://deepmind.google/technologies/gemini/">Google Gemini</a>
     CCAI_SERVICE_PROVIDER_GOOGLE_GEMINI = 2;
 
-    // <p>Microsoft Azure as the CCAI service provider, using Microsoft&apos;s Azure cognitive services</p>
-    // <p><a href="https://azure.microsoft.com/en-us/products/cognitive-services/openai-service/">Azure OpenAI</a></p>
+    // Microsoft Azure as the CCAI service provider, using Microsoft&apos;s Azure cognitive services
+    // <a href="https://azure.microsoft.com/en-us/products/cognitive-services/openai-service/">Azure OpenAI</a>
     CCAI_SERVICE_PROVIDER_MICROSOFT_AZURE_OPENAI = 3;
 
-    // <p>Microsoft AutoGen as the CCAI service provider</p>
-    // <p><a href="https://github.com/microsoft/autogen">AutoGen</a></p>
+    // Microsoft AutoGen as the CCAI service provider
+    // <a href="https://github.com/microsoft/autogen">AutoGen</a>
     CCAI_SERVICE_PROVIDER_MICROSOFT_AUTOGEN = 4;
 
-    // <p>Ollama as the CCAI service provider, typically associated with specific OLLAMA AI tools</p>
-    // <p><a href="https://github.com/ollama/ollama">Ollama</a></p>
+    // Ollama as the CCAI service provider, typically associated with specific OLLAMA AI tools
+    // <a href="https://github.com/ollama/ollama">Ollama</a>
     CCAI_SERVICE_PROVIDER_OLLAMA = 5;
 
-    // <p>OpenAI as the CCAI service provider, commonly used for models such as GPT</p>
-    // <p><a href="https://openai.com/">OpenAI</a></p>
+    // OpenAI as the CCAI service provider, commonly used for models such as GPT
+    // <a href="https://openai.com/">OpenAI</a>
     CCAI_SERVICE_PROVIDER_OPENAI = 6;
 
-    // <p>Anthropic as the CCAI service provider, used with AI models from Anthropic</p>
-    // <p><a href="https://www.anthropic.com/">Anthropic</a></p>
+    // Anthropic as the CCAI service provider, used with AI models from Anthropic
+    // <a href="https://www.anthropic.com/">Anthropic</a>
     CCAI_SERVICE_PROVIDER_ANTHROPIC = 7;
 
-    // <p>Hugging Face as the CCAI service provider, often used for open-source NLP models</p>
-    // <p><a href="https://huggingface.co/">Hugging Face</a></p>
+    // Hugging Face as the CCAI service provider, often used for open-source NLP models
+    // <a href="https://huggingface.co/">Hugging Face</a>
     CCAI_SERVICE_PROVIDER_HUGGINGFACE = 8;
 
-    // <p>IBM as the CCAI service provider, such as IBM Watson for conversational AI</p>
-    // <p><a href="https://www.ibm.com/watson">IBM Watson</a></p>
+    // IBM as the CCAI service provider, such as IBM Watson for conversational AI
+    // <a href="https://www.ibm.com/watson">IBM Watson</a>
     CCAI_SERVICE_PROVIDER_IBM = 9;
 
-    // <p>Haystack as the CCAI service provider, e.g., for question answering and conversations</p>
-    // <p><a href="https://github.com/deepset-ai/haystack">Haystack</a></p>
+    // Haystack as the CCAI service provider, e.g., for question answering and conversations
+    // <a href="https://github.com/deepset-ai/haystack">Haystack</a>
     CCAI_SERVICE_PROVIDER_HAYSTACK = 10;
 
-    // <p>LangChain as the CCAI service provider</p>
-    // <p><a href="https://github.com/langchain-ai/langchain">LangChain</a></p>
+    // LangChain as the CCAI service provider
+    // <a href="https://github.com/langchain-ai/langchain">LangChain</a>
     CCAI_SERVICE_PROVIDER_LANGCHAIN = 11;
 
-    // <p>Amazon AWS as the CCAI service provider, using Amazon&apos;s AI/ML services</p>
-    // <p><a href="https://aws.amazon.com/machine-learning/">AWS AI Services</a></p>
+    // Amazon AWS as the CCAI service provider, using Amazon&apos;s AI/ML services
+    // <a href="https://aws.amazon.com/machine-learning/">AWS AI Services</a>
     CCAI_SERVICE_PROVIDER_AMAZON = 12;
 
-    // <p>Mistral as the CCAI service provider, using Mistral&apos;s services</p>
-    // <p><a href="https://mistral.ai/">Mistral</a></p>
+    // Mistral as the CCAI service provider, using Mistral&apos;s services
+    // <a href="https://mistral.ai/">Mistral</a>
     CCAI_SERVICE_PROVIDER_MISTRAL = 13;
 
-    // <p>DuckDuckGo Websearch API</p>
-    // <p><a href="https://duckduckgo.com/api">DuckDuckGo API</a></p>
+    // DuckDuckGo Websearch API
+    // <a href="https://duckduckgo.com/api">DuckDuckGo API</a>
     CCAI_SERVICE_PROVIDER_DUCKDUCKGO = 14;
 
-    // <p>Google PSE Websearch API</p>
-    // <p><a href="https://programmablesearchengine.google.com/">Google Programmable Search Engine</a></p>
+    // Google PSE Websearch API
+    // <a href="https://programmablesearchengine.google.com/">Google Programmable Search Engine</a>
     CCAI_SERVICE_PROVIDER_GOOGLE_PSE = 15;
 
-    // <p>Jina Websearch API</p>
-    // <p><a href="https://github.com/jina-ai/jina">Jina AI</a></p>
+    // Jina Websearch API
+    // <a href="https://github.com/jina-ai/jina">Jina AI</a>
     CCAI_SERVICE_PROVIDER_JINA = 16;
 
-    // <p>Tavily Websearch API</p>
-    // <p><a href="https://tavily.com/">Tavily API</a></p>
+    // Tavily Websearch API
+    // <a href="https://tavily.com/">Tavily API</a>
     CCAI_SERVICE_PROVIDER_TAVILY = 17;
 
-    // <p>ElasticSearch vector database service</p>
-    // <p><a href="https://www.elastic.co/">ElasticSearch</a></p>
+    // ElasticSearch vector database service
+    // <a href="https://www.elastic.co/">ElasticSearch</a>
     CCAI_SERVICE_PROVIDER_ELASTICSEARCH = 18;
 
-    // <p>Milvus vector database service</p>
-    // <p><a href="https://milvus.io/">Milvus</a></p>
+    // Milvus vector database service
+    // <a href="https://milvus.io/">Milvus</a>
     CCAI_SERVICE_PROVIDER_MILVUS = 19;
 
-    // <p>Qdrant vector database service</p>
-    // <p><a href="https://qdrant.tech/">Qdrant</a></p>
+    // Qdrant vector database service
+    // <a href="https://qdrant.tech/">Qdrant</a>
     CCAI_SERVICE_PROVIDER_QDRANT = 20;
 
-    // <p>Chroma vector database service</p>
-    // <p><a href="https://github.com/chroma-core/chroma">ChromaDB</a></p>
+    // Chroma vector database service
+    // <a href="https://github.com/chroma-core/chroma">ChromaDB</a>
     CCAI_SERVICE_PROVIDER_CHROMA = 21;
 
-    // <p>Google CCAI service provider</p>
-    // <p><a href="https://cloud.google.com/ai">Google Cloud AI</a></p>
+    // Google CCAI service provider
+    // <a href="https://cloud.google.com/ai">Google Cloud AI</a>
     CCAI_SERVICE_PROVIDER_GOOGLE = 22;
 
-    // <p>Microsoft CCAI service provider</p>
-    // <p><a href="https://www.microsoft.com/en-us/ai">Microsoft AI</a></p>
+    // Microsoft CCAI service provider
+    // <a href="https://www.microsoft.com/en-us/ai">Microsoft AI</a>
     CCAI_SERVICE_PROVIDER_MICROSOFT = 23;
 
-    // <p>Deepgram as the CCAI service provider for speech processing</p>
-    // <p><a href="https://deepgram.com/">Deepgram</a></p>
+    // Deepgram as the CCAI service provider for speech processing
+    // <a href="https://deepgram.com/">Deepgram</a>
     CCAI_SERVICE_PROVIDER_DEEPGRAM = 24;
 
-    // <p>ElevenLabs as the CCAI service provider for voice synthesis</p>
-    // <p><a href="https://elevenlabs.io/">ElevenLabs</a></p>
+    // ElevenLabs as the CCAI service provider for voice synthesis
+    // <a href="https://elevenlabs.io/">ElevenLabs</a>
     CCAI_SERVICE_PROVIDER_ELEVENLABS = 25;
 
-    // <p>Hugging Face Text Generation Inference (TGI) as the CCAI service provider</p>
-    // <p><a href="https://github.com/huggingface/text-generation-inference">Text Generation Inference</a></p>
+    // Hugging Face Text Generation Inference (TGI) as the CCAI service provider
+    // <a href="https://github.com/huggingface/text-generation-inference">Text Generation Inference</a>
     CCAI_SERVICE_PROVIDER_HUGGINGFACE_TGI = 26;
 
-    // <p>Hugging Face Text Embedding Inference (TGE) as the CCAI service provider</p>
-    // <p><a href="https://github.com/huggingface/text-embeddings-inference">Text Embeddings Inference</a></p>
+    // Hugging Face Text Embedding Inference (TGE) as the CCAI service provider
+    // <a href="https://github.com/huggingface/text-embeddings-inference">Text Embeddings Inference</a>
     CCAI_SERVICE_PROVIDER_HUGGINGFACE_TGE = 27;
 
-    // <p>Hugging Face SmolAgents as the CCAI service provider</p>
-    // <p><a href="https://github.com/huggingface/smolagents">SmolAgents</a></p>
+    // Hugging Face SmolAgents as the CCAI service provider
+    // <a href="https://github.com/huggingface/smolagents">SmolAgents</a>
     CCAI_SERVICE_PROVIDER_HUGGINGFACE_SMOLAGENTS = 28;
 
-    // <p>Google Agent Development Kit (ADK) as the CCAI service provider</p>
-    // <p><a href="https://google.github.io/adk-docs/">Google Agent Development Kit (ADK)</a></p>
+    // Google Agent Development Kit (ADK) as the CCAI service provider
+    // <a href="https://google.github.io/adk-docs/">Google Agent Development Kit (ADK)</a>
     CCAI_SERVICE_PROVIDER_GOOGLE_AGENT_DEVELOPMENT_KIT = 29;
 
-    // <p>Model Context Protocol as the CCAI service provider, enabling integration with services following
-    // the Model Context Protocol standard.</p>
-    // <p><a href="https://modelcontextprotocol.io/introduction">MCP</a></p>
+    // Model Context Protocol as the CCAI service provider, enabling integration with services following
+    // the Model Context Protocol standard.
+    // <a href="https://modelcontextprotocol.io/introduction">MCP</a>
     CCAI_SERVICE_PROVIDER_MODEL_CONTEXT_PROTOCOL = 30;
 
-    // <p>Opensearch as the CCAI service provider, enabling integration with Opensearch vector database and search services</p>
-    // <p><a href="https://opensearch.org/">Opensearch</a></p>
+    // Opensearch as the CCAI service provider, enabling integration with Opensearch vector database and search services
+    // <a href="https://opensearch.org/">Opensearch</a>
     CCAI_SERVICE_PROVIDER_OPENSEARCH = 31;
 
-    // <p>Grok as the CCAI service provider, commonly used for models such as Grok-1</p>
-    // <p><a href="https://grok.x.ai/">Grok</a></p>
+    // Grok as the CCAI service provider, commonly used for models such as Grok-1
+    // <a href="https://grok.x.ai/">Grok</a>
     CCAI_SERVICE_PROVIDER_GROK = 32;
 
-    // <p>PostgreSQL as the CCAI service provider, enabling integration with PostgreSQL databases</p>
-    // <p><a href="https://www.postgresql.org/">PostgreSQL</a></p>
+    // PostgreSQL as the CCAI service provider, enabling integration with PostgreSQL databases
+    // <a href="https://www.postgresql.org/">PostgreSQL</a>
     CCAI_SERVICE_PROVIDER_POSTGRES = 33;
 
 }
 
 
 
-// <p>Request to create a Call Center AI (CCAI service) project.</p>
+// Request to create a Call Center AI (CCAI service) project.
 message CreateCcaiProjectRequest {
 
     // The CCAI service project to be created.
@@ -447,7 +447,7 @@ message CreateCcaiProjectRequest {
 
 }
 
-// <p>Response after attempting to create a Call Center AI (CCAI service) project.</p>
+// Response after attempting to create a Call Center AI (CCAI service) project.
 message CreateCcaiProjectResponse {
 
     // The created CCAI service project.
@@ -459,7 +459,7 @@ message CreateCcaiProjectResponse {
 }
 
 
-// <p>Request to retrieve a CCAI service project</p>
+// Request to retrieve a CCAI service project
 message GetCcaiProjectRequest{
 
     // CCAI service project name with which to perform the call of the form <pre><code>projects/&lt;project_uuid&gt;/project</code></pre>
@@ -480,7 +480,7 @@ message GetCcaiProjectRequest{
 
 }
 
-// <p>Request to retrieve a CCAI service project</p>
+// Request to retrieve a CCAI service project
 message GetCcaiServiceRequest{
 
     // CCAI service project name with which to perform the call of the form
@@ -497,7 +497,7 @@ message GetCcaiServiceRequest{
 }
 
 
-// <p>Request to get the list of agents</p>
+// Request to get the list of agents
 message ListCcaiProjectsRequest {
 
     // Optional. Specify the view of the returned CcaiProject (full view by default)
@@ -510,22 +510,22 @@ message ListCcaiProjectsRequest {
     // If not specified, the default behavior is to have no sorting.
     optional CcaiProjectSorting ccai_project_sorting = 3;
 
-    // <p>Optional. The next_page_token value returned from a previous list request.</p>
-    // <p>Example: &quot;current_index-1--page_size-20&quot;</p>
-    // <p>The page token to support pagination.</p>
-    // <p>Pagination allows you to retrieve a large result set in smaller, more manageable portions.</p>
-    // <p>The page token is a string representing the current index and page size.</p>
+    // Optional. The next_page_token value returned from a previous list request.
+    // Example: &quot;current_index-1--page_size-20&quot;
+    // The page token to support pagination.
+    // Pagination allows you to retrieve a large result set in smaller, more manageable portions.
+    // The page token is a string representing the current index and page size.
     //
-    // <p>Valid page token strings:</p>
+    // Valid page token strings:
     // <ul>
     //   <li>&quot;&quot; (empty string) - Retrieves the first page.</li>
     //   <li>&quot;current_index-0--page_size-20&quot; - Retrieves the first page with a page size of 20.</li>
     //   <li>&quot;current_index-1--page_size-20&quot; - Retrieves the second page with a page size of 20.</li>
     // </ul>
     //
-    // <p>Index starts at 0.</p>
+    // Index starts at 0.
     //
-    // <p>Examples of valid page token strings:</p>
+    // Examples of valid page token strings:
     // <ul>
     //   <li>&quot;&quot;</li>
     //   <li>&quot;current_index-0--page_size-20&quot;</li>
@@ -533,7 +533,7 @@ message ListCcaiProjectsRequest {
     //   <li>&quot;current_index-10--page_size-20&quot;</li>
     // </ul>
     //
-    // <p>Examples of invalid page token strings:</p>
+    // Examples of invalid page token strings:
     // <ul>
     //   <li>&quot;1&quot;</li>
     //   <li>&quot;current_index-0--page_size-20&quot;</li>
@@ -553,7 +553,7 @@ message ListCcaiProjectsRequest {
 
 }
 
-// <p>This is a protobuf message definition for the response of getting a list of CCAI service projects.</p>
+// This is a protobuf message definition for the response of getting a list of CCAI service projects.
 message ListCcaiProjectsResponse {
 
     // The list of CCAI service projects returned in the response.
@@ -566,25 +566,25 @@ message ListCcaiProjectsResponse {
 
 }
 
-// <p>This protobuf message defines the sorting order for CCAI service (Virtual Test System Infrastructure) projects.</p>
+// This protobuf message defines the sorting order for CCAI service (Virtual Test System Infrastructure) projects.
 message CcaiProjectSorting {
 
-    // <p>Enum to specify the sorting field for CCAI service projects.</p>
+    // Enum to specify the sorting field for CCAI service projects.
     enum CcaiProjectSortingField {
 
-        // <p>No sorting</p>
+        // No sorting
         NO_CCAI_PROJECT_SORTING = 0;
 
-        // <p>Sort by project name such as <pre><code>projects/&lt;project_uuid&gt;/project</code></pre>.</p>
+        // Sort by project name such as <pre><code>projects/&lt;project_uuid&gt;/project</code></pre>.
         SORT_CCAI_PROJECT_BY_NAME = 1;
 
-        // <p>Sort by display name</p>
+        // Sort by display name
         SORT_CCAI_PROJECT_BY_DISPLAY_NAME = 2;
 
-        // <p>Sort by creation date</p>
+        // Sort by creation date
         SORT_CCAI_PROJECT_BY_CREATION_DATE = 3;
 
-        // <p>Sort by last modified date</p>
+        // Sort by last modified date
         SORT_CCAI_PROJECT_BY_LAST_MODIFIED = 4;
 
     }
@@ -598,24 +598,24 @@ message CcaiProjectSorting {
 }
 
 
-// <p>CcaiProjectView defines what the CcaiProject message contains</p>
+// CcaiProjectView defines what the CcaiProject message contains
 enum CcaiProjectView {
 
-    // <p>Unspecified CCAI_PROJECT view: the view is defined by the call:</p>
+    // Unspecified CCAI_PROJECT view: the view is defined by the call:
     CCAI_PROJECT_VIEW_UNSPECIFIED = 0;
 
-    // <p>Full CCAI_PROJECT view: populate all the fields of the CCAI_PROJECT message including configs.</p>
+    // Full CCAI_PROJECT view: populate all the fields of the CCAI_PROJECT message including configs.
     CCAI_PROJECT_VIEW_FULL = 1;
 
-    // <p>Shallow CCAI_PROJECT view: populates all the fields except configs.</p>
+    // Shallow CCAI_PROJECT view: populates all the fields except configs.
     CCAI_PROJECT_VIEW_SHALLOW = 2;
 
-    // <p>Minimum view including only CCAI_PROJECT UUID and CCAI_PROJECT display name</p>
+    // Minimum view including only CCAI_PROJECT UUID and CCAI_PROJECT display name
     CCAI_PROJECT_VIEW_MINIMUM = 3;
 
 }
 
-// <p>Filter which services should be included in the returned CcaiProject</p>
+// Filter which services should be included in the returned CcaiProject
 message CcaiServiceFilter {
 
     // Language codes of the projects for which services are filtered.
@@ -629,7 +629,7 @@ message CcaiServiceFilter {
 
 }
 
-// <p>Request to updated CCAI service project</p>
+// Request to updated CCAI service project
 message UpdateCcaiProjectRequest{
 
     // The CcaiProject that should be updated
@@ -647,7 +647,7 @@ message UpdateCcaiProjectRequest{
 
 }
 
-// <p>Request to updated CCAI service project</p>
+// Request to updated CCAI service project
 message UpdateCcaiProjectResponse{
 
     // CCAI service project name with which to perform the call of the form <pre><code>projects/&lt;project_uuid&gt;/project</code></pre>
@@ -658,8 +658,8 @@ message UpdateCcaiProjectResponse{
 
 }
 
-// <p>Request to delete a CCAI service project</p>
-// <p>If a deployed CCAI service project was deleted then it was undeployed beforehand automatically</p>
+// Request to delete a CCAI service project
+// If a deployed CCAI service project was deleted then it was undeployed beforehand automatically
 message DeleteCcaiProjectRequest{
 
     // CCAI service project name with which to perform the call of the form <pre><code>projects/&lt;project_uuid&gt;/project</code></pre>
@@ -671,8 +671,8 @@ message DeleteCcaiProjectRequest{
 
 }
 
-// <p>Response to delete a CCAI service project</p>
-// <p>If a deployed CCAI service project was deleted then it was undeployed beforehand automatically</p>
+// Response to delete a CCAI service project
+// If a deployed CCAI service project was deleted then it was undeployed beforehand automatically
 message DeleteCcaiProjectResponse{
 
     // CCAI service project name with which to perform the call of the form <pre><code>projects/&lt;project_uuid&gt;/project</code></pre>
