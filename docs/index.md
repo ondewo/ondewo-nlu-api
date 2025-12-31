@@ -1622,6 +1622,7 @@ Request of the report of the statistics about sessions
 | group_bys | [string](#string) | repeated | Optional. Grouping based on named properties |
 | order_bys | [string](#string) | repeated | Optional. Order based on named properties |
 | field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which data fields will be added to the returned data. Example: paths=[&quot;duration_in_s_min&quot;, &quot;id&quot;, &quot;session_id&quot;, &quot;project_id&quot;] |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which data fields will be added to the returned data. Example: paths=[&quot;duration_in_s_min&quot;, &quot;id&quot;, &quot;session_id&quot;, &quot;project_id&quot;] |
 | sql_query | [string](#string) |  | SQL Query - only usable with specific SessionsReportType such as SessionsReportType.SESSION_SQL_QUERY |
 
 
@@ -1656,6 +1657,7 @@ The request message for <a href="index.html#ondewo.nlu.Agents.ImportAgent">Agent
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The project that the agent to import is associated with. Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre> |
 | agent_uri | [string](#string) |  | The URI to a Google Cloud Storage file containing the agent to import. Note: The URI must start with "gs://". |
+| agent_content | [bytes](#bytes) |  | The agent to import. <br> Example for how to import an agent via the command line: <br> <pre><code>curl \ 'https://dialogflow.googleapis.com/v2/projects/<project_name>/agent:import\ -X POST \ -H 'Authorization: Bearer '$(gcloud auth print-access-token) \ -H 'Accept: application/json' \ -H 'Content-Type: application/json' \ --compressed \ --data-binary "{ 'agentContent': '$(cat <agent zip file> | base64 -w 0)' }" </code></pre> |
 | agent_content | [bytes](#bytes) |  | The agent to import. <br> Example for how to import an agent via the command line: <br> <pre><code>curl \ 'https://dialogflow.googleapis.com/v2/projects/<project_name>/agent:import\ -X POST \ -H 'Authorization: Bearer '$(gcloud auth print-access-token) \ -H 'Accept: application/json' \ -H 'Content-Type: application/json' \ --compressed \ --data-binary "{ 'agentContent': '$(cat <agent zip file> | base64 -w 0)' }" </code></pre> |
 
 
@@ -1768,6 +1770,7 @@ Valid page token strings: <ul> <li>&quot;&quot; (empty string) - Retrieves the f
 
 Index starts at 0.
 
+Examples of valid page token strings: <ul> <li>&quot;&quot;</li> <li>&quot;current_index-0--page_size-20&quot;</li> <li>&quot;current_index-1--page_size-20&quot;</li> <li>&quot;current_index-10--page_size-20&quot;</li> </ul>
 Examples of valid page token strings: <ul> <li>&quot;&quot;</li> <li>&quot;current_index-0--page_size-20&quot;</li> <li>&quot;current_index-1--page_size-20&quot;</li> <li>&quot;current_index-10--page_size-20&quot;</li> </ul>
 
 Examples of invalid page token strings: <ul> <li>&quot;1&quot;</li> <li>&quot;current_index-0--page_size-20&quot;</li> <li>&quot;current_index--1--page_size-20&quot;</li> <li>&quot;current_index1--page_size-20&quot;</li> <li>&quot;current_index-1--page_size--20&quot;</li> </ul> |
@@ -1940,6 +1943,7 @@ The request message for <a href="index.html#ondewo.nlu.Agents.RestoreAgent">Agen
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The project that the agent to restore is associated with. Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre> |
 | agent_uri | [string](#string) |  | The URI to a Google Cloud Storage file containing the agent to restore. Note: The URI must start with "gs://". |
+| agent_content | [bytes](#bytes) |  | The agent to restore. <br> Example for how to restore an agent via the command line: <pre><code>curl \ 'https://dialogflow.googleapis.com/v2/projects/<project_name>/agent:restore\ -X POST \ -H 'Authorization: Bearer '$(gcloud auth print-access-token) \ -H 'Accept: application/json' \ -H 'Content-Type: application/json' \ --compressed \ --data-binary "{ 'agentContent': '$(cat <agent zip file> | base64 -w 0)' }" \ </code></pre> |
 | agent_content | [bytes](#bytes) |  | The agent to restore. <br> Example for how to restore an agent via the command line: <pre><code>curl \ 'https://dialogflow.googleapis.com/v2/projects/<project_name>/agent:restore\ -X POST \ -H 'Authorization: Bearer '$(gcloud auth print-access-token) \ -H 'Accept: application/json' \ -H 'Content-Type: application/json' \ --compressed \ --data-binary "{ 'agentContent': '$(cat <agent zip file> | base64 -w 0)' }" \ </code></pre> |
 
 
@@ -2372,6 +2376,7 @@ The request for intent classification.
 | parent | [string](#string) |  | Required. The project of this agent. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
 | text | [string](#string) |  | the input text |
 | language_code | [string](#string) |  | the input language |
+| active_contexts | [bool](#bool) |  | Optional: if restrict classification result with input contexts listed in the field <code>context_names</code> |
 | active_contexts | [bool](#bool) |  | Optional: if restrict classification result with input contexts listed in the field <code>context_names</code> |
 | context_names | [string](#string) | repeated | Optional: names of the input contexts to restrict the classification result with. Intents can only be classified if the intent's input context set is the subset of the given context set. |
 | mode | [Mode](#ondewo.nlu.Mode) |  | Optional: Which mode to use: <ul> <li>EXCLUSIVE - skip algorithms listed in <code>algorithms</code> field,</li> <li>INCLUSIVE - run ONLY algorithms listed in <code>algorithms</code> field,</li> <li>UNSPECIFIED - default mode, described in agent config</li> </ul> |
@@ -4341,6 +4346,7 @@ Optional. Represents an entity.
 Values can also be described as regexes with postprocessing options such as:
 
 <pre><code> * regex('//1') => references the first group match of the regex defined as a synonym * regex('//2') => references the second group match of the regex defined as a synonym * regex('//1') => references the first group match of the regex defined as a synonym </code></pre>
+<pre><code> * regex('//1') => references the first group match of the regex defined as a synonym * regex('//2') => references the second group match of the regex defined as a synonym * regex('//1') => references the first group match of the regex defined as a synonym </code></pre>
 
 Values can also be described as regexes with one or more postprocessing options such as one postprocessing option to remove all whitespaces <code>regex('&lt;#RW#&gt;\\1')</code> or by a combination of several postprocessing options such as remove all whitespaces and lower casing <code>regex('&lt;#RW#&gt;&lt;#LC#&gt;\\1')</code>.
 
@@ -4689,9 +4695,13 @@ There are three types of entities:
 
 <ul>
   <li><strong>System</strong> - entities that are defined by the Dialogflow API for common
+<ul>
+  <li><strong>System</strong> - entities that are defined by the Dialogflow API for common
     data types such as date, time, currency, and so on. A system entity is
     represented by the <code>EntityType</code> type.</li>
+    represented by the <code>EntityType</code> type.</li>
 
+  <li><strong>Developer</strong> - entities that are defined by you that represent
   <li><strong>Developer</strong> - entities that are defined by you that represent
     actionable data that is meaningful to your application. For example,
     you could define a <code>pizza.sauce</code> entity for red or white pizza sauce,
@@ -4700,7 +4710,15 @@ There are three types of entities:
     entity is represented by the <code>EntityType</code> type.</li>
 
   <li><strong>User</strong> - entities that are built for an individual user such as
+    you could define a <code>pizza.sauce</code> entity for red or white pizza sauce,
+    a <code>pizza.cheese</code> entity for the different types of cheese on a pizza,
+    a <code>pizza.topping</code> entity for different toppings, and so on. A developer
+    entity is represented by the <code>EntityType</code> type.</li>
+
+  <li><strong>User</strong> - entities that are built for an individual user such as
     favorites, preferences, playlists, and so on. A user entity is
+    represented by the <a href="index.html#google.cloud.dialogflow.v2.SessionEntityType">SessionEntityType</a> type.</li>
+</ul>
     represented by the <a href="index.html#google.cloud.dialogflow.v2.SessionEntityType">SessionEntityType</a> type.</li>
 </ul>
 
@@ -6274,6 +6292,8 @@ An intent represents a mapping between input from a user and an action to
 be taken by your application. When you pass user input to the
 <a href="index.html#google.cloud.dialogflow.v2.Sessions.DetectIntent">DetectIntent</a> (or
 <a href="index.html#google.cloud.dialogflow.v2.Sessions.StreamingDetectIntent">StreamingDetectIntent</a>) method, the
+<a href="index.html#google.cloud.dialogflow.v2.Sessions.DetectIntent">DetectIntent</a> (or
+<a href="index.html#google.cloud.dialogflow.v2.Sessions.StreamingDetectIntent">StreamingDetectIntent</a>) method, the
 Dialogflow API analyzes the input and searches
 for a matching intent. If no match is found, the Dialogflow API returns a
 fallback intent (<code>is_fallback</code> = true).
@@ -6283,20 +6303,30 @@ match user input to an intent by adding the following to your intent.
 
 <ul>
   <li><strong>Contexts</strong> - provide additional context for intent analysis. For
+<ul>
+  <li><strong>Contexts</strong> - provide additional context for intent analysis. For
     example, if an intent is related to an object in your application that
     plays music, you can provide a context to determine when to match the
+    intent if the user input is &quot;turn it off&quot;.  You can include a context
     intent if the user input is &quot;turn it off&quot;.  You can include a context
     that matches the intent when there is previous user input of
     &quot;play music&quot;, and not when there is previous user input of
     &quot;turn on the light&quot;.</li>
+    &quot;play music&quot;, and not when there is previous user input of
+    &quot;turn on the light&quot;.</li>
 
+  <li><strong>Events</strong> - allow for matching an intent by using an event name
   <li><strong>Events</strong> - allow for matching an intent by using an event name
     instead of user input. Your application can provide an event name and
     related parameters to the Dialogflow API to match an intent. For
     example, when your application starts, you can send a welcome event
     with a user name parameter to the Dialogflow API to match an intent with
     a personalized welcome message for the user.</li>
+    a personalized welcome message for the user.</li>
 
+  <li><strong>Training phrases</strong> - provide examples of user input to train the
+    Dialogflow API agent to better match intents.</li>
+</ul>
   <li><strong>Training phrases</strong> - provide examples of user input to train the
     Dialogflow API agent to better match intents.</li>
 </ul>

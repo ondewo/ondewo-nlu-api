@@ -4426,6 +4426,7 @@ This field cannot be set by the <code>Update</code> method. </p></td>
                   <td>repeated</td>
                   <td><p>Optional. The list of all languages supported by this agent (except for the
 <code>default_language_code</code>). </p></td>
+<code>default_language_code</code>). </p></td>
                 </tr>
               
                 <tr>
@@ -7076,6 +7077,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre> </p></td>
                   <td></td>
                   <td><p>Optional. The mask to control which data fields will be added to the returned data.
 Example: paths=[&quot;duration_in_s_min&quot;, &quot;id&quot;, &quot;session_id&quot;, &quot;project_id&quot;] </p></td>
+Example: paths=[&quot;duration_in_s_min&quot;, &quot;id&quot;, &quot;session_id&quot;, &quot;project_id&quot;] </p></td>
                 </tr>
               
                 <tr>
@@ -7162,7 +7164,10 @@ Note: The URI must start with "gs://". </p></td>
                   <td></td>
                   <td><p>The agent to import.
 <br>
+<br>
 Example for how to import an agent via the command line:
+<br>
+<pre><code>curl \
 <br>
 <pre><code>curl \
   'https://dialogflow.googleapis.com/v2/projects/<project_name>/agent:import\
@@ -7173,6 +7178,8 @@ Example for how to import an agent via the command line:
    --compressed \
    --data-binary "{
       'agentContent': '$(cat <agent zip file> | base64 -w 0)'
+   }"
+</code></pre> </p></td>
    }"
 </code></pre> </p></td>
                 </tr>
@@ -7831,7 +7838,9 @@ Note: The URI must start with "gs://". </p></td>
                   <td></td>
                   <td><p>The agent to restore.
 <br>
+<br>
 Example for how to restore an agent via the command line:
+<pre><code>curl \
 <pre><code>curl \
   'https://dialogflow.googleapis.com/v2/projects/<project_name>/agent:restore\
    -X POST \
@@ -7841,6 +7850,8 @@ Example for how to restore an agent via the command line:
    --compressed \
    --data-binary "{
        'agentContent': '$(cat <agent zip file> | base64 -w 0)'
+   }" \
+</code></pre> </p></td>
    }" \
 </code></pre> </p></td>
                 </tr>
@@ -8888,6 +8899,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td>active_contexts</td>
                   <td><a href="#bool">bool</a></td>
                   <td></td>
+                  <td><p>Optional: if restrict classification result with input contexts listed in the field <code>context_names</code> </p></td>
                   <td><p>Optional: if restrict classification result with input contexts listed in the field <code>context_names</code> </p></td>
                 </tr>
               
@@ -14314,6 +14326,11 @@ Values can also be described as regexes with postprocessing options such as:
  * regex('//2') => references the second group match of the regex defined as a synonym
  * regex('//1') => references the first group match of the regex defined as a synonym
 </code></pre>
+<pre><code>
+ * regex('//1') => references the first group match of the regex defined as a synonym
+ * regex('//2') => references the second group match of the regex defined as a synonym
+ * regex('//1') => references the first group match of the regex defined as a synonym
+</code></pre>
 
 Values can also be described as regexes with one or more postprocessing options such as one postprocessing
 option to remove all whitespaces <code>regex('&lt;#RW#&gt;\\1')</code> or by a combination of several
@@ -14322,6 +14339,14 @@ postprocessing options such as remove all whitespaces and lower casing
 
 All processing options are:
 
+<pre><code>
+ * regex('&lt;#TW&gt;//1') => matches 1st group and trims duplicated whitespaces to one single space
+ * regex('&lt;#RW&gt;//1') => matches 1st group and removes all whitespaces
+ * regex('&lt;#UC&gt;//1') => matches 1st group and converts to upper case
+ * regex('&lt;#LC&gt;//1') => matches 1st group and converts to lower case
+ * regex('&lt;#CC&gt;//1') => matches 1st group and converts to camelCase
+ * regex('&lt;#SC&gt;//1') => matches 1st group and converts to snake_case
+</code></pre> </p></td>
 <pre><code>
  * regex('&lt;#TW&gt;//1') => matches 1st group and trims duplicated whitespaces to one single space
  * regex('&lt;#RW&gt;//1') => matches 1st group and removes all whitespaces
@@ -14342,6 +14367,12 @@ Synonyms can be regex expressions, i.e. regular expressions, that are python com
 See here for supported regex: <a href="https://docs.python.org/3/library/re.html">https://docs.python.org/3/library/re.html</a>
 Examples are:
 
+<pre><code>
+ * regex('[a-zA-Z]+') => just letters
+ * regex('\d{1,5}') => just numbers
+ * regex('^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$') => mix of numbers, letters and dot
+ * regex('(?i)(^|\s)(0\s{0,3}') => with matching groups and case insensitivity
+</code></pre> </p></td>
 <pre><code>
  * regex('[a-zA-Z]+') => just letters
  * regex('\d{1,5}') => just numbers
@@ -14684,6 +14715,8 @@ Example:
              [Entity Value]          [Entity Synonyms]
              Red                     red, scarlett, dark red, ...
              Blue                    blue, indico, dark blue, sky blue, ...
+             Dark                    obscure, black, opaque, ...
+</code></pre> </p></td>
              Dark                    obscure, black, opaque, ...
 </code></pre> </p></td>
                 </tr>
@@ -18915,18 +18948,29 @@ Format</a>
         &quot;simpleResponse&quot;: {
           &quot;displayText&quot;: &quot;hi&quot;,
           &quot;textToSpeech&quot;: &quot;hello&quot;
+        &quot;simpleResponse&quot;: {
+          &quot;displayText&quot;: &quot;hi&quot;,
+          &quot;textToSpeech&quot;: &quot;hello&quot;
         }
       }
     ],
     &quot;suggestions&quot;: [
+    &quot;suggestions&quot;: [
       {
+        &quot;title&quot;: &quot;Say this&quot;
         &quot;title&quot;: &quot;Say this&quot;
       },
       {
         &quot;title&quot;: &quot;or this&quot;
+        &quot;title&quot;: &quot;or this&quot;
       }
     ]
   },
+  &quot;systemIntent&quot;: {
+    &quot;data&quot;: {
+      &quot;@type&quot;: &quot;type.googleapis.com/google.actions.v2.OptionValueSpec&quot;,
+      &quot;listSelect&quot;: {
+        &quot;items&quot;: [
   &quot;systemIntent&quot;: {
     &quot;data&quot;: {
       &quot;@type&quot;: &quot;type.googleapis.com/google.actions.v2.OptionValueSpec&quot;,
@@ -18937,8 +18981,13 @@ Format</a>
               &quot;key&quot;: &quot;key1&quot;,
               &quot;synonyms&quot;: [
                 &quot;key one&quot;
+            &quot;optionInfo&quot;: {
+              &quot;key&quot;: &quot;key1&quot;,
+              &quot;synonyms&quot;: [
+                &quot;key one&quot;
               ]
             },
+            &quot;title&quot;: &quot;must not be empty, but unique&quot;
             &quot;title&quot;: &quot;must not be empty, but unique&quot;
           },
           {
@@ -18946,15 +18995,22 @@ Format</a>
               &quot;key&quot;: &quot;key2&quot;,
               &quot;synonyms&quot;: [
                 &quot;key two&quot;
+            &quot;optionInfo&quot;: {
+              &quot;key&quot;: &quot;key2&quot;,
+              &quot;synonyms&quot;: [
+                &quot;key two&quot;
               ]
             },
+            &quot;title&quot;: &quot;must not be empty, but unique&quot;
             &quot;title&quot;: &quot;must not be empty, but unique&quot;
           }
         ]
       }
     },
     &quot;intent&quot;: &quot;actions.intent.OPTION&quot;
+    &quot;intent&quot;: &quot;actions.intent.OPTION&quot;
   }
+}</code></pre></p></td>
 }</code></pre></p></td>
               </tr>
             

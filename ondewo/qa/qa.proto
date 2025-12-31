@@ -85,8 +85,8 @@ service QA {
 message GetAnswerRequest {
 
     // Required. The name of the session this query is sent to. Format:
-    // `projects/<Project ID>/agent/sessions/<Session ID>`. It's up to the API
-    // caller to choose an appropriate session ID. It can be a random number or
+    // <code>projects/&lt;Project ID&gt;/agent/sessions/&lt;Session ID&gt;</code>.
+    // It&apos;s up to the API caller to choose an appropriate session ID. It can be a random number or
     // some type of user identifier (preferably hashed). The length of the session
     // ID must not exceed 36 bytes.
     string session_id = 1;
@@ -161,7 +161,7 @@ message RunTrainingResponse {
 // Message for defining URL filters to include and exclude from the scraping process.
 message UrlFilter {
 
-    // Optional. List of allowed values for the metadata field 'url'.
+    // Optional. List of allowed values for the metadata field <code>&apos;url&apos;</code>.
     repeated string allowed_values = 1;
 
     // Optional. Regular expression that must be matched by the metadata.

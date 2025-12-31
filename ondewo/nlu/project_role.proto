@@ -111,10 +111,12 @@ enum DefaultProjectRole {
 enum ProjectRoleView {
 
     // The view depends on the endpoint:
-    // * CreateProjectRole: FULL
-    // * GetProjectRole: FULL
-    // * UpdateProjectRole: FULL
-    // * ListProjectRoles: FULL
+    // <ul>
+    //   <li>CreateProjectRole: FULL</li>
+    //   <li>GetProjectRole: FULL</li>
+    //   <li>UpdateProjectRole: FULL</li>
+    //   <li>ListProjectRoles: FULL</li>
+    // </ul>
     PROJECT_ROLE_VIEW_UNSPECIFIED = 0;
 
     // only role ID and name fields are populated
@@ -131,9 +133,9 @@ message CreateProjectRoleRequest {
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     string parent = 1;
 
-    //If the role_id is not provided, an incremental value will be assigned
-    //The "name" and "role_type" are mandatory values
-    //The permissions all default to False if not provided specifically
+    // If the role_id is not provided, an incremental value will be assigned
+    // The &quot;name&quot; and &quot;role_type&quot; are mandatory values
+    // The permissions all default to False if not provided specifically
     ProjectRole role = 2;
 
     // Optional. specify the view of the created project role, PROJECT_ROLE_VIEW_FULL by default
@@ -147,8 +149,8 @@ message UpdateProjectRoleRequest {
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     string parent = 1;
 
-    //role_id in the Role message should be given, if empty will throw an error in the backend
-    //other fields in the Role are optional. Only the fields to be updated should be provided
+    // role_id in the Role message should be given, if empty will throw an error in the backend
+    // other fields in the Role are optional. Only the fields to be updated should be provided
     ProjectRole role = 2;
 
     // Optional. The mask to control which fields get updated.
@@ -187,7 +189,7 @@ message DeleteProjectRoleRequest {
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     string parent = 1;
 
-    //role is identified by role id, if empty will throw an error in the backend
+    // role is identified by role id, if empty will throw an error in the backend
     uint32 role_id = 2;
 }
 
@@ -203,24 +205,30 @@ message ListProjectRolesRequest {
     // The page token is a string representing the current index and page size.
     //
     // Valid page token strings:
-    // * "" (empty string) - Retrieves the first page.
-    // * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
-    // * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+    // <ul>
+    //   <li>&quot;&quot; (empty string) - Retrieves the first page.</li>
+    //   <li>&quot;current_index-0--page_size-20&quot; - Retrieves the first page with a page size of 20.</li>
+    //   <li>&quot;current_index-1--page_size-20&quot; - Retrieves the second page with a page size of 20.</li>
+    // </ul>
     //
     // Index starts at 0.
     //
     // Examples of valid page token strings:
-    // * ""
-    // * "current_index-0--page_size-20"
-    // * "current_index-1--page_size-20"
-    // * "current_index-10--page_size-20"
+    // <ul>
+    //   <li>&quot;&quot;</li>
+    //   <li>&quot;current_index-0--page_size-20&quot;</li>
+    //   <li>&quot;current_index-1--page_size-20&quot;</li>
+    //   <li>&quot;current_index-10--page_size-20&quot;</li>
+    // </ul>
     //
     // Examples of invalid page token strings:
-    // * "1"
-    // * "current_index-0--page_size-20"
-    // * "current_index--1--page_size-20"
-    // * "current_index1--page_size-20"
-    // * "current_index-1--page_size--20"
+    // <ul>
+    //   <li>&quot;1&quot;</li>
+    //   <li>&quot;current_index-0--page_size-20&quot;</li>
+    //   <li>&quot;current_index--1--page_size-20&quot;</li>
+    //   <li>&quot;current_index1--page_size-20&quot;</li>
+    //   <li>&quot;current_index-1--page_size--20&quot;</li>
+    // </ul>
     string page_token = 2;
 
     // Optional. specify the view of the project roles, PROJECT_ROLE_VIEW_FULL by default
