@@ -374,6 +374,7 @@ message GenerateResponsesRequest {
     // Git branch
     string branch = 8;
 
+    // Optional. Whether to drop unknown parameters from the generated responses
     bool drop_unknown_parameters = 9;
 
     // Optional. The mask to control which fields gets returned.
@@ -752,6 +753,7 @@ enum IntentAlgorithms {
     // fine-tuned for multi-class intent detection. For details see <a href="https://arxiv.org/abs/1810.04805">https://arxiv.org/abs/1810.04805</a>
     OndewoIntentBertClassifier = 7;
 
+    // Meta classifier that combines multiple intent classification algorithms to improve accuracy
     OndewoIntentMetaClassifier = 8;
 
     // Maximum number of repeated fallbacks before this algorithm exists the conversation and resets contexts

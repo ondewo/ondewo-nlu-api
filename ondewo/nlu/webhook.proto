@@ -261,7 +261,7 @@ message SessionEntityType {
 }
 
 // The request message for
-// <a href="index.html#ondewo.nlu.SessionEntityTypes.ListSessionEntityTypes">SessionEntityTypes.ListSessionEntityTypes</a>.
+// <a href="index.html#ondewo.nlu.Webhook.ListSessionEntityTypes">Webhook.ListSessionEntityTypes</a>.
 message ListSessionEntityTypesRequest {
     // Required. The session to list all session entity types from.
     // Format: <code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code> or
@@ -308,7 +308,7 @@ message ListSessionEntityTypesRequest {
 }
 
 // The response message for
-// <a href="index.html#ondewo.nlu.SessionEntityTypes.ListSessionEntityTypes">SessionEntityTypes.ListSessionEntityTypes</a>.
+// <a href="index.html#ondewo.nlu.Webhook.ListSessionEntityTypes">Webhook.ListSessionEntityTypes</a>.
 message ListSessionEntityTypesResponse {
     // The list of session entity types. There will be a maximum number of items
     // returned based on the page_size field in the request.
@@ -320,7 +320,7 @@ message ListSessionEntityTypesResponse {
 }
 
 // The request message for
-// <a href="index.html#ondewo.nlu.SessionEntityTypes.GetSessionEntityType">SessionEntityTypes.GetSessionEntityType</a>.
+// <a href="index.html#ondewo.nlu.Webhook.GetSessionEntityType">Webhook.GetSessionEntityType</a>.
 message GetSessionEntityTypeRequest {
     // Required. The name of the session entity type. Format:
     // <code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/entityTypes/&lt;Entity Type
@@ -333,7 +333,7 @@ message GetSessionEntityTypeRequest {
 }
 
 // The request message for
-// <a href="index.html#ondewo.nlu.SessionEntityTypes.CreateSessionEntityType">SessionEntityTypes.CreateSessionEntityType</a>.
+// <a href="index.html#ondewo.nlu.Webhook.CreateSessionEntityType">Webhook.CreateSessionEntityType</a>
 message CreateSessionEntityTypeRequest {
     // Required. The agent to list all intents from.
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
@@ -357,7 +357,7 @@ message CreateSessionEntityTypeRequest {
 }
 
 // The request message for
-// <a href="index.html#ondewo.nlu.SessionEntityTypes.UpdateSessionEntityType">SessionEntityTypes.UpdateSessionEntityType</a>.
+// <a href="index.html#ondewo.nlu.Webhook.UpdateSessionEntityType">Webhook.UpdateSessionEntityType</a>.
 message UpdateSessionEntityTypeRequest {
     // Required. The session entity type to update.
     SessionEntityType session_entity_type = 1;
@@ -368,7 +368,7 @@ message UpdateSessionEntityTypeRequest {
 }
 
 // The request message for
-// <a href="index.html#ondewo.nlu.SessionEntityTypes.DeleteSessionEntityType">SessionEntityTypes.DeleteSessionEntityType</a>.
+// <a href="index.html#ondewo.nlu.Webhook.DeleteSessionEntityType">Webhook.DeleteSessionEntityType</a>.
 message DeleteSessionEntityTypeRequest {
 
     // Required. The name of the entity type to delete. Format:

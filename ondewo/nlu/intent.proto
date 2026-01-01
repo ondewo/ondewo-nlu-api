@@ -40,39 +40,19 @@ import "google/protobuf/timestamp.proto";
 import "google/protobuf/field_mask.proto";
 import "google/protobuf/struct.proto";
 
-// An intent represents a mapping between input from a user and an action to
-// be taken by your application. When you pass user input to the
-// <a href="index.html#google.cloud.dialogflow.v2.Sessions.DetectIntent">DetectIntent</a> (or
-// <a href="index.html#google.cloud.dialogflow.v2.Sessions.StreamingDetectIntent">StreamingDetectIntent</a>) method, the
-// Dialogflow API analyzes the input and searches
-// for a matching intent. If no match is found, the Dialogflow API returns a
-// fallback intent (<code>is_fallback</code> = true).
+// An intent represents a mapping between input from a user and an action to be taken by your application. When you pass user input to the <a href="index.html#ondewo.nlu.Sessions.DetectIntent">DetectIntent</a> (or <a href="index.html#ondewo.nlu.Sessions.StreamingDetectIntent">StreamingDetectIntent</a>) method, the Dialogflow API analyzes the input and searches for a matching intent. If no match is found, the Dialogflow API returns a fallback intent (<code>is_fallback</code> = true).
 //
-// You can provide additional information for the Dialogflow API to use to
-// match user input to an intent by adding the following to your intent.
+// You can provide additional information for the Dialogflow API to use to match user input to an intent by adding the following to your intent.
 //
 // <ul>
-//   <li><strong>Contexts</strong> - provide additional context for intent analysis. For
-//     example, if an intent is related to an object in your application that
-//     plays music, you can provide a context to determine when to match the
-//     intent if the user input is &quot;turn it off&quot;.  You can include a context
-//     that matches the intent when there is previous user input of
-//     &quot;play music&quot;, and not when there is previous user input of
-//     &quot;turn on the light&quot;.</li>
+//   <li><strong>Contexts</strong> - provide additional context for intent analysis. For example, if an intent is related to an object in your application that plays music, you can provide a context to determine when to match the intent if the user input is &quot;turn it off&quot;.  You can include a context that matches the intent when there is previous user input of &quot;play music&quot;, and not when there is previous user input of &quot;turn on the light&quot;.</li>
 //
-//   <li><strong>Events</strong> - allow for matching an intent by using an event name
-//     instead of user input. Your application can provide an event name and
-//     related parameters to the Dialogflow API to match an intent. For
-//     example, when your application starts, you can send a welcome event
-//     with a user name parameter to the Dialogflow API to match an intent with
-//     a personalized welcome message for the user.</li>
+//   <li><strong>Events</strong> - allow for matching an intent by using an event name instead of user input. Your application can provide an event name and related parameters to the Dialogflow API to match an intent. For example, when your application starts, you can send a welcome event with a user name parameter to the Dialogflow API to match an intent with a personalized welcome message for the user.</li>
 //
-//   <li><strong>Training phrases</strong> - provide examples of user input to train the
-//     Dialogflow API agent to better match intents.</li>
+//   <li><strong>Training phrases</strong> - provide examples of user input to train the Dialogflow API agent to better match intents.</li>
 // </ul>
 //
-// For more information about intents, see the
-// <a href="https://dialogflow.com/docs/intents">Dialogflow documentation</a>.
+// For more information about intents, see the <a href="https://dialogflow.com/docs/intents">Dialogflow documentation</a>.
 service Intents {
     // Returns the list of all intents in the specified agent.
     rpc ListIntents (ListIntentsRequest) returns (ListIntentsResponse) {
@@ -320,7 +300,9 @@ message Intent {
 
     // Structure of status of an Intent
     enum IntentStatus {
+        // Intent is active
         ACTIVE = 0;
+        // Intent is inactive
         INACTIVE = 1;
     }
 
@@ -717,44 +699,64 @@ message Intent {
             // }</code></pre>
             ACTIONS_ON_GOOGLE = 8;
 
+            // Placeholder platform 1
             PLACEHOLDER_1 = 9;
 
+            // Placeholder platform 2
             PLACEHOLDER_2 = 10;
 
+            // Placeholder platform 3
             PLACEHOLDER_3 = 11;
 
+            // Placeholder platform 4
             PLACEHOLDER_4 = 12;
 
+            // Placeholder platform 5
             PLACEHOLDER_5 = 13;
 
+            // Placeholder platform 6
             PLACEHOLDER_6 = 14;
 
+            // Placeholder platform 7
             PLACEHOLDER_7 = 15;
 
+            // Placeholder platform 8
             PLACEHOLDER_8 = 16;
 
+            // Placeholder platform 9
             PLACEHOLDER_9 = 17;
 
+            // Placeholder platform 10
             PLACEHOLDER_10 = 18;
 
+            // Placeholder platform 11
             PLACEHOLDER_11 = 19;
 
+            // Placeholder platform 12
             PLACEHOLDER_12 = 20;
 
+            // Placeholder platform 13
             PLACEHOLDER_13 = 21;
 
+            // Placeholder platform 14
             PLACEHOLDER_14 = 22;
 
+            // Placeholder platform 15
             PLACEHOLDER_15 = 23;
 
+            // Placeholder platform 16
             PLACEHOLDER_16 = 24;
 
+            // Placeholder platform 17
             PLACEHOLDER_17 = 25;
 
+            // Placeholder platform 18
             PLACEHOLDER_18 = 26;
 
+            // Placeholder platform 19
             PLACEHOLDER_19 = 27;
 
+            // Placeholder platform 20
             PLACEHOLDER_20 = 28;
         }
 
@@ -1237,12 +1239,19 @@ enum IntentCategory {
 message IntentSorting {
     // Structure of intent sorting field
     enum IntentSortingField {
+        // No sorting applied
         NO_INTENT_SORTING = 0;
+        // Sort by intent name
         SORT_INTENT_BY_NAME = 1;
+        // Sort by creation date
         SORT_INTENT_BY_CREATION_DATE = 2;
+        // Sort by last updated date
         SORT_INTENT_BY_LAST_UPDATED = 3;
+        // Sort by training phrase (user says) count
         SORT_INTENT_BY_USERSAYS_COUNT = 4;
+        // Sort by start date
         SORT_INTENT_BY_START_DATE = 5;
+        // Sort by end date
         SORT_INTENT_BY_END_DATE = 6;
     }
 
@@ -1304,6 +1313,7 @@ message BatchTrainingPhrasesStatusResponse {
 // This message is a request of a creation of a batch of training phrases
 message BatchCreateTrainingPhrasesRequest {
 
+    // Request to create a single training phrase
     message CreateTrainingPhraseRequest {
         // Required. The name of the intent for which to create a training phrase for.
         string intent_name = 1;
@@ -1330,6 +1340,7 @@ message BatchDeleteTrainingPhrasesRequest {
 
 // This message is a response of deleting a batch of training phrases
 message BatchDeleteTrainingPhrasesResponse {
+    // Status of a training phrase deletion operation
     message DeleteTrainingPhraseStatus{
         oneof delete_status{
             google.protobuf.Empty successfully_deleted = 1;
@@ -1398,6 +1409,7 @@ message ListTrainingPhrasesResponse {
 
 // This message is a response of a batch responses of message status
 message BatchResponseMessagesStatusResponse {
+    // Status of a response message operation
     message ResponseMessageStatus {
         oneof phrase_or_status {
             Intent.Message response_message = 1;
@@ -1412,6 +1424,7 @@ message BatchResponseMessagesStatusResponse {
 // Request to create a list of new response messages and adds it to an intent
 message BatchCreateResponseMessagesRequest {
 
+    // Request to create a single response message
     message CreateResponseMessageRequest {
         // Required. The name of the intent for which to create a response message for.
         string intent_name = 1;
@@ -1444,6 +1457,7 @@ message BatchDeleteResponseMessagesRequest {
 
 // Response containing list with deleted response messages
 message BatchDeleteResponseMessagesResponse {
+    // Status of a response message deletion operation
     message DeleteResponseMessageStatus{
         oneof delete_status{
             google.protobuf.Empty successfully_deleted = 1;
@@ -1513,6 +1527,7 @@ message ListResponseMessagesResponse {
 
 // Response containing a batch of parameters in the specified intent
 message BatchParametersStatusResponse {
+    // Status of a parameter operation
     message ParameterStatus {
         oneof phrase_or_status {
             Intent.Parameter parameter = 1;
@@ -1527,6 +1542,7 @@ message BatchParametersStatusResponse {
 // Request to create a batch of parameters in the specified intent
 message BatchCreateParametersRequest {
 
+    // Request to create a single parameter
     message CreateParameterRequest {
         // Required. The name of the intent for which to create a training phrase for.
         string intent_name = 1;
@@ -1534,6 +1550,7 @@ message BatchCreateParametersRequest {
         // Required. The response message.
         Intent.Parameter parameter = 2;
     };
+    // List of parameters to create
     repeated CreateParameterRequest parameter_requests = 1;
 }
 
@@ -1559,6 +1576,7 @@ message BatchDeleteParametersRequest {
 
 // This message contains response of deleted parameters
 message BatchDeleteParametersResponse {
+    // Status of a parameter deletion operation
     message DeleteParameterStatus{
         oneof delete_status{
             google.protobuf.Empty successfully_deleted = 1;

@@ -541,6 +541,7 @@ message Agent {
     // Read-only in the Agent message
     AgentStatus status = 9;
 
+    // Optional. Description of the agent.
     string description = 10;
 
     // Creation date and time. Read-only field.
@@ -752,8 +753,8 @@ message ExportAgentResponse {
         // The exported agent.
         //
         // Example for how to export an agent to a zip file via a command line:
-        //
-        // curl \
+        //<br/>
+        //<pre><code>curl \
         //   'https://dialogflow.googleapis.com/v2/projects/<project_name>/agent:export'\
         //   -X POST \
         //   -H 'Authorization: Bearer '$(gcloud auth print-access-token) \
@@ -763,6 +764,7 @@ message ExportAgentResponse {
         //   --data-binary '{}' \
         // | grep agentContent | sed -e 's/.*"agentContent": "\([^"]*\)".*/\1/' \
         // | base64 --decode > <agent zip file>
+        // </code></pre>
         bytes agent_content = 2;
     }
 }
@@ -781,7 +783,7 @@ message ExportBenchmarkAgentRequest {
     int32 compression_level = 2;
 
     // Train-test split related parameters, for further info,
-    // check https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html
+    // check <a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html">https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html</a>
     // default values come from API definition above
     // Optional: bigger than zero
     float test_size = 3;
@@ -1342,10 +1344,13 @@ message SetResourcesRequest {
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     string parent = 1;
 
+    // Required. Name of the resource.
     string name = 2;
 
+    // Required. Type of the resource (e.g., "audio", "image", "file").
     string type = 3;
 
+    // Required. The resource file content as bytes.
     bytes resource_file = 4;
 
     // Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc.
@@ -1359,8 +1364,10 @@ message DeleteResourcesRequest {
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     string parent = 1;
 
+    // Required. Name of the resource to delete.
     string name = 2;
 
+    // Required. Type of the resource (e.g., "audio", "image", "file").
     string type = 3;
 
     // Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc.
@@ -1374,8 +1381,10 @@ message ExportResourcesRequest {
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     string parent = 1;
 
+    // Required. Name of the resource to export.
     string name = 2;
 
+    // Required. Type of the resource (e.g., "audio", "image", "file").
     string type = 3;
 
     // Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc.
@@ -1389,13 +1398,16 @@ message ExportResourcesResponse {
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     string parent = 1;
 
+    // Required. Name of the exported resource.
     string name = 2;
 
+    // Required. Type of the resource (e.g., "audio", "image", "file").
     string type = 3;
 
     // Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc.
     string language_code = 4;
 
+    // Required. The exported resource file content as bytes.
     bytes resource_file = 5;
 }
 
@@ -1406,11 +1418,13 @@ message GetModelStatusesRequest {
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
+    // Optional. Cache version to filter model statuses. If not specified, returns statuses for all cache versions.
     int32 cache_version = 2;
 
     // Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc.
     string language_code = 3;
 
+    // Optional. Model name to filter model statuses. If not specified, returns statuses for all models.
     string model_name = 4;
 }
 
@@ -1426,20 +1440,31 @@ message ModelStatus {
     // The model name
     string model_name = 3;
 
+    // Timestamp when the status was set. Read-only field.
     google.protobuf.Timestamp status_set_time = 4;
 
+    // Status name of the model.
     enum StatusName {
+        // Unknown status
         UNKNOWN = 0;
+        // Model is initializing
         INITIALIZING = 1;
+        // Model has been initialized
         INITIALIZED = 2;
+        // Model is loading data
         LOADING_DATA = 3;
+        // Model is training
         TRAINING = 4;
+        // Model is being tested
         TESTING = 5;
+        // Model training is complete
         TRAINED = 6;
     }
 
+    // Configuration of the model as a string.
     string config = 5;
 
+    // Current status of the model.
     StatusName status = 6;
 
 }
@@ -1447,6 +1472,7 @@ message ModelStatus {
 // Response to get model statuses
 message GetModelStatusesResponse {
 
+    // List of model statuses matching the request filters.
     repeated ModelStatus model_statuses = 1;
 }
 
@@ -1544,26 +1570,37 @@ message FullTextSearchRequest {
     // Type of query
     enum QueryType {
 
-        ALL = 0;  // just a placeholder, has to start with zero
+        // Placeholder value, has to start with zero
+        ALL = 0;
 
+        // Query for entities
         OndewoEntityQuery = 1;
 
+        // Query for entity types
         OndewoEntityTypeQuery = 2;
 
+        // Query for entity synonyms
         OndewoEntitySynonymQuery = 3;
 
+        // Query for intents
         OndewoIntentQuery = 4;
 
+        // Query for intent input contexts
         OndewoIntentContextInQuery = 5;
 
+        // Query for intent output contexts
         OndewoIntentContextOutQuery = 6;
 
+        // Query for intent training phrases (user says)
         OndewoIntentUsersaysQuery = 7;
 
+        // Query for intent tags
         OndewoIntentTagsQuery = 8;
 
+        // Query for intent parameters
         OndewoIntentParametersQuery = 9;
 
+        // Query for intent responses
         OndewoIntentResponseQuery = 10;
 
     }
@@ -1579,12 +1616,16 @@ message FullTextSearchResponseEntityType {
     // Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc.
     string language_code = 2;
 
+    // Search result for an entity type
     message EntityTypeSearchResult {
 
+        // Name of the entity type
         string name = 1;
 
+        // Display name of the entity type
         string display_name = 2;
 
+        // Language code of the entity type
         string language = 3;
 
         // Creation date and time. Read-only field.
@@ -1600,12 +1641,16 @@ message FullTextSearchResponseEntityType {
         string modified_by = 7;
     }
 
+    // List of entity type search results
     repeated EntityTypeSearchResult entity_type_results = 3;
 
+    // Search term used in the query
     string term = 4;
 
+    // Elasticsearch query that was executed
     string elastic_query = 5;
 
+    // Time taken to execute the query in seconds
     float time = 6;
 
     // The next_page_token is used to retrieve the next page of a returned result,
@@ -1623,16 +1668,22 @@ message FullTextSearchResponseEntity {
     // Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc.
     string language_code = 2;
 
+    // Search result for an entity
     message EntitySearchResult {
 
+        // Name of the entity
         string name = 1;
 
+        // Display name of the entity
         string display_name = 2;
 
+        // Name of the entity type this entity belongs to
         string entity_type_name = 3;
 
+        // Display name of the entity type
         string entity_type_display_name = 4;
 
+        // Language code of the entity
         string language = 5;
 
         // Creation date and time. Read-only field.
@@ -1648,12 +1699,16 @@ message FullTextSearchResponseEntity {
         string modified_by = 9;
     }
 
+    // List of entity search results
     repeated EntitySearchResult entity_results = 3;
 
+    // Search term used in the query
     string term = 4;
 
+    // Elasticsearch query that was executed
     string elastic_query = 5;
 
+    // Time taken to execute the query in seconds
     float time = 6;
 
     // The next_page_token is used to retrieve the next page of a returned result,
@@ -1671,20 +1726,28 @@ message FullTextSearchResponseEntitySynonym {
     // Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc.
     string language_code = 2;
 
+    // Search result for an entity synonym
     message EntitySynonymSearchResult {
 
+        // Name of the entity synonym
         string name = 1;
 
+        // Display name of the entity synonym
         string display_name = 2;
 
+        // Name of the entity type
         string entity_type_name = 3;
 
+        // Display name of the entity type
         string entity_type_display_name = 4;
 
+        // Name of the entity this synonym belongs to
         string entity_name = 5;
 
+        // Display name of the entity
         string entity_display_name = 6;
 
+        // Language code of the entity synonym
         string language = 7;
 
         // Creation date and time. Read-only field.
@@ -1700,12 +1763,16 @@ message FullTextSearchResponseEntitySynonym {
         string modified_by = 11;
     }
 
+    // List of entity synonym search results
     repeated EntitySynonymSearchResult entity_synonym_results = 3;
 
+    // Search term used in the query
     string term = 4;
 
+    // Elasticsearch query that was executed
     string elastic_query = 5;
 
+    // Time taken to execute the query in seconds
     float time = 6;
 
     // The next_page_token is used to retrieve the next page of a returned result,
@@ -1722,16 +1789,22 @@ message FullTextSearchResponseIntent {
     // Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc.
     string language_code = 2;
 
+    // Search result for an intent
     message IntentSearchResult {
 
+        // Name of the intent
         string name = 1;
 
+        // Display name of the intent
         string display_name = 2;
 
+        // Domain name of the intent
         string domain_name = 3;
 
+        // Tags associated with the intent
         repeated string tags = 4;
 
+        // Language code of the intent
         string language = 5;
 
         // Creation date and time. Read-only field.
@@ -1748,12 +1821,16 @@ message FullTextSearchResponseIntent {
 
     }
 
+    // List of intent search results
     repeated IntentSearchResult intent_results = 3;
 
+    // Search term used in the query
     string term = 4;
 
+    // Elasticsearch query that was executed
     string elastic_query = 5;
 
+    // Time taken to execute the query in seconds
     float time = 6;
 
     // The next_page_token is used to retrieve the next page of a returned result,
@@ -1771,16 +1848,22 @@ message FullTextSearchResponseIntentContextIn {
     // Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc.
     string language_code = 2;
 
+    // Search result for an intent input context
     message IntentContextInSearchResult {
 
+        // Name of the input context
         string name = 1;
 
+        // Name of the intent this context belongs to
         string intent_name = 2;
 
+        // Display name of the intent
         string intent_display_name = 3;
 
+        // Tags associated with the intent
         repeated string tags = 4;
 
+        // Language code of the context
         string language = 5;
 
         // Creation date and time. Read-only field.
@@ -1797,12 +1880,16 @@ message FullTextSearchResponseIntentContextIn {
 
     }
 
+    // List of intent input context search results
     repeated IntentContextInSearchResult intent_context_in_results = 3;
 
+    // Search term used in the query
     string term = 4;
 
+    // Elasticsearch query that was executed
     string elastic_query = 5;
 
+    // Time taken to execute the query in seconds
     float time = 6;
 
     // The next_page_token is used to retrieve the next page of a returned result,
@@ -1820,16 +1907,22 @@ message FullTextSearchResponseIntentContextOut {
     // Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc.
     string language_code = 2;
 
+    // Search result for an intent output context
     message IntentContextOutSearchResult {
 
+        // Name of the output context
         string name = 1;
 
+        // Name of the intent this context belongs to
         string intent_name = 2;
 
+        // Display name of the intent
         string intent_display_name = 3;
 
+        // Tags associated with the intent
         repeated string tags = 4;
 
+        // Language code of the context
         string language = 5;
 
         // Creation date and time. Read-only field.
@@ -1846,12 +1939,16 @@ message FullTextSearchResponseIntentContextOut {
 
     }
 
+    // List of intent output context search results
     repeated IntentContextOutSearchResult intent_context_out_results = 3;
 
+    // Search term used in the query
     string term = 4;
 
+    // Elasticsearch query that was executed
     string elastic_query = 5;
 
+    // Time taken to execute the query in seconds
     float time = 6;
 
     // The next_page_token is used to retrieve the next page of a returned result,
@@ -1869,24 +1966,34 @@ message FullTextSearchResponseIntentUsersays {
     // Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc.
     string language_code = 2;
 
+    // Search result for an intent training phrase (user says)
     message IntentUsersaysSearchResult {
 
+        // Name of the training phrase
         string name = 1;
 
+        // Text of the training phrase
         string text = 2;
 
+        // Text with entity types annotated
         string text_as_entity_types = 3;
 
+        // Text with entity values annotated
         string text_as_entity_values = 4;
 
+        // Type of the training phrase part
         string type = 5;
 
+        // Name of the intent this training phrase belongs to
         string intent_name = 6;
 
+        // Display name of the intent
         string intent_display_name = 7;
 
+        // Tags associated with the intent
         repeated string tags = 8;
 
+        // Language code of the training phrase
         string language = 9;
 
         // Creation date and time. Read-only field.
@@ -1903,12 +2010,16 @@ message FullTextSearchResponseIntentUsersays {
 
     }
 
+    // List of intent training phrase search results
     repeated IntentUsersaysSearchResult intent_usersays_results = 3;
 
+    // Search term used in the query
     string term = 4;
 
+    // Elasticsearch query that was executed
     string elastic_query = 5;
 
+    // Time taken to execute the query in seconds
     float time = 6;
 
     // The next_page_token is used to retrieve the next page of a returned result,
@@ -1926,18 +2037,25 @@ message FullTextSearchResponseIntentTags {
     // Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc.
     string language_code = 2;
 
+    // Search result for an intent tag
     message IntentTagsSearchResult {
 
+        // Name of the tag
         string name = 1;
 
+        // Text content of the tag
         string text = 2;
 
+        // Name of the intent this tag belongs to
         string intent_name = 3;
 
+        // Display name of the intent
         string intent_display_name = 4;
 
+        // Tags associated with the intent
         repeated string tags = 5;
 
+        // Language code of the tag
         string language = 6;
 
         // Creation date and time. Read-only field.
@@ -1954,12 +2072,16 @@ message FullTextSearchResponseIntentTags {
 
     }
 
+    // List of intent tag search results
     repeated IntentTagsSearchResult intent_tags_results = 3;
 
+    // Search term used in the query
     string term = 4;
 
+    // Elasticsearch query that was executed
     string elastic_query = 5;
 
+    // Time taken to execute the query in seconds
     float time = 6;
 
     // The next_page_token is used to retrieve the next page of a returned result,
@@ -1977,20 +2099,28 @@ message FullTextSearchResponseIntentResponse {
     // Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc.
     string language_code = 2;
 
+    // Search result for an intent response
     message IntentResponseSearchResult {
 
+        // Text content of the response
         string text = 1;
 
+        // Platform for which this response is intended
         string platform = 2;
 
+        // Type of the response
         string response_type = 3;
 
+        // Name of the intent this response belongs to
         string intent_name = 4;
 
+        // Display name of the intent
         string intent_display_name = 5;
 
+        // Tags associated with the intent
         repeated string tags = 6;
 
+        // Language code of the response
         string language = 7;
 
         // Creation date and time. Read-only field.
@@ -2006,12 +2136,16 @@ message FullTextSearchResponseIntentResponse {
         string modified_by = 11;
 
     }
+    // List of intent response search results
     repeated IntentResponseSearchResult intent_response_results = 3;
 
+    // Search term used in the query
     string term = 4;
 
+    // Elasticsearch query that was executed
     string elastic_query = 5;
 
+    // Time taken to execute the query in seconds
     float time = 6;
 
     // The next_page_token is used to retrieve the next page of a returned result.
@@ -2057,18 +2191,25 @@ message FullTextSearchResponseIntentParameters {
     // Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc.
     string language_code = 2;
 
+    // Search result for an intent parameter
     message IntentParametersSearchResult {
 
+        // Name of the parameter
         string parameter_name = 1;
 
+        // Display name of the parameter
         string parameter_display_name = 2;
 
+        // Name of the intent this parameter belongs to
         string intent_name = 3;
 
+        // Display name of the intent
         string intent_display_name = 4;
 
+        // Tags associated with the intent
         repeated string tags = 5;
 
+        // Language code of the parameter
         string language = 6;
 
         // Creation date and time. Read-only field.
@@ -2085,12 +2226,16 @@ message FullTextSearchResponseIntentParameters {
 
     }
 
+    // List of intent parameter search results
     repeated IntentParametersSearchResult intent_parameters_results = 3;
 
+    // Search term used in the query
     string term = 4;
 
+    // Elasticsearch query that was executed
     string elastic_query = 5;
 
+    // Time taken to execute the query in seconds
     float time = 6;
 
     // The next_page_token is used to retrieve the next page of a returned result,

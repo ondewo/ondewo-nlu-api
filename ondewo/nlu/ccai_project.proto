@@ -575,7 +575,7 @@ message CcaiProjectSorting {
         // No sorting
         NO_CCAI_PROJECT_SORTING = 0;
 
-        // Sort by project name such as <pre><code>projects/&lt;project_uuid&gt;/project</code></pre>.
+        // Sort by project name such as <pre><code>projects/&lt;project_uuid&gt;/project</code></pre>
         SORT_CCAI_PROJECT_BY_NAME = 1;
 
         // Sort by display name

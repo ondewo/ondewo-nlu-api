@@ -50,10 +50,7 @@ option java_outer_classname = "SessionProto";
 option java_package = "com.google.cloud.dialogflow.v2";
 option objc_class_prefix = "DF";
 
-// A session represents an interaction with a user. You retrieve user input
-// and pass it to the <a href="index.html#ondewo.nlu.Sessions.DetectIntent">DetectIntent</a> (or
-// <a href="index.html#ondewo.nlu.Sessions.StreamingDetectIntent">StreamingDetectIntent</a>) method to determine
-// user intent and respond.
+// A session represents an interaction with a user. You retrieve user input and pass it to the <a href="index.html#ondewo.nlu.Sessions.DetectIntent">DetectIntent</a> (or <a href="index.html#ondewo.nlu.Sessions.StreamingDetectIntent">StreamingDetectIntent</a>) method to determine user intent and respond.
 service Sessions {
 
     // Processes a natural language query and returns structured, actionable data
@@ -649,17 +646,10 @@ message QueryResult {
 }
 
 
-// The top-level message sent by the client to the
-// <code>StreamingDetectIntent</code> method.
-//
+// The top-level message sent by the client to the <code>StreamingDetectIntent</code> method.
 // Multiple request messages should be sent in order:
-//
-// 1.  The first message must contain <code>session</code>, <code>query_input</code> plus optionally
-//     <code>query_params</code> and/or <code>single_utterance</code>. The message must not contain <code>input_audio</code>.
-//
-// 2.  If <code>query_input</code> was set to a streaming input audio config,
-//     all subsequent messages must contain only <code>input_audio</code>.
-//     Otherwise, finish the request stream.
+// 1.  The first message must contain <code>session</code>, <code>query_input</code> plus optionally <code>query_params</code> and/or <code>single_utterance</code>. The message must not contain <code>input_audio</code>.
+// 2.  If <code>query_input</code> was set to a streaming input audio config, all subsequent messages must contain only <code>input_audio</code>. Otherwise, finish the request stream.
 message StreamingDetectIntentRequest {
 
     // Required. The name of the session the query is sent to.
@@ -698,18 +688,10 @@ message StreamingDetectIntentRequest {
 
 }
 
-// The top-level message returned from the
-// <code>StreamingDetectIntent</code> method.
-//
+// The top-level message returned from the <code>StreamingDetectIntent</code> method.
 // Multiple response messages can be returned in order:
-//
-// 1.  If the input was set to streaming audio, the first one or more messages
-//     contain <code>recognition_result</code>. Each <code>recognition_result</code> represents a more
-//     complete transcript of what the user said. The last <code>recognition_result</code>
-//     has <code>is_final</code> set to <code>true</code>.
-//
-// 2.  The next message contains <code>response_id</code>, <code>query_result</code>
-//     and optionally <code>webhook_status</code> if a WebHook was called.
+// 1.  If the input was set to streaming audio, the first one or more messages contain <code>recognition_result</code>. Each <code>recognition_result</code> represents a more complete transcript of what the user said. The last <code>recognition_result</code> has <code>is_final</code> set to <code>true</code>.
+// 2.  The next message contains <code>response_id</code>, <code>query_result</code> and optionally <code>webhook_status</code> if a WebHook was called.
 message StreamingDetectIntentResponse {
 
     // The unique identifier of the response. It can be used to
@@ -841,11 +823,9 @@ message TextInput {
     string language_code = 2;
 }
 
-// Events allow for matching intents by event name instead of the natural
-// language input. For instance, input <code>&lt;event: { name: &quot;welcome_event&quot;,
-// parameters: { name: &quot;Sam&quot; } }&gt;</code> can trigger a personalized welcome response.
-// The parameter <code>name</code> may be used by the agent in the response:
-// <code>&quot;Hello #welcome_event.name! What can I do for you today?&quot;</code>.
+// Events allow for matching intents by event name instead of the natural language input. 
+// For instance, input <code>&lt;event: { name: &quot;welcome_event&quot;, parameters: { name: &quot;Sam&quot; } }&gt;</code> can trigger a personalized welcome response.
+// The parameter <code>name</code> may be used by the agent in the response: <code>&quot;Hello #welcome_event.name! What can I do for you today?&quot;</code>.
 message EventInput {
 
     // Required. The unique identifier of the event.
@@ -1103,6 +1083,7 @@ message ContextFilter {
     // value of the parameter
     string value = 3;
 
+    // comparison operator to use for filtering
     ComparisonOperator operator = 4;
 }
 
@@ -1348,7 +1329,7 @@ message SessionInfo {
 
     // The list of contexts of each step collected in an outer list
     message ContextSteps {
-
+        // List of contexts for a session step
         repeated Context contexts = 1;
     }
 
@@ -1496,6 +1477,8 @@ message CreateSessionReviewRequest {
     // The reviews for all steps in the session
     SessionReview session_review = 3;
 
+    // Represents the options for views of a session_review.
+    // A session_review can be a sizable object. Therefore, we provide a resource view that does not return all data
     SessionReview.View session_review_view = 4;
 }
 

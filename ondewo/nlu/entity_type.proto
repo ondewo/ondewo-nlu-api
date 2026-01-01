@@ -47,30 +47,19 @@ option objc_class_prefix = "DF";
 
 // Entities are extracted from user input and represent parameters that are meaningful to your application. For example, a date range, a proper name such as a geographic location or landmark, and so on. Entities represent actionable data for your application.
 //
-// When you define an entity, you can also include synonyms that all map to
-// that entity. For example, &quot;soft drink&quot;, &quot;soda&quot;, &quot;pop&quot;, and so on.
+// When you define an entity, you can also include synonyms that all map to that entity. For example, &quot;soft drink&quot;, &quot;soda&quot;, &quot;pop&quot;, and so on.
 //
 // There are three types of entities:
 //
 // <ul>
-//   <li><strong>System</strong> - entities that are defined by the Dialogflow API for common
-//     data types such as date, time, currency, and so on. A system entity is
-//     represented by the <code>EntityType</code> type.</li>
+//   <li><strong>System</strong> - entities that are defined by the Dialogflow API for common data types such as date, time, currency, and so on. A system entity is represented by the <code>EntityType</code> type.</li>
 //
-//   <li><strong>Developer</strong> - entities that are defined by you that represent
-//     actionable data that is meaningful to your application. For example,
-//     you could define a <code>pizza.sauce</code> entity for red or white pizza sauce,
-//     a <code>pizza.cheese</code> entity for the different types of cheese on a pizza,
-//     a <code>pizza.topping</code> entity for different toppings, and so on. A developer
-//     entity is represented by the <code>EntityType</code> type.</li>
+//   <li><strong>Developer</strong> - entities that are defined by you that represent actionable data that is meaningful to your application. For example, you could define a <code>pizza.sauce</code> entity for red or white pizza sauce, a <code>pizza.cheese</code> entity for the different types of cheese on a pizza, a <code>pizza.topping</code> entity for different toppings, and so on. A developer entity is represented by the <code>EntityType</code> type.</li>
 //
-//   <li><strong>User</strong> - entities that are built for an individual user such as
-//     favorites, preferences, playlists, and so on. A user entity is
-//     represented by the <a href="index.html#google.cloud.dialogflow.v2.SessionEntityType">SessionEntityType</a> type.</li>
+//   <li><strong>User</strong> - entities that are built for an individual user such as favorites, preferences, playlists, and so on. A user entity is represented by the <a href="index.html#google.cloud.dialogflow.v2.SessionEntityType">SessionEntityType</a> type.</li>
 // </ul>
 //
-// For more information about entity types, see the
-// <a href="https://dialogflow.com/docs/entities">Dialogflow documentation</a>.
+// For more information about entity types, see the <a href="https://dialogflow.com/docs/entities">Dialogflow documentation</a>.
 service EntityTypes {
     // Returns the list of all entity types in the specified agent.
     rpc ListEntityTypes (ListEntityTypesRequest) returns (ListEntityTypesResponse) {
@@ -181,7 +170,7 @@ service EntityTypes {
 // language queries.
 message EntityType {
 
-    // Optional. Represents an entity.
+    // Represents an entity value within an entity type
     message Entity {
         // Required.
         // For <code>KIND_MAP</code> entity types: A canonical name to be used in place of synonyms.
@@ -269,7 +258,9 @@ message EntityType {
     }
 
     enum EntityTypeStatus {
+        // Entity type is active
         ACTIVE = 0;
+        // Entity type is inactive
         INACTIVE = 1;
     }
 
@@ -585,11 +576,17 @@ enum EntityTypeCategory {
 message EntityTypeSorting {
     // Structure of Entity type sorting field
     enum EntityTypeSortingField {
+        // No sorting applied
         NO_ENTITY_TYPE_SORTING = 0;
+        // Sort by entity type name
         SORT_ENTITY_TYPE_BY_NAME = 1;
+        // Sort by creation date
         SORT_ENTITY_TYPE_BY_CREATION_DATE = 2;
+        // Sort by last updated date
         SORT_ENTITY_TYPE_BY_LAST_UPDATED = 3;
+        // Sort by entity value count
         SORT_ENTITY_TYPE_BY_ENTITY_VALUE_COUNT = 4;
+        // Sort by synonym count
         SORT_ENTITY_TYPE_BY_SYNONYM_COUNT = 5;
     }
 
@@ -764,8 +761,11 @@ message EntityValueSorting {
     enum EntityValueSortingField {
         // Default behaviour: Sorts by value
         NO_ENTITY_VALUE_SORTING = 0;
+        // Sort by display name
         SORT_ENTITY_VALUE_BY_DISPLAY_NAME = 1;
+        // Sort by value
         SORT_ENTITY_VALUE_BY_VALUE = 2;
+        // Sort by synonym count
         SORT_ENTITY_VALUE_BY_SYNONYM_COUNT = 3;
     }
 
