@@ -173,7 +173,6 @@ service Agents {
     // }' localhost:50055 ondewo.nlu.Agents.DeleteAgent
     // </pre>
     // <samp>{}</samp>
-    // Returns <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#empty">google.protobuf.Empty</a>.
     rpc DeleteAgent (DeleteAgentRequest) returns (google.protobuf.Empty) {
         option (google.api.http) = {
             delete: "/v2/{parent=projects/*/agent}"
@@ -188,7 +187,6 @@ service Agents {
     // grpcurl -plaintext -H 'cai-token: aimp' localhost:50055 ondewo.nlu.Agents.DeleteAllAgents
     // </pre>
     // <samp>{}</samp>
-    // Returns <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#empty">google.protobuf.Empty</a>.
     rpc DeleteAllAgents (google.protobuf.Empty) returns (google.protobuf.Empty) {
         option (google.api.http) = {
             delete: "/v2/projects"
@@ -298,8 +296,6 @@ service Agents {
     }
 
     // Adds a user with specified id to the project (agent)
-    // <br>
-    // Returns <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#empty">google.protobuf.Empty</a>.
     rpc AddUserToProject (AddUserToProjectRequest) returns (google.protobuf.Empty) {
         option (google.api.http) = {
             post: "/v2/{parent=projects/*/agent}/users/{user_id=*}"
@@ -308,8 +304,6 @@ service Agents {
     }
 
     // Removes a user with specified id from the project (agent)
-    // <br>
-    // Returns <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#empty">google.protobuf.Empty</a>.
     rpc RemoveUserFromProject (RemoveUserFromProjectRequest) returns (google.protobuf.Empty) {
         option (google.api.http) = {
             delete: "/v2/{parent=projects/*/agent}/users/{user_id=*}"
@@ -444,8 +438,6 @@ service Agents {
     }
 
     // Sets resources
-    // <br>
-    // Returns <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#empty">google.protobuf.empty</a>
     rpc SetResources (SetResourcesRequest) returns (google.protobuf.Empty) {
         option (google.api.http) = {
             post: "/v2/{parent=projects/*/agent}:resources"
@@ -454,8 +446,6 @@ service Agents {
     }
 
     // Deletes resources
-    // <br>
-    // Returns <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#empty">google.protobuf.empty</a>
     rpc DeleteResources (DeleteResourcesRequest) returns (google.protobuf.Empty) {
         option (google.api.http) = {
             delete: "/v2/{parent=projects/*/agent}:resources"
@@ -543,8 +533,6 @@ message Agent {
     string nlu_platform = 6;
 
     // Optional. Agent configuration as OndewoConfig converted to Struct format.
-    // <br>
-    // Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#struct">google.protobuf.Struct</a>
     google.protobuf.Struct configs = 7;
 
     // Optional. User id of the project owner. If empty, in CreateAgent call it is set to user id in the call
@@ -560,11 +548,9 @@ message Agent {
     string description = 10;
 
     // Creation date and time. Read-only field.
-    // Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a>
     google.protobuf.Timestamp created_at = 11;
 
     // Modification date and time. Read-only field.
-    // Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a>
     google.protobuf.Timestamp modified_at = 12;
 
     // User id in form of a valid UUID.
@@ -637,8 +623,6 @@ message UpdateAgentRequest {
     AgentView agent_view = 2;
 
     // Optional. The mask to control which fields get updated.
-    // <br>
-    // Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#field-mask">google.protobuf.FieldMask</a>
     google.protobuf.FieldMask update_mask = 3;
 }
 
@@ -661,8 +645,6 @@ message GetAgentRequest {
     AgentView agent_view = 2;
 
     // Optional. A mask to control which fields are returned in the response.
-    // <br>
-    // Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#field-mask">google.protobuf.FieldMask</a>
     google.protobuf.FieldMask field_mask = 3;
 }
 
@@ -679,8 +661,6 @@ message ListAgentsRequest {
     AgentSorting sort_by_field = 3;
 
     // Optional. The mask to control which fields gets returned.
-    // <br>
-    // Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#field-mask">google.protobuf.FieldMask</a>
     optional google.protobuf.FieldMask field_mask = 4;
 
 }
@@ -862,7 +842,6 @@ message RankingMatchOptimizationConfig {
     // <br>
     // example {'OndewoIntentSimilarityMatch': 0.59, 'OndewoIntentNamedSimilarityMatch': 0.39}
     // <br>
-    // Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#struct">google.protobuf.Struct</a>
     google.protobuf.Struct initial_thresholds = 4;
 }
 
@@ -871,12 +850,10 @@ message OptimizeRankingMatchResponse {
 
     // info about optimization
     // <br>
-    // Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#struct">google.protobuf.Struct</a>
     google.protobuf.Struct optimization_info = 1;
 
     // the optimized configuration of the ondewo agent e.g., optimized parameters
     // <br>
-    // Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#struct">google.protobuf.Struct</a>
     google.protobuf.Struct optimized_ondewo_config = 3;
 }
 
@@ -1032,7 +1009,6 @@ message GetSessionsStatisticsRequest {
     // <br>
     // Example: paths=[&quot;duration_in_s_min&quot;, &quot;id&quot;, &quot;session_id&quot;, &quot;project_id&quot;]
     // <br>
-    // Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#field-mask">google.protobuf.FieldMask</a>
     google.protobuf.FieldMask field_mask = 9;
 
     // SQL Query - only usable with specific SessionsReportType such as SessionsReportType.SESSION_SQL_QUERY
@@ -1212,7 +1188,6 @@ message ListUsersInProjectRequest {
 
     // Optional. The mask to control which fields gets returned.
     // <br>
-    // Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#field-mask">google.protobuf.FieldMask</a>
     optional google.protobuf.FieldMask field_mask = 3;
 
 }
@@ -1292,8 +1267,6 @@ message ListProjectPermissionsRequest {
     string page_token = 1;
 
     // Optional. The mask to control which fields gets returned.
-    // <br>
-    // Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#field-mask">google.protobuf.FieldMask</a>
     optional google.protobuf.FieldMask field_mask = 2;
 
 }
@@ -1478,8 +1451,6 @@ message ModelStatus {
     string model_name = 3;
 
     // Timestamp when the status was set. Read-only field.
-    // <br>
-    // Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a>
     google.protobuf.Timestamp status_set_time = 4;
 
     // Status name of the model.
@@ -1531,11 +1502,9 @@ message CustomPlatformInfo {
     uint32 position = 3;
 
     // Creation date and time. Read-only field.
-    // Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a>
     google.protobuf.Timestamp created_at = 4;
 
     // Modification date and time. Read-only field.
-    // Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a>
     google.protobuf.Timestamp modified_at = 5;
 
     // User id in form of a valid UUID.
@@ -1670,13 +1639,9 @@ message FullTextSearchResponseEntityType {
         string language = 3;
 
         // Creation date and time. Read-only field.
-        // <br>
-        // Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a>
         google.protobuf.Timestamp created_at = 4;
 
         // Modification date and time. Read-only field.
-        // <br>
-        // Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a>
         google.protobuf.Timestamp modified_at = 5;
 
         // User id in form of a valid UUID.
@@ -1732,11 +1697,9 @@ message FullTextSearchResponseEntity {
         string language = 5;
 
         // Creation date and time. Read-only field.
-        // Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a>
         google.protobuf.Timestamp created_at = 6;
 
         // Modification date and time. Read-only field.
-        // Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a>
         google.protobuf.Timestamp modified_at = 7;
 
         // User id in form of a valid UUID.
@@ -1798,11 +1761,9 @@ message FullTextSearchResponseEntitySynonym {
         string language = 7;
 
         // Creation date and time. Read-only field.
-        // Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a>
         google.protobuf.Timestamp created_at = 8;
 
         // Modification date and time. Read-only field.
-        // Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a>
         google.protobuf.Timestamp modified_at = 9;
 
         // User id in form of a valid UUID.
@@ -1857,11 +1818,9 @@ message FullTextSearchResponseIntent {
         string language = 5;
 
         // Creation date and time. Read-only field.
-        // Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a>
         google.protobuf.Timestamp created_at = 6;
 
         // Modification date and time. Read-only field.
-        // Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a>
         google.protobuf.Timestamp modified_at = 7;
 
         // User id in form of a valid UUID.
@@ -1918,11 +1877,9 @@ message FullTextSearchResponseIntentContextIn {
         string language = 5;
 
         // Creation date and time. Read-only field.
-        // Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a>
         google.protobuf.Timestamp created_at = 6;
 
         // Modification date and time. Read-only field.
-        // Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a>
         google.protobuf.Timestamp modified_at = 7;
 
         // User id in form of a valid UUID.
@@ -1979,11 +1936,9 @@ message FullTextSearchResponseIntentContextOut {
         string language = 5;
 
         // Creation date and time. Read-only field.
-        // Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a>
         google.protobuf.Timestamp created_at = 6;
 
         // Modification date and time. Read-only field.
-        // Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a>
         google.protobuf.Timestamp modified_at = 7;
 
         // User id in form of a valid UUID.
@@ -2052,11 +2007,9 @@ message FullTextSearchResponseIntentUsersays {
         string language = 9;
 
         // Creation date and time. Read-only field.
-        // Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a>
         google.protobuf.Timestamp created_at = 10;
 
         // Modification date and time. Read-only field.
-        // Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a>
         google.protobuf.Timestamp modified_at = 11;
 
         // User id in form of a valid UUID.
@@ -2116,11 +2069,9 @@ message FullTextSearchResponseIntentTags {
         string language = 6;
 
         // Creation date and time. Read-only field.
-        // Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a>
         google.protobuf.Timestamp created_at = 7;
 
         // Modification date and time. Read-only field.
-        // Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a>
         google.protobuf.Timestamp modified_at = 8;
 
         // User id in form of a valid UUID.
@@ -2183,11 +2134,9 @@ message FullTextSearchResponseIntentResponse {
         string language = 7;
 
         // Creation date and time. Read-only field.
-        // Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a>
         google.protobuf.Timestamp created_at = 8;
 
         // Modification date and time. Read-only field.
-        // Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a>
         google.protobuf.Timestamp modified_at = 9;
 
         // User id in form of a valid UUID.
@@ -2274,11 +2223,9 @@ message FullTextSearchResponseIntentParameters {
         string language = 6;
 
         // Creation date and time. Read-only field.
-        // Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a>
         google.protobuf.Timestamp created_at = 7;
 
         // Modification date and time. Read-only field.
-        // Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a>
         google.protobuf.Timestamp modified_at = 8;
 
         // User id in form of a valid UUID.

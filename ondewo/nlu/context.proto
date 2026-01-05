@@ -175,7 +175,7 @@ message Context {
     string modified_by = 8;
 }
 
-// The request message for <a href="index.html#google.cloud.dialogflow.v2.Contexts.ListContexts">Contexts.ListContexts</a>.
+// The request message for <a href="index.html#ondewo.nlu.Contexts.ListContexts">Contexts.ListContexts</a>.
 message ListContextsRequest {
     // Required. The session to list all contexts from.
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre>
@@ -214,7 +214,7 @@ message ListContextsRequest {
     string page_token = 3;
 }
 
-// The response message for <a href="index.html#google.cloud.dialogflow.v2.Contexts.ListContexts">Contexts.ListContexts</a>.
+// The response message for <a href="index.html#ondewo.nlu.Contexts.ListContexts">Contexts.ListContexts</a>.
 message ListContextsResponse {
     // The list of contexts. There will be a maximum number of items
     // returned based on the page_token field in the request.
@@ -225,14 +225,14 @@ message ListContextsResponse {
     string next_page_token = 2;
 }
 
-// The request message for <a href="index.html#google.cloud.dialogflow.v2.Contexts.GetContext">Contexts.GetContext</a>.
+// The request message for <a href="index.html#ondewo.nlu.Contexts.GetContext">Contexts.GetContext</a>.
 message GetContextRequest {
     // Required. The name of the context. Format:
     // <code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/contexts/&lt;context_uuid&gt;</code>.
     string name = 1;
 }
 
-// The request message for <a href="index.html#google.cloud.dialogflow.v2.Contexts.CreateContext">Contexts.CreateContext</a>.
+// The request message for <a href="index.html#ondewo.nlu.Contexts.CreateContext">Contexts.CreateContext</a>.
 message CreateContextRequest {
     // Required. The session to create a context for.
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre>
@@ -242,7 +242,7 @@ message CreateContextRequest {
     Context context = 2;
 }
 
-// The request message for <a href="index.html#google.cloud.dialogflow.v2.Contexts.UpdateContext">Contexts.UpdateContext</a>.
+// The request message for <a href="index.html#ondewo.nlu.Contexts.UpdateContext">Contexts.UpdateContext</a>.
 message UpdateContextRequest {
     // Required. The context to update.
     Context context = 1;
@@ -251,14 +251,14 @@ message UpdateContextRequest {
     google.protobuf.FieldMask update_mask = 2;
 }
 
-// The request message for <a href="index.html#google.cloud.dialogflow.v2.Contexts.DeleteContext">Contexts.DeleteContext</a>.
+// The request message for <a href="index.html#ondewo.nlu.Contexts.DeleteContext">Contexts.DeleteContext</a>.
 message DeleteContextRequest {
     // Required. The name of the context to delete. Format:
     // <code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/contexts/&lt;context_uuid&gt;</code>.
     string name = 1;
 }
 
-// The request message for <a href="index.html#google.cloud.dialogflow.v2.Contexts.DeleteAllContexts">Contexts.DeleteAllContexts</a>.
+// The request message for <a href="index.html#ondewo.nlu.Contexts.DeleteAllContexts">Contexts.DeleteAllContexts</a>.
 message DeleteAllContextsRequest {
     // Required. The name of the session to delete all contexts from.
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre>

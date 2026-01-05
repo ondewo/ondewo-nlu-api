@@ -352,6 +352,7 @@ message ListNotificationsRequest {
     string page_token = 2;
 
     // Optional. Mask to control which fields will be filled with data.
+    // <br>
     // Example: path=["notification.user_names"]
     google.protobuf.FieldMask field_mask = 3;
 }

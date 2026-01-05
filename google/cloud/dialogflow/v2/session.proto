@@ -128,8 +128,7 @@ message QueryParameters {
 
 // Represents the query input. It can contain either:
 //
-// 1.  An audio config which
-//     instructs the speech recognizer how to process the speech audio.
+// 1.  An audio config which instructs the speech recognizer how to process the speech audio.
 //
 // 2.  A conversational query in the form of text,.
 //
@@ -247,8 +246,7 @@ message StreamingDetectIntentRequest {
 
   // Required. The input specification. It can be set to:
   //
-  // 1.  an audio config which instructs the speech recognizer how to process
-  //     the speech audio,
+  // 1.  an audio config which instructs the speech recognizer how to process the speech audio,
   //
   // 2.  a conversational query in the form of text, or
   //
@@ -298,7 +296,9 @@ message StreamingDetectIntentResponse {
   google.rpc.Status webhook_status = 4;
 }
 
-// Contains a speech recognition result corresponding to a portion of the audio that is currently being processed or an indication that this is the end of the single requested utterance.
+// Contains a speech recognition result corresponding to a portion of the audio
+// that is currently being processed or an indication that this is the end
+// of the single requested utterance.
 //
 // Example:
 //
@@ -315,19 +315,20 @@ message StreamingDetectIntentResponse {
 //
 // 6.  transcript: " that is"
 //
-// 7.  recognition_event_type: <code>RECOGNITION_EVENT_END_OF_SINGLE_UTTERANCE</code>
+// 7.  recognition_event_type: `RECOGNITION_EVENT_END_OF_SINGLE_UTTERANCE`
 //
 // 8.  transcript: " that is the question"
 //     is_final: true
 //
 // Only two of the responses contain final results (#4 and #8 indicated by
-// <code>is_final: true</code>). Concatenating these generates the full transcript: <code>"to be or not to be that is the question"</code>.
+// `is_final: true`). Concatenating these generates the full transcript: "to be
+// or not to be that is the question".
 //
 // In each response we populate:
 //
-// *  for <code>MESSAGE_TYPE_TRANSCRIPT</code>: <code>transcript</code> and possibly <code>is_final</code>.
+// *  for `MESSAGE_TYPE_TRANSCRIPT`: `transcript` and possibly `is_final`.
 //
-// *  for <code>MESSAGE_TYPE_END_OF_SINGLE_UTTERANCE</code>: only <code>event_type</code>.
+// *  for `MESSAGE_TYPE_END_OF_SINGLE_UTTERANCE`: only `event_type`.
 message StreamingRecognitionResult {
   // Type of the response message.
   enum MessageType {

@@ -532,8 +532,7 @@ message S2tTranscription {
 
 // Represents the query input. It can contain either:
 //
-// 1.  An audio config which
-//     instructs the speech recognizer how to process the speech audio.
+// 1.  An audio config which instructs the speech recognizer how to process the speech audio.
 //
 // 2.  A conversational query in the form of text,.
 //
@@ -842,8 +841,7 @@ message EventInput {
 }
 
 // Audio encoding of the audio content sent in the conversational query request.
-// Refer to the <a href="/speech/docs/basics">Cloud Speech API documentation</a> for more
-// details.
+// Refer to the <a href="/speech/docs/basics">Cloud Speech API documentation</a> for more details.
 enum AudioEncoding {
 
     // Not specified.
@@ -905,8 +903,7 @@ message Session {
     SessionInfo session_info = 3;
 
     // Represents the options for views of a session.
-    // A session can be a sizable object. Therefore, we provide a resource view that
-    // does not return all data
+    // A session can be a sizable object. Therefore, we provide a resource view that does not return all data
     enum View {
 
         // Endpoints decide whether to return the full or the sparse view
@@ -1493,8 +1490,7 @@ message SessionReview {
     repeated SessionReviewStep session_review_steps = 2;
 
     // Represents the options for views of a session_review.
-    // A session_review can be a sizable object. Therefore, we provide a resource view that
-    // does not return all data
+    // A session_review can be a sizable object. Therefore, we provide a resource view that does not return all data
     enum View {
         // Endpoints decide whether to return the full or the sparse view
         VIEW_UNSPECIFIED = 0;

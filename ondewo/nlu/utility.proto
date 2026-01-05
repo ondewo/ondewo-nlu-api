@@ -373,8 +373,7 @@ message CleanEntityTypeResponse {
 // Request message to AddTrainingPhrase rpc
 message AddTrainingPhrasesRequest {
 
-    // Message that contains the new training phrase, together with the intent display name
-    // and, optionally the entity annotations
+    // Message that contains the new training phrase, together with the intent display name and, optionally the entity annotations
     message TrainingPhraseForIntent {
 
         // Required. New training phrase to be added

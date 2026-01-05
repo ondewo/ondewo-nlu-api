@@ -56,7 +56,7 @@ option objc_class_prefix = "DF";
 //
 //   <li><strong>Developer</strong> - entities that are defined by you that represent actionable data that is meaningful to your application. For example, you could define a <code>pizza.sauce</code> entity for red or white pizza sauce, a <code>pizza.cheese</code> entity for the different types of cheese on a pizza, a <code>pizza.topping</code> entity for different toppings, and so on. A developer entity is represented by the <code>EntityType</code> type.</li>
 //
-//   <li><strong>User</strong> - entities that are built for an individual user such as favorites, preferences, playlists, and so on. A user entity is represented by the <a href="index.html#google.cloud.dialogflow.v2.SessionEntityType">SessionEntityType</a> type.</li>
+//   <li><strong>User</strong> - entities that are built for an individual user such as favorites, preferences, playlists, and so on. A user entity is represented by the <a href="index.html#ondewo.nlu.SessionEntityType">SessionEntityType</a> type.</li>
 // </ul>
 //
 // For more information about entity types, see the <a href="https://dialogflow.com/docs/entities">Dialogflow documentation</a>.
@@ -100,8 +100,8 @@ service EntityTypes {
 
     // Updates/Creates multiple entity types in the specified agent.
     //
-    // Operation &lt;response: <a href="index.html#google.cloud.dialogflow.v2.BatchUpdateEntityTypesResponse">BatchUpdateEntityTypesResponse</a>,
-    //            metadata: <a href="index.html#google.protobuf.Struct">google.protobuf.Struct</a>&gt;
+    // Operation &lt;response: <a href="index.html#ondewo.nlu.BatchUpdateEntityTypesResponse">BatchUpdateEntityTypesResponse</a>,
+    //            metadata: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#struct">google.protobuf.Struct</a>&gt;
     rpc BatchUpdateEntityTypes (BatchUpdateEntityTypesRequest) returns (ondewo.nlu.Operation) {
         option (google.api.http) = {
             post: "/v2/{parent=projects/*/agent}/entityTypes:batchUpdate"
@@ -111,8 +111,8 @@ service EntityTypes {
 
     // Deletes entity types in the specified agent.
     //
-    // Operation &lt;response: <a href="index.html#google.protobuf.Empty">google.protobuf.Empty</a>,
-    //            metadata: <a href="index.html#google.protobuf.Struct">google.protobuf.Struct</a>&gt;
+    // Operation &lt;response: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#empty">google.protobuf.Empty</a>,
+    //            metadata: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#struct">google.protobuf.Struct</a>&gt;
     rpc BatchDeleteEntityTypes (BatchDeleteEntityTypesRequest) returns (ondewo.nlu.Operation) {
         option (google.api.http) = {
             post: "/v2/{parent=projects/*/agent}/entityTypes:batchDelete"
@@ -321,7 +321,7 @@ message EntityType {
     string modified_by = 17;
 }
 
-// The request message for <a href="index.html#google.cloud.dialogflow.v2.EntityTypes.ListEntityTypes">EntityTypes.ListEntityTypes</a>.
+// The request message for <a href="index.html#ondewo.nlu.EntityTypes.ListEntityTypes">EntityTypes.ListEntityTypes</a>.
 message ListEntityTypesRequest {
     // Required. The agent to list all entity types from.
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
@@ -376,7 +376,7 @@ message ListEntityTypesRequest {
     EntityTypeSorting sort_by_field = 7;
 }
 
-// The response message for <a href="index.html#google.cloud.dialogflow.v2.EntityTypes.ListEntityTypes">EntityTypes.ListEntityTypes</a>.
+// The response message for <a href="index.html#ondewo.nlu.EntityTypes.ListEntityTypes">EntityTypes.ListEntityTypes</a>.
 message ListEntityTypesResponse {
     // The list of agent entity types. There will be a maximum number of items
     // returned based on the page_token field in the request.
@@ -387,7 +387,7 @@ message ListEntityTypesResponse {
     string next_page_token = 2;
 }
 
-// The request message for <a href="index.html#google.cloud.dialogflow.v2.EntityTypes.GetEntityType">EntityTypes.GetEntityType</a>.
+// The request message for <a href="index.html#ondewo.nlu.EntityTypes.GetEntityType">EntityTypes.GetEntityType</a>.
 message GetEntityTypeRequest {
     // Required. The name of the entity type.
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;</code></pre>
@@ -435,7 +435,7 @@ message GetEntityTypeRequest {
     EntityTypeView entity_type_view = 6;
 }
 
-// The request message for <a href="index.html#google.cloud.dialogflow.v2.EntityTypes.CreateEntityType">EntityTypes.CreateEntityType</a>.
+// The request message for <a href="index.html#ondewo.nlu.EntityTypes.CreateEntityType">EntityTypes.CreateEntityType</a>.
 message CreateEntityTypeRequest {
     // Required. The agent to create a entity type for.
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
@@ -455,7 +455,7 @@ message CreateEntityTypeRequest {
     EntityTypeView entity_type_view = 6;
 }
 
-// The request message for <a href="index.html#google.cloud.dialogflow.v2.EntityTypes.UpdateEntityType">EntityTypes.UpdateEntityType</a>.
+// The request message for <a href="index.html#ondewo.nlu.EntityTypes.UpdateEntityType">EntityTypes.UpdateEntityType</a>.
 message UpdateEntityTypeRequest {
     // Required. The entity type to update.
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;</code></pre>
@@ -475,14 +475,14 @@ message UpdateEntityTypeRequest {
     EntityTypeView entity_type_view = 6;
 }
 
-// The request message for <a href="index.html#google.cloud.dialogflow.v2.EntityTypes.DeleteEntityType">EntityTypes.DeleteEntityType</a>.
+// The request message for <a href="index.html#ondewo.nlu.EntityTypes.DeleteEntityType">EntityTypes.DeleteEntityType</a>.
 message DeleteEntityTypeRequest {
     // Required. The name of the entity type to delete.
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;</code></pre>
     string name = 1;
 }
 
-// The request message for <a href="index.html#google.cloud.dialogflow.v2.EntityTypes.BatchUpdateEntityTypes">EntityTypes.BatchUpdateEntityTypes</a>.
+// The request message for <a href="index.html#ondewo.nlu.EntityTypes.BatchUpdateEntityTypes">EntityTypes.BatchUpdateEntityTypes</a>.
 message BatchUpdateEntityTypesRequest {
     // Required. The name of the agent to update or create entity types in.
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
@@ -517,13 +517,13 @@ message BatchUpdateEntityTypesRequest {
     google.protobuf.FieldMask update_mask = 5;
 }
 
-// The response message for <a href="index.html#google.cloud.dialogflow.v2.EntityTypes.BatchUpdateEntityTypes">EntityTypes.BatchUpdateEntityTypes</a>.
+// The response message for <a href="index.html#ondewo.nlu.EntityTypes.BatchUpdateEntityTypes">EntityTypes.BatchUpdateEntityTypes</a>.
 message BatchUpdateEntityTypesResponse {
     // The collection of updated or created entity types.
     repeated EntityType entity_types = 1;
 }
 
-// The request message for <a href="index.html#google.cloud.dialogflow.v2.EntityTypes.BatchDeleteEntityTypes">EntityTypes.BatchDeleteEntityTypes</a>.
+// The request message for <a href="index.html#ondewo.nlu.EntityTypes.BatchDeleteEntityTypes">EntityTypes.BatchDeleteEntityTypes</a>.
 message BatchDeleteEntityTypesRequest {
     // Required. The name of the agent to delete all entities types for. Format:
     // <code>projects/&lt;project_uuid&gt;/agent</code>.

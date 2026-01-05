@@ -31,7 +31,7 @@ service Operations {
 
     // Lists operations that match the specified filter in the request. If the
     // server doesn&apos;t support this method, it returns <code>UNIMPLEMENTED</code>.
-    //
+    //<br>
     // NOTE: the <code>name</code> binding below allows API services to override the binding
     // to use different resource name schemes, such as <code>users/*/operations</code>.
     rpc ListOperations (ListOperationsRequest) returns (ListOperationsResponse) {
@@ -48,7 +48,7 @@ service Operations {
     // Deletes a long-running operation. This method indicates that the client is
     // no longer interested in the operation result. It does not cancel the
     // operation. If the server doesn&apos;t support this method, it returns
-    // <code>google.rpc.Code.UNIMPLEMENTED</code>.
+    // <code>google.rpc.Code.UNIMPLEMENTED</code>
     rpc DeleteOperation (DeleteOperationRequest) returns (google.protobuf.Empty) {
         option (google.api.http) = {delete: "/v1/{name=operations/**}"};
     }
@@ -61,15 +61,14 @@ service Operations {
     // other methods to verify whether the cancellation succeeded or whether the
     // operation completed despite cancellation. On successful cancellation,
     // the operation is not deleted; instead, it becomes an operation with
-    // an <a href="index.html#ondewo.nlu.Operation.error">Operation.error</a> value with a <a href="index.html#google.rpc.Status.code">google.rpc.Status.code</a>
+    // an <a href="index.html#ondewo.nlu.Operation">Operation.error</a> value with a <a href="https://developers.google.com/actions-center/reference/grpc-api/status_codes">google.rpc.Status.code</a>
     // of 1, corresponding to <code>Code.CANCELLED</code>.
     rpc CancelOperation (CancelOperationRequest) returns (google.protobuf.Empty) {
         option (google.api.http) = {post: "/v1/{name=operations/**}:cancel" body: "*"};
     }
 }
 
-// This resource represents a long-running operation that is the result of a
-// network API call.
+// This resource represents a long-running operation that is the result of a network API call.
 message Operation {
 
     // The server-assigned name, which is only unique within the same service that

@@ -177,8 +177,7 @@ message QueryParameters {
 
 // Represents the query input. It can contain either:
 //
-// 1.  An audio config which
-//     instructs the speech recognizer how to process the speech audio.
+// 1.  An audio config which instructs the speech recognizer how to process the speech audio.
 //
 // 2.  A conversational query in the form of text,.
 //
@@ -448,9 +447,11 @@ message StreamingDetectIntentResponse {
   OutputAudioConfig output_audio_config = 6;
 }
 
-// Contains a speech recognition result corresponding to a portion of the audio that is currently being processed or an indication that this is the end of the single requested utterance.
+// Contains a speech recognition result corresponding to a portion of the audio
+// that is currently being processed or an indication that this is the end
+// of the single requested utterance.
 //
-// Example: 
+// Example:
 //
 // 1.  transcript: "tube"
 //
@@ -470,7 +471,9 @@ message StreamingDetectIntentResponse {
 // 8.  transcript: " that is the question"
 //     is_final: true
 //
-// Only two of the responses contain final results (#4 and #8 indicated by `is_final: true`). Concatenating these generates the full transcript: "to be or not to be that is the question".
+// Only two of the responses contain final results (#4 and #8 indicated by
+// `is_final: true`). Concatenating these generates the full transcript: "to be
+// or not to be that is the question".
 //
 // In each response we populate:
 //

@@ -113,8 +113,7 @@ message WebhookRequest {
     // same value as <code>[Streaming]DetectIntentResponse.query_result</code>.
     QueryResult query_result = 2;
 
-    // Optional. The contents of the original request that was passed to
-    // <code>[Streaming]DetectIntent</code> call.
+    // Optional. The contents of the original request that was passed to <code>[Streaming]DetectIntent</code> call.
     OriginalDetectIntentRequest original_detect_intent_request = 3;
 
     // The unique identifier of detectIntent request session.
@@ -180,8 +179,7 @@ message WebhookResponse {
     repeated SessionEntityType session_entity_types = 10;
 }
 
-// Represents the contents of the original request that was passed to
-// the <code>[Streaming]DetectIntent</code> call.
+// Represents the contents of the original request that was passed to the <code>[Streaming]DetectIntent</code> call.
 message OriginalDetectIntentRequest {
 
     // The source of this request, e.g., <code>google</code>, <code>facebook</code>, <code>slack</code> or other &quot;platforms&quot;. .
@@ -260,8 +258,7 @@ message SessionEntityType {
 
 }
 
-// The request message for
-// <a href="index.html#ondewo.nlu.Webhook.ListSessionEntityTypes">Webhook.ListSessionEntityTypes</a>.
+// The request message for <a href="index.html#ondewo.nlu.Webhook.ListSessionEntityTypes">Webhook.ListSessionEntityTypes</a>.
 message ListSessionEntityTypesRequest {
     // Required. The session to list all session entity types from.
     // Format: <code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code> or
@@ -307,8 +304,7 @@ message ListSessionEntityTypesRequest {
     string page_token = 3;
 }
 
-// The response message for
-// <a href="index.html#ondewo.nlu.Webhook.ListSessionEntityTypes">Webhook.ListSessionEntityTypes</a>.
+// The response message for <a href="index.html#ondewo.nlu.Webhook.ListSessionEntityTypes">Webhook.ListSessionEntityTypes</a>.
 message ListSessionEntityTypesResponse {
     // The list of session entity types. There will be a maximum number of items
     // returned based on the page_size field in the request.
@@ -319,8 +315,7 @@ message ListSessionEntityTypesResponse {
     string next_page_token = 2;
 }
 
-// The request message for
-// <a href="index.html#ondewo.nlu.Webhook.GetSessionEntityType">Webhook.GetSessionEntityType</a>.
+// The request message for <a href="index.html#ondewo.nlu.Webhook.GetSessionEntityType">Webhook.GetSessionEntityType</a>.
 message GetSessionEntityTypeRequest {
     // Required. The name of the session entity type. Format:
     // <code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/entityTypes/&lt;Entity Type
@@ -332,8 +327,7 @@ message GetSessionEntityTypeRequest {
     string name = 1;
 }
 
-// The request message for
-// <a href="index.html#ondewo.nlu.Webhook.CreateSessionEntityType">Webhook.CreateSessionEntityType</a>
+// The request message for <a href="index.html#ondewo.nlu.Webhook.CreateSessionEntityType">Webhook.CreateSessionEntityType</a>
 message CreateSessionEntityTypeRequest {
     // Required. The agent to list all intents from.
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
@@ -356,8 +350,7 @@ message CreateSessionEntityTypeRequest {
     string session_id = 3;
 }
 
-// The request message for
-// <a href="index.html#ondewo.nlu.Webhook.UpdateSessionEntityType">Webhook.UpdateSessionEntityType</a>.
+// The request message for <a href="index.html#ondewo.nlu.Webhook.UpdateSessionEntityType">Webhook.UpdateSessionEntityType</a>.
 message UpdateSessionEntityTypeRequest {
     // Required. The session entity type to update.
     SessionEntityType session_entity_type = 1;
@@ -367,8 +360,7 @@ message UpdateSessionEntityTypeRequest {
 
 }
 
-// The request message for
-// <a href="index.html#ondewo.nlu.Webhook.DeleteSessionEntityType">Webhook.DeleteSessionEntityType</a>.
+// The request message for <a href="index.html#ondewo.nlu.Webhook.DeleteSessionEntityType">Webhook.DeleteSessionEntityType</a>.
 message DeleteSessionEntityTypeRequest {
 
     // Required. The name of the entity type to delete. Format:

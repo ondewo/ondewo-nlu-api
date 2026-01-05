@@ -3715,7 +3715,6 @@ grpcurl -plaintext -H 'cai-token: aimp' -d '{
 }' localhost:50055 ondewo.nlu.Agents.DeleteAgent
 </pre>
 <samp>{}</samp>
-Returns <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#empty">google.protobuf.Empty</a>.
         
           <h4 id="ondewo.nlu.Agents.DeleteAllAgents" class="title-badge method">DeleteAllAgents</h4>
 
@@ -3729,7 +3728,6 @@ Examples:
 grpcurl -plaintext -H 'cai-token: aimp' localhost:50055 ondewo.nlu.Agents.DeleteAllAgents
 </pre>
 <samp>{}</samp>
-Returns <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#empty">google.protobuf.Empty</a>.
         
           <h4 id="ondewo.nlu.Agents.ListAgents" class="title-badge method">ListAgents</h4>
 
@@ -3835,16 +3833,12 @@ grpcurl -plaintext -H 'cai-token: aimp' localhost:50055 ondewo.nlu.Agents.ListAl
           <pre>rpc AddUserToProject (<a href="#ondewo.nlu.AddUserToProjectRequest">AddUserToProjectRequest</a>) returns (<a href="#google.protobuf.Empty">.google.protobuf.Empty)</a></pre>
 
           Adds a user with specified id to the project (agent)
-<br>
-Returns <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#empty">google.protobuf.Empty</a>.
         
           <h4 id="ondewo.nlu.Agents.RemoveUserFromProject" class="title-badge method">RemoveUserFromProject</h4>
 
           <pre>rpc RemoveUserFromProject (<a href="#ondewo.nlu.RemoveUserFromProjectRequest">RemoveUserFromProjectRequest</a>) returns (<a href="#google.protobuf.Empty">.google.protobuf.Empty)</a></pre>
 
           Removes a user with specified id from the project (agent)
-<br>
-Returns <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#empty">google.protobuf.Empty</a>.
         
           <h4 id="ondewo.nlu.Agents.ListUsersInProject" class="title-badge method">ListUsersInProject</h4>
 
@@ -3960,16 +3954,12 @@ Operation &lt;response: <a href="https://protobuf.dev/reference/protobuf/google.
           <pre>rpc SetResources (<a href="#ondewo.nlu.SetResourcesRequest">SetResourcesRequest</a>) returns (<a href="#google.protobuf.Empty">.google.protobuf.Empty)</a></pre>
 
           Sets resources
-<br>
-Returns <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#empty">google.protobuf.empty</a>
         
           <h4 id="ondewo.nlu.Agents.DeleteResources" class="title-badge method">DeleteResources</h4>
 
           <pre>rpc DeleteResources (<a href="#ondewo.nlu.DeleteResourcesRequest">DeleteResourcesRequest</a>) returns (<a href="#google.protobuf.Empty">.google.protobuf.Empty)</a></pre>
 
           Deletes resources
-<br>
-Returns <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#empty">google.protobuf.empty</a>
         
           <h4 id="ondewo.nlu.Agents.ExportResources" class="title-badge method">ExportResources</h4>
 
@@ -4461,9 +4451,7 @@ America/New_York, Europe/Paris. </p></td>
                   <td>configs</td>
                   <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
                   <td></td>
-                  <td><p>Optional. Agent configuration as OndewoConfig converted to Struct format.
-<br>
-Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#struct">google.protobuf.Struct</a> </p></td>
+                  <td><p>Optional. Agent configuration as OndewoConfig converted to Struct format. </p></td>
                 </tr>
               
                 <tr>
@@ -4494,16 +4482,14 @@ Read-only in the Agent message </p></td>
                   <td>created_at</td>
                   <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
                   <td></td>
-                  <td><p>Creation date and time. Read-only field.
-Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> </p></td>
+                  <td><p>Creation date and time. Read-only field. </p></td>
                 </tr>
               
                 <tr>
                   <td>modified_at</td>
                   <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
                   <td></td>
-                  <td><p>Modification date and time. Read-only field.
-Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> </p></td>
+                  <td><p>Modification date and time. Read-only field. </p></td>
                 </tr>
               
                 <tr>
@@ -4721,16 +4707,14 @@ Sorting position of the GetPlatformMappingRequest. </p></td>
                   <td>created_at</td>
                   <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
                   <td></td>
-                  <td><p>Creation date and time. Read-only field.
-Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> </p></td>
+                  <td><p>Creation date and time. Read-only field. </p></td>
                 </tr>
               
                 <tr>
                   <td>modified_at</td>
                   <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
                   <td></td>
-                  <td><p>Modification date and time. Read-only field.
-Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> </p></td>
+                  <td><p>Modification date and time. Read-only field. </p></td>
                 </tr>
               
                 <tr>
@@ -5326,16 +5310,14 @@ e.g. next_page_token is current_index-2 </p></td>
                   <td>created_at</td>
                   <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
                   <td></td>
-                  <td><p>Creation date and time. Read-only field.
-Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> </p></td>
+                  <td><p>Creation date and time. Read-only field. </p></td>
                 </tr>
               
                 <tr>
                   <td>modified_at</td>
                   <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
                   <td></td>
-                  <td><p>Modification date and time. Read-only field.
-Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> </p></td>
+                  <td><p>Modification date and time. Read-only field. </p></td>
                 </tr>
               
                 <tr>
@@ -5490,16 +5472,14 @@ e.g. next_page_token is current_index-2 </p></td>
                   <td>created_at</td>
                   <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
                   <td></td>
-                  <td><p>Creation date and time. Read-only field.
-Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> </p></td>
+                  <td><p>Creation date and time. Read-only field. </p></td>
                 </tr>
               
                 <tr>
                   <td>modified_at</td>
                   <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
                   <td></td>
-                  <td><p>Modification date and time. Read-only field.
-Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> </p></td>
+                  <td><p>Modification date and time. Read-only field. </p></td>
                 </tr>
               
                 <tr>
@@ -5626,18 +5606,14 @@ e.g. next_page_token is current_index-2 </p></td>
                   <td>created_at</td>
                   <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
                   <td></td>
-                  <td><p>Creation date and time. Read-only field.
-<br>
-Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> </p></td>
+                  <td><p>Creation date and time. Read-only field. </p></td>
                 </tr>
               
                 <tr>
                   <td>modified_at</td>
                   <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
                   <td></td>
-                  <td><p>Modification date and time. Read-only field.
-<br>
-Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> </p></td>
+                  <td><p>Modification date and time. Read-only field. </p></td>
                 </tr>
               
                 <tr>
@@ -5778,16 +5754,14 @@ e.g. next_page_token is current_index-2 </p></td>
                   <td>created_at</td>
                   <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
                   <td></td>
-                  <td><p>Creation date and time. Read-only field.
-Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> </p></td>
+                  <td><p>Creation date and time. Read-only field. </p></td>
                 </tr>
               
                 <tr>
                   <td>modified_at</td>
                   <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
                   <td></td>
-                  <td><p>Modification date and time. Read-only field.
-Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> </p></td>
+                  <td><p>Modification date and time. Read-only field. </p></td>
                 </tr>
               
                 <tr>
@@ -5928,16 +5902,14 @@ e.g. next_page_token is current_index-2 </p></td>
                   <td>created_at</td>
                   <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
                   <td></td>
-                  <td><p>Creation date and time. Read-only field.
-Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> </p></td>
+                  <td><p>Creation date and time. Read-only field. </p></td>
                 </tr>
               
                 <tr>
                   <td>modified_at</td>
                   <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
                   <td></td>
-                  <td><p>Modification date and time. Read-only field.
-Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> </p></td>
+                  <td><p>Modification date and time. Read-only field. </p></td>
                 </tr>
               
                 <tr>
@@ -6078,16 +6050,14 @@ e.g. next_page_token is current_index-2 </p></td>
                   <td>created_at</td>
                   <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
                   <td></td>
-                  <td><p>Creation date and time. Read-only field.
-Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> </p></td>
+                  <td><p>Creation date and time. Read-only field. </p></td>
                 </tr>
               
                 <tr>
                   <td>modified_at</td>
                   <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
                   <td></td>
-                  <td><p>Modification date and time. Read-only field.
-Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> </p></td>
+                  <td><p>Modification date and time. Read-only field. </p></td>
                 </tr>
               
                 <tr>
@@ -6235,16 +6205,14 @@ e.g. next_page_token is current_index-2 </p></td>
                   <td>created_at</td>
                   <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
                   <td></td>
-                  <td><p>Creation date and time. Read-only field.
-Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> </p></td>
+                  <td><p>Creation date and time. Read-only field. </p></td>
                 </tr>
               
                 <tr>
                   <td>modified_at</td>
                   <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
                   <td></td>
-                  <td><p>Modification date and time. Read-only field.
-Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> </p></td>
+                  <td><p>Modification date and time. Read-only field. </p></td>
                 </tr>
               
                 <tr>
@@ -6427,16 +6395,14 @@ Examples of invalid page token strings:
                   <td>created_at</td>
                   <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
                   <td></td>
-                  <td><p>Creation date and time. Read-only field.
-Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> </p></td>
+                  <td><p>Creation date and time. Read-only field. </p></td>
                 </tr>
               
                 <tr>
                   <td>modified_at</td>
                   <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
                   <td></td>
-                  <td><p>Modification date and time. Read-only field.
-Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> </p></td>
+                  <td><p>Modification date and time. Read-only field. </p></td>
                 </tr>
               
                 <tr>
@@ -6584,16 +6550,14 @@ e.g. next_page_token is current_index-2 </p></td>
                   <td>created_at</td>
                   <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
                   <td></td>
-                  <td><p>Creation date and time. Read-only field.
-Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> </p></td>
+                  <td><p>Creation date and time. Read-only field. </p></td>
                 </tr>
               
                 <tr>
                   <td>modified_at</td>
                   <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
                   <td></td>
-                  <td><p>Modification date and time. Read-only field.
-Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> </p></td>
+                  <td><p>Modification date and time. Read-only field. </p></td>
                 </tr>
               
                 <tr>
@@ -6762,16 +6726,14 @@ e.g. next_page_token is current_index-2 </p></td>
                   <td>created_at</td>
                   <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
                   <td></td>
-                  <td><p>Creation date and time. Read-only field.
-Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> </p></td>
+                  <td><p>Creation date and time. Read-only field. </p></td>
                 </tr>
               
                 <tr>
                   <td>modified_at</td>
                   <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
                   <td></td>
-                  <td><p>Modification date and time. Read-only field.
-Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> </p></td>
+                  <td><p>Modification date and time. Read-only field. </p></td>
                 </tr>
               
                 <tr>
@@ -6824,9 +6786,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre> </p></td>
                   <td>field_mask</td>
                   <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
                   <td></td>
-                  <td><p>Optional. A mask to control which fields are returned in the response.
-<br>
-Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#field-mask">google.protobuf.FieldMask</a> </p></td>
+                  <td><p>Optional. A mask to control which fields are returned in the response. </p></td>
                 </tr>
               
             </tbody>
@@ -7121,8 +7081,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre> </p></td>
                   <td><p>Optional. The mask to control which data fields will be added to the returned data.
 <br>
 Example: paths=[&quot;duration_in_s_min&quot;, &quot;id&quot;, &quot;session_id&quot;, &quot;project_id&quot;]
-<br>
-Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#field-mask">google.protobuf.FieldMask</a> </p></td>
+<br> </p></td>
                 </tr>
               
                 <tr>
@@ -7299,9 +7258,7 @@ e.g. next_page_token is current_index-2 </p></td>
                   <td>field_mask</td>
                   <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
                   <td>optional</td>
-                  <td><p>Optional. The mask to control which fields gets returned.
-<br>
-Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#field-mask">google.protobuf.FieldMask</a> </p></td>
+                  <td><p>Optional. The mask to control which fields gets returned. </p></td>
                 </tr>
               
             </tbody>
@@ -7394,9 +7351,7 @@ Examples of invalid page token strings:
                   <td>field_mask</td>
                   <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
                   <td>optional</td>
-                  <td><p>Optional. The mask to control which fields gets returned.
-<br>
-Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#field-mask">google.protobuf.FieldMask</a> </p></td>
+                  <td><p>Optional. The mask to control which fields gets returned. </p></td>
                 </tr>
               
             </tbody>
@@ -7498,8 +7453,7 @@ Examples of invalid page token strings:
                   <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
                   <td>optional</td>
                   <td><p>Optional. The mask to control which fields gets returned.
-<br>
-Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#field-mask">google.protobuf.FieldMask</a> </p></td>
+<br> </p></td>
                 </tr>
               
             </tbody>
@@ -7601,9 +7555,7 @@ e.g. next_page_token is current_index-2 </p></td>
                   <td>status_set_time</td>
                   <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
                   <td></td>
-                  <td><p>Timestamp when the status was set. Read-only field.
-<br>
-Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> </p></td>
+                  <td><p>Timestamp when the status was set. Read-only field. </p></td>
                 </tr>
               
                 <tr>
@@ -7689,8 +7641,7 @@ with optimized thresholds will be returned but not updated on the server </p></t
                   <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
                   <td></td>
                   <td><p>info about optimization
-<br>
-Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#struct">google.protobuf.Struct</a> </p></td>
+<br> </p></td>
                 </tr>
               
                 <tr>
@@ -7698,8 +7649,7 @@ Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#struct">
                   <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
                   <td></td>
                   <td><p>the optimized configuration of the ondewo agent e.g., optimized parameters
-<br>
-Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#struct">google.protobuf.Struct</a> </p></td>
+<br> </p></td>
                 </tr>
               
             </tbody>
@@ -7779,8 +7729,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td><p>initial thresholds are optional, if not given will be taken from the current config
 <br>
 example {'OndewoIntentSimilarityMatch': 0.59, 'OndewoIntentNamedSimilarityMatch': 0.39}
-<br>
-Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#struct">google.protobuf.Struct</a> </p></td>
+<br> </p></td>
                 </tr>
               
             </tbody>
@@ -8073,9 +8022,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre> </p></td>
                   <td>update_mask</td>
                   <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
                   <td></td>
-                  <td><p>Optional. The mask to control which fields get updated.
-<br>
-Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#field-mask">google.protobuf.FieldMask</a> </p></td>
+                  <td><p>Optional. The mask to control which fields get updated. </p></td>
                 </tr>
               
             </tbody>
@@ -8986,9 +8933,7 @@ Intents can only be classified if the intent's input context set is the subset o
                   <td>field_mask</td>
                   <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
                   <td>optional</td>
-                  <td><p>Optional. The mask to control which fields gets returned.
-<br>
-Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#field-mask">google.protobuf.FieldMask</a> </p></td>
+                  <td><p>Optional. The mask to control which fields gets returned. </p></td>
                 </tr>
               
             </tbody>
@@ -9301,9 +9246,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre> </p></td>
                   <td>field_mask</td>
                   <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
                   <td>optional</td>
-                  <td><p>Optional. The mask to control which fields gets returned.
-<br>
-Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#field-mask">google.protobuf.FieldMask</a> </p></td>
+                  <td><p>Optional. The mask to control which fields gets returned. </p></td>
                 </tr>
               
             </tbody>
@@ -9358,9 +9301,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&g
                   <td>field_mask</td>
                   <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
                   <td>optional</td>
-                  <td><p>Optional. The mask to control which fields gets returned.
-<br>
-Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#field-mask">google.protobuf.FieldMask</a> </p></td>
+                  <td><p>Optional. The mask to control which fields gets returned. </p></td>
                 </tr>
               
             </tbody>
@@ -9489,9 +9430,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre> </p></td>
                   <td>field_mask</td>
                   <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
                   <td>optional</td>
-                  <td><p>Optional. The mask to control which fields gets returned.
-<br>
-Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#field-mask">google.protobuf.FieldMask</a> </p></td>
+                  <td><p>Optional. The mask to control which fields gets returned. </p></td>
                 </tr>
               
             </tbody>
@@ -9568,9 +9507,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre> </p></td>
                   <td>field_mask</td>
                   <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
                   <td>optional</td>
-                  <td><p>Optional. The mask to control which fields gets returned.
-<br>
-Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#field-mask">google.protobuf.FieldMask</a> </p></td>
+                  <td><p>Optional. The mask to control which fields gets returned. </p></td>
                 </tr>
               
             </tbody>
@@ -9661,9 +9598,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre> </p></td>
                   <td>field_mask</td>
                   <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
                   <td>optional</td>
-                  <td><p>Optional. The mask to control which fields gets returned.
-<br>
-Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#field-mask">google.protobuf.FieldMask</a> </p></td>
+                  <td><p>Optional. The mask to control which fields gets returned. </p></td>
                 </tr>
               
             </tbody>
@@ -9783,9 +9718,7 @@ as duplicate. Meaningful values of similarity_threshold are between 0.95 and 1.0
                   <td>field_mask</td>
                   <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
                   <td>optional</td>
-                  <td><p>Optional. The mask to control which fields gets returned.
-<br>
-Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#field-mask">google.protobuf.FieldMask</a> </p></td>
+                  <td><p>Optional. The mask to control which fields gets returned. </p></td>
                 </tr>
               
             </tbody>
@@ -9862,9 +9795,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre> </p></td>
                   <td>field_mask</td>
                   <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
                   <td>optional</td>
-                  <td><p>Optional. The mask to control which fields gets returned.
-<br>
-Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#field-mask">google.protobuf.FieldMask</a> </p></td>
+                  <td><p>Optional. The mask to control which fields gets returned. </p></td>
                 </tr>
               
             </tbody>
@@ -10004,9 +9935,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/ccai/services/&lt;service_uuid&
                   <td>field_mask</td>
                   <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
                   <td>optional</td>
-                  <td><p>Optional. The mask to control which fields gets returned.
-<br>
-Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#field-mask">google.protobuf.FieldMask</a> </p></td>
+                  <td><p>Optional. The mask to control which fields gets returned. </p></td>
                 </tr>
               
             </tbody>
@@ -10107,11 +10036,9 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/ccai/services/&lt;service_uuid&
                   <td></td>
                   <td><p>The request payload for the LLM, structured according to the specific
 requirements of the large language model provider.
-<br>
+<br> 
 The payload must fit the format expected by the specified LLM provider,
-as defined by <pre><code>CcaiServiceProvider</code></pre>
-<br>
-Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#struct">google.protobuf.Struct</a> </p></td>
+as defined by <pre><code>CcaiServiceProvider</code></pre> </p></td>
                 </tr>
               
                 <tr>
@@ -10134,9 +10061,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/ccai/services/&lt;service_uuid&
                   <td>field_mask</td>
                   <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
                   <td>optional</td>
-                  <td><p>Optional. The mask to control which fields gets returned.
-<br>
-Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#field-mask">google.protobuf.FieldMask</a> </p></td>
+                  <td><p>Optional. The mask to control which fields gets returned. </p></td>
                 </tr>
               
             </tbody>
@@ -10163,9 +10088,7 @@ Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#field-ma
                   <td><p>The response data from the LLM, returned as a structured payload.
 <br>
 This can contain the text generation, embeddings, or other outputs
-based on the specific request made to the LLM provider.
-<br>
-Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#struct">google.protobuf.Struct</a> </p></td>
+based on the specific request made to the LLM provider. </p></td>
                 </tr>
               
                 <tr>
@@ -10259,9 +10182,7 @@ Specifies the LLM provider (e.g., Ollama, OpenAI, Google, etc.), indicating the 
                   <td><p>The response data from the LLM in a streaming format, returned as a structured payload.
 <br>
 This response is part of a continuous stream of data from the LLM, allowing
-incremental results to be sent as they are generated.
-<br>
-Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#struct">google.protobuf.Struct</a> </p></td>
+incremental results to be sent as they are generated. </p></td>
                 </tr>
               
             </tbody>
@@ -12323,6 +12244,7 @@ Examples of invalid page token strings:
                   <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
                   <td></td>
                   <td><p>Optional. Mask to control which fields will be filled with data.
+<br>
 Example: path=["notification.user_names"] </p></td>
                 </tr>
               
@@ -13308,7 +13230,7 @@ Keys are the display names of context parameters. </p></td>
         
       
         <h3 id="ondewo.nlu.CreateContextRequest" class="title-badge message">CreateContextRequest</h3>
-        <p>The request message for <a href="index.html#google.cloud.dialogflow.v2.Contexts.CreateContext">Contexts.CreateContext</a>.</p>
+        <p>The request message for <a href="index.html#ondewo.nlu.Contexts.CreateContext">Contexts.CreateContext</a>.</p>
 
         
           <table class="field-table">
@@ -13340,7 +13262,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid
         
       
         <h3 id="ondewo.nlu.DeleteAllContextsRequest" class="title-badge message">DeleteAllContextsRequest</h3>
-        <p>The request message for <a href="index.html#google.cloud.dialogflow.v2.Contexts.DeleteAllContexts">Contexts.DeleteAllContexts</a>.</p>
+        <p>The request message for <a href="index.html#ondewo.nlu.Contexts.DeleteAllContexts">Contexts.DeleteAllContexts</a>.</p>
 
         
           <table class="field-table">
@@ -13365,7 +13287,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid
         
       
         <h3 id="ondewo.nlu.DeleteContextRequest" class="title-badge message">DeleteContextRequest</h3>
-        <p>The request message for <a href="index.html#google.cloud.dialogflow.v2.Contexts.DeleteContext">Contexts.DeleteContext</a>.</p>
+        <p>The request message for <a href="index.html#ondewo.nlu.Contexts.DeleteContext">Contexts.DeleteContext</a>.</p>
 
         
           <table class="field-table">
@@ -13390,7 +13312,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid
         
       
         <h3 id="ondewo.nlu.GetContextRequest" class="title-badge message">GetContextRequest</h3>
-        <p>The request message for <a href="index.html#google.cloud.dialogflow.v2.Contexts.GetContext">Contexts.GetContext</a>.</p>
+        <p>The request message for <a href="index.html#ondewo.nlu.Contexts.GetContext">Contexts.GetContext</a>.</p>
 
         
           <table class="field-table">
@@ -13415,7 +13337,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid
         
       
         <h3 id="ondewo.nlu.ListContextsRequest" class="title-badge message">ListContextsRequest</h3>
-        <p>The request message for <a href="index.html#google.cloud.dialogflow.v2.Contexts.ListContexts">Contexts.ListContexts</a>.</p>
+        <p>The request message for <a href="index.html#ondewo.nlu.Contexts.ListContexts">Contexts.ListContexts</a>.</p>
 
         
           <table class="field-table">
@@ -13476,7 +13398,7 @@ Examples of invalid page token strings:
         
       
         <h3 id="ondewo.nlu.ListContextsResponse" class="title-badge message">ListContextsResponse</h3>
-        <p>The response message for <a href="index.html#google.cloud.dialogflow.v2.Contexts.ListContexts">Contexts.ListContexts</a>.</p>
+        <p>The response message for <a href="index.html#ondewo.nlu.Contexts.ListContexts">Contexts.ListContexts</a>.</p>
 
         
           <table class="field-table">
@@ -13509,7 +13431,7 @@ e.g. next_page_token is current_index-2 </p></td>
         
       
         <h3 id="ondewo.nlu.UpdateContextRequest" class="title-badge message">UpdateContextRequest</h3>
-        <p>The request message for <a href="index.html#google.cloud.dialogflow.v2.Contexts.UpdateContext">Contexts.UpdateContext</a>.</p>
+        <p>The request message for <a href="index.html#ondewo.nlu.Contexts.UpdateContext">Contexts.UpdateContext</a>.</p>
 
         
           <table class="field-table">
@@ -13557,7 +13479,7 @@ e.g. next_page_token is current_index-2 </p></td>
       
         
         <h3 id="ondewo.nlu.EntityTypes" class="title-badge service">EntityTypes</h3>
-        <p>Entities are extracted from user input and represent parameters that are meaningful to your application. For example, a date range, a proper name such as a geographic location or landmark, and so on. Entities represent actionable data for your application.</p><p>When you define an entity, you can also include synonyms that all map to that entity. For example, &quot;soft drink&quot;, &quot;soda&quot;, &quot;pop&quot;, and so on.</p><p>There are three types of entities:</p><p><ul></p><p><li><strong>System</strong> - entities that are defined by the Dialogflow API for common data types such as date, time, currency, and so on. A system entity is represented by the <code>EntityType</code> type.</li></p><p><li><strong>Developer</strong> - entities that are defined by you that represent actionable data that is meaningful to your application. For example, you could define a <code>pizza.sauce</code> entity for red or white pizza sauce, a <code>pizza.cheese</code> entity for the different types of cheese on a pizza, a <code>pizza.topping</code> entity for different toppings, and so on. A developer entity is represented by the <code>EntityType</code> type.</li></p><p><li><strong>User</strong> - entities that are built for an individual user such as favorites, preferences, playlists, and so on. A user entity is represented by the <a href="index.html#google.cloud.dialogflow.v2.SessionEntityType">SessionEntityType</a> type.</li></p><p></ul></p><p>For more information about entity types, see the <a href="https://dialogflow.com/docs/entities">Dialogflow documentation</a>.</p>
+        <p>Entities are extracted from user input and represent parameters that are meaningful to your application. For example, a date range, a proper name such as a geographic location or landmark, and so on. Entities represent actionable data for your application.</p><p>When you define an entity, you can also include synonyms that all map to that entity. For example, &quot;soft drink&quot;, &quot;soda&quot;, &quot;pop&quot;, and so on.</p><p>There are three types of entities:</p><p><ul></p><p><li><strong>System</strong> - entities that are defined by the Dialogflow API for common data types such as date, time, currency, and so on. A system entity is represented by the <code>EntityType</code> type.</li></p><p><li><strong>Developer</strong> - entities that are defined by you that represent actionable data that is meaningful to your application. For example, you could define a <code>pizza.sauce</code> entity for red or white pizza sauce, a <code>pizza.cheese</code> entity for the different types of cheese on a pizza, a <code>pizza.topping</code> entity for different toppings, and so on. A developer entity is represented by the <code>EntityType</code> type.</li></p><p><li><strong>User</strong> - entities that are built for an individual user such as favorites, preferences, playlists, and so on. A user entity is represented by the <a href="index.html#ondewo.nlu.SessionEntityType">SessionEntityType</a> type.</li></p><p></ul></p><p>For more information about entity types, see the <a href="https://dialogflow.com/docs/entities">Dialogflow documentation</a>.</p>
 
         
         <div id="ondewo.nlu.EntityTypes-methods" class="service-methods">Service Methods</div>
@@ -13598,8 +13520,8 @@ e.g. next_page_token is current_index-2 </p></td>
 
           Updates/Creates multiple entity types in the specified agent.
 
-Operation &lt;response: <a href="index.html#google.cloud.dialogflow.v2.BatchUpdateEntityTypesResponse">BatchUpdateEntityTypesResponse</a>,
-           metadata: <a href="index.html#google.protobuf.Struct">google.protobuf.Struct</a>&gt;
+Operation &lt;response: <a href="index.html#ondewo.nlu.BatchUpdateEntityTypesResponse">BatchUpdateEntityTypesResponse</a>,
+           metadata: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#struct">google.protobuf.Struct</a>&gt;
         
           <h4 id="ondewo.nlu.EntityTypes.BatchDeleteEntityTypes" class="title-badge method">BatchDeleteEntityTypes</h4>
 
@@ -13607,8 +13529,8 @@ Operation &lt;response: <a href="index.html#google.cloud.dialogflow.v2.BatchUpda
 
           Deletes entity types in the specified agent.
 
-Operation &lt;response: <a href="index.html#google.protobuf.Empty">google.protobuf.Empty</a>,
-           metadata: <a href="index.html#google.protobuf.Struct">google.protobuf.Struct</a>&gt;
+Operation &lt;response: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#empty">google.protobuf.Empty</a>,
+           metadata: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#struct">google.protobuf.Struct</a>&gt;
         
           <h4 id="ondewo.nlu.EntityTypes.GetEntity" class="title-badge method">GetEntity</h4>
 
@@ -13882,7 +13804,7 @@ Operation &lt;response: <a href="index.html#google.protobuf.Empty">google.protob
         
       
         <h3 id="ondewo.nlu.BatchDeleteEntityTypesRequest" class="title-badge message">BatchDeleteEntityTypesRequest</h3>
-        <p>The request message for <a href="index.html#google.cloud.dialogflow.v2.EntityTypes.BatchDeleteEntityTypes">EntityTypes.BatchDeleteEntityTypes</a>.</p>
+        <p>The request message for <a href="index.html#ondewo.nlu.EntityTypes.BatchDeleteEntityTypes">EntityTypes.BatchDeleteEntityTypes</a>.</p>
 
         
           <table class="field-table">
@@ -13995,7 +13917,7 @@ same agent as `parent`. </p></td>
         
       
         <h3 id="ondewo.nlu.BatchUpdateEntityTypesRequest" class="title-badge message">BatchUpdateEntityTypesRequest</h3>
-        <p>The request message for <a href="index.html#google.cloud.dialogflow.v2.EntityTypes.BatchUpdateEntityTypes">EntityTypes.BatchUpdateEntityTypes</a>.</p>
+        <p>The request message for <a href="index.html#ondewo.nlu.EntityTypes.BatchUpdateEntityTypes">EntityTypes.BatchUpdateEntityTypes</a>.</p>
 
         
           <table class="field-table">
@@ -14055,7 +13977,7 @@ Note: languages must be enabled in the agent, before they can be used. </p></td>
         
       
         <h3 id="ondewo.nlu.BatchUpdateEntityTypesResponse" class="title-badge message">BatchUpdateEntityTypesResponse</h3>
-        <p>The response message for <a href="index.html#google.cloud.dialogflow.v2.EntityTypes.BatchUpdateEntityTypes">EntityTypes.BatchUpdateEntityTypes</a>.</p>
+        <p>The response message for <a href="index.html#ondewo.nlu.EntityTypes.BatchUpdateEntityTypes">EntityTypes.BatchUpdateEntityTypes</a>.</p>
 
         
           <table class="field-table">
@@ -14111,7 +14033,7 @@ Note: languages must be enabled in the agent, before they can be used. </p></td>
         
       
         <h3 id="ondewo.nlu.CreateEntityTypeRequest" class="title-badge message">CreateEntityTypeRequest</h3>
-        <p>The request message for <a href="index.html#google.cloud.dialogflow.v2.EntityTypes.CreateEntityType">EntityTypes.CreateEntityType</a>.</p>
+        <p>The request message for <a href="index.html#ondewo.nlu.EntityTypes.CreateEntityType">EntityTypes.CreateEntityType</a>.</p>
 
         
           <table class="field-table">
@@ -14217,7 +14139,7 @@ Note: languages must be enabled in the agent, before they can be used. </p></td>
         
       
         <h3 id="ondewo.nlu.DeleteEntityTypeRequest" class="title-badge message">DeleteEntityTypeRequest</h3>
-        <p>The request message for <a href="index.html#google.cloud.dialogflow.v2.EntityTypes.DeleteEntityType">EntityTypes.DeleteEntityType</a>.</p>
+        <p>The request message for <a href="index.html#ondewo.nlu.EntityTypes.DeleteEntityType">EntityTypes.DeleteEntityType</a>.</p>
 
         
           <table class="field-table">
@@ -14622,7 +14544,7 @@ Examples are:
         
       
         <h3 id="ondewo.nlu.GetEntityTypeRequest" class="title-badge message">GetEntityTypeRequest</h3>
-        <p>The request message for <a href="index.html#google.cloud.dialogflow.v2.EntityTypes.GetEntityType">EntityTypes.GetEntityType</a>.</p>
+        <p>The request message for <a href="index.html#ondewo.nlu.EntityTypes.GetEntityType">EntityTypes.GetEntityType</a>.</p>
 
         
           <table class="field-table">
@@ -14824,7 +14746,7 @@ e.g. next_page_token is current_index-2 </p></td>
         
       
         <h3 id="ondewo.nlu.ListEntityTypesRequest" class="title-badge message">ListEntityTypesRequest</h3>
-        <p>The request message for <a href="index.html#google.cloud.dialogflow.v2.EntityTypes.ListEntityTypes">EntityTypes.ListEntityTypes</a>.</p>
+        <p>The request message for <a href="index.html#ondewo.nlu.EntityTypes.ListEntityTypes">EntityTypes.ListEntityTypes</a>.</p>
 
         
           <table class="field-table">
@@ -14917,7 +14839,7 @@ Examples of invalid page token strings:
         
       
         <h3 id="ondewo.nlu.ListEntityTypesResponse" class="title-badge message">ListEntityTypesResponse</h3>
-        <p>The response message for <a href="index.html#google.cloud.dialogflow.v2.EntityTypes.ListEntityTypes">EntityTypes.ListEntityTypes</a>.</p>
+        <p>The response message for <a href="index.html#ondewo.nlu.EntityTypes.ListEntityTypes">EntityTypes.ListEntityTypes</a>.</p>
 
         
           <table class="field-table">
@@ -14974,7 +14896,7 @@ e.g. next_page_token is current_index-2 </p></td>
         
       
         <h3 id="ondewo.nlu.UpdateEntityTypeRequest" class="title-badge message">UpdateEntityTypeRequest</h3>
-        <p>The request message for <a href="index.html#google.cloud.dialogflow.v2.EntityTypes.UpdateEntityType">EntityTypes.UpdateEntityType</a>.</p>
+        <p>The request message for <a href="index.html#ondewo.nlu.EntityTypes.UpdateEntityType">EntityTypes.UpdateEntityType</a>.</p>
 
         
           <table class="field-table">
@@ -15316,15 +15238,15 @@ types (with or without aliases).</p></td>
 
           Updates/Creates multiple intents in the specified agent.
 
-Operation &lt;response: <a href="index.html#google.cloud.dialogflow.v2.BatchUpdateIntentsResponse">BatchUpdateIntentsResponse</a>&gt;
+Operation &lt;response: <a href="index.html#ondewo.nlu.BatchUpdateIntentsResponse">BatchUpdateIntentsResponse</a>&gt;
         
           <h4 id="ondewo.nlu.Intents.BatchDeleteIntents" class="title-badge method">BatchDeleteIntents</h4>
 
           <pre>rpc BatchDeleteIntents (<a href="#ondewo.nlu.BatchDeleteIntentsRequest">BatchDeleteIntentsRequest</a>) returns (<a href="#ondewo.nlu.Operation">Operation)</a></pre>
 
           Deletes intents in the specified agent.
-
-Operation &lt;response: <a href="index.html#google.protobuf.Empty">google.protobuf.Empty</a>&gt;
+<br>
+Operation &lt;response: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#empty">google.protobuf.Empty</a>&gt;
         
           <h4 id="ondewo.nlu.Intents.TagIntent" class="title-badge method">TagIntent</h4>
 
@@ -15729,7 +15651,7 @@ Operation &lt;response: <a href="index.html#google.protobuf.Empty">google.protob
         
       
         <h3 id="ondewo.nlu.BatchDeleteIntentsRequest" class="title-badge message">BatchDeleteIntentsRequest</h3>
-        <p>The request message for <a href="index.html#google.cloud.dialogflow.v2.Intents.BatchDeleteIntents">Intents.BatchDeleteIntents</a>.</p>
+        <p>The request message for <a href="index.html#ondewo.nlu.Intents.BatchDeleteIntents">Intents.BatchDeleteIntents</a>.</p>
 
         
           <table class="field-table">
@@ -16253,7 +16175,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&g
         
       
         <h3 id="ondewo.nlu.BatchUpdateIntentsRequest" class="title-badge message">BatchUpdateIntentsRequest</h3>
-        <p>The request message for <a href="index.html#google.cloud.dialogflow.v2.Intents.BatchUpdateIntents">Intents.BatchUpdateIntents</a>.</p>
+        <p>The request message for <a href="index.html#ondewo.nlu.Intents.BatchUpdateIntents">Intents.BatchUpdateIntents</a>.</p>
 
         
           <table class="field-table">
@@ -16320,7 +16242,7 @@ Note: languages must be enabled in the agent, before they can be used. </p></td>
         
       
         <h3 id="ondewo.nlu.BatchUpdateIntentsResponse" class="title-badge message">BatchUpdateIntentsResponse</h3>
-        <p>The response message for <a href="index.html#google.cloud.dialogflow.v2.Intents.BatchUpdateIntents">Intents.BatchUpdateIntents</a>.</p>
+        <p>The response message for <a href="index.html#ondewo.nlu.Intents.BatchUpdateIntents">Intents.BatchUpdateIntents</a>.</p>
 
         
           <table class="field-table">
@@ -16416,7 +16338,7 @@ Note: languages must be enabled in the agent, before they can be used. </p></td>
         
       
         <h3 id="ondewo.nlu.CreateIntentRequest" class="title-badge message">CreateIntentRequest</h3>
-        <p>The request message for <a href="index.html#google.cloud.dialogflow.v2.Intents.CreateIntent">Intents.CreateIntent</a>.</p>
+        <p>The request message for <a href="index.html#ondewo.nlu.Intents.CreateIntent">Intents.CreateIntent</a>.</p>
 
         
           <table class="field-table">
@@ -16467,7 +16389,7 @@ Note: languages must be enabled in the agent, before they can be used. </p></td>
         
       
         <h3 id="ondewo.nlu.DeleteIntentRequest" class="title-badge message">DeleteIntentRequest</h3>
-        <p>The request message for <a href="index.html#google.cloud.dialogflow.v2.Intents.DeleteIntent">Intents.DeleteIntent</a>.</p>
+        <p>The request message for <a href="index.html#ondewo.nlu.Intents.DeleteIntent">Intents.DeleteIntent</a>.</p>
 
         
           <table class="field-table">
@@ -16517,7 +16439,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&g
         
       
         <h3 id="ondewo.nlu.GetIntentRequest" class="title-badge message">GetIntentRequest</h3>
-        <p>The request message for <a href="index.html#google.cloud.dialogflow.v2.Intents.GetIntent">Intents.GetIntent</a>.</p>
+        <p>The request message for <a href="index.html#ondewo.nlu.Intents.GetIntent">Intents.GetIntent</a>.</p>
 
         
           <table class="field-table">
@@ -16644,7 +16566,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&g
         
       
         <h3 id="ondewo.nlu.Intent" class="title-badge message">Intent</h3>
-        <p>Represents an intent.</p><p>Intents convert a number of user expressions or patterns into an action. An</p><p>action is an extraction of a user command or sentence semantics.</p>
+        <p>Represents an intent.</p><p>Intents convert a number of user expressions or patterns into an action. An action is an extraction of a user command or sentence semantics.</p>
 
         
           <table class="field-table">
@@ -17452,7 +17374,7 @@ e.g., screen readers. </p></td>
         
       
         <h3 id="ondewo.nlu.Intent.Message.LinkOutSuggestion" class="title-badge message">Intent.Message.LinkOutSuggestion</h3>
-        <p>The suggestion chip message that allows the user to jump out to the app</p><p>or website associated with this agent.</p>
+        <p>The suggestion chip message that allows the user to jump out to the app or website associated with this agent.</p>
 
         
           <table class="field-table">
@@ -17591,7 +17513,7 @@ suggestion chip. </p></td>
         
       
         <h3 id="ondewo.nlu.Intent.Message.SelectItemInfo" class="title-badge message">Intent.Message.SelectItemInfo</h3>
-        <p>Additional info about the select item for when it is triggered in a</p><p>dialog.</p>
+        <p>Additional info about the select item for when it is triggered in a dialog.</p>
 
         
           <table class="field-table">
@@ -17604,16 +17526,14 @@ suggestion chip. </p></td>
                   <td>key</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Required. A unique key that will be sent back to the agent if this
-response is given. </p></td>
+                  <td><p>Required. A unique key that will be sent back to the agent if this response is given. </p></td>
                 </tr>
               
                 <tr>
                   <td>synonyms</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
-                  <td><p>Optional. A list of synonyms that can also be used to trigger this
-item in dialog. </p></td>
+                  <td><p>Optional. A list of synonyms that can also be used to trigger this item in dialog. </p></td>
                 </tr>
               
             </tbody>
@@ -17665,7 +17585,7 @@ text_to_speech. </p></td>
         
       
         <h3 id="ondewo.nlu.Intent.Message.SimpleResponses" class="title-badge message">Intent.Message.SimpleResponses</h3>
-        <p>The collection of simple response candidates.</p><p>This message in <code>QueryResult.fulfillment_messages</code> and</p><p><code>WebhookResponse.fulfillment_messages</code> should contain only one</p><p><code>SimpleResponse</code>.</p>
+        <p>The collection of simple response candidates. This message in <code>QueryResult.fulfillment_messages</code> and <code>WebhookResponse.fulfillment_messages</code> should contain only one <code>SimpleResponse</code>.</p>
 
         
           <table class="field-table">
@@ -17689,7 +17609,7 @@ text_to_speech. </p></td>
         
       
         <h3 id="ondewo.nlu.Intent.Message.Suggestion" class="title-badge message">Intent.Message.Suggestion</h3>
-        <p>The suggestion chip message that the user can tap to quickly post a reply</p><p>to the conversation.</p>
+        <p>The suggestion chip message that the user can tap to quickly post a reply to the conversation.</p>
 
         
           <table class="field-table">
@@ -18273,7 +18193,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&g
         
       
         <h3 id="ondewo.nlu.ListIntentsRequest" class="title-badge message">ListIntentsRequest</h3>
-        <p>The request message for <a href="index.html#google.cloud.dialogflow.v2.Intents.ListIntents">Intents.ListIntents</a>.</p>
+        <p>The request message for <a href="index.html#ondewo.nlu.Intents.ListIntents">Intents.ListIntents</a>.</p>
 
         
           <table class="field-table">
@@ -18372,7 +18292,7 @@ Examples of invalid page token strings:
         
       
         <h3 id="ondewo.nlu.ListIntentsResponse" class="title-badge message">ListIntentsResponse</h3>
-        <p>The response message for <a href="index.html#google.cloud.dialogflow.v2.Intents.ListIntents">Intents.ListIntents</a>.</p>
+        <p>The response message for <a href="index.html#ondewo.nlu.Intents.ListIntents">Intents.ListIntents</a>.</p>
 
         
           <table class="field-table">
@@ -18854,7 +18774,7 @@ where &lt;CURRENT_INDEX&gt; and &lt;PAGE_SIZE&gt; are of type int, &lt;SUB_FIELD
         
       
         <h3 id="ondewo.nlu.UpdateIntentRequest" class="title-badge message">UpdateIntentRequest</h3>
-        <p>The request message for <a href="index.html#google.cloud.dialogflow.v2.Intents.UpdateIntent">Intents.UpdateIntent</a>.</p>
+        <p>The request message for <a href="index.html#ondewo.nlu.Intents.UpdateIntent">Intents.UpdateIntent</a>.</p>
 
         
           <table class="field-table">
@@ -19717,7 +19637,7 @@ The Training phrases field is populated with only a few entries and no annotatio
 
           Lists operations that match the specified filter in the request. If the
 server doesn&apos;t support this method, it returns <code>UNIMPLEMENTED</code>.
-
+<br>
 NOTE: the <code>name</code> binding below allows API services to override the binding
 to use different resource name schemes, such as <code>users/*/operations</code>.
         
@@ -19736,7 +19656,7 @@ service.
           Deletes a long-running operation. This method indicates that the client is
 no longer interested in the operation result. It does not cancel the
 operation. If the server doesn&apos;t support this method, it returns
-<code>google.rpc.Code.UNIMPLEMENTED</code>.
+<code>google.rpc.Code.UNIMPLEMENTED</code>
         
           <h4 id="ondewo.nlu.Operations.CancelOperation" class="title-badge method">CancelOperation</h4>
 
@@ -19750,7 +19670,7 @@ guaranteed.  If the server doesn&apos;t support this method, it returns
 other methods to verify whether the cancellation succeeded or whether the
 operation completed despite cancellation. On successful cancellation,
 the operation is not deleted; instead, it becomes an operation with
-an <a href="index.html#ondewo.nlu.Operation.error">Operation.error</a> value with a <a href="index.html#google.rpc.Status.code">google.rpc.Status.code</a>
+an <a href="index.html#ondewo.nlu.Operation">Operation.error</a> value with a <a href="https://developers.google.com/actions-center/reference/grpc-api/status_codes">google.rpc.Status.code</a>
 of 1, corresponding to <code>Code.CANCELLED</code>.
         
 
@@ -20019,7 +19939,7 @@ e.g. next_page_token is current_index-2 </p></td>
         
       
         <h3 id="ondewo.nlu.Operation" class="title-badge message">Operation</h3>
-        <p>This resource represents a long-running operation that is the result of a</p><p>network API call.</p>
+        <p>This resource represents a long-running operation that is the result of a network API call.</p>
 
         
           <table class="field-table">
@@ -31577,7 +31497,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
         
       
         <h3 id="ondewo.nlu.QueryInput" class="title-badge message">QueryInput</h3>
-        <p>Represents the query input. It can contain either:</p><p>1.  An audio config which</p><p>instructs the speech recognizer how to process the speech audio.</p><p>2.  A conversational query in the form of text,.</p><p>3.  An event that specifies which intent to trigger.</p>
+        <p>Represents the query input. It can contain either:</p><p>1.  An audio config which instructs the speech recognizer how to process the speech audio.</p><p>2.  A conversational query in the form of text,.</p><p>3.  An event that specifies which intent to trigger.</p>
 
         
           <table class="field-table">
@@ -33437,7 +33357,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid
       <div id="ondewo/nlu/session.proto-enums" class="object-category">Enums</div>
       
         <h3 id="ondewo.nlu.AudioEncoding" class="title-badge enum">AudioEncoding</h3>
-        <p>Audio encoding of the audio content sent in the conversational query request.</p><p>Refer to the <a href="/speech/docs/basics">Cloud Speech API documentation</a> for more</p><p>details.</p>
+        <p>Audio encoding of the audio content sent in the conversational query request.</p><p>Refer to the <a href="/speech/docs/basics">Cloud Speech API documentation</a> for more details.</p>
         <table class="enum-table">
           <thead>
             <tr><td>Name</td><td>Number</td><td>Description</td></tr>
@@ -33637,7 +33557,7 @@ wideband is supported. <code>sample_rate_hertz</code> must be 16000.</p></td>
         </table>
       
         <h3 id="ondewo.nlu.Session.View" class="title-badge enum">Session.View</h3>
-        <p>Represents the options for views of a session.</p><p>A session can be a sizable object. Therefore, we provide a resource view that</p><p>does not return all data</p>
+        <p>Represents the options for views of a session.</p><p>A session can be a sizable object. Therefore, we provide a resource view that does not return all data</p>
         <table class="enum-table">
           <thead>
             <tr><td>Name</td><td>Number</td><td>Description</td></tr>
@@ -33666,7 +33586,7 @@ wideband is supported. <code>sample_rate_hertz</code> must be 16000.</p></td>
         </table>
       
         <h3 id="ondewo.nlu.SessionReview.View" class="title-badge enum">SessionReview.View</h3>
-        <p>Represents the options for views of a session_review.</p><p>A session_review can be a sizable object. Therefore, we provide a resource view that</p><p>does not return all data</p>
+        <p>Represents the options for views of a session_review.</p><p>A session_review can be a sizable object. Therefore, we provide a resource view that does not return all data</p>
         <table class="enum-table">
           <thead>
             <tr><td>Name</td><td>Number</td><td>Description</td></tr>
@@ -35551,7 +35471,7 @@ the training phrases. Overrides the default: <code>&apos;.,;!?:&apos;</code> </p
         
       
         <h3 id="ondewo.nlu.AddTrainingPhrasesRequest.TrainingPhraseForIntent" class="title-badge message">AddTrainingPhrasesRequest.TrainingPhraseForIntent</h3>
-        <p>Message that contains the new training phrase, together with the intent display name</p><p>and, optionally the entity annotations</p>
+        <p>Message that contains the new training phrase, together with the intent display name and, optionally the entity annotations</p>
 
         
           <table class="field-table">
@@ -36554,7 +36474,7 @@ with Google Assistant integration.
       <div id="ondewo/nlu/webhook.proto-messages" class="object-category">Messages</div>
       
         <h3 id="ondewo.nlu.CreateSessionEntityTypeRequest" class="title-badge message">CreateSessionEntityTypeRequest</h3>
-        <p>The request message for</p><p><a href="index.html#ondewo.nlu.Webhook.CreateSessionEntityType">Webhook.CreateSessionEntityType</a></p>
+        <p>The request message for <a href="index.html#ondewo.nlu.Webhook.CreateSessionEntityType">Webhook.CreateSessionEntityType</a></p>
 
         
           <table class="field-table">
@@ -36603,7 +36523,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agents/sessions/&lt;session_uui
         
       
         <h3 id="ondewo.nlu.DeleteSessionEntityTypeRequest" class="title-badge message">DeleteSessionEntityTypeRequest</h3>
-        <p>The request message for</p><p><a href="index.html#ondewo.nlu.Webhook.DeleteSessionEntityType">Webhook.DeleteSessionEntityType</a>.</p>
+        <p>The request message for <a href="index.html#ondewo.nlu.Webhook.DeleteSessionEntityType">Webhook.DeleteSessionEntityType</a>.</p>
 
         
           <table class="field-table">
@@ -36633,7 +36553,7 @@ environment. If <code>User ID</code> is not specified, we assume default <code>&
         
       
         <h3 id="ondewo.nlu.GetSessionEntityTypeRequest" class="title-badge message">GetSessionEntityTypeRequest</h3>
-        <p>The request message for</p><p><a href="index.html#ondewo.nlu.Webhook.GetSessionEntityType">Webhook.GetSessionEntityType</a>.</p>
+        <p>The request message for <a href="index.html#ondewo.nlu.Webhook.GetSessionEntityType">Webhook.GetSessionEntityType</a>.</p>
 
         
           <table class="field-table">
@@ -36663,7 +36583,7 @@ environment. If <code>User ID</code> is not specified, we assume default <code>&
         
       
         <h3 id="ondewo.nlu.ListSessionEntityTypesRequest" class="title-badge message">ListSessionEntityTypesRequest</h3>
-        <p>The request message for</p><p><a href="index.html#ondewo.nlu.Webhook.ListSessionEntityTypes">Webhook.ListSessionEntityTypes</a>.</p>
+        <p>The request message for <a href="index.html#ondewo.nlu.Webhook.ListSessionEntityTypes">Webhook.ListSessionEntityTypes</a>.</p>
 
         
           <table class="field-table">
@@ -36735,7 +36655,7 @@ Examples of invalid page token strings:
         
       
         <h3 id="ondewo.nlu.ListSessionEntityTypesResponse" class="title-badge message">ListSessionEntityTypesResponse</h3>
-        <p>The response message for</p><p><a href="index.html#ondewo.nlu.Webhook.ListSessionEntityTypes">Webhook.ListSessionEntityTypes</a>.</p>
+        <p>The response message for <a href="index.html#ondewo.nlu.Webhook.ListSessionEntityTypes">Webhook.ListSessionEntityTypes</a>.</p>
 
         
           <table class="field-table">
@@ -36768,7 +36688,7 @@ e.g. next_page_token is current_index-2 </p></td>
         
       
         <h3 id="ondewo.nlu.OriginalDetectIntentRequest" class="title-badge message">OriginalDetectIntentRequest</h3>
-        <p>Represents the contents of the original request that was passed to</p><p>the <code>[Streaming]DetectIntent</code> call.</p>
+        <p>Represents the contents of the original request that was passed to the <code>[Streaming]DetectIntent</code> call.</p>
 
         
           <table class="field-table">
@@ -36907,7 +36827,7 @@ type. </p></td>
         
       
         <h3 id="ondewo.nlu.UpdateSessionEntityTypeRequest" class="title-badge message">UpdateSessionEntityTypeRequest</h3>
-        <p>The request message for</p><p><a href="index.html#ondewo.nlu.Webhook.UpdateSessionEntityType">Webhook.UpdateSessionEntityType</a>.</p>
+        <p>The request message for <a href="index.html#ondewo.nlu.Webhook.UpdateSessionEntityType">Webhook.UpdateSessionEntityType</a>.</p>
 
         
           <table class="field-table">
@@ -36967,8 +36887,7 @@ same value as <code>[Streaming]DetectIntentResponse.query_result</code>. </p></t
                   <td>original_detect_intent_request</td>
                   <td><a href="#ondewo.nlu.OriginalDetectIntentRequest">OriginalDetectIntentRequest</a></td>
                   <td></td>
-                  <td><p>Optional. The contents of the original request that was passed to
-<code>[Streaming]DetectIntent</code> call. </p></td>
+                  <td><p>Optional. The contents of the original request that was passed to <code>[Streaming]DetectIntent</code> call. </p></td>
                 </tr>
               
                 <tr>
