@@ -3851,6 +3851,9 @@ grpcurl -plaintext -H 'cai-token: aimp' localhost:50055 ondewo.nlu.Agents.ListAl
           <pre>rpc GetPlatformInfo (<a href="#google.protobuf.Empty">.google.protobuf.Empty</a>) returns (<a href="#ondewo.nlu.GetPlatformInfoResponse">GetPlatformInfoResponse)</a></pre>
 
           Gets information from the platform
+<br>
+Request parameter:
+<a href="https://protobuf.dev/reference/protobuf/google.protobuf/#empty">google.protobuf.Empty</a>
         
           <h4 id="ondewo.nlu.Agents.ListProjectPermissions" class="title-badge method">ListProjectPermissions</h4>
 
@@ -3864,8 +3867,8 @@ grpcurl -plaintext -H 'cai-token: aimp' localhost:50055 ondewo.nlu.Agents.ListAl
 
           Trains the specified agent.
 
-Operation &lt;response: <a href="index.html#google.protobuf.Empty">google.protobuf.Empty</a>,
-           metadata: <a href="index.html#google.protobuf.Struct">google.protobuf.Struct</a>&gt;
+Operation &lt;response: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#empty">google.protobuf.Empty</a>,
+           metadata: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#struct">google.protobuf.Struct</a>&gt;
         
           <h4 id="ondewo.nlu.Agents.BuildCache" class="title-badge method">BuildCache</h4>
 
@@ -3873,17 +3876,17 @@ Operation &lt;response: <a href="index.html#google.protobuf.Empty">google.protob
 
           Builds cache for the specified agent.
 
-Operation &lt;response: <a href="index.html#google.protobuf.Empty">google.protobuf.Empty</a>,
-           metadata: <a href="index.html#google.protobuf.Struct">google.protobuf.Struct</a>&gt;
+Operation &lt;response: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#empty">google.protobuf.Empty</a>,
+           metadata: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#struct">google.protobuf.Struct</a>&gt;
         
           <h4 id="ondewo.nlu.Agents.ExportAgent" class="title-badge method">ExportAgent</h4>
 
           <pre>rpc ExportAgent (<a href="#ondewo.nlu.ExportAgentRequest">ExportAgentRequest</a>) returns (<a href="#ondewo.nlu.Operation">Operation)</a></pre>
 
           Exports the specified agent to a ZIP file.
-
+<br>
 Operation &lt;response: <a href="index.html#ondewo.nlu.ExportAgentResponse">ExportAgentResponse</a>,
-           metadata: <a href="index.html#google.protobuf.Struct">google.protobuf.Struct</a>&gt;
+           metadata: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#struct">google.protobuf.Struct</a>&gt;
         
           <h4 id="ondewo.nlu.Agents.ExportBenchmarkAgent" class="title-badge method">ExportBenchmarkAgent</h4>
 
@@ -3896,13 +3899,13 @@ Operation &lt;response: <a href="index.html#ondewo.nlu.ExportAgentResponse">Expo
           <pre>rpc ImportAgent (<a href="#ondewo.nlu.ImportAgentRequest">ImportAgentRequest</a>) returns (<a href="#ondewo.nlu.Operation">Operation)</a></pre>
 
           Imports the specified agent from a ZIP file.
-
+<br>
 Uploads new intents and entity types without deleting the existing ones.
 Intents and entity types with the same name are replaced with the new
 versions from ImportAgentRequest.
-
-Operation &lt;response: <a href="index.html#google.protobuf.Empty">google.protobuf.Empty</a>,
-           metadata: <a href="index.html#google.protobuf.Struct">google.protobuf.Struct</a>&gt;
+<br>
+Operation &lt;response: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#empty">google.protobuf.Empty</a>,
+           metadata: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#struct">google.protobuf.Struct</a>&gt;
         
           <h4 id="ondewo.nlu.Agents.MigrateAgent" class="title-badge method">MigrateAgent</h4>
 
@@ -3921,12 +3924,12 @@ Operation &lt;response: <a href="index.html#google.protobuf.Empty">google.protob
           <pre>rpc RestoreAgent (<a href="#ondewo.nlu.RestoreAgentRequest">RestoreAgentRequest</a>) returns (<a href="#ondewo.nlu.Operation">Operation)</a></pre>
 
           Restores the specified agent from a ZIP file.
-
+<br>
 Replaces the current agent version with a new one. All the intents and
 entity types in the older version are deleted.
-
-Operation &lt;response: <a href="index.html#google.protobuf.Empty">google.protobuf.Empty</a>,
-           metadata: <a href="index.html#google.protobuf.Struct">google.protobuf.Struct</a>&gt;
+<br>
+Operation &lt;response: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#empty">google.protobuf.Empty</a>,
+           metadata: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#struct">google.protobuf.Struct</a>&gt;
         
           <h4 id="ondewo.nlu.Agents.GetAgentStatistics" class="title-badge method">GetAgentStatistics</h4>
 
@@ -4472,7 +4475,7 @@ Read-only in the Agent message </p></td>
                   <td>description</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Optional. Description of the agent. </p></td>
                 </tr>
               
                 <tr>
@@ -4782,14 +4785,14 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre> </p></td>
                   <td>name</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Required. Name of the resource to delete. </p></td>
                 </tr>
               
                 <tr>
                   <td>type</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Required. Type of the resource (e.g., "audio", "image", "file"). </p></td>
                 </tr>
               
                 <tr>
@@ -4874,8 +4877,8 @@ only if <code>agent_uri</code> is specified in <code>ExportAgentRequest</code>. 
                   <td><p>The exported agent.
 
 Example for how to export an agent to a zip file via a command line:
-
-curl \
+<br/>
+<pre><code>curl \
   'https://dialogflow.googleapis.com/v2/projects/<project_name>/agent:export'\
   -X POST \
   -H 'Authorization: Bearer '$(gcloud auth print-access-token) \
@@ -4884,7 +4887,8 @@ curl \
   --compressed \
   --data-binary '{}' \
 | grep agentContent | sed -e 's/.*"agentContent": "\([^"]*\)".*/\1/' \
-| base64 --decode > <agent zip file> </p></td>
+| base64 --decode > <agent zip file>
+</code></pre> </p></td>
                 </tr>
               
             </tbody>
@@ -4927,7 +4931,7 @@ other values cause an error in the request validation handler. </p></td>
                   <td><a href="#float">float</a></td>
                   <td></td>
                   <td><p>Train-test split related parameters, for further info,
-check https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html
+check <a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html">https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html</a>
 default values come from API definition above
 Optional: bigger than zero </p></td>
                 </tr>
@@ -5037,14 +5041,14 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre> </p></td>
                   <td>name</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Required. Name of the resource to export. </p></td>
                 </tr>
               
                 <tr>
                   <td>type</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Required. Type of the resource (e.g., "audio", "image", "file"). </p></td>
                 </tr>
               
                 <tr>
@@ -5083,14 +5087,14 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre> </p></td>
                   <td>name</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Required. Name of the exported resource. </p></td>
                 </tr>
               
                 <tr>
                   <td>type</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Required. Type of the resource (e.g., "audio", "image", "file"). </p></td>
                 </tr>
               
                 <tr>
@@ -5104,7 +5108,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre> </p></td>
                   <td>resource_file</td>
                   <td><a href="#bytes">bytes</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Required. The exported resource file content as bytes. </p></td>
                 </tr>
               
             </tbody>
@@ -5218,28 +5222,28 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre> </p></td>
                   <td>entity_results</td>
                   <td><a href="#ondewo.nlu.FullTextSearchResponseEntity.EntitySearchResult">FullTextSearchResponseEntity.EntitySearchResult</a></td>
                   <td>repeated</td>
-                  <td><p> </p></td>
+                  <td><p>List of entity search results </p></td>
                 </tr>
               
                 <tr>
                   <td>term</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Search term used in the query </p></td>
                 </tr>
               
                 <tr>
                   <td>elastic_query</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Elasticsearch query that was executed </p></td>
                 </tr>
               
                 <tr>
                   <td>time</td>
                   <td><a href="#float">float</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Time taken to execute the query in seconds </p></td>
                 </tr>
               
                 <tr>
@@ -5258,7 +5262,7 @@ e.g. next_page_token is current_index-2 </p></td>
         
       
         <h3 id="ondewo.nlu.FullTextSearchResponseEntity.EntitySearchResult" class="title-badge message">FullTextSearchResponseEntity.EntitySearchResult</h3>
-        <p></p>
+        <p>Search result for an entity</p>
 
         
           <table class="field-table">
@@ -5271,35 +5275,35 @@ e.g. next_page_token is current_index-2 </p></td>
                   <td>name</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Name of the entity </p></td>
                 </tr>
               
                 <tr>
                   <td>display_name</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Display name of the entity </p></td>
                 </tr>
               
                 <tr>
                   <td>entity_type_name</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Name of the entity type this entity belongs to </p></td>
                 </tr>
               
                 <tr>
                   <td>entity_type_display_name</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Display name of the entity type </p></td>
                 </tr>
               
                 <tr>
                   <td>language</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Language code of the entity </p></td>
                 </tr>
               
                 <tr>
@@ -5366,28 +5370,28 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre> </p></td>
                   <td>entity_synonym_results</td>
                   <td><a href="#ondewo.nlu.FullTextSearchResponseEntitySynonym.EntitySynonymSearchResult">FullTextSearchResponseEntitySynonym.EntitySynonymSearchResult</a></td>
                   <td>repeated</td>
-                  <td><p> </p></td>
+                  <td><p>List of entity synonym search results </p></td>
                 </tr>
               
                 <tr>
                   <td>term</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Search term used in the query </p></td>
                 </tr>
               
                 <tr>
                   <td>elastic_query</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Elasticsearch query that was executed </p></td>
                 </tr>
               
                 <tr>
                   <td>time</td>
                   <td><a href="#float">float</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Time taken to execute the query in seconds </p></td>
                 </tr>
               
                 <tr>
@@ -5406,7 +5410,7 @@ e.g. next_page_token is current_index-2 </p></td>
         
       
         <h3 id="ondewo.nlu.FullTextSearchResponseEntitySynonym.EntitySynonymSearchResult" class="title-badge message">FullTextSearchResponseEntitySynonym.EntitySynonymSearchResult</h3>
-        <p></p>
+        <p>Search result for an entity synonym</p>
 
         
           <table class="field-table">
@@ -5419,49 +5423,49 @@ e.g. next_page_token is current_index-2 </p></td>
                   <td>name</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Name of the entity synonym </p></td>
                 </tr>
               
                 <tr>
                   <td>display_name</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Display name of the entity synonym </p></td>
                 </tr>
               
                 <tr>
                   <td>entity_type_name</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Name of the entity type </p></td>
                 </tr>
               
                 <tr>
                   <td>entity_type_display_name</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Display name of the entity type </p></td>
                 </tr>
               
                 <tr>
                   <td>entity_name</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Name of the entity this synonym belongs to </p></td>
                 </tr>
               
                 <tr>
                   <td>entity_display_name</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Display name of the entity </p></td>
                 </tr>
               
                 <tr>
                   <td>language</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Language code of the entity synonym </p></td>
                 </tr>
               
                 <tr>
@@ -5528,28 +5532,28 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre> </p></td>
                   <td>entity_type_results</td>
                   <td><a href="#ondewo.nlu.FullTextSearchResponseEntityType.EntityTypeSearchResult">FullTextSearchResponseEntityType.EntityTypeSearchResult</a></td>
                   <td>repeated</td>
-                  <td><p> </p></td>
+                  <td><p>List of entity type search results </p></td>
                 </tr>
               
                 <tr>
                   <td>term</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Search term used in the query </p></td>
                 </tr>
               
                 <tr>
                   <td>elastic_query</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Elasticsearch query that was executed </p></td>
                 </tr>
               
                 <tr>
                   <td>time</td>
                   <td><a href="#float">float</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Time taken to execute the query in seconds </p></td>
                 </tr>
               
                 <tr>
@@ -5568,7 +5572,7 @@ e.g. next_page_token is current_index-2 </p></td>
         
       
         <h3 id="ondewo.nlu.FullTextSearchResponseEntityType.EntityTypeSearchResult" class="title-badge message">FullTextSearchResponseEntityType.EntityTypeSearchResult</h3>
-        <p></p>
+        <p>Search result for an entity type</p>
 
         
           <table class="field-table">
@@ -5581,21 +5585,21 @@ e.g. next_page_token is current_index-2 </p></td>
                   <td>name</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Name of the entity type </p></td>
                 </tr>
               
                 <tr>
                   <td>display_name</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Display name of the entity type </p></td>
                 </tr>
               
                 <tr>
                   <td>language</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Language code of the entity type </p></td>
                 </tr>
               
                 <tr>
@@ -5662,28 +5666,28 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre> </p></td>
                   <td>intent_results</td>
                   <td><a href="#ondewo.nlu.FullTextSearchResponseIntent.IntentSearchResult">FullTextSearchResponseIntent.IntentSearchResult</a></td>
                   <td>repeated</td>
-                  <td><p> </p></td>
+                  <td><p>List of intent search results </p></td>
                 </tr>
               
                 <tr>
                   <td>term</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Search term used in the query </p></td>
                 </tr>
               
                 <tr>
                   <td>elastic_query</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Elasticsearch query that was executed </p></td>
                 </tr>
               
                 <tr>
                   <td>time</td>
                   <td><a href="#float">float</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Time taken to execute the query in seconds </p></td>
                 </tr>
               
                 <tr>
@@ -5702,7 +5706,7 @@ e.g. next_page_token is current_index-2 </p></td>
         
       
         <h3 id="ondewo.nlu.FullTextSearchResponseIntent.IntentSearchResult" class="title-badge message">FullTextSearchResponseIntent.IntentSearchResult</h3>
-        <p></p>
+        <p>Search result for an intent</p>
 
         
           <table class="field-table">
@@ -5715,35 +5719,35 @@ e.g. next_page_token is current_index-2 </p></td>
                   <td>name</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Name of the intent </p></td>
                 </tr>
               
                 <tr>
                   <td>display_name</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Display name of the intent </p></td>
                 </tr>
               
                 <tr>
                   <td>domain_name</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Domain name of the intent </p></td>
                 </tr>
               
                 <tr>
                   <td>tags</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
-                  <td><p> </p></td>
+                  <td><p>Tags associated with the intent </p></td>
                 </tr>
               
                 <tr>
                   <td>language</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Language code of the intent </p></td>
                 </tr>
               
                 <tr>
@@ -5810,28 +5814,28 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre> </p></td>
                   <td>intent_context_in_results</td>
                   <td><a href="#ondewo.nlu.FullTextSearchResponseIntentContextIn.IntentContextInSearchResult">FullTextSearchResponseIntentContextIn.IntentContextInSearchResult</a></td>
                   <td>repeated</td>
-                  <td><p> </p></td>
+                  <td><p>List of intent input context search results </p></td>
                 </tr>
               
                 <tr>
                   <td>term</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Search term used in the query </p></td>
                 </tr>
               
                 <tr>
                   <td>elastic_query</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Elasticsearch query that was executed </p></td>
                 </tr>
               
                 <tr>
                   <td>time</td>
                   <td><a href="#float">float</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Time taken to execute the query in seconds </p></td>
                 </tr>
               
                 <tr>
@@ -5850,7 +5854,7 @@ e.g. next_page_token is current_index-2 </p></td>
         
       
         <h3 id="ondewo.nlu.FullTextSearchResponseIntentContextIn.IntentContextInSearchResult" class="title-badge message">FullTextSearchResponseIntentContextIn.IntentContextInSearchResult</h3>
-        <p></p>
+        <p>Search result for an intent input context</p>
 
         
           <table class="field-table">
@@ -5863,35 +5867,35 @@ e.g. next_page_token is current_index-2 </p></td>
                   <td>name</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Name of the input context </p></td>
                 </tr>
               
                 <tr>
                   <td>intent_name</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Name of the intent this context belongs to </p></td>
                 </tr>
               
                 <tr>
                   <td>intent_display_name</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Display name of the intent </p></td>
                 </tr>
               
                 <tr>
                   <td>tags</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
-                  <td><p> </p></td>
+                  <td><p>Tags associated with the intent </p></td>
                 </tr>
               
                 <tr>
                   <td>language</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Language code of the context </p></td>
                 </tr>
               
                 <tr>
@@ -5958,28 +5962,28 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre> </p></td>
                   <td>intent_context_out_results</td>
                   <td><a href="#ondewo.nlu.FullTextSearchResponseIntentContextOut.IntentContextOutSearchResult">FullTextSearchResponseIntentContextOut.IntentContextOutSearchResult</a></td>
                   <td>repeated</td>
-                  <td><p> </p></td>
+                  <td><p>List of intent output context search results </p></td>
                 </tr>
               
                 <tr>
                   <td>term</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Search term used in the query </p></td>
                 </tr>
               
                 <tr>
                   <td>elastic_query</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Elasticsearch query that was executed </p></td>
                 </tr>
               
                 <tr>
                   <td>time</td>
                   <td><a href="#float">float</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Time taken to execute the query in seconds </p></td>
                 </tr>
               
                 <tr>
@@ -5998,7 +6002,7 @@ e.g. next_page_token is current_index-2 </p></td>
         
       
         <h3 id="ondewo.nlu.FullTextSearchResponseIntentContextOut.IntentContextOutSearchResult" class="title-badge message">FullTextSearchResponseIntentContextOut.IntentContextOutSearchResult</h3>
-        <p></p>
+        <p>Search result for an intent output context</p>
 
         
           <table class="field-table">
@@ -6011,35 +6015,35 @@ e.g. next_page_token is current_index-2 </p></td>
                   <td>name</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Name of the output context </p></td>
                 </tr>
               
                 <tr>
                   <td>intent_name</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Name of the intent this context belongs to </p></td>
                 </tr>
               
                 <tr>
                   <td>intent_display_name</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Display name of the intent </p></td>
                 </tr>
               
                 <tr>
                   <td>tags</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
-                  <td><p> </p></td>
+                  <td><p>Tags associated with the intent </p></td>
                 </tr>
               
                 <tr>
                   <td>language</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Language code of the context </p></td>
                 </tr>
               
                 <tr>
@@ -6106,28 +6110,28 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre> </p></td>
                   <td>intent_parameters_results</td>
                   <td><a href="#ondewo.nlu.FullTextSearchResponseIntentParameters.IntentParametersSearchResult">FullTextSearchResponseIntentParameters.IntentParametersSearchResult</a></td>
                   <td>repeated</td>
-                  <td><p> </p></td>
+                  <td><p>List of intent parameter search results </p></td>
                 </tr>
               
                 <tr>
                   <td>term</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Search term used in the query </p></td>
                 </tr>
               
                 <tr>
                   <td>elastic_query</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Elasticsearch query that was executed </p></td>
                 </tr>
               
                 <tr>
                   <td>time</td>
                   <td><a href="#float">float</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Time taken to execute the query in seconds </p></td>
                 </tr>
               
                 <tr>
@@ -6146,7 +6150,7 @@ e.g. next_page_token is current_index-2 </p></td>
         
       
         <h3 id="ondewo.nlu.FullTextSearchResponseIntentParameters.IntentParametersSearchResult" class="title-badge message">FullTextSearchResponseIntentParameters.IntentParametersSearchResult</h3>
-        <p></p>
+        <p>Search result for an intent parameter</p>
 
         
           <table class="field-table">
@@ -6159,42 +6163,42 @@ e.g. next_page_token is current_index-2 </p></td>
                   <td>parameter_name</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Name of the parameter </p></td>
                 </tr>
               
                 <tr>
                   <td>parameter_display_name</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Display name of the parameter </p></td>
                 </tr>
               
                 <tr>
                   <td>intent_name</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Name of the intent this parameter belongs to </p></td>
                 </tr>
               
                 <tr>
                   <td>intent_display_name</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Display name of the intent </p></td>
                 </tr>
               
                 <tr>
                   <td>tags</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
-                  <td><p> </p></td>
+                  <td><p>Tags associated with the intent </p></td>
                 </tr>
               
                 <tr>
                   <td>language</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Language code of the parameter </p></td>
                 </tr>
               
                 <tr>
@@ -6261,28 +6265,28 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre> </p></td>
                   <td>intent_response_results</td>
                   <td><a href="#ondewo.nlu.FullTextSearchResponseIntentResponse.IntentResponseSearchResult">FullTextSearchResponseIntentResponse.IntentResponseSearchResult</a></td>
                   <td>repeated</td>
-                  <td><p> </p></td>
+                  <td><p>List of intent response search results </p></td>
                 </tr>
               
                 <tr>
                   <td>term</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Search term used in the query </p></td>
                 </tr>
               
                 <tr>
                   <td>elastic_query</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Elasticsearch query that was executed </p></td>
                 </tr>
               
                 <tr>
                   <td>time</td>
                   <td><a href="#float">float</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Time taken to execute the query in seconds </p></td>
                 </tr>
               
                 <tr>
@@ -6329,7 +6333,7 @@ Examples of invalid page token strings:
         
       
         <h3 id="ondewo.nlu.FullTextSearchResponseIntentResponse.IntentResponseSearchResult" class="title-badge message">FullTextSearchResponseIntentResponse.IntentResponseSearchResult</h3>
-        <p></p>
+        <p>Search result for an intent response</p>
 
         
           <table class="field-table">
@@ -6342,49 +6346,49 @@ Examples of invalid page token strings:
                   <td>text</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Text content of the response </p></td>
                 </tr>
               
                 <tr>
                   <td>platform</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Platform for which this response is intended </p></td>
                 </tr>
               
                 <tr>
                   <td>response_type</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Type of the response </p></td>
                 </tr>
               
                 <tr>
                   <td>intent_name</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Name of the intent this response belongs to </p></td>
                 </tr>
               
                 <tr>
                   <td>intent_display_name</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Display name of the intent </p></td>
                 </tr>
               
                 <tr>
                   <td>tags</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
-                  <td><p> </p></td>
+                  <td><p>Tags associated with the intent </p></td>
                 </tr>
               
                 <tr>
                   <td>language</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Language code of the response </p></td>
                 </tr>
               
                 <tr>
@@ -6451,28 +6455,28 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre> </p></td>
                   <td>intent_tags_results</td>
                   <td><a href="#ondewo.nlu.FullTextSearchResponseIntentTags.IntentTagsSearchResult">FullTextSearchResponseIntentTags.IntentTagsSearchResult</a></td>
                   <td>repeated</td>
-                  <td><p> </p></td>
+                  <td><p>List of intent tag search results </p></td>
                 </tr>
               
                 <tr>
                   <td>term</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Search term used in the query </p></td>
                 </tr>
               
                 <tr>
                   <td>elastic_query</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Elasticsearch query that was executed </p></td>
                 </tr>
               
                 <tr>
                   <td>time</td>
                   <td><a href="#float">float</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Time taken to execute the query in seconds </p></td>
                 </tr>
               
                 <tr>
@@ -6491,7 +6495,7 @@ e.g. next_page_token is current_index-2 </p></td>
         
       
         <h3 id="ondewo.nlu.FullTextSearchResponseIntentTags.IntentTagsSearchResult" class="title-badge message">FullTextSearchResponseIntentTags.IntentTagsSearchResult</h3>
-        <p></p>
+        <p>Search result for an intent tag</p>
 
         
           <table class="field-table">
@@ -6504,42 +6508,42 @@ e.g. next_page_token is current_index-2 </p></td>
                   <td>name</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Name of the tag </p></td>
                 </tr>
               
                 <tr>
                   <td>text</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Text content of the tag </p></td>
                 </tr>
               
                 <tr>
                   <td>intent_name</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Name of the intent this tag belongs to </p></td>
                 </tr>
               
                 <tr>
                   <td>intent_display_name</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Display name of the intent </p></td>
                 </tr>
               
                 <tr>
                   <td>tags</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
-                  <td><p> </p></td>
+                  <td><p>Tags associated with the intent </p></td>
                 </tr>
               
                 <tr>
                   <td>language</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Language code of the tag </p></td>
                 </tr>
               
                 <tr>
@@ -6606,28 +6610,28 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre> </p></td>
                   <td>intent_usersays_results</td>
                   <td><a href="#ondewo.nlu.FullTextSearchResponseIntentUsersays.IntentUsersaysSearchResult">FullTextSearchResponseIntentUsersays.IntentUsersaysSearchResult</a></td>
                   <td>repeated</td>
-                  <td><p> </p></td>
+                  <td><p>List of intent training phrase search results </p></td>
                 </tr>
               
                 <tr>
                   <td>term</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Search term used in the query </p></td>
                 </tr>
               
                 <tr>
                   <td>elastic_query</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Elasticsearch query that was executed </p></td>
                 </tr>
               
                 <tr>
                   <td>time</td>
                   <td><a href="#float">float</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Time taken to execute the query in seconds </p></td>
                 </tr>
               
                 <tr>
@@ -6646,7 +6650,7 @@ e.g. next_page_token is current_index-2 </p></td>
         
       
         <h3 id="ondewo.nlu.FullTextSearchResponseIntentUsersays.IntentUsersaysSearchResult" class="title-badge message">FullTextSearchResponseIntentUsersays.IntentUsersaysSearchResult</h3>
-        <p></p>
+        <p>Search result for an intent training phrase (user says)</p>
 
         
           <table class="field-table">
@@ -6659,63 +6663,63 @@ e.g. next_page_token is current_index-2 </p></td>
                   <td>name</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Name of the training phrase </p></td>
                 </tr>
               
                 <tr>
                   <td>text</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Text of the training phrase </p></td>
                 </tr>
               
                 <tr>
                   <td>text_as_entity_types</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Text with entity types annotated </p></td>
                 </tr>
               
                 <tr>
                   <td>text_as_entity_values</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Text with entity values annotated </p></td>
                 </tr>
               
                 <tr>
                   <td>type</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Type of the training phrase part </p></td>
                 </tr>
               
                 <tr>
                   <td>intent_name</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Name of the intent this training phrase belongs to </p></td>
                 </tr>
               
                 <tr>
                   <td>intent_display_name</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Display name of the intent </p></td>
                 </tr>
               
                 <tr>
                   <td>tags</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
-                  <td><p> </p></td>
+                  <td><p>Tags associated with the intent </p></td>
                 </tr>
               
                 <tr>
                   <td>language</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Language code of the training phrase </p></td>
                 </tr>
               
                 <tr>
@@ -6899,7 +6903,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td>cache_version</td>
                   <td><a href="#int32">int32</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Optional. Cache version to filter model statuses. If not specified, returns statuses for all cache versions. </p></td>
                 </tr>
               
                 <tr>
@@ -6913,7 +6917,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td>model_name</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Optional. Model name to filter model statuses. If not specified, returns statuses for all models. </p></td>
                 </tr>
               
             </tbody>
@@ -6937,7 +6941,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td>model_statuses</td>
                   <td><a href="#ondewo.nlu.ModelStatus">ModelStatus</a></td>
                   <td>repeated</td>
-                  <td><p> </p></td>
+                  <td><p>List of model statuses matching the request filters. </p></td>
                 </tr>
               
             </tbody>
@@ -7075,7 +7079,9 @@ Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre> </p></td>
                   <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
                   <td></td>
                   <td><p>Optional. The mask to control which data fields will be added to the returned data.
-Example: paths=[&quot;duration_in_s_min&quot;, &quot;id&quot;, &quot;session_id&quot;, &quot;project_id&quot;] </p></td>
+<br>
+Example: paths=[&quot;duration_in_s_min&quot;, &quot;id&quot;, &quot;session_id&quot;, &quot;project_id&quot;]
+<br> </p></td>
                 </tr>
               
                 <tr>
@@ -7446,7 +7452,8 @@ Examples of invalid page token strings:
                   <td>field_mask</td>
                   <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
                   <td>optional</td>
-                  <td><p>Optional. The mask to control which fields gets returned. </p></td>
+                  <td><p>Optional. The mask to control which fields gets returned.
+<br> </p></td>
                 </tr>
               
             </tbody>
@@ -7548,21 +7555,21 @@ e.g. next_page_token is current_index-2 </p></td>
                   <td>status_set_time</td>
                   <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Timestamp when the status was set. Read-only field. </p></td>
                 </tr>
               
                 <tr>
                   <td>config</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Configuration of the model as a string. </p></td>
                 </tr>
               
                 <tr>
                   <td>status</td>
                   <td><a href="#ondewo.nlu.ModelStatus.StatusName">ModelStatus.StatusName</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Current status of the model. </p></td>
                 </tr>
               
             </tbody>
@@ -7633,14 +7640,16 @@ with optimized thresholds will be returned but not updated on the server </p></t
                   <td>optimization_info</td>
                   <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
                   <td></td>
-                  <td><p>info about optimization </p></td>
+                  <td><p>info about optimization
+<br> </p></td>
                 </tr>
               
                 <tr>
                   <td>optimized_ondewo_config</td>
                   <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
                   <td></td>
-                  <td><p>the optimized configuration of the ondewo agent e.g., optimized parameters </p></td>
+                  <td><p>the optimized configuration of the ondewo agent e.g., optimized parameters
+<br> </p></td>
                 </tr>
               
             </tbody>
@@ -7718,7 +7727,9 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
                   <td></td>
                   <td><p>initial thresholds are optional, if not given will be taken from the current config
-example {'OndewoIntentSimilarityMatch': 0.59, 'OndewoIntentNamedSimilarityMatch': 0.39} </p></td>
+<br>
+example {'OndewoIntentSimilarityMatch': 0.59, 'OndewoIntentNamedSimilarityMatch': 0.39}
+<br> </p></td>
                 </tr>
               
             </tbody>
@@ -7913,21 +7924,21 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre> </p></td>
                   <td>name</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Required. Name of the resource. </p></td>
                 </tr>
               
                 <tr>
                   <td>type</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Required. Type of the resource (e.g., "audio", "image", "file"). </p></td>
                 </tr>
               
                 <tr>
                   <td>resource_file</td>
                   <td><a href="#bytes">bytes</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Required. The resource file content as bytes. </p></td>
                 </tr>
               
                 <tr>
@@ -8185,67 +8196,67 @@ Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre> </p></td>
               <tr>
                 <td>ALL</td>
                 <td>0</td>
-                <td><p>just a placeholder, has to start with zero</p></td>
+                <td><p>Placeholder value, has to start with zero</p></td>
               </tr>
             
               <tr>
                 <td>OndewoEntityQuery</td>
                 <td>1</td>
-                <td><p></p></td>
+                <td><p>Query for entities</p></td>
               </tr>
             
               <tr>
                 <td>OndewoEntityTypeQuery</td>
                 <td>2</td>
-                <td><p></p></td>
+                <td><p>Query for entity types</p></td>
               </tr>
             
               <tr>
                 <td>OndewoEntitySynonymQuery</td>
                 <td>3</td>
-                <td><p></p></td>
+                <td><p>Query for entity synonyms</p></td>
               </tr>
             
               <tr>
                 <td>OndewoIntentQuery</td>
                 <td>4</td>
-                <td><p></p></td>
+                <td><p>Query for intents</p></td>
               </tr>
             
               <tr>
                 <td>OndewoIntentContextInQuery</td>
                 <td>5</td>
-                <td><p></p></td>
+                <td><p>Query for intent input contexts</p></td>
               </tr>
             
               <tr>
                 <td>OndewoIntentContextOutQuery</td>
                 <td>6</td>
-                <td><p></p></td>
+                <td><p>Query for intent output contexts</p></td>
               </tr>
             
               <tr>
                 <td>OndewoIntentUsersaysQuery</td>
                 <td>7</td>
-                <td><p></p></td>
+                <td><p>Query for intent training phrases (user says)</p></td>
               </tr>
             
               <tr>
                 <td>OndewoIntentTagsQuery</td>
                 <td>8</td>
-                <td><p></p></td>
+                <td><p>Query for intent tags</p></td>
               </tr>
             
               <tr>
                 <td>OndewoIntentParametersQuery</td>
                 <td>9</td>
-                <td><p></p></td>
+                <td><p>Query for intent parameters</p></td>
               </tr>
             
               <tr>
                 <td>OndewoIntentResponseQuery</td>
                 <td>10</td>
-                <td><p></p></td>
+                <td><p>Query for intent responses</p></td>
               </tr>
             
           </tbody>
@@ -8281,7 +8292,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre> </p></td>
         </table>
       
         <h3 id="ondewo.nlu.ModelStatus.StatusName" class="title-badge enum">ModelStatus.StatusName</h3>
-        <p></p>
+        <p>Status name of the model.</p>
         <table class="enum-table">
           <thead>
             <tr><td>Name</td><td>Number</td><td>Description</td></tr>
@@ -8291,43 +8302,43 @@ Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre> </p></td>
               <tr>
                 <td>UNKNOWN</td>
                 <td>0</td>
-                <td><p></p></td>
+                <td><p>Unknown status</p></td>
               </tr>
             
               <tr>
                 <td>INITIALIZING</td>
                 <td>1</td>
-                <td><p></p></td>
+                <td><p>Model is initializing</p></td>
               </tr>
             
               <tr>
                 <td>INITIALIZED</td>
                 <td>2</td>
-                <td><p></p></td>
+                <td><p>Model has been initialized</p></td>
               </tr>
             
               <tr>
                 <td>LOADING_DATA</td>
                 <td>3</td>
-                <td><p></p></td>
+                <td><p>Model is loading data</p></td>
               </tr>
             
               <tr>
                 <td>TRAINING</td>
                 <td>4</td>
-                <td><p></p></td>
+                <td><p>Model is training</p></td>
               </tr>
             
               <tr>
                 <td>TESTING</td>
                 <td>5</td>
-                <td><p></p></td>
+                <td><p>Model is being tested</p></td>
               </tr>
             
               <tr>
                 <td>TRAINED</td>
                 <td>6</td>
-                <td><p></p></td>
+                <td><p>Model training is complete</p></td>
               </tr>
             
           </tbody>
@@ -9412,7 +9423,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre> </p></td>
                   <td>drop_unknown_parameters</td>
                   <td><a href="#bool">bool</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Optional. Whether to drop unknown parameters from the generated responses </p></td>
                 </tr>
               
                 <tr>
@@ -9949,7 +9960,9 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/ccai/services/&lt;service_uuid&
                   <td><a href="#ondewo.nlu.LlmModel">LlmModel</a></td>
                   <td>repeated</td>
                   <td><p>A list of LLM models associated with the specified CCAI service.
+<br>
 Each model in this list represents an individual language model that can
+<br>
 be used within the service, including details such as name, provider, and description. </p></td>
                 </tr>
               
@@ -10023,8 +10036,9 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/ccai/services/&lt;service_uuid&
                   <td></td>
                   <td><p>The request payload for the LLM, structured according to the specific
 requirements of the large language model provider.
+<br> 
 The payload must fit the format expected by the specified LLM provider,
-as defined by <pre><code>CcaiServiceProvider</code></pre>. </p></td>
+as defined by <pre><code>CcaiServiceProvider</code></pre> </p></td>
                 </tr>
               
                 <tr>
@@ -10072,6 +10086,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/ccai/services/&lt;service_uuid&
                   <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
                   <td></td>
                   <td><p>The response data from the LLM, returned as a structured payload.
+<br>
 This can contain the text generation, embeddings, or other outputs
 based on the specific request made to the LLM provider. </p></td>
                 </tr>
@@ -10165,6 +10180,7 @@ Specifies the LLM provider (e.g., Ollama, OpenAI, Google, etc.), indicating the 
                   <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
                   <td></td>
                   <td><p>The response data from the LLM in a streaming format, returned as a structured payload.
+<br>
 This response is part of a continuous stream of data from the LLM, allowing
 incremental results to be sent as they are generated. </p></td>
                 </tr>
@@ -10441,7 +10457,7 @@ fine-tuned for multi-class intent detection. For details see <a href="https://ar
               <tr>
                 <td>OndewoIntentMetaClassifier</td>
                 <td>8</td>
-                <td><p></p></td>
+                <td><p>Meta classifier that combines multiple intent classification algorithms to improve accuracy</p></td>
               </tr>
             
               <tr>
@@ -11448,7 +11464,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
               <tr>
                 <td>SORT_CCAI_PROJECT_BY_NAME</td>
                 <td>1</td>
-                <td><p>Sort by project name such as <pre><code>projects/&lt;project_uuid&gt;/project</code></pre>.</p></td>
+                <td><p>Sort by project name such as <pre><code>projects/&lt;project_uuid&gt;/project</code></pre></p></td>
               </tr>
             
               <tr>
@@ -12228,6 +12244,7 @@ Examples of invalid page token strings:
                   <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
                   <td></td>
                   <td><p>Optional. Mask to control which fields will be filled with data.
+<br>
 Example: path=["notification.user_names"] </p></td>
                 </tr>
               
@@ -12883,7 +12900,7 @@ A Notification origin can be from a product (service), e.g. ondewo-nlu, ondewo-s
       
         
         <h3 id="ondewo.nlu.Contexts" class="title-badge service">Contexts</h3>
-        <p>A context represents additional information included with user input or with an intent returned by the Dialogflow API. Contexts are helpful for differentiating user input which may be vague or have a different meaning depending on additional details from your application such as user setting and preferences, previous user input, where the user is in your application, geographic location, and so on.</p><p>You can include contexts as input parameters of a <a href="index.html#google.cloud.dialogflow.v2.Sessions.DetectIntent">DetectIntent</a> (or <a href="index.html#google.cloud.dialogflow.v2.Sessions.StreamingDetectIntent">StreamingDetectIntent</a>) request, or as output contexts included in the returned intent.</p><p>Contexts expire when an intent is matched, after the number of <code>DetectIntent</code> requests specified by the <code>lifespan_count</code> parameter, or after 10 minutes if no intents are matched for a <code>DetectIntent</code> request.</p><p>For more information about contexts, see the <a href="https://dialogflow.com/docs/contexts">Dialogflow documentation</a>.</p>
+        <p>A context represents additional information included with user input or with an intent returned by the Dialogflow API. Contexts are helpful for differentiating user input which may be vague or have a different meaning depending on additional details from your application such as user setting and preferences, previous user input, where the user is in your application, geographic location, and so on.</p><p>You can include contexts as input parameters of a <a href="index.html#ondewo.nlu.Sessions.DetectIntent">DetectIntent</a> (or <a href="index.html#ondewo.nlu.Sessions.StreamingDetectIntent">StreamingDetectIntent</a>) request, or as output contexts included in the returned intent.</p><p>Contexts expire when an intent is matched, after the number of <code>DetectIntent</code> requests specified by the <code>lifespan_count</code> parameter, or after 10 minutes if no intents are matched for a <code>DetectIntent</code> request.</p><p>For more information about contexts, see the <a href="https://dialogflow.com/docs/contexts">Dialogflow documentation</a>.</p>
 
         
         <div id="ondewo.nlu.Contexts-methods" class="service-methods">Service Methods</div>
@@ -13109,7 +13126,7 @@ Keys are the display names of context parameters. </p></td>
         
       
         <h3 id="ondewo.nlu.Context.Parameter" class="title-badge message">Context.Parameter</h3>
-        <p></p>
+        <p>Represents a parameter associated with a context</p>
 
         
           <table class="field-table">
@@ -13213,7 +13230,7 @@ Keys are the display names of context parameters. </p></td>
         
       
         <h3 id="ondewo.nlu.CreateContextRequest" class="title-badge message">CreateContextRequest</h3>
-        <p>The request message for <a href="index.html#google.cloud.dialogflow.v2.Contexts.CreateContext">Contexts.CreateContext</a>.</p>
+        <p>The request message for <a href="index.html#ondewo.nlu.Contexts.CreateContext">Contexts.CreateContext</a>.</p>
 
         
           <table class="field-table">
@@ -13245,7 +13262,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid
         
       
         <h3 id="ondewo.nlu.DeleteAllContextsRequest" class="title-badge message">DeleteAllContextsRequest</h3>
-        <p>The request message for <a href="index.html#google.cloud.dialogflow.v2.Contexts.DeleteAllContexts">Contexts.DeleteAllContexts</a>.</p><p>Required. The name of the session to delete all contexts from.</p><p>Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre></p>
+        <p>The request message for <a href="index.html#ondewo.nlu.Contexts.DeleteAllContexts">Contexts.DeleteAllContexts</a>.</p>
 
         
           <table class="field-table">
@@ -13258,7 +13275,8 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid
                   <td>session_id</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Required. The name of the session to delete all contexts from.
+Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre> </p></td>
                 </tr>
               
             </tbody>
@@ -13269,7 +13287,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid
         
       
         <h3 id="ondewo.nlu.DeleteContextRequest" class="title-badge message">DeleteContextRequest</h3>
-        <p>The request message for <a href="index.html#google.cloud.dialogflow.v2.Contexts.DeleteContext">Contexts.DeleteContext</a>.</p>
+        <p>The request message for <a href="index.html#ondewo.nlu.Contexts.DeleteContext">Contexts.DeleteContext</a>.</p>
 
         
           <table class="field-table">
@@ -13294,7 +13312,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid
         
       
         <h3 id="ondewo.nlu.GetContextRequest" class="title-badge message">GetContextRequest</h3>
-        <p>The request message for <a href="index.html#google.cloud.dialogflow.v2.Contexts.GetContext">Contexts.GetContext</a>.</p>
+        <p>The request message for <a href="index.html#ondewo.nlu.Contexts.GetContext">Contexts.GetContext</a>.</p>
 
         
           <table class="field-table">
@@ -13319,7 +13337,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid
         
       
         <h3 id="ondewo.nlu.ListContextsRequest" class="title-badge message">ListContextsRequest</h3>
-        <p>The request message for <a href="index.html#google.cloud.dialogflow.v2.Contexts.ListContexts">Contexts.ListContexts</a>.</p>
+        <p>The request message for <a href="index.html#ondewo.nlu.Contexts.ListContexts">Contexts.ListContexts</a>.</p>
 
         
           <table class="field-table">
@@ -13380,7 +13398,7 @@ Examples of invalid page token strings:
         
       
         <h3 id="ondewo.nlu.ListContextsResponse" class="title-badge message">ListContextsResponse</h3>
-        <p>The response message for <a href="index.html#google.cloud.dialogflow.v2.Contexts.ListContexts">Contexts.ListContexts</a>.</p>
+        <p>The response message for <a href="index.html#ondewo.nlu.Contexts.ListContexts">Contexts.ListContexts</a>.</p>
 
         
           <table class="field-table">
@@ -13413,7 +13431,7 @@ e.g. next_page_token is current_index-2 </p></td>
         
       
         <h3 id="ondewo.nlu.UpdateContextRequest" class="title-badge message">UpdateContextRequest</h3>
-        <p>The request message for <a href="index.html#google.cloud.dialogflow.v2.Contexts.UpdateContext">Contexts.UpdateContext</a>.</p>
+        <p>The request message for <a href="index.html#ondewo.nlu.Contexts.UpdateContext">Contexts.UpdateContext</a>.</p>
 
         
           <table class="field-table">
@@ -13461,7 +13479,7 @@ e.g. next_page_token is current_index-2 </p></td>
       
         
         <h3 id="ondewo.nlu.EntityTypes" class="title-badge service">EntityTypes</h3>
-        <p>Entities are extracted from user input and represent parameters that are meaningful to your application. For example, a date range, a proper name such as a geographic location or landmark, and so on. Entities represent actionable data for your application.</p><p>When you define an entity, you can also include synonyms that all map to</p><p>that entity. For example, &quot;soft drink&quot;, &quot;soda&quot;, &quot;pop&quot;, and so on.</p><p>There are three types of entities:</p><p><ul></p><p><li><strong>System</strong> - entities that are defined by the Dialogflow API for common</p><p>data types such as date, time, currency, and so on. A system entity is</p><p>represented by the <code>EntityType</code> type.</li></p><p><li><strong>Developer</strong> - entities that are defined by you that represent</p><p>actionable data that is meaningful to your application. For example,</p><p>you could define a <code>pizza.sauce</code> entity for red or white pizza sauce,</p><p>a <code>pizza.cheese</code> entity for the different types of cheese on a pizza,</p><p>a <code>pizza.topping</code> entity for different toppings, and so on. A developer</p><p>entity is represented by the <code>EntityType</code> type.</li></p><p><li><strong>User</strong> - entities that are built for an individual user such as</p><p>favorites, preferences, playlists, and so on. A user entity is</p><p>represented by the <a href="index.html#google.cloud.dialogflow.v2.SessionEntityType">SessionEntityType</a> type.</li></p><p></ul></p><p>For more information about entity types, see the</p><p><a href="https://dialogflow.com/docs/entities">Dialogflow documentation</a>.</p>
+        <p>Entities are extracted from user input and represent parameters that are meaningful to your application. For example, a date range, a proper name such as a geographic location or landmark, and so on. Entities represent actionable data for your application.</p><p>When you define an entity, you can also include synonyms that all map to that entity. For example, &quot;soft drink&quot;, &quot;soda&quot;, &quot;pop&quot;, and so on.</p><p>There are three types of entities:</p><p><ul></p><p><li><strong>System</strong> - entities that are defined by the Dialogflow API for common data types such as date, time, currency, and so on. A system entity is represented by the <code>EntityType</code> type.</li></p><p><li><strong>Developer</strong> - entities that are defined by you that represent actionable data that is meaningful to your application. For example, you could define a <code>pizza.sauce</code> entity for red or white pizza sauce, a <code>pizza.cheese</code> entity for the different types of cheese on a pizza, a <code>pizza.topping</code> entity for different toppings, and so on. A developer entity is represented by the <code>EntityType</code> type.</li></p><p><li><strong>User</strong> - entities that are built for an individual user such as favorites, preferences, playlists, and so on. A user entity is represented by the <a href="index.html#ondewo.nlu.SessionEntityType">SessionEntityType</a> type.</li></p><p></ul></p><p>For more information about entity types, see the <a href="https://dialogflow.com/docs/entities">Dialogflow documentation</a>.</p>
 
         
         <div id="ondewo.nlu.EntityTypes-methods" class="service-methods">Service Methods</div>
@@ -13502,8 +13520,8 @@ e.g. next_page_token is current_index-2 </p></td>
 
           Updates/Creates multiple entity types in the specified agent.
 
-Operation &lt;response: <a href="index.html#google.cloud.dialogflow.v2.BatchUpdateEntityTypesResponse">BatchUpdateEntityTypesResponse</a>,
-           metadata: <a href="index.html#google.protobuf.Struct">google.protobuf.Struct</a>&gt;
+Operation &lt;response: <a href="index.html#ondewo.nlu.BatchUpdateEntityTypesResponse">BatchUpdateEntityTypesResponse</a>,
+           metadata: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#struct">google.protobuf.Struct</a>&gt;
         
           <h4 id="ondewo.nlu.EntityTypes.BatchDeleteEntityTypes" class="title-badge method">BatchDeleteEntityTypes</h4>
 
@@ -13511,8 +13529,8 @@ Operation &lt;response: <a href="index.html#google.cloud.dialogflow.v2.BatchUpda
 
           Deletes entity types in the specified agent.
 
-Operation &lt;response: <a href="index.html#google.protobuf.Empty">google.protobuf.Empty</a>,
-           metadata: <a href="index.html#google.protobuf.Struct">google.protobuf.Struct</a>&gt;
+Operation &lt;response: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#empty">google.protobuf.Empty</a>,
+           metadata: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#struct">google.protobuf.Struct</a>&gt;
         
           <h4 id="ondewo.nlu.EntityTypes.GetEntity" class="title-badge method">GetEntity</h4>
 
@@ -13786,7 +13804,7 @@ Operation &lt;response: <a href="index.html#google.protobuf.Empty">google.protob
         
       
         <h3 id="ondewo.nlu.BatchDeleteEntityTypesRequest" class="title-badge message">BatchDeleteEntityTypesRequest</h3>
-        <p>The request message for <a href="index.html#google.cloud.dialogflow.v2.EntityTypes.BatchDeleteEntityTypes">EntityTypes.BatchDeleteEntityTypes</a>.</p>
+        <p>The request message for <a href="index.html#ondewo.nlu.EntityTypes.BatchDeleteEntityTypes">EntityTypes.BatchDeleteEntityTypes</a>.</p>
 
         
           <table class="field-table">
@@ -13899,7 +13917,7 @@ same agent as `parent`. </p></td>
         
       
         <h3 id="ondewo.nlu.BatchUpdateEntityTypesRequest" class="title-badge message">BatchUpdateEntityTypesRequest</h3>
-        <p>The request message for <a href="index.html#google.cloud.dialogflow.v2.EntityTypes.BatchUpdateEntityTypes">EntityTypes.BatchUpdateEntityTypes</a>.</p>
+        <p>The request message for <a href="index.html#ondewo.nlu.EntityTypes.BatchUpdateEntityTypes">EntityTypes.BatchUpdateEntityTypes</a>.</p>
 
         
           <table class="field-table">
@@ -13959,7 +13977,7 @@ Note: languages must be enabled in the agent, before they can be used. </p></td>
         
       
         <h3 id="ondewo.nlu.BatchUpdateEntityTypesResponse" class="title-badge message">BatchUpdateEntityTypesResponse</h3>
-        <p>The response message for <a href="index.html#google.cloud.dialogflow.v2.EntityTypes.BatchUpdateEntityTypes">EntityTypes.BatchUpdateEntityTypes</a>.</p>
+        <p>The response message for <a href="index.html#ondewo.nlu.EntityTypes.BatchUpdateEntityTypes">EntityTypes.BatchUpdateEntityTypes</a>.</p>
 
         
           <table class="field-table">
@@ -14015,7 +14033,7 @@ Note: languages must be enabled in the agent, before they can be used. </p></td>
         
       
         <h3 id="ondewo.nlu.CreateEntityTypeRequest" class="title-badge message">CreateEntityTypeRequest</h3>
-        <p>The request message for <a href="index.html#google.cloud.dialogflow.v2.EntityTypes.CreateEntityType">EntityTypes.CreateEntityType</a>.</p>
+        <p>The request message for <a href="index.html#ondewo.nlu.EntityTypes.CreateEntityType">EntityTypes.CreateEntityType</a>.</p>
 
         
           <table class="field-table">
@@ -14121,7 +14139,7 @@ Note: languages must be enabled in the agent, before they can be used. </p></td>
         
       
         <h3 id="ondewo.nlu.DeleteEntityTypeRequest" class="title-badge message">DeleteEntityTypeRequest</h3>
-        <p>The request message for <a href="index.html#google.cloud.dialogflow.v2.EntityTypes.DeleteEntityType">EntityTypes.DeleteEntityType</a>.</p>
+        <p>The request message for <a href="index.html#ondewo.nlu.EntityTypes.DeleteEntityType">EntityTypes.DeleteEntityType</a>.</p>
 
         
           <table class="field-table">
@@ -14290,7 +14308,7 @@ e.g. next_page_token is current_index-2 </p></td>
         
       
         <h3 id="ondewo.nlu.EntityType.Entity" class="title-badge message">EntityType.Entity</h3>
-        <p>Optional. Represents an entity.</p>
+        <p>Represents an entity value within an entity type</p>
 
         
           <table class="field-table">
@@ -14526,7 +14544,7 @@ Examples are:
         
       
         <h3 id="ondewo.nlu.GetEntityTypeRequest" class="title-badge message">GetEntityTypeRequest</h3>
-        <p>The request message for <a href="index.html#google.cloud.dialogflow.v2.EntityTypes.GetEntityType">EntityTypes.GetEntityType</a>.</p>
+        <p>The request message for <a href="index.html#ondewo.nlu.EntityTypes.GetEntityType">EntityTypes.GetEntityType</a>.</p>
 
         
           <table class="field-table">
@@ -14728,7 +14746,7 @@ e.g. next_page_token is current_index-2 </p></td>
         
       
         <h3 id="ondewo.nlu.ListEntityTypesRequest" class="title-badge message">ListEntityTypesRequest</h3>
-        <p>The request message for <a href="index.html#google.cloud.dialogflow.v2.EntityTypes.ListEntityTypes">EntityTypes.ListEntityTypes</a>.</p>
+        <p>The request message for <a href="index.html#ondewo.nlu.EntityTypes.ListEntityTypes">EntityTypes.ListEntityTypes</a>.</p>
 
         
           <table class="field-table">
@@ -14821,7 +14839,7 @@ Examples of invalid page token strings:
         
       
         <h3 id="ondewo.nlu.ListEntityTypesResponse" class="title-badge message">ListEntityTypesResponse</h3>
-        <p>The response message for <a href="index.html#google.cloud.dialogflow.v2.EntityTypes.ListEntityTypes">EntityTypes.ListEntityTypes</a>.</p>
+        <p>The response message for <a href="index.html#ondewo.nlu.EntityTypes.ListEntityTypes">EntityTypes.ListEntityTypes</a>.</p>
 
         
           <table class="field-table">
@@ -14878,7 +14896,7 @@ e.g. next_page_token is current_index-2 </p></td>
         
       
         <h3 id="ondewo.nlu.UpdateEntityTypeRequest" class="title-badge message">UpdateEntityTypeRequest</h3>
-        <p>The request message for <a href="index.html#google.cloud.dialogflow.v2.EntityTypes.UpdateEntityType">EntityTypes.UpdateEntityType</a>.</p>
+        <p>The request message for <a href="index.html#ondewo.nlu.EntityTypes.UpdateEntityType">EntityTypes.UpdateEntityType</a>.</p>
 
         
           <table class="field-table">
@@ -14967,13 +14985,13 @@ listed in the entity.</p></td>
               <tr>
                 <td>ACTIVE</td>
                 <td>0</td>
-                <td><p></p></td>
+                <td><p>Entity type is active</p></td>
               </tr>
             
               <tr>
                 <td>INACTIVE</td>
                 <td>1</td>
-                <td><p></p></td>
+                <td><p>Entity type is inactive</p></td>
               </tr>
             
           </tbody>
@@ -15051,37 +15069,37 @@ types (with or without aliases).</p></td>
               <tr>
                 <td>NO_ENTITY_TYPE_SORTING</td>
                 <td>0</td>
-                <td><p></p></td>
+                <td><p>No sorting applied</p></td>
               </tr>
             
               <tr>
                 <td>SORT_ENTITY_TYPE_BY_NAME</td>
                 <td>1</td>
-                <td><p></p></td>
+                <td><p>Sort by entity type name</p></td>
               </tr>
             
               <tr>
                 <td>SORT_ENTITY_TYPE_BY_CREATION_DATE</td>
                 <td>2</td>
-                <td><p></p></td>
+                <td><p>Sort by creation date</p></td>
               </tr>
             
               <tr>
                 <td>SORT_ENTITY_TYPE_BY_LAST_UPDATED</td>
                 <td>3</td>
-                <td><p></p></td>
+                <td><p>Sort by last updated date</p></td>
               </tr>
             
               <tr>
                 <td>SORT_ENTITY_TYPE_BY_ENTITY_VALUE_COUNT</td>
                 <td>4</td>
-                <td><p></p></td>
+                <td><p>Sort by entity value count</p></td>
               </tr>
             
               <tr>
                 <td>SORT_ENTITY_TYPE_BY_SYNONYM_COUNT</td>
                 <td>5</td>
-                <td><p></p></td>
+                <td><p>Sort by synonym count</p></td>
               </tr>
             
           </tbody>
@@ -15145,19 +15163,19 @@ types (with or without aliases).</p></td>
               <tr>
                 <td>SORT_ENTITY_VALUE_BY_DISPLAY_NAME</td>
                 <td>1</td>
-                <td><p></p></td>
+                <td><p>Sort by display name</p></td>
               </tr>
             
               <tr>
                 <td>SORT_ENTITY_VALUE_BY_VALUE</td>
                 <td>2</td>
-                <td><p></p></td>
+                <td><p>Sort by value</p></td>
               </tr>
             
               <tr>
                 <td>SORT_ENTITY_VALUE_BY_SYNONYM_COUNT</td>
                 <td>3</td>
-                <td><p></p></td>
+                <td><p>Sort by synonym count</p></td>
               </tr>
             
           </tbody>
@@ -15179,7 +15197,7 @@ types (with or without aliases).</p></td>
       
         
         <h3 id="ondewo.nlu.Intents" class="title-badge service">Intents</h3>
-        <p>An intent represents a mapping between input from a user and an action to</p><p>be taken by your application. When you pass user input to the</p><p><a href="index.html#google.cloud.dialogflow.v2.Sessions.DetectIntent">DetectIntent</a> (or</p><p><a href="index.html#google.cloud.dialogflow.v2.Sessions.StreamingDetectIntent">StreamingDetectIntent</a>) method, the</p><p>Dialogflow API analyzes the input and searches</p><p>for a matching intent. If no match is found, the Dialogflow API returns a</p><p>fallback intent (<code>is_fallback</code> = true).</p><p>You can provide additional information for the Dialogflow API to use to</p><p>match user input to an intent by adding the following to your intent.</p><p><ul></p><p><li><strong>Contexts</strong> - provide additional context for intent analysis. For</p><p>example, if an intent is related to an object in your application that</p><p>plays music, you can provide a context to determine when to match the</p><p>intent if the user input is &quot;turn it off&quot;.  You can include a context</p><p>that matches the intent when there is previous user input of</p><p>&quot;play music&quot;, and not when there is previous user input of</p><p>&quot;turn on the light&quot;.</li></p><p><li><strong>Events</strong> - allow for matching an intent by using an event name</p><p>instead of user input. Your application can provide an event name and</p><p>related parameters to the Dialogflow API to match an intent. For</p><p>example, when your application starts, you can send a welcome event</p><p>with a user name parameter to the Dialogflow API to match an intent with</p><p>a personalized welcome message for the user.</li></p><p><li><strong>Training phrases</strong> - provide examples of user input to train the</p><p>Dialogflow API agent to better match intents.</li></p><p></ul></p><p>For more information about intents, see the</p><p><a href="https://dialogflow.com/docs/intents">Dialogflow documentation</a>.</p>
+        <p>An intent represents a mapping between input from a user and an action to be taken by your application. When you pass user input to the <a href="index.html#ondewo.nlu.Sessions.DetectIntent">DetectIntent</a> (or <a href="index.html#ondewo.nlu.Sessions.StreamingDetectIntent">StreamingDetectIntent</a>) method, the Dialogflow API analyzes the input and searches for a matching intent. If no match is found, the Dialogflow API returns a fallback intent (<code>is_fallback</code> = true).</p><p>You can provide additional information for the Dialogflow API to use to match user input to an intent by adding the following to your intent.</p><p><ul></p><p><li><strong>Contexts</strong> - provide additional context for intent analysis. For example, if an intent is related to an object in your application that plays music, you can provide a context to determine when to match the intent if the user input is &quot;turn it off&quot;.  You can include a context that matches the intent when there is previous user input of &quot;play music&quot;, and not when there is previous user input of &quot;turn on the light&quot;.</li></p><p><li><strong>Events</strong> - allow for matching an intent by using an event name instead of user input. Your application can provide an event name and related parameters to the Dialogflow API to match an intent. For example, when your application starts, you can send a welcome event with a user name parameter to the Dialogflow API to match an intent with a personalized welcome message for the user.</li></p><p><li><strong>Training phrases</strong> - provide examples of user input to train the Dialogflow API agent to better match intents.</li></p><p></ul></p><p>For more information about intents, see the <a href="https://dialogflow.com/docs/intents">Dialogflow documentation</a>.</p>
 
         
         <div id="ondewo.nlu.Intents-methods" class="service-methods">Service Methods</div>
@@ -15220,15 +15238,15 @@ types (with or without aliases).</p></td>
 
           Updates/Creates multiple intents in the specified agent.
 
-Operation &lt;response: <a href="index.html#google.cloud.dialogflow.v2.BatchUpdateIntentsResponse">BatchUpdateIntentsResponse</a>&gt;
+Operation &lt;response: <a href="index.html#ondewo.nlu.BatchUpdateIntentsResponse">BatchUpdateIntentsResponse</a>&gt;
         
           <h4 id="ondewo.nlu.Intents.BatchDeleteIntents" class="title-badge method">BatchDeleteIntents</h4>
 
           <pre>rpc BatchDeleteIntents (<a href="#ondewo.nlu.BatchDeleteIntentsRequest">BatchDeleteIntentsRequest</a>) returns (<a href="#ondewo.nlu.Operation">Operation)</a></pre>
 
           Deletes intents in the specified agent.
-
-Operation &lt;response: <a href="index.html#google.protobuf.Empty">google.protobuf.Empty</a>&gt;
+<br>
+Operation &lt;response: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#empty">google.protobuf.Empty</a>&gt;
         
           <h4 id="ondewo.nlu.Intents.TagIntent" class="title-badge method">TagIntent</h4>
 
@@ -15481,7 +15499,7 @@ Operation &lt;response: <a href="index.html#google.protobuf.Empty">google.protob
                   <td>parameter_requests</td>
                   <td><a href="#ondewo.nlu.BatchCreateParametersRequest.CreateParameterRequest">BatchCreateParametersRequest.CreateParameterRequest</a></td>
                   <td>repeated</td>
-                  <td><p> </p></td>
+                  <td><p>List of parameters to create </p></td>
                 </tr>
               
             </tbody>
@@ -15492,7 +15510,7 @@ Operation &lt;response: <a href="index.html#google.protobuf.Empty">google.protob
         
       
         <h3 id="ondewo.nlu.BatchCreateParametersRequest.CreateParameterRequest" class="title-badge message">BatchCreateParametersRequest.CreateParameterRequest</h3>
-        <p></p>
+        <p>Request to create a single parameter</p>
 
         
           <table class="field-table">
@@ -15547,7 +15565,7 @@ Operation &lt;response: <a href="index.html#google.protobuf.Empty">google.protob
         
       
         <h3 id="ondewo.nlu.BatchCreateResponseMessagesRequest.CreateResponseMessageRequest" class="title-badge message">BatchCreateResponseMessagesRequest.CreateResponseMessageRequest</h3>
-        <p></p>
+        <p>Request to create a single response message</p>
 
         
           <table class="field-table">
@@ -15602,7 +15620,7 @@ Operation &lt;response: <a href="index.html#google.protobuf.Empty">google.protob
         
       
         <h3 id="ondewo.nlu.BatchCreateTrainingPhrasesRequest.CreateTrainingPhraseRequest" class="title-badge message">BatchCreateTrainingPhrasesRequest.CreateTrainingPhraseRequest</h3>
-        <p></p>
+        <p>Request to create a single training phrase</p>
 
         
           <table class="field-table">
@@ -15633,7 +15651,7 @@ Operation &lt;response: <a href="index.html#google.protobuf.Empty">google.protob
         
       
         <h3 id="ondewo.nlu.BatchDeleteIntentsRequest" class="title-badge message">BatchDeleteIntentsRequest</h3>
-        <p>The request message for <a href="index.html#google.cloud.dialogflow.v2.Intents.BatchDeleteIntents">Intents.BatchDeleteIntents</a>.</p>
+        <p>The request message for <a href="index.html#ondewo.nlu.Intents.BatchDeleteIntents">Intents.BatchDeleteIntents</a>.</p>
 
         
           <table class="field-table">
@@ -15722,7 +15740,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&g
         
       
         <h3 id="ondewo.nlu.BatchDeleteParametersResponse.DeleteParameterStatus" class="title-badge message">BatchDeleteParametersResponse.DeleteParameterStatus</h3>
-        <p></p>
+        <p>Status of a parameter deletion operation</p>
 
         
           <table class="field-table">
@@ -15809,7 +15827,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&g
         
       
         <h3 id="ondewo.nlu.BatchDeleteResponseMessagesResponse.DeleteResponseMessageStatus" class="title-badge message">BatchDeleteResponseMessagesResponse.DeleteResponseMessageStatus</h3>
-        <p></p>
+        <p>Status of a response message deletion operation</p>
 
         
           <table class="field-table">
@@ -15896,7 +15914,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&g
         
       
         <h3 id="ondewo.nlu.BatchDeleteTrainingPhrasesResponse.DeleteTrainingPhraseStatus" class="title-badge message">BatchDeleteTrainingPhrasesResponse.DeleteTrainingPhraseStatus</h3>
-        <p></p>
+        <p>Status of a training phrase deletion operation</p>
 
         
           <table class="field-table">
@@ -16033,7 +16051,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&g
         
       
         <h3 id="ondewo.nlu.BatchParametersStatusResponse.ParameterStatus" class="title-badge message">BatchParametersStatusResponse.ParameterStatus</h3>
-        <p></p>
+        <p>Status of a parameter operation</p>
 
         
           <table class="field-table">
@@ -16095,7 +16113,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&g
         
       
         <h3 id="ondewo.nlu.BatchResponseMessagesStatusResponse.ResponseMessageStatus" class="title-badge message">BatchResponseMessagesStatusResponse.ResponseMessageStatus</h3>
-        <p></p>
+        <p>Status of a response message operation</p>
 
         
           <table class="field-table">
@@ -16157,7 +16175,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&g
         
       
         <h3 id="ondewo.nlu.BatchUpdateIntentsRequest" class="title-badge message">BatchUpdateIntentsRequest</h3>
-        <p>The request message for <a href="index.html#google.cloud.dialogflow.v2.Intents.BatchUpdateIntents">Intents.BatchUpdateIntents</a>.</p>
+        <p>The request message for <a href="index.html#ondewo.nlu.Intents.BatchUpdateIntents">Intents.BatchUpdateIntents</a>.</p>
 
         
           <table class="field-table">
@@ -16224,7 +16242,7 @@ Note: languages must be enabled in the agent, before they can be used. </p></td>
         
       
         <h3 id="ondewo.nlu.BatchUpdateIntentsResponse" class="title-badge message">BatchUpdateIntentsResponse</h3>
-        <p>The response message for <a href="index.html#google.cloud.dialogflow.v2.Intents.BatchUpdateIntents">Intents.BatchUpdateIntents</a>.</p>
+        <p>The response message for <a href="index.html#ondewo.nlu.Intents.BatchUpdateIntents">Intents.BatchUpdateIntents</a>.</p>
 
         
           <table class="field-table">
@@ -16320,7 +16338,7 @@ Note: languages must be enabled in the agent, before they can be used. </p></td>
         
       
         <h3 id="ondewo.nlu.CreateIntentRequest" class="title-badge message">CreateIntentRequest</h3>
-        <p>The request message for <a href="index.html#google.cloud.dialogflow.v2.Intents.CreateIntent">Intents.CreateIntent</a>.</p>
+        <p>The request message for <a href="index.html#ondewo.nlu.Intents.CreateIntent">Intents.CreateIntent</a>.</p>
 
         
           <table class="field-table">
@@ -16371,7 +16389,7 @@ Note: languages must be enabled in the agent, before they can be used. </p></td>
         
       
         <h3 id="ondewo.nlu.DeleteIntentRequest" class="title-badge message">DeleteIntentRequest</h3>
-        <p>The request message for <a href="index.html#google.cloud.dialogflow.v2.Intents.DeleteIntent">Intents.DeleteIntent</a>.</p>
+        <p>The request message for <a href="index.html#ondewo.nlu.Intents.DeleteIntent">Intents.DeleteIntent</a>.</p>
 
         
           <table class="field-table">
@@ -16421,7 +16439,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&g
         
       
         <h3 id="ondewo.nlu.GetIntentRequest" class="title-badge message">GetIntentRequest</h3>
-        <p>The request message for <a href="index.html#google.cloud.dialogflow.v2.Intents.GetIntent">Intents.GetIntent</a>.</p>
+        <p>The request message for <a href="index.html#ondewo.nlu.Intents.GetIntent">Intents.GetIntent</a>.</p>
 
         
           <table class="field-table">
@@ -16548,7 +16566,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&g
         
       
         <h3 id="ondewo.nlu.Intent" class="title-badge message">Intent</h3>
-        <p>Represents an intent.</p><p>Intents convert a number of user expressions or patterns into an action. An</p><p>action is an extraction of a user command or sentence semantics.</p>
+        <p>Represents an intent.</p><p>Intents convert a number of user expressions or patterns into an action. An action is an extraction of a user command or sentence semantics.</p>
 
         
           <table class="field-table">
@@ -17356,7 +17374,7 @@ e.g., screen readers. </p></td>
         
       
         <h3 id="ondewo.nlu.Intent.Message.LinkOutSuggestion" class="title-badge message">Intent.Message.LinkOutSuggestion</h3>
-        <p>The suggestion chip message that allows the user to jump out to the app</p><p>or website associated with this agent.</p>
+        <p>The suggestion chip message that allows the user to jump out to the app or website associated with this agent.</p>
 
         
           <table class="field-table">
@@ -17495,7 +17513,7 @@ suggestion chip. </p></td>
         
       
         <h3 id="ondewo.nlu.Intent.Message.SelectItemInfo" class="title-badge message">Intent.Message.SelectItemInfo</h3>
-        <p>Additional info about the select item for when it is triggered in a</p><p>dialog.</p>
+        <p>Additional info about the select item for when it is triggered in a dialog.</p>
 
         
           <table class="field-table">
@@ -17508,16 +17526,14 @@ suggestion chip. </p></td>
                   <td>key</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Required. A unique key that will be sent back to the agent if this
-response is given. </p></td>
+                  <td><p>Required. A unique key that will be sent back to the agent if this response is given. </p></td>
                 </tr>
               
                 <tr>
                   <td>synonyms</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
-                  <td><p>Optional. A list of synonyms that can also be used to trigger this
-item in dialog. </p></td>
+                  <td><p>Optional. A list of synonyms that can also be used to trigger this item in dialog. </p></td>
                 </tr>
               
             </tbody>
@@ -17569,7 +17585,7 @@ text_to_speech. </p></td>
         
       
         <h3 id="ondewo.nlu.Intent.Message.SimpleResponses" class="title-badge message">Intent.Message.SimpleResponses</h3>
-        <p>The collection of simple response candidates.</p><p>This message in <code>QueryResult.fulfillment_messages</code> and</p><p><code>WebhookResponse.fulfillment_messages</code> should contain only one</p><p><code>SimpleResponse</code>.</p>
+        <p>The collection of simple response candidates. This message in <code>QueryResult.fulfillment_messages</code> and <code>WebhookResponse.fulfillment_messages</code> should contain only one <code>SimpleResponse</code>.</p>
 
         
           <table class="field-table">
@@ -17593,7 +17609,7 @@ text_to_speech. </p></td>
         
       
         <h3 id="ondewo.nlu.Intent.Message.Suggestion" class="title-badge message">Intent.Message.Suggestion</h3>
-        <p>The suggestion chip message that the user can tap to quickly post a reply</p><p>to the conversation.</p>
+        <p>The suggestion chip message that the user can tap to quickly post a reply to the conversation.</p>
 
         
           <table class="field-table">
@@ -18177,7 +18193,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&g
         
       
         <h3 id="ondewo.nlu.ListIntentsRequest" class="title-badge message">ListIntentsRequest</h3>
-        <p>The request message for <a href="index.html#google.cloud.dialogflow.v2.Intents.ListIntents">Intents.ListIntents</a>.</p>
+        <p>The request message for <a href="index.html#ondewo.nlu.Intents.ListIntents">Intents.ListIntents</a>.</p>
 
         
           <table class="field-table">
@@ -18276,7 +18292,7 @@ Examples of invalid page token strings:
         
       
         <h3 id="ondewo.nlu.ListIntentsResponse" class="title-badge message">ListIntentsResponse</h3>
-        <p>The response message for <a href="index.html#google.cloud.dialogflow.v2.Intents.ListIntents">Intents.ListIntents</a>.</p>
+        <p>The response message for <a href="index.html#ondewo.nlu.Intents.ListIntents">Intents.ListIntents</a>.</p>
 
         
           <table class="field-table">
@@ -18758,7 +18774,7 @@ where &lt;CURRENT_INDEX&gt; and &lt;PAGE_SIZE&gt; are of type int, &lt;SUB_FIELD
         
       
         <h3 id="ondewo.nlu.UpdateIntentRequest" class="title-badge message">UpdateIntentRequest</h3>
-        <p>The request message for <a href="index.html#google.cloud.dialogflow.v2.Intents.UpdateIntent">Intents.UpdateIntent</a>.</p>
+        <p>The request message for <a href="index.html#ondewo.nlu.Intents.UpdateIntent">Intents.UpdateIntent</a>.</p>
 
         
           <table class="field-table">
@@ -18824,13 +18840,13 @@ Note: languages must be enabled in the agent, before they can be used. </p></td>
               <tr>
                 <td>ACTIVE</td>
                 <td>0</td>
-                <td><p></p></td>
+                <td><p>Intent is active</p></td>
               </tr>
             
               <tr>
                 <td>INACTIVE</td>
                 <td>1</td>
-                <td><p></p></td>
+                <td><p>Intent is inactive</p></td>
               </tr>
             
           </tbody>
@@ -18961,121 +18977,121 @@ Format</a>
               <tr>
                 <td>PLACEHOLDER_1</td>
                 <td>9</td>
-                <td><p></p></td>
+                <td><p>Placeholder platform 1</p></td>
               </tr>
             
               <tr>
                 <td>PLACEHOLDER_2</td>
                 <td>10</td>
-                <td><p></p></td>
+                <td><p>Placeholder platform 2</p></td>
               </tr>
             
               <tr>
                 <td>PLACEHOLDER_3</td>
                 <td>11</td>
-                <td><p></p></td>
+                <td><p>Placeholder platform 3</p></td>
               </tr>
             
               <tr>
                 <td>PLACEHOLDER_4</td>
                 <td>12</td>
-                <td><p></p></td>
+                <td><p>Placeholder platform 4</p></td>
               </tr>
             
               <tr>
                 <td>PLACEHOLDER_5</td>
                 <td>13</td>
-                <td><p></p></td>
+                <td><p>Placeholder platform 5</p></td>
               </tr>
             
               <tr>
                 <td>PLACEHOLDER_6</td>
                 <td>14</td>
-                <td><p></p></td>
+                <td><p>Placeholder platform 6</p></td>
               </tr>
             
               <tr>
                 <td>PLACEHOLDER_7</td>
                 <td>15</td>
-                <td><p></p></td>
+                <td><p>Placeholder platform 7</p></td>
               </tr>
             
               <tr>
                 <td>PLACEHOLDER_8</td>
                 <td>16</td>
-                <td><p></p></td>
+                <td><p>Placeholder platform 8</p></td>
               </tr>
             
               <tr>
                 <td>PLACEHOLDER_9</td>
                 <td>17</td>
-                <td><p></p></td>
+                <td><p>Placeholder platform 9</p></td>
               </tr>
             
               <tr>
                 <td>PLACEHOLDER_10</td>
                 <td>18</td>
-                <td><p></p></td>
+                <td><p>Placeholder platform 10</p></td>
               </tr>
             
               <tr>
                 <td>PLACEHOLDER_11</td>
                 <td>19</td>
-                <td><p></p></td>
+                <td><p>Placeholder platform 11</p></td>
               </tr>
             
               <tr>
                 <td>PLACEHOLDER_12</td>
                 <td>20</td>
-                <td><p></p></td>
+                <td><p>Placeholder platform 12</p></td>
               </tr>
             
               <tr>
                 <td>PLACEHOLDER_13</td>
                 <td>21</td>
-                <td><p></p></td>
+                <td><p>Placeholder platform 13</p></td>
               </tr>
             
               <tr>
                 <td>PLACEHOLDER_14</td>
                 <td>22</td>
-                <td><p></p></td>
+                <td><p>Placeholder platform 14</p></td>
               </tr>
             
               <tr>
                 <td>PLACEHOLDER_15</td>
                 <td>23</td>
-                <td><p></p></td>
+                <td><p>Placeholder platform 15</p></td>
               </tr>
             
               <tr>
                 <td>PLACEHOLDER_16</td>
                 <td>24</td>
-                <td><p></p></td>
+                <td><p>Placeholder platform 16</p></td>
               </tr>
             
               <tr>
                 <td>PLACEHOLDER_17</td>
                 <td>25</td>
-                <td><p></p></td>
+                <td><p>Placeholder platform 17</p></td>
               </tr>
             
               <tr>
                 <td>PLACEHOLDER_18</td>
                 <td>26</td>
-                <td><p></p></td>
+                <td><p>Placeholder platform 18</p></td>
               </tr>
             
               <tr>
                 <td>PLACEHOLDER_19</td>
                 <td>27</td>
-                <td><p></p></td>
+                <td><p>Placeholder platform 19</p></td>
               </tr>
             
               <tr>
                 <td>PLACEHOLDER_20</td>
                 <td>28</td>
-                <td><p></p></td>
+                <td><p>Placeholder platform 20</p></td>
               </tr>
             
           </tbody>
@@ -19200,43 +19216,43 @@ filling prompt is forwarded to the webhook.</p></td>
               <tr>
                 <td>NO_INTENT_SORTING</td>
                 <td>0</td>
-                <td><p></p></td>
+                <td><p>No sorting applied</p></td>
               </tr>
             
               <tr>
                 <td>SORT_INTENT_BY_NAME</td>
                 <td>1</td>
-                <td><p></p></td>
+                <td><p>Sort by intent name</p></td>
               </tr>
             
               <tr>
                 <td>SORT_INTENT_BY_CREATION_DATE</td>
                 <td>2</td>
-                <td><p></p></td>
+                <td><p>Sort by creation date</p></td>
               </tr>
             
               <tr>
                 <td>SORT_INTENT_BY_LAST_UPDATED</td>
                 <td>3</td>
-                <td><p></p></td>
+                <td><p>Sort by last updated date</p></td>
               </tr>
             
               <tr>
                 <td>SORT_INTENT_BY_USERSAYS_COUNT</td>
                 <td>4</td>
-                <td><p></p></td>
+                <td><p>Sort by training phrase (user says) count</p></td>
               </tr>
             
               <tr>
                 <td>SORT_INTENT_BY_START_DATE</td>
                 <td>5</td>
-                <td><p></p></td>
+                <td><p>Sort by start date</p></td>
               </tr>
             
               <tr>
                 <td>SORT_INTENT_BY_END_DATE</td>
                 <td>6</td>
-                <td><p></p></td>
+                <td><p>Sort by end date</p></td>
               </tr>
             
           </tbody>
@@ -19621,7 +19637,7 @@ The Training phrases field is populated with only a few entries and no annotatio
 
           Lists operations that match the specified filter in the request. If the
 server doesn&apos;t support this method, it returns <code>UNIMPLEMENTED</code>.
-
+<br>
 NOTE: the <code>name</code> binding below allows API services to override the binding
 to use different resource name schemes, such as <code>users/*/operations</code>.
         
@@ -19640,7 +19656,7 @@ service.
           Deletes a long-running operation. This method indicates that the client is
 no longer interested in the operation result. It does not cancel the
 operation. If the server doesn&apos;t support this method, it returns
-<code>google.rpc.Code.UNIMPLEMENTED</code>.
+<code>google.rpc.Code.UNIMPLEMENTED</code>
         
           <h4 id="ondewo.nlu.Operations.CancelOperation" class="title-badge method">CancelOperation</h4>
 
@@ -19654,7 +19670,7 @@ guaranteed.  If the server doesn&apos;t support this method, it returns
 other methods to verify whether the cancellation succeeded or whether the
 operation completed despite cancellation. On successful cancellation,
 the operation is not deleted; instead, it becomes an operation with
-an <a href="index.html#ondewo.nlu.Operation.error">Operation.error</a> value with a <a href="index.html#google.rpc.Status.code">google.rpc.Status.code</a>
+an <a href="index.html#ondewo.nlu.Operation">Operation.error</a> value with a <a href="https://developers.google.com/actions-center/reference/grpc-api/status_codes">google.rpc.Status.code</a>
 of 1, corresponding to <code>Code.CANCELLED</code>.
         
 
@@ -19923,7 +19939,7 @@ e.g. next_page_token is current_index-2 </p></td>
         
       
         <h3 id="ondewo.nlu.Operation" class="title-badge message">Operation</h3>
-        <p>This resource represents a long-running operation that is the result of a</p><p>network API call.</p>
+        <p>This resource represents a long-running operation that is the result of a network API call.</p>
 
         
           <table class="field-table">
@@ -28140,7 +28156,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
       
         
         <h3 id="ondewo.nlu.Sessions" class="title-badge service">Sessions</h3>
-        <p>A session represents an interaction with a user. You retrieve user input</p><p>and pass it to the <a href="index.html#ondewo.nlu.Sessions.DetectIntent">DetectIntent</a> (or</p><p><a href="index.html#ondewo.nlu.Sessions.StreamingDetectIntent">StreamingDetectIntent</a>) method to determine</p><p>user intent and respond.</p>
+        <p>A session represents an interaction with a user. You retrieve user input and pass it to the <a href="index.html#ondewo.nlu.Sessions.DetectIntent">DetectIntent</a> (or <a href="index.html#ondewo.nlu.Sessions.StreamingDetectIntent">StreamingDetectIntent</a>) method to determine user intent and respond.</p>
 
         
         <div id="ondewo.nlu.Sessions-methods" class="service-methods">Service Methods</div>
@@ -29041,7 +29057,7 @@ A transcription can be from a speech-to-text system or a human </p></td>
                   <td>operator</td>
                   <td><a href="#ondewo.nlu.ComparisonOperator">ComparisonOperator</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>comparison operator to use for filtering </p></td>
                 </tr>
               
             </tbody>
@@ -29137,7 +29153,8 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid
                   <td>session_review_view</td>
                   <td><a href="#ondewo.nlu.SessionReview.View">SessionReview.View</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Represents the options for views of a session_review.
+A session_review can be a sizable object. Therefore, we provide a resource view that does not return all data </p></td>
                 </tr>
               
             </tbody>
@@ -29586,7 +29603,7 @@ or a user-assigned name. </p></td>
         
       
         <h3 id="ondewo.nlu.EventInput" class="title-badge message">EventInput</h3>
-        <p>Events allow for matching intents by event name instead of the natural</p><p>language input. For instance, input <code>&lt;event: { name: &quot;welcome_event&quot;,</p><p>parameters: { name: &quot;Sam&quot; } }&gt;</code> can trigger a personalized welcome response.</p><p>The parameter <code>name</code> may be used by the agent in the response:</p><p><code>&quot;Hello #welcome_event.name! What can I do for you today?&quot;</code>.</p>
+        <p>Events allow for matching intents by event name instead of the natural language input. </p><p>For instance, input <code>&lt;event: { name: &quot;welcome_event&quot;, parameters: { name: &quot;Sam&quot; } }&gt;</code> can trigger a personalized welcome response.</p><p>The parameter <code>name</code> may be used by the agent in the response: <code>&quot;Hello #welcome_event.name! What can I do for you today?&quot;</code>.</p>
 
         
           <table class="field-table">
@@ -31480,7 +31497,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
         
       
         <h3 id="ondewo.nlu.QueryInput" class="title-badge message">QueryInput</h3>
-        <p>Represents the query input. It can contain either:</p><p>1.  An audio config which</p><p>instructs the speech recognizer how to process the speech audio.</p><p>2.  A conversational query in the form of text,.</p><p>3.  An event that specifies which intent to trigger.</p>
+        <p>Represents the query input. It can contain either:</p><p>1.  An audio config which instructs the speech recognizer how to process the speech audio.</p><p>2.  A conversational query in the form of text,.</p><p>3.  An event that specifies which intent to trigger.</p>
 
         
           <table class="field-table">
@@ -32690,7 +32707,7 @@ For a voice assistant device, this is the device-id or the app id </p></td>
                   <td>contexts</td>
                   <td><a href="#ondewo.nlu.Context">Context</a></td>
                   <td>repeated</td>
-                  <td><p> </p></td>
+                  <td><p>List of contexts for a session step </p></td>
                 </tr>
               
             </tbody>
@@ -32968,7 +32985,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid
         
       
         <h3 id="ondewo.nlu.StreamingDetectIntentRequest" class="title-badge message">StreamingDetectIntentRequest</h3>
-        <p>The top-level message sent by the client to the</p><p><code>StreamingDetectIntent</code> method.</p><p>Multiple request messages should be sent in order:</p><p>1.  The first message must contain <code>session</code>, <code>query_input</code> plus optionally</p><p><code>query_params</code> and/or <code>single_utterance</code>. The message must not contain <code>input_audio</code>.</p><p>2.  If <code>query_input</code> was set to a streaming input audio config,</p><p>all subsequent messages must contain only <code>input_audio</code>.</p><p>Otherwise, finish the request stream.</p>
+        <p>The top-level message sent by the client to the <code>StreamingDetectIntent</code> method.</p><p>Multiple request messages should be sent in order:</p><p>1.  The first message must contain <code>session</code>, <code>query_input</code> plus optionally <code>query_params</code> and/or <code>single_utterance</code>. The message must not contain <code>input_audio</code>.</p><p>2.  If <code>query_input</code> was set to a streaming input audio config, all subsequent messages must contain only <code>input_audio</code>. Otherwise, finish the request stream.</p>
 
         
           <table class="field-table">
@@ -33039,7 +33056,7 @@ over all streaming messages must not exceed 1 minute. </p></td>
         
       
         <h3 id="ondewo.nlu.StreamingDetectIntentResponse" class="title-badge message">StreamingDetectIntentResponse</h3>
-        <p>The top-level message returned from the</p><p><code>StreamingDetectIntent</code> method.</p><p>Multiple response messages can be returned in order:</p><p>1.  If the input was set to streaming audio, the first one or more messages</p><p>contain <code>recognition_result</code>. Each <code>recognition_result</code> represents a more</p><p>complete transcript of what the user said. The last <code>recognition_result</code></p><p>has <code>is_final</code> set to <code>true</code>.</p><p>2.  The next message contains <code>response_id</code>, <code>query_result</code></p><p>and optionally <code>webhook_status</code> if a WebHook was called.</p>
+        <p>The top-level message returned from the <code>StreamingDetectIntent</code> method.</p><p>Multiple response messages can be returned in order:</p><p>1.  If the input was set to streaming audio, the first one or more messages contain <code>recognition_result</code>. Each <code>recognition_result</code> represents a more complete transcript of what the user said. The last <code>recognition_result</code> has <code>is_final</code> set to <code>true</code>.</p><p>2.  The next message contains <code>response_id</code>, <code>query_result</code> and optionally <code>webhook_status</code> if a WebHook was called.</p>
 
         
           <table class="field-table">
@@ -33340,7 +33357,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid
       <div id="ondewo/nlu/session.proto-enums" class="object-category">Enums</div>
       
         <h3 id="ondewo.nlu.AudioEncoding" class="title-badge enum">AudioEncoding</h3>
-        <p>Audio encoding of the audio content sent in the conversational query request.</p><p>Refer to the <a href="/speech/docs/basics">Cloud Speech API documentation</a> for more</p><p>details.</p>
+        <p>Audio encoding of the audio content sent in the conversational query request.</p><p>Refer to the <a href="/speech/docs/basics">Cloud Speech API documentation</a> for more details.</p>
         <table class="enum-table">
           <thead>
             <tr><td>Name</td><td>Number</td><td>Description</td></tr>
@@ -33540,7 +33557,7 @@ wideband is supported. <code>sample_rate_hertz</code> must be 16000.</p></td>
         </table>
       
         <h3 id="ondewo.nlu.Session.View" class="title-badge enum">Session.View</h3>
-        <p>Represents the options for views of a session.</p><p>A session can be a sizable object. Therefore, we provide a resource view that</p><p>does not return all data</p>
+        <p>Represents the options for views of a session.</p><p>A session can be a sizable object. Therefore, we provide a resource view that does not return all data</p>
         <table class="enum-table">
           <thead>
             <tr><td>Name</td><td>Number</td><td>Description</td></tr>
@@ -33569,7 +33586,7 @@ wideband is supported. <code>sample_rate_hertz</code> must be 16000.</p></td>
         </table>
       
         <h3 id="ondewo.nlu.SessionReview.View" class="title-badge enum">SessionReview.View</h3>
-        <p>Represents the options for views of a session_review.</p><p>A session_review can be a sizable object. Therefore, we provide a resource view that</p><p>does not return all data</p>
+        <p>Represents the options for views of a session_review.</p><p>A session_review can be a sizable object. Therefore, we provide a resource view that does not return all data</p>
         <table class="enum-table">
           <thead>
             <tr><td>Name</td><td>Number</td><td>Description</td></tr>
@@ -35454,7 +35471,7 @@ the training phrases. Overrides the default: <code>&apos;.,;!?:&apos;</code> </p
         
       
         <h3 id="ondewo.nlu.AddTrainingPhrasesRequest.TrainingPhraseForIntent" class="title-badge message">AddTrainingPhrasesRequest.TrainingPhraseForIntent</h3>
-        <p>Message that contains the new training phrase, together with the intent display name</p><p>and, optionally the entity annotations</p>
+        <p>Message that contains the new training phrase, together with the intent display name and, optionally the entity annotations</p>
 
         
           <table class="field-table">
@@ -36457,7 +36474,7 @@ with Google Assistant integration.
       <div id="ondewo/nlu/webhook.proto-messages" class="object-category">Messages</div>
       
         <h3 id="ondewo.nlu.CreateSessionEntityTypeRequest" class="title-badge message">CreateSessionEntityTypeRequest</h3>
-        <p>The request message for</p><p><a href="index.html#ondewo.nlu.SessionEntityTypes.CreateSessionEntityType">SessionEntityTypes.CreateSessionEntityType</a>.</p>
+        <p>The request message for <a href="index.html#ondewo.nlu.Webhook.CreateSessionEntityType">Webhook.CreateSessionEntityType</a></p>
 
         
           <table class="field-table">
@@ -36506,7 +36523,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agents/sessions/&lt;session_uui
         
       
         <h3 id="ondewo.nlu.DeleteSessionEntityTypeRequest" class="title-badge message">DeleteSessionEntityTypeRequest</h3>
-        <p>The request message for</p><p><a href="index.html#ondewo.nlu.SessionEntityTypes.DeleteSessionEntityType">SessionEntityTypes.DeleteSessionEntityType</a>.</p>
+        <p>The request message for <a href="index.html#ondewo.nlu.Webhook.DeleteSessionEntityType">Webhook.DeleteSessionEntityType</a>.</p>
 
         
           <table class="field-table">
@@ -36536,7 +36553,7 @@ environment. If <code>User ID</code> is not specified, we assume default <code>&
         
       
         <h3 id="ondewo.nlu.GetSessionEntityTypeRequest" class="title-badge message">GetSessionEntityTypeRequest</h3>
-        <p>The request message for</p><p><a href="index.html#ondewo.nlu.SessionEntityTypes.GetSessionEntityType">SessionEntityTypes.GetSessionEntityType</a>.</p>
+        <p>The request message for <a href="index.html#ondewo.nlu.Webhook.GetSessionEntityType">Webhook.GetSessionEntityType</a>.</p>
 
         
           <table class="field-table">
@@ -36566,7 +36583,7 @@ environment. If <code>User ID</code> is not specified, we assume default <code>&
         
       
         <h3 id="ondewo.nlu.ListSessionEntityTypesRequest" class="title-badge message">ListSessionEntityTypesRequest</h3>
-        <p>The request message for</p><p><a href="index.html#ondewo.nlu.SessionEntityTypes.ListSessionEntityTypes">SessionEntityTypes.ListSessionEntityTypes</a>.</p>
+        <p>The request message for <a href="index.html#ondewo.nlu.Webhook.ListSessionEntityTypes">Webhook.ListSessionEntityTypes</a>.</p>
 
         
           <table class="field-table">
@@ -36638,7 +36655,7 @@ Examples of invalid page token strings:
         
       
         <h3 id="ondewo.nlu.ListSessionEntityTypesResponse" class="title-badge message">ListSessionEntityTypesResponse</h3>
-        <p>The response message for</p><p><a href="index.html#ondewo.nlu.SessionEntityTypes.ListSessionEntityTypes">SessionEntityTypes.ListSessionEntityTypes</a>.</p>
+        <p>The response message for <a href="index.html#ondewo.nlu.Webhook.ListSessionEntityTypes">Webhook.ListSessionEntityTypes</a>.</p>
 
         
           <table class="field-table">
@@ -36671,7 +36688,7 @@ e.g. next_page_token is current_index-2 </p></td>
         
       
         <h3 id="ondewo.nlu.OriginalDetectIntentRequest" class="title-badge message">OriginalDetectIntentRequest</h3>
-        <p>Represents the contents of the original request that was passed to</p><p>the <code>[Streaming]DetectIntent</code> call.</p>
+        <p>Represents the contents of the original request that was passed to the <code>[Streaming]DetectIntent</code> call.</p>
 
         
           <table class="field-table">
@@ -36810,7 +36827,7 @@ type. </p></td>
         
       
         <h3 id="ondewo.nlu.UpdateSessionEntityTypeRequest" class="title-badge message">UpdateSessionEntityTypeRequest</h3>
-        <p>The request message for</p><p><a href="index.html#ondewo.nlu.SessionEntityTypes.UpdateSessionEntityType">SessionEntityTypes.UpdateSessionEntityType</a>.</p>
+        <p>The request message for <a href="index.html#ondewo.nlu.Webhook.UpdateSessionEntityType">Webhook.UpdateSessionEntityType</a>.</p>
 
         
           <table class="field-table">
@@ -36870,8 +36887,7 @@ same value as <code>[Streaming]DetectIntentResponse.query_result</code>. </p></t
                   <td>original_detect_intent_request</td>
                   <td><a href="#ondewo.nlu.OriginalDetectIntentRequest">OriginalDetectIntentRequest</a></td>
                   <td></td>
-                  <td><p>Optional. The contents of the original request that was passed to
-<code>[Streaming]DetectIntent</code> call. </p></td>
+                  <td><p>Optional. The contents of the original request that was passed to <code>[Streaming]DetectIntent</code> call. </p></td>
                 </tr>
               
                 <tr>
