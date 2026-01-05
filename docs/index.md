@@ -734,12 +734,12 @@ Project/Agent messages
 | supported_language_codes | [string](#string) | repeated | Optional. The list of all languages supported by this agent (except for the <code>default_language_code</code>). |
 | time_zone | [string](#string) |  | Required. The time zone of this agent from the <a href="https://www.iana.org/time-zones">time zone database</a>, e.g., America/New_York, Europe/Paris. |
 | nlu_platform | [string](#string) |  | Required. Specifies the format of the agent data. |
-| configs | [google.protobuf.Struct](#google.protobuf.Struct) |  | Optional. Agent configuration as OndewoConfig converted to Struct format. |
+| configs | [google.protobuf.Struct](#google.protobuf.Struct) |  | Optional. Agent configuration as OndewoConfig converted to Struct format. <br> Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#struct">google.protobuf.Struct</a> |
 | owner_id | [string](#string) |  | Optional. User id of the project owner. If empty, in CreateAgent call it is set to user id in the call metadata. Read-only in the Agent message |
 | status | [AgentStatus](#ondewo.nlu.AgentStatus) |  | Optional. Status of the agent Read-only in the Agent message |
 | description | [string](#string) |  | Optional. Description of the agent. |
-| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
-| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> |
+| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> |
 | created_by | [string](#string) |  | User id in form of a valid UUID. |
 | modified_by | [string](#string) |  | User id in form of a valid UUID. |
 
@@ -839,8 +839,8 @@ This message contains the information of custom platform
 | platform | [Intent.Message.Platform](#ondewo.nlu.Intent.Message.Platform) |  | Required. ID of the Platform. Custom Intent.Message.Platform placeholder. Note: it will not work with non-placeholders values |
 | display_name | [string](#string) |  | Required. Name to be displayed. |
 | position | [uint32](#uint32) |  | Optional. Sorting position of the GetPlatformMappingRequest. |
-| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
-| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> |
+| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> |
 | created_by | [string](#string) |  | User id in form of a valid UUID. |
 | modified_by | [string](#string) |  | User id in form of a valid UUID. |
 
@@ -1065,8 +1065,8 @@ Search result for an entity
 | entity_type_name | [string](#string) |  | Name of the entity type this entity belongs to |
 | entity_type_display_name | [string](#string) |  | Display name of the entity type |
 | language | [string](#string) |  | Language code of the entity |
-| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
-| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> |
+| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> |
 | created_by | [string](#string) |  | User id in form of a valid UUID. |
 | modified_by | [string](#string) |  | User id in form of a valid UUID. |
 
@@ -1111,8 +1111,8 @@ Search result for an entity synonym
 | entity_name | [string](#string) |  | Name of the entity this synonym belongs to |
 | entity_display_name | [string](#string) |  | Display name of the entity |
 | language | [string](#string) |  | Language code of the entity synonym |
-| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
-| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> |
+| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> |
 | created_by | [string](#string) |  | User id in form of a valid UUID. |
 | modified_by | [string](#string) |  | User id in form of a valid UUID. |
 
@@ -1153,8 +1153,8 @@ Search result for an entity type
 | name | [string](#string) |  | Name of the entity type |
 | display_name | [string](#string) |  | Display name of the entity type |
 | language | [string](#string) |  | Language code of the entity type |
-| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
-| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. <br> Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> |
+| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. <br> Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> |
 | created_by | [string](#string) |  | User id in form of a valid UUID. |
 | modified_by | [string](#string) |  | User id in form of a valid UUID. |
 
@@ -1197,8 +1197,8 @@ Search result for an intent
 | domain_name | [string](#string) |  | Domain name of the intent |
 | tags | [string](#string) | repeated | Tags associated with the intent |
 | language | [string](#string) |  | Language code of the intent |
-| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
-| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> |
+| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> |
 | created_by | [string](#string) |  | User id in form of a valid UUID. |
 | modified_by | [string](#string) |  | User id in form of a valid UUID. |
 
@@ -1241,8 +1241,8 @@ Search result for an intent input context
 | intent_display_name | [string](#string) |  | Display name of the intent |
 | tags | [string](#string) | repeated | Tags associated with the intent |
 | language | [string](#string) |  | Language code of the context |
-| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
-| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> |
+| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> |
 | created_by | [string](#string) |  | User id in form of a valid UUID. |
 | modified_by | [string](#string) |  | User id in form of a valid UUID. |
 
@@ -1285,8 +1285,8 @@ Search result for an intent output context
 | intent_display_name | [string](#string) |  | Display name of the intent |
 | tags | [string](#string) | repeated | Tags associated with the intent |
 | language | [string](#string) |  | Language code of the context |
-| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
-| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> |
+| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> |
 | created_by | [string](#string) |  | User id in form of a valid UUID. |
 | modified_by | [string](#string) |  | User id in form of a valid UUID. |
 
@@ -1330,8 +1330,8 @@ Search result for an intent parameter
 | intent_display_name | [string](#string) |  | Display name of the intent |
 | tags | [string](#string) | repeated | Tags associated with the intent |
 | language | [string](#string) |  | Language code of the parameter |
-| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
-| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> |
+| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> |
 | created_by | [string](#string) |  | User id in form of a valid UUID. |
 | modified_by | [string](#string) |  | User id in form of a valid UUID. |
 
@@ -1384,8 +1384,8 @@ Search result for an intent response
 | intent_display_name | [string](#string) |  | Display name of the intent |
 | tags | [string](#string) | repeated | Tags associated with the intent |
 | language | [string](#string) |  | Language code of the response |
-| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
-| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> |
+| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> |
 | created_by | [string](#string) |  | User id in form of a valid UUID. |
 | modified_by | [string](#string) |  | User id in form of a valid UUID. |
 
@@ -1429,8 +1429,8 @@ Search result for an intent tag
 | intent_display_name | [string](#string) |  | Display name of the intent |
 | tags | [string](#string) | repeated | Tags associated with the intent |
 | language | [string](#string) |  | Language code of the tag |
-| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
-| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> |
+| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> |
 | created_by | [string](#string) |  | User id in form of a valid UUID. |
 | modified_by | [string](#string) |  | User id in form of a valid UUID. |
 
@@ -1477,8 +1477,8 @@ Search result for an intent training phrase (user says)
 | intent_display_name | [string](#string) |  | Display name of the intent |
 | tags | [string](#string) | repeated | Tags associated with the intent |
 | language | [string](#string) |  | Language code of the training phrase |
-| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
-| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> |
+| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> |
 | created_by | [string](#string) |  | User id in form of a valid UUID. |
 | modified_by | [string](#string) |  | User id in form of a valid UUID. |
 
@@ -1497,7 +1497,7 @@ The request message for <a href="index.html#ondewo.nlu.Agents.GetAgent">Agents.G
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The project that the agent to fetch is associated with. Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre> |
 | agent_view | [AgentView](#ondewo.nlu.AgentView) |  | Optional. Specify the view of the returned agent (full view by default) |
-| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. A mask to control which fields are returned in the response. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. A mask to control which fields are returned in the response. <br> Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#field-mask">google.protobuf.FieldMask</a> |
 
 
 
@@ -1619,7 +1619,7 @@ Request of the report of the statistics about sessions
 | limit | [int32](#int32) |  | Optional. limit the returned number of results |
 | group_bys | [string](#string) | repeated | Optional. Grouping based on named properties |
 | order_bys | [string](#string) | repeated | Optional. Order based on named properties |
-| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which data fields will be added to the returned data. Example: paths=[&quot;duration_in_s_min&quot;, &quot;id&quot;, &quot;session_id&quot;, &quot;project_id&quot;] |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which data fields will be added to the returned data. <br> Example: paths=[&quot;duration_in_s_min&quot;, &quot;id&quot;, &quot;session_id&quot;, &quot;project_id&quot;] <br> Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#field-mask">google.protobuf.FieldMask</a> |
 | sql_query | [string](#string) |  | SQL Query - only usable with specific SessionsReportType such as SessionsReportType.SESSION_SQL_QUERY |
 
 
@@ -1688,7 +1688,7 @@ Request to get the list of agents
 | agent_view | [AgentView](#ondewo.nlu.AgentView) |  | Optional. Specify the view of the returned agent (full view by default) |
 | page_token | [string](#string) |  | Optional. The next_page_token value returned from a previous list request. |
 | sort_by_field | [AgentSorting](#ondewo.nlu.AgentSorting) |  | Optional. Defines the sorting of the list. Default, no sorting. |
-| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) | optional | Optional. The mask to control which fields gets returned. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) | optional | Optional. The mask to control which fields gets returned. <br> Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#field-mask">google.protobuf.FieldMask</a> |
 
 
 
@@ -1728,7 +1728,7 @@ Index starts at 0.
 Examples of valid page token strings: <ul> <li>&quot;&quot;</li> <li>&quot;current_index-0--page_size-20&quot;</li> <li>&quot;current_index-1--page_size-20&quot;</li> <li>&quot;current_index-10--page_size-20&quot;</li> </ul>
 
 Examples of invalid page token strings: <ul> <li>&quot;1&quot;</li> <li>&quot;current_index-0--page_size-20&quot;</li> <li>&quot;current_index--1--page_size-20&quot;</li> <li>&quot;current_index1--page_size-20&quot;</li> <li>&quot;current_index-1--page_size--20&quot;</li> </ul> |
-| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) | optional | Optional. The mask to control which fields gets returned. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) | optional | Optional. The mask to control which fields gets returned. <br> Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#field-mask">google.protobuf.FieldMask</a> |
 
 
 
@@ -1769,7 +1769,7 @@ Index starts at 0.
 Examples of valid page token strings: <ul> <li>&quot;&quot;</li> <li>&quot;current_index-0--page_size-20&quot;</li> <li>&quot;current_index-1--page_size-20&quot;</li> <li>&quot;current_index-10--page_size-20&quot;</li> </ul>
 
 Examples of invalid page token strings: <ul> <li>&quot;1&quot;</li> <li>&quot;current_index-0--page_size-20&quot;</li> <li>&quot;current_index--1--page_size-20&quot;</li> <li>&quot;current_index1--page_size-20&quot;</li> <li>&quot;current_index-1--page_size--20&quot;</li> </ul> |
-| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) | optional | Optional. The mask to control which fields gets returned. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) | optional | Optional. The mask to control which fields gets returned. <br> Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#field-mask">google.protobuf.FieldMask</a> |
 
 
 
@@ -1818,7 +1818,7 @@ Status of model
 | cache_version | [int32](#int32) |  | Cache version that contains the correspondent model |
 | language_code | [string](#string) |  | Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc. |
 | model_name | [string](#string) |  | The model name |
-| status_set_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Timestamp when the status was set. Read-only field. |
+| status_set_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Timestamp when the status was set. Read-only field. <br> Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> |
 | config | [string](#string) |  | Configuration of the model as a string. |
 | status | [ModelStatus.StatusName](#ondewo.nlu.ModelStatus.StatusName) |  | Current status of the model. |
 
@@ -1853,8 +1853,8 @@ This message is a response of Optimize Ranking Match
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| optimization_info | [google.protobuf.Struct](#google.protobuf.Struct) |  | info about optimization |
-| optimized_ondewo_config | [google.protobuf.Struct](#google.protobuf.Struct) |  | the optimized configuration of the ondewo agent e.g., optimized parameters |
+| optimization_info | [google.protobuf.Struct](#google.protobuf.Struct) |  | info about optimization <br> Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#struct">google.protobuf.Struct</a> |
+| optimized_ondewo_config | [google.protobuf.Struct](#google.protobuf.Struct) |  | the optimized configuration of the ondewo agent e.g., optimized parameters <br> Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#struct">google.protobuf.Struct</a> |
 
 
 
@@ -1888,7 +1888,7 @@ This message contains the configuration to run Optimize Ranking Match
 | language_code | [string](#string) |  | Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc. |
 | n_splits | [int32](#int32) |  | number of splits for optimization |
 | random_seed | [int32](#int32) |  | random seed number for defining the split of train and test of training phrases for optimization |
-| initial_thresholds | [google.protobuf.Struct](#google.protobuf.Struct) |  | initial thresholds are optional, if not given will be taken from the current config example {'OndewoIntentSimilarityMatch': 0.59, 'OndewoIntentNamedSimilarityMatch': 0.39} |
+| initial_thresholds | [google.protobuf.Struct](#google.protobuf.Struct) |  | initial thresholds are optional, if not given will be taken from the current config <br> example {'OndewoIntentSimilarityMatch': 0.59, 'OndewoIntentNamedSimilarityMatch': 0.39} <br> Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#struct">google.protobuf.Struct</a> |
 
 
 
@@ -2008,7 +2008,7 @@ Request to update the agent
 | ----- | ---- | ----- | ----------- |
 | agent | [Agent](#ondewo.nlu.Agent) |  | The agent |
 | agent_view | [AgentView](#ondewo.nlu.AgentView) |  | Optional. Specify the view of the returned agent (sparse view by default) |
-| update_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which fields get updated. |
+| update_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which fields get updated. <br> Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#field-mask">google.protobuf.FieldMask</a> |
 
 
 
@@ -2230,12 +2230,12 @@ Examples:
 
 Examples:
 
-<pre> grpcurl -plaintext -H 'cai-token: aimp' -d '{ "parent": "projects/76aaf4f3-a1f6-4fda-b4b3-351c64e65bc4/agent" }' localhost:50055 ondewo.nlu.Agents.DeleteAgent </pre> <samp>{}</samp> |
+<pre> grpcurl -plaintext -H 'cai-token: aimp' -d '{ "parent": "projects/76aaf4f3-a1f6-4fda-b4b3-351c64e65bc4/agent" }' localhost:50055 ondewo.nlu.Agents.DeleteAgent </pre> <samp>{}</samp> Returns <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#empty">google.protobuf.Empty</a>. |
 | DeleteAllAgents | [.google.protobuf.Empty](#google.protobuf.Empty) | [.google.protobuf.Empty](#google.protobuf.Empty) | Deletes all agents in the server (for development purposes only).
 
 Examples:
 
-<pre> grpcurl -plaintext -H 'cai-token: aimp' localhost:50055 ondewo.nlu.Agents.DeleteAllAgents </pre> <samp>{}</samp> |
+<pre> grpcurl -plaintext -H 'cai-token: aimp' localhost:50055 ondewo.nlu.Agents.DeleteAllAgents </pre> <samp>{}</samp> Returns <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#empty">google.protobuf.Empty</a>. |
 | ListAgents | [ListAgentsRequest](#ondewo.nlu.ListAgentsRequest) | [ListAgentsResponse](#ondewo.nlu.ListAgentsResponse) | Lists agents in the server associated to the current user
 
 Examples:
@@ -2251,38 +2251,28 @@ Examples:
 Examples:
 
 <pre> grpcurl -plaintext -H 'cai-token: aimp' localhost:50055 ondewo.nlu.Agents.ListAllAgents </pre> <samp>{ "agents_with_owners": [ { "agent": { "parent": "projects/76aaf4f3-a1f6-4fda-b4b3-351c64e65bc4/agent", "display_name": "Pizza Bot 2", "owner_id": "5aac51b8-668f-49dd-913f-cc683e56af34" }, "owner": { "user_id": "5aac51b8-668f-49dd-913f-cc683e56af34", "display_name": "admin", "server_role_id": 3, "user_email": "admin@ondewo.com" } } ], "next_page_token": "current_index-1" } </samp> |
-| AddUserToProject | [AddUserToProjectRequest](#ondewo.nlu.AddUserToProjectRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Adds a user with specified id to the project (agent) |
-| RemoveUserFromProject | [RemoveUserFromProjectRequest](#ondewo.nlu.RemoveUserFromProjectRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Removes a user with specified id from the project (agent) |
+| AddUserToProject | [AddUserToProjectRequest](#ondewo.nlu.AddUserToProjectRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Adds a user with specified id to the project (agent) <br> Returns <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#empty">google.protobuf.Empty</a>. |
+| RemoveUserFromProject | [RemoveUserFromProjectRequest](#ondewo.nlu.RemoveUserFromProjectRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Removes a user with specified id from the project (agent) <br> Returns <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#empty">google.protobuf.Empty</a>. |
 | ListUsersInProject | [ListUsersInProjectRequest](#ondewo.nlu.ListUsersInProjectRequest) | [ListUsersInProjectResponse](#ondewo.nlu.ListUsersInProjectResponse) | Lists users in the project (agent) |
-| GetPlatformInfo | [.google.protobuf.Empty](#google.protobuf.Empty) | [GetPlatformInfoResponse](#ondewo.nlu.GetPlatformInfoResponse) | Gets information from the platform |
+| GetPlatformInfo | [.google.protobuf.Empty](#google.protobuf.Empty) | [GetPlatformInfoResponse](#ondewo.nlu.GetPlatformInfoResponse) | Gets information from the platform <br> Request parameter: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#empty">google.protobuf.Empty</a> |
 | ListProjectPermissions | [ListProjectPermissionsRequest](#ondewo.nlu.ListProjectPermissionsRequest) | [ListProjectPermissionsResponse](#ondewo.nlu.ListProjectPermissionsResponse) | List permissions from the project (agent) |
 | TrainAgent | [TrainAgentRequest](#ondewo.nlu.TrainAgentRequest) | [Operation](#ondewo.nlu.Operation) | Trains the specified agent.
 
-Operation &lt;response: <a href="index.html#google.protobuf.Empty">google.protobuf.Empty</a>, metadata: <a href="index.html#google.protobuf.Struct">google.protobuf.Struct</a>&gt; |
+Operation &lt;response: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#empty">google.protobuf.Empty</a>, metadata: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#struct">google.protobuf.Struct</a>&gt; |
 | BuildCache | [BuildCacheRequest](#ondewo.nlu.BuildCacheRequest) | [Operation](#ondewo.nlu.Operation) | Builds cache for the specified agent.
 
-Operation &lt;response: <a href="index.html#google.protobuf.Empty">google.protobuf.Empty</a>, metadata: <a href="index.html#google.protobuf.Struct">google.protobuf.Struct</a>&gt; |
-| ExportAgent | [ExportAgentRequest](#ondewo.nlu.ExportAgentRequest) | [Operation](#ondewo.nlu.Operation) | Exports the specified agent to a ZIP file.
-
-Operation &lt;response: <a href="index.html#ondewo.nlu.ExportAgentResponse">ExportAgentResponse</a>, metadata: <a href="index.html#google.protobuf.Struct">google.protobuf.Struct</a>&gt; |
+Operation &lt;response: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#empty">google.protobuf.Empty</a>, metadata: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#struct">google.protobuf.Struct</a>&gt; |
+| ExportAgent | [ExportAgentRequest](#ondewo.nlu.ExportAgentRequest) | [Operation](#ondewo.nlu.Operation) | Exports the specified agent to a ZIP file. <br> Operation &lt;response: <a href="index.html#ondewo.nlu.ExportAgentResponse">ExportAgentResponse</a>, metadata: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#struct">google.protobuf.Struct</a>&gt; |
 | ExportBenchmarkAgent | [ExportBenchmarkAgentRequest](#ondewo.nlu.ExportBenchmarkAgentRequest) | [Operation](#ondewo.nlu.Operation) | Exports the specified train agent to a ZIP file after train-test split, returns the test TrainingPhrase list. |
-| ImportAgent | [ImportAgentRequest](#ondewo.nlu.ImportAgentRequest) | [Operation](#ondewo.nlu.Operation) | Imports the specified agent from a ZIP file.
-
-Uploads new intents and entity types without deleting the existing ones. Intents and entity types with the same name are replaced with the new versions from ImportAgentRequest.
-
-Operation &lt;response: <a href="index.html#google.protobuf.Empty">google.protobuf.Empty</a>, metadata: <a href="index.html#google.protobuf.Struct">google.protobuf.Struct</a>&gt; |
+| ImportAgent | [ImportAgentRequest](#ondewo.nlu.ImportAgentRequest) | [Operation](#ondewo.nlu.Operation) | Imports the specified agent from a ZIP file. <br> Uploads new intents and entity types without deleting the existing ones. Intents and entity types with the same name are replaced with the new versions from ImportAgentRequest. <br> Operation &lt;response: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#empty">google.protobuf.Empty</a>, metadata: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#struct">google.protobuf.Struct</a>&gt; |
 | MigrateAgent | [MigrateAgentRequest](#ondewo.nlu.MigrateAgentRequest) | [Operation](#ondewo.nlu.Operation) |  |
 | OptimizeRankingMatch | [OptimizeRankingMatchRequest](#ondewo.nlu.OptimizeRankingMatchRequest) | [Operation](#ondewo.nlu.Operation) |  |
-| RestoreAgent | [RestoreAgentRequest](#ondewo.nlu.RestoreAgentRequest) | [Operation](#ondewo.nlu.Operation) | Restores the specified agent from a ZIP file.
-
-Replaces the current agent version with a new one. All the intents and entity types in the older version are deleted.
-
-Operation &lt;response: <a href="index.html#google.protobuf.Empty">google.protobuf.Empty</a>, metadata: <a href="index.html#google.protobuf.Struct">google.protobuf.Struct</a>&gt; |
+| RestoreAgent | [RestoreAgentRequest](#ondewo.nlu.RestoreAgentRequest) | [Operation](#ondewo.nlu.Operation) | Restores the specified agent from a ZIP file. <br> Replaces the current agent version with a new one. All the intents and entity types in the older version are deleted. <br> Operation &lt;response: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#empty">google.protobuf.Empty</a>, metadata: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#struct">google.protobuf.Struct</a>&gt; |
 | GetAgentStatistics | [GetAgentStatisticsRequest](#ondewo.nlu.GetAgentStatisticsRequest) | [GetAgentStatisticsResponse](#ondewo.nlu.GetAgentStatisticsResponse) | Gets statistics for the agent |
 | GetSessionsStatistics | [GetSessionsStatisticsRequest](#ondewo.nlu.GetSessionsStatisticsRequest) | [GetSessionsStatisticsResponse](#ondewo.nlu.GetSessionsStatisticsResponse) |  |
 | SetAgentStatus | [SetAgentStatusRequest](#ondewo.nlu.SetAgentStatusRequest) | [Agent](#ondewo.nlu.Agent) | Sets status for the agent |
-| SetResources | [SetResourcesRequest](#ondewo.nlu.SetResourcesRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Sets resources |
-| DeleteResources | [DeleteResourcesRequest](#ondewo.nlu.DeleteResourcesRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Deletes resources |
+| SetResources | [SetResourcesRequest](#ondewo.nlu.SetResourcesRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Sets resources <br> Returns <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#empty">google.protobuf.empty</a> |
+| DeleteResources | [DeleteResourcesRequest](#ondewo.nlu.DeleteResourcesRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Deletes resources <br> Returns <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#empty">google.protobuf.empty</a> |
 | ExportResources | [ExportResourcesRequest](#ondewo.nlu.ExportResourcesRequest) | [ExportResourcesResponse](#ondewo.nlu.ExportResourcesResponse) | Exports resources |
 | GetModelStatuses | [GetModelStatusesRequest](#ondewo.nlu.GetModelStatusesRequest) | [GetModelStatusesResponse](#ondewo.nlu.GetModelStatusesResponse) | Get statuses of models related to project |
 | GetPlatformMapping | [GetPlatformMappingRequest](#ondewo.nlu.GetPlatformMappingRequest) | [PlatformMapping](#ondewo.nlu.PlatformMapping) | Get all set platform name mappings for an Agent |
@@ -2374,7 +2364,7 @@ The request for intent classification.
 | context_names | [string](#string) | repeated | Optional: names of the input contexts to restrict the classification result with. Intents can only be classified if the intent's input context set is the subset of the given context set. |
 | mode | [Mode](#ondewo.nlu.Mode) |  | Optional: Which mode to use: <ul> <li>EXCLUSIVE - skip algorithms listed in <code>algorithms</code> field,</li> <li>INCLUSIVE - run ONLY algorithms listed in <code>algorithms</code> field,</li> <li>UNSPECIFIED - default mode, described in agent config</li> </ul> |
 | algorithms | [IntentAlgorithms](#ondewo.nlu.IntentAlgorithms) | repeated | Optional: Algorithm list |
-| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) | optional | Optional. The mask to control which fields gets returned. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) | optional | Optional. The mask to control which fields gets returned. <br> Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#field-mask">google.protobuf.FieldMask</a> |
 
 
 
@@ -2488,7 +2478,7 @@ This message is a request to extract entities with Fuzzy Entity Recognizer
 | potential_entities | [EntityTypeFuzzyNerConfig](#ondewo.nlu.EntityTypeFuzzyNerConfig) | repeated | Potential entities to be extracted from the text with entity-specific configs |
 | minimal_score | [float](#float) |  | Minimal similarity score to consider entity as "matched" |
 | allow_overlaps | [bool](#bool) |  | Optional. Whether or not entities are allowed to overlap. |
-| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) | optional | Optional. The mask to control which fields gets returned. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) | optional | Optional. The mask to control which fields gets returned. <br> Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#field-mask">google.protobuf.FieldMask</a> |
 
 
 
@@ -2507,7 +2497,7 @@ The request to detect parameters.
 | text | [string](#string) |  | the input text |
 | language_code | [string](#string) |  | the input language |
 | intent_name | [string](#string) |  | Optional. The name of the relevant intent. Used to establish preference hierarchy for entities that correspond to intent parameters Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre> |
-| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) | optional | Optional. The mask to control which fields gets returned. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) | optional | Optional. The mask to control which fields gets returned. <br> Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#field-mask">google.protobuf.FieldMask</a> |
 
 
 
@@ -2560,7 +2550,7 @@ Request to generate responses
 | n_repeat_synonym | [int32](#int32) |  | The number of synonyms desired |
 | branch | [string](#string) |  | Git branch |
 | drop_unknown_parameters | [bool](#bool) |  | Optional. Whether to drop unknown parameters from the generated responses |
-| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) | optional | Optional. The mask to control which fields gets returned. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) | optional | Optional. The mask to control which fields gets returned. <br> Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#field-mask">google.protobuf.FieldMask</a> |
 
 
 
@@ -2594,7 +2584,7 @@ Request to generate user sentences
 | parent | [string](#string) |  | the parent of the request Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre> |
 | n_repeat_synonym | [int32](#int32) |  | The number of synonyms desired |
 | branch | [string](#string) |  | Git branch |
-| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) | optional | Optional. The mask to control which fields gets returned. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) | optional | Optional. The mask to control which fields gets returned. <br> Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#field-mask">google.protobuf.FieldMask</a> |
 
 
 
@@ -2630,7 +2620,7 @@ Request to get alternative sentences
 | parent | [string](#string) |  | the parent of the request Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre> |
 | protected_words | [string](#string) | repeated | Protected words in the augmentation process |
 | words_to_change | [string](#string) | repeated | Words to be changed in the augmentation process |
-| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) | optional | Optional. The mask to control which fields gets returned. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) | optional | Optional. The mask to control which fields gets returned. <br> Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#field-mask">google.protobuf.FieldMask</a> |
 
 
 
@@ -2670,7 +2660,7 @@ Request to get alternative training phrases
 | protected_words | [string](#string) | repeated | Protected words in the augmentation process |
 | words_to_change | [string](#string) | repeated | Words to be changed in the augmentation process |
 | branch | [string](#string) |  | Git branch |
-| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) | optional | Optional. The mask to control which fields gets returned. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) | optional | Optional. The mask to control which fields gets returned. <br> Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#field-mask">google.protobuf.FieldMask</a> |
 
 
 
@@ -2704,7 +2694,7 @@ Request to get synonyms
 | word | [string](#string) |  | Word from which a synonym is got |
 | language_code | [string](#string) |  | language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc. |
 | parent | [string](#string) |  | the parent of the request Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre> |
-| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) | optional | Optional. The mask to control which fields gets returned. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) | optional | Optional. The mask to control which fields gets returned. <br> Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#field-mask">google.protobuf.FieldMask</a> |
 
 
 
@@ -2770,7 +2760,7 @@ The request message to list available LLM models for a specified CCAI service.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | ccai_service_name | [string](#string) |  | The CCAI service for which to list models. Format: <pre><code>projects/&lt;project_uuid&gt;/ccai/services/&lt;service_uuid&gt;</code></pre> |
-| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) | optional | Optional. The mask to control which fields gets returned. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) | optional | Optional. The mask to control which fields gets returned. <br> Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#field-mask">google.protobuf.FieldMask</a> |
 
 
 
@@ -2785,7 +2775,7 @@ The response message containing a list of available LLM models.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| llm_models | [LlmModel](#ondewo.nlu.LlmModel) | repeated | A list of LLM models associated with the specified CCAI service. Each model in this list represents an individual language model that can be used within the service, including details such as name, provider, and description. |
+| llm_models | [LlmModel](#ondewo.nlu.LlmModel) | repeated | A list of LLM models associated with the specified CCAI service. <br> Each model in this list represents an individual language model that can <br> be used within the service, including details such as name, provider, and description. |
 
 
 
@@ -2818,10 +2808,10 @@ The request message to generate a response from a Large Language Model (LLM).
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| llm_generation_request | [google.protobuf.Struct](#google.protobuf.Struct) |  | The request payload for the LLM, structured according to the specific requirements of the large language model provider. The payload must fit the format expected by the specified LLM provider, as defined by <pre><code>CcaiServiceProvider</code></pre>. |
+| llm_generation_request | [google.protobuf.Struct](#google.protobuf.Struct) |  | The request payload for the LLM, structured according to the specific requirements of the large language model provider. <br> The payload must fit the format expected by the specified LLM provider, as defined by <pre><code>CcaiServiceProvider</code></pre> <br> Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#struct">google.protobuf.Struct</a> |
 | ccai_service_name | [string](#string) |  | The CCAI service to be used for processing the request. This specifies which large language model provider and model settings will handle the request. Format: <pre><code>projects/&lt;project_uuid&gt;/ccai/services/&lt;service_uuid&gt;</code></pre> |
 | file_resources | [FileResource](#ondewo.nlu.FileResource) | repeated | Files as input for the generation request |
-| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) | optional | Optional. The mask to control which fields gets returned. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) | optional | Optional. The mask to control which fields gets returned. <br> Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#field-mask">google.protobuf.FieldMask</a> |
 
 
 
@@ -2836,7 +2826,7 @@ The response message containing the generated output from a Large Language Model
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| llm_generation_response | [google.protobuf.Struct](#google.protobuf.Struct) |  | The response data from the LLM, returned as a structured payload. This can contain the text generation, embeddings, or other outputs based on the specific request made to the LLM provider. |
+| llm_generation_response | [google.protobuf.Struct](#google.protobuf.Struct) |  | The response data from the LLM, returned as a structured payload. <br> This can contain the text generation, embeddings, or other outputs based on the specific request made to the LLM provider. <br> Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#struct">google.protobuf.Struct</a> |
 | file_resources | [FileResource](#ondewo.nlu.FileResource) | repeated | Files as input for the generation request, e.g., generated pictures, audio or video |
 
 
@@ -2871,7 +2861,7 @@ The response message for streaming generation from a Large Language Model (LLM).
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| llm_generation_stream_response | [google.protobuf.Struct](#google.protobuf.Struct) |  | The response data from the LLM in a streaming format, returned as a structured payload. This response is part of a continuous stream of data from the LLM, allowing incremental results to be sent as they are generated. |
+| llm_generation_stream_response | [google.protobuf.Struct](#google.protobuf.Struct) |  | The response data from the LLM in a streaming format, returned as a structured payload. <br> This response is part of a continuous stream of data from the LLM, allowing incremental results to be sent as they are generated. <br> Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#struct">google.protobuf.Struct</a> |
 
 
 

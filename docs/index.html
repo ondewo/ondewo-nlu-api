@@ -3715,6 +3715,7 @@ grpcurl -plaintext -H 'cai-token: aimp' -d '{
 }' localhost:50055 ondewo.nlu.Agents.DeleteAgent
 </pre>
 <samp>{}</samp>
+Returns <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#empty">google.protobuf.Empty</a>.
         
           <h4 id="ondewo.nlu.Agents.DeleteAllAgents" class="title-badge method">DeleteAllAgents</h4>
 
@@ -3728,6 +3729,7 @@ Examples:
 grpcurl -plaintext -H 'cai-token: aimp' localhost:50055 ondewo.nlu.Agents.DeleteAllAgents
 </pre>
 <samp>{}</samp>
+Returns <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#empty">google.protobuf.Empty</a>.
         
           <h4 id="ondewo.nlu.Agents.ListAgents" class="title-badge method">ListAgents</h4>
 
@@ -3833,12 +3835,16 @@ grpcurl -plaintext -H 'cai-token: aimp' localhost:50055 ondewo.nlu.Agents.ListAl
           <pre>rpc AddUserToProject (<a href="#ondewo.nlu.AddUserToProjectRequest">AddUserToProjectRequest</a>) returns (<a href="#google.protobuf.Empty">.google.protobuf.Empty)</a></pre>
 
           Adds a user with specified id to the project (agent)
+<br>
+Returns <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#empty">google.protobuf.Empty</a>.
         
           <h4 id="ondewo.nlu.Agents.RemoveUserFromProject" class="title-badge method">RemoveUserFromProject</h4>
 
           <pre>rpc RemoveUserFromProject (<a href="#ondewo.nlu.RemoveUserFromProjectRequest">RemoveUserFromProjectRequest</a>) returns (<a href="#google.protobuf.Empty">.google.protobuf.Empty)</a></pre>
 
           Removes a user with specified id from the project (agent)
+<br>
+Returns <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#empty">google.protobuf.Empty</a>.
         
           <h4 id="ondewo.nlu.Agents.ListUsersInProject" class="title-badge method">ListUsersInProject</h4>
 
@@ -3851,6 +3857,9 @@ grpcurl -plaintext -H 'cai-token: aimp' localhost:50055 ondewo.nlu.Agents.ListAl
           <pre>rpc GetPlatformInfo (<a href="#google.protobuf.Empty">.google.protobuf.Empty</a>) returns (<a href="#ondewo.nlu.GetPlatformInfoResponse">GetPlatformInfoResponse)</a></pre>
 
           Gets information from the platform
+<br>
+Request parameter:
+<a href="https://protobuf.dev/reference/protobuf/google.protobuf/#empty">google.protobuf.Empty</a>
         
           <h4 id="ondewo.nlu.Agents.ListProjectPermissions" class="title-badge method">ListProjectPermissions</h4>
 
@@ -3864,8 +3873,8 @@ grpcurl -plaintext -H 'cai-token: aimp' localhost:50055 ondewo.nlu.Agents.ListAl
 
           Trains the specified agent.
 
-Operation &lt;response: <a href="index.html#google.protobuf.Empty">google.protobuf.Empty</a>,
-           metadata: <a href="index.html#google.protobuf.Struct">google.protobuf.Struct</a>&gt;
+Operation &lt;response: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#empty">google.protobuf.Empty</a>,
+           metadata: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#struct">google.protobuf.Struct</a>&gt;
         
           <h4 id="ondewo.nlu.Agents.BuildCache" class="title-badge method">BuildCache</h4>
 
@@ -3873,17 +3882,17 @@ Operation &lt;response: <a href="index.html#google.protobuf.Empty">google.protob
 
           Builds cache for the specified agent.
 
-Operation &lt;response: <a href="index.html#google.protobuf.Empty">google.protobuf.Empty</a>,
-           metadata: <a href="index.html#google.protobuf.Struct">google.protobuf.Struct</a>&gt;
+Operation &lt;response: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#empty">google.protobuf.Empty</a>,
+           metadata: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#struct">google.protobuf.Struct</a>&gt;
         
           <h4 id="ondewo.nlu.Agents.ExportAgent" class="title-badge method">ExportAgent</h4>
 
           <pre>rpc ExportAgent (<a href="#ondewo.nlu.ExportAgentRequest">ExportAgentRequest</a>) returns (<a href="#ondewo.nlu.Operation">Operation)</a></pre>
 
           Exports the specified agent to a ZIP file.
-
+<br>
 Operation &lt;response: <a href="index.html#ondewo.nlu.ExportAgentResponse">ExportAgentResponse</a>,
-           metadata: <a href="index.html#google.protobuf.Struct">google.protobuf.Struct</a>&gt;
+           metadata: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#struct">google.protobuf.Struct</a>&gt;
         
           <h4 id="ondewo.nlu.Agents.ExportBenchmarkAgent" class="title-badge method">ExportBenchmarkAgent</h4>
 
@@ -3896,13 +3905,13 @@ Operation &lt;response: <a href="index.html#ondewo.nlu.ExportAgentResponse">Expo
           <pre>rpc ImportAgent (<a href="#ondewo.nlu.ImportAgentRequest">ImportAgentRequest</a>) returns (<a href="#ondewo.nlu.Operation">Operation)</a></pre>
 
           Imports the specified agent from a ZIP file.
-
+<br>
 Uploads new intents and entity types without deleting the existing ones.
 Intents and entity types with the same name are replaced with the new
 versions from ImportAgentRequest.
-
-Operation &lt;response: <a href="index.html#google.protobuf.Empty">google.protobuf.Empty</a>,
-           metadata: <a href="index.html#google.protobuf.Struct">google.protobuf.Struct</a>&gt;
+<br>
+Operation &lt;response: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#empty">google.protobuf.Empty</a>,
+           metadata: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#struct">google.protobuf.Struct</a>&gt;
         
           <h4 id="ondewo.nlu.Agents.MigrateAgent" class="title-badge method">MigrateAgent</h4>
 
@@ -3921,12 +3930,12 @@ Operation &lt;response: <a href="index.html#google.protobuf.Empty">google.protob
           <pre>rpc RestoreAgent (<a href="#ondewo.nlu.RestoreAgentRequest">RestoreAgentRequest</a>) returns (<a href="#ondewo.nlu.Operation">Operation)</a></pre>
 
           Restores the specified agent from a ZIP file.
-
+<br>
 Replaces the current agent version with a new one. All the intents and
 entity types in the older version are deleted.
-
-Operation &lt;response: <a href="index.html#google.protobuf.Empty">google.protobuf.Empty</a>,
-           metadata: <a href="index.html#google.protobuf.Struct">google.protobuf.Struct</a>&gt;
+<br>
+Operation &lt;response: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#empty">google.protobuf.Empty</a>,
+           metadata: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#struct">google.protobuf.Struct</a>&gt;
         
           <h4 id="ondewo.nlu.Agents.GetAgentStatistics" class="title-badge method">GetAgentStatistics</h4>
 
@@ -3951,12 +3960,16 @@ Operation &lt;response: <a href="index.html#google.protobuf.Empty">google.protob
           <pre>rpc SetResources (<a href="#ondewo.nlu.SetResourcesRequest">SetResourcesRequest</a>) returns (<a href="#google.protobuf.Empty">.google.protobuf.Empty)</a></pre>
 
           Sets resources
+<br>
+Returns <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#empty">google.protobuf.empty</a>
         
           <h4 id="ondewo.nlu.Agents.DeleteResources" class="title-badge method">DeleteResources</h4>
 
           <pre>rpc DeleteResources (<a href="#ondewo.nlu.DeleteResourcesRequest">DeleteResourcesRequest</a>) returns (<a href="#google.protobuf.Empty">.google.protobuf.Empty)</a></pre>
 
           Deletes resources
+<br>
+Returns <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#empty">google.protobuf.empty</a>
         
           <h4 id="ondewo.nlu.Agents.ExportResources" class="title-badge method">ExportResources</h4>
 
@@ -4448,7 +4461,9 @@ America/New_York, Europe/Paris. </p></td>
                   <td>configs</td>
                   <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
                   <td></td>
-                  <td><p>Optional. Agent configuration as OndewoConfig converted to Struct format. </p></td>
+                  <td><p>Optional. Agent configuration as OndewoConfig converted to Struct format.
+<br>
+Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#struct">google.protobuf.Struct</a> </p></td>
                 </tr>
               
                 <tr>
@@ -4479,14 +4494,16 @@ Read-only in the Agent message </p></td>
                   <td>created_at</td>
                   <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
                   <td></td>
-                  <td><p>Creation date and time. Read-only field. </p></td>
+                  <td><p>Creation date and time. Read-only field.
+Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> </p></td>
                 </tr>
               
                 <tr>
                   <td>modified_at</td>
                   <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
                   <td></td>
-                  <td><p>Modification date and time. Read-only field. </p></td>
+                  <td><p>Modification date and time. Read-only field.
+Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> </p></td>
                 </tr>
               
                 <tr>
@@ -4704,14 +4721,16 @@ Sorting position of the GetPlatformMappingRequest. </p></td>
                   <td>created_at</td>
                   <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
                   <td></td>
-                  <td><p>Creation date and time. Read-only field. </p></td>
+                  <td><p>Creation date and time. Read-only field.
+Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> </p></td>
                 </tr>
               
                 <tr>
                   <td>modified_at</td>
                   <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
                   <td></td>
-                  <td><p>Modification date and time. Read-only field. </p></td>
+                  <td><p>Modification date and time. Read-only field.
+Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> </p></td>
                 </tr>
               
                 <tr>
@@ -5307,14 +5326,16 @@ e.g. next_page_token is current_index-2 </p></td>
                   <td>created_at</td>
                   <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
                   <td></td>
-                  <td><p>Creation date and time. Read-only field. </p></td>
+                  <td><p>Creation date and time. Read-only field.
+Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> </p></td>
                 </tr>
               
                 <tr>
                   <td>modified_at</td>
                   <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
                   <td></td>
-                  <td><p>Modification date and time. Read-only field. </p></td>
+                  <td><p>Modification date and time. Read-only field.
+Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> </p></td>
                 </tr>
               
                 <tr>
@@ -5469,14 +5490,16 @@ e.g. next_page_token is current_index-2 </p></td>
                   <td>created_at</td>
                   <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
                   <td></td>
-                  <td><p>Creation date and time. Read-only field. </p></td>
+                  <td><p>Creation date and time. Read-only field.
+Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> </p></td>
                 </tr>
               
                 <tr>
                   <td>modified_at</td>
                   <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
                   <td></td>
-                  <td><p>Modification date and time. Read-only field. </p></td>
+                  <td><p>Modification date and time. Read-only field.
+Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> </p></td>
                 </tr>
               
                 <tr>
@@ -5603,14 +5626,18 @@ e.g. next_page_token is current_index-2 </p></td>
                   <td>created_at</td>
                   <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
                   <td></td>
-                  <td><p>Creation date and time. Read-only field. </p></td>
+                  <td><p>Creation date and time. Read-only field.
+<br>
+Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> </p></td>
                 </tr>
               
                 <tr>
                   <td>modified_at</td>
                   <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
                   <td></td>
-                  <td><p>Modification date and time. Read-only field. </p></td>
+                  <td><p>Modification date and time. Read-only field.
+<br>
+Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> </p></td>
                 </tr>
               
                 <tr>
@@ -5751,14 +5778,16 @@ e.g. next_page_token is current_index-2 </p></td>
                   <td>created_at</td>
                   <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
                   <td></td>
-                  <td><p>Creation date and time. Read-only field. </p></td>
+                  <td><p>Creation date and time. Read-only field.
+Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> </p></td>
                 </tr>
               
                 <tr>
                   <td>modified_at</td>
                   <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
                   <td></td>
-                  <td><p>Modification date and time. Read-only field. </p></td>
+                  <td><p>Modification date and time. Read-only field.
+Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> </p></td>
                 </tr>
               
                 <tr>
@@ -5899,14 +5928,16 @@ e.g. next_page_token is current_index-2 </p></td>
                   <td>created_at</td>
                   <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
                   <td></td>
-                  <td><p>Creation date and time. Read-only field. </p></td>
+                  <td><p>Creation date and time. Read-only field.
+Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> </p></td>
                 </tr>
               
                 <tr>
                   <td>modified_at</td>
                   <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
                   <td></td>
-                  <td><p>Modification date and time. Read-only field. </p></td>
+                  <td><p>Modification date and time. Read-only field.
+Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> </p></td>
                 </tr>
               
                 <tr>
@@ -6047,14 +6078,16 @@ e.g. next_page_token is current_index-2 </p></td>
                   <td>created_at</td>
                   <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
                   <td></td>
-                  <td><p>Creation date and time. Read-only field. </p></td>
+                  <td><p>Creation date and time. Read-only field.
+Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> </p></td>
                 </tr>
               
                 <tr>
                   <td>modified_at</td>
                   <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
                   <td></td>
-                  <td><p>Modification date and time. Read-only field. </p></td>
+                  <td><p>Modification date and time. Read-only field.
+Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> </p></td>
                 </tr>
               
                 <tr>
@@ -6202,14 +6235,16 @@ e.g. next_page_token is current_index-2 </p></td>
                   <td>created_at</td>
                   <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
                   <td></td>
-                  <td><p>Creation date and time. Read-only field. </p></td>
+                  <td><p>Creation date and time. Read-only field.
+Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> </p></td>
                 </tr>
               
                 <tr>
                   <td>modified_at</td>
                   <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
                   <td></td>
-                  <td><p>Modification date and time. Read-only field. </p></td>
+                  <td><p>Modification date and time. Read-only field.
+Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> </p></td>
                 </tr>
               
                 <tr>
@@ -6392,14 +6427,16 @@ Examples of invalid page token strings:
                   <td>created_at</td>
                   <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
                   <td></td>
-                  <td><p>Creation date and time. Read-only field. </p></td>
+                  <td><p>Creation date and time. Read-only field.
+Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> </p></td>
                 </tr>
               
                 <tr>
                   <td>modified_at</td>
                   <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
                   <td></td>
-                  <td><p>Modification date and time. Read-only field. </p></td>
+                  <td><p>Modification date and time. Read-only field.
+Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> </p></td>
                 </tr>
               
                 <tr>
@@ -6547,14 +6584,16 @@ e.g. next_page_token is current_index-2 </p></td>
                   <td>created_at</td>
                   <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
                   <td></td>
-                  <td><p>Creation date and time. Read-only field. </p></td>
+                  <td><p>Creation date and time. Read-only field.
+Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> </p></td>
                 </tr>
               
                 <tr>
                   <td>modified_at</td>
                   <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
                   <td></td>
-                  <td><p>Modification date and time. Read-only field. </p></td>
+                  <td><p>Modification date and time. Read-only field.
+Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> </p></td>
                 </tr>
               
                 <tr>
@@ -6723,14 +6762,16 @@ e.g. next_page_token is current_index-2 </p></td>
                   <td>created_at</td>
                   <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
                   <td></td>
-                  <td><p>Creation date and time. Read-only field. </p></td>
+                  <td><p>Creation date and time. Read-only field.
+Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> </p></td>
                 </tr>
               
                 <tr>
                   <td>modified_at</td>
                   <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
                   <td></td>
-                  <td><p>Modification date and time. Read-only field. </p></td>
+                  <td><p>Modification date and time. Read-only field.
+Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> </p></td>
                 </tr>
               
                 <tr>
@@ -6783,7 +6824,9 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre> </p></td>
                   <td>field_mask</td>
                   <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
                   <td></td>
-                  <td><p>Optional. A mask to control which fields are returned in the response. </p></td>
+                  <td><p>Optional. A mask to control which fields are returned in the response.
+<br>
+Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#field-mask">google.protobuf.FieldMask</a> </p></td>
                 </tr>
               
             </tbody>
@@ -7076,7 +7119,10 @@ Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre> </p></td>
                   <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
                   <td></td>
                   <td><p>Optional. The mask to control which data fields will be added to the returned data.
-Example: paths=[&quot;duration_in_s_min&quot;, &quot;id&quot;, &quot;session_id&quot;, &quot;project_id&quot;] </p></td>
+<br>
+Example: paths=[&quot;duration_in_s_min&quot;, &quot;id&quot;, &quot;session_id&quot;, &quot;project_id&quot;]
+<br>
+Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#field-mask">google.protobuf.FieldMask</a> </p></td>
                 </tr>
               
                 <tr>
@@ -7253,7 +7299,9 @@ e.g. next_page_token is current_index-2 </p></td>
                   <td>field_mask</td>
                   <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
                   <td>optional</td>
-                  <td><p>Optional. The mask to control which fields gets returned. </p></td>
+                  <td><p>Optional. The mask to control which fields gets returned.
+<br>
+Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#field-mask">google.protobuf.FieldMask</a> </p></td>
                 </tr>
               
             </tbody>
@@ -7346,7 +7394,9 @@ Examples of invalid page token strings:
                   <td>field_mask</td>
                   <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
                   <td>optional</td>
-                  <td><p>Optional. The mask to control which fields gets returned. </p></td>
+                  <td><p>Optional. The mask to control which fields gets returned.
+<br>
+Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#field-mask">google.protobuf.FieldMask</a> </p></td>
                 </tr>
               
             </tbody>
@@ -7447,7 +7497,9 @@ Examples of invalid page token strings:
                   <td>field_mask</td>
                   <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
                   <td>optional</td>
-                  <td><p>Optional. The mask to control which fields gets returned. </p></td>
+                  <td><p>Optional. The mask to control which fields gets returned.
+<br>
+Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#field-mask">google.protobuf.FieldMask</a> </p></td>
                 </tr>
               
             </tbody>
@@ -7549,7 +7601,9 @@ e.g. next_page_token is current_index-2 </p></td>
                   <td>status_set_time</td>
                   <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
                   <td></td>
-                  <td><p>Timestamp when the status was set. Read-only field. </p></td>
+                  <td><p>Timestamp when the status was set. Read-only field.
+<br>
+Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#timestamp">google.protobuf.Timestamp</a> </p></td>
                 </tr>
               
                 <tr>
@@ -7634,14 +7688,18 @@ with optimized thresholds will be returned but not updated on the server </p></t
                   <td>optimization_info</td>
                   <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
                   <td></td>
-                  <td><p>info about optimization </p></td>
+                  <td><p>info about optimization
+<br>
+Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#struct">google.protobuf.Struct</a> </p></td>
                 </tr>
               
                 <tr>
                   <td>optimized_ondewo_config</td>
                   <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
                   <td></td>
-                  <td><p>the optimized configuration of the ondewo agent e.g., optimized parameters </p></td>
+                  <td><p>the optimized configuration of the ondewo agent e.g., optimized parameters
+<br>
+Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#struct">google.protobuf.Struct</a> </p></td>
                 </tr>
               
             </tbody>
@@ -7719,7 +7777,10 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
                   <td></td>
                   <td><p>initial thresholds are optional, if not given will be taken from the current config
-example {'OndewoIntentSimilarityMatch': 0.59, 'OndewoIntentNamedSimilarityMatch': 0.39} </p></td>
+<br>
+example {'OndewoIntentSimilarityMatch': 0.59, 'OndewoIntentNamedSimilarityMatch': 0.39}
+<br>
+Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#struct">google.protobuf.Struct</a> </p></td>
                 </tr>
               
             </tbody>
@@ -8012,7 +8073,9 @@ Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre> </p></td>
                   <td>update_mask</td>
                   <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
                   <td></td>
-                  <td><p>Optional. The mask to control which fields get updated. </p></td>
+                  <td><p>Optional. The mask to control which fields get updated.
+<br>
+Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#field-mask">google.protobuf.FieldMask</a> </p></td>
                 </tr>
               
             </tbody>
@@ -8923,7 +8986,9 @@ Intents can only be classified if the intent's input context set is the subset o
                   <td>field_mask</td>
                   <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
                   <td>optional</td>
-                  <td><p>Optional. The mask to control which fields gets returned. </p></td>
+                  <td><p>Optional. The mask to control which fields gets returned.
+<br>
+Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#field-mask">google.protobuf.FieldMask</a> </p></td>
                 </tr>
               
             </tbody>
@@ -9236,7 +9301,9 @@ Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre> </p></td>
                   <td>field_mask</td>
                   <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
                   <td>optional</td>
-                  <td><p>Optional. The mask to control which fields gets returned. </p></td>
+                  <td><p>Optional. The mask to control which fields gets returned.
+<br>
+Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#field-mask">google.protobuf.FieldMask</a> </p></td>
                 </tr>
               
             </tbody>
@@ -9291,7 +9358,9 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&g
                   <td>field_mask</td>
                   <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
                   <td>optional</td>
-                  <td><p>Optional. The mask to control which fields gets returned. </p></td>
+                  <td><p>Optional. The mask to control which fields gets returned.
+<br>
+Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#field-mask">google.protobuf.FieldMask</a> </p></td>
                 </tr>
               
             </tbody>
@@ -9420,7 +9489,9 @@ Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre> </p></td>
                   <td>field_mask</td>
                   <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
                   <td>optional</td>
-                  <td><p>Optional. The mask to control which fields gets returned. </p></td>
+                  <td><p>Optional. The mask to control which fields gets returned.
+<br>
+Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#field-mask">google.protobuf.FieldMask</a> </p></td>
                 </tr>
               
             </tbody>
@@ -9497,7 +9568,9 @@ Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre> </p></td>
                   <td>field_mask</td>
                   <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
                   <td>optional</td>
-                  <td><p>Optional. The mask to control which fields gets returned. </p></td>
+                  <td><p>Optional. The mask to control which fields gets returned.
+<br>
+Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#field-mask">google.protobuf.FieldMask</a> </p></td>
                 </tr>
               
             </tbody>
@@ -9588,7 +9661,9 @@ Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre> </p></td>
                   <td>field_mask</td>
                   <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
                   <td>optional</td>
-                  <td><p>Optional. The mask to control which fields gets returned. </p></td>
+                  <td><p>Optional. The mask to control which fields gets returned.
+<br>
+Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#field-mask">google.protobuf.FieldMask</a> </p></td>
                 </tr>
               
             </tbody>
@@ -9708,7 +9783,9 @@ as duplicate. Meaningful values of similarity_threshold are between 0.95 and 1.0
                   <td>field_mask</td>
                   <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
                   <td>optional</td>
-                  <td><p>Optional. The mask to control which fields gets returned. </p></td>
+                  <td><p>Optional. The mask to control which fields gets returned.
+<br>
+Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#field-mask">google.protobuf.FieldMask</a> </p></td>
                 </tr>
               
             </tbody>
@@ -9785,7 +9862,9 @@ Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre> </p></td>
                   <td>field_mask</td>
                   <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
                   <td>optional</td>
-                  <td><p>Optional. The mask to control which fields gets returned. </p></td>
+                  <td><p>Optional. The mask to control which fields gets returned.
+<br>
+Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#field-mask">google.protobuf.FieldMask</a> </p></td>
                 </tr>
               
             </tbody>
@@ -9925,7 +10004,9 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/ccai/services/&lt;service_uuid&
                   <td>field_mask</td>
                   <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
                   <td>optional</td>
-                  <td><p>Optional. The mask to control which fields gets returned. </p></td>
+                  <td><p>Optional. The mask to control which fields gets returned.
+<br>
+Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#field-mask">google.protobuf.FieldMask</a> </p></td>
                 </tr>
               
             </tbody>
@@ -9950,7 +10031,9 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/ccai/services/&lt;service_uuid&
                   <td><a href="#ondewo.nlu.LlmModel">LlmModel</a></td>
                   <td>repeated</td>
                   <td><p>A list of LLM models associated with the specified CCAI service.
+<br>
 Each model in this list represents an individual language model that can
+<br>
 be used within the service, including details such as name, provider, and description. </p></td>
                 </tr>
               
@@ -10024,8 +10107,11 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/ccai/services/&lt;service_uuid&
                   <td></td>
                   <td><p>The request payload for the LLM, structured according to the specific
 requirements of the large language model provider.
+<br>
 The payload must fit the format expected by the specified LLM provider,
-as defined by <pre><code>CcaiServiceProvider</code></pre>. </p></td>
+as defined by <pre><code>CcaiServiceProvider</code></pre>
+<br>
+Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#struct">google.protobuf.Struct</a> </p></td>
                 </tr>
               
                 <tr>
@@ -10048,7 +10134,9 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/ccai/services/&lt;service_uuid&
                   <td>field_mask</td>
                   <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
                   <td>optional</td>
-                  <td><p>Optional. The mask to control which fields gets returned. </p></td>
+                  <td><p>Optional. The mask to control which fields gets returned.
+<br>
+Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#field-mask">google.protobuf.FieldMask</a> </p></td>
                 </tr>
               
             </tbody>
@@ -10073,8 +10161,11 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/ccai/services/&lt;service_uuid&
                   <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
                   <td></td>
                   <td><p>The response data from the LLM, returned as a structured payload.
+<br>
 This can contain the text generation, embeddings, or other outputs
-based on the specific request made to the LLM provider. </p></td>
+based on the specific request made to the LLM provider.
+<br>
+Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#struct">google.protobuf.Struct</a> </p></td>
                 </tr>
               
                 <tr>
@@ -10166,8 +10257,11 @@ Specifies the LLM provider (e.g., Ollama, OpenAI, Google, etc.), indicating the 
                   <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
                   <td></td>
                   <td><p>The response data from the LLM in a streaming format, returned as a structured payload.
+<br>
 This response is part of a continuous stream of data from the LLM, allowing
-incremental results to be sent as they are generated. </p></td>
+incremental results to be sent as they are generated.
+<br>
+Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#struct">google.protobuf.Struct</a> </p></td>
                 </tr>
               
             </tbody>

@@ -122,6 +122,8 @@ message ListLlmModelsRequest {
     string ccai_service_name = 1;
 
     // Optional. The mask to control which fields gets returned.
+    // <br>
+    // Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#field-mask">google.protobuf.FieldMask</a>
     optional google.protobuf.FieldMask field_mask = 2;
 
 }
@@ -130,7 +132,9 @@ message ListLlmModelsRequest {
 message ListLlmModelsResponse {
 
     // A list of LLM models associated with the specified CCAI service.
+    // <br>
     // Each model in this list represents an individual language model that can
+    // <br>
     // be used within the service, including details such as name, provider, and description.
     repeated LlmModel llm_models = 1;
 
@@ -169,8 +173,11 @@ message LlmGenerateRequest {
 
     // The request payload for the LLM, structured according to the specific
     // requirements of the large language model provider.
+    // <br> 
     // The payload must fit the format expected by the specified LLM provider,
-    // as defined by <pre><code>CcaiServiceProvider</code></pre>.
+    // as defined by <pre><code>CcaiServiceProvider</code></pre>
+    // <br>
+    // Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#struct">google.protobuf.Struct</a>
     google.protobuf.Struct llm_generation_request = 1;
 
     // The CCAI service to be used for processing the request.
@@ -182,6 +189,8 @@ message LlmGenerateRequest {
     repeated FileResource file_resources = 3;
 
     // Optional. The mask to control which fields gets returned.
+    // <br>
+    // Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#field-mask">google.protobuf.FieldMask</a>
     optional google.protobuf.FieldMask field_mask = 4;
 
 }
@@ -190,8 +199,11 @@ message LlmGenerateRequest {
 message LlmGenerateResponse {
 
     // The response data from the LLM, returned as a structured payload.
+    // <br>
     // This can contain the text generation, embeddings, or other outputs
     // based on the specific request made to the LLM provider.
+    // <br>
+    // Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#struct">google.protobuf.Struct</a>
     google.protobuf.Struct llm_generation_response = 1;
 
     // Files as input for the generation request, e.g., generated pictures, audio or video
@@ -203,8 +215,11 @@ message LlmGenerateResponse {
 message StreamingLlmGenerateResponse {
 
     // The response data from the LLM in a streaming format, returned as a structured payload.
+    // <br>
     // This response is part of a continuous stream of data from the LLM, allowing
     // incremental results to be sent as they are generated.
+    // <br>
+    // Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#struct">google.protobuf.Struct</a>
     google.protobuf.Struct llm_generation_stream_response = 1;
 
 }
@@ -228,6 +243,8 @@ message ExtractEntitiesRequest {
     string intent_name = 4;
 
     // Optional. The mask to control which fields gets returned.
+    // <br>
+    // Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#field-mask">google.protobuf.FieldMask</a>
     optional google.protobuf.FieldMask field_mask = 5;
 
 }
@@ -252,6 +269,8 @@ message ExtractEntitiesFuzzyRequest {
     bool allow_overlaps = 5;
 
     // Optional. The mask to control which fields gets returned.
+    // <br>
+    // Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#field-mask">google.protobuf.FieldMask</a>
     optional google.protobuf.FieldMask field_mask = 6;
 
 }
@@ -333,6 +352,8 @@ message GetAlternativeSentencesRequest {
     repeated string words_to_change = 7;
 
     // Optional. The mask to control which fields gets returned.
+    // <br>
+    // Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#field-mask">google.protobuf.FieldMask</a>
     optional google.protobuf.FieldMask field_mask = 8;
 
 }
@@ -354,6 +375,8 @@ message GenerateUserSaysRequest {
     string branch = 8;
 
     // Optional. The mask to control which fields gets returned.
+    // <br>
+    // Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#field-mask">google.protobuf.FieldMask</a>
     optional google.protobuf.FieldMask field_mask = 9;
 
 }
@@ -378,6 +401,8 @@ message GenerateResponsesRequest {
     bool drop_unknown_parameters = 9;
 
     // Optional. The mask to control which fields gets returned.
+    // <br>
+    // Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#field-mask">google.protobuf.FieldMask</a>
     optional google.protobuf.FieldMask field_mask = 10;
 
 }
@@ -418,6 +443,8 @@ message GetAlternativeTrainingPhrasesRequest {
     string branch = 10;
 
     // Optional. The mask to control which fields gets returned.
+    // <br>
+    // Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#field-mask">google.protobuf.FieldMask</a>
     optional google.protobuf.FieldMask field_mask = 11;
 
 }
@@ -439,6 +466,8 @@ message GetSynonymsRequest {
     string parent = 5;
 
     // Optional. The mask to control which fields gets returned.
+    // <br>
+    // Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#field-mask">google.protobuf.FieldMask</a>
     optional google.protobuf.FieldMask field_mask = 6;
 
 }
@@ -707,6 +736,8 @@ message ClassifyIntentsRequest {
     repeated IntentAlgorithms algorithms = 7;
 
     // Optional. The mask to control which fields gets returned.
+    // <br>
+    // Type: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#field-mask">google.protobuf.FieldMask</a>
     optional google.protobuf.FieldMask field_mask = 8;
 
 }
