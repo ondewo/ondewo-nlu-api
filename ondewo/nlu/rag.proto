@@ -420,7 +420,7 @@ message RagFileMetadata {
     // Optional. MIME type (e.g., <code>"application/pdf"</code>, <code>"image/png"</code>).
     string content_type = 2;
 
-    // Optional. File size in bytes (if known, 0 if unknown).
+    // Optional. Minimum 0. File size in bytes (if known, 0 if unknown).
     int64 size = 3;
 }
 
@@ -1333,7 +1333,7 @@ message RagRemoveChunksRequest {
     // Required. Document ID to remove chunks from.
     string document_id = 3;
 
-    // Required. Chunk IDs to remove. If empty, removes all chunks from the document.
+    // Optional. Chunk IDs to remove. If empty, removes all chunks from the document.
     repeated string chunk_ids = 4;
 }
 
@@ -1833,10 +1833,10 @@ message RagPromptConfig {
 // Prompt template variable for dynamic content insertion.
 message RagPromptVariable {
 
-    // Variable name used in prompt template.
+    // Required. Variable name used in prompt template.
     string key = 1;
 
-    // Whether this variable is optional in the template.
+    // Required. Whether this variable is optional in the template.
     optional bool optional = 2;
 }
 
