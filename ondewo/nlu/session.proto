@@ -276,7 +276,7 @@ service Sessions {
     // returns a session-review from ondewo-kb or computes the first review if none exists
     rpc GetSessionReview (GetSessionReviewRequest) returns (SessionReview) {
         option (google.api.http) = {
-            get: "/v2/{session_review_id=projects/*/agent/sessions/*}/reviews/*}"
+            get: "/v2/{session_review_id=projects/*/agent/sessions/*/reviews/*}"
         };
     };
 
