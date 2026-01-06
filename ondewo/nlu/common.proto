@@ -40,7 +40,7 @@ enum SortingMode {
 // statistic response
 message StatResponse {
 
-    // Response wrapper for the "Get<Stat>" endpoints
+    // Response wrapper for the &quot;Get&lt;Stat&gt;&quot; endpoints
     uint32 value = 1;
 }
 
@@ -53,11 +53,11 @@ message Comment {
     // text of the comment
     string text = 2;
 
-    // User id as resource name
+    // User id as resource name.
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</code></pre>
     string user_id = 3;
 
-    // name of the resource for which the comment is about
+    // name of the resource for which the comment is about.
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/&lt;resource_type&gt;/&lt;resource_uuid&gt;/.../</code></pre>
     string comment_about_name = 4;
 
@@ -211,11 +211,11 @@ message Notification {
     // resource name of the notification
     string name = 1;
 
-    // User id as resource name
+    // User id as resource name.
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</code></pre>
     string user_name = 2;
 
-    // User id as resource name
+    // User id as resource name.
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</code></pre>
     string title = 3;
 
@@ -237,7 +237,7 @@ message Notification {
     // When the user marked the notification as read, i.e. read the notification
     google.protobuf.Timestamp notification_read_timestamp = 9;
 
-    // The origin of a notification
+    // The origin of a notification.
     // A Notification origin can be from a product (service), e.g. ondewo-nlu, ondewo-s2t, ondewo-t2s, etc.
     NotificationOrigin notification_origin = 10;
 
@@ -325,27 +325,34 @@ message ListNotificationsRequest {
     // The page token is a string representing the current index and page size.
     //
     // Valid page token strings:
-    // * "" (empty string) - Retrieves the first page.
-    // * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
-    // * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+    // <ul>
+    //   <li>&quot;&quot; (empty string) - Retrieves the first page.</li>
+    //   <li>&quot;current_index-0--page_size-20&quot; - Retrieves the first page with a page size of 20.</li>
+    //   <li>&quot;current_index-1--page_size-20&quot; - Retrieves the second page with a page size of 20.</li>
+    // </ul>
     //
     // Index starts at 0.
     //
     // Examples of valid page token strings:
-    // * ""
-    // * "current_index-0--page_size-20"
-    // * "current_index-1--page_size-20"
-    // * "current_index-10--page_size-20"
+    // <ul>
+    //   <li>&quot;&quot;</li>
+    //   <li>&quot;current_index-0--page_size-20&quot;</li>
+    //   <li>&quot;current_index-1--page_size-20&quot;</li>
+    //   <li>&quot;current_index-10--page_size-20&quot;</li>
+    // </ul>
     //
     // Examples of invalid page token strings:
-    // * "1"
-    // * "current_index-0--page_size-20"
-    // * "current_index--1--page_size-20"
-    // * "current_index1--page_size-20"
-    // * "current_index-1--page_size--20"
+    // <ul>
+    //   <li>&quot;1&quot;</li>
+    //   <li>&quot;current_index-0--page_size-20&quot;</li>
+    //   <li>&quot;current_index--1--page_size-20&quot;</li>
+    //   <li>&quot;current_index1--page_size-20&quot;</li>
+    //   <li>&quot;current_index-1--page_size--20&quot;</li>
+    // </ul>
     string page_token = 2;
 
     // Optional. Mask to control which fields will be filled with data.
+    // <br>
     // Example: path=["notification.user_names"]
     google.protobuf.FieldMask field_mask = 3;
 }

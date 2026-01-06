@@ -52,7 +52,7 @@ service Webhook {
     }
 
     // send a request for /slot_filling/ to the webhook server
-    // parameter values can be provided &
+    // parameter values can be provided &amp;
     // context information can be changed by the webhook server
     rpc SlotFilling (WebhookRequest) returns (WebhookResponse) {
         option (google.api.http) = {
@@ -74,21 +74,21 @@ service Webhook {
     // If the specified session entity type already exists, overrides the session
     // entity type.
     //
-    // This method doesn't work with Google Assistant integration.
+    // This method doesn&apos;t work with Google Assistant integration.
     // Contact Dialogflow support if you need to use session entities
     // with Google Assistant integration.
     rpc CreateSessionEntityType (CreateSessionEntityTypeRequest) returns (SessionEntityType);
 
     // Updates the specified session entity type.
     //
-    // This method doesn't work with Google Assistant integration.
+    // This method doesn&apos;t work with Google Assistant integration.
     // Contact Dialogflow support if you need to use session entities
     // with Google Assistant integration.
     rpc UpdateSessionEntityType(UpdateSessionEntityTypeRequest) returns (SessionEntityType);
 
     // Deletes the specified session entity type.
     //
-    // This method doesn't work with Google Assistant integration.
+    // This method doesn&apos;t work with Google Assistant integration.
     // Contact Dialogflow support if you need to use session entities
     // with Google Assistant integration.
     rpc DeleteSessionEntityType(DeleteSessionEntityTypeRequest) returns (google.protobuf.Empty);
@@ -106,15 +106,14 @@ message WebhookRequest {
 
 
     // The unique identifier of the response. Contains the same value as
-    // `[Streaming]DetectIntentResponse.response_id`.
+    // <code>[Streaming]DetectIntentResponse.response_id</code>.
     string response_id = 1;
 
     // The result of the conversational query or event processing. Contains the
-    // same value as `[Streaming]DetectIntentResponse.query_result`.
+    // same value as <code>[Streaming]DetectIntentResponse.query_result</code>.
     QueryResult query_result = 2;
 
-    // Optional. The contents of the original request that was passed to
-    // `[Streaming]DetectIntent` call.
+    // Optional. The contents of the original request that was passed to <code>[Streaming]DetectIntent</code> call.
     OriginalDetectIntentRequest original_detect_intent_request = 3;
 
     // The unique identifier of detectIntent request session.
@@ -130,33 +129,33 @@ message WebhookRequest {
 message WebhookResponse {
 
     // Optional. The text to be shown on the screen. This value is passed directly
-    // to `QueryResult.fulfillment_text`.
+    // to <code>QueryResult.fulfillment_text</code>.
     string fulfillment_text = 1;
 
     // Optional. The collection of rich messages to present to the user. This
-    // value is passed directly to `QueryResult.fulfillment_messages`.
+    // value is passed directly to <code>QueryResult.fulfillment_messages</code>.
     repeated Intent.Message fulfillment_messages = 2;
 
-    // Optional. This value is passed directly to `QueryResult.webhook_source`.
+    // Optional. This value is passed directly to <code>QueryResult.webhook_source</code>.
     string source = 3;
 
-    // Optional. This value is passed directly to `QueryResult.webhook_payload`.
-    // See the related `fulfillment_messages[i].payload field`, which may be used
+    // Optional. This value is passed directly to <code>QueryResult.webhook_payload</code>.
+    // See the related <code>fulfillment_messages[i].payload field</code>, which may be used
     // as an alternative to this field.
     //
     // This field can be used for Actions on Google responses.
     // It should have a structure similar to the JSON message shown here. For more
     // information, see
-    // [Actions on Google Webhook
-    // Format](https://developers.google.com/actions/dialogflow/webhook)
+    // <a href="https://developers.google.com/actions/dialogflow/webhook">Actions on Google Webhook
+    // Format</a>
     // <pre>{
-    //   "google": {
-    //     "expectUserResponse": true,
-    //     "richResponse": {
-    //       "items": [
+    //   &quot;google&quot;: {
+    //     &quot;expectUserResponse&quot;: true,
+    //     &quot;richResponse&quot;: {
+    //       &quot;items&quot;: [
     //         {
-    //           "simpleResponse": {
-    //             "textToSpeech": "this is a simple response"
+    //           &quot;simpleResponse&quot;: {
+    //             &quot;textToSpeech&quot;: &quot;this is a simple response&quot;
     //           }
     //         }
     //       ]
@@ -166,36 +165,35 @@ message WebhookResponse {
     google.protobuf.Struct payload = 4;
 
     // Optional. The collection of output contexts. This value is passed directly
-    // to `QueryResult.output_contexts`.
+    // to <code>QueryResult.output_contexts</code>.
     repeated Context output_contexts = 5;
 
-    // Optional. Makes the platform immediately invoke another `DetectIntent` call
+    // Optional. Makes the platform immediately invoke another <code>DetectIntent</code> call
     // internally with the specified event as input.
     EventInput followup_event_input = 6;
 
     // Optional. Additional session entity types to replace or extend developer
     // entity types with. The entity synonyms apply to all languages and persist
     // for the session. Setting this data from a webhook overwrites
-    // the session entity types that have been set using `detectIntent` method.
+    // the session entity types that have been set using <code>detectIntent</code> method.
     repeated SessionEntityType session_entity_types = 10;
 }
 
-// Represents the contents of the original request that was passed to
-// the `[Streaming]DetectIntent` call.
+// Represents the contents of the original request that was passed to the <code>[Streaming]DetectIntent</code> call.
 message OriginalDetectIntentRequest {
 
-    // The source of this request, e.g., `google`, `facebook`, `slack` or other "platforms". .
-    // Used to identify the "platform"
+    // The source of this request, e.g., <code>google</code>, <code>facebook</code>, <code>slack</code> or other &quot;platforms&quot;. .
+    // Used to identify the &quot;platform&quot;
     string source = 1;
 
-    // Optional. This field is set to the value of the `QueryParameters.payload`
+    // Optional. This field is set to the value of the <code>QueryParameters.payload</code>
     // field passed in the request. Some integrations that query an
     // agent may provide additional data in the payload.
     //
     // In particular this can be of the form:
     // <pre>{
-    //  "a": {
-    //    "b": "c"
+    //  &quot;a&quot;: {
+    //    &quot;b&quot;: &quot;c&quot;
     //  }
     // }</pre>
     google.protobuf.Struct payload = 3;
@@ -205,20 +203,15 @@ message OriginalDetectIntentRequest {
 message PingResponse {
 
     // This is the response message of a Ping request.
-    // It's purpose is to report the reachability of a Webhook server.
+    // It&apos;s purpose is to report the reachability of a Webhook server.
     bool is_reachable = 1;
 }
 
 
 
-// A session represents a conversation between a Dialogflow agent and an
-// end-user. You can create special entities, called session entities, during a
-// session. Session entities can extend or replace custom entity types and only
-// exist during the session that they were created for. All session data,
-// including session entities, is stored by Dialogflow for 20 minutes.
+// A session represents a conversation between a Dialogflow agent and an end-user. You can create special entities, called session entities, during a session. Session entities can extend or replace custom entity types and only exist during the session that they were created for. All session data, including session entities, is stored by Dialogflow for 20 minutes.
 //
-// For more information, see the [session entity
-// guide](https://cloud.google.com/dialogflow/docs/entities-session).
+// For more information, see the <a href="https://cloud.google.com/dialogflow/docs/entities-session">session entity guide</a>.
 message SessionEntityType {
 
     // The types of modifications for a session entity type.
@@ -233,25 +226,25 @@ message SessionEntityType {
         // The collection of session entities extends the collection of entities in
         // the corresponding custom entity type.
         //
-        // Note: Even in this override mode calls to `ListSessionEntityTypes`,
-        // `GetSessionEntityType`, `CreateSessionEntityType` and
-        // `UpdateSessionEntityType` only return the additional entities added in
+        // Note: Even in this override mode calls to <code>ListSessionEntityTypes</code>,
+        // <code>GetSessionEntityType</code>, <code>CreateSessionEntityType</code> and
+        // <code>UpdateSessionEntityType</code> only return the additional entities added in
         // this session entity type. If you want to get the supplemented list,
         // please call
-        // [EntityTypes.GetEntityType][google.cloud.dialogflow.v2.EntityTypes.GetEntityType]
+        // <a href="index.html#ondewo.nlu.EntityTypes.GetEntityType">EntityTypes.GetEntityType</a>
         // on the custom entity type and merge.
         ENTITY_OVERRIDE_MODE_SUPPLEMENT = 2;
     }
 
     // Required. The unique identifier of this session entity type. Format:
-    // `projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/entityTypes/<Entity Type
-    // Display Name>`, or `projects/&lt;project_uuid&gt;/agent/environments/
-    // <&lt;environment_uuid&gt;/users/&lt;user_uuid&gt;/sessions/&lt;session_uuid&gt;/entityTypes/<Entity Type Display
-    // Name>`.
-    // If `Environment ID` is not specified, we assume default 'draft'
-    // environment. If `User ID` is not specified, we assume default '-' user.
+    // <code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/entityTypes/&lt;Entity Type
+    // Display Name&gt;</code>, or <code>projects/&lt;project_uuid&gt;/agent/environments/
+    // &lt;&lt;environment_uuid&gt;/users/&lt;user_uuid&gt;/sessions/&lt;session_uuid&gt;/entityTypes/&lt;Entity Type Display
+    // Name&gt;</code>.
+    // If <code>Environment ID</code> is not specified, we assume default <code>&apos;draft&apos;</code>
+    // environment. If <code>User ID</code> is not specified, we assume default <code>&apos;-&apos;</code> user.
     //
-    // `<Entity Type Display Name>` must be the display name of an existing entity
+    // <code>&lt;Entity Type Display Name&gt;</code> must be the display name of an existing entity
     // type in the same agent that will be overridden or supplemented.
     string name = 1;
 
@@ -265,15 +258,14 @@ message SessionEntityType {
 
 }
 
-// The request message for
-// [SessionEntityTypes.ListSessionEntityTypes][google.cloud.dialogflow.v2.SessionEntityTypes.ListSessionEntityTypes].
+// The request message for <a href="index.html#ondewo.nlu.Webhook.ListSessionEntityTypes">Webhook.ListSessionEntityTypes</a>.
 message ListSessionEntityTypesRequest {
     // Required. The session to list all session entity types from.
-    // Format: `projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;` or
-    // `projects/&lt;project_uuid&gt;/agent/environments/&lt;environment_uuid&gt;/users/&lt;user_uuid&gt;/
-    // sessions/&lt;session_uuid&gt;`.
-    // If `Environment ID` is not specified, we assume default 'draft'
-    // environment. If `User ID` is not specified, we assume default '-' user.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code> or
+    // <code>projects/&lt;project_uuid&gt;/agent/environments/&lt;environment_uuid&gt;/users/&lt;user_uuid&gt;/
+    // sessions/&lt;session_uuid&gt;</code>.
+    // If <code>Environment ID</code> is not specified, we assume default <code>&apos;draft&apos;</code>
+    // environment. If <code>User ID</code> is not specified, we assume default <code>&apos;-&apos;</code> user.
     string parent = 1;
 
     // Optional. The maximum number of items to return in a single page. By
@@ -285,29 +277,34 @@ message ListSessionEntityTypesRequest {
     // The page token is a string representing the current index and page size.
     //
     // Valid page token strings:
-    // * "" (empty string) - Retrieves the first page.
-    // * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
-    // * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+    // <ul>
+    //     <li><code>&quot;&quot;</code> (empty string) - Retrieves the first page.</li>
+    //     <li><code>&quot;current_index-0--page_size-20&quot;</code> - Retrieves the first page with a page size of 20.</li>
+    //     <li><code>&quot;current_index-1--page_size-20&quot;</code> - Retrieves the second page with a page size of 20.</li>
+    // </ul>
     //
     // Index starts at 0.
     //
     // Examples of valid page token strings:
-    // * ""
-    // * "current_index-0--page_size-20"
-    // * "current_index-1--page_size-20"
-    // * "current_index-10--page_size-20"
+    // <ul>
+    //     <li><code>&quot;&quot;</code></li>
+    //     <li><code>&quot;current_index-0--page_size-20&quot;</code></li>
+    //     <li><code>&quot;current_index-1--page_size-20&quot;</code></li>
+    //     <li><code>&quot;current_index-10--page_size-20&quot;</code></li>
+    // </ul>
     //
     // Examples of invalid page token strings:
-    // * "1"
-    // * "current_index-0--page_size-20"
-    // * "current_index--1--page_size-20"
-    // * "current_index1--page_size-20"
-    // * "current_index-1--page_size--20"
+    // <ul>
+    //     <li><code>&quot;1&quot;</code></li>
+    //     <li><code>&quot;current_index-0--page_size-20&quot;</code></li>
+    //     <li><code>&quot;current_index--1--page_size-20&quot;</code></li>
+    //     <li><code>&quot;current_index1--page_size-20&quot;</code></li>
+    //     <li><code>&quot;current_index-1--page_size--20&quot;</code></li>
+    // </ul>
     string page_token = 3;
 }
 
-// The response message for
-// [SessionEntityTypes.ListSessionEntityTypes][google.cloud.dialogflow.v2.SessionEntityTypes.ListSessionEntityTypes].
+// The response message for <a href="index.html#ondewo.nlu.Webhook.ListSessionEntityTypes">Webhook.ListSessionEntityTypes</a>.
 message ListSessionEntityTypesResponse {
     // The list of session entity types. There will be a maximum number of items
     // returned based on the page_size field in the request.
@@ -318,21 +315,19 @@ message ListSessionEntityTypesResponse {
     string next_page_token = 2;
 }
 
-// The request message for
-// [SessionEntityTypes.GetSessionEntityType][google.cloud.dialogflow.v2.SessionEntityTypes.GetSessionEntityType].
+// The request message for <a href="index.html#ondewo.nlu.Webhook.GetSessionEntityType">Webhook.GetSessionEntityType</a>.
 message GetSessionEntityTypeRequest {
     // Required. The name of the session entity type. Format:
-    // `projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/entityTypes/<Entity Type
-    // Display Name>` or `projects/&lt;project_uuid&gt;/agent/environments/
-    // <&lt;environment_uuid&gt;/users/&lt;user_uuid&gt;/sessions/&lt;session_uuid&gt;/entityTypes/<Entity Type Display
-    // Name>`.
-    // If `Environment ID` is not specified, we assume default 'draft'
-    // environment. If `User ID` is not specified, we assume default '-' user.
+    // <code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/entityTypes/&lt;Entity Type
+    // Display Name&gt;</code> or <code>projects/&lt;project_uuid&gt;/agent/environments/
+    // &lt;&lt;environment_uuid&gt;/users/&lt;user_uuid&gt;/sessions/&lt;session_uuid&gt;/entityTypes/&lt;Entity Type Display
+    // Name&gt;</code>.
+    // If <code>Environment ID</code> is not specified, we assume default <code>&apos;draft&apos;</code>
+    // environment. If <code>User ID</code> is not specified, we assume default <code>&apos;-&apos;</code> user.
     string name = 1;
 }
 
-// The request message for
-// [SessionEntityTypes.CreateSessionEntityType][google.cloud.dialogflow.v2.SessionEntityTypes.CreateSessionEntityType].
+// The request message for <a href="index.html#ondewo.nlu.Webhook.CreateSessionEntityType">Webhook.CreateSessionEntityType</a>
 message CreateSessionEntityTypeRequest {
     // Required. The agent to list all intents from.
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
@@ -345,18 +340,17 @@ message CreateSessionEntityTypeRequest {
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agents/sessions/&lt;session_uuid&gt;</code></pre>
     // or
     // <pre><code>projects/&lt;project_uuid&gt;/agents/sessions/&lt;session_uuid&gt;</code></pre>
-    // `projects/&lt;project_uuid&gt;/agent/environments/&lt;environment_uuid&gt;/users/&lt;user_uuid&gt;/
-    // sessions/&lt;session_uuid&gt;`.
-    // If `Environment ID` is not specified, we assume default 'draft'
-    // environment. If `User ID` is not specified, we assume default '-' user.
+    // <code>projects/&lt;project_uuid&gt;/agent/environments/&lt;environment_uuid&gt;/users/&lt;user_uuid&gt;/
+    // sessions/&lt;session_uuid&gt;</code>.
+    // If <code>Environment ID</code> is not specified, we assume default <code>&apos;draft&apos;</code>
+    // environment. If <code>User ID</code> is not specified, we assume default <code>&apos;-&apos;</code> user.
     // Required. The project that the agent to fetch is associated with.
     // The session to create a session entity type for.
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agents/sessions/&lt;session_uuid&gt;</code></pre>
     string session_id = 3;
 }
 
-// The request message for
-// [SessionEntityTypes.UpdateSessionEntityType][google.cloud.dialogflow.v2.SessionEntityTypes.UpdateSessionEntityType].
+// The request message for <a href="index.html#ondewo.nlu.Webhook.UpdateSessionEntityType">Webhook.UpdateSessionEntityType</a>.
 message UpdateSessionEntityTypeRequest {
     // Required. The session entity type to update.
     SessionEntityType session_entity_type = 1;
@@ -366,16 +360,15 @@ message UpdateSessionEntityTypeRequest {
 
 }
 
-// The request message for
-// [SessionEntityTypes.DeleteSessionEntityType][google.cloud.dialogflow.v2.SessionEntityTypes.DeleteSessionEntityType].
+// The request message for <a href="index.html#ondewo.nlu.Webhook.DeleteSessionEntityType">Webhook.DeleteSessionEntityType</a>.
 message DeleteSessionEntityTypeRequest {
 
     // Required. The name of the entity type to delete. Format:
-    // `projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/entityTypes/<Entity Type
-    // Display Name>` or `projects/&lt;project_uuid&gt;/agent/environments/
-    // <&lt;environment_uuid&gt;/users/&lt;user_uuid&gt;/sessions/&lt;session_uuid&gt;/entityTypes/<Entity Type Display
-    // Name>`.
-    // If `Environment ID` is not specified, we assume default 'draft'
-    // environment. If `User ID` is not specified, we assume default '-' user.
+    // <code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/entityTypes/&lt;Entity Type
+    // Display Name&gt;</code> or <code>projects/&lt;project_uuid&gt;/agent/environments/
+    // &lt;&lt;environment_uuid&gt;/users/&lt;user_uuid&gt;/sessions/&lt;session_uuid&gt;/entityTypes/&lt;Entity Type Display
+    // Name&gt;</code>.
+    // If <code>Environment ID</code> is not specified, we assume default <code>&apos;draft&apos;</code>
+    // environment. If <code>User ID</code> is not specified, we assume default <code>&apos;-&apos;</code> user.
     string name = 1;
 }
