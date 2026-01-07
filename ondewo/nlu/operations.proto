@@ -26,20 +26,14 @@ import "ondewo/nlu/operation_metadata.proto";
 
 // Manages long-running operations with an API service.
 //
-// When an API method normally takes long time to complete, it can be designed
-// to return [Operation][ondewo.nlu.Operation] to the client, and the client can use this
-// interface to receive the real response asynchronously by polling the
-// operation resource, or pass the operation resource to another API (such as
-// Google Cloud Pub/Sub API) to receive the response.  Any API service that
-// returns long-running operations should implement the `Operations` interface
-// so developers can have a consistent client experience.
+// When an API method normally takes long time to complete, it can be designed to return <a href="index.html#ondewo.nlu.Operation">Operation</a> to the client, and the client can use this interface to receive the real response asynchronously by polling the operation resource, or pass the operation resource to another API (such as Google Cloud Pub/Sub API) to receive the response.  Any API service that returns long-running operations should implement the <code>Operations</code> interface so developers can have a consistent client experience.
 service Operations {
 
     // Lists operations that match the specified filter in the request. If the
-    // server doesn't support this method, it returns `UNIMPLEMENTED`.
-    //
-    // NOTE: the `name` binding below allows API services to override the binding
-    // to use different resource name schemes, such as `users/*/operations`.
+    // server doesn&apos;t support this method, it returns <code>UNIMPLEMENTED</code>.
+    //<br>
+    // NOTE: the <code>name</code> binding below allows API services to override the binding
+    // to use different resource name schemes, such as <code>users/*/operations</code>.
     rpc ListOperations (ListOperationsRequest) returns (ListOperationsResponse) {
         option (google.api.http) = {get: "/v1/{name=operations}"};
     }
@@ -53,34 +47,33 @@ service Operations {
 
     // Deletes a long-running operation. This method indicates that the client is
     // no longer interested in the operation result. It does not cancel the
-    // operation. If the server doesn't support this method, it returns
-    // `google.rpc.Code.UNIMPLEMENTED`.
+    // operation. If the server doesn&apos;t support this method, it returns
+    // <code>google.rpc.Code.UNIMPLEMENTED</code>
     rpc DeleteOperation (DeleteOperationRequest) returns (google.protobuf.Empty) {
         option (google.api.http) = {delete: "/v1/{name=operations/**}"};
     }
 
     // Starts asynchronous cancellation on a long-running operation.  The server
     // makes a best effort to cancel the operation, but success is not
-    // guaranteed.  If the server doesn't support this method, it returns
-    // `google.rpc.Code.UNIMPLEMENTED`.  Clients can use
-    // [Operations.GetOperation][ondewo.nlu.Operations.GetOperation] or
+    // guaranteed.  If the server doesn&apos;t support this method, it returns
+    // <code>google.rpc.Code.UNIMPLEMENTED</code>.  Clients can use
+    // <a href="index.html#ondewo.nlu.Operations.GetOperation">Operations.GetOperation</a> or
     // other methods to verify whether the cancellation succeeded or whether the
     // operation completed despite cancellation. On successful cancellation,
     // the operation is not deleted; instead, it becomes an operation with
-    // an [Operation.error][ondewo.nlu.Operation.error] value with a [google.rpc.Status.code][google.rpc.Status.code]
-    // of 1, corresponding to `Code.CANCELLED`.
+    // an <a href="index.html#ondewo.nlu.Operation">Operation.error</a> value with a <a href="https://developers.google.com/actions-center/reference/grpc-api/status_codes">google.rpc.Status.code</a>
+    // of 1, corresponding to <code>Code.CANCELLED</code>.
     rpc CancelOperation (CancelOperationRequest) returns (google.protobuf.Empty) {
         option (google.api.http) = {post: "/v1/{name=operations/**}:cancel" body: "*"};
     }
 }
 
-// This resource represents a long-running operation that is the result of a
-// network API call.
+// This resource represents a long-running operation that is the result of a network API call.
 message Operation {
 
     // The server-assigned name, which is only unique within the same service that
     // originally returns it. If you use the default HTTP mapping, the
-    // `name` should have the format of `operations/some/unique/name`.
+    // <code>name</code> should have the format of <code>operations/some/unique/name</code>.
     string name = 1;
 
     // Service-specific metadata associated with the operation.  It typically
@@ -89,31 +82,31 @@ message Operation {
     // long-running operation should document the metadata type, if any.
     OperationMetadata metadata = 2;
 
-    // If the value is `false`, it means the operation is still in progress.
-    // If true, the operation is completed, and either `error` or `response` is
+    // If the value is <code>false</code>, it means the operation is still in progress.
+    // If true, the operation is completed, and either <code>error</code> or <code>response</code> is
     // available.
     bool done = 3;
 
-    // The operation result, which can be either an `error` or a valid `response`.
-    // If `done` == `false`, neither `error` nor `response` is set.
-    // If `done` == `true`, exactly one of `error` or `response` is set.
+    // The operation result, which can be either an <code>error</code> or a valid <code>response</code>.
+    // If <code>done</code> == <code>false</code>, neither <code>error</code> nor <code>response</code> is set.
+    // If <code>done</code> == <code>true</code>, exactly one of <code>error</code> or <code>response</code> is set.
     oneof result {
         // The error result of the operation in case of failure or cancellation.
         google.rpc.Status error = 4;
 
         // The normal response of the operation in case of success.  If the original
-        // method returns no data on success, such as `Delete`, the response is
-        // `google.protobuf.Empty`.  If the original method is standard
-        // `Get`/`Create`/`Update`, the response should be the resource.  For other
-        // methods, the response should have the type `XxxResponse`, where `Xxx`
+        // method returns no data on success, such as <code>Delete</code>, the response is
+        // <code>google.protobuf.Empty</code>.  If the original method is standard
+        // <code>Get</code>/<code>Create</code>/<code>Update</code>, the response should be the resource.  For other
+        // methods, the response should have the type <code>XxxResponse</code>, where <code>Xxx</code>
         // is the original method name.  For example, if the original method name
-        // is `TakeSnapshot()`, the inferred response type is
-        // `TakeSnapshotResponse`.
+        // is <code>TakeSnapshot()</code>, the inferred response type is
+        // <code>TakeSnapshotResponse</code>.
         google.protobuf.Any response = 5;
     }
 }
 
-// The request message for [Operations.GetOperation][ondewo.nlu.Operations.GetOperation].
+// The request message for <a href="index.html#ondewo.nlu.Operations.GetOperation">Operations.GetOperation</a>.
 message GetOperationRequest {
 
     // The name of the operation resource.
@@ -124,7 +117,7 @@ message GetOperationRequest {
 
 }
 
-// The request message for [Operations.ListOperations][ondewo.nlu.Operations.ListOperations].
+// The request message for <a href="index.html#ondewo.nlu.Operations.ListOperations">Operations.ListOperations</a>.
 message ListOperationsRequest {
 
     // The name of the operation collection.
@@ -141,24 +134,30 @@ message ListOperationsRequest {
     // The page token is a string representing the current index and page size.
     //
     // Valid page token strings:
-    // * "" (empty string) - Retrieves the first page.
-    // * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
-    // * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+    // <ul>
+    //   <li>&quot;&quot; (empty string) - Retrieves the first page.</li>
+    //   <li>&quot;current_index-0--page_size-20&quot; - Retrieves the first page with a page size of 20.</li>
+    //   <li>&quot;current_index-1--page_size-20&quot; - Retrieves the second page with a page size of 20.</li>
+    // </ul>
     //
     // Index starts at 0.
     //
     // Examples of valid page token strings:
-    // * ""
-    // * "current_index-0--page_size-20"
-    // * "current_index-1--page_size-20"
-    // * "current_index-10--page_size-20"
+    // <ul>
+    //   <li>&quot;&quot;</li>
+    //   <li>&quot;current_index-0--page_size-20&quot;</li>
+    //   <li>&quot;current_index-1--page_size-20&quot;</li>
+    //   <li>&quot;current_index-10--page_size-20&quot;</li>
+    // </ul>
     //
     // Examples of invalid page token strings:
-    // * "1"
-    // * "current_index-0--page_size-20"
-    // * "current_index--1--page_size-20"
-    // * "current_index1--page_size-20"
-    // * "current_index-1--page_size--20"
+    // <ul>
+    //   <li>&quot;1&quot;</li>
+    //   <li>&quot;current_index-0--page_size-20&quot;</li>
+    //   <li>&quot;current_index--1--page_size-20&quot;</li>
+    //   <li>&quot;current_index1--page_size-20&quot;</li>
+    //   <li>&quot;current_index-1--page_size--20&quot;</li>
+    // </ul>
     string page_token = 3;
 
     // Optional. A filter to narrow the response down to operations of interest.
@@ -199,7 +198,7 @@ message OperationFilter {
 
 }
 
-// The response message for [Operations.ListOperations][ondewo.nlu.Operations.ListOperations].
+// The response message for <a href="index.html#ondewo.nlu.Operations.ListOperations">Operations.ListOperations</a>.
 message ListOperationsResponse {
 
     // A list of operations that matches the specified filter in the request.
@@ -211,14 +210,14 @@ message ListOperationsResponse {
 
 }
 
-// The request message for [Operations.CancelOperation][ondewo.nlu.Operations.CancelOperation].
+// The request message for <a href="index.html#ondewo.nlu.Operations.CancelOperation">Operations.CancelOperation</a>.
 message CancelOperationRequest {
 
     // The name of the operation resource to be cancelled.
     string name = 1;
 }
 
-// The request message for [Operations.DeleteOperation][ondewo.nlu.Operations.DeleteOperation].
+// The request message for <a href="index.html#ondewo.nlu.Operations.DeleteOperation">Operations.DeleteOperation</a>.
 message DeleteOperationRequest {
 
     // The name of the operation resource to be deleted.

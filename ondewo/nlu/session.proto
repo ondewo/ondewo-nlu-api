@@ -50,10 +50,7 @@ option java_outer_classname = "SessionProto";
 option java_package = "com.google.cloud.dialogflow.v2";
 option objc_class_prefix = "DF";
 
-// A session represents an interaction with a user. You retrieve user input
-// and pass it to the [DetectIntent][google.cloud.dialogflow.v2.Sessions.DetectIntent] (or
-// [StreamingDetectIntent][google.cloud.dialogflow.v2.Sessions.StreamingDetectIntent]) method to determine
-// user intent and respond.
+// A session represents an interaction with a user. You retrieve user input and pass it to the <a href="index.html#ondewo.nlu.Sessions.DetectIntent">DetectIntent</a> (or <a href="index.html#ondewo.nlu.Sessions.StreamingDetectIntent">StreamingDetectIntent</a>) method to determine user intent and respond.
 service Sessions {
 
     // Processes a natural language query and returns structured, actionable data
@@ -73,6 +70,7 @@ service Sessions {
     rpc StreamingDetectIntent (stream StreamingDetectIntentRequest) returns (stream StreamingDetectIntentResponse);
 
     // *** SESSION RELATED ENDPOINTS *** //
+
     // ListSessions: returns list of sessions from ondewo-kb; by default returns only session IDs
     rpc ListSessions (ListSessionsRequest) returns (ListSessionsResponse) {
         option (google.api.http) = {
@@ -130,6 +128,7 @@ service Sessions {
     };
 
     // *** SESSION-LABEL RELATED ENDPOINTS *** //
+
     rpc ListSessionLabels (ListSessionLabelsRequest) returns (ListSessionLabelsResponse) {
         option (google.api.http) = {
             get: "/v2/{session_id=projects/*/agent/sessions/*}/labels"
@@ -264,6 +263,7 @@ service Sessions {
     };
 
     // *** SESSION-REVIEW RELATED ENDPOINTS *** //
+
     // ListSessionReviews:
     // returns list of session reviews from ondewo-kb; by default only returns session review IDs
     rpc ListSessionReviews (ListSessionReviewsRequest) returns (ListSessionReviewsResponse) {
@@ -324,11 +324,11 @@ service Sessions {
 
 }
 
-// The request to detect user's intent.
+// The request to detect user&apos;s intent.
 message DetectIntentRequest {
 
     // Required. The name of the session this query is sent to. Format:
-    // `projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;`. It's up to the API
+    // <code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code>. It&apos;s up to the API
     // caller to choose an appropriate session ID. It can be a random number or
     // some type of user identifier (preferably hashed). The length of the session
     // ID must not exceed 36 bytes.
@@ -338,17 +338,15 @@ message DetectIntentRequest {
     QueryParameters query_params = 2;
 
     // Required. The input specification. It can be set to:
-    //
-    // 1.  an audio config
-    //     which instructs the speech recognizer how to process the speech audio,
-    //
-    // 2.  a conversational query in the form of text, or
-    //
-    // 3.  an event that specifies which intent to trigger.
+    // <ol>
+    //   <li>an audio config which instructs the speech recognizer how to process the speech audio,</li>
+    //   <li>a conversational query in the form of text, or</li>
+    //   <li>an event that specifies which intent to trigger.</li>
+    // </ol>
     QueryInput query_input = 3;
 
     // Optional. The natural language speech audio to be processed. This field
-    // should be populated iff `query_input` is set to an input audio config.
+    // should be populated iff <code>query_input</code> is set to an input audio config.
     // A single request can contain up to 1 minute of speech audio data.
     bytes input_audio = 5;
 
@@ -364,7 +362,7 @@ message DetectIntentResponse {
     // The results of the conversational query or event processing.
     QueryResult query_result = 2;
 
-    // Specifies the status of the webhook request. `webhook_status`
+    // Specifies the status of the webhook request. <code>webhook_status</code>
     // is never populated in webhook requests.
     google.rpc.Status webhook_status = 3;
 }
@@ -373,7 +371,7 @@ message DetectIntentResponse {
 message QueryParameters {
 
     // Optional. The time zone of this conversational query from the
-    // [time zone database](https://www.iana.org/time-zones), e.g.,
+    // <a href="https://www.iana.org/time-zones">time zone database</a>, e.g.,
     // America/New_York, Europe/Paris. If not provided, the time zone specified in
     // agent settings is used.
     string time_zone = 1;
@@ -399,12 +397,12 @@ message QueryParameters {
     // key: <code>timestamp</code>
     // <pre>timestamp=time.time() # float python timestamp in seconds since epoch </pre>
     // key: <code>source</code>
-    // <pre>source='https://ondewo.com'</pre>
+    // <pre>source=&apos;https://ondewo.com&apos;</pre>
     // key: <code>configuration</code>
-    // <pre>configuration='config_example_123'</pre>
+    // <pre>configuration=&apos;config_example_123&apos;</pre>
     // key: <code>single_intent_algorithm</code>
-    // <pre>single_intent_algorithm='IntentClassifierType.OndewoIntentAgent'</pre>
-    // => allowed other values for <code>single_intent_algorithm</code>:
+    // <pre>single_intent_algorithm=&apos;IntentClassifierType.OndewoIntentAgent&apos;</pre>
+    // =&gt; allowed other values for <code>single_intent_algorithm</code>:
     // <pre>
     //  IntentClassifierType.DefaultFallBackAlgorithm
     //  IntentClassifierType.DeviationEndingDetection
@@ -426,9 +424,9 @@ message QueryParameters {
     //  IntentClassifierType.OndewoWeightedEnsemble
     //</pre>
     // key: <code>single_ner_algorithm</code>
-    // <pre>single_ner_algorithm='NerMethodType.OndewoNerRegex'</pre>
+    // <pre>single_ner_algorithm=&apos;NerMethodType.OndewoNerRegex&apos;</pre>
     // <pre>
-    // => allowed other values for <code>single_ner_algorithm</code>:
+    // =&gt; allowed other values for <code>single_ner_algorithm</code>:
     //  NerMethodType.OndewoNerBert
     //  NerMethodType.OndewoNerDateNer
     //  NerMethodType.OndewoNerDictionary
@@ -461,13 +459,13 @@ message QueryParameters {
 
     // Id of the the origin of the user request
     //
-    // For a phone bot, this is the phone number +123456789 the user called (Note: This is not the user's phone number)
+    // For a phone bot, this is the phone number +123456789 the user called (Note: This is not the user&apos;s phone number)
     // For a chatbot or voicebot on the web, this is the URL on which the bo, e.g. https://ondewo.com/webchat
     // For a voice assistant device, this is the device-id or the app id
     // This field can also be used for a customized tracking id or tag id
     string origin_id = 12; // https://aim-develop.ondewo.com/
 
-    // Id of the "identified user" e.g. for a chatbot the email address or for a phone bot the phone number of the user
+    // Id of the &quot;identified user&quot; e.g. for a chatbot the email address or for a phone bot the phone number of the user
     // This field can also be used for a customized tracking id or tag id
     string identified_user_id = 13;
 
@@ -534,8 +532,7 @@ message S2tTranscription {
 
 // Represents the query input. It can contain either:
 //
-// 1.  An audio config which
-//     instructs the speech recognizer how to process the speech audio.
+// 1.  An audio config which instructs the speech recognizer how to process the speech audio.
 //
 // 2.  A conversational query in the form of text,.
 //
@@ -564,12 +561,14 @@ message QueryInput {
 message QueryResult {
 
     // The original conversational query text:
-    // - If natural language text was provided as input, `query_text` contains
-    //   a copy of the input.
-    // - If natural language speech audio was provided as input, `query_text`
+    // <ul>
+    //     <li>If natural language text was provided as input, <code>query_text</code> contains
+    //   a copy of the input.</li>
+    //     <li>If natural language speech audio was provided as input, <code>query_text</code>
     //   contains the speech recognition result. If speech recognizer produced
-    //   multiple alternatives, a particular one is picked.
-    // - If an event was provided as input, `query_text` is not set.
+    //   multiple alternatives, a particular one is picked.</li>
+    //     <li>If an event was provided as input, <code>query_text</code> is not set.</li>
+    // </ul>
     string query_text = 1;
 
     // The Speech recognition confidence between 0.0 and 1.0. A higher number
@@ -577,8 +576,8 @@ message QueryResult {
     // correct. The default of 0.0 is a sentinel value indicating that confidence
     // was not set.
     //
-    // You should not rely on this field as it isn't guaranteed to be accurate, or
-    // even set. In particular this field isn't set in Webhook calls and for
+    // You should not rely on this field as it isn&apos;t guaranteed to be accurate, or
+    // even set. In particular this field isn&apos;t set in Webhook calls and for
     // StreamingDetectIntent since the streaming endpoint has separate confidence
     // estimates per portion of the audio in StreamingRecognitionResult.
     float speech_recognition_confidence = 2;
@@ -590,10 +589,12 @@ message QueryResult {
     google.protobuf.Struct parameters = 4;
 
     // This field is set to:
-    // - `false` if the matched intent has required parameters and not all of
-    //    the required parameter values have been collected.
-    // - `true` if all required parameter values have been collected, or if the
-    //    matched intent doesn't contain any required parameters.
+    // <ul>
+    //     <li><code>false</code> if the matched intent has required parameters and not all of
+    //    the required parameter values have been collected.</li>
+    //     <li><code>true</code> if all required parameter values have been collected, or if the
+    //    matched intent doesn&apos;t contain any required parameters.</li>
+    // </ul>
     bool all_required_params_present = 5;
 
     // The text to be pronounced to the user or shown on the screen.
@@ -603,22 +604,22 @@ message QueryResult {
     repeated Intent.Message fulfillment_messages = 7;
 
     // If the query was fulfilled by a webhook call, this field is set to the
-    // value of the `source` field returned in the webhook response.
+    // value of the <code>source</code> field returned in the webhook response.
     string webhook_source = 8;
 
     // If the query was fulfilled by a webhook call, this field is set to the
-    // value of the `payload` field returned in the webhook response.
+    // value of the <code>payload</code> field returned in the webhook response.
     google.protobuf.Struct webhook_payload = 9;
 
     // The collection of output contexts. If applicable,
-    // `output_contexts.parameters` contains entries with name
-    // `<parameter name>.original` containing the original parameter values
+    // <code>output_contexts.parameters</code> contains entries with name
+    // <code>&lt;parameter name&gt;.original</code> containing the original parameter values
     // before the query.
     repeated Context output_contexts = 10;
 
     // The intent that matched the conversational query. Some, not
     // all fields are filled in this message, including but not limited to:
-    // `name`, `display_name` and `webhook_state`.
+    // <code>name</code>, <code>display_name</code> and <code>webhook_state</code>.
     Intent intent = 11;
 
     // The intent detection confidence. Values range from 0.0
@@ -634,7 +635,7 @@ message QueryResult {
     google.protobuf.Struct diagnostic_info = 14;
 
     // The language that was triggered during intent detection.
-    // See [Language Support](https://dialogflow.com/docs/reference/language)
+    // See <a href="https://dialogflow.com/docs/reference/language">Language Support</a>
     // for a list of the currently supported language codes.
     string language_code = 15;
 
@@ -644,22 +645,15 @@ message QueryResult {
 }
 
 
-// The top-level message sent by the client to the
-// `StreamingDetectIntent` method.
-//
+// The top-level message sent by the client to the <code>StreamingDetectIntent</code> method.
 // Multiple request messages should be sent in order:
-//
-// 1.  The first message must contain `session`, `query_input` plus optionally
-//     `query_params` and/or `single_utterance`. The message must not contain `input_audio`.
-//
-// 2.  If `query_input` was set to a streaming input audio config,
-//     all subsequent messages must contain only `input_audio`.
-//     Otherwise, finish the request stream.
+// 1.  The first message must contain <code>session</code>, <code>query_input</code> plus optionally <code>query_params</code> and/or <code>single_utterance</code>. The message must not contain <code>input_audio</code>.
+// 2.  If <code>query_input</code> was set to a streaming input audio config, all subsequent messages must contain only <code>input_audio</code>. Otherwise, finish the request stream.
 message StreamingDetectIntentRequest {
 
     // Required. The name of the session the query is sent to.
     // Format of the session name:
-    // `projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;`. It’s up to the API
+    // <code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code>. It&apos;s up to the API
     // caller to choose an appropriate &lt;session_uuid&gt;. It can be a random number or
     // some type of user identifier (preferably hashed). The length of the session
     // ID must not exceed 36 characters.
@@ -669,44 +663,34 @@ message StreamingDetectIntentRequest {
     QueryParameters query_params = 2;
 
     // Required. The input specification. It can be set to:
-    //
-    // 1.  an audio config which instructs the speech recognizer how to process
-    //     the speech audio,
-    //
-    // 2.  a conversational query in the form of text, or
-    //
-    // 3.  an event that specifies which intent to trigger.
+    // <ol>
+    //   <li>an audio config which instructs the speech recognizer how to process the speech audio,</li>
+    //   <li>a conversational query in the form of text, or</li>
+    //   <li>an event that specifies which intent to trigger.</li>
+    // </ol>
     QueryInput query_input = 3;
 
-    // Optional. If `false` (default), recognition does not cease until the
+    // Optional. If <code>false</code> (default), recognition does not cease until the
     // client closes the stream.
-    // If `true`, the recognizer will detect a single spoken utterance in input
-    // audio. Recognition ceases when it detects the audio's voice has
+    // If <code>true</code>, the recognizer will detect a single spoken utterance in input
+    // audio. Recognition ceases when it detects the audio&apos;s voice has
     // stopped or paused. In this case, once a detected intent is received, the
     // client should close the stream and start a new request with a new stream as
     // needed.
-    // This setting is ignored when `query_input` is a piece of text or an event.
+    // This setting is ignored when <code>query_input</code> is a piece of text or an event.
     bool single_utterance = 4;
 
     // Optional. The input audio content to be recognized. Must be sent if
-    // `query_input` was set to a streaming input audio config. The complete audio
+    // <code>query_input</code> was set to a streaming input audio config. The complete audio
     // over all streaming messages must not exceed 1 minute.
     bytes input_audio = 6;
 
 }
 
-// The top-level message returned from the
-// `StreamingDetectIntent` method.
-//
+// The top-level message returned from the <code>StreamingDetectIntent</code> method.
 // Multiple response messages can be returned in order:
-//
-// 1.  If the input was set to streaming audio, the first one or more messages
-//     contain `recognition_result`. Each `recognition_result` represents a more
-//     complete transcript of what the user said. The last `recognition_result`
-//     has `is_final` set to `true`.
-//
-// 2.  The next message contains `response_id`, `query_result`
-//     and optionally `webhook_status` if a WebHook was called.
+// 1.  If the input was set to streaming audio, the first one or more messages contain <code>recognition_result</code>. Each <code>recognition_result</code> represents a more complete transcript of what the user said. The last <code>recognition_result</code> has <code>is_final</code> set to <code>true</code>.
+// 2.  The next message contains <code>response_id</code>, <code>query_result</code> and optionally <code>webhook_status</code> if a WebHook was called.
 message StreamingDetectIntentResponse {
 
     // The unique identifier of the response. It can be used to
@@ -724,39 +708,36 @@ message StreamingDetectIntentResponse {
 
 }
 
-// Contains a speech recognition result corresponding to a portion of the audio
-// that is currently being processed or an indication that this is the end
-// of the single requested utterance.
+// Contains a speech recognition result corresponding to a portion of the audio that is currently being processed or an indication that this is the end of the single requested utterance.
 //
 // Example:
 //
-// 1.  transcript: "tube"
+// 1.  transcript: &quot;tube&quot;
 //
-// 2.  transcript: "to be a"
+// 2.  transcript: &quot;to be a&quot;
 //
-// 3.  transcript: "to be"
+// 3.  transcript: &quot;to be&quot;
 //
-// 4.  transcript: "to be or not to be"
+// 4.  transcript: &quot;to be or not to be&quot;
 //     is_final: true
 //
-// 5.  transcript: " that's"
+// 5.  transcript: &quot; that&apos;s&quot;
 //
-// 6.  transcript: " that is"
+// 6.  transcript: &quot; that is&quot;
 //
-// 7.  recognition_event_type: `RECOGNITION_EVENT_END_OF_SINGLE_UTTERANCE`
+// 7.  recognition_event_type: <code>RECOGNITION_EVENT_END_OF_SINGLE_UTTERANCE</code>
 //
-// 8.  transcript: " that is the question"
+// 8.  transcript: &quot; that is the question&quot;
 //     is_final: true
 //
-// Only two of the responses contain final results (#4 and #8 indicated by
-// `is_final: true`). Concatenating these generates the full transcript: "to be
-// or not to be that is the question".
+// Only two of the responses contain final results (#4 and #8 indicated by <code>is_final: true</code>). Concatenating these generates the full transcript: <code>"to be or not to be that is the question"</code>.
 //
 // In each response we populate:
 //
-// *  for `MESSAGE_TYPE_TRANSCRIPT`: `transcript` and possibly `is_final`.
-//
-// *  for `MESSAGE_TYPE_END_OF_SINGLE_UTTERANCE`: only `event_type`.
+// <ul>
+//     <li>for <code>MESSAGE_TYPE_TRANSCRIPT</code>: <code>transcript</code> and possibly <code>is_final</code>.</li>
+//     <li>for <code>MESSAGE_TYPE_END_OF_SINGLE_UTTERANCE</code>: only <code>event_type</code>.</li>
+// </ul>
 message StreamingRecognitionResult {
 
     // Type of the response message.
@@ -767,13 +748,13 @@ message StreamingRecognitionResult {
         // Message contains a (possibly partial) transcript.
         TRANSCRIPT = 1;
 
-        // Event indicates that the server has detected the end of the user's speech
+        // Event indicates that the server has detected the end of the user&apos;s speech
         // utterance and expects no additional speech. Therefore, the server will
         // not process additional audio (although it may subsequently return
         // additional results). The client should stop sending additional audio
         // data, half-close the gRPC connection, and wait for any additional results
         // until the server closes the gRPC connection. This message is only sent if
-        // `single_utterance` was set to `true`, and is not used otherwise.
+        // <code>single_utterance</code> was set to <code>true</code>, and is not used otherwise.
         END_OF_SINGLE_UTTERANCE = 2;
     }
 
@@ -781,14 +762,14 @@ message StreamingRecognitionResult {
     MessageType message_type = 1;
 
     // Transcript text representing the words that the user spoke.
-    // Populated if and only if `event_type` = `RECOGNITION_EVENT_TRANSCRIPT`.
+    // Populated if and only if <code>event_type</code> = <code>RECOGNITION_EVENT_TRANSCRIPT</code>.
     string transcript = 2;
 
-    // The default of 0.0 is a sentinel value indicating `confidence` was not set.
-    // If `false`, the `StreamingRecognitionResult` represents an
-    // interim result that may change. If `true`, the recognizer will not return
+    // The default of 0.0 is a sentinel value indicating <code>confidence</code> was not set.
+    // If <code>false</code>, the <code>StreamingRecognitionResult</code> represents an
+    // interim result that may change. If <code>true</code>, the recognizer will not return
     // any further hypotheses about this piece of the audio. May only be populated
-    // for `event_type` = `RECOGNITION_EVENT_TRANSCRIPT`.
+    // for <code>event_type</code> = <code>RECOGNITION_EVENT_TRANSCRIPT</code>.
     bool is_final = 3;
 
     // The Speech confidence between 0.0 and 1.0 for the current portion of audio.
@@ -796,7 +777,7 @@ message StreamingRecognitionResult {
     // recognized words are correct. The default of 0.0 is a sentinel value
     // indicating that confidence was not set.
     //
-    // This field is typically only provided if `is_final` is true and you should
+    // This field is typically only provided if <code>is_final</code> is true and you should
     // not rely on it being accurate or even set.
     float confidence = 4;
 
@@ -809,20 +790,20 @@ message InputAudioConfig {
     AudioEncoding audio_encoding = 1;
 
     // Required. Sample rate (in Hertz) of the audio content sent in the query.
-    // Refer to [Cloud Speech API documentation](/speech/docs/basics) for more
+    // Refer to <a href="/speech/docs/basics">Cloud Speech API documentation</a> for more
     // details.
     int32 sample_rate_hertz = 2;
 
     // Required. The language of the supplied audio. Dialogflow does not do
-    // translations. See [Language
-    // Support](https://dialogflow.com/docs/languages) for a list of the
+    // translations. See <a href="https://dialogflow.com/docs/languages">Language
+    // Support</a> for a list of the
     // currently supported language codes. Note that queries in the same session
     // do not necessarily need to specify the same language.
     string language_code = 3;
 
     // Optional. The collection of phrase hints which are used to boost accuracy
     // of speech recognition.
-    // Refer to [Cloud Speech API documentation](/speech/docs/basics#phrase-hints)
+    // Refer to <a href="/speech/docs/basics#phrase-hints">Cloud Speech API documentation</a>
     // for more details.
     repeated string phrase_hints = 4;
 }
@@ -834,18 +815,16 @@ message TextInput {
     // Text length must not exceed 256 bytes.
     string text = 1;
 
-    // Required. The language of this conversational query. See [Language
-    // Support](https://dialogflow.com/docs/languages) for a list of the
+    // Required. The language of this conversational query. See <a href="https://dialogflow.com/docs/languages">Language
+    // Support</a> for a list of the
     // currently supported language codes. Note that queries in the same session
     // do not necessarily need to specify the same language.
     string language_code = 2;
 }
 
-// Events allow for matching intents by event name instead of the natural
-// language input. For instance, input `<event: { name: “welcome_event”,
-// parameters: { name: “Sam” } }>` can trigger a personalized welcome response.
-// The parameter `name` may be used by the agent in the response:
-// `“Hello #welcome_event.name! What can I do for you today?”`.
+// Events allow for matching intents by event name instead of the natural language input. 
+// For instance, input <code>&lt;event: { name: &quot;welcome_event&quot;, parameters: { name: &quot;Sam&quot; } }&gt;</code> can trigger a personalized welcome response.
+// The parameter <code>name</code> may be used by the agent in the response: <code>&quot;Hello #welcome_event.name! What can I do for you today?&quot;</code>.
 message EventInput {
 
     // Required. The unique identifier of the event.
@@ -854,16 +833,15 @@ message EventInput {
     // Optional. The collection of parameters associated with the event.
     google.protobuf.Struct parameters = 2;
 
-    // Required. The language of this query. See [Language
-    // Support](https://dialogflow.com/docs/languages) for a list of the
+    // Required. The language of this query. See <a href="https://dialogflow.com/docs/languages">Language
+    // Support</a> for a list of the
     // currently supported language codes. Note that queries in the same session
     // do not necessarily need to specify the same language.
     string language_code = 3;
 }
 
 // Audio encoding of the audio content sent in the conversational query request.
-// Refer to the [Cloud Speech API documentation](/speech/docs/basics) for more
-// details.
+// Refer to the <a href="/speech/docs/basics">Cloud Speech API documentation</a> for more details.
 enum AudioEncoding {
 
     // Not specified.
@@ -872,40 +850,40 @@ enum AudioEncoding {
     // Uncompressed 16-bit signed little-endian samples (Linear PCM).
     AUDIO_ENCODING_LINEAR_16 = 1;
 
-    // [`FLAC`](https://xiph.org/flac/documentation.html) (Free Lossless Audio
+    // <a href="https://xiph.org/flac/documentation.html">FLAC</a> (Free Lossless Audio
     // Codec) is the recommended encoding because it is lossless (therefore
     // recognition is not compromised) and requires only about half the
-    // bandwidth of `LINEAR16`. `FLAC` stream encoding supports 16-bit and
-    // 24-bit samples, however, not all fields in `STREAMINFO` are supported.
+    // bandwidth of <code>LINEAR16</code>. <code>FLAC</code> stream encoding supports 16-bit and
+    // 24-bit samples, however, not all fields in <code>STREAMINFO</code> are supported.
     AUDIO_ENCODING_FLAC = 2;
 
     // 8-bit samples that compand 14-bit audio samples using G.711 PCMU/mu-law.
     AUDIO_ENCODING_MULAW = 3;
 
-    // Adaptive Multi-Rate Narrowband codec. `sample_rate_hertz` must be 8000.
+    // Adaptive Multi-Rate Narrowband codec. <code>sample_rate_hertz</code> must be 8000.
     AUDIO_ENCODING_AMR = 4;
 
-    // Adaptive Multi-Rate wideband codec. `sample_rate_hertz` must be 16000.
+    // Adaptive Multi-Rate wideband codec. <code>sample_rate_hertz</code> must be 16000.
     AUDIO_ENCODING_AMR_WB = 5;
 
     // Opus encoded audio frames in Ogg container
-    // ([OggOpus](https://wiki.xiph.org/OggOpus)).
-    // `sample_rate_hertz` must be 16000.
+    // (<a href="https://wiki.xiph.org/OggOpus">OggOpus</a>).
+    // <code>sample_rate_hertz</code> must be 16000.
     AUDIO_ENCODING_OGG_OPUS = 6;
 
     // Although the use of lossy encodings is not recommended, if a very low
-    // bitrate encoding is required, `OGG_OPUS` is highly preferred over
-    // Speex encoding. The [Speex](https://speex.org/) encoding supported by
+    // bitrate encoding is required, <code>OGG_OPUS</code> is highly preferred over
+    // Speex encoding. The <a href="https://speex.org/">Speex</a> encoding supported by
     // Dialogflow API has a header byte in each block, as in MIME type
-    // `audio/x-speex-with-header-byte`.
+    // <code>audio/x-speex-with-header-byte</code>.
     // It is a variant of the RTP Speex encoding defined in
-    // [RFC 5574](https://tools.ietf.org/html/rfc5574).
+    // <a href="https://tools.ietf.org/html/rfc5574">RFC 5574</a>.
     // The stream is a sequence of blocks, one block per RTP packet. Each block
     // starts with a byte containing the length of the block, in bytes, followed
     // by one or more frames of Speex data, padded to an integral number of
     // bytes (octets) as specified in RFC 5574. In other words, each RTP header
     // is replaced with a single byte containing the block length. Only Speex
-    // wideband is supported. `sample_rate_hertz` must be 16000.
+    // wideband is supported. <code>sample_rate_hertz</code> must be 16000.
     AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE = 7;
 }
 
@@ -925,8 +903,7 @@ message Session {
     SessionInfo session_info = 3;
 
     // Represents the options for views of a session.
-    // A session can be a sizable object. Therefore, we provide a resource view that
-    // does not return all data
+    // A session can be a sizable object. Therefore, we provide a resource view that does not return all data
     enum View {
 
         // Endpoints decide whether to return the full or the sparse view
@@ -1057,24 +1034,30 @@ message ListSessionsRequest {
     // The page token is a string representing the current index and page size.
     //
     // Valid page token strings:
-    // * "" (empty string) - Retrieves the first page.
-    // * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
-    // * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+    // <ul>
+    //   <li><code>&quot;&quot;</code> (empty string) - Retrieves the first page.</li>
+    //   <li><code>&quot;current_index-0--page_size-20&quot;</code> - Retrieves the first page with a page size of 20.</li>
+    //   <li><code>&quot;current_index-1--page_size-20&quot;</code> - Retrieves the second page with a page size of 20.</li>
+    // </ul>
     //
     // Index starts at 0.
     //
     // Examples of valid page token strings:
-    // * ""
-    // * "current_index-0--page_size-20"
-    // * "current_index-1--page_size-20"
-    // * "current_index-10--page_size-20"
+    // <ul>
+    //   <li><code>&quot;&quot;</code></li>
+    //   <li><code>&quot;current_index-0--page_size-20&quot;</code></li>
+    //   <li><code>&quot;current_index-1--page_size-20&quot;</code></li>
+    //   <li><code>&quot;current_index-10--page_size-20&quot;</code></li>
+    // </ul>
     //
     // Examples of invalid page token strings:
-    // * "1"
-    // * "current_index-0--page_size-20"
-    // * "current_index--1--page_size-20"
-    // * "current_index1--page_size-20"
-    // * "current_index-1--page_size--20"
+    // <ul>
+    //   <li><code>&quot;1&quot;</code></li>
+    //   <li><code>&quot;current_index-0--page_size-20&quot;</code></li>
+    //   <li><code>&quot;current_index--1--page_size-20&quot;</code></li>
+    //   <li><code>&quot;current_index1--page_size-20&quot;</code></li>
+    //   <li><code>&quot;current_index-1--page_size--20&quot;</code></li>
+    // </ul>
     string page_token = 4;
 
     // Optional. A filter to narrow the response down to sessions of interest.
@@ -1097,6 +1080,7 @@ message ContextFilter {
     // value of the parameter
     string value = 3;
 
+    // comparison operator to use for filtering
     ComparisonOperator operator = 4;
 }
 
@@ -1342,7 +1326,7 @@ message SessionInfo {
 
     // The list of contexts of each step collected in an outer list
     message ContextSteps {
-
+        // List of contexts for a session step
         repeated Context contexts = 1;
     }
 
@@ -1476,6 +1460,7 @@ message DeleteSessionRequest {
 }
 
 // *** SESSION-REVIEW RELATED MESSAGES *** //
+
 message CreateSessionReviewRequest {
 
     // The unique identifier for the session under review
@@ -1489,6 +1474,8 @@ message CreateSessionReviewRequest {
     // The reviews for all steps in the session
     SessionReview session_review = 3;
 
+    // Represents the options for views of a session_review.
+    // A session_review can be a sizable object. Therefore, we provide a resource view that does not return all data
     SessionReview.View session_review_view = 4;
 }
 
@@ -1503,8 +1490,7 @@ message SessionReview {
     repeated SessionReviewStep session_review_steps = 2;
 
     // Represents the options for views of a session_review.
-    // A session_review can be a sizable object. Therefore, we provide a resource view that
-    // does not return all data
+    // A session_review can be a sizable object. Therefore, we provide a resource view that does not return all data
     enum View {
         // Endpoints decide whether to return the full or the sparse view
         VIEW_UNSPECIFIED = 0;
@@ -1600,10 +1586,10 @@ message DetectedIntent {
     repeated Intent.Message fulfillment_messages = 4;
 
     // This field is set to:
-    // - `true` if the matched intent has required parameters and not all of
-    //    the required parameter values have been collected.
-    // - `false` if all required parameter values have been collected, or if the
-    //    matched intent doesn't contain any required parameters.
+    // <ul>
+    //   <li><code>true</code> if the matched intent has required parameters and not all of the required parameter values have been collected.</li>
+    //   <li><code>false</code> if all required parameter values have been collected, or if the matched intent doesn&apos;t contain any required parameters.</li>
+    // </ul>
     bool required_param_missing = 5;
 }
 
@@ -1987,24 +1973,30 @@ message ListSessionCommentsRequest {
     // The page token is a string representing the current index and page size.
     //
     // Valid page token strings:
-    // * "" (empty string) - Retrieves the first page.
-    // * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
-    // * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+    // <ul>
+    //   <li><code>&quot;&quot;</code> (empty string) - Retrieves the first page.</li>
+    //   <li><code>&quot;current_index-0--page_size-20&quot;</code> - Retrieves the first page with a page size of 20.</li>
+    //   <li><code>&quot;current_index-1--page_size-20&quot;</code> - Retrieves the second page with a page size of 20.</li>
+    // </ul>
     //
     // Index starts at 0.
     //
     // Examples of valid page token strings:
-    // * ""
-    // * "current_index-0--page_size-20"
-    // * "current_index-1--page_size-20"
-    // * "current_index-10--page_size-20"
+    // <ul>
+    //   <li><code>&quot;&quot;</code></li>
+    //   <li><code>&quot;current_index-0--page_size-20&quot;</code></li>
+    //   <li><code>&quot;current_index-1--page_size-20&quot;</code></li>
+    //   <li><code>&quot;current_index-10--page_size-20&quot;</code></li>
+    // </ul>
     //
     // Examples of invalid page token strings:
-    // * "1"
-    // * "current_index-0--page_size-20"
-    // * "current_index--1--page_size-20"
-    // * "current_index1--page_size-20"
-    // * "current_index-1--page_size--20"
+    // <ul>
+    //   <li><code>&quot;1&quot;</code></li>
+    //   <li><code>&quot;current_index-0--page_size-20&quot;</code></li>
+    //   <li><code>&quot;current_index--1--page_size-20&quot;</code></li>
+    //   <li><code>&quot;current_index1--page_size-20&quot;</code></li>
+    //   <li><code>&quot;current_index-1--page_size--20&quot;</code></li>
+    // </ul>
     string page_token = 2;
 
     // Optional. The mask to control which fields gets returned.
@@ -2024,24 +2016,30 @@ message ListSessionCommentsResponse {
     // The page token is a string representing the current index and page size.
     //
     // Valid page token strings:
-    // * "" (empty string) - Retrieves the first page.
-    // * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
-    // * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+    // <ul>
+    //   <li><code>&quot;&quot;</code> (empty string) - Retrieves the first page.</li>
+    //   <li><code>&quot;current_index-0--page_size-20&quot;</code> - Retrieves the first page with a page size of 20.</li>
+    //   <li><code>&quot;current_index-1--page_size-20&quot;</code> - Retrieves the second page with a page size of 20.</li>
+    // </ul>
     //
     // Index starts at 0.
     //
     // Examples of valid page token strings:
-    // * ""
-    // * "current_index-0--page_size-20"
-    // * "current_index-1--page_size-20"
-    // * "current_index-10--page_size-20"
+    // <ul>
+    //   <li><code>&quot;&quot;</code></li>
+    //   <li><code>&quot;current_index-0--page_size-20&quot;</code></li>
+    //   <li><code>&quot;current_index-1--page_size-20&quot;</code></li>
+    //   <li><code>&quot;current_index-10--page_size-20&quot;</code></li>
+    // </ul>
     //
     // Examples of invalid page token strings:
-    // * "1"
-    // * "current_index-0--page_size-20"
-    // * "current_index--1--page_size-20"
-    // * "current_index1--page_size-20"
-    // * "current_index-1--page_size--20"
+    // <ul>
+    //   <li><code>&quot;1&quot;</code></li>
+    //   <li><code>&quot;current_index-0--page_size-20&quot;</code></li>
+    //   <li><code>&quot;current_index--1--page_size-20&quot;</code></li>
+    //   <li><code>&quot;current_index1--page_size-20&quot;</code></li>
+    //   <li><code>&quot;current_index-1--page_size--20&quot;</code></li>
+    // </ul>
     string page_token = 2;
 
 }
@@ -2061,24 +2059,30 @@ message ListSessionReviewsRequest {
     // The page token is a string representing the current index and page size.
     //
     // Valid page token strings:
-    // * "" (empty string) - Retrieves the first page.
-    // * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
-    // * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+    // <ul>
+    //   <li><code>&quot;&quot;</code> (empty string) - Retrieves the first page.</li>
+    //   <li><code>&quot;current_index-0--page_size-20&quot;</code> - Retrieves the first page with a page size of 20.</li>
+    //   <li><code>&quot;current_index-1--page_size-20&quot;</code> - Retrieves the second page with a page size of 20.</li>
+    // </ul>
     //
     // Index starts at 0.
     //
     // Examples of valid page token strings:
-    // * ""
-    // * "current_index-0--page_size-20"
-    // * "current_index-1--page_size-20"
-    // * "current_index-10--page_size-20"
+    // <ul>
+    //   <li><code>&quot;&quot;</code></li>
+    //   <li><code>&quot;current_index-0--page_size-20&quot;</code></li>
+    //   <li><code>&quot;current_index-1--page_size-20&quot;</code></li>
+    //   <li><code>&quot;current_index-10--page_size-20&quot;</code></li>
+    // </ul>
     //
     // Examples of invalid page token strings:
-    // * "1"
-    // * "current_index-0--page_size-20"
-    // * "current_index--1--page_size-20"
-    // * "current_index1--page_size-20"
-    // * "current_index-1--page_size--20"
+    // <ul>
+    //   <li><code>&quot;1&quot;</code></li>
+    //   <li><code>&quot;current_index-0--page_size-20&quot;</code></li>
+    //   <li><code>&quot;current_index--1--page_size-20&quot;</code></li>
+    //   <li><code>&quot;current_index1--page_size-20&quot;</code></li>
+    //   <li><code>&quot;current_index-1--page_size--20&quot;</code></li>
+    // </ul>
     string page_token = 4;
 }
 
@@ -2329,24 +2333,30 @@ message GetAudioFilesRequest {
     // The page token is a string representing the current index and page size.
     //
     // Valid page token strings:
-    // * "" (empty string) - Retrieves the first page.
-    // * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
-    // * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+    // <ul>
+    //   <li><code>&quot;&quot;</code> (empty string) - Retrieves the first page.</li>
+    //   <li><code>&quot;current_index-0--page_size-20&quot;</code> - Retrieves the first page with a page size of 20.</li>
+    //   <li><code>&quot;current_index-1--page_size-20&quot;</code> - Retrieves the second page with a page size of 20.</li>
+    // </ul>
     //
     // Index starts at 0.
     //
     // Examples of valid page token strings:
-    // * ""
-    // * "current_index-0--page_size-20"
-    // * "current_index-1--page_size-20"
-    // * "current_index-10--page_size-20"
+    // <ul>
+    //   <li><code>&quot;&quot;</code></li>
+    //   <li><code>&quot;current_index-0--page_size-20&quot;</code></li>
+    //   <li><code>&quot;current_index-1--page_size-20&quot;</code></li>
+    //   <li><code>&quot;current_index-10--page_size-20&quot;</code></li>
+    // </ul>
     //
     // Examples of invalid page token strings:
-    // * "1"
-    // * "current_index-0--page_size-20"
-    // * "current_index--1--page_size-20"
-    // * "current_index1--page_size-20"
-    // * "current_index-1--page_size--20"
+    // <ul>
+    //   <li><code>&quot;1&quot;</code></li>
+    //   <li><code>&quot;current_index-0--page_size-20&quot;</code></li>
+    //   <li><code>&quot;current_index--1--page_size-20&quot;</code></li>
+    //   <li><code>&quot;current_index1--page_size-20&quot;</code></li>
+    //   <li><code>&quot;current_index-1--page_size--20&quot;</code></li>
+    // </ul>
     string page_token = 4;
 
     // sorting mode
@@ -2449,24 +2459,30 @@ message ListAudioFilesRequest {
     // The page token is a string representing the current index and page size.
     //
     // Valid page token strings:
-    // * "" (empty string) - Retrieves the first page.
-    // * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
-    // * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+    // <ul>
+    //   <li><code>&quot;&quot;</code> (empty string) - Retrieves the first page.</li>
+    //   <li><code>&quot;current_index-0--page_size-20&quot;</code> - Retrieves the first page with a page size of 20.</li>
+    //   <li><code>&quot;current_index-1--page_size-20&quot;</code> - Retrieves the second page with a page size of 20.</li>
+    // </ul>
     //
     // Index starts at 0.
     //
     // Examples of valid page token strings:
-    // * ""
-    // * "current_index-0--page_size-20"
-    // * "current_index-1--page_size-20"
-    // * "current_index-10--page_size-20"
+    // <ul>
+    //   <li><code>&quot;&quot;</code></li>
+    //   <li><code>&quot;current_index-0--page_size-20&quot;</code></li>
+    //   <li><code>&quot;current_index-1--page_size-20&quot;</code></li>
+    //   <li><code>&quot;current_index-10--page_size-20&quot;</code></li>
+    // </ul>
     //
     // Examples of invalid page token strings:
-    // * "1"
-    // * "current_index-0--page_size-20"
-    // * "current_index--1--page_size-20"
-    // * "current_index1--page_size-20"
-    // * "current_index-1--page_size--20"
+    // <ul>
+    //   <li><code>&quot;1&quot;</code></li>
+    //   <li><code>&quot;current_index-0--page_size-20&quot;</code></li>
+    //   <li><code>&quot;current_index--1--page_size-20&quot;</code></li>
+    //   <li><code>&quot;current_index1--page_size-20&quot;</code></li>
+    //   <li><code>&quot;current_index-1--page_size--20&quot;</code></li>
+    // </ul>
     string page_token = 4;
 
     // sorting mode

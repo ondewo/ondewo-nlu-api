@@ -235,7 +235,7 @@ service Rags {
 
     // RAGFlow endpoint: POST /api/v1/file/rm
 
-    // Delete one or more files/folders (hard delete).<br>
+    // Delete one or more files/folders.<br>
     // Recursively deletes folder contents. Removes from storage.
     rpc RagDeleteFiles(RagDeleteFilesRequest) returns (google.protobuf.Empty);
 
@@ -287,7 +287,7 @@ service Rags {
     // RAGFlow endpoint: DELETE /api/v1/chats
 
     // Delete one or more chat assistants (batch operation).<br>
-    // If ids empty, deletes all user's chats (soft delete).
+    // If ids empty, deletes all user's chats.
     rpc RagDeleteChatAssistants(RagDeleteRequest) returns (RagPartialSuccess);
 
     // RAGFlow endpoint: GET /api/v1/chats
@@ -315,7 +315,7 @@ service Rags {
 
     // RAGFlow endpoint: DELETE /api/v1/agents/<agent_id>
 
-    // Delete an agent (hard delete).<br>
+    // Delete an agent.<br>
     // Only owner can delete.
     rpc RagDeleteAgent(RagDeleteAgentRequest) returns (google.protobuf.Empty);
 
@@ -351,7 +351,7 @@ service Rags {
     // RAGFlow endpoint: DELETE /api/v1/chats/<chat_id>/sessions
 
     // Delete one or more chat sessions (batch operation).<br>
-    // If ids empty, deletes all sessions for the chat (hard delete).
+    // If ids empty, deletes all sessions for the chat.
     rpc RagDeleteChatSessions(RagDeleteChatSessionsRequest) returns (RagPartialSuccess);
 
     // RAGFlow endpoint: GET /api/v1/agents/<agent_id>/sessions
@@ -363,7 +363,7 @@ service Rags {
     // RAGFlow endpoint: DELETE /api/v1/agents/<agent_id>/sessions
 
     // Delete one or more agent sessions (batch operation).<br>
-    // If ids empty, deletes all sessions for the agent (hard delete).
+    // If ids empty, deletes all sessions for the agent.
     rpc RagDeleteAgentSessions(RagDeleteAgentSessionsRequest) returns (RagPartialSuccess);
 
     // ========================================================================

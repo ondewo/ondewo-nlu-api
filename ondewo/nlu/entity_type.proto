@@ -45,33 +45,21 @@ option java_outer_classname = "EntityTypeProto";
 option java_package = "com.google.cloud.dialogflow.v2";
 option objc_class_prefix = "DF";
 
-// Entities are extracted from user input and represent parameters that are
-// meaningful to your application. For example, a date range, a proper name
-// such as a geographic location or landmark, and so on. Entities represent
-// actionable data for your application.
+// Entities are extracted from user input and represent parameters that are meaningful to your application. For example, a date range, a proper name such as a geographic location or landmark, and so on. Entities represent actionable data for your application.
 //
-// When you define an entity, you can also include synonyms that all map to
-// that entity. For example, "soft drink", "soda", "pop", and so on.
+// When you define an entity, you can also include synonyms that all map to that entity. For example, &quot;soft drink&quot;, &quot;soda&quot;, &quot;pop&quot;, and so on.
 //
 // There are three types of entities:
 //
-// *   **System** - entities that are defined by the Dialogflow API for common
-//     data types such as date, time, currency, and so on. A system entity is
-//     represented by the `EntityType` type.
+// <ul>
+//   <li><strong>System</strong> - entities that are defined by the Dialogflow API for common data types such as date, time, currency, and so on. A system entity is represented by the <code>EntityType</code> type.</li>
 //
-// *   **Developer** - entities that are defined by you that represent
-//     actionable data that is meaningful to your application. For example,
-//     you could define a `pizza.sauce` entity for red or white pizza sauce,
-//     a `pizza.cheese` entity for the different types of cheese on a pizza,
-//     a `pizza.topping` entity for different toppings, and so on. A developer
-//     entity is represented by the `EntityType` type.
+//   <li><strong>Developer</strong> - entities that are defined by you that represent actionable data that is meaningful to your application. For example, you could define a <code>pizza.sauce</code> entity for red or white pizza sauce, a <code>pizza.cheese</code> entity for the different types of cheese on a pizza, a <code>pizza.topping</code> entity for different toppings, and so on. A developer entity is represented by the <code>EntityType</code> type.</li>
 //
-// *   **User** - entities that are built for an individual user such as
-//     favorites, preferences, playlists, and so on. A user entity is
-//     represented by the [SessionEntityType][google.cloud.dialogflow.v2.SessionEntityType] type.
+//   <li><strong>User</strong> - entities that are built for an individual user such as favorites, preferences, playlists, and so on. A user entity is represented by the <a href="index.html#ondewo.nlu.SessionEntityType">SessionEntityType</a> type.</li>
+// </ul>
 //
-// For more information about entity types, see the
-// [Dialogflow documentation](https://dialogflow.com/docs/entities).
+// For more information about entity types, see the <a href="https://dialogflow.com/docs/entities">Dialogflow documentation</a>.
 service EntityTypes {
     // Returns the list of all entity types in the specified agent.
     rpc ListEntityTypes (ListEntityTypesRequest) returns (ListEntityTypesResponse) {
@@ -112,8 +100,8 @@ service EntityTypes {
 
     // Updates/Creates multiple entity types in the specified agent.
     //
-    // Operation <response: [BatchUpdateEntityTypesResponse][google.cloud.dialogflow.v2.BatchUpdateEntityTypesResponse],
-    //            metadata: [google.protobuf.Struct][google.protobuf.Struct]>
+    // Operation &lt;response: <a href="index.html#ondewo.nlu.BatchUpdateEntityTypesResponse">BatchUpdateEntityTypesResponse</a>,
+    //            metadata: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#struct">google.protobuf.Struct</a>&gt;
     rpc BatchUpdateEntityTypes (BatchUpdateEntityTypesRequest) returns (ondewo.nlu.Operation) {
         option (google.api.http) = {
             post: "/v2/{parent=projects/*/agent}/entityTypes:batchUpdate"
@@ -123,8 +111,8 @@ service EntityTypes {
 
     // Deletes entity types in the specified agent.
     //
-    // Operation <response: [google.protobuf.Empty][google.protobuf.Empty],
-    //            metadata: [google.protobuf.Struct][google.protobuf.Struct]>
+    // Operation &lt;response: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#empty">google.protobuf.Empty</a>,
+    //            metadata: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#struct">google.protobuf.Struct</a>&gt;
     rpc BatchDeleteEntityTypes (BatchDeleteEntityTypesRequest) returns (ondewo.nlu.Operation) {
         option (google.api.http) = {
             post: "/v2/{parent=projects/*/agent}/entityTypes:batchDelete"
@@ -182,56 +170,54 @@ service EntityTypes {
 // language queries.
 message EntityType {
 
-    // Optional. Represents an entity.
+    // Represents an entity value within an entity type
     message Entity {
         // Required.
-        // For `KIND_MAP` entity types: </br>
-        //   A canonical name to be used in place of synonyms.</br>
-        // For `KIND_LIST` entity types:</br>
-        //   A string that can contain references to other entity types (with or without aliases). </br>
+        // For <code>KIND_MAP</code> entity types: A canonical name to be used in place of synonyms.
+        // For <code>KIND_LIST</code> entity types: A string that can contain references to other entity types (with or without aliases).
         //
         // Values can also be described as regexes with postprocessing options such as:
         //
-        //   <pre><code>
-        //    * regex('//1') => references the first group match of the regex defined as a synonym
-        //    * regex('//2') => references the second group match of the regex defined as a synonym
-        //    * regex('//1') => references the first group match of the regex defined as a synonym
-        //   </code></pre>
+        // <pre><code>
+        //  * regex('//1') => references the first group match of the regex defined as a synonym
+        //  * regex('//2') => references the second group match of the regex defined as a synonym
+        //  * regex('//1') => references the first group match of the regex defined as a synonym
+        // </code></pre>
         //
         // Values can also be described as regexes with one or more postprocessing options such as one postprocessing
         // option to remove all whitespaces <code>regex('&lt;#RW#&gt;\\1')</code> or by a combination of several
         // postprocessing options such as remove all whitespaces and lower casing
-        // <code>regex('&lt;#RW#&gt;&lt;#LC#&gt;\\1') </code>.
+        // <code>regex('&lt;#RW#&gt;&lt;#LC#&gt;\\1')</code>.
         //
         // All processing options are:
         //
-        //   <pre><code>
-        //    * regex('&lt;#TW&gt;//1') => matches 1st group and trims duplicated whitespaces to one single space
-        //    * regex('&lt;#RW&gt;//1') => matches 1st group and removes all whitespaces
-        //    * regex('&lt;#UC&gt;//1') => matches 1st group and converts to upper case
-        //    * regex('&lt;#LC&gt;//1') => matches 1st group and converts to lower case
-        //    * regex('&lt;#CC&gt;//1') => matches 1st group and converts to camelCase
-        //    * regex('&lt;#SC&gt;//1') => matches 1st group and converts to snake_case
-        //   </code></pre>
+        // <pre><code>
+        //  * regex('&lt;#TW&gt;//1') => matches 1st group and trims duplicated whitespaces to one single space
+        //  * regex('&lt;#RW&gt;//1') => matches 1st group and removes all whitespaces
+        //  * regex('&lt;#UC&gt;//1') => matches 1st group and converts to upper case
+        //  * regex('&lt;#LC&gt;//1') => matches 1st group and converts to lower case
+        //  * regex('&lt;#CC&gt;//1') => matches 1st group and converts to camelCase
+        //  * regex('&lt;#SC&gt;//1') => matches 1st group and converts to snake_case
+        // </code></pre>
         string value = 1;
 
-        // Required. A collection of synonyms. For `KIND_LIST` entity types this
-        // must contain exactly one synonym equal to `value`.
+        // Required. A collection of synonyms. For <code>KIND_LIST</code> entity types this
+        // must contain exactly one synonym equal to <code>value</code>.
         // Synonyms can be regex expressions, i.e. regular expressions, that are python compatible.
-        // See here for supported regex: https://docs.python.org/3/library/re.html
+        // See here for supported regex: <a href="https://docs.python.org/3/library/re.html">https://docs.python.org/3/library/re.html</a>
         // Examples are:
         //
-        //  <pre><code>
-        //   * regex('[a-zA-Z]+') => just letters
-        //   * regex('\d{1,5}') => just numbers
-        //   * regex('^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$') => mix of numbers, letters and dot
-        //   * regex('(?i)(^|\s)(0\s{0,3}') => with matching groups and case insensitivity
-        //  </code></pre>
+        // <pre><code>
+        //  * regex('[a-zA-Z]+') => just letters
+        //  * regex('\d{1,5}') => just numbers
+        //  * regex('^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$') => mix of numbers, letters and dot
+        //  * regex('(?i)(^|\s)(0\s{0,3}') => with matching groups and case insensitivity
+        // </code></pre>
         //
         repeated string synonyms = 2;
 
         // The unique identifier of the entity. Format:
-        // `projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;/entities/&lt;entity_uuid&gt;`.
+        // <code>projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;/entities/&lt;entity_uuid&gt;</code>.
         string name = 3;
 
         // The name of the entity.
@@ -272,7 +258,9 @@ message EntityType {
     }
 
     enum EntityTypeStatus {
+        // Entity type is active
         ACTIVE = 0;
+        // Entity type is inactive
         INACTIVE = 1;
     }
 
@@ -288,10 +276,10 @@ message EntityType {
         AUTO_EXPANSION_MODE_DEFAULT = 1;
     }
 
-    // Required for all methods except `create` (`create` populates the name
+    // Required for all methods except <code>create</code> (<code>create</code> populates the name
     // automatically.
     // The unique identifier of the entity type. Format:
-    // `projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;`.
+    // <code>projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;</code>.
     string name = 1;
 
     // Required. The name of the entity type.
@@ -333,16 +321,16 @@ message EntityType {
     string modified_by = 17;
 }
 
-// The request message for [EntityTypes.ListEntityTypes][google.cloud.dialogflow.v2.EntityTypes.ListEntityTypes].
+// The request message for <a href="index.html#ondewo.nlu.EntityTypes.ListEntityTypes">EntityTypes.ListEntityTypes</a>.
 message ListEntityTypesRequest {
     // Required. The agent to list all entity types from.
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
     // Optional. The language to list entity synonyms for. If not specified,
-    // the agent's default language is used.
-    // [More than a dozen
-    // languages](https://dialogflow.com/docs/reference/language) are supported.
+    // the agent&apos;s default language is used.
+    // <a href="https://dialogflow.com/docs/reference/language">More than a dozen
+    // languages</a> are supported.
     // Note: languages must be enabled in the agent, before they can be used.
     string language_code = 2;
 
@@ -352,24 +340,30 @@ message ListEntityTypesRequest {
     // The page token is a string representing the current index and page size.
     //
     // Valid page token strings:
-    // * "" (empty string) - Retrieves the first page.
-    // * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
-    // * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+    // <ul>
+    //   <li>&quot;&quot; (empty string) - Retrieves the first page.</li>
+    //   <li>&quot;current_index-0--page_size-20&quot; - Retrieves the first page with a page size of 20.</li>
+    //   <li>&quot;current_index-1--page_size-20&quot; - Retrieves the second page with a page size of 20.</li>
+    // </ul>
     //
     // Index starts at 0.
     //
     // Examples of valid page token strings:
-    // * ""
-    // * "current_index-0--page_size-20"
-    // * "current_index-1--page_size-20"
-    // * "current_index-10--page_size-20"
+    // <ul>
+    //   <li>&quot;&quot;</li>
+    //   <li>&quot;current_index-0--page_size-20&quot;</li>
+    //   <li>&quot;current_index-1--page_size-20&quot;</li>
+    //   <li>&quot;current_index-10--page_size-20&quot;</li>
+    // </ul>
     //
     // Examples of invalid page token strings:
-    // * "1"
-    // * "current_index-0--page_size-20"
-    // * "current_index--1--page_size-20"
-    // * "current_index1--page_size-20"
-    // * "current_index-1--page_size--20"
+    // <ul>
+    //   <li>&quot;1&quot;</li>
+    //   <li>&quot;current_index-0--page_size-20&quot;</li>
+    //   <li>&quot;current_index--1--page_size-20&quot;</li>
+    //   <li>&quot;current_index1--page_size-20&quot;</li>
+    //   <li>&quot;current_index-1--page_size--20&quot;</li>
+    // </ul>
     string page_token = 4;
 
     // Optional. The resource view to apply to the returned entity type.
@@ -382,7 +376,7 @@ message ListEntityTypesRequest {
     EntityTypeSorting sort_by_field = 7;
 }
 
-// The response message for [EntityTypes.ListEntityTypes][google.cloud.dialogflow.v2.EntityTypes.ListEntityTypes].
+// The response message for <a href="index.html#ondewo.nlu.EntityTypes.ListEntityTypes">EntityTypes.ListEntityTypes</a>.
 message ListEntityTypesResponse {
     // The list of agent entity types. There will be a maximum number of items
     // returned based on the page_token field in the request.
@@ -393,16 +387,16 @@ message ListEntityTypesResponse {
     string next_page_token = 2;
 }
 
-// The request message for [EntityTypes.GetEntityType][google.cloud.dialogflow.v2.EntityTypes.GetEntityType].
+// The request message for <a href="index.html#ondewo.nlu.EntityTypes.GetEntityType">EntityTypes.GetEntityType</a>.
 message GetEntityTypeRequest {
     // Required. The name of the entity type.
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;</code></pre>
     string name = 1;
 
     // Optional. The language to retrieve entity synonyms for. If not specified,
-    // the agent's default language is used.
-    // [More than a dozen
-    // languages](https://dialogflow.com/docs/reference/language) are supported.
+    // the agent&apos;s default language is used.
+    // <a href="https://dialogflow.com/docs/reference/language">More than a dozen
+    // languages</a> are supported.
     // Note: languages must be enabled in the agent, before they can be used.
     string language_code = 2;
 
@@ -411,31 +405,37 @@ message GetEntityTypeRequest {
     // The page token is a string representing the current index and page size.
     //
     // Valid page token strings:
-    // * "" (empty string) - Retrieves the first page.
-    // * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
-    // * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+    // <ul>
+    //   <li>&quot;&quot; (empty string) - Retrieves the first page.</li>
+    //   <li>&quot;current_index-0--page_size-20&quot; - Retrieves the first page with a page size of 20.</li>
+    //   <li>&quot;current_index-1--page_size-20&quot; - Retrieves the second page with a page size of 20.</li>
+    // </ul>
     //
     // Index starts at 0.
     //
     // Examples of valid page token strings:
-    // * ""
-    // * "current_index-0--page_size-20"
-    // * "current_index-1--page_size-20"
-    // * "current_index-10--page_size-20"
+    // <ul>
+    //   <li>&quot;&quot;</li>
+    //   <li>&quot;current_index-0--page_size-20&quot;</li>
+    //   <li>&quot;current_index-1--page_size-20&quot;</li>
+    //   <li>&quot;current_index-10--page_size-20&quot;</li>
+    // </ul>
     //
     // Examples of invalid page token strings:
-    // * "1"
-    // * "current_index-0--page_size-20"
-    // * "current_index--1--page_size-20"
-    // * "current_index1--page_size-20"
-    // * "current_index-1--page_size--20"
+    // <ul>
+    //   <li>&quot;1&quot;</li>
+    //   <li>&quot;current_index-0--page_size-20&quot;</li>
+    //   <li>&quot;current_index--1--page_size-20&quot;</li>
+    //   <li>&quot;current_index1--page_size-20&quot;</li>
+    //   <li>&quot;current_index-1--page_size--20&quot;</li>
+    // </ul>
     string page_token = 5;
 
     // Optional. The resource view to apply to the returned Entity Type
     EntityTypeView entity_type_view = 6;
 }
 
-// The request message for [EntityTypes.CreateEntityType][google.cloud.dialogflow.v2.EntityTypes.CreateEntityType].
+// The request message for <a href="index.html#ondewo.nlu.EntityTypes.CreateEntityType">EntityTypes.CreateEntityType</a>.
 message CreateEntityTypeRequest {
     // Required. The agent to create a entity type for.
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
@@ -444,10 +444,10 @@ message CreateEntityTypeRequest {
     // Required. The entity type to create.
     EntityType entity_type = 2;
 
-    // Optional. The language of entity synonyms defined in `entity_type`. If not
-    // specified, the agent's default language is used.
-    // [More than a dozen
-    // languages](https://dialogflow.com/docs/reference/language) are supported.
+    // Optional. The language of entity synonyms defined in <code>entity_type</code>. If not
+    // specified, the agent&apos;s default language is used.
+    // <a href="https://dialogflow.com/docs/reference/language">More than a dozen
+    // languages</a> are supported.
     // Note: languages must be enabled in the agent, before they can be used.
     string language_code = 3;
 
@@ -455,16 +455,16 @@ message CreateEntityTypeRequest {
     EntityTypeView entity_type_view = 6;
 }
 
-// The request message for [EntityTypes.UpdateEntityType][google.cloud.dialogflow.v2.EntityTypes.UpdateEntityType].
+// The request message for <a href="index.html#ondewo.nlu.EntityTypes.UpdateEntityType">EntityTypes.UpdateEntityType</a>.
 message UpdateEntityTypeRequest {
     // Required. The entity type to update.
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;</code></pre>
     EntityType entity_type = 1;
 
-    // Optional. The language of entity synonyms defined in `entity_type`. If not
-    // specified, the agent's default language is used.
-    // [More than a dozen
-    // languages](https://dialogflow.com/docs/reference/language) are supported.
+    // Optional. The language of entity synonyms defined in <code>entity_type</code>. If not
+    // specified, the agent&apos;s default language is used.
+    // <a href="https://dialogflow.com/docs/reference/language">More than a dozen
+    // languages</a> are supported.
     // Note: languages must be enabled in the agent, before they can be used.
     string language_code = 2;
 
@@ -475,14 +475,14 @@ message UpdateEntityTypeRequest {
     EntityTypeView entity_type_view = 6;
 }
 
-// The request message for [EntityTypes.DeleteEntityType][google.cloud.dialogflow.v2.EntityTypes.DeleteEntityType].
+// The request message for <a href="index.html#ondewo.nlu.EntityTypes.DeleteEntityType">EntityTypes.DeleteEntityType</a>.
 message DeleteEntityTypeRequest {
     // Required. The name of the entity type to delete.
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;</code></pre>
     string name = 1;
 }
 
-// The request message for [EntityTypes.BatchUpdateEntityTypes][google.cloud.dialogflow.v2.EntityTypes.BatchUpdateEntityTypes].
+// The request message for <a href="index.html#ondewo.nlu.EntityTypes.BatchUpdateEntityTypes">EntityTypes.BatchUpdateEntityTypes</a>.
 message BatchUpdateEntityTypesRequest {
     // Required. The name of the agent to update or create entity types in.
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
@@ -491,23 +491,25 @@ message BatchUpdateEntityTypesRequest {
     // Required. The source of the entity type batch.
     //
     // For each entity type in the batch:
-    // * If `name` is specified, we update an existing entity type.
-    // * If `name` is not specified, we create a new entity type.
+    // <ul>
+    //   <li>If <code>name</code> is specified, we update an existing entity type.</li>
+    //   <li>If <code>name</code> is not specified, we create a new entity type.</li>
+    // </ul>
     oneof entity_type_batch {
         // The URI to a Google Cloud Storage file containing entity types to update
         // or create. The file format can either be a serialized proto (of
         // EntityBatch type) or a JSON object. Note: The URI must start with
-        // "gs://".
+        // &quot;gs://&quot;.
         string entity_type_batch_uri = 2;
 
         // The collection of entity type to update or create.
         EntityTypeBatch entity_type_batch_inline = 3;
     }
 
-    // Optional. The language of entity synonyms defined in `entity_types`. If not
-    // specified, the agent's default language is used.
-    // [More than a dozen
-    // languages](https://dialogflow.com/docs/reference/language) are supported.
+    // Optional. The language of entity synonyms defined in <code>entity_types</code>. If not
+    // specified, the agent&apos;s default language is used.
+    // <a href="https://dialogflow.com/docs/reference/language">More than a dozen
+    // languages</a> are supported.
     // Note: languages must be enabled in the agent, before they can be used.
     string language_code = 4;
 
@@ -515,16 +517,16 @@ message BatchUpdateEntityTypesRequest {
     google.protobuf.FieldMask update_mask = 5;
 }
 
-// The response message for [EntityTypes.BatchUpdateEntityTypes][google.cloud.dialogflow.v2.EntityTypes.BatchUpdateEntityTypes].
+// The response message for <a href="index.html#ondewo.nlu.EntityTypes.BatchUpdateEntityTypes">EntityTypes.BatchUpdateEntityTypes</a>.
 message BatchUpdateEntityTypesResponse {
     // The collection of updated or created entity types.
     repeated EntityType entity_types = 1;
 }
 
-// The request message for [EntityTypes.BatchDeleteEntityTypes][google.cloud.dialogflow.v2.EntityTypes.BatchDeleteEntityTypes].
+// The request message for <a href="index.html#ondewo.nlu.EntityTypes.BatchDeleteEntityTypes">EntityTypes.BatchDeleteEntityTypes</a>.
 message BatchDeleteEntityTypesRequest {
     // Required. The name of the agent to delete all entities types for. Format:
-    // `projects/&lt;project_uuid&gt;/agent`.
+    // <code>projects/&lt;project_uuid&gt;/agent</code>.
     string parent = 1;
 
     // Required. The names entity types to delete. All names must point to the
@@ -559,7 +561,7 @@ enum EntityTypeView {
     ENTITY_TYPE_VIEW_MINIMUM = 4;
 }
 
-// Represents the category of entity types to filter by in the "List Entity Types" request
+// Represents the category of entity types to filter by in the &quot;List Entity Types&quot; request
 enum EntityTypeCategory {
     // represent all entity types
     ALL_ENTITY_TYPES = 0;
@@ -574,11 +576,17 @@ enum EntityTypeCategory {
 message EntityTypeSorting {
     // Structure of Entity type sorting field
     enum EntityTypeSortingField {
+        // No sorting applied
         NO_ENTITY_TYPE_SORTING = 0;
+        // Sort by entity type name
         SORT_ENTITY_TYPE_BY_NAME = 1;
+        // Sort by creation date
         SORT_ENTITY_TYPE_BY_CREATION_DATE = 2;
+        // Sort by last updated date
         SORT_ENTITY_TYPE_BY_LAST_UPDATED = 3;
+        // Sort by entity value count
         SORT_ENTITY_TYPE_BY_ENTITY_VALUE_COUNT = 4;
+        // Sort by synonym count
         SORT_ENTITY_TYPE_BY_SYNONYM_COUNT = 5;
     }
 
@@ -607,7 +615,7 @@ message BatchEntitiesResponse {
 
 message CreateEntityRequest {
     // Required. Name of the entity type in which to create the entity value. Format:
-    // `projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;/entities/&lt;entity_uuid&gt;`.
+    // <code>projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;/entities/&lt;entity_uuid&gt;</code>.
     string entity_type_name = 1;
 
     // The entity value to create
@@ -635,28 +643,28 @@ message UpdateEntityRequest {
 // This message is a request to get a an entity
 message GetEntityRequest {
     // The unique identifiers of the entities. Format:
-    // `projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;/entities/&lt;entity_uuid&gt;`.
+    // <code>projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;/entities/&lt;entity_uuid&gt;</code>.
     string name = 1;
 }
 
 // This message is a request to get a batch of entities
 message BatchGetEntitiesRequest {
     // The unique identifiers of the entities. Format:
-    // `projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;/entities/&lt;entity_uuid&gt;`.
+    // <code>projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;/entities/&lt;entity_uuid&gt;</code>.
     repeated string names = 1;
 }
 
 // This message is a request to delete a batch of entities
 message BatchDeleteEntitiesRequest {
     // The unique identifiers of the entities. Format:
-    // `projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;/entities/&lt;entity_uuid&gt;`.
+    // <code>projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;/entities/&lt;entity_uuid&gt;</code>.
     repeated string names = 1;
 }
 
 // This message is a request to delete a batch of entities
 message DeleteEntityRequest {
     // The unique identifiers of the entities. Format:
-    // `projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;/entities/&lt;entity_uuid&gt;`.
+    // <code>projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;/entities/&lt;entity_uuid&gt;</code>.
     string name = 1;
 }
 
@@ -681,11 +689,11 @@ message BatchDeleteEntitiesResponse {
 // This message is a request to get a list of entities
 message ListEntitiesRequest {
     // The unique identifier of the entity type. Format:
-    // `projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;
+    // <code>projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;</code>
     string entity_type_name = 1;
 
     // Optional. The language to list training phrases, parameters and rich
-    // messages for. If not specified, the agent's default language is used.
+    // messages for. If not specified, the agent&apos;s default language is used.
     string language_code = 2;
 
     // Optional. The next_page_token value returned from a previous list request.
@@ -694,37 +702,45 @@ message ListEntitiesRequest {
     // The page token is a string representing the current index and page size.
     //
     // Valid page token strings:
-    // * "" (empty string) - Retrieves the first page.
-    // * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
-    // * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+    // <ul>
+    //   <li>&quot;&quot; (empty string) - Retrieves the first page.</li>
+    //   <li>&quot;current_index-0--page_size-20&quot; - Retrieves the first page with a page size of 20.</li>
+    //   <li>&quot;current_index-1--page_size-20&quot; - Retrieves the second page with a page size of 20.</li>
+    // </ul>
     //
     // Index starts at 0.
     //
     // Examples of valid page token strings:
-    // * ""
-    // * "current_index-0--page_size-20"
-    // * "current_index-1--page_size-20"
-    // * "current_index-10--page_size-20"
+    // <ul>
+    //   <li>&quot;&quot;</li>
+    //   <li>&quot;current_index-0--page_size-20&quot;</li>
+    //   <li>&quot;current_index-1--page_size-20&quot;</li>
+    //   <li>&quot;current_index-10--page_size-20&quot;</li>
+    // </ul>
     //
     // Examples of invalid page token strings:
-    // * "1"
-    // * "current_index-0--page_size-20"
-    // * "current_index--1--page_size-20"
-    // * "current_index1--page_size-20"
-    // * "current_index-1--page_size--20"
+    // <ul>
+    //   <li>&quot;1&quot;</li>
+    //   <li>&quot;current_index-0--page_size-20&quot;</li>
+    //   <li>&quot;current_index--1--page_size-20&quot;</li>
+    //   <li>&quot;current_index1--page_size-20&quot;</li>
+    //   <li>&quot;current_index-1--page_size--20&quot;</li>
+    // </ul>
     string page_token = 3;
 
     // Optional. Defines the sorting of the list. Default, no sorting.
     EntityValueSorting sort_by_field = 5;
 
-    // Optional. Defines a pattern to search for in the entity type "values" and "synonyms"
+    // Optional. Defines a pattern to search for in the entity type &quot;values&quot; and &quot;synonyms&quot;
     // Example:
-    //      Pattern: "dark"
+    // <pre><code>
+    //      Pattern: &quot;dark&quot;
     //      Results:
     //              [Entity Value]          [Entity Synonyms]
     //              Red                     red, scarlett, dark red, ...
     //              Blue                    blue, indico, dark blue, sky blue, ...
     //              Dark                    obscure, black, opaque, ...
+    // </code></pre>
     //
     string search_by_pattern = 6;
 }
@@ -743,9 +759,13 @@ message ListEntitiesResponse {
 message EntityValueSorting {
     // Structure of Entity value sorting field
     enum EntityValueSortingField {
-        NO_ENTITY_VALUE_SORTING = 0;  // Default behaviour: Sorts by value
+        // Default behaviour: Sorts by value
+        NO_ENTITY_VALUE_SORTING = 0;
+        // Sort by display name
         SORT_ENTITY_VALUE_BY_DISPLAY_NAME = 1;
+        // Sort by value
         SORT_ENTITY_VALUE_BY_VALUE = 2;
+        // Sort by synonym count
         SORT_ENTITY_VALUE_BY_SYNONYM_COUNT = 3;
     }
 

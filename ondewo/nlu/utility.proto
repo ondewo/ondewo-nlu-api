@@ -33,9 +33,7 @@ package ondewo.nlu;
 import "ondewo/nlu/intent.proto";
 import "ondewo/nlu/entity_type.proto";
 
-// This is collection of utility endpoints, intended to language-independent operations,
-// such as code checks, regex checks, etc.
-// Holds a collection of utility functions
+// This is collection of utility endpoints, intended to language-independent operations, such as code checks, regex checks, etc. Holds a collection of utility functions
 service Utilities {
 
     // Validates the validity of python regexes
@@ -100,16 +98,16 @@ message CleanAllIntentsRequest {
     string parent = 1;
 
     // Optional. The language to list training phrases, parameters and rich
-    // messages for. If not specified, the agent's default language is used.
+    // messages for. If not specified, the agent&apos;s default language is used.
     // Note: languages must be enabled in the agent before they can be used.
     string language_code = 2;
 
     // Optional. Characters to be recognized as special characters for cleaning.
-    // Overrides the default: '.,;!?:'
+    // Overrides the default: <code>&apos;.,;!?:&apos;</code>
     string special_characters = 3;
 
     // Optional. List of substring that shall not be cleaned/deleted.
-    // Example: ['St.', 'U.S.', 'sys.', '24.12.', 'Nr.', 'TelNr.']
+    // Example: <code>[&apos;St.&apos;, &apos;U.S.&apos;, &apos;sys.&apos;, &apos;24.12.&apos;, &apos;Nr.&apos;, &apos;TelNr.&apos;]</code>
     // Default = None
     repeated string substring_white_list = 4;
 
@@ -150,16 +148,16 @@ message CleanIntentRequest {
     string intent_name = 2;
 
     // Optional. The language to list training phrases, parameters and rich
-    // messages for. If not specified, the agent's default language is used.
+    // messages for. If not specified, the agent&apos;s default language is used.
     // Note: languages must be enabled in the agent before they can be used.
     string language_code = 3;
 
     // Optional. Characters to be recognized as special characters for cleaning.
-    // Overrides the default: '.,;!?:'
+    // Overrides the default: <code>&apos;.,;!?:&apos;</code>
     string special_characters = 4;
 
     // Optional. List of substring that shall not be cleaned/deleted.
-    // Example: ['St.', 'U.S.', 'sys.', '24.12.', 'Nr.', 'TelNr.']
+    // Example: <code>[&apos;St.&apos;, &apos;U.S.&apos;, &apos;sys.&apos;, &apos;24.12.&apos;, &apos;Nr.&apos;, &apos;TelNr.&apos;]</code>
     // Default = None
     repeated string substring_white_list = 5;
 
@@ -285,16 +283,16 @@ message CleanAllEntityTypesRequest {
     string parent = 1;
 
     // Optional. The language to list training phrases, parameters and rich
-    // messages for. If not specified, the agent's default language is used.
+    // messages for. If not specified, the agent&apos;s default language is used.
     // Note: languages must be enabled in the agent before they can be used.
     string language_code = 2;
 
     // Optional. Characters to be recognized as special characters for cleaning.
-    // Overrides the default: '.,;!?:'
+    // Overrides the default: <code>&apos;.,;!?:&apos;</code>
     string special_characters = 3;
 
     // Optional. List of substring that shall not be cleaned/deleted.
-    // Example: ['St.', 'U.S.', 'sys.', '24.12.', 'Nr.', 'TelNr.']
+    // Example: <code>[&apos;St.&apos;, &apos;U.S.&apos;, &apos;sys.&apos;, &apos;24.12.&apos;, &apos;Nr.&apos;, &apos;TelNr.&apos;]</code>
     repeated string substring_white_list = 4;
 
     // Optional. Entity type that contain more than max_entity_count_update entities will
@@ -304,7 +302,7 @@ message CleanAllEntityTypesRequest {
 
     // Optional. List of strings or regexes. Entity types will be deleted if their display
     // name matches an element of this list
-    // Example: ['sys.ignore.'] -> would delete entity types with display names sys.ignore.*
+    // Example: <code>[&apos;sys.ignore.&apos;]</code> -&gt; would delete entity types with display names sys.ignore.*
     repeated string forbidden_entity_type_patterns = 6;
 
     // Required. Do not apply changes to the database if set to True
@@ -341,16 +339,16 @@ message CleanEntityTypeRequest {
     string entity_type_name = 2;
 
     // Optional. The language to list training phrases, parameters and rich
-    // messages for. If not specified, the agent's default language is used.
+    // messages for. If not specified, the agent&apos;s default language is used.
     // Note: languages must be enabled in the agent before they can be used.
     string language_code = 3;
 
     // Optional. Characters to be recognized as special characters for cleaning.
-    // Overrides the default: '.,;!?:'
+    // Overrides the default: <code>&apos;.,;!?:&apos;</code>
     string special_characters = 4;
 
     // Optional. List of substring that shall not be cleaned/deleted.
-    // Example: ['St.', 'U.S.', 'sys.', '24.12.', 'Nr.', 'TelNr.']
+    // Example: <code>[&apos;St.&apos;, &apos;U.S.&apos;, &apos;sys.&apos;, &apos;24.12.&apos;, &apos;Nr.&apos;, &apos;TelNr.&apos;]</code>
     repeated string substring_white_list = 5;
 
     // Optional. Entity type that contain more than max_entity_count_update entities will
@@ -375,8 +373,7 @@ message CleanEntityTypeResponse {
 // Request message to AddTrainingPhrase rpc
 message AddTrainingPhrasesRequest {
 
-    // Message that contains the new training phrase, together with the intent display name
-    // and, optionally the entity annotations
+    // Message that contains the new training phrase, together with the intent display name and, optionally the entity annotations
     message TrainingPhraseForIntent {
 
         // Required. New training phrase to be added
@@ -394,7 +391,7 @@ message AddTrainingPhrasesRequest {
     string parent = 1;
 
     // Required. The language to list training phrases, parameters and rich
-    // messages for. If not specified, the agent's default language is used.
+    // messages for. If not specified, the agent&apos;s default language is used.
     // Note: languages must be enabled in the agent before they can be used.
     string language_code = 2;
 
@@ -405,7 +402,7 @@ message AddTrainingPhrasesRequest {
     bool extract_entities = 4;
 
     // Optional. Characters to be recognized as special characters for cleaning
-    // the training phrases. Overrides the default: '.,;!?:'
+    // the training phrases. Overrides the default: <code>&apos;.,;!?:&apos;</code>
     string special_characters = 5;
 
     // Optional. Options for the training phrase cleaner to override the default settings
@@ -431,7 +428,7 @@ message AddTrainingPhrasesFromCSVRequest {
     string parent = 1;
 
     // Required. The language to list training phrases, parameters and rich
-    // messages for. If not specified, the agent's default language is used.
+    // messages for. If not specified, the agent&apos;s default language is used.
     // Note: languages must be enabled in the agent before they can be used.
     string language_code = 2;
 
@@ -444,7 +441,7 @@ message AddTrainingPhrasesFromCSVRequest {
     // Optional. Before new training phrases are added to their corresponding intent,
     // they are cleaned with cleaning scripts. These cleaning scripts remove certain special characters,
     // if they are found at the beginning of the text or if they appear in annotations.
-    // Overrides the default: '.,;!?:'
+    // Overrides the default: <code>&apos;.,;!?:&apos;</code>
     string special_characters = 5;
 
     // Optional. Options for the training phrase cleaner to override the default settings
