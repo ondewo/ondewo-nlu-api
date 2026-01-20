@@ -371,10 +371,15 @@ service Rags {
     // REST: /api/v1/chats/<id>/completions, /api/v1/agents/<id>/completions, /api/v1/sessions
     // ========================================================================
 
-    // RAGFlow endpoint: POST /api/v1/chats/<chat_id>/completions
+    // RAGFlow endpoint: POST /api/v1/chats/<chat_id>/completions or POST /api/v1/chats_openai/<chat_id>/completions
 
     // Generate chat completion with RAG (server streaming).<br>
-    // Creates new session if session_id not provided.
+	// This endpoint either
+	// <ul>
+	//     <li>creates a new session if no <code>session_id</code> is provided and <code>messages</code> contains only one message</li>
+	//     <li>uses an exising session if <code>session_id</code> is provided (ignores message history in <code>messages</code>)</li>
+	//     <li>continues a conversion with the message history from <code>messages</code> without creating a session if no <code>session_id</code> is provided and <code>messages</code> contains multiple messages</li>
+	// </ul>
     rpc RagChatCompletion(RagChatCompletionRequest) returns (stream RagChatCompletionResponse);
 
     // RAGFlow endpoint: POST /api/v1/agents/<agent_id>/completions
@@ -2186,13 +2191,13 @@ message RagChatSession {
 // Message in a conversation session.
 message RagMessage {
 
-    // Role of the message sender.
+    // Required. Role of the message sender.
     optional RagMessageRole role = 1;
 
-    // Message content text.
+    // Required. Message content text.
     string content = 2;
 
-    // Additional fields returned by RAGFlow.
+    // Additional fields provided to or returned by RAGFlow.
     google.protobuf.Struct additional_fields = 4;
 }
 
@@ -2411,24 +2416,22 @@ message RagChatCompletionRequest {
     // Required. Chat assistant ID to use for generating the completion.
     string chat_id = 2;
 
-    // Optional. Session ID to continue an existing conversation. If not provided, a new session will be created.
-    string session_id = 3;
+	// Required. Message history. Must contain at least one <code>"user"</code> message.<br>
+	// If <code>session_id</code> is provided, the message history is ignored and only the last <code>"user"</code> message is taken and added to the existing session.
+	repeated RagMessage messages = 3;
 
-    // Optional. Maximum length 255. Name for new session. Ignored if <code>session_id</code> is provided.
-    string name = 4;
+    // Optional. Session ID to continue an existing conversation. If not provided and <code>messages</code> contains only one message, a new session will be created.
+    string session_id = 4;
 
-    // Optional. Maximum length 255. User defined ID for new session. Ignored if <code>session_id</code> is provided.
-    string user_id = 5;
+    // Optional. Maximum length 255. Name for new session. Ignored if <code>session_id</code> is provided or <code>messages</code> contains more than one message.
+    string name = 5;
 
-    // Optional. User question or message to send to the chat assistant.
-    string question = 6;
+    // Optional. Maximum length 255. User defined ID for new session. Ignored if <code>session_id</code> is provided or <code>messages</code> contains more than one message.
+    string user_id = 6;
 
     // Optional. Enable streaming mode. If <code>true</code>, the response will be streamed as Server-Sent Events (SSE).
     // Default: <code>true</code>.
-    optional bool stream = 7;
-
-    // Optional. Additional fields to pass through to RAGFlow API.
-    google.protobuf.Struct additional_fields = 8;
+    optional bool stream = 8;
 }
 
 // Response message for chat completion.
@@ -2438,12 +2441,11 @@ message RagChatCompletionRequest {
 // </ul>
 message RagChatCompletionResponse {
 
-    // Response text. Incremental for streaming mode, complete for non-streaming mode.
+    // Response text. Delta of response for streaming mode, complete for non-streaming mode.
     string answer = 1;
 
     // Source references including document chunks used to generate the response.
-    // Contains a <code>chunks</code> array with metadata about retrieved documents.
-    google.protobuf.Struct reference = 2;
+    RagReference reference = 2;
 
     // Optional. Base64-encoded audio response when text-to-speech is enabled.
     string audio_binary = 3;
@@ -2454,14 +2456,80 @@ message RagChatCompletionResponse {
     // Session ID for the conversation.
     string session_id = 5;
 
-    // Prompt used for generation. Usually empty string.
+    // String containing the prompt used for generating an answer plus statistics of the generation.
     string prompt = 6;
 
     // Creation timestamp (Unix timestamp in seconds).
     double created_at = 7;
+}
 
-    // Additional fields returned by RAGFlow API.
-    google.protobuf.Struct additional_fields = 8;
+// Reference object containing list of reference document chunks.
+message RagReference {
+
+	// List of retrieved chunks
+	repeated RagReferenceChunk chunks = 1;
+
+	// List summarizing retrieved documents
+	repeated RagDocAgg doc_aggs = 2;
+
+	// Total number of retrieved documents
+	int32 total = 3;
+}
+
+// Retrieved chunk returned as reference with chat/agent completions
+message RagReferenceChunk {
+
+	// Chunk ID
+	string id = 1;
+
+	// Chunk content
+	string content = 2;
+
+	// Document ID of the chunk
+	string document_id = 3;
+
+	// Document name
+	string document_name = 4;
+
+	// Dataset ID
+	string dataset_id = 5;
+
+	// Image ID if the chunk refers to an image
+	string image_id = 6;
+
+	// Positions of the chunk in the document. Mostly useful for PDFs to determine the position of a chunk on a page.<br>
+	// For text documents this is always <code>[[i + 1, i, i, i, i]]</code> where <code>i</code> is the 1-based index of the chunk in the sequence of chunks in the document.<br>
+	// For PDFs the <code>positions</code> list contains the bounding box(es) of the chunk as <code>[[page_nr, left, right, top, bottom], ...]</code> with the <code>page_nr</code> being 1-indexed and the positions being in 72 DPI points. Multiple lists are returned if the chunks spans multiple bounding boxes (multiple pages).
+	repeated RagIntList positions = 7;
+
+	// Chunk embedding similarity
+	float vector_similarity = 8;
+
+	// Keyword similarity
+	float term_similarity = 9;
+
+	// Overall similarity score (weighted sum of embedding and keyword similarity)
+	float similarity = 10;
+}
+
+// List of integers
+message RagIntList {
+
+	// Integer list
+	repeated int32 int_list = 1;
+}
+
+// Aggregated document retrieval results containing how many chunks of the given document where retrieved
+message RagDocAgg {
+
+	// Document name
+	string doc_name = 1;
+
+	// Document ID
+	string doc_id = 2;
+
+	// Number of retrieved chunks
+	int32 count = 3;
 }
 
 // Request message for generating an agent completion.

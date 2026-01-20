@@ -2126,6 +2126,10 @@
                       </li>
                     
                       <li>
+                        <a href="#ondewo.nlu.RagDocAgg" class="title-badge message">RagDocAgg</a>
+                      </li>
+                    
+                      <li>
                         <a href="#ondewo.nlu.RagDocument" class="title-badge message">RagDocument</a>
                       </li>
                     
@@ -2187,6 +2191,10 @@
                     
                       <li>
                         <a href="#ondewo.nlu.RagGraphRagConfig" class="title-badge message">RagGraphRagConfig</a>
+                      </li>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.RagIntList" class="title-badge message">RagIntList</a>
                       </li>
                     
                       <li>
@@ -2283,6 +2291,14 @@
                     
                       <li>
                         <a href="#ondewo.nlu.RagRaptorConfig" class="title-badge message">RagRaptorConfig</a>
+                      </li>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.RagReference" class="title-badge message">RagReference</a>
+                      </li>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.RagReferenceChunk" class="title-badge message">RagReferenceChunk</a>
                       </li>
                     
                       <li>
@@ -21067,7 +21083,7 @@ Returns array from file itself to root (includes the file, ordered deepest to ro
 
           <pre>rpc RagDeleteFiles (<a href="#ondewo.nlu.RagDeleteFilesRequest">RagDeleteFilesRequest</a>) returns (<a href="#google.protobuf.Empty">.google.protobuf.Empty)</a></pre>
 
-          Delete one or more files/folders (hard delete).<br>
+          Delete one or more files/folders.<br>
 Recursively deletes folder contents. Removes from storage.
         
           <h4 id="ondewo.nlu.Rags.RagRenameFile" class="title-badge method">RagRenameFile</h4>
@@ -21120,7 +21136,7 @@ LLM and prompt configs are merged with existing values.
           <pre>rpc RagDeleteChatAssistants (<a href="#ondewo.nlu.RagDeleteRequest">RagDeleteRequest</a>) returns (<a href="#ondewo.nlu.RagPartialSuccess">RagPartialSuccess)</a></pre>
 
           Delete one or more chat assistants (batch operation).<br>
-If ids empty, deletes all user's chats (soft delete).
+If ids empty, deletes all user's chats.
         
           <h4 id="ondewo.nlu.Rags.RagListChatAssistants" class="title-badge method">RagListChatAssistants</h4>
 
@@ -21147,7 +21163,7 @@ DSL updates create new version snapshot. Only owner can update.
 
           <pre>rpc RagDeleteAgent (<a href="#ondewo.nlu.RagDeleteAgentRequest">RagDeleteAgentRequest</a>) returns (<a href="#google.protobuf.Empty">.google.protobuf.Empty)</a></pre>
 
-          Delete an agent (hard delete).<br>
+          Delete an agent.<br>
 Only owner can delete.
         
           <h4 id="ondewo.nlu.Rags.RagListAgents" class="title-badge method">RagListAgents</h4>
@@ -21183,7 +21199,7 @@ Returns message history with embedded chunk references.
           <pre>rpc RagDeleteChatSessions (<a href="#ondewo.nlu.RagDeleteChatSessionsRequest">RagDeleteChatSessionsRequest</a>) returns (<a href="#ondewo.nlu.RagPartialSuccess">RagPartialSuccess)</a></pre>
 
           Delete one or more chat sessions (batch operation).<br>
-If ids empty, deletes all sessions for the chat (hard delete).
+If ids empty, deletes all sessions for the chat.
         
           <h4 id="ondewo.nlu.Rags.RagListAgentSessions" class="title-badge method">RagListAgentSessions</h4>
 
@@ -21197,14 +21213,19 @@ Can optionally exclude DSL from response for performance.
           <pre>rpc RagDeleteAgentSessions (<a href="#ondewo.nlu.RagDeleteAgentSessionsRequest">RagDeleteAgentSessionsRequest</a>) returns (<a href="#ondewo.nlu.RagPartialSuccess">RagPartialSuccess)</a></pre>
 
           Delete one or more agent sessions (batch operation).<br>
-If ids empty, deletes all sessions for the agent (hard delete).
+If ids empty, deletes all sessions for the agent.
         
           <h4 id="ondewo.nlu.Rags.RagChatCompletion" class="title-badge method">RagChatCompletion</h4>
 
           <pre>rpc RagChatCompletion (<a href="#ondewo.nlu.RagChatCompletionRequest">RagChatCompletionRequest</a>) returns (stream <a href="#ondewo.nlu.RagChatCompletionResponse">RagChatCompletionResponse)</a></pre>
 
           Generate chat completion with RAG (server streaming).<br>
-Creates new session if session_id not provided.
+This endpoint either
+<ul>
+    <li>creates a new session if no <code>session_id</code> is provided and <code>messages</code> contains only one message</li>
+    <li>uses an exising session if <code>session_id</code> is provided (ignores message history in <code>messages</code>)</li>
+    <li>continues a conversion with the message history from <code>messages</code> without creating a session if no <code>session_id</code> is provided and <code>messages</code> contains multiple messages</li>
+</ul>
         
           <h4 id="ondewo.nlu.Rags.RagAgentCompletion" class="title-badge method">RagAgentCompletion</h4>
 
@@ -22064,31 +22085,32 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 </tr>
               
                 <tr>
+                  <td>messages</td>
+                  <td><a href="#ondewo.nlu.RagMessage">RagMessage</a></td>
+                  <td>repeated</td>
+                  <td><p>Required. Message history. Must contain at least one <code>"user"</code> message.<br>
+If <code>session_id</code> is provided, the message history is ignored and only the last <code>"user"</code> message is taken and added to the existing session. </p></td>
+                </tr>
+              
+                <tr>
                   <td>session_id</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Optional. Session ID to continue an existing conversation. If not provided, a new session will be created. </p></td>
+                  <td><p>Optional. Session ID to continue an existing conversation. If not provided and <code>messages</code> contains only one message, a new session will be created. </p></td>
                 </tr>
               
                 <tr>
                   <td>name</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Optional. Maximum length 255. Name for new session. Ignored if <code>session_id</code> is provided. </p></td>
+                  <td><p>Optional. Maximum length 255. Name for new session. Ignored if <code>session_id</code> is provided or <code>messages</code> contains more than one message. </p></td>
                 </tr>
               
                 <tr>
                   <td>user_id</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Optional. Maximum length 255. User defined ID for new session. Ignored if <code>session_id</code> is provided. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>question</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Optional. User question or message to send to the chat assistant. </p></td>
+                  <td><p>Optional. Maximum length 255. User defined ID for new session. Ignored if <code>session_id</code> is provided or <code>messages</code> contains more than one message. </p></td>
                 </tr>
               
                 <tr>
@@ -22097,13 +22119,6 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td>optional</td>
                   <td><p>Optional. Enable streaming mode. If <code>true</code>, the response will be streamed as Server-Sent Events (SSE).
 Default: <code>true</code>. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>additional_fields</td>
-                  <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
-                  <td></td>
-                  <td><p>Optional. Additional fields to pass through to RAGFlow API. </p></td>
                 </tr>
               
             </tbody>
@@ -22127,15 +22142,14 @@ Default: <code>true</code>. </p></td>
                   <td>answer</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Response text. Incremental for streaming mode, complete for non-streaming mode. </p></td>
+                  <td><p>Response text. Delta of response for streaming mode, complete for non-streaming mode. </p></td>
                 </tr>
               
                 <tr>
                   <td>reference</td>
-                  <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
+                  <td><a href="#ondewo.nlu.RagReference">RagReference</a></td>
                   <td></td>
-                  <td><p>Source references including document chunks used to generate the response.
-Contains a <code>chunks</code> array with metadata about retrieved documents. </p></td>
+                  <td><p>Source references including document chunks used to generate the response. </p></td>
                 </tr>
               
                 <tr>
@@ -22163,7 +22177,7 @@ Contains a <code>chunks</code> array with metadata about retrieved documents. </
                   <td>prompt</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Prompt used for generation. Usually empty string. </p></td>
+                  <td><p>String containing the prompt used for generating an answer plus statistics of the generation. </p></td>
                 </tr>
               
                 <tr>
@@ -22171,13 +22185,6 @@ Contains a <code>chunks</code> array with metadata about retrieved documents. </
                   <td><a href="#double">double</a></td>
                   <td></td>
                   <td><p>Creation timestamp (Unix timestamp in seconds). </p></td>
-                </tr>
-              
-                <tr>
-                  <td>additional_fields</td>
-                  <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
-                  <td></td>
-                  <td><p>Additional fields returned by RAGFlow API. </p></td>
                 </tr>
               
             </tbody>
@@ -23298,6 +23305,44 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
 
         
       
+        <h3 id="ondewo.nlu.RagDocAgg" class="title-badge message">RagDocAgg</h3>
+        <p>Aggregated document retrieval results containing how many chunks of the given document where retrieved</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>doc_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Document name </p></td>
+                </tr>
+              
+                <tr>
+                  <td>doc_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Document ID </p></td>
+                </tr>
+              
+                <tr>
+                  <td>count</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>Number of retrieved chunks </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="ondewo.nlu.RagDocument" class="title-badge message">RagDocument</h3>
         <p>Document uploaded to a dataset.</p>
 
@@ -24086,6 +24131,30 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
 
         
       
+        <h3 id="ondewo.nlu.RagIntList" class="title-badge message">RagIntList</h3>
+        <p>List of integers</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>int_list</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td>repeated</td>
+                  <td><p>Integer list </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="ondewo.nlu.RagListAgentSessionsRequest" class="title-badge message">RagListAgentSessionsRequest</h3>
         <p>Request message for listing agent sessions.</p>
 
@@ -24831,21 +24900,21 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td>role</td>
                   <td><a href="#ondewo.nlu.RagMessageRole">RagMessageRole</a></td>
                   <td>optional</td>
-                  <td><p>Role of the message sender. </p></td>
+                  <td><p>Required. Role of the message sender. </p></td>
                 </tr>
               
                 <tr>
                   <td>content</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Message content text. </p></td>
+                  <td><p>Required. Message content text. </p></td>
                 </tr>
               
                 <tr>
                   <td>additional_fields</td>
                   <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
                   <td></td>
-                  <td><p>Additional fields returned by RAGFlow. </p></td>
+                  <td><p>Additional fields provided to or returned by RAGFlow. </p></td>
                 </tr>
               
             </tbody>
@@ -25372,6 +25441,133 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td><a href="#int64">int64</a></td>
                   <td>optional</td>
                   <td><p>Optional. Minimum 0. Default 0. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="ondewo.nlu.RagReference" class="title-badge message">RagReference</h3>
+        <p>Reference object containing list of reference document chunks.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>chunks</td>
+                  <td><a href="#ondewo.nlu.RagReferenceChunk">RagReferenceChunk</a></td>
+                  <td>repeated</td>
+                  <td><p>List of retrieved chunks </p></td>
+                </tr>
+              
+                <tr>
+                  <td>doc_aggs</td>
+                  <td><a href="#ondewo.nlu.RagDocAgg">RagDocAgg</a></td>
+                  <td>repeated</td>
+                  <td><p>List summarizing retrieved documents </p></td>
+                </tr>
+              
+                <tr>
+                  <td>total</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>Total number of retrieved documents </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="ondewo.nlu.RagReferenceChunk" class="title-badge message">RagReferenceChunk</h3>
+        <p>Retrieved chunk returned as reference with chat/agent completions</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Chunk ID </p></td>
+                </tr>
+              
+                <tr>
+                  <td>content</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Chunk content </p></td>
+                </tr>
+              
+                <tr>
+                  <td>document_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Document ID of the chunk </p></td>
+                </tr>
+              
+                <tr>
+                  <td>document_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Document name </p></td>
+                </tr>
+              
+                <tr>
+                  <td>dataset_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Dataset ID </p></td>
+                </tr>
+              
+                <tr>
+                  <td>image_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Image ID if the chunk refers to an image </p></td>
+                </tr>
+              
+                <tr>
+                  <td>positions</td>
+                  <td><a href="#ondewo.nlu.RagIntList">RagIntList</a></td>
+                  <td>repeated</td>
+                  <td><p>Positions of the chunk in the document. Mostly useful for PDFs to determine the position of a chunk on a page.<br>
+For text documents this is always <code>[[i + 1, i, i, i, i]]</code> where <code>i</code> is the 1-based index of the chunk in the sequence of chunks in the document.<br>
+For PDFs the <code>positions</code> list contains the bounding box(es) of the chunk as <code>[[page_nr, left, right, top, bottom], ...]</code> with the <code>page_nr</code> being 1-indexed and the positions being in 72 DPI points. Multiple lists are returned if the chunks spans multiple bounding boxes (multiple pages). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>vector_similarity</td>
+                  <td><a href="#float">float</a></td>
+                  <td></td>
+                  <td><p>Chunk embedding similarity </p></td>
+                </tr>
+              
+                <tr>
+                  <td>term_similarity</td>
+                  <td><a href="#float">float</a></td>
+                  <td></td>
+                  <td><p>Keyword similarity </p></td>
+                </tr>
+              
+                <tr>
+                  <td>similarity</td>
+                  <td><a href="#float">float</a></td>
+                  <td></td>
+                  <td><p>Overall similarity score (weighted sum of embedding and keyword similarity) </p></td>
                 </tr>
               
             </tbody>

@@ -395,6 +395,7 @@
     - [RagDeleteDocumentsRequest](#ondewo.nlu.RagDeleteDocumentsRequest)
     - [RagDeleteFilesRequest](#ondewo.nlu.RagDeleteFilesRequest)
     - [RagDeleteRequest](#ondewo.nlu.RagDeleteRequest)
+    - [RagDocAgg](#ondewo.nlu.RagDocAgg)
     - [RagDocument](#ondewo.nlu.RagDocument)
     - [RagDocumentList](#ondewo.nlu.RagDocumentList)
     - [RagDownloadDocumentRequest](#ondewo.nlu.RagDownloadDocumentRequest)
@@ -411,6 +412,7 @@
     - [RagGetRootFolderRequest](#ondewo.nlu.RagGetRootFolderRequest)
     - [RagGetRootFolderResponse](#ondewo.nlu.RagGetRootFolderResponse)
     - [RagGraphRagConfig](#ondewo.nlu.RagGraphRagConfig)
+    - [RagIntList](#ondewo.nlu.RagIntList)
     - [RagListAgentSessionsRequest](#ondewo.nlu.RagListAgentSessionsRequest)
     - [RagListAgentsRequest](#ondewo.nlu.RagListAgentsRequest)
     - [RagListChatAssistantsRequest](#ondewo.nlu.RagListChatAssistantsRequest)
@@ -435,6 +437,8 @@
     - [RagPromptConfig](#ondewo.nlu.RagPromptConfig)
     - [RagPromptVariable](#ondewo.nlu.RagPromptVariable)
     - [RagRaptorConfig](#ondewo.nlu.RagRaptorConfig)
+    - [RagReference](#ondewo.nlu.RagReference)
+    - [RagReferenceChunk](#ondewo.nlu.RagReferenceChunk)
     - [RagRelatedQuestionsRequest](#ondewo.nlu.RagRelatedQuestionsRequest)
     - [RagRelatedQuestionsResponse](#ondewo.nlu.RagRelatedQuestionsResponse)
     - [RagRemoveChunksRequest](#ondewo.nlu.RagRemoveChunksRequest)
@@ -7100,12 +7104,11 @@ Request message for generating a chat completion.
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The agent to generate the chat completion for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
 | chat_id | [string](#string) |  | Required. Chat assistant ID to use for generating the completion. |
-| session_id | [string](#string) |  | Optional. Session ID to continue an existing conversation. If not provided, a new session will be created. |
-| name | [string](#string) |  | Optional. Maximum length 255. Name for new session. Ignored if <code>session_id</code> is provided. |
-| user_id | [string](#string) |  | Optional. Maximum length 255. User defined ID for new session. Ignored if <code>session_id</code> is provided. |
-| question | [string](#string) |  | Optional. User question or message to send to the chat assistant. |
+| messages | [RagMessage](#ondewo.nlu.RagMessage) | repeated | Required. Message history. Must contain at least one <code>"user"</code> message.<br> If <code>session_id</code> is provided, the message history is ignored and only the last <code>"user"</code> message is taken and added to the existing session. |
+| session_id | [string](#string) |  | Optional. Session ID to continue an existing conversation. If not provided and <code>messages</code> contains only one message, a new session will be created. |
+| name | [string](#string) |  | Optional. Maximum length 255. Name for new session. Ignored if <code>session_id</code> is provided or <code>messages</code> contains more than one message. |
+| user_id | [string](#string) |  | Optional. Maximum length 255. User defined ID for new session. Ignored if <code>session_id</code> is provided or <code>messages</code> contains more than one message. |
 | stream | [bool](#bool) | optional | Optional. Enable streaming mode. If <code>true</code>, the response will be streamed as Server-Sent Events (SSE). Default: <code>true</code>. |
-| additional_fields | [google.protobuf.Struct](#google.protobuf.Struct) |  | Optional. Additional fields to pass through to RAGFlow API. |
 
 
 
@@ -7124,14 +7127,13 @@ Response message for chat completion.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| answer | [string](#string) |  | Response text. Incremental for streaming mode, complete for non-streaming mode. |
-| reference | [google.protobuf.Struct](#google.protobuf.Struct) |  | Source references including document chunks used to generate the response. Contains a <code>chunks</code> array with metadata about retrieved documents. |
+| answer | [string](#string) |  | Response text. Delta of response for streaming mode, complete for non-streaming mode. |
+| reference | [RagReference](#ondewo.nlu.RagReference) |  | Source references including document chunks used to generate the response. |
 | audio_binary | [string](#string) |  | Optional. Base64-encoded audio response when text-to-speech is enabled. |
 | id | [string](#string) |  | Message ID uniquely identifying this response. |
 | session_id | [string](#string) |  | Session ID for the conversation. |
-| prompt | [string](#string) |  | Prompt used for generation. Usually empty string. |
+| prompt | [string](#string) |  | String containing the prompt used for generating an answer plus statistics of the generation. |
 | created_at | [double](#double) |  | Creation timestamp (Unix timestamp in seconds). |
-| additional_fields | [google.protobuf.Struct](#google.protobuf.Struct) |  | Additional fields returned by RAGFlow API. |
 
 
 
@@ -7515,6 +7517,23 @@ Request message for deleting one or more of a RAGFlow resource.
 
 
 
+<a name="ondewo.nlu.RagDocAgg"></a>
+
+### RagDocAgg
+Aggregated document retrieval results containing how many chunks of the given document where retrieved
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| doc_name | [string](#string) |  | Document name |
+| doc_id | [string](#string) |  | Document ID |
+| count | [int32](#int32) |  | Number of retrieved chunks |
+
+
+
+
+
+
 <a name="ondewo.nlu.RagDocument"></a>
 
 ### RagDocument
@@ -7815,6 +7834,21 @@ GraphRAG configuration.
 
 
 
+<a name="ondewo.nlu.RagIntList"></a>
+
+### RagIntList
+List of integers
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| int_list | [int32](#int32) | repeated | Integer list |
+
+
+
+
+
+
 <a name="ondewo.nlu.RagListAgentSessionsRequest"></a>
 
 ### RagListAgentSessionsRequest
@@ -8065,9 +8099,9 @@ Message in a conversation session.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| role | [RagMessageRole](#ondewo.nlu.RagMessageRole) | optional | Role of the message sender. |
-| content | [string](#string) |  | Message content text. |
-| additional_fields | [google.protobuf.Struct](#google.protobuf.Struct) |  | Additional fields returned by RAGFlow. |
+| role | [RagMessageRole](#ondewo.nlu.RagMessageRole) | optional | Required. Role of the message sender. |
+| content | [string](#string) |  | Required. Message content text. |
+| additional_fields | [google.protobuf.Struct](#google.protobuf.Struct) |  | Additional fields provided to or returned by RAGFlow. |
 
 
 
@@ -8291,6 +8325,47 @@ RAPTOR configuration. Refer to <a href="https://arxiv.org/html/2401.18059v1">RAP
 | threshold | [float](#float) | optional | Optional. Minimum 0.0. Maximum 1.0. Default 0.1. |
 | max_cluster | [int32](#int32) |  | Optional. Minimum 1. Maximum 1024. Default 64. |
 | random_seed | [int64](#int64) | optional | Optional. Minimum 0. Default 0. |
+
+
+
+
+
+
+<a name="ondewo.nlu.RagReference"></a>
+
+### RagReference
+Reference object containing list of reference document chunks.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| chunks | [RagReferenceChunk](#ondewo.nlu.RagReferenceChunk) | repeated | List of retrieved chunks |
+| doc_aggs | [RagDocAgg](#ondewo.nlu.RagDocAgg) | repeated | List summarizing retrieved documents |
+| total | [int32](#int32) |  | Total number of retrieved documents |
+
+
+
+
+
+
+<a name="ondewo.nlu.RagReferenceChunk"></a>
+
+### RagReferenceChunk
+Retrieved chunk returned as reference with chat/agent completions
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| id | [string](#string) |  | Chunk ID |
+| content | [string](#string) |  | Chunk content |
+| document_id | [string](#string) |  | Document ID of the chunk |
+| document_name | [string](#string) |  | Document name |
+| dataset_id | [string](#string) |  | Dataset ID |
+| image_id | [string](#string) |  | Image ID if the chunk refers to an image |
+| positions | [RagIntList](#ondewo.nlu.RagIntList) | repeated | Positions of the chunk in the document. Mostly useful for PDFs to determine the position of a chunk on a page.<br> For text documents this is always <code>[[i + 1, i, i, i, i]]</code> where <code>i</code> is the 1-based index of the chunk in the sequence of chunks in the document.<br> For PDFs the <code>positions</code> list contains the bounding box(es) of the chunk as <code>[[page_nr, left, right, top, bottom], ...]</code> with the <code>page_nr</code> being 1-indexed and the positions being in 72 DPI points. Multiple lists are returned if the chunks spans multiple bounding boxes (multiple pages). |
+| vector_similarity | [float](#float) |  | Chunk embedding similarity |
+| term_similarity | [float](#float) |  | Keyword similarity |
+| similarity | [float](#float) |  | Overall similarity score (weighted sum of embedding and keyword similarity) |
 
 
 
@@ -8854,26 +8929,26 @@ Covers all endpoints of the <a href="https://github.com/ondewo/ragflow">RAGFlow<
 | RagGetRootFolder | [RagGetRootFolderRequest](#ondewo.nlu.RagGetRootFolderRequest) | [RagGetRootFolderResponse](#ondewo.nlu.RagGetRootFolderResponse) | Get user's root folder information.<br> Each tenant has a unique root folder. |
 | RagGetParentFolder | [RagFileIdRequest](#ondewo.nlu.RagFileIdRequest) | [RagGetParentFolderResponse](#ondewo.nlu.RagGetParentFolderResponse) | Get the parent folder of a file.<br> Returns 404 if file or parent not found. |
 | RagGetAllParentFolders | [RagFileIdRequest](#ondewo.nlu.RagFileIdRequest) | [RagParentFoldersList](#ondewo.nlu.RagParentFoldersList) | Get all parent folders (breadcrumb path) of a file.<br> Returns array from file itself to root (includes the file, ordered deepest to root). |
-| RagDeleteFiles | [RagDeleteFilesRequest](#ondewo.nlu.RagDeleteFilesRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Delete one or more files/folders (hard delete).<br> Recursively deletes folder contents. Removes from storage. |
+| RagDeleteFiles | [RagDeleteFilesRequest](#ondewo.nlu.RagDeleteFilesRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Delete one or more files/folders.<br> Recursively deletes folder contents. Removes from storage. |
 | RagRenameFile | [RagRenameFileRequest](#ondewo.nlu.RagRenameFileRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Rename a file or folder.<br> Cannot change file extension. Duplicate names not allowed. |
 | RagDownloadFile | [RagFileIdRequest](#ondewo.nlu.RagFileIdRequest) | [RagFileChunk](#ondewo.nlu.RagFileChunk) stream | Download a file.<br> Retrieves from MinIO/S3 storage.<br> First chunk contains metadata, subsequent chunks only contain data. |
 | RagMoveFile | [RagMoveFileRequest](#ondewo.nlu.RagMoveFileRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Move one or more files to another folder.<br> Validates all files and destination exist. |
 | RagFileToDocument | [RagFileToDocumentRequest](#ondewo.nlu.RagFileToDocumentRequest) | [RagFileToDocumentList](#ondewo.nlu.RagFileToDocumentList) | Convert files to documents and add to datasets.<br> Handles folders recursively (converts all inner files).<br> Links files to multiple datasets if multiple dataset_ids provided. |
 | RagCreateChatAssistant | [RagCreateChatAssistantRequest](#ondewo.nlu.RagCreateChatAssistantRequest) | [RagChatAssistant](#ondewo.nlu.RagChatAssistant) | Create a new chat assistant.<br> All datasets must have parsed files (chunk_num > 0).<br> All datasets must use the same embedding model. |
 | RagUpdateChatAssistant | [RagUpdateChatAssistantRequest](#ondewo.nlu.RagUpdateChatAssistantRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Update an existing chat assistant's configuration.<br> LLM and prompt configs are merged with existing values. |
-| RagDeleteChatAssistants | [RagDeleteRequest](#ondewo.nlu.RagDeleteRequest) | [RagPartialSuccess](#ondewo.nlu.RagPartialSuccess) | Delete one or more chat assistants (batch operation).<br> If ids empty, deletes all user's chats (soft delete). |
+| RagDeleteChatAssistants | [RagDeleteRequest](#ondewo.nlu.RagDeleteRequest) | [RagPartialSuccess](#ondewo.nlu.RagPartialSuccess) | Delete one or more chat assistants (batch operation).<br> If ids empty, deletes all user's chats. |
 | RagListChatAssistants | [RagListChatAssistantsRequest](#ondewo.nlu.RagListChatAssistantsRequest) | [RagChatAssistantList](#ondewo.nlu.RagChatAssistantList) | List chat assistants with pagination.<br> Returns full dataset objects (not just IDs). |
 | RagCreateAgent | [RagCreateAgentRequest](#ondewo.nlu.RagCreateAgentRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Create a new agent with DSL configuration.<br> Title must be unique for the user. |
 | RagUpdateAgent | [RagUpdateAgentRequest](#ondewo.nlu.RagUpdateAgentRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Update an existing agent.<br> DSL updates create new version snapshot. Only owner can update. |
-| RagDeleteAgent | [RagDeleteAgentRequest](#ondewo.nlu.RagDeleteAgentRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Delete an agent (hard delete).<br> Only owner can delete. |
+| RagDeleteAgent | [RagDeleteAgentRequest](#ondewo.nlu.RagDeleteAgentRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Delete an agent.<br> Only owner can delete. |
 | RagListAgents | [RagListAgentsRequest](#ondewo.nlu.RagListAgentsRequest) | [RagAgentList](#ondewo.nlu.RagAgentList) | List agents with pagination.<br> Only returns user's own agents. |
 | RagCreateChatSession | [RagCreateChatSessionRequest](#ondewo.nlu.RagCreateChatSessionRequest) | [RagChatSession](#ondewo.nlu.RagChatSession) | Create a new chat session (conversation).<br> Session initialized with assistant's prologue message. |
 | RagUpdateChatSession | [RagUpdateChatSessionRequest](#ondewo.nlu.RagUpdateChatSessionRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Update a chat session's metadata (name only).<br> Cannot update message or reference fields. |
 | RagListChatSessions | [RagListChatSessionsRequest](#ondewo.nlu.RagListChatSessionsRequest) | [RagChatSessionList](#ondewo.nlu.RagChatSessionList) | List sessions for a chat assistant.<br> Returns message history with embedded chunk references. |
-| RagDeleteChatSessions | [RagDeleteChatSessionsRequest](#ondewo.nlu.RagDeleteChatSessionsRequest) | [RagPartialSuccess](#ondewo.nlu.RagPartialSuccess) | Delete one or more chat sessions (batch operation).<br> If ids empty, deletes all sessions for the chat (hard delete). |
+| RagDeleteChatSessions | [RagDeleteChatSessionsRequest](#ondewo.nlu.RagDeleteChatSessionsRequest) | [RagPartialSuccess](#ondewo.nlu.RagPartialSuccess) | Delete one or more chat sessions (batch operation).<br> If ids empty, deletes all sessions for the chat. |
 | RagListAgentSessions | [RagListAgentSessionsRequest](#ondewo.nlu.RagListAgentSessionsRequest) | [RagAgentSessionList](#ondewo.nlu.RagAgentSessionList) | List sessions for an agent.<br> Can optionally exclude DSL from response for performance. |
-| RagDeleteAgentSessions | [RagDeleteAgentSessionsRequest](#ondewo.nlu.RagDeleteAgentSessionsRequest) | [RagPartialSuccess](#ondewo.nlu.RagPartialSuccess) | Delete one or more agent sessions (batch operation).<br> If ids empty, deletes all sessions for the agent (hard delete). |
-| RagChatCompletion | [RagChatCompletionRequest](#ondewo.nlu.RagChatCompletionRequest) | [RagChatCompletionResponse](#ondewo.nlu.RagChatCompletionResponse) stream | Generate chat completion with RAG (server streaming).<br> Creates new session if session_id not provided. |
+| RagDeleteAgentSessions | [RagDeleteAgentSessionsRequest](#ondewo.nlu.RagDeleteAgentSessionsRequest) | [RagPartialSuccess](#ondewo.nlu.RagPartialSuccess) | Delete one or more agent sessions (batch operation).<br> If ids empty, deletes all sessions for the agent. |
+| RagChatCompletion | [RagChatCompletionRequest](#ondewo.nlu.RagChatCompletionRequest) | [RagChatCompletionResponse](#ondewo.nlu.RagChatCompletionResponse) stream | Generate chat completion with RAG (server streaming).<br> This endpoint either <ul> <li>creates a new session if no <code>session_id</code> is provided and <code>messages</code> contains only one message</li> <li>uses an exising session if <code>session_id</code> is provided (ignores message history in <code>messages</code>)</li> <li>continues a conversion with the message history from <code>messages</code> without creating a session if no <code>session_id</code> is provided and <code>messages</code> contains multiple messages</li> </ul> |
 | RagAgentCompletion | [RagAgentCompletionRequest](#ondewo.nlu.RagAgentCompletionRequest) | [RagAgentCompletionResponse](#ondewo.nlu.RagAgentCompletionResponse) stream | Generate agent completion (server streaming).<br> Filters events to only return message-related events. |
 | RagAsk | [RagAskRequest](#ondewo.nlu.RagAskRequest) | [RagAskResponse](#ondewo.nlu.RagAskResponse) stream | Ask a question across datasets without a chat assistant.<br> Streaming only. All datasets must have parsed files. |
 | RagRelatedQuestions | [RagRelatedQuestionsRequest](#ondewo.nlu.RagRelatedQuestionsRequest) | [RagRelatedQuestionsResponse](#ondewo.nlu.RagRelatedQuestionsResponse) | Generate related search terms for a question.<br> Returns 5-10 suggestions considering industry context. |
