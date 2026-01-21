@@ -2472,7 +2472,7 @@ message RagReference {
 	// List summarizing retrieved documents
 	repeated RagDocAgg doc_aggs = 2;
 
-	// Total number of retrieved documents
+	// Total number of retrieved chunks
 	int32 total = 3;
 }
 
