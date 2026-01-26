@@ -371,7 +371,7 @@ service Rags {
     // REST: /api/v1/chats/<id>/completions, /api/v1/agents/<id>/completions, /api/v1/sessions
     // ========================================================================
 
-    // RAGFlow endpoint: POST /api/v1/chats/<chat_id>/completions or POST /api/v1/chats_openai/<chat_id>/completions
+    // RAGFlow endpoint: POST /api/v1/chats/<chat_id>/completions or POST /api/v1/chats_openai/<chat_id>/chat/completions
 
     // Generate chat completion with RAG (server streaming).<br>
 	// This endpoint either
@@ -2442,7 +2442,12 @@ message RagChatCompletionRequest {
 // </ul>
 message RagChatCompletionResponse {
 
-    // Response text. Delta of response for streaming mode, complete for non-streaming mode.
+    // Response text. Delta of response for streaming mode, complete for non-streaming mode.<br>
+	// The answer text can contain:
+	// <ul>
+	//     <li>reasoning content: this is always enclosed in <code><think>...</think></code> tags</li>
+	//     <li>citations of retrieved chunks: these are in the format <code>[ID:X]</code> where <code>X</code> is the index of the referenced chunk in the <code>chunks</code> list of the <code>reference</code>s</li>
+	// </ul>
     string answer = 1;
 
     // Source references including document chunks used to generate the response.
