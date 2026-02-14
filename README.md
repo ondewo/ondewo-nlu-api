@@ -56,6 +56,7 @@ Please use the issue tracker in this repo for discussions about this API, or the
 │   ├── nlu
 │   │   ├── agent.proto
 │   │   ├── aiservices.proto
+│   │   ├── ccai_project.proto
 │   │   ├── common.proto
 │   │   ├── context.proto
 │   │   ├── entity_type.proto

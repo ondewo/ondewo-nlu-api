@@ -2,6 +2,23 @@
 
 *****************
 
+## Release ONDEWO NLU API 6.3.0
+
+### Improvements
+
+* [[OND221-2657]](https://ondewo.atlassian.net/browse/OND221-2657) Added `CcaiServiceType`
+  `CCAI_SERVICE_TYPE_ONDEWO_VTSI_OUTBOUND_CAMPAIGN` for outbound campaign management in the Virtual Telephony Service
+  Integration (VTSI) context. This service type enables functionalities related to managing and executing outbound
+  campaigns, such as scheduling calls, managing contact lists, and tracking campaign performance within the VTSI
+  framework.
+* [[OND221-2657]](https://ondewo.atlassian.net/browse/OND221-2657) Added `CcaiServiceType`
+  `CCAI_SERVICE_TYPE_ONDEWO_VTSI_INBOUND_CAMPAIGN` for inbound campaign management in the Virtual Telephony Service
+  Integration (VTSI) context. This service type focuses on handling inbound campaigns, which may include managing
+  incoming calls, routing them to appropriate agents or services, and tracking the performance of inbound campaigns
+  within the VTSI framework.
+
+*****************
+
 ## Release ONDEWO NLU API 6.2.0
 
 ### Improvements
