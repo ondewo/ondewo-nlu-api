@@ -637,6 +637,9 @@ message RagRaptorConfig {
 
     // Optional. Minimum 0. Default 0.
     optional int64 random_seed = 6;
+
+    // Additional fields returned by RAGFlow not explicitly defined above.
+    google.protobuf.Struct additional_fields = 7;
 }
 
 // GraphRAG configuration.
@@ -656,6 +659,9 @@ message RagGraphRagConfig {
 
     // Optional. Default <code>false</code>.
     bool resolution = 5;
+
+    // Additional fields returned by RAGFlow not explicitly defined above.
+    google.protobuf.Struct additional_fields = 6;
 }
 
 // Knowledge graph construction methods.
