@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
-// Modifications Copyright 2020-2023 ONDEWO GmbH
+// Modifications Copyright 2020-2026 ONDEWO GmbH
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -822,7 +822,7 @@ message TextInput {
     string language_code = 2;
 }
 
-// Events allow for matching intents by event name instead of the natural language input. 
+// Events allow for matching intents by event name instead of the natural language input.
 // For instance, input <code>&lt;event: { name: &quot;welcome_event&quot;, parameters: { name: &quot;Sam&quot; } }&gt;</code> can trigger a personalized welcome response.
 // The parameter <code>name</code> may be used by the agent in the response: <code>&quot;Hello #welcome_event.name! What can I do for you today?&quot;</code>.
 message EventInput {

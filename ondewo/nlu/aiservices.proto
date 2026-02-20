@@ -1,4 +1,4 @@
-// Copyright 2020-2023 ONDEWO GmbH
+// Copyright 2020-2026 ONDEWO GmbH
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -171,7 +171,7 @@ message LlmGenerateRequest {
 
     // The request payload for the LLM, structured according to the specific
     // requirements of the large language model provider.
-    // <br> 
+    // <br>
     // The payload must fit the format expected by the specified LLM provider,
     // as defined by <pre><code>CcaiServiceProvider</code></pre>
     google.protobuf.Struct llm_generation_request = 1;

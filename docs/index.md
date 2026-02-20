@@ -3064,7 +3064,7 @@ Message representing a CCAI service project
 <a name="ondewo.nlu.CcaiProjectSorting"></a>
 
 ### CcaiProjectSorting
-This protobuf message defines the sorting order for CCAI service (Virtual Test System Infrastructure) projects.
+This protobuf message defines the sorting order for CCAI service (VOIP Telephone System Integration) projects.
 
 
 | Field | Type | Label | Description |
@@ -3429,33 +3429,39 @@ CcaiProjectView defines what the CcaiProject message contains
 <a name="ondewo.nlu.CcaiServiceType"></a>
 
 ### CcaiServiceType
+Defines the types of CCAI (Call Center AI) services available in the system.
 
+Each service type represents a specific capability or module within the ONDEWO platform
+that enables comprehensive call center and customer interaction management. Services can be
+composed in workflows and are identified by their type, language code, and provider configuration.
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| CCAI_SERVICE_TYPE_UNSPECIFIED | 0 | unspecified |
-| CCAI_SERVICE_TYPE_ONDEWO_AIM | 1 | ondewo-aim service |
-| CCAI_SERVICE_TYPE_ONDEWO_BPI | 2 | ondewo-bpi service |
-| CCAI_SERVICE_TYPE_ONDEWO_CSI | 3 | ondewo-csi service |
-| CCAI_SERVICE_TYPE_ONDEWO_NLU | 4 | ondewo-nlu service |
-| CCAI_SERVICE_TYPE_ONDEWO_S2T | 5 | ondewo-s2t service |
-| CCAI_SERVICE_TYPE_ONDEWO_SIP | 6 | ondewo-sip service |
-| CCAI_SERVICE_TYPE_ONDEWO_T2S | 7 | ondewo-t2s service |
-| CCAI_SERVICE_TYPE_ONDEWO_VTSI | 8 | ondewo-vtsi service |
-| CCAI_SERVICE_TYPE_ONDEWO_VTSI_RABBITMQ | 9 | ondewo-vtsi service |
-| CCAI_SERVICE_TYPE_ONDEWO_NLU_QA | 10 | ondewo-nlu-qa service |
-| CCAI_SERVICE_TYPE_ONDEWO_NLU_WEBHOOK | 11 | ondewo-nlu-webhook service |
-| CCAI_SERVICE_TYPE_ONDEWO_SURVEY | 12 | ondewo-survey service |
-| CCAI_SERVICE_TYPE_ONDEWO_NLU_LLM | 13 | ondewo-nlu-llm service |
-| CCAI_SERVICE_TYPE_ONDEWO_NLU_WEBSEARCH | 14 | ondewo-nlu-websearch service |
-| CCAI_SERVICE_TYPE_ONDEWO_AIM_WEBCHAT | 15 | ondewo-aim-webchat service |
-| CCAI_SERVICE_TYPE_ONDEWO_AIM_WEBPHONE | 16 | ondewo-aim-webphone service |
-| CCAI_SERVICE_TYPE_ONDEWO_NLU_VECTORSTORE | 17 | ondewo-nlu-vectorstore service |
-| CCAI_SERVICE_TYPE_ONDEWO_NLU_LLM_AGENT | 18 | ondewo-nlu-llm-agent service |
-| CCAI_SERVICE_TYPE_ONDEWO_NLU_LLM_MCP | 19 | ondewo-nlu-llm-mcp service |
-| CCAI_SERVICE_TYPE_ONDEWO_NLU_LLM_RAG | 20 | ondewo-nlu-llm-rag service |
-| CCAI_SERVICE_TYPE_ONDEWO_ANALYTICS | 21 | ondewo-analytics service |
-| CCAI_SERVICE_TYPE_ONDEWO_ANALYTICS_DASHBOARD | 22 | ondewo-analytics-dashboard service |
+| CCAI_SERVICE_TYPE_UNSPECIFIED | 0 | No service type specified or unknown type |
+| CCAI_SERVICE_TYPE_ONDEWO_AIM | 1 | ONDEWO Agent Interaction Manager (AIM) Orchestrates multi-channel agent interactions, conversation routing, and workforce management. Handles inbound/outbound call distribution, chat routing, and agent state management. |
+| CCAI_SERVICE_TYPE_ONDEWO_BPI | 2 | ONDEWO Business Process Intelligence (BPI) Analyzes call center processes, identifies optimization opportunities, and monitors compliance. Enables workflow automation, process mining, and performance benchmarking. |
+| CCAI_SERVICE_TYPE_ONDEWO_CSI | 3 | ONDEWO Customer Service Intelligence (CSI) Provides customer service analytics, sentiment analysis, and interaction quality scoring. Generates insights from call recordings, transcripts, and customer feedback. |
+| CCAI_SERVICE_TYPE_ONDEWO_NLU | 4 | ONDEWO Natural Language Understanding (NLU) Core natural language processing service for intent recognition, entity extraction, and dialogue management. Essential for conversational AI and automated customer interactions. |
+| CCAI_SERVICE_TYPE_ONDEWO_S2T | 5 | ONDEWO Speech-to-Text (S2T) Converts audio speech to written text with high accuracy and multi-language support. Integrates with voice channels for real-time transcription during calls. |
+| CCAI_SERVICE_TYPE_ONDEWO_SIP | 6 | ONDEWO Session Initiation Protocol (SIP) Manages VoIP signaling, call establishment, call control, and telephony infrastructure. Handles SIP trunk integration, PBX connectivity, and call routing logic. |
+| CCAI_SERVICE_TYPE_ONDEWO_T2S | 7 | ONDEWO Text-to-Speech (T2S) Converts written text to natural-sounding audio speech with multiple voice options. Enables voice-based responses, IVR prompts, and notification delivery. |
+| CCAI_SERVICE_TYPE_ONDEWO_VTSI | 8 | ONDEWO VOIP Telephone System Integration (VTSI) Provides virtual telephony infrastructure for testing, simulation, and call management. Enables stress testing, scenario simulation, and quality assurance for voice applications. |
+| CCAI_SERVICE_TYPE_ONDEWO_VTSI_RABBITMQ | 9 | ONDEWO VOIP Telephone System Integration (VTSI) with RabbitMQ Extended VTSI service with RabbitMQ message queue integration for asynchronous processing. Enables decoupled, scalable call handling and event streaming. |
+| CCAI_SERVICE_TYPE_ONDEWO_NLU_QA | 10 | ONDEWO NLU Question Answering (QA) Provides intelligent question-answering capabilities for knowledge base queries. Enables automated FAQ handling and self-service customer support. |
+| CCAI_SERVICE_TYPE_ONDEWO_NLU_WEBHOOK | 11 | ONDEWO NLU Webhook Enables webhook-based event integration for NLU events and external notifications. Allows real-time integration with third-party systems and custom workflows. |
+| CCAI_SERVICE_TYPE_ONDEWO_SURVEY | 12 | ONDEWO Survey Manages survey campaigns, customer feedback collection, and satisfaction measurements. Supports post-call surveys and voice-based survey delivery. |
+| CCAI_SERVICE_TYPE_ONDEWO_NLU_LLM | 13 | ONDEWO NLU Large Language Model (LLM) Integrates large language models for advanced NLP tasks and generative AI capabilities. Enables contextual responses, content generation, and semantic understanding. |
+| CCAI_SERVICE_TYPE_ONDEWO_NLU_WEBSEARCH | 14 | ONDEWO NLU Web Search Performs real-time internet search queries and retrieves current information. Enables agents to access live data during customer interactions. |
+| CCAI_SERVICE_TYPE_ONDEWO_AIM_WEBCHAT | 15 | ONDEWO Agent Interaction Manager (AIM) WebChat Enables live chat interactions via web browsers for customer support. Manages web-based messaging channels with agent assignment and routing. |
+| CCAI_SERVICE_TYPE_ONDEWO_AIM_WEBPHONE | 16 | ONDEWO Agent Interaction Manager (AIM) WebPhone Enables VoIP phone interactions directly through web browsers without additional software. Supports WebRTC-based calling for modern browser environments. |
+| CCAI_SERVICE_TYPE_ONDEWO_NLU_VECTORSTORE | 17 | ONDEWO NLU Vector Store Manages vector embeddings and semantic search capabilities for knowledge retrieval. Enables similarity matching and context-aware information lookup. |
+| CCAI_SERVICE_TYPE_ONDEWO_NLU_LLM_AGENT | 18 | ONDEWO NLU LLM Agent Autonomous agent powered by large language models with tool-calling capabilities. Enables complex, multi-step tasks and dynamic decision-making in customer interactions. |
+| CCAI_SERVICE_TYPE_ONDEWO_NLU_LLM_MCP | 19 | ONDEWO NLU LLM Model Context Protocol (MCP) Integrates large language models with the Model Context Protocol standard for tool usage. Enables standardized integration with external tools and data sources. |
+| CCAI_SERVICE_TYPE_ONDEWO_NLU_LLM_RAG | 20 | ONDEWO NLU LLM Retrieval-Augmented Generation (RAG) Enhances large language model responses with document and knowledge base retrieval. Enables grounded, factual responses backed by organizational knowledge. |
+| CCAI_SERVICE_TYPE_ONDEWO_ANALYTICS | 21 | ONDEWO Analytics Provides comprehensive analytics and metrics for call center operations and KPI tracking. Enables real-time dashboards, historical analysis, and predictive insights. |
+| CCAI_SERVICE_TYPE_ONDEWO_ANALYTICS_DASHBOARD | 22 | ONDEWO Analytics Dashboard Visual dashboard for displaying analytics, KPIs, and performance metrics. Provides interactive reports for supervisors, managers, and executives. |
+| CCAI_SERVICE_TYPE_ONDEWO_VTSI_OUTBOUND_CAMPAIGN | 23 | ONDEWO VOIP Telephone System Integration (VTSI) Outbound Calling Handles outbound call campaigns and call management. Enables sales outreach, follow-ups, and proactive customer communication. |
+| CCAI_SERVICE_TYPE_ONDEWO_VTSI_INBOUND_CAMPAIGN | 24 | ONDEWO VOIP Telephone System Integration (VTSI) Inbound Campaign Manages inbound call campaigns and call routing for marketing or support purposes. Enables targeted call handling and customer engagement strategies. |
 
 
  <!-- end enums -->
@@ -6322,7 +6328,7 @@ can be a sub-operation itself
 <a name="ondewo.nlu.OperationMetadata.OperationType"></a>
 
 ### OperationMetadata.OperationType
-Type of operation. 
+Type of operation.
 It can be creating, importing, exporting, deleting, restoring, building cache, training or exporting benchmark an agent
 
 | Name | Number | Description |
@@ -6343,7 +6349,7 @@ It can be creating, importing, exporting, deleting, restoring, building cache, t
 <a name="ondewo.nlu.OperationMetadata.Status"></a>
 
 ### OperationMetadata.Status
-Structure to set status of operation. 
+Structure to set status of operation.
 An operation may not be started if NOT_STARTED is set, in progress if IN_PROGRESS, finished if DONE, interrupted if CANCELED or failed if FAILED.
 
 | Name | Number | Description |
@@ -7127,7 +7133,7 @@ Response message for chat completion.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| answer | [string](#string) |  | Response text. Delta of response for streaming mode, complete for non-streaming mode. |
+| answer | [string](#string) |  | Response text. Delta of response for streaming mode, complete for non-streaming mode.<br> The answer text can contain: <ul> <li>reasoning content: this is always enclosed in <code><think>...</think></code> tags</li> <li>citations of retrieved chunks: these are in the format <code>[ID:X]</code> where <code>X</code> is the index of the referenced chunk in the <code>chunks</code> list of the <code>reference</code>s</li> </ul> |
 | reference | [RagReference](#ondewo.nlu.RagReference) |  | Source references including document chunks used to generate the response. |
 | audio_binary | [string](#string) |  | Optional. Base64-encoded audio response when text-to-speech is enabled. |
 | id | [string](#string) |  | Message ID uniquely identifying this response. |
@@ -8245,6 +8251,7 @@ Used fields depend on the chunking method of the document.
 | task_page_size | [int32](#int32) |  | Optional. Minimum 1, default 12. Only applies to PDFs. |
 | raptor | [RagRaptorConfig](#ondewo.nlu.RagRaptorConfig) |  | Optional. RAPTOR-specific settings. Default <code>{ "use_raptor": false }</code>. |
 | graphrag | [RagGraphRagConfig](#ondewo.nlu.RagGraphRagConfig) |  | Optional. GRAPHRAG-specific settings. Default <code>{ "use_graphrag": false }</code>. |
+| additional_fields | [google.protobuf.Struct](#google.protobuf.Struct) |  | Additional fields returned by RAGFlow. |
 
 
 
@@ -8341,7 +8348,7 @@ Reference object containing list of reference document chunks.
 | ----- | ---- | ----- | ----------- |
 | chunks | [RagReferenceChunk](#ondewo.nlu.RagReferenceChunk) | repeated | List of retrieved chunks |
 | doc_aggs | [RagDocAgg](#ondewo.nlu.RagDocAgg) | repeated | List summarizing retrieved documents |
-| total | [int32](#int32) |  | Total number of retrieved documents |
+| total | [int32](#int32) |  | Total number of retrieved chunks |
 
 
 
@@ -8948,7 +8955,7 @@ Covers all endpoints of the <a href="https://github.com/ondewo/ragflow">RAGFlow<
 | RagDeleteChatSessions | [RagDeleteChatSessionsRequest](#ondewo.nlu.RagDeleteChatSessionsRequest) | [RagPartialSuccess](#ondewo.nlu.RagPartialSuccess) | Delete one or more chat sessions (batch operation).<br> If ids empty, deletes all sessions for the chat. |
 | RagListAgentSessions | [RagListAgentSessionsRequest](#ondewo.nlu.RagListAgentSessionsRequest) | [RagAgentSessionList](#ondewo.nlu.RagAgentSessionList) | List sessions for an agent.<br> Can optionally exclude DSL from response for performance. |
 | RagDeleteAgentSessions | [RagDeleteAgentSessionsRequest](#ondewo.nlu.RagDeleteAgentSessionsRequest) | [RagPartialSuccess](#ondewo.nlu.RagPartialSuccess) | Delete one or more agent sessions (batch operation).<br> If ids empty, deletes all sessions for the agent. |
-| RagChatCompletion | [RagChatCompletionRequest](#ondewo.nlu.RagChatCompletionRequest) | [RagChatCompletionResponse](#ondewo.nlu.RagChatCompletionResponse) stream | Generate chat completion with RAG (server streaming).<br> This endpoint either <ul> <li>creates a new session if no <code>session_id</code> is provided and <code>messages</code> contains only one message</li> <li>uses an exising session if <code>session_id</code> is provided (ignores message history in <code>messages</code>)</li> <li>continues a conversion with the message history from <code>messages</code> without creating a session if no <code>session_id</code> is provided and <code>messages</code> contains multiple messages</li> </ul> |
+| RagChatCompletion | [RagChatCompletionRequest](#ondewo.nlu.RagChatCompletionRequest) | [RagChatCompletionResponse](#ondewo.nlu.RagChatCompletionResponse) stream | Generate chat completion with RAG (server streaming).<br> This endpoint either <ul> <li>creates a new session if no <code>session_id</code> is provided and <code>messages</code> contains only one message</li> <li>uses an exising session if <code>session_id</code> is provided (ignores message history in <code>messages</code>)</li> <li>continues a conversion with the message history from <code>messages</code> without creating a session if no <code>session_id</code> is provided and <code>messages</code> contains multiple messages</li> </ul> At this point the endpoint is not fully implemented and does not support sessions. This means the full message history must always be passed. |
 | RagAgentCompletion | [RagAgentCompletionRequest](#ondewo.nlu.RagAgentCompletionRequest) | [RagAgentCompletionResponse](#ondewo.nlu.RagAgentCompletionResponse) stream | Generate agent completion (server streaming).<br> Filters events to only return message-related events. |
 | RagAsk | [RagAskRequest](#ondewo.nlu.RagAskRequest) | [RagAskResponse](#ondewo.nlu.RagAskResponse) stream | Ask a question across datasets without a chat assistant.<br> Streaming only. All datasets must have parsed files. |
 | RagRelatedQuestions | [RagRelatedQuestionsRequest](#ondewo.nlu.RagRelatedQuestionsRequest) | [RagRelatedQuestionsResponse](#ondewo.nlu.RagRelatedQuestionsResponse) | Generate related search terms for a question.<br> Returns 5-10 suggestions considering industry context. |
@@ -9344,7 +9351,7 @@ Represents a document file resource (e.g., text, markdown, PDF, DOCX).
 <a name="ondewo.nlu.EventInput"></a>
 
 ### EventInput
-Events allow for matching intents by event name instead of the natural language input. 
+Events allow for matching intents by event name instead of the natural language input.
 For instance, input <code>&lt;event: { name: &quot;welcome_event&quot;, parameters: { name: &quot;Sam&quot; } }&gt;</code> can trigger a personalized welcome response.
 The parameter <code>name</code> may be used by the agent in the response: <code>&quot;Hello #welcome_event.name! What can I do for you today?&quot;</code>.
 

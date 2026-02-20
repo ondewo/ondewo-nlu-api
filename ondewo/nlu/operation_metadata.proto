@@ -1,4 +1,4 @@
-// Copyright 2020-2023 ONDEWO GmbH
+// Copyright 2020-2026 ONDEWO GmbH
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ message OperationMetadata {
     // long-running operation status code
     Status status = 1;
 
-    // Structure to set status of operation. 
+    // Structure to set status of operation.
     // An operation may not be started if NOT_STARTED is set, in progress if IN_PROGRESS, finished if DONE, interrupted if CANCELED or failed if FAILED.
     enum Status {
 
@@ -82,7 +82,7 @@ message OperationMetadata {
     // operation type
     OperationType operation_type = 12;
 
-    // Type of operation. 
+    // Type of operation.
     // It can be creating, importing, exporting, deleting, restoring, building cache, training or exporting benchmark an agent
     enum OperationType {
 
