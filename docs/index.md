@@ -7834,6 +7834,7 @@ GraphRAG configuration.
 | method | [RagGraphRagMethod](#ondewo.nlu.RagGraphRagMethod) | optional | Optional. Default <code>light</code>. |
 | community | [bool](#bool) |  | Optional. Default <code>false</code>. |
 | resolution | [bool](#bool) |  | Optional. Default <code>false</code>. |
+| additional_fields | [google.protobuf.Struct](#google.protobuf.Struct) |  | Additional fields returned by RAGFlow not explicitly defined above. |
 
 
 
@@ -8332,6 +8333,7 @@ RAPTOR configuration. Refer to <a href="https://arxiv.org/html/2401.18059v1">RAP
 | threshold | [float](#float) | optional | Optional. Minimum 0.0. Maximum 1.0. Default 0.1. |
 | max_cluster | [int32](#int32) |  | Optional. Minimum 1. Maximum 1024. Default 64. |
 | random_seed | [int64](#int64) | optional | Optional. Minimum 0. Default 0. |
+| additional_fields | [google.protobuf.Struct](#google.protobuf.Struct) |  | Additional fields returned by RAGFlow not explicitly defined above. |
 
 
 
