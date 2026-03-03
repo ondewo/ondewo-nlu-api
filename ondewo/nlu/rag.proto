@@ -797,7 +797,7 @@ message RagUpdateDatasetRequest {
     // Optional. New embedding model (cannot change if chunk_count > 0).
     string embedding_model = 9;
 
-    // Optional. PageRank value.
+    // Optional. Minimum 0. Maximum 100. PageRank value.
     optional int32 pagerank = 10;
 }
 
