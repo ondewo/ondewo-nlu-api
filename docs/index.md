@@ -8647,7 +8647,7 @@ The same field constraints as for <code>RagCreateDatasetRequest</code> apply her
 | chunk_method | [RagChunkMethod](#ondewo.nlu.RagChunkMethod) | optional | Optional. New chunk method. |
 | parser_config | [RagParserConfig](#ondewo.nlu.RagParserConfig) |  | Optional. New parser config (deep merged with existing). |
 | embedding_model | [string](#string) |  | Optional. New embedding model (cannot change if chunk_count > 0). |
-| pagerank | [int32](#int32) | optional | Optional. PageRank value. |
+| pagerank | [int32](#int32) | optional | Optional. Minimum 0. Maximum 100. PageRank value. |
 
 
 
