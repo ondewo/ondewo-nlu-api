@@ -2366,10 +2366,6 @@
                       </li>
                     
                       <li>
-                        <a href="#ondewo.nlu.RagUploadDocumentsRequest.RagMetadata" class="title-badge message">RagUploadDocumentsRequest.RagMetadata</a>
-                      </li>
-                    
-                      <li>
                         <a href="#ondewo.nlu.RagUploadFilesRequest" class="title-badge message">RagUploadFilesRequest</a>
                       </li>
                     
@@ -21011,7 +21007,7 @@ Uses the dataset's RAPTOR settings.
         
           <h4 id="ondewo.nlu.Rags.RagUploadDocuments" class="title-badge method">RagUploadDocuments</h4>
 
-          <pre>rpc RagUploadDocuments (stream <a href="#ondewo.nlu.RagUploadDocumentsRequest">RagUploadDocumentsRequest</a>) returns (<a href="#ondewo.nlu.RagDocumentList">RagDocumentList)</a></pre>
+          <pre>rpc RagUploadDocuments (<a href="#ondewo.nlu.RagUploadDocumentsRequest">RagUploadDocumentsRequest</a>) returns (<a href="#ondewo.nlu.RagDocument">RagDocument)</a></pre>
 
           Upload one or more documents to a dataset.<br>
 Documents start in UNSTART state and must be parsed.
@@ -26615,38 +26611,7 @@ Index into metadata.files array (0-based). </p></td>
         
       
         <h3 id="ondewo.nlu.RagUploadDocumentsRequest" class="title-badge message">RagUploadDocumentsRequest</h3>
-        <p>Request message for uploading documents to a dataset.<br></p><p>Documents are uploaded via streaming multipart form data.</p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>metadata</td>
-                  <td><a href="#ondewo.nlu.RagUploadDocumentsRequest.RagMetadata">RagUploadDocumentsRequest.RagMetadata</a></td>
-                  <td></td>
-                  <td><p>First message: declares all files to be uploaded. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>chunk</td>
-                  <td><a href="#ondewo.nlu.RagUploadChunk">RagUploadChunk</a></td>
-                  <td></td>
-                  <td><p>Subsequent messages: stream file data chunks. </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="ondewo.nlu.RagUploadDocumentsRequest.RagMetadata" class="title-badge message">RagUploadDocumentsRequest.RagMetadata</h3>
-        <p>Metadata for the upload (first message only).</p>
+        <p>Request message for uploading a document to a dataset.</p>
 
         
           <table class="field-table">
@@ -26671,10 +26636,17 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 </tr>
               
                 <tr>
-                  <td>files</td>
+                  <td>metadata</td>
                   <td><a href="#ondewo.nlu.RagFileMetadata">RagFileMetadata</a></td>
-                  <td>repeated</td>
-                  <td><p>Required. Metadata for all files being uploaded in this stream. </p></td>
+                  <td></td>
+                  <td><p>Required. Metadata of the uploaded file. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>data</td>
+                  <td><a href="#bytes">bytes</a></td>
+                  <td></td>
+                  <td><p>Required. File data (raw bytes). </p></td>
                 </tr>
               
             </tbody>
