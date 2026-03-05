@@ -454,7 +454,7 @@
     - [RagUpdateDatasetRequest](#ondewo.nlu.RagUpdateDatasetRequest)
     - [RagUpdateDocumentRequest](#ondewo.nlu.RagUpdateDocumentRequest)
     - [RagUploadChunk](#ondewo.nlu.RagUploadChunk)
-    - [RagUploadDocumentsRequest](#ondewo.nlu.RagUploadDocumentsRequest)
+    - [RagUploadDocumentRequest](#ondewo.nlu.RagUploadDocumentRequest)
     - [RagUploadFilesRequest](#ondewo.nlu.RagUploadFilesRequest)
     - [RagUploadFilesRequest.RagMetadata](#ondewo.nlu.RagUploadFilesRequest.RagMetadata)
   
@@ -8692,9 +8692,9 @@ Used to stream file data after metadata is sent in first message.
 
 
 
-<a name="ondewo.nlu.RagUploadDocumentsRequest"></a>
+<a name="ondewo.nlu.RagUploadDocumentRequest"></a>
 
-### RagUploadDocumentsRequest
+### RagUploadDocumentRequest
 Request message for uploading a document to a dataset.
 
 
@@ -8903,7 +8903,7 @@ Covers all endpoints of the <a href="https://github.com/ondewo/ragflow">RAGFlow<
 | RagKnowledgeGraphStatus | [RagDatasetIdRequest](#ondewo.nlu.RagDatasetIdRequest) | [RagTaskStatus](#ondewo.nlu.RagTaskStatus) | Get the knowledge graph construction status of a dataset. |
 | RagConstructRaptor | [RagDatasetIdRequest](#ondewo.nlu.RagDatasetIdRequest) | [RagConstructRaptorResponse](#ondewo.nlu.RagConstructRaptorResponse) | Construct a RAPTOR for a dataset.<br> Uses the dataset's RAPTOR settings. |
 | RagRaptorStatus | [RagDatasetIdRequest](#ondewo.nlu.RagDatasetIdRequest) | [RagTaskStatus](#ondewo.nlu.RagTaskStatus) | Get the RAPTOR construction status of a dataset. |
-| RagUploadDocuments | [RagUploadDocumentsRequest](#ondewo.nlu.RagUploadDocumentsRequest) | [RagDocument](#ondewo.nlu.RagDocument) | Upload one or more documents to a dataset.<br> Documents start in UNSTART state and must be parsed. |
+| RagUploadDocument | [RagUploadDocumentRequest](#ondewo.nlu.RagUploadDocumentRequest) | [RagDocument](#ondewo.nlu.RagDocument) | Upload one or more documents to a dataset.<br> Documents start in UNSTART state and must be parsed. |
 | RagUpdateDocument | [RagUpdateDocumentRequest](#ondewo.nlu.RagUpdateDocumentRequest) | [RagDocument](#ondewo.nlu.RagDocument) | Update document metadata and configuration.<br> Changing chunk_method resets document to UNSTART and deletes chunks. |
 | RagDownloadDocument | [RagDownloadDocumentRequest](#ondewo.nlu.RagDownloadDocumentRequest) | [RagFileChunk](#ondewo.nlu.RagFileChunk) stream | Download the original document file.<br> Returns binary file stream from storage.<br> First chunk contains metadata, subsequent chunks only contain data. |
 | RagListDocuments | [RagListDocumentsRequest](#ondewo.nlu.RagListDocumentsRequest) | [RagListDocumentsResponse](#ondewo.nlu.RagListDocumentsResponse) | List documents in a dataset with pagination and filtering.<br> Supports time range filtering and keyword search. |
