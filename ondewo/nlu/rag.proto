@@ -115,7 +115,7 @@ service Rags {
 
     // Upload one or more documents to a dataset.<br>
     // Documents start in UNSTART state and must be parsed.
-    rpc RagUploadDocuments(RagUploadDocumentsRequest) returns (RagDocument);
+    rpc RagUploadDocument(RagUploadDocumentRequest) returns (RagDocument);
 
     // RAGFlow endpoint: PUT /api/v1/datasets/<dataset_id>/documents/<document_id>
 
@@ -933,7 +933,7 @@ message RagConstructRaptorResponse {
 // ============================================================================
 
 // Request message for uploading a document to a dataset.
-message RagUploadDocumentsRequest {
+message RagUploadDocumentRequest {
 
 	// Required. The agent to upload documents for.
 	// Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
