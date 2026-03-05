@@ -7834,6 +7834,7 @@ GraphRAG configuration.
 | method | [RagGraphRagMethod](#ondewo.nlu.RagGraphRagMethod) | optional | Optional. Default <code>light</code>. |
 | community | [bool](#bool) |  | Optional. Default <code>false</code>. |
 | resolution | [bool](#bool) |  | Optional. Default <code>false</code>. |
+| additional_fields | [google.protobuf.Struct](#google.protobuf.Struct) |  | Additional fields returned by RAGFlow not explicitly defined above. |
 
 
 
@@ -8332,6 +8333,7 @@ RAPTOR configuration. Refer to <a href="https://arxiv.org/html/2401.18059v1">RAP
 | threshold | [float](#float) | optional | Optional. Minimum 0.0. Maximum 1.0. Default 0.1. |
 | max_cluster | [int32](#int32) |  | Optional. Minimum 1. Maximum 1024. Default 64. |
 | random_seed | [int64](#int64) | optional | Optional. Minimum 0. Default 0. |
+| additional_fields | [google.protobuf.Struct](#google.protobuf.Struct) |  | Additional fields returned by RAGFlow not explicitly defined above. |
 
 
 
@@ -8645,7 +8647,7 @@ The same field constraints as for <code>RagCreateDatasetRequest</code> apply her
 | chunk_method | [RagChunkMethod](#ondewo.nlu.RagChunkMethod) | optional | Optional. New chunk method. |
 | parser_config | [RagParserConfig](#ondewo.nlu.RagParserConfig) |  | Optional. New parser config (deep merged with existing). |
 | embedding_model | [string](#string) |  | Optional. New embedding model (cannot change if chunk_count > 0). |
-| pagerank | [int32](#int32) | optional | Optional. PageRank value. |
+| pagerank | [int32](#int32) | optional | Optional. Minimum 0. Maximum 100. PageRank value. |
 
 
 
