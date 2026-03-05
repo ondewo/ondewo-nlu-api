@@ -115,7 +115,7 @@ service Rags {
 
     // Upload one or more documents to a dataset.<br>
     // Documents start in UNSTART state and must be parsed.
-    rpc RagUploadDocuments(stream RagUploadDocumentsRequest) returns (RagDocumentList);
+    rpc RagUploadDocuments(RagUploadDocumentsRequest) returns (RagDocument);
 
     // RAGFlow endpoint: PUT /api/v1/datasets/<dataset_id>/documents/<document_id>
 
@@ -932,33 +932,21 @@ message RagConstructRaptorResponse {
 // Document Management Types
 // ============================================================================
 
-// Request message for uploading documents to a dataset.<br>
-// Documents are uploaded via streaming multipart form data.
+// Request message for uploading a document to a dataset.
 message RagUploadDocumentsRequest {
 
-    // Metadata for the upload (first message only).
-    message RagMetadata {
+	// Required. The agent to upload documents for.
+	// Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+	string parent = 1;
 
-        // Required. The agent to upload documents for.
-        // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-        string parent = 1;
+	// Required. Target dataset ID to upload documents to.
+	string dataset_id = 2;
 
-        // Required. Target dataset ID to upload documents to.
-        string dataset_id = 2;
+	// Required. Metadata of the uploaded file.
+	RagFileMetadata metadata = 3;
 
-        // Required. Metadata for all files being uploaded in this stream.
-        repeated RagFileMetadata files = 3;
-    }
-
-    // First message must contain metadata, subsequent messages contain chunks.
-    oneof payload {
-
-        // First message: declares all files to be uploaded.
-        RagMetadata metadata = 1;
-
-        // Subsequent messages: stream file data chunks.
-        RagUploadChunk chunk = 2;
-    }
+    // Required. File data (raw bytes).
+	bytes data = 4;
 }
 
 // Response message containing a list of documents.
