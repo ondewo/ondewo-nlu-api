@@ -8742,6 +8742,7 @@ Request message for uploading a document to a dataset.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The agent to upload documents for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| language_code | [string](#string) |  | Required. The language of the project to use. |
 | dataset_id | [string](#string) |  | Required. Target dataset ID to upload documents to. |
 | metadata | [RagFileMetadata](#ondewo.nlu.RagFileMetadata) |  | Required. Metadata of the uploaded file. |
 | data | [bytes](#bytes) |  | Required. File data (raw bytes). |
