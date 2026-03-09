@@ -6838,6 +6838,7 @@ The chunk content is automatically tokenized and embeddings are generated.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The agent to add the chunk for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| language_code | [string](#string) |  | Required. The language of the project to use. |
 | dataset_id | [string](#string) |  | Required. Dataset ID containing the document. |
 | document_id | [string](#string) |  | Required. Document ID to add the chunk to. |
 | content | [string](#string) |  | Required. Chunk text content. |
@@ -6921,6 +6922,7 @@ Agents are workflow-based AI assistants with Domain Specific Language (DSL) conf
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The agent to generate the completion for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| language_code | [string](#string) |  | Required. The language of the project to use. |
 | agent_id | [string](#string) |  | Required. RAGFlow agent ID to use for generating the completion. |
 | session_id | [string](#string) |  | Optional. Session ID to continue an existing conversation. If not provided, a new session will be created. |
 | question | [string](#string) |  | Required. User question or message to send to the agent. |
@@ -7028,6 +7030,7 @@ Request message for asking a question using RAGFlow's basic QA endpoint.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The agent to ask the question for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| language_code | [string](#string) |  | Required. The language of the project to use. |
 | question | [string](#string) |  | Required. User question to be answered. |
 | dataset_ids | [string](#string) | repeated | Required. List of dataset IDs to search for relevant information. The system will search across all specified datasets. |
 
@@ -7108,6 +7111,7 @@ Request message for generating a chat completion.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The agent to generate the chat completion for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| language_code | [string](#string) |  | Required. The language of the project to use. |
 | chat_id | [string](#string) |  | Required. Chat assistant ID to use for generating the completion. |
 | messages | [RagMessage](#ondewo.nlu.RagMessage) | repeated | Required. Message history. Must contain at least one <code>"user"</code> message.<br> If <code>session_id</code> is provided, the message history is ignored and only the last <code>"user"</code> message is taken and added to the existing session. |
 | session_id | [string](#string) |  | Optional. Session ID to continue an existing conversation. If not provided and <code>messages</code> contains only one message, a new session will be created. |
@@ -7252,6 +7256,7 @@ Request message for creating a new RAGFlow agent.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The agent to create the RAGFlow agent for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| language_code | [string](#string) |  | Required. The language of the project to use. |
 | avatar | [string](#string) |  | Optional. Base64-encoded icon in the format <code>"data:image/[png|jpeg];base64,&lt;base64_string&gt;"</code>. |
 | title | [string](#string) |  | Required. Maximum length 255. Unique agent title. Must be unique within the project. |
 | permission | [RagPermission](#ondewo.nlu.RagPermission) | optional | Optional. Default <code>me</code> |
@@ -7274,6 +7279,7 @@ Request message for creating a new chat assistant.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The agent to create a chat assistant for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| language_code | [string](#string) |  | Required. The language of the project to use. |
 | name | [string](#string) |  | Required. Maximum length 255. Unique name for the chat assistant. |
 | description | [string](#string) |  | Optional. Description of the chat assistant's purpose. |
 | avatar | [string](#string) |  | Optional. Base64-encoded icon in the format <code>"data:image/[png|jpeg];base64,&lt;base64_string&gt;"</code>. |
@@ -7296,6 +7302,7 @@ Request message for creating a new chat session.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The agent to create a chat session for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| language_code | [string](#string) |  | Required. The language of the project to use. |
 | chat_id | [string](#string) |  | Required. Parent chat assistant UUID. |
 | name | [string](#string) |  | Optional. Maximum length 255. Session name (default: <code>"New session"</code>). |
 | user_id | [string](#string) |  | Optional. Maximum length 255. User identifier for tracking conversation ownership. |
@@ -7314,6 +7321,7 @@ Request message for creating a new dataset.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The agent to create the dataset for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| language_code | [string](#string) |  | Required. The language of the project to use. |
 | name | [string](#string) |  | Required. Unique name of the dataset to create. Must follow these requirements: <ul> <li>contain only characters from the basic multilingual Unicode plane</li> <li>maximum 128 characters</li> <li>case-insensitive</li> </ul> |
 | description | [string](#string) |  | Optional. Dataset description. Maximum 65,535 characters. |
 | avatar | [string](#string) |  | Optional. Base64-encoded avatar image in the format <code>"data:image/[png|jpeg];base64,&lt;base64_string&gt;"</code>. Maximum 65,535 characters. |
@@ -7336,6 +7344,7 @@ Request message for creating a file or folder in RAGFlow.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The agent to create the file for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| language_code | [string](#string) |  | Required. The language of the project to use. |
 | name | [string](#string) |  | Required. Maximum length 255. Name of the file or folder to create. |
 | parent_id | [string](#string) |  | Optional. Parent folder ID. If not provided, creates in root directory. |
 | type | [RagCreateFileFileType](#ondewo.nlu.RagCreateFileFileType) | optional | Required. Type of item to create: <code>"folder"</code> for directories or <code>"virtual"</code> for virtual files. |
@@ -7397,6 +7406,7 @@ Request message with a single dataset ID.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The agent to list all datasets from. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| language_code | [string](#string) |  | Required. The language of the project to use. |
 | dataset_id | [string](#string) |  | Required. Dataset ID. |
 
 
@@ -7428,6 +7438,7 @@ Request message for deleting a RAGFlow agent.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The agent to delete the RAGFlow agent from. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| language_code | [string](#string) |  | Required. The language of the project to use. |
 | agent_id | [string](#string) |  | Required. ID of the RAGFlow agent to delete. |
 
 
@@ -7444,6 +7455,7 @@ Request message for deleting agent sessions.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The agent to delete agent sessions from. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| language_code | [string](#string) |  | Required. The language of the project to use. |
 | agent_id | [string](#string) |  | Required. RAGFlow agent UUID. |
 | ids | [string](#string) | repeated | Optional. Session UUIDs to delete. Specify either this field or <code>delete_all</code>. |
 | delete_all | [bool](#bool) | optional | Optional. Delete all sessions for this agent (needed because protobuf cannot represent <code>ids=null</code>). |
@@ -7462,6 +7474,7 @@ Request message for deleting chat sessions.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The agent to delete chat sessions from. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| language_code | [string](#string) |  | Required. The language of the project to use. |
 | chat_id | [string](#string) |  | Required. Chat assistant UUID. |
 | ids | [string](#string) | repeated | Optional. Session UUIDs to delete. Specify either this field or <code>delete_all</code>. |
 | delete_all | [bool](#bool) | optional | Optional. Delete all sessions for this chat (needed because protobuf cannot represent <code>ids=null</code>). |
@@ -7480,6 +7493,7 @@ Request message for deleting one or more documents from a dataset.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The agent to delete documents from. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| language_code | [string](#string) |  | Required. The language of the project to use. |
 | dataset_id | [string](#string) |  | Required. Dataset ID containing the documents to delete. |
 | ids | [string](#string) | repeated | Optional. Document IDs to delete. If empty and <code>delete_all</code> is <code>true</code>, deletes all documents in the dataset. |
 | delete_all | [bool](#bool) | optional | Optional. Delete all documents in the dataset (needed because protobuf cannot represent <code>ids=null</code>). |
@@ -7498,6 +7512,7 @@ Request message for deleting files or folders.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The agent to delete files from. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| language_code | [string](#string) |  | Required. The language of the project to use. |
 | file_ids | [string](#string) | repeated | Required. UUIDs of files or folders to delete. Supports batch deletion. |
 
 
@@ -7514,6 +7529,7 @@ Request message for deleting one or more of a RAGFlow resource.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The agent to delete datasets from. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| language_code | [string](#string) |  | Required. The language of the project to use. |
 | ids | [string](#string) | repeated | Optional. IDs of resources to delete. If empty and <code>delete_all</code> is <code>true</code>, deletes all. Duplicate IDs are not allowed. |
 | delete_all | [bool](#bool) | optional | Optional. Delete all (needed because protobuf cannot represent <code>ids=null</code>). |
 
@@ -7603,6 +7619,7 @@ Request message for downloading the original document file.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The agent to download the document from. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| language_code | [string](#string) |  | Required. The language of the project to use. |
 | dataset_id | [string](#string) |  | Required. Dataset ID containing the document. |
 | document_id | [string](#string) |  | Required. Document ID to download. |
 
@@ -7664,6 +7681,7 @@ Request message for requests that only need a file ID.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The agent to rename the file for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| language_code | [string](#string) |  | Required. The language of the project to use. |
 | file_id | [string](#string) |  | Required. File ID. |
 
 
@@ -7750,6 +7768,7 @@ RAGFlow allows linking uploaded files to multiple target datasets for RAG operat
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The agent to convert files to documents for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| language_code | [string](#string) |  | Required. The language of the project to use. |
 | file_ids | [string](#string) | repeated | Required. UUIDs of files to convert. If folders are provided, processes contents recursively. |
 | kb_ids | [string](#string) | repeated | Required. Target dataset IDs (knowledge base IDs). A single file can be linked to multiple datasets. |
 
@@ -7799,6 +7818,7 @@ Empty request message with only the parent field.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The agent to get the parent folder for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| language_code | [string](#string) |  | Required. The language of the project to use. |
 
 
 
@@ -7864,6 +7884,7 @@ Request message for listing agent sessions.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The agent to list agent sessions from. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| language_code | [string](#string) |  | Required. The language of the project to use. |
 | agent_id | [string](#string) |  | Required. RAGFlow agent UUID. |
 | pagination | [RagPagination](#ondewo.nlu.RagPagination) |  | Optional. Pagination parameters for paging through results. |
 | orderby | [string](#string) |  | Sort field (default: <code>"update_time"</code>). |
@@ -7886,6 +7907,7 @@ Request message for listing RAGFlow agents.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The agent to list RAGFlow agents from. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| language_code | [string](#string) |  | Required. The language of the project to use. |
 | pagination | [RagPagination](#ondewo.nlu.RagPagination) |  | Optional. Pagination parameters to control the number and offset of results. |
 | title | [string](#string) |  | Optional. Filter results by agent title. Only agents with matching titles will be returned. |
 | orderby | [string](#string) |  | Optional. Sort field for ordering results. Default: <code>"update_time"</code>. |
@@ -7906,6 +7928,7 @@ Request message for listing chat assistants.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The agent to list chat assistants from. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| language_code | [string](#string) |  | Required. The language of the project to use. |
 | pagination | [RagPagination](#ondewo.nlu.RagPagination) |  | Optional. Pagination parameters for paging through results. |
 | id | [string](#string) |  | Optional. Filter by chat assistant UUID. |
 | name | [string](#string) |  | Optional. Filter by chat assistant name. |
@@ -7927,6 +7950,7 @@ Request message for listing chat sessions.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The agent to list chat sessions from. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| language_code | [string](#string) |  | Required. The language of the project to use. |
 | chat_id | [string](#string) |  | Required. Chat assistant UUID. |
 | pagination | [RagPagination](#ondewo.nlu.RagPagination) |  | Optional. Pagination parameters for paging through results. |
 | orderby | [string](#string) |  | Sort field (default: <code>"create_time"</code>). |
@@ -7949,6 +7973,7 @@ Request message for listing chunks of a document with pagination.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The agent to list chunks from. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| language_code | [string](#string) |  | Required. The language of the project to use. |
 | dataset_id | [string](#string) |  | Required. Dataset ID containing the document. |
 | document_id | [string](#string) |  | Required. Document ID to list chunks from. |
 | pagination | [RagPagination](#ondewo.nlu.RagPagination) |  | Optional. Pagination parameters. |
@@ -7986,6 +8011,7 @@ Request message for listing datasets with pagination and filtering.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The agent to list all datasets from. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| language_code | [string](#string) |  | Required. The language of the project to use. |
 | pagination | [RagPagination](#ondewo.nlu.RagPagination) |  | Optional. Pagination parameters. |
 | id | [string](#string) |  | Optional. Filter by dataset ID. |
 | name | [string](#string) |  | Optional. Filter by dataset name. |
@@ -8006,6 +8032,7 @@ Request message for listing documents in a dataset with pagination and filtering
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The agent to list documents from. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| language_code | [string](#string) |  | Required. The language of the project to use. |
 | dataset_id | [string](#string) |  | Required. Dataset ID to list documents from. |
 | id | [string](#string) |  | Optional. Filter by specific document ID. |
 | name | [string](#string) |  | Optional. Filter by document name (exact match). |
@@ -8048,6 +8075,7 @@ Request message for listing files and folders.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The agent to list files from. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| language_code | [string](#string) |  | Required. The language of the project to use. |
 | parent_id | [string](#string) |  | Optional. Folder ID to list contents from. If not provided, lists root directory contents. |
 | pagination | [RagPagination](#ondewo.nlu.RagPagination) |  | Optional. Pagination parameters. Default page size is 15 items per page. |
 | keywords | [string](#string) |  | Optional. Search keywords to filter files by name or other searchable attributes. |
@@ -8155,6 +8183,7 @@ Request message for moving files or folders.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The agent to move files for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| language_code | [string](#string) |  | Required. The language of the project to use. |
 | src_file_ids | [string](#string) | repeated | Required. UUIDs of source files or folders to move. Supports batch move operations. |
 | dest_file_id | [string](#string) |  | Required. UUID of the destination folder. |
 
@@ -8204,6 +8233,7 @@ Parsing extracts chunks from documents using the configured chunk method.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The agent to parse documents for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| language_code | [string](#string) |  | Required. The language of the project to use. |
 | dataset_id | [string](#string) |  | Required. Dataset ID containing the documents to parse. |
 | document_ids | [string](#string) | repeated | Required. Document IDs to parse into chunks (queues documents for background processing). |
 
@@ -8389,6 +8419,7 @@ Request message for generating related questions based on a user's query.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The agent to generate related questions for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| language_code | [string](#string) |  | Required. The language of the project to use. |
 | question | [string](#string) |  | Required. Original user question to generate related questions from. |
 | industry | [string](#string) |  | Optional. Industry context to focus the related questions. Helps tailor suggestions to specific domains (e.g., "healthcare", "finance"). |
 
@@ -8421,6 +8452,7 @@ Request message for removing one or more chunks from a document.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The agent to remove chunks from. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| language_code | [string](#string) |  | Required. The language of the project to use. |
 | dataset_id | [string](#string) |  | Required. Dataset ID containing the document. |
 | document_id | [string](#string) |  | Required. Document ID to remove chunks from. |
 | chunk_ids | [string](#string) | repeated | Optional. Chunk IDs to remove. If empty, removes all chunks from the document. |
@@ -8439,6 +8471,7 @@ Request message for renaming a file or folder.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The agent to rename the file for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| language_code | [string](#string) |  | Required. The language of the project to use. |
 | file_id | [string](#string) |  | Required. UUID of the file or folder to rename. |
 | name | [string](#string) |  | Required. New name for the file or folder. For files, the extension must remain the same. |
 
@@ -8457,6 +8490,7 @@ Supports hybrid search combining vector similarity with keyword matching.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The agent to retrieve chunks for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| language_code | [string](#string) |  | Required. The language of the project to use. |
 | dataset_ids | [string](#string) | repeated | Required. Dataset IDs to search (all datasets must use the same embedding model). |
 | pagination | [RagPagination](#ondewo.nlu.RagPagination) |  | Optional. Pagination parameters. |
 | question | [string](#string) |  | Required. Query string to search for. |
@@ -8504,6 +8538,7 @@ Only documents currently being processed can be stopped.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The agent to stop parsing for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| language_code | [string](#string) |  | Required. The language of the project to use. |
 | dataset_id | [string](#string) |  | Required. Dataset ID containing the documents to stop parsing. |
 | document_ids | [string](#string) | repeated | Required. Document IDs to stop parsing (only stops documents with progress between <code>0</code> and <code>1</code>). |
 
@@ -8548,6 +8583,7 @@ Request message for updating an existing RAGFlow agent.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The agent to update the RAGFlow agent for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| language_code | [string](#string) |  | Required. The language of the project to use. |
 | agent_id | [string](#string) |  | Required. ID of the RAGFlow agent to update. |
 | avatar | [string](#string) |  | Optional. Base64-encoded icon in the format <code>"data:image/[png|jpeg];base64,&lt;base64_string&gt;"</code>. |
 | title | [string](#string) |  | Optional. Maximum length 255. Unique agent title. Must be unique within the project. |
@@ -8571,6 +8607,7 @@ Request message for updating an existing chat assistant.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The agent containing the chat assistant to update. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| language_code | [string](#string) |  | Required. The language of the project to use. |
 | chat_id | [string](#string) |  | Required. UUID of the chat assistant to update. |
 | name | [string](#string) |  | Required. Maximum length 255. Unique name for the chat assistant. |
 | description | [string](#string) |  | Optional. Description of the chat assistant's purpose. |
@@ -8594,6 +8631,7 @@ Request message for updating an existing chat session.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The agent containing the chat session to update. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| language_code | [string](#string) |  | Required. The language of the project to use. |
 | chat_id | [string](#string) |  | Required. Chat assistant UUID. |
 | session_id | [string](#string) |  | Required. Session UUID to update. |
 | name | [string](#string) |  | Optional. Maximum length 255. New session name. |
@@ -8614,6 +8652,7 @@ Content changes trigger re-tokenization and re-generation of embeddings.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The agent to update the chunk for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| language_code | [string](#string) |  | Required. The language of the project to use. |
 | dataset_id | [string](#string) |  | Required. Dataset ID containing the document. |
 | document_id | [string](#string) |  | Required. Document ID containing the chunk. |
 | chunk_id | [string](#string) |  | Required. Chunk ID to update. |
@@ -8638,6 +8677,7 @@ The same field constraints as for <code>RagCreateDatasetRequest</code> apply her
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The agent to update the dataset for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| language_code | [string](#string) |  | Required. The language of the project to use. |
 | dataset_id | [string](#string) |  | Required. Dataset ID. |
 | name | [string](#string) |  | Optional. New dataset name. |
 | description | [string](#string) |  | Optional. New dataset description. |
@@ -8662,6 +8702,7 @@ Request message for updating an existing document's metadata and configuration.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The agent to update the document for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| language_code | [string](#string) |  | Required. The language of the project to use. |
 | dataset_id | [string](#string) |  | Required. Dataset ID containing the document. |
 | document_id | [string](#string) |  | Required. Document ID to update. |
 | name | [string](#string) |  | Optional. Maximum length 255. New document name (file extension must remain the same). |
@@ -8736,6 +8777,7 @@ Metadata for the upload operation (must be sent in first message only).
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The agent to upload files for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| language_code | [string](#string) |  | Required. The language of the project to use. |
 | parent_id | [string](#string) |  | Optional. Parent folder ID. If not provided, files will be uploaded to root directory. |
 | files | [RagFileMetadata](#ondewo.nlu.RagFileMetadata) | repeated | Required. Metadata for all files being uploaded in this request. |
 
