@@ -477,31 +477,34 @@ message RagCreateDatasetRequest {
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
+    // Required. The language of the project to use.
+    string language_code = 2;
+
     // Required. Unique name of the dataset to create. Must follow these requirements:
     // <ul>
     //     <li>contain only characters from the basic multilingual Unicode plane</li>
     //     <li>maximum 128 characters</li>
     //     <li>case-insensitive</li>
     // </ul>
-    string name = 2;
+    string name = 3;
 
     // Optional. Dataset description. Maximum 65,535 characters.
-    string description = 3;
+    string description = 4;
 
     // Optional. Base64-encoded avatar image in the format <code>"data:image/[png|jpeg];base64,&lt;base64_string&gt;"</code>. Maximum 65,535 characters.
-    string avatar = 4;
+    string avatar = 5;
 
     // Optional. Access permission for new dataset.
-    optional RagPermission permission = 5;
+    optional RagPermission permission = 6;
 
     // Optional. Default chunking method for documents in this dataset.
-    optional RagChunkMethod chunk_method = 6;
+    optional RagChunkMethod chunk_method = 7;
 
     // Optional. Configuration settings for the dataset parser. The used fields vary depending on the selected <code>chunk_method</code>.
-    RagParserConfig parser_config = 7;
+    RagParserConfig parser_config = 8;
 
     // Optional. Embedding model name in the format "&lt;model_name&gt;@&lt;factory_name&gt;" (uses user's default if not specified). Maximum length 255.
-    string embedding_model = 8;
+    string embedding_model = 9;
 }
 
 // Access permissions for a dataset.
@@ -773,32 +776,35 @@ message RagUpdateDatasetRequest {
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
+    // Required. The language of the project to use.
+    string language_code = 2;
+
     // Required. Dataset ID.
-    string dataset_id = 2;
+    string dataset_id = 3;
 
     // Optional. New dataset name.
-    string name = 3;
+    string name = 4;
 
     // Optional. New dataset description.
-    string description = 4;
+    string description = 5;
 
     // Optional. New avatar image.
-    string avatar = 5;
+    string avatar = 6;
 
     // Optional. New access permission.
-    optional RagPermission permission = 6;
+    optional RagPermission permission = 7;
 
     // Optional. New chunk method.
-    optional RagChunkMethod chunk_method = 7;
+    optional RagChunkMethod chunk_method = 8;
 
     // Optional. New parser config (deep merged with existing).
-    RagParserConfig parser_config = 8;
+    RagParserConfig parser_config = 9;
 
     // Optional. New embedding model (cannot change if chunk_count > 0).
-    string embedding_model = 9;
+    string embedding_model = 10;
 
     // Optional. Minimum 0. Maximum 100. PageRank value.
-    optional int32 pagerank = 10;
+    optional int32 pagerank = 11;
 }
 
 // Request message for deleting one or more of a RAGFlow resource.
@@ -808,11 +814,14 @@ message RagDeleteRequest {
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
+    // Required. The language of the project to use.
+    string language_code = 2;
+
     // Optional. IDs of resources to delete. If empty and <code>delete_all</code> is <code>true</code>, deletes all. Duplicate IDs are not allowed.
-    repeated string ids = 2;
+    repeated string ids = 3;
 
     // Optional. Delete all (needed because protobuf cannot represent <code>ids=null</code>).
-    optional bool delete_all = 3;
+    optional bool delete_all = 4;
 }
 
 // Request message for listing datasets with pagination and filtering.
@@ -822,20 +831,23 @@ message RagListDatasetsRequest {
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
+    // Required. The language of the project to use.
+    string language_code = 2;
+
     // Optional. Pagination parameters.
-    RagPagination pagination = 2;
+    RagPagination pagination = 3;
 
     // Optional. Filter by dataset ID.
-    string id = 3;
+    string id = 4;
 
     // Optional. Filter by dataset name.
-    string name = 4;
+    string name = 5;
 
     // Optional. Sort field (default: <code>create_time</code>).
-    string orderby = 5;
+    string orderby = 6;
 
     // Optional. Sort descending (default: <code>true</code>).
-    optional bool desc = 6;
+    optional bool desc = 7;
 }
 
 // Response message for listing datasets.
@@ -852,8 +864,11 @@ message RagDatasetIdRequest {
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
+    // Required. The language of the project to use.
+    string language_code = 2;
+
     // Required. Dataset ID.
-    string dataset_id = 2;
+    string dataset_id = 3;
 }
 
 // Response message for getting a dataset's knowledge graph.
@@ -1064,26 +1079,29 @@ message RagUpdateDocumentRequest {
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
+    // Required. The language of the project to use.
+    string language_code = 2;
+
     // Required. Dataset ID containing the document.
-    string dataset_id = 2;
+    string dataset_id = 3;
 
     // Required. Document ID to update.
-    string document_id = 3;
+    string document_id = 4;
 
     // Optional. Maximum length 255. New document name (file extension must remain the same).
-    string name = 4;
+    string name = 5;
 
     // Optional. New chunking method (resets document to <code>UNSTART</code> status and deletes all existing chunks).
-    optional RagChunkMethod chunk_method = 5;
+    optional RagChunkMethod chunk_method = 6;
 
     // Optional. New parser configuration (deep merged with existing configuration).
-    RagParserConfig parser_config = 6;
+    RagParserConfig parser_config = 7;
 
     // Optional. Document enabled/disabled status.
-    optional bool enabled = 7;
+    optional bool enabled = 8;
 
     // Optional. Custom metadata fields for document-specific metadata (replaces existing metadata).
-    google.protobuf.Struct meta_fields = 8;
+    google.protobuf.Struct meta_fields = 9;
 }
 
 // Request message for downloading the original document file.
@@ -1093,11 +1111,14 @@ message RagDownloadDocumentRequest {
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
+    // Required. The language of the project to use.
+    string language_code = 2;
+
     // Required. Dataset ID containing the document.
-    string dataset_id = 2;
+    string dataset_id = 3;
 
     // Required. Document ID to download.
-    string document_id = 3;
+    string document_id = 4;
 }
 
 // Request message for listing documents in a dataset with pagination and filtering.
@@ -1107,38 +1128,41 @@ message RagListDocumentsRequest {
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
+    // Required. The language of the project to use.
+    string language_code = 2;
+
     // Required. Dataset ID to list documents from.
-    string dataset_id = 2;
+    string dataset_id = 3;
 
     // Optional. Filter by specific document ID.
-    string id = 3;
+    string id = 4;
 
     // Optional. Filter by document name (exact match).
-    string name = 4;
+    string name = 5;
 
     // Optional. Pagination parameters.
-    RagPagination pagination = 5;
+    RagPagination pagination = 6;
 
     // Optional. Sort field (default: <code>"create_time"</code>). Accept any field of <code>RagDocument</code>.
-    string orderby = 6;
+    string orderby = 7;
 
     // Optional. Sort in descending order (default: <code>true</code>).
-    optional bool desc = 7;
+    optional bool desc = 8;
 
     // Optional. Search keywords to filter documents (searches in document name and metadata).
-    string keywords = 8;
+    string keywords = 9;
 
     // Optional. Suffixes to filter by (e.g. <code>["pdf", "png", "docx"]</code>).
-    repeated string suffix = 9;
+    repeated string suffix = 10;
 
     // Optional. Document status to filter by.
-    repeated RagDocumentStatus run_status = 10;
+    repeated RagDocumentStatus run_status = 11;
 
     // Optional. Filter by creation time start (Unix timestamp in milliseconds, <code>0</code> = no filter).
-    int64 create_time_from = 11;
+    int64 create_time_from = 12;
 
     // Optional. Filter by creation time end (Unix timestamp in milliseconds, <code>0</code> = no filter).
-    int64 create_time_to = 12;
+    int64 create_time_to = 13;
 }
 
 // Response message for listing documents.
@@ -1158,14 +1182,17 @@ message RagDeleteDocumentsRequest {
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
+    // Required. The language of the project to use.
+    string language_code = 2;
+
     // Required. Dataset ID containing the documents to delete.
-    string dataset_id = 2;
+    string dataset_id = 3;
 
     // Optional. Document IDs to delete. If empty and <code>delete_all</code> is <code>true</code>, deletes all documents in the dataset.
-    repeated string ids = 3;
+    repeated string ids = 4;
 
     // Optional. Delete all documents in the dataset (needed because protobuf cannot represent <code>ids=null</code>).
-    optional bool delete_all = 4;
+    optional bool delete_all = 5;
 }
 
 // ============================================================================
@@ -1180,11 +1207,14 @@ message RagParseDocumentsRequest {
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
+    // Required. The language of the project to use.
+    string language_code = 2;
+
     // Required. Dataset ID containing the documents to parse.
-    string dataset_id = 2;
+    string dataset_id = 3;
 
     // Required. Document IDs to parse into chunks (queues documents for background processing).
-    repeated string document_ids = 3;
+    repeated string document_ids = 4;
 }
 
 // Request message for stopping document parsing.<br>
@@ -1195,11 +1225,14 @@ message RagStopParsingRequest {
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
+    // Required. The language of the project to use.
+    string language_code = 2;
+
     // Required. Dataset ID containing the documents to stop parsing.
-    string dataset_id = 2;
+    string dataset_id = 3;
 
     // Required. Document IDs to stop parsing (only stops documents with progress between <code>0</code> and <code>1</code>).
-    repeated string document_ids = 3;
+    repeated string document_ids = 4;
 }
 
 // Request message for listing chunks of a document with pagination.
@@ -1209,20 +1242,23 @@ message RagListChunksRequest {
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
+    // Required. The language of the project to use.
+    string language_code = 2;
+
     // Required. Dataset ID containing the document.
-    string dataset_id = 2;
+    string dataset_id = 3;
 
     // Required. Document ID to list chunks from.
-    string document_id = 3;
+    string document_id = 4;
 
     // Optional. Pagination parameters.
-    RagPagination pagination = 4;
+    RagPagination pagination = 5;
 
     // Optional. Search keywords to filter chunks (supports content highlighting in results).
-    string keywords = 5;
+    string keywords = 6;
 
     // Optional. Filter by specific chunk ID.
-    string id = 6;
+    string id = 7;
 }
 
 // Response message for listing chunks.
@@ -1300,20 +1336,23 @@ message RagAddChunkRequest {
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
+    // Required. The language of the project to use.
+    string language_code = 2;
+
     // Required. Dataset ID containing the document.
-    string dataset_id = 2;
+    string dataset_id = 3;
 
     // Required. Document ID to add the chunk to.
-    string document_id = 3;
+    string document_id = 4;
 
     // Required. Chunk text content.
-    string content = 4;
+    string content = 5;
 
     // Optional. Important keywords to associate with this chunk.
-    repeated string important_keywords = 5;
+    repeated string important_keywords = 6;
 
     // Optional. Associated questions for this chunk (useful for Q&amp;A-style retrieval).
-    repeated string questions = 6;
+    repeated string questions = 7;
 }
 
 // Response message for adding a chunk.
@@ -1330,14 +1369,17 @@ message RagRemoveChunksRequest {
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
+    // Required. The language of the project to use.
+    string language_code = 2;
+
     // Required. Dataset ID containing the document.
-    string dataset_id = 2;
+    string dataset_id = 3;
 
     // Required. Document ID to remove chunks from.
-    string document_id = 3;
+    string document_id = 4;
 
     // Optional. Chunk IDs to remove. If empty, removes all chunks from the document.
-    repeated string chunk_ids = 4;
+    repeated string chunk_ids = 5;
 }
 
 // Request message for updating an existing chunk's content and metadata.<br>
@@ -1348,30 +1390,33 @@ message RagUpdateChunkRequest {
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
+    // Required. The language of the project to use.
+    string language_code = 2;
+
     // Required. Dataset ID containing the document.
-    string dataset_id = 2;
+    string dataset_id = 3;
 
     // Required. Document ID containing the chunk.
-    string document_id = 3;
+    string document_id = 4;
 
     // Required. Chunk ID to update.
-    string chunk_id = 4;
+    string chunk_id = 5;
 
     // Optional. New chunk content (re-tokenizes and re-generates embeddings if changed).
-    string content = 5;
+    string content = 6;
 
     // Optional. Updated important keywords for this chunk.
-    repeated string important_keywords = 6;
+    repeated string important_keywords = 7;
 
     // Optional. Updated questions associated with this chunk.
-    repeated string questions = 7;
+    repeated string questions = 8;
 
     // Optional. Availability status (disable chunk without deleting it).
-    optional bool available = 8;
+    optional bool available = 9;
 
     // Position information in the original document.<br>
     // Each position is an array of 5 integers representing location data (format varies by document type).
-    repeated google.protobuf.ListValue positions = 9;
+    repeated google.protobuf.ListValue positions = 10;
 }
 
 // Request message for retrieving chunks using vector similarity search.<br>
@@ -1382,45 +1427,48 @@ message RagRetrievalRequest {
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
+    // Required. The language of the project to use.
+    string language_code = 2;
+
     // Required. Dataset IDs to search (all datasets must use the same embedding model).
-    repeated string dataset_ids = 2;
+    repeated string dataset_ids = 3;
 
     // Optional. Pagination parameters.
-    RagPagination pagination = 3;
+    RagPagination pagination = 4;
 
     // Required. Query string to search for.
-    string question = 4;
+    string question = 5;
 
     // Optional. Filter by specific document IDs within the datasets.
-    repeated string document_ids = 5;
+    repeated string document_ids = 6;
 
     // Optional. Include knowledge graph retrieval to enhance results with graph relationships.
-    optional bool use_kg = 6;
+    optional bool use_kg = 7;
 
     // Optional. Cross-language translation codes to enable multilingual retrieval.
-    repeated string cross_languages = 7;
+    repeated string cross_languages = 8;
 
     // Optional. Metadata filter condition to restrict results based on document metadata.
-    RagMetadataConditions metadata_condition = 8;
+    RagMetadataConditions metadata_condition = 9;
 
     // Optional. Minimum similarity score threshold between <code>0.0</code> and <code>1.0</code> (default: <code>0.2</code>).
-    float similarity_threshold = 9;
+    float similarity_threshold = 10;
 
     // Optional. Weight for vector similarity versus keyword matching between <code>0.0</code> and <code>1.0</code> (default: <code>0.3</code>).<br>
     // Higher values favor vector similarity, lower values favor keyword matching.
-    optional float vector_similarity_weight = 10;
+    optional float vector_similarity_weight = 11;
 
     // Optional. Minimum 1. Maximum number of chunks to retrieve before reranking (default: <code>1024</code>).
-    int32 top_k = 11;
+    int32 top_k = 12;
 
     // Optional. Rerank model ID to reorder results after initial retrieval.
-    string rerank_id = 12;
+    string rerank_id = 13;
 
     // Optional. Whether to highlight matched content in the returned chunks.
-    optional bool highlight = 13;
+    optional bool highlight = 14;
 
     // Optional. Extract additional keywords from the query to improve retrieval.
-    optional bool keyword = 14;
+    optional bool keyword = 15;
 }
 
 // List of document metadata conditions.
@@ -1474,11 +1522,14 @@ message RagUploadFilesRequest {
         // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
         string parent = 1;
 
+		// Required. The language of the project to use.
+		string language_code = 2;
+
         // Optional. Parent folder ID. If not provided, files will be uploaded to root directory.
-        string parent_id = 2;
+        string parent_id = 3;
 
         // Required. Metadata for all files being uploaded in this request.
-        repeated RagFileMetadata files = 3;
+        repeated RagFileMetadata files = 4;
     }
 
     // First message must contain metadata; subsequent messages contain file data chunks.
@@ -1549,14 +1600,17 @@ message RagCreateFileRequest {
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
+    // Required. The language of the project to use.
+    string language_code = 2;
+
     // Required. Maximum length 255. Name of the file or folder to create.
-    string name = 2;
+    string name = 3;
 
     // Optional. Parent folder ID. If not provided, creates in root directory.
-    string parent_id = 3;
+    string parent_id = 4;
 
     // Required. Type of item to create: <code>"folder"</code> for directories or <code>"virtual"</code> for virtual files.
-    optional RagCreateFileFileType type = 4;
+    optional RagCreateFileFileType type = 5;
 }
 
 // Available file types for file creation.
@@ -1576,20 +1630,23 @@ message RagListFilesRequest {
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
+    // Required. The language of the project to use.
+    string language_code = 2;
+
     // Optional. Folder ID to list contents from. If not provided, lists root directory contents.
-    string parent_id = 2;
+    string parent_id = 3;
 
     // Optional. Pagination parameters. Default page size is 15 items per page.
-    RagPagination pagination = 3;
+    RagPagination pagination = 4;
 
     // Optional. Search keywords to filter files by name or other searchable attributes.
-    string keywords = 4;
+    string keywords = 5;
 
     // Optional. Field to sort results by. All fields of <code>RagFile</code> are possible.
-    string orderby = 5;
+    string orderby = 6;
 
     // Optional. Sort in descending order. Default is <code>true</code> (newest first).
-    optional bool desc = 6;
+    optional bool desc = 7;
 }
 
 // Response message for listing files and folders.
@@ -1611,13 +1668,16 @@ message RagGetRootFolderRequest {
     // Required. The agent to get the parent folder for.
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
+
+    // Required. The language of the project to use.
+    string language_code = 2;
 }
 
 // Response message for getting the root folder.
 message RagGetRootFolderResponse {
 
     // The root folder of the file system.
-    RagFile root_folder = 1;
+    RagFile root_folder = 2;
 }
 
 // Request message for requests that only need a file ID.
@@ -1627,8 +1687,11 @@ message RagFileIdRequest {
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
+    // Required. The language of the project to use.
+    string language_code = 2;
+
     // Required. File ID.
-    string file_id = 2;
+    string file_id = 3;
 }
 
 // Response message for getting the parent folder of a file.
@@ -1652,8 +1715,11 @@ message RagDeleteFilesRequest {
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
+    // Required. The language of the project to use.
+    string language_code = 2;
+
     // Required. UUIDs of files or folders to delete. Supports batch deletion.
-    repeated string file_ids = 2;
+    repeated string file_ids = 3;
 }
 
 // Request message for renaming a file or folder.
@@ -1663,11 +1729,14 @@ message RagRenameFileRequest {
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
+    // Required. The language of the project to use.
+    string language_code = 2;
+
     // Required. UUID of the file or folder to rename.
-    string file_id = 2;
+    string file_id = 3;
 
     // Required. New name for the file or folder. For files, the extension must remain the same.
-    string name = 3;
+    string name = 4;
 }
 
 // Request message for moving files or folders.
@@ -1677,11 +1746,14 @@ message RagMoveFileRequest {
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
+    // Required. The language of the project to use.
+    string language_code = 2;
+
     // Required. UUIDs of source files or folders to move. Supports batch move operations.
-    repeated string src_file_ids = 2;
+    repeated string src_file_ids = 3;
 
     // Required. UUID of the destination folder.
-    string dest_file_id = 3;
+    string dest_file_id = 4;
 }
 
 // Request message for converting files to documents and linking them to datasets.
@@ -1692,11 +1764,14 @@ message RagFileToDocumentRequest {
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
+    // Required. The language of the project to use.
+    string language_code = 2;
+
     // Required. UUIDs of files to convert. If folders are provided, processes contents recursively.
-    repeated string file_ids = 2;
+    repeated string file_ids = 3;
 
     // Required. Target dataset IDs (knowledge base IDs). A single file can be linked to multiple datasets.
-    repeated string kb_ids = 3;
+    repeated string kb_ids = 4;
 }
 
 // Response message containing a list of file-to-document associations.
@@ -1743,26 +1818,29 @@ message RagCreateChatAssistantRequest {
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
+    // Required. The language of the project to use.
+    string language_code = 2;
+
     // Required. Maximum length 255. Unique name for the chat assistant.
-    string name = 2;
+    string name = 3;
 
     // Optional. Description of the chat assistant's purpose.
-    string description = 3;
+    string description = 4;
 
     // Optional. Base64-encoded icon in the format <code>"data:image/[png|jpeg];base64,&lt;base64_string&gt;"</code>.
-    string avatar = 4;
+    string avatar = 5;
 
     // Optional. Dataset IDs to use as knowledge base (all datasets must have parsed files and use the same embedding model).
-    repeated string dataset_ids = 5;
+    repeated string dataset_ids = 6;
 
     // Optional. LLM configuration settings.
-    RagLlmSetting llm = 6;
+    RagLlmSetting llm = 7;
 
     // Optional. Prompt and retrieval configuration settings.
-    RagPromptConfig prompt = 7;
+    RagPromptConfig prompt = 8;
 
     // Optional. Additional fields to pass through to RAGFlow.
-    google.protobuf.Struct additional_fields = 8;
+    google.protobuf.Struct additional_fields = 9;
 }
 
 // LLM configuration for chat assistant.
@@ -1918,29 +1996,32 @@ message RagUpdateChatAssistantRequest {
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
+    // Required. The language of the project to use.
+    string language_code = 2;
+
     // Required. UUID of the chat assistant to update.
-    string chat_id = 2;
+    string chat_id = 3;
 
     // Required. Maximum length 255. Unique name for the chat assistant.
-    string name = 3;
+    string name = 4;
 
     // Optional. Description of the chat assistant's purpose.
-    string description = 4;
+    string description = 5;
 
     // Optional. Base64-encoded icon in the format <code>"data:image/[png|jpeg];base64,&lt;base64_string&gt;"</code>.
-    string avatar = 5;
+    string avatar = 6;
 
     // Optional. Dataset IDs to use as knowledge base (all datasets must have parsed files and use the same embedding model).
-    repeated string dataset_ids = 6;
+    repeated string dataset_ids = 7;
 
     // Optional. LLM configuration settings.
-    RagLlmSetting llm = 7;
+    RagLlmSetting llm = 8;
 
     // Optional. Prompt and retrieval configuration settings.
-    RagPromptConfig prompt = 8;
+    RagPromptConfig prompt = 9;
 
     // Optional. Additional fields to pass through to RAGFlow.
-    google.protobuf.Struct additional_fields = 9;
+    google.protobuf.Struct additional_fields = 10;
 }
 
 // Request message for listing chat assistants.
@@ -1950,23 +2031,26 @@ message RagListChatAssistantsRequest {
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
+    // Required. The language of the project to use.
+    string language_code = 2;
+
     // Optional. Pagination parameters for paging through results.
-    RagPagination pagination = 2;
+    RagPagination pagination = 3;
 
     // Optional. Filter by chat assistant UUID.
-    string id = 3;
+    string id = 4;
 
     // Optional. Filter by chat assistant name.
-    string name = 4;
+    string name = 5;
 
     // Sort field (default: <code>"create_time"</code>).
-    string orderby = 5;
+    string orderby = 6;
 
     // Optional. Sort in descending order (default: <code>true</code>).
-    optional bool desc = 6;
+    optional bool desc = 7;
 
     // Optional. Additional fields to pass through to RAGFlow.
-    google.protobuf.Struct additional_fields = 7;
+    google.protobuf.Struct additional_fields = 8;
 }
 
 // Response message for listing chat assistants.
@@ -1987,26 +2071,29 @@ message RagCreateAgentRequest {
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
+    // Required. The language of the project to use.
+    string language_code = 2;
+
     // Optional. Base64-encoded icon in the format <code>"data:image/[png|jpeg];base64,&lt;base64_string&gt;"</code>.
-    string avatar = 2;
+    string avatar = 3;
 
     // Required. Maximum length 255. Unique agent title. Must be unique within the project.
-    string title = 3;
+    string title = 4;
 
     // Optional. Default <code>me</code>
-    optional RagPermission permission = 4;
+    optional RagPermission permission = 5;
 
     // Optional. Agent description providing details about the agent's purpose and functionality.
-    string description = 5;
+    string description = 6;
 
     // Optional. Max length 32. Canvas type.
-    optional string canvas_type = 6;
+    optional string canvas_type = 7;
 
     // Optional. Canvas category.
-    optional RagCanvasCategory canvas_category = 7;
+    optional RagCanvasCategory canvas_category = 8;
 
     // Required. Canvas DSL configuration defining the agent's workflow.
-    google.protobuf.Struct dsl = 8;
+    google.protobuf.Struct dsl = 9;
 }
 
 // Agent canvas category.
@@ -2026,29 +2113,32 @@ message RagUpdateAgentRequest {
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
+    // Required. The language of the project to use.
+    string language_code = 2;
+
     // Required. ID of the RAGFlow agent to update.
-    string agent_id = 2;
+    string agent_id = 3;
 
     // Optional. Base64-encoded icon in the format <code>"data:image/[png|jpeg];base64,&lt;base64_string&gt;"</code>.
-    string avatar = 3;
+    string avatar = 4;
 
     // Optional. Maximum length 255. Unique agent title. Must be unique within the project.
-    string title = 4;
+    string title = 5;
 
     // Optional. Default <code>me</code>
-    optional RagPermission permission = 5;
+    optional RagPermission permission = 6;
 
     // Optional. Agent description providing details about the agent's purpose and functionality.
-    string description = 6;
+    string description = 7;
 
     // Optional. Max length 32. Canvas type.
-    optional string canvas_type = 7;
+    optional string canvas_type = 8;
 
     // Optional. Canvas category.
-    optional RagCanvasCategory canvas_category = 8;
+    optional RagCanvasCategory canvas_category = 9;
 
     // Optional. Canvas DSL configuration defining the agent's workflow.
-    google.protobuf.Struct dsl = 9;
+    google.protobuf.Struct dsl = 10;
 }
 
 // Request message for deleting a RAGFlow agent.
@@ -2058,8 +2148,11 @@ message RagDeleteAgentRequest {
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
+    // Required. The language of the project to use.
+    string language_code = 2;
+
     // Required. ID of the RAGFlow agent to delete.
-    string agent_id = 2;
+    string agent_id = 3;
 }
 
 // Request message for listing RAGFlow agents.
@@ -2069,21 +2162,24 @@ message RagListAgentsRequest {
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
+    // Required. The language of the project to use.
+    string language_code = 2;
+
     // Optional. Pagination parameters to control the number and offset of results.
-    RagPagination pagination = 2;
+    RagPagination pagination = 3;
 
     // Optional. Filter results by agent title. Only agents with matching titles will be returned.
-    string title = 3;
+    string title = 4;
 
     // Optional. Sort field for ordering results. Default: <code>"update_time"</code>.
-    string orderby = 4;
+    string orderby = 5;
 
     // Optional. Sort in descending order. If <code>true</code>, results are sorted from highest to lowest.
     // Default: <code>true</code>.
-    optional bool desc = 5;
+    optional bool desc = 6;
 
     // Optional. Filter results by specific agent ID.
-    string id = 6;
+    string id = 7;
 }
 
 // Response message containing a list of RAGFlow agents.
@@ -2148,14 +2244,17 @@ message RagCreateChatSessionRequest {
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
+    // Required. The language of the project to use.
+    string language_code = 2;
+
     // Required. Parent chat assistant UUID.
-    string chat_id = 2;
+    string chat_id = 3;
 
     // Optional. Maximum length 255. Session name (default: <code>"New session"</code>).
-    string name = 3;
+    string name = 4;
 
     // Optional. Maximum length 255. User identifier for tracking conversation ownership.
-    string user_id = 4;
+    string user_id = 5;
 }
 
 // Chat session containing conversation history for a chat assistant.
@@ -2219,17 +2318,20 @@ message RagUpdateChatSessionRequest {
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
+    // Required. The language of the project to use.
+    string language_code = 2;
+
     // Required. Chat assistant UUID.
-    string chat_id = 2;
+    string chat_id = 3;
 
     // Required. Session UUID to update.
-    string session_id = 3;
+    string session_id = 4;
 
     // Optional. Maximum length 255. New session name.
-    string name = 4;
+    string name = 5;
 
     // Optional. Maximum length 255.  User identifier.
-    string user_id = 5;
+    string user_id = 6;
 }
 
 // Request message for listing chat sessions.
@@ -2239,26 +2341,29 @@ message RagListChatSessionsRequest {
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
+    // Required. The language of the project to use.
+    string language_code = 2;
+
     // Required. Chat assistant UUID.
-    string chat_id = 2;
+    string chat_id = 3;
 
     // Optional. Pagination parameters for paging through results.
-    RagPagination pagination = 3;
+    RagPagination pagination = 4;
 
     // Sort field (default: <code>"create_time"</code>).
-    string orderby = 4;
+    string orderby = 5;
 
     // Optional. Sort in descending order (default: <code>true</code>).
-    optional bool desc = 5;
+    optional bool desc = 6;
 
     // Optional. Filter by session name.
-    string name = 6;
+    string name = 7;
 
     // Optional. Filter by session UUID.
-    string id = 7;
+    string id = 8;
 
     // Optional. Filter by user identifier.
-    string user_id = 8;
+    string user_id = 9;
 }
 
 // Response message for listing chat sessions.
@@ -2275,14 +2380,17 @@ message RagDeleteChatSessionsRequest {
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
+    // Required. The language of the project to use.
+    string language_code = 2;
+
     // Required. Chat assistant UUID.
-    string chat_id = 2;
+    string chat_id = 3;
 
     // Optional. Session UUIDs to delete. Specify either this field or <code>delete_all</code>.
-    repeated string ids = 3;
+    repeated string ids = 4;
 
     // Optional. Delete all sessions for this chat (needed because protobuf cannot represent <code>ids=null</code>).
-    optional bool delete_all = 4;
+    optional bool delete_all = 5;
 }
 
 // Request message for listing agent sessions.
@@ -2292,26 +2400,29 @@ message RagListAgentSessionsRequest {
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
+    // Required. The language of the project to use.
+    string language_code = 2;
+
     // Required. RAGFlow agent UUID.
-    string agent_id = 2;
+    string agent_id = 3;
 
     // Optional. Pagination parameters for paging through results.
-    RagPagination pagination = 3;
+    RagPagination pagination = 4;
 
     // Sort field (default: <code>"update_time"</code>).
-    string orderby = 4;
+    string orderby = 5;
 
     // Optional. Sort in descending order (default: <code>true</code>).
-    optional bool desc = 5;
+    optional bool desc = 6;
 
     // Optional. Filter by session UUID.
-    string id = 6;
+    string id = 7;
 
     // Optional. Filter by user identifier.
-    string user_id = 7;
+    string user_id = 8;
 
     // Optional. Include DSL workflow configuration in response.
-    optional bool dsl = 8;
+    optional bool dsl = 9;
 }
 
 // Response message for listing agent sessions.
@@ -2390,14 +2501,17 @@ message RagDeleteAgentSessionsRequest {
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
+    // Required. The language of the project to use.
+    string language_code = 2;
+
     // Required. RAGFlow agent UUID.
-    string agent_id = 2;
+    string agent_id = 3;
 
     // Optional. Session UUIDs to delete. Specify either this field or <code>delete_all</code>.
-    repeated string ids = 3;
+    repeated string ids = 4;
 
     // Optional. Delete all sessions for this agent (needed because protobuf cannot represent <code>ids=null</code>).
-    optional bool delete_all = 4;
+    optional bool delete_all = 5;
 }
 
 // ============================================================================
@@ -2411,25 +2525,28 @@ message RagChatCompletionRequest {
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
+    // Required. The language of the project to use.
+    string language_code = 2;
+
     // Required. Chat assistant ID to use for generating the completion.
-    string chat_id = 2;
+    string chat_id = 3;
 
 	// Required. Message history. Must contain at least one <code>"user"</code> message.<br>
 	// If <code>session_id</code> is provided, the message history is ignored and only the last <code>"user"</code> message is taken and added to the existing session.
 	repeated RagMessage messages = 3;
 
     // Optional. Session ID to continue an existing conversation. If not provided and <code>messages</code> contains only one message, a new session will be created.
-    string session_id = 4;
+    string session_id = 5;
 
     // Optional. Maximum length 255. Name for new session. Ignored if <code>session_id</code> is provided or <code>messages</code> contains more than one message.
-    string name = 5;
+    string name = 6;
 
     // Optional. Maximum length 255. User defined ID for new session. Ignored if <code>session_id</code> is provided or <code>messages</code> contains more than one message.
-    string user_id = 6;
+    string user_id = 7;
 
     // Optional. Enable streaming mode. If <code>true</code>, the response will be streamed as Server-Sent Events (SSE).
     // Default: <code>true</code>.
-    optional bool stream = 8;
+    optional bool stream = 9;
 }
 
 // Response message for chat completion.
@@ -2543,30 +2660,33 @@ message RagAgentCompletionRequest {
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
+    // Required. The language of the project to use.
+    string language_code = 2;
+
     // Required. RAGFlow agent ID to use for generating the completion.
-    string agent_id = 2;
+    string agent_id = 3;
 
     // Optional. Session ID to continue an existing conversation. If not provided, a new session will be created.
-    string session_id = 3;
+    string session_id = 4;
 
     // Required. User question or message to send to the agent.
-    string question = 4;
+    string question = 5;
 
     // Optional. Enable streaming mode. If <code>true</code>, the response will be streamed as Server-Sent Events (SSE).
     // Default: <code>true</code>.
-    optional bool stream = 5;
+    optional bool stream = 6;
 
     // Optional. Files to include in the agent's context for processing.
-    repeated RagFile files = 6;
+    repeated RagFile files = 7;
 
     // Optional. Input form data to pass to the agent workflow. The structure depends on the agent's DSL configuration.
-    google.protobuf.Struct inputs = 7;
+    google.protobuf.Struct inputs = 8;
 
     // Optional. User identifier for tracking and personalization. Ignored if <code>session_id</code> is given.
-    string user_id = 8;
+    string user_id = 9;
 
     // Optional. Additional fields to pass through to RAGFlow API.
-    google.protobuf.Struct additional_fields = 9;
+    google.protobuf.Struct additional_fields = 10;
 }
 
 // Response message for agent completion.
@@ -2634,12 +2754,15 @@ message RagAskRequest {
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
+    // Required. The language of the project to use.
+    string language_code = 2;
+
     // Required. User question to be answered.
-    string question = 2;
+    string question = 3;
 
     // Required. List of dataset IDs to search for relevant information.
     // The system will search across all specified datasets.
-    repeated string dataset_ids = 3;
+    repeated string dataset_ids = 4;
 }
 
 // Response message containing the answer to a user's question.
@@ -2661,12 +2784,15 @@ message RagRelatedQuestionsRequest {
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
+    // Required. The language of the project to use.
+    string language_code = 2;
+
     // Required. Original user question to generate related questions from.
-    string question = 2;
+    string question = 3;
 
     // Optional. Industry context to focus the related questions.
     // Helps tailor suggestions to specific domains (e.g., "healthcare", "finance").
-    string industry = 3;
+    string industry = 4;
 }
 
 // Response message containing a list of suggested related questions.
