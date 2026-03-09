@@ -2531,9 +2531,9 @@ message RagChatCompletionRequest {
     // Required. Chat assistant ID to use for generating the completion.
     string chat_id = 3;
 
-	// Required. Message history. Must contain at least one <code>"user"</code> message.<br>
-	// If <code>session_id</code> is provided, the message history is ignored and only the last <code>"user"</code> message is taken and added to the existing session.
-	repeated RagMessage messages = 3;
+    // Required. Message history. Must contain at least one <code>"user"</code> message.<br>
+    // If <code>session_id</code> is provided, the message history is ignored and only the last <code>"user"</code> message is taken and added to the existing session.
+    repeated RagMessage messages = 4;
 
     // Optional. Session ID to continue an existing conversation. If not provided and <code>messages</code> contains only one message, a new session will be created.
     string session_id = 5;
