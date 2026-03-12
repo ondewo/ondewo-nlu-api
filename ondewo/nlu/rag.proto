@@ -2971,20 +2971,22 @@ message RagCrawler {
     // Output format configuration.
     RagCrawlerOutput rag_crawler_output = 8;
 
-    // Scheduling configuration.
-    RagCrawlerScheduling rag_crawler_scheduling = 9;
-
     // Creation date and time. Read-only field.
-    google.protobuf.Timestamp created_at = 10;
+    google.protobuf.Timestamp created_at = 9;
 
     // Modification date and time. Read-only field.
-    google.protobuf.Timestamp modified_at = 11;
+    google.protobuf.Timestamp modified_at = 10;
 
     // User id in form of a valid UUID.
-    string created_by = 12;
+    string created_by = 11;
 
     // User id in form of a valid UUID.
-    string modified_by = 13;
+    string modified_by = 12;
+
+    // Browser configuration.
+    // Allows passing arbitrary Crawl4AI BrowserConfig options.
+    // Use this to fully configure request headers.
+    RagCrawlerBrowserConfig rag_crawler_browser_config = 13;
 
 }
 
@@ -3043,6 +3045,30 @@ message RagCrawlerUrlAuth {
 
 }
 
+// Browser configuration for Crawl4AI crawler runtime.
+message RagCrawlerBrowserConfig {
+
+    // Optional. HTTP headers sent with crawler requests.
+    // Repeated entries allow duplicate header names and preserve order.
+    repeated RagCrawlerHeader headers = 1;
+
+    // Optional. Additional BrowserConfig options to pass through to Crawl4AI.
+    // Example keys: user_agent, viewport, java_script_enabled, proxy.
+    google.protobuf.Struct additional_fields = 2;
+
+}
+
+// HTTP header key/value pair.
+message RagCrawlerHeader {
+
+    // Required. Header name.
+    string name = 1;
+
+    // Required. Header value.
+    string value = 2;
+
+}
+
 // HTTP Basic Authentication settings.
 message RagCrawlerBasicAuth {
 
@@ -3075,29 +3101,41 @@ message RagCrawlerFormAuth {
 // Core crawling behavior configuration.
 message RagCrawlerConfig {
 
-    // Crawl strategy: e.g., <code>BFSDeepCrawlStrategy</code> (breadth-first) or <code>DFSDeepCrawlStrategy</code> (depth-first).
-    string strategy = 1;
-
-    // Maximum link depth from seed URLs.
-    int32 max_depth = 2;
-
-    // Maximum total pages to crawl.
-    int32 max_pages = 3;
-
-    // Whether to follow links to external domains.
-    bool include_external = 4;
-
     // Parallelism settings.
-    RagCrawlerParallelism rag_crawler_parallelism = 5;
+    RagCrawlerParallelism rag_crawler_parallelism = 1;
 
     // Timeout settings.
-    RagCrawlerTimeouts rag_crawler_timeouts = 6;
+    RagCrawlerTimeouts rag_crawler_timeouts = 2;
 
     // Retry settings.
-    RagCrawlerRetry rag_crawler_retry = 7;
+    RagCrawlerRetry rag_crawler_retry = 3;
 
     // Incremental crawling settings.
-    RagCrawlerIncremental rag_crawler_incremental = 8;
+    RagCrawlerIncremental rag_crawler_incremental = 4;
+
+    // Optional. Whether to enable deep crawling behavior.
+    // Default <code>false</code>. If <code>false</code>, deep crawl settings are ignored.
+    bool use_deep_crawl = 5;
+
+    // Optional. Deep crawling settings.
+    RagCrawlerDeepCrawlConfig rag_crawler_deep_crawl_config = 6;
+
+}
+
+// Deep crawling behavior configuration.
+message RagCrawlerDeepCrawlConfig {
+
+    // Optional. Crawl strategy: e.g., <code>BFSDeepCrawlStrategy</code> (breadth-first) or <code>DFSDeepCrawlStrategy</code> (depth-first).
+    string strategy = 1;
+
+    // Optional. Maximum link depth from seed URLs.
+    int32 max_depth = 2;
+
+    // Optional. Maximum total pages to crawl.
+    int32 max_pages = 3;
+
+    // Optional. Whether to follow links to external domains.
+    bool include_external = 4;
 
 }
 
@@ -3219,36 +3257,6 @@ message RagCrawlerOutputChunking {
     // Maximum characters per chunk.
     int32 max_chunk_size = 3;
 
-}
-
-// Stealth mode settings.
-message RagCrawlerStealthMode {
-
-    // Whether stealth plugins are enabled to modify browser fingerprints.
-    bool enabled = 1;
-}
-
-// Captcha solving settings.
-message RagCrawlerCaptcha {
-
-    // Whether captcha solving is enabled.
-    bool enabled = 1;
-}
-
-// Scheduling configuration for the crawler.
-message RagCrawlerScheduling {
-
-    // Schedule type: <code>cron</code> | <code>interval</code> | <code>manual</code>.
-    string type = 1;
-
-    // Cron expression (e.g., <code>0 */6 * * *</code> for every 6 hours).
-    string cron = 2;
-
-    // Timezone for schedule (e.g., <code>Europe/Vienna</code>).
-    string timezone = 3;
-
-    // Random delay in seconds (0 to jitter_seconds) to avoid thundering herd.
-    int32 jitter_seconds = 4;
 }
 
 // Request message for adding crawler output to one or more datasets.
