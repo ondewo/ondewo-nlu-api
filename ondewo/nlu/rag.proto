@@ -45,7 +45,7 @@ import "ondewo/nlu/operations.proto";
 service Rags {
 
     // ===========================================
-    // Dataset Management (10 methods)
+    // Dataset Management
     // REST: /api/v1/datasets
     // ===========================================
 
@@ -73,6 +73,63 @@ service Rags {
     // List datasets with pagination and filtering.<br>
     // Returns datasets from all tenants the user has access to.
     rpc RagListDatasets(RagListDatasetsRequest) returns (RagDatasetList);
+
+    // ========================================================================
+    // Document Management
+    // REST: /api/v1/datasets/<dataset_id>/documents
+    // ========================================================================
+
+    // RAGFlow endpoint: POST /api/v1/datasets/<dataset_id>/documents
+
+    // Upload one or more documents to a dataset.<br>
+    // Documents start in UNSTART state and must be parsed.
+    rpc RagUploadDocument(stream RagUploadDocumentRequest) returns (RagDocument);
+
+    // RAGFlow endpoint: PUT /api/v1/datasets/<dataset_id>/documents/<document_id>
+
+    // Update document metadata and configuration.<br>
+    // Changing chunk_method resets document to UNSTART and deletes chunks.
+    rpc RagUpdateDocument(RagUpdateDocumentRequest) returns (RagDocument);
+
+    // RAGFlow endpoint: GET /api/v1/datasets/<dataset_id>/documents/<document_id>
+
+    // Download the original document file.<br>
+    // Returns binary file stream from storage.<br>
+    // First chunk contains metadata, subsequent chunks only contain data.
+    rpc RagDownloadDocument(RagDownloadDocumentRequest) returns (stream RagFileChunk);
+
+    // RAGFlow endpoint: GET /api/v1/datasets/<dataset_id>/documents
+
+    // List documents in a dataset with pagination and filtering.<br>
+    // Supports time range filtering and keyword search.
+    rpc RagListDocuments(RagListDocumentsRequest) returns (RagListDocumentsResponse);
+
+    // RAGFlow endpoint: DELETE /api/v1/datasets/<dataset_id>/documents
+
+    // Delete one or more documents from a dataset (batch operation).<br>
+    // If ids empty, deletes all documents. Removes chunks and storage files.
+    rpc RagDeleteDocuments(RagDeleteDocumentsRequest) returns (RagPartialSuccess);
+
+    // ========================================================================
+    // Chunk Management
+    // REST: /api/v1/datasets/<dataset_id>/chunks, /api/v1/datasets/<dataset_id>/documents/<document_id>/chunks, /api/v1/retrieval
+    // ========================================================================
+
+    // RAGFlow endpoint: POST /api/v1/retrieval
+
+    // Retrieve chunks using vector similarity search.<br>
+    // All datasets must use the same embedding model.<br>
+    // Supports reranking, metadata filtering, and knowledge graph retrieval.
+    rpc RagRetrieval(RagRetrievalRequest) returns (RagRetrievalResponse);
+
+    // ========================================================================
+    // Currently unused endpoints
+    // ========================================================================
+
+    // -------------------------------------------
+    // Dataset Management
+    // REST: /api/v1/datasets
+    // -------------------------------------------
 
     // RAGFlow endpoint: GET /api/v1/datasets/<dataset_id>/knowledge_graph
 
@@ -108,46 +165,10 @@ service Rags {
     // Get the RAPTOR construction status of a dataset.
     rpc RagRaptorStatus(RagDatasetIdRequest) returns (RagTaskStatus);
 
-    // ========================================================================
-    // Document Management (5 methods)
-    // REST: /api/v1/datasets/<dataset_id>/documents
-    // ========================================================================
-
-    // RAGFlow endpoint: POST /api/v1/datasets/<dataset_id>/documents
-
-    // Upload one or more documents to a dataset.<br>
-    // Documents start in UNSTART state and must be parsed.
-    rpc RagUploadDocument(RagUploadDocumentRequest) returns (RagDocument);
-
-    // RAGFlow endpoint: PUT /api/v1/datasets/<dataset_id>/documents/<document_id>
-
-    // Update document metadata and configuration.<br>
-    // Changing chunk_method resets document to UNSTART and deletes chunks.
-    rpc RagUpdateDocument(RagUpdateDocumentRequest) returns (RagDocument);
-
-    // RAGFlow endpoint: GET /api/v1/datasets/<dataset_id>/documents/<document_id>
-
-    // Download the original document file.<br>
-    // Returns binary file stream from storage.<br>
-    // First chunk contains metadata, subsequent chunks only contain data.
-    rpc RagDownloadDocument(RagDownloadDocumentRequest) returns (stream RagFileChunk);
-
-    // RAGFlow endpoint: GET /api/v1/datasets/<dataset_id>/documents
-
-    // List documents in a dataset with pagination and filtering.<br>
-    // Supports time range filtering and keyword search.
-    rpc RagListDocuments(RagListDocumentsRequest) returns (RagListDocumentsResponse);
-
-    // RAGFlow endpoint: DELETE /api/v1/datasets/<dataset_id>/documents
-
-    // Delete one or more documents from a dataset (batch operation).<br>
-    // If ids empty, deletes all documents. Removes chunks and storage files.
-    rpc RagDeleteDocuments(RagDeleteDocumentsRequest) returns (RagPartialSuccess);
-
-    // ========================================================================
-    // Chunk Management (7 methods)
+    // ------------------------------------------------------------------------
+    // Chunk Management
     // REST: /api/v1/datasets/<dataset_id>/chunks, /api/v1/datasets/<dataset_id>/documents/<document_id>/chunks, /api/v1/retrieval
-    // ========================================================================
+    // ------------------------------------------------------------------------
 
     // RAGFlow endpoint: POST /api/v1/datasets/<dataset_id>/chunks
 
@@ -186,92 +207,10 @@ service Rags {
     // Re-tokenizes content and re-generates embeddings if content changed.
     rpc RagUpdateChunk(RagUpdateChunkRequest) returns (google.protobuf.Empty);
 
-    // RAGFlow endpoint: POST /api/v1/retrieval
-
-    // Retrieve chunks using vector similarity search.<br>
-    // All datasets must use the same embedding model.<br>
-    // Supports reranking, metadata filtering, and knowledge graph retrieval.
-    rpc RagRetrieval(RagRetrievalRequest) returns (RagRetrievalResponse);
-
-    // ========================================================================
-    // File Management (11 methods)
-    // REST: /api/v1/file
-    // ========================================================================
-
-    // RAGFlow endpoint: POST /api/v1/file/upload
-
-    // Upload one or more files via multipart form data.<br>
-    // Supports nested folder paths in filename.<br>
-    // Auto-creates intermediate folders.
-    rpc RagUploadFiles(stream RagUploadFilesRequest) returns (RagFileList);
-
-    // RAGFlow endpoint: POST /api/v1/file/create
-
-    // Create a new file or folder.<br>
-    // Duplicate names in same folder not allowed.
-    rpc RagCreateFile(RagCreateFileRequest) returns (RagFile);
-
-    // RAGFlow endpoint: GET /api/v1/file/list
-
-    // List files in a folder with pagination.<br>
-    // Supports keyword search. Auto-initializes knowledgebase docs folder.
-    rpc RagListFiles(RagListFilesRequest) returns (RagListFilesResponse);
-
-    // RAGFlow endpoint: GET /api/v1/file/root_folder
-
-    // Get user's root folder information.<br>
-    // Each tenant has a unique root folder.
-    rpc RagGetRootFolder(RagGetRootFolderRequest) returns (RagGetRootFolderResponse);
-
-    // RAGFlow endpoint: GET /api/v1/file/parent_folder
-
-    // Get the parent folder of a file.<br>
-    // Returns 404 if file or parent not found.
-    rpc RagGetParentFolder(RagFileIdRequest) returns (RagGetParentFolderResponse);
-
-    // RAGFlow endpoint: GET /api/v1/file/all_parent_folder
-
-    // Get all parent folders (breadcrumb path) of a file.<br>
-    // Returns array from file itself to root (includes the file, ordered deepest to root).
-    rpc RagGetAllParentFolders(RagFileIdRequest) returns (RagParentFoldersList);
-
-    // RAGFlow endpoint: POST /api/v1/file/rm
-
-    // Delete one or more files/folders.<br>
-    // Recursively deletes folder contents. Removes from storage.
-    rpc RagDeleteFiles(RagDeleteFilesRequest) returns (google.protobuf.Empty);
-
-    // RAGFlow endpoint: POST /api/v1/file/rename
-
-    // Rename a file or folder.<br>
-    // Cannot change file extension. Duplicate names not allowed.
-    rpc RagRenameFile(RagRenameFileRequest) returns (google.protobuf.Empty);
-
-    // RAGFlow endpoint: GET /api/v1/file/get/<file_id>
-
-    // Download a file.<br>
-    // Retrieves from MinIO/S3 storage.<br>
-    // First chunk contains metadata, subsequent chunks only contain data.
-    rpc RagDownloadFile(RagFileIdRequest) returns (stream RagFileChunk);
-
-    // RAGFlow endpoint: POST /api/v1/file/mv
-
-    // Move one or more files to another folder.<br>
-    // Validates all files and destination exist.
-    rpc RagMoveFile(RagMoveFileRequest) returns (google.protobuf.Empty);
-
-    // RAGFlow endpoint: POST /api/v1/file/convert
-
-    // Convert files to documents and add to datasets.<br>
-    // Handles folders recursively (converts all inner files).<br>
-    // Links files to multiple datasets if multiple dataset_ids provided.
-    rpc RagFileToDocument(RagFileToDocumentRequest) returns (RagFileToDocumentList);
-
-    // ========================================================================
-    // Chat Assistant Management (4 methods)
-    // Chat assistants are RAG-powered conversational agents.
+    // ------------------------------------------------------------------------
+    // Chat Assistant Management
     // REST: /api/v1/chats
-    // ========================================================================
+    // ------------------------------------------------------------------------
 
     // RAGFlow endpoint: POST /api/v1/chats
 
@@ -298,10 +237,10 @@ service Rags {
     // Returns full dataset objects (not just IDs).
     rpc RagListChatAssistants(RagListChatAssistantsRequest) returns (RagChatAssistantList);
 
-    // ========================================================================
-    // Agent Management (4 methods)
+    // ------------------------------------------------------------------------
+    // Agent Management
     // REST: /api/v1/agents
-    // ========================================================================
+    // ------------------------------------------------------------------------
 
     // RAGFlow endpoint: POST /api/v1/agents
 
@@ -327,10 +266,10 @@ service Rags {
     // Only returns user's own agents.
     rpc RagListAgents(RagListAgentsRequest) returns (RagAgentList);
 
-    // ========================================================================
-    // Session Management (6 methods)
+    // ------------------------------------------------------------------------
+    // Session Management
     // REST: /api/v1/chats/<chat_id>/sessions, /api/v1/agents/<agent_id>/sessions
-    // ========================================================================
+    // ------------------------------------------------------------------------
 
     // RAGFlow endpoint: POST /api/v1/chats/<chat_id>/sessions
 
@@ -368,10 +307,10 @@ service Rags {
     // If ids empty, deletes all sessions for the agent.
     rpc RagDeleteAgentSessions(RagDeleteAgentSessionsRequest) returns (RagPartialSuccess);
 
-    // ========================================================================
-    // Completion (4 methods)
+    // ------------------------------------------------------------------------
+    // Completion
     // REST: /api/v1/chats/<id>/completions, /api/v1/agents/<id>/completions, /api/v1/sessions
-    // ========================================================================
+    // ------------------------------------------------------------------------
 
     // RAGFlow endpoint: POST /api/v1/chats/<chat_id>/completions or POST /api/v1/chats_openai/<chat_id>/chat/completions
 
@@ -491,11 +430,14 @@ message RagFileMetadata {
 // First chunk contains metadata, subsequent chunks only contain data.
 message RagFileChunk {
 
-    // Optional. Chunk of file content.
-    bytes data = 1;
+    oneof payload {
 
-    // Optional. File metadata (only in first chunk).
-    RagFileMetadata metadata = 2;
+        // Optional. Chunk of file content.
+        bytes chunk = 1;
+
+        // Optional. File metadata (only in first chunk).
+        RagFileMetadata metadata = 2;
+    }
 }
 
 // Upload chunk for streaming uploads.
@@ -551,27 +493,11 @@ message RagCreateDatasetRequest {
     // Optional. Base64-encoded avatar image in the format <code>"data:image/[png|jpeg];base64,&lt;base64_string&gt;"</code>. Maximum 65,535 characters.
     string avatar = 5;
 
-    // Optional. Access permission for new dataset.
-    optional RagPermission permission = 6;
-
     // Optional. Default chunking method for documents in this dataset.
-    optional RagChunkMethod chunk_method = 7;
+    optional RagChunkMethod chunk_method = 6;
 
     // Optional. Configuration settings for the dataset parser. The used fields vary depending on the selected <code>chunk_method</code>.
-    RagParserConfig parser_config = 8;
-
-    // Optional. Embedding model name in the format "&lt;model_name&gt;@&lt;factory_name&gt;" (uses user's default if not specified). Maximum length 255.
-    string embedding_model = 9;
-}
-
-// Access permissions for a dataset.
-enum RagPermission {
-
-    // Only the current user can manage the dataset (default).
-    me = 0;
-
-    // All team members of the current user can manage the dataset.
-    team = 1;
+    RagParserConfig parser_config = 7;
 }
 
 // Chunking method for documents. See <a href="https://ragflow.io/docs/dev/configure_knowledge_base#select-chunking-method">https://ragflow.io/docs/dev/configure_knowledge_base#select-chunking-method</a> for details.
@@ -671,9 +597,6 @@ message RagParserConfig {
 
     // Optional. GRAPHRAG-specific settings. Default <code>{ "use_graphrag": false }</code>.
     RagGraphRagConfig graphrag = 12;
-
-    // Additional fields returned by RAGFlow.
-    google.protobuf.Struct additional_fields = 13;
 }
 
 // RAPTOR configuration. Refer to <a href="https://arxiv.org/html/2401.18059v1">RAPTOR paper</a> for more information about RAPTOR.
@@ -697,9 +620,6 @@ message RagRaptorConfig {
 
     // Optional. Minimum 0. Default 0.
     optional int64 random_seed = 6;
-
-    // Additional fields returned by RAGFlow not explicitly defined above.
-    google.protobuf.Struct additional_fields = 7;
 }
 
 // GraphRAG configuration.
@@ -719,9 +639,6 @@ message RagGraphRagConfig {
 
     // Optional. Default <code>false</code>.
     bool resolution = 5;
-
-    // Additional fields returned by RAGFlow not explicitly defined above.
-    google.protobuf.Struct additional_fields = 6;
 }
 
 // Knowledge graph construction methods.
@@ -743,86 +660,44 @@ message RagDataset {
     // Base64-encoded avatar image.
     string avatar = 2;
 
-    // RAGFlow Tenant ID.
-    string tenant_id = 3;
-
     // Dataset name.
-    string name = 4;
-
-    // Dataset language (e.g. <code>"English"</code>).
-    string language = 5;
+    string name = 3;
 
     // Dataset description.
-    string description = 6;
-
-    // Embedding model name.
-    string embedding_model = 7;
-
-    // Access permission.
-    optional RagPermission permission = 8;
-
-    // ID of RAGFlow user who created the dataset.
-    string created_by = 9;
+    string description = 4;
 
     // Number of documents in the dataset.
-    optional int32 document_count = 10;
+    optional int32 document_count = 5;
 
     // Number of tokens in the dataset.
-    optional int32 token_num = 11;
+    optional int32 token_num = 6;
 
     // Number of chunks of all documents in the dataset.
-    optional int32 chunk_count = 12;
-
-    // Default similarity threshold (0.0-1.0).
-    optional float similarity_threshold = 13;
-
-    // Default vector similarity weight (0.0-1.0).
-    optional float vector_similarity_weight = 14;
+    optional int32 chunk_count = 7;
 
     // Default chunking method for documents in this dataset.
-    optional RagChunkMethod chunk_method = 15;
-
-    // Optional. Pipeline ID.
-    string pipeline_id = 16;
+    optional RagChunkMethod chunk_method = 8;
 
     // Document parser configuration (auto-generated based on chunk_method).
-    RagParserConfig parser_config = 17;
+    RagParserConfig parser_config = 9;
 
     // Pagerank.
-    optional int32 pagerank = 18;
-
-    // Optional. GraphRAG task ID.
-    string graphrag_task_id = 19;
-
-    // Optional. Finish time of GraphRAG task (ISO 8601 datetime).
-    string graphrag_task_finish_at = 20;
-
-    // Optional. RAPTOR task ID.
-    string raptor_task_id = 21;
-
-    // Optional. Finish time of RAPTOR task (ISO 8601 datetime).
-    string raptor_task_finish_at = 22;
-
-    // Optional. Mindmap task ID.
-    string mindmap_task_id = 23;
-
-    // Optional. Finish time of Mindmap task (ISO 8601 datetime).
-    string mindmap_task_finish_at = 24;
+    optional int32 pagerank = 10;
 
     // Optional. Status of dataset (<code>"0"</code>: inactive, <code>"1"</code>: active).
-    optional string status = 25;
+    optional string status = 11;
 
     // Creation timestamp (Unix timestamp in milliseconds).
-    int64 create_time = 26;
+    int64 create_time = 12;
 
     // Creation date (ISO 8601 datetime).
-    string create_date = 27;
+    string create_date = 13;
 
     // Last update timestamp (Unix timestamp in milliseconds).
-    int64 update_time = 28;
+    int64 update_time = 14;
 
     // Last update date (ISO 8601 datetime).
-    string update_date = 29;
+    string update_date = 15;
 }
 
 // Request message for updating an existing dataset.
@@ -848,20 +723,14 @@ message RagUpdateDatasetRequest {
     // Optional. New avatar image.
     string avatar = 6;
 
-    // Optional. New access permission.
-    optional RagPermission permission = 7;
-
     // Optional. New chunk method.
-    optional RagChunkMethod chunk_method = 8;
+    optional RagChunkMethod chunk_method = 7;
 
     // Optional. New parser config (deep merged with existing).
-    RagParserConfig parser_config = 9;
-
-    // Optional. New embedding model (cannot change if chunk_count > 0).
-    string embedding_model = 10;
+    RagParserConfig parser_config = 8;
 
     // Optional. Minimum 0. Maximum 100. PageRank value.
-    optional int32 pagerank = 11;
+    optional int32 pagerank = 9;
 }
 
 // Request message for deleting one or more of a RAGFlow resource.
@@ -874,11 +743,8 @@ message RagDeleteRequest {
     // Required. The language of the project to use.
     string language_code = 2;
 
-    // Optional. IDs of resources to delete. If empty and <code>delete_all</code> is <code>true</code>, deletes all. Duplicate IDs are not allowed.
+    // Optional. IDs of resources to delete. If empty all are deleted. Duplicate IDs are ignored.
     repeated string ids = 3;
-
-    // Optional. Delete all (needed because protobuf cannot represent <code>ids=null</code>).
-    optional bool delete_all = 4;
 }
 
 // Request message for listing datasets with pagination and filtering.
@@ -914,92 +780,6 @@ message RagDatasetList {
     repeated RagDataset datasets = 1;
 }
 
-// Request message with a single dataset ID.
-message RagDatasetIdRequest {
-
-    // Required. The agent to list all datasets from.
-    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    string parent = 1;
-
-    // Required. The language of the project to use.
-    string language_code = 2;
-
-    // Required. Dataset ID.
-    string dataset_id = 3;
-}
-
-// Response message for getting a dataset's knowledge graph.
-message RagGetKnowledgeGraphResponse {
-
-    // Graph structure with nodes (max 256) and edges (max 128).<br>
-    // Format: <code>{nodes: [{id, pagerank}], edges: [{source, target, weight}]}</code>
-    google.protobuf.Struct graph = 1;
-
-    // Mind map structure (optional).
-    google.protobuf.Struct mind_map = 2;
-
-    // Additional fields to pass through to RAGFlow.
-    google.protobuf.Struct additional_fields = 3;
-}
-
-// Response message for starting construction of a knowledge graph.
-message RagConstructKnowledgeGraphResponse {
-
-    // ID of the GraphRAG task.
-    string graphrag_task_id = 1;
-}
-
-// Status of a task.
-message RagTaskStatus {
-
-    // Task ID.
-    string id = 1;
-
-    // Document ID.
-    string doc_id = 2;
-
-    // Start page.
-    optional int32 from_page = 3;
-
-    // End page.
-    optional int32 to_page = 4;
-
-    // Task type.
-    string task_type = 5;
-
-    // Priority.
-    optional int32 priority = 6;
-
-    // Optional. Start time of the task (ISO 8601 datetime).
-    string begin_at = 7;
-
-    // Current duration of the task (in seconds).
-    optional float process_duration = 8;
-
-    // Task progress (0.0 - 1.0).
-    optional float progress = 9;
-
-    // Task progress message.
-    string progress_msg = 10;
-
-    // Retry count.
-    optional int32 retry_count = 11;
-
-    // Digest.
-    string digest = 12;
-
-    // List of document chunk IDs as a string.
-    string chunk_ids = 13;
-}
-
-
-// Response message for starting RAPTOR construction.
-message RagConstructRaptorResponse {
-
-    // ID of the GraphRAG task.
-    string raptor_task_id = 1;
-}
-
 // ============================================================================
 // Document Management Types
 // ============================================================================
@@ -1017,11 +797,14 @@ message RagUploadDocumentRequest {
     // Required. Target dataset ID to upload documents to.
     string dataset_id = 3;
 
-    // Required. Metadata of the uploaded file.
-    RagFileMetadata metadata = 4;
+    oneof payload {
 
-    // Required. File data (raw bytes).
-    bytes data = 5;
+        // Required. Metadata of the uploaded file.
+        RagFileMetadata metadata = 4;
+
+        // Required. File chunk (raw bytes).
+        bytes chunk = 5;
+    }
 }
 
 // Response message containing a list of documents.
@@ -1046,71 +829,81 @@ message RagDocument {
     // Chunking method used for this document.
     optional RagChunkMethod chunk_method = 4;
 
-    // Pipeline ID.
-    string pipeline_id = 5;
-
     // Parser configuration used for chunking this document.
-    RagParserConfig parser_config = 6;
+    RagParserConfig parser_config = 5;
 
-    // Source type indicating how the document was added (e.g., <code>"local"</code> for direct uploads, <code>"knowledgebase"</code> for file system imports).
-    string source_type = 7;
-
-    // File type or extension (e.g., <code>"pdf"</code>, <code>"docx"</code>, <code>"txt"</code>).
-    string type = 8;
-
-    // ID of the user who created the document.
-    string created_by = 9;
+    // Broad file category
+    RagDocumentType type = 6;
 
     // Document filename.
-    string name = 10;
-
-    // Storage location path in the backend file system or object storage.
-    string location = 11;
+    string name = 7;
 
     // File size in bytes.
-    optional int64 size = 12;
+    optional int64 size = 8;
 
     // Number of chunks extracted from this document (initially <code>0</code> until parsed).
-    optional int32 chunk_count = 13;
+    optional int32 chunk_count = 9;
 
     // Number of tokens across all chunks in this document.
-    optional int32 token_count = 14;
+    optional int32 token_count = 10;
 
     // Processing progress as a decimal value between <code>0.0</code> (not started) and <code>1.0</code> (complete).
-    optional float progress = 15;
+    optional float progress = 11;
 
     // Human-readable progress message describing current processing state.
-    string progress_msg = 16;
+    string progress_msg = 12;
 
     // Processing start timestamp (ISO 8601 datetime string).
-    string process_begin_at = 17;
+    string process_begin_at = 13;
 
     // Total processing duration in seconds.
-    optional float process_duration = 18;
+    optional float process_duration = 14;
 
     // Custom metadata fields specific to this document (arbitrary key-value pairs).
-    google.protobuf.Struct meta_fields = 19;
-
-    // Actual file extension extracted from the file (may differ from filename extension).
-    string suffix = 20;
+    google.protobuf.Struct meta_fields = 15;
 
     // Document processing status.
-    optional RagDocumentStatus run = 21;
+    optional RagDocumentStatus run = 16;
 
-    // Validation status indicating if document is enabled (<code>"1"</code>=valid/enabled, <code>"0"</code>=invalid/disabled).
-    string status = 22;
+    // Status indicating if document is enabled (<code>"1"</code>=enabled, <code>"0"</code>=disabled).
+    string status = 17;
 
     // Creation timestamp (Unix timestamp in milliseconds).
-    int64 create_time = 23;
+    int64 create_time = 18;
 
     // Creation date (ISO 8601 datetime string).
-    string create_date = 24;
+    string create_date = 19;
 
     // Last update timestamp (Unix timestamp in milliseconds).
-    int64 update_time = 25;
+    int64 update_time = 20;
 
     // Last update date (ISO 8601 datetime string).
-    string update_date = 26;
+    string update_date = 21;
+}
+
+// Broad document category.
+enum RagDocumentType {
+
+    // PDF
+    pdf = 0;
+
+    // general documents (e.g. text, slides, spreadsheets, code, ...)
+    doc = 1;
+
+    // images and videos
+    visual = 2;
+
+    // audio
+    aural = 3;
+
+    // empty virtual files
+    virtual = 4;
+
+    // folders
+    folder = 5;
+
+    // unrecognized document types
+    other = 6
 }
 
 // Document processing status.
@@ -1209,7 +1002,7 @@ message RagListDocumentsRequest {
     // Optional. Sort in descending order (default: <code>true</code>).
     optional bool desc = 8;
 
-    // Optional. Search keywords to filter documents (searches in document name and metadata).
+    // Optional. Filter by document names containing <code>keywords</code>.
     string keywords = 9;
 
     // Optional. Suffixes to filter by (e.g. <code>["pdf", "png", "docx"]</code>).
@@ -1223,6 +1016,95 @@ message RagListDocumentsRequest {
 
     // Optional. Filter by creation time end (Unix timestamp in milliseconds, <code>0</code> = no filter).
     int64 create_time_to = 13;
+
+    // Optional. Metadata filter condition to restrict results based on document metadata.<br>
+    RagMetadataConditions metadata_condition = 14;
+}
+
+// List of document metadata conditions.
+message RagMetadataConditions {
+
+    // Optional. Whether to apply the conditions with a logical <em>and</em> or logical <em>or</em>.
+    RagLogic logic = 1;
+
+    // Optional. List of conditions.
+    repeated RagMetadataCondition conditions = 1;
+}
+
+// Metadata conditions logical operators
+enum RagLogic {
+
+    // Return results that match <em>all</em> conditions.
+    and = 0;
+
+    // Return results that match <em>any</em> condition.
+    or = 1;
+}
+
+// Condition to filter document metadata on.
+// String comparison is always case-insensitive.
+message RagMetadataCondition {
+
+    // Required. Metadata field name.
+    string name = 1;
+
+    // Required. Comparison operator.
+    RagComparisonOperator comparison_operator = 2;
+
+    // Required. Value to compare to.
+    string value = 3;
+}
+
+// Vaild metadata condition comparison operators
+enum RagComparisonOperator {
+
+    // String representation of metadata field contains value.<br>
+    // If metadata field is a list, checks if the string representation of <em>any</em> field contains value.
+    contains = 0;
+
+    // String representation of metadata field does not contain value.<br>
+    // If metadata field is a list, checks if the string representation of <em>no</em> fields contains value.
+    not_contains = 1;
+
+    // Checks with Python's <code>in</code> opertor.<br>
+    // If metadata field is a list, <em>all</em> elements must satisfy the condition.
+    in = 2;
+
+    // Checks with Python's <code>not in</code> opertor.<br>
+    // If metadata field is a list, <em>all</em> elements must satisfy the condition.
+    not_in = 3;
+
+    // String representation fo metadata field starts with value.<br>
+    // If metadata field is a list, checks if the joined string of the string representations of all list elements starts with the value.
+    start_with = 4;
+
+    // String representation fo metadata field ends with value.<br>
+    // If metadata field is a list, checks if the joined string of the string representations of all list elements ends with the value.
+    ends_with = 5;
+
+    // Is empty (Python <em>falsy</em>).
+    empty = 6;
+
+    // Is not empty (Python <em>truthy</em>).
+    not_empty = 7;
+
+    // Equals.
+    eq = 8;
+
+    // Does not equal.
+    neq = 9;
+
+    // Greater than.
+    gt = 10;
+
+    // Less than.
+    lt = 11;
+
+    // Greater than or equal.
+    geq = 12;
+
+    // Less than or equal.
+    leq = 13;
 }
 
 // Response message for listing documents.
@@ -1248,16 +1130,235 @@ message RagDeleteDocumentsRequest {
     // Required. Dataset ID containing the documents to delete.
     string dataset_id = 3;
 
-    // Optional. Document IDs to delete. If empty and <code>delete_all</code> is <code>true</code>, deletes all documents in the dataset.
+    // Optional. Document IDs to delete. If empty, deletes all documents in the dataset.
     repeated string ids = 4;
-
-    // Optional. Delete all documents in the dataset (needed because protobuf cannot represent <code>ids=null</code>).
-    optional bool delete_all = 5;
 }
 
 // ============================================================================
 // Chunk Management Types
 // ============================================================================
+
+// Request message for retrieving chunks using vector similarity search.<br>
+// Supports hybrid search combining vector similarity with keyword matching.
+message RagRetrievalRequest {
+
+    // Required. The agent to retrieve chunks for.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Required. The language of the project to use.
+    string language_code = 2;
+
+    // Required. Dataset IDs to search (all datasets must use the same embedding model).
+    repeated string dataset_ids = 3;
+
+    // Optional. Pagination parameters.
+    RagPagination pagination = 4;
+
+    // Required. Query string to search for.
+    string question = 5;
+
+    // Optional. Filter by specific document IDs within the datasets.
+    repeated string document_ids = 6;
+
+    // Optional. Include knowledge graph retrieval to enhance results with graph relationships.
+    optional bool use_kg = 7;
+
+    // Optional. Cross-language translation codes to enable multilingual retrieval.<br>
+    // List elements can be any form of language name/code (parsed by LLM).
+    repeated string cross_languages = 8;
+
+    // Optional. Metadata filter condition to restrict results based on document metadata.
+    RagMetadataConditions metadata_condition = 9;
+
+    // Optional. Minimum similarity score threshold between <code>0.0</code> and <code>1.0</code> (default: <code>0.2</code>).
+    float similarity_threshold = 10;
+
+    // Optional. Weight for vector similarity versus keyword matching between <code>0.0</code> and <code>1.0</code> (default: <code>0.3</code>).<br>
+    // Higher values favor vector similarity, lower values favor keyword matching.
+    optional float vector_similarity_weight = 11;
+
+    // Optional. Minimum 1. Maximum number of chunks to retrieve before reranking (default: <code>1024</code>).
+    int32 top_k = 12;
+
+    // Optional. Whether to highlight matched content in the returned chunks.
+    optional bool highlight = 13;
+
+    // Optional. Extract additional keywords from the query to improve retrieval.
+    optional bool keyword = 14;
+}
+
+// Response message for chunk retrieval.
+message RagRetrievalResponse {
+
+    // Retrieved chunks with similarity scores populated (ordered by relevance).
+    repeated RagChunk chunks = 1;
+
+    // Document aggregations providing statistics about which documents matched.
+    repeated RagDocAgg doc_aggs = 2;
+
+    // Total number of chunks matching the query (before pagination).
+    optional int32 total = 3;
+}
+
+// Chunk of text extracted from a document.<br>
+// Chunks are the basic retrieval units used for vector similarity search in RAG.
+message RagChunk {
+
+    // Chunk ID (computed as xxhash of content combined with document_id).
+    string id = 1;
+
+    // Parent dataset ID.
+    string dataset_id = 2;
+
+    // Parent document ID.
+    string document_id = 3;
+
+    // Chunk text content (the actual text segment extracted from the document).
+    string content = 4;
+
+    // Document name keyword used for filtering and identification.
+    string docnm_kwd = 5;
+
+    // Important keywords extracted from or manually assigned to this chunk.
+    repeated string important_keywords = 6;
+
+    // Associated questions for Q&amp;A chunks (used when <code>chunk_method=qa</code>).
+    repeated string questions = 7;
+
+    // Associated image ID if this chunk references an image.
+    string image_id = 8;
+
+    // Availability status indicating if the chunk is active and can be retrieved (can be disabled without deletion).
+    optional bool available = 9;
+
+    // Position information in the original document.<br>
+    // Each position is an array of 5 integers representing location data (format varies by document type).
+    repeated google.protobuf.ListValue positions = 10;
+
+    // Creation timestamp (ISO 8601 datetime string).
+    string create_time = 11;
+
+    // Creation timestamp as a floating-point Unix timestamp.
+    float create_timestamp = 12;
+
+    // Document name used as a keyword for retrieval.
+    string document_keyword = 13;
+
+    // Similarity score between <code>0.0</code> and <code>1.0</code> (only populated in retrieval responses).
+    optional float similarity = 14;
+}
+
+// Aggregated document retrieval results containing how many chunks of the given document where retrieved
+message RagDocAgg {
+
+    // Document name
+    string doc_name = 1;
+
+    // Document ID
+    string doc_id = 2;
+
+    // Number of retrieved chunks
+    int32 count = 3;
+}
+
+// =============================================================================
+// Currently unused messages
+// =============================================================================
+
+// ----------------------------------------------------------------------------
+// Dataset Management Types
+// ----------------------------------------------------------------------------
+
+// Request message with a single dataset ID.
+message RagDatasetIdRequest {
+
+    // Required. The agent to list all datasets from.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Required. The language of the project to use.
+    string language_code = 2;
+
+    // Required. Dataset ID.
+    string dataset_id = 3;
+}
+
+// Response message for getting a dataset's knowledge graph.
+message RagGetKnowledgeGraphResponse {
+
+    // Graph structure with nodes (max 256) and edges (max 128).<br>
+    // Format: <code>{nodes: [{id, pagerank}], edges: [{source, target, weight}]}</code>
+    google.protobuf.Struct graph = 1;
+
+    // Mind map structure (optional).
+    google.protobuf.Struct mind_map = 2;
+
+    // Additional fields to pass through to RAGFlow.
+    google.protobuf.Struct additional_fields = 3;
+}
+
+// Response message for starting construction of a knowledge graph.
+message RagConstructKnowledgeGraphResponse {
+
+    // ID of the GraphRAG task.
+    string graphrag_task_id = 1;
+}
+
+// Status of a task.
+message RagTaskStatus {
+
+    // Task ID.
+    string id = 1;
+
+    // Document ID.
+    string doc_id = 2;
+
+    // Start page.
+    optional int32 from_page = 3;
+
+    // End page.
+    optional int32 to_page = 4;
+
+    // Task type.
+    string task_type = 5;
+
+    // Priority.
+    optional int32 priority = 6;
+
+    // Optional. Start time of the task (ISO 8601 datetime).
+    string begin_at = 7;
+
+    // Current duration of the task (in seconds).
+    optional float process_duration = 8;
+
+    // Task progress (0.0 - 1.0).
+    optional float progress = 9;
+
+    // Task progress message.
+    string progress_msg = 10;
+
+    // Retry count.
+    optional int32 retry_count = 11;
+
+    // Digest.
+    string digest = 12;
+
+    // List of document chunk IDs as a string.
+    string chunk_ids = 13;
+}
+
+
+// Response message for starting RAPTOR construction.
+message RagConstructRaptorResponse {
+
+    // ID of the GraphRAG task.
+    string raptor_task_id = 1;
+}
+
+// ----------------------------------------------------------------------------
+// Chunk Management Types
+// ----------------------------------------------------------------------------
 
 // Request message for starting document parsing.<br>
 // Parsing extracts chunks from documents using the configured chunk method.
@@ -1332,60 +1433,6 @@ message RagListChunksResponse {
 
     // Document details for the parent document.
     RagDocument doc = 3;
-}
-
-// Chunk of text extracted from a document.<br>
-// Chunks are the basic retrieval units used for vector similarity search in RAG.
-message RagChunk {
-
-    // Chunk ID (computed as xxhash of content combined with document_id).
-    string id = 1;
-
-    // Parent dataset ID.
-    string dataset_id = 2;
-
-    // Parent document ID.
-    string document_id = 3;
-
-    // Chunk text content (the actual text segment extracted from the document).
-    string content = 4;
-
-    // Document name keyword used for filtering and identification.
-    string docnm_kwd = 5;
-
-    // Important keywords extracted from or manually assigned to this chunk.
-    repeated string important_keywords = 6;
-
-    // Associated questions for Q&amp;A chunks (used when <code>chunk_method=qa</code>).
-    repeated string questions = 7;
-
-    // Associated image ID if this chunk references an image.
-    string image_id = 8;
-
-    // Availability status indicating if the chunk is active and can be retrieved (can be disabled without deletion).
-    optional bool available = 9;
-
-    // Position information in the original document.<br>
-    // Each position is an array of 5 integers representing location data (format varies by document type).
-    repeated google.protobuf.ListValue positions = 10;
-
-    // Creation timestamp (ISO 8601 datetime string).
-    string create_time = 11;
-
-    // Creation timestamp as a floating-point Unix timestamp.
-    float create_timestamp = 12;
-
-    // Document name used as a keyword for retrieval.
-    string document_keyword = 13;
-
-    // Similarity score between <code>0.0</code> and <code>1.0</code> (only populated in retrieval responses).
-    optional float similarity = 14;
-
-    // Embedding vector for this chunk (optional, rarely included in responses for performance reasons).
-    google.protobuf.Struct vector = 15;
-
-    // Additional fields returned by RAGFlow not explicitly defined above.
-    google.protobuf.Struct additional_fields = 16;
 }
 
 // Request message for manually adding a chunk to a document.<br>
@@ -1479,97 +1526,9 @@ message RagUpdateChunkRequest {
     repeated google.protobuf.ListValue positions = 10;
 }
 
-// Request message for retrieving chunks using vector similarity search.<br>
-// Supports hybrid search combining vector similarity with keyword matching.
-message RagRetrievalRequest {
-
-    // Required. The agent to retrieve chunks for.
-    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    string parent = 1;
-
-    // Required. The language of the project to use.
-    string language_code = 2;
-
-    // Required. Dataset IDs to search (all datasets must use the same embedding model).
-    repeated string dataset_ids = 3;
-
-    // Optional. Pagination parameters.
-    RagPagination pagination = 4;
-
-    // Required. Query string to search for.
-    string question = 5;
-
-    // Optional. Filter by specific document IDs within the datasets.
-    repeated string document_ids = 6;
-
-    // Optional. Include knowledge graph retrieval to enhance results with graph relationships.
-    optional bool use_kg = 7;
-
-    // Optional. Cross-language translation codes to enable multilingual retrieval.
-    repeated string cross_languages = 8;
-
-    // Optional. Metadata filter condition to restrict results based on document metadata.
-    RagMetadataConditions metadata_condition = 9;
-
-    // Optional. Minimum similarity score threshold between <code>0.0</code> and <code>1.0</code> (default: <code>0.2</code>).
-    float similarity_threshold = 10;
-
-    // Optional. Weight for vector similarity versus keyword matching between <code>0.0</code> and <code>1.0</code> (default: <code>0.3</code>).<br>
-    // Higher values favor vector similarity, lower values favor keyword matching.
-    optional float vector_similarity_weight = 11;
-
-    // Optional. Minimum 1. Maximum number of chunks to retrieve before reranking (default: <code>1024</code>).
-    int32 top_k = 12;
-
-    // Optional. Rerank model ID to reorder results after initial retrieval.
-    string rerank_id = 13;
-
-    // Optional. Whether to highlight matched content in the returned chunks.
-    optional bool highlight = 14;
-
-    // Optional. Extract additional keywords from the query to improve retrieval.
-    optional bool keyword = 15;
-}
-
-// List of document metadata conditions.
-message RagMetadataConditions {
-
-    // Optional. List of conditions.
-    repeated RagMetadataCondition conditions = 1;
-}
-
-// Condition to filter document metadata on.
-message RagMetadataCondition {
-
-    // Required. Metadata field name.
-    string name = 1;
-
-    // Required. Comparison operator. Can be one of: <code>"contains"</code>, <code>"not contains"</code>, <code>"start with"</code>, <code>"empty"</code>, <code>"not empty"</code>, <code>"="</code>, <code>"≠"</code>, <code>"&lt;"</code>, <code>"&gt;</code>, <code>"≥"</code>, <code>"≤"</code>
-    string comparison_operator = 2;
-
-    // Required. Value to compare to.
-    string value = 3;
-}
-
-// Response message for chunk retrieval.
-message RagRetrievalResponse {
-
-    // Retrieved chunks with similarity scores populated (ordered by relevance).
-    repeated RagChunk chunks = 1;
-
-    // Document aggregations providing statistics about which documents matched.
-    repeated google.protobuf.Struct doc_aggs = 2;
-
-    // Total number of chunks matching the query (before pagination).
-    optional int32 total = 3;
-
-    // Additional fields returned by RAGFlow not explicitly defined above.
-    google.protobuf.Struct additional_fields = 4;
-}
-
-// ============================================================================
+// ----------------------------------------------------------------------------
 // File Management Types
-// ============================================================================
+// ----------------------------------------------------------------------------
 
 // Request message for uploading files via streaming multipart form data.
 // RAGFlow supports individual and bulk file uploads. Files can be uploaded to a specific folder or to the root directory if no parent folder is specified.
@@ -1867,9 +1826,9 @@ message RagFileToDocument {
     string update_date = 7;
 }
 
-// ============================================================================
+// ----------------------------------------------------------------------------
 // Chat Management Types
-// ============================================================================
+// ----------------------------------------------------------------------------
 
 // Request message for creating a new chat assistant.
 message RagCreateChatAssistantRequest {
@@ -2120,9 +2079,9 @@ message RagChatAssistantList {
     repeated RagChatAssistant chats = 1;
 }
 
-// ============================================================================
+// ----------------------------------------------------------------------------
 // Agent Management Types
-// ============================================================================
+// ----------------------------------------------------------------------------
 
 // Request message for creating a new RAGFlow agent.
 message RagCreateAgentRequest {
@@ -2293,9 +2252,9 @@ message RagAgent {
     string update_date = 13;
 }
 
-// ============================================================================
+// ----------------------------------------------------------------------------
 // Session Management Types
-// ============================================================================
+// ----------------------------------------------------------------------------
 
 // Request message for creating a new chat session.
 message RagCreateChatSessionRequest {
@@ -2574,9 +2533,9 @@ message RagDeleteAgentSessionsRequest {
     optional bool delete_all = 5;
 }
 
-// ============================================================================
+// ----------------------------------------------------------------------------
 // Completion Types (Streaming)
-// ============================================================================
+// ----------------------------------------------------------------------------
 
 // Request message for generating a chat completion.
 message RagChatCompletionRequest {
@@ -2697,19 +2656,6 @@ message RagIntList {
 
     // Integer list
     repeated int32 int_list = 1;
-}
-
-// Aggregated document retrieval results containing how many chunks of the given document where retrieved
-message RagDocAgg {
-
-    // Document name
-    string doc_name = 1;
-
-    // Document ID
-    string doc_id = 2;
-
-    // Number of retrieved chunks
-    int32 count = 3;
 }
 
 // Request message for generating an agent completion.
