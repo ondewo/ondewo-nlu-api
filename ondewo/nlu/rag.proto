@@ -3005,21 +3005,21 @@ message RagCrawler {
     RagCrawlerConfig rag_crawler_config = 6;
 
     // Creation date and time. Read-only field.
-    google.protobuf.Timestamp created_at = 9;
+    google.protobuf.Timestamp created_at = 7;
 
     // Modification date and time. Read-only field.
-    google.protobuf.Timestamp modified_at = 10;
+    google.protobuf.Timestamp modified_at = 8;
 
     // User id in form of a valid UUID.
-    string created_by = 11;
+    string created_by = 9;
 
     // User id in form of a valid UUID.
-    string modified_by = 12;
+    string modified_by = 10;
 
     // Optional. Browser runtime setup (engine, viewport, cookies, proxy, headers).
     // Roughly corresponds to Crawl4AI <code>BrowserConfig</code>.
     // Use this when target sites require JS, custom headers, session cookies, or proxy routing.
-    RagCrawlerBrowserConfig rag_crawler_browser_config = 13;
+    RagCrawlerBrowserConfig rag_crawler_browser_config = 11;
 
 }
 
@@ -3155,37 +3155,37 @@ message RagCrawlerBrowserConfig {
     google.protobuf.Struct additional_fields = 2;
 
     // Optional. Run browser in headless mode.
-    optional bool headless = 4;
+    optional bool headless = 3;
 
     // Optional. Proxy settings.
-    RagCrawlerProxyConfig proxy_config = 10;
+    RagCrawlerProxyConfig proxy_config = 4;
 
     // Optional. Browser viewport width.
-    int32 viewport_width = 11;
+    int32 viewport_width = 5;
 
     // Optional. Browser viewport height.
-    int32 viewport_height = 12;
+    int32 viewport_height = 6;
 
     // Optional. Device scale factor (DPR).
-    float device_scale_factor = 13;
+    float device_scale_factor = 7;
 
     // Optional. Initial cookies.
-    repeated RagCrawlerCookie cookies = 16;
+    repeated RagCrawlerCookie cookies = 8;
 
     // Optional. Enable stealth mode.
-    optional bool enable_stealth = 19;
+    optional bool enable_stealth = 9;
 
     // Optional. Enable text-only mode for faster/lower-cost crawling.
-    optional bool text_mode = 20;
+    optional bool text_mode = 10;
 
     // Optional. Ignore invalid HTTPS certificates.
-    optional bool ignore_https_errors = 25;
+    optional bool ignore_https_errors = 11;
 
     // Optional. Enable/disable JavaScript execution.
-    optional bool javascript_enabled = 26;
+    optional bool javascript_enabled = 12;
 
     // Optional. User-agent generator configuration used when <code>user_agent_mode=random</code>.
-    google.protobuf.Struct user_agent_generator_config = 29;
+    google.protobuf.Struct user_agent_generator_config = 13;
 }
 
 // HTTP header key/value pair.
@@ -3256,111 +3256,111 @@ message RagCrawlerConfig {
 
     // Optional. Enable deep crawler behavior (link following beyond seeds).
     // Default <code>false</code>. If <code>false</code>, deep crawler settings are ignored.
-    bool use_deep_crawler = 5;
+    bool use_deep_crawler = 3;
 
     // Optional. Deep crawler settings (depth/pages/scoring/filter chain).
-    RagCrawlerDeepCrawlerConfig rag_crawler_deep_crawler_config = 6;
+    RagCrawlerDeepCrawlerConfig rag_crawler_deep_crawler_config = 4;
 
     // Optional. Structured output configuration (format + metadata policy).
-    RagCrawlerOutputConfig output = 7;
+    RagCrawlerOutputConfig output = 5;
 
     // Optional. Page rendering and extraction strategy configuration.
-    RagCrawlerRenderingConfig rendering = 8;
+    RagCrawlerRenderingConfig rendering = 6;
 
     // Optional. Crawl traversal strategy.
     // BFS is often best for broad site coverage; DFS for deep section traversal.
     // Default <code>RAG_CRAWLER_CRAWL_STRATEGY_BFS</code>.
-    optional RagCrawlerCrawlStrategy strategy = 9;
+    optional RagCrawlerCrawlStrategy strategy = 7;
 
     // Optional. Request and rendering timeout settings.
-    RagCrawlerTimeoutsConfig timeouts = 10;
+    RagCrawlerTimeoutsConfig timeouts = 8;
 
     // Optional. Retry behavior configuration for transient failures.
-    RagCrawlerRetryConfig retry = 11;
+    RagCrawlerRetryConfig retry = 9;
 
     // Optional. Capture page screenshot per crawled URL.
-    bool capture_screenshot = 12;
+    bool capture_screenshot = 10;
 
     // Optional. Capture rendered page as PDF.
-    bool capture_pdf = 13;
+    bool capture_pdf = 11;
 
     // Optional. Capture rendered page snapshot as MHTML.
-    bool capture_mhtml = 14;
+    bool capture_mhtml = 12;
 
     // Optional. Collect SSL certificate details for HTTPS targets.
-    bool fetch_ssl_certificate = 15;
+    bool fetch_ssl_certificate = 13;
 
     // Optional. Capture browser network events for diagnostics.
-    bool capture_network_requests = 16;
+    bool capture_network_requests = 14;
 
     // Optional. Capture browser console messages for diagnostics.
-    bool capture_console_messages = 17;
+    bool capture_console_messages = 15;
 
     // Optional. Minimum score/quality threshold for table extraction.
-    int32 table_score_threshold = 19;
+    int32 table_score_threshold = 16;
 
     // Optional. Cache mode for crawling behavior.
-    optional RagCrawlerCacheMode cache_mode = 20;
+    optional RagCrawlerCacheMode cache_mode = 17;
 
     // Optional. Session identifier to reuse browser/session state across calls.
-    string session_id = 21;
+    string session_id = 18;
 
     // Optional. JavaScript snippets executed after waits on fully loaded pages.
-    repeated string js_code = 22;
+    repeated string js_code = 19;
 
     // Optional. JavaScript snippets executed before <code>wait_for</code>.
-    repeated string js_code_before_wait = 23;
+    repeated string js_code_before_wait = 20;
 
     // Optional. Wait condition (<code>css:...</code> or <code>js:...</code>).
-    string wait_for = 24;
+    string wait_for = 21;
 
     // Optional. Timeout in milliseconds for <code>wait_for</code>.
-    int32 wait_for_timeout = 25;
+    int32 wait_for_timeout = 22;
 
     // Optional. Auto-scroll the full page to load dynamic content.
-    bool scan_full_page = 27;
+    bool scan_full_page = 23;
 
     // Optional. Delay between scroll steps when <code>scan_full_page=true</code>.
-    float scroll_delay = 28;
+    float scroll_delay = 24;
 
     // Optional. Maximum number of scroll steps for full page scan.
-    int32 max_scroll_steps = 29;
+    int32 max_scroll_steps = 25;
 
     // Optional. Virtual scroll configuration for feeds that replace content while scrolling.
-    RagCrawlerVirtualScrollConfig virtual_scroll_config = 30;
+    RagCrawlerVirtualScrollConfig virtual_scroll_config = 26;
 
     // Optional. Remove blocking overlays/popups from page.
-    bool remove_overlay_elements = 31;
+    bool remove_overlay_elements = 27;
 
     // Optional. Remove known consent/CMP popups.
-    bool remove_consent_popups = 32;
+    bool remove_consent_popups = 28;
 
     // Optional. Browser locale (e.g. <code>en-US</code>).
-    string locale = 35;
+    string locale = 29;
 
     // Optional. Browser timezone (e.g. <code>Europe/Vienna</code>).
-    string timezone_id = 36;
+    string timezone_id = 30;
 
     // Optional. Browser geolocation override.
-    RagCrawlerGeolocation geolocation = 37;
+    RagCrawlerGeolocation geolocation = 31;
 
     // Optional. Exclude links to external domains from extracted links.
-    bool exclude_external_links = 38;
+    bool exclude_external_links = 32;
 
     // Optional. Exclude links to known social media domains.
-    bool exclude_social_media_links = 39;
+    bool exclude_social_media_links = 33;
 
     // Optional. Additional social media domains to exclude.
-    repeated string exclude_social_media_domains = 40;
+    repeated string exclude_social_media_domains = 34;
 
     // Optional. Custom domains to exclude from extracted links.
-    repeated string exclude_domains = 41;
+    repeated string exclude_domains = 35;
 
     // Optional. Exclude internal links from extracted links.
-    bool exclude_internal_links = 42;
+    bool exclude_internal_links = 36;
 
     // Optional. Whether this is a JS-only continuation in an existing session.
-    bool js_only = 43;
+    bool js_only = 37;
 
 
 // Cache mode for crawler runs.
@@ -3639,7 +3639,7 @@ message RagCrawlerDeepCrawlerConfig {
     RagCrawlerFilterChainConfig filter_chain = 6;
 
     // Optional. Enable prefetch mode for faster URL graph discovery.
-    bool prefetch = 8;
+    bool prefetch = 7;
 }
 
 // Structured markdown output aligned with Crawl4AI MarkdownGenerationResult.
@@ -3691,7 +3691,7 @@ message RagCrawlerTableRow {
 message RagCrawlerNetworkEvent {
 
     // Event type. Typical values: <code>request</code>, <code>response</code>, <code>request_failed</code>.
-    string event_type = 7;
+    string event_type = 1;
 
     // URL associated with the event.
     string url = 2;
@@ -3709,44 +3709,44 @@ message RagCrawlerNetworkEvent {
     google.protobuf.Struct payload = 6;
 
     // Optional. Request/response headers.
-    google.protobuf.Struct headers = 8;
+    google.protobuf.Struct headers = 7;
 
     // Optional. Request body payload for request events.
-    string post_data = 9;
+    string post_data = 8;
 
     // Optional. Browser resource type (document, xhr, fetch, image, ...).
-    string resource_type = 10;
+    string resource_type = 9;
 
     // Optional. Whether this request is a navigation request.
-    bool is_navigation_request = 11;
+    bool is_navigation_request = 10;
 
     // Optional. Event timestamp in seconds since epoch.
-    double timestamp = 12;
+    double timestamp = 11;
 
     // Optional. HTTP status text for response events.
-    string status_text = 13;
+    string status_text = 12;
 
     // Optional. Whether response came from service worker.
-    bool from_service_worker = 14;
+    bool from_service_worker = 13;
 
     // Optional. Request timing metrics.
-    google.protobuf.Struct request_timing = 15;
+    google.protobuf.Struct request_timing = 14;
 
     // Optional. Failure text for failed request events.
-    string failure_text = 16;
+    string failure_text = 15;
 }
 
 // Browser console message captured during crawling.
 message RagCrawlerConsoleMessage {
 
     // Message type. Typical values: <code>log</code>, <code>warning</code>, <code>error</code>, <code>info</code>, <code>debug</code>.
-    string type = 6;
+    string type = 1;
 
     // Message text.
     string text = 2;
 
     // Optional. Source location (e.g. <code>https://site/script.js:10:5</code>).
-    string location = 7;
+    string location = 3;
 
     // Optional. Timestamp in milliseconds since epoch.
     int64 timestamp_ms = 4;
@@ -3755,7 +3755,7 @@ message RagCrawlerConsoleMessage {
     google.protobuf.Struct payload = 5;
 
     // Optional. Event timestamp in seconds since epoch.
-    double timestamp = 8;
+    double timestamp = 6;
 }
 
 // SSL certificate details captured from crawled target.
@@ -3803,10 +3803,10 @@ message RagCrawlerResult {
     string url = 4;
 
     // Canonical raw HTML snapshot (equivalent to Crawl4AI <code>CrawlResult.html</code>).
-    string html = 32;
+    string html = 5;
 
     // Optional. Sanitized HTML after cleanup/content selection.
-    string cleaned_html = 10;
+    string cleaned_html = 6;
 
     // Timestamp when this URL was last processed by crawler.
     google.protobuf.Timestamp last_crawled_date = 7;
@@ -3819,61 +3819,61 @@ message RagCrawlerResult {
     RagCrawlerMarkdownResult markdown_result = 9;
 
     // Optional. Filtered HTML variant optimized for extraction.
-    string fit_html = 11;
+    string fit_html = 10;
 
     // Optional. Extracted link graph split by categories (e.g. internal/external).
-    google.protobuf.Struct links = 12;
+    google.protobuf.Struct links = 11;
 
     // Optional. Extracted media assets by category (e.g. images/audio/video).
-    google.protobuf.Struct media = 13;
+    google.protobuf.Struct media = 12;
 
     // Optional. Structured tables extracted from page.
-    repeated RagCrawlerTable tables = 14;
+    repeated RagCrawlerTable tables = 13;
 
     // Optional. Network diagnostics captured during crawl.
-    repeated RagCrawlerNetworkEvent network_requests = 16;
+    repeated RagCrawlerNetworkEvent network_requests = 14;
 
     // Optional. Browser console diagnostics captured during crawl.
-    repeated RagCrawlerConsoleMessage console_messages = 17;
+    repeated RagCrawlerConsoleMessage console_messages = 15;
 
     // Optional. JavaScript execution output captured from page scripts/hooks.
-    google.protobuf.Struct js_execution_result = 18;
+    google.protobuf.Struct js_execution_result = 16;
 
     // Optional. Screenshot payload as base64 PNG.
-    string screenshot = 19;
+    string screenshot = 17;
 
     // Optional. PDF payload (binary).
-    bytes pdf = 20;
+    bytes pdf = 18;
 
     // Optional. MHTML snapshot payload.
-    string mhtml = 21;
+    string mhtml = 19;
 
     // Optional. SSL certificate details.
-    RagCrawlerSslCertificate ssl_certificate = 23;
+    RagCrawlerSslCertificate ssl_certificate = 20;
 
     // Optional. Dispatcher/runtime metadata (parallel crawl context).
-    google.protobuf.Struct dispatch_result = 24;
+    google.protobuf.Struct dispatch_result = 21;
 
     // Optional. Crawl status flag.
-    bool success = 25;
+    bool success = 22;
 
     // Optional. Error details if crawl failed.
-    string error_message = 26;
+    string error_message = 23;
 
     // Optional. HTTP status code.
-    int32 status_code = 27;
+    int32 status_code = 24;
 
     // Optional. HTTP response headers.
-    google.protobuf.Struct response_headers = 28;
+    google.protobuf.Struct response_headers = 25;
 
     // Optional. Redirect destination URL.
-    string redirected_url = 29;
+    string redirected_url = 26;
 
     // Optional. HTTP status code at redirect destination.
-    int32 redirected_status_code = 30;
+    int32 redirected_status_code = 27;
 
     // Optional. Structured extraction output (JSON string or plain text).
-    string extracted_content = 31;
+    string extracted_content = 28;
 }
 
 // Request message for creating a crawler job.
