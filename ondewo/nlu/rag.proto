@@ -101,7 +101,7 @@ service Rags {
 
     // List documents in a dataset with pagination and filtering.<br>
     // Supports time range filtering and keyword search.
-    rpc RagListDocuments(RagListDocumentsRequest) returns (RagListDocumentsResponse);
+    rpc RagListDocuments(RagListDocumentsRequest) returns (RagDocumentList);
 
     // RAGFlow endpoint: DELETE /api/v1/datasets/<dataset_id>/documents
 
@@ -1044,7 +1044,7 @@ enum RagComparisonOperator {
 }
 
 // Response message for listing documents.
-message RagListDocumentsResponse {
+message RagDocumentList {
 
     // List of documents for the current page.
     repeated RagDocument documents = 1;
