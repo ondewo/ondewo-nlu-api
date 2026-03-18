@@ -35,6 +35,7 @@ package ondewo.nlu;
 
 import "google/protobuf/empty.proto";
 import "google/protobuf/struct.proto";
+import "google/protobuf/timestamp.proto";
 
 // TODO change Github link if changes to RAGFlow are merged to upstream
 
@@ -346,16 +347,6 @@ service Rags {
 // Shared types used across multiple services.
 // ============================================================================
 
-// Pagination parameters for list requests.
-message RagPagination {
-
-    // Optional. Minimum 1. Page number (1-indexed, default: 1).
-    int32 page = 1;
-
-    // Optional. Minimum 1. Number of items per page (default varies by endpoint).
-    int32 page_size = 2;
-}
-
 // File metadata for streaming uploads/downloads.
 message RagFileMetadata {
 
@@ -367,33 +358,6 @@ message RagFileMetadata {
 
     // Optional. Minimum 0. File size in bytes (if known, 0 if unknown).
     int64 size = 3;
-}
-
-// File chunk for streaming downloads.<br>
-// First chunk contains metadata, subsequent chunks only contain data.
-message RagFileChunk {
-
-    oneof payload {
-
-        // Optional. Chunk of file content.
-        bytes chunk = 1;
-
-        // Optional. File metadata (only in first chunk).
-        RagFileMetadata metadata = 2;
-    }
-}
-
-// Upload chunk for streaming uploads.
-// Used to stream file data after metadata is sent in first message.
-message RagUploadChunk {
-
-    // Required. Not actually optional but `optional` keyword is needed to enable presence tracking.
-    // Without it, it is impossible to distinguish between `0` and not present.
-    // Index into metadata.files array (0-based).
-    optional int32 file_index = 1;
-
-    // Optional. Chunk of file content, null indicates EOF.
-    bytes data = 2;
 }
 
 // On complete success: no fields set (empty message).
@@ -447,40 +411,40 @@ message RagCreateDatasetRequest {
 enum RagChunkMethod {
 
     // General (default).
-    naive = 0;
+    RAG_CHUNK_METHOD_NAIVE = 0;
 
     // Book.
-    book = 1;
+    RAG_CHUNK_METHOD_BOOK = 1;
 
     // Email.
-    email = 2;
+    RAG_CHUNK_METHOD_EMAIL = 2;
 
     // Laws.
-    laws = 3;
+    RAG_CHUNK_METHOD_LAWS = 3;
 
     // Manual.
-    manual = 4;
+    RAG_CHUNK_METHOD_MANUAL = 4;
 
     // One.
-    one = 5;
+    RAG_CHUNK_METHOD_ONE = 5;
 
     // Paper.
-    paper = 6;
+    RAG_CHUNK_METHOD_PAPER = 6;
 
     // Picture.
-    picture = 7;
+    RAG_CHUNK_METHOD_PICTURE = 7;
 
     // Presentation.
-    presentation = 8;
+    RAG_CHUNK_METHOD_PRESENTATION = 8;
 
     // Q&A.
-    qa = 9;
+    RAG_CHUNK_METHOD_QA = 9;
 
     // Table.
-    table = 10;
+    RAG_CHUNK_METHOD_TABLE = 10;
 
     // Tag.
-    tag = 11;
+    RAG_CHUNK_METHOD_TAG = 11;
 }
 
 // Document parser configuration.
@@ -588,10 +552,10 @@ message RagGraphRagConfig {
 enum RagGraphRagMethod {
 
     // Use prompts provided by <a href="https://github.com/HKUDS/LightRAG">LightRAG</a>.
-    light = 0;
+    RAG_GRAPH_RAG_METHOD_LIGHT = 0;
 
     // Use prompts provided by <a href="https://github.com/microsoft/graphrag">GraphRAG</a>.
-    general = 1;
+    RAG_GRAPH_RAG_METHOD_GENERAL = 1;
 }
 
 // Dataset containing documents for RAG.
@@ -630,17 +594,11 @@ message RagDataset {
     // Optional. Status of dataset (<code>"0"</code>: inactive, <code>"1"</code>: active).
     optional string status = 11;
 
-    // Creation timestamp (Unix timestamp in milliseconds).
-    int64 create_time = 12;
+    // Creation date and time.
+    google.protobuf.Timestamp create_time = 12;
 
-    // Creation date (ISO 8601 datetime).
-    string create_date = 13;
-
-    // Last update timestamp (Unix timestamp in milliseconds).
-    int64 update_time = 14;
-
-    // Last update date (ISO 8601 datetime).
-    string update_date = 15;
+    // Last update date and time.
+    google.protobuf.Timestamp update_time = 13;
 }
 
 // Request message for updating an existing dataset.
@@ -700,8 +658,25 @@ message RagListDatasetsRequest {
     // Required. The language of the project to use.
     string language_code = 2;
 
-    // Optional. Pagination parameters.
-    RagPagination pagination = 3;
+    // Optional. Specifies which page to return. The page token is a string of the format
+    // <pre><code>current_index-&lt;idx&gt;--page_size-&lt;size&gt;</code></pre>
+    //
+    // <ul>
+    //     <li><code>&lt;size&gt;</code> must be an integer &geq; <code>1</code>. The maximum number of results to return.</li>
+    //     <li><code>&lt;idx&gt;</code> must be an interger &geq; <code>0</code>. The start index in the requested list, starting from which a maximum of <code>&lt;size&gt;</code> elements are returned.</li>
+    // </ul>
+    //
+    // <em>Important note</em>: The <code>&lt;idx&gt;</code> is the index in the requested sequence NOT the page number. E.g. if the requested list has 100 elements then <code>current_index-5--page_size-15</code> returns the elements at index 5-19 and not the 5-th page of 15 elements.
+    // <br>
+    // Both <code>current_index-&lt;idx&gt;</code> and <code>page_size-&lt;size&gt;</code> are optional and default to <code>0</code> and <code>10</code> respectively. The following are all valid <code>page_token</code>s
+    //
+    // <ul>
+    //     <li><code> </code> (empty string/missing value) - index 0, page size 10</li>
+    //     <li><code>current_index-3</code> - index 3, page size 10</li>
+    //     <li><code>page_size-20</code> - index 0, page size 20</li>
+    //     <li><code>current_index-3--page_size-20</code> - index 3, page size 20</li>
+    // </ul>
+    string page_token = 3;
 
     // Optional. Filter by dataset ID.
     string id = 4;
@@ -709,7 +684,7 @@ message RagListDatasetsRequest {
     // Optional. Filter by dataset name.
     string name = 5;
 
-    // Optional. Sort field (default: <code>create_time</code>).
+    // Optional. Sort field. Must be a field of <code>RagDataset</code> (default: <code>create_time</code>).
     string orderby = 6;
 
     // Optional. Sort descending (default: <code>true</code>).
@@ -721,6 +696,12 @@ message RagDatasetList {
 
     // List of datasets.
     repeated RagDataset datasets = 1;
+
+    // Total number of datasets that match the given filters
+    int32 total = 2;
+
+    // Page token string (following the format described in <code>RagListDatasetsRequest</code>) for retrieving the next results page
+    string next_page_token = 3;
 }
 
 // ============================================================================
@@ -740,21 +721,11 @@ message RagUploadDocumentRequest {
     // Required. Target dataset ID to upload documents to.
     string dataset_id = 3;
 
-    oneof payload {
+    // Required in first chunk, ignored in later chunks. File metadata.
+    RagFileMetadata metadata = 4;
 
-        // Required. Metadata of the uploaded file.
-        RagFileMetadata metadata = 4;
-
-        // Required. File chunk (raw bytes).
-        bytes chunk = 5;
-    }
-}
-
-// Response message containing a list of documents.
-message RagDocumentList {
-
-    // List of documents.
-    repeated RagDocument documents = 1;
+    // Optional. Chunk of file content.
+    bytes data = 5;
 }
 
 // Document uploaded to a dataset.
@@ -796,8 +767,8 @@ message RagDocument {
     // Human-readable progress message describing current processing state.
     string progress_msg = 12;
 
-    // Processing start timestamp (ISO 8601 datetime string).
-    string process_begin_at = 13;
+    // Processing start date and time.
+    google.protobuf.Timestamp process_begin_at = 13;
 
     // Total processing duration in seconds.
     optional float process_duration = 14;
@@ -811,61 +782,55 @@ message RagDocument {
     // Status indicating if document is enabled (<code>"1"</code>=enabled, <code>"0"</code>=disabled).
     string status = 17;
 
-    // Creation timestamp (Unix timestamp in milliseconds).
-    int64 create_time = 18;
+    // Creation date and time.
+    google.protobuf.Timestamp create_time = 18;
 
-    // Creation date (ISO 8601 datetime string).
-    string create_date = 19;
-
-    // Last update timestamp (Unix timestamp in milliseconds).
-    int64 update_time = 20;
-
-    // Last update date (ISO 8601 datetime string).
-    string update_date = 21;
+    // Last update date and time.
+    google.protobuf.Timestamp update_time = 19;
 }
 
 // Broad document category.
 enum RagDocumentType {
 
     // PDF
-    pdf = 0;
+    RAG_DOCUMENT_TYPE_PDF = 0;
 
     // general documents (e.g. text, slides, spreadsheets, code, ...)
-    doc = 1;
+    RAG_DOCUMENT_TYPE_DOC = 1;
 
     // images and videos
-    visual = 2;
+    RAG_DOCUMENT_TYPE_VISUAL = 2;
 
     // audio
-    aural = 3;
+    RAG_DOCUMENT_TYPE_AURAL = 3;
 
     // empty virtual files
-    virtual = 4;
+    RAG_DOCUMENT_TYPE_VIRTUAL = 4;
 
     // folders
-    folder = 5;
+    RAG_DOCUMENT_TYPE_FOLDER = 5;
 
     // unrecognized document types
-    other = 6
+    RAG_DOCUMENT_TYPE_OTHER = 6;
 }
 
 // Document processing status.
 enum RagDocumentStatus {
 
     // Document has not started processing.
-    UNSTART = 0;
+    RAG_DOCUMENT_STATUS_UNSTART = 0;
 
     // Document is currently being processed.
-    RUNNING = 1;
+    RAG_DOCUMENT_STATUS_RUNNING = 1;
 
     // Document processing was cancelled.
-    CANCEL = 2;
+    RAG_DOCUMENT_STATUS_CANCEL = 2;
 
     // Document processing completed successfully.
-    DONE = 3;
+    RAG_DOCUMENT_STATUS_DONE = 3;
 
     // Document processing failed.
-    FAIL = 4;
+    RAG_DOCUMENT_STATUS_FAIL = 4;
 }
 
 // Request message for updating an existing document's metadata and configuration.
@@ -900,7 +865,7 @@ message RagUpdateDocumentRequest {
     google.protobuf.Struct meta_fields = 9;
 }
 
-// Request message for downloading the original document file.
+// Request message for downloading the document file.
 message RagDownloadDocumentRequest {
 
     // Required. The agent to download the document from.
@@ -915,6 +880,17 @@ message RagDownloadDocumentRequest {
 
     // Required. Document ID to download.
     string document_id = 4;
+}
+
+// File chunk for streaming downloads.<br>
+// First chunk contains metadata, subsequent chunks only contain data.
+message RagFileChunk {
+
+    // Required in first chunk, ignored in later chunks. File metadata.
+    RagFileMetadata metadata = 1;
+
+    // Optional. Chunk of file content.
+    bytes data = 2;
 }
 
 // Request message for listing documents in a dataset with pagination and filtering.
@@ -936,8 +912,25 @@ message RagListDocumentsRequest {
     // Optional. Filter by document name (exact match).
     string name = 5;
 
-    // Optional. Pagination parameters.
-    RagPagination pagination = 6;
+    // Optional. Specifies which page to return. The page token is a string of the format
+    // <pre><code>current_index-&lt;idx&gt;--page_size-&lt;size&gt;</code></pre>
+    //
+    // <ul>
+    //     <li><code>&lt;size&gt;</code> must be an integer &geq; <code>1</code>. The maximum number of results to return.</li>
+    //     <li><code>&lt;idx&gt;</code> must be an interger &geq; <code>0</code>. The start index in the requested list, starting from which a maximum of <code>&lt;size&gt;</code> elements are returned.</li>
+    // </ul>
+    //
+    // <em>Important note</em>: The <code>&lt;idx&gt;</code> is the index in the requested sequence NOT the page number. E.g. if the requested list has 100 elements then <code>current_index-5--page_size-15</code> returns the elements at index 5-19 and not the 5-th page of 15 elements.
+    //
+    // Both <code>current_index-&lt;idx&gt;</code> and <code>page_size-&lt;size&gt;</code> are optional and default to <code>0</code> and <code>10</code> respectively. The following are all valid <code>page_token</code>s
+    // <br>
+    // <ul>
+    //     <li><code> </code> (empty string/missing value) - index 0, page size 10</li>
+    //     <li><code>current_index-3</code> - index 3, page size 10</li>
+    //     <li><code>page_size-20</code> - index 0, page size 20</li>
+    //     <li><code>current_index-3--page_size-20</code> - index 3, page size 20</li>
+    // </ul>
+    string page_token = 6;
 
     // Optional. Sort field (default: <code>"create_time"</code>). Accept any field of <code>RagDocument</code>.
     string orderby = 7;
@@ -954,11 +947,11 @@ message RagListDocumentsRequest {
     // Optional. Document status to filter by.
     repeated RagDocumentStatus run_status = 11;
 
-    // Optional. Filter by creation time start (Unix timestamp in milliseconds, <code>0</code> = no filter).
-    int64 create_time_from = 12;
+    // Optional. Filter by creation time start.
+    google.protobuf.Timestamp create_time_from = 12;
 
-    // Optional. Filter by creation time end (Unix timestamp in milliseconds, <code>0</code> = no filter).
-    int64 create_time_to = 13;
+    // Optional. Filter by creation time end.
+    google.protobuf.Timestamp create_time_to = 13;
 
     // Optional. Metadata filter condition to restrict results based on document metadata.<br>
     RagMetadataConditions metadata_condition = 14;
@@ -971,17 +964,17 @@ message RagMetadataConditions {
     RagLogic logic = 1;
 
     // Optional. List of conditions.
-    repeated RagMetadataCondition conditions = 1;
+    repeated RagMetadataCondition conditions = 2;
 }
 
 // Metadata conditions logical operators
 enum RagLogic {
 
     // Return results that match <em>all</em> conditions.
-    and = 0;
+    RAG_LOGIC_AND = 0;
 
     // Return results that match <em>any</em> condition.
-    or = 1;
+    RAG_LOGIC_OR = 1;
 }
 
 // Condition to filter document metadata on.
@@ -1003,61 +996,64 @@ enum RagComparisonOperator {
 
     // String representation of metadata field contains value.<br>
     // If metadata field is a list, checks if the string representation of <em>any</em> field contains value.
-    contains = 0;
+    RAG_COMPARISON_OPERATOR_CONTAINS = 0;
 
     // String representation of metadata field does not contain value.<br>
     // If metadata field is a list, checks if the string representation of <em>no</em> fields contains value.
-    not_contains = 1;
+    RAG_COMPARISON_OPERATOR_NOT_CONTAINS = 1;
 
     // Checks with Python's <code>in</code> opertor.<br>
     // If metadata field is a list, <em>all</em> elements must satisfy the condition.
-    in = 2;
+    RAG_COMPARISON_OPERATOR_IN = 2;
 
     // Checks with Python's <code>not in</code> opertor.<br>
     // If metadata field is a list, <em>all</em> elements must satisfy the condition.
-    not_in = 3;
+    RAG_COMPARISON_OPERATOR_NOT_IN = 3;
 
     // String representation fo metadata field starts with value.<br>
     // If metadata field is a list, checks if the joined string of the string representations of all list elements starts with the value.
-    start_with = 4;
+    RAG_COMPARISON_OPERATOR_START_WITH = 4;
 
     // String representation fo metadata field ends with value.<br>
     // If metadata field is a list, checks if the joined string of the string representations of all list elements ends with the value.
-    ends_with = 5;
+    RAG_COMPARISON_OPERATOR_ENDS_WITH = 5;
 
     // Is empty (Python <em>falsy</em>).
-    empty = 6;
+    RAG_COMPARISON_OPERATOR_EMPTY = 6;
 
     // Is not empty (Python <em>truthy</em>).
-    not_empty = 7;
+    RAG_COMPARISON_OPERATOR_NOT_EMPTY = 7;
 
     // Equals.
-    eq = 8;
+    RAG_COMPARISON_OPERATOR_EQ = 8;
 
     // Does not equal.
-    neq = 9;
+    RAG_COMPARISON_OPERATOR_NEQ = 9;
 
     // Greater than.
-    gt = 10;
+    RAG_COMPARISON_OPERATOR_GT = 10;
 
     // Less than.
-    lt = 11;
+    RAG_COMPARISON_OPERATOR_LT = 11;
 
     // Greater than or equal.
-    geq = 12;
+    RAG_COMPARISON_OPERATOR_GEQ = 12;
 
     // Less than or equal.
-    leq = 13;
+    RAG_COMPARISON_OPERATOR_LEQ = 13;
 }
 
 // Response message for listing documents.
 message RagListDocumentsResponse {
 
-    // Total number of documents matching the filter criteria (not limited by pagination).
-    optional int32 total = 1;
-
     // List of documents for the current page.
-    repeated RagDocument docs = 2;
+    repeated RagDocument documents = 1;
+
+    // Total number of documents matching the filter criteria (not limited by pagination).
+    int32 total = 2;
+
+    // Page token string (following the format described in <code>RagListDocumentsRequest</code>) for retrieving the next results page
+    string next_page_token = 3;
 }
 
 // Request message for deleting one or more documents from a dataset.
@@ -1095,8 +1091,25 @@ message RagRetrievalRequest {
     // Required. Dataset IDs to search (all datasets must use the same embedding model).
     repeated string dataset_ids = 3;
 
-    // Optional. Pagination parameters.
-    RagPagination pagination = 4;
+    // Optional. Specifies which page to return. The page token is a string of the format
+    // <pre><code>current_index-&lt;idx&gt;--page_size-&lt;size&gt;</code></pre>
+    //
+    // <ul>
+    //     <li><code>&lt;size&gt;</code> must be an integer &geq; <code>1</code>. The maximum number of results to return.</li>
+    //     <li><code>&lt;idx&gt;</code> must be an interger &geq; <code>0</code>. The start index in the requested list, starting from which a maximum of <code>&lt;size&gt;</code> elements are returned.</li>
+    // </ul>
+    //
+    // <em>Important note</em>: The <code>&lt;idx&gt;</code> is the index in the requested sequence NOT the page number. E.g. if the requested list has 100 elements then <code>current_index-5--page_size-15</code> returns the elements at index 5-19 and not the 5-th page of 15 elements.
+    //
+    // Both <code>current_index-&lt;idx&gt;</code> and <code>page_size-&lt;size&gt;</code> are optional and default to <code>0</code> and <code>10</code> respectively. The following are all valid <code>page_token</code>s
+    // <br>
+    // <ul>
+    //     <li><code> </code> (empty string/missing value) - index 0, page size 10</li>
+    //     <li><code>current_index-3</code> - index 3, page size 10</li>
+    //     <li><code>page_size-20</code> - index 0, page size 20</li>
+    //     <li><code>current_index-3--page_size-20</code> - index 3, page size 20</li>
+    // </ul>
+    string page_token = 4;
 
     // Required. Query string to search for.
     string question = 5;
@@ -1137,11 +1150,14 @@ message RagRetrievalResponse {
     // Retrieved chunks with similarity scores populated (ordered by relevance).
     repeated RagChunk chunks = 1;
 
-    // Document aggregations providing statistics about which documents matched.
+    // Statistics of the matched documents.
     repeated RagDocAgg doc_aggs = 2;
 
     // Total number of chunks matching the query (before pagination).
-    optional int32 total = 3;
+    int32 total = 3;
+
+    // Page token string (following the format described in <code>RagRetrievalRequest</code>) for retrieving the next results page
+    string next_page_token = 4;
 }
 
 // Chunk of text extracted from a document.<br>
@@ -1179,11 +1195,8 @@ message RagChunk {
     // Each position is an array of 5 integers representing location data (format varies by document type).
     repeated google.protobuf.ListValue positions = 10;
 
-    // Creation timestamp (ISO 8601 datetime string).
-    string create_time = 11;
-
-    // Creation timestamp as a floating-point Unix timestamp.
-    float create_timestamp = 12;
+    // Creation date and time.
+    google.protobuf.Timestamp create_time = 11;
 
     // Document name used as a keyword for retrieval.
     string document_keyword = 13;
@@ -1356,7 +1369,7 @@ message RagListChunksRequest {
     string document_id = 4;
 
     // Optional. Pagination parameters.
-    RagPagination pagination = 5;
+    string pagination = 5;
 
     // Optional. Search keywords to filter chunks (supports content highlighting in results).
     string keywords = 6;
@@ -1467,306 +1480,6 @@ message RagUpdateChunkRequest {
     // Position information in the original document.<br>
     // Each position is an array of 5 integers representing location data (format varies by document type).
     repeated google.protobuf.ListValue positions = 10;
-}
-
-// ----------------------------------------------------------------------------
-// File Management Types
-// ----------------------------------------------------------------------------
-
-// Request message for uploading files via streaming multipart form data.
-// RAGFlow supports individual and bulk file uploads. Files can be uploaded to a specific folder or to the root directory if no parent folder is specified.
-message RagUploadFilesRequest {
-
-    // Metadata for the upload operation (must be sent in first message only).
-    message RagMetadata {
-
-        // Required. The agent to upload files for.
-        // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-        string parent = 1;
-
-        // Required. The language of the project to use.
-        string language_code = 2;
-
-        // Optional. Parent folder ID. If not provided, files will be uploaded to root directory.
-        string parent_id = 3;
-
-        // Required. Metadata for all files being uploaded in this request.
-        repeated RagFileMetadata files = 4;
-    }
-
-    // First message must contain metadata; subsequent messages contain file data chunks.
-    oneof payload {
-
-        // First message: declares all files to be uploaded.
-        RagMetadata metadata = 1;
-
-        // Subsequent messages: stream file data in chunks.
-        RagUploadChunk chunk = 2;
-    }
-}
-
-// Response message containing a list of files.
-message RagFileList {
-
-    // Uploaded files. RAGFlow automatically creates intermediate folders as needed during upload.
-    repeated RagFile files = 1;
-}
-
-// File or folder in RAGFlow file system.
-message RagFile {
-
-    // File or folder UUID.
-    string id = 1;
-
-    // Parent folder ID. Empty string for root-level items.
-    string parent_id = 2;
-
-    // Tenant ID.
-    string tenant_id = 3;
-
-    // ID of the user who created the file.
-    string created_by = 4;
-
-    // File or folder name.
-    string name = 5;
-
-    // Storage location path within the RAGFlow file system.
-    string location = 6;
-
-    // File size in bytes (0 for folders).
-    optional int64 size = 7;
-
-    // File type/extension or <code>"folder"</code> for directories. Check <code>type == "folder"</code> to distinguish folders from files.
-    string type = 8;
-
-    // Source type indicating file origin (e.g., <code>"local"</code> for uploaded files).
-    string source_type = 9;
-
-    // Creation timestamp (Unix timestamp in milliseconds).
-    int64 create_time = 10;
-
-    // Creation date (ISO 8601 datetime format).
-    string create_date = 11;
-
-    // Last update timestamp (Unix timestamp in milliseconds).
-    int64 update_time = 12;
-
-    // Last update date (ISO 8601 datetime format).
-    string update_date = 13;
-}
-
-// Request message for creating a file or folder in RAGFlow.
-message RagCreateFileRequest {
-
-    // Required. The agent to create the file for.
-    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    string parent = 1;
-
-    // Required. The language of the project to use.
-    string language_code = 2;
-
-    // Required. Maximum length 255. Name of the file or folder to create.
-    string name = 3;
-
-    // Optional. Parent folder ID. If not provided, creates in root directory.
-    string parent_id = 4;
-
-    // Required. Type of item to create: <code>"folder"</code> for directories or <code>"virtual"</code> for virtual files.
-    optional RagCreateFileFileType type = 5;
-}
-
-// Available file types for file creation.
-enum RagCreateFileFileType {
-
-    // virtual file
-    virtual = 0;
-
-    // folder
-    folder = 1;
-}
-
-// Request message for listing files and folders.
-message RagListFilesRequest {
-
-    // Required. The agent to list files from.
-    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    string parent = 1;
-
-    // Required. The language of the project to use.
-    string language_code = 2;
-
-    // Optional. Folder ID to list contents from. If not provided, lists root directory contents.
-    string parent_id = 3;
-
-    // Optional. Pagination parameters. Default page size is 15 items per page.
-    RagPagination pagination = 4;
-
-    // Optional. Search keywords to filter files by name or other searchable attributes.
-    string keywords = 5;
-
-    // Optional. Field to sort results by. All fields of <code>RagFile</code> are possible.
-    string orderby = 6;
-
-    // Optional. Sort in descending order. Default is <code>true</code> (newest first).
-    optional bool desc = 7;
-}
-
-// Response message for listing files and folders.
-message RagListFilesResponse {
-
-    // Total number of files and folders matching the query (before pagination).
-    optional int32 total = 1;
-
-    // List of files and folders in the current page.
-    repeated RagFile files = 2;
-
-    // Information about the parent folder being listed.
-    RagFile parent_folder = 3;
-}
-
-// Empty request message with only the parent field.
-message RagGetRootFolderRequest {
-
-    // Required. The agent to get the parent folder for.
-    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    string parent = 1;
-
-    // Required. The language of the project to use.
-    string language_code = 2;
-}
-
-// Response message for getting the root folder.
-message RagGetRootFolderResponse {
-
-    // The root folder of the file system.
-    RagFile root_folder = 2;
-}
-
-// Request message for requests that only need a file ID.
-message RagFileIdRequest {
-
-    // Required. The agent to rename the file for.
-    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    string parent = 1;
-
-    // Required. The language of the project to use.
-    string language_code = 2;
-
-    // Required. File ID.
-    string file_id = 3;
-}
-
-// Response message for getting the parent folder of a file.
-message RagGetParentFolderResponse {
-
-    // The immediate parent folder of the requested file.
-    RagFile parent_folder = 1;
-}
-
-// Response message for getting all parent folders in the hierarchy.
-message RagParentFoldersList {
-
-    // All parent folders in the hierarchy, from immediate parent to root folder.
-    repeated RagFile parent_folders = 1;
-}
-
-// Request message for deleting files or folders.
-message RagDeleteFilesRequest {
-
-    // Required. The agent to delete files from.
-    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    string parent = 1;
-
-    // Required. The language of the project to use.
-    string language_code = 2;
-
-    // Required. UUIDs of files or folders to delete. Supports batch deletion.
-    repeated string file_ids = 3;
-}
-
-// Request message for renaming a file or folder.
-message RagRenameFileRequest {
-
-    // Required. The agent to rename the file for.
-    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    string parent = 1;
-
-    // Required. The language of the project to use.
-    string language_code = 2;
-
-    // Required. UUID of the file or folder to rename.
-    string file_id = 3;
-
-    // Required. New name for the file or folder. For files, the extension must remain the same.
-    string name = 4;
-}
-
-// Request message for moving files or folders.
-message RagMoveFileRequest {
-
-    // Required. The agent to move files for.
-    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    string parent = 1;
-
-    // Required. The language of the project to use.
-    string language_code = 2;
-
-    // Required. UUIDs of source files or folders to move. Supports batch move operations.
-    repeated string src_file_ids = 3;
-
-    // Required. UUID of the destination folder.
-    string dest_file_id = 4;
-}
-
-// Request message for converting files to documents and linking them to datasets.
-// RAGFlow allows linking uploaded files to multiple target datasets for RAG operations.
-message RagFileToDocumentRequest {
-
-    // Required. The agent to convert files to documents for.
-    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    string parent = 1;
-
-    // Required. The language of the project to use.
-    string language_code = 2;
-
-    // Required. UUIDs of files to convert. If folders are provided, processes contents recursively.
-    repeated string file_ids = 3;
-
-    // Required. Target dataset IDs (knowledge base IDs). A single file can be linked to multiple datasets.
-    repeated string kb_ids = 4;
-}
-
-// Response message containing a list of file-to-document associations.
-message RagFileToDocumentList {
-
-    // List of file-to-document associations created during the conversion operation.
-    repeated RagFileToDocument files_to_documents = 1;
-}
-
-// Association between a file and a document in a dataset.
-// Tracks the relationship when files are converted to documents for use in RAG operations.
-message RagFileToDocument {
-
-    // UUID of the file-to-document association.
-    string id = 1;
-
-    // UUID of the source file.
-    string file_id = 2;
-
-    // UUID of the generated document in the dataset.
-    string document_id = 3;
-
-    // Creation timestamp (Unix timestamp in milliseconds).
-    int64 create_time = 4;
-
-    // Creation date (ISO 8601 datetime format).
-    string create_date = 5;
-
-    // Last update timestamp (Unix timestamp in milliseconds).
-    int64 update_time = 6;
-
-    // Last update date (ISO 8601 datetime format).
-    string update_date = 7;
 }
 
 // ----------------------------------------------------------------------------
@@ -1945,10 +1658,10 @@ message RagChatAssistant {
 enum RagPromptType {
 
     // simple
-    simple = 0;
+    RAG_PROMPT_TYPE_SIMPLE = 0;
 
     // advanced
-    advanced = 1;
+    RAG_PROMPT_TYPE_ADVANCED = 1;
 }
 
 // Request message for updating an existing chat assistant.
@@ -1997,7 +1710,7 @@ message RagListChatAssistantsRequest {
     string language_code = 2;
 
     // Optional. Pagination parameters for paging through results.
-    RagPagination pagination = 3;
+    string pagination = 3;
 
     // Optional. Filter by chat assistant UUID.
     string id = 4;
@@ -2058,14 +1771,24 @@ message RagCreateAgentRequest {
     google.protobuf.Struct dsl = 9;
 }
 
+// Access permissions for a dataset.
+enum RagPermission {
+
+    // Only the current user can manage the dataset (default).
+    RAG_PERMISSION_ME = 0;
+
+    // All team members of the current user can manage the dataset.
+    RAG_PERMISSION_TEAM = 1;
+}
+
 // Agent canvas category.
 enum RagCanvasCategory {
 
     // agent canvas
-    agent_canvas = 0;
+    RAG_CANVAS_CATEGORY_AGENT_CANVAS = 0;
 
     // dataflow canvas
-    dataflow_canvas = 1;
+    RAG_CANVAS_CATEGORY_DATAFLOW_CANVAS = 1;
 }
 
 // Request message for updating an existing RAGFlow agent.
@@ -2128,7 +1851,7 @@ message RagListAgentsRequest {
     string language_code = 2;
 
     // Optional. Pagination parameters to control the number and offset of results.
-    RagPagination pagination = 3;
+    string pagination = 3;
 
     // Optional. Filter results by agent title. Only agents with matching titles will be returned.
     string title = 4;
@@ -2264,13 +1987,13 @@ message RagMessage {
 enum RagMessageRole {
 
     // Message from user.
-    user = 0;
+    RAG_MESSAGE_ROLE_USER = 0;
 
     // Message from AI assistant.
-    assistant = 1;
+    RAG_MESSAGE_ROLE_ASSISTANT = 1;
 
     // System message.
-    system = 2;
+    RAG_MESSAGE_ROLE_SYSTEM = 2;
 }
 
 // Request message for updating an existing chat session.
@@ -2310,7 +2033,7 @@ message RagListChatSessionsRequest {
     string chat_id = 3;
 
     // Optional. Pagination parameters for paging through results.
-    RagPagination pagination = 4;
+    string pagination = 4;
 
     // Sort field (default: <code>"create_time"</code>).
     string orderby = 5;
@@ -2369,7 +2092,7 @@ message RagListAgentSessionsRequest {
     string agent_id = 3;
 
     // Optional. Pagination parameters for paging through results.
-    RagPagination pagination = 4;
+    string pagination = 4;
 
     // Sort field (default: <code>"update_time"</code>).
     string orderby = 5;
@@ -2447,13 +2170,13 @@ message RagAgentSession {
 enum RagSessionSource {
 
     // none
-    none = 0;
+    RAG_SESSION_SOURCE_NONE = 0;
 
     // agent
-    agent = 1;
+    RAG_SESSION_SOURCE_AGENT = 1;
 
     // dialog
-    dialog = 2;
+    RAG_SESSION_SOURCE_DIALOG = 2;
 }
 
 // Request message for deleting agent sessions.
@@ -2638,6 +2361,49 @@ message RagAgentCompletionRequest {
     google.protobuf.Struct additional_fields = 10;
 }
 
+// File or folder in RAGFlow file system.
+message RagFile {
+
+    // File or folder UUID.
+    string id = 1;
+
+    // Parent folder ID. Empty string for root-level items.
+    string parent_id = 2;
+
+    // Tenant ID.
+    string tenant_id = 3;
+
+    // ID of the user who created the file.
+    string created_by = 4;
+
+    // File or folder name.
+    string name = 5;
+
+    // Storage location path within the RAGFlow file system.
+    string location = 6;
+
+    // File size in bytes (0 for folders).
+    optional int64 size = 7;
+
+    // File type/extension or <code>"folder"</code> for directories. Check <code>type == "folder"</code> to distinguish folders from files.
+    string type = 8;
+
+    // Source type indicating file origin (e.g., <code>"local"</code> for uploaded files).
+    string source_type = 9;
+
+    // Creation timestamp (Unix timestamp in milliseconds).
+    int64 create_time = 10;
+
+    // Creation date (ISO 8601 datetime format).
+    string create_date = 11;
+
+    // Last update timestamp (Unix timestamp in milliseconds).
+    int64 update_time = 12;
+
+    // Last update date (ISO 8601 datetime format).
+    string update_date = 13;
+}
+
 // Response message for agent completion.
 // <ul>
 //     <li>For streaming: Each message contains a partial response with <code>event</code> indicating the event type (e.g., <code>"message"</code>, <code>"message_end"</code>).</li>
@@ -2671,10 +2437,10 @@ message RagAgentCompletionResponse {
 enum RagAgentEventType {
 
     // Regular message event.
-    message = 0;
+    RAG_AGENT_EVENT_TYPE_MESSAGE = 0;
 
     // Message completion event.
-    message_end = 1;
+    RAG_AGENT_EVENT_TYPE_MESSAGE_END = 1;
 }
 
 // Data payload in agent completion response.
