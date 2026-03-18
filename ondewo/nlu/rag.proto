@@ -404,7 +404,7 @@ service Rags {
     rpc RagRelatedQuestions(RagRelatedQuestionsRequest) returns (RagRelatedQuestionsResponse);
 
     // ========================================================================
-    // Crawler (11 methods)
+    // Crawler (10 methods)
     // REST: /api/v1/crawlers, /api/v1/crawler_jobs, /api/v1/crawler_results
     // ========================================================================
 
@@ -413,14 +413,9 @@ service Rags {
     // Create a rag crawler for a dataset of an agent.
     rpc RagCreateCrawler(RagCreateCrawlerRequest) returns (RagCreateCrawlerResponse);
 
-    // RAGFlow endpoint: POST /api/v1/crawlers/<crawler_id>/start
-
-    // Start the rag crawler of a dataset for the specified agent.
-    rpc RagStartCrawler(RagStartCrawlerRequest) returns (ondewo.nlu.Operation);
-
     // RAGFlow endpoint: POST /api/v1/crawler_jobs
 
-    // Create a crawler job for a crawler.
+    // Create (and start) a crawler job for a crawler.
     rpc RagCreateCrawlerJob(RagCreateCrawlerJobRequest) returns (ondewo.nlu.Operation);
 
     // RAGFlow endpoint: GET /api/v1/crawler_jobs/<crawler_job_id>
@@ -462,7 +457,6 @@ service Rags {
 
     // Add rag crawler output to one or more datasets.
     rpc RagAddCrawlerOutputToDatasets(RagAddCrawlerOutputToDatasetsRequest) returns (ondewo.nlu.Operation);
-
 }
 
 // ============================================================================
@@ -2871,15 +2865,16 @@ message RagRelatedQuestionsResponse {
 // Request message for creating a crawler for a dataset of an agent.
 message RagCreateCrawlerRequest {
 
-    // Required. The project that the agent to build cache is associated with.
-    // Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
+    // Required. The agent to create crawlers for.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
     // Required. The language of the project to use.
     string language_code = 2;
 
-    // Resource name of the RagCrawler
-    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid</code></pre>
+    // Required. Crawler definition to create.
+    // If <code>rag_crawler.name</code> is empty, backend will generate it.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre>
     RagCrawler rag_crawler = 3;
 
 }
@@ -2887,36 +2882,16 @@ message RagCreateCrawlerRequest {
 // Response message for creating a crawler for a dataset of an agent.
 message RagCreateCrawlerResponse {
 
-    // Resource name of the RagCrawler
-    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid</code></pre>
+    // Created crawler.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre>
     RagCrawler rag_crawler = 1;
 
     // Error message if there are any.
     string error_message = 2;
 
-    // Required. The nlu agent project of this CcaiProject.
+    // Required. The NLU agent project.
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string nlu_project_name = 4;
-
-}
-
-// Request message for starting the crawler of a dataset for the specified agent.
-message RagStartCrawlerRequest {
-
-    // Resource name of the RagCrawler
-    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid</code></pre>
-    string name = 1;
-
-    // Required. The language of the agent of the dataset.
-    string language_code = 2;
-
-    // Required. Unique name of the dataset for the crawler. Must follow these requirements:
-    // <ul>
-    //     <li>contain only characters from the basic multilingual Unicode plane</li>
-    //     <li>maximum 128 characters</li>
-    //     <li>case-insensitive</li>
-    // </ul>
-    string dataset_id = 3;
 
 }
 
@@ -2924,8 +2899,15 @@ message RagStartCrawlerRequest {
 message RagDeleteCrawlerRequest {
 
     // Resource name of the RagCrawler
-    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid</code></pre>
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre>
     string name = 1;
+
+    // Required. The agent owning the crawler.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 2;
+
+    // Required. The language of the project to use.
+    string language_code = 3;
 
 }
 
@@ -2933,7 +2915,7 @@ message RagDeleteCrawlerRequest {
 message RagDeleteCrawlerResponse {
 
     // Resource name of the RagCrawler
-    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid</code></pre>
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre>
     string name = 1;
 
     // Error message if there are any.
@@ -3000,7 +2982,7 @@ message RagListCrawlersResponse {
 message RagCrawler {
 
     // Resource name of the RagCrawler
-    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid</code></pre>
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre>
     // Automatically generated in backend if empty
     string name = 1;
 
@@ -3015,7 +2997,7 @@ message RagCrawler {
     // Optional. Allow/block rules applied to discovered links before scheduling.
     RagCrawlerUrlFilters rag_crawler_url_filters = 4;
 
-    // Optional. Login/auth setup used before or during crawl requests.
+    // Optional. Login/auth setup used before crawl requests.
     RagCrawlerAuth rag_crawler_auth = 5;
 
     // Optional. Crawl execution behavior and extraction settings.
@@ -3172,27 +3154,8 @@ message RagCrawlerBrowserConfig {
     // Example keys: user_agent, viewport, java_script_enabled, proxy.
     google.protobuf.Struct additional_fields = 2;
 
-    // Optional. Browser engine type. Typical values: <code>chromium</code>, <code>firefox</code>, <code>webkit</code>.
-    string browser_type = 3;
-
     // Optional. Run browser in headless mode.
     optional bool headless = 4;
-
-    // Optional. Browser mode. Typical values: <code>dedicated</code>, <code>builtin</code>, <code>custom</code>, <code>docker</code>.
-    // Select <code>custom</code>/<code>docker</code> for externally managed browser runtimes.
-    string browser_mode = 5;
-
-    // Optional. Use managed browser over CDP (remote control).
-    optional bool use_managed_browser = 6;
-
-    // Optional. CDP endpoint URL used when managed browser mode is enabled.
-    string cdp_url = 7;
-
-    // Optional. Browser debugging port (typically DevTools/CDP).
-    int32 debugging_port = 8;
-
-    // Optional. Browser host for remote/debug connections.
-    string host = 9;
 
     // Optional. Proxy settings.
     RagCrawlerProxyConfig proxy_config = 10;
@@ -3206,22 +3169,8 @@ message RagCrawlerBrowserConfig {
     // Optional. Device scale factor (DPR).
     float device_scale_factor = 13;
 
-    // Optional. Keep persistent browser context across runs.
-    // Useful for session reuse but can leak stale state if unmanaged.
-    optional bool use_persistent_context = 14;
-
-    // Optional. User data directory for persistent context storage.
-    string user_data_dir = 15;
-
     // Optional. Initial cookies.
     repeated RagCrawlerCookie cookies = 16;
-
-    // Optional. Explicit User-Agent value (overrides defaults).
-    string user_agent = 17;
-
-    // Optional. User-Agent mode. Typical values: <code>random</code> or empty.
-    // If set, can override/augment <code>user_agent</code> behavior.
-    string user_agent_mode = 18;
 
     // Optional. Enable stealth mode.
     optional bool enable_stealth = 19;
@@ -3229,12 +3178,14 @@ message RagCrawlerBrowserConfig {
     // Optional. Enable text-only mode for faster/lower-cost crawling.
     optional bool text_mode = 20;
 
-    // Optional. Enable light mode for reduced browser overhead.
-    optional bool light_mode = 21;
+    // Optional. Ignore invalid HTTPS certificates.
+    optional bool ignore_https_errors = 25;
 
-    // Optional. Extra browser launch arguments.
-    // Example: <code>--disable-dev-shm-usage</code>, <code>--no-sandbox</code>.
-    repeated string extra_args = 22;
+    // Optional. Enable/disable JavaScript execution.
+    optional bool javascript_enabled = 26;
+
+    // Optional. User-agent generator configuration used when <code>user_agent_mode=random</code>.
+    google.protobuf.Struct user_agent_generator_config = 29;
 }
 
 // HTTP header key/value pair.
@@ -3303,14 +3254,6 @@ message RagCrawlerConfig {
     // Helps avoid anti-bot/rate-limit responses.
     float crawler_delay_seconds = 2;
 
-    // Optional. Include markdown output in crawler results.
-    // Retained for compatibility with older clients.
-    bool output_markdown = 3;
-
-    // Optional. Include raw HTML in crawler results.
-    // Retained for compatibility with older clients.
-    bool output_raw_html = 4;
-
     // Optional. Enable deep crawler behavior (link following beyond seeds).
     // Default <code>false</code>. If <code>false</code>, deep crawler settings are ignored.
     bool use_deep_crawler = 5;
@@ -3353,12 +3296,120 @@ message RagCrawlerConfig {
     // Optional. Capture browser console messages for diagnostics.
     bool capture_console_messages = 17;
 
-    // Optional. Allow and persist files downloaded by the page.
-    bool accept_downloads = 18;
-
     // Optional. Minimum score/quality threshold for table extraction.
     int32 table_score_threshold = 19;
 
+    // Optional. Cache mode for crawling behavior.
+    optional RagCrawlerCacheMode cache_mode = 20;
+
+    // Optional. Session identifier to reuse browser/session state across calls.
+    string session_id = 21;
+
+    // Optional. JavaScript snippets executed after waits on fully loaded pages.
+    repeated string js_code = 22;
+
+    // Optional. JavaScript snippets executed before <code>wait_for</code>.
+    repeated string js_code_before_wait = 23;
+
+    // Optional. Wait condition (<code>css:...</code> or <code>js:...</code>).
+    string wait_for = 24;
+
+    // Optional. Timeout in milliseconds for <code>wait_for</code>.
+    int32 wait_for_timeout = 25;
+
+    // Optional. Auto-scroll the full page to load dynamic content.
+    bool scan_full_page = 27;
+
+    // Optional. Delay between scroll steps when <code>scan_full_page=true</code>.
+    float scroll_delay = 28;
+
+    // Optional. Maximum number of scroll steps for full page scan.
+    int32 max_scroll_steps = 29;
+
+    // Optional. Virtual scroll configuration for feeds that replace content while scrolling.
+    RagCrawlerVirtualScrollConfig virtual_scroll_config = 30;
+
+    // Optional. Remove blocking overlays/popups from page.
+    bool remove_overlay_elements = 31;
+
+    // Optional. Remove known consent/CMP popups.
+    bool remove_consent_popups = 32;
+
+    // Optional. Browser locale (e.g. <code>en-US</code>).
+    string locale = 35;
+
+    // Optional. Browser timezone (e.g. <code>Europe/Vienna</code>).
+    string timezone_id = 36;
+
+    // Optional. Browser geolocation override.
+    RagCrawlerGeolocation geolocation = 37;
+
+    // Optional. Exclude links to external domains from extracted links.
+    bool exclude_external_links = 38;
+
+    // Optional. Exclude links to known social media domains.
+    bool exclude_social_media_links = 39;
+
+    // Optional. Additional social media domains to exclude.
+    repeated string exclude_social_media_domains = 40;
+
+    // Optional. Custom domains to exclude from extracted links.
+    repeated string exclude_domains = 41;
+
+    // Optional. Exclude internal links from extracted links.
+    bool exclude_internal_links = 42;
+
+    // Optional. Whether this is a JS-only continuation in an existing session.
+    bool js_only = 43;
+
+
+// Cache mode for crawler runs.
+enum RagCrawlerCacheMode {
+
+    // Normal cache behavior (read/write).
+    RAG_CRAWLER_CACHE_MODE_ENABLED = 0;
+
+    // Disable all cache reads/writes.
+    RAG_CRAWLER_CACHE_MODE_DISABLED = 1;
+
+    // Read from cache only.
+    RAG_CRAWLER_CACHE_MODE_READ_ONLY = 2;
+
+    // Write to cache only.
+    RAG_CRAWLER_CACHE_MODE_WRITE_ONLY = 3;
+
+    // Bypass cache for this operation.
+    RAG_CRAWLER_CACHE_MODE_BYPASS = 4;
+}
+
+// Geolocation override.
+message RagCrawlerGeolocation {
+
+    // Required. Latitude in range [-90, 90].
+    double latitude = 1;
+
+    // Required. Longitude in range [-180, 180].
+    double longitude = 2;
+
+    // Optional. Accuracy in meters.
+    float accuracy = 3;
+}
+
+// Virtual scroll configuration.
+message RagCrawlerVirtualScrollConfig {
+
+    // Required. CSS selector of scrollable container.
+    string container_selector = 1;
+
+    // Optional. Maximum number of scroll actions.
+    int32 scroll_count = 2;
+
+    // Optional. Scroll amount mode (e.g. <code>container_height</code>, <code>page_height</code> or pixel number encoded as string).
+    string scroll_by = 3;
+
+    // Optional. Wait time in seconds after each scroll.
+    float wait_after_scroll = 4;
+}
 }
 
 // Structured output configuration.
@@ -3589,20 +3640,6 @@ message RagCrawlerDeepCrawlerConfig {
 
     // Optional. Enable prefetch mode for faster URL graph discovery.
     bool prefetch = 8;
-
-    // Optional. Prefer HTTPS when normalizing internal links.
-    bool preserve_https_for_internal_links = 9;
-
-    // Optional. Serialized checkpoint state for resume support.
-    // Intended for long-running crawls interrupted by deploys/timeouts.
-    google.protobuf.Struct resume_state = 10;
-
-    // Optional. Identifier for external state/progress callback integration.
-    string state_callback_identifier = 11;
-
-    // Optional. Identifier for external cancellation-check integration.
-    string cancellation_check_identifier = 12;
-
 }
 
 // Structured markdown output aligned with Crawl4AI MarkdownGenerationResult.
@@ -3653,8 +3690,8 @@ message RagCrawlerTableRow {
 // Network request/response diagnostics entry captured during crawling.
 message RagCrawlerNetworkEvent {
 
-    // Event type. Typical values: <code>request</code>, <code>response</code>, <code>failure</code>.
-    string type = 1;
+    // Event type. Typical values: <code>request</code>, <code>response</code>, <code>request_failed</code>.
+    string event_type = 7;
 
     // URL associated with the event.
     string url = 2;
@@ -3670,25 +3707,55 @@ message RagCrawlerNetworkEvent {
 
     // Optional. Event payload/metadata.
     google.protobuf.Struct payload = 6;
+
+    // Optional. Request/response headers.
+    google.protobuf.Struct headers = 8;
+
+    // Optional. Request body payload for request events.
+    string post_data = 9;
+
+    // Optional. Browser resource type (document, xhr, fetch, image, ...).
+    string resource_type = 10;
+
+    // Optional. Whether this request is a navigation request.
+    bool is_navigation_request = 11;
+
+    // Optional. Event timestamp in seconds since epoch.
+    double timestamp = 12;
+
+    // Optional. HTTP status text for response events.
+    string status_text = 13;
+
+    // Optional. Whether response came from service worker.
+    bool from_service_worker = 14;
+
+    // Optional. Request timing metrics.
+    google.protobuf.Struct request_timing = 15;
+
+    // Optional. Failure text for failed request events.
+    string failure_text = 16;
 }
 
 // Browser console message captured during crawling.
 message RagCrawlerConsoleMessage {
 
-    // Optional. Log level. Typical values: <code>log</code>, <code>warn</code>, <code>error</code>, <code>debug</code>.
-    string level = 1;
+    // Message type. Typical values: <code>log</code>, <code>warning</code>, <code>error</code>, <code>info</code>, <code>debug</code>.
+    string type = 6;
 
     // Message text.
     string text = 2;
 
-    // Optional. Source location.
-    string source = 3;
+    // Optional. Source location (e.g. <code>https://site/script.js:10:5</code>).
+    string location = 7;
 
     // Optional. Timestamp in milliseconds since epoch.
     int64 timestamp_ms = 4;
 
     // Optional. Additional message fields.
     google.protobuf.Struct payload = 5;
+
+    // Optional. Event timestamp in seconds since epoch.
+    double timestamp = 8;
 }
 
 // SSL certificate details captured from crawled target.
@@ -3735,15 +3802,11 @@ message RagCrawlerResult {
     // URL this content came from.
     string url = 4;
 
-    // Deprecated. Plain markdown content of the scraped page.
-    // Prefer <code>markdown_result</code> for structured markdown output.
-    string markdown = 5; // TODO: Config for metadata
+    // Canonical raw HTML snapshot (equivalent to Crawl4AI <code>CrawlResult.html</code>).
+    string html = 32;
 
-    // TODO: Custom extractors should be possible
-
-    // Deprecated. Raw HTML snapshot.
-    // Prefer structured output controls in <code>rag_crawler_config.output.format</code>.
-    string raw_html = 6; // TODO: If I want either only markdown or only raw_html
+    // Optional. Sanitized HTML after cleanup/content selection.
+    string cleaned_html = 10;
 
     // Timestamp when this URL was last processed by crawler.
     google.protobuf.Timestamp last_crawled_date = 7;
@@ -3754,9 +3817,6 @@ message RagCrawlerResult {
 
     // Structured markdown output.
     RagCrawlerMarkdownResult markdown_result = 9;
-
-    // Optional. Sanitized HTML after cleanup/content selection.
-    string cleaned_html = 10;
 
     // Optional. Filtered HTML variant optimized for extraction.
     string fit_html = 11;
@@ -3769,9 +3829,6 @@ message RagCrawlerResult {
 
     // Optional. Structured tables extracted from page.
     repeated RagCrawlerTable tables = 14;
-
-    // Optional. Session identifier used for this crawl run.
-    string session_id = 15;
 
     // Optional. Network diagnostics captured during crawl.
     repeated RagCrawlerNetworkEvent network_requests = 16;
@@ -3790,9 +3847,6 @@ message RagCrawlerResult {
 
     // Optional. MHTML snapshot payload.
     string mhtml = 21;
-
-    // Optional. Downloaded file paths.
-    repeated string downloaded_files = 22;
 
     // Optional. SSL certificate details.
     RagCrawlerSslCertificate ssl_certificate = 23;
@@ -3872,8 +3926,7 @@ message RagListCrawlerJobsRequest {
     string page_token = 4;
 
     // Optional. Filter by operation state.
-    // Uses numeric values of <code>OperationMetadata.Status</code> from <code>operation_metadata.proto</code>.
-    optional int32 state = 5;
+    optional OperationMetadata.Status state = 5;
 
     // Optional. Sort field (default: <code>created_at</code>).
     string orderby = 6;
