@@ -400,7 +400,7 @@ service Rags {
 
 // ============================================================================
 // Common Types
-// Shared types used across multiple services.
+// Shared types used across multiple endpoints.
 // ============================================================================
 
 // File metadata for streaming uploads/downloads.
@@ -708,7 +708,7 @@ message RagDeleteRequest {
 message RagListDatasetsRequest {
 
     // Required. The agent to list all datasets from.
-    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+   // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
     // Required. The language of the project to use.
@@ -740,7 +740,7 @@ message RagListDatasetsRequest {
     // Optional. Filter by dataset name.
     string name = 5;
 
-    // Optional. Sort field. Must be a field of <code>RagDataset</code> (default: <code>create_time</code>).
+    // Optional. Sort field. Can be <code>create_time</code> or <code>update_time</code> (default: <code>create_time</code>).
     string orderby = 6;
 
     // Optional. Sort descending (default: <code>true</code>).
@@ -1043,7 +1043,8 @@ message RagMetadataCondition {
     // Required. Comparison operator.
     RagComparisonOperator comparison_operator = 2;
 
-    // Required. Value to compare to.
+    // Required. Value to compare to.<br>
+    // Must always be a string, but can also be the string representation of a different type, e.g. string representation of a dict <code>"{"key1": 3, "key2": "value"}"</code>.
     string value = 3;
 }
 
