@@ -510,7 +510,7 @@ message RagParserConfig {
 message RagRaptorConfig {
 
     // Optional. Default <code>false</code>. Whether to use RAPTOR for this dataset.
-    bool use_raptor = 1;
+    optional bool use_raptor = 1;
 
     // Optional. Prompt to use for RAPTOR. Default:<br>
     // <code>"Please summarize the following paragraphs. Be careful with the numbers, do not make things up. Paragraphs as following:\n      {cluster_content}\nThe above is the content you need to summarize."</code>
@@ -533,7 +533,7 @@ message RagRaptorConfig {
 message RagGraphRagConfig {
 
     // Optional. Default <code>false</code>.
-    bool use_graphrag = 1;
+    optional bool use_graphrag = 1;
 
     // Optional. Default <code>["organization", "person", "geo", "event", "category"]</code>.
     repeated string entity_types = 2;
@@ -542,10 +542,10 @@ message RagGraphRagConfig {
     optional RagGraphRagMethod method = 3;
 
     // Optional. Default <code>false</code>.
-    bool community = 4;
+    optional bool community = 4;
 
     // Optional. Default <code>false</code>.
-    bool resolution = 5;
+    optional bool resolution = 5;
 }
 
 // Knowledge graph construction methods.
