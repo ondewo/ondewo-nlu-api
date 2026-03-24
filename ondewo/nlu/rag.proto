@@ -708,14 +708,14 @@ message RagDatasetList {
 // Request message for uploading a document to a dataset.
 message RagUploadDocumentRequest {
 
-    // Required. The agent to upload documents for.
+    // Required in first chunk, ignored in later chunks. The agent to upload documents for.
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
-    // Required. The language of the project to use.
+    // Required in first chunk, ignored in later chunks. The language of the project to use.
     string language_code = 2;
 
-    // Required. Target dataset ID to upload documents to.
+    // Required in first chunk, ignored in later chunks. Target dataset ID to upload documents to.
     string dataset_id = 3;
 
     // Required in first chunk, ignored in later chunks. File metadata.
