@@ -591,14 +591,11 @@ message RagDataset {
     // Pagerank.
     optional int32 pagerank = 10;
 
-    // Optional. Status of dataset (<code>"0"</code>: inactive, <code>"1"</code>: active).
-    optional string status = 11;
-
     // Creation date and time.
-    google.protobuf.Timestamp create_time = 12;
+    google.protobuf.Timestamp create_time = 11;
 
     // Last update date and time.
-    google.protobuf.Timestamp update_time = 13;
+    google.protobuf.Timestamp update_time = 12;
 }
 
 // Request message for updating an existing dataset.
