@@ -538,7 +538,7 @@ message RagParserConfig {
     string delimiter = 4;
 
     // Optional. Convert Excel documents to HTML. Default <code>false</code>.
-    bool html4excel = 5;
+    optional bool html4excel = 5;
 
     // Optional. Default <code>"DeepDOC"</code>.
     string layout_recognize = 6;
