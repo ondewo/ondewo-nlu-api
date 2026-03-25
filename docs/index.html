@@ -1897,7 +1897,7 @@
                       
                         <li><a href="#ondewo.nlu.Rags.RagRaptorStatus" class="title-badge method">RagRaptorStatus</a></li>
                       
-                        <li><a href="#ondewo.nlu.Rags.RagUploadDocuments" class="title-badge method">RagUploadDocuments</a></li>
+                        <li><a href="#ondewo.nlu.Rags.RagUploadDocument" class="title-badge method">RagUploadDocument</a></li>
                       
                         <li><a href="#ondewo.nlu.Rags.RagUpdateDocument" class="title-badge method">RagUpdateDocument</a></li>
                       
@@ -2362,11 +2362,7 @@
                       </li>
                     
                       <li>
-                        <a href="#ondewo.nlu.RagUploadDocumentsRequest" class="title-badge message">RagUploadDocumentsRequest</a>
-                      </li>
-                    
-                      <li>
-                        <a href="#ondewo.nlu.RagUploadDocumentsRequest.RagMetadata" class="title-badge message">RagUploadDocumentsRequest.RagMetadata</a>
+                        <a href="#ondewo.nlu.RagUploadDocumentRequest" class="title-badge message">RagUploadDocumentRequest</a>
                       </li>
                     
                       <li>
@@ -21009,9 +21005,9 @@ Uses the dataset's RAPTOR settings.
 
           Get the RAPTOR construction status of a dataset.
         
-          <h4 id="ondewo.nlu.Rags.RagUploadDocuments" class="title-badge method">RagUploadDocuments</h4>
+          <h4 id="ondewo.nlu.Rags.RagUploadDocument" class="title-badge method">RagUploadDocument</h4>
 
-          <pre>rpc RagUploadDocuments (stream <a href="#ondewo.nlu.RagUploadDocumentsRequest">RagUploadDocumentsRequest</a>) returns (<a href="#ondewo.nlu.RagDocumentList">RagDocumentList)</a></pre>
+          <pre>rpc RagUploadDocument (<a href="#ondewo.nlu.RagUploadDocumentRequest">RagUploadDocumentRequest</a>) returns (<a href="#ondewo.nlu.RagDocument">RagDocument)</a></pre>
 
           Upload one or more documents to a dataset.<br>
 Documents start in UNSTART state and must be parsed.
@@ -21337,6 +21333,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 </tr>
               
                 <tr>
+                  <td>language_code</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The language of the project to use. </p></td>
+                </tr>
+              
+                <tr>
                   <td>dataset_id</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
@@ -21578,6 +21581,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td></td>
                   <td><p>Required. The agent to generate the completion for.
 Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>language_code</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The language of the project to use. </p></td>
                 </tr>
               
                 <tr>
@@ -21899,6 +21909,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 </tr>
               
                 <tr>
+                  <td>language_code</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The language of the project to use. </p></td>
+                </tr>
+              
+                <tr>
                   <td>question</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
@@ -22136,6 +22153,13 @@ Typically includes chunk information, document titles, and similarity scores. </
                   <td></td>
                   <td><p>Required. The agent to generate the chat completion for.
 Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>language_code</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The language of the project to use. </p></td>
                 </tr>
               
                 <tr>
@@ -22554,6 +22578,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 </tr>
               
                 <tr>
+                  <td>language_code</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The language of the project to use. </p></td>
+                </tr>
+              
+                <tr>
                   <td>avatar</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
@@ -22625,6 +22656,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td></td>
                   <td><p>Required. The agent to create a chat assistant for.
 Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>language_code</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The language of the project to use. </p></td>
                 </tr>
               
                 <tr>
@@ -22702,6 +22740,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 </tr>
               
                 <tr>
+                  <td>language_code</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The language of the project to use. </p></td>
+                </tr>
+              
+                <tr>
                   <td>chat_id</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
@@ -22745,6 +22790,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td></td>
                   <td><p>Required. The agent to create the dataset for.
 Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>language_code</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The language of the project to use. </p></td>
                 </tr>
               
                 <tr>
@@ -22824,6 +22876,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td></td>
                   <td><p>Required. The agent to create the file for.
 Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>language_code</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The language of the project to use. </p></td>
                 </tr>
               
                 <tr>
@@ -23093,6 +23152,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 </tr>
               
                 <tr>
+                  <td>language_code</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The language of the project to use. </p></td>
+                </tr>
+              
+                <tr>
                   <td>dataset_id</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
@@ -23149,6 +23215,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 </tr>
               
                 <tr>
+                  <td>language_code</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The language of the project to use. </p></td>
+                </tr>
+              
+                <tr>
                   <td>agent_id</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
@@ -23178,6 +23251,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td></td>
                   <td><p>Required. The agent to delete agent sessions from.
 Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>language_code</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The language of the project to use. </p></td>
                 </tr>
               
                 <tr>
@@ -23227,6 +23307,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 </tr>
               
                 <tr>
+                  <td>language_code</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The language of the project to use. </p></td>
+                </tr>
+              
+                <tr>
                   <td>chat_id</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
@@ -23270,6 +23357,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td></td>
                   <td><p>Required. The agent to delete documents from.
 Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>language_code</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The language of the project to use. </p></td>
                 </tr>
               
                 <tr>
@@ -23319,6 +23413,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 </tr>
               
                 <tr>
+                  <td>language_code</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The language of the project to use. </p></td>
+                </tr>
+              
+                <tr>
                   <td>file_ids</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
@@ -23348,6 +23449,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td></td>
                   <td><p>Required. The agent to delete datasets from.
 Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>language_code</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The language of the project to use. </p></td>
                 </tr>
               
                 <tr>
@@ -23651,6 +23759,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 </tr>
               
                 <tr>
+                  <td>language_code</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The language of the project to use. </p></td>
+                </tr>
+              
+                <tr>
                   <td>dataset_id</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
@@ -23826,6 +23941,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td></td>
                   <td><p>Required. The agent to rename the file for.
 Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>language_code</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The language of the project to use. </p></td>
                 </tr>
               
                 <tr>
@@ -24013,6 +24135,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 </tr>
               
                 <tr>
+                  <td>language_code</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The language of the project to use. </p></td>
+                </tr>
+              
+                <tr>
                   <td>file_ids</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
@@ -24112,6 +24241,13 @@ Format: <code>{nodes: [{id, pagerank}], edges: [{source, target, weight}]}</code
                   <td></td>
                   <td><p>Required. The agent to get the parent folder for.
 Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>language_code</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The language of the project to use. </p></td>
                 </tr>
               
             </tbody>
@@ -24247,6 +24383,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 </tr>
               
                 <tr>
+                  <td>language_code</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The language of the project to use. </p></td>
+                </tr>
+              
+                <tr>
                   <td>agent_id</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
@@ -24321,6 +24464,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 </tr>
               
                 <tr>
+                  <td>language_code</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The language of the project to use. </p></td>
+                </tr>
+              
+                <tr>
                   <td>pagination</td>
                   <td><a href="#ondewo.nlu.RagPagination">RagPagination</a></td>
                   <td></td>
@@ -24379,6 +24529,13 @@ Default: <code>true</code>. </p></td>
                   <td></td>
                   <td><p>Required. The agent to list chat assistants from.
 Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>language_code</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The language of the project to use. </p></td>
                 </tr>
               
                 <tr>
@@ -24446,6 +24603,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td></td>
                   <td><p>Required. The agent to list chat sessions from.
 Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>language_code</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The language of the project to use. </p></td>
                 </tr>
               
                 <tr>
@@ -24520,6 +24684,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td></td>
                   <td><p>Required. The agent to list chunks from.
 Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>language_code</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The language of the project to use. </p></td>
                 </tr>
               
                 <tr>
@@ -24621,6 +24792,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 </tr>
               
                 <tr>
+                  <td>language_code</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The language of the project to use. </p></td>
+                </tr>
+              
+                <tr>
                   <td>pagination</td>
                   <td><a href="#ondewo.nlu.RagPagination">RagPagination</a></td>
                   <td></td>
@@ -24678,6 +24856,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td></td>
                   <td><p>Required. The agent to list documents from.
 Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>language_code</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The language of the project to use. </p></td>
                 </tr>
               
                 <tr>
@@ -24811,6 +24996,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td></td>
                   <td><p>Required. The agent to list files from.
 Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>language_code</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The language of the project to use. </p></td>
                 </tr>
               
                 <tr>
@@ -25078,6 +25270,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 </tr>
               
                 <tr>
+                  <td>language_code</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The language of the project to use. </p></td>
+                </tr>
+              
+                <tr>
                   <td>src_file_ids</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
@@ -25169,6 +25368,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td></td>
                   <td><p>Required. The agent to parse documents for.
 Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>language_code</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The language of the project to use. </p></td>
                 </tr>
               
                 <tr>
@@ -25683,6 +25889,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 </tr>
               
                 <tr>
+                  <td>language_code</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The language of the project to use. </p></td>
+                </tr>
+              
+                <tr>
                   <td>question</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
@@ -25747,6 +25960,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 </tr>
               
                 <tr>
+                  <td>language_code</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The language of the project to use. </p></td>
+                </tr>
+              
+                <tr>
                   <td>dataset_id</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
@@ -25793,6 +26013,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 </tr>
               
                 <tr>
+                  <td>language_code</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The language of the project to use. </p></td>
+                </tr>
+              
+                <tr>
                   <td>file_id</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
@@ -25829,6 +26056,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td></td>
                   <td><p>Required. The agent to retrieve chunks for.
 Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>language_code</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The language of the project to use. </p></td>
                 </tr>
               
                 <tr>
@@ -25994,6 +26228,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 </tr>
               
                 <tr>
+                  <td>language_code</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The language of the project to use. </p></td>
+                </tr>
+              
+                <tr>
                   <td>dataset_id</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
@@ -26141,6 +26382,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 </tr>
               
                 <tr>
+                  <td>language_code</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The language of the project to use. </p></td>
+                </tr>
+              
+                <tr>
                   <td>agent_id</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
@@ -26219,6 +26467,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td></td>
                   <td><p>Required. The agent containing the chat assistant to update.
 Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>language_code</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The language of the project to use. </p></td>
                 </tr>
               
                 <tr>
@@ -26303,6 +26558,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 </tr>
               
                 <tr>
+                  <td>language_code</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The language of the project to use. </p></td>
+                </tr>
+              
+                <tr>
                   <td>chat_id</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
@@ -26353,6 +26615,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td></td>
                   <td><p>Required. The agent to update the chunk for.
 Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>language_code</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The language of the project to use. </p></td>
                 </tr>
               
                 <tr>
@@ -26435,6 +26704,13 @@ Each position is an array of 5 integers representing location data (format varie
                   <td></td>
                   <td><p>Required. The agent to update the dataset for.
 Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>language_code</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The language of the project to use. </p></td>
                 </tr>
               
                 <tr>
@@ -26526,6 +26802,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 </tr>
               
                 <tr>
+                  <td>language_code</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The language of the project to use. </p></td>
+                </tr>
+              
+                <tr>
                   <td>dataset_id</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
@@ -26614,39 +26897,8 @@ Index into metadata.files array (0-based). </p></td>
 
         
       
-        <h3 id="ondewo.nlu.RagUploadDocumentsRequest" class="title-badge message">RagUploadDocumentsRequest</h3>
-        <p>Request message for uploading documents to a dataset.<br></p><p>Documents are uploaded via streaming multipart form data.</p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>metadata</td>
-                  <td><a href="#ondewo.nlu.RagUploadDocumentsRequest.RagMetadata">RagUploadDocumentsRequest.RagMetadata</a></td>
-                  <td></td>
-                  <td><p>First message: declares all files to be uploaded. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>chunk</td>
-                  <td><a href="#ondewo.nlu.RagUploadChunk">RagUploadChunk</a></td>
-                  <td></td>
-                  <td><p>Subsequent messages: stream file data chunks. </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="ondewo.nlu.RagUploadDocumentsRequest.RagMetadata" class="title-badge message">RagUploadDocumentsRequest.RagMetadata</h3>
-        <p>Metadata for the upload (first message only).</p>
+        <h3 id="ondewo.nlu.RagUploadDocumentRequest" class="title-badge message">RagUploadDocumentRequest</h3>
+        <p>Request message for uploading a document to a dataset.</p>
 
         
           <table class="field-table">
@@ -26664,6 +26916,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 </tr>
               
                 <tr>
+                  <td>language_code</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The language of the project to use. </p></td>
+                </tr>
+              
+                <tr>
                   <td>dataset_id</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
@@ -26671,10 +26930,17 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 </tr>
               
                 <tr>
-                  <td>files</td>
+                  <td>metadata</td>
                   <td><a href="#ondewo.nlu.RagFileMetadata">RagFileMetadata</a></td>
-                  <td>repeated</td>
-                  <td><p>Required. Metadata for all files being uploaded in this stream. </p></td>
+                  <td></td>
+                  <td><p>Required. Metadata of the uploaded file. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>data</td>
+                  <td><a href="#bytes">bytes</a></td>
+                  <td></td>
+                  <td><p>Required. File data (raw bytes). </p></td>
                 </tr>
               
             </tbody>
@@ -26731,6 +26997,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td></td>
                   <td><p>Required. The agent to upload files for.
 Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>language_code</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The language of the project to use. </p></td>
                 </tr>
               
                 <tr>
