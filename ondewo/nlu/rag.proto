@@ -2796,14 +2796,16 @@ message RagCrawlerUrlFilters {
   // Optional. Exclude links to known social media domains.
   bool exclude_social_media_links = 6;
 
+  // Optional. Exclude internal links from extracted links.
+  bool exclude_internal_links = 9;
+  
   // Optional. Additional social media domains to exclude.
   repeated string exclude_social_media_domains = 7;
 
+  // TODO: Look into this
   // Optional. Custom domains to exclude from extracted links.
-  repeated string exclude_domains = 8;
+  // repeated string exclude_domains = 8;
 
-  // Optional. Exclude internal links from extracted links.
-  bool exclude_internal_links = 9;
 }
 
 // Authentication configuration.
@@ -2811,8 +2813,6 @@ message RagCrawlerUrlFilters {
 // Supports both browser/form login and HTTP auth patterns used by Crawl4AI
 // pipelines when crawling protected content.
 message RagCrawlerAuth {
-  // Optional. Base URL used for auth/login navigation.
-  string auth_base_url = 1;
 
   // Optional. HTTP Basic auth settings.
   RagCrawlerHttpAuth http_auth = 2;
@@ -2820,6 +2820,10 @@ message RagCrawlerAuth {
   // Optional. Form/HTML login selector and credential settings.
   RagCrawlerHtmlAuth html_auth = 3;
 }
+
+// example.com/blog
+// example.com/login
+// 1. Auth job -> 2. URL
 
 enum RagCrawlerSelectorType {
   // ID selector.
@@ -2837,35 +2841,39 @@ enum RagCrawlerSelectorType {
 // Selector types and selector strings identify login form fields in the page
 // DOM. Credentials are then filled before form submission.
 message RagCrawlerHtmlAuth {
+
+  // Optional. Base URL used for auth/login navigation.
+  string html_auth_base_url = 1;
+
   // Optional. Username field selector type.
-  RagCrawlerSelectorType username_selector_type = 1;
+  RagCrawlerSelectorType html_auth_username_selector_type = 2;
 
   // Optional. Username field selector value.
-  string username_selector = 2;
+  string html_auth_username_selector = 3;
 
   // Optional. Username credential.
-  string username = 3;
+  string html_auth_username = 4;
 
   // Optional. Password field selector type.
-  RagCrawlerSelectorType password_selector_type = 4;
+  RagCrawlerSelectorType html_auth_password_selector_type = 5;
 
   // Optional. Password field selector value.
-  string password_selector = 5;
+  string html_auth_password_selector = 6;
 
   // Optional. Password credential.
-  string password = 6;
+  string html_auth_password = 7;
 }
 
 // HTTP Basic authentication settings.
 message RagCrawlerHttpAuth {
   // HTTP Basic Authentication username.
-  string username = 1;
+  string http_auth_username = 1;
 
   // HTTP Basic Authentication password.
-  string password = 2;
+  string http_auth_password = 2;
 
   // Optional. User-Agent sent with basic-auth requests.
-  string user_agent = 3;
+  string http_auth_user_agent = 3;
 }
 
 // Browser runtime configuration.
@@ -2876,46 +2884,43 @@ message RagCrawlerHttpAuth {
 message RagCrawlerBrowserConfig {
   // Optional. HTTP headers sent on page/resource requests.
   // Repeated entries allow duplicate header names and preserve order.
-  repeated RagCrawlerHeader headers = 1;
-
-  // Optional. Additional BrowserConfig options passed through to Crawl4AI.
-  // Example keys: user_agent, viewport, java_script_enabled, proxy.
-  google.protobuf.Struct additional_fields = 2;
+  repeated google.protobuf.Struct browser_config_headers = 1;
 
   // Optional. Run browser in headless mode.
-  bool headless = 3;
+  // bool headless = 3;
 
   // Optional. Proxy settings.
   RagCrawlerProxyConfig proxy_config = 4;
 
   // Optional. Browser viewport width.
-  int32 viewport_width = 5;
+  // int32 viewport_width = 5;
 
   // Optional. Browser viewport height.
-  int32 viewport_height = 6;
+  // int32 viewport_height = 6;
 
   // Optional. Device scale factor (DPR).
-  float device_scale_factor = 7;
+  // float device_scale_factor = 7;
 
   // Optional. Initial cookies.
-  repeated RagCrawlerCookie cookies = 8;
+  repeated RagCrawlerCookie browser_config_cookies = 8;
 
   // Optional. Enable stealth mode.
-  bool enable_stealth = 9;
+  // bool enable_stealth = 9;
 
   // Optional. Enable text-only mode for faster/lower-cost crawling.
-  bool text_mode = 10;
+  // bool text_mode = 10;
 
   // Optional. Ignore invalid HTTPS certificates.
-  bool ignore_https_errors = 11;
+  // bool ignore_https_errors = 11;
 
   // Optional. Enable/disable JavaScript execution.
-  bool javascript_enabled = 12;
+  // bool javascript_enabled = 12;
 
   // Optional. User-agent generator configuration used when <code>user_agent_mode=random</code>.
   google.protobuf.Struct user_agent_generator_config = 13;
 }
 
+// TODO: Change to this: headers	google.protobuf.Struct
 // HTTP header key/value pair.
 message RagCrawlerHeader {
   // Required. Header name.
@@ -2928,13 +2933,13 @@ message RagCrawlerHeader {
 // Proxy configuration for browser traffic.
 message RagCrawlerProxyConfig {
   // Required. Proxy server URL.
-  string server = 1;
+  string proxy_config_server = 1;
 
   // Optional. Proxy username.
-  string sername = 2;
+  string proxy_config_username = 2;
 
   // Optional. Proxy password.
-  string password = 3;
+  string proxy_config_password = 3;
 }
 
 // Cookie representation for initial browser session state.
@@ -2952,16 +2957,24 @@ message RagCrawlerCookie {
   string cookie_path = 4;
 
   // Optional. Expiration as Unix timestamp (seconds).
-  int64 expires_at_unix_seconds = 5;
+  int64 cookie_expires_at_unix_seconds = 5;
 
   // Optional. HttpOnly flag.
-  bool http_only = 6;
+  bool cookie_http_only = 6;
 
   // Optional. Secure flag.
-  bool secure = 7;
+  bool cookie_secure = 7;
 
   // Optional. SameSite policy. Typical values: <code>Lax</code>, <code>Strict</code>, <code>None</code>.
-  string same_site = 8;
+  RagCrawlerSameSite cookie_same_site = 8;
+}
+
+// TODO: Document this
+enum RagCrawlerSameSite {
+  RAG_CRAWLER_SAME_SITE_UNSPECIFIED = 0;
+  RAG_CRAWLER_SAME_SITE_LAX = 1;
+  RAG_CRAWLER_SAME_SITE_STRICT = 2;
+  RAG_CRAWLER_SAME_SITE_NONE = 3;
 }
 
 // Concurrency and pacing controls for crawler runs.
@@ -2984,47 +2997,37 @@ message RagCrawlerConfig {
   // Single source of truth for request pacing and parallelism.
   RagCrawlerConcurrencyConfig concurrency = 1;
 
-  // Removed legacy flat concurrency fields.
-  // Keep field numbers reserved to prevent accidental reuse.
-  reserved 2, 3;
-
   // Optional. Deep crawler behavior (enable + depth/pages/scoring/filter chain).
-  RagCrawlerDeepCrawlerSettings deep_crawler_config = 4;
+  RagCrawlerDeepCrawlerSettings deep_crawler_config = 2;
 
   // Optional. Structured output configuration (format + metadata policy).
-  RagCrawlerOutputConfig output_config = 5;
-
+  RagCrawlerOutputConfig output_config = 3;
+    
   // Optional. Page rendering and extraction strategy configuration.
-  RagCrawlerRenderingConfig rendering_config = 6;
+  RagCrawlerRenderingConfig rendering_config = 4;
 
   // Optional. Crawl traversal strategy.
   // BFS is often best for broad site coverage; DFS for deep section traversal.
   // Default <code>RAG_CRAWLER_CRAWL_STRATEGY_BFS</code>.
-  RagCrawlerCrawlStrategy strategy = 7;
+  RagCrawlerCrawlStrategy strategy = 5;
 
   // Optional. Request and rendering timeout settings.
-  RagCrawlerTimeoutsConfig timeouts_config = 8;
+  RagCrawlerTimeoutsConfig timeouts_config = 6;
 
   // Optional. Retry behavior configuration for transient failures.
-  RagCrawlerRetryConfig retry_config = 9;
+  RagCrawlerRetryConfig retry_config = 7;
 
   // Optional. Browser/runtime diagnostics collection settings.
-  RagCrawlerDiagnosticsConfig diagnostics_config = 10;
+  RagCrawlerDiagnosticsConfig diagnostics_config = 8;
 
   // Optional. Cache mode for crawling behavior.
-  RagCrawlerCacheMode cache_mode = 11;
-
-  // Optional. JavaScript snippets executed after waits on fully loaded pages.
-  repeated string js_code = 12;
+  // RagCrawlerCacheMode cache_mode = 9;
 
   // Optional. JavaScript wait/scroll/overlay behavior configuration.
-  RagCrawlerInteractionConfig interaction_config = 13;
+  RagCrawlerInteractionConfig interaction_config = 11;
 
   // Optional. Browser locale/timezone/geolocation overrides.
-  RagCrawlerLocaleConfig locale_config = 14;
-
-  // Optional. Whether this is a JS-only continuation in an existing session.
-  bool js_only = 15;
+  // RagCrawlerLocaleConfig locale_config = 12;
 }
 
 // Cache mode for crawler runs.
@@ -3045,32 +3048,32 @@ enum RagCrawlerCacheMode {
   RAG_CRAWLER_CACHE_MODE_BYPASS = 4;
 }
 
-// Geolocation override.
-message RagCrawlerGeolocation {
-  // Required. Latitude in range [-90, 90].
-  double latitude = 1;
+// // Geolocation override.
+// message RagCrawlerGeolocation {
+//   // Required. Latitude in range [-90, 90].
+//   double geolocation_latitude = 1;
 
-  // Required. Longitude in range [-180, 180].
-  double longitude = 2;
+//   // Required. Longitude in range [-180, 180].
+//   double geolocation_longitude = 2;
 
-  // Optional. Accuracy in meters.
-  float accuracy = 3;
-}
+//   // Optional. Accuracy in meters.
+//   float geolocation_accuracy = 3;
+// }
 
-// Virtual scroll configuration.
-message RagCrawlerVirtualScrollConfig {
-  // Required. CSS selector of scrollable container.
-  string container_selector = 1;
+// // Virtual scroll configuration.
+// message RagCrawlerVirtualScrollConfig {
+//   // Required. CSS selector of scrollable container.
+//   string virtual_scroll_config_container_selector = 1;
 
-  // Optional. Maximum number of scroll actions.
-  int32 scroll_count = 2;
+//   // Optional. Maximum number of scroll actions.
+//   int32 virtual_scroll_config_scroll_count = 2;
 
-  // Optional. Scroll amount mode (e.g. <code>container_height</code>, <code>page_height</code> or pixel number encoded as string).
-  string scroll_by = 3;
+//   // Optional. Scroll amount mode (e.g. <code>container_height</code>, <code>page_height</code> or pixel number encoded as string).
+//   string virtual_scroll_config_scroll_by = 3;
 
-  // Optional. Wait time in seconds after each scroll.
-  float wait_after_scroll = 4;
-}
+//   // Optional. Wait time in seconds after each scroll.
+//   float virtual_scroll_config_wait_after_scroll = 4;
+// }
 
 // Deep crawler options grouped under one config node.
 message RagCrawlerDeepCrawlerSettings {
@@ -3106,35 +3109,35 @@ message RagCrawlerInteractionConfig {
   int32 wait_for_timeout = 3;
 
   // Optional. Auto-scroll the full page to load dynamic content.
-  bool scan_full_page = 4;
+  // bool scan_full_page = 4;
 
   // Optional. Delay between scroll steps when <code>scan_full_page=true</code>.
-  float scroll_delay = 5;
+  // float scroll_delay = 5;
 
   // Optional. Maximum number of scroll steps for full page scan.
-  int32 max_scroll_steps = 6;
+  //int32 max_scroll_steps = 6;
 
   // Optional. Virtual scroll configuration for feeds that replace content while scrolling.
-  RagCrawlerVirtualScrollConfig virtual_scroll_config = 7;
+  // RagCrawlerVirtualScrollConfig virtual_scroll_config = 7;
 
   // Optional. Remove blocking overlays/popups from page.
-  bool remove_overlay_elements = 8;
+  // bool remove_overlay_elements = 8;
 
   // Optional. Remove known consent/CMP popups.
-  bool remove_consent_popups = 9;
+  // bool remove_consent_popups = 9;
 }
 
-// Browser locale/environment settings.
-message RagCrawlerLocaleConfig {
-  // Optional. Browser locale (e.g. <code>en-US</code>).
-  string locale = 1;
+// // Browser locale/environment settings.
+// message RagCrawlerLocaleConfig {
+//   // Optional. Browser locale (e.g. <code>en-US</code>).
+//   string locale = 1;
 
-  // Optional. Browser timezone (e.g. <code>Europe/Vienna</code>).
-  string timezone_id = 2;
+//   // Optional. Browser timezone (e.g. <code>Europe/Vienna</code>).
+//   string timezone_id = 2;
 
-  // Optional. Browser geolocation override.
-  RagCrawlerGeolocation geolocation = 3;
-}
+//   // Optional. Browser geolocation override.
+//   RagCrawlerGeolocation geolocation = 3;
+// }
 
 // Structured output configuration.
 //
@@ -3148,7 +3151,7 @@ message RagCrawlerOutputConfig {
   RagCrawlerOutputMetadata metadata = 2;
 
   // Optional. Minimum score/quality threshold for table extraction.
-  int32 table_score_threshold = 3;
+  // int32 table_score_threshold = 3;
 }
 
 // Output format options for crawler results.
@@ -3265,16 +3268,16 @@ message RagCrawlerRenderingConfig {
 
   // Optional. Table extraction strategy.
   // Example: <code>RAG_CRAWLER_TABLE_EXTRACTION_STRATEGY_DEFAULT</code>.
-  RagCrawlerTableExtractionStrategy table_extraction = 2;
+  // RagCrawlerTableExtractionStrategy table_extraction = 2;
 
   // Optional. Enable JavaScript execution during rendering.
   // Required for SPAs or pages that hydrate content client-side.
   // Default <code>false</code>.
-  bool with_js = 3;
+  //bool with_js = 3;
 
   // Optional. Additional wait time (seconds) before HTML extraction.
   // Useful for late async content (XHR/fetch-driven sections).
-  float delay_before_return_html_seconds = 4;
+  // float delay_before_return_html_seconds = 4;
 }
 
 // Crawl traversal strategy.
@@ -3321,20 +3324,20 @@ message RagCrawlerRetryConfig {
 //
 // Scorers influence scheduling order (especially for best-first traversal)
 // by assigning relevance/quality weights to discovered URLs.
-message RagCrawlerUrlScorerConfig {
-  // Optional. Scorer implementation/type.
-  // Typical values: <code>keyword_relevance</code>.
-  string scorer_type = 1;
+// message RagCrawlerUrlScorerConfig {
+//   // Optional. Scorer implementation/type.
+//   // Typical values: <code>keyword_relevance</code>.
+//   string scorer_type = 1;
 
-  // Optional. Keywords used by keyword-based scorers.
-  repeated string keywords = 2;
+//   // Optional. Keywords used by keyword-based scorers.
+//   repeated string keywords = 2;
 
-  // Optional. Relative scorer weight.
-  float weight = 3;
+//   // Optional. Relative scorer weight.
+//   float weight = 3;
 
-  // Optional. Extra scorer-specific options.
-  google.protobuf.Struct additional_fields = 4;
-}
+//   // Optional. Extra scorer-specific options.
+//   google.protobuf.Struct additional_fields = 4;
+// }
 
 // Supported deep crawl filter types.
 enum RagCrawlerFilterType {
@@ -3381,80 +3384,80 @@ enum RagCrawlerFilterContentType {
 // Generic deep-crawl filter definition.
 //
 // Depending on <code>type</code>, only a subset of fields is used.
-message RagCrawlerFilterConfig {
-  // Required. Filter type discriminator.
-  RagCrawlerFilterType type = 1;
+// message RagCrawlerFilterConfig {
+//   // Required. Filter type discriminator.
+//   RagCrawlerFilterType type = 1;
 
-  // Optional. URL patterns for URL pattern filters.
-  repeated string regex_patterns = 2;
+//   // Optional. URL patterns for URL pattern filters.
+//   repeated string regex_patterns = 2;
 
-  // Optional. Allowed domains for domain filters.
-  repeated string allowed_domains = 3;
+//   // Optional. Allowed domains for domain filters.
+//   repeated string allowed_domains = 3;
 
-  // Optional. Blocked domains for domain filters.
-  repeated string blocked_domains = 4;
+//   // Optional. Blocked domains for domain filters.
+//   repeated string blocked_domains = 4;
 
-  // Optional. Allowed content types for content type filters.
-  repeated RagCrawlerFilterContentType allowed_content_types = 5;
-}
+//   // Optional. Allowed content types for content type filters.
+//   repeated RagCrawlerFilterContentType allowed_content_types = 5;
+// }
 
 // Ordered chain of URL filters.
 //
 // Filters run sequentially; early filters should be cheap and broad (domain/
 // pattern), later filters can be more expensive (relevance/SEO checks).
-message RagCrawlerFilterChainConfig {
-  // Filters to apply in order.
-  repeated RagCrawlerFilterConfig filters = 1;
-}
+// message RagCrawlerFilterChainConfig {
+//   // Filters to apply in order.
+//   repeated RagCrawlerFilterConfig filters = 1;
+// }
 
 // Deep-crawl behavior.
 //
 // Controls link-following beyond initial seeds, including traversal limits,
 // scoring, and filter chains.
-message RagCrawlerDeepCrawlerConfig {
-  // Optional. Maximum link depth from seed URLs.
-  // <code>0</code> usually means only seed pages.
-  int32 max_depth = 1;
+// message RagCrawlerDeepCrawlerConfig {
+//   // Optional. Maximum link depth from seed URLs.
+//   // <code>0</code> usually means only seed pages.
+//   int32 max_depth = 1;
 
-  // Optional. Hard cap on total processed pages for this run.
-  int32 max_pages = 2;
+//   // Optional. Hard cap on total processed pages for this run.
+//   int32 max_pages = 2;
 
-  // Optional. Follow links that leave allowed/seed domains.
-  bool follow_include_external = 3;
+//   // Optional. Follow links that leave allowed/seed domains.
+//   // bool follow_include_external = 3;
 
-  // Optional. Minimum URL score threshold used for admission/prioritization.
-  float score_threshold = 4;
+//   // Optional. Minimum URL score threshold used for admission/prioritization.
+//   // float score_threshold = 4;
 
-  // Optional. URL scorer configuration used for prioritization.
-  RagCrawlerUrlScorerConfig url_scorer = 5;
+//   // Optional. URL scorer configuration used for prioritization.
+//   // RagCrawlerUrlScorerConfig url_scorer = 5;
 
-  // Optional. Filter chain used to accept/reject discovered URLs.
-  RagCrawlerFilterChainConfig filter_chain = 6;
+//   // Optional. Filter chain used to accept/reject discovered URLs.
+//   // RagCrawlerFilterChainConfig filter_chain = 6;
 
-  // Optional. Enable prefetch mode for faster URL graph discovery.
-  bool prefetch = 7;
-}
+//   // Optional. Enable prefetch mode for faster URL graph discovery.
+//   // bool prefetch = 7;
+// }
 
 // Structured table extracted from HTML.
-message RagCrawlerTable {
-  // Table headers.
-  repeated string headers = 1;
+// message RagCrawlerTable {
+//   // Table headers.
+//   repeated string headers = 1;
 
-  // Table rows. Each row is a list of cell values.
-  repeated RagCrawlerTableRow rows = 2;
+//   // Table rows. Each row is a list of cell values.
+//   repeated RagCrawlerTableRow rows = 2;
 
-  // Optional. Table caption.
-  string caption = 3;
+//   // Optional. Table caption.
+//   string caption = 3;
 
-  // Optional. Table summary.
-  string summary = 4;
-}
+//   // Optional. Table summary.
+//   string summary = 4;
+// }
 
 // A single table row.
-message RagCrawlerTableRow {
-  // Cell values for this row.
-  repeated string cells = 1;
-}
+// message RagCrawlerTableRow {
+//   // Cell values for this row.
+//   repeated string cells = 1;
+// }
 
 // Network request/response diagnostics entry captured during crawling.
 message RagCrawlerNetworkEvent {
