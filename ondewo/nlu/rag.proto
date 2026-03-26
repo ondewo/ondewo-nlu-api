@@ -39,6 +39,7 @@ import "google/protobuf/field_mask.proto";
 import "google/protobuf/timestamp.proto";
 import "ondewo/nlu/operation_metadata.proto";
 import "ondewo/nlu/operations.proto";
+import "ondewo/nlu/session.proto";
 
 // TODO change Github link if changes to RAGFlow are merged to upstream
 
