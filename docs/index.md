@@ -385,7 +385,6 @@
     - [RagCreateChatAssistantRequest](#ondewo.nlu.RagCreateChatAssistantRequest)
     - [RagCreateChatSessionRequest](#ondewo.nlu.RagCreateChatSessionRequest)
     - [RagCreateDatasetRequest](#ondewo.nlu.RagCreateDatasetRequest)
-    - [RagCreateFileRequest](#ondewo.nlu.RagCreateFileRequest)
     - [RagDataset](#ondewo.nlu.RagDataset)
     - [RagDatasetIdRequest](#ondewo.nlu.RagDatasetIdRequest)
     - [RagDatasetList](#ondewo.nlu.RagDatasetList)
@@ -393,7 +392,6 @@
     - [RagDeleteAgentSessionsRequest](#ondewo.nlu.RagDeleteAgentSessionsRequest)
     - [RagDeleteChatSessionsRequest](#ondewo.nlu.RagDeleteChatSessionsRequest)
     - [RagDeleteDocumentsRequest](#ondewo.nlu.RagDeleteDocumentsRequest)
-    - [RagDeleteFilesRequest](#ondewo.nlu.RagDeleteFilesRequest)
     - [RagDeleteRequest](#ondewo.nlu.RagDeleteRequest)
     - [RagDocAgg](#ondewo.nlu.RagDocAgg)
     - [RagDocument](#ondewo.nlu.RagDocument)
@@ -401,16 +399,8 @@
     - [RagDownloadDocumentRequest](#ondewo.nlu.RagDownloadDocumentRequest)
     - [RagFile](#ondewo.nlu.RagFile)
     - [RagFileChunk](#ondewo.nlu.RagFileChunk)
-    - [RagFileIdRequest](#ondewo.nlu.RagFileIdRequest)
-    - [RagFileList](#ondewo.nlu.RagFileList)
     - [RagFileMetadata](#ondewo.nlu.RagFileMetadata)
-    - [RagFileToDocument](#ondewo.nlu.RagFileToDocument)
-    - [RagFileToDocumentList](#ondewo.nlu.RagFileToDocumentList)
-    - [RagFileToDocumentRequest](#ondewo.nlu.RagFileToDocumentRequest)
     - [RagGetKnowledgeGraphResponse](#ondewo.nlu.RagGetKnowledgeGraphResponse)
-    - [RagGetParentFolderResponse](#ondewo.nlu.RagGetParentFolderResponse)
-    - [RagGetRootFolderRequest](#ondewo.nlu.RagGetRootFolderRequest)
-    - [RagGetRootFolderResponse](#ondewo.nlu.RagGetRootFolderResponse)
     - [RagGraphRagConfig](#ondewo.nlu.RagGraphRagConfig)
     - [RagIntList](#ondewo.nlu.RagIntList)
     - [RagListAgentSessionsRequest](#ondewo.nlu.RagListAgentSessionsRequest)
@@ -421,16 +411,10 @@
     - [RagListChunksResponse](#ondewo.nlu.RagListChunksResponse)
     - [RagListDatasetsRequest](#ondewo.nlu.RagListDatasetsRequest)
     - [RagListDocumentsRequest](#ondewo.nlu.RagListDocumentsRequest)
-    - [RagListDocumentsResponse](#ondewo.nlu.RagListDocumentsResponse)
-    - [RagListFilesRequest](#ondewo.nlu.RagListFilesRequest)
-    - [RagListFilesResponse](#ondewo.nlu.RagListFilesResponse)
     - [RagLlmSetting](#ondewo.nlu.RagLlmSetting)
     - [RagMessage](#ondewo.nlu.RagMessage)
     - [RagMetadataCondition](#ondewo.nlu.RagMetadataCondition)
     - [RagMetadataConditions](#ondewo.nlu.RagMetadataConditions)
-    - [RagMoveFileRequest](#ondewo.nlu.RagMoveFileRequest)
-    - [RagPagination](#ondewo.nlu.RagPagination)
-    - [RagParentFoldersList](#ondewo.nlu.RagParentFoldersList)
     - [RagParseDocumentsRequest](#ondewo.nlu.RagParseDocumentsRequest)
     - [RagParserConfig](#ondewo.nlu.RagParserConfig)
     - [RagPartialSuccess](#ondewo.nlu.RagPartialSuccess)
@@ -442,7 +426,6 @@
     - [RagRelatedQuestionsRequest](#ondewo.nlu.RagRelatedQuestionsRequest)
     - [RagRelatedQuestionsResponse](#ondewo.nlu.RagRelatedQuestionsResponse)
     - [RagRemoveChunksRequest](#ondewo.nlu.RagRemoveChunksRequest)
-    - [RagRenameFileRequest](#ondewo.nlu.RagRenameFileRequest)
     - [RagRetrievalRequest](#ondewo.nlu.RagRetrievalRequest)
     - [RagRetrievalResponse](#ondewo.nlu.RagRetrievalResponse)
     - [RagStopParsingRequest](#ondewo.nlu.RagStopParsingRequest)
@@ -453,17 +436,16 @@
     - [RagUpdateChunkRequest](#ondewo.nlu.RagUpdateChunkRequest)
     - [RagUpdateDatasetRequest](#ondewo.nlu.RagUpdateDatasetRequest)
     - [RagUpdateDocumentRequest](#ondewo.nlu.RagUpdateDocumentRequest)
-    - [RagUploadChunk](#ondewo.nlu.RagUploadChunk)
     - [RagUploadDocumentRequest](#ondewo.nlu.RagUploadDocumentRequest)
-    - [RagUploadFilesRequest](#ondewo.nlu.RagUploadFilesRequest)
-    - [RagUploadFilesRequest.RagMetadata](#ondewo.nlu.RagUploadFilesRequest.RagMetadata)
   
     - [RagAgentEventType](#ondewo.nlu.RagAgentEventType)
     - [RagCanvasCategory](#ondewo.nlu.RagCanvasCategory)
     - [RagChunkMethod](#ondewo.nlu.RagChunkMethod)
-    - [RagCreateFileFileType](#ondewo.nlu.RagCreateFileFileType)
+    - [RagComparisonOperator](#ondewo.nlu.RagComparisonOperator)
     - [RagDocumentStatus](#ondewo.nlu.RagDocumentStatus)
+    - [RagDocumentType](#ondewo.nlu.RagDocumentType)
     - [RagGraphRagMethod](#ondewo.nlu.RagGraphRagMethod)
+    - [RagLogic](#ondewo.nlu.RagLogic)
     - [RagMessageRole](#ondewo.nlu.RagMessageRole)
     - [RagPermission](#ondewo.nlu.RagPermission)
     - [RagPromptType](#ondewo.nlu.RagPromptType)
@@ -7205,12 +7187,9 @@ Chunks are the basic retrieval units used for vector similarity search in RAG.
 | image_id | [string](#string) |  | Associated image ID if this chunk references an image. |
 | available | [bool](#bool) | optional | Availability status indicating if the chunk is active and can be retrieved (can be disabled without deletion). |
 | positions | [google.protobuf.ListValue](#google.protobuf.ListValue) | repeated | Position information in the original document.<br> Each position is an array of 5 integers representing location data (format varies by document type). |
-| create_time | [string](#string) |  | Creation timestamp (ISO 8601 datetime string). |
-| create_timestamp | [float](#float) |  | Creation timestamp as a floating-point Unix timestamp. |
+| create_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. |
 | document_keyword | [string](#string) |  | Document name used as a keyword for retrieval. |
 | similarity | [float](#float) | optional | Similarity score between <code>0.0</code> and <code>1.0</code> (only populated in retrieval responses). |
-| vector | [google.protobuf.Struct](#google.protobuf.Struct) |  | Embedding vector for this chunk (optional, rarely included in responses for performance reasons). |
-| additional_fields | [google.protobuf.Struct](#google.protobuf.Struct) |  | Additional fields returned by RAGFlow not explicitly defined above. |
 
 
 
@@ -7325,29 +7304,8 @@ Request message for creating a new dataset.
 | name | [string](#string) |  | Required. Unique name of the dataset to create. Must follow these requirements: <ul> <li>contain only characters from the basic multilingual Unicode plane</li> <li>maximum 128 characters</li> <li>case-insensitive</li> </ul> |
 | description | [string](#string) |  | Optional. Dataset description. Maximum 65,535 characters. |
 | avatar | [string](#string) |  | Optional. Base64-encoded avatar image in the format <code>"data:image/[png|jpeg];base64,&lt;base64_string&gt;"</code>. Maximum 65,535 characters. |
-| permission | [RagPermission](#ondewo.nlu.RagPermission) | optional | Optional. Access permission for new dataset. |
 | chunk_method | [RagChunkMethod](#ondewo.nlu.RagChunkMethod) | optional | Optional. Default chunking method for documents in this dataset. |
 | parser_config | [RagParserConfig](#ondewo.nlu.RagParserConfig) |  | Optional. Configuration settings for the dataset parser. The used fields vary depending on the selected <code>chunk_method</code>. |
-| embedding_model | [string](#string) |  | Optional. Embedding model name in the format "&lt;model_name&gt;@&lt;factory_name&gt;" (uses user's default if not specified). Maximum length 255. |
-
-
-
-
-
-
-<a name="ondewo.nlu.RagCreateFileRequest"></a>
-
-### RagCreateFileRequest
-Request message for creating a file or folder in RAGFlow.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| parent | [string](#string) |  | Required. The agent to create the file for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
-| language_code | [string](#string) |  | Required. The language of the project to use. |
-| name | [string](#string) |  | Required. Maximum length 255. Name of the file or folder to create. |
-| parent_id | [string](#string) |  | Optional. Parent folder ID. If not provided, creates in root directory. |
-| type | [RagCreateFileFileType](#ondewo.nlu.RagCreateFileFileType) | optional | Required. Type of item to create: <code>"folder"</code> for directories or <code>"virtual"</code> for virtual files. |
 
 
 
@@ -7364,33 +7322,16 @@ Dataset containing documents for RAG.
 | ----- | ---- | ----- | ----------- |
 | id | [string](#string) |  | Dataset UUID. |
 | avatar | [string](#string) |  | Base64-encoded avatar image. |
-| tenant_id | [string](#string) |  | RAGFlow Tenant ID. |
 | name | [string](#string) |  | Dataset name. |
-| language | [string](#string) |  | Dataset language (e.g. <code>"English"</code>). |
 | description | [string](#string) |  | Dataset description. |
-| embedding_model | [string](#string) |  | Embedding model name. |
-| permission | [RagPermission](#ondewo.nlu.RagPermission) | optional | Access permission. |
-| created_by | [string](#string) |  | ID of RAGFlow user who created the dataset. |
 | document_count | [int32](#int32) | optional | Number of documents in the dataset. |
 | token_num | [int32](#int32) | optional | Number of tokens in the dataset. |
 | chunk_count | [int32](#int32) | optional | Number of chunks of all documents in the dataset. |
-| similarity_threshold | [float](#float) | optional | Default similarity threshold (0.0-1.0). |
-| vector_similarity_weight | [float](#float) | optional | Default vector similarity weight (0.0-1.0). |
 | chunk_method | [RagChunkMethod](#ondewo.nlu.RagChunkMethod) | optional | Default chunking method for documents in this dataset. |
-| pipeline_id | [string](#string) |  | Optional. Pipeline ID. |
 | parser_config | [RagParserConfig](#ondewo.nlu.RagParserConfig) |  | Document parser configuration (auto-generated based on chunk_method). |
 | pagerank | [int32](#int32) | optional | Pagerank. |
-| graphrag_task_id | [string](#string) |  | Optional. GraphRAG task ID. |
-| graphrag_task_finish_at | [string](#string) |  | Optional. Finish time of GraphRAG task (ISO 8601 datetime). |
-| raptor_task_id | [string](#string) |  | Optional. RAPTOR task ID. |
-| raptor_task_finish_at | [string](#string) |  | Optional. Finish time of RAPTOR task (ISO 8601 datetime). |
-| mindmap_task_id | [string](#string) |  | Optional. Mindmap task ID. |
-| mindmap_task_finish_at | [string](#string) |  | Optional. Finish time of Mindmap task (ISO 8601 datetime). |
-| status | [string](#string) | optional | Optional. Status of dataset (<code>"0"</code>: inactive, <code>"1"</code>: active). |
-| create_time | [int64](#int64) |  | Creation timestamp (Unix timestamp in milliseconds). |
-| create_date | [string](#string) |  | Creation date (ISO 8601 datetime). |
-| update_time | [int64](#int64) |  | Last update timestamp (Unix timestamp in milliseconds). |
-| update_date | [string](#string) |  | Last update date (ISO 8601 datetime). |
+| create_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. |
+| update_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Last update date and time. |
 
 
 
@@ -7423,6 +7364,8 @@ Response message for listing datasets.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | datasets | [RagDataset](#ondewo.nlu.RagDataset) | repeated | List of datasets. |
+| total | [int32](#int32) |  | Total number of datasets that match the given filters |
+| next_page_token | [string](#string) |  | Page token string (following the format described in <code>RagListDatasetsRequest</code>) for retrieving the next results page |
 
 
 
@@ -7495,25 +7438,7 @@ Request message for deleting one or more documents from a dataset.
 | parent | [string](#string) |  | Required. The agent to delete documents from. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
 | language_code | [string](#string) |  | Required. The language of the project to use. |
 | dataset_id | [string](#string) |  | Required. Dataset ID containing the documents to delete. |
-| ids | [string](#string) | repeated | Optional. Document IDs to delete. If empty and <code>delete_all</code> is <code>true</code>, deletes all documents in the dataset. |
-| delete_all | [bool](#bool) | optional | Optional. Delete all documents in the dataset (needed because protobuf cannot represent <code>ids=null</code>). |
-
-
-
-
-
-
-<a name="ondewo.nlu.RagDeleteFilesRequest"></a>
-
-### RagDeleteFilesRequest
-Request message for deleting files or folders.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| parent | [string](#string) |  | Required. The agent to delete files from. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
-| language_code | [string](#string) |  | Required. The language of the project to use. |
-| file_ids | [string](#string) | repeated | Required. UUIDs of files or folders to delete. Supports batch deletion. |
+| ids | [string](#string) | repeated | Optional. Document IDs to delete. If empty, deletes all documents in the dataset. |
 
 
 
@@ -7530,8 +7455,7 @@ Request message for deleting one or more of a RAGFlow resource.
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The agent to delete datasets from. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
 | language_code | [string](#string) |  | Required. The language of the project to use. |
-| ids | [string](#string) | repeated | Optional. IDs of resources to delete. If empty and <code>delete_all</code> is <code>true</code>, deletes all. Duplicate IDs are not allowed. |
-| delete_all | [bool](#bool) | optional | Optional. Delete all (needed because protobuf cannot represent <code>ids=null</code>). |
+| ids | [string](#string) | repeated | Optional. IDs of resources to delete. If empty all are deleted. Duplicate IDs are ignored. |
 
 
 
@@ -7567,28 +7491,21 @@ Document uploaded to a dataset.
 | thumbnail | [string](#string) |  | Base64-encoded thumbnail image in the format <code>"data:image/[png|jpeg];base64,&lt;base64_string&gt;"</code>. Maximum 65,535 characters. |
 | dataset_id | [string](#string) |  | Parent dataset ID. |
 | chunk_method | [RagChunkMethod](#ondewo.nlu.RagChunkMethod) | optional | Chunking method used for this document. |
-| pipeline_id | [string](#string) |  | Pipeline ID. |
 | parser_config | [RagParserConfig](#ondewo.nlu.RagParserConfig) |  | Parser configuration used for chunking this document. |
-| source_type | [string](#string) |  | Source type indicating how the document was added (e.g., <code>"local"</code> for direct uploads, <code>"knowledgebase"</code> for file system imports). |
-| type | [string](#string) |  | File type or extension (e.g., <code>"pdf"</code>, <code>"docx"</code>, <code>"txt"</code>). |
-| created_by | [string](#string) |  | ID of the user who created the document. |
+| type | [RagDocumentType](#ondewo.nlu.RagDocumentType) |  | Broad file category |
 | name | [string](#string) |  | Document filename. |
-| location | [string](#string) |  | Storage location path in the backend file system or object storage. |
 | size | [int64](#int64) | optional | File size in bytes. |
 | chunk_count | [int32](#int32) | optional | Number of chunks extracted from this document (initially <code>0</code> until parsed). |
 | token_count | [int32](#int32) | optional | Number of tokens across all chunks in this document. |
 | progress | [float](#float) | optional | Processing progress as a decimal value between <code>0.0</code> (not started) and <code>1.0</code> (complete). |
 | progress_msg | [string](#string) |  | Human-readable progress message describing current processing state. |
-| process_begin_at | [string](#string) |  | Processing start timestamp (ISO 8601 datetime string). |
+| process_begin_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Processing start date and time. |
 | process_duration | [float](#float) | optional | Total processing duration in seconds. |
 | meta_fields | [google.protobuf.Struct](#google.protobuf.Struct) |  | Custom metadata fields specific to this document (arbitrary key-value pairs). |
-| suffix | [string](#string) |  | Actual file extension extracted from the file (may differ from filename extension). |
 | run | [RagDocumentStatus](#ondewo.nlu.RagDocumentStatus) | optional | Document processing status. |
-| status | [string](#string) |  | Validation status indicating if document is enabled (<code>"1"</code>=valid/enabled, <code>"0"</code>=invalid/disabled). |
-| create_time | [int64](#int64) |  | Creation timestamp (Unix timestamp in milliseconds). |
-| create_date | [string](#string) |  | Creation date (ISO 8601 datetime string). |
-| update_time | [int64](#int64) |  | Last update timestamp (Unix timestamp in milliseconds). |
-| update_date | [string](#string) |  | Last update date (ISO 8601 datetime string). |
+| status | [string](#string) |  | Status indicating if document is enabled (<code>"1"</code>=enabled, <code>"0"</code>=disabled). |
+| create_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. |
+| update_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Last update date and time. |
 
 
 
@@ -7598,12 +7515,14 @@ Document uploaded to a dataset.
 <a name="ondewo.nlu.RagDocumentList"></a>
 
 ### RagDocumentList
-Response message containing a list of documents.
+Response message for listing documents.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| documents | [RagDocument](#ondewo.nlu.RagDocument) | repeated | List of documents. |
+| documents | [RagDocument](#ondewo.nlu.RagDocument) | repeated | List of documents for the current page. |
+| total | [int32](#int32) |  | Total number of documents matching the filter criteria (not limited by pagination). |
+| next_page_token | [string](#string) |  | Page token string (following the format described in <code>RagListDocumentsRequest</code>) for retrieving the next results page |
 
 
 
@@ -7613,7 +7532,7 @@ Response message containing a list of documents.
 <a name="ondewo.nlu.RagDownloadDocumentRequest"></a>
 
 ### RagDownloadDocumentRequest
-Request message for downloading the original document file.
+Request message for downloading the document file.
 
 
 | Field | Type | Label | Description |
@@ -7664,40 +7583,8 @@ First chunk contains metadata, subsequent chunks only contain data.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
+| metadata | [RagFileMetadata](#ondewo.nlu.RagFileMetadata) |  | Required in first chunk, ignored in later chunks. File metadata. |
 | data | [bytes](#bytes) |  | Optional. Chunk of file content. |
-| metadata | [RagFileMetadata](#ondewo.nlu.RagFileMetadata) |  | Optional. File metadata (only in first chunk). |
-
-
-
-
-
-
-<a name="ondewo.nlu.RagFileIdRequest"></a>
-
-### RagFileIdRequest
-Request message for requests that only need a file ID.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| parent | [string](#string) |  | Required. The agent to rename the file for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
-| language_code | [string](#string) |  | Required. The language of the project to use. |
-| file_id | [string](#string) |  | Required. File ID. |
-
-
-
-
-
-
-<a name="ondewo.nlu.RagFileList"></a>
-
-### RagFileList
-Response message containing a list of files.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| files | [RagFile](#ondewo.nlu.RagFile) | repeated | Uploaded files. RAGFlow automatically creates intermediate folders as needed during upload. |
 
 
 
@@ -7721,62 +7608,6 @@ File metadata for streaming uploads/downloads.
 
 
 
-<a name="ondewo.nlu.RagFileToDocument"></a>
-
-### RagFileToDocument
-Association between a file and a document in a dataset.
-Tracks the relationship when files are converted to documents for use in RAG operations.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| id | [string](#string) |  | UUID of the file-to-document association. |
-| file_id | [string](#string) |  | UUID of the source file. |
-| document_id | [string](#string) |  | UUID of the generated document in the dataset. |
-| create_time | [int64](#int64) |  | Creation timestamp (Unix timestamp in milliseconds). |
-| create_date | [string](#string) |  | Creation date (ISO 8601 datetime format). |
-| update_time | [int64](#int64) |  | Last update timestamp (Unix timestamp in milliseconds). |
-| update_date | [string](#string) |  | Last update date (ISO 8601 datetime format). |
-
-
-
-
-
-
-<a name="ondewo.nlu.RagFileToDocumentList"></a>
-
-### RagFileToDocumentList
-Response message containing a list of file-to-document associations.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| files_to_documents | [RagFileToDocument](#ondewo.nlu.RagFileToDocument) | repeated | List of file-to-document associations created during the conversion operation. |
-
-
-
-
-
-
-<a name="ondewo.nlu.RagFileToDocumentRequest"></a>
-
-### RagFileToDocumentRequest
-Request message for converting files to documents and linking them to datasets.
-RAGFlow allows linking uploaded files to multiple target datasets for RAG operations.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| parent | [string](#string) |  | Required. The agent to convert files to documents for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
-| language_code | [string](#string) |  | Required. The language of the project to use. |
-| file_ids | [string](#string) | repeated | Required. UUIDs of files to convert. If folders are provided, processes contents recursively. |
-| kb_ids | [string](#string) | repeated | Required. Target dataset IDs (knowledge base IDs). A single file can be linked to multiple datasets. |
-
-
-
-
-
-
 <a name="ondewo.nlu.RagGetKnowledgeGraphResponse"></a>
 
 ### RagGetKnowledgeGraphResponse
@@ -7794,52 +7625,6 @@ Response message for getting a dataset's knowledge graph.
 
 
 
-<a name="ondewo.nlu.RagGetParentFolderResponse"></a>
-
-### RagGetParentFolderResponse
-Response message for getting the parent folder of a file.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| parent_folder | [RagFile](#ondewo.nlu.RagFile) |  | The immediate parent folder of the requested file. |
-
-
-
-
-
-
-<a name="ondewo.nlu.RagGetRootFolderRequest"></a>
-
-### RagGetRootFolderRequest
-Empty request message with only the parent field.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| parent | [string](#string) |  | Required. The agent to get the parent folder for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
-| language_code | [string](#string) |  | Required. The language of the project to use. |
-
-
-
-
-
-
-<a name="ondewo.nlu.RagGetRootFolderResponse"></a>
-
-### RagGetRootFolderResponse
-Response message for getting the root folder.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| root_folder | [RagFile](#ondewo.nlu.RagFile) |  | The root folder of the file system. |
-
-
-
-
-
-
 <a name="ondewo.nlu.RagGraphRagConfig"></a>
 
 ### RagGraphRagConfig
@@ -7848,12 +7633,11 @@ GraphRAG configuration.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| use_graphrag | [bool](#bool) |  | Optional. Default <code>false</code>. |
+| use_graphrag | [bool](#bool) | optional | Optional. Default <code>false</code>. |
 | entity_types | [string](#string) | repeated | Optional. Default <code>["organization", "person", "geo", "event", "category"]</code>. |
 | method | [RagGraphRagMethod](#ondewo.nlu.RagGraphRagMethod) | optional | Optional. Default <code>light</code>. |
-| community | [bool](#bool) |  | Optional. Default <code>false</code>. |
-| resolution | [bool](#bool) |  | Optional. Default <code>false</code>. |
-| additional_fields | [google.protobuf.Struct](#google.protobuf.Struct) |  | Additional fields returned by RAGFlow not explicitly defined above. |
+| community | [bool](#bool) | optional | Optional. Default <code>false</code>. |
+| resolution | [bool](#bool) | optional | Optional. Default <code>false</code>. |
 
 
 
@@ -7886,7 +7670,7 @@ Request message for listing agent sessions.
 | parent | [string](#string) |  | Required. The agent to list agent sessions from. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
 | language_code | [string](#string) |  | Required. The language of the project to use. |
 | agent_id | [string](#string) |  | Required. RAGFlow agent UUID. |
-| pagination | [RagPagination](#ondewo.nlu.RagPagination) |  | Optional. Pagination parameters for paging through results. |
+| pagination | [string](#string) |  | Optional. Pagination parameters for paging through results. |
 | orderby | [string](#string) |  | Sort field (default: <code>"update_time"</code>). |
 | desc | [bool](#bool) | optional | Optional. Sort in descending order (default: <code>true</code>). |
 | id | [string](#string) |  | Optional. Filter by session UUID. |
@@ -7908,7 +7692,7 @@ Request message for listing RAGFlow agents.
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The agent to list RAGFlow agents from. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
 | language_code | [string](#string) |  | Required. The language of the project to use. |
-| pagination | [RagPagination](#ondewo.nlu.RagPagination) |  | Optional. Pagination parameters to control the number and offset of results. |
+| pagination | [string](#string) |  | Optional. Pagination parameters to control the number and offset of results. |
 | title | [string](#string) |  | Optional. Filter results by agent title. Only agents with matching titles will be returned. |
 | orderby | [string](#string) |  | Optional. Sort field for ordering results. Default: <code>"update_time"</code>. |
 | desc | [bool](#bool) | optional | Optional. Sort in descending order. If <code>true</code>, results are sorted from highest to lowest. Default: <code>true</code>. |
@@ -7929,7 +7713,7 @@ Request message for listing chat assistants.
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The agent to list chat assistants from. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
 | language_code | [string](#string) |  | Required. The language of the project to use. |
-| pagination | [RagPagination](#ondewo.nlu.RagPagination) |  | Optional. Pagination parameters for paging through results. |
+| pagination | [string](#string) |  | Optional. Pagination parameters for paging through results. |
 | id | [string](#string) |  | Optional. Filter by chat assistant UUID. |
 | name | [string](#string) |  | Optional. Filter by chat assistant name. |
 | orderby | [string](#string) |  | Sort field (default: <code>"create_time"</code>). |
@@ -7952,7 +7736,7 @@ Request message for listing chat sessions.
 | parent | [string](#string) |  | Required. The agent to list chat sessions from. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
 | language_code | [string](#string) |  | Required. The language of the project to use. |
 | chat_id | [string](#string) |  | Required. Chat assistant UUID. |
-| pagination | [RagPagination](#ondewo.nlu.RagPagination) |  | Optional. Pagination parameters for paging through results. |
+| pagination | [string](#string) |  | Optional. Pagination parameters for paging through results. |
 | orderby | [string](#string) |  | Sort field (default: <code>"create_time"</code>). |
 | desc | [bool](#bool) | optional | Optional. Sort in descending order (default: <code>true</code>). |
 | name | [string](#string) |  | Optional. Filter by session name. |
@@ -7976,7 +7760,7 @@ Request message for listing chunks of a document with pagination.
 | language_code | [string](#string) |  | Required. The language of the project to use. |
 | dataset_id | [string](#string) |  | Required. Dataset ID containing the document. |
 | document_id | [string](#string) |  | Required. Document ID to list chunks from. |
-| pagination | [RagPagination](#ondewo.nlu.RagPagination) |  | Optional. Pagination parameters. |
+| pagination | [string](#string) |  | Optional. Pagination parameters. |
 | keywords | [string](#string) |  | Optional. Search keywords to filter chunks (supports content highlighting in results). |
 | id | [string](#string) |  | Optional. Filter by specific chunk ID. |
 
@@ -8012,10 +7796,16 @@ Request message for listing datasets with pagination and filtering.
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The agent to list all datasets from. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
 | language_code | [string](#string) |  | Required. The language of the project to use. |
-| pagination | [RagPagination](#ondewo.nlu.RagPagination) |  | Optional. Pagination parameters. |
+| page_token | [string](#string) |  | Optional. Specifies which page to return. The page token is a string of the format <pre><code>current_index-&lt;idx&gt;--page_size-&lt;size&gt;</code></pre>
+
+<ul> <li><code>&lt;size&gt;</code> must be an integer &geq; <code>1</code>. The maximum number of results to return.</li> <li><code>&lt;idx&gt;</code> must be an interger &geq; <code>0</code>. The start index in the requested list, starting from which a maximum of <code>&lt;size&gt;</code> elements are returned.</li> </ul>
+
+<em>Important note</em>: The <code>&lt;idx&gt;</code> is the index in the requested sequence NOT the page number. E.g. if the requested list has 100 elements then <code>current_index-5--page_size-15</code> returns the elements at index 5-19 and not the 5-th page of 15 elements. <br> Both <code>current_index-&lt;idx&gt;</code> and <code>page_size-&lt;size&gt;</code> are optional and default to <code>0</code> and <code>10</code> respectively. The following are all valid <code>page_token</code>s
+
+<ul> <li><code> </code> (empty string/missing value) - index 0, page size 10</li> <li><code>current_index-3</code> - index 3, page size 10</li> <li><code>page_size-20</code> - index 0, page size 20</li> <li><code>current_index-3--page_size-20</code> - index 3, page size 20</li> </ul> |
 | id | [string](#string) |  | Optional. Filter by dataset ID. |
 | name | [string](#string) |  | Optional. Filter by dataset name. |
-| orderby | [string](#string) |  | Optional. Sort field (default: <code>create_time</code>). |
+| orderby | [string](#string) |  | Optional. Sort field. Can be <code>create_time</code> or <code>update_time</code> (default: <code>create_time</code>). |
 | desc | [bool](#bool) | optional | Optional. Sort descending (default: <code>true</code>). |
 
 
@@ -8036,68 +7826,21 @@ Request message for listing documents in a dataset with pagination and filtering
 | dataset_id | [string](#string) |  | Required. Dataset ID to list documents from. |
 | id | [string](#string) |  | Optional. Filter by specific document ID. |
 | name | [string](#string) |  | Optional. Filter by document name (exact match). |
-| pagination | [RagPagination](#ondewo.nlu.RagPagination) |  | Optional. Pagination parameters. |
+| page_token | [string](#string) |  | Optional. Specifies which page to return. The page token is a string of the format <pre><code>current_index-&lt;idx&gt;--page_size-&lt;size&gt;</code></pre>
+
+<ul> <li><code>&lt;size&gt;</code> must be an integer &geq; <code>1</code>. The maximum number of results to return.</li> <li><code>&lt;idx&gt;</code> must be an interger &geq; <code>0</code>. The start index in the requested list, starting from which a maximum of <code>&lt;size&gt;</code> elements are returned.</li> </ul>
+
+<em>Important note</em>: The <code>&lt;idx&gt;</code> is the index in the requested sequence NOT the page number. E.g. if the requested list has 100 elements then <code>current_index-5--page_size-15</code> returns the elements at index 5-19 and not the 5-th page of 15 elements.
+
+Both <code>current_index-&lt;idx&gt;</code> and <code>page_size-&lt;size&gt;</code> are optional and default to <code>0</code> and <code>10</code> respectively. The following are all valid <code>page_token</code>s <br> <ul> <li><code> </code> (empty string/missing value) - index 0, page size 10</li> <li><code>current_index-3</code> - index 3, page size 10</li> <li><code>page_size-20</code> - index 0, page size 20</li> <li><code>current_index-3--page_size-20</code> - index 3, page size 20</li> </ul> |
 | orderby | [string](#string) |  | Optional. Sort field (default: <code>"create_time"</code>). Accept any field of <code>RagDocument</code>. |
 | desc | [bool](#bool) | optional | Optional. Sort in descending order (default: <code>true</code>). |
-| keywords | [string](#string) |  | Optional. Search keywords to filter documents (searches in document name and metadata). |
+| keywords | [string](#string) |  | Optional. Filter by document names containing <code>keywords</code>. |
 | suffix | [string](#string) | repeated | Optional. Suffixes to filter by (e.g. <code>["pdf", "png", "docx"]</code>). |
 | run_status | [RagDocumentStatus](#ondewo.nlu.RagDocumentStatus) | repeated | Optional. Document status to filter by. |
-| create_time_from | [int64](#int64) |  | Optional. Filter by creation time start (Unix timestamp in milliseconds, <code>0</code> = no filter). |
-| create_time_to | [int64](#int64) |  | Optional. Filter by creation time end (Unix timestamp in milliseconds, <code>0</code> = no filter). |
-
-
-
-
-
-
-<a name="ondewo.nlu.RagListDocumentsResponse"></a>
-
-### RagListDocumentsResponse
-Response message for listing documents.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| total | [int32](#int32) | optional | Total number of documents matching the filter criteria (not limited by pagination). |
-| docs | [RagDocument](#ondewo.nlu.RagDocument) | repeated | List of documents for the current page. |
-
-
-
-
-
-
-<a name="ondewo.nlu.RagListFilesRequest"></a>
-
-### RagListFilesRequest
-Request message for listing files and folders.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| parent | [string](#string) |  | Required. The agent to list files from. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
-| language_code | [string](#string) |  | Required. The language of the project to use. |
-| parent_id | [string](#string) |  | Optional. Folder ID to list contents from. If not provided, lists root directory contents. |
-| pagination | [RagPagination](#ondewo.nlu.RagPagination) |  | Optional. Pagination parameters. Default page size is 15 items per page. |
-| keywords | [string](#string) |  | Optional. Search keywords to filter files by name or other searchable attributes. |
-| orderby | [string](#string) |  | Optional. Field to sort results by. All fields of <code>RagFile</code> are possible. |
-| desc | [bool](#bool) | optional | Optional. Sort in descending order. Default is <code>true</code> (newest first). |
-
-
-
-
-
-
-<a name="ondewo.nlu.RagListFilesResponse"></a>
-
-### RagListFilesResponse
-Response message for listing files and folders.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| total | [int32](#int32) | optional | Total number of files and folders matching the query (before pagination). |
-| files | [RagFile](#ondewo.nlu.RagFile) | repeated | List of files and folders in the current page. |
-| parent_folder | [RagFile](#ondewo.nlu.RagFile) |  | Information about the parent folder being listed. |
+| create_time_from | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Optional. Filter by creation time start. |
+| create_time_to | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Optional. Filter by creation time end. |
+| metadata_condition | [RagMetadataConditions](#ondewo.nlu.RagMetadataConditions) |  | Optional. Metadata filter condition to restrict results based on document metadata.<br> |
 
 
 
@@ -8146,13 +7889,14 @@ Message in a conversation session.
 
 ### RagMetadataCondition
 Condition to filter document metadata on.
+String comparison is always case-insensitive.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | name | [string](#string) |  | Required. Metadata field name. |
-| comparison_operator | [string](#string) |  | Required. Comparison operator. Can be one of: <code>"contains"</code>, <code>"not contains"</code>, <code>"start with"</code>, <code>"empty"</code>, <code>"not empty"</code>, <code>"="</code>, <code>"≠"</code>, <code>"&lt;"</code>, <code>"&gt;</code>, <code>"≥"</code>, <code>"≤"</code> |
-| value | [string](#string) |  | Required. Value to compare to. |
+| comparison_operator | [RagComparisonOperator](#ondewo.nlu.RagComparisonOperator) |  | Required. Comparison operator. |
+| value | [string](#string) |  | Required. Value to compare to.<br> Must always be a string, but can also be the string representation of a different type, e.g. string representation of a dict <code>"{"key1": 3, "key2": "value"}"</code>. |
 
 
 
@@ -8167,56 +7911,8 @@ List of document metadata conditions.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
+| logic | [RagLogic](#ondewo.nlu.RagLogic) |  | Optional. Whether to apply the conditions with a logical <em>and</em> or logical <em>or</em>. |
 | conditions | [RagMetadataCondition](#ondewo.nlu.RagMetadataCondition) | repeated | Optional. List of conditions. |
-
-
-
-
-
-
-<a name="ondewo.nlu.RagMoveFileRequest"></a>
-
-### RagMoveFileRequest
-Request message for moving files or folders.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| parent | [string](#string) |  | Required. The agent to move files for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
-| language_code | [string](#string) |  | Required. The language of the project to use. |
-| src_file_ids | [string](#string) | repeated | Required. UUIDs of source files or folders to move. Supports batch move operations. |
-| dest_file_id | [string](#string) |  | Required. UUID of the destination folder. |
-
-
-
-
-
-
-<a name="ondewo.nlu.RagPagination"></a>
-
-### RagPagination
-Pagination parameters for list requests.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| page | [int32](#int32) |  | Optional. Minimum 1. Page number (1-indexed, default: 1). |
-| page_size | [int32](#int32) |  | Optional. Minimum 1. Number of items per page (default varies by endpoint). |
-
-
-
-
-
-
-<a name="ondewo.nlu.RagParentFoldersList"></a>
-
-### RagParentFoldersList
-Response message for getting all parent folders in the hierarchy.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| parent_folders | [RagFile](#ondewo.nlu.RagFile) | repeated | All parent folders in the hierarchy, from immediate parent to root folder. |
 
 
 
@@ -8273,7 +7969,7 @@ Used fields depend on the chunking method of the document.
 | auto_questions | [int32](#int32) | optional | Optional. Minimum 0, maximum 10, default 0. See <a href="https://ragflow.io/docs/dev/autokeyword_autoquestion">https://ragflow.io/docs/dev/autokeyword_autoquestion</a> for details. |
 | chunk_token_num | [int32](#int32) |  | Optional. Minimum 1, maximum 2048, default 512. |
 | delimiter | [string](#string) |  | Optional. Default <code>"\n"</code>. |
-| html4excel | [bool](#bool) |  | Optional. Convert Excel documents to HTML. Default <code>false</code>. |
+| html4excel | [bool](#bool) | optional | Optional. Convert Excel documents to HTML. Default <code>false</code>. |
 | layout_recognize | [string](#string) |  | Optional. Default <code>"DeepDOC"</code>. |
 | tag_kb_ids | [string](#string) | repeated | Optional. List of dataset IDs. See <a href="https://ragflow.io/docs/dev/use_tag_sets">https://ragflow.io/docs/dev/use_tag_sets</a> for details. |
 | topn_tags | [int32](#int32) |  | Optional. Minimum 1. Maximum 10. Default 1. |
@@ -8281,7 +7977,6 @@ Used fields depend on the chunking method of the document.
 | task_page_size | [int32](#int32) |  | Optional. Minimum 1, default 12. Only applies to PDFs. |
 | raptor | [RagRaptorConfig](#ondewo.nlu.RagRaptorConfig) |  | Optional. RAPTOR-specific settings. Default <code>{ "use_raptor": false }</code>. |
 | graphrag | [RagGraphRagConfig](#ondewo.nlu.RagGraphRagConfig) |  | Optional. GRAPHRAG-specific settings. Default <code>{ "use_graphrag": false }</code>. |
-| additional_fields | [google.protobuf.Struct](#google.protobuf.Struct) |  | Additional fields returned by RAGFlow. |
 
 
 
@@ -8356,13 +8051,12 @@ RAPTOR configuration. Refer to <a href="https://arxiv.org/html/2401.18059v1">RAP
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| use_raptor | [bool](#bool) |  | Optional. Default <code>false</code>. Whether to use RAPTOR for this dataset. |
+| use_raptor | [bool](#bool) | optional | Optional. Default <code>false</code>. Whether to use RAPTOR for this dataset. |
 | prompt | [string](#string) |  | Optional. Prompt to use for RAPTOR. Default:<br> <code>"Please summarize the following paragraphs. Be careful with the numbers, do not make things up. Paragraphs as following:\n {cluster_content}\nThe above is the content you need to summarize."</code> |
 | max_token | [int32](#int32) |  | Optional. Minimum 1. Maximum 2048. Default 256. |
 | threshold | [float](#float) | optional | Optional. Minimum 0.0. Maximum 1.0. Default 0.1. |
 | max_cluster | [int32](#int32) |  | Optional. Minimum 1. Maximum 1024. Default 64. |
 | random_seed | [int64](#int64) | optional | Optional. Minimum 0. Default 0. |
-| additional_fields | [google.protobuf.Struct](#google.protobuf.Struct) |  | Additional fields returned by RAGFlow not explicitly defined above. |
 
 
 
@@ -8462,24 +8156,6 @@ Request message for removing one or more chunks from a document.
 
 
 
-<a name="ondewo.nlu.RagRenameFileRequest"></a>
-
-### RagRenameFileRequest
-Request message for renaming a file or folder.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| parent | [string](#string) |  | Required. The agent to rename the file for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
-| language_code | [string](#string) |  | Required. The language of the project to use. |
-| file_id | [string](#string) |  | Required. UUID of the file or folder to rename. |
-| name | [string](#string) |  | Required. New name for the file or folder. For files, the extension must remain the same. |
-
-
-
-
-
-
 <a name="ondewo.nlu.RagRetrievalRequest"></a>
 
 ### RagRetrievalRequest
@@ -8492,16 +8168,21 @@ Supports hybrid search combining vector similarity with keyword matching.
 | parent | [string](#string) |  | Required. The agent to retrieve chunks for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
 | language_code | [string](#string) |  | Required. The language of the project to use. |
 | dataset_ids | [string](#string) | repeated | Required. Dataset IDs to search (all datasets must use the same embedding model). |
-| pagination | [RagPagination](#ondewo.nlu.RagPagination) |  | Optional. Pagination parameters. |
+| page_token | [string](#string) |  | Optional. Specifies which page to return. The page token is a string of the format <pre><code>current_index-&lt;idx&gt;--page_size-&lt;size&gt;</code></pre>
+
+<ul> <li><code>&lt;size&gt;</code> must be an integer &geq; <code>1</code>. The maximum number of results to return.</li> <li><code>&lt;idx&gt;</code> must be an interger &geq; <code>0</code>. The start index in the requested list, starting from which a maximum of <code>&lt;size&gt;</code> elements are returned.</li> </ul>
+
+<em>Important note</em>: The <code>&lt;idx&gt;</code> is the index in the requested sequence NOT the page number. E.g. if the requested list has 100 elements then <code>current_index-5--page_size-15</code> returns the elements at index 5-19 and not the 5-th page of 15 elements.
+
+Both <code>current_index-&lt;idx&gt;</code> and <code>page_size-&lt;size&gt;</code> are optional and default to <code>0</code> and <code>10</code> respectively. The following are all valid <code>page_token</code>s <br> <ul> <li><code> </code> (empty string/missing value) - index 0, page size 10</li> <li><code>current_index-3</code> - index 3, page size 10</li> <li><code>page_size-20</code> - index 0, page size 20</li> <li><code>current_index-3--page_size-20</code> - index 3, page size 20</li> </ul> |
 | question | [string](#string) |  | Required. Query string to search for. |
 | document_ids | [string](#string) | repeated | Optional. Filter by specific document IDs within the datasets. |
 | use_kg | [bool](#bool) | optional | Optional. Include knowledge graph retrieval to enhance results with graph relationships. |
-| cross_languages | [string](#string) | repeated | Optional. Cross-language translation codes to enable multilingual retrieval. |
+| cross_languages | [string](#string) | repeated | Optional. Cross-language translation codes to enable multilingual retrieval.<br> List elements can be any form of language name/code (parsed by LLM). |
 | metadata_condition | [RagMetadataConditions](#ondewo.nlu.RagMetadataConditions) |  | Optional. Metadata filter condition to restrict results based on document metadata. |
 | similarity_threshold | [float](#float) |  | Optional. Minimum similarity score threshold between <code>0.0</code> and <code>1.0</code> (default: <code>0.2</code>). |
 | vector_similarity_weight | [float](#float) | optional | Optional. Weight for vector similarity versus keyword matching between <code>0.0</code> and <code>1.0</code> (default: <code>0.3</code>).<br> Higher values favor vector similarity, lower values favor keyword matching. |
 | top_k | [int32](#int32) |  | Optional. Minimum 1. Maximum number of chunks to retrieve before reranking (default: <code>1024</code>). |
-| rerank_id | [string](#string) |  | Optional. Rerank model ID to reorder results after initial retrieval. |
 | highlight | [bool](#bool) | optional | Optional. Whether to highlight matched content in the returned chunks. |
 | keyword | [bool](#bool) | optional | Optional. Extract additional keywords from the query to improve retrieval. |
 
@@ -8519,9 +8200,9 @@ Response message for chunk retrieval.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | chunks | [RagChunk](#ondewo.nlu.RagChunk) | repeated | Retrieved chunks with similarity scores populated (ordered by relevance). |
-| doc_aggs | [google.protobuf.Struct](#google.protobuf.Struct) | repeated | Document aggregations providing statistics about which documents matched. |
-| total | [int32](#int32) | optional | Total number of chunks matching the query (before pagination). |
-| additional_fields | [google.protobuf.Struct](#google.protobuf.Struct) |  | Additional fields returned by RAGFlow not explicitly defined above. |
+| doc_aggs | [RagDocAgg](#ondewo.nlu.RagDocAgg) | repeated | Statistics of the matched documents. |
+| total | [int32](#int32) |  | Total number of chunks matching the query (before pagination). |
+| next_page_token | [string](#string) |  | Page token string (following the format described in <code>RagRetrievalRequest</code>) for retrieving the next results page |
 
 
 
@@ -8682,10 +8363,8 @@ The same field constraints as for <code>RagCreateDatasetRequest</code> apply her
 | name | [string](#string) |  | Optional. New dataset name. |
 | description | [string](#string) |  | Optional. New dataset description. |
 | avatar | [string](#string) |  | Optional. New avatar image. |
-| permission | [RagPermission](#ondewo.nlu.RagPermission) | optional | Optional. New access permission. |
 | chunk_method | [RagChunkMethod](#ondewo.nlu.RagChunkMethod) | optional | Optional. New chunk method. |
 | parser_config | [RagParserConfig](#ondewo.nlu.RagParserConfig) |  | Optional. New parser config (deep merged with existing). |
-| embedding_model | [string](#string) |  | Optional. New embedding model (cannot change if chunk_count > 0). |
 | pagerank | [int32](#int32) | optional | Optional. Minimum 0. Maximum 100. PageRank value. |
 
 
@@ -8716,23 +8395,6 @@ Request message for updating an existing document's metadata and configuration.
 
 
 
-<a name="ondewo.nlu.RagUploadChunk"></a>
-
-### RagUploadChunk
-Upload chunk for streaming uploads.
-Used to stream file data after metadata is sent in first message.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| file_index | [int32](#int32) | optional | Required. Not actually optional but `optional` keyword is needed to enable presence tracking. Without it, it is impossible to distinguish between `0` and not present. Index into metadata.files array (0-based). |
-| data | [bytes](#bytes) |  | Optional. Chunk of file content, null indicates EOF. |
-
-
-
-
-
-
 <a name="ondewo.nlu.RagUploadDocumentRequest"></a>
 
 ### RagUploadDocumentRequest
@@ -8741,46 +8403,11 @@ Request message for uploading a document to a dataset.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| parent | [string](#string) |  | Required. The agent to upload documents for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
-| language_code | [string](#string) |  | Required. The language of the project to use. |
-| dataset_id | [string](#string) |  | Required. Target dataset ID to upload documents to. |
-| metadata | [RagFileMetadata](#ondewo.nlu.RagFileMetadata) |  | Required. Metadata of the uploaded file. |
-| data | [bytes](#bytes) |  | Required. File data (raw bytes). |
-
-
-
-
-
-
-<a name="ondewo.nlu.RagUploadFilesRequest"></a>
-
-### RagUploadFilesRequest
-Request message for uploading files via streaming multipart form data.
-RAGFlow supports individual and bulk file uploads. Files can be uploaded to a specific folder or to the root directory if no parent folder is specified.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| metadata | [RagUploadFilesRequest.RagMetadata](#ondewo.nlu.RagUploadFilesRequest.RagMetadata) |  | First message: declares all files to be uploaded. |
-| chunk | [RagUploadChunk](#ondewo.nlu.RagUploadChunk) |  | Subsequent messages: stream file data in chunks. |
-
-
-
-
-
-
-<a name="ondewo.nlu.RagUploadFilesRequest.RagMetadata"></a>
-
-### RagUploadFilesRequest.RagMetadata
-Metadata for the upload operation (must be sent in first message only).
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| parent | [string](#string) |  | Required. The agent to upload files for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
-| language_code | [string](#string) |  | Required. The language of the project to use. |
-| parent_id | [string](#string) |  | Optional. Parent folder ID. If not provided, files will be uploaded to root directory. |
-| files | [RagFileMetadata](#ondewo.nlu.RagFileMetadata) | repeated | Required. Metadata for all files being uploaded in this request. |
+| parent | [string](#string) |  | Required in first chunk, ignored in later chunks. The agent to upload documents for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| language_code | [string](#string) |  | Required in first chunk, ignored in later chunks. The language of the project to use. |
+| dataset_id | [string](#string) |  | Required in first chunk, ignored in later chunks. Target dataset ID to upload documents to. |
+| metadata | [RagFileMetadata](#ondewo.nlu.RagFileMetadata) |  | Required in first chunk, ignored in later chunks. File metadata. |
+| data | [bytes](#bytes) |  | Optional. Chunk of file content. |
 
 
 
@@ -8796,8 +8423,8 @@ Agent completion event type.
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| message | 0 | Regular message event. |
-| message_end | 1 | Message completion event. |
+| RAG_AGENT_EVENT_TYPE_MESSAGE | 0 | Regular message event. |
+| RAG_AGENT_EVENT_TYPE_MESSAGE_END | 1 | Message completion event. |
 
 
 
@@ -8808,8 +8435,8 @@ Agent canvas category.
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| agent_canvas | 0 | agent canvas |
-| dataflow_canvas | 1 | dataflow canvas |
+| RAG_CANVAS_CATEGORY_AGENT_CANVAS | 0 | agent canvas |
+| RAG_CANVAS_CATEGORY_DATAFLOW_CANVAS | 1 | dataflow canvas |
 
 
 
@@ -8820,30 +8447,42 @@ Chunking method for documents. See <a href="https://ragflow.io/docs/dev/configur
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| naive | 0 | General (default). |
-| book | 1 | Book. |
-| email | 2 | Email. |
-| laws | 3 | Laws. |
-| manual | 4 | Manual. |
-| one | 5 | One. |
-| paper | 6 | Paper. |
-| picture | 7 | Picture. |
-| presentation | 8 | Presentation. |
-| qa | 9 | Q&A. |
-| table | 10 | Table. |
-| tag | 11 | Tag. |
+| RAG_CHUNK_METHOD_NAIVE | 0 | General (default). |
+| RAG_CHUNK_METHOD_BOOK | 1 | Book. |
+| RAG_CHUNK_METHOD_EMAIL | 2 | Email. |
+| RAG_CHUNK_METHOD_LAWS | 3 | Laws. |
+| RAG_CHUNK_METHOD_MANUAL | 4 | Manual. |
+| RAG_CHUNK_METHOD_ONE | 5 | One. |
+| RAG_CHUNK_METHOD_PAPER | 6 | Paper. |
+| RAG_CHUNK_METHOD_PICTURE | 7 | Picture. |
+| RAG_CHUNK_METHOD_PRESENTATION | 8 | Presentation. |
+| RAG_CHUNK_METHOD_QA | 9 | Q&A. |
+| RAG_CHUNK_METHOD_TABLE | 10 | Table. |
+| RAG_CHUNK_METHOD_TAG | 11 | Tag. |
 
 
 
-<a name="ondewo.nlu.RagCreateFileFileType"></a>
+<a name="ondewo.nlu.RagComparisonOperator"></a>
 
-### RagCreateFileFileType
-Available file types for file creation.
+### RagComparisonOperator
+Vaild metadata condition comparison operators
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| virtual | 0 | virtual file |
-| folder | 1 | folder |
+| RAG_COMPARISON_OPERATOR_CONTAINS | 0 | String representation of metadata field contains value.<br> If metadata field is a list, checks if the string representation of <em>any</em> field contains value. |
+| RAG_COMPARISON_OPERATOR_NOT_CONTAINS | 1 | String representation of metadata field does not contain value.<br> If metadata field is a list, checks if the string representation of <em>no</em> fields contains value. |
+| RAG_COMPARISON_OPERATOR_IN | 2 | Checks with Python's <code>in</code> opertor.<br> If metadata field is a list, <em>all</em> elements must satisfy the condition. |
+| RAG_COMPARISON_OPERATOR_NOT_IN | 3 | Checks with Python's <code>not in</code> opertor.<br> If metadata field is a list, <em>all</em> elements must satisfy the condition. |
+| RAG_COMPARISON_OPERATOR_START_WITH | 4 | String representation fo metadata field starts with value.<br> If metadata field is a list, checks if the joined string of the string representations of all list elements starts with the value. |
+| RAG_COMPARISON_OPERATOR_ENDS_WITH | 5 | String representation fo metadata field ends with value.<br> If metadata field is a list, checks if the joined string of the string representations of all list elements ends with the value. |
+| RAG_COMPARISON_OPERATOR_EMPTY | 6 | Is empty (Python <em>falsy</em>). |
+| RAG_COMPARISON_OPERATOR_NOT_EMPTY | 7 | Is not empty (Python <em>truthy</em>). |
+| RAG_COMPARISON_OPERATOR_EQ | 8 | Equals. |
+| RAG_COMPARISON_OPERATOR_NEQ | 9 | Does not equal. |
+| RAG_COMPARISON_OPERATOR_GT | 10 | Greater than. |
+| RAG_COMPARISON_OPERATOR_LT | 11 | Less than. |
+| RAG_COMPARISON_OPERATOR_GEQ | 12 | Greater than or equal. |
+| RAG_COMPARISON_OPERATOR_LEQ | 13 | Less than or equal. |
 
 
 
@@ -8854,11 +8493,28 @@ Document processing status.
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| UNSTART | 0 | Document has not started processing. |
-| RUNNING | 1 | Document is currently being processed. |
-| CANCEL | 2 | Document processing was cancelled. |
-| DONE | 3 | Document processing completed successfully. |
-| FAIL | 4 | Document processing failed. |
+| RAG_DOCUMENT_STATUS_UNSTART | 0 | Document has not started processing. |
+| RAG_DOCUMENT_STATUS_RUNNING | 1 | Document is currently being processed. |
+| RAG_DOCUMENT_STATUS_CANCEL | 2 | Document processing was cancelled. |
+| RAG_DOCUMENT_STATUS_DONE | 3 | Document processing completed successfully. |
+| RAG_DOCUMENT_STATUS_FAIL | 4 | Document processing failed. |
+
+
+
+<a name="ondewo.nlu.RagDocumentType"></a>
+
+### RagDocumentType
+Broad document category.
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| RAG_DOCUMENT_TYPE_PDF | 0 | PDF |
+| RAG_DOCUMENT_TYPE_DOC | 1 | general documents (e.g. text, slides, spreadsheets, code, ...) |
+| RAG_DOCUMENT_TYPE_VISUAL | 2 | images and videos |
+| RAG_DOCUMENT_TYPE_AURAL | 3 | audio |
+| RAG_DOCUMENT_TYPE_VIRTUAL | 4 | empty virtual files |
+| RAG_DOCUMENT_TYPE_FOLDER | 5 | folders |
+| RAG_DOCUMENT_TYPE_OTHER | 6 | unrecognized document types |
 
 
 
@@ -8869,8 +8525,20 @@ Knowledge graph construction methods.
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| light | 0 | Use prompts provided by <a href="https://github.com/HKUDS/LightRAG">LightRAG</a>. |
-| general | 1 | Use prompts provided by <a href="https://github.com/microsoft/graphrag">GraphRAG</a>. |
+| RAG_GRAPH_RAG_METHOD_LIGHT | 0 | Use prompts provided by <a href="https://github.com/HKUDS/LightRAG">LightRAG</a>. |
+| RAG_GRAPH_RAG_METHOD_GENERAL | 1 | Use prompts provided by <a href="https://github.com/microsoft/graphrag">GraphRAG</a>. |
+
+
+
+<a name="ondewo.nlu.RagLogic"></a>
+
+### RagLogic
+Metadata conditions logical operators
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| RAG_LOGIC_AND | 0 | Return results that match <em>all</em> conditions. |
+| RAG_LOGIC_OR | 1 | Return results that match <em>any</em> condition. |
 
 
 
@@ -8881,9 +8549,9 @@ Role of message sender in conversation.
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| user | 0 | Message from user. |
-| assistant | 1 | Message from AI assistant. |
-| system | 2 | System message. |
+| RAG_MESSAGE_ROLE_USER | 0 | Message from user. |
+| RAG_MESSAGE_ROLE_ASSISTANT | 1 | Message from AI assistant. |
+| RAG_MESSAGE_ROLE_SYSTEM | 2 | System message. |
 
 
 
@@ -8894,8 +8562,8 @@ Access permissions for a dataset.
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| me | 0 | Only the current user can manage the dataset (default). |
-| team | 1 | All team members of the current user can manage the dataset. |
+| RAG_PERMISSION_ME | 0 | Only the current user can manage the dataset (default). |
+| RAG_PERMISSION_TEAM | 1 | All team members of the current user can manage the dataset. |
 
 
 
@@ -8906,8 +8574,8 @@ Chat assistant prompt type.
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| simple | 0 | simple |
-| advanced | 1 | advanced |
+| RAG_PROMPT_TYPE_SIMPLE | 0 | simple |
+| RAG_PROMPT_TYPE_ADVANCED | 1 | advanced |
 
 
 
@@ -8918,9 +8586,9 @@ Session source
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| none | 0 | none |
-| agent | 1 | agent |
-| dialog | 2 | dialog |
+| RAG_SESSION_SOURCE_NONE | 0 | none |
+| RAG_SESSION_SOURCE_AGENT | 1 | agent |
+| RAG_SESSION_SOURCE_DIALOG | 2 | dialog |
 
 
  <!-- end enums -->
@@ -8940,35 +8608,24 @@ Covers all endpoints of the <a href="https://github.com/ondewo/ragflow">RAGFlow<
 | RagUpdateDataset | [RagUpdateDatasetRequest](#ondewo.nlu.RagUpdateDatasetRequest) | [RagDataset](#ondewo.nlu.RagDataset) | Update an existing dataset's configuration.<br> Cannot change embedding_model if dataset has chunks. |
 | RagDeleteDatasets | [RagDeleteRequest](#ondewo.nlu.RagDeleteRequest) | [RagPartialSuccess](#ondewo.nlu.RagPartialSuccess) | Delete one or more datasets (batch operation).<br> If ids is null or empty, deletes all user's datasets.<br> Deletes all associated documents, files, and chunks. |
 | RagListDatasets | [RagListDatasetsRequest](#ondewo.nlu.RagListDatasetsRequest) | [RagDatasetList](#ondewo.nlu.RagDatasetList) | List datasets with pagination and filtering.<br> Returns datasets from all tenants the user has access to. |
+| RagUploadDocument | [RagUploadDocumentRequest](#ondewo.nlu.RagUploadDocumentRequest) stream | [RagDocument](#ondewo.nlu.RagDocument) | Upload one or more documents to a dataset.<br> Documents start in UNSTART state and must be parsed. |
+| RagUpdateDocument | [RagUpdateDocumentRequest](#ondewo.nlu.RagUpdateDocumentRequest) | [RagDocument](#ondewo.nlu.RagDocument) | Update document metadata and configuration.<br> Changing chunk_method resets document to UNSTART and deletes chunks. |
+| RagDownloadDocument | [RagDownloadDocumentRequest](#ondewo.nlu.RagDownloadDocumentRequest) | [RagFileChunk](#ondewo.nlu.RagFileChunk) stream | Download the original document file.<br> Returns binary file stream from storage.<br> First chunk contains metadata, subsequent chunks only contain data. |
+| RagListDocuments | [RagListDocumentsRequest](#ondewo.nlu.RagListDocumentsRequest) | [RagDocumentList](#ondewo.nlu.RagDocumentList) | List documents in a dataset with pagination and filtering.<br> Supports time range filtering and keyword search. |
+| RagDeleteDocuments | [RagDeleteDocumentsRequest](#ondewo.nlu.RagDeleteDocumentsRequest) | [RagPartialSuccess](#ondewo.nlu.RagPartialSuccess) | Delete one or more documents from a dataset (batch operation).<br> If ids empty, deletes all documents. Removes chunks and storage files. |
+| RagRetrieval | [RagRetrievalRequest](#ondewo.nlu.RagRetrievalRequest) | [RagRetrievalResponse](#ondewo.nlu.RagRetrievalResponse) | Retrieve chunks using vector similarity search.<br> All datasets must use the same embedding model.<br> Supports reranking, metadata filtering, and knowledge graph retrieval. |
 | RagGetKnowledgeGraph | [RagDatasetIdRequest](#ondewo.nlu.RagDatasetIdRequest) | [RagGetKnowledgeGraphResponse](#ondewo.nlu.RagGetKnowledgeGraphResponse) | Get the knowledge graph for a dataset.<br> Returns graph structure with nodes (max 256) and edges (max 128). |
 | RagDeleteKnowledgeGraph | [RagDatasetIdRequest](#ondewo.nlu.RagDatasetIdRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Delete the knowledge graph for a dataset.<br> Deletes graph-related chunks but not the dataset itself. |
 | RagConstructKnowledgeGraph | [RagDatasetIdRequest](#ondewo.nlu.RagDatasetIdRequest) | [RagConstructKnowledgeGraphResponse](#ondewo.nlu.RagConstructKnowledgeGraphResponse) | Construct a knowledge graph for a dataset.<br> Uses the dataset's GraphRAG settings. |
 | RagKnowledgeGraphStatus | [RagDatasetIdRequest](#ondewo.nlu.RagDatasetIdRequest) | [RagTaskStatus](#ondewo.nlu.RagTaskStatus) | Get the knowledge graph construction status of a dataset. |
 | RagConstructRaptor | [RagDatasetIdRequest](#ondewo.nlu.RagDatasetIdRequest) | [RagConstructRaptorResponse](#ondewo.nlu.RagConstructRaptorResponse) | Construct a RAPTOR for a dataset.<br> Uses the dataset's RAPTOR settings. |
 | RagRaptorStatus | [RagDatasetIdRequest](#ondewo.nlu.RagDatasetIdRequest) | [RagTaskStatus](#ondewo.nlu.RagTaskStatus) | Get the RAPTOR construction status of a dataset. |
-| RagUploadDocument | [RagUploadDocumentRequest](#ondewo.nlu.RagUploadDocumentRequest) | [RagDocument](#ondewo.nlu.RagDocument) | Upload one or more documents to a dataset.<br> Documents start in UNSTART state and must be parsed. |
-| RagUpdateDocument | [RagUpdateDocumentRequest](#ondewo.nlu.RagUpdateDocumentRequest) | [RagDocument](#ondewo.nlu.RagDocument) | Update document metadata and configuration.<br> Changing chunk_method resets document to UNSTART and deletes chunks. |
-| RagDownloadDocument | [RagDownloadDocumentRequest](#ondewo.nlu.RagDownloadDocumentRequest) | [RagFileChunk](#ondewo.nlu.RagFileChunk) stream | Download the original document file.<br> Returns binary file stream from storage.<br> First chunk contains metadata, subsequent chunks only contain data. |
-| RagListDocuments | [RagListDocumentsRequest](#ondewo.nlu.RagListDocumentsRequest) | [RagListDocumentsResponse](#ondewo.nlu.RagListDocumentsResponse) | List documents in a dataset with pagination and filtering.<br> Supports time range filtering and keyword search. |
-| RagDeleteDocuments | [RagDeleteDocumentsRequest](#ondewo.nlu.RagDeleteDocumentsRequest) | [RagPartialSuccess](#ondewo.nlu.RagPartialSuccess) | Delete one or more documents from a dataset (batch operation).<br> If ids empty, deletes all documents. Removes chunks and storage files. |
 | RagParseDocuments | [RagParseDocumentsRequest](#ondewo.nlu.RagParseDocumentsRequest) | [RagPartialSuccess](#ondewo.nlu.RagPartialSuccess) | Start parsing documents into chunks.<br> Cannot parse documents currently being processed (0 < progress < 1).<br> Queues documents for background processing. |
 | RagStopParsing | [RagStopParsingRequest](#ondewo.nlu.RagStopParsingRequest) | [RagPartialSuccess](#ondewo.nlu.RagPartialSuccess) | Stop parsing documents.<br> Can only stop documents with progress between 0 and 1. |
 | RagListChunks | [RagListChunksRequest](#ondewo.nlu.RagListChunksRequest) | [RagListChunksResponse](#ondewo.nlu.RagListChunksResponse) | List chunks of a document with pagination.<br> Supports keyword search with content highlighting. |
 | RagAddChunk | [RagAddChunkRequest](#ondewo.nlu.RagAddChunkRequest) | [RagAddChunkResponse](#ondewo.nlu.RagAddChunkResponse) | Manually add a chunk to a document.<br> Automatically tokenizes content and generates embeddings. |
 | RagRemoveChunks | [RagRemoveChunksRequest](#ondewo.nlu.RagRemoveChunksRequest) | [RagPartialSuccess](#ondewo.nlu.RagPartialSuccess) | Remove one or more chunks from a document.<br> If chunk_ids empty, removes all chunks from document. |
 | RagUpdateChunk | [RagUpdateChunkRequest](#ondewo.nlu.RagUpdateChunkRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Update an existing chunk's content and metadata.<br> Re-tokenizes content and re-generates embeddings if content changed. |
-| RagRetrieval | [RagRetrievalRequest](#ondewo.nlu.RagRetrievalRequest) | [RagRetrievalResponse](#ondewo.nlu.RagRetrievalResponse) | Retrieve chunks using vector similarity search.<br> All datasets must use the same embedding model.<br> Supports reranking, metadata filtering, and knowledge graph retrieval. |
-| RagUploadFiles | [RagUploadFilesRequest](#ondewo.nlu.RagUploadFilesRequest) stream | [RagFileList](#ondewo.nlu.RagFileList) | Upload one or more files via multipart form data.<br> Supports nested folder paths in filename.<br> Auto-creates intermediate folders. |
-| RagCreateFile | [RagCreateFileRequest](#ondewo.nlu.RagCreateFileRequest) | [RagFile](#ondewo.nlu.RagFile) | Create a new file or folder.<br> Duplicate names in same folder not allowed. |
-| RagListFiles | [RagListFilesRequest](#ondewo.nlu.RagListFilesRequest) | [RagListFilesResponse](#ondewo.nlu.RagListFilesResponse) | List files in a folder with pagination.<br> Supports keyword search. Auto-initializes knowledgebase docs folder. |
-| RagGetRootFolder | [RagGetRootFolderRequest](#ondewo.nlu.RagGetRootFolderRequest) | [RagGetRootFolderResponse](#ondewo.nlu.RagGetRootFolderResponse) | Get user's root folder information.<br> Each tenant has a unique root folder. |
-| RagGetParentFolder | [RagFileIdRequest](#ondewo.nlu.RagFileIdRequest) | [RagGetParentFolderResponse](#ondewo.nlu.RagGetParentFolderResponse) | Get the parent folder of a file.<br> Returns 404 if file or parent not found. |
-| RagGetAllParentFolders | [RagFileIdRequest](#ondewo.nlu.RagFileIdRequest) | [RagParentFoldersList](#ondewo.nlu.RagParentFoldersList) | Get all parent folders (breadcrumb path) of a file.<br> Returns array from file itself to root (includes the file, ordered deepest to root). |
-| RagDeleteFiles | [RagDeleteFilesRequest](#ondewo.nlu.RagDeleteFilesRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Delete one or more files/folders.<br> Recursively deletes folder contents. Removes from storage. |
-| RagRenameFile | [RagRenameFileRequest](#ondewo.nlu.RagRenameFileRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Rename a file or folder.<br> Cannot change file extension. Duplicate names not allowed. |
-| RagDownloadFile | [RagFileIdRequest](#ondewo.nlu.RagFileIdRequest) | [RagFileChunk](#ondewo.nlu.RagFileChunk) stream | Download a file.<br> Retrieves from MinIO/S3 storage.<br> First chunk contains metadata, subsequent chunks only contain data. |
-| RagMoveFile | [RagMoveFileRequest](#ondewo.nlu.RagMoveFileRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Move one or more files to another folder.<br> Validates all files and destination exist. |
-| RagFileToDocument | [RagFileToDocumentRequest](#ondewo.nlu.RagFileToDocumentRequest) | [RagFileToDocumentList](#ondewo.nlu.RagFileToDocumentList) | Convert files to documents and add to datasets.<br> Handles folders recursively (converts all inner files).<br> Links files to multiple datasets if multiple dataset_ids provided. |
 | RagCreateChatAssistant | [RagCreateChatAssistantRequest](#ondewo.nlu.RagCreateChatAssistantRequest) | [RagChatAssistant](#ondewo.nlu.RagChatAssistant) | Create a new chat assistant.<br> All datasets must have parsed files (chunk_num > 0).<br> All datasets must use the same embedding model. |
 | RagUpdateChatAssistant | [RagUpdateChatAssistantRequest](#ondewo.nlu.RagUpdateChatAssistantRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Update an existing chat assistant's configuration.<br> LLM and prompt configs are merged with existing values. |
 | RagDeleteChatAssistants | [RagDeleteRequest](#ondewo.nlu.RagDeleteRequest) | [RagPartialSuccess](#ondewo.nlu.RagPartialSuccess) | Delete one or more chat assistants (batch operation).<br> If ids empty, deletes all user's chats. |
