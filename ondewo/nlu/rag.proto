@@ -2814,10 +2814,10 @@ message RagCrawlerUrlFilters {
 message RagCrawlerAuth {
 
   // Optional. HTTP Basic auth settings.
-  RagCrawlerHttpAuth http_auth = 2;
+  RagCrawlerHttpAuth http_auth = 1;
 
   // Optional. Form/HTML login selector and credential settings.
-  RagCrawlerHtmlAuth html_auth = 3;
+  RagCrawlerHtmlAuth html_auth = 2;
 }
 
 enum RagCrawlerSelectorType {
@@ -2941,16 +2941,16 @@ message RagCrawlerConfig {
   // Optional. Crawl traversal strategy.
   // BFS is often best for broad site coverage; DFS for deep section traversal.
   // Default <code>RAG_CRAWLER_CRAWL_STRATEGY_BFS</code>.
-  RagCrawlerCrawlStrategy strategy = 5;
+  RagCrawlerCrawlStrategy strategy = 4;
 
   // Optional. Request and rendering timeout settings.
-  RagCrawlerTimeoutsConfig timeouts_config = 6;
+  RagCrawlerTimeoutsConfig timeouts_config = 5;
 
   // Optional. Browser/runtime diagnostics collection settings.
-  RagCrawlerDiagnosticsConfig diagnostics_config = 8;
+  RagCrawlerDiagnosticsConfig diagnostics_config = 6;
 
   // Optional. JavaScript wait/scroll/overlay behavior configuration.
-  RagCrawlerInteractionConfig interaction_config = 9;
+  RagCrawlerInteractionConfig interaction_config = 7;
 }
 
 // Cache mode for crawler runs.
@@ -2977,10 +2977,10 @@ message RagCrawlerDeepCrawlerSettings {
   // Default <code>false</code>. If <code>false</code>, <code>config</code> is ignored.
   bool enabled = 1;
 
-  int32 max_depth = 1;
+  int32 max_depth = 2;
 
   // Optional. Hard cap on total processed pages for this run.
-  int32 max_pages = 2;
+  int32 max_pages = 3;
 }
 
 // Diagnostics capture toggles.
@@ -3009,16 +3009,6 @@ message RagCrawlerInteractionConfig {
 // Use this block to define result payload shape and metadata behavior,
 // similar to Crawl4AI markdown/output-generation toggles.
 message RagCrawlerOutputConfig {
-  // Optional. Format toggles for markdown/raw-html/metadata emission.
-  RagCrawlerOutputFormat format = 1;
-
-  // Optional. Metadata extraction policy and markdown frontmatter options.
-  RagCrawlerOutputMetadata metadata = 2;
-
-}
-
-// Output format options for crawler results.
-message RagCrawlerOutputFormat {
   // Optional. Inject YAML frontmatter into markdown output.
   // If the content is HTML based, it will automatically be converted to markdown.
   // Optionally, you can inject YAML frontmatter into the markdown output.
@@ -3037,6 +3027,7 @@ message RagCrawlerOutputFormat {
   // <code>RAG_CRAWLER_OUTPUT_METADATA_FIELD_MODIFIED_DATE</code>,
   // <code>RAG_CRAWLER_OUTPUT_METADATA_FIELD_SCRAPED_AT</code>.
   repeated RagCrawlerOutputMetadataField fields = 2;
+
 }
 
 // Supported metadata fields for crawler output enrichment.
@@ -3094,16 +3085,16 @@ message RagCrawlerRetryConfig {
 
   // Optional. Enable retry logic.
   // Default <code>false</code>.
-  bool retry_enabled = 1;
+  bool retry_enabled = 3;
 
   // Optional. Maximum retry attempts per page source.
-  int32 retry_max_attempts = 2;
+  int32 retry_max_attempts = 4;
 
   // Optional. Backoff delays in seconds between retries.
-  repeated int32 retry_backoff_delays_seconds = 3;
+  repeated int32 retry_backoff_delays_seconds = 5;
 
   // Optional. HTTP status codes that trigger retries.
-  repeated int32 retry_http_status_codes = 4;
+  repeated int32 retry_http_status_codes = 6;
 }
 
 // Supported content types for deep-crawl content-type filters.
@@ -3141,9 +3132,6 @@ message RagCrawlerContentResult {
 
   // Optional. Extracted media assets by category (e.g. images/audio/video).
   google.protobuf.Struct media = 4;
-
-  // Optional. Structured tables extracted from page.
-  repeated RagCrawlerTable tables = 5;
 }
 
 // Consolidated diagnostics and HTTP execution metadata for a crawl result.
