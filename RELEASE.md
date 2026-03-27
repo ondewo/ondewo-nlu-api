@@ -9,6 +9,10 @@
 * [[OND211-2330]](https://ondewo.atlassian.net/browse/OND211-2330) Added new `Rags` service with endpoints for
 accessing the new RAG functionality. This includes dataset and document management, document retrieval, and chat with a
 RAG enabled assistant. The endpoints mirror RAGFlow's HTTP API.
+* [[OND211-2352]](https://ondewo.atlassian.net/browse/OND211-2352) Added crawler endpoints: `RagCreateCrawler`,
+  `RagStartCrawler`, `RagDeleteCrawler`, and `RagListCrawlers`. Added `RagCrawler` message with full configuration
+  including `RagCrawlerSources`, `RagCrawlerUrlFilters`, `RagCrawlerAuth`, `RagCrawlerConfig`, `RagCrawlerRendering`,
+  `RagCrawlerOutput`, `RagCrawlerAntiBot`, and `RagCrawlerScheduling`
 
 *****************
 
