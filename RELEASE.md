@@ -6,9 +6,7 @@
 
 ### Improvements
 
-* [[OND211-2330]](https://ondewo.atlassian.net/browse/OND211-2330) Added new `Rags` service with endpoints for
-accessing the new RAG functionality. This includes dataset and document management, document retrieval, and chat with a
-RAG enabled assistant. The endpoints mirror RAGFlow's HTTP API.
+* [[OND211-2330]](https://ondewo.atlassian.net/browse/OND211-2330) Added new `Rags` service with endpoints for accessing the new RAG functionality. This includes dataset and document management and document retrieval. The endpoints largely mirror RAGFlow's HTTP API.
 
 *****************
 
