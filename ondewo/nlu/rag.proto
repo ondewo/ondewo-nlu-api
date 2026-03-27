@@ -2943,14 +2943,11 @@ message RagCrawlerConfig {
   // Default <code>RAG_CRAWLER_CRAWL_STRATEGY_BFS</code>.
   RagCrawlerCrawlStrategy strategy = 4;
 
-  // Optional. Request and rendering timeout settings.
-  RagCrawlerTimeoutsConfig timeouts_config = 5;
-
   // Optional. Browser/runtime diagnostics collection settings.
-  RagCrawlerDiagnosticsConfig diagnostics_config = 6;
+  RagCrawlerDiagnosticsConfig diagnostics_config = 5;
 
   // Optional. JavaScript wait/scroll/overlay behavior configuration.
-  RagCrawlerInteractionConfig interaction_config = 7;
+  RagCrawlerInteractionConfig interaction_config = 6;
 }
 
 // Cache mode for crawler runs.
