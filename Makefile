@@ -171,6 +171,18 @@ login_to_gh: ## Login to Github CLI with Access Token
 build_gh_release: ## Generate Github Release with CLI
 	gh release create --repo $(GH_REPO) "$(ONDEWO_NLU_API_VERSION)" -n "$(CURRENT_RELEASE_NOTES)" -t "Release ${ONDEWO_NLU_API_VERSION}"
 
+delete_gh_release: ## Delete GitHub Release, release branch and release tag via gh CLI
+	-gh release delete --repo $(GH_REPO) "$(ONDEWO_NLU_API_VERSION)" --yes
+	-gh api repos/ondewo/ondewo-nlu-api/git/refs/heads/release/${ONDEWO_NLU_API_VERSION} -X DELETE
+	-gh api repos/ondewo/ondewo-nlu-api/git/refs/tags/${ONDEWO_NLU_API_VERSION} -X DELETE
+
+unrelease_to_github_via_docker_image: ## Unrelease from Github via docker
+	docker run --rm \
+		-e GITHUB_GH_TOKEN=${GITHUB_GH_TOKEN} \
+		${IMAGE_UTILS_NAME} make login_to_gh delete_gh_release
+
+unrelease: build_utils_docker_image unrelease_to_github_via_docker_image ## Undo a release: delete the GitHub release, release branch, and release tag
+	@echo "Unrelease of ${ONDEWO_NLU_API_VERSION} complete"
 
 release_all_clients: ## Releases all NLU Clients
 	@make release_python_client || (echo "Already released ${ONDEWO_NLU_API_VERSION} of Python Client")
