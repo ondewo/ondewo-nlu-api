@@ -21351,7 +21351,7 @@ If ids empty, deletes all sessions for the agent.
 This endpoint either
 <ul>
     <li>creates a new session if no <code>session_id</code> is provided and <code>messages</code> contains only one message</li>
-    <li>uses an exising session if <code>session_id</code> is provided (ignores message history in <code>messages</code>)</li>
+    <li>uses an existing session if <code>session_id</code> is provided (ignores message history in <code>messages</code>)</li>
     <li>continues a conversion with the message history from <code>messages</code> without creating a session if no <code>session_id</code> is provided and <code>messages</code> contains multiple messages</li>
 </ul>
 At this point the endpoint is not fully implemented and does not support sessions. This means the full message history must always be passed.
@@ -22869,7 +22869,7 @@ Roughly corresponds to Crawl4AI <code>CrawlerRunConfig</code>. </p></td>
         
       
         <h3 id="ondewo.nlu.RagCrawlerAuth" class="title-badge message">RagCrawlerAuth</h3>
-        <p>Authentication configuration.</p><p>Supports both browser/form login and HTTP auth patterns used by Crawl4AI</p><p>pipelines when crawling protected content.</p><p>HTTP Auth is used on all pages of the sources, while html_auth is a seperate authentication flow used in the beginning of the crawl</p><p>to extract the cookies. This is done through a login screen. If HTTP Auth is set, this would ALSO be used on the HTML auth page,</p>
+        <p>Authentication configuration.</p><p>Supports both browser/form login and HTTP auth patterns used by Crawl4AI</p><p>pipelines when crawling protected content.</p><p>HTTP Auth is used on all pages of the sources, while html_auth is a separate authentication flow used in the beginning of the crawl</p><p>to extract the cookies. This is done through a login screen. If HTTP Auth is set, this would ALSO be used on the HTML auth page,</p>
 
         
           <table class="field-table">
@@ -22995,7 +22995,7 @@ Increase for throughput; reduce for fragile sites/rate limits. </p></td>
         
       
         <h3 id="ondewo.nlu.RagCrawlerContentResult" class="title-badge message">RagCrawlerContentResult</h3>
-        <p>Consolidated extraction output for a crawled page.</p>
+        <p></p>
 
         
           <table class="field-table">
@@ -24349,7 +24349,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
             <tbody>
               
                 <tr>
-                  <td>crawler_name</td>
+                  <td>name</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Resource name of the RagCrawler
@@ -24475,7 +24475,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 </tr>
               
                 <tr>
-                  <td>crawler_names</td>
+                  <td>names</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
                   <td><p>Optional. Crawler resource names to delete.
@@ -25961,10 +25961,10 @@ Leave empty for the first page. </p></td>
                 </tr>
               
                 <tr>
-                  <td>desc</td>
-                  <td><a href="#bool">bool</a></td>
-                  <td></td>
-                  <td><p>Optional. Sort descending (default: <code>true</code>). </p></td>
+                  <td>sorting_mode</td>
+                  <td><a href="#ondewo.nlu.SortingMode">SortingMode</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. Sort descending. </p></td>
                 </tr>
               
             </tbody>
@@ -26062,10 +26062,10 @@ Leave empty for the first page. </p></td>
                 </tr>
               
                 <tr>
-                  <td>desc</td>
-                  <td><a href="#bool">bool</a></td>
-                  <td></td>
-                  <td><p>Optional. Sort descending (default: <code>true</code>). </p></td>
+                  <td>sorting_mode</td>
+                  <td><a href="#ondewo.nlu.SortingMode">SortingMode</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. Sort descending. </p></td>
                 </tr>
               
             </tbody>
@@ -26142,7 +26142,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
 
 <ul>
     <li><code>&lt;size&gt;</code> must be an integer &geq; <code>1</code>. The maximum number of results to return.</li>
-    <li><code>&lt;idx&gt;</code> must be an interger &geq; <code>0</code>. The start index in the requested list, starting from which a maximum of <code>&lt;size&gt;</code> elements are returned.</li>
+    <li><code>&lt;idx&gt;</code> must be an integer &geq; <code>0</code>. The start index in the requested list, starting from which a maximum of <code>&lt;size&gt;</code> elements are returned.</li>
 </ul>
 
 <em>Important note</em>: The <code>&lt;idx&gt;</code> is the index in the requested sequence NOT the page number. E.g. if the requested list has 100 elements then <code>current_index-5--page_size-15</code> returns the elements at index 5-19 and not the 5-th page of 15 elements.
@@ -26247,7 +26247,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
 
 <ul>
     <li><code>&lt;size&gt;</code> must be an integer &geq; <code>1</code>. The maximum number of results to return.</li>
-    <li><code>&lt;idx&gt;</code> must be an interger &geq; <code>0</code>. The start index in the requested list, starting from which a maximum of <code>&lt;size&gt;</code> elements are returned.</li>
+    <li><code>&lt;idx&gt;</code> must be an integer &geq; <code>0</code>. The start index in the requested list, starting from which a maximum of <code>&lt;size&gt;</code> elements are returned.</li>
 </ul>
 
 <em>Important note</em>: The <code>&lt;idx&gt;</code> is the index in the requested sequence NOT the page number. E.g. if the requested list has 100 elements then <code>current_index-5--page_size-15</code> returns the elements at index 5-19 and not the 5-th page of 15 elements.
@@ -27228,7 +27228,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
 
 <ul>
     <li><code>&lt;size&gt;</code> must be an integer &geq; <code>1</code>. The maximum number of results to return.</li>
-    <li><code>&lt;idx&gt;</code> must be an interger &geq; <code>0</code>. The start index in the requested list, starting from which a maximum of <code>&lt;size&gt;</code> elements are returned.</li>
+    <li><code>&lt;idx&gt;</code> must be an integer &geq; <code>0</code>. The start index in the requested list, starting from which a maximum of <code>&lt;size&gt;</code> elements are returned.</li>
 </ul>
 
 <em>Important note</em>: The <code>&lt;idx&gt;</code> is the index in the requested sequence NOT the page number. E.g. if the requested list has 100 elements then <code>current_index-5--page_size-15</code> returns the elements at index 5-19 and not the 5-th page of 15 elements.
@@ -27448,7 +27448,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawler_runs/&lt;crawler_
         
       
         <h3 id="ondewo.nlu.RagStopCrawlerResponse" class="title-badge message">RagStopCrawlerResponse</h3>
-        <p>Result of stopping a crawler run (aligned with VTSI <code>StopCallerResponse</code>).</p>
+        <p>Result of stopping a crawler run</p>
 
         
           <table class="field-table">
@@ -28364,7 +28364,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
         </table>
       
         <h3 id="ondewo.nlu.RagComparisonOperator" class="title-badge enum">RagComparisonOperator</h3>
-        <p>Vaild metadata condition comparison operators</p>
+        <p>Valid metadata condition comparison operators</p>
         <table class="enum-table">
           <thead>
             <tr><td>Name</td><td>Number</td><td>Description</td></tr>
@@ -28388,14 +28388,14 @@ If metadata field is a list, checks if the string representation of <em>no</em> 
               <tr>
                 <td>RAG_COMPARISON_OPERATOR_IN</td>
                 <td>2</td>
-                <td><p>Checks with Python's <code>in</code> opertor.<br>
+                <td><p>Checks with Python's <code>in</code> operator.<br>
 If metadata field is a list, <em>all</em> elements must satisfy the condition.</p></td>
               </tr>
             
               <tr>
                 <td>RAG_COMPARISON_OPERATOR_NOT_IN</td>
                 <td>3</td>
-                <td><p>Checks with Python's <code>not in</code> opertor.<br>
+                <td><p>Checks with Python's <code>not in</code> operator.<br>
 If metadata field is a list, <em>all</em> elements must satisfy the condition.</p></td>
               </tr>
             
@@ -28576,6 +28576,24 @@ If metadata field is a list, checks if the joined string of the string represent
                 <td>RAG_CRAWLER_FILTER_CONTENT_TYPE_APPLICATION_PDF</td>
                 <td>5</td>
                 <td><p>PDF documents.</p></td>
+              </tr>
+            
+              <tr>
+                <td>RAG_CRAWLER_FILTER_CONTENT_TYPE_APPLICATION_POWERPOINT</td>
+                <td>6</td>
+                <td><p>PowerPoint documents.</p></td>
+              </tr>
+            
+              <tr>
+                <td>RAG_CRAWLER_FILTER_CONTENT_TYPE_APPLICATION_EXCEL</td>
+                <td>7</td>
+                <td><p>Excel documents.</p></td>
+              </tr>
+            
+              <tr>
+                <td>RAG_CRAWLER_FILTER_CONTENT_TYPE_APPLICATION_WORD</td>
+                <td>8</td>
+                <td><p>Word documents.</p></td>
               </tr>
             
           </tbody>

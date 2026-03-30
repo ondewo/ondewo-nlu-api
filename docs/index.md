@@ -7343,7 +7343,7 @@ Authentication configuration.
 
 Supports both browser/form login and HTTP auth patterns used by Crawl4AI
 pipelines when crawling protected content.
-HTTP Auth is used on all pages of the sources, while html_auth is a seperate authentication flow used in the beginning of the crawl
+HTTP Auth is used on all pages of the sources, while html_auth is a separate authentication flow used in the beginning of the crawl
 to extract the cookies. This is done through a login screen. If HTTP Auth is set, this would ALSO be used on the HTML auth page,
 
 
@@ -7415,7 +7415,7 @@ diagnostics capture, and deep crawling options for each crawler run.
 <a name="ondewo.nlu.RagCrawlerContentResult"></a>
 
 ### RagCrawlerContentResult
-Consolidated extraction output for a crawled page.
+
 
 
 | Field | Type | Label | Description |
@@ -7939,7 +7939,7 @@ Response message for deleting a crawler of a dataset for the specified agent.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| crawler_name | [string](#string) |  | Resource name of the RagCrawler Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre> |
+| name | [string](#string) |  | Resource name of the RagCrawler Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre> |
 | error_message | [string](#string) |  | Error message if there are any. |
 
 
@@ -7997,7 +7997,7 @@ Request message for deleting multiple crawlers of a dataset for the specified ag
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The agent owning the crawlers. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
 | language_code | [string](#string) |  | Required. The language of the project to use. |
-| crawler_names | [string](#string) | repeated | Optional. Crawler resource names to delete. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre> |
+| names | [string](#string) | repeated | Optional. Crawler resource names to delete. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre> |
 
 
 
@@ -8529,7 +8529,7 @@ Request message for listing crawler runs.
 | page_token | [string](#string) |  | Optional. Opaque pagination cursor from a previous list response. Leave empty for the first page. |
 | state | [OperationMetadata.Status](#ondewo.nlu.OperationMetadata.Status) |  | Optional. Filter by operation state. |
 | orderby | [string](#string) |  | Optional. Sort field (default: <code>created_at</code>). |
-| desc | [bool](#bool) |  | Optional. Sort descending (default: <code>true</code>). |
+| sorting_mode | [SortingMode](#ondewo.nlu.SortingMode) | optional | Optional. Sort descending. |
 
 
 
@@ -8566,7 +8566,7 @@ Request message for listing crawlers of a dataset for the specified agent.
 | dataset_name | [string](#string) |  | Optional. Filter by dataset name. |
 | crawler_name | [string](#string) |  | Optional. Filter by crawler name. |
 | orderby | [string](#string) |  | Optional. Sort field (default: <code>create_time</code>). |
-| desc | [bool](#bool) |  | Optional. Sort descending (default: <code>true</code>). |
+| sorting_mode | [SortingMode](#ondewo.nlu.SortingMode) | optional | Optional. Sort descending. |
 
 
 
@@ -8601,7 +8601,7 @@ Request message for listing datasets with pagination and filtering.
 | language_code | [string](#string) |  | Required. The language of the project to use. |
 | page_token | [string](#string) |  | Optional. Specifies which page to return. The page token is a string of the format <pre><code>current_index-&lt;idx&gt;--page_size-&lt;size&gt;</code></pre>
 
-<ul> <li><code>&lt;size&gt;</code> must be an integer &geq; <code>1</code>. The maximum number of results to return.</li> <li><code>&lt;idx&gt;</code> must be an interger &geq; <code>0</code>. The start index in the requested list, starting from which a maximum of <code>&lt;size&gt;</code> elements are returned.</li> </ul>
+<ul> <li><code>&lt;size&gt;</code> must be an integer &geq; <code>1</code>. The maximum number of results to return.</li> <li><code>&lt;idx&gt;</code> must be an integer &geq; <code>0</code>. The start index in the requested list, starting from which a maximum of <code>&lt;size&gt;</code> elements are returned.</li> </ul>
 
 <em>Important note</em>: The <code>&lt;idx&gt;</code> is the index in the requested sequence NOT the page number. E.g. if the requested list has 100 elements then <code>current_index-5--page_size-15</code> returns the elements at index 5-19 and not the 5-th page of 15 elements. <br> Both <code>current_index-&lt;idx&gt;</code> and <code>page_size-&lt;size&gt;</code> are optional and default to <code>0</code> and <code>10</code> respectively. The following are all valid <code>page_token</code>s
 
@@ -8631,7 +8631,7 @@ Request message for listing documents in a dataset with pagination and filtering
 | name | [string](#string) |  | Optional. Filter by document name (exact match). |
 | page_token | [string](#string) |  | Optional. Specifies which page to return. The page token is a string of the format <pre><code>current_index-&lt;idx&gt;--page_size-&lt;size&gt;</code></pre>
 
-<ul> <li><code>&lt;size&gt;</code> must be an integer &geq; <code>1</code>. The maximum number of results to return.</li> <li><code>&lt;idx&gt;</code> must be an interger &geq; <code>0</code>. The start index in the requested list, starting from which a maximum of <code>&lt;size&gt;</code> elements are returned.</li> </ul>
+<ul> <li><code>&lt;size&gt;</code> must be an integer &geq; <code>1</code>. The maximum number of results to return.</li> <li><code>&lt;idx&gt;</code> must be an integer &geq; <code>0</code>. The start index in the requested list, starting from which a maximum of <code>&lt;size&gt;</code> elements are returned.</li> </ul>
 
 <em>Important note</em>: The <code>&lt;idx&gt;</code> is the index in the requested sequence NOT the page number. E.g. if the requested list has 100 elements then <code>current_index-5--page_size-15</code> returns the elements at index 5-19 and not the 5-th page of 15 elements.
 
@@ -8994,7 +8994,7 @@ Supports hybrid search combining vector similarity with keyword matching.
 | dataset_ids | [string](#string) | repeated | Required. Dataset IDs to search (all datasets must use the same embedding model). |
 | page_token | [string](#string) |  | Optional. Specifies which page to return. The page token is a string of the format <pre><code>current_index-&lt;idx&gt;--page_size-&lt;size&gt;</code></pre>
 
-<ul> <li><code>&lt;size&gt;</code> must be an integer &geq; <code>1</code>. The maximum number of results to return.</li> <li><code>&lt;idx&gt;</code> must be an interger &geq; <code>0</code>. The start index in the requested list, starting from which a maximum of <code>&lt;size&gt;</code> elements are returned.</li> </ul>
+<ul> <li><code>&lt;size&gt;</code> must be an integer &geq; <code>1</code>. The maximum number of results to return.</li> <li><code>&lt;idx&gt;</code> must be an integer &geq; <code>0</code>. The start index in the requested list, starting from which a maximum of <code>&lt;size&gt;</code> elements are returned.</li> </ul>
 
 <em>Important note</em>: The <code>&lt;idx&gt;</code> is the index in the requested sequence NOT the page number. E.g. if the requested list has 100 elements then <code>current_index-5--page_size-15</code> returns the elements at index 5-19 and not the 5-th page of 15 elements.
 
@@ -9073,7 +9073,7 @@ Request message for stopping a crawler run.
 <a name="ondewo.nlu.RagStopCrawlerResponse"></a>
 
 ### RagStopCrawlerResponse
-Result of stopping a crawler run (aligned with VTSI <code>StopCallerResponse</code>).
+Result of stopping a crawler run
 
 
 | Field | Type | Label | Description |
@@ -9361,14 +9361,14 @@ Chunking method for documents. See <a href="https://ragflow.io/docs/dev/configur
 <a name="ondewo.nlu.RagComparisonOperator"></a>
 
 ### RagComparisonOperator
-Vaild metadata condition comparison operators
+Valid metadata condition comparison operators
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
 | RAG_COMPARISON_OPERATOR_CONTAINS | 0 | String representation of metadata field contains value.<br> If metadata field is a list, checks if the string representation of <em>any</em> field contains value. |
 | RAG_COMPARISON_OPERATOR_NOT_CONTAINS | 1 | String representation of metadata field does not contain value.<br> If metadata field is a list, checks if the string representation of <em>no</em> fields contains value. |
-| RAG_COMPARISON_OPERATOR_IN | 2 | Checks with Python's <code>in</code> opertor.<br> If metadata field is a list, <em>all</em> elements must satisfy the condition. |
-| RAG_COMPARISON_OPERATOR_NOT_IN | 3 | Checks with Python's <code>not in</code> opertor.<br> If metadata field is a list, <em>all</em> elements must satisfy the condition. |
+| RAG_COMPARISON_OPERATOR_IN | 2 | Checks with Python's <code>in</code> operator.<br> If metadata field is a list, <em>all</em> elements must satisfy the condition. |
+| RAG_COMPARISON_OPERATOR_NOT_IN | 3 | Checks with Python's <code>not in</code> operator.<br> If metadata field is a list, <em>all</em> elements must satisfy the condition. |
 | RAG_COMPARISON_OPERATOR_START_WITH | 4 | String representation fo metadata field starts with value.<br> If metadata field is a list, checks if the joined string of the string representations of all list elements starts with the value. |
 | RAG_COMPARISON_OPERATOR_ENDS_WITH | 5 | String representation fo metadata field ends with value.<br> If metadata field is a list, checks if the joined string of the string representations of all list elements ends with the value. |
 | RAG_COMPARISON_OPERATOR_EMPTY | 6 | Is empty (Python <em>falsy</em>). |
@@ -9423,6 +9423,9 @@ Supported content types for deep-crawl content-type filters.
 | RAG_CRAWLER_FILTER_CONTENT_TYPE_APPLICATION_XML | 3 | XML payloads. |
 | RAG_CRAWLER_FILTER_CONTENT_TYPE_TEXT_PLAIN | 4 | Plain text documents. |
 | RAG_CRAWLER_FILTER_CONTENT_TYPE_APPLICATION_PDF | 5 | PDF documents. |
+| RAG_CRAWLER_FILTER_CONTENT_TYPE_APPLICATION_POWERPOINT | 6 | PowerPoint documents. |
+| RAG_CRAWLER_FILTER_CONTENT_TYPE_APPLICATION_EXCEL | 7 | Excel documents. |
+| RAG_CRAWLER_FILTER_CONTENT_TYPE_APPLICATION_WORD | 8 | Word documents. |
 
 
 
@@ -9608,7 +9611,7 @@ Covers all endpoints of the <a href="https://github.com/ondewo/ragflow">RAGFlow<
 | RagDeleteChatSessions | [RagDeleteChatSessionsRequest](#ondewo.nlu.RagDeleteChatSessionsRequest) | [RagPartialSuccess](#ondewo.nlu.RagPartialSuccess) | Delete one or more chat sessions (batch operation).<br> If ids empty, deletes all sessions for the chat. |
 | RagListAgentSessions | [RagListAgentSessionsRequest](#ondewo.nlu.RagListAgentSessionsRequest) | [RagAgentSessionList](#ondewo.nlu.RagAgentSessionList) | List sessions for an agent.<br> Can optionally exclude DSL from response for performance. |
 | RagDeleteAgentSessions | [RagDeleteAgentSessionsRequest](#ondewo.nlu.RagDeleteAgentSessionsRequest) | [RagPartialSuccess](#ondewo.nlu.RagPartialSuccess) | Delete one or more agent sessions (batch operation).<br> If ids empty, deletes all sessions for the agent. |
-| RagChatCompletion | [RagChatCompletionRequest](#ondewo.nlu.RagChatCompletionRequest) | [RagChatCompletionResponse](#ondewo.nlu.RagChatCompletionResponse) stream | Generate chat completion with RAG (server streaming).<br> This endpoint either <ul> <li>creates a new session if no <code>session_id</code> is provided and <code>messages</code> contains only one message</li> <li>uses an exising session if <code>session_id</code> is provided (ignores message history in <code>messages</code>)</li> <li>continues a conversion with the message history from <code>messages</code> without creating a session if no <code>session_id</code> is provided and <code>messages</code> contains multiple messages</li> </ul> At this point the endpoint is not fully implemented and does not support sessions. This means the full message history must always be passed. |
+| RagChatCompletion | [RagChatCompletionRequest](#ondewo.nlu.RagChatCompletionRequest) | [RagChatCompletionResponse](#ondewo.nlu.RagChatCompletionResponse) stream | Generate chat completion with RAG (server streaming).<br> This endpoint either <ul> <li>creates a new session if no <code>session_id</code> is provided and <code>messages</code> contains only one message</li> <li>uses an existing session if <code>session_id</code> is provided (ignores message history in <code>messages</code>)</li> <li>continues a conversion with the message history from <code>messages</code> without creating a session if no <code>session_id</code> is provided and <code>messages</code> contains multiple messages</li> </ul> At this point the endpoint is not fully implemented and does not support sessions. This means the full message history must always be passed. |
 | RagAgentCompletion | [RagAgentCompletionRequest](#ondewo.nlu.RagAgentCompletionRequest) | [RagAgentCompletionResponse](#ondewo.nlu.RagAgentCompletionResponse) stream | Generate agent completion (server streaming).<br> Filters events to only return message-related events. |
 | RagAsk | [RagAskRequest](#ondewo.nlu.RagAskRequest) | [RagAskResponse](#ondewo.nlu.RagAskResponse) stream | Ask a question across datasets without a chat assistant.<br> Streaming only. All datasets must have parsed files. |
 | RagRelatedQuestions | [RagRelatedQuestionsRequest](#ondewo.nlu.RagRelatedQuestionsRequest) | [RagRelatedQuestionsResponse](#ondewo.nlu.RagRelatedQuestionsResponse) | Generate related search terms for a question.<br> Returns 5-10 suggestions considering industry context. |
