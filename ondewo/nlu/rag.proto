@@ -2735,37 +2735,40 @@ message RagCrawler {
   // Should be unique per agent to simplify operational troubleshooting.
   string display_name = 2;
 
+  // Creation date and time. Read-only field.
+  google.protobuf.Timestamp created_at = 3;
+
+  // Modification date and time. Read-only field.
+  google.protobuf.Timestamp modified_at = 4;
+
+  // User id in form of a valid UUID.
+  string created_by = 5;
+
+  // User id in form of a valid UUID.
+  string modified_by = 6;
+
   // Optional. Crawl entry points.
   // Configure crawl entry points: URL seeds and/or sitemap sources.
-  RagCrawlerSources crawler_sources = 3;
+  RagCrawlerSources crawler_sources = 7;
 
   // Optional. Seed URL filters.
   // Filters are applied to the seed URLs before they are crawled.
-  RagCrawlerSeedUrlFilters crawler_seed_url_filters = 4;
+  RagCrawlerSeedUrlFilters crawler_seed_url_filters = 8;
 
   // Optional. Login/auth setup used before crawl requests.
-  RagCrawlerAuth crawler_auth = 5;
+  RagCrawlerAuth crawler_auth = 9;
 
   // Optional. Browser runtime setup (engine, viewport, cookies, proxy, headers).
   // Roughly corresponds to Crawl4AI <code>BrowserConfig</code>.
   // Use this when target sites require JS, custom headers, session cookies, or proxy routing.
-  RagCrawlerBrowserConfig crawler_browser_config = 6;
+  RagCrawlerBrowserConfig crawler_browser_config = 10;
 
   // Optional. Crawl execution behavior and extraction settings.
   // Roughly corresponds to Crawl4AI <code>CrawlerRunConfig</code>.
-  RagCrawlerConfig crawler_config = 7;
+  RagCrawlerConfig crawler_config = 11;
 
-  // Creation date and time. Read-only field.
-  google.protobuf.Timestamp created_at = 8;
-
-  // Modification date and time. Read-only field.
-  google.protobuf.Timestamp modified_at = 9;
-
-  // User id in form of a valid UUID.
-  string created_by = 10;
-
-  // User id in form of a valid UUID.
-  string modified_by = 11;
+  // Optional. Retry configuration for crawler runs.
+  RagCrawlerRetryConfig retry_config = 12;
 }
 
 // Crawl entry points.
@@ -2935,24 +2938,6 @@ message RagCrawlerConfig {
   RagCrawlerResultsConfig output_config = 3;
 }
 
-// Cache mode for crawler runs.
-enum RagCrawlerCacheMode {
-  // Normal cache behavior (read/write).
-  RAG_CRAWLER_CACHE_MODE_ENABLED = 0;
-
-  // Disable all cache reads/writes.
-  RAG_CRAWLER_CACHE_MODE_DISABLED = 1;
-
-  // Read from cache only.
-  RAG_CRAWLER_CACHE_MODE_READ_ONLY = 2;
-
-  // Write to cache only.
-  RAG_CRAWLER_CACHE_MODE_WRITE_ONLY = 3;
-
-  // Bypass cache for this operation.
-  RAG_CRAWLER_CACHE_MODE_BYPASS = 4;
-}
-
 // Deep crawler options grouped under one config node.
 message RagCrawlerDeepCrawlerConfig {
   // Optional. Enable deep crawler behavior (link following beyond seeds).
@@ -2973,27 +2958,6 @@ message RagCrawlerDeepCrawlerConfig {
 
   // Optional. URL and domain restrictions.
   RagCrawlerFilters deep_crawler_filters = 5;
-}
-
-// Diagnostics capture toggles.
-message RagCrawlerDiagnosticsConfig {
-  // Optional. Collect SSL certificate details for HTTPS targets.
-  bool ssl_certificate = 1;
-
-  // Optional. Capture browser network events for diagnostics.
-  bool network_requests = 2;
-
-  // Optional. Capture browser console messages for diagnostics.
-  bool console_messages = 3;
-}
-
-// Wait/scroll/DOM interaction settings.
-message RagCrawlerInteractionConfig {
-  // Optional. Wait condition for the page to be loaded.
-  string wait_for = 1;
-
-  // Optional. Timeout in milliseconds for the wait condition.
-  int32 wait_for_timeout = 2;
 }
 
 // Structured output configuration.
