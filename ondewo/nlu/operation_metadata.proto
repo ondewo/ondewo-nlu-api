@@ -116,6 +116,14 @@ message OperationMetadata {
         // force loading agent data for full text search
         INDEX_AGENT = 9;
 
+        // run a rag crawler
+        RUN_RAG_CRAWLER = 10;
+
+        // add a rag crawler result to a dataset
+        ADD_RAG_CRAWLER_RESULT_TO_DATASET = 11;
+
+        // remove a rag crawler result from a dataset
+        REMOVE_RAG_CRAWLER_RESULT_FROM_DATASET = 12;
     }
 
     // name of the host where the operation was executed

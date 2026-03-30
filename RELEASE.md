@@ -6,7 +6,11 @@
 
 ### Improvements
 
-* [[OND211-2330]](https://ondewo.atlassian.net/browse/OND211-2330) Added new `Rags` service with endpoints for accessing the new RAG functionality. This includes dataset and document management and document retrieval. The endpoints largely mirror RAGFlow's HTTP API.
+* [[OND211-2330]](https://ondewo.atlassian.net/browse/OND211-2330) Added new `Rags` service with endpoints for accessing
+  the new RAG functionality. This includes dataset and document management and document retrieval. The endpoints largely
+  mirror RAGFlow's HTTP API.
+* [[OND211-2359]](https://ondewo.atlassian.net/browse/OND211-2359) Added Crawler endpoints and messages for `Rags`
+  service with endpoints.
 
 *****************
 
@@ -138,9 +142,9 @@
 ### Breaking changes
 
 * Restructuring of messages
-  * From `BatchEntitiesResponse.EntityStatus` to `EntityStatus`
-  * From `BatchCreateEntitiesRequest.CreateEntityRequest` to `CreateEntityRequest`
-  * From `BatchDeleteEntitiesResponse.DeleteEntityStatus` to `DeleteEntityStatus`
+    * From `BatchEntitiesResponse.EntityStatus` to `EntityStatus`
+    * From `BatchCreateEntitiesRequest.CreateEntityRequest` to `CreateEntityRequest`
+    * From `BatchDeleteEntitiesResponse.DeleteEntityStatus` to `DeleteEntityStatus`
 
 *****************
 
@@ -216,18 +220,18 @@
 ### New Features
 
 * [[OND211-1979]](https://ondewo.atlassian.net/browse/OND211-1979) - Session API optimization and refactoring
-  * Added labels to `QueryParameters` for `DetectIntentRequest`
-  * Added name in message `SessionStep`
-  * Added name in message `SessionReviewStep`
+    * Added labels to `QueryParameters` for `DetectIntentRequest`
+    * Added name in message `SessionStep`
+    * Added name in message `SessionReviewStep`
 * [[OND211-2054]](https://ondewo.atlassian.net/browse/OND211-2054) - Added reporting capabilities for sessions and
   session steps incl.
   `ContextFilter` and `ComparisonOperator` for detailed sessions filtering.
-  * Dedicated reports available for
-    * Top X intents
-    * Top X entity values
-    * Top X entity types
-    * Top X tags
-  * Query functionality for database tables session and session_steps for even more detailed reporting options
+    * Dedicated reports available for
+        * Top X intents
+        * Top X entity values
+        * Top X entity types
+        * Top X tags
+    * Query functionality for database tables session and session_steps for even more detailed reporting options
 
 ### Improvements
 
@@ -237,9 +241,9 @@
 
 * [[OND211-1979]](https://ondewo.atlassian.net/browse/OND211-1979) - Consistency improvement or Session and
   SessionReview messages incl.
-  * Renamed message `Session.session_id` to Session.name
-  * Renamed `SessionReview.session_review_id` to `SessionReview.name`
-  * Renamed `RemoveSessionLabels` to `DeleteSessionLabels`
+    * Renamed message `Session.session_id` to Session.name
+    * Renamed `SessionReview.session_review_id` to `SessionReview.name`
+    * Renamed `RemoveSessionLabels` to `DeleteSessionLabels`
 
 *****************
 
