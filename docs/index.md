@@ -7615,7 +7615,6 @@ extracted content, metadata, diagnostics, and optional binary artifacts.
 | file_resource | [FileResource](#ondewo.nlu.FileResource) |  | Classified primary file resource built from source URL and detected MIME/type. If its a HTML page, it will be stored in the DocumentFileResource Bytes. See FileResource Documentation for all other file types. |
 | last_crawled_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Timestamp when this URL was last processed by crawler. |
 | content_result | [RagCrawlerContentResult](#ondewo.nlu.RagCrawlerContentResult) |  | Optional. Consolidated extracted content for this page. |
-| execution_info | [RagCrawlerExecutionInfo](#ondewo.nlu.RagCrawlerExecutionInfo) |  | Optional. Consolidated diagnostics and HTTP execution details. |
 | page_last_updated_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Optional. Timestamp when source page was last updated. Source precedence: HTTP Last-Modified header, then sitemap <lastmod> fallback. |
 
 
