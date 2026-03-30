@@ -363,6 +363,7 @@
 - [ondewo/nlu/rag.proto](#ondewo/nlu/rag.proto)
     - [RagAddChunkRequest](#ondewo.nlu.RagAddChunkRequest)
     - [RagAddChunkResponse](#ondewo.nlu.RagAddChunkResponse)
+    - [RagAddCrawlerResultsToDatasetsRequest](#ondewo.nlu.RagAddCrawlerResultsToDatasetsRequest)
     - [RagAgent](#ondewo.nlu.RagAgent)
     - [RagAgentCompletionData](#ondewo.nlu.RagAgentCompletionData)
     - [RagAgentCompletionRequest](#ondewo.nlu.RagAgentCompletionRequest)
@@ -381,9 +382,30 @@
     - [RagChunk](#ondewo.nlu.RagChunk)
     - [RagConstructKnowledgeGraphResponse](#ondewo.nlu.RagConstructKnowledgeGraphResponse)
     - [RagConstructRaptorResponse](#ondewo.nlu.RagConstructRaptorResponse)
+    - [RagCrawler](#ondewo.nlu.RagCrawler)
+    - [RagCrawlerAuth](#ondewo.nlu.RagCrawlerAuth)
+    - [RagCrawlerBrowserConfig](#ondewo.nlu.RagCrawlerBrowserConfig)
+    - [RagCrawlerConcurrencyConfig](#ondewo.nlu.RagCrawlerConcurrencyConfig)
+    - [RagCrawlerConfig](#ondewo.nlu.RagCrawlerConfig)
+    - [RagCrawlerContentResult](#ondewo.nlu.RagCrawlerContentResult)
+    - [RagCrawlerCookie](#ondewo.nlu.RagCrawlerCookie)
+    - [RagCrawlerDeepCrawlerConfig](#ondewo.nlu.RagCrawlerDeepCrawlerConfig)
+    - [RagCrawlerDiagnosticsConfig](#ondewo.nlu.RagCrawlerDiagnosticsConfig)
+    - [RagCrawlerExecutionInfo](#ondewo.nlu.RagCrawlerExecutionInfo)
+    - [RagCrawlerFilters](#ondewo.nlu.RagCrawlerFilters)
+    - [RagCrawlerHtmlAuth](#ondewo.nlu.RagCrawlerHtmlAuth)
+    - [RagCrawlerHttpAuth](#ondewo.nlu.RagCrawlerHttpAuth)
+    - [RagCrawlerInteractionConfig](#ondewo.nlu.RagCrawlerInteractionConfig)
+    - [RagCrawlerMetaDataExtractor](#ondewo.nlu.RagCrawlerMetaDataExtractor)
+    - [RagCrawlerResult](#ondewo.nlu.RagCrawlerResult)
+    - [RagCrawlerResultsConfig](#ondewo.nlu.RagCrawlerResultsConfig)
+    - [RagCrawlerRetryConfig](#ondewo.nlu.RagCrawlerRetryConfig)
+    - [RagCrawlerSeedUrlFilters](#ondewo.nlu.RagCrawlerSeedUrlFilters)
+    - [RagCrawlerSources](#ondewo.nlu.RagCrawlerSources)
     - [RagCreateAgentRequest](#ondewo.nlu.RagCreateAgentRequest)
     - [RagCreateChatAssistantRequest](#ondewo.nlu.RagCreateChatAssistantRequest)
     - [RagCreateChatSessionRequest](#ondewo.nlu.RagCreateChatSessionRequest)
+    - [RagCreateCrawlerRequest](#ondewo.nlu.RagCreateCrawlerRequest)
     - [RagCreateDatasetRequest](#ondewo.nlu.RagCreateDatasetRequest)
     - [RagDataset](#ondewo.nlu.RagDataset)
     - [RagDatasetIdRequest](#ondewo.nlu.RagDatasetIdRequest)
@@ -391,6 +413,12 @@
     - [RagDeleteAgentRequest](#ondewo.nlu.RagDeleteAgentRequest)
     - [RagDeleteAgentSessionsRequest](#ondewo.nlu.RagDeleteAgentSessionsRequest)
     - [RagDeleteChatSessionsRequest](#ondewo.nlu.RagDeleteChatSessionsRequest)
+    - [RagDeleteCrawlerRequest](#ondewo.nlu.RagDeleteCrawlerRequest)
+    - [RagDeleteCrawlerResponse](#ondewo.nlu.RagDeleteCrawlerResponse)
+    - [RagDeleteCrawlerRunsRequest](#ondewo.nlu.RagDeleteCrawlerRunsRequest)
+    - [RagDeleteCrawlerRunsResponse](#ondewo.nlu.RagDeleteCrawlerRunsResponse)
+    - [RagDeleteCrawlersRequest](#ondewo.nlu.RagDeleteCrawlersRequest)
+    - [RagDeleteCrawlersResponse](#ondewo.nlu.RagDeleteCrawlersResponse)
     - [RagDeleteDocumentsRequest](#ondewo.nlu.RagDeleteDocumentsRequest)
     - [RagDeleteRequest](#ondewo.nlu.RagDeleteRequest)
     - [RagDocAgg](#ondewo.nlu.RagDocAgg)
@@ -400,6 +428,13 @@
     - [RagFile](#ondewo.nlu.RagFile)
     - [RagFileChunk](#ondewo.nlu.RagFileChunk)
     - [RagFileMetadata](#ondewo.nlu.RagFileMetadata)
+    - [RagGetCrawlerAttachedDatasetsRequest](#ondewo.nlu.RagGetCrawlerAttachedDatasetsRequest)
+    - [RagGetCrawlerAttachedDatasetsResponse](#ondewo.nlu.RagGetCrawlerAttachedDatasetsResponse)
+    - [RagGetCrawlerRequest](#ondewo.nlu.RagGetCrawlerRequest)
+    - [RagGetCrawlerResultRequest](#ondewo.nlu.RagGetCrawlerResultRequest)
+    - [RagGetCrawlerResultsRequest](#ondewo.nlu.RagGetCrawlerResultsRequest)
+    - [RagGetCrawlerResultsResponse](#ondewo.nlu.RagGetCrawlerResultsResponse)
+    - [RagGetCrawlerRunRequest](#ondewo.nlu.RagGetCrawlerRunRequest)
     - [RagGetKnowledgeGraphResponse](#ondewo.nlu.RagGetKnowledgeGraphResponse)
     - [RagGraphRagConfig](#ondewo.nlu.RagGraphRagConfig)
     - [RagIntList](#ondewo.nlu.RagIntList)
@@ -409,6 +444,10 @@
     - [RagListChatSessionsRequest](#ondewo.nlu.RagListChatSessionsRequest)
     - [RagListChunksRequest](#ondewo.nlu.RagListChunksRequest)
     - [RagListChunksResponse](#ondewo.nlu.RagListChunksResponse)
+    - [RagListCrawlerRunsRequest](#ondewo.nlu.RagListCrawlerRunsRequest)
+    - [RagListCrawlerRunsResponse](#ondewo.nlu.RagListCrawlerRunsResponse)
+    - [RagListCrawlersRequest](#ondewo.nlu.RagListCrawlersRequest)
+    - [RagListCrawlersResponse](#ondewo.nlu.RagListCrawlersResponse)
     - [RagListDatasetsRequest](#ondewo.nlu.RagListDatasetsRequest)
     - [RagListDocumentsRequest](#ondewo.nlu.RagListDocumentsRequest)
     - [RagLlmSetting](#ondewo.nlu.RagLlmSetting)
@@ -426,14 +465,19 @@
     - [RagRelatedQuestionsRequest](#ondewo.nlu.RagRelatedQuestionsRequest)
     - [RagRelatedQuestionsResponse](#ondewo.nlu.RagRelatedQuestionsResponse)
     - [RagRemoveChunksRequest](#ondewo.nlu.RagRemoveChunksRequest)
+    - [RagRemoveCrawlerResultsFromDatasetsRequest](#ondewo.nlu.RagRemoveCrawlerResultsFromDatasetsRequest)
     - [RagRetrievalRequest](#ondewo.nlu.RagRetrievalRequest)
     - [RagRetrievalResponse](#ondewo.nlu.RagRetrievalResponse)
+    - [RagStartCrawlerRequest](#ondewo.nlu.RagStartCrawlerRequest)
+    - [RagStopCrawlerRequest](#ondewo.nlu.RagStopCrawlerRequest)
+    - [RagStopCrawlerResponse](#ondewo.nlu.RagStopCrawlerResponse)
     - [RagStopParsingRequest](#ondewo.nlu.RagStopParsingRequest)
     - [RagTaskStatus](#ondewo.nlu.RagTaskStatus)
     - [RagUpdateAgentRequest](#ondewo.nlu.RagUpdateAgentRequest)
     - [RagUpdateChatAssistantRequest](#ondewo.nlu.RagUpdateChatAssistantRequest)
     - [RagUpdateChatSessionRequest](#ondewo.nlu.RagUpdateChatSessionRequest)
     - [RagUpdateChunkRequest](#ondewo.nlu.RagUpdateChunkRequest)
+    - [RagUpdateCrawlerRequest](#ondewo.nlu.RagUpdateCrawlerRequest)
     - [RagUpdateDatasetRequest](#ondewo.nlu.RagUpdateDatasetRequest)
     - [RagUpdateDocumentRequest](#ondewo.nlu.RagUpdateDocumentRequest)
     - [RagUploadDocumentRequest](#ondewo.nlu.RagUploadDocumentRequest)
@@ -442,6 +486,11 @@
     - [RagCanvasCategory](#ondewo.nlu.RagCanvasCategory)
     - [RagChunkMethod](#ondewo.nlu.RagChunkMethod)
     - [RagComparisonOperator](#ondewo.nlu.RagComparisonOperator)
+    - [RagCrawlerCacheMode](#ondewo.nlu.RagCrawlerCacheMode)
+    - [RagCrawlerCrawlStrategy](#ondewo.nlu.RagCrawlerCrawlStrategy)
+    - [RagCrawlerFilterContentType](#ondewo.nlu.RagCrawlerFilterContentType)
+    - [RagCrawlerMetaDataExtractorType](#ondewo.nlu.RagCrawlerMetaDataExtractorType)
+    - [RagCrawlerSelectorType](#ondewo.nlu.RagCrawlerSelectorType)
     - [RagDocumentStatus](#ondewo.nlu.RagDocumentStatus)
     - [RagDocumentType](#ondewo.nlu.RagDocumentType)
     - [RagGraphRagMethod](#ondewo.nlu.RagGraphRagMethod)
@@ -6324,6 +6373,9 @@ It can be creating, importing, exporting, deleting, restoring, building cache, t
 | TRAIN_AGENT | 7 | train agent |
 | EXPORT_BENCHMARK_AGENT | 8 | export benchmark agent to a zip file |
 | INDEX_AGENT | 9 | force loading agent data for full text search |
+| RUN_RAG_CRAWLER | 10 | run a rag crawler |
+| ADD_RAG_CRAWLER_RESULT_TO_DATASET | 11 | add a rag crawler result to a dataset |
+| REMOVE_RAG_CRAWLER_RESULT_FROM_DATASET | 12 | remove a rag crawler result from a dataset |
 
 
 
@@ -6847,6 +6899,27 @@ Response message for adding a chunk.
 
 
 
+<a name="ondewo.nlu.RagAddCrawlerResultsToDatasetsRequest"></a>
+
+### RagAddCrawlerResultsToDatasetsRequest
+Request message for adding crawler output to one or more datasets.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  | Required. The agent that owns the crawler. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| language_code | [string](#string) |  | Required. The language of the project to use. |
+| crawler_names | [string](#string) | repeated | Required. Resource names of crawlers whose results should be imported. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre> |
+| crawler_result_names | [string](#string) | repeated | Required. Resource names of crawler results to import. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawler_results/&lt;crawler_result_uuid&gt;</code></pre> |
+| dataset_ids | [string](#string) | repeated | Required. Dataset IDs to receive the imported crawler outputs.
+
+Example: <pre><code>crawler_names = ["projects/p/agent/crawlers/c1"] crawler_result_names = ["projects/p/agent/crawler_results/r1", "projects/p/agent/crawler_results/r2"] dataset_ids = ["dataset-a", "dataset-b"]</code></pre> |
+
+
+
+
+
+
 <a name="ondewo.nlu.RagAgent"></a>
 
 ### RagAgent
@@ -7226,6 +7299,402 @@ Response message for starting RAPTOR construction.
 
 
 
+<a name="ondewo.nlu.RagCrawler"></a>
+
+### RagCrawler
+RagCrawler definition.
+
+This object represents a reusable crawler profile that can be run multiple times.
+It is modeled after Crawl4AI concepts:
+<ul>
+    <li>seed/sitemap discovery (<code>RagCrawlerSources</code>)</li>
+    <li>URL/domain constraints (<code>RagCrawlerFilters</code>)</li>
+    <li>authentication/session bootstrap (<code>RagCrawlerAuth</code>, <code>RagCrawlerBrowserConfig</code>)</li>
+    <li>run behavior and extraction output (<code>RagCrawlerConfig</code>)</li>
+</ul>
+
+The same crawler can be executed multiple times; each execution creates
+a separate crawler run and result set.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | Resource name of the RagCrawler Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre> Automatically generated in backend if empty |
+| display_name | [string](#string) |  | Optional. Human-readable crawler name shown in UIs/logs. Should be unique per agent to simplify operational troubleshooting. |
+| crawler_sources | [RagCrawlerSources](#ondewo.nlu.RagCrawlerSources) |  | Optional. Crawl entry points. Configure crawl entry points: URL seeds and/or sitemap sources. |
+| crawler_seed_url_filters | [RagCrawlerSeedUrlFilters](#ondewo.nlu.RagCrawlerSeedUrlFilters) |  | Optional. Seed URL filters. Filters are applied to the seed URLs before they are crawled. |
+| crawler_auth | [RagCrawlerAuth](#ondewo.nlu.RagCrawlerAuth) |  | Optional. Login/auth setup used before crawl requests. |
+| crawler_browser_config | [RagCrawlerBrowserConfig](#ondewo.nlu.RagCrawlerBrowserConfig) |  | Optional. Browser runtime setup (engine, viewport, cookies, proxy, headers). Roughly corresponds to Crawl4AI <code>BrowserConfig</code>. Use this when target sites require JS, custom headers, session cookies, or proxy routing. |
+| crawler_config | [RagCrawlerConfig](#ondewo.nlu.RagCrawlerConfig) |  | Optional. Crawl execution behavior and extraction settings. Roughly corresponds to Crawl4AI <code>CrawlerRunConfig</code>. |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
+| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
+| created_by | [string](#string) |  | User id in form of a valid UUID. |
+| modified_by | [string](#string) |  | User id in form of a valid UUID. |
+
+
+
+
+
+
+<a name="ondewo.nlu.RagCrawlerAuth"></a>
+
+### RagCrawlerAuth
+Authentication configuration.
+
+Supports both browser/form login and HTTP auth patterns used by Crawl4AI
+pipelines when crawling protected content.
+HTTP Auth is used on all pages of the sources, while html_auth is a separate authentication flow used in the beginning of the crawl
+to extract the cookies. This is done through a login screen. If HTTP Auth is set, this would ALSO be used on the HTML auth page,
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| http_auth | [RagCrawlerHttpAuth](#ondewo.nlu.RagCrawlerHttpAuth) |  | Optional. HTTP Basic auth settings. |
+| html_auth | [RagCrawlerHtmlAuth](#ondewo.nlu.RagCrawlerHtmlAuth) |  | Optional. Form/HTML login selector and credential settings. |
+
+
+
+
+
+
+<a name="ondewo.nlu.RagCrawlerBrowserConfig"></a>
+
+### RagCrawlerBrowserConfig
+Browser runtime configuration.
+
+This block maps closely to Crawl4AI BrowserConfig and controls browser
+process setup (engine, headless mode, viewport, context, proxy, cookies,
+user-agent behavior, and launch arguments).
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| crawler_headers | [google.protobuf.Struct](#google.protobuf.Struct) | repeated | Optional. HTTP headers sent on page/resource requests. Repeated entries allow duplicate header names and preserve order. |
+| crawler_cookies | [RagCrawlerCookie](#ondewo.nlu.RagCrawlerCookie) | repeated | Optional. Initial cookies. |
+
+
+
+
+
+
+<a name="ondewo.nlu.RagCrawlerConcurrencyConfig"></a>
+
+### RagCrawlerConcurrencyConfig
+Concurrency and pacing controls for crawler runs.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| max_concurrent_requests | [int32](#int32) |  | Optional. Max number of concurrent in-flight requests/pages. Increase for throughput; reduce for fragile sites/rate limits. |
+
+
+
+
+
+
+<a name="ondewo.nlu.RagCrawlerConfig"></a>
+
+### RagCrawlerConfig
+Crawl run behavior.
+
+This block controls scheduling, traversal, extraction outputs, retries,
+diagnostics capture, and deep crawling options for each crawler run.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| concurrency_config | [RagCrawlerConcurrencyConfig](#ondewo.nlu.RagCrawlerConcurrencyConfig) |  | Optional. Concurrency and pacing controls for crawler requests. |
+| deep_crawler_config | [RagCrawlerDeepCrawlerConfig](#ondewo.nlu.RagCrawlerDeepCrawlerConfig) |  | Optional. Deep crawler behavior (enable + depth/pages/scoring/filter chain). |
+| output_config | [RagCrawlerResultsConfig](#ondewo.nlu.RagCrawlerResultsConfig) |  | Optional. Structured output configuration (format + metadata policy). |
+
+
+
+
+
+
+<a name="ondewo.nlu.RagCrawlerContentResult"></a>
+
+### RagCrawlerContentResult
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| metadata | [google.protobuf.Struct](#google.protobuf.Struct) |  | Optional. Extracted page metadata. Includes only fields configured in <code>crawler_config.output_config.metadata.fields</code>. |
+| markdown | [string](#string) |  | Optional. Extracted markdown output. |
+
+
+
+
+
+
+<a name="ondewo.nlu.RagCrawlerCookie"></a>
+
+### RagCrawlerCookie
+Cookie representation for initial browser session state.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| cookie_name | [string](#string) |  | Required. Cookie name. |
+| cookie_value | [string](#string) |  | Required. Cookie value. |
+| cookie_domain | [string](#string) |  | Optional. Cookie domain. |
+
+
+
+
+
+
+<a name="ondewo.nlu.RagCrawlerDeepCrawlerConfig"></a>
+
+### RagCrawlerDeepCrawlerConfig
+Deep crawler options grouped under one config node.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| is_active | [bool](#bool) |  | Optional. Enable deep crawler behavior (link following beyond seeds). Default <code>false</code>. If <code>false</code>, <code>config</code> is ignored. |
+| crawl_strategy | [RagCrawlerCrawlStrategy](#ondewo.nlu.RagCrawlerCrawlStrategy) |  | Optional. Crawl traversal strategy. BFS is often best for broad site coverage; DFS for deep section traversal. Default <code>RAG_CRAWLER_CRAWL_STRATEGY_BFS</code>. |
+| max_depth | [int32](#int32) |  | Optional. Maximum link depth from seed URLs. <code>0</code> usually means only seed pages. |
+| max_pages | [int32](#int32) |  | Optional. Hard cap on total processed pages for this run. |
+| deep_crawler_filters | [RagCrawlerFilters](#ondewo.nlu.RagCrawlerFilters) |  | Optional. URL and domain restrictions. |
+
+
+
+
+
+
+<a name="ondewo.nlu.RagCrawlerDiagnosticsConfig"></a>
+
+### RagCrawlerDiagnosticsConfig
+Diagnostics capture toggles.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| ssl_certificate | [bool](#bool) |  | Optional. Collect SSL certificate details for HTTPS targets. |
+| network_requests | [bool](#bool) |  | Optional. Capture browser network events for diagnostics. |
+| console_messages | [bool](#bool) |  | Optional. Capture browser console messages for diagnostics. |
+
+
+
+
+
+
+<a name="ondewo.nlu.RagCrawlerExecutionInfo"></a>
+
+### RagCrawlerExecutionInfo
+Consolidated diagnostics and HTTP execution metadata for a crawl result.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| ssl_certificate | [google.protobuf.Struct](#google.protobuf.Struct) |  | Optional. SSL certificate details. |
+| success | [bool](#bool) |  | Optional. Crawl status flag. |
+| error_message | [string](#string) |  | Optional. Error details if crawl failed. |
+
+
+
+
+
+
+<a name="ondewo.nlu.RagCrawlerFilters"></a>
+
+### RagCrawlerFilters
+URL and domain restrictions.
+
+Filters are evaluated during link discovery/scheduling and help avoid
+crawling irrelevant, duplicate, or unsafe sections (auth/logout pages,
+marketing subdomains, binary downloads, etc.).
+These include domains to be excluded in the sources (e.g. through sitemaps or seed URLs)
+and domains to be excluded in the deep crawl or extraction of pages to be crawled.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| allowed_domains | [string](#string) | repeated | Optional. Domain allow-list (host-level gating). |
+| disallowed_domains | [string](#string) | repeated | Optional. Domain block-list. |
+| allow_internal_links | [bool](#bool) |  | Optional. Include internal links. |
+| allow_external_links | [bool](#bool) |  | Optional. Exclude external links. |
+| allow_social_media_links | [bool](#bool) |  | Optional. Include social media links. |
+
+
+
+
+
+
+<a name="ondewo.nlu.RagCrawlerHtmlAuth"></a>
+
+### RagCrawlerHtmlAuth
+Form/HTML login configuration.
+
+Selector types and selector strings identify login form fields in the page
+DOM. Credentials are then filled before form submission.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| html_auth_base_url | [string](#string) |  | Optional. Base URL used for auth/login navigation. |
+| html_auth_username_selector_type | [RagCrawlerSelectorType](#ondewo.nlu.RagCrawlerSelectorType) |  | Optional. Username field selector type. |
+| html_auth_username_selector | [string](#string) |  | Optional. Username field selector value. |
+| html_auth_username | [string](#string) |  | Optional. Username credential. |
+| html_auth_password_selector_type | [RagCrawlerSelectorType](#ondewo.nlu.RagCrawlerSelectorType) |  | Optional. Password field selector type. |
+| html_auth_password_selector | [string](#string) |  | Optional. Password field selector value. |
+| html_auth_password | [string](#string) |  | Optional. Password credential. |
+
+
+
+
+
+
+<a name="ondewo.nlu.RagCrawlerHttpAuth"></a>
+
+### RagCrawlerHttpAuth
+HTTP Basic authentication settings.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| http_auth_username | [string](#string) |  | HTTP Basic Authentication username. |
+| http_auth_password | [string](#string) |  | HTTP Basic Authentication password. |
+| http_auth_user_agent | [string](#string) |  | Optional. User-Agent sent with basic-auth requests. |
+
+
+
+
+
+
+<a name="ondewo.nlu.RagCrawlerInteractionConfig"></a>
+
+### RagCrawlerInteractionConfig
+Wait/scroll/DOM interaction settings.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| wait_for | [string](#string) |  | Optional. Wait condition for the page to be loaded. |
+| wait_for_timeout | [int32](#int32) |  | Optional. Timeout in milliseconds for the wait condition. |
+
+
+
+
+
+
+<a name="ondewo.nlu.RagCrawlerMetaDataExtractor"></a>
+
+### RagCrawlerMetaDataExtractor
+Metadata extractor configuration.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| type | [RagCrawlerMetaDataExtractorType](#ondewo.nlu.RagCrawlerMetaDataExtractorType) |  | Optional. Regex pattern to match metadata field names. |
+| value | [string](#string) |  | Optional. Value to extract (e.g. regex pattern, fixed value, CSS selector, XPath selector, ID selector). |
+| key | [string](#string) |  | Optional. Metadata field name to extract (e.g. url, title, description, author, keywords, tags, created_date, modified_date, scraped_at). |
+
+
+
+
+
+
+<a name="ondewo.nlu.RagCrawlerResult"></a>
+
+### RagCrawlerResult
+Crawler result entity.
+
+Each result corresponds to one crawled URL in a crawler run and includes
+extracted content, metadata, diagnostics, and optional binary artifacts.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | Resource name of the crawler result. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawler_results/&lt;crawler_result_uuid&gt;</code></pre> |
+| crawler_name | [string](#string) |  | Resource name of the source crawler profile. |
+| operation_name | [string](#string) |  | Resource name of the crawler run that produced this result. |
+| source_url | [string](#string) |  | URL this content came from. |
+| file_resource | [FileResource](#ondewo.nlu.FileResource) |  | Classified primary file resource built from source URL and detected MIME/type. If its a HTML page, it will be stored in the DocumentFileResource Bytes. See FileResource Documentation for all other file types. |
+| last_crawled_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Timestamp when this URL was last processed by crawler. |
+| content_result | [RagCrawlerContentResult](#ondewo.nlu.RagCrawlerContentResult) |  | Optional. Consolidated extracted content for this page. |
+| page_last_updated_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Optional. Timestamp when source page was last updated. Source precedence: HTTP Last-Modified header, then sitemap <lastmod> fallback. |
+
+
+
+
+
+
+<a name="ondewo.nlu.RagCrawlerResultsConfig"></a>
+
+### RagCrawlerResultsConfig
+Structured output configuration.
+
+Use this block to define result payload shape and metadata behavior,
+similar to Crawl4AI markdown/output-generation toggles.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| inject_frontmatter | [bool](#bool) |  | Optional. Inject YAML frontmatter into markdown output. If the content is HTML based, it will automatically be converted to markdown. Optionally, you can inject YAML frontmatter into the markdown output. Default <code>true</code>. |
+| meta_data_extractors | [RagCrawlerMetaDataExtractor](#ondewo.nlu.RagCrawlerMetaDataExtractor) | repeated | Optional. Metadata extractors. |
+
+
+
+
+
+
+<a name="ondewo.nlu.RagCrawlerRetryConfig"></a>
+
+### RagCrawlerRetryConfig
+Timeout settings for crawler operations.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| page_load_timeout_seconds | [int32](#int32) |  | Optional. Page load/render timeout in seconds. |
+| retry_max_attempts | [int32](#int32) |  | Optional. Maximum retry attempts per page source. |
+
+
+
+
+
+
+<a name="ondewo.nlu.RagCrawlerSeedUrlFilters"></a>
+
+### RagCrawlerSeedUrlFilters
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| allowed_regex | [string](#string) | repeated | Optional. Regex allow-list for full URLs. |
+| disallowed_regex | [string](#string) | repeated | Optional. Regex block-list for full URLs. |
+| allowed_domains | [string](#string) | repeated | Optional. Domain allow-list (host-level gating). |
+| disallowed_domains | [string](#string) | repeated | Optional. Domain block-list. |
+
+
+
+
+
+
+<a name="ondewo.nlu.RagCrawlerSources"></a>
+
+### RagCrawlerSources
+Crawl entry points.
+
+Both inputs can be provided at the same time:
+- Sitemaps are expanded into a crawl URL list (in discovery order)
+- Seed URLs are appended afterwards (in the order provided)
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| urls | [string](#string) | repeated | Direct seed URLs to enqueue as starting points. |
+| sitemaps | [string](#string) | repeated | Sitemap URLs used for URL discovery. Typical values are <code>/sitemap.xml</code> or sitemap index files. |
+
+
+
+
+
+
 <a name="ondewo.nlu.RagCreateAgentRequest"></a>
 
 ### RagCreateAgentRequest
@@ -7285,6 +7754,24 @@ Request message for creating a new chat session.
 | chat_id | [string](#string) |  | Required. Parent chat assistant UUID. |
 | name | [string](#string) |  | Optional. Maximum length 255. Session name (default: <code>"New session"</code>). |
 | user_id | [string](#string) |  | Optional. Maximum length 255. User identifier for tracking conversation ownership. |
+
+
+
+
+
+
+<a name="ondewo.nlu.RagCreateCrawlerRequest"></a>
+
+### RagCreateCrawlerRequest
+Request message for creating a crawler for a dataset of an agent.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  | Required. The agent to create crawlers for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| language_code | [string](#string) |  | Required. The language of the project to use. |
+| crawler | [RagCrawler](#ondewo.nlu.RagCrawler) |  | Required. Crawler definition to create. If <code>crawler.name</code> is empty, backend will generate it. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre> |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which RagCrawler fields get returned. |
 
 
 
@@ -7421,6 +7908,112 @@ Request message for deleting chat sessions.
 | chat_id | [string](#string) |  | Required. Chat assistant UUID. |
 | ids | [string](#string) | repeated | Optional. Session UUIDs to delete. Specify either this field or <code>delete_all</code>. |
 | delete_all | [bool](#bool) | optional | Optional. Delete all sessions for this chat (needed because protobuf cannot represent <code>ids=null</code>). |
+
+
+
+
+
+
+<a name="ondewo.nlu.RagDeleteCrawlerRequest"></a>
+
+### RagDeleteCrawlerRequest
+Request message for deleting a crawler of a dataset for the specified agent.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | Resource name of the RagCrawler Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre> |
+| parent | [string](#string) |  | Required. The agent owning the crawler. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| language_code | [string](#string) |  | Required. The language of the project to use. |
+
+
+
+
+
+
+<a name="ondewo.nlu.RagDeleteCrawlerResponse"></a>
+
+### RagDeleteCrawlerResponse
+Response message for deleting a crawler of a dataset for the specified agent.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | Resource name of the RagCrawler Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre> |
+| error_message | [string](#string) |  | Error message if there are any. |
+
+
+
+
+
+
+<a name="ondewo.nlu.RagDeleteCrawlerRunsRequest"></a>
+
+### RagDeleteCrawlerRunsRequest
+Request message for deleting crawler runs.
+
+Deletion candidates are the union of:
+- explicit run names in <code>crawler_run_names</code>
+- all runs belonging to crawlers listed in <code>crawler_names</code>
+
+If both lists are empty, the call is a no-op.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  | Required. The agent that owns the crawler runs. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| language_code | [string](#string) |  | Required. The language of the project to use. |
+| crawler_run_names | [string](#string) | repeated | Optional. Explicit crawler run names to delete. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawler_runs/&lt;crawler_run_uuid&gt;</code></pre> |
+| crawler_names | [string](#string) | repeated | Optional. Crawler names whose runs should be deleted. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre> |
+
+
+
+
+
+
+<a name="ondewo.nlu.RagDeleteCrawlerRunsResponse"></a>
+
+### RagDeleteCrawlerRunsResponse
+Response message for deleting crawler runs.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| deleted_count | [int32](#int32) |  | Number of deleted crawler runs. |
+| deleted_run_names | [string](#string) | repeated | Resource names of deleted crawler runs. |
+
+
+
+
+
+
+<a name="ondewo.nlu.RagDeleteCrawlersRequest"></a>
+
+### RagDeleteCrawlersRequest
+Request message for deleting multiple crawlers of a dataset for the specified agent.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  | Required. The agent owning the crawlers. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| language_code | [string](#string) |  | Required. The language of the project to use. |
+| names | [string](#string) | repeated | Optional. Crawler resource names to delete. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre> |
+
+
+
+
+
+
+<a name="ondewo.nlu.RagDeleteCrawlersResponse"></a>
+
+### RagDeleteCrawlersResponse
+Response message for deleting multiple crawlers of a dataset for the specified agent.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| delete_crawler_responses | [RagDeleteCrawlerResponse](#ondewo.nlu.RagDeleteCrawlerResponse) | repeated | responses to delete crawlers |
+| error_message | [string](#string) |  | error message if there are any |
 
 
 
@@ -7608,6 +8201,142 @@ File metadata for streaming uploads/downloads.
 
 
 
+<a name="ondewo.nlu.RagGetCrawlerAttachedDatasetsRequest"></a>
+
+### RagGetCrawlerAttachedDatasetsRequest
+Request message for getting datasets attached to a crawler.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  | Required. The agent owning the crawler. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| language_code | [string](#string) |  | Required. The language of the project to use. |
+| crawler_name | [string](#string) |  | Required. Resource name of the crawler. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre> |
+| page_size | [int32](#int32) |  | Optional. Maximum number of datasets to return.
+
+If unset or non-positive, backend default is used. |
+| page_token | [string](#string) |  | Optional. Opaque pagination cursor from a previous response. Leave empty for the first page. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which <code>RagDataset</code> fields get returned. |
+
+
+
+
+
+
+<a name="ondewo.nlu.RagGetCrawlerAttachedDatasetsResponse"></a>
+
+### RagGetCrawlerAttachedDatasetsResponse
+Response message for getting datasets attached to a crawler.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| datasets | [RagDataset](#ondewo.nlu.RagDataset) | repeated | Datasets attached to the crawler. |
+| next_page_token | [string](#string) |  | Opaque pagination cursor for the next page. Pass this value unchanged as request <code>page_token</code>. Empty means no further pages. |
+
+
+
+
+
+
+<a name="ondewo.nlu.RagGetCrawlerRequest"></a>
+
+### RagGetCrawlerRequest
+Request message for getting a crawler.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | Required. Resource name of the RagCrawler. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre> |
+| parent | [string](#string) |  | Required. The agent owning the crawler. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| language_code | [string](#string) |  | Required. The language of the project to use. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which RagCrawler fields get returned. |
+
+
+
+
+
+
+<a name="ondewo.nlu.RagGetCrawlerResultRequest"></a>
+
+### RagGetCrawlerResultRequest
+Request message for getting a single crawler result from a crawler run.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  | Required. The agent that owns the crawler run. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| language_code | [string](#string) |  | Required. The language of the project to use. |
+| operation_name | [string](#string) |  | Required. Resource name of the crawler run. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawler_runs/&lt;crawler_run_uuid&gt;</code></pre> |
+| url | [string](#string) |  | Required. Exact URL of the crawler result to retrieve. |
+
+
+
+
+
+
+<a name="ondewo.nlu.RagGetCrawlerResultsRequest"></a>
+
+### RagGetCrawlerResultsRequest
+Request message for getting crawler results of a crawler run.
+
+Results are returned in pages. Request the first page with an empty
+<code>page_token</code>, then continue with each response <code>next_page_token</code>.
+
+Example:
+<pre><code>RagGetCrawlerResults(run_name, page_token="")
+-> next_page_token="..."
+RagGetCrawlerResults(run_name, page_token="...")
+</code></pre>
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  | Required. The agent that owns the crawler run. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| language_code | [string](#string) |  | Required. The language of the project to use. |
+| operation_name | [string](#string) |  | Required. Resource name of the crawler run. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawler_runs/&lt;crawler_run_uuid&gt;</code></pre> |
+| page_token | [string](#string) |  | Optional. Opaque pagination cursor from a previous response. Leave empty for the first page. |
+| url_query | [string](#string) |  | Optional. Filter by URL substring. |
+
+
+
+
+
+
+<a name="ondewo.nlu.RagGetCrawlerResultsResponse"></a>
+
+### RagGetCrawlerResultsResponse
+Response message for getting crawler results.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| crawler_results | [RagCrawlerResult](#ondewo.nlu.RagCrawlerResult) | repeated | List of crawler results for the crawler run. |
+| next_page_token | [string](#string) |  | Opaque pagination cursor for the next page. Pass this value unchanged as request <code>page_token</code>. Empty means no further pages. |
+| total_size | [int32](#int32) |  | Total number of crawler results available after applying request filters (for example <code>url_query</code>). |
+
+
+
+
+
+
+<a name="ondewo.nlu.RagGetCrawlerRunRequest"></a>
+
+### RagGetCrawlerRunRequest
+Request message for getting a crawler run.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  | Required. The agent that owns the crawler run. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| language_code | [string](#string) |  | Required. The language of the project to use. |
+| crawler_run_name | [string](#string) |  | Required. Resource name of the crawler run. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawler_runs/&lt;crawler_run_uuid&gt;</code></pre> |
+
+
+
+
+
+
 <a name="ondewo.nlu.RagGetKnowledgeGraphResponse"></a>
 
 ### RagGetKnowledgeGraphResponse
@@ -7786,6 +8515,80 @@ Response message for listing chunks.
 
 
 
+<a name="ondewo.nlu.RagListCrawlerRunsRequest"></a>
+
+### RagListCrawlerRunsRequest
+Request message for listing crawler runs.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  | Required. The agent that owns the crawler runs. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| language_code | [string](#string) |  | Required. The language of the project to use. |
+| crawler_name | [string](#string) |  | Optional. Restrict to one crawler. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre> |
+| page_token | [string](#string) |  | Optional. Opaque pagination cursor from a previous list response. Leave empty for the first page. |
+| state | [OperationMetadata.Status](#ondewo.nlu.OperationMetadata.Status) |  | Optional. Filter by operation state. |
+| orderby | [string](#string) |  | Optional. Sort field (default: <code>created_at</code>). |
+| sorting_mode | [SortingMode](#ondewo.nlu.SortingMode) | optional | Optional. Sort descending. |
+
+
+
+
+
+
+<a name="ondewo.nlu.RagListCrawlerRunsResponse"></a>
+
+### RagListCrawlerRunsResponse
+Response message for listing crawler runs.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| crawler_runs | [Operation](#ondewo.nlu.Operation) | repeated | List of crawler run operations. |
+| next_page_token | [string](#string) |  | Opaque pagination cursor for the next page. Pass this value unchanged as request <code>page_token</code>. Empty means no further pages. |
+
+
+
+
+
+
+<a name="ondewo.nlu.RagListCrawlersRequest"></a>
+
+### RagListCrawlersRequest
+Request message for listing crawlers of a dataset for the specified agent.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  | Required. The agent to list crawlers for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| language_code | [string](#string) |  | Required. The language of the agent of the dataset. |
+| page_token | [string](#string) |  | Optional. Opaque pagination cursor from a previous list response. Leave empty for the first page. |
+| dataset_name | [string](#string) |  | Optional. Filter by dataset name. |
+| crawler_name | [string](#string) |  | Optional. Filter by crawler name. |
+| orderby | [string](#string) |  | Optional. Sort field (default: <code>create_time</code>). |
+| sorting_mode | [SortingMode](#ondewo.nlu.SortingMode) | optional | Optional. Sort descending. |
+
+
+
+
+
+
+<a name="ondewo.nlu.RagListCrawlersResponse"></a>
+
+### RagListCrawlersResponse
+Response message for listing crawlers.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| crawlers | [RagCrawler](#ondewo.nlu.RagCrawler) | repeated | List of crawlers. |
+| next_page_token | [string](#string) |  | Opaque pagination cursor for the next page. Pass this value unchanged as request <code>page_token</code>. Empty means no further pages. |
+
+
+
+
+
+
 <a name="ondewo.nlu.RagListDatasetsRequest"></a>
 
 ### RagListDatasetsRequest
@@ -7798,7 +8601,7 @@ Request message for listing datasets with pagination and filtering.
 | language_code | [string](#string) |  | Required. The language of the project to use. |
 | page_token | [string](#string) |  | Optional. Specifies which page to return. The page token is a string of the format <pre><code>current_index-&lt;idx&gt;--page_size-&lt;size&gt;</code></pre>
 
-<ul> <li><code>&lt;size&gt;</code> must be an integer &geq; <code>1</code>. The maximum number of results to return.</li> <li><code>&lt;idx&gt;</code> must be an interger &geq; <code>0</code>. The start index in the requested list, starting from which a maximum of <code>&lt;size&gt;</code> elements are returned.</li> </ul>
+<ul> <li><code>&lt;size&gt;</code> must be an integer &geq; <code>1</code>. The maximum number of results to return.</li> <li><code>&lt;idx&gt;</code> must be an integer &geq; <code>0</code>. The start index in the requested list, starting from which a maximum of <code>&lt;size&gt;</code> elements are returned.</li> </ul>
 
 <em>Important note</em>: The <code>&lt;idx&gt;</code> is the index in the requested sequence NOT the page number. E.g. if the requested list has 100 elements then <code>current_index-5--page_size-15</code> returns the elements at index 5-19 and not the 5-th page of 15 elements. <br> Both <code>current_index-&lt;idx&gt;</code> and <code>page_size-&lt;size&gt;</code> are optional and default to <code>0</code> and <code>10</code> respectively. The following are all valid <code>page_token</code>s
 
@@ -7828,7 +8631,7 @@ Request message for listing documents in a dataset with pagination and filtering
 | name | [string](#string) |  | Optional. Filter by document name (exact match). |
 | page_token | [string](#string) |  | Optional. Specifies which page to return. The page token is a string of the format <pre><code>current_index-&lt;idx&gt;--page_size-&lt;size&gt;</code></pre>
 
-<ul> <li><code>&lt;size&gt;</code> must be an integer &geq; <code>1</code>. The maximum number of results to return.</li> <li><code>&lt;idx&gt;</code> must be an interger &geq; <code>0</code>. The start index in the requested list, starting from which a maximum of <code>&lt;size&gt;</code> elements are returned.</li> </ul>
+<ul> <li><code>&lt;size&gt;</code> must be an integer &geq; <code>1</code>. The maximum number of results to return.</li> <li><code>&lt;idx&gt;</code> must be an integer &geq; <code>0</code>. The start index in the requested list, starting from which a maximum of <code>&lt;size&gt;</code> elements are returned.</li> </ul>
 
 <em>Important note</em>: The <code>&lt;idx&gt;</code> is the index in the requested sequence NOT the page number. E.g. if the requested list has 100 elements then <code>current_index-5--page_size-15</code> returns the elements at index 5-19 and not the 5-th page of 15 elements.
 
@@ -8156,6 +8959,27 @@ Request message for removing one or more chunks from a document.
 
 
 
+<a name="ondewo.nlu.RagRemoveCrawlerResultsFromDatasetsRequest"></a>
+
+### RagRemoveCrawlerResultsFromDatasetsRequest
+Request message for removing previously imported crawler output from one or more datasets.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  | Required. The agent that owns the crawler. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| language_code | [string](#string) |  | Required. The language of the project to use. |
+| crawler_name | [string](#string) |  | Required. Resource names of crawlers whose results should be removed. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre> |
+| crawler_result_names | [string](#string) | repeated | Required. Resource names of crawler results to remove. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawler_results/&lt;crawler_result_uuid&gt;</code></pre> |
+| dataset_ids | [string](#string) | repeated | Required. Dataset IDs from which the crawler outputs should be removed.
+
+Example: <pre><code>crawler_names = ["projects/p/agent/crawlers/c1"] crawler_result_names = ["projects/p/agent/crawler_results/r1", "projects/p/agent/crawler_results/r2"] dataset_ids = ["dataset-a", "dataset-b"]</code></pre> |
+
+
+
+
+
+
 <a name="ondewo.nlu.RagRetrievalRequest"></a>
 
 ### RagRetrievalRequest
@@ -8170,7 +8994,7 @@ Supports hybrid search combining vector similarity with keyword matching.
 | dataset_ids | [string](#string) | repeated | Required. Dataset IDs to search (all datasets must use the same embedding model). |
 | page_token | [string](#string) |  | Optional. Specifies which page to return. The page token is a string of the format <pre><code>current_index-&lt;idx&gt;--page_size-&lt;size&gt;</code></pre>
 
-<ul> <li><code>&lt;size&gt;</code> must be an integer &geq; <code>1</code>. The maximum number of results to return.</li> <li><code>&lt;idx&gt;</code> must be an interger &geq; <code>0</code>. The start index in the requested list, starting from which a maximum of <code>&lt;size&gt;</code> elements are returned.</li> </ul>
+<ul> <li><code>&lt;size&gt;</code> must be an integer &geq; <code>1</code>. The maximum number of results to return.</li> <li><code>&lt;idx&gt;</code> must be an integer &geq; <code>0</code>. The start index in the requested list, starting from which a maximum of <code>&lt;size&gt;</code> elements are returned.</li> </ul>
 
 <em>Important note</em>: The <code>&lt;idx&gt;</code> is the index in the requested sequence NOT the page number. E.g. if the requested list has 100 elements then <code>current_index-5--page_size-15</code> returns the elements at index 5-19 and not the 5-th page of 15 elements.
 
@@ -8203,6 +9027,59 @@ Response message for chunk retrieval.
 | doc_aggs | [RagDocAgg](#ondewo.nlu.RagDocAgg) | repeated | Statistics of the matched documents. |
 | total | [int32](#int32) |  | Total number of chunks matching the query (before pagination). |
 | next_page_token | [string](#string) |  | Page token string (following the format described in <code>RagRetrievalRequest</code>) for retrieving the next results page |
+
+
+
+
+
+
+<a name="ondewo.nlu.RagStartCrawlerRequest"></a>
+
+### RagStartCrawlerRequest
+Request message for running a crawler.
+
+This starts a long-running operation and returns immediately.
+Clients should poll operation status via <code>RagGetCrawlerRun</code>.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  | Required. The agent that owns the crawler. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| language_code | [string](#string) |  | Required. The language of the project to use. |
+| crawler_name | [string](#string) |  | Required. Resource name of the crawler to run. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre> |
+
+
+
+
+
+
+<a name="ondewo.nlu.RagStopCrawlerRequest"></a>
+
+### RagStopCrawlerRequest
+Request message for stopping a crawler run.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  | Required. The agent that owns the crawler run. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| language_code | [string](#string) |  | Required. The language of the project to use. |
+| name | [string](#string) |  | Required. Resource name of the crawler run. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawler_runs/&lt;crawler_run_uuid&gt;</code></pre> |
+
+
+
+
+
+
+<a name="ondewo.nlu.RagStopCrawlerResponse"></a>
+
+### RagStopCrawlerResponse
+Result of stopping a crawler run
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | Resource name of the crawler run that was stopped. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawler_runs/&lt;crawler_run_uuid&gt;</code></pre> |
+| error_message | [string](#string) |  | Error message if there are any; empty when the stop request was accepted successfully. |
 
 
 
@@ -8348,6 +9225,25 @@ Content changes trigger re-tokenization and re-generation of embeddings.
 
 
 
+<a name="ondewo.nlu.RagUpdateCrawlerRequest"></a>
+
+### RagUpdateCrawlerRequest
+Request message for updating a crawler (partial update).
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| crawler | [RagCrawler](#ondewo.nlu.RagCrawler) |  | Required. The crawler to update. Only configuration fields can be updated. The name field must be set and must match an existing crawler. Timestamps and audit fields are auto-managed by the service. |
+| parent | [string](#string) |  | Required. The agent owning the crawler. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| language_code | [string](#string) |  | Required. The language of the project to use. |
+| update_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. FieldMask to specify which fields to update. If not provided, all configuration fields in crawler are updated. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which crawler fields get returned. |
+
+
+
+
+
+
 <a name="ondewo.nlu.RagUpdateDatasetRequest"></a>
 
 ### RagUpdateDatasetRequest
@@ -8465,14 +9361,14 @@ Chunking method for documents. See <a href="https://ragflow.io/docs/dev/configur
 <a name="ondewo.nlu.RagComparisonOperator"></a>
 
 ### RagComparisonOperator
-Vaild metadata condition comparison operators
+Valid metadata condition comparison operators
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
 | RAG_COMPARISON_OPERATOR_CONTAINS | 0 | String representation of metadata field contains value.<br> If metadata field is a list, checks if the string representation of <em>any</em> field contains value. |
 | RAG_COMPARISON_OPERATOR_NOT_CONTAINS | 1 | String representation of metadata field does not contain value.<br> If metadata field is a list, checks if the string representation of <em>no</em> fields contains value. |
-| RAG_COMPARISON_OPERATOR_IN | 2 | Checks with Python's <code>in</code> opertor.<br> If metadata field is a list, <em>all</em> elements must satisfy the condition. |
-| RAG_COMPARISON_OPERATOR_NOT_IN | 3 | Checks with Python's <code>not in</code> opertor.<br> If metadata field is a list, <em>all</em> elements must satisfy the condition. |
+| RAG_COMPARISON_OPERATOR_IN | 2 | Checks with Python's <code>in</code> operator.<br> If metadata field is a list, <em>all</em> elements must satisfy the condition. |
+| RAG_COMPARISON_OPERATOR_NOT_IN | 3 | Checks with Python's <code>not in</code> operator.<br> If metadata field is a list, <em>all</em> elements must satisfy the condition. |
 | RAG_COMPARISON_OPERATOR_START_WITH | 4 | String representation fo metadata field starts with value.<br> If metadata field is a list, checks if the joined string of the string representations of all list elements starts with the value. |
 | RAG_COMPARISON_OPERATOR_ENDS_WITH | 5 | String representation fo metadata field ends with value.<br> If metadata field is a list, checks if the joined string of the string representations of all list elements ends with the value. |
 | RAG_COMPARISON_OPERATOR_EMPTY | 6 | Is empty (Python <em>falsy</em>). |
@@ -8483,6 +9379,81 @@ Vaild metadata condition comparison operators
 | RAG_COMPARISON_OPERATOR_LT | 11 | Less than. |
 | RAG_COMPARISON_OPERATOR_GEQ | 12 | Greater than or equal. |
 | RAG_COMPARISON_OPERATOR_LEQ | 13 | Less than or equal. |
+
+
+
+<a name="ondewo.nlu.RagCrawlerCacheMode"></a>
+
+### RagCrawlerCacheMode
+Cache mode for crawler runs.
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| RAG_CRAWLER_CACHE_MODE_ENABLED | 0 | Normal cache behavior (read/write). |
+| RAG_CRAWLER_CACHE_MODE_DISABLED | 1 | Disable all cache reads/writes. |
+| RAG_CRAWLER_CACHE_MODE_READ_ONLY | 2 | Read from cache only. |
+| RAG_CRAWLER_CACHE_MODE_WRITE_ONLY | 3 | Write to cache only. |
+| RAG_CRAWLER_CACHE_MODE_BYPASS | 4 | Bypass cache for this operation. |
+
+
+
+<a name="ondewo.nlu.RagCrawlerCrawlStrategy"></a>
+
+### RagCrawlerCrawlStrategy
+Crawl traversal strategy.
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| RAG_CRAWLER_CRAWL_STRATEGY_BFS | 0 | Breadth-first traversal. |
+| RAG_CRAWLER_CRAWL_STRATEGY_DFS | 1 | Depth-first traversal. |
+| RAG_CRAWLER_CRAWL_STRATEGY_BEST_FIRST | 2 | Best-first traversal based on relevance scoring. |
+
+
+
+<a name="ondewo.nlu.RagCrawlerFilterContentType"></a>
+
+### RagCrawlerFilterContentType
+Supported content types for deep-crawl content-type filters.
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| RAG_CRAWLER_FILTER_CONTENT_TYPE_UNSPECIFIED | 0 | Unspecified content type. |
+| RAG_CRAWLER_FILTER_CONTENT_TYPE_TEXT_HTML | 1 | HTML documents. |
+| RAG_CRAWLER_FILTER_CONTENT_TYPE_APPLICATION_JSON | 2 | JSON payloads. |
+| RAG_CRAWLER_FILTER_CONTENT_TYPE_APPLICATION_XML | 3 | XML payloads. |
+| RAG_CRAWLER_FILTER_CONTENT_TYPE_TEXT_PLAIN | 4 | Plain text documents. |
+| RAG_CRAWLER_FILTER_CONTENT_TYPE_APPLICATION_PDF | 5 | PDF documents. |
+| RAG_CRAWLER_FILTER_CONTENT_TYPE_APPLICATION_POWERPOINT | 6 | PowerPoint documents. |
+| RAG_CRAWLER_FILTER_CONTENT_TYPE_APPLICATION_EXCEL | 7 | Excel documents. |
+| RAG_CRAWLER_FILTER_CONTENT_TYPE_APPLICATION_WORD | 8 | Word documents. |
+
+
+
+<a name="ondewo.nlu.RagCrawlerMetaDataExtractorType"></a>
+
+### RagCrawlerMetaDataExtractorType
+
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| RAG_CRAWLER_META_DATA_EXTRACTOR_TYPE_REGEX | 0 | Regex pattern. |
+| RAG_CRAWLER_META_DATA_EXTRACTOR_TYPE_FIXED_VALUE | 1 | Fixed value. |
+| RAG_CRAWLER_META_DATA_EXTRACTOR_TYPE_CSS_SELECTOR | 2 | CSS selector. |
+| RAG_CRAWLER_META_DATA_EXTRACTOR_TYPE_XPATH_SELECTOR | 3 | XPath selector. |
+| RAG_CRAWLER_META_DATA_EXTRACTOR_TYPE_ID_SELECTOR | 4 | ID selector. |
+
+
+
+<a name="ondewo.nlu.RagCrawlerSelectorType"></a>
+
+### RagCrawlerSelectorType
+
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| RAG_CRAWLER_SELECTOR_TYPE_ID | 0 | ID selector. |
+| RAG_CRAWLER_SELECTOR_TYPE_CSS_CLASS | 1 | CSS class selector. |
+| RAG_CRAWLER_SELECTOR_TYPE_XPATH | 2 | XPath selector. |
 
 
 
@@ -8640,10 +9611,26 @@ Covers all endpoints of the <a href="https://github.com/ondewo/ragflow">RAGFlow<
 | RagDeleteChatSessions | [RagDeleteChatSessionsRequest](#ondewo.nlu.RagDeleteChatSessionsRequest) | [RagPartialSuccess](#ondewo.nlu.RagPartialSuccess) | Delete one or more chat sessions (batch operation).<br> If ids empty, deletes all sessions for the chat. |
 | RagListAgentSessions | [RagListAgentSessionsRequest](#ondewo.nlu.RagListAgentSessionsRequest) | [RagAgentSessionList](#ondewo.nlu.RagAgentSessionList) | List sessions for an agent.<br> Can optionally exclude DSL from response for performance. |
 | RagDeleteAgentSessions | [RagDeleteAgentSessionsRequest](#ondewo.nlu.RagDeleteAgentSessionsRequest) | [RagPartialSuccess](#ondewo.nlu.RagPartialSuccess) | Delete one or more agent sessions (batch operation).<br> If ids empty, deletes all sessions for the agent. |
-| RagChatCompletion | [RagChatCompletionRequest](#ondewo.nlu.RagChatCompletionRequest) | [RagChatCompletionResponse](#ondewo.nlu.RagChatCompletionResponse) stream | Generate chat completion with RAG (server streaming).<br> This endpoint either <ul> <li>creates a new session if no <code>session_id</code> is provided and <code>messages</code> contains only one message</li> <li>uses an exising session if <code>session_id</code> is provided (ignores message history in <code>messages</code>)</li> <li>continues a conversion with the message history from <code>messages</code> without creating a session if no <code>session_id</code> is provided and <code>messages</code> contains multiple messages</li> </ul> At this point the endpoint is not fully implemented and does not support sessions. This means the full message history must always be passed. |
+| RagChatCompletion | [RagChatCompletionRequest](#ondewo.nlu.RagChatCompletionRequest) | [RagChatCompletionResponse](#ondewo.nlu.RagChatCompletionResponse) stream | Generate chat completion with RAG (server streaming).<br> This endpoint either <ul> <li>creates a new session if no <code>session_id</code> is provided and <code>messages</code> contains only one message</li> <li>uses an existing session if <code>session_id</code> is provided (ignores message history in <code>messages</code>)</li> <li>continues a conversion with the message history from <code>messages</code> without creating a session if no <code>session_id</code> is provided and <code>messages</code> contains multiple messages</li> </ul> At this point the endpoint is not fully implemented and does not support sessions. This means the full message history must always be passed. |
 | RagAgentCompletion | [RagAgentCompletionRequest](#ondewo.nlu.RagAgentCompletionRequest) | [RagAgentCompletionResponse](#ondewo.nlu.RagAgentCompletionResponse) stream | Generate agent completion (server streaming).<br> Filters events to only return message-related events. |
 | RagAsk | [RagAskRequest](#ondewo.nlu.RagAskRequest) | [RagAskResponse](#ondewo.nlu.RagAskResponse) stream | Ask a question across datasets without a chat assistant.<br> Streaming only. All datasets must have parsed files. |
 | RagRelatedQuestions | [RagRelatedQuestionsRequest](#ondewo.nlu.RagRelatedQuestionsRequest) | [RagRelatedQuestionsResponse](#ondewo.nlu.RagRelatedQuestionsResponse) | Generate related search terms for a question.<br> Returns 5-10 suggestions considering industry context. |
+| RagCreateCrawler | [RagCreateCrawlerRequest](#ondewo.nlu.RagCreateCrawlerRequest) | [RagCrawler](#ondewo.nlu.RagCrawler) | Create a rag crawler for a dataset of an agent. |
+| RagGetCrawler | [RagGetCrawlerRequest](#ondewo.nlu.RagGetCrawlerRequest) | [RagCrawler](#ondewo.nlu.RagCrawler) | Get a rag crawler by resource name. |
+| RagListCrawlers | [RagListCrawlersRequest](#ondewo.nlu.RagListCrawlersRequest) | [RagListCrawlersResponse](#ondewo.nlu.RagListCrawlersResponse) | List rag crawlers of a dataset for the specified agent. |
+| RagUpdateCrawler | [RagUpdateCrawlerRequest](#ondewo.nlu.RagUpdateCrawlerRequest) | [RagCrawler](#ondewo.nlu.RagCrawler) | Update a rag crawler (partial update of configuration fields). |
+| RagDeleteCrawler | [RagDeleteCrawlerRequest](#ondewo.nlu.RagDeleteCrawlerRequest) | [RagDeleteCrawlerResponse](#ondewo.nlu.RagDeleteCrawlerResponse) | Delete a rag crawler of a dataset for the specified agent. |
+| RagStartCrawler | [RagStartCrawlerRequest](#ondewo.nlu.RagStartCrawlerRequest) | [Operation](#ondewo.nlu.Operation) | Run a crawler. |
+| RagStopCrawler | [RagStopCrawlerRequest](#ondewo.nlu.RagStopCrawlerRequest) | [RagStopCrawlerResponse](#ondewo.nlu.RagStopCrawlerResponse) | Stop a pending or running crawler run. |
+| RagGetCrawlerRun | [RagGetCrawlerRunRequest](#ondewo.nlu.RagGetCrawlerRunRequest) | [Operation](#ondewo.nlu.Operation) | Get a crawler run by resource name. |
+| RagListCrawlerRuns | [RagListCrawlerRunsRequest](#ondewo.nlu.RagListCrawlerRunsRequest) | [RagListCrawlerRunsResponse](#ondewo.nlu.RagListCrawlerRunsResponse) | List crawler runs for a crawler. |
+| RagDeleteCrawlerRuns | [RagDeleteCrawlerRunsRequest](#ondewo.nlu.RagDeleteCrawlerRunsRequest) | [RagDeleteCrawlerRunsResponse](#ondewo.nlu.RagDeleteCrawlerRunsResponse) | Delete crawler runs by explicit run names and/or crawler names. |
+| RagGetCrawlerResult | [RagGetCrawlerResultRequest](#ondewo.nlu.RagGetCrawlerResultRequest) | [RagCrawlerResult](#ondewo.nlu.RagCrawlerResult) | Get a single crawler result by crawler run resource name and URL. |
+| RagGetCrawlerResults | [RagGetCrawlerResultsRequest](#ondewo.nlu.RagGetCrawlerResultsRequest) | [RagGetCrawlerResultsResponse](#ondewo.nlu.RagGetCrawlerResultsResponse) | Get crawler results by crawler run resource name. |
+| RagAddCrawlerResultsToDatasets | [RagAddCrawlerResultsToDatasetsRequest](#ondewo.nlu.RagAddCrawlerResultsToDatasetsRequest) | [Operation](#ondewo.nlu.Operation) | Add rag crawler output to one or more datasets. |
+| RagRemoveCrawlerResultsFromDatasets | [RagRemoveCrawlerResultsFromDatasetsRequest](#ondewo.nlu.RagRemoveCrawlerResultsFromDatasetsRequest) | [Operation](#ondewo.nlu.Operation) | Remove previously imported crawler output from one or more datasets. |
+| RagGetCrawlerAttachedDatasets | [RagGetCrawlerAttachedDatasetsRequest](#ondewo.nlu.RagGetCrawlerAttachedDatasetsRequest) | [RagGetCrawlerAttachedDatasetsResponse](#ondewo.nlu.RagGetCrawlerAttachedDatasetsResponse) | Get datasets currently attached to a crawler. |
+| RagDeleteCrawlers | [RagDeleteCrawlersRequest](#ondewo.nlu.RagDeleteCrawlersRequest) | [RagDeleteCrawlersResponse](#ondewo.nlu.RagDeleteCrawlersResponse) | Delete multiple crawlers. |
 
  <!-- end services -->
 
