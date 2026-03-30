@@ -3133,12 +3133,9 @@ message RagCrawlerResult {
   // Optional. Consolidated extracted content for this page.
   RagCrawlerContentResult content_result = 7;
 
-  // Optional. Consolidated diagnostics and HTTP execution details.
-  RagCrawlerExecutionInfo execution_info = 8;
-
   // Optional. Timestamp when source page was last updated.
   // Source precedence: HTTP Last-Modified header, then sitemap <lastmod> fallback.
-  google.protobuf.Timestamp page_last_updated_date = 9;
+  google.protobuf.Timestamp page_last_updated_date = 8;
 }
 
 // Request message for running a crawler.
