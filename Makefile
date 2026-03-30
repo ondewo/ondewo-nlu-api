@@ -182,6 +182,8 @@ unrelease_to_github_via_docker_image: ## Unrelease from Github via docker
 		${IMAGE_UTILS_NAME} make login_to_gh delete_gh_release
 
 unrelease: build_utils_docker_image unrelease_to_github_via_docker_image ## Undo a release: delete the GitHub release, release branch, and release tag
+	-git branch -d "release/${ONDEWO_NLU_API_VERSION}"
+	-git tag -d "${ONDEWO_NLU_API_VERSION}"
 	@echo "Unrelease of ${ONDEWO_NLU_API_VERSION} complete"
 
 release_all_clients: ## Releases all NLU Clients
