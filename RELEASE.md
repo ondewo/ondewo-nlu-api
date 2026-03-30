@@ -2,17 +2,11 @@
 
 *****************
 
-## Release ONDEWO NLU API 7.0.0
+## Release ONDEWO NLU API 6.4.0
 
 ### Improvements
 
-* [[OND211-2330]](https://ondewo.atlassian.net/browse/OND211-2330) Added new `Rags` service with endpoints for
-accessing the new RAG functionality. This includes dataset and document management, document retrieval, and chat with a
-RAG enabled assistant. The endpoints mirror RAGFlow's HTTP API.
-* [[OND211-2352]](https://ondewo.atlassian.net/browse/OND211-2352) Added crawler endpoints: `RagCreateCrawler`,
-  `RagStartCrawler`, `RagDeleteCrawler`, and `RagListCrawlers`. Added `RagCrawler` message with full configuration
-  including `RagCrawlerSources`, `RagCrawlerUrlFilters`, `RagCrawlerAuth`, `RagCrawlerConfig`, `RagCrawlerRendering`,
-  `RagCrawlerOutput`, `RagCrawlerAntiBot`, and `RagCrawlerScheduling`
+* [[OND211-2330]](https://ondewo.atlassian.net/browse/OND211-2330) Added new `Rags` service with endpoints for accessing the new RAG functionality. This includes dataset and document management and document retrieval. The endpoints largely mirror RAGFlow's HTTP API.
 
 *****************
 
@@ -144,9 +138,9 @@ RAG enabled assistant. The endpoints mirror RAGFlow's HTTP API.
 ### Breaking changes
 
 * Restructuring of messages
-    * From `BatchEntitiesResponse.EntityStatus` to `EntityStatus`
-    * From `BatchCreateEntitiesRequest.CreateEntityRequest` to `CreateEntityRequest`
-    * From `BatchDeleteEntitiesResponse.DeleteEntityStatus` to `DeleteEntityStatus`
+  * From `BatchEntitiesResponse.EntityStatus` to `EntityStatus`
+  * From `BatchCreateEntitiesRequest.CreateEntityRequest` to `CreateEntityRequest`
+  * From `BatchDeleteEntitiesResponse.DeleteEntityStatus` to `DeleteEntityStatus`
 
 *****************
 
@@ -222,18 +216,18 @@ RAG enabled assistant. The endpoints mirror RAGFlow's HTTP API.
 ### New Features
 
 * [[OND211-1979]](https://ondewo.atlassian.net/browse/OND211-1979) - Session API optimization and refactoring
-    * Added labels to `QueryParameters` for `DetectIntentRequest`
-    * Added name in message `SessionStep`
-    * Added name in message `SessionReviewStep`
+  * Added labels to `QueryParameters` for `DetectIntentRequest`
+  * Added name in message `SessionStep`
+  * Added name in message `SessionReviewStep`
 * [[OND211-2054]](https://ondewo.atlassian.net/browse/OND211-2054) - Added reporting capabilities for sessions and
   session steps incl.
   `ContextFilter` and `ComparisonOperator` for detailed sessions filtering.
-    * Dedicated reports available for
-        * Top X intents
-        * Top X entity values
-        * Top X entity types
-        * Top X tags
-    * Query functionality for database tables session and session_steps for even more detailed reporting options
+  * Dedicated reports available for
+    * Top X intents
+    * Top X entity values
+    * Top X entity types
+    * Top X tags
+  * Query functionality for database tables session and session_steps for even more detailed reporting options
 
 ### Improvements
 
@@ -243,9 +237,9 @@ RAG enabled assistant. The endpoints mirror RAGFlow's HTTP API.
 
 * [[OND211-1979]](https://ondewo.atlassian.net/browse/OND211-1979) - Consistency improvement or Session and
   SessionReview messages incl.
-    * Renamed message `Session.session_id` to Session.name
-    * Renamed `SessionReview.session_review_id` to `SessionReview.name`
-    * Renamed `RemoveSessionLabels` to `DeleteSessionLabels`
+  * Renamed message `Session.session_id` to Session.name
+  * Renamed `SessionReview.session_review_id` to `SessionReview.name`
+  * Renamed `RemoveSessionLabels` to `DeleteSessionLabels`
 
 *****************
 
