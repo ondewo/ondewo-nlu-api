@@ -442,14 +442,14 @@ message RagDataset {
     // Pagerank.
     optional int32 pagerank = 10;
 
-    // Parsing status of all documents in the dataset
-    RagDatasetParsingStatus parsing_status = 11;
-
     // Creation date and time.
-    google.protobuf.Timestamp create_time = 12;
+    google.protobuf.Timestamp create_time = 11;
 
     // Last update date and time.
-    google.protobuf.Timestamp update_time = 13;
+    google.protobuf.Timestamp update_time = 12;
+
+    // Parsing status of all documents in the dataset
+    RagDatasetParsingStatus parsing_status = 13;
 
 }
 
