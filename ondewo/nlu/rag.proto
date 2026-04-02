@@ -443,14 +443,14 @@ message RagDataset {
     // Pagerank.
     optional int32 pagerank = 10;
 
+    // Parsing status of all documents in the dataset. Might be empty if the system failed to get the parsing statistics.
+    RagDatasetParsingStatus parsing_status = 11;
+
     // Creation date and time.
-    google.protobuf.Timestamp create_time = 11;
+    google.protobuf.Timestamp create_time = 12;
 
     // Last update date and time.
-    google.protobuf.Timestamp update_time = 12;
-
-    // Parsing status of all documents in the dataset. Might be empty if the system failed to get the parsing statistics.
-    RagDatasetParsingStatus parsing_status = 13;
+    google.protobuf.Timestamp update_time = 13;
 
 }
 
@@ -1082,21 +1082,18 @@ message RagChunk {
     // Associated image ID if this chunk references an image.
     string image_id = 8;
 
-    // Availability status indicating if the chunk is active and can be retrieved (can be disabled without deletion).
-    optional bool available = 9;
-
     // Position information in the original document.<br>
     // Each position is an array of 5 integers representing location data (format varies by document type).
-    repeated google.protobuf.ListValue positions = 10;
+    repeated google.protobuf.ListValue positions = 9;
 
     // Creation date and time.
-    google.protobuf.Timestamp create_time = 11;
+    google.protobuf.Timestamp create_time = 10;
 
     // Document name used as a keyword for retrieval.
-    string document_keyword = 13;
+    string document_keyword = 12;
 
     // Similarity score between <code>0.0</code> and <code>1.0</code> (only populated in retrieval responses).
-    optional float similarity = 14;
+    optional float similarity = 13;
 
 }
 
