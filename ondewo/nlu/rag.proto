@@ -449,7 +449,7 @@ message RagDataset {
     // Last update date and time.
     google.protobuf.Timestamp update_time = 12;
 
-    // Parsing status of all documents in the dataset
+    // Parsing status of all documents in the dataset. Might be empty if the system failed to get the parsing statistics.
     RagDatasetParsingStatus parsing_status = 13;
 
 }
