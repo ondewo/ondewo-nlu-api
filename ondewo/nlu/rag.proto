@@ -2874,6 +2874,9 @@ message RagCrawler {
 
   // Optional. Retry configuration for crawler runs.
   RagCrawlerRetryConfig retry_config = 12;
+
+  // Logs
+  repeated google.protobuf.Struct logs = 13;
 }
 
 // Crawl entry points.
