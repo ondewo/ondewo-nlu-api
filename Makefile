@@ -171,6 +171,21 @@ login_to_gh: ## Login to Github CLI with Access Token
 build_gh_release: ## Generate Github Release with CLI
 	gh release create --repo $(GH_REPO) "$(ONDEWO_NLU_API_VERSION)" -n "$(CURRENT_RELEASE_NOTES)" -t "Release ${ONDEWO_NLU_API_VERSION}"
 
+delete_gh_release: ## Delete GitHub Release, release branch and release tag via gh CLI
+	-gh release delete --repo $(GH_REPO) "$(ONDEWO_NLU_API_VERSION)" --yes
+	-gh api repos/ondewo/ondewo-nlu-api/git/refs/heads/release/${ONDEWO_NLU_API_VERSION} -X DELETE
+	-gh api repos/ondewo/ondewo-nlu-api/git/refs/tags/${ONDEWO_NLU_API_VERSION} -X DELETE
+
+unrelease_to_github_via_docker_image: ## Unrelease from Github via docker
+	docker run --rm \
+		-e GITHUB_GH_TOKEN=${GITHUB_GH_TOKEN} \
+		${IMAGE_UTILS_NAME} make login_to_gh delete_gh_release
+
+unrelease: build_utils_docker_image unrelease_to_github_via_docker_image ## Undo a release: delete the GitHub release, release branch, and release tag
+	-git branch -d "release/${ONDEWO_NLU_API_VERSION}"
+	-git tag -d "${ONDEWO_NLU_API_VERSION}"
+	-git fetch --prune
+	@echo "Unrelease of ${ONDEWO_NLU_API_VERSION} complete"
 
 release_all_clients: ## Releases all NLU Clients
 	@make release_python_client || (echo "Already released ${ONDEWO_NLU_API_VERSION} of Python Client")
@@ -274,6 +289,9 @@ release_to_github_via_docker_image: ## Release to Github via docker
 ondewo_release: spc clone_devops_accounts run_release_with_devops ## Release with credentials from devops-accounts repo
 	@rm -rf ${DEVOPS_ACCOUNT_GIT}
 
+ondewo_unrelease: clone_devops_accounts run_unrelease_with_devops ## Unrelease with credentials from devops-accounts repo
+	@rm -rf ${DEVOPS_ACCOUNT_GIT}
+
 clone_devops_accounts: ## Clones devops-accounts repo
 	@if [ -d $(DEVOPS_ACCOUNT_GIT) ]; then rm -Rf $(DEVOPS_ACCOUNT_GIT); fi
 	git clone git@bitbucket.org:ondewo/${DEVOPS_ACCOUNT_GIT}.git
@@ -281,6 +299,10 @@ clone_devops_accounts: ## Clones devops-accounts repo
 run_release_with_devops: ## Gets Credentials from devops-repo and runs release with them
 	$(eval info:= $(shell cat ${DEVOPS_ACCOUNT_DIR}/account_github.env | grep GITHUB_GH))
 	make release $(info)
+
+run_unrelease_with_devops: ## Gets Credentials from devops-repo and runs unrelease with them
+	$(eval info:= $(shell cat ${DEVOPS_ACCOUNT_DIR}/account_github.env | grep GITHUB_GH))
+	make unrelease $(info)
 
 spc: ## Checks if the Release Branch, Tag and Pypi version already exist
 	$(eval filtered_branches:= $(shell git branch --all | grep "release/${ONDEWO_NLU_API_VERSION}"))
