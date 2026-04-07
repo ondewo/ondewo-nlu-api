@@ -394,10 +394,10 @@
     - [RagDeleteCrawlerRunsResponse](#ondewo.nlu.RagDeleteCrawlerRunsResponse)
     - [RagDeleteCrawlersRequest](#ondewo.nlu.RagDeleteCrawlersRequest)
     - [RagDeleteCrawlersResponse](#ondewo.nlu.RagDeleteCrawlersResponse)
-    - [RagDeleteDocumentsRequest](#ondewo.nlu.RagDeleteDocumentsRequest)
     - [RagDeleteRequest](#ondewo.nlu.RagDeleteRequest)
     - [RagDocAgg](#ondewo.nlu.RagDocAgg)
     - [RagDocument](#ondewo.nlu.RagDocument)
+    - [RagDocumentIdsRequest](#ondewo.nlu.RagDocumentIdsRequest)
     - [RagDocumentList](#ondewo.nlu.RagDocumentList)
     - [RagDownloadDocumentRequest](#ondewo.nlu.RagDownloadDocumentRequest)
     - [RagFileChunk](#ondewo.nlu.RagFileChunk)
@@ -418,7 +418,6 @@
     - [RagListDocumentsRequest](#ondewo.nlu.RagListDocumentsRequest)
     - [RagMetadataCondition](#ondewo.nlu.RagMetadataCondition)
     - [RagMetadataConditions](#ondewo.nlu.RagMetadataConditions)
-    - [RagParseDocumentsRequest](#ondewo.nlu.RagParseDocumentsRequest)
     - [RagParserConfig](#ondewo.nlu.RagParserConfig)
     - [RagPartialSuccess](#ondewo.nlu.RagPartialSuccess)
     - [RagRaptorConfig](#ondewo.nlu.RagRaptorConfig)
@@ -7459,24 +7458,6 @@ Response message for deleting multiple crawlers of a dataset for the specified a
 
 
 
-<a name="ondewo.nlu.RagDeleteDocumentsRequest"></a>
-
-### RagDeleteDocumentsRequest
-Request message for deleting one or more documents from a dataset.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| parent | [string](#string) |  | Required. The agent to delete documents from. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
-| language_code | [string](#string) |  | Required. The language of the project to use. |
-| dataset_id | [string](#string) |  | Required. Dataset ID containing the documents to delete. |
-| ids | [string](#string) | repeated | Optional. Document IDs to delete. If empty, deletes all documents in the dataset. |
-
-
-
-
-
-
 <a name="ondewo.nlu.RagDeleteRequest"></a>
 
 ### RagDeleteRequest
@@ -7538,6 +7519,24 @@ Document uploaded to a dataset.
 | status | [string](#string) |  | Status indicating if document is enabled (<code>"1"</code>=enabled, <code>"0"</code>=disabled). |
 | create_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. |
 | update_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Last update date and time. |
+
+
+
+
+
+
+<a name="ondewo.nlu.RagDocumentIdsRequest"></a>
+
+### RagDocumentIdsRequest
+Request message for any endpoints that need a list of document IDs as input, e.g. delete documents, parse documents, stop parsing documents.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  | Required. The agent to delete documents from. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| language_code | [string](#string) |  | Required. The language of the project to use. |
+| dataset_id | [string](#string) |  | Required. Dataset ID of the dataset containing the documents in <code>document_ids</code>. |
+| document_ids | [string](#string) | repeated | Optional. Document IDs for the request. |
 
 
 
@@ -7937,25 +7936,6 @@ List of document metadata conditions.
 
 
 
-<a name="ondewo.nlu.RagParseDocumentsRequest"></a>
-
-### RagParseDocumentsRequest
-Request message for starting document parsing.<br>
-Parsing extracts chunks from documents using the configured chunk method.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| parent | [string](#string) |  | Required. The agent to parse documents for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
-| language_code | [string](#string) |  | Required. The language of the project to use. |
-| dataset_id | [string](#string) |  | Required. Dataset ID containing the documents to parse. |
-| document_ids | [string](#string) | repeated | Required. Document IDs to parse into chunks (queues documents for background processing). |
-
-
-
-
-
-
 <a name="ondewo.nlu.RagParserConfig"></a>
 
 ### RagParserConfig
@@ -8070,7 +8050,7 @@ Supports hybrid search combining vector similarity with keyword matching.
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The agent to retrieve chunks for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
 | language_code | [string](#string) |  | Required. The language of the project to use. |
-| dataset_ids | [string](#string) | repeated | Required. Dataset IDs to search (all datasets must use the same embedding model). |
+| dataset_ids | [string](#string) | repeated | Required. Dataset IDs to search. |
 | page_token | [string](#string) |  | Optional. Specifies which page to return. The page token is a string of the format <pre><code>current_index-&lt;idx&gt;--page_size-&lt;size&gt;</code></pre>
 
 <ul> <li><code>&lt;size&gt;</code> must be an integer &geq; <code>1</code>. The maximum number of results to return.</li> <li><code>&lt;idx&gt;</code> must be an integer &geq; <code>0</code>. The start index in the requested list, starting from which a maximum of <code>&lt;size&gt;</code> elements are returned.</li> </ul>
@@ -8441,17 +8421,18 @@ Covers all endpoints of the <a href="https://github.com/ondewo/ragflow">RAGFlow<
 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
-| RagCreateDataset | [RagCreateDatasetRequest](#ondewo.nlu.RagCreateDatasetRequest) | [RagDataset](#ondewo.nlu.RagDataset) | Create a new dataset (knowledge base).<br> Uses tenant's default embedding model if not specified. |
-| RagUpdateDataset | [RagUpdateDatasetRequest](#ondewo.nlu.RagUpdateDatasetRequest) | [RagDataset](#ondewo.nlu.RagDataset) | Update an existing dataset's configuration.<br> Cannot change embedding_model if dataset has chunks. |
+| RagCreateDataset | [RagCreateDatasetRequest](#ondewo.nlu.RagCreateDatasetRequest) | [RagDataset](#ondewo.nlu.RagDataset) | Create a new dataset (knowledge base).<br> |
+| RagUpdateDataset | [RagUpdateDatasetRequest](#ondewo.nlu.RagUpdateDatasetRequest) | [RagDataset](#ondewo.nlu.RagDataset) | Update an existing dataset's configuration.<br> |
 | RagDeleteDatasets | [RagDeleteRequest](#ondewo.nlu.RagDeleteRequest) | [RagPartialSuccess](#ondewo.nlu.RagPartialSuccess) | Delete one or more datasets (batch operation).<br> If ids is null or empty, deletes all user's datasets.<br> Deletes all associated documents, files, and chunks. |
 | RagListDatasets | [RagListDatasetsRequest](#ondewo.nlu.RagListDatasetsRequest) | [RagDatasetList](#ondewo.nlu.RagDatasetList) | List datasets with pagination and filtering.<br> Returns datasets from all tenants the user has access to. |
 | RagUploadDocument | [RagUploadDocumentRequest](#ondewo.nlu.RagUploadDocumentRequest) stream | [RagDocument](#ondewo.nlu.RagDocument) | Uploads a document to a dataset and starts parsing it.<br> If the <code>run</code> field of the returned document is not <code>RAG_DOCUMENT_STATUS_RUNNING</code> this indicates a failure to start parsing the document. |
 | RagUpdateDocument | [RagUpdateDocumentRequest](#ondewo.nlu.RagUpdateDocumentRequest) | [RagDocument](#ondewo.nlu.RagDocument) | Update document metadata and configuration.<br> If the chunk method is changed, the document is automatically re-parsed.<br> If the <code>run</code> field of the returned document is not <code>RAG_DOCUMENT_STATUS_RUNNING</code> this indicates a failure to start parsing the document. |
 | RagDownloadDocument | [RagDownloadDocumentRequest](#ondewo.nlu.RagDownloadDocumentRequest) | [RagFileChunk](#ondewo.nlu.RagFileChunk) stream | Download the original document file.<br> Returns binary file stream from storage.<br> First chunk contains metadata, subsequent chunks only contain data. |
 | RagListDocuments | [RagListDocumentsRequest](#ondewo.nlu.RagListDocumentsRequest) | [RagDocumentList](#ondewo.nlu.RagDocumentList) | List documents in a dataset with pagination and filtering.<br> Supports time range filtering and keyword search. |
-| RagDeleteDocuments | [RagDeleteDocumentsRequest](#ondewo.nlu.RagDeleteDocumentsRequest) | [RagPartialSuccess](#ondewo.nlu.RagPartialSuccess) | Delete one or more documents from a dataset (batch operation).<br> If ids empty, deletes all documents. Removes chunks and storage files. |
-| RagRetrieval | [RagRetrievalRequest](#ondewo.nlu.RagRetrievalRequest) | [RagRetrievalResponse](#ondewo.nlu.RagRetrievalResponse) | Retrieve chunks using vector similarity search.<br> All datasets must use the same embedding model.<br> Supports reranking, metadata filtering, and knowledge graph retrieval. |
-| RagParseDocuments | [RagParseDocumentsRequest](#ondewo.nlu.RagParseDocumentsRequest) | [RagPartialSuccess](#ondewo.nlu.RagPartialSuccess) | Start parsing documents into chunks.<br> Queues documents for background processing. |
+| RagDeleteDocuments | [RagDocumentIdsRequest](#ondewo.nlu.RagDocumentIdsRequest) | [RagPartialSuccess](#ondewo.nlu.RagPartialSuccess) | Delete one or more documents from a dataset (batch operation).<br> If ids empty, deletes all documents. Removes chunks and storage files. |
+| RagRetrieval | [RagRetrievalRequest](#ondewo.nlu.RagRetrievalRequest) | [RagRetrievalResponse](#ondewo.nlu.RagRetrievalResponse) | Retrieve chunks using vector similarity search.<br> Supports reranking, metadata filtering, and knowledge graph retrieval. |
+| RagParseDocuments | [RagDocumentIdsRequest](#ondewo.nlu.RagDocumentIdsRequest) | [RagPartialSuccess](#ondewo.nlu.RagPartialSuccess) | Start parsing documents into chunks.<br> Queues documents for background processing. |
+| RagStopParsing | [RagDocumentIdsRequest](#ondewo.nlu.RagDocumentIdsRequest) | [RagPartialSuccess](#ondewo.nlu.RagPartialSuccess) | Stop parsing documents. |
 | RagCreateCrawler | [RagCreateCrawlerRequest](#ondewo.nlu.RagCreateCrawlerRequest) | [RagCrawler](#ondewo.nlu.RagCrawler) | Create a rag crawler for a dataset of an agent. |
 | RagGetCrawler | [RagGetCrawlerRequest](#ondewo.nlu.RagGetCrawlerRequest) | [RagCrawler](#ondewo.nlu.RagCrawler) | Get a rag crawler by resource name. |
 | RagListCrawlers | [RagListCrawlersRequest](#ondewo.nlu.RagListCrawlersRequest) | [RagListCrawlersResponse](#ondewo.nlu.RagListCrawlersResponse) | List rag crawlers of a dataset for the specified agent. |
