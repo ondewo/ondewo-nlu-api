@@ -2993,6 +2993,20 @@ message RagCrawlerHtmlAuth {
   // Optional. Password credential.
   string html_auth_password = 7;
 
+  // Authentication execution type
+  RagCrawlerAuthenticationExecutionType authentication_execution_type = 8;
+}
+
+enum RagCrawlerAuthenticationExecutionType {
+
+  // Authentication execution type not specified.
+  RAG_CRAWLER_AUTHENTICATION_EXECUTION_TYPE_UNSPECIFIED = 0;
+
+  // Authentication execution type is server side.
+  RAG_CRAWLER_AUTHENTICATION_EXECUTION_TYPE_SERVER_SIDE = 1;
+
+  // Authentication execution type is client side.
+  RAG_CRAWLER_AUTHENTICATION_EXECUTION_TYPE_CLIENT_SIDE = 2;
 }
 
 // HTTP Basic authentication settings.
