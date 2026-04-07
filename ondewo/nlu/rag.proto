@@ -133,7 +133,7 @@ service Rags {
     // RAGFlow endpoint: DELETE /api/v1/datasets/<dataset_id>/chunks
 
     // Stop parsing documents.
-    rpc RagStopParsing(RagDocumentIdsRequest) returns (RagPartialSuccess);Collapse comment
+    rpc RagStopParsing(RagDocumentIdsRequest) returns (RagPartialSuccess);
 
     // ========================================================================
     // Crawler
