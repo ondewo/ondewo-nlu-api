@@ -2116,6 +2116,10 @@
                       </li>
                     
                       <li>
+                        <a href="#ondewo.nlu.RagCrawlerDiagnosticsConfig" class="title-badge message">RagCrawlerDiagnosticsConfig</a>
+                      </li>
+                    
+                      <li>
                         <a href="#ondewo.nlu.RagCrawlerExecutionInfo" class="title-badge message">RagCrawlerExecutionInfo</a>
                       </li>
                     
@@ -2129,6 +2133,10 @@
                     
                       <li>
                         <a href="#ondewo.nlu.RagCrawlerHttpAuth" class="title-badge message">RagCrawlerHttpAuth</a>
+                      </li>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.RagCrawlerInteractionConfig" class="title-badge message">RagCrawlerInteractionConfig</a>
                       </li>
                     
                       <li>
@@ -2494,7 +2502,7 @@
                       </li>
                     
                       <li>
-                        <a href="#ondewo.nlu.RagCrawlerAuthenticationExecutionType" class="title-badge enum">RagCrawlerAuthenticationExecutionType</a>
+                        <a href="#ondewo.nlu.RagCrawlerCacheMode" class="title-badge enum">RagCrawlerCacheMode</a>
                       </li>
                     
                       <li>
@@ -22786,34 +22794,6 @@ Should be unique per agent to simplify operational troubleshooting. </p></td>
                 </tr>
               
                 <tr>
-                  <td>created_at</td>
-                  <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
-                  <td></td>
-                  <td><p>Creation date and time. Read-only field. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>modified_at</td>
-                  <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
-                  <td></td>
-                  <td><p>Modification date and time. Read-only field. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>created_by</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>User id in form of a valid UUID. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>modified_by</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>User id in form of a valid UUID. </p></td>
-                </tr>
-              
-                <tr>
                   <td>crawler_sources</td>
                   <td><a href="#ondewo.nlu.RagCrawlerSources">RagCrawlerSources</a></td>
                   <td></td>
@@ -22854,17 +22834,31 @@ Roughly corresponds to Crawl4AI <code>CrawlerRunConfig</code>. </p></td>
                 </tr>
               
                 <tr>
-                  <td>retry_config</td>
-                  <td><a href="#ondewo.nlu.RagCrawlerRetryConfig">RagCrawlerRetryConfig</a></td>
+                  <td>created_at</td>
+                  <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
                   <td></td>
-                  <td><p>Optional. Retry configuration for crawler runs. </p></td>
+                  <td><p>Creation date and time. Read-only field. </p></td>
                 </tr>
               
                 <tr>
-                  <td>logs</td>
-                  <td><a href="#google.logging.v2.LogEntry">google.logging.v2.LogEntry</a></td>
-                  <td>repeated</td>
-                  <td><p>Logs </p></td>
+                  <td>modified_at</td>
+                  <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
+                  <td></td>
+                  <td><p>Modification date and time. Read-only field. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>created_by</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>User id in form of a valid UUID. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>modified_by</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>User id in form of a valid UUID. </p></td>
                 </tr>
               
             </tbody>
@@ -23126,6 +23120,44 @@ Default <code>RAG_CRAWLER_CRAWL_STRATEGY_BFS</code>. </p></td>
 
         
       
+        <h3 id="ondewo.nlu.RagCrawlerDiagnosticsConfig" class="title-badge message">RagCrawlerDiagnosticsConfig</h3>
+        <p>Diagnostics capture toggles.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>ssl_certificate</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Optional. Collect SSL certificate details for HTTPS targets. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>network_requests</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Optional. Capture browser network events for diagnostics. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>console_messages</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Optional. Capture browser console messages for diagnostics. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="ondewo.nlu.RagCrawlerExecutionInfo" class="title-badge message">RagCrawlerExecutionInfo</h3>
         <p>Consolidated diagnostics and HTTP execution metadata for a crawl result.</p>
 
@@ -23275,13 +23307,6 @@ Default <code>RAG_CRAWLER_CRAWL_STRATEGY_BFS</code>. </p></td>
                   <td><p>Optional. Password credential. </p></td>
                 </tr>
               
-                <tr>
-                  <td>authentication_execution_type</td>
-                  <td><a href="#ondewo.nlu.RagCrawlerAuthenticationExecutionType">RagCrawlerAuthenticationExecutionType</a></td>
-                  <td></td>
-                  <td><p>Authentication execution type </p></td>
-                </tr>
-              
             </tbody>
           </table>
 
@@ -23318,6 +23343,37 @@ Default <code>RAG_CRAWLER_CRAWL_STRATEGY_BFS</code>. </p></td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Optional. User-Agent sent with basic-auth requests. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="ondewo.nlu.RagCrawlerInteractionConfig" class="title-badge message">RagCrawlerInteractionConfig</h3>
+        <p>Wait/scroll/DOM interaction settings.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>wait_for</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. Wait condition for the page to be loaded. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>wait_for_timeout</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>Optional. Timeout in milliseconds for the wait condition. </p></td>
                 </tr>
               
             </tbody>
@@ -28408,8 +28464,8 @@ If metadata field is a list, checks if the joined string of the string represent
           </tbody>
         </table>
       
-        <h3 id="ondewo.nlu.RagCrawlerAuthenticationExecutionType" class="title-badge enum">RagCrawlerAuthenticationExecutionType</h3>
-        <p></p>
+        <h3 id="ondewo.nlu.RagCrawlerCacheMode" class="title-badge enum">RagCrawlerCacheMode</h3>
+        <p>Cache mode for crawler runs.</p>
         <table class="enum-table">
           <thead>
             <tr><td>Name</td><td>Number</td><td>Description</td></tr>
@@ -28417,21 +28473,33 @@ If metadata field is a list, checks if the joined string of the string represent
           <tbody>
             
               <tr>
-                <td>RAG_CRAWLER_AUTHENTICATION_EXECUTION_TYPE_UNSPECIFIED</td>
+                <td>RAG_CRAWLER_CACHE_MODE_ENABLED</td>
                 <td>0</td>
-                <td><p>Authentication execution type not specified.</p></td>
+                <td><p>Normal cache behavior (read/write).</p></td>
               </tr>
             
               <tr>
-                <td>RAG_CRAWLER_AUTHENTICATION_EXECUTION_TYPE_SERVER_SIDE</td>
+                <td>RAG_CRAWLER_CACHE_MODE_DISABLED</td>
                 <td>1</td>
-                <td><p>Authentication execution type is server side.</p></td>
+                <td><p>Disable all cache reads/writes.</p></td>
               </tr>
             
               <tr>
-                <td>RAG_CRAWLER_AUTHENTICATION_EXECUTION_TYPE_CLIENT_SIDE</td>
+                <td>RAG_CRAWLER_CACHE_MODE_READ_ONLY</td>
                 <td>2</td>
-                <td><p>Authentication execution type is client side.</p></td>
+                <td><p>Read from cache only.</p></td>
+              </tr>
+            
+              <tr>
+                <td>RAG_CRAWLER_CACHE_MODE_WRITE_ONLY</td>
+                <td>3</td>
+                <td><p>Write to cache only.</p></td>
+              </tr>
+            
+              <tr>
+                <td>RAG_CRAWLER_CACHE_MODE_BYPASS</td>
+                <td>4</td>
+                <td><p>Bypass cache for this operation.</p></td>
               </tr>
             
           </tbody>

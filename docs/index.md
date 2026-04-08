@@ -390,10 +390,12 @@
     - [RagCrawlerContentResult](#ondewo.nlu.RagCrawlerContentResult)
     - [RagCrawlerCookie](#ondewo.nlu.RagCrawlerCookie)
     - [RagCrawlerDeepCrawlerConfig](#ondewo.nlu.RagCrawlerDeepCrawlerConfig)
+    - [RagCrawlerDiagnosticsConfig](#ondewo.nlu.RagCrawlerDiagnosticsConfig)
     - [RagCrawlerExecutionInfo](#ondewo.nlu.RagCrawlerExecutionInfo)
     - [RagCrawlerFilters](#ondewo.nlu.RagCrawlerFilters)
     - [RagCrawlerHtmlAuth](#ondewo.nlu.RagCrawlerHtmlAuth)
     - [RagCrawlerHttpAuth](#ondewo.nlu.RagCrawlerHttpAuth)
+    - [RagCrawlerInteractionConfig](#ondewo.nlu.RagCrawlerInteractionConfig)
     - [RagCrawlerMetaDataExtractor](#ondewo.nlu.RagCrawlerMetaDataExtractor)
     - [RagCrawlerResult](#ondewo.nlu.RagCrawlerResult)
     - [RagCrawlerResultsConfig](#ondewo.nlu.RagCrawlerResultsConfig)
@@ -484,7 +486,7 @@
     - [RagCanvasCategory](#ondewo.nlu.RagCanvasCategory)
     - [RagChunkMethod](#ondewo.nlu.RagChunkMethod)
     - [RagComparisonOperator](#ondewo.nlu.RagComparisonOperator)
-    - [RagCrawlerAuthenticationExecutionType](#ondewo.nlu.RagCrawlerAuthenticationExecutionType)
+    - [RagCrawlerCacheMode](#ondewo.nlu.RagCrawlerCacheMode)
     - [RagCrawlerCrawlStrategy](#ondewo.nlu.RagCrawlerCrawlStrategy)
     - [RagCrawlerFilterContentType](#ondewo.nlu.RagCrawlerFilterContentType)
     - [RagCrawlerMetaDataExtractorType](#ondewo.nlu.RagCrawlerMetaDataExtractorType)
@@ -7319,17 +7321,15 @@ a separate crawler run and result set.
 | ----- | ---- | ----- | ----------- |
 | name | [string](#string) |  | Resource name of the RagCrawler Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre> Automatically generated in backend if empty |
 | display_name | [string](#string) |  | Optional. Human-readable crawler name shown in UIs/logs. Should be unique per agent to simplify operational troubleshooting. |
-| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
-| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
-| created_by | [string](#string) |  | User id in form of a valid UUID. |
-| modified_by | [string](#string) |  | User id in form of a valid UUID. |
 | crawler_sources | [RagCrawlerSources](#ondewo.nlu.RagCrawlerSources) |  | Optional. Crawl entry points. Configure crawl entry points: URL seeds and/or sitemap sources. |
 | crawler_seed_url_filters | [RagCrawlerSeedUrlFilters](#ondewo.nlu.RagCrawlerSeedUrlFilters) |  | Optional. Seed URL filters. Filters are applied to the seed URLs before they are crawled. |
 | crawler_auth | [RagCrawlerAuth](#ondewo.nlu.RagCrawlerAuth) |  | Optional. Login/auth setup used before crawl requests. |
 | crawler_browser_config | [RagCrawlerBrowserConfig](#ondewo.nlu.RagCrawlerBrowserConfig) |  | Optional. Browser runtime setup (engine, viewport, cookies, proxy, headers). Roughly corresponds to Crawl4AI <code>BrowserConfig</code>. Use this when target sites require JS, custom headers, session cookies, or proxy routing. |
 | crawler_config | [RagCrawlerConfig](#ondewo.nlu.RagCrawlerConfig) |  | Optional. Crawl execution behavior and extraction settings. Roughly corresponds to Crawl4AI <code>CrawlerRunConfig</code>. |
-| retry_config | [RagCrawlerRetryConfig](#ondewo.nlu.RagCrawlerRetryConfig) |  | Optional. Retry configuration for crawler runs. |
-| logs | [google.logging.v2.LogEntry](#google.logging.v2.LogEntry) | repeated | Logs |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
+| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
+| created_by | [string](#string) |  | User id in form of a valid UUID. |
+| modified_by | [string](#string) |  | User id in form of a valid UUID. |
 
 
 
@@ -7464,6 +7464,23 @@ Deep crawler options grouped under one config node.
 
 
 
+<a name="ondewo.nlu.RagCrawlerDiagnosticsConfig"></a>
+
+### RagCrawlerDiagnosticsConfig
+Diagnostics capture toggles.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| ssl_certificate | [bool](#bool) |  | Optional. Collect SSL certificate details for HTTPS targets. |
+| network_requests | [bool](#bool) |  | Optional. Capture browser network events for diagnostics. |
+| console_messages | [bool](#bool) |  | Optional. Capture browser console messages for diagnostics. |
+
+
+
+
+
+
 <a name="ondewo.nlu.RagCrawlerExecutionInfo"></a>
 
 ### RagCrawlerExecutionInfo
@@ -7524,7 +7541,6 @@ DOM. Credentials are then filled before form submission.
 | html_auth_password_selector_type | [RagCrawlerSelectorType](#ondewo.nlu.RagCrawlerSelectorType) |  | Optional. Password field selector type. |
 | html_auth_password_selector | [string](#string) |  | Optional. Password field selector value. |
 | html_auth_password | [string](#string) |  | Optional. Password credential. |
-| authentication_execution_type | [RagCrawlerAuthenticationExecutionType](#ondewo.nlu.RagCrawlerAuthenticationExecutionType) |  | Authentication execution type |
 
 
 
@@ -7542,6 +7558,22 @@ HTTP Basic authentication settings.
 | http_auth_username | [string](#string) |  | HTTP Basic Authentication username. |
 | http_auth_password | [string](#string) |  | HTTP Basic Authentication password. |
 | http_auth_user_agent | [string](#string) |  | Optional. User-Agent sent with basic-auth requests. |
+
+
+
+
+
+
+<a name="ondewo.nlu.RagCrawlerInteractionConfig"></a>
+
+### RagCrawlerInteractionConfig
+Wait/scroll/DOM interaction settings.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| wait_for | [string](#string) |  | Optional. Wait condition for the page to be loaded. |
+| wait_for_timeout | [int32](#int32) |  | Optional. Timeout in milliseconds for the wait condition. |
 
 
 
@@ -9350,16 +9382,18 @@ Valid metadata condition comparison operators
 
 
 
-<a name="ondewo.nlu.RagCrawlerAuthenticationExecutionType"></a>
+<a name="ondewo.nlu.RagCrawlerCacheMode"></a>
 
-### RagCrawlerAuthenticationExecutionType
-
+### RagCrawlerCacheMode
+Cache mode for crawler runs.
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| RAG_CRAWLER_AUTHENTICATION_EXECUTION_TYPE_UNSPECIFIED | 0 | Authentication execution type not specified. |
-| RAG_CRAWLER_AUTHENTICATION_EXECUTION_TYPE_SERVER_SIDE | 1 | Authentication execution type is server side. |
-| RAG_CRAWLER_AUTHENTICATION_EXECUTION_TYPE_CLIENT_SIDE | 2 | Authentication execution type is client side. |
+| RAG_CRAWLER_CACHE_MODE_ENABLED | 0 | Normal cache behavior (read/write). |
+| RAG_CRAWLER_CACHE_MODE_DISABLED | 1 | Disable all cache reads/writes. |
+| RAG_CRAWLER_CACHE_MODE_READ_ONLY | 2 | Read from cache only. |
+| RAG_CRAWLER_CACHE_MODE_WRITE_ONLY | 3 | Write to cache only. |
+| RAG_CRAWLER_CACHE_MODE_BYPASS | 4 | Bypass cache for this operation. |
 
 
 
