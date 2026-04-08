@@ -27,13 +27,12 @@
 // limitations under the License.
 
 // File-level comment for <code>ondewo/nlu/rag.proto</code>.
-// This file contains a single service <a href="#ondewo.nlu.Rags">Rags</a>. The Rags service provides integration with RAGFlow for Retrieval-Augmented Generation (RAG), including dataset management, document processing, chunk retrieval, conversational AI with chat and agent assistants, and file management. Key message types include <a href="#ondewo.nlu.RagDataset">RagDataset</a>, <a href="#ondewo.nlu.RagChat">RagChat</a>, and <a href="#ondewo.nlu.RagAgent">RagAgent</a>.
+// This file contains a single service <a href="#ondewo.nlu.Rags">Rags</a>. The Rags service provides RAG (Retrieval-Augmented Generation) and web crawler functionality.
 // All message fields that are marked as <code>optional</code> are not actually optional but marked as such to enable presence tracking so that it is possible to distinguish between null and default value fields. Without the <code>optional</code> keyword it would for instance not be possible to distinguish between an integer <code>0</code> and <code>null</code>.
 syntax = "proto3";
 
 package ondewo.nlu;
 
-import "google/protobuf/empty.proto";
 import "google/protobuf/struct.proto";
 import "google/protobuf/field_mask.proto";
 import "google/protobuf/timestamp.proto";
@@ -43,10 +42,8 @@ import "ondewo/nlu/operations.proto";
 import "ondewo/nlu/session.proto";
 import "ondewo/nlu/common.proto";
 
-// TODO change Github link if changes to RAGFlow are merged to upstream
-
-// Provides an interface for interacting with the RAGFlow RAG engine.
-// Covers all endpoints of the <a href="https://github.com/ondewo/ragflow">RAGFlow</a> HTTP API. For more information on RAGFlow refer to the <a href="https://ragflow.io/docs/dev/">official documentation</a>
+// Provides RAG and web crawler endpoints.
+// Most of the RAG related endpoints largely mirror <a href="https://github.com/ondewo/ragflow">RAGFlow's</a> HTTP API endpoints. For more information on RAGFlow refer to the <a href="https://ragflow.io/docs/dev/">official documentation</a>
 service Rags {
 
     // ===========================================
@@ -530,7 +527,7 @@ message RagDeleteRequest {
 message RagListDatasetsRequest {
 
     // Required. The agent to list all datasets from.
-   // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
     // Required. The language of the project to use.
@@ -902,13 +899,13 @@ enum RagComparisonOperator {
     // If metadata field is a list, <em>all</em> elements must satisfy the condition.
     RAG_COMPARISON_OPERATOR_NOT_IN = 3;
 
-    // String representation fo metadata field starts with value.<br>
+    // String representation of metadata field starts with value.<br>
     // If metadata field is a list, checks if the joined string of the string representations of all list elements starts with the value.
     RAG_COMPARISON_OPERATOR_START_WITH = 4;
 
-    // String representation fo metadata field ends with value.<br>
+    // String representation of metadata field ends with value.<br>
     // If metadata field is a list, checks if the joined string of the string representations of all list elements ends with the value.
-    RAG_COMPARISON_OPERATOR_ENDS_WITH = 5;
+    RAG_COMPARISON_OPERATOR_END_WITH = 5;
 
     // Is empty (Python <em>falsy</em>).
     RAG_COMPARISON_OPERATOR_EMPTY = 6;
@@ -1121,157 +1118,157 @@ message RagDocAgg {
 // Request message for creating a crawler for a dataset of an agent.
 message RagCreateCrawlerRequest {
 
-  // Required. The agent to create crawlers for.
-  // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-  string parent = 1;
+    // Required. The agent to create crawlers for.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
 
-  // Required. The language of the project to use.
-  string language_code = 2;
+    // Required. The language of the project to use.
+    string language_code = 2;
 
-  // Required. Crawler definition to create.
-  // If <code>crawler.name</code> is empty, backend will generate it.
-  // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre>
-  RagCrawler crawler = 3;
+    // Required. Crawler definition to create.
+    // If <code>crawler.name</code> is empty, backend will generate it.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre>
+    RagCrawler crawler = 3;
 
-  // Optional. The mask to control which RagCrawler fields get returned.
-  google.protobuf.FieldMask field_mask = 4;
+    // Optional. The mask to control which RagCrawler fields get returned.
+    google.protobuf.FieldMask field_mask = 4;
 
 }
 
 // Request message for deleting a crawler of a dataset for the specified agent.
 message RagDeleteCrawlerRequest {
 
-  // Resource name of the RagCrawler
-  // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre>
-  string name = 1;
+    // Resource name of the RagCrawler
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre>
+    string name = 1;
 
-  // Required. The agent owning the crawler.
-  // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-  string parent = 2;
+    // Required. The agent owning the crawler.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 2;
 
-  // Required. The language of the project to use.
-  string language_code = 3;
+    // Required. The language of the project to use.
+    string language_code = 3;
 
 }
 
 // Response message for deleting a crawler of a dataset for the specified agent.
 message RagDeleteCrawlerResponse {
 
-  // Resource name of the RagCrawler
-  // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre>
-  string name = 1;
+    // Resource name of the RagCrawler
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre>
+    string name = 1;
 
-  // Error message if there are any.
-  string error_message = 2;
+    // Error message if there are any.
+    string error_message = 2;
 
 }
 
 // Request message for deleting multiple crawlers of a dataset for the specified agent.
 message RagDeleteCrawlersRequest {
 
-  // Required. The agent owning the crawlers.
-  // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-  string parent = 1;
+    // Required. The agent owning the crawlers.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
 
-  // Required. The language of the project to use.
-  string language_code = 2;
+    // Required. The language of the project to use.
+    string language_code = 2;
 
-  // Optional. Crawler resource names to delete.
-  // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre>
-  repeated string names = 3;
+    // Optional. Crawler resource names to delete.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre>
+    repeated string names = 3;
 }
 
 // Response message for deleting multiple crawlers of a dataset for the specified agent.
 message RagDeleteCrawlersResponse {
 
-  // responses to delete crawlers
-  repeated RagDeleteCrawlerResponse delete_crawler_responses = 1;
+    // responses to delete crawlers
+    repeated RagDeleteCrawlerResponse delete_crawler_responses = 1;
 
-  // error message if there are any
-  string error_message = 2;
+    // error message if there are any
+    string error_message = 2;
 
 }
 
 // Request message for listing crawlers of a dataset for the specified agent.
 message RagListCrawlersRequest {
 
-  // Required. The agent to list crawlers for.
-  // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-  string parent = 1;
+    // Required. The agent to list crawlers for.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
 
-  // Required. The language of the agent of the dataset.
-  string language_code = 2;
+    // Required. The language of the agent of the dataset.
+    string language_code = 2;
 
-  // Optional. Opaque pagination cursor from a previous list response.
-  // Leave empty for the first page.
-  string page_token = 3;
+    // Optional. Opaque pagination cursor from a previous list response.
+    // Leave empty for the first page.
+    string page_token = 3;
 
-  // Optional. Filter by dataset name.
-  string dataset_name = 4;
+    // Optional. Filter by dataset name.
+    string dataset_name = 4;
 
-  // Optional. Filter by crawler name.
-  string crawler_name = 5;
+    // Optional. Filter by crawler name.
+    string crawler_name = 5;
 
-  // Optional. Sort field (default: <code>create_time</code>).
-  string orderby = 6;
+    // Optional. Sort field (default: <code>create_time</code>).
+    string orderby = 6;
 
-  // Optional. Sort descending.
-  optional SortingMode sorting_mode = 7;
+    // Optional. Sort descending.
+    optional SortingMode sorting_mode = 7;
 
 }
 
 // Response message for listing crawlers.
 message RagListCrawlersResponse {
-  // List of crawlers.
-  repeated RagCrawler crawlers = 1;
+    // List of crawlers.
+    repeated RagCrawler crawlers = 1;
 
-  // Opaque pagination cursor for the next page.
-  // Pass this value unchanged as request <code>page_token</code>.
-  // Empty means no further pages.
-  string next_page_token = 2;
+    // Opaque pagination cursor for the next page.
+    // Pass this value unchanged as request <code>page_token</code>.
+    // Empty means no further pages.
+    string next_page_token = 2;
 
 }
 
 // Request message for getting a crawler.
 message RagGetCrawlerRequest {
 
-  // Required. Resource name of the RagCrawler.
-  // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre>
-  string name = 1;
+    // Required. Resource name of the RagCrawler.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre>
+    string name = 1;
 
-  // Required. The agent owning the crawler.
-  // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-  string parent = 2;
+    // Required. The agent owning the crawler.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 2;
 
-  // Required. The language of the project to use.
-  string language_code = 3;
+    // Required. The language of the project to use.
+    string language_code = 3;
 
-  // Optional. The mask to control which RagCrawler fields get returned.
-  google.protobuf.FieldMask field_mask = 4;
+    // Optional. The mask to control which RagCrawler fields get returned.
+    google.protobuf.FieldMask field_mask = 4;
 
 }
 
 // Request message for updating a crawler (partial update).
 message RagUpdateCrawlerRequest {
 
-  // Required. The crawler to update. Only configuration fields can be updated.
-  // The name field must be set and must match an existing crawler.
-  // Timestamps and audit fields are auto-managed by the service.
-  RagCrawler crawler = 1;
+    // Required. The crawler to update. Only configuration fields can be updated.
+    // The name field must be set and must match an existing crawler.
+    // Timestamps and audit fields are auto-managed by the service.
+    RagCrawler crawler = 1;
 
-  // Required. The agent owning the crawler.
-  // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-  string parent = 2;
+    // Required. The agent owning the crawler.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 2;
 
-  // Required. The language of the project to use.
-  string language_code = 3;
+    // Required. The language of the project to use.
+    string language_code = 3;
 
-  // Optional. FieldMask to specify which fields to update.
-  // If not provided, all configuration fields in crawler are updated.
-  google.protobuf.FieldMask update_mask = 4;
+    // Optional. FieldMask to specify which fields to update.
+    // If not provided, all configuration fields in crawler are updated.
+    google.protobuf.FieldMask update_mask = 4;
 
-  // Optional. The mask to control which crawler fields get returned.
-  google.protobuf.FieldMask field_mask = 5;
+    // Optional. The mask to control which crawler fields get returned.
+    google.protobuf.FieldMask field_mask = 5;
 }
 
 // RagCrawler definition.
@@ -1289,52 +1286,52 @@ message RagUpdateCrawlerRequest {
 // a separate crawler run and result set.
 message RagCrawler {
 
-  // Resource name of the RagCrawler
-  // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre>
-  // Automatically generated in backend if empty
-  string name = 1;
+    // Resource name of the RagCrawler
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre>
+    // Automatically generated in backend if empty
+    string name = 1;
 
-  // Optional. Human-readable crawler name shown in UIs/logs.
-  // Should be unique per agent to simplify operational troubleshooting.
-  string display_name = 2;
+    // Optional. Human-readable crawler name shown in UIs/logs.
+    // Should be unique per agent to simplify operational troubleshooting.
+    string display_name = 2;
 
-  // Creation date and time. Read-only field.
-  google.protobuf.Timestamp created_at = 3;
+    // Creation date and time. Read-only field.
+    google.protobuf.Timestamp created_at = 3;
 
-  // Modification date and time. Read-only field.
-  google.protobuf.Timestamp modified_at = 4;
+    // Modification date and time. Read-only field.
+    google.protobuf.Timestamp modified_at = 4;
 
-  // User id in form of a valid UUID.
-  string created_by = 5;
+    // User id in form of a valid UUID.
+    string created_by = 5;
 
-  // User id in form of a valid UUID.
-  string modified_by = 6;
+    // User id in form of a valid UUID.
+    string modified_by = 6;
 
-  // Optional. Crawl entry points.
-  // Configure crawl entry points: URL seeds and/or sitemap sources.
-  RagCrawlerSources crawler_sources = 7;
+    // Optional. Crawl entry points.
+    // Configure crawl entry points: URL seeds and/or sitemap sources.
+    RagCrawlerSources crawler_sources = 7;
 
-  // Optional. Seed URL filters.
-  // Filters are applied to the seed URLs before they are crawled.
-  RagCrawlerSeedUrlFilters crawler_seed_url_filters = 8;
+    // Optional. Seed URL filters.
+    // Filters are applied to the seed URLs before they are crawled.
+    RagCrawlerSeedUrlFilters crawler_seed_url_filters = 8;
 
-  // Optional. Login/auth setup used before crawl requests.
-  RagCrawlerAuth crawler_auth = 9;
+    // Optional. Login/auth setup used before crawl requests.
+    RagCrawlerAuth crawler_auth = 9;
 
-  // Optional. Browser runtime setup (engine, viewport, cookies, proxy, headers).
-  // Roughly corresponds to Crawl4AI <code>BrowserConfig</code>.
-  // Use this when target sites require JS, custom headers, session cookies, or proxy routing.
-  RagCrawlerBrowserConfig crawler_browser_config = 10;
+    // Optional. Browser runtime setup (engine, viewport, cookies, proxy, headers).
+    // Roughly corresponds to Crawl4AI <code>BrowserConfig</code>.
+    // Use this when target sites require JS, custom headers, session cookies, or proxy routing.
+    RagCrawlerBrowserConfig crawler_browser_config = 10;
 
-  // Optional. Crawl execution behavior and extraction settings.
-  // Roughly corresponds to Crawl4AI <code>CrawlerRunConfig</code>.
-  RagCrawlerConfig crawler_config = 11;
+    // Optional. Crawl execution behavior and extraction settings.
+    // Roughly corresponds to Crawl4AI <code>CrawlerRunConfig</code>.
+    RagCrawlerConfig crawler_config = 11;
 
-  // Optional. Retry configuration for crawler runs.
-  RagCrawlerRetryConfig retry_config = 12;
+    // Optional. Retry configuration for crawler runs.
+    RagCrawlerRetryConfig retry_config = 12;
 
-  // Logs
-  repeated google.logging.v2.LogEntry logs = 13;
+    // Logs
+    repeated google.logging.v2.LogEntry logs = 13;
 }
 
 // Crawl entry points.
@@ -1344,12 +1341,12 @@ message RagCrawler {
 // - Seed URLs are appended afterwards (in the order provided)
 message RagCrawlerSources {
 
-  // Direct seed URLs to enqueue as starting points.
-  repeated string urls = 1;
+    // Direct seed URLs to enqueue as starting points.
+    repeated string urls = 1;
 
-  // Sitemap URLs used for URL discovery.
-  // Typical values are <code>/sitemap.xml</code> or sitemap index files.
-  repeated string sitemaps = 2;
+    // Sitemap URLs used for URL discovery.
+    // Typical values are <code>/sitemap.xml</code> or sitemap index files.
+    repeated string sitemaps = 2;
 }
 
 
@@ -1381,17 +1378,17 @@ message RagCrawlerFilters {
 
 message RagCrawlerSeedUrlFilters {
 
-  // Optional. Regex allow-list for full URLs.
-  repeated string allowed_regex = 1;
+    // Optional. Regex allow-list for full URLs.
+    repeated string allowed_regex = 1;
 
-  // Optional. Regex block-list for full URLs.
-  repeated string disallowed_regex = 2;
+    // Optional. Regex block-list for full URLs.
+    repeated string disallowed_regex = 2;
 
-  // Optional. Domain allow-list (host-level gating).
-  repeated string allowed_domains = 3;
+    // Optional. Domain allow-list (host-level gating).
+    repeated string allowed_domains = 3;
 
-  // Optional. Domain block-list.
-  repeated string disallowed_domains = 4;
+    // Optional. Domain block-list.
+    repeated string disallowed_domains = 4;
 
 }
 
@@ -1403,24 +1400,24 @@ message RagCrawlerSeedUrlFilters {
 // to extract the cookies. This is done through a login screen. If HTTP Auth is set, this would ALSO be used on the HTML auth page,
 message RagCrawlerAuth {
 
-  // Optional. HTTP Basic auth settings.
-  RagCrawlerHttpAuth http_auth = 1;
+    // Optional. HTTP Basic auth settings.
+    RagCrawlerHttpAuth http_auth = 1;
 
-  // Optional. Form/HTML login selector and credential settings.
-  RagCrawlerHtmlAuth html_auth = 2;
+    // Optional. Form/HTML login selector and credential settings.
+    RagCrawlerHtmlAuth html_auth = 2;
 
 }
 
 enum RagCrawlerSelectorType {
 
-  // ID selector.
-  RAG_CRAWLER_SELECTOR_TYPE_ID = 0;
+    // ID selector.
+    RAG_CRAWLER_SELECTOR_TYPE_ID = 0;
 
-  // CSS class selector.
-  RAG_CRAWLER_SELECTOR_TYPE_CSS_CLASS = 1;
+    // CSS class selector.
+    RAG_CRAWLER_SELECTOR_TYPE_CSS_CLASS = 1;
 
-  // XPath selector.
-  RAG_CRAWLER_SELECTOR_TYPE_XPATH = 2;
+    // XPath selector.
+    RAG_CRAWLER_SELECTOR_TYPE_XPATH = 2;
 
 }
 
@@ -1430,54 +1427,54 @@ enum RagCrawlerSelectorType {
 // DOM. Credentials are then filled before form submission.
 message RagCrawlerHtmlAuth {
 
-  // Optional. Base URL used for auth/login navigation.
-  string html_auth_base_url = 1;
+    // Optional. Base URL used for auth/login navigation.
+    string html_auth_base_url = 1;
 
-  // Optional. Username field selector type.
-  RagCrawlerSelectorType html_auth_username_selector_type = 2;
+    // Optional. Username field selector type.
+    RagCrawlerSelectorType html_auth_username_selector_type = 2;
 
-  // Optional. Username field selector value.
-  string html_auth_username_selector = 3;
+    // Optional. Username field selector value.
+    string html_auth_username_selector = 3;
 
-  // Optional. Username credential.
-  string html_auth_username = 4;
+    // Optional. Username credential.
+    string html_auth_username = 4;
 
-  // Optional. Password field selector type.
-  RagCrawlerSelectorType html_auth_password_selector_type = 5;
+    // Optional. Password field selector type.
+    RagCrawlerSelectorType html_auth_password_selector_type = 5;
 
-  // Optional. Password field selector value.
-  string html_auth_password_selector = 6;
+    // Optional. Password field selector value.
+    string html_auth_password_selector = 6;
 
-  // Optional. Password credential.
-  string html_auth_password = 7;
+    // Optional. Password credential.
+    string html_auth_password = 7;
 
-  // Authentication execution type
-  RagCrawlerAuthenticationExecutionType authentication_execution_type = 8;
+    // Authentication execution type
+    RagCrawlerAuthenticationExecutionType authentication_execution_type = 8;
 }
 
 enum RagCrawlerAuthenticationExecutionType {
 
-  // Authentication execution type not specified.
-  RAG_CRAWLER_AUTHENTICATION_EXECUTION_TYPE_UNSPECIFIED = 0;
+    // Authentication execution type not specified.
+    RAG_CRAWLER_AUTHENTICATION_EXECUTION_TYPE_UNSPECIFIED = 0;
 
-  // Authentication execution type is server side.
-  RAG_CRAWLER_AUTHENTICATION_EXECUTION_TYPE_SERVER_SIDE = 1;
+    // Authentication execution type is server side.
+    RAG_CRAWLER_AUTHENTICATION_EXECUTION_TYPE_SERVER_SIDE = 1;
 
-  // Authentication execution type is client side.
-  RAG_CRAWLER_AUTHENTICATION_EXECUTION_TYPE_CLIENT_SIDE = 2;
+    // Authentication execution type is client side.
+    RAG_CRAWLER_AUTHENTICATION_EXECUTION_TYPE_CLIENT_SIDE = 2;
 }
 
 // HTTP Basic authentication settings.
 message RagCrawlerHttpAuth {
 
-  // HTTP Basic Authentication username.
-  string http_auth_username = 1;
+    // HTTP Basic Authentication username.
+    string http_auth_username = 1;
 
-  // HTTP Basic Authentication password.
-  string http_auth_password = 2;
+    // HTTP Basic Authentication password.
+    string http_auth_password = 2;
 
-  // Optional. User-Agent sent with basic-auth requests.
-  string http_auth_user_agent = 3;
+    // Optional. User-Agent sent with basic-auth requests.
+    string http_auth_user_agent = 3;
 
 }
 
@@ -1488,35 +1485,35 @@ message RagCrawlerHttpAuth {
 // user-agent behavior, and launch arguments).
 message RagCrawlerBrowserConfig {
 
-  // Optional. HTTP headers sent on page/resource requests.
-  // Repeated entries allow duplicate header names and preserve order.
-  repeated google.protobuf.Struct crawler_headers = 1;
+    // Optional. HTTP headers sent on page/resource requests.
+    // Repeated entries allow duplicate header names and preserve order.
+    repeated google.protobuf.Struct crawler_headers = 1;
 
-  // Optional. Initial cookies.
-  repeated RagCrawlerCookie crawler_cookies = 2;
+    // Optional. Initial cookies.
+    repeated RagCrawlerCookie crawler_cookies = 2;
 
 }
 
 // Cookie representation for initial browser session state.
 message RagCrawlerCookie {
 
-  // Required. Cookie name.
-  string cookie_name = 1;
+    // Required. Cookie name.
+    string cookie_name = 1;
 
-  // Required. Cookie value.
-  string cookie_value = 2;
+    // Required. Cookie value.
+    string cookie_value = 2;
 
-  // Optional. Cookie domain.
-  string cookie_domain = 3;
+    // Optional. Cookie domain.
+    string cookie_domain = 3;
 
 }
 
 // Concurrency and pacing controls for crawler runs.
 message RagCrawlerConcurrencyConfig {
 
-  // Optional. Max number of concurrent in-flight requests/pages.
-  // Increase for throughput; reduce for fragile sites/rate limits.
-  int32 max_concurrent_requests = 1;
+    // Optional. Max number of concurrent in-flight requests/pages.
+    // Increase for throughput; reduce for fragile sites/rate limits.
+    int32 max_concurrent_requests = 1;
 
 }
 
@@ -1526,38 +1523,38 @@ message RagCrawlerConcurrencyConfig {
 // diagnostics capture, and deep crawling options for each crawler run.
 message RagCrawlerConfig {
 
-  // Optional. Concurrency and pacing controls for crawler requests.
-  RagCrawlerConcurrencyConfig concurrency_config = 1;
+    // Optional. Concurrency and pacing controls for crawler requests.
+    RagCrawlerConcurrencyConfig concurrency_config = 1;
 
-  // Optional. Deep crawler behavior (enable + depth/pages/scoring/filter chain).
-  RagCrawlerDeepCrawlerConfig deep_crawler_config = 2;
+    // Optional. Deep crawler behavior (enable + depth/pages/scoring/filter chain).
+    RagCrawlerDeepCrawlerConfig deep_crawler_config = 2;
 
-  // Optional. Structured output configuration (format + metadata policy).
-  RagCrawlerResultsConfig output_config = 3;
+    // Optional. Structured output configuration (format + metadata policy).
+    RagCrawlerResultsConfig output_config = 3;
 
 }
 
 // Deep crawler options grouped under one config node.
 message RagCrawlerDeepCrawlerConfig {
 
-  // Optional. Enable deep crawler behavior (link following beyond seeds).
-  // Default <code>false</code>. If <code>false</code>, <code>config</code> is ignored.
-  bool is_active = 1;
+    // Optional. Enable deep crawler behavior (link following beyond seeds).
+    // Default <code>false</code>. If <code>false</code>, <code>config</code> is ignored.
+    bool is_active = 1;
 
-  // Optional. Crawl traversal strategy.
-  // BFS is often best for broad site coverage; DFS for deep section traversal.
-  // Default <code>RAG_CRAWLER_CRAWL_STRATEGY_BFS</code>.
-  RagCrawlerCrawlStrategy crawl_strategy = 2;
+    // Optional. Crawl traversal strategy.
+    // BFS is often best for broad site coverage; DFS for deep section traversal.
+    // Default <code>RAG_CRAWLER_CRAWL_STRATEGY_BFS</code>.
+    RagCrawlerCrawlStrategy crawl_strategy = 2;
 
-  // Optional. Maximum link depth from seed URLs.
-  // <code>0</code> usually means only seed pages.
-  int32 max_depth = 3;
+    // Optional. Maximum link depth from seed URLs.
+    // <code>0</code> usually means only seed pages.
+    int32 max_depth = 3;
 
-  // Optional. Hard cap on total processed pages for this run.
-  int32 max_pages = 4;
+    // Optional. Hard cap on total processed pages for this run.
+    int32 max_pages = 4;
 
-  // Optional. URL and domain restrictions.
-  RagCrawlerFilters deep_crawler_filters = 5;
+    // Optional. URL and domain restrictions.
+    RagCrawlerFilters deep_crawler_filters = 5;
 
 }
 
@@ -1567,128 +1564,128 @@ message RagCrawlerDeepCrawlerConfig {
 // similar to Crawl4AI markdown/output-generation toggles.
 message RagCrawlerResultsConfig {
 
-  // Optional. Inject YAML frontmatter into markdown output.
-  // If the content is HTML based, it will automatically be converted to markdown.
-  // Optionally, you can inject YAML frontmatter into the markdown output.
-  // Default <code>true</code>.
-  bool inject_frontmatter = 1;
+    // Optional. Inject YAML frontmatter into markdown output.
+    // If the content is HTML based, it will automatically be converted to markdown.
+    // Optionally, you can inject YAML frontmatter into the markdown output.
+    // Default <code>true</code>.
+    bool inject_frontmatter = 1;
 
-  // Optional. Metadata extractors.
-  repeated RagCrawlerMetaDataExtractor meta_data_extractors = 2;
+    // Optional. Metadata extractors.
+    repeated RagCrawlerMetaDataExtractor meta_data_extractors = 2;
 
 }
 
 enum RagCrawlerMetaDataExtractorType {
 
-  // Regex pattern.
-  RAG_CRAWLER_META_DATA_EXTRACTOR_TYPE_REGEX = 0;
+    // Regex pattern.
+    RAG_CRAWLER_META_DATA_EXTRACTOR_TYPE_REGEX = 0;
 
-  // Fixed value.
-  RAG_CRAWLER_META_DATA_EXTRACTOR_TYPE_FIXED_VALUE = 1;
+    // Fixed value.
+    RAG_CRAWLER_META_DATA_EXTRACTOR_TYPE_FIXED_VALUE = 1;
 
-  // CSS selector.
-  RAG_CRAWLER_META_DATA_EXTRACTOR_TYPE_CSS_SELECTOR = 2;
+    // CSS selector.
+    RAG_CRAWLER_META_DATA_EXTRACTOR_TYPE_CSS_SELECTOR = 2;
 
-  // XPath selector.
-  RAG_CRAWLER_META_DATA_EXTRACTOR_TYPE_XPATH_SELECTOR = 3;
+    // XPath selector.
+    RAG_CRAWLER_META_DATA_EXTRACTOR_TYPE_XPATH_SELECTOR = 3;
 
-  // ID selector.
-  RAG_CRAWLER_META_DATA_EXTRACTOR_TYPE_ID_SELECTOR = 4;
+    // ID selector.
+    RAG_CRAWLER_META_DATA_EXTRACTOR_TYPE_ID_SELECTOR = 4;
 }
 
 // Metadata extractor configuration.
 message RagCrawlerMetaDataExtractor {
 
-  // Optional. Regex pattern to match metadata field names.
-  RagCrawlerMetaDataExtractorType type = 1;
+    // Optional. Regex pattern to match metadata field names.
+    RagCrawlerMetaDataExtractorType type = 1;
 
-  // Optional. Value to extract (e.g. regex pattern, fixed value, CSS selector, XPath selector, ID selector).
-  string value = 2;
+    // Optional. Value to extract (e.g. regex pattern, fixed value, CSS selector, XPath selector, ID selector).
+    string value = 2;
 
-  // Optional. Metadata field name to extract (e.g. url, title, description, author, keywords, tags, created_date, modified_date, scraped_at).
-  string key = 3;
+    // Optional. Metadata field name to extract (e.g. url, title, description, author, keywords, tags, created_date, modified_date, scraped_at).
+    string key = 3;
 
 }
 
 // Crawl traversal strategy.
 enum RagCrawlerCrawlStrategy {
 
-  // Breadth-first traversal.
-  RAG_CRAWLER_CRAWL_STRATEGY_BFS = 0;
+    // Breadth-first traversal.
+    RAG_CRAWLER_CRAWL_STRATEGY_BFS = 0;
 
-  // Depth-first traversal.
-  RAG_CRAWLER_CRAWL_STRATEGY_DFS = 1;
+    // Depth-first traversal.
+    RAG_CRAWLER_CRAWL_STRATEGY_DFS = 1;
 
-  // Best-first traversal based on relevance scoring.
-  RAG_CRAWLER_CRAWL_STRATEGY_BEST_FIRST = 2;
+    // Best-first traversal based on relevance scoring.
+    RAG_CRAWLER_CRAWL_STRATEGY_BEST_FIRST = 2;
 
 }
 
 // Timeout settings for crawler operations.
 message RagCrawlerRetryConfig {
 
-  // Optional. Page load/render timeout in seconds.
-  int32 page_load_timeout_seconds = 1;
+    // Optional. Page load/render timeout in seconds.
+    int32 page_load_timeout_seconds = 1;
 
-  // Optional. Maximum retry attempts per page source.
-  int32 retry_max_attempts = 2;
+    // Optional. Maximum retry attempts per page source.
+    int32 retry_max_attempts = 2;
 
 }
 
 // Supported content types for deep-crawl content-type filters.
 enum RagCrawlerFilterContentType {
 
-  // Unspecified content type.
-  RAG_CRAWLER_FILTER_CONTENT_TYPE_UNSPECIFIED = 0;
+    // Unspecified content type.
+    RAG_CRAWLER_FILTER_CONTENT_TYPE_UNSPECIFIED = 0;
 
-  // HTML documents.
-  RAG_CRAWLER_FILTER_CONTENT_TYPE_TEXT_HTML = 1;
+    // HTML documents.
+    RAG_CRAWLER_FILTER_CONTENT_TYPE_TEXT_HTML = 1;
 
-  // JSON payloads.
-  RAG_CRAWLER_FILTER_CONTENT_TYPE_APPLICATION_JSON = 2;
+    // JSON payloads.
+    RAG_CRAWLER_FILTER_CONTENT_TYPE_APPLICATION_JSON = 2;
 
-  // XML payloads.
-  RAG_CRAWLER_FILTER_CONTENT_TYPE_APPLICATION_XML = 3;
+    // XML payloads.
+    RAG_CRAWLER_FILTER_CONTENT_TYPE_APPLICATION_XML = 3;
 
-  // Plain text documents.
-  RAG_CRAWLER_FILTER_CONTENT_TYPE_TEXT_PLAIN = 4;
+    // Plain text documents.
+    RAG_CRAWLER_FILTER_CONTENT_TYPE_TEXT_PLAIN = 4;
 
-  // PDF documents.
-  RAG_CRAWLER_FILTER_CONTENT_TYPE_APPLICATION_PDF = 5;
+    // PDF documents.
+    RAG_CRAWLER_FILTER_CONTENT_TYPE_APPLICATION_PDF = 5;
 
-  // PowerPoint documents.
-  RAG_CRAWLER_FILTER_CONTENT_TYPE_APPLICATION_POWERPOINT = 6;
+    // PowerPoint documents.
+    RAG_CRAWLER_FILTER_CONTENT_TYPE_APPLICATION_POWERPOINT = 6;
 
-  // Excel documents.
-  RAG_CRAWLER_FILTER_CONTENT_TYPE_APPLICATION_EXCEL = 7;
+    // Excel documents.
+    RAG_CRAWLER_FILTER_CONTENT_TYPE_APPLICATION_EXCEL = 7;
 
-  // Word documents.
-  RAG_CRAWLER_FILTER_CONTENT_TYPE_APPLICATION_WORD = 8;
+    // Word documents.
+    RAG_CRAWLER_FILTER_CONTENT_TYPE_APPLICATION_WORD = 8;
 
 }
 
 message RagCrawlerContentResult {
 
-  // Optional. Extracted page metadata.
-  // Includes only fields configured in <code>crawler_config.output_config.metadata.fields</code>.
-  google.protobuf.Struct metadata = 1;
+    // Optional. Extracted page metadata.
+    // Includes only fields configured in <code>crawler_config.output_config.metadata.fields</code>.
+    google.protobuf.Struct metadata = 1;
 
-  // Optional. Extracted markdown output.
-  string markdown = 2;
+    // Optional. Extracted markdown output.
+    string markdown = 2;
 
 }
 
 // Consolidated diagnostics and HTTP execution metadata for a crawl result.
 message RagCrawlerExecutionInfo {
 
-  // Optional. SSL certificate details.
-  google.protobuf.Struct ssl_certificate = 1;
+    // Optional. SSL certificate details.
+    google.protobuf.Struct ssl_certificate = 1;
 
-  // Optional. Crawl status flag.
-  bool success = 2;
+    // Optional. Crawl status flag.
+    bool success = 2;
 
-  // Optional. Error details if crawl failed.
-  string error_message = 3;
+    // Optional. Error details if crawl failed.
+    string error_message = 3;
 
 }
 
@@ -1698,33 +1695,33 @@ message RagCrawlerExecutionInfo {
 // extracted content, metadata, diagnostics, and optional binary artifacts.
 message RagCrawlerResult {
 
-  // Resource name of the crawler result.
-  // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawler_results/&lt;crawler_result_uuid&gt;</code></pre>
-  string name = 1;
+    // Resource name of the crawler result.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawler_results/&lt;crawler_result_uuid&gt;</code></pre>
+    string name = 1;
 
-  // Resource name of the source crawler profile.
-  string crawler_name = 2;
+    // Resource name of the source crawler profile.
+    string crawler_name = 2;
 
-  // Resource name of the crawler run that produced this result.
-  string operation_name = 3;
+    // Resource name of the crawler run that produced this result.
+    string operation_name = 3;
 
-  // URL this content came from.
-  string source_url = 4;
+    // URL this content came from.
+    string source_url = 4;
 
-  // Classified primary file resource built from source URL and detected MIME/type.
-  // If its a HTML page, it will be stored in the DocumentFileResource Bytes.
-  // See FileResource Documentation for all other file types.
-  FileResource file_resource = 5;
+    // Classified primary file resource built from source URL and detected MIME/type.
+    // If its a HTML page, it will be stored in the DocumentFileResource Bytes.
+    // See FileResource Documentation for all other file types.
+    FileResource file_resource = 5;
 
-  // Timestamp when this URL was last processed by crawler.
-  google.protobuf.Timestamp last_crawled_date = 6;
+    // Timestamp when this URL was last processed by crawler.
+    google.protobuf.Timestamp last_crawled_date = 6;
 
-  // Optional. Consolidated extracted content for this page.
-  RagCrawlerContentResult content_result = 7;
+    // Optional. Consolidated extracted content for this page.
+    RagCrawlerContentResult content_result = 7;
 
-  // Optional. Timestamp when source page was last updated.
-  // Source precedence: HTTP Last-Modified header, then sitemap <lastmod> fallback.
-  google.protobuf.Timestamp page_last_updated_date = 8;
+    // Optional. Timestamp when source page was last updated.
+    // Source precedence: HTTP Last-Modified header, then sitemap <lastmod> fallback.
+    google.protobuf.Timestamp page_last_updated_date = 8;
 
 }
 
@@ -1734,73 +1731,73 @@ message RagCrawlerResult {
 // Clients should poll operation status via <code>RagGetCrawlerRun</code>.
 message RagStartCrawlerRequest {
 
-  // Required. The agent that owns the crawler.
-  // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-  string parent = 1;
+    // Required. The agent that owns the crawler.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
 
-  // Required. The language of the project to use.
-  string language_code = 2;
+    // Required. The language of the project to use.
+    string language_code = 2;
 
-  // Required. Resource name of the crawler to run.
-  // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre>
-  string crawler_name = 3;
+    // Required. Resource name of the crawler to run.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre>
+    string crawler_name = 3;
 
 }
 
 // Request message for getting a crawler run.
 message RagGetCrawlerRunRequest {
 
-  // Required. The agent that owns the crawler run.
-  // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-  string parent = 1;
+    // Required. The agent that owns the crawler run.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
 
-  // Required. The language of the project to use.
-  string language_code = 2;
+    // Required. The language of the project to use.
+    string language_code = 2;
 
-  // Required. Resource name of the crawler run.
-  // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawler_runs/&lt;crawler_run_uuid&gt;</code></pre>
-  string crawler_run_name = 3;
+    // Required. Resource name of the crawler run.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawler_runs/&lt;crawler_run_uuid&gt;</code></pre>
+    string crawler_run_name = 3;
 
 }
 
 // Request message for listing crawler runs.
 message RagListCrawlerRunsRequest {
 
-  // Required. The agent that owns the crawler runs.
-  // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-  string parent = 1;
+    // Required. The agent that owns the crawler runs.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
 
-  // Required. The language of the project to use.
-  string language_code = 2;
+    // Required. The language of the project to use.
+    string language_code = 2;
 
-  // Optional. Restrict to one crawler.
-  // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre>
-  string crawler_name = 3;
+    // Optional. Restrict to one crawler.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre>
+    string crawler_name = 3;
 
-  // Optional. Opaque pagination cursor from a previous list response.
-  // Leave empty for the first page.
-  string page_token = 4;
+    // Optional. Opaque pagination cursor from a previous list response.
+    // Leave empty for the first page.
+    string page_token = 4;
 
-  // Optional. Filter by operation state.
-  OperationMetadata.Status state = 5;
+    // Optional. Filter by operation state.
+    OperationMetadata.Status state = 5;
 
-  // Optional. Sort field (default: <code>created_at</code>).
-  string orderby = 6;
+    // Optional. Sort field (default: <code>created_at</code>).
+    string orderby = 6;
 
-  // Optional. Sort descending.
-  optional SortingMode sorting_mode = 7;
+    // Optional. Sort descending.
+    optional SortingMode sorting_mode = 7;
 
 }
 
 // Response message for listing crawler runs.
 message RagListCrawlerRunsResponse {
-  // List of crawler run operations.
-  repeated ondewo.nlu.Operation crawler_runs = 1;
+    // List of crawler run operations.
+    repeated ondewo.nlu.Operation crawler_runs = 1;
 
-  // Opaque pagination cursor for the next page.
-  // Pass this value unchanged as request <code>page_token</code>.
-  // Empty means no further pages.
-  string next_page_token = 2;
+    // Opaque pagination cursor for the next page.
+    // Pass this value unchanged as request <code>page_token</code>.
+    // Empty means no further pages.
+    string next_page_token = 2;
 }
 
 // Request message for deleting crawler runs.
@@ -1812,59 +1809,59 @@ message RagListCrawlerRunsResponse {
 // If both lists are empty, the call is a no-op.
 message RagDeleteCrawlerRunsRequest {
 
-  // Required. The agent that owns the crawler runs.
-  // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-  string parent = 1;
+    // Required. The agent that owns the crawler runs.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
 
-  // Required. The language of the project to use.
-  string language_code = 2;
+    // Required. The language of the project to use.
+    string language_code = 2;
 
-  // Optional. Explicit crawler run names to delete.
-  // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawler_runs/&lt;crawler_run_uuid&gt;</code></pre>
-  repeated string crawler_run_names = 3;
+    // Optional. Explicit crawler run names to delete.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawler_runs/&lt;crawler_run_uuid&gt;</code></pre>
+    repeated string crawler_run_names = 3;
 
-  // Optional. Crawler names whose runs should be deleted.
-  // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre>
-  repeated string crawler_names = 4;
+    // Optional. Crawler names whose runs should be deleted.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre>
+    repeated string crawler_names = 4;
 
 }
 
 // Response message for deleting crawler runs.
 message RagDeleteCrawlerRunsResponse {
 
-  // Number of deleted crawler runs.
-  int32 deleted_count = 1;
+    // Number of deleted crawler runs.
+    int32 deleted_count = 1;
 
-  // Resource names of deleted crawler runs.
-  repeated string deleted_run_names = 2;
+    // Resource names of deleted crawler runs.
+    repeated string deleted_run_names = 2;
 
 }
 
 // Request message for stopping a crawler run.
 message RagStopCrawlerRequest {
 
-  // Required. The agent that owns the crawler run.
-  // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-  string parent = 1;
+    // Required. The agent that owns the crawler run.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
 
-  // Required. The language of the project to use.
-  string language_code = 2;
+    // Required. The language of the project to use.
+    string language_code = 2;
 
-  // Required. Resource name of the crawler run.
-  // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawler_runs/&lt;crawler_run_uuid&gt;</code></pre>
-  string name = 3;
+    // Required. Resource name of the crawler run.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawler_runs/&lt;crawler_run_uuid&gt;</code></pre>
+    string name = 3;
 
 }
 
 // Result of stopping a crawler run
 message RagStopCrawlerResponse {
 
-  // Resource name of the crawler run that was stopped.
-  // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawler_runs/&lt;crawler_run_uuid&gt;</code></pre>
-  string name = 1;
+    // Resource name of the crawler run that was stopped.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawler_runs/&lt;crawler_run_uuid&gt;</code></pre>
+    string name = 1;
 
-  // Error message if there are any; empty when the stop request was accepted successfully.
-  string error_message = 2;
+    // Error message if there are any; empty when the stop request was accepted successfully.
+    string error_message = 2;
 
 }
 
@@ -1880,155 +1877,155 @@ message RagStopCrawlerResponse {
 // </code></pre>
 message RagGetCrawlerResultsRequest {
 
-  // Required. The agent that owns the crawler run.
-  // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-  string parent = 1;
+    // Required. The agent that owns the crawler run.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
 
-  // Required. The language of the project to use.
-  string language_code = 2;
+    // Required. The language of the project to use.
+    string language_code = 2;
 
-  // Required. Resource name of the crawler run.
-  // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawler_runs/&lt;crawler_run_uuid&gt;</code></pre>
-  string operation_name = 3;
+    // Required. Resource name of the crawler run.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawler_runs/&lt;crawler_run_uuid&gt;</code></pre>
+    string operation_name = 3;
 
-  // Optional. Opaque pagination cursor from a previous response.
-  // Leave empty for the first page.
-  string page_token = 4;
+    // Optional. Opaque pagination cursor from a previous response.
+    // Leave empty for the first page.
+    string page_token = 4;
 
-  // Optional. Filter by URL substring.
-  string url_query = 5;
+    // Optional. Filter by URL substring.
+    string url_query = 5;
 
 }
 
 // Response message for getting crawler results.
 message RagGetCrawlerResultsResponse {
 
-  // List of crawler results for the crawler run.
-  repeated RagCrawlerResult crawler_results = 1;
+    // List of crawler results for the crawler run.
+    repeated RagCrawlerResult crawler_results = 1;
 
-  // Opaque pagination cursor for the next page.
-  // Pass this value unchanged as request <code>page_token</code>.
-  // Empty means no further pages.
-  string next_page_token = 2;
+    // Opaque pagination cursor for the next page.
+    // Pass this value unchanged as request <code>page_token</code>.
+    // Empty means no further pages.
+    string next_page_token = 2;
 
-  // Total number of crawler results available after applying request filters
-  // (for example <code>url_query</code>).
-  int32 total_size = 3;
+    // Total number of crawler results available after applying request filters
+    // (for example <code>url_query</code>).
+    int32 total_size = 3;
 
 }
 
 // Request message for getting a single crawler result from a crawler run.
 message RagGetCrawlerResultRequest {
 
-  // Required. The agent that owns the crawler run.
-  // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-  string parent = 1;
+    // Required. The agent that owns the crawler run.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
 
-  // Required. The language of the project to use.
-  string language_code = 2;
+    // Required. The language of the project to use.
+    string language_code = 2;
 
-  // Required. Resource name of the crawler run.
-  // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawler_runs/&lt;crawler_run_uuid&gt;</code></pre>
-  string operation_name = 3;
+    // Required. Resource name of the crawler run.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawler_runs/&lt;crawler_run_uuid&gt;</code></pre>
+    string operation_name = 3;
 
-  // Required. Exact URL of the crawler result to retrieve.
-  string url = 4;
+    // Required. Exact URL of the crawler result to retrieve.
+    string url = 4;
 
 }
 
 // Request message for adding crawler output to one or more datasets.
 message RagAddCrawlerResultsToDatasetsRequest {
 
-  // Required. The agent that owns the crawler.
-  // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-  string parent = 1;
+    // Required. The agent that owns the crawler.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
 
-  // Required. The language of the project to use.
-  string language_code = 2;
+    // Required. The language of the project to use.
+    string language_code = 2;
 
-  // Required. Resource names of crawlers whose results should be imported.
-  // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre>
-  repeated string crawler_names = 3;
+    // Required. Resource names of crawlers whose results should be imported.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre>
+    repeated string crawler_names = 3;
 
-  // Required. Resource names of crawler results to import.
-  // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawler_results/&lt;crawler_result_uuid&gt;</code></pre>
-  repeated string crawler_result_names = 4;
+    // Required. Resource names of crawler results to import.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawler_results/&lt;crawler_result_uuid&gt;</code></pre>
+    repeated string crawler_result_names = 4;
 
-  // Required. Dataset IDs to receive the imported crawler outputs.
-  //
-  // Example:
-  // <pre><code>crawler_names = ["projects/p/agent/crawlers/c1"]
-  // crawler_result_names = ["projects/p/agent/crawler_results/r1", "projects/p/agent/crawler_results/r2"]
-  // dataset_ids = ["dataset-a", "dataset-b"]</code></pre>
-  repeated string dataset_ids = 5;
+    // Required. Dataset IDs to receive the imported crawler outputs.
+    //
+    // Example:
+    // <pre><code>crawler_names = ["projects/p/agent/crawlers/c1"]
+    // crawler_result_names = ["projects/p/agent/crawler_results/r1", "projects/p/agent/crawler_results/r2"]
+    // dataset_ids = ["dataset-a", "dataset-b"]</code></pre>
+    repeated string dataset_ids = 5;
 
 }
 
 // Request message for removing previously imported crawler output from one or more datasets.
 message RagRemoveCrawlerResultsFromDatasetsRequest {
 
-  // Required. The agent that owns the crawler.
-  // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-  string parent = 1;
+    // Required. The agent that owns the crawler.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
 
-  // Required. The language of the project to use.
-  string language_code = 2;
+    // Required. The language of the project to use.
+    string language_code = 2;
 
-  // Required. Resource names of crawlers whose results should be removed.
-  // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre>
-  string crawler_name = 3;
+    // Required. Resource names of crawlers whose results should be removed.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre>
+    string crawler_name = 3;
 
-  // Required. Resource names of crawler results to remove.
-  // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawler_results/&lt;crawler_result_uuid&gt;</code></pre>
-  repeated string crawler_result_names = 4;
+    // Required. Resource names of crawler results to remove.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawler_results/&lt;crawler_result_uuid&gt;</code></pre>
+    repeated string crawler_result_names = 4;
 
-  // Required. Dataset IDs from which the crawler outputs should be removed.
-  //
-  // Example:
-  // <pre><code>crawler_names = ["projects/p/agent/crawlers/c1"]
-  // crawler_result_names = ["projects/p/agent/crawler_results/r1", "projects/p/agent/crawler_results/r2"]
-  // dataset_ids = ["dataset-a", "dataset-b"]</code></pre>
-  repeated string dataset_ids = 5;
+    // Required. Dataset IDs from which the crawler outputs should be removed.
+    //
+    // Example:
+    // <pre><code>crawler_names = ["projects/p/agent/crawlers/c1"]
+    // crawler_result_names = ["projects/p/agent/crawler_results/r1", "projects/p/agent/crawler_results/r2"]
+    // dataset_ids = ["dataset-a", "dataset-b"]</code></pre>
+    repeated string dataset_ids = 5;
 
 }
 
 // Request message for getting datasets attached to a crawler.
 message RagGetCrawlerAttachedDatasetsRequest {
 
-  // Required. The agent owning the crawler.
-  // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-  string parent = 1;
+    // Required. The agent owning the crawler.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
 
-  // Required. The language of the project to use.
-  string language_code = 2;
+    // Required. The language of the project to use.
+    string language_code = 2;
 
-  // Required. Resource name of the crawler.
-  // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre>
-  string crawler_name = 3;
+    // Required. Resource name of the crawler.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre>
+    string crawler_name = 3;
 
-  // Optional. Maximum number of datasets to return.
-  //
-  // If unset or non-positive, backend default is used.
-  int32 page_size = 4;
+    // Optional. Maximum number of datasets to return.
+    //
+    // If unset or non-positive, backend default is used.
+    int32 page_size = 4;
 
-  // Optional. Opaque pagination cursor from a previous response.
-  // Leave empty for the first page.
-  string page_token = 5;
+    // Optional. Opaque pagination cursor from a previous response.
+    // Leave empty for the first page.
+    string page_token = 5;
 
-  // Optional. The mask to control which <code>RagDataset</code> fields get returned.
-  google.protobuf.FieldMask field_mask = 6;
+    // Optional. The mask to control which <code>RagDataset</code> fields get returned.
+    google.protobuf.FieldMask field_mask = 6;
 
 }
 
 // Response message for getting datasets attached to a crawler.
 message RagGetCrawlerAttachedDatasetsResponse {
 
-  // Datasets attached to the crawler.
-  repeated RagDataset datasets = 1;
+    // Datasets attached to the crawler.
+    repeated RagDataset datasets = 1;
 
-  // Opaque pagination cursor for the next page.
-  // Pass this value unchanged as request <code>page_token</code>.
-  // Empty means no further pages.
-  string next_page_token = 2;
+    // Opaque pagination cursor for the next page.
+    // Pass this value unchanged as request <code>page_token</code>.
+    // Empty means no further pages.
+    string next_page_token = 2;
 
 }
