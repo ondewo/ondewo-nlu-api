@@ -37,6 +37,7 @@ import "google/protobuf/empty.proto";
 import "google/protobuf/struct.proto";
 import "google/protobuf/field_mask.proto";
 import "google/protobuf/timestamp.proto";
+import "google/logging/v2/log_entry.proto";
 import "ondewo/nlu/operation_metadata.proto";
 import "ondewo/nlu/operations.proto";
 import "ondewo/nlu/session.proto";
@@ -2876,7 +2877,7 @@ message RagCrawler {
   RagCrawlerRetryConfig retry_config = 12;
 
   // Logs
-  repeated google.protobuf.Struct logs = 13;
+  repeated google.logging.v2.LogEntry logs = 13;
 }
 
 // Crawl entry points.
