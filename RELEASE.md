@@ -2,6 +2,14 @@
 
 *****************
 
+## Release ONDEWO NLU API 6.5.0
+
+### Improvements
+
+* [[OND211-2330]](https://ondewo.atlassian.net/browse/OND211-2330) Cleaned up `rags` service by removing unsupported endpoints and their request/response messages. Added the field `parsing_status` of the new message type `RagDatasetParsingStatus` to `RagDataset` which provides parsing status statistics for all documents in the dataset. Remove the redundant `available` field from `RagChunk`.
+
+*****************
+
 ## Release ONDEWO NLU API 6.4.0
 
 ### Improvements
