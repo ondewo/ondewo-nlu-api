@@ -21246,13 +21246,6 @@ Roughly corresponds to Crawl4AI <code>CrawlerRunConfig</code>. </p></td>
                   <td><p>Optional. Retry configuration for crawler runs. </p></td>
                 </tr>
               
-                <tr>
-                  <td>logs</td>
-                  <td><a href="#google.logging.v2.LogEntry">google.logging.v2.LogEntry</a></td>
-                  <td>repeated</td>
-                  <td><p>Logs </p></td>
-                </tr>
-              
             </tbody>
           </table>
 
@@ -21585,7 +21578,7 @@ Default <code>RAG_CRAWLER_CRAWL_STRATEGY_BFS</code>. </p></td>
                   <td>allow_external_links</td>
                   <td><a href="#bool">bool</a></td>
                   <td></td>
-                  <td><p>Optional. Exclude external links. </p></td>
+                  <td><p>Optional. Include external links. </p></td>
                 </tr>
               
                 <tr>
@@ -24142,7 +24135,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td>crawler_name</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Required. Resource names of crawlers whose results should be removed.
+                  <td><p>Required. Resource name of crawler whose results should be removed.
 Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre> </p></td>
                 </tr>
               
