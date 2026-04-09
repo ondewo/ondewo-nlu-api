@@ -6883,7 +6883,6 @@ a separate crawler run and result set.
 | crawler_browser_config | [RagCrawlerBrowserConfig](#ondewo.nlu.RagCrawlerBrowserConfig) |  | Optional. Browser runtime setup (engine, viewport, cookies, proxy, headers). Roughly corresponds to Crawl4AI <code>BrowserConfig</code>. Use this when target sites require JS, custom headers, session cookies, or proxy routing. |
 | crawler_config | [RagCrawlerConfig](#ondewo.nlu.RagCrawlerConfig) |  | Optional. Crawl execution behavior and extraction settings. Roughly corresponds to Crawl4AI <code>CrawlerRunConfig</code>. |
 | retry_config | [RagCrawlerRetryConfig](#ondewo.nlu.RagCrawlerRetryConfig) |  | Optional. Retry configuration for crawler runs. |
-| logs | [google.logging.v2.LogEntry](#google.logging.v2.LogEntry) | repeated | Logs |
 
 
 
@@ -7050,7 +7049,7 @@ and domains to be excluded in the deep crawl or extraction of pages to be crawle
 | allowed_domains | [string](#string) | repeated | Optional. Domain allow-list (host-level gating). |
 | disallowed_domains | [string](#string) | repeated | Optional. Domain block-list. |
 | allow_internal_links | [bool](#bool) |  | Optional. Include internal links. |
-| allow_external_links | [bool](#bool) |  | Optional. Exclude external links. |
+| allow_external_links | [bool](#bool) |  | Optional. Include external links. |
 | allow_social_media_links | [bool](#bool) |  | Optional. Include social media links. |
 
 
@@ -8037,7 +8036,7 @@ Request message for removing previously imported crawler output from one or more
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The agent that owns the crawler. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
 | language_code | [string](#string) |  | Required. The language of the project to use. |
-| crawler_name | [string](#string) |  | Required. Resource names of crawlers whose results should be removed. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre> |
+| crawler_name | [string](#string) |  | Required. Resource name of crawler whose results should be removed. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre> |
 | crawler_result_names | [string](#string) | repeated | Required. Resource names of crawler results to remove. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawler_results/&lt;crawler_result_uuid&gt;</code></pre> |
 | dataset_ids | [string](#string) | repeated | Required. Dataset IDs from which the crawler outputs should be removed.
 
