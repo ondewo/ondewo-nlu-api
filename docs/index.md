@@ -392,6 +392,7 @@
     - [RagDeleteCrawlerRunsResponse](#ondewo.nlu.RagDeleteCrawlerRunsResponse)
     - [RagDeleteCrawlersRequest](#ondewo.nlu.RagDeleteCrawlersRequest)
     - [RagDeleteCrawlersResponse](#ondewo.nlu.RagDeleteCrawlersResponse)
+    - [RagDeleteDocumentsRequest](#ondewo.nlu.RagDeleteDocumentsRequest)
     - [RagDeleteRequest](#ondewo.nlu.RagDeleteRequest)
     - [RagDocAgg](#ondewo.nlu.RagDocAgg)
     - [RagDocument](#ondewo.nlu.RagDocument)
@@ -434,7 +435,6 @@
     - [RagComparisonOperator](#ondewo.nlu.RagComparisonOperator)
     - [RagCrawlerAuthenticationExecutionType](#ondewo.nlu.RagCrawlerAuthenticationExecutionType)
     - [RagCrawlerCrawlStrategy](#ondewo.nlu.RagCrawlerCrawlStrategy)
-    - [RagCrawlerFilterContentType](#ondewo.nlu.RagCrawlerFilterContentType)
     - [RagCrawlerMetaDataExtractorType](#ondewo.nlu.RagCrawlerMetaDataExtractorType)
     - [RagCrawlerSelectorType](#ondewo.nlu.RagCrawlerSelectorType)
     - [RagDocumentStatus](#ondewo.nlu.RagDocumentStatus)
@@ -6838,7 +6838,6 @@ Chunks are the basic retrieval units used for vector similarity search in RAG.
 | dataset_id | [string](#string) |  | Parent dataset ID. |
 | document_id | [string](#string) |  | Parent document ID. |
 | content | [string](#string) |  | Chunk text content (the actual text segment extracted from the document). |
-| docnm_kwd | [string](#string) |  | Document name keyword used for filtering and identification. |
 | important_keywords | [string](#string) | repeated | Important keywords extracted from or manually assigned to this chunk. |
 | questions | [string](#string) | repeated | Associated questions for Q&amp;A chunks (used when <code>chunk_method=qa</code>). |
 | image_id | [string](#string) |  | Associated image ID if this chunk references an image. |
@@ -6896,10 +6895,8 @@ a separate crawler run and result set.
 ### RagCrawlerAuth
 Authentication configuration.
 
-Supports both browser/form login and HTTP auth patterns used by Crawl4AI
-pipelines when crawling protected content.
-HTTP Auth is used on all pages of the sources, while html_auth is a separate authentication flow used in the beginning of the crawl
-to extract the cookies. This is done through a login screen. If HTTP Auth is set, this would ALSO be used on the HTML auth page,
+Supports both browser/form login and HTTP auth patterns used by Crawl4AI pipelines when crawling protected content.
+HTTP Auth is used on all pages of the sources, while html_auth is a separate authentication flow used in the beginning of the crawl to extract the cookies. This is done through a login screen. If HTTP Auth is set, this would ALSO be used on the HTML auth page.
 
 
 | Field | Type | Label | Description |
@@ -6975,7 +6972,7 @@ diagnostics capture, and deep crawling options for each crawler run.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| metadata | [google.protobuf.Struct](#google.protobuf.Struct) |  | Optional. Extracted page metadata. Includes only fields configured in <code>crawler_config.output_config.metadata.fields</code>. |
+| metadata | [google.protobuf.Struct](#google.protobuf.Struct) |  | Optional. Extracted page metadata. Includes only fields configured in <code>RagCrawlerConfig.output_config.meta_data_extractors</code>. |
 | markdown | [string](#string) |  | Optional. Extracted markdown output. |
 
 
@@ -7079,7 +7076,7 @@ DOM. Credentials are then filled before form submission.
 | html_auth_password_selector_type | [RagCrawlerSelectorType](#ondewo.nlu.RagCrawlerSelectorType) |  | Optional. Password field selector type. |
 | html_auth_password_selector | [string](#string) |  | Optional. Password field selector value. |
 | html_auth_password | [string](#string) |  | Optional. Password credential. |
-| authentication_execution_type | [RagCrawlerAuthenticationExecutionType](#ondewo.nlu.RagCrawlerAuthenticationExecutionType) |  | Authentication execution type |
+| authentication_execution_type | [RagCrawlerAuthenticationExecutionType](#ondewo.nlu.RagCrawlerAuthenticationExecutionType) |  | Optional. Authentication execution type |
 
 
 
@@ -7249,7 +7246,7 @@ Request message for creating a new dataset.
 | name | [string](#string) |  | Required. Unique name of the dataset to create. Must follow these requirements: <ul> <li>contain only characters from the basic multilingual Unicode plane</li> <li>maximum 128 characters</li> <li>case-insensitive</li> </ul> |
 | description | [string](#string) |  | Optional. Dataset description. Maximum 65,535 characters. |
 | avatar | [string](#string) |  | Optional. Base64-encoded avatar image in the format <code>"data:image/[png|jpeg];base64,&lt;base64_string&gt;"</code>. Maximum 65,535 characters. |
-| chunk_method | [RagChunkMethod](#ondewo.nlu.RagChunkMethod) | optional | Optional. Default chunking method for documents in this dataset. |
+| chunk_method | [RagChunkMethod](#ondewo.nlu.RagChunkMethod) |  | Optional. Default chunking method for documents in this dataset. |
 | parser_config | [RagParserConfig](#ondewo.nlu.RagParserConfig) |  | Optional. Configuration settings for the dataset parser. The used fields vary depending on the selected <code>chunk_method</code>. |
 
 
@@ -7272,7 +7269,7 @@ Dataset containing documents for RAG.
 | document_count | [int32](#int32) | optional | Number of documents in the dataset. |
 | token_num | [int32](#int32) | optional | Number of tokens in the dataset. |
 | chunk_count | [int32](#int32) | optional | Number of chunks of all documents in the dataset. |
-| chunk_method | [RagChunkMethod](#ondewo.nlu.RagChunkMethod) | optional | Default chunking method for documents in this dataset. |
+| chunk_method | [RagChunkMethod](#ondewo.nlu.RagChunkMethod) |  | Default chunking method for documents in this dataset. |
 | parser_config | [RagParserConfig](#ondewo.nlu.RagParserConfig) |  | Document parser configuration (auto-generated based on chunk_method). |
 | pagerank | [int32](#int32) | optional | Pagerank. |
 | parsing_status | [RagDatasetParsingStatus](#ondewo.nlu.RagDatasetParsingStatus) |  | Parsing status of all documents in the dataset. Might be empty if the system failed to get the parsing statistics. |
@@ -7426,6 +7423,25 @@ Response message for deleting multiple crawlers of a dataset for the specified a
 
 
 
+<a name="ondewo.nlu.RagDeleteDocumentsRequest"></a>
+
+### RagDeleteDocumentsRequest
+Request message for deleting one or more documents of a single dataset.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  | Required. The agent to delete datasets from. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| language_code | [string](#string) |  | Required. The language of the project to use. |
+| dataset_id | [string](#string) |  | Required. ID of dataset containing the documents to delete. |
+| ids | [string](#string) | repeated | Optional. IDs of documents to delete. Duplicate IDs are ignored. |
+| delete_all | [bool](#bool) |  | Optional. Delete all documents of the specified dataset if set to <code>true</code> |
+
+
+
+
+
+
 <a name="ondewo.nlu.RagDeleteRequest"></a>
 
 ### RagDeleteRequest
@@ -7436,7 +7452,8 @@ Request message for deleting one or more of a RAGFlow resource.
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The agent to delete datasets from. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
 | language_code | [string](#string) |  | Required. The language of the project to use. |
-| ids | [string](#string) | repeated | Optional. IDs of resources to delete. If empty all are deleted. Duplicate IDs are ignored. |
+| ids | [string](#string) | repeated | Optional. IDs of resources to delete. Duplicate IDs are ignored. |
+| delete_all | [bool](#bool) |  | Optional. Delete all resources if set to <code>true</code> |
 
 
 
@@ -7471,7 +7488,7 @@ Document uploaded to a dataset.
 | id | [string](#string) |  | Document UUID. |
 | thumbnail | [string](#string) |  | Base64-encoded thumbnail image in the format <code>"data:image/[png|jpeg];base64,&lt;base64_string&gt;"</code>. Maximum 65,535 characters. |
 | dataset_id | [string](#string) |  | Parent dataset ID. |
-| chunk_method | [RagChunkMethod](#ondewo.nlu.RagChunkMethod) | optional | Chunking method used for this document. |
+| chunk_method | [RagChunkMethod](#ondewo.nlu.RagChunkMethod) |  | Chunking method used for this document. |
 | parser_config | [RagParserConfig](#ondewo.nlu.RagParserConfig) |  | Parser configuration used for chunking this document. |
 | type | [RagDocumentType](#ondewo.nlu.RagDocumentType) |  | Broad file category |
 | name | [string](#string) |  | Document filename. |
@@ -7483,7 +7500,7 @@ Document uploaded to a dataset.
 | process_begin_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Processing start date and time. |
 | process_duration | [float](#float) | optional | Total processing duration in seconds. |
 | meta_fields | [google.protobuf.Struct](#google.protobuf.Struct) |  | Custom metadata fields specific to this document (arbitrary key-value pairs). |
-| run | [RagDocumentStatus](#ondewo.nlu.RagDocumentStatus) | optional | Document processing status. |
+| run | [RagDocumentStatus](#ondewo.nlu.RagDocumentStatus) |  | Document processing status. |
 | status | [string](#string) |  | Status indicating if document is enabled (<code>"1"</code>=enabled, <code>"0"</code>=disabled). |
 | create_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. |
 | update_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Last update date and time. |
@@ -7594,7 +7611,13 @@ Request message for getting datasets attached to a crawler.
 | page_size | [int32](#int32) |  | Optional. Maximum number of datasets to return.
 
 If unset or non-positive, backend default is used. |
-| page_token | [string](#string) |  | Optional. Opaque pagination cursor from a previous response. Leave empty for the first page. |
+| page_token | [string](#string) |  | Optional. Specifies which page to return. The page token is a string of the format <pre><code>current_index-&lt;idx&gt;--page_size-&lt;size&gt;</code></pre>
+
+<ul> <li><code>&lt;size&gt;</code> must be an integer &geq; <code>1</code>. The maximum number of results to return.</li> <li><code>&lt;idx&gt;</code> must be an integer &geq; <code>0</code>. The start index in the requested list, starting from which a maximum of <code>&lt;size&gt;</code> elements are returned.</li> </ul>
+
+<em>Important note</em>: The <code>&lt;idx&gt;</code> is the index in the requested sequence NOT the page number. E.g. if the requested list has 100 elements then <code>current_index-5--page_size-15</code> returns the elements at index 5-19 and not the 5-th page of 15 elements.
+
+Both <code>current_index-&lt;idx&gt;</code> and <code>page_size-&lt;size&gt;</code> are optional and default to <code>0</code> and <code>10</code> respectively. The following are all valid <code>page_token</code>s <br> <ul> <li><code> </code> (empty string/missing value) - index 0, page size 10</li> <li><code>current_index-3</code> - index 3, page size 10</li> <li><code>page_size-20</code> - index 0, page size 20</li> <li><code>current_index-3--page_size-20</code> - index 3, page size 20</li> </ul> |
 | field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which <code>RagDataset</code> fields get returned. |
 
 
@@ -7611,7 +7634,7 @@ Response message for getting datasets attached to a crawler.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | datasets | [RagDataset](#ondewo.nlu.RagDataset) | repeated | Datasets attached to the crawler. |
-| next_page_token | [string](#string) |  | Opaque pagination cursor for the next page. Pass this value unchanged as request <code>page_token</code>. Empty means no further pages. |
+| next_page_token | [string](#string) |  | Page token string (following the format described in <code>RagGetCrawlerAttachedDatasetsRequest</code>) for retrieving the next results page |
 
 
 
@@ -7674,7 +7697,13 @@ RagGetCrawlerResults(run_name, page_token="...")
 | parent | [string](#string) |  | Required. The agent that owns the crawler run. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
 | language_code | [string](#string) |  | Required. The language of the project to use. |
 | operation_name | [string](#string) |  | Required. Resource name of the crawler run. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawler_runs/&lt;crawler_run_uuid&gt;</code></pre> |
-| page_token | [string](#string) |  | Optional. Opaque pagination cursor from a previous response. Leave empty for the first page. |
+| page_token | [string](#string) |  | Optional. Specifies which page to return. The page token is a string of the format <pre><code>current_index-&lt;idx&gt;--page_size-&lt;size&gt;</code></pre>
+
+<ul> <li><code>&lt;size&gt;</code> must be an integer &geq; <code>1</code>. The maximum number of results to return.</li> <li><code>&lt;idx&gt;</code> must be an integer &geq; <code>0</code>. The start index in the requested list, starting from which a maximum of <code>&lt;size&gt;</code> elements are returned.</li> </ul>
+
+<em>Important note</em>: The <code>&lt;idx&gt;</code> is the index in the requested sequence NOT the page number. E.g. if the requested list has 100 elements then <code>current_index-5--page_size-15</code> returns the elements at index 5-19 and not the 5-th page of 15 elements.
+
+Both <code>current_index-&lt;idx&gt;</code> and <code>page_size-&lt;size&gt;</code> are optional and default to <code>0</code> and <code>10</code> respectively. The following are all valid <code>page_token</code>s <br> <ul> <li><code> </code> (empty string/missing value) - index 0, page size 10</li> <li><code>current_index-3</code> - index 3, page size 10</li> <li><code>page_size-20</code> - index 0, page size 20</li> <li><code>current_index-3--page_size-20</code> - index 3, page size 20</li> </ul> |
 | url_query | [string](#string) |  | Optional. Filter by URL substring. |
 
 
@@ -7691,7 +7720,7 @@ Response message for getting crawler results.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | crawler_results | [RagCrawlerResult](#ondewo.nlu.RagCrawlerResult) | repeated | List of crawler results for the crawler run. |
-| next_page_token | [string](#string) |  | Opaque pagination cursor for the next page. Pass this value unchanged as request <code>page_token</code>. Empty means no further pages. |
+| next_page_token | [string](#string) |  | Page token string (following the format described in <code>RagGetCrawlerResultsRequest</code>) for retrieving the next results page |
 | total_size | [int32](#int32) |  | Total number of crawler results available after applying request filters (for example <code>url_query</code>). |
 
 
@@ -7746,7 +7775,13 @@ Request message for listing crawler runs.
 | parent | [string](#string) |  | Required. The agent that owns the crawler runs. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
 | language_code | [string](#string) |  | Required. The language of the project to use. |
 | crawler_name | [string](#string) |  | Optional. Restrict to one crawler. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre> |
-| page_token | [string](#string) |  | Optional. Opaque pagination cursor from a previous list response. Leave empty for the first page. |
+| page_token | [string](#string) |  | Optional. Specifies which page to return. The page token is a string of the format <pre><code>current_index-&lt;idx&gt;--page_size-&lt;size&gt;</code></pre>
+
+<ul> <li><code>&lt;size&gt;</code> must be an integer &geq; <code>1</code>. The maximum number of results to return.</li> <li><code>&lt;idx&gt;</code> must be an integer &geq; <code>0</code>. The start index in the requested list, starting from which a maximum of <code>&lt;size&gt;</code> elements are returned.</li> </ul>
+
+<em>Important note</em>: The <code>&lt;idx&gt;</code> is the index in the requested sequence NOT the page number. E.g. if the requested list has 100 elements then <code>current_index-5--page_size-15</code> returns the elements at index 5-19 and not the 5-th page of 15 elements.
+
+Both <code>current_index-&lt;idx&gt;</code> and <code>page_size-&lt;size&gt;</code> are optional and default to <code>0</code> and <code>10</code> respectively. The following are all valid <code>page_token</code>s <br> <ul> <li><code> </code> (empty string/missing value) - index 0, page size 10</li> <li><code>current_index-3</code> - index 3, page size 10</li> <li><code>page_size-20</code> - index 0, page size 20</li> <li><code>current_index-3--page_size-20</code> - index 3, page size 20</li> </ul> |
 | state | [OperationMetadata.Status](#ondewo.nlu.OperationMetadata.Status) |  | Optional. Filter by operation state. |
 | orderby | [string](#string) |  | Optional. Sort field (default: <code>created_at</code>). |
 | sorting_mode | [SortingMode](#ondewo.nlu.SortingMode) | optional | Optional. Sort descending. |
@@ -7765,7 +7800,7 @@ Response message for listing crawler runs.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | crawler_runs | [Operation](#ondewo.nlu.Operation) | repeated | List of crawler run operations. |
-| next_page_token | [string](#string) |  | Opaque pagination cursor for the next page. Pass this value unchanged as request <code>page_token</code>. Empty means no further pages. |
+| next_page_token | [string](#string) |  | Page token string (following the format described in <code>RagListCrawlerRunsRequest</code>) for retrieving the next results page |
 
 
 
@@ -7782,7 +7817,13 @@ Request message for listing crawlers of a dataset for the specified agent.
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The agent to list crawlers for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
 | language_code | [string](#string) |  | Required. The language of the agent of the dataset. |
-| page_token | [string](#string) |  | Optional. Opaque pagination cursor from a previous list response. Leave empty for the first page. |
+| page_token | [string](#string) |  | Optional. Specifies which page to return. The page token is a string of the format <pre><code>current_index-&lt;idx&gt;--page_size-&lt;size&gt;</code></pre>
+
+<ul> <li><code>&lt;size&gt;</code> must be an integer &geq; <code>1</code>. The maximum number of results to return.</li> <li><code>&lt;idx&gt;</code> must be an integer &geq; <code>0</code>. The start index in the requested list, starting from which a maximum of <code>&lt;size&gt;</code> elements are returned.</li> </ul>
+
+<em>Important note</em>: The <code>&lt;idx&gt;</code> is the index in the requested sequence NOT the page number. E.g. if the requested list has 100 elements then <code>current_index-5--page_size-15</code> returns the elements at index 5-19 and not the 5-th page of 15 elements.
+
+Both <code>current_index-&lt;idx&gt;</code> and <code>page_size-&lt;size&gt;</code> are optional and default to <code>0</code> and <code>10</code> respectively. The following are all valid <code>page_token</code>s <br> <ul> <li><code> </code> (empty string/missing value) - index 0, page size 10</li> <li><code>current_index-3</code> - index 3, page size 10</li> <li><code>page_size-20</code> - index 0, page size 20</li> <li><code>current_index-3--page_size-20</code> - index 3, page size 20</li> </ul> |
 | dataset_name | [string](#string) |  | Optional. Filter by dataset name. |
 | crawler_name | [string](#string) |  | Optional. Filter by crawler name. |
 | orderby | [string](#string) |  | Optional. Sort field (default: <code>create_time</code>). |
@@ -7802,7 +7843,7 @@ Response message for listing crawlers.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | crawlers | [RagCrawler](#ondewo.nlu.RagCrawler) | repeated | List of crawlers. |
-| next_page_token | [string](#string) |  | Opaque pagination cursor for the next page. Pass this value unchanged as request <code>page_token</code>. Empty means no further pages. |
+| next_page_token | [string](#string) |  | Page token string (following the format described in <code>RagListCrawlersRequest</code>) for retrieving the next results page |
 
 
 
@@ -7860,7 +7901,7 @@ Both <code>current_index-&lt;idx&gt;</code> and <code>page_size-&lt;size&gt;</co
 | desc | [bool](#bool) | optional | Optional. Sort in descending order (default: <code>true</code>). |
 | keywords | [string](#string) |  | Optional. Filter by document names containing <code>keywords</code>. |
 | suffix | [string](#string) | repeated | Optional. Suffixes to filter by (e.g. <code>["pdf", "png", "docx"]</code>). |
-| run_status | [RagDocumentStatus](#ondewo.nlu.RagDocumentStatus) | repeated | Optional. Document status to filter by. |
+| run_status | [RagDocumentStatus](#ondewo.nlu.RagDocumentStatus) | repeated | Optional. Document statuses to filter by. |
 | create_time_from | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Optional. Filter by creation time start. |
 | create_time_to | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Optional. Filter by creation time end. |
 | metadata_condition | [RagMetadataConditions](#ondewo.nlu.RagMetadataConditions) |  | Optional. Metadata filter condition to restrict results based on document metadata.<br> |
@@ -8031,7 +8072,7 @@ Both <code>current_index-&lt;idx&gt;</code> and <code>page_size-&lt;size&gt;</co
 | use_kg | [bool](#bool) | optional | Optional. Include knowledge graph retrieval to enhance results with graph relationships. |
 | cross_languages | [string](#string) | repeated | Optional. Cross-language translation codes to enable multilingual retrieval.<br> List elements can be any form of language name/code (parsed by LLM). |
 | metadata_condition | [RagMetadataConditions](#ondewo.nlu.RagMetadataConditions) |  | Optional. Metadata filter condition to restrict results based on document metadata. |
-| similarity_threshold | [float](#float) |  | Optional. Minimum similarity score threshold between <code>0.0</code> and <code>1.0</code> (default: <code>0.2</code>). |
+| similarity_threshold | [float](#float) | optional | Optional. Minimum similarity score threshold between <code>0.0</code> and <code>1.0</code> (default: <code>0.2</code>). |
 | vector_similarity_weight | [float](#float) | optional | Optional. Weight for vector similarity versus keyword matching between <code>0.0</code> and <code>1.0</code> (default: <code>0.3</code>).<br> Higher values favor vector similarity, lower values favor keyword matching. |
 | top_k | [int32](#int32) |  | Optional. Minimum 1. Maximum number of chunks to retrieve before reranking (default: <code>1024</code>). |
 | highlight | [bool](#bool) | optional | Optional. Whether to highlight matched content in the returned chunks. |
@@ -8145,9 +8186,9 @@ The same field constraints as for <code>RagCreateDatasetRequest</code> apply her
 | language_code | [string](#string) |  | Required. The language of the project to use. |
 | dataset_id | [string](#string) |  | Required. Dataset ID. |
 | name | [string](#string) |  | Optional. New dataset name. |
-| description | [string](#string) |  | Optional. New dataset description. |
-| avatar | [string](#string) |  | Optional. New avatar image. |
-| chunk_method | [RagChunkMethod](#ondewo.nlu.RagChunkMethod) | optional | Optional. New chunk method. |
+| description | [string](#string) | optional | Optional. New dataset description. |
+| avatar | [string](#string) | optional | Optional. New avatar image. |
+| chunk_method | [RagChunkMethod](#ondewo.nlu.RagChunkMethod) |  | Optional. New chunk method. |
 | parser_config | [RagParserConfig](#ondewo.nlu.RagParserConfig) |  | Optional. New parser config (deep merged with existing). |
 | pagerank | [int32](#int32) | optional | Optional. Minimum 0. Maximum 100. PageRank value. |
 
@@ -8169,7 +8210,7 @@ Request message for updating an existing document's metadata and configuration.
 | dataset_id | [string](#string) |  | Required. Dataset ID containing the document. |
 | document_id | [string](#string) |  | Required. Document ID to update. |
 | name | [string](#string) |  | Optional. Maximum length 255. New document name (file extension must remain the same). |
-| chunk_method | [RagChunkMethod](#ondewo.nlu.RagChunkMethod) | optional | Optional. New chunking method (resets document to <code>UNSTART</code> status and deletes all existing chunks). |
+| chunk_method | [RagChunkMethod](#ondewo.nlu.RagChunkMethod) |  | Optional. New chunking method (resets document to <code>UNSTART</code> status and deletes all existing chunks). |
 | parser_config | [RagParserConfig](#ondewo.nlu.RagParserConfig) |  | Optional. New parser configuration (deep merged with existing configuration). |
 | enabled | [bool](#bool) | optional | Optional. Document enabled/disabled status. |
 | meta_fields | [google.protobuf.Struct](#google.protobuf.Struct) |  | Optional. Custom metadata fields for document-specific metadata (replaces existing metadata). |
@@ -8207,18 +8248,19 @@ Chunking method for documents. See <a href="https://ragflow.io/docs/dev/configur
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| RAG_CHUNK_METHOD_NAIVE | 0 | General (default). |
-| RAG_CHUNK_METHOD_BOOK | 1 | Book. |
-| RAG_CHUNK_METHOD_EMAIL | 2 | Email. |
-| RAG_CHUNK_METHOD_LAWS | 3 | Laws. |
-| RAG_CHUNK_METHOD_MANUAL | 4 | Manual. |
-| RAG_CHUNK_METHOD_ONE | 5 | One. |
-| RAG_CHUNK_METHOD_PAPER | 6 | Paper. |
-| RAG_CHUNK_METHOD_PICTURE | 7 | Picture. |
-| RAG_CHUNK_METHOD_PRESENTATION | 8 | Presentation. |
-| RAG_CHUNK_METHOD_QA | 9 | Q&A. |
-| RAG_CHUNK_METHOD_TABLE | 10 | Table. |
-| RAG_CHUNK_METHOD_TAG | 11 | Tag. |
+| RAG_CHUNK_METHOD_UNSPECIFIED | 0 | Unspecified. Defaults to <code>RAG_CHUNK_METHOD_NAIVE</code> |
+| RAG_CHUNK_METHOD_NAIVE | 1 | General (default). |
+| RAG_CHUNK_METHOD_BOOK | 2 | Book. |
+| RAG_CHUNK_METHOD_EMAIL | 3 | Email. |
+| RAG_CHUNK_METHOD_LAWS | 4 | Laws. |
+| RAG_CHUNK_METHOD_MANUAL | 5 | Manual. |
+| RAG_CHUNK_METHOD_ONE | 6 | One. |
+| RAG_CHUNK_METHOD_PAPER | 7 | Paper. |
+| RAG_CHUNK_METHOD_PICTURE | 8 | Picture. |
+| RAG_CHUNK_METHOD_PRESENTATION | 9 | Presentation. |
+| RAG_CHUNK_METHOD_QA | 10 | Q&A. |
+| RAG_CHUNK_METHOD_TABLE | 11 | Table. |
+| RAG_CHUNK_METHOD_TAG | 12 | Tag. |
 
 
 
@@ -8229,20 +8271,21 @@ Valid metadata condition comparison operators
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| RAG_COMPARISON_OPERATOR_CONTAINS | 0 | String representation of metadata field contains value.<br> If metadata field is a list, checks if the string representation of <em>any</em> field contains value. |
-| RAG_COMPARISON_OPERATOR_NOT_CONTAINS | 1 | String representation of metadata field does not contain value.<br> If metadata field is a list, checks if the string representation of <em>no</em> fields contains value. |
-| RAG_COMPARISON_OPERATOR_IN | 2 | Checks with Python's <code>in</code> operator.<br> If metadata field is a list, <em>all</em> elements must satisfy the condition. |
-| RAG_COMPARISON_OPERATOR_NOT_IN | 3 | Checks with Python's <code>not in</code> operator.<br> If metadata field is a list, <em>all</em> elements must satisfy the condition. |
-| RAG_COMPARISON_OPERATOR_START_WITH | 4 | String representation of metadata field starts with value.<br> If metadata field is a list, checks if the joined string of the string representations of all list elements starts with the value. |
-| RAG_COMPARISON_OPERATOR_END_WITH | 5 | String representation of metadata field ends with value.<br> If metadata field is a list, checks if the joined string of the string representations of all list elements ends with the value. |
-| RAG_COMPARISON_OPERATOR_EMPTY | 6 | Is empty (Python <em>falsy</em>). |
-| RAG_COMPARISON_OPERATOR_NOT_EMPTY | 7 | Is not empty (Python <em>truthy</em>). |
-| RAG_COMPARISON_OPERATOR_EQ | 8 | Equals. |
-| RAG_COMPARISON_OPERATOR_NEQ | 9 | Does not equal. |
-| RAG_COMPARISON_OPERATOR_GT | 10 | Greater than. |
-| RAG_COMPARISON_OPERATOR_LT | 11 | Less than. |
-| RAG_COMPARISON_OPERATOR_GEQ | 12 | Greater than or equal. |
-| RAG_COMPARISON_OPERATOR_LEQ | 13 | Less than or equal. |
+| RAG_COMPARISON_OPERATOR_UNSPECIFIED | 0 | Unspecified. Must never be used. |
+| RAG_COMPARISON_OPERATOR_CONTAINS | 1 | String representation of metadata field contains value.<br> If metadata field is a list, checks if the string representation of <em>any</em> field contains value. |
+| RAG_COMPARISON_OPERATOR_NOT_CONTAINS | 2 | String representation of metadata field does not contain value.<br> If metadata field is a list, checks if the string representation of <em>no</em> fields contains value. |
+| RAG_COMPARISON_OPERATOR_IN | 3 | Checks with Python's <code>in</code> operator.<br> If metadata field is a list, <em>all</em> elements must satisfy the condition. |
+| RAG_COMPARISON_OPERATOR_NOT_IN | 4 | Checks with Python's <code>not in</code> operator.<br> If metadata field is a list, <em>all</em> elements must satisfy the condition. |
+| RAG_COMPARISON_OPERATOR_START_WITH | 5 | String representation of metadata field starts with value.<br> If metadata field is a list, checks if the joined string of the string representations of all list elements starts with the value. |
+| RAG_COMPARISON_OPERATOR_END_WITH | 6 | String representation of metadata field ends with value.<br> If metadata field is a list, checks if the joined string of the string representations of all list elements ends with the value. |
+| RAG_COMPARISON_OPERATOR_EMPTY | 7 | Is empty (Python <em>falsy</em>). |
+| RAG_COMPARISON_OPERATOR_NOT_EMPTY | 8 | Is not empty (Python <em>truthy</em>). |
+| RAG_COMPARISON_OPERATOR_EQ | 9 | Equals. |
+| RAG_COMPARISON_OPERATOR_NEQ | 10 | Does not equal. |
+| RAG_COMPARISON_OPERATOR_GT | 11 | Greater than. |
+| RAG_COMPARISON_OPERATOR_LT | 12 | Less than. |
+| RAG_COMPARISON_OPERATOR_GEQ | 13 | Greater than or equal. |
+| RAG_COMPARISON_OPERATOR_LEQ | 14 | Less than or equal. |
 
 
 
@@ -8266,28 +8309,10 @@ Crawl traversal strategy.
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| RAG_CRAWLER_CRAWL_STRATEGY_BFS | 0 | Breadth-first traversal. |
-| RAG_CRAWLER_CRAWL_STRATEGY_DFS | 1 | Depth-first traversal. |
-| RAG_CRAWLER_CRAWL_STRATEGY_BEST_FIRST | 2 | Best-first traversal based on relevance scoring. |
-
-
-
-<a name="ondewo.nlu.RagCrawlerFilterContentType"></a>
-
-### RagCrawlerFilterContentType
-Supported content types for deep-crawl content-type filters.
-
-| Name | Number | Description |
-| ---- | ------ | ----------- |
-| RAG_CRAWLER_FILTER_CONTENT_TYPE_UNSPECIFIED | 0 | Unspecified content type. |
-| RAG_CRAWLER_FILTER_CONTENT_TYPE_TEXT_HTML | 1 | HTML documents. |
-| RAG_CRAWLER_FILTER_CONTENT_TYPE_APPLICATION_JSON | 2 | JSON payloads. |
-| RAG_CRAWLER_FILTER_CONTENT_TYPE_APPLICATION_XML | 3 | XML payloads. |
-| RAG_CRAWLER_FILTER_CONTENT_TYPE_TEXT_PLAIN | 4 | Plain text documents. |
-| RAG_CRAWLER_FILTER_CONTENT_TYPE_APPLICATION_PDF | 5 | PDF documents. |
-| RAG_CRAWLER_FILTER_CONTENT_TYPE_APPLICATION_POWERPOINT | 6 | PowerPoint documents. |
-| RAG_CRAWLER_FILTER_CONTENT_TYPE_APPLICATION_EXCEL | 7 | Excel documents. |
-| RAG_CRAWLER_FILTER_CONTENT_TYPE_APPLICATION_WORD | 8 | Word documents. |
+| RAG_CRAWLER_CRAWL_STRATEGY_UNSPECIFIED | 0 | Unspecified |
+| RAG_CRAWLER_CRAWL_STRATEGY_BFS | 1 | Breadth-first traversal. |
+| RAG_CRAWLER_CRAWL_STRATEGY_DFS | 2 | Depth-first traversal. |
+| RAG_CRAWLER_CRAWL_STRATEGY_BEST_FIRST | 3 | Best-first traversal based on relevance scoring. |
 
 
 
@@ -8298,11 +8323,12 @@ Supported content types for deep-crawl content-type filters.
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| RAG_CRAWLER_META_DATA_EXTRACTOR_TYPE_REGEX | 0 | Regex pattern. |
-| RAG_CRAWLER_META_DATA_EXTRACTOR_TYPE_FIXED_VALUE | 1 | Fixed value. |
-| RAG_CRAWLER_META_DATA_EXTRACTOR_TYPE_CSS_SELECTOR | 2 | CSS selector. |
-| RAG_CRAWLER_META_DATA_EXTRACTOR_TYPE_XPATH_SELECTOR | 3 | XPath selector. |
-| RAG_CRAWLER_META_DATA_EXTRACTOR_TYPE_ID_SELECTOR | 4 | ID selector. |
+| RAG_CRAWLER_META_DATA_EXTRACTOR_TPYE_UNSPECIFIED | 0 | Unspecified. |
+| RAG_CRAWLER_META_DATA_EXTRACTOR_TYPE_REGEX | 1 | Regex pattern. |
+| RAG_CRAWLER_META_DATA_EXTRACTOR_TYPE_FIXED_VALUE | 2 | Fixed value. |
+| RAG_CRAWLER_META_DATA_EXTRACTOR_TYPE_CSS_SELECTOR | 3 | CSS selector. |
+| RAG_CRAWLER_META_DATA_EXTRACTOR_TYPE_XPATH_SELECTOR | 4 | XPath selector. |
+| RAG_CRAWLER_META_DATA_EXTRACTOR_TYPE_ID_SELECTOR | 5 | ID selector. |
 
 
 
@@ -8313,9 +8339,10 @@ Supported content types for deep-crawl content-type filters.
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| RAG_CRAWLER_SELECTOR_TYPE_ID | 0 | ID selector. |
-| RAG_CRAWLER_SELECTOR_TYPE_CSS_CLASS | 1 | CSS class selector. |
-| RAG_CRAWLER_SELECTOR_TYPE_XPATH | 2 | XPath selector. |
+| RAG_CRAWLER_SELECTOR_TYPE_UNSPECIFIED | 0 | Unspecified. |
+| RAG_CRAWLER_SELECTOR_TYPE_ID | 1 | ID selector. |
+| RAG_CRAWLER_SELECTOR_TYPE_CSS_CLASS | 2 | CSS class selector. |
+| RAG_CRAWLER_SELECTOR_TYPE_XPATH | 3 | XPath selector. |
 
 
 
@@ -8326,11 +8353,12 @@ Document processing status.
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| RAG_DOCUMENT_STATUS_UNSTART | 0 | Document has not started processing. |
-| RAG_DOCUMENT_STATUS_RUNNING | 1 | Document is currently being processed. |
-| RAG_DOCUMENT_STATUS_CANCEL | 2 | Document processing was cancelled. |
-| RAG_DOCUMENT_STATUS_DONE | 3 | Document processing completed successfully. |
-| RAG_DOCUMENT_STATUS_FAIL | 4 | Document processing failed. |
+| RAG_DOCUMENT_STATUS_UNSPECIFIED | 0 | Unspecified. |
+| RAG_DOCUMENT_STATUS_UNSTART | 1 | Document has not started processing. |
+| RAG_DOCUMENT_STATUS_RUNNING | 2 | Document is currently being processed. |
+| RAG_DOCUMENT_STATUS_CANCEL | 3 | Document processing was cancelled. |
+| RAG_DOCUMENT_STATUS_DONE | 4 | Document processing completed successfully. |
+| RAG_DOCUMENT_STATUS_FAIL | 5 | Document processing failed. |
 
 
 
@@ -8341,13 +8369,14 @@ Broad document category.
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| RAG_DOCUMENT_TYPE_PDF | 0 | PDF |
-| RAG_DOCUMENT_TYPE_DOC | 1 | general documents (e.g. text, slides, spreadsheets, code, ...) |
-| RAG_DOCUMENT_TYPE_VISUAL | 2 | images and videos |
-| RAG_DOCUMENT_TYPE_AURAL | 3 | audio |
-| RAG_DOCUMENT_TYPE_VIRTUAL | 4 | empty virtual files |
-| RAG_DOCUMENT_TYPE_FOLDER | 5 | folders |
-| RAG_DOCUMENT_TYPE_OTHER | 6 | unrecognized document types |
+| RAG_DOCUMENT_TYPE_UNSPECIFIED | 0 | Unspecified. |
+| RAG_DOCUMENT_TYPE_PDF | 1 | PDF |
+| RAG_DOCUMENT_TYPE_DOC | 2 | general documents (e.g. text, slides, spreadsheets, code, ...) |
+| RAG_DOCUMENT_TYPE_VISUAL | 3 | images and videos |
+| RAG_DOCUMENT_TYPE_AURAL | 4 | audio |
+| RAG_DOCUMENT_TYPE_VIRTUAL | 5 | empty virtual files |
+| RAG_DOCUMENT_TYPE_FOLDER | 6 | folders |
+| RAG_DOCUMENT_TYPE_OTHER | 7 | unrecognized document types |
 
 
 
@@ -8358,8 +8387,9 @@ Knowledge graph construction methods.
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| RAG_GRAPH_RAG_METHOD_LIGHT | 0 | Use prompts provided by <a href="https://github.com/HKUDS/LightRAG">LightRAG</a>. |
-| RAG_GRAPH_RAG_METHOD_GENERAL | 1 | Use prompts provided by <a href="https://github.com/microsoft/graphrag">GraphRAG</a>. |
+| RAG_GRAPH_RAG_METHOD_UNSPECIFIED | 0 | Unspecified. Defaults to <code>RAG_GRAPH_RAG_METHOD_GENERAL</code> |
+| RAG_GRAPH_RAG_METHOD_LIGHT | 1 | Use prompts provided by <a href="https://github.com/HKUDS/LightRAG">LightRAG</a>. |
+| RAG_GRAPH_RAG_METHOD_GENERAL | 2 | Use prompts provided by <a href="https://github.com/microsoft/graphrag">GraphRAG</a>. |
 
 
 
@@ -8370,8 +8400,9 @@ Metadata conditions logical operators
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| RAG_LOGIC_AND | 0 | Return results that match <em>all</em> conditions. |
-| RAG_LOGIC_OR | 1 | Return results that match <em>any</em> condition. |
+| RAG_LOGIC_UNSPECIFIED | 0 | Unspecified. Must never be used. |
+| RAG_LOGIC_AND | 1 | Return results that match <em>all</em> conditions. |
+| RAG_LOGIC_OR | 2 | Return results that match <em>any</em> condition. |
 
 
  <!-- end enums -->
@@ -8395,7 +8426,7 @@ Most of the RAG related endpoints largely mirror <a href="https://github.com/ond
 | RagUpdateDocument | [RagUpdateDocumentRequest](#ondewo.nlu.RagUpdateDocumentRequest) | [RagDocument](#ondewo.nlu.RagDocument) | Update document metadata and configuration.<br> If the chunk method is changed, the document is automatically re-parsed.<br> If the <code>run</code> field of the returned document is not <code>RAG_DOCUMENT_STATUS_RUNNING</code> this indicates a failure to start parsing the document. |
 | RagDownloadDocument | [RagDownloadDocumentRequest](#ondewo.nlu.RagDownloadDocumentRequest) | [RagFileChunk](#ondewo.nlu.RagFileChunk) stream | Download the original document file.<br> Returns binary file stream from storage.<br> First chunk contains metadata, subsequent chunks only contain data. |
 | RagListDocuments | [RagListDocumentsRequest](#ondewo.nlu.RagListDocumentsRequest) | [RagDocumentList](#ondewo.nlu.RagDocumentList) | List documents in a dataset with pagination and filtering.<br> Supports time range filtering and keyword search. |
-| RagDeleteDocuments | [RagDocumentIdsRequest](#ondewo.nlu.RagDocumentIdsRequest) | [RagPartialSuccess](#ondewo.nlu.RagPartialSuccess) | Delete one or more documents from a dataset (batch operation).<br> If ids empty, deletes all documents. Removes chunks and storage files. |
+| RagDeleteDocuments | [RagDeleteDocumentsRequest](#ondewo.nlu.RagDeleteDocumentsRequest) | [RagPartialSuccess](#ondewo.nlu.RagPartialSuccess) | Delete one or more documents from a dataset (batch operation).<br> If ids empty, deletes all documents. Removes chunks and storage files. |
 | RagRetrieval | [RagRetrievalRequest](#ondewo.nlu.RagRetrievalRequest) | [RagRetrievalResponse](#ondewo.nlu.RagRetrievalResponse) | Retrieve chunks using vector similarity search.<br> Supports reranking, metadata filtering, and knowledge graph retrieval. |
 | RagParseDocuments | [RagDocumentIdsRequest](#ondewo.nlu.RagDocumentIdsRequest) | [RagPartialSuccess](#ondewo.nlu.RagPartialSuccess) | Start parsing documents into chunks.<br> Queues documents for background processing. |
 | RagStopParsing | [RagDocumentIdsRequest](#ondewo.nlu.RagDocumentIdsRequest) | [RagPartialSuccess](#ondewo.nlu.RagPartialSuccess) | Stop parsing documents. |

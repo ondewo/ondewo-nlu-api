@@ -2068,6 +2068,10 @@
                       </li>
                     
                       <li>
+                        <a href="#ondewo.nlu.RagDeleteDocumentsRequest" class="title-badge message">RagDeleteDocumentsRequest</a>
+                      </li>
+                    
+                      <li>
                         <a href="#ondewo.nlu.RagDeleteRequest" class="title-badge message">RagDeleteRequest</a>
                       </li>
                     
@@ -2235,10 +2239,6 @@
                     
                       <li>
                         <a href="#ondewo.nlu.RagCrawlerCrawlStrategy" class="title-badge enum">RagCrawlerCrawlStrategy</a>
-                      </li>
-                    
-                      <li>
-                        <a href="#ondewo.nlu.RagCrawlerFilterContentType" class="title-badge enum">RagCrawlerFilterContentType</a>
                       </li>
                     
                       <li>
@@ -20859,7 +20859,7 @@ Supports time range filtering and keyword search.
         
           <h4 id="ondewo.nlu.Rags.RagDeleteDocuments" class="title-badge method">RagDeleteDocuments</h4>
 
-          <pre>rpc RagDeleteDocuments (<a href="#ondewo.nlu.RagDocumentIdsRequest">RagDocumentIdsRequest</a>) returns (<a href="#ondewo.nlu.RagPartialSuccess">RagPartialSuccess)</a></pre>
+          <pre>rpc RagDeleteDocuments (<a href="#ondewo.nlu.RagDeleteDocumentsRequest">RagDeleteDocumentsRequest</a>) returns (<a href="#ondewo.nlu.RagPartialSuccess">RagPartialSuccess)</a></pre>
 
           Delete one or more documents from a dataset (batch operation).<br>
 If ids empty, deletes all documents. Removes chunks and storage files.
@@ -21088,13 +21088,6 @@ dataset_ids = ["dataset-a", "dataset-b"]</code></pre> </p></td>
                 </tr>
               
                 <tr>
-                  <td>docnm_kwd</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Document name keyword used for filtering and identification. </p></td>
-                </tr>
-              
-                <tr>
                   <td>important_keywords</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
@@ -21268,7 +21261,7 @@ Roughly corresponds to Crawl4AI <code>CrawlerRunConfig</code>. </p></td>
         
       
         <h3 id="ondewo.nlu.RagCrawlerAuth" class="title-badge message">RagCrawlerAuth</h3>
-        <p>Authentication configuration.</p><p>Supports both browser/form login and HTTP auth patterns used by Crawl4AI</p><p>pipelines when crawling protected content.</p><p>HTTP Auth is used on all pages of the sources, while html_auth is a separate authentication flow used in the beginning of the crawl</p><p>to extract the cookies. This is done through a login screen. If HTTP Auth is set, this would ALSO be used on the HTML auth page,</p>
+        <p>Authentication configuration.</p><p>Supports both browser/form login and HTTP auth patterns used by Crawl4AI pipelines when crawling protected content.</p><p>HTTP Auth is used on all pages of the sources, while html_auth is a separate authentication flow used in the beginning of the crawl to extract the cookies. This is done through a login screen. If HTTP Auth is set, this would ALSO be used on the HTML auth page.</p>
 
         
           <table class="field-table">
@@ -21408,7 +21401,7 @@ Increase for throughput; reduce for fragile sites/rate limits. </p></td>
                   <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
                   <td></td>
                   <td><p>Optional. Extracted page metadata.
-Includes only fields configured in <code>crawler_config.output_config.metadata.fields</code>. </p></td>
+Includes only fields configured in <code>RagCrawlerConfig.output_config.meta_data_extractors</code>. </p></td>
                 </tr>
               
                 <tr>
@@ -21672,7 +21665,7 @@ Default <code>RAG_CRAWLER_CRAWL_STRATEGY_BFS</code>. </p></td>
                   <td>authentication_execution_type</td>
                   <td><a href="#ondewo.nlu.RagCrawlerAuthenticationExecutionType">RagCrawlerAuthenticationExecutionType</a></td>
                   <td></td>
-                  <td><p>Authentication execution type </p></td>
+                  <td><p>Optional. Authentication execution type </p></td>
                 </tr>
               
             </tbody>
@@ -22079,7 +22072,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 <tr>
                   <td>chunk_method</td>
                   <td><a href="#ondewo.nlu.RagChunkMethod">RagChunkMethod</a></td>
-                  <td>optional</td>
+                  <td></td>
                   <td><p>Optional. Default chunking method for documents in this dataset. </p></td>
                 </tr>
               
@@ -22159,7 +22152,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 <tr>
                   <td>chunk_method</td>
                   <td><a href="#ondewo.nlu.RagChunkMethod">RagChunkMethod</a></td>
-                  <td>optional</td>
+                  <td></td>
                   <td><p>Default chunking method for documents in this dataset. </p></td>
                 </tr>
               
@@ -22517,6 +22510,59 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid
 
         
       
+        <h3 id="ondewo.nlu.RagDeleteDocumentsRequest" class="title-badge message">RagDeleteDocumentsRequest</h3>
+        <p>Request message for deleting one or more documents of a single dataset.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>parent</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The agent to delete datasets from.
+Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>language_code</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The language of the project to use. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>dataset_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. ID of dataset containing the documents to delete. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>ids</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Optional. IDs of documents to delete. Duplicate IDs are ignored. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>delete_all</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Optional. Delete all documents of the specified dataset if set to <code>true</code> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="ondewo.nlu.RagDeleteRequest" class="title-badge message">RagDeleteRequest</h3>
         <p>Request message for deleting one or more of a RAGFlow resource.</p>
 
@@ -22546,7 +22592,14 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td>ids</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
-                  <td><p>Optional. IDs of resources to delete. If empty all are deleted. Duplicate IDs are ignored. </p></td>
+                  <td><p>Optional. IDs of resources to delete. Duplicate IDs are ignored. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>delete_all</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Optional. Delete all resources if set to <code>true</code> </p></td>
                 </tr>
               
             </tbody>
@@ -22628,7 +22681,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 <tr>
                   <td>chunk_method</td>
                   <td><a href="#ondewo.nlu.RagChunkMethod">RagChunkMethod</a></td>
-                  <td>optional</td>
+                  <td></td>
                   <td><p>Chunking method used for this document. </p></td>
                 </tr>
               
@@ -22712,7 +22765,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 <tr>
                   <td>run</td>
                   <td><a href="#ondewo.nlu.RagDocumentStatus">RagDocumentStatus</a></td>
-                  <td>optional</td>
+                  <td></td>
                   <td><p>Document processing status. </p></td>
                 </tr>
               
@@ -22989,8 +23042,24 @@ If unset or non-positive, backend default is used. </p></td>
                   <td>page_token</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Optional. Opaque pagination cursor from a previous response.
-Leave empty for the first page. </p></td>
+                  <td><p>Optional. Specifies which page to return. The page token is a string of the format
+<pre><code>current_index-&lt;idx&gt;--page_size-&lt;size&gt;</code></pre>
+
+<ul>
+    <li><code>&lt;size&gt;</code> must be an integer &geq; <code>1</code>. The maximum number of results to return.</li>
+    <li><code>&lt;idx&gt;</code> must be an integer &geq; <code>0</code>. The start index in the requested list, starting from which a maximum of <code>&lt;size&gt;</code> elements are returned.</li>
+</ul>
+
+<em>Important note</em>: The <code>&lt;idx&gt;</code> is the index in the requested sequence NOT the page number. E.g. if the requested list has 100 elements then <code>current_index-5--page_size-15</code> returns the elements at index 5-19 and not the 5-th page of 15 elements.
+
+Both <code>current_index-&lt;idx&gt;</code> and <code>page_size-&lt;size&gt;</code> are optional and default to <code>0</code> and <code>10</code> respectively. The following are all valid <code>page_token</code>s
+<br>
+<ul>
+    <li><code> </code> (empty string/missing value) - index 0, page size 10</li>
+    <li><code>current_index-3</code> - index 3, page size 10</li>
+    <li><code>page_size-20</code> - index 0, page size 20</li>
+    <li><code>current_index-3--page_size-20</code> - index 3, page size 20</li>
+</ul> </p></td>
                 </tr>
               
                 <tr>
@@ -23028,9 +23097,7 @@ Leave empty for the first page. </p></td>
                   <td>next_page_token</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Opaque pagination cursor for the next page.
-Pass this value unchanged as request <code>page_token</code>.
-Empty means no further pages. </p></td>
+                  <td><p>Page token string (following the format described in <code>RagGetCrawlerAttachedDatasetsRequest</code>) for retrieving the next results page </p></td>
                 </tr>
               
             </tbody>
@@ -23171,8 +23238,24 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawler_runs/&lt;crawler_
                   <td>page_token</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Optional. Opaque pagination cursor from a previous response.
-Leave empty for the first page. </p></td>
+                  <td><p>Optional. Specifies which page to return. The page token is a string of the format
+<pre><code>current_index-&lt;idx&gt;--page_size-&lt;size&gt;</code></pre>
+
+<ul>
+    <li><code>&lt;size&gt;</code> must be an integer &geq; <code>1</code>. The maximum number of results to return.</li>
+    <li><code>&lt;idx&gt;</code> must be an integer &geq; <code>0</code>. The start index in the requested list, starting from which a maximum of <code>&lt;size&gt;</code> elements are returned.</li>
+</ul>
+
+<em>Important note</em>: The <code>&lt;idx&gt;</code> is the index in the requested sequence NOT the page number. E.g. if the requested list has 100 elements then <code>current_index-5--page_size-15</code> returns the elements at index 5-19 and not the 5-th page of 15 elements.
+
+Both <code>current_index-&lt;idx&gt;</code> and <code>page_size-&lt;size&gt;</code> are optional and default to <code>0</code> and <code>10</code> respectively. The following are all valid <code>page_token</code>s
+<br>
+<ul>
+    <li><code> </code> (empty string/missing value) - index 0, page size 10</li>
+    <li><code>current_index-3</code> - index 3, page size 10</li>
+    <li><code>page_size-20</code> - index 0, page size 20</li>
+    <li><code>current_index-3--page_size-20</code> - index 3, page size 20</li>
+</ul> </p></td>
                 </tr>
               
                 <tr>
@@ -23210,9 +23293,7 @@ Leave empty for the first page. </p></td>
                   <td>next_page_token</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Opaque pagination cursor for the next page.
-Pass this value unchanged as request <code>page_token</code>.
-Empty means no further pages. </p></td>
+                  <td><p>Page token string (following the format described in <code>RagGetCrawlerResultsRequest</code>) for retrieving the next results page </p></td>
                 </tr>
               
                 <tr>
@@ -23359,8 +23440,24 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid
                   <td>page_token</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Optional. Opaque pagination cursor from a previous list response.
-Leave empty for the first page. </p></td>
+                  <td><p>Optional. Specifies which page to return. The page token is a string of the format
+<pre><code>current_index-&lt;idx&gt;--page_size-&lt;size&gt;</code></pre>
+
+<ul>
+    <li><code>&lt;size&gt;</code> must be an integer &geq; <code>1</code>. The maximum number of results to return.</li>
+    <li><code>&lt;idx&gt;</code> must be an integer &geq; <code>0</code>. The start index in the requested list, starting from which a maximum of <code>&lt;size&gt;</code> elements are returned.</li>
+</ul>
+
+<em>Important note</em>: The <code>&lt;idx&gt;</code> is the index in the requested sequence NOT the page number. E.g. if the requested list has 100 elements then <code>current_index-5--page_size-15</code> returns the elements at index 5-19 and not the 5-th page of 15 elements.
+
+Both <code>current_index-&lt;idx&gt;</code> and <code>page_size-&lt;size&gt;</code> are optional and default to <code>0</code> and <code>10</code> respectively. The following are all valid <code>page_token</code>s
+<br>
+<ul>
+    <li><code> </code> (empty string/missing value) - index 0, page size 10</li>
+    <li><code>current_index-3</code> - index 3, page size 10</li>
+    <li><code>page_size-20</code> - index 0, page size 20</li>
+    <li><code>current_index-3--page_size-20</code> - index 3, page size 20</li>
+</ul> </p></td>
                 </tr>
               
                 <tr>
@@ -23412,9 +23509,7 @@ Leave empty for the first page. </p></td>
                   <td>next_page_token</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Opaque pagination cursor for the next page.
-Pass this value unchanged as request <code>page_token</code>.
-Empty means no further pages. </p></td>
+                  <td><p>Page token string (following the format described in <code>RagListCrawlerRunsRequest</code>) for retrieving the next results page </p></td>
                 </tr>
               
             </tbody>
@@ -23453,8 +23548,24 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td>page_token</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Optional. Opaque pagination cursor from a previous list response.
-Leave empty for the first page. </p></td>
+                  <td><p>Optional. Specifies which page to return. The page token is a string of the format
+<pre><code>current_index-&lt;idx&gt;--page_size-&lt;size&gt;</code></pre>
+
+<ul>
+    <li><code>&lt;size&gt;</code> must be an integer &geq; <code>1</code>. The maximum number of results to return.</li>
+    <li><code>&lt;idx&gt;</code> must be an integer &geq; <code>0</code>. The start index in the requested list, starting from which a maximum of <code>&lt;size&gt;</code> elements are returned.</li>
+</ul>
+
+<em>Important note</em>: The <code>&lt;idx&gt;</code> is the index in the requested sequence NOT the page number. E.g. if the requested list has 100 elements then <code>current_index-5--page_size-15</code> returns the elements at index 5-19 and not the 5-th page of 15 elements.
+
+Both <code>current_index-&lt;idx&gt;</code> and <code>page_size-&lt;size&gt;</code> are optional and default to <code>0</code> and <code>10</code> respectively. The following are all valid <code>page_token</code>s
+<br>
+<ul>
+    <li><code> </code> (empty string/missing value) - index 0, page size 10</li>
+    <li><code>current_index-3</code> - index 3, page size 10</li>
+    <li><code>page_size-20</code> - index 0, page size 20</li>
+    <li><code>current_index-3--page_size-20</code> - index 3, page size 20</li>
+</ul> </p></td>
                 </tr>
               
                 <tr>
@@ -23513,9 +23624,7 @@ Leave empty for the first page. </p></td>
                   <td>next_page_token</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Opaque pagination cursor for the next page.
-Pass this value unchanged as request <code>page_token</code>.
-Empty means no further pages. </p></td>
+                  <td><p>Page token string (following the format described in <code>RagListCrawlersRequest</code>) for retrieving the next results page </p></td>
                 </tr>
               
             </tbody>
@@ -23711,7 +23820,7 @@ Both <code>current_index-&lt;idx&gt;</code> and <code>page_size-&lt;size&gt;</co
                   <td>run_status</td>
                   <td><a href="#ondewo.nlu.RagDocumentStatus">RagDocumentStatus</a></td>
                   <td>repeated</td>
-                  <td><p>Optional. Document status to filter by. </p></td>
+                  <td><p>Optional. Document statuses to filter by. </p></td>
                 </tr>
               
                 <tr>
@@ -24159,7 +24268,7 @@ List elements can be any form of language name/code (parsed by LLM). </p></td>
                 <tr>
                   <td>similarity_threshold</td>
                   <td><a href="#float">float</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Minimum similarity score threshold between <code>0.0</code> and <code>1.0</code> (default: <code>0.2</code>). </p></td>
                 </tr>
               
@@ -24454,21 +24563,21 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 <tr>
                   <td>description</td>
                   <td><a href="#string">string</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. New dataset description. </p></td>
                 </tr>
               
                 <tr>
                   <td>avatar</td>
                   <td><a href="#string">string</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. New avatar image. </p></td>
                 </tr>
               
                 <tr>
                   <td>chunk_method</td>
                   <td><a href="#ondewo.nlu.RagChunkMethod">RagChunkMethod</a></td>
-                  <td>optional</td>
+                  <td></td>
                   <td><p>Optional. New chunk method. </p></td>
                 </tr>
               
@@ -24542,7 +24651,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 <tr>
                   <td>chunk_method</td>
                   <td><a href="#ondewo.nlu.RagChunkMethod">RagChunkMethod</a></td>
-                  <td>optional</td>
+                  <td></td>
                   <td><p>Optional. New chunking method (resets document to <code>UNSTART</code> status and deletes all existing chunks). </p></td>
                 </tr>
               
@@ -24641,74 +24750,80 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
           <tbody>
             
               <tr>
-                <td>RAG_CHUNK_METHOD_NAIVE</td>
+                <td>RAG_CHUNK_METHOD_UNSPECIFIED</td>
                 <td>0</td>
+                <td><p>Unspecified. Defaults to <code>RAG_CHUNK_METHOD_NAIVE</code></p></td>
+              </tr>
+            
+              <tr>
+                <td>RAG_CHUNK_METHOD_NAIVE</td>
+                <td>1</td>
                 <td><p>General (default).</p></td>
               </tr>
             
               <tr>
                 <td>RAG_CHUNK_METHOD_BOOK</td>
-                <td>1</td>
+                <td>2</td>
                 <td><p>Book.</p></td>
               </tr>
             
               <tr>
                 <td>RAG_CHUNK_METHOD_EMAIL</td>
-                <td>2</td>
+                <td>3</td>
                 <td><p>Email.</p></td>
               </tr>
             
               <tr>
                 <td>RAG_CHUNK_METHOD_LAWS</td>
-                <td>3</td>
+                <td>4</td>
                 <td><p>Laws.</p></td>
               </tr>
             
               <tr>
                 <td>RAG_CHUNK_METHOD_MANUAL</td>
-                <td>4</td>
+                <td>5</td>
                 <td><p>Manual.</p></td>
               </tr>
             
               <tr>
                 <td>RAG_CHUNK_METHOD_ONE</td>
-                <td>5</td>
+                <td>6</td>
                 <td><p>One.</p></td>
               </tr>
             
               <tr>
                 <td>RAG_CHUNK_METHOD_PAPER</td>
-                <td>6</td>
+                <td>7</td>
                 <td><p>Paper.</p></td>
               </tr>
             
               <tr>
                 <td>RAG_CHUNK_METHOD_PICTURE</td>
-                <td>7</td>
+                <td>8</td>
                 <td><p>Picture.</p></td>
               </tr>
             
               <tr>
                 <td>RAG_CHUNK_METHOD_PRESENTATION</td>
-                <td>8</td>
+                <td>9</td>
                 <td><p>Presentation.</p></td>
               </tr>
             
               <tr>
                 <td>RAG_CHUNK_METHOD_QA</td>
-                <td>9</td>
+                <td>10</td>
                 <td><p>Q&A.</p></td>
               </tr>
             
               <tr>
                 <td>RAG_CHUNK_METHOD_TABLE</td>
-                <td>10</td>
+                <td>11</td>
                 <td><p>Table.</p></td>
               </tr>
             
               <tr>
                 <td>RAG_CHUNK_METHOD_TAG</td>
-                <td>11</td>
+                <td>12</td>
                 <td><p>Tag.</p></td>
               </tr>
             
@@ -24724,92 +24839,98 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
           <tbody>
             
               <tr>
-                <td>RAG_COMPARISON_OPERATOR_CONTAINS</td>
+                <td>RAG_COMPARISON_OPERATOR_UNSPECIFIED</td>
                 <td>0</td>
+                <td><p>Unspecified. Must never be used.</p></td>
+              </tr>
+            
+              <tr>
+                <td>RAG_COMPARISON_OPERATOR_CONTAINS</td>
+                <td>1</td>
                 <td><p>String representation of metadata field contains value.<br>
 If metadata field is a list, checks if the string representation of <em>any</em> field contains value.</p></td>
               </tr>
             
               <tr>
                 <td>RAG_COMPARISON_OPERATOR_NOT_CONTAINS</td>
-                <td>1</td>
+                <td>2</td>
                 <td><p>String representation of metadata field does not contain value.<br>
 If metadata field is a list, checks if the string representation of <em>no</em> fields contains value.</p></td>
               </tr>
             
               <tr>
                 <td>RAG_COMPARISON_OPERATOR_IN</td>
-                <td>2</td>
+                <td>3</td>
                 <td><p>Checks with Python's <code>in</code> operator.<br>
 If metadata field is a list, <em>all</em> elements must satisfy the condition.</p></td>
               </tr>
             
               <tr>
                 <td>RAG_COMPARISON_OPERATOR_NOT_IN</td>
-                <td>3</td>
+                <td>4</td>
                 <td><p>Checks with Python's <code>not in</code> operator.<br>
 If metadata field is a list, <em>all</em> elements must satisfy the condition.</p></td>
               </tr>
             
               <tr>
                 <td>RAG_COMPARISON_OPERATOR_START_WITH</td>
-                <td>4</td>
+                <td>5</td>
                 <td><p>String representation of metadata field starts with value.<br>
 If metadata field is a list, checks if the joined string of the string representations of all list elements starts with the value.</p></td>
               </tr>
             
               <tr>
                 <td>RAG_COMPARISON_OPERATOR_END_WITH</td>
-                <td>5</td>
+                <td>6</td>
                 <td><p>String representation of metadata field ends with value.<br>
 If metadata field is a list, checks if the joined string of the string representations of all list elements ends with the value.</p></td>
               </tr>
             
               <tr>
                 <td>RAG_COMPARISON_OPERATOR_EMPTY</td>
-                <td>6</td>
+                <td>7</td>
                 <td><p>Is empty (Python <em>falsy</em>).</p></td>
               </tr>
             
               <tr>
                 <td>RAG_COMPARISON_OPERATOR_NOT_EMPTY</td>
-                <td>7</td>
+                <td>8</td>
                 <td><p>Is not empty (Python <em>truthy</em>).</p></td>
               </tr>
             
               <tr>
                 <td>RAG_COMPARISON_OPERATOR_EQ</td>
-                <td>8</td>
+                <td>9</td>
                 <td><p>Equals.</p></td>
               </tr>
             
               <tr>
                 <td>RAG_COMPARISON_OPERATOR_NEQ</td>
-                <td>9</td>
+                <td>10</td>
                 <td><p>Does not equal.</p></td>
               </tr>
             
               <tr>
                 <td>RAG_COMPARISON_OPERATOR_GT</td>
-                <td>10</td>
+                <td>11</td>
                 <td><p>Greater than.</p></td>
               </tr>
             
               <tr>
                 <td>RAG_COMPARISON_OPERATOR_LT</td>
-                <td>11</td>
+                <td>12</td>
                 <td><p>Less than.</p></td>
               </tr>
             
               <tr>
                 <td>RAG_COMPARISON_OPERATOR_GEQ</td>
-                <td>12</td>
+                <td>13</td>
                 <td><p>Greater than or equal.</p></td>
               </tr>
             
               <tr>
                 <td>RAG_COMPARISON_OPERATOR_LEQ</td>
-                <td>13</td>
+                <td>14</td>
                 <td><p>Less than or equal.</p></td>
               </tr>
             
@@ -24854,86 +24975,27 @@ If metadata field is a list, checks if the joined string of the string represent
           <tbody>
             
               <tr>
-                <td>RAG_CRAWLER_CRAWL_STRATEGY_BFS</td>
+                <td>RAG_CRAWLER_CRAWL_STRATEGY_UNSPECIFIED</td>
                 <td>0</td>
+                <td><p>Unspecified</p></td>
+              </tr>
+            
+              <tr>
+                <td>RAG_CRAWLER_CRAWL_STRATEGY_BFS</td>
+                <td>1</td>
                 <td><p>Breadth-first traversal.</p></td>
               </tr>
             
               <tr>
                 <td>RAG_CRAWLER_CRAWL_STRATEGY_DFS</td>
-                <td>1</td>
+                <td>2</td>
                 <td><p>Depth-first traversal.</p></td>
               </tr>
             
               <tr>
                 <td>RAG_CRAWLER_CRAWL_STRATEGY_BEST_FIRST</td>
-                <td>2</td>
-                <td><p>Best-first traversal based on relevance scoring.</p></td>
-              </tr>
-            
-          </tbody>
-        </table>
-      
-        <h3 id="ondewo.nlu.RagCrawlerFilterContentType" class="title-badge enum">RagCrawlerFilterContentType</h3>
-        <p>Supported content types for deep-crawl content-type filters.</p>
-        <table class="enum-table">
-          <thead>
-            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
-          </thead>
-          <tbody>
-            
-              <tr>
-                <td>RAG_CRAWLER_FILTER_CONTENT_TYPE_UNSPECIFIED</td>
-                <td>0</td>
-                <td><p>Unspecified content type.</p></td>
-              </tr>
-            
-              <tr>
-                <td>RAG_CRAWLER_FILTER_CONTENT_TYPE_TEXT_HTML</td>
-                <td>1</td>
-                <td><p>HTML documents.</p></td>
-              </tr>
-            
-              <tr>
-                <td>RAG_CRAWLER_FILTER_CONTENT_TYPE_APPLICATION_JSON</td>
-                <td>2</td>
-                <td><p>JSON payloads.</p></td>
-              </tr>
-            
-              <tr>
-                <td>RAG_CRAWLER_FILTER_CONTENT_TYPE_APPLICATION_XML</td>
                 <td>3</td>
-                <td><p>XML payloads.</p></td>
-              </tr>
-            
-              <tr>
-                <td>RAG_CRAWLER_FILTER_CONTENT_TYPE_TEXT_PLAIN</td>
-                <td>4</td>
-                <td><p>Plain text documents.</p></td>
-              </tr>
-            
-              <tr>
-                <td>RAG_CRAWLER_FILTER_CONTENT_TYPE_APPLICATION_PDF</td>
-                <td>5</td>
-                <td><p>PDF documents.</p></td>
-              </tr>
-            
-              <tr>
-                <td>RAG_CRAWLER_FILTER_CONTENT_TYPE_APPLICATION_POWERPOINT</td>
-                <td>6</td>
-                <td><p>PowerPoint documents.</p></td>
-              </tr>
-            
-              <tr>
-                <td>RAG_CRAWLER_FILTER_CONTENT_TYPE_APPLICATION_EXCEL</td>
-                <td>7</td>
-                <td><p>Excel documents.</p></td>
-              </tr>
-            
-              <tr>
-                <td>RAG_CRAWLER_FILTER_CONTENT_TYPE_APPLICATION_WORD</td>
-                <td>8</td>
-                <td><p>Word documents.</p></td>
+                <td><p>Best-first traversal based on relevance scoring.</p></td>
               </tr>
             
           </tbody>
@@ -24948,32 +25010,38 @@ If metadata field is a list, checks if the joined string of the string represent
           <tbody>
             
               <tr>
-                <td>RAG_CRAWLER_META_DATA_EXTRACTOR_TYPE_REGEX</td>
+                <td>RAG_CRAWLER_META_DATA_EXTRACTOR_TPYE_UNSPECIFIED</td>
                 <td>0</td>
+                <td><p>Unspecified.</p></td>
+              </tr>
+            
+              <tr>
+                <td>RAG_CRAWLER_META_DATA_EXTRACTOR_TYPE_REGEX</td>
+                <td>1</td>
                 <td><p>Regex pattern.</p></td>
               </tr>
             
               <tr>
                 <td>RAG_CRAWLER_META_DATA_EXTRACTOR_TYPE_FIXED_VALUE</td>
-                <td>1</td>
+                <td>2</td>
                 <td><p>Fixed value.</p></td>
               </tr>
             
               <tr>
                 <td>RAG_CRAWLER_META_DATA_EXTRACTOR_TYPE_CSS_SELECTOR</td>
-                <td>2</td>
+                <td>3</td>
                 <td><p>CSS selector.</p></td>
               </tr>
             
               <tr>
                 <td>RAG_CRAWLER_META_DATA_EXTRACTOR_TYPE_XPATH_SELECTOR</td>
-                <td>3</td>
+                <td>4</td>
                 <td><p>XPath selector.</p></td>
               </tr>
             
               <tr>
                 <td>RAG_CRAWLER_META_DATA_EXTRACTOR_TYPE_ID_SELECTOR</td>
-                <td>4</td>
+                <td>5</td>
                 <td><p>ID selector.</p></td>
               </tr>
             
@@ -24989,20 +25057,26 @@ If metadata field is a list, checks if the joined string of the string represent
           <tbody>
             
               <tr>
-                <td>RAG_CRAWLER_SELECTOR_TYPE_ID</td>
+                <td>RAG_CRAWLER_SELECTOR_TYPE_UNSPECIFIED</td>
                 <td>0</td>
+                <td><p>Unspecified.</p></td>
+              </tr>
+            
+              <tr>
+                <td>RAG_CRAWLER_SELECTOR_TYPE_ID</td>
+                <td>1</td>
                 <td><p>ID selector.</p></td>
               </tr>
             
               <tr>
                 <td>RAG_CRAWLER_SELECTOR_TYPE_CSS_CLASS</td>
-                <td>1</td>
+                <td>2</td>
                 <td><p>CSS class selector.</p></td>
               </tr>
             
               <tr>
                 <td>RAG_CRAWLER_SELECTOR_TYPE_XPATH</td>
-                <td>2</td>
+                <td>3</td>
                 <td><p>XPath selector.</p></td>
               </tr>
             
@@ -25018,32 +25092,38 @@ If metadata field is a list, checks if the joined string of the string represent
           <tbody>
             
               <tr>
-                <td>RAG_DOCUMENT_STATUS_UNSTART</td>
+                <td>RAG_DOCUMENT_STATUS_UNSPECIFIED</td>
                 <td>0</td>
+                <td><p>Unspecified.</p></td>
+              </tr>
+            
+              <tr>
+                <td>RAG_DOCUMENT_STATUS_UNSTART</td>
+                <td>1</td>
                 <td><p>Document has not started processing.</p></td>
               </tr>
             
               <tr>
                 <td>RAG_DOCUMENT_STATUS_RUNNING</td>
-                <td>1</td>
+                <td>2</td>
                 <td><p>Document is currently being processed.</p></td>
               </tr>
             
               <tr>
                 <td>RAG_DOCUMENT_STATUS_CANCEL</td>
-                <td>2</td>
+                <td>3</td>
                 <td><p>Document processing was cancelled.</p></td>
               </tr>
             
               <tr>
                 <td>RAG_DOCUMENT_STATUS_DONE</td>
-                <td>3</td>
+                <td>4</td>
                 <td><p>Document processing completed successfully.</p></td>
               </tr>
             
               <tr>
                 <td>RAG_DOCUMENT_STATUS_FAIL</td>
-                <td>4</td>
+                <td>5</td>
                 <td><p>Document processing failed.</p></td>
               </tr>
             
@@ -25059,44 +25139,50 @@ If metadata field is a list, checks if the joined string of the string represent
           <tbody>
             
               <tr>
-                <td>RAG_DOCUMENT_TYPE_PDF</td>
+                <td>RAG_DOCUMENT_TYPE_UNSPECIFIED</td>
                 <td>0</td>
+                <td><p>Unspecified.</p></td>
+              </tr>
+            
+              <tr>
+                <td>RAG_DOCUMENT_TYPE_PDF</td>
+                <td>1</td>
                 <td><p>PDF</p></td>
               </tr>
             
               <tr>
                 <td>RAG_DOCUMENT_TYPE_DOC</td>
-                <td>1</td>
+                <td>2</td>
                 <td><p>general documents (e.g. text, slides, spreadsheets, code, ...)</p></td>
               </tr>
             
               <tr>
                 <td>RAG_DOCUMENT_TYPE_VISUAL</td>
-                <td>2</td>
+                <td>3</td>
                 <td><p>images and videos</p></td>
               </tr>
             
               <tr>
                 <td>RAG_DOCUMENT_TYPE_AURAL</td>
-                <td>3</td>
+                <td>4</td>
                 <td><p>audio</p></td>
               </tr>
             
               <tr>
                 <td>RAG_DOCUMENT_TYPE_VIRTUAL</td>
-                <td>4</td>
+                <td>5</td>
                 <td><p>empty virtual files</p></td>
               </tr>
             
               <tr>
                 <td>RAG_DOCUMENT_TYPE_FOLDER</td>
-                <td>5</td>
+                <td>6</td>
                 <td><p>folders</p></td>
               </tr>
             
               <tr>
                 <td>RAG_DOCUMENT_TYPE_OTHER</td>
-                <td>6</td>
+                <td>7</td>
                 <td><p>unrecognized document types</p></td>
               </tr>
             
@@ -25112,14 +25198,20 @@ If metadata field is a list, checks if the joined string of the string represent
           <tbody>
             
               <tr>
-                <td>RAG_GRAPH_RAG_METHOD_LIGHT</td>
+                <td>RAG_GRAPH_RAG_METHOD_UNSPECIFIED</td>
                 <td>0</td>
+                <td><p>Unspecified. Defaults to <code>RAG_GRAPH_RAG_METHOD_GENERAL</code></p></td>
+              </tr>
+            
+              <tr>
+                <td>RAG_GRAPH_RAG_METHOD_LIGHT</td>
+                <td>1</td>
                 <td><p>Use prompts provided by <a href="https://github.com/HKUDS/LightRAG">LightRAG</a>.</p></td>
               </tr>
             
               <tr>
                 <td>RAG_GRAPH_RAG_METHOD_GENERAL</td>
-                <td>1</td>
+                <td>2</td>
                 <td><p>Use prompts provided by <a href="https://github.com/microsoft/graphrag">GraphRAG</a>.</p></td>
               </tr>
             
@@ -25135,14 +25227,20 @@ If metadata field is a list, checks if the joined string of the string represent
           <tbody>
             
               <tr>
-                <td>RAG_LOGIC_AND</td>
+                <td>RAG_LOGIC_UNSPECIFIED</td>
                 <td>0</td>
+                <td><p>Unspecified. Must never be used.</p></td>
+              </tr>
+            
+              <tr>
+                <td>RAG_LOGIC_AND</td>
+                <td>1</td>
                 <td><p>Return results that match <em>all</em> conditions.</p></td>
               </tr>
             
               <tr>
                 <td>RAG_LOGIC_OR</td>
-                <td>1</td>
+                <td>2</td>
                 <td><p>Return results that match <em>any</em> condition.</p></td>
               </tr>
             
