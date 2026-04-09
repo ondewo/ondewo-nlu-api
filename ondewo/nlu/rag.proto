@@ -1383,8 +1383,6 @@ message RagCrawler {
     // Optional. Retry configuration for crawler runs.
     RagCrawlerRetryConfig retry_config = 12;
 
-    // Logs
-    repeated google.logging.v2.LogEntry logs = 13;
 }
 
 // Crawl entry points.
@@ -2027,7 +2025,7 @@ message RagRemoveCrawlerResultsFromDatasetsRequest {
     // Required. The language of the project to use.
     string language_code = 2;
 
-    // Required. Resource names of crawlers whose results should be removed.
+    // Required. Resource name of crawlers whose results should be removed.
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre>
     string crawler_name = 3;
 
