@@ -7152,7 +7152,7 @@ similar to Crawl4AI markdown/output-generation toggles.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| inject_frontmatter | [bool](#bool) |  | Optional. Inject YAML frontmatter into markdown output. If the content is HTML based, it will automatically be converted to markdown. Optionally, you can inject YAML frontmatter into the markdown output. Default <code>true</code>. |
+| inject_frontmatter | [bool](#bool) | optional | Optional. Inject YAML frontmatter into markdown output. If the content is HTML based, it will automatically be converted to markdown. Optionally, you can inject YAML frontmatter into the markdown output. Default <code>true</code>. |
 | meta_data_extractors | [RagCrawlerMetaDataExtractor](#ondewo.nlu.RagCrawlerMetaDataExtractor) | repeated | Optional. Metadata extractors. |
 
 
