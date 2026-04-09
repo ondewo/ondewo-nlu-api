@@ -2,6 +2,14 @@
 
 *****************
 
+## Release ONDEWO NLU API 6.6.0
+
+### Improvements
+
+* [[OND211-2352]](https://ondewo.atlassian.net/browse/OND211-2352) Remove unused google.logging.v2 dependency.
+
+*****************
+
 ## Release ONDEWO NLU API 6.5.0
 
 ### Improvements
