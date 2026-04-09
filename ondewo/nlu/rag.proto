@@ -1620,7 +1620,7 @@ message RagCrawlerResultsConfig {
     // If the content is HTML based, it will automatically be converted to markdown.
     // Optionally, you can inject YAML frontmatter into the markdown output.
     // Default <code>true</code>.
-    bool inject_frontmatter = 1;
+    optional bool inject_frontmatter = 1;
 
     // Optional. Metadata extractors.
     repeated RagCrawlerMetaDataExtractor meta_data_extractors = 2;
