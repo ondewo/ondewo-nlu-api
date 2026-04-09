@@ -1419,7 +1419,7 @@ message RagCrawlerFilters {
     // Optional. Include internal links.
     bool allow_internal_links = 3;
 
-    // Optional. Exclude external links.
+    // Optional. Include external links.
     bool allow_external_links = 4;
 
     // Optional. Include social media links.
@@ -2025,7 +2025,7 @@ message RagRemoveCrawlerResultsFromDatasetsRequest {
     // Required. The language of the project to use.
     string language_code = 2;
 
-    // Required. Resource name of crawlers whose results should be removed.
+    // Required. Resource name of crawler whose results should be removed.
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre>
     string crawler_name = 3;
 
