@@ -7812,7 +7812,7 @@ Response message for getting crawler run logs.
 | ----- | ---- | ----- | ----------- |
 | operation_name | [string](#string) |  | Resource name of the crawler run operation. |
 | crawler_name | [string](#string) |  | Resource name of the crawler profile. |
-| operation_status | [string](#string) |  | Status of the run. |
+| status | [OperationMetadata.Status](#ondewo.nlu.OperationMetadata.Status) |  | Operation status of the run. |
 | entries | [LogEntry](#ondewo.nlu.LogEntry) | repeated | List of log entries for the requested page. |
 | next_page_token | [string](#string) |  | Page token string for retrieving the next results page. |
 
@@ -7875,7 +7875,7 @@ Request message for listing crawler runs.
 <em>Important note</em>: The <code>&lt;idx&gt;</code> is the index in the requested sequence NOT the page number. E.g. if the requested list has 100 elements then <code>current_index-5--page_size-15</code> returns the elements at index 5-19 and not the 5-th page of 15 elements.
 
 Both <code>current_index-&lt;idx&gt;</code> and <code>page_size-&lt;size&gt;</code> are optional and default to <code>0</code> and <code>10</code> respectively. The following are all valid <code>page_token</code>s <br> <ul> <li><code> </code> (empty string/missing value) - index 0, page size 10</li> <li><code>current_index-3</code> - index 3, page size 10</li> <li><code>page_size-20</code> - index 0, page size 20</li> <li><code>current_index-3--page_size-20</code> - index 3, page size 20</li> </ul> |
-| state | [OperationMetadata.Status](#ondewo.nlu.OperationMetadata.Status) |  | Optional. Filter by operation state. |
+| status | [OperationMetadata.Status](#ondewo.nlu.OperationMetadata.Status) |  | Optional. Filter by operation status. |
 | orderby | [string](#string) |  | Optional. Sort field (default: <code>created_at</code>). |
 | sorting_mode | [SortingMode](#ondewo.nlu.SortingMode) | optional | Optional. Sort descending. |
 
