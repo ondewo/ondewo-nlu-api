@@ -161,19 +161,17 @@
     - [AddNotificationsRequest](#ondewo.nlu.AddNotificationsRequest)
     - [AddNotificationsResponse](#ondewo.nlu.AddNotificationsResponse)
     - [Comment](#ondewo.nlu.Comment)
-    - [CrawlerLogContext](#ondewo.nlu.CrawlerLogContext)
     - [KeyValuePair](#ondewo.nlu.KeyValuePair)
     - [ListNotificationsRequest](#ondewo.nlu.ListNotificationsRequest)
     - [ListNotificationsResponse](#ondewo.nlu.ListNotificationsResponse)
     - [LogEntry](#ondewo.nlu.LogEntry)
-    - [LogEntryContext](#ondewo.nlu.LogEntryContext)
     - [Notification](#ondewo.nlu.Notification)
     - [NotificationFilter](#ondewo.nlu.NotificationFilter)
     - [SetNotificationsFlaggedStatusRequest](#ondewo.nlu.SetNotificationsFlaggedStatusRequest)
     - [SetNotificationsReadStatusRequest](#ondewo.nlu.SetNotificationsReadStatusRequest)
     - [StatResponse](#ondewo.nlu.StatResponse)
   
-    - [LogLevel](#ondewo.nlu.LogLevel)
+    - [LogSeverity](#ondewo.nlu.LogSeverity)
     - [NotificationFlaggedStatus](#ondewo.nlu.NotificationFlaggedStatus)
     - [NotificationOrigin](#ondewo.nlu.NotificationOrigin)
     - [NotificationReadStatus](#ondewo.nlu.NotificationReadStatus)
@@ -3525,23 +3523,6 @@ Comment message
 
 
 
-<a name="ondewo.nlu.CrawlerLogContext"></a>
-
-### CrawlerLogContext
-Specific context for crawler-related log entries.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| source_url | [string](#string) |  | The URL being processed when this log was generated. |
-| batch_index | [int32](#int32) | optional | The batch index of the crawl operation. |
-| http_status_code | [int32](#int32) | optional | The HTTP status code returned by the target server. |
-
-
-
-
-
-
 <a name="ondewo.nlu.KeyValuePair"></a>
 
 ### KeyValuePair
@@ -3610,29 +3591,16 @@ A generic log entry structure.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| id | [string](#string) |  | Unique ID of the log entry. |
-| sequence_index | [int32](#int32) |  | Sequence index within the run. |
-| logged_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Timestamp of the log. |
-| level | [LogLevel](#ondewo.nlu.LogLevel) |  | Severity of the log. |
-| phase | [string](#string) |  | Execution phase (e.g. "discovery", "extraction"). |
-| message | [string](#string) |  | Human-readable message. |
-| details_json | [google.protobuf.Struct](#google.protobuf.Struct) |  | Raw details in JSON format. |
-| log_context | [LogEntryContext](#ondewo.nlu.LogEntryContext) |  | Grouped domain-specific metadata. |
-
-
-
-
-
-
-<a name="ondewo.nlu.LogEntryContext"></a>
-
-### LogEntryContext
-Container for domain-specific log metadata.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| crawler | [CrawlerLogContext](#ondewo.nlu.CrawlerLogContext) |  | Context specific to crawler runs. |
+| name | [string](#string) |  | Resource name of the log entry. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/logs/&lt;log_uuid&gt;</code></pre> |
+| log_entry_sequence_index | [int32](#int32) |  | Sequence index within the run. |
+| log_entry_name | [string](#string) |  | Name of the log. |
+| log_entry_timestamp | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Timestamp of the log. |
+| log_entry_receive_timestamp | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Output only. Timestamp when the log was received. |
+| log_entry_severity | [LogSeverity](#ondewo.nlu.LogSeverity) |  | Severity of the log. |
+| log_entry_phase | [string](#string) |  | Execution phase (e.g. "discovery", "extraction"). |
+| log_entry_operation_name | [string](#string) |  | Name of the operation. |
+| log_entry_details | [google.protobuf.Struct](#google.protobuf.Struct) |  | Raw details in Struct format. |
+| log_entry_context | [google.protobuf.Struct](#google.protobuf.Struct) |  | Domain-specific metadata in Struct format. |
 
 
 
@@ -3743,19 +3711,21 @@ statistic response
  <!-- end messages -->
 
 
-<a name="ondewo.nlu.LogLevel"></a>
+<a name="ondewo.nlu.LogSeverity"></a>
 
-### LogLevel
-Log levels for various system operations.
+### LogSeverity
+Log levels for various system operations based on Loguru log levels.
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| LOG_LEVEL_UNSPECIFIED | 0 | Unspecified log level. |
-| LOG_LEVEL_DEBUG | 1 | Debug level - detailed information for troubleshooting. |
-| LOG_LEVEL_INFO | 2 | Info level - general operational messages. |
-| LOG_LEVEL_WARN | 3 | Warning level - potential issues that don't stop execution. |
-| LOG_LEVEL_ERROR | 4 | Error level - serious issues that might affect results. |
-| LOG_LEVEL_FATAL | 5 | Fatal level - critical failures that stop the process. |
+| LOG_SEVERITY_UNSPECIFIED | 0 | Unspecified log level. |
+| LOG_SEVERITY_TRACE | 1 | Trace level - lowest level, most detailed. |
+| LOG_SEVERITY_DEBUG | 2 | Debug level - detailed information for troubleshooting. |
+| LOG_SEVERITY_INFO | 3 | Info level - general operational messages. |
+| LOG_SEVERITY_SUCCESS | 4 | Success level - successful completion of an operation. |
+| LOG_SEVERITY_WARNING | 5 | Warning level - potential issues that don't stop execution. |
+| LOG_SEVERITY_ERROR | 6 | Error level - serious issues that might affect results. |
+| LOG_SEVERITY_CRITICAL | 7 | Critical level - critical failures that stop the process. |
 
 
 
@@ -7820,7 +7790,7 @@ Request message for getting crawler run logs.
 | operation_name | [string](#string) |  | Required. Resource name of the crawler run. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawler_runs/&lt;crawler_run_uuid&gt;</code></pre> |
 | page_token | [string](#string) |  | Optional. Specifies which page to return. |
 | page_size | [int32](#int32) |  | Optional. Number of logs per page. |
-| level_filter | [LogLevel](#ondewo.nlu.LogLevel) | repeated | Optional. Filter by one or more log levels. |
+| level_filter | [LogSeverity](#ondewo.nlu.LogSeverity) | repeated | Optional. Filter by one or more log levels. |
 | phase_filter | [string](#string) |  | Optional. Filter by specific phase (exact match). |
 | search_query | [string](#string) |  | Optional. Search string for the message or details. |
 | start_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Optional. Filter logs generated after this time. |
