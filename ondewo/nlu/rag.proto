@@ -1428,6 +1428,13 @@ message RagCrawlerFilters {
     // Optional. Include social media links.
     bool allow_social_media_links = 5;
 
+    repeated string allowed_regex = 6;
+
+    repeated string disallowed_regex = 7;
+
+    repeated string allowed_paths = 8;
+
+    repeated string disallowed_paths = 9;
 }
 
 message RagCrawlerSeedUrlFilters {
