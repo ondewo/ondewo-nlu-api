@@ -414,38 +414,38 @@ message KeyValuePair {
 }
 
 // Log levels for various system operations.
-enum LogLevel {
+enum LogSeverity {
     // Unspecified log level.
-    LOG_LEVEL_UNSPECIFIED = 0;
+    LOG_SEVERITY_UNSPECIFIED = 0;
     // Debug level - detailed information for troubleshooting.
-    LOG_LEVEL_DEBUG = 1;
+    LOG_SEVERITY_DEBUG = 1;
     // Info level - general operational messages.
-    LOG_LEVEL_INFO = 2;
+    LOG_SEVERITY_INFO = 2;
     // Warning level - potential issues that don't stop execution.
-    LOG_LEVEL_WARN = 3;
+    LOG_SEVERITY_WARN = 3;
     // Error level - serious issues that might affect results.
-    LOG_LEVEL_ERROR = 4;
+    LOG_SEVERITY_ERROR = 4;
     // Fatal level - critical failures that stop the process.
-    LOG_LEVEL_FATAL = 5;
+    LOG_SEVERITY_FATAL = 5;
 }
 
 // Specific context for crawler-related log entries.
-message CrawlerLogContext {
+message HttpContext {
     // The URL being processed when this log was generated.
-    string source_url = 1;
-
-    // The batch index of the crawl operation.
-    optional int32 batch_index = 2;
+    string url = 1;
 
     // The HTTP status code returned by the target server.
-    optional int32 http_status_code = 3;
+    optional int32 http_status_code = 2;
 }
 
 // Container for domain-specific log metadata.
-message LogEntryContext {
+message LogContext {
     oneof context {
-        // Context specific to crawler runs.
-        CrawlerLogContext crawler = 1;
+        // Human-readable message.
+        string message = 1;
+
+        // Context specific to http operations.
+        HttpContext http = 2;
 
         // Future contexts (e.g., webhook, training, etc.) can be added here.
     }
@@ -459,21 +459,22 @@ message LogEntry {
     // Sequence index within the run.
     int32 sequence_index = 2;
 
+    string log_name = 3;
+
     // Timestamp of the log.
-    google.protobuf.Timestamp logged_at = 3;
+    google.protobuf.Timestamp timestamp = 4;
 
     // Severity of the log.
-    LogLevel level = 4;
+    LogSeverity severity = 5;
 
     // Execution phase (e.g. "discovery", "extraction").
-    string phase = 5;
+    string phase = 6;
 
-    // Human-readable message.
-    string message = 6;
+    string operation_name = 7;
 
     // Raw details in JSON format.
-    google.protobuf.Struct details_json = 7;
+    google.protobuf.Struct details_json = 8;
 
     // Grouped domain-specific metadata.
-    LogEntryContext log_context = 8;
+    LogContext log_context = 9;
 }
