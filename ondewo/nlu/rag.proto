@@ -2130,7 +2130,7 @@ message RagGetCrawlerRunLogsRequest {
   // --- Filtering Logic ---
 
   // Optional. Filter by one or more log levels.
-  repeated LogSeverity level_filter = 6;
+  repeated LogSeverity level_filters = 6;
 
   // Optional. Filter by specific phase (exact match).
   string phase_filter = 7;
@@ -2156,21 +2156,12 @@ message RagGetCrawlerRunLogsResponse {
   // Resource name of the crawler profile.
   string crawler_name = 2;
 
-  // ID of the RAG crawler.
-  string rag_crawler_id = 3;
-
   // Status of the run.
-  string status = 4;
-
-  // Start timestamp.
-  google.protobuf.Timestamp started_at = 5;
-
-  // Completion timestamp.
-  google.protobuf.Timestamp completed_at = 6;
+  string operation_status = 3;
 
   // List of log entries for the requested page.
-  repeated LogEntry entries = 7;
+  repeated LogEntry entries = 4;
 
   // Page token string for retrieving the next results page.
-  string next_page_token = 8;
+  string next_page_token = 5;
 }
