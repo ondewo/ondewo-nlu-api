@@ -7790,7 +7790,7 @@ Request message for getting crawler run logs.
 | operation_name | [string](#string) |  | Required. Resource name of the crawler run. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawler_runs/&lt;crawler_run_uuid&gt;</code></pre> |
 | page_token | [string](#string) |  | Optional. Specifies which page to return. |
 | page_size | [int32](#int32) |  | Optional. Number of logs per page. |
-| level_filter | [LogSeverity](#ondewo.nlu.LogSeverity) | repeated | Optional. Filter by one or more log levels. |
+| level_filters | [LogSeverity](#ondewo.nlu.LogSeverity) | repeated | Optional. Filter by one or more log levels. |
 | phase_filter | [string](#string) |  | Optional. Filter by specific phase (exact match). |
 | search_query | [string](#string) |  | Optional. Search string for the message or details. |
 | start_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Optional. Filter logs generated after this time. |
@@ -7812,10 +7812,7 @@ Response message for getting crawler run logs.
 | ----- | ---- | ----- | ----------- |
 | operation_name | [string](#string) |  | Resource name of the crawler run operation. |
 | crawler_name | [string](#string) |  | Resource name of the crawler profile. |
-| rag_crawler_id | [string](#string) |  | ID of the RAG crawler. |
-| status | [string](#string) |  | Status of the run. |
-| started_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Start timestamp. |
-| completed_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Completion timestamp. |
+| operation_status | [string](#string) |  | Status of the run. |
 | entries | [LogEntry](#ondewo.nlu.LogEntry) | repeated | List of log entries for the requested page. |
 | next_page_token | [string](#string) |  | Page token string for retrieving the next results page. |
 
