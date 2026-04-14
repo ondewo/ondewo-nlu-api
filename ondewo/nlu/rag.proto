@@ -38,6 +38,7 @@ import "google/protobuf/field_mask.proto";
 import "google/protobuf/timestamp.proto";
 import "ondewo/nlu/operation_metadata.proto";
 import "ondewo/nlu/operations.proto";
+import "ondewo/nlu/logs.proto";
 import "ondewo/nlu/session.proto";
 import "ondewo/nlu/common.proto";
 
