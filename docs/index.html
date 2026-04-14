@@ -1620,6 +1620,43 @@
             
               
               <li>
+                <a href="#ondewo/nlu/logs.proto">ondewo/nlu/logs.proto</a>
+                <div class="file-content">
+                  
+                  
+                  <a href="#ondewo/nlu/logs.proto-messages">Messages</a>
+                  <ul>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.CrawlerLogContext" class="title-badge message">CrawlerLogContext</a>
+                      </li>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.LogEntry" class="title-badge message">LogEntry</a>
+                      </li>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.LogEntryContext" class="title-badge message">LogEntryContext</a>
+                      </li>
+                    
+                  </ul>
+                  
+                  
+                  <a href="#ondewo/nlu/logs.proto-enums">Enums</a>
+                  <ul>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.LogLevel" class="title-badge enum">LogLevel</a>
+                      </li>
+                    
+                  </ul>
+                  
+                  
+                </div>
+              </li>
+            
+              
+              <li>
                 <a href="#ondewo/nlu/operation_metadata.proto">ondewo/nlu/operation_metadata.proto</a>
                 <div class="file-content">
                   
@@ -1933,6 +1970,8 @@
                       
                         <li><a href="#ondewo.nlu.Rags.RagDeleteCrawlers" class="title-badge method">RagDeleteCrawlers</a></li>
                       
+                        <li><a href="#ondewo.nlu.Rags.RagGetCrawlerRunLogs" class="title-badge method">RagGetCrawlerRunLogs</a></li>
+                      
                       </ul>
                       
                     </li>
@@ -2125,6 +2164,14 @@
                     
                       <li>
                         <a href="#ondewo.nlu.RagGetCrawlerResultsResponse" class="title-badge message">RagGetCrawlerResultsResponse</a>
+                      </li>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.RagGetCrawlerRunLogsRequest" class="title-badge message">RagGetCrawlerRunLogsRequest</a>
+                      </li>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.RagGetCrawlerRunLogsResponse" class="title-badge message">RagGetCrawlerRunLogsResponse</a>
                       </li>
                     
                       <li>
@@ -19135,6 +19182,209 @@ The Training phrases field is populated with only a few entries and no annotatio
     
       
       <div class="file-heading">
+        <h2 id="ondewo/nlu/logs.proto">ondewo/nlu/logs.proto</h2><a href="#top">Top</a>
+      </div>
+      <p></p>
+
+      
+
+      
+      <div id="ondewo/nlu/logs.proto-messages" class="object-category">Messages</div>
+      
+        <h3 id="ondewo.nlu.CrawlerLogContext" class="title-badge message">CrawlerLogContext</h3>
+        <p>Specific context for crawler-related log entries.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>source_url</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The URL being processed when this log was generated. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>batch_index</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td>optional</td>
+                  <td><p>The batch index of the crawl operation. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>http_status_code</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td>optional</td>
+                  <td><p>The HTTP status code returned by the target server. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="ondewo.nlu.LogEntry" class="title-badge message">LogEntry</h3>
+        <p>A generic log entry structure.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Unique ID of the log entry. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>sequence_index</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>Sequence index within the run. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>logged_at</td>
+                  <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
+                  <td></td>
+                  <td><p>Timestamp of the log. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>level</td>
+                  <td><a href="#ondewo.nlu.LogLevel">LogLevel</a></td>
+                  <td></td>
+                  <td><p>Severity of the log. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>phase</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Execution phase (e.g. "discovery", "extraction"). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>message</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Human-readable message. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>details_json</td>
+                  <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
+                  <td></td>
+                  <td><p>Raw details in JSON format. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>log_context</td>
+                  <td><a href="#ondewo.nlu.LogEntryContext">LogEntryContext</a></td>
+                  <td></td>
+                  <td><p>Grouped domain-specific metadata. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="ondewo.nlu.LogEntryContext" class="title-badge message">LogEntryContext</h3>
+        <p>Container for domain-specific log metadata.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>crawler</td>
+                  <td><a href="#ondewo.nlu.CrawlerLogContext">CrawlerLogContext</a></td>
+                  <td></td>
+                  <td><p>Context specific to crawler runs. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+      
+
+      
+      <div id="ondewo/nlu/logs.proto-enums" class="object-category">Enums</div>
+      
+        <h3 id="ondewo.nlu.LogLevel" class="title-badge enum">LogLevel</h3>
+        <p>Log levels for various system operations.</p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>LOG_LEVEL_UNSPECIFIED</td>
+                <td>0</td>
+                <td><p>Unspecified log level.</p></td>
+              </tr>
+            
+              <tr>
+                <td>LOG_LEVEL_DEBUG</td>
+                <td>1</td>
+                <td><p>Debug level - detailed information for troubleshooting.</p></td>
+              </tr>
+            
+              <tr>
+                <td>LOG_LEVEL_INFO</td>
+                <td>2</td>
+                <td><p>Info level - general operational messages.</p></td>
+              </tr>
+            
+              <tr>
+                <td>LOG_LEVEL_WARN</td>
+                <td>3</td>
+                <td><p>Warning level - potential issues that don't stop execution.</p></td>
+              </tr>
+            
+              <tr>
+                <td>LOG_LEVEL_ERROR</td>
+                <td>4</td>
+                <td><p>Error level - serious issues that might affect results.</p></td>
+              </tr>
+            
+              <tr>
+                <td>LOG_LEVEL_FATAL</td>
+                <td>5</td>
+                <td><p>Fatal level - critical failures that stop the process.</p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+      
+
+      
+
+    
+      
+      <div class="file-heading">
         <h2 id="ondewo/nlu/operation_metadata.proto">ondewo/nlu/operation_metadata.proto</h2><a href="#top">Top</a>
       </div>
       <p></p>
@@ -20980,6 +21230,12 @@ Queues documents for background processing.
 
           Delete multiple crawlers.
         
+          <h4 id="ondewo.nlu.Rags.RagGetCrawlerRunLogs" class="title-badge method">RagGetCrawlerRunLogs</h4>
+
+          <pre>rpc RagGetCrawlerRunLogs (<a href="#ondewo.nlu.RagGetCrawlerRunLogsRequest">RagGetCrawlerRunLogsRequest</a>) returns (<a href="#ondewo.nlu.RagGetCrawlerRunLogsResponse">RagGetCrawlerRunLogsResponse)</a></pre>
+
+          Get crawler run logs.
+        
 
         
 
@@ -21586,6 +21842,34 @@ Default <code>RAG_CRAWLER_CRAWL_STRATEGY_BFS</code>. </p></td>
                   <td><a href="#bool">bool</a></td>
                   <td></td>
                   <td><p>Optional. Include social media links. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>allowed_regex</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>disallowed_regex</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>allowed_paths</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>disallowed_paths</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
                 </tr>
               
             </tbody>
@@ -23295,6 +23579,175 @@ Both <code>current_index-&lt;idx&gt;</code> and <code>page_size-&lt;size&gt;</co
                   <td></td>
                   <td><p>Total number of crawler results available after applying request filters
 (for example <code>url_query</code>). </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="ondewo.nlu.RagGetCrawlerRunLogsRequest" class="title-badge message">RagGetCrawlerRunLogsRequest</h3>
+        <p>Request message for getting crawler run logs.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>parent</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The agent that owns the crawler run.
+Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>language_code</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The language of the project to use. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>operation_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Resource name of the crawler run.
+Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawler_runs/&lt;crawler_run_uuid&gt;</code></pre> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>page_token</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. Specifies which page to return. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>page_size</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>Optional. Number of logs per page. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>level_filter</td>
+                  <td><a href="#ondewo.nlu.LogLevel">LogLevel</a></td>
+                  <td>repeated</td>
+                  <td><p>Optional. Filter by one or more log levels. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>phase_filter</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. Filter by specific phase (exact match). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>search_query</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. Search string for the message or details. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>start_time</td>
+                  <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
+                  <td></td>
+                  <td><p>Optional. Filter logs generated after this time. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>end_time</td>
+                  <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
+                  <td></td>
+                  <td><p>Optional. Filter logs generated before this time. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>source_url_filter</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. Filter by source URL (substring match). </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="ondewo.nlu.RagGetCrawlerRunLogsResponse" class="title-badge message">RagGetCrawlerRunLogsResponse</h3>
+        <p>Response message for getting crawler run logs.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>operation_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Resource name of the crawler run operation. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>crawler_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Resource name of the crawler profile. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>rag_crawler_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>ID of the RAG crawler. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>status</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Status of the run. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>started_at</td>
+                  <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
+                  <td></td>
+                  <td><p>Start timestamp. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>completed_at</td>
+                  <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
+                  <td></td>
+                  <td><p>Completion timestamp. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>entries</td>
+                  <td><a href="#ondewo.nlu.LogEntry">LogEntry</a></td>
+                  <td>repeated</td>
+                  <td><p>List of log entries for the requested page. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>next_page_token</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Page token string for retrieving the next results page. </p></td>
                 </tr>
               
             </tbody>
