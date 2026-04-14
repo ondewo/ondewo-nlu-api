@@ -36,10 +36,10 @@ package ondewo.nlu;
 import "google/protobuf/struct.proto";
 import "google/protobuf/field_mask.proto";
 import "google/protobuf/timestamp.proto";
+import "ondewo/nlu/common.proto";
 import "ondewo/nlu/operation_metadata.proto";
 import "ondewo/nlu/operations.proto";
 import "ondewo/nlu/session.proto";
-import "ondewo/nlu/common.proto";
 
 // Provides RAG and web crawler endpoints.
 // Most of the RAG related endpoints largely mirror <a href="https://github.com/ondewo/ragflow">RAGFlow's</a> HTTP API endpoints. For more information on RAGFlow refer to the <a href="https://ragflow.io/docs/dev/">official documentation</a>
@@ -2130,7 +2130,7 @@ message RagGetCrawlerRunLogsRequest {
   // --- Filtering Logic ---
 
   // Optional. Filter by one or more log levels.
-  repeated LogLevel level_filter = 6;
+  repeated LogSeverity level_filter = 6;
 
   // Optional. Filter by specific phase (exact match).
   string phase_filter = 7;

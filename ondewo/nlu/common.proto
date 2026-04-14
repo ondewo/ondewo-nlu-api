@@ -413,68 +413,56 @@ message KeyValuePair {
 
 }
 
-// Log levels for various system operations.
+// Log levels for various system operations based on Loguru log levels.
 enum LogSeverity {
     // Unspecified log level.
     LOG_SEVERITY_UNSPECIFIED = 0;
+    // Trace level - lowest level, most detailed.
+    LOG_SEVERITY_TRACE = 1;
     // Debug level - detailed information for troubleshooting.
-    LOG_SEVERITY_DEBUG = 1;
+    LOG_SEVERITY_DEBUG = 2;
     // Info level - general operational messages.
-    LOG_SEVERITY_INFO = 2;
+    LOG_SEVERITY_INFO = 3;
+    // Success level - successful completion of an operation.
+    LOG_SEVERITY_SUCCESS = 4;
     // Warning level - potential issues that don't stop execution.
-    LOG_SEVERITY_WARN = 3;
+    LOG_SEVERITY_WARNING = 5;
     // Error level - serious issues that might affect results.
-    LOG_SEVERITY_ERROR = 4;
-    // Fatal level - critical failures that stop the process.
-    LOG_SEVERITY_FATAL = 5;
-}
-
-// Specific context for crawler-related log entries.
-message HttpContext {
-    // The URL being processed when this log was generated.
-    string url = 1;
-
-    // The HTTP status code returned by the target server.
-    optional int32 http_status_code = 2;
-}
-
-// Container for domain-specific log metadata.
-message LogContext {
-    oneof context {
-        // Human-readable message.
-        string message = 1;
-
-        // Context specific to http operations.
-        HttpContext http = 2;
-
-        // Future contexts (e.g., webhook, training, etc.) can be added here.
-    }
+    LOG_SEVERITY_ERROR = 6;
+    // Critical level - critical failures that stop the process.
+    LOG_SEVERITY_CRITICAL = 7;
 }
 
 // A generic log entry structure.
 message LogEntry {
-    // Unique ID of the log entry.
-    string id = 1;
+    // Resource name of the log entry.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/logs/&lt;log_uuid&gt;</code></pre>
+    string name = 1;
 
     // Sequence index within the run.
-    int32 sequence_index = 2;
+    int32 log_entry_sequence_index = 2;
 
-    string log_name = 3;
+    // Name of the log.
+    string log_entry_name = 3;
 
     // Timestamp of the log.
-    google.protobuf.Timestamp timestamp = 4;
+    google.protobuf.Timestamp log_entry_timestamp = 4;
+
+    // Output only. Timestamp when the log was received.
+    google.protobuf.Timestamp log_entry_receive_timestamp = 5;
 
     // Severity of the log.
-    LogSeverity severity = 5;
+    LogSeverity log_entry_severity = 6;
 
     // Execution phase (e.g. "discovery", "extraction").
-    string phase = 6;
+    string log_entry_phase = 7;
 
-    string operation_name = 7;
+    // Name of the operation.
+    string log_entry_operation_name = 8;
 
-    // Raw details in JSON format.
-    google.protobuf.Struct details_json = 8;
+    // Raw details in Struct format.
+    google.protobuf.Struct log_entry_details = 9;
 
-    // Grouped domain-specific metadata.
-    LogContext log_context = 9;
+    // Domain-specific metadata in Struct format.
+    google.protobuf.Struct log_entry_context = 10;
 }
