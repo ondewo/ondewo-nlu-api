@@ -161,15 +161,19 @@
     - [AddNotificationsRequest](#ondewo.nlu.AddNotificationsRequest)
     - [AddNotificationsResponse](#ondewo.nlu.AddNotificationsResponse)
     - [Comment](#ondewo.nlu.Comment)
+    - [CrawlerLogContext](#ondewo.nlu.CrawlerLogContext)
     - [KeyValuePair](#ondewo.nlu.KeyValuePair)
     - [ListNotificationsRequest](#ondewo.nlu.ListNotificationsRequest)
     - [ListNotificationsResponse](#ondewo.nlu.ListNotificationsResponse)
+    - [LogEntry](#ondewo.nlu.LogEntry)
+    - [LogEntryContext](#ondewo.nlu.LogEntryContext)
     - [Notification](#ondewo.nlu.Notification)
     - [NotificationFilter](#ondewo.nlu.NotificationFilter)
     - [SetNotificationsFlaggedStatusRequest](#ondewo.nlu.SetNotificationsFlaggedStatusRequest)
     - [SetNotificationsReadStatusRequest](#ondewo.nlu.SetNotificationsReadStatusRequest)
     - [StatResponse](#ondewo.nlu.StatResponse)
   
+    - [LogLevel](#ondewo.nlu.LogLevel)
     - [NotificationFlaggedStatus](#ondewo.nlu.NotificationFlaggedStatus)
     - [NotificationOrigin](#ondewo.nlu.NotificationOrigin)
     - [NotificationReadStatus](#ondewo.nlu.NotificationReadStatus)
@@ -320,13 +324,6 @@
     - [IntentView](#ondewo.nlu.IntentView)
   
     - [Intents](#ondewo.nlu.Intents)
-  
-- [ondewo/nlu/logs.proto](#ondewo/nlu/logs.proto)
-    - [CrawlerLogContext](#ondewo.nlu.CrawlerLogContext)
-    - [LogEntry](#ondewo.nlu.LogEntry)
-    - [LogEntryContext](#ondewo.nlu.LogEntryContext)
-  
-    - [LogLevel](#ondewo.nlu.LogLevel)
   
 - [ondewo/nlu/operation_metadata.proto](#ondewo/nlu/operation_metadata.proto)
     - [OperationMetadata](#ondewo.nlu.OperationMetadata)
@@ -3528,6 +3525,23 @@ Comment message
 
 
 
+<a name="ondewo.nlu.CrawlerLogContext"></a>
+
+### CrawlerLogContext
+Specific context for crawler-related log entries.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| source_url | [string](#string) |  | The URL being processed when this log was generated. |
+| batch_index | [int32](#int32) | optional | The batch index of the crawl operation. |
+| http_status_code | [int32](#int32) | optional | The HTTP status code returned by the target server. |
+
+
+
+
+
+
 <a name="ondewo.nlu.KeyValuePair"></a>
 
 ### KeyValuePair
@@ -3582,6 +3596,43 @@ Message containing the response to a list request for notifications.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | notifications | [Notification](#ondewo.nlu.Notification) | repeated | List of notifications that meet the specified criteria. |
+
+
+
+
+
+
+<a name="ondewo.nlu.LogEntry"></a>
+
+### LogEntry
+A generic log entry structure.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| id | [string](#string) |  | Unique ID of the log entry. |
+| sequence_index | [int32](#int32) |  | Sequence index within the run. |
+| logged_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Timestamp of the log. |
+| level | [LogLevel](#ondewo.nlu.LogLevel) |  | Severity of the log. |
+| phase | [string](#string) |  | Execution phase (e.g. "discovery", "extraction"). |
+| message | [string](#string) |  | Human-readable message. |
+| details_json | [google.protobuf.Struct](#google.protobuf.Struct) |  | Raw details in JSON format. |
+| log_context | [LogEntryContext](#ondewo.nlu.LogEntryContext) |  | Grouped domain-specific metadata. |
+
+
+
+
+
+
+<a name="ondewo.nlu.LogEntryContext"></a>
+
+### LogEntryContext
+Container for domain-specific log metadata.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| crawler | [CrawlerLogContext](#ondewo.nlu.CrawlerLogContext) |  | Context specific to crawler runs. |
 
 
 
@@ -3690,6 +3741,22 @@ statistic response
 
 
  <!-- end messages -->
+
+
+<a name="ondewo.nlu.LogLevel"></a>
+
+### LogLevel
+Log levels for various system operations.
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| LOG_LEVEL_UNSPECIFIED | 0 | Unspecified log level. |
+| LOG_LEVEL_DEBUG | 1 | Debug level - detailed information for troubleshooting. |
+| LOG_LEVEL_INFO | 2 | Info level - general operational messages. |
+| LOG_LEVEL_WARN | 3 | Warning level - potential issues that don't stop execution. |
+| LOG_LEVEL_ERROR | 4 | Error level - serious issues that might affect results. |
+| LOG_LEVEL_FATAL | 5 | Fatal level - critical failures that stop the process. |
+
 
 
 <a name="ondewo.nlu.NotificationFlaggedStatus"></a>
@@ -6255,92 +6322,6 @@ Operation &lt;response: <a href="index.html#ondewo.nlu.BatchUpdateIntentsRespons
 | BatchDeleteParameters | [BatchDeleteParametersRequest](#ondewo.nlu.BatchDeleteParametersRequest) | [BatchDeleteParametersResponse](#ondewo.nlu.BatchDeleteParametersResponse) | Delete a intent messages batch of the specified names. |
 | ListParameters | [ListParametersRequest](#ondewo.nlu.ListParametersRequest) | [ListParametersResponse](#ondewo.nlu.ListParametersResponse) | List messages (of a specific intent). |
 | ListTrainingPhrasesofIntentsWithEnrichment | [ListTrainingPhrasesofIntentsWithEnrichmentRequest](#ondewo.nlu.ListTrainingPhrasesofIntentsWithEnrichmentRequest) | [ListTrainingPhrasesofIntentsWithEnrichmentResponse](#ondewo.nlu.ListTrainingPhrasesofIntentsWithEnrichmentResponse) | List Training phrases (of a specific intent). |
-
- <!-- end services -->
-
-
-
-<a name="ondewo/nlu/logs.proto"></a>
-<p align="right"><a href="#top">Top</a></p>
-
-## ondewo/nlu/logs.proto
-
-
-
-<a name="ondewo.nlu.CrawlerLogContext"></a>
-
-### CrawlerLogContext
-Specific context for crawler-related log entries.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| source_url | [string](#string) |  | The URL being processed when this log was generated. |
-| batch_index | [int32](#int32) | optional | The batch index of the crawl operation. |
-| http_status_code | [int32](#int32) | optional | The HTTP status code returned by the target server. |
-
-
-
-
-
-
-<a name="ondewo.nlu.LogEntry"></a>
-
-### LogEntry
-A generic log entry structure.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| id | [string](#string) |  | Unique ID of the log entry. |
-| sequence_index | [int32](#int32) |  | Sequence index within the run. |
-| logged_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Timestamp of the log. |
-| level | [LogLevel](#ondewo.nlu.LogLevel) |  | Severity of the log. |
-| phase | [string](#string) |  | Execution phase (e.g. "discovery", "extraction"). |
-| message | [string](#string) |  | Human-readable message. |
-| details_json | [google.protobuf.Struct](#google.protobuf.Struct) |  | Raw details in JSON format. |
-| log_context | [LogEntryContext](#ondewo.nlu.LogEntryContext) |  | Grouped domain-specific metadata. |
-
-
-
-
-
-
-<a name="ondewo.nlu.LogEntryContext"></a>
-
-### LogEntryContext
-Container for domain-specific log metadata.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| crawler | [CrawlerLogContext](#ondewo.nlu.CrawlerLogContext) |  | Context specific to crawler runs. |
-
-
-
-
-
- <!-- end messages -->
-
-
-<a name="ondewo.nlu.LogLevel"></a>
-
-### LogLevel
-Log levels for various system operations.
-
-| Name | Number | Description |
-| ---- | ------ | ----------- |
-| LOG_LEVEL_UNSPECIFIED | 0 | Unspecified log level. |
-| LOG_LEVEL_DEBUG | 1 | Debug level - detailed information for troubleshooting. |
-| LOG_LEVEL_INFO | 2 | Info level - general operational messages. |
-| LOG_LEVEL_WARN | 3 | Warning level - potential issues that don't stop execution. |
-| LOG_LEVEL_ERROR | 4 | Error level - serious issues that might affect results. |
-| LOG_LEVEL_FATAL | 5 | Fatal level - critical failures that stop the process. |
-
-
- <!-- end enums -->
-
- <!-- end HasExtensions -->
 
  <!-- end services -->
 

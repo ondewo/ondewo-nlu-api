@@ -830,6 +830,10 @@
                       </li>
                     
                       <li>
+                        <a href="#ondewo.nlu.CrawlerLogContext" class="title-badge message">CrawlerLogContext</a>
+                      </li>
+                    
+                      <li>
                         <a href="#ondewo.nlu.KeyValuePair" class="title-badge message">KeyValuePair</a>
                       </li>
                     
@@ -839,6 +843,14 @@
                     
                       <li>
                         <a href="#ondewo.nlu.ListNotificationsResponse" class="title-badge message">ListNotificationsResponse</a>
+                      </li>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.LogEntry" class="title-badge message">LogEntry</a>
+                      </li>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.LogEntryContext" class="title-badge message">LogEntryContext</a>
                       </li>
                     
                       <li>
@@ -866,6 +878,10 @@
                   
                   <a href="#ondewo/nlu/common.proto-enums">Enums</a>
                   <ul>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.LogLevel" class="title-badge enum">LogLevel</a>
+                      </li>
                     
                       <li>
                         <a href="#ondewo.nlu.NotificationFlaggedStatus" class="title-badge enum">NotificationFlaggedStatus</a>
@@ -1610,43 +1626,6 @@
                     
                       <li>
                         <a href="#ondewo.nlu.IntentView" class="title-badge enum">IntentView</a>
-                      </li>
-                    
-                  </ul>
-                  
-                  
-                </div>
-              </li>
-            
-              
-              <li>
-                <a href="#ondewo/nlu/logs.proto">ondewo/nlu/logs.proto</a>
-                <div class="file-content">
-                  
-                  
-                  <a href="#ondewo/nlu/logs.proto-messages">Messages</a>
-                  <ul>
-                    
-                      <li>
-                        <a href="#ondewo.nlu.CrawlerLogContext" class="title-badge message">CrawlerLogContext</a>
-                      </li>
-                    
-                      <li>
-                        <a href="#ondewo.nlu.LogEntry" class="title-badge message">LogEntry</a>
-                      </li>
-                    
-                      <li>
-                        <a href="#ondewo.nlu.LogEntryContext" class="title-badge message">LogEntryContext</a>
-                      </li>
-                    
-                  </ul>
-                  
-                  
-                  <a href="#ondewo/nlu/logs.proto-enums">Enums</a>
-                  <ul>
-                    
-                      <li>
-                        <a href="#ondewo.nlu.LogLevel" class="title-badge enum">LogLevel</a>
                       </li>
                     
                   </ul>
@@ -12002,6 +11981,44 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/&lt;resource_type&gt;/&lt
 
         
       
+        <h3 id="ondewo.nlu.CrawlerLogContext" class="title-badge message">CrawlerLogContext</h3>
+        <p>Specific context for crawler-related log entries.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>source_url</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The URL being processed when this log was generated. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>batch_index</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td>optional</td>
+                  <td><p>The batch index of the crawl operation. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>http_status_code</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td>optional</td>
+                  <td><p>The HTTP status code returned by the target server. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="ondewo.nlu.KeyValuePair" class="title-badge message">KeyValuePair</h3>
         <p>Key-Value pair message, where the value can be one of various types (int, float, double, string, etc.).</p>
 
@@ -12145,6 +12162,103 @@ Example: path=["notification.user_names"] </p></td>
                   <td><a href="#ondewo.nlu.Notification">Notification</a></td>
                   <td>repeated</td>
                   <td><p>List of notifications that meet the specified criteria. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="ondewo.nlu.LogEntry" class="title-badge message">LogEntry</h3>
+        <p>A generic log entry structure.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Unique ID of the log entry. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>sequence_index</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>Sequence index within the run. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>logged_at</td>
+                  <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
+                  <td></td>
+                  <td><p>Timestamp of the log. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>level</td>
+                  <td><a href="#ondewo.nlu.LogLevel">LogLevel</a></td>
+                  <td></td>
+                  <td><p>Severity of the log. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>phase</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Execution phase (e.g. "discovery", "extraction"). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>message</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Human-readable message. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>details_json</td>
+                  <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
+                  <td></td>
+                  <td><p>Raw details in JSON format. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>log_context</td>
+                  <td><a href="#ondewo.nlu.LogEntryContext">LogEntryContext</a></td>
+                  <td></td>
+                  <td><p>Grouped domain-specific metadata. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="ondewo.nlu.LogEntryContext" class="title-badge message">LogEntryContext</h3>
+        <p>Container for domain-specific log metadata.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>crawler</td>
+                  <td><a href="#ondewo.nlu.CrawlerLogContext">CrawlerLogContext</a></td>
+                  <td></td>
+                  <td><p>Context specific to crawler runs. </p></td>
                 </tr>
               
             </tbody>
@@ -12470,6 +12584,53 @@ A Notification origin can be from a product (service), e.g. ondewo-nlu, ondewo-s
 
       
       <div id="ondewo/nlu/common.proto-enums" class="object-category">Enums</div>
+      
+        <h3 id="ondewo.nlu.LogLevel" class="title-badge enum">LogLevel</h3>
+        <p>Log levels for various system operations.</p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>LOG_LEVEL_UNSPECIFIED</td>
+                <td>0</td>
+                <td><p>Unspecified log level.</p></td>
+              </tr>
+            
+              <tr>
+                <td>LOG_LEVEL_DEBUG</td>
+                <td>1</td>
+                <td><p>Debug level - detailed information for troubleshooting.</p></td>
+              </tr>
+            
+              <tr>
+                <td>LOG_LEVEL_INFO</td>
+                <td>2</td>
+                <td><p>Info level - general operational messages.</p></td>
+              </tr>
+            
+              <tr>
+                <td>LOG_LEVEL_WARN</td>
+                <td>3</td>
+                <td><p>Warning level - potential issues that don't stop execution.</p></td>
+              </tr>
+            
+              <tr>
+                <td>LOG_LEVEL_ERROR</td>
+                <td>4</td>
+                <td><p>Error level - serious issues that might affect results.</p></td>
+              </tr>
+            
+              <tr>
+                <td>LOG_LEVEL_FATAL</td>
+                <td>5</td>
+                <td><p>Fatal level - critical failures that stop the process.</p></td>
+              </tr>
+            
+          </tbody>
+        </table>
       
         <h3 id="ondewo.nlu.NotificationFlaggedStatus" class="title-badge enum">NotificationFlaggedStatus</h3>
         <p>Enumerates the possible flagged statuses for a notification.</p>
@@ -19170,209 +19331,6 @@ The Training phrases field is populated with only a few entries and no annotatio
                 <td>INTENT_VIEW_MINIMUM</td>
                 <td>4</td>
                 <td><p>Minimum view including only intent UUID and intent display name</p></td>
-              </tr>
-            
-          </tbody>
-        </table>
-      
-      
-
-      
-
-    
-      
-      <div class="file-heading">
-        <h2 id="ondewo/nlu/logs.proto">ondewo/nlu/logs.proto</h2><a href="#top">Top</a>
-      </div>
-      <p></p>
-
-      
-
-      
-      <div id="ondewo/nlu/logs.proto-messages" class="object-category">Messages</div>
-      
-        <h3 id="ondewo.nlu.CrawlerLogContext" class="title-badge message">CrawlerLogContext</h3>
-        <p>Specific context for crawler-related log entries.</p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>source_url</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>The URL being processed when this log was generated. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>batch_index</td>
-                  <td><a href="#int32">int32</a></td>
-                  <td>optional</td>
-                  <td><p>The batch index of the crawl operation. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>http_status_code</td>
-                  <td><a href="#int32">int32</a></td>
-                  <td>optional</td>
-                  <td><p>The HTTP status code returned by the target server. </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="ondewo.nlu.LogEntry" class="title-badge message">LogEntry</h3>
-        <p>A generic log entry structure.</p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>id</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Unique ID of the log entry. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>sequence_index</td>
-                  <td><a href="#int32">int32</a></td>
-                  <td></td>
-                  <td><p>Sequence index within the run. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>logged_at</td>
-                  <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
-                  <td></td>
-                  <td><p>Timestamp of the log. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>level</td>
-                  <td><a href="#ondewo.nlu.LogLevel">LogLevel</a></td>
-                  <td></td>
-                  <td><p>Severity of the log. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>phase</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Execution phase (e.g. "discovery", "extraction"). </p></td>
-                </tr>
-              
-                <tr>
-                  <td>message</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Human-readable message. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>details_json</td>
-                  <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
-                  <td></td>
-                  <td><p>Raw details in JSON format. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>log_context</td>
-                  <td><a href="#ondewo.nlu.LogEntryContext">LogEntryContext</a></td>
-                  <td></td>
-                  <td><p>Grouped domain-specific metadata. </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="ondewo.nlu.LogEntryContext" class="title-badge message">LogEntryContext</h3>
-        <p>Container for domain-specific log metadata.</p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>crawler</td>
-                  <td><a href="#ondewo.nlu.CrawlerLogContext">CrawlerLogContext</a></td>
-                  <td></td>
-                  <td><p>Context specific to crawler runs. </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-      
-
-      
-      <div id="ondewo/nlu/logs.proto-enums" class="object-category">Enums</div>
-      
-        <h3 id="ondewo.nlu.LogLevel" class="title-badge enum">LogLevel</h3>
-        <p>Log levels for various system operations.</p>
-        <table class="enum-table">
-          <thead>
-            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
-          </thead>
-          <tbody>
-            
-              <tr>
-                <td>LOG_LEVEL_UNSPECIFIED</td>
-                <td>0</td>
-                <td><p>Unspecified log level.</p></td>
-              </tr>
-            
-              <tr>
-                <td>LOG_LEVEL_DEBUG</td>
-                <td>1</td>
-                <td><p>Debug level - detailed information for troubleshooting.</p></td>
-              </tr>
-            
-              <tr>
-                <td>LOG_LEVEL_INFO</td>
-                <td>2</td>
-                <td><p>Info level - general operational messages.</p></td>
-              </tr>
-            
-              <tr>
-                <td>LOG_LEVEL_WARN</td>
-                <td>3</td>
-                <td><p>Warning level - potential issues that don't stop execution.</p></td>
-              </tr>
-            
-              <tr>
-                <td>LOG_LEVEL_ERROR</td>
-                <td>4</td>
-                <td><p>Error level - serious issues that might affect results.</p></td>
-              </tr>
-            
-              <tr>
-                <td>LOG_LEVEL_FATAL</td>
-                <td>5</td>
-                <td><p>Fatal level - critical failures that stop the process.</p></td>
               </tr>
             
           </tbody>
