@@ -183,6 +183,9 @@ service Rags {
 
     // Delete multiple crawlers.
     rpc RagDeleteCrawlers(RagDeleteCrawlersRequest) returns (RagDeleteCrawlersResponse);
+
+    // Get crawler run logs.
+    rpc RagGetCrawlerRunLogs(RagGetCrawlerRunLogsRequest) returns (RagGetCrawlerRunLogsResponse);
 }
 
 // ============================================================================
@@ -2095,4 +2098,72 @@ message RagGetCrawlerAttachedDatasetsResponse {
     // Page token string (following the format described in <code>RagGetCrawlerAttachedDatasetsRequest</code>) for retrieving the next results page
     string next_page_token = 2;
 
+}
+
+
+// Request message for getting crawler run logs.
+message RagGetCrawlerRunLogsRequest {
+  // Required. The agent that owns the crawler run.
+  // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+  string parent = 1;
+
+  // Required. The language of the project to use.
+  string language_code = 2;
+
+  // Required. Resource name of the crawler run.
+  // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawler_runs/&lt;crawler_run_uuid&gt;</code></pre>
+  string operation_name = 3;
+
+  // Optional. Specifies which page to return.
+  string page_token = 4;
+
+  // Optional. Number of logs per page.
+  int32 page_size = 5;
+
+  // --- Filtering Logic ---
+
+  // Optional. Filter by one or more log levels.
+  repeated LogLevel level_filter = 6;
+
+  // Optional. Filter by specific phase (exact match).
+  string phase_filter = 7;
+
+  // Optional. Search string for the message or details.
+  string search_query = 8;
+
+  // Optional. Filter logs generated after this time.
+  google.protobuf.Timestamp start_time = 9;
+
+  // Optional. Filter logs generated before this time.
+  google.protobuf.Timestamp end_time = 10;
+
+  // Optional. Filter by source URL (substring match).
+  string source_url_filter = 11;
+}
+
+// Response message for getting crawler run logs.
+message RagGetCrawlerRunLogsResponse {
+  // Resource name of the crawler run operation.
+  string operation_name = 1;
+
+  // Resource name of the crawler profile.
+  string crawler_name = 2;
+
+  // ID of the RAG crawler.
+  string rag_crawler_id = 3;
+
+  // Status of the run.
+  string status = 4;
+
+  // Start timestamp.
+  google.protobuf.Timestamp started_at = 5;
+
+  // Completion timestamp.
+  google.protobuf.Timestamp completed_at = 6;
+
+  // List of log entries for the requested page.
+  repeated LogEntry entries = 7;
+
+  // Page token string for retrieving the next results page.
+  string next_page_token = 8;
 }
