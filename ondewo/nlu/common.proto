@@ -17,6 +17,7 @@ syntax = "proto3";
 package ondewo.nlu;
 
 import "google/protobuf/field_mask.proto";
+import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
 
 option cc_enable_arenas = true;
@@ -410,4 +411,58 @@ message KeyValuePair {
 
     }
 
+}
+
+// Log levels for various system operations based on Loguru log levels.
+enum LogSeverity {
+    // Unspecified log level.
+    LOG_SEVERITY_UNSPECIFIED = 0;
+    // Trace level - lowest level, most detailed.
+    LOG_SEVERITY_TRACE = 1;
+    // Debug level - detailed information for troubleshooting.
+    LOG_SEVERITY_DEBUG = 2;
+    // Info level - general operational messages.
+    LOG_SEVERITY_INFO = 3;
+    // Success level - successful completion of an operation.
+    LOG_SEVERITY_SUCCESS = 4;
+    // Warning level - potential issues that don't stop execution.
+    LOG_SEVERITY_WARNING = 5;
+    // Error level - serious issues that might affect results.
+    LOG_SEVERITY_ERROR = 6;
+    // Critical level - critical failures that stop the process.
+    LOG_SEVERITY_CRITICAL = 7;
+}
+
+// A generic log entry structure.
+message LogEntry {
+    // Resource name of the log entry.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/logs/&lt;log_uuid&gt;</code></pre>
+    string name = 1;
+
+    // Sequence index within the run.
+    int32 log_entry_sequence_index = 2;
+
+    // Name of the log.
+    string log_entry_name = 3;
+
+    // Timestamp of the log.
+    google.protobuf.Timestamp log_entry_timestamp = 4;
+
+    // Output only. Timestamp when the log was received.
+    google.protobuf.Timestamp log_entry_receive_timestamp = 5;
+
+    // Severity of the log.
+    LogSeverity log_entry_severity = 6;
+
+    // Execution phase (e.g. "discovery", "extraction").
+    string log_entry_phase = 7;
+
+    // Name of the operation.
+    string log_entry_operation_name = 8;
+
+    // Raw details in Struct format.
+    google.protobuf.Struct log_entry_details = 9;
+
+    // Domain-specific metadata in Struct format.
+    google.protobuf.Struct log_entry_context = 10;
 }
