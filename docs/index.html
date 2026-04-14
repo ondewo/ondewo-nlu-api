@@ -21161,7 +21161,7 @@ Queues documents for background processing.
       <div id="ondewo/nlu/rag.proto-messages" class="object-category">Messages</div>
       
         <h3 id="ondewo.nlu.RagAddCrawlerResultsToDatasetsRequest" class="title-badge message">RagAddCrawlerResultsToDatasetsRequest</h3>
-        <p>Request message for adding crawler output to one or more datasets.</p>
+        <p>Request message for adding crawler output to one or more datasets.<br></p><p>Either <code>crawler_names</code> or <code>crawler_result_names</code> (or both) must be provided.</p>
 
         
           <table class="field-table">
@@ -21189,7 +21189,8 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td>crawler_names</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
-                  <td><p>Required. Resource names of crawlers whose results should be imported.
+                  <td><p>Optional. Resource names of crawlers whose results should be imported.<br>
+The specified crawlers must have at least one successful run. All of the results of the last completed run are uploaded to the datasets.
 Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre> </p></td>
                 </tr>
               
@@ -21197,7 +21198,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid
                   <td>crawler_result_names</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
-                  <td><p>Required. Resource names of crawler results to import.
+                  <td><p>Optional. Resource names of crawler results to upload in addition to the results of the crawlers specified in <code>crawler_names</code>.
 Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawler_results/&lt;crawler_result_uuid&gt;</code></pre> </p></td>
                 </tr>
               
@@ -21205,12 +21206,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawler_results/&lt;crawl
                   <td>dataset_ids</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
-                  <td><p>Required. Dataset IDs to receive the imported crawler outputs.
-
-Example:
-<pre><code>crawler_names = ["projects/p/agent/crawlers/c1"]
-crawler_result_names = ["projects/p/agent/crawler_results/r1", "projects/p/agent/crawler_results/r2"]
-dataset_ids = ["dataset-a", "dataset-b"]</code></pre> </p></td>
+                  <td><p>Required. IDs of the datasets to add the crawl results to. </p></td>
                 </tr>
               
             </tbody>

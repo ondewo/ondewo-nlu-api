@@ -6853,18 +6853,17 @@ All message fields that are marked as <code>optional</code> are not actually opt
 <a name="ondewo.nlu.RagAddCrawlerResultsToDatasetsRequest"></a>
 
 ### RagAddCrawlerResultsToDatasetsRequest
-Request message for adding crawler output to one or more datasets.
+Request message for adding crawler output to one or more datasets.<br>
+Either <code>crawler_names</code> or <code>crawler_result_names</code> (or both) must be provided.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The agent that owns the crawler. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
 | language_code | [string](#string) |  | Required. The language of the project to use. |
-| crawler_names | [string](#string) | repeated | Required. Resource names of crawlers whose results should be imported. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre> |
-| crawler_result_names | [string](#string) | repeated | Required. Resource names of crawler results to import. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawler_results/&lt;crawler_result_uuid&gt;</code></pre> |
-| dataset_ids | [string](#string) | repeated | Required. Dataset IDs to receive the imported crawler outputs.
-
-Example: <pre><code>crawler_names = ["projects/p/agent/crawlers/c1"] crawler_result_names = ["projects/p/agent/crawler_results/r1", "projects/p/agent/crawler_results/r2"] dataset_ids = ["dataset-a", "dataset-b"]</code></pre> |
+| crawler_names | [string](#string) | repeated | Optional. Resource names of crawlers whose results should be imported.<br> The specified crawlers must have at least one successful run. All of the results of the last completed run are uploaded to the datasets. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre> |
+| crawler_result_names | [string](#string) | repeated | Optional. Resource names of crawler results to upload in addition to the results of the crawlers specified in <code>crawler_names</code>. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawler_results/&lt;crawler_result_uuid&gt;</code></pre> |
+| dataset_ids | [string](#string) | repeated | Required. IDs of the datasets to add the crawl results to. |
 
 
 
