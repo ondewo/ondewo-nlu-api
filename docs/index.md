@@ -3593,7 +3593,7 @@ A generic log entry structure.
 | ----- | ---- | ----- | ----------- |
 | name | [string](#string) |  | Resource name of the log entry. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/logs/&lt;log_uuid&gt;</code></pre> |
 | log_entry_sequence_index | [int32](#int32) |  | Sequence index within the run. |
-| log_entry_name | [string](#string) |  | Name of the log. |
+| display_name | [string](#string) |  | Name of the log. |
 | log_entry_timestamp | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Timestamp of the log. |
 | log_entry_receive_timestamp | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Output only. Timestamp when the log was received. |
 | log_entry_severity | [LogSeverity](#ondewo.nlu.LogSeverity) |  | Severity of the log. |
@@ -6967,6 +6967,7 @@ user-agent behavior, and launch arguments).
 | ----- | ---- | ----- | ----------- |
 | crawler_headers | [google.protobuf.Struct](#google.protobuf.Struct) | repeated | Optional. HTTP headers sent on page/resource requests. Repeated entries allow duplicate header names and preserve order. |
 | crawler_cookies | [RagCrawlerCookie](#ondewo.nlu.RagCrawlerCookie) | repeated | Optional. Initial cookies. |
+| crawler_user_agent | [string](#string) |  | Optional. User-Agent sent with requests. |
 
 
 
@@ -7141,7 +7142,6 @@ HTTP Basic authentication settings.
 | ----- | ---- | ----- | ----------- |
 | http_auth_username | [string](#string) |  | HTTP Basic Authentication username. |
 | http_auth_password | [string](#string) |  | HTTP Basic Authentication password. |
-| http_auth_user_agent | [string](#string) |  | Optional. User-Agent sent with basic-auth requests. |
 
 
 

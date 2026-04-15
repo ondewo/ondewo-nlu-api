@@ -12151,7 +12151,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/logs/&lt;log_uuid&gt;</co
                 </tr>
               
                 <tr>
-                  <td>log_entry_name</td>
+                  <td>display_name</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Name of the log. </p></td>
@@ -21476,6 +21476,13 @@ Repeated entries allow duplicate header names and preserve order. </p></td>
                   <td><p>Optional. Initial cookies. </p></td>
                 </tr>
               
+                <tr>
+                  <td>crawler_user_agent</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. User-Agent sent with requests. </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -21885,13 +21892,6 @@ Default <code>RAG_CRAWLER_CRAWL_STRATEGY_BFS</code>. </p></td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>HTTP Basic Authentication password. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>http_auth_user_agent</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Optional. User-Agent sent with basic-auth requests. </p></td>
                 </tr>
               
             </tbody>
