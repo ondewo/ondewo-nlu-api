@@ -1829,8 +1829,8 @@ message RagListCrawlerRunsRequest {
     // </ul>
     string page_token = 4;
 
-    // Optional. Filter by operation state.
-    OperationMetadata.Status state = 5;
+    // Optional. Filter by operation status.
+    OperationMetadata.Status status = 5;
 
     // Optional. Sort field (default: <code>created_at</code>).
     string orderby = 6;
@@ -1996,7 +1996,8 @@ message RagGetCrawlerResultRequest {
 
 }
 
-// Request message for adding crawler output to one or more datasets.
+// Request message for adding crawler output to one or more datasets.<br>
+// Either <code>crawler_names</code> or <code>crawler_result_names</code> (or both) must be provided.
 message RagAddCrawlerResultsToDatasetsRequest {
 
     // Required. The agent that owns the crawler.
@@ -2006,20 +2007,16 @@ message RagAddCrawlerResultsToDatasetsRequest {
     // Required. The language of the project to use.
     string language_code = 2;
 
-    // Required. Resource names of crawlers whose results should be imported.
+    // Optional. Resource names of crawlers whose results should be imported.<br>
+    // The specified crawlers must have at least one successful run. All of the results of the last completed run are uploaded to the datasets.
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre>
     repeated string crawler_names = 3;
 
-    // Required. Resource names of crawler results to import.
+    // Optional. Resource names of crawler results to upload in addition to the results of the crawlers specified in <code>crawler_names</code>.
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawler_results/&lt;crawler_result_uuid&gt;</code></pre>
     repeated string crawler_result_names = 4;
 
-    // Required. Dataset IDs to receive the imported crawler outputs.
-    //
-    // Example:
-    // <pre><code>crawler_names = ["projects/p/agent/crawlers/c1"]
-    // crawler_result_names = ["projects/p/agent/crawler_results/r1", "projects/p/agent/crawler_results/r2"]
-    // dataset_ids = ["dataset-a", "dataset-b"]</code></pre>
+    // Required. IDs of the datasets to add the crawl results to.
     repeated string dataset_ids = 5;
 
 }
@@ -2107,7 +2104,6 @@ message RagGetCrawlerAttachedDatasetsResponse {
 
 }
 
-
 // Request message for getting crawler run logs.
 message RagGetCrawlerRunLogsRequest {
   // Required. The agent that owns the crawler run.
@@ -2146,6 +2142,7 @@ message RagGetCrawlerRunLogsRequest {
 
   // Optional. Filter by source URL (substring match).
   string source_url_filter = 11;
+
 }
 
 // Response message for getting crawler run logs.
@@ -2156,12 +2153,13 @@ message RagGetCrawlerRunLogsResponse {
   // Resource name of the crawler profile.
   string crawler_name = 2;
 
-  // Status of the run.
-  string operation_status = 3;
+  // Operation status of the run.
+  OperationMetadata.Status status = 3;
 
   // List of log entries for the requested page.
   repeated LogEntry entries = 4;
 
   // Page token string for retrieving the next results page.
   string next_page_token = 5;
+
 }

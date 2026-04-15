@@ -164,12 +164,14 @@
     - [KeyValuePair](#ondewo.nlu.KeyValuePair)
     - [ListNotificationsRequest](#ondewo.nlu.ListNotificationsRequest)
     - [ListNotificationsResponse](#ondewo.nlu.ListNotificationsResponse)
+    - [LogEntry](#ondewo.nlu.LogEntry)
     - [Notification](#ondewo.nlu.Notification)
     - [NotificationFilter](#ondewo.nlu.NotificationFilter)
     - [SetNotificationsFlaggedStatusRequest](#ondewo.nlu.SetNotificationsFlaggedStatusRequest)
     - [SetNotificationsReadStatusRequest](#ondewo.nlu.SetNotificationsReadStatusRequest)
     - [StatResponse](#ondewo.nlu.StatResponse)
   
+    - [LogSeverity](#ondewo.nlu.LogSeverity)
     - [NotificationFlaggedStatus](#ondewo.nlu.NotificationFlaggedStatus)
     - [NotificationOrigin](#ondewo.nlu.NotificationOrigin)
     - [NotificationReadStatus](#ondewo.nlu.NotificationReadStatus)
@@ -407,6 +409,8 @@
     - [RagGetCrawlerResultRequest](#ondewo.nlu.RagGetCrawlerResultRequest)
     - [RagGetCrawlerResultsRequest](#ondewo.nlu.RagGetCrawlerResultsRequest)
     - [RagGetCrawlerResultsResponse](#ondewo.nlu.RagGetCrawlerResultsResponse)
+    - [RagGetCrawlerRunLogsRequest](#ondewo.nlu.RagGetCrawlerRunLogsRequest)
+    - [RagGetCrawlerRunLogsResponse](#ondewo.nlu.RagGetCrawlerRunLogsResponse)
     - [RagGetCrawlerRunRequest](#ondewo.nlu.RagGetCrawlerRunRequest)
     - [RagGraphRagConfig](#ondewo.nlu.RagGraphRagConfig)
     - [RagListCrawlerRunsRequest](#ondewo.nlu.RagListCrawlerRunsRequest)
@@ -3579,6 +3583,30 @@ Message containing the response to a list request for notifications.
 
 
 
+<a name="ondewo.nlu.LogEntry"></a>
+
+### LogEntry
+A generic log entry structure.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | Resource name of the log entry. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/logs/&lt;log_uuid&gt;</code></pre> |
+| log_entry_sequence_index | [int32](#int32) |  | Sequence index within the run. |
+| log_entry_name | [string](#string) |  | Name of the log. |
+| log_entry_timestamp | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Timestamp of the log. |
+| log_entry_receive_timestamp | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Output only. Timestamp when the log was received. |
+| log_entry_severity | [LogSeverity](#ondewo.nlu.LogSeverity) |  | Severity of the log. |
+| log_entry_phase | [string](#string) |  | Execution phase (e.g. "discovery", "extraction"). |
+| log_entry_operation_name | [string](#string) |  | Name of the operation. |
+| log_entry_details | [google.protobuf.Struct](#google.protobuf.Struct) |  | Raw details in Struct format. |
+| log_entry_context | [google.protobuf.Struct](#google.protobuf.Struct) |  | Domain-specific metadata in Struct format. |
+
+
+
+
+
+
 <a name="ondewo.nlu.Notification"></a>
 
 ### Notification
@@ -3681,6 +3709,24 @@ statistic response
 
 
  <!-- end messages -->
+
+
+<a name="ondewo.nlu.LogSeverity"></a>
+
+### LogSeverity
+Log levels for various system operations based on Loguru log levels.
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| LOG_SEVERITY_UNSPECIFIED | 0 | Unspecified log level. |
+| LOG_SEVERITY_TRACE | 1 | Trace level - lowest level, most detailed. |
+| LOG_SEVERITY_DEBUG | 2 | Debug level - detailed information for troubleshooting. |
+| LOG_SEVERITY_INFO | 3 | Info level - general operational messages. |
+| LOG_SEVERITY_SUCCESS | 4 | Success level - successful completion of an operation. |
+| LOG_SEVERITY_WARNING | 5 | Warning level - potential issues that don't stop execution. |
+| LOG_SEVERITY_ERROR | 6 | Error level - serious issues that might affect results. |
+| LOG_SEVERITY_CRITICAL | 7 | Critical level - critical failures that stop the process. |
+
 
 
 <a name="ondewo.nlu.NotificationFlaggedStatus"></a>
@@ -6807,18 +6853,17 @@ All message fields that are marked as <code>optional</code> are not actually opt
 <a name="ondewo.nlu.RagAddCrawlerResultsToDatasetsRequest"></a>
 
 ### RagAddCrawlerResultsToDatasetsRequest
-Request message for adding crawler output to one or more datasets.
+Request message for adding crawler output to one or more datasets.<br>
+Either <code>crawler_names</code> or <code>crawler_result_names</code> (or both) must be provided.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The agent that owns the crawler. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
 | language_code | [string](#string) |  | Required. The language of the project to use. |
-| crawler_names | [string](#string) | repeated | Required. Resource names of crawlers whose results should be imported. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre> |
-| crawler_result_names | [string](#string) | repeated | Required. Resource names of crawler results to import. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawler_results/&lt;crawler_result_uuid&gt;</code></pre> |
-| dataset_ids | [string](#string) | repeated | Required. Dataset IDs to receive the imported crawler outputs.
-
-Example: <pre><code>crawler_names = ["projects/p/agent/crawlers/c1"] crawler_result_names = ["projects/p/agent/crawler_results/r1", "projects/p/agent/crawler_results/r2"] dataset_ids = ["dataset-a", "dataset-b"]</code></pre> |
+| crawler_names | [string](#string) | repeated | Optional. Resource names of crawlers whose results should be imported.<br> The specified crawlers must have at least one successful run. All of the results of the last completed run are uploaded to the datasets. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre> |
+| crawler_result_names | [string](#string) | repeated | Optional. Resource names of crawler results to upload in addition to the results of the crawlers specified in <code>crawler_names</code>. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawler_results/&lt;crawler_result_uuid&gt;</code></pre> |
+| dataset_ids | [string](#string) | repeated | Required. IDs of the datasets to add the crawl results to. |
 
 
 
@@ -7051,6 +7096,10 @@ and domains to be excluded in the deep crawl or extraction of pages to be crawle
 | allow_internal_links | [bool](#bool) |  | Optional. Include internal links. |
 | allow_external_links | [bool](#bool) |  | Optional. Include external links. |
 | allow_social_media_links | [bool](#bool) |  | Optional. Include social media links. |
+| allowed_regex | [string](#string) | repeated |  |
+| disallowed_regex | [string](#string) | repeated |  |
+| allowed_paths | [string](#string) | repeated |  |
+| disallowed_paths | [string](#string) | repeated |  |
 
 
 
@@ -7727,6 +7776,50 @@ Response message for getting crawler results.
 
 
 
+<a name="ondewo.nlu.RagGetCrawlerRunLogsRequest"></a>
+
+### RagGetCrawlerRunLogsRequest
+Request message for getting crawler run logs.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  | Required. The agent that owns the crawler run. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| language_code | [string](#string) |  | Required. The language of the project to use. |
+| operation_name | [string](#string) |  | Required. Resource name of the crawler run. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawler_runs/&lt;crawler_run_uuid&gt;</code></pre> |
+| page_token | [string](#string) |  | Optional. Specifies which page to return. |
+| page_size | [int32](#int32) |  | Optional. Number of logs per page. |
+| level_filters | [LogSeverity](#ondewo.nlu.LogSeverity) | repeated | Optional. Filter by one or more log levels. |
+| phase_filter | [string](#string) |  | Optional. Filter by specific phase (exact match). |
+| search_query | [string](#string) |  | Optional. Search string for the message or details. |
+| start_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Optional. Filter logs generated after this time. |
+| end_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Optional. Filter logs generated before this time. |
+| source_url_filter | [string](#string) |  | Optional. Filter by source URL (substring match). |
+
+
+
+
+
+
+<a name="ondewo.nlu.RagGetCrawlerRunLogsResponse"></a>
+
+### RagGetCrawlerRunLogsResponse
+Response message for getting crawler run logs.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| operation_name | [string](#string) |  | Resource name of the crawler run operation. |
+| crawler_name | [string](#string) |  | Resource name of the crawler profile. |
+| status | [OperationMetadata.Status](#ondewo.nlu.OperationMetadata.Status) |  | Operation status of the run. |
+| entries | [LogEntry](#ondewo.nlu.LogEntry) | repeated | List of log entries for the requested page. |
+| next_page_token | [string](#string) |  | Page token string for retrieving the next results page. |
+
+
+
+
+
+
 <a name="ondewo.nlu.RagGetCrawlerRunRequest"></a>
 
 ### RagGetCrawlerRunRequest
@@ -7781,7 +7874,7 @@ Request message for listing crawler runs.
 <em>Important note</em>: The <code>&lt;idx&gt;</code> is the index in the requested sequence NOT the page number. E.g. if the requested list has 100 elements then <code>current_index-5--page_size-15</code> returns the elements at index 5-19 and not the 5-th page of 15 elements.
 
 Both <code>current_index-&lt;idx&gt;</code> and <code>page_size-&lt;size&gt;</code> are optional and default to <code>0</code> and <code>10</code> respectively. The following are all valid <code>page_token</code>s <br> <ul> <li><code> </code> (empty string/missing value) - index 0, page size 10</li> <li><code>current_index-3</code> - index 3, page size 10</li> <li><code>page_size-20</code> - index 0, page size 20</li> <li><code>current_index-3--page_size-20</code> - index 3, page size 20</li> </ul> |
-| state | [OperationMetadata.Status](#ondewo.nlu.OperationMetadata.Status) |  | Optional. Filter by operation state. |
+| status | [OperationMetadata.Status](#ondewo.nlu.OperationMetadata.Status) |  | Optional. Filter by operation status. |
 | orderby | [string](#string) |  | Optional. Sort field (default: <code>created_at</code>). |
 | sorting_mode | [SortingMode](#ondewo.nlu.SortingMode) | optional | Optional. Sort descending. |
 
@@ -8445,6 +8538,7 @@ Most of the RAG related endpoints largely mirror <a href="https://github.com/ond
 | RagRemoveCrawlerResultsFromDatasets | [RagRemoveCrawlerResultsFromDatasetsRequest](#ondewo.nlu.RagRemoveCrawlerResultsFromDatasetsRequest) | [Operation](#ondewo.nlu.Operation) | Remove previously imported crawler output from one or more datasets. |
 | RagGetCrawlerAttachedDatasets | [RagGetCrawlerAttachedDatasetsRequest](#ondewo.nlu.RagGetCrawlerAttachedDatasetsRequest) | [RagGetCrawlerAttachedDatasetsResponse](#ondewo.nlu.RagGetCrawlerAttachedDatasetsResponse) | Get datasets currently attached to a crawler. |
 | RagDeleteCrawlers | [RagDeleteCrawlersRequest](#ondewo.nlu.RagDeleteCrawlersRequest) | [RagDeleteCrawlersResponse](#ondewo.nlu.RagDeleteCrawlersResponse) | Delete multiple crawlers. |
+| RagGetCrawlerRunLogs | [RagGetCrawlerRunLogsRequest](#ondewo.nlu.RagGetCrawlerRunLogsRequest) | [RagGetCrawlerRunLogsResponse](#ondewo.nlu.RagGetCrawlerRunLogsResponse) | Get crawler run logs. |
 
  <!-- end services -->
 
