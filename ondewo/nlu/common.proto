@@ -443,7 +443,7 @@ message LogEntry {
     int32 log_entry_sequence_index = 2;
 
     // Name of the log.
-    string log_entry_name = 3;
+    string display_name = 3;
 
     // Timestamp of the log.
     google.protobuf.Timestamp log_entry_timestamp = 4;

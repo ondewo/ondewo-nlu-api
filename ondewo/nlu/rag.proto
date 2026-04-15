@@ -1534,9 +1534,6 @@ message RagCrawlerHttpAuth {
     // HTTP Basic Authentication password.
     string http_auth_password = 2;
 
-    // Optional. User-Agent sent with basic-auth requests.
-    string http_auth_user_agent = 3;
-
 }
 
 // Browser runtime configuration.
@@ -1552,6 +1549,9 @@ message RagCrawlerBrowserConfig {
 
     // Optional. Initial cookies.
     repeated RagCrawlerCookie crawler_cookies = 2;
+
+    // Optional. User-Agent sent with requests.
+    string crawler_user_agent = 3;
 
 }
 
