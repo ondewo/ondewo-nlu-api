@@ -6917,17 +6917,17 @@ a separate crawler run and result set.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | name | [string](#string) |  | Resource name of the RagCrawler Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre> Automatically generated in backend if empty |
-| display_name | [string](#string) |  | Optional. Human-readable crawler name shown in UIs/logs. Should be unique per agent to simplify operational troubleshooting. |
+| display_name | [string](#string) | optional | Optional. Human-readable crawler name shown in UIs/logs. Should be unique per agent to simplify operational troubleshooting. |
 | created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
 | modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
 | created_by | [string](#string) |  | User id in form of a valid UUID. |
 | modified_by | [string](#string) |  | User id in form of a valid UUID. |
-| crawler_sources | [RagCrawlerSources](#ondewo.nlu.RagCrawlerSources) |  | Optional. Crawl entry points. Configure crawl entry points: URL seeds and/or sitemap sources. |
-| crawler_seed_url_filters | [RagCrawlerSeedUrlFilters](#ondewo.nlu.RagCrawlerSeedUrlFilters) |  | Optional. Seed URL filters. Filters are applied to the seed URLs before they are crawled. |
-| crawler_auth | [RagCrawlerAuth](#ondewo.nlu.RagCrawlerAuth) |  | Optional. Login/auth setup used before crawl requests. |
-| crawler_browser_config | [RagCrawlerBrowserConfig](#ondewo.nlu.RagCrawlerBrowserConfig) |  | Optional. Browser runtime setup (engine, viewport, cookies, proxy, headers). Roughly corresponds to Crawl4AI <code>BrowserConfig</code>. Use this when target sites require JS, custom headers, session cookies, or proxy routing. |
-| crawler_config | [RagCrawlerConfig](#ondewo.nlu.RagCrawlerConfig) |  | Optional. Crawl execution behavior and extraction settings. Roughly corresponds to Crawl4AI <code>CrawlerRunConfig</code>. |
-| retry_config | [RagCrawlerRetryConfig](#ondewo.nlu.RagCrawlerRetryConfig) |  | Optional. Retry configuration for crawler runs. |
+| crawler_sources | [RagCrawlerSources](#ondewo.nlu.RagCrawlerSources) | optional | Optional. Crawl entry points. Configure crawl entry points: URL seeds and/or sitemap sources. |
+| crawler_seed_url_filters | [RagCrawlerSeedUrlFilters](#ondewo.nlu.RagCrawlerSeedUrlFilters) | optional | Optional. Seed URL filters. Filters are applied to the seed URLs before they are crawled. |
+| crawler_auth | [RagCrawlerAuth](#ondewo.nlu.RagCrawlerAuth) | optional | Optional. Login/auth setup used before crawl requests. |
+| crawler_browser_config | [RagCrawlerBrowserConfig](#ondewo.nlu.RagCrawlerBrowserConfig) | optional | Optional. Browser runtime setup (engine, viewport, cookies, proxy, headers). Roughly corresponds to Crawl4AI <code>BrowserConfig</code>. Use this when target sites require JS, custom headers, session cookies, or proxy routing. |
+| crawler_config | [RagCrawlerConfig](#ondewo.nlu.RagCrawlerConfig) | optional | Optional. Crawl execution behavior and extraction settings. Roughly corresponds to Crawl4AI <code>CrawlerRunConfig</code>. |
+| retry_config | [RagCrawlerRetryConfig](#ondewo.nlu.RagCrawlerRetryConfig) | optional | Optional. Retry configuration for crawler runs. |
 
 
 
@@ -6945,8 +6945,8 @@ HTTP Auth is used on all pages of the sources, while html_auth is a separate aut
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| http_auth | [RagCrawlerHttpAuth](#ondewo.nlu.RagCrawlerHttpAuth) |  | Optional. HTTP Basic auth settings. |
-| html_auth | [RagCrawlerHtmlAuth](#ondewo.nlu.RagCrawlerHtmlAuth) |  | Optional. Form/HTML login selector and credential settings. |
+| http_auth | [RagCrawlerHttpAuth](#ondewo.nlu.RagCrawlerHttpAuth) | optional | Optional. HTTP Basic auth settings. |
+| html_auth | [RagCrawlerHtmlAuth](#ondewo.nlu.RagCrawlerHtmlAuth) | optional | Optional. Form/HTML login selector and credential settings. |
 
 
 
@@ -6967,7 +6967,7 @@ user-agent behavior, and launch arguments).
 | ----- | ---- | ----- | ----------- |
 | crawler_headers | [google.protobuf.Struct](#google.protobuf.Struct) | repeated | Optional. HTTP headers sent on page/resource requests. Repeated entries allow duplicate header names and preserve order. |
 | crawler_cookies | [RagCrawlerCookie](#ondewo.nlu.RagCrawlerCookie) | repeated | Optional. Initial cookies. |
-| crawler_user_agent | [string](#string) |  | Optional. User-Agent sent with requests. |
+| crawler_user_agent | [string](#string) | optional | Optional. User-Agent sent with requests. |
 
 
 
@@ -6982,7 +6982,7 @@ Concurrency and pacing controls for crawler runs.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| max_concurrent_requests | [int32](#int32) |  | Optional. Max number of concurrent in-flight requests/pages. Increase for throughput; reduce for fragile sites/rate limits. |
+| max_concurrent_requests | [int32](#int32) | optional | Optional. Max number of concurrent in-flight requests/pages. Increase for throughput; reduce for fragile sites/rate limits. |
 | slow_crawl | [bool](#bool) | optional | Optional. Enable slow crawl mode with fixed delays between requests to avoid rate limits. |
 
 
@@ -7001,9 +7001,9 @@ diagnostics capture, and deep crawling options for each crawler run.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| concurrency_config | [RagCrawlerConcurrencyConfig](#ondewo.nlu.RagCrawlerConcurrencyConfig) |  | Optional. Concurrency and pacing controls for crawler requests. |
-| deep_crawler_config | [RagCrawlerDeepCrawlerConfig](#ondewo.nlu.RagCrawlerDeepCrawlerConfig) |  | Optional. Deep crawler behavior (enable + depth/pages/scoring/filter chain). |
-| output_config | [RagCrawlerResultsConfig](#ondewo.nlu.RagCrawlerResultsConfig) |  | Optional. Structured output configuration (format + metadata policy). |
+| concurrency_config | [RagCrawlerConcurrencyConfig](#ondewo.nlu.RagCrawlerConcurrencyConfig) | optional | Optional. Concurrency and pacing controls for crawler requests. |
+| deep_crawler_config | [RagCrawlerDeepCrawlerConfig](#ondewo.nlu.RagCrawlerDeepCrawlerConfig) | optional | Optional. Deep crawler behavior (enable + depth/pages/scoring/filter chain). |
+| output_config | [RagCrawlerResultsConfig](#ondewo.nlu.RagCrawlerResultsConfig) | optional | Optional. Structured output configuration (format + metadata policy). |
 
 
 
@@ -7018,8 +7018,8 @@ diagnostics capture, and deep crawling options for each crawler run.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| metadata | [google.protobuf.Struct](#google.protobuf.Struct) |  | Optional. Extracted page metadata. Includes only fields configured in <code>RagCrawlerConfig.output_config.meta_data_extractors</code>. |
-| markdown | [string](#string) |  | Optional. Extracted markdown output. |
+| metadata | [google.protobuf.Struct](#google.protobuf.Struct) | optional | Optional. Extracted page metadata. Includes only fields configured in <code>RagCrawlerConfig.output_config.meta_data_extractors</code>. |
+| markdown | [string](#string) | optional | Optional. Extracted markdown output. |
 
 
 
@@ -7036,7 +7036,7 @@ Cookie representation for initial browser session state.
 | ----- | ---- | ----- | ----------- |
 | cookie_name | [string](#string) |  | Required. Cookie name. |
 | cookie_value | [string](#string) |  | Required. Cookie value. |
-| cookie_domain | [string](#string) |  | Optional. Cookie domain. |
+| cookie_domain | [string](#string) | optional | Optional. Cookie domain. |
 
 
 
@@ -7051,11 +7051,11 @@ Deep crawler options grouped under one config node.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| is_active | [bool](#bool) |  | Optional. Enable deep crawler behavior (link following beyond seeds). Default <code>false</code>. If <code>false</code>, <code>config</code> is ignored. |
-| crawl_strategy | [RagCrawlerCrawlStrategy](#ondewo.nlu.RagCrawlerCrawlStrategy) |  | Optional. Crawl traversal strategy. BFS is often best for broad site coverage; DFS for deep section traversal. Default <code>RAG_CRAWLER_CRAWL_STRATEGY_BFS</code>. |
-| max_depth | [int32](#int32) |  | Optional. Maximum link depth from seed URLs. <code>0</code> usually means only seed pages. |
-| max_pages | [int32](#int32) |  | Optional. Hard cap on total processed pages for this run. |
-| deep_crawler_filters | [RagCrawlerFilters](#ondewo.nlu.RagCrawlerFilters) |  | Optional. URL and domain restrictions. |
+| is_active | [bool](#bool) | optional | Optional. Enable deep crawler behavior (link following beyond seeds). Default <code>false</code>. If <code>false</code>, <code>config</code> is ignored. |
+| crawl_strategy | [RagCrawlerCrawlStrategy](#ondewo.nlu.RagCrawlerCrawlStrategy) | optional | Optional. Crawl traversal strategy. BFS is often best for broad site coverage; DFS for deep section traversal. Default <code>RAG_CRAWLER_CRAWL_STRATEGY_BFS</code>. |
+| max_depth | [int32](#int32) | optional | Optional. Maximum link depth from seed URLs. <code>0</code> usually means only seed pages. |
+| max_pages | [int32](#int32) | optional | Optional. Hard cap on total processed pages for this run. |
+| deep_crawler_filters | [RagCrawlerFilters](#ondewo.nlu.RagCrawlerFilters) | optional | Optional. URL and domain restrictions. |
 
 
 
@@ -7070,9 +7070,9 @@ Consolidated diagnostics and HTTP execution metadata for a crawl result.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| ssl_certificate | [google.protobuf.Struct](#google.protobuf.Struct) |  | Optional. SSL certificate details. |
-| success | [bool](#bool) |  | Optional. Crawl status flag. |
-| error_message | [string](#string) |  | Optional. Error details if crawl failed. |
+| ssl_certificate | [google.protobuf.Struct](#google.protobuf.Struct) | optional | Optional. SSL certificate details. |
+| success | [bool](#bool) | optional | Optional. Crawl status flag. |
+| error_message | [string](#string) | optional | Optional. Error details if crawl failed. |
 
 
 
@@ -7095,9 +7095,9 @@ and domains to be excluded in the deep crawl or extraction of pages to be crawle
 | ----- | ---- | ----- | ----------- |
 | allowed_domains | [string](#string) | repeated | Optional. Domain allow-list (host-level gating). |
 | disallowed_domains | [string](#string) | repeated | Optional. Domain block-list. |
-| allow_internal_links | [bool](#bool) |  | Optional. Include internal links. |
-| allow_external_links | [bool](#bool) |  | Optional. Include external links. |
-| allow_social_media_links | [bool](#bool) |  | Optional. Include social media links. |
+| allow_internal_links | [bool](#bool) | optional | Optional. Include internal links. |
+| allow_external_links | [bool](#bool) | optional | Optional. Include external links. |
+| allow_social_media_links | [bool](#bool) | optional | Optional. Include social media links. |
 | allowed_regex | [string](#string) | repeated |  |
 | disallowed_regex | [string](#string) | repeated |  |
 | allowed_paths | [string](#string) | repeated |  |
@@ -7119,14 +7119,14 @@ DOM. Credentials are then filled before form submission.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| html_auth_base_url | [string](#string) |  | Optional. Base URL used for auth/login navigation. |
-| html_auth_username_selector_type | [RagCrawlerSelectorType](#ondewo.nlu.RagCrawlerSelectorType) |  | Optional. Username field selector type. |
-| html_auth_username_selector | [string](#string) |  | Optional. Username field selector value. |
-| html_auth_username | [string](#string) |  | Optional. Username credential. |
-| html_auth_password_selector_type | [RagCrawlerSelectorType](#ondewo.nlu.RagCrawlerSelectorType) |  | Optional. Password field selector type. |
-| html_auth_password_selector | [string](#string) |  | Optional. Password field selector value. |
-| html_auth_password | [string](#string) |  | Optional. Password credential. |
-| authentication_execution_type | [RagCrawlerAuthenticationExecutionType](#ondewo.nlu.RagCrawlerAuthenticationExecutionType) |  | Optional. Authentication execution type |
+| html_auth_base_url | [string](#string) | optional | Optional. Base URL used for auth/login navigation. |
+| html_auth_username_selector_type | [RagCrawlerSelectorType](#ondewo.nlu.RagCrawlerSelectorType) | optional | Optional. Username field selector type. |
+| html_auth_username_selector | [string](#string) | optional | Optional. Username field selector value. |
+| html_auth_username | [string](#string) | optional | Optional. Username credential. |
+| html_auth_password_selector_type | [RagCrawlerSelectorType](#ondewo.nlu.RagCrawlerSelectorType) | optional | Optional. Password field selector type. |
+| html_auth_password_selector | [string](#string) | optional | Optional. Password field selector value. |
+| html_auth_password | [string](#string) | optional | Optional. Password credential. |
+| authentication_execution_type | [RagCrawlerAuthenticationExecutionType](#ondewo.nlu.RagCrawlerAuthenticationExecutionType) | optional | Optional. Authentication execution type |
 
 
 
@@ -7157,9 +7157,9 @@ Metadata extractor configuration.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| type | [RagCrawlerMetaDataExtractorType](#ondewo.nlu.RagCrawlerMetaDataExtractorType) |  | Optional. Regex pattern to match metadata field names. |
-| value | [string](#string) |  | Optional. Value to extract (e.g. regex pattern, fixed value, CSS selector, XPath selector, ID selector). |
-| key | [string](#string) |  | Optional. Metadata field name to extract (e.g. url, title, description, author, keywords, tags, created_date, modified_date, scraped_at). |
+| type | [RagCrawlerMetaDataExtractorType](#ondewo.nlu.RagCrawlerMetaDataExtractorType) | optional | Optional. Regex pattern to match metadata field names. |
+| value | [string](#string) | optional | Optional. Value to extract (e.g. regex pattern, fixed value, CSS selector, XPath selector, ID selector). |
+| key | [string](#string) | optional | Optional. Metadata field name to extract (e.g. url, title, description, author, keywords, tags, created_date, modified_date, scraped_at). |
 
 
 
@@ -7183,8 +7183,8 @@ extracted content, metadata, diagnostics, and optional binary artifacts.
 | source_url | [string](#string) |  | URL this content came from. |
 | file_resource | [FileResource](#ondewo.nlu.FileResource) |  | Classified primary file resource built from source URL and detected MIME/type. If its a HTML page, it will be stored in the DocumentFileResource Bytes. See FileResource Documentation for all other file types. |
 | last_crawled_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Timestamp when this URL was last processed by crawler. |
-| content_result | [RagCrawlerContentResult](#ondewo.nlu.RagCrawlerContentResult) |  | Optional. Consolidated extracted content for this page. |
-| page_last_updated_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Optional. Timestamp when source page was last updated. Source precedence: HTTP Last-Modified header, then sitemap <lastmod> fallback. |
+| content_result | [RagCrawlerContentResult](#ondewo.nlu.RagCrawlerContentResult) | optional | Optional. Consolidated extracted content for this page. |
+| page_last_updated_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) | optional | Optional. Timestamp when source page was last updated. Source precedence: HTTP Last-Modified header, then sitemap <lastmod> fallback. |
 
 
 
@@ -7218,8 +7218,8 @@ Timeout settings for crawler operations.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| page_load_timeout_seconds | [int32](#int32) |  | Optional. Page load/render timeout in seconds. |
-| retry_max_attempts | [int32](#int32) |  | Optional. Maximum retry attempts per page source. |
+| page_load_timeout_seconds | [int32](#int32) | optional | Optional. Page load/render timeout in seconds. |
+| retry_max_attempts | [int32](#int32) | optional | Optional. Maximum retry attempts per page source. |
 
 
 
@@ -7275,7 +7275,7 @@ Request message for creating a crawler for a dataset of an agent.
 | parent | [string](#string) |  | Required. The agent to create crawlers for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
 | language_code | [string](#string) |  | Required. The language of the project to use. |
 | crawler | [RagCrawler](#ondewo.nlu.RagCrawler) |  | Required. Crawler definition to create. If <code>crawler.name</code> is empty, backend will generate it. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre> |
-| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which RagCrawler fields get returned. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) | optional | Optional. The mask to control which RagCrawler fields get returned. |
 
 
 
@@ -7657,17 +7657,17 @@ Request message for getting datasets attached to a crawler.
 | parent | [string](#string) |  | Required. The agent owning the crawler. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
 | language_code | [string](#string) |  | Required. The language of the project to use. |
 | crawler_name | [string](#string) |  | Required. Resource name of the crawler. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre> |
-| page_size | [int32](#int32) |  | Optional. Maximum number of datasets to return.
+| page_size | [int32](#int32) | optional | Optional. Maximum number of datasets to return.
 
 If unset or non-positive, backend default is used. |
-| page_token | [string](#string) |  | Optional. Specifies which page to return. The page token is a string of the format <pre><code>current_index-&lt;idx&gt;--page_size-&lt;size&gt;</code></pre>
+| page_token | [string](#string) | optional | Optional. Specifies which page to return. The page token is a string of the format <pre><code>current_index-&lt;idx&gt;--page_size-&lt;size&gt;</code></pre>
 
 <ul> <li><code>&lt;size&gt;</code> must be an integer &geq; <code>1</code>. The maximum number of results to return.</li> <li><code>&lt;idx&gt;</code> must be an integer &geq; <code>0</code>. The start index in the requested list, starting from which a maximum of <code>&lt;size&gt;</code> elements are returned.</li> </ul>
 
 <em>Important note</em>: The <code>&lt;idx&gt;</code> is the index in the requested sequence NOT the page number. E.g. if the requested list has 100 elements then <code>current_index-5--page_size-15</code> returns the elements at index 5-19 and not the 5-th page of 15 elements.
 
 Both <code>current_index-&lt;idx&gt;</code> and <code>page_size-&lt;size&gt;</code> are optional and default to <code>0</code> and <code>10</code> respectively. The following are all valid <code>page_token</code>s <br> <ul> <li><code> </code> (empty string/missing value) - index 0, page size 10</li> <li><code>current_index-3</code> - index 3, page size 10</li> <li><code>page_size-20</code> - index 0, page size 20</li> <li><code>current_index-3--page_size-20</code> - index 3, page size 20</li> </ul> |
-| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which <code>RagDataset</code> fields get returned. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) | optional | Optional. The mask to control which <code>RagDataset</code> fields get returned. |
 
 
 
@@ -7701,7 +7701,7 @@ Request message for getting a crawler.
 | name | [string](#string) |  | Required. Resource name of the RagCrawler. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre> |
 | parent | [string](#string) |  | Required. The agent owning the crawler. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
 | language_code | [string](#string) |  | Required. The language of the project to use. |
-| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which RagCrawler fields get returned. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) | optional | Optional. The mask to control which RagCrawler fields get returned. |
 
 
 
@@ -7746,14 +7746,14 @@ RagGetCrawlerResults(run_name, page_token="...")
 | parent | [string](#string) |  | Required. The agent that owns the crawler run. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
 | language_code | [string](#string) |  | Required. The language of the project to use. |
 | operation_name | [string](#string) |  | Required. Resource name of the crawler run. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawler_runs/&lt;crawler_run_uuid&gt;</code></pre> |
-| page_token | [string](#string) |  | Optional. Specifies which page to return. The page token is a string of the format <pre><code>current_index-&lt;idx&gt;--page_size-&lt;size&gt;</code></pre>
+| page_token | [string](#string) | optional | Optional. Specifies which page to return. The page token is a string of the format <pre><code>current_index-&lt;idx&gt;--page_size-&lt;size&gt;</code></pre>
 
 <ul> <li><code>&lt;size&gt;</code> must be an integer &geq; <code>1</code>. The maximum number of results to return.</li> <li><code>&lt;idx&gt;</code> must be an integer &geq; <code>0</code>. The start index in the requested list, starting from which a maximum of <code>&lt;size&gt;</code> elements are returned.</li> </ul>
 
 <em>Important note</em>: The <code>&lt;idx&gt;</code> is the index in the requested sequence NOT the page number. E.g. if the requested list has 100 elements then <code>current_index-5--page_size-15</code> returns the elements at index 5-19 and not the 5-th page of 15 elements.
 
 Both <code>current_index-&lt;idx&gt;</code> and <code>page_size-&lt;size&gt;</code> are optional and default to <code>0</code> and <code>10</code> respectively. The following are all valid <code>page_token</code>s <br> <ul> <li><code> </code> (empty string/missing value) - index 0, page size 10</li> <li><code>current_index-3</code> - index 3, page size 10</li> <li><code>page_size-20</code> - index 0, page size 20</li> <li><code>current_index-3--page_size-20</code> - index 3, page size 20</li> </ul> |
-| url_query | [string](#string) |  | Optional. Filter by URL substring. |
+| url_query | [string](#string) | optional | Optional. Filter by URL substring. |
 
 
 
@@ -7788,14 +7788,14 @@ Request message for getting crawler run logs.
 | parent | [string](#string) |  | Required. The agent that owns the crawler run. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
 | language_code | [string](#string) |  | Required. The language of the project to use. |
 | operation_name | [string](#string) |  | Required. Resource name of the crawler run. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawler_runs/&lt;crawler_run_uuid&gt;</code></pre> |
-| page_token | [string](#string) |  | Optional. Specifies which page to return. |
-| page_size | [int32](#int32) |  | Optional. Number of logs per page. |
+| page_token | [string](#string) | optional | Optional. Specifies which page to return. |
+| page_size | [int32](#int32) | optional | Optional. Number of logs per page. |
 | level_filters | [LogSeverity](#ondewo.nlu.LogSeverity) | repeated | Optional. Filter by one or more log levels. |
-| phase_filter | [string](#string) |  | Optional. Filter by specific phase (exact match). |
-| search_query | [string](#string) |  | Optional. Search string for the message or details. |
-| start_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Optional. Filter logs generated after this time. |
-| end_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Optional. Filter logs generated before this time. |
-| source_url_filter | [string](#string) |  | Optional. Filter by source URL (substring match). |
+| phase_filter | [string](#string) | optional | Optional. Filter by specific phase (exact match). |
+| search_query | [string](#string) | optional | Optional. Search string for the message or details. |
+| start_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) | optional | Optional. Filter logs generated after this time. |
+| end_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) | optional | Optional. Filter logs generated before this time. |
+| source_url_filter | [string](#string) | optional | Optional. Filter by source URL (substring match). |
 | orderby | [string](#string) | optional | Optional. Sort field. Accept any field of <code>LogEntry</code>. Default: <code>log_entry_timestamp</code>. |
 | sorting_mode | [SortingMode](#ondewo.nlu.SortingMode) | optional | Optional. Sort descending. |
 
@@ -7870,16 +7870,16 @@ Request message for listing crawler runs.
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The agent that owns the crawler runs. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
 | language_code | [string](#string) |  | Required. The language of the project to use. |
-| crawler_name | [string](#string) |  | Optional. Restrict to one crawler. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre> |
-| page_token | [string](#string) |  | Optional. Specifies which page to return. The page token is a string of the format <pre><code>current_index-&lt;idx&gt;--page_size-&lt;size&gt;</code></pre>
+| crawler_name | [string](#string) | optional | Optional. Restrict to one crawler. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre> |
+| page_token | [string](#string) | optional | Optional. Specifies which page to return. The page token is a string of the format <pre><code>current_index-&lt;idx&gt;--page_size-&lt;size&gt;</code></pre>
 
 <ul> <li><code>&lt;size&gt;</code> must be an integer &geq; <code>1</code>. The maximum number of results to return.</li> <li><code>&lt;idx&gt;</code> must be an integer &geq; <code>0</code>. The start index in the requested list, starting from which a maximum of <code>&lt;size&gt;</code> elements are returned.</li> </ul>
 
 <em>Important note</em>: The <code>&lt;idx&gt;</code> is the index in the requested sequence NOT the page number. E.g. if the requested list has 100 elements then <code>current_index-5--page_size-15</code> returns the elements at index 5-19 and not the 5-th page of 15 elements.
 
 Both <code>current_index-&lt;idx&gt;</code> and <code>page_size-&lt;size&gt;</code> are optional and default to <code>0</code> and <code>10</code> respectively. The following are all valid <code>page_token</code>s <br> <ul> <li><code> </code> (empty string/missing value) - index 0, page size 10</li> <li><code>current_index-3</code> - index 3, page size 10</li> <li><code>page_size-20</code> - index 0, page size 20</li> <li><code>current_index-3--page_size-20</code> - index 3, page size 20</li> </ul> |
-| status | [OperationMetadata.Status](#ondewo.nlu.OperationMetadata.Status) |  | Optional. Filter by operation status. |
-| orderby | [string](#string) |  | Optional. Sort field (default: <code>created_at</code>). |
+| status | [OperationMetadata.Status](#ondewo.nlu.OperationMetadata.Status) | optional | Optional. Filter by operation status. |
+| orderby | [string](#string) | optional | Optional. Sort field (default: <code>created_at</code>). |
 | sorting_mode | [SortingMode](#ondewo.nlu.SortingMode) | optional | Optional. Sort descending. |
 
 
@@ -7913,16 +7913,16 @@ Request message for listing crawlers of a dataset for the specified agent.
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The agent to list crawlers for. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
 | language_code | [string](#string) |  | Required. The language of the agent of the dataset. |
-| page_token | [string](#string) |  | Optional. Specifies which page to return. The page token is a string of the format <pre><code>current_index-&lt;idx&gt;--page_size-&lt;size&gt;</code></pre>
+| page_token | [string](#string) | optional | Optional. Specifies which page to return. The page token is a string of the format <pre><code>current_index-&lt;idx&gt;--page_size-&lt;size&gt;</code></pre>
 
 <ul> <li><code>&lt;size&gt;</code> must be an integer &geq; <code>1</code>. The maximum number of results to return.</li> <li><code>&lt;idx&gt;</code> must be an integer &geq; <code>0</code>. The start index in the requested list, starting from which a maximum of <code>&lt;size&gt;</code> elements are returned.</li> </ul>
 
 <em>Important note</em>: The <code>&lt;idx&gt;</code> is the index in the requested sequence NOT the page number. E.g. if the requested list has 100 elements then <code>current_index-5--page_size-15</code> returns the elements at index 5-19 and not the 5-th page of 15 elements.
 
 Both <code>current_index-&lt;idx&gt;</code> and <code>page_size-&lt;size&gt;</code> are optional and default to <code>0</code> and <code>10</code> respectively. The following are all valid <code>page_token</code>s <br> <ul> <li><code> </code> (empty string/missing value) - index 0, page size 10</li> <li><code>current_index-3</code> - index 3, page size 10</li> <li><code>page_size-20</code> - index 0, page size 20</li> <li><code>current_index-3--page_size-20</code> - index 3, page size 20</li> </ul> |
-| dataset_name | [string](#string) |  | Optional. Filter by dataset name. |
-| crawler_name | [string](#string) |  | Optional. Filter by crawler name. |
-| orderby | [string](#string) |  | Optional. Sort field (default: <code>create_time</code>). |
+| dataset_name | [string](#string) | optional | Optional. Filter by dataset name. |
+| crawler_name | [string](#string) | optional | Optional. Filter by crawler name. |
+| orderby | [string](#string) | optional | Optional. Sort field (default: <code>create_time</code>). |
 | sorting_mode | [SortingMode](#ondewo.nlu.SortingMode) | optional | Optional. Sort descending. |
 
 
@@ -8261,8 +8261,8 @@ Request message for updating a crawler (partial update).
 | crawler | [RagCrawler](#ondewo.nlu.RagCrawler) |  | Required. The crawler to update. Only configuration fields can be updated. The name field must be set and must match an existing crawler. Timestamps and audit fields are auto-managed by the service. |
 | parent | [string](#string) |  | Required. The agent owning the crawler. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
 | language_code | [string](#string) |  | Required. The language of the project to use. |
-| update_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. FieldMask to specify which fields to update. If not provided, all configuration fields in crawler are updated. |
-| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which crawler fields get returned. |
+| update_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) | optional | Optional. FieldMask to specify which fields to update. If not provided, all configuration fields in crawler are updated. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) | optional | Optional. The mask to control which crawler fields get returned. |
 
 
 
