@@ -2129,22 +2129,22 @@ message GetLatestSessionReviewRequest {
 
 }
 
-// Effort level for reasoning models (e.g., o1, o3). Controls the trade-off between speed and quality.
+// Effort level for thinking in reasoning models (e.g., o1, o3). Controls the trade-off between speed and quality.
 enum ThinkingEffort {
 
-    // Unspecified reasoning effort.
+    // Unspecified thinking effort.
     THINKING_EFFORT_UNSPECIFIED = 0;
 
-    // Minimal reasoning effort.
+    // Minimal thinking effort.
     THINKING_EFFORT_MINIMAL = 1;
 
-    // Low reasoning effort.
+    // Low thinking effort.
     THINKING_EFFORT_LOW = 2;
 
-    // Medium reasoning effort.
+    // Medium thinking effort.
     THINKING_EFFORT_MEDIUM = 3;
 
-    // High reasoning effort.
+    // High thinking effort.
     THINKING_EFFORT_HIGH = 4;
 
 }
