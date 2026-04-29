@@ -472,6 +472,9 @@ message QueryParameters {
     // transcriptions of the user input sorted by score
     repeated S2tTranscription transcriptions = 14;
 
+    // Optional. Configures the thinking features of agents in DetectIntent and StreamingDetectIntent.
+    ThinkingConfig thinking_config = 15;
+
 }
 
 enum TranscriptionType {
@@ -2124,6 +2127,37 @@ message GetLatestSessionReviewRequest {
     // Optional. The mask to control which fields gets returned.
     optional google.protobuf.FieldMask field_mask = 3;
 
+}
+
+// Effort level for reasoning models (e.g., o1, o3). Controls the trade-off between speed and quality.
+enum ThinkingEffort {
+
+    // Unspecified reasoning effort.
+    THINKING_EFFORT_UNSPECIFIED = 0;
+
+    // Minimal reasoning effort.
+    THINKING_EFFORT_MINIMAL = 1;
+
+    // Low reasoning effort.
+    THINKING_EFFORT_LOW = 2;
+
+    // Medium reasoning effort.
+    THINKING_EFFORT_MEDIUM = 3;
+
+    // High reasoning effort.
+    THINKING_EFFORT_HIGH = 4;
+
+}
+
+// Configures the agent to return additional insights after the conversation is complete.
+message ThinkingConfig {
+  // Optional. Configures the agent to return additional insights after the
+  // conversation is complete.
+  bool enable_thinking = 1;
+
+    // Optional. The maximum reasoning effort to be expended. This parameter allows you to control the trade-off 
+    // between latency and accuracy of the reasoning process. 
+  ThinkingEffort thinking_effort = 2;
 }
 
 // Represents the options for views of resources.
