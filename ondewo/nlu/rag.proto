@@ -1577,7 +1577,7 @@ message RagCrawlerConcurrencyConfig {
     int32 max_concurrent_requests = 1;
 
     // Optional. Enable slow crawl mode with fixed delays between requests to avoid rate limits.
-    bool slow_crawl = 2;
+    optional bool slow_crawl = 2;
 
 }
 
@@ -2148,7 +2148,7 @@ message RagGetCrawlerRunLogsRequest {
 
   // Optional. Sort field. Accept any field of <code>LogEntry</code>.
   // Default: <code>log_entry_timestamp</code>.
-  string orderby = 12;
+  optional string orderby = 12;
 
   // Optional. Sort descending.
   optional SortingMode sorting_mode = 13;
