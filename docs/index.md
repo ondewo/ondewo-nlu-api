@@ -7797,7 +7797,7 @@ Request message for getting crawler run logs.
 | end_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Optional. Filter logs generated before this time. |
 | source_url_filter | [string](#string) |  | Optional. Filter by source URL (substring match). |
 | orderby | [string](#string) |  | Optional. Sort field. Accept any field of <code>LogEntry</code>. Default: <code>log_entry_timestamp</code>. |
-| desc | [bool](#bool) |  | Optional. Sort descending. Default: <code>true</code>. |
+| sorting_mode | [SortingMode](#ondewo.nlu.SortingMode) | optional | Optional. Sort descending. |
 
 
 
