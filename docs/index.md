@@ -6983,6 +6983,7 @@ Concurrency and pacing controls for crawler runs.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | max_concurrent_requests | [int32](#int32) |  | Optional. Max number of concurrent in-flight requests/pages. Increase for throughput; reduce for fragile sites/rate limits. |
+| slow_crawl | [bool](#bool) |  | Optional. Enable slow crawl mode with fixed delays between requests to avoid rate limits. |
 
 
 
@@ -7795,6 +7796,8 @@ Request message for getting crawler run logs.
 | start_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Optional. Filter logs generated after this time. |
 | end_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Optional. Filter logs generated before this time. |
 | source_url_filter | [string](#string) |  | Optional. Filter by source URL (substring match). |
+| orderby | [string](#string) |  | Optional. Sort field. Accept any field of <code>LogEntry</code>. Default: <code>log_entry_timestamp</code>. |
+| desc | [bool](#bool) |  | Optional. Sort descending. Default: <code>true</code>. |
 
 
 
@@ -7814,6 +7817,7 @@ Response message for getting crawler run logs.
 | status | [OperationMetadata.Status](#ondewo.nlu.OperationMetadata.Status) |  | Operation status of the run. |
 | entries | [LogEntry](#ondewo.nlu.LogEntry) | repeated | List of log entries for the requested page. |
 | next_page_token | [string](#string) |  | Page token string for retrieving the next results page. |
+| total_log_entries | [int32](#int32) |  | Total number of log entries available after applying filters. |
 
 
 

@@ -21508,6 +21508,13 @@ Repeated entries allow duplicate header names and preserve order. </p></td>
 Increase for throughput; reduce for fragile sites/rate limits. </p></td>
                 </tr>
               
+                <tr>
+                  <td>slow_crawl</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Optional. Enable slow crawl mode with fixed delays between requests to avoid rate limits. </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -23588,6 +23595,21 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawler_runs/&lt;crawler_
                   <td><p>Optional. Filter by source URL (substring match). </p></td>
                 </tr>
               
+                <tr>
+                  <td>orderby</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. Sort field. Accept any field of <code>LogEntry</code>.
+Default: <code>log_entry_timestamp</code>. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>desc</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Optional. Sort descending. Default: <code>true</code>. </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -23638,6 +23660,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawler_runs/&lt;crawler_
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Page token string for retrieving the next results page. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>total_log_entries</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>Total number of log entries available after applying filters. </p></td>
                 </tr>
               
             </tbody>
