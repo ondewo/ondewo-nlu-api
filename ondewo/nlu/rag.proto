@@ -1272,6 +1272,9 @@ message RagListCrawlersRequest {
     // Optional. Sort descending.
     optional SortingMode sorting_mode = 7;
 
+    // Optional. The Mask to control which RagCrawler fields get returned for each crawler in the list response.
+    optional google.protobuf.FieldMask field_mask = 8;
+
 }
 
 // Response message for listing crawlers.
@@ -1963,6 +1966,14 @@ message RagGetCrawlerResultsRequest {
     // Optional. Filter by URL substring.
     optional string url_query = 5;
 
+    // Optional. The mask to control which RagCrawlerResult fields get returned.
+    optional string field_mask = 6;
+
+    // Optional. Sort field (default: <code>last_crawled_date</code>).
+    optional string orderby = 7;
+
+    // Optional. Sort descending.
+    optional SortingMode sorting_mode = 8;
 }
 
 // Response message for getting crawler results.
@@ -1996,6 +2007,9 @@ message RagGetCrawlerResultRequest {
 
     // Required. Exact URL of the crawler result to retrieve.
     string url = 4;
+
+    // Optional. The mask to control which RagCrawlerResult fields get returned.
+    optional google.protobuf.FieldMask field_mask = 5;
 
 }
 
@@ -2152,6 +2166,9 @@ message RagGetCrawlerRunLogsRequest {
 
   // Optional. Sort descending.
   optional SortingMode sorting_mode = 13;
+
+  // Optional. The mask to control which <code>LogEntry</code> fields get returned.
+  optional google.protobuf.FieldMask field_mask = 14;
 
 }
 
