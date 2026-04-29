@@ -2,6 +2,14 @@
 
 *****************
 
+## Release ONDEWO NLU API 6.8.0
+
+### Improvements
+
+* [[OND211-2359]](https://ondewo.atlassian.net/browse/OND211-2359) Added `slow_crawl` boolean field to `RagCrawlerConcurrencyConfig` for enabling fixed delays between requests to avoid rate limits. Added `orderby` and `desc` fields to `RagGetCrawlerRunLogsRequest` for sorting log results. Added `total_log_entries` field to `RagGetCrawlerRunLogsResponse` for total count of matching log entries.
+
+*****************
+
 ## Release ONDEWO NLU API 6.7.0
 
 ### Improvements
