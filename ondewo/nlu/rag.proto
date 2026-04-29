@@ -1576,6 +1576,9 @@ message RagCrawlerConcurrencyConfig {
     // Increase for throughput; reduce for fragile sites/rate limits.
     int32 max_concurrent_requests = 1;
 
+    // Optional. Enable slow crawl mode with fixed delays between requests to avoid rate limits.
+    bool slow_crawl = 2;
+
 }
 
 // Crawl run behavior.
@@ -2143,6 +2146,13 @@ message RagGetCrawlerRunLogsRequest {
   // Optional. Filter by source URL (substring match).
   string source_url_filter = 11;
 
+    // Optional. Sort field. Accept any field of <code>LogEntry</code>.
+    // Default: <code>log_entry_timestamp</code>.
+    string orderby = 12;
+
+    // Optional. Sort descending. Default: <code>true</code>.
+    bool desc = 13;
+
 }
 
 // Response message for getting crawler run logs.
@@ -2162,4 +2172,6 @@ message RagGetCrawlerRunLogsResponse {
   // Page token string for retrieving the next results page.
   string next_page_token = 5;
 
+  // Total number of log entries available after applying filters.
+  int32 total_log_entries = 6;
 }
