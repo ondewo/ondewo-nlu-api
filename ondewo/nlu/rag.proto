@@ -2146,12 +2146,12 @@ message RagGetCrawlerRunLogsRequest {
   // Optional. Filter by source URL (substring match).
   string source_url_filter = 11;
 
-    // Optional. Sort field. Accept any field of <code>LogEntry</code>.
-    // Default: <code>log_entry_timestamp</code>.
-    string orderby = 12;
+  // Optional. Sort field. Accept any field of <code>LogEntry</code>.
+  // Default: <code>log_entry_timestamp</code>.
+  string orderby = 12;
 
-    // Optional. Sort descending. Default: <code>true</code>.
-    bool desc = 13;
+  // Optional. Sort descending.
+  optional SortingMode sorting_mode = 13;
 
 }
 
