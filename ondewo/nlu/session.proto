@@ -472,6 +472,9 @@ message QueryParameters {
     // transcriptions of the user input sorted by score
     repeated S2tTranscription transcriptions = 14;
 
+    // Optional. Configures the thinking features of agents in DetectIntent and StreamingDetectIntent.
+    ThinkingConfig thinking_config = 15;
+
 }
 
 enum TranscriptionType {
@@ -641,6 +644,11 @@ message QueryResult {
 
     // Generated or attached files, e.g., llm generates a picture or file attachment
     repeated FileResource file_resources = 16;
+
+    // The thinking or reasoning steps produced by an AI agent (e.g., Autogen, LangChain)
+    // during the processing of the query. Each entry captures one atomic step of the
+    // agent's internal reasoning chain.
+    repeated ThinkingResult thinking_results = 17;
 
 }
 
@@ -2124,6 +2132,142 @@ message GetLatestSessionReviewRequest {
     // Optional. The mask to control which fields gets returned.
     optional google.protobuf.FieldMask field_mask = 3;
 
+}
+
+// Effort level for thinking in reasoning models (e.g., o1, o3). Controls the trade-off between speed and quality.
+enum ThinkingEffort {
+
+    // Unspecified thinking effort.
+    THINKING_EFFORT_UNSPECIFIED = 0;
+
+    // Minimal thinking effort.
+    THINKING_EFFORT_MINIMAL = 1;
+
+    // Low thinking effort.
+    THINKING_EFFORT_LOW = 2;
+
+    // Medium thinking effort.
+    THINKING_EFFORT_MEDIUM = 3;
+
+    // High thinking effort.
+    THINKING_EFFORT_HIGH = 4;
+
+}
+
+// Represents a single step in the thinking or reasoning chain of an AI agent
+// (e.g., Autogen, LangChain). Each ThinkingResult captures one atomic content
+// unit produced during the agent\'s internal reasoning process.
+message ThinkingResult {
+
+    // Plain text or markdown reasoning content produced by the agent.
+    message Text {
+
+        // The thinking text content (may be plain text or markdown).
+        repeated string text = 1;
+
+    }
+
+    // A code block produced during the agent\'s reasoning.
+    message Code {
+
+        // The programming language of the code block (e.g., "python", "javascript", "bash").
+        string language = 1;
+
+        // The code content.
+        string code = 2;
+
+    }
+
+    // A tool or function call made by the agent during its reasoning process.
+    message ToolCall {
+
+        // The name of the tool or function called.
+        string tool_name = 1;
+
+        // The input arguments passed to the tool, serialised as a structured JSON object.
+        google.protobuf.Struct arguments = 2;
+
+        // An optional unique call ID used to correlate this call with its ToolResult.
+        string call_id = 3;
+
+    }
+
+    // The result returned from a tool or function call.
+    message ToolResult {
+
+        // The call ID linking this result back to the corresponding ToolCall.
+        string call_id = 1;
+
+        // The name of the tool that produced this result.
+        string tool_name = 2;
+
+        // The structured output returned by the tool.
+        google.protobuf.Struct result = 3;
+
+        // Optional. A plain-text representation of the result (for display or logging).
+        string result_text = 4;
+
+    }
+
+    // The content of this thinking step. Exactly one content type will be set.
+    oneof content {
+
+        // Plain text or markdown reasoning content.
+        Text text = 1;
+
+        // A code block produced during reasoning.
+        Code code = 2;
+
+        // A tool or function call made during reasoning.
+        ToolCall tool_call = 3;
+
+        // The result of a tool or function call.
+        ToolResult tool_result = 4;
+
+        // Arbitrary structured data produced during reasoning (e.g., plans, notes, JSON output).
+        google.protobuf.Struct structured_data = 5;
+
+        // A file resource produced or referenced during reasoning
+        // (e.g., a generated image, document, or audio clip).
+        FileResource file_resource = 6;
+
+    }
+
+    // The name of the AI agent that produced this thinking step
+    // (e.g., "orchestrator", "researcher", "executor").
+    string agent_name = 7;
+
+    // The role of the agent within the multi-agent pipeline
+    // (e.g., "assistant", "planner", "tool_executor", "critic").
+    string agent_role = 8;
+
+    // The 0-based index of this step within the agent\'s thinking chain.
+    // Use this to reconstruct the reasoning sequence in order.
+    int32 step_index = 9;
+
+    // Creation date and time. Read-only field.
+    google.protobuf.Timestamp created_at = 10;
+
+    // Modification date and time. Read-only field.
+    google.protobuf.Timestamp modified_at = 11;
+
+    // User id in form of a valid UUID.
+    string created_by = 12;
+
+    // User id in form of a valid UUID.
+    string modified_by = 13;
+
+}
+
+// Configures the agent to return additional insights after the conversation is complete.
+message ThinkingConfig {
+  // Optional. Configures the agent to return additional insights after the
+  // conversation is complete.
+  bool enable_thinking = 1;
+
+    // Optional. The maximum reasoning effort to be expended. This parameter allows you to control the trade-off 
+    // between latency and accuracy of the reasoning process. 
+  ThinkingEffort thinking_effort = 2;
 }
 
 // Represents the options for views of resources.
