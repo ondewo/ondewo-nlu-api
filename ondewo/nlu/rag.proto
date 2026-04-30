@@ -514,6 +514,12 @@ message RagUpdateDatasetRequest {
     // Optional. Minimum 0. Maximum 100. PageRank value.
     optional int32 pagerank = 9;
 
+    // Optional. FieldMask to specify which fields to update.
+    optional google.protobuf.FieldMask update_mask = 10;
+
+    // Optional. The mask to control which <code>RagDataset</code> fields get returned.
+    optional google.protobuf.FieldMask field_mask = 11;
+
 }
 
 // Request message for deleting one or more of a RAGFlow resource.
@@ -574,7 +580,13 @@ message RagListDatasetsRequest {
     string orderby = 6;
 
     // Optional. Sort descending (default: <code>true</code>).
-    optional bool desc = 7;
+    optional bool desc = 7 [deprecated = true];
+
+    // Optional. Specify whether to sort ascending or descending (default: ascending).
+    optional SortingMode sorting_mode = 8;
+
+    // Optional. The mask to control which <code>RagDataset</code> fields get returned.
+    optional google.protobuf.FieldMask field_mask = 9;
 
 }
 
@@ -762,6 +774,12 @@ message RagUpdateDocumentRequest {
     // Optional. Custom metadata fields for document-specific metadata (replaces existing metadata).
     google.protobuf.Struct meta_fields = 9;
 
+    // Optional. FieldMask to specify which fields to update.
+    optional google.protobuf.FieldMask update_mask = 10;
+
+    // Optional. The mask to control which <code>RagDocument</code> fields get returned.
+    optional google.protobuf.FieldMask field_mask = 11;
+
 }
 
 // Request message for downloading the document file.
@@ -837,7 +855,7 @@ message RagListDocumentsRequest {
     string orderby = 7;
 
     // Optional. Sort in descending order (default: <code>true</code>).
-    optional bool desc = 8;
+    optional bool desc = 8 [deprecated = true];
 
     // Optional. Filter by document names containing <code>keywords</code>.
     string keywords = 9;
@@ -856,6 +874,12 @@ message RagListDocumentsRequest {
 
     // Optional. Metadata filter condition to restrict results based on document metadata.<br>
     RagMetadataConditions metadata_condition = 14;
+
+    // Optional. Specify whether to sort ascending or descending (default: ascending).
+    optional SortingMode sorting_mode = 15;
+
+    // Optional. The mask to control which <code>RagDocument</code> fields get returned.
+    optional google.protobuf.FieldMask field_mask = 16;
 
 }
 
@@ -1079,6 +1103,9 @@ message RagRetrievalRequest {
     // Optional. Extract additional keywords from the query to improve retrieval.
     optional bool keyword = 14;
 
+    // Optional. The mask to control which <code>RagChunk</code> fields get returned.
+    optional google.protobuf.FieldMask field_mask = 15;
+
 }
 
 // Response message for chunk retrieval.
@@ -1271,6 +1298,9 @@ message RagListCrawlersRequest {
 
     // Optional. Sort descending.
     optional SortingMode sorting_mode = 7;
+
+    // Optional. The Mask to control which RagCrawler fields get returned for each crawler in the list response.
+    optional google.protobuf.FieldMask field_mask = 8;
 
 }
 
@@ -1963,6 +1993,14 @@ message RagGetCrawlerResultsRequest {
     // Optional. Filter by URL substring.
     optional string url_query = 5;
 
+    // Optional. The mask to control which <code>RagCrawlerResult</code> fields get returned.
+    optional google.protobuf.FieldMask field_mask = 6;
+
+    // Optional. Sort field (default: <code>last_crawled_date</code>).
+    optional string orderby = 7;
+
+    // Optional. Sort descending.
+    optional SortingMode sorting_mode = 8;
 }
 
 // Response message for getting crawler results.
@@ -1996,6 +2034,9 @@ message RagGetCrawlerResultRequest {
 
     // Required. Exact URL of the crawler result to retrieve.
     string url = 4;
+
+    // Optional. The mask to control which RagCrawlerResult fields get returned.
+    optional google.protobuf.FieldMask field_mask = 5;
 
 }
 
@@ -2094,6 +2135,12 @@ message RagGetCrawlerAttachedDatasetsRequest {
     // Optional. The mask to control which <code>RagDataset</code> fields get returned.
     optional google.protobuf.FieldMask field_mask = 6;
 
+    // Optional. Sort field (default: <code>create_time</code>).
+    optional string orderby = 7;
+
+    // Optional. Sort descending (default: <code>SORTING_MODE_DESCENDING</code>).
+    optional SortingMode sorting_mode = 8;
+
 }
 
 // Response message for getting datasets attached to a crawler.
@@ -2152,6 +2199,9 @@ message RagGetCrawlerRunLogsRequest {
 
   // Optional. Sort descending.
   optional SortingMode sorting_mode = 13;
+
+  // Optional. The mask to control which <code>LogEntry</code> fields get returned.
+  optional google.protobuf.FieldMask field_mask = 14;
 
 }
 
