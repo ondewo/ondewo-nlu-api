@@ -6,7 +6,14 @@
 
 ### Improvements
 
-* [[OND211-2359]](https://ondewo.atlassian.net/browse/OND211-2359) Added `slow_crawl` boolean field to `RagCrawlerConcurrencyConfig` for enabling fixed delays between requests to avoid rate limits. Added `orderby` and `desc` fields to `RagGetCrawlerRunLogsRequest` for sorting log results. Added `total_log_entries` field to `RagGetCrawlerRunLogsResponse` for total count of matching log entries.
+* [[OND211-2359]](https://ondewo.atlassian.net/browse/OND211-2359) Added `slow_crawl` boolean field to `RagCrawlerConcurrencyConfig` for enabling fixed delays between requests to avoid rate limits.
+* [[OND211-2359]](https://ondewo.atlassian.net/browse/OND211-2359) Added `total_log_entries` field to `RagGetCrawlerRunLogsResponse` for total count of matching log entries.
+* [[OND211-2359]](https://ondewo.atlassian.net/browse/OND211-2359) Added `orderby`, `sorting_mode` and `field_mask` fields to `RagGetCrawlerRunLogsRequest` for sorting and selective field retrieval of log results.
+* [[OND211-2359]](https://ondewo.atlassian.net/browse/OND211-2359) Added `update_mask` and `field_mask` fields to `RagUpdateDatasetRequest` and `RagUpdateDocumentRequest` for selective field updates and selective field retrieval.
+* [[OND211-2359]](https://ondewo.atlassian.net/browse/OND211-2359) Added `sorting_mode` and `field_mask` fields to `RagListDatasetsRequest` and `RagListDocumentsRequest` for ONDEWO-style sorting and selective field retrieval. Deprecated the `desc` field on both requests in favor of `sorting_mode`.
+* [[OND211-2359]](https://ondewo.atlassian.net/browse/OND211-2359) Added `field_mask` to `RagRetrievalRequest`, `RagListCrawlersRequest`, `RagGetCrawlerResultRequest` and `RagGetCrawlerResultsRequest` for selective field retrieval.
+* [[OND211-2359]](https://ondewo.atlassian.net/browse/OND211-2359) Added `orderby` and `sorting_mode` fields to `RagGetCrawlerResultsRequest` and `RagGetCrawlerAttachedDatasetsRequest` for sorting result lists.
+* [[OND211-2359]](https://ondewo.atlassian.net/browse/OND211-2359) Marked numerous existing scalar and message fields across the `Rags` service as `optional` (proto3 optional presence) on crawler, dataset, document and request/response messages to allow distinguishing unset values from defaults.
 
 *****************
 
