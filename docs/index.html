@@ -21333,7 +21333,7 @@ Automatically generated in backend if empty </p></td>
                 <tr>
                   <td>display_name</td>
                   <td><a href="#string">string</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Human-readable crawler name shown in UIs/logs.
 Should be unique per agent to simplify operational troubleshooting. </p></td>
                 </tr>
@@ -21369,7 +21369,7 @@ Should be unique per agent to simplify operational troubleshooting. </p></td>
                 <tr>
                   <td>crawler_sources</td>
                   <td><a href="#ondewo.nlu.RagCrawlerSources">RagCrawlerSources</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Crawl entry points.
 Configure crawl entry points: URL seeds and/or sitemap sources. </p></td>
                 </tr>
@@ -21377,7 +21377,7 @@ Configure crawl entry points: URL seeds and/or sitemap sources. </p></td>
                 <tr>
                   <td>crawler_seed_url_filters</td>
                   <td><a href="#ondewo.nlu.RagCrawlerSeedUrlFilters">RagCrawlerSeedUrlFilters</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Seed URL filters.
 Filters are applied to the seed URLs before they are crawled. </p></td>
                 </tr>
@@ -21385,14 +21385,14 @@ Filters are applied to the seed URLs before they are crawled. </p></td>
                 <tr>
                   <td>crawler_auth</td>
                   <td><a href="#ondewo.nlu.RagCrawlerAuth">RagCrawlerAuth</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Login/auth setup used before crawl requests. </p></td>
                 </tr>
               
                 <tr>
                   <td>crawler_browser_config</td>
                   <td><a href="#ondewo.nlu.RagCrawlerBrowserConfig">RagCrawlerBrowserConfig</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Browser runtime setup (engine, viewport, cookies, proxy, headers).
 Roughly corresponds to Crawl4AI <code>BrowserConfig</code>.
 Use this when target sites require JS, custom headers, session cookies, or proxy routing. </p></td>
@@ -21401,7 +21401,7 @@ Use this when target sites require JS, custom headers, session cookies, or proxy
                 <tr>
                   <td>crawler_config</td>
                   <td><a href="#ondewo.nlu.RagCrawlerConfig">RagCrawlerConfig</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Crawl execution behavior and extraction settings.
 Roughly corresponds to Crawl4AI <code>CrawlerRunConfig</code>. </p></td>
                 </tr>
@@ -21409,7 +21409,7 @@ Roughly corresponds to Crawl4AI <code>CrawlerRunConfig</code>. </p></td>
                 <tr>
                   <td>retry_config</td>
                   <td><a href="#ondewo.nlu.RagCrawlerRetryConfig">RagCrawlerRetryConfig</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Retry configuration for crawler runs. </p></td>
                 </tr>
               
@@ -21433,14 +21433,14 @@ Roughly corresponds to Crawl4AI <code>CrawlerRunConfig</code>. </p></td>
                 <tr>
                   <td>http_auth</td>
                   <td><a href="#ondewo.nlu.RagCrawlerHttpAuth">RagCrawlerHttpAuth</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. HTTP Basic auth settings. </p></td>
                 </tr>
               
                 <tr>
                   <td>html_auth</td>
                   <td><a href="#ondewo.nlu.RagCrawlerHtmlAuth">RagCrawlerHtmlAuth</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Form/HTML login selector and credential settings. </p></td>
                 </tr>
               
@@ -21479,7 +21479,7 @@ Repeated entries allow duplicate header names and preserve order. </p></td>
                 <tr>
                   <td>crawler_user_agent</td>
                   <td><a href="#string">string</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. User-Agent sent with requests. </p></td>
                 </tr>
               
@@ -21503,9 +21503,16 @@ Repeated entries allow duplicate header names and preserve order. </p></td>
                 <tr>
                   <td>max_concurrent_requests</td>
                   <td><a href="#int32">int32</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Max number of concurrent in-flight requests/pages.
 Increase for throughput; reduce for fragile sites/rate limits. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>slow_crawl</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. Enable slow crawl mode with fixed delays between requests to avoid rate limits. </p></td>
                 </tr>
               
             </tbody>
@@ -21528,21 +21535,21 @@ Increase for throughput; reduce for fragile sites/rate limits. </p></td>
                 <tr>
                   <td>concurrency_config</td>
                   <td><a href="#ondewo.nlu.RagCrawlerConcurrencyConfig">RagCrawlerConcurrencyConfig</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Concurrency and pacing controls for crawler requests. </p></td>
                 </tr>
               
                 <tr>
                   <td>deep_crawler_config</td>
                   <td><a href="#ondewo.nlu.RagCrawlerDeepCrawlerConfig">RagCrawlerDeepCrawlerConfig</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Deep crawler behavior (enable + depth/pages/scoring/filter chain). </p></td>
                 </tr>
               
                 <tr>
                   <td>output_config</td>
                   <td><a href="#ondewo.nlu.RagCrawlerResultsConfig">RagCrawlerResultsConfig</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Structured output configuration (format + metadata policy). </p></td>
                 </tr>
               
@@ -21566,7 +21573,7 @@ Increase for throughput; reduce for fragile sites/rate limits. </p></td>
                 <tr>
                   <td>metadata</td>
                   <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Extracted page metadata.
 Includes only fields configured in <code>RagCrawlerConfig.output_config.meta_data_extractors</code>. </p></td>
                 </tr>
@@ -21574,7 +21581,7 @@ Includes only fields configured in <code>RagCrawlerConfig.output_config.meta_dat
                 <tr>
                   <td>markdown</td>
                   <td><a href="#string">string</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Extracted markdown output. </p></td>
                 </tr>
               
@@ -21612,7 +21619,7 @@ Includes only fields configured in <code>RagCrawlerConfig.output_config.meta_dat
                 <tr>
                   <td>cookie_domain</td>
                   <td><a href="#string">string</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Cookie domain. </p></td>
                 </tr>
               
@@ -21636,7 +21643,7 @@ Includes only fields configured in <code>RagCrawlerConfig.output_config.meta_dat
                 <tr>
                   <td>is_active</td>
                   <td><a href="#bool">bool</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Enable deep crawler behavior (link following beyond seeds).
 Default <code>false</code>. If <code>false</code>, <code>config</code> is ignored. </p></td>
                 </tr>
@@ -21644,7 +21651,7 @@ Default <code>false</code>. If <code>false</code>, <code>config</code> is ignore
                 <tr>
                   <td>crawl_strategy</td>
                   <td><a href="#ondewo.nlu.RagCrawlerCrawlStrategy">RagCrawlerCrawlStrategy</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Crawl traversal strategy.
 BFS is often best for broad site coverage; DFS for deep section traversal.
 Default <code>RAG_CRAWLER_CRAWL_STRATEGY_BFS</code>. </p></td>
@@ -21653,7 +21660,7 @@ Default <code>RAG_CRAWLER_CRAWL_STRATEGY_BFS</code>. </p></td>
                 <tr>
                   <td>max_depth</td>
                   <td><a href="#int32">int32</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Maximum link depth from seed URLs.
 <code>0</code> usually means only seed pages. </p></td>
                 </tr>
@@ -21661,14 +21668,14 @@ Default <code>RAG_CRAWLER_CRAWL_STRATEGY_BFS</code>. </p></td>
                 <tr>
                   <td>max_pages</td>
                   <td><a href="#int32">int32</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Hard cap on total processed pages for this run. </p></td>
                 </tr>
               
                 <tr>
                   <td>deep_crawler_filters</td>
                   <td><a href="#ondewo.nlu.RagCrawlerFilters">RagCrawlerFilters</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. URL and domain restrictions. </p></td>
                 </tr>
               
@@ -21692,21 +21699,21 @@ Default <code>RAG_CRAWLER_CRAWL_STRATEGY_BFS</code>. </p></td>
                 <tr>
                   <td>ssl_certificate</td>
                   <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. SSL certificate details. </p></td>
                 </tr>
               
                 <tr>
                   <td>success</td>
                   <td><a href="#bool">bool</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Crawl status flag. </p></td>
                 </tr>
               
                 <tr>
                   <td>error_message</td>
                   <td><a href="#string">string</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Error details if crawl failed. </p></td>
                 </tr>
               
@@ -21744,21 +21751,21 @@ Default <code>RAG_CRAWLER_CRAWL_STRATEGY_BFS</code>. </p></td>
                 <tr>
                   <td>allow_internal_links</td>
                   <td><a href="#bool">bool</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Include internal links. </p></td>
                 </tr>
               
                 <tr>
                   <td>allow_external_links</td>
                   <td><a href="#bool">bool</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Include external links. </p></td>
                 </tr>
               
                 <tr>
                   <td>allow_social_media_links</td>
                   <td><a href="#bool">bool</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Include social media links. </p></td>
                 </tr>
               
@@ -21810,56 +21817,56 @@ Default <code>RAG_CRAWLER_CRAWL_STRATEGY_BFS</code>. </p></td>
                 <tr>
                   <td>html_auth_base_url</td>
                   <td><a href="#string">string</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Base URL used for auth/login navigation. </p></td>
                 </tr>
               
                 <tr>
                   <td>html_auth_username_selector_type</td>
                   <td><a href="#ondewo.nlu.RagCrawlerSelectorType">RagCrawlerSelectorType</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Username field selector type. </p></td>
                 </tr>
               
                 <tr>
                   <td>html_auth_username_selector</td>
                   <td><a href="#string">string</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Username field selector value. </p></td>
                 </tr>
               
                 <tr>
                   <td>html_auth_username</td>
                   <td><a href="#string">string</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Username credential. </p></td>
                 </tr>
               
                 <tr>
                   <td>html_auth_password_selector_type</td>
                   <td><a href="#ondewo.nlu.RagCrawlerSelectorType">RagCrawlerSelectorType</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Password field selector type. </p></td>
                 </tr>
               
                 <tr>
                   <td>html_auth_password_selector</td>
                   <td><a href="#string">string</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Password field selector value. </p></td>
                 </tr>
               
                 <tr>
                   <td>html_auth_password</td>
                   <td><a href="#string">string</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Password credential. </p></td>
                 </tr>
               
                 <tr>
                   <td>authentication_execution_type</td>
                   <td><a href="#ondewo.nlu.RagCrawlerAuthenticationExecutionType">RagCrawlerAuthenticationExecutionType</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Authentication execution type </p></td>
                 </tr>
               
@@ -21914,21 +21921,21 @@ Default <code>RAG_CRAWLER_CRAWL_STRATEGY_BFS</code>. </p></td>
                 <tr>
                   <td>type</td>
                   <td><a href="#ondewo.nlu.RagCrawlerMetaDataExtractorType">RagCrawlerMetaDataExtractorType</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Regex pattern to match metadata field names. </p></td>
                 </tr>
               
                 <tr>
                   <td>value</td>
                   <td><a href="#string">string</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Value to extract (e.g. regex pattern, fixed value, CSS selector, XPath selector, ID selector). </p></td>
                 </tr>
               
                 <tr>
                   <td>key</td>
                   <td><a href="#string">string</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Metadata field name to extract (e.g. url, title, description, author, keywords, tags, created_date, modified_date, scraped_at). </p></td>
                 </tr>
               
@@ -21997,14 +22004,14 @@ See FileResource Documentation for all other file types. </p></td>
                 <tr>
                   <td>content_result</td>
                   <td><a href="#ondewo.nlu.RagCrawlerContentResult">RagCrawlerContentResult</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Consolidated extracted content for this page. </p></td>
                 </tr>
               
                 <tr>
                   <td>page_last_updated_date</td>
                   <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Timestamp when source page was last updated.
 Source precedence: HTTP Last-Modified header, then sitemap <lastmod> fallback. </p></td>
                 </tr>
@@ -22063,14 +22070,14 @@ Default <code>true</code>. </p></td>
                 <tr>
                   <td>page_load_timeout_seconds</td>
                   <td><a href="#int32">int32</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Page load/render timeout in seconds. </p></td>
                 </tr>
               
                 <tr>
                   <td>retry_max_attempts</td>
                   <td><a href="#int32">int32</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Maximum retry attempts per page source. </p></td>
                 </tr>
               
@@ -22195,7 +22202,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid
                 <tr>
                   <td>field_mask</td>
                   <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. The mask to control which RagCrawler fields get returned. </p></td>
                 </tr>
               
@@ -23220,7 +23227,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid
                 <tr>
                   <td>page_size</td>
                   <td><a href="#int32">int32</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Maximum number of datasets to return.
 
 If unset or non-positive, backend default is used. </p></td>
@@ -23229,7 +23236,7 @@ If unset or non-positive, backend default is used. </p></td>
                 <tr>
                   <td>page_token</td>
                   <td><a href="#string">string</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Specifies which page to return. The page token is a string of the format
 <pre><code>current_index-&lt;idx&gt;--page_size-&lt;size&gt;</code></pre>
 
@@ -23253,7 +23260,7 @@ Both <code>current_index-&lt;idx&gt;</code> and <code>page_size-&lt;size&gt;</co
                 <tr>
                   <td>field_mask</td>
                   <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. The mask to control which <code>RagDataset</code> fields get returned. </p></td>
                 </tr>
               
@@ -23331,7 +23338,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 <tr>
                   <td>field_mask</td>
                   <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. The mask to control which RagCrawler fields get returned. </p></td>
                 </tr>
               
@@ -23425,7 +23432,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawler_runs/&lt;crawler_
                 <tr>
                   <td>page_token</td>
                   <td><a href="#string">string</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Specifies which page to return. The page token is a string of the format
 <pre><code>current_index-&lt;idx&gt;--page_size-&lt;size&gt;</code></pre>
 
@@ -23449,7 +23456,7 @@ Both <code>current_index-&lt;idx&gt;</code> and <code>page_size-&lt;size&gt;</co
                 <tr>
                   <td>url_query</td>
                   <td><a href="#string">string</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Filter by URL substring. </p></td>
                 </tr>
               
@@ -23535,14 +23542,14 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawler_runs/&lt;crawler_
                 <tr>
                   <td>page_token</td>
                   <td><a href="#string">string</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Specifies which page to return. </p></td>
                 </tr>
               
                 <tr>
                   <td>page_size</td>
                   <td><a href="#int32">int32</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Number of logs per page. </p></td>
                 </tr>
               
@@ -23556,36 +23563,51 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawler_runs/&lt;crawler_
                 <tr>
                   <td>phase_filter</td>
                   <td><a href="#string">string</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Filter by specific phase (exact match). </p></td>
                 </tr>
               
                 <tr>
                   <td>search_query</td>
                   <td><a href="#string">string</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Search string for the message or details. </p></td>
                 </tr>
               
                 <tr>
                   <td>start_time</td>
                   <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Filter logs generated after this time. </p></td>
                 </tr>
               
                 <tr>
                   <td>end_time</td>
                   <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Filter logs generated before this time. </p></td>
                 </tr>
               
                 <tr>
                   <td>source_url_filter</td>
                   <td><a href="#string">string</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Filter by source URL (substring match). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>orderby</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. Sort field. Accept any field of <code>LogEntry</code>.
+Default: <code>log_entry_timestamp</code>. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>sorting_mode</td>
+                  <td><a href="#ondewo.nlu.SortingMode">SortingMode</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. Sort descending. </p></td>
                 </tr>
               
             </tbody>
@@ -23638,6 +23660,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawler_runs/&lt;crawler_
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Page token string for retrieving the next results page. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>total_log_entries</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>Total number of log entries available after applying filters. </p></td>
                 </tr>
               
             </tbody>
@@ -23767,7 +23796,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 <tr>
                   <td>crawler_name</td>
                   <td><a href="#string">string</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Restrict to one crawler.
 Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre> </p></td>
                 </tr>
@@ -23775,7 +23804,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid
                 <tr>
                   <td>page_token</td>
                   <td><a href="#string">string</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Specifies which page to return. The page token is a string of the format
 <pre><code>current_index-&lt;idx&gt;--page_size-&lt;size&gt;</code></pre>
 
@@ -23799,14 +23828,14 @@ Both <code>current_index-&lt;idx&gt;</code> and <code>page_size-&lt;size&gt;</co
                 <tr>
                   <td>status</td>
                   <td><a href="#ondewo.nlu.OperationMetadata.Status">OperationMetadata.Status</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Filter by operation status. </p></td>
                 </tr>
               
                 <tr>
                   <td>orderby</td>
                   <td><a href="#string">string</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Sort field (default: <code>created_at</code>). </p></td>
                 </tr>
               
@@ -23883,7 +23912,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 <tr>
                   <td>page_token</td>
                   <td><a href="#string">string</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Specifies which page to return. The page token is a string of the format
 <pre><code>current_index-&lt;idx&gt;--page_size-&lt;size&gt;</code></pre>
 
@@ -23907,21 +23936,21 @@ Both <code>current_index-&lt;idx&gt;</code> and <code>page_size-&lt;size&gt;</co
                 <tr>
                   <td>dataset_name</td>
                   <td><a href="#string">string</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Filter by dataset name. </p></td>
                 </tr>
               
                 <tr>
                   <td>crawler_name</td>
                   <td><a href="#string">string</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Filter by crawler name. </p></td>
                 </tr>
               
                 <tr>
                   <td>orderby</td>
                   <td><a href="#string">string</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. Sort field (default: <code>create_time</code>). </p></td>
                 </tr>
               
@@ -24838,7 +24867,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 <tr>
                   <td>update_mask</td>
                   <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. FieldMask to specify which fields to update.
 If not provided, all configuration fields in crawler are updated. </p></td>
                 </tr>
@@ -24846,7 +24875,7 @@ If not provided, all configuration fields in crawler are updated. </p></td>
                 <tr>
                   <td>field_mask</td>
                   <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p>Optional. The mask to control which crawler fields get returned. </p></td>
                 </tr>
               
