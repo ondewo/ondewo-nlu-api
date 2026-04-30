@@ -23264,6 +23264,20 @@ Both <code>current_index-&lt;idx&gt;</code> and <code>page_size-&lt;size&gt;</co
                   <td><p>Optional. The mask to control which <code>RagDataset</code> fields get returned. </p></td>
                 </tr>
               
+                <tr>
+                  <td>orderby</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. Sort field (default: <code>create_time</code>). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>sorting_mode</td>
+                  <td><a href="#ondewo.nlu.SortingMode">SortingMode</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. Sort descending (default: <code>SORTING_MODE_DESCENDING</code>). </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -23389,6 +23403,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawler_runs/&lt;crawler_
                   <td><p>Required. Exact URL of the crawler result to retrieve. </p></td>
                 </tr>
               
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. The mask to control which RagCrawlerResult fields get returned. </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -23458,6 +23479,27 @@ Both <code>current_index-&lt;idx&gt;</code> and <code>page_size-&lt;size&gt;</co
                   <td><a href="#string">string</a></td>
                   <td>optional</td>
                   <td><p>Optional. Filter by URL substring. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. The mask to control which <code>RagCrawlerResult</code> fields get returned. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>orderby</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. Sort field (default: <code>last_crawled_date</code>). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>sorting_mode</td>
+                  <td><a href="#ondewo.nlu.SortingMode">SortingMode</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. Sort descending. </p></td>
                 </tr>
               
             </tbody>
@@ -23608,6 +23650,13 @@ Default: <code>log_entry_timestamp</code>. </p></td>
                   <td><a href="#ondewo.nlu.SortingMode">SortingMode</a></td>
                   <td>optional</td>
                   <td><p>Optional. Sort descending. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. The mask to control which <code>LogEntry</code> fields get returned. </p></td>
                 </tr>
               
             </tbody>
@@ -23961,6 +24010,13 @@ Both <code>current_index-&lt;idx&gt;</code> and <code>page_size-&lt;size&gt;</co
                   <td><p>Optional. Sort descending. </p></td>
                 </tr>
               
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. The Mask to control which RagCrawler fields get returned for each crawler in the list response. </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -24074,6 +24130,20 @@ Both <code>current_index-&lt;idx&gt;</code> and <code>page_size-&lt;size&gt;</co
                   <td><a href="#bool">bool</a></td>
                   <td>optional</td>
                   <td><p>Optional. Sort descending (default: <code>true</code>). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>sorting_mode</td>
+                  <td><a href="#ondewo.nlu.SortingMode">SortingMode</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. Sort descending (default: <code>SORTING_MODE_DESCENDING</code>). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. The mask to control which <code>RagDataset</code> fields get returned. </p></td>
                 </tr>
               
             </tbody>
@@ -24207,6 +24277,13 @@ Both <code>current_index-&lt;idx&gt;</code> and <code>page_size-&lt;size&gt;</co
                   <td><a href="#ondewo.nlu.RagMetadataConditions">RagMetadataConditions</a></td>
                   <td></td>
                   <td><p>Optional. Metadata filter condition to restrict results based on document metadata.<br> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. The mask to control which <code>RagDocument</code> fields get returned. </p></td>
                 </tr>
               
             </tbody>
@@ -24666,6 +24743,13 @@ Higher values favor vector similarity, lower values favor keyword matching. </p>
                   <td><p>Optional. Extract additional keywords from the query to improve retrieval. </p></td>
                 </tr>
               
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. The mask to control which <code>RagChunk</code> fields get returned. </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -24960,6 +25044,20 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td><p>Optional. Minimum 0. Maximum 100. PageRank value. </p></td>
                 </tr>
               
+                <tr>
+                  <td>update_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. FieldMask to specify which fields to update. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. The mask to control which <code>RagDataset</code> fields get returned. </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -25039,6 +25137,20 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
                   <td></td>
                   <td><p>Optional. Custom metadata fields for document-specific metadata (replaces existing metadata). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>update_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. FieldMask to specify which fields to update. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. The mask to control which <code>RagDocument</code> fields get returned. </p></td>
                 </tr>
               
             </tbody>

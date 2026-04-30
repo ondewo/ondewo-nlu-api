@@ -7668,6 +7668,8 @@ If unset or non-positive, backend default is used. |
 
 Both <code>current_index-&lt;idx&gt;</code> and <code>page_size-&lt;size&gt;</code> are optional and default to <code>0</code> and <code>10</code> respectively. The following are all valid <code>page_token</code>s <br> <ul> <li><code> </code> (empty string/missing value) - index 0, page size 10</li> <li><code>current_index-3</code> - index 3, page size 10</li> <li><code>page_size-20</code> - index 0, page size 20</li> <li><code>current_index-3--page_size-20</code> - index 3, page size 20</li> </ul> |
 | field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) | optional | Optional. The mask to control which <code>RagDataset</code> fields get returned. |
+| orderby | [string](#string) | optional | Optional. Sort field (default: <code>create_time</code>). |
+| sorting_mode | [SortingMode](#ondewo.nlu.SortingMode) | optional | Optional. Sort descending (default: <code>SORTING_MODE_DESCENDING</code>). |
 
 
 
@@ -7720,6 +7722,7 @@ Request message for getting a single crawler result from a crawler run.
 | language_code | [string](#string) |  | Required. The language of the project to use. |
 | operation_name | [string](#string) |  | Required. Resource name of the crawler run. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawler_runs/&lt;crawler_run_uuid&gt;</code></pre> |
 | url | [string](#string) |  | Required. Exact URL of the crawler result to retrieve. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) | optional | Optional. The mask to control which RagCrawlerResult fields get returned. |
 
 
 
@@ -7754,6 +7757,9 @@ RagGetCrawlerResults(run_name, page_token="...")
 
 Both <code>current_index-&lt;idx&gt;</code> and <code>page_size-&lt;size&gt;</code> are optional and default to <code>0</code> and <code>10</code> respectively. The following are all valid <code>page_token</code>s <br> <ul> <li><code> </code> (empty string/missing value) - index 0, page size 10</li> <li><code>current_index-3</code> - index 3, page size 10</li> <li><code>page_size-20</code> - index 0, page size 20</li> <li><code>current_index-3--page_size-20</code> - index 3, page size 20</li> </ul> |
 | url_query | [string](#string) | optional | Optional. Filter by URL substring. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) | optional | Optional. The mask to control which <code>RagCrawlerResult</code> fields get returned. |
+| orderby | [string](#string) | optional | Optional. Sort field (default: <code>last_crawled_date</code>). |
+| sorting_mode | [SortingMode](#ondewo.nlu.SortingMode) | optional | Optional. Sort descending. |
 
 
 
@@ -7798,6 +7804,7 @@ Request message for getting crawler run logs.
 | source_url_filter | [string](#string) | optional | Optional. Filter by source URL (substring match). |
 | orderby | [string](#string) | optional | Optional. Sort field. Accept any field of <code>LogEntry</code>. Default: <code>log_entry_timestamp</code>. |
 | sorting_mode | [SortingMode](#ondewo.nlu.SortingMode) | optional | Optional. Sort descending. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) | optional | Optional. The mask to control which <code>LogEntry</code> fields get returned. |
 
 
 
@@ -7924,6 +7931,7 @@ Both <code>current_index-&lt;idx&gt;</code> and <code>page_size-&lt;size&gt;</co
 | crawler_name | [string](#string) | optional | Optional. Filter by crawler name. |
 | orderby | [string](#string) | optional | Optional. Sort field (default: <code>create_time</code>). |
 | sorting_mode | [SortingMode](#ondewo.nlu.SortingMode) | optional | Optional. Sort descending. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) | optional | Optional. The Mask to control which RagCrawler fields get returned for each crawler in the list response. |
 
 
 
@@ -7967,6 +7975,8 @@ Request message for listing datasets with pagination and filtering.
 | name | [string](#string) |  | Optional. Filter by dataset name. |
 | orderby | [string](#string) |  | Optional. Sort field. Can be <code>create_time</code> or <code>update_time</code> (default: <code>create_time</code>). |
 | desc | [bool](#bool) | optional | Optional. Sort descending (default: <code>true</code>). |
+| sorting_mode | [SortingMode](#ondewo.nlu.SortingMode) | optional | Optional. Sort descending (default: <code>SORTING_MODE_DESCENDING</code>). |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) | optional | Optional. The mask to control which <code>RagDataset</code> fields get returned. |
 
 
 
@@ -8001,6 +8011,7 @@ Both <code>current_index-&lt;idx&gt;</code> and <code>page_size-&lt;size&gt;</co
 | create_time_from | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Optional. Filter by creation time start. |
 | create_time_to | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Optional. Filter by creation time end. |
 | metadata_condition | [RagMetadataConditions](#ondewo.nlu.RagMetadataConditions) |  | Optional. Metadata filter condition to restrict results based on document metadata.<br> |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) | optional | Optional. The mask to control which <code>RagDocument</code> fields get returned. |
 
 
 
@@ -8173,6 +8184,7 @@ Both <code>current_index-&lt;idx&gt;</code> and <code>page_size-&lt;size&gt;</co
 | top_k | [int32](#int32) |  | Optional. Minimum 1. Maximum number of chunks to retrieve before reranking (default: <code>1024</code>). |
 | highlight | [bool](#bool) | optional | Optional. Whether to highlight matched content in the returned chunks. |
 | keyword | [bool](#bool) | optional | Optional. Extract additional keywords from the query to improve retrieval. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) | optional | Optional. The mask to control which <code>RagChunk</code> fields get returned. |
 
 
 
@@ -8287,6 +8299,8 @@ The same field constraints as for <code>RagCreateDatasetRequest</code> apply her
 | chunk_method | [RagChunkMethod](#ondewo.nlu.RagChunkMethod) |  | Optional. New chunk method. |
 | parser_config | [RagParserConfig](#ondewo.nlu.RagParserConfig) |  | Optional. New parser config (deep merged with existing). |
 | pagerank | [int32](#int32) | optional | Optional. Minimum 0. Maximum 100. PageRank value. |
+| update_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) | optional | Optional. FieldMask to specify which fields to update. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) | optional | Optional. The mask to control which <code>RagDataset</code> fields get returned. |
 
 
 
@@ -8310,6 +8324,8 @@ Request message for updating an existing document's metadata and configuration.
 | parser_config | [RagParserConfig](#ondewo.nlu.RagParserConfig) |  | Optional. New parser configuration (deep merged with existing configuration). |
 | enabled | [bool](#bool) | optional | Optional. Document enabled/disabled status. |
 | meta_fields | [google.protobuf.Struct](#google.protobuf.Struct) |  | Optional. Custom metadata fields for document-specific metadata (replaces existing metadata). |
+| update_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) | optional | Optional. FieldMask to specify which fields to update. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) | optional | Optional. The mask to control which <code>RagDocument</code> fields get returned. |
 
 
 
