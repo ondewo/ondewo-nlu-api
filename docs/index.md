@@ -536,12 +536,6 @@
     - [StreamingDetectIntentResponse](#ondewo.nlu.StreamingDetectIntentResponse)
     - [StreamingRecognitionResult](#ondewo.nlu.StreamingRecognitionResult)
     - [TextInput](#ondewo.nlu.TextInput)
-    - [ThinkingConfig](#ondewo.nlu.ThinkingConfig)
-    - [ThinkingResult](#ondewo.nlu.ThinkingResult)
-    - [ThinkingResult.Code](#ondewo.nlu.ThinkingResult.Code)
-    - [ThinkingResult.Text](#ondewo.nlu.ThinkingResult.Text)
-    - [ThinkingResult.ToolCall](#ondewo.nlu.ThinkingResult.ToolCall)
-    - [ThinkingResult.ToolResult](#ondewo.nlu.ThinkingResult.ToolResult)
     - [UpdateSessionCommentsRequest](#ondewo.nlu.UpdateSessionCommentsRequest)
     - [UpdateSessionStepRequest](#ondewo.nlu.UpdateSessionStepRequest)
     - [VideoFileResource](#ondewo.nlu.VideoFileResource)
@@ -553,7 +547,6 @@
     - [Session.View](#ondewo.nlu.Session.View)
     - [SessionReview.View](#ondewo.nlu.SessionReview.View)
     - [StreamingRecognitionResult.MessageType](#ondewo.nlu.StreamingRecognitionResult.MessageType)
-    - [ThinkingEffort](#ondewo.nlu.ThinkingEffort)
     - [TranscriptionType](#ondewo.nlu.TranscriptionType)
   
     - [Sessions](#ondewo.nlu.Sessions)
@@ -7675,6 +7668,8 @@ If unset or non-positive, backend default is used. |
 
 Both <code>current_index-&lt;idx&gt;</code> and <code>page_size-&lt;size&gt;</code> are optional and default to <code>0</code> and <code>10</code> respectively. The following are all valid <code>page_token</code>s <br> <ul> <li><code> </code> (empty string/missing value) - index 0, page size 10</li> <li><code>current_index-3</code> - index 3, page size 10</li> <li><code>page_size-20</code> - index 0, page size 20</li> <li><code>current_index-3--page_size-20</code> - index 3, page size 20</li> </ul> |
 | field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) | optional | Optional. The mask to control which <code>RagDataset</code> fields get returned. |
+| orderby | [string](#string) | optional | Optional. Sort field (default: <code>create_time</code>). |
+| sorting_mode | [SortingMode](#ondewo.nlu.SortingMode) | optional | Optional. Sort descending (default: <code>SORTING_MODE_DESCENDING</code>). |
 
 
 
@@ -7727,6 +7722,7 @@ Request message for getting a single crawler result from a crawler run.
 | language_code | [string](#string) |  | Required. The language of the project to use. |
 | operation_name | [string](#string) |  | Required. Resource name of the crawler run. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawler_runs/&lt;crawler_run_uuid&gt;</code></pre> |
 | url | [string](#string) |  | Required. Exact URL of the crawler result to retrieve. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) | optional | Optional. The mask to control which RagCrawlerResult fields get returned. |
 
 
 
@@ -7761,6 +7757,9 @@ RagGetCrawlerResults(run_name, page_token="...")
 
 Both <code>current_index-&lt;idx&gt;</code> and <code>page_size-&lt;size&gt;</code> are optional and default to <code>0</code> and <code>10</code> respectively. The following are all valid <code>page_token</code>s <br> <ul> <li><code> </code> (empty string/missing value) - index 0, page size 10</li> <li><code>current_index-3</code> - index 3, page size 10</li> <li><code>page_size-20</code> - index 0, page size 20</li> <li><code>current_index-3--page_size-20</code> - index 3, page size 20</li> </ul> |
 | url_query | [string](#string) | optional | Optional. Filter by URL substring. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) | optional | Optional. The mask to control which <code>RagCrawlerResult</code> fields get returned. |
+| orderby | [string](#string) | optional | Optional. Sort field (default: <code>last_crawled_date</code>). |
+| sorting_mode | [SortingMode](#ondewo.nlu.SortingMode) | optional | Optional. Sort descending. |
 
 
 
@@ -7805,6 +7804,7 @@ Request message for getting crawler run logs.
 | source_url_filter | [string](#string) | optional | Optional. Filter by source URL (substring match). |
 | orderby | [string](#string) | optional | Optional. Sort field. Accept any field of <code>LogEntry</code>. Default: <code>log_entry_timestamp</code>. |
 | sorting_mode | [SortingMode](#ondewo.nlu.SortingMode) | optional | Optional. Sort descending. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) | optional | Optional. The mask to control which <code>LogEntry</code> fields get returned. |
 
 
 
@@ -7931,6 +7931,7 @@ Both <code>current_index-&lt;idx&gt;</code> and <code>page_size-&lt;size&gt;</co
 | crawler_name | [string](#string) | optional | Optional. Filter by crawler name. |
 | orderby | [string](#string) | optional | Optional. Sort field (default: <code>create_time</code>). |
 | sorting_mode | [SortingMode](#ondewo.nlu.SortingMode) | optional | Optional. Sort descending. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) | optional | Optional. The Mask to control which RagCrawler fields get returned for each crawler in the list response. |
 
 
 
@@ -7973,7 +7974,9 @@ Request message for listing datasets with pagination and filtering.
 | id | [string](#string) |  | Optional. Filter by dataset ID. |
 | name | [string](#string) |  | Optional. Filter by dataset name. |
 | orderby | [string](#string) |  | Optional. Sort field. Can be <code>create_time</code> or <code>update_time</code> (default: <code>create_time</code>). |
-| desc | [bool](#bool) | optional | Optional. Sort descending (default: <code>true</code>). |
+| desc | [bool](#bool) | optional | **Deprecated.** Optional. Sort descending (default: <code>true</code>). |
+| sorting_mode | [SortingMode](#ondewo.nlu.SortingMode) | optional | Optional. Specify whether to sort ascending or descending (default: ascending). |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) | optional | Optional. The mask to control which <code>RagDataset</code> fields get returned. |
 
 
 
@@ -8001,13 +8004,15 @@ Request message for listing documents in a dataset with pagination and filtering
 
 Both <code>current_index-&lt;idx&gt;</code> and <code>page_size-&lt;size&gt;</code> are optional and default to <code>0</code> and <code>10</code> respectively. The following are all valid <code>page_token</code>s <br> <ul> <li><code> </code> (empty string/missing value) - index 0, page size 10</li> <li><code>current_index-3</code> - index 3, page size 10</li> <li><code>page_size-20</code> - index 0, page size 20</li> <li><code>current_index-3--page_size-20</code> - index 3, page size 20</li> </ul> |
 | orderby | [string](#string) |  | Optional. Sort field (default: <code>"create_time"</code>). Accept any field of <code>RagDocument</code>. |
-| desc | [bool](#bool) | optional | Optional. Sort in descending order (default: <code>true</code>). |
+| desc | [bool](#bool) | optional | **Deprecated.** Optional. Sort in descending order (default: <code>true</code>). |
 | keywords | [string](#string) |  | Optional. Filter by document names containing <code>keywords</code>. |
 | suffix | [string](#string) | repeated | Optional. Suffixes to filter by (e.g. <code>["pdf", "png", "docx"]</code>). |
 | run_status | [RagDocumentStatus](#ondewo.nlu.RagDocumentStatus) | repeated | Optional. Document statuses to filter by. |
 | create_time_from | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Optional. Filter by creation time start. |
 | create_time_to | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Optional. Filter by creation time end. |
 | metadata_condition | [RagMetadataConditions](#ondewo.nlu.RagMetadataConditions) |  | Optional. Metadata filter condition to restrict results based on document metadata.<br> |
+| sorting_mode | [SortingMode](#ondewo.nlu.SortingMode) | optional | Optional. Specify whether to sort ascending or descending (default: ascending). |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) | optional | Optional. The mask to control which <code>RagDocument</code> fields get returned. |
 
 
 
@@ -8180,6 +8185,7 @@ Both <code>current_index-&lt;idx&gt;</code> and <code>page_size-&lt;size&gt;</co
 | top_k | [int32](#int32) |  | Optional. Minimum 1. Maximum number of chunks to retrieve before reranking (default: <code>1024</code>). |
 | highlight | [bool](#bool) | optional | Optional. Whether to highlight matched content in the returned chunks. |
 | keyword | [bool](#bool) | optional | Optional. Extract additional keywords from the query to improve retrieval. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) | optional | Optional. The mask to control which <code>RagChunk</code> fields get returned. |
 
 
 
@@ -8294,6 +8300,8 @@ The same field constraints as for <code>RagCreateDatasetRequest</code> apply her
 | chunk_method | [RagChunkMethod](#ondewo.nlu.RagChunkMethod) |  | Optional. New chunk method. |
 | parser_config | [RagParserConfig](#ondewo.nlu.RagParserConfig) |  | Optional. New parser config (deep merged with existing). |
 | pagerank | [int32](#int32) | optional | Optional. Minimum 0. Maximum 100. PageRank value. |
+| update_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) | optional | Optional. FieldMask to specify which fields to update. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) | optional | Optional. The mask to control which <code>RagDataset</code> fields get returned. |
 
 
 
@@ -8317,6 +8325,8 @@ Request message for updating an existing document's metadata and configuration.
 | parser_config | [RagParserConfig](#ondewo.nlu.RagParserConfig) |  | Optional. New parser configuration (deep merged with existing configuration). |
 | enabled | [bool](#bool) | optional | Optional. Document enabled/disabled status. |
 | meta_fields | [google.protobuf.Struct](#google.protobuf.Struct) |  | Optional. Custom metadata fields for document-specific metadata (replaces existing metadata). |
+| update_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) | optional | Optional. FieldMask to specify which fields to update. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) | optional | Optional. The mask to control which <code>RagDocument</code> fields get returned. |
 
 
 
@@ -9837,7 +9847,6 @@ For a phone bot, this is the phone number +123456789 the user called (Note: This
 https://aim-develop.ondewo.com/ |
 | identified_user_id | [string](#string) |  | Id of the &quot;identified user&quot; e.g. for a chatbot the email address or for a phone bot the phone number of the user This field can also be used for a customized tracking id or tag id |
 | transcriptions | [S2tTranscription](#ondewo.nlu.S2tTranscription) | repeated | transcriptions of the user input sorted by score |
-| thinking_config | [ThinkingConfig](#ondewo.nlu.ThinkingConfig) |  | Optional. Configures the thinking features of agents in DetectIntent and StreamingDetectIntent. |
 
 
 
@@ -9870,7 +9879,6 @@ You should not rely on this field as it isn&apos;t guaranteed to be accurate, or
 | diagnostic_info | [google.protobuf.Struct](#google.protobuf.Struct) |  | The free-form diagnostic info. For example, this field could contain webhook call latency. |
 | language_code | [string](#string) |  | The language that was triggered during intent detection. See <a href="https://dialogflow.com/docs/reference/language">Language Support</a> for a list of the currently supported language codes. |
 | file_resources | [FileResource](#ondewo.nlu.FileResource) | repeated | Generated or attached files, e.g., llm generates a picture or file attachment |
-| thinking_results | [ThinkingResult](#ondewo.nlu.ThinkingResult) | repeated | The thinking or reasoning steps produced by an AI agent (e.g., Autogen, LangChain) during the processing of the query. Each entry captures one atomic step of the agent's internal reasoning chain. |
 
 
 
@@ -10239,117 +10247,6 @@ Represents the natural language text to be processed.
 
 
 
-<a name="ondewo.nlu.ThinkingConfig"></a>
-
-### ThinkingConfig
-Configures the agent to return additional insights after the conversation is complete.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| enable_thinking | [bool](#bool) |  | Optional. Configures the agent to return additional insights after the conversation is complete. |
-| thinking_effort | [ThinkingEffort](#ondewo.nlu.ThinkingEffort) |  | Optional. The maximum reasoning effort to be expended. This parameter allows you to control the trade-off between latency and accuracy of the reasoning process. |
-
-
-
-
-
-
-<a name="ondewo.nlu.ThinkingResult"></a>
-
-### ThinkingResult
-Represents a single step in the thinking or reasoning chain of an AI agent
-(e.g., Autogen, LangChain). Each ThinkingResult captures one atomic content
-unit produced during the agent\'s internal reasoning process.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| text | [ThinkingResult.Text](#ondewo.nlu.ThinkingResult.Text) |  | Plain text or markdown reasoning content. |
-| code | [ThinkingResult.Code](#ondewo.nlu.ThinkingResult.Code) |  | A code block produced during reasoning. |
-| tool_call | [ThinkingResult.ToolCall](#ondewo.nlu.ThinkingResult.ToolCall) |  | A tool or function call made during reasoning. |
-| tool_result | [ThinkingResult.ToolResult](#ondewo.nlu.ThinkingResult.ToolResult) |  | The result of a tool or function call. |
-| structured_data | [google.protobuf.Struct](#google.protobuf.Struct) |  | Arbitrary structured data produced during reasoning (e.g., plans, notes, JSON output). |
-| file_resource | [FileResource](#ondewo.nlu.FileResource) |  | A file resource produced or referenced during reasoning (e.g., a generated image, document, or audio clip). |
-| agent_name | [string](#string) |  | The name of the AI agent that produced this thinking step (e.g., "orchestrator", "researcher", "executor"). |
-| agent_role | [string](#string) |  | The role of the agent within the multi-agent pipeline (e.g., "assistant", "planner", "tool_executor", "critic"). |
-| step_index | [int32](#int32) |  | The 0-based index of this step within the agent\'s thinking chain. Use this to reconstruct the reasoning sequence in order. |
-| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
-| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
-| created_by | [string](#string) |  | User id in form of a valid UUID. |
-| modified_by | [string](#string) |  | User id in form of a valid UUID. |
-
-
-
-
-
-
-<a name="ondewo.nlu.ThinkingResult.Code"></a>
-
-### ThinkingResult.Code
-A code block produced during the agent\'s reasoning.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| language | [string](#string) |  | The programming language of the code block (e.g., "python", "javascript", "bash"). |
-| code | [string](#string) |  | The code content. |
-
-
-
-
-
-
-<a name="ondewo.nlu.ThinkingResult.Text"></a>
-
-### ThinkingResult.Text
-Plain text or markdown reasoning content produced by the agent.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| text | [string](#string) | repeated | The thinking text content (may be plain text or markdown). |
-
-
-
-
-
-
-<a name="ondewo.nlu.ThinkingResult.ToolCall"></a>
-
-### ThinkingResult.ToolCall
-A tool or function call made by the agent during its reasoning process.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| tool_name | [string](#string) |  | The name of the tool or function called. |
-| arguments | [google.protobuf.Struct](#google.protobuf.Struct) |  | The input arguments passed to the tool, serialised as a structured JSON object. |
-| call_id | [string](#string) |  | An optional unique call ID used to correlate this call with its ToolResult. |
-
-
-
-
-
-
-<a name="ondewo.nlu.ThinkingResult.ToolResult"></a>
-
-### ThinkingResult.ToolResult
-The result returned from a tool or function call.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| call_id | [string](#string) |  | The call ID linking this result back to the corresponding ToolCall. |
-| tool_name | [string](#string) |  | The name of the tool that produced this result. |
-| result | [google.protobuf.Struct](#google.protobuf.Struct) |  | The structured output returned by the tool. |
-| result_text | [string](#string) |  | Optional. A plain-text representation of the result (for display or logging). |
-
-
-
-
-
-
 <a name="ondewo.nlu.UpdateSessionCommentsRequest"></a>
 
 ### UpdateSessionCommentsRequest
@@ -10511,21 +10408,6 @@ Type of the response message.
 | MESSAGE_TYPE_UNSPECIFIED | 0 | Not specified. Should never be used. |
 | TRANSCRIPT | 1 | Message contains a (possibly partial) transcript. |
 | END_OF_SINGLE_UTTERANCE | 2 | Event indicates that the server has detected the end of the user&apos;s speech utterance and expects no additional speech. Therefore, the server will not process additional audio (although it may subsequently return additional results). The client should stop sending additional audio data, half-close the gRPC connection, and wait for any additional results until the server closes the gRPC connection. This message is only sent if <code>single_utterance</code> was set to <code>true</code>, and is not used otherwise. |
-
-
-
-<a name="ondewo.nlu.ThinkingEffort"></a>
-
-### ThinkingEffort
-Effort level for thinking in reasoning models (e.g., o1, o3). Controls the trade-off between speed and quality.
-
-| Name | Number | Description |
-| ---- | ------ | ----------- |
-| THINKING_EFFORT_UNSPECIFIED | 0 | Unspecified thinking effort. |
-| THINKING_EFFORT_MINIMAL | 1 | Minimal thinking effort. |
-| THINKING_EFFORT_LOW | 2 | Low thinking effort. |
-| THINKING_EFFORT_MEDIUM | 3 | Medium thinking effort. |
-| THINKING_EFFORT_HIGH | 4 | High thinking effort. |
 
 
 

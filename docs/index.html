@@ -2763,30 +2763,6 @@
                       </li>
                     
                       <li>
-                        <a href="#ondewo.nlu.ThinkingConfig" class="title-badge message">ThinkingConfig</a>
-                      </li>
-                    
-                      <li>
-                        <a href="#ondewo.nlu.ThinkingResult" class="title-badge message">ThinkingResult</a>
-                      </li>
-                    
-                      <li>
-                        <a href="#ondewo.nlu.ThinkingResult.Code" class="title-badge message">ThinkingResult.Code</a>
-                      </li>
-                    
-                      <li>
-                        <a href="#ondewo.nlu.ThinkingResult.Text" class="title-badge message">ThinkingResult.Text</a>
-                      </li>
-                    
-                      <li>
-                        <a href="#ondewo.nlu.ThinkingResult.ToolCall" class="title-badge message">ThinkingResult.ToolCall</a>
-                      </li>
-                    
-                      <li>
-                        <a href="#ondewo.nlu.ThinkingResult.ToolResult" class="title-badge message">ThinkingResult.ToolResult</a>
-                      </li>
-                    
-                      <li>
                         <a href="#ondewo.nlu.UpdateSessionCommentsRequest" class="title-badge message">UpdateSessionCommentsRequest</a>
                       </li>
                     
@@ -2830,10 +2806,6 @@
                     
                       <li>
                         <a href="#ondewo.nlu.StreamingRecognitionResult.MessageType" class="title-badge enum">StreamingRecognitionResult.MessageType</a>
-                      </li>
-                    
-                      <li>
-                        <a href="#ondewo.nlu.ThinkingEffort" class="title-badge enum">ThinkingEffort</a>
                       </li>
                     
                       <li>
@@ -23292,6 +23264,20 @@ Both <code>current_index-&lt;idx&gt;</code> and <code>page_size-&lt;size&gt;</co
                   <td><p>Optional. The mask to control which <code>RagDataset</code> fields get returned. </p></td>
                 </tr>
               
+                <tr>
+                  <td>orderby</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. Sort field (default: <code>create_time</code>). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>sorting_mode</td>
+                  <td><a href="#ondewo.nlu.SortingMode">SortingMode</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. Sort descending (default: <code>SORTING_MODE_DESCENDING</code>). </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -23417,6 +23403,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawler_runs/&lt;crawler_
                   <td><p>Required. Exact URL of the crawler result to retrieve. </p></td>
                 </tr>
               
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. The mask to control which RagCrawlerResult fields get returned. </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -23486,6 +23479,27 @@ Both <code>current_index-&lt;idx&gt;</code> and <code>page_size-&lt;size&gt;</co
                   <td><a href="#string">string</a></td>
                   <td>optional</td>
                   <td><p>Optional. Filter by URL substring. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. The mask to control which <code>RagCrawlerResult</code> fields get returned. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>orderby</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. Sort field (default: <code>last_crawled_date</code>). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>sorting_mode</td>
+                  <td><a href="#ondewo.nlu.SortingMode">SortingMode</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. Sort descending. </p></td>
                 </tr>
               
             </tbody>
@@ -23636,6 +23650,13 @@ Default: <code>log_entry_timestamp</code>. </p></td>
                   <td><a href="#ondewo.nlu.SortingMode">SortingMode</a></td>
                   <td>optional</td>
                   <td><p>Optional. Sort descending. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. The mask to control which <code>LogEntry</code> fields get returned. </p></td>
                 </tr>
               
             </tbody>
@@ -23989,6 +24010,13 @@ Both <code>current_index-&lt;idx&gt;</code> and <code>page_size-&lt;size&gt;</co
                   <td><p>Optional. Sort descending. </p></td>
                 </tr>
               
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. The Mask to control which RagCrawler fields get returned for each crawler in the list response. </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -24101,12 +24129,47 @@ Both <code>current_index-&lt;idx&gt;</code> and <code>page_size-&lt;size&gt;</co
                   <td>desc</td>
                   <td><a href="#bool">bool</a></td>
                   <td>optional</td>
-                  <td><p>Optional. Sort descending (default: <code>true</code>). </p></td>
+                  <td><p><strong>Deprecated.</strong> Optional. Sort descending (default: <code>true</code>). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>sorting_mode</td>
+                  <td><a href="#ondewo.nlu.SortingMode">SortingMode</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. Specify whether to sort ascending or descending (default: ascending). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. The mask to control which <code>RagDataset</code> fields get returned. </p></td>
                 </tr>
               
             </tbody>
           </table>
 
+          
+            
+            
+            <h4>Fields with deprecated option</h4>
+            <table>
+              <thead>
+                <tr>
+                  <td>Name</td>
+                  <td>Option</td>
+                </tr>
+              </thead>
+              <tbody>
+              
+                <tr>
+                  <td>desc</td>
+                  <td><p>true</p></td>
+                </tr>
+              
+              </tbody>
+            </table>
+            
           
 
         
@@ -24192,7 +24255,7 @@ Both <code>current_index-&lt;idx&gt;</code> and <code>page_size-&lt;size&gt;</co
                   <td>desc</td>
                   <td><a href="#bool">bool</a></td>
                   <td>optional</td>
-                  <td><p>Optional. Sort in descending order (default: <code>true</code>). </p></td>
+                  <td><p><strong>Deprecated.</strong> Optional. Sort in descending order (default: <code>true</code>). </p></td>
                 </tr>
               
                 <tr>
@@ -24237,9 +24300,44 @@ Both <code>current_index-&lt;idx&gt;</code> and <code>page_size-&lt;size&gt;</co
                   <td><p>Optional. Metadata filter condition to restrict results based on document metadata.<br> </p></td>
                 </tr>
               
+                <tr>
+                  <td>sorting_mode</td>
+                  <td><a href="#ondewo.nlu.SortingMode">SortingMode</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. Specify whether to sort ascending or descending (default: ascending). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. The mask to control which <code>RagDocument</code> fields get returned. </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
+          
+            
+            
+            <h4>Fields with deprecated option</h4>
+            <table>
+              <thead>
+                <tr>
+                  <td>Name</td>
+                  <td>Option</td>
+                </tr>
+              </thead>
+              <tbody>
+              
+                <tr>
+                  <td>desc</td>
+                  <td><p>true</p></td>
+                </tr>
+              
+              </tbody>
+            </table>
+            
           
 
         
@@ -24694,6 +24792,13 @@ Higher values favor vector similarity, lower values favor keyword matching. </p>
                   <td><p>Optional. Extract additional keywords from the query to improve retrieval. </p></td>
                 </tr>
               
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. The mask to control which <code>RagChunk</code> fields get returned. </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -24988,6 +25093,20 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td><p>Optional. Minimum 0. Maximum 100. PageRank value. </p></td>
                 </tr>
               
+                <tr>
+                  <td>update_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. FieldMask to specify which fields to update. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. The mask to control which <code>RagDataset</code> fields get returned. </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -25067,6 +25186,20 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
                   <td></td>
                   <td><p>Optional. Custom metadata fields for document-specific metadata (replaces existing metadata). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>update_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. FieldMask to specify which fields to update. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. The mask to control which <code>RagDocument</code> fields get returned. </p></td>
                 </tr>
               
             </tbody>
@@ -29329,13 +29462,6 @@ This field can also be used for a customized tracking id or tag id </p></td>
                   <td><p>transcriptions of the user input sorted by score </p></td>
                 </tr>
               
-                <tr>
-                  <td>thinking_config</td>
-                  <td><a href="#ondewo.nlu.ThinkingConfig">ThinkingConfig</a></td>
-                  <td></td>
-                  <td><p>Optional. Configures the thinking features of agents in DetectIntent and StreamingDetectIntent. </p></td>
-                </tr>
-              
             </tbody>
           </table>
 
@@ -29497,15 +29623,6 @@ for a list of the currently supported language codes. </p></td>
                   <td><a href="#ondewo.nlu.FileResource">FileResource</a></td>
                   <td>repeated</td>
                   <td><p>Generated or attached files, e.g., llm generates a picture or file attachment </p></td>
-                </tr>
-              
-                <tr>
-                  <td>thinking_results</td>
-                  <td><a href="#ondewo.nlu.ThinkingResult">ThinkingResult</a></td>
-                  <td>repeated</td>
-                  <td><p>The thinking or reasoning steps produced by an AI agent (e.g., Autogen, LangChain)
-during the processing of the query. Each entry captures one atomic step of the
-agent's internal reasoning chain. </p></td>
                 </tr>
               
             </tbody>
@@ -30830,289 +30947,6 @@ do not necessarily need to specify the same language. </p></td>
 
         
       
-        <h3 id="ondewo.nlu.ThinkingConfig" class="title-badge message">ThinkingConfig</h3>
-        <p>Configures the agent to return additional insights after the conversation is complete.</p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>enable_thinking</td>
-                  <td><a href="#bool">bool</a></td>
-                  <td></td>
-                  <td><p>Optional. Configures the agent to return additional insights after the
-conversation is complete. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>thinking_effort</td>
-                  <td><a href="#ondewo.nlu.ThinkingEffort">ThinkingEffort</a></td>
-                  <td></td>
-                  <td><p>Optional. The maximum reasoning effort to be expended. This parameter allows you to control the trade-off 
-between latency and accuracy of the reasoning process. </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="ondewo.nlu.ThinkingResult" class="title-badge message">ThinkingResult</h3>
-        <p>Represents a single step in the thinking or reasoning chain of an AI agent</p><p>(e.g., Autogen, LangChain). Each ThinkingResult captures one atomic content</p><p>unit produced during the agent\'s internal reasoning process.</p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>text</td>
-                  <td><a href="#ondewo.nlu.ThinkingResult.Text">ThinkingResult.Text</a></td>
-                  <td></td>
-                  <td><p>Plain text or markdown reasoning content. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>code</td>
-                  <td><a href="#ondewo.nlu.ThinkingResult.Code">ThinkingResult.Code</a></td>
-                  <td></td>
-                  <td><p>A code block produced during reasoning. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>tool_call</td>
-                  <td><a href="#ondewo.nlu.ThinkingResult.ToolCall">ThinkingResult.ToolCall</a></td>
-                  <td></td>
-                  <td><p>A tool or function call made during reasoning. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>tool_result</td>
-                  <td><a href="#ondewo.nlu.ThinkingResult.ToolResult">ThinkingResult.ToolResult</a></td>
-                  <td></td>
-                  <td><p>The result of a tool or function call. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>structured_data</td>
-                  <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
-                  <td></td>
-                  <td><p>Arbitrary structured data produced during reasoning (e.g., plans, notes, JSON output). </p></td>
-                </tr>
-              
-                <tr>
-                  <td>file_resource</td>
-                  <td><a href="#ondewo.nlu.FileResource">FileResource</a></td>
-                  <td></td>
-                  <td><p>A file resource produced or referenced during reasoning
-(e.g., a generated image, document, or audio clip). </p></td>
-                </tr>
-              
-                <tr>
-                  <td>agent_name</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>The name of the AI agent that produced this thinking step
-(e.g., "orchestrator", "researcher", "executor"). </p></td>
-                </tr>
-              
-                <tr>
-                  <td>agent_role</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>The role of the agent within the multi-agent pipeline
-(e.g., "assistant", "planner", "tool_executor", "critic"). </p></td>
-                </tr>
-              
-                <tr>
-                  <td>step_index</td>
-                  <td><a href="#int32">int32</a></td>
-                  <td></td>
-                  <td><p>The 0-based index of this step within the agent\'s thinking chain.
-Use this to reconstruct the reasoning sequence in order. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>created_at</td>
-                  <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
-                  <td></td>
-                  <td><p>Creation date and time. Read-only field. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>modified_at</td>
-                  <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
-                  <td></td>
-                  <td><p>Modification date and time. Read-only field. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>created_by</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>User id in form of a valid UUID. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>modified_by</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>User id in form of a valid UUID. </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="ondewo.nlu.ThinkingResult.Code" class="title-badge message">ThinkingResult.Code</h3>
-        <p>A code block produced during the agent\'s reasoning.</p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>language</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>The programming language of the code block (e.g., "python", "javascript", "bash"). </p></td>
-                </tr>
-              
-                <tr>
-                  <td>code</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>The code content. </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="ondewo.nlu.ThinkingResult.Text" class="title-badge message">ThinkingResult.Text</h3>
-        <p>Plain text or markdown reasoning content produced by the agent.</p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>text</td>
-                  <td><a href="#string">string</a></td>
-                  <td>repeated</td>
-                  <td><p>The thinking text content (may be plain text or markdown). </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="ondewo.nlu.ThinkingResult.ToolCall" class="title-badge message">ThinkingResult.ToolCall</h3>
-        <p>A tool or function call made by the agent during its reasoning process.</p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>tool_name</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>The name of the tool or function called. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>arguments</td>
-                  <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
-                  <td></td>
-                  <td><p>The input arguments passed to the tool, serialised as a structured JSON object. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>call_id</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>An optional unique call ID used to correlate this call with its ToolResult. </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="ondewo.nlu.ThinkingResult.ToolResult" class="title-badge message">ThinkingResult.ToolResult</h3>
-        <p>The result returned from a tool or function call.</p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>call_id</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>The call ID linking this result back to the corresponding ToolCall. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>tool_name</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>The name of the tool that produced this result. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>result</td>
-                  <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
-                  <td></td>
-                  <td><p>The structured output returned by the tool. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>result_text</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Optional. A plain-text representation of the result (for display or logging). </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
         <h3 id="ondewo.nlu.UpdateSessionCommentsRequest" class="title-badge message">UpdateSessionCommentsRequest</h3>
         <p>This message is a request to update a session comment</p>
 
@@ -31565,47 +31399,6 @@ additional results). The client should stop sending additional audio
 data, half-close the gRPC connection, and wait for any additional results
 until the server closes the gRPC connection. This message is only sent if
 <code>single_utterance</code> was set to <code>true</code>, and is not used otherwise.</p></td>
-              </tr>
-            
-          </tbody>
-        </table>
-      
-        <h3 id="ondewo.nlu.ThinkingEffort" class="title-badge enum">ThinkingEffort</h3>
-        <p>Effort level for thinking in reasoning models (e.g., o1, o3). Controls the trade-off between speed and quality.</p>
-        <table class="enum-table">
-          <thead>
-            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
-          </thead>
-          <tbody>
-            
-              <tr>
-                <td>THINKING_EFFORT_UNSPECIFIED</td>
-                <td>0</td>
-                <td><p>Unspecified thinking effort.</p></td>
-              </tr>
-            
-              <tr>
-                <td>THINKING_EFFORT_MINIMAL</td>
-                <td>1</td>
-                <td><p>Minimal thinking effort.</p></td>
-              </tr>
-            
-              <tr>
-                <td>THINKING_EFFORT_LOW</td>
-                <td>2</td>
-                <td><p>Low thinking effort.</p></td>
-              </tr>
-            
-              <tr>
-                <td>THINKING_EFFORT_MEDIUM</td>
-                <td>3</td>
-                <td><p>Medium thinking effort.</p></td>
-              </tr>
-            
-              <tr>
-                <td>THINKING_EFFORT_HIGH</td>
-                <td>4</td>
-                <td><p>High thinking effort.</p></td>
               </tr>
             
           </tbody>
