@@ -254,6 +254,9 @@ message RagCreateDatasetRequest {
     // Optional. Configuration settings for the dataset parser. The used fields vary depending on the selected <code>chunk_method</code>.
     RagParserConfig parser_config = 7;
 
+    // Optional if <code>dataset_default_embedding_ccai_service_name</code> is set in the ONDEWO config, otherwise mandatory. CCAI service to use for embedding the documents in the dataset.
+    string embedding_ccai_service_name = 8;
+
 }
 
 // Chunking method for documents. See <a href="https://ragflow.io/docs/dev/configure_knowledge_base#select-chunking-method">https://ragflow.io/docs/dev/configure_knowledge_base#select-chunking-method</a> for details.
@@ -1078,6 +1081,9 @@ message RagRetrievalRequest {
 
     // Optional. Extract additional keywords from the query to improve retrieval.
     optional bool keyword = 14;
+
+    // Optional. Rerank model used to refine the initial retrieval scores. If not provided, the default model is used (if one is set). If empty, the results are not reranked.
+    optional string rerank_ccai_service_name = 15;
 
 }
 
