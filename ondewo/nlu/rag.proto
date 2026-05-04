@@ -517,6 +517,9 @@ message RagUpdateDatasetRequest {
     // Optional. Minimum 0. Maximum 100. PageRank value.
     optional int32 pagerank = 9;
 
+    // Optional. CCAI service to use for embedding the documents in the dataset.
+    string embedding_ccai_service_name = 10;
+
 }
 
 // Request message for deleting one or more of a RAGFlow resource.
