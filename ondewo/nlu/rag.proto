@@ -576,7 +576,20 @@ message RagListDatasetsRequest {
     // Optional. Filter by dataset name.
     string name = 5;
 
-    // Optional. Sort field. Can be <code>create_time</code> or <code>update_time</code> (default: <code>create_time</code>).
+    // Optional. Sort field. Can be one of
+    // <ul>
+    //     <li><code>id</code></li>
+    //     <li><code>name</code></li>
+    //     <li><code>description</code></li>
+    //     <li><code>document_count</code></li>
+    //     <li><code>token_num</code></li>
+    //     <li><code>chunk_count</code></li>
+    //     <li><code>chunk_method</code></li>
+    //     <li><code>pagerank</code></li>
+    //     <li><code>create_time</code></li>
+    //     <li><code>update_time</code></li>
+    // </ul>
+    // (default: <code>create_time</code>).
     string orderby = 6;
 
     // Optional. Sort descending (default: <code>true</code>).
