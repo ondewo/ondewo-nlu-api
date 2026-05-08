@@ -7973,7 +7973,7 @@ Request message for listing datasets with pagination and filtering.
 <ul> <li><code> </code> (empty string/missing value) - index 0, page size 10</li> <li><code>current_index-3</code> - index 3, page size 10</li> <li><code>page_size-20</code> - index 0, page size 20</li> <li><code>current_index-3--page_size-20</code> - index 3, page size 20</li> </ul> |
 | id | [string](#string) |  | Optional. Filter by dataset ID. |
 | name | [string](#string) |  | Optional. Filter by dataset name. |
-| orderby | [string](#string) |  | Optional. Sort field. Can be <code>create_time</code> or <code>update_time</code> (default: <code>create_time</code>). |
+| orderby | [string](#string) |  | Optional. Sort field. Can be one of <ul> <li><code>id</code></li> <li><code>name</code></li> <li><code>description</code></li> <li><code>document_count</code></li> <li><code>token_num</code></li> <li><code>chunk_count</code></li> <li><code>chunk_method</code></li> <li><code>pagerank</code></li> <li><code>create_time</code></li> <li><code>update_time</code></li> </ul> (default: <code>create_time</code>). |
 | desc | [bool](#bool) | optional | **Deprecated.** Optional. Sort descending (default: <code>true</code>). |
 | sorting_mode | [SortingMode](#ondewo.nlu.SortingMode) | optional | Optional. Specify whether to sort ascending or descending (default: ascending). |
 | field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) | optional | Optional. The mask to control which <code>RagDataset</code> fields get returned. |
