@@ -255,7 +255,7 @@ message RagCreateDatasetRequest {
     RagParserConfig parser_config = 7;
 
     // Optional if <code>dataset_default_embedding_ccai_service_name</code> is set in the ONDEWO config, otherwise mandatory. CCAI service to use for embedding the documents in the dataset.
-    string embedding_ccai_service_name = 8;
+    string embedding_model_ccai_service_name = 8;
 
 }
 
@@ -524,7 +524,7 @@ message RagUpdateDatasetRequest {
     optional google.protobuf.FieldMask field_mask = 11;
 
     // Optional. CCAI service to use for embedding the documents in the dataset.
-    string embedding_ccai_service_name = 12;
+    string embedding_model_ccai_service_name = 12;
 
 }
 
@@ -1126,7 +1126,7 @@ message RagRetrievalRequest {
     optional google.protobuf.FieldMask field_mask = 15;
 
     // Optional. Rerank model used to refine the initial retrieval scores. If not provided, the default model is used (if one is set). If empty, the results are not reranked.
-    optional string rerank_ccai_service_name = 16;
+    optional string rerank_model_ccai_service_name = 16;
 
 }
 
