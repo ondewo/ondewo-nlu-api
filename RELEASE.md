@@ -2,6 +2,14 @@
 
 *****************
 
+## Release ONDEWO NLU API 6.9.0
+
+### Improvements
+
+* [[OND211-2380]](https://ondewo.atlassian.net/browse/OND211-2380) Added additional fields to `RagCreateDataset`, `RagUpdateDataset`, and `RagRetrieval` to allow the user to configure the embedding/rerank models
+
+*****************
+
 ## Release ONDEWO NLU API 6.8.0
 
 ### Improvements
