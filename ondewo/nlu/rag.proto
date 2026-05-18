@@ -1185,9 +1185,6 @@ message RagChunk {
     // Similarity score between <code>0.0</code> and <code>1.0</code> (only populated in retrieval responses).
     optional float similarity = 11;
 
-    // Parent document file name.
-    string document_name = 12;
-
 }
 
 // Aggregated document retrieval results containing how many chunks of the given document where retrieved
