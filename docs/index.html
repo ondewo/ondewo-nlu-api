@@ -22278,6 +22278,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td><p>Optional. Configuration settings for the dataset parser. The used fields vary depending on the selected <code>chunk_method</code>. </p></td>
                 </tr>
               
+                <tr>
+                  <td>embedding_model_ccai_service_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional if <code>dataset_default_embedding_ccai_service_name</code> is set in the ONDEWO config, otherwise mandatory. CCAI service to use for embedding the documents in the dataset. </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -24812,6 +24819,13 @@ Higher values favor vector similarity, lower values favor keyword matching. </p>
                   <td><p>Optional. The mask to control which <code>RagChunk</code> fields get returned. </p></td>
                 </tr>
               
+                <tr>
+                  <td>rerank_model_ccai_service_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. Rerank model used to refine the initial retrieval scores. If not provided, the default model is used (if one is set). If empty, the results are not reranked. </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -25118,6 +25132,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
                   <td>optional</td>
                   <td><p>Optional. The mask to control which <code>RagDataset</code> fields get returned. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>embedding_model_ccai_service_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. CCAI service to use for embedding the documents in the dataset. </p></td>
                 </tr>
               
             </tbody>

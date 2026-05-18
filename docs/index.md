@@ -7297,6 +7297,7 @@ Request message for creating a new dataset.
 | avatar | [string](#string) |  | Optional. Base64-encoded avatar image in the format <code>"data:image/[png|jpeg];base64,&lt;base64_string&gt;"</code>. Maximum 65,535 characters. |
 | chunk_method | [RagChunkMethod](#ondewo.nlu.RagChunkMethod) |  | Optional. Default chunking method for documents in this dataset. |
 | parser_config | [RagParserConfig](#ondewo.nlu.RagParserConfig) |  | Optional. Configuration settings for the dataset parser. The used fields vary depending on the selected <code>chunk_method</code>. |
+| embedding_model_ccai_service_name | [string](#string) |  | Optional if <code>dataset_default_embedding_ccai_service_name</code> is set in the ONDEWO config, otherwise mandatory. CCAI service to use for embedding the documents in the dataset. |
 
 
 
@@ -8186,6 +8187,7 @@ Both <code>current_index-&lt;idx&gt;</code> and <code>page_size-&lt;size&gt;</co
 | highlight | [bool](#bool) | optional | Optional. Whether to highlight matched content in the returned chunks. |
 | keyword | [bool](#bool) | optional | Optional. Extract additional keywords from the query to improve retrieval. |
 | field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) | optional | Optional. The mask to control which <code>RagChunk</code> fields get returned. |
+| rerank_model_ccai_service_name | [string](#string) | optional | Optional. Rerank model used to refine the initial retrieval scores. If not provided, the default model is used (if one is set). If empty, the results are not reranked. |
 
 
 
@@ -8302,6 +8304,7 @@ The same field constraints as for <code>RagCreateDatasetRequest</code> apply her
 | pagerank | [int32](#int32) | optional | Optional. Minimum 0. Maximum 100. PageRank value. |
 | update_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) | optional | Optional. FieldMask to specify which fields to update. |
 | field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) | optional | Optional. The mask to control which <code>RagDataset</code> fields get returned. |
+| embedding_model_ccai_service_name | [string](#string) |  | Optional. CCAI service to use for embedding the documents in the dataset. |
 
 
 
