@@ -463,6 +463,9 @@ message RagDataset {
     // Last update date and time.
     google.protobuf.Timestamp update_time = 13;
 
+    // CCAI service name of the embedding model used by this dataset.
+    string embedding_model_ccai_service_name = 14;
+
 }
 
 // Parsing status statistics of all documents in a dataset
