@@ -124,6 +124,9 @@ message OperationMetadata {
 
         // remove a rag crawler result from a dataset
         REMOVE_RAG_CRAWLER_RESULT_FROM_DATASET = 12;
+
+        // change the embedding model of dataset that already contains parsed documents
+        CHANGE_DATASET_EMBEDDING_MODEL = 13;
     }
 
     // name of the host where the operation was executed
