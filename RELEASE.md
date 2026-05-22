@@ -2,6 +2,14 @@
 
 *****************
 
+## Release ONDEWO NLU API 6.10.0
+
+### Improvements
+
+* [[OND211-2380]](https://ondewo.atlassian.net/browse/OND211-2380) Add new Operation type and return embedding model with datasets.
+
+*****************
+
 ## Release ONDEWO NLU API 6.9.0
 
 ### Improvements
