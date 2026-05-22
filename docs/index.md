@@ -6364,6 +6364,7 @@ It can be creating, importing, exporting, deleting, restoring, building cache, t
 | RUN_RAG_CRAWLER | 10 | run a rag crawler |
 | ADD_RAG_CRAWLER_RESULT_TO_DATASET | 11 | add a rag crawler result to a dataset |
 | REMOVE_RAG_CRAWLER_RESULT_FROM_DATASET | 12 | remove a rag crawler result from a dataset |
+| CHANGE_DATASET_EMBEDDING_MODEL | 13 | change the embedding model of dataset that already contains parsed documents |
 
 
 
@@ -7325,6 +7326,7 @@ Dataset containing documents for RAG.
 | parsing_status | [RagDatasetParsingStatus](#ondewo.nlu.RagDatasetParsingStatus) |  | Parsing status of all documents in the dataset. Might be empty if the system failed to get the parsing statistics. |
 | create_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. |
 | update_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Last update date and time. |
+| embedding_model_ccai_service_name | [string](#string) |  | CCAI service name of the embedding model used by this dataset. |
 
 
 

@@ -19571,6 +19571,12 @@ The Training phrases field is populated with only a few entries and no annotatio
                 <td><p>remove a rag crawler result from a dataset</p></td>
               </tr>
             
+              <tr>
+                <td>CHANGE_DATASET_EMBEDDING_MODEL</td>
+                <td>13</td>
+                <td><p>change the embedding model of dataset that already contains parsed documents</p></td>
+              </tr>
+            
           </tbody>
         </table>
       
@@ -22391,6 +22397,13 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
                   <td></td>
                   <td><p>Last update date and time. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>embedding_model_ccai_service_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>CCAI service name of the embedding model used by this dataset. </p></td>
                 </tr>
               
             </tbody>
