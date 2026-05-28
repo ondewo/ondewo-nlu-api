@@ -431,6 +431,13 @@ message GetLlmEvaluationDatasetRequest {
     // Optional. The mask to control which fields will be filled with data.
     // Example: paths=["dataset.name", "dataset.llm_evaluation_examples"]
     google.protobuf.FieldMask field_mask = 2;
+
+    // Project owning the dataset.
+    // Format: <code>projects/&lt;project_uuid&gt;</code>.
+    string parent = 3;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 4;
 }
 
 // Request to list evaluation datasets within a project.
@@ -476,12 +483,26 @@ message UpdateLlmEvaluationDatasetRequest {
     // Optional. The mask to control which fields will be filled with data on the
     // returned dataset.
     google.protobuf.FieldMask field_mask = 3;
+
+    // Project owning the dataset.
+    // Format: <code>projects/&lt;project_uuid&gt;</code>.
+    string parent = 4;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 5;
 }
 
 // Request to delete a dataset and all owned examples.
 message DeleteLlmEvaluationDatasetRequest {
     // Dataset to delete.
     string dataset_id = 1;
+
+    // Project owning the dataset.
+    // Format: <code>projects/&lt;project_uuid&gt;</code>.
+    string parent = 2;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 3;
 }
 
 // endregion dataset RPC messages
@@ -495,6 +516,13 @@ message AddLlmEvaluationExampleRequest {
 
     // Example payload to append.
     LlmEvaluationExample llm_evaluation_example = 2;
+
+    // Project owning the dataset.
+    // Format: <code>projects/&lt;project_uuid&gt;</code>.
+    string parent = 3;
+
+    // BCP-47 language-code scope (required, must match the dataset's).
+    string language_code = 4;
 }
 
 // Request to append multiple examples to an existing dataset.
@@ -504,6 +532,13 @@ message AddLlmEvaluationExamplesRequest {
 
     // Examples to append.
     repeated LlmEvaluationExample llm_evaluation_examples = 2;
+
+    // Project owning the dataset.
+    // Format: <code>projects/&lt;project_uuid&gt;</code>.
+    string parent = 3;
+
+    // BCP-47 language-code scope (required, must match the dataset's).
+    string language_code = 4;
 }
 
 // Response for AddExamples.
@@ -519,6 +554,13 @@ message GetLlmEvaluationExampleRequest {
 
     // Optional. The mask to control which fields will be filled with data.
     google.protobuf.FieldMask field_mask = 2;
+
+    // Project owning the example.
+    // Format: <code>projects/&lt;project_uuid&gt;</code>.
+    string parent = 3;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 4;
 }
 
 // Request to list examples in a dataset.
@@ -531,6 +573,13 @@ message ListLlmEvaluationExamplesRequest {
 
     // Optional. The mask to control which fields will be filled with data.
     google.protobuf.FieldMask field_mask = 3;
+
+    // Project owning the dataset.
+    // Format: <code>projects/&lt;project_uuid&gt;</code>.
+    string parent = 4;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 5;
 }
 
 // Response for ListExamples.
@@ -553,12 +602,26 @@ message UpdateLlmEvaluationExampleRequest {
     // Optional. The mask to control which fields will be filled with data on the
     // returned example.
     google.protobuf.FieldMask field_mask = 3;
+
+    // Project owning the example.
+    // Format: <code>projects/&lt;project_uuid&gt;</code>.
+    string parent = 4;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 5;
 }
 
 // Request to delete an example.
 message DeleteLlmEvaluationExampleRequest {
     // Example to delete.
     string example_id = 1;
+
+    // Project owning the example.
+    // Format: <code>projects/&lt;project_uuid&gt;</code>.
+    string parent = 2;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 3;
 }
 
 // endregion example RPC messages
@@ -607,6 +670,13 @@ message GetLlmEvaluationExperimentRequest {
 
     // Optional. The mask to control which fields will be filled with data.
     google.protobuf.FieldMask field_mask = 2;
+
+    // Project owning the experiment.
+    // Format: <code>projects/&lt;project_uuid&gt;</code>.
+    string parent = 3;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 4;
 }
 
 // Request to list experiments in a project, optionally scoped to a dataset.
@@ -656,18 +726,39 @@ message UpdateLlmEvaluationExperimentRequest {
     // Optional. The mask to control which fields will be filled with data on the
     // returned experiment.
     google.protobuf.FieldMask field_mask = 3;
+
+    // Project owning the experiment.
+    // Format: <code>projects/&lt;project_uuid&gt;</code>.
+    string parent = 4;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 5;
 }
 
 // Request to delete an experiment.
 message DeleteLlmEvaluationExperimentRequest {
     // Experiment to delete.
     string experiment_id = 1;
+
+    // Project owning the experiment.
+    // Format: <code>projects/&lt;project_uuid&gt;</code>.
+    string parent = 2;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 3;
 }
 
 // Request to cancel a running experiment.
 message CancelLlmEvaluationExperimentRequest {
     // Experiment to cancel.
     string experiment_id = 1;
+
+    // Project owning the experiment.
+    // Format: <code>projects/&lt;project_uuid&gt;</code>.
+    string parent = 2;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 3;
 }
 
 // Request to compare two-or-more experiments.
@@ -677,6 +768,13 @@ message CompareLlmEvaluationExperimentsRequest {
 
     // Optional baseline used for delta computation.
     string baseline_experiment_id = 2;
+
+    // Project owning the experiments.
+    // Format: <code>projects/&lt;project_uuid&gt;</code>.
+    string parent = 3;
+
+    // BCP-47 language-code scope (required, all experiments must share the same).
+    string language_code = 4;
 }
 
 // endregion experiment RPC messages
@@ -694,6 +792,13 @@ message SubmitLlmFeedbackRequest {
 
     // Feedback payload.
     LlmFeedback llm_feedback = 3;
+
+    // Project owning the experiment.
+    // Format: <code>projects/&lt;project_uuid&gt;</code>.
+    string parent = 4;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 5;
 }
 
 // Request to list feedback records, optionally filtered.
@@ -715,6 +820,13 @@ message ListLlmFeedbackRequest {
 
     // Optional. The mask to control which fields will be filled with data.
     google.protobuf.FieldMask field_mask = 6;
+
+    // Project owning the feedback records.
+    // Format: <code>projects/&lt;project_uuid&gt;</code>.
+    string parent = 7;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 8;
 }
 
 // Response to ListFeedback.
@@ -730,6 +842,13 @@ message ListLlmFeedbackResponse {
 message DeleteLlmFeedbackRequest {
     // Feedback record to delete.
     string feedback_id = 1;
+
+    // Project owning the feedback.
+    // Format: <code>projects/&lt;project_uuid&gt;</code>.
+    string parent = 2;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 3;
 }
 
 // endregion feedback RPC messages
