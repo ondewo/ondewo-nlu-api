@@ -1158,22 +1158,17 @@ enum SessionsReportType {
     // provider surfaces extended thinking).
     SESSION_LLM_THINKING = 20;
 
-    // Enum value 21 reserved (previously SESSION_LLM_COST, removed in
-    // OND211-2396 — USD cost tracking is no longer collected).
-    reserved 21;
-    reserved "SESSION_LLM_COST";
-
     // Finish-reason distribution across sessions in scope (<code>stop</code>,
     // <code>length</code>, <code>tool_calls</code>, <code>content_filter</code>,
     // <code>error</code>, ...).
-    SESSION_LLM_FINISH_REASONS = 22;
+    SESSION_LLM_FINISH_REASONS = 21;
 
     // LLM call latency aggregates (p50 / p95 / p99, time-to-first-token).
-    SESSION_LLM_LATENCY = 23;
+    SESSION_LLM_LATENCY = 22;
 
     // RAG-specific metrics (retrieval hit-rate, context precision, citation
     // overlap) aggregated across sessions in scope.
-    SESSION_LLM_RAG_METRICS = 24;
+    SESSION_LLM_RAG_METRICS = 23;
 
 }
 

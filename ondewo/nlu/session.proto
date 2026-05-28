@@ -727,17 +727,12 @@ message LlmTelemetry {
     int32 reflection_iterations = 42;
     string termination_reason = 43;
 
-    // Field 44 reserved (previously cost_usd, removed in OND211-2396 — USD cost
-    // tracking is no longer collected). Do not reuse this tag.
-    reserved 44;
-    reserved "cost_usd";
-
     // Join key linking this LLM call to an evaluator run (see llm_evaluation.proto).
-    string evaluator_runs_join_key = 45;
+    string evaluator_runs_join_key = 44;
 
     // Immediate inline feedback recorded inside the turn (e.g. self-grading by a
     // reflection agent). Each entry is a single LlmFeedback record.
-    repeated LlmFeedback llm_feedbacks = 46;
+    repeated LlmFeedback llm_feedbacks = 45;
 }
 
 // Aggregated telemetry across all LLM calls in one DetectIntent turn.
