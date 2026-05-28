@@ -146,6 +146,12 @@ message LlmEvaluationDataset {
     // Project owning the dataset.
     // Format: <code>projects/&lt;project_uuid&gt;</code>.
     string parent = 10;
+
+    // BCP-47 language code (e.g. <code>"en"</code>, <code>"de"</code>, <code>"en-US"</code>)
+    // identifying which language the dataset was authored for. Datasets are
+    // scoped per (project, language_code) — the same dataset name may exist
+    // independently per language.
+    string language_code = 11;
 }
 
 // A single example in an evaluation dataset.
@@ -170,6 +176,13 @@ message LlmEvaluationExample {
 
     // User id of the example creator.
     string created_by = 7;
+
+    // Project owning the example (denormalized from parent dataset for cheap
+    // per-project filtering). Format: <code>projects/&lt;project_uuid&gt;</code>.
+    string parent = 8;
+
+    // BCP-47 language code (denormalized from parent dataset for cheap filtering).
+    string language_code = 9;
 }
 
 // A single experiment run over a dataset.
@@ -229,6 +242,11 @@ message LlmEvaluationExperiment {
 
     // User id of the experiment creator.
     string created_by = 18;
+
+    // BCP-47 language code (denormalized from parent dataset). Experiments are
+    // scoped per (project, language_code); experiment name uniqueness is
+    // enforced per (project, language_code) tuple.
+    string language_code = 19;
 }
 
 // Lifecycle status of an experiment.
@@ -388,7 +406,7 @@ message CreateLlmEvaluationDatasetRequest {
     // Format: <code>projects/&lt;project_uuid&gt;</code>.
     string parent = 1;
 
-    // Human-readable dataset name (unique within the project).
+    // Human-readable dataset name (unique within the (project, language_code) tuple).
     string name = 2;
 
     // Free-form description.
@@ -399,6 +417,10 @@ message CreateLlmEvaluationDatasetRequest {
 
     // Free-form tags for grouping / filtering.
     repeated string tags = 5;
+
+    // BCP-47 language code the dataset is authored for. Required — the same
+    // dataset name may coexist across different languages.
+    string language_code = 6;
 }
 
 // Request to get a single evaluation dataset.
@@ -428,6 +450,10 @@ message ListLlmEvaluationDatasetsRequest {
 
     // Optional tag filter (returned dataset must carry every tag in the list).
     repeated string tags_filter = 5;
+
+    // Optional BCP-47 language-code filter. When set, only datasets authored
+    // for the given language are returned.
+    string language_code = 6;
 }
 
 // Response for ListDatasets.
@@ -568,6 +594,10 @@ message RunLlmEvaluationExperimentRequest {
 
     // Optional baseline experiment id for regression detection.
     string baseline_experiment_id = 9;
+
+    // BCP-47 language code the experiment runs against. Required — selects
+    // which language-scoped dataset is loaded.
+    string language_code = 10;
 }
 
 // Request to fetch a previously-run experiment.
@@ -599,6 +629,10 @@ message ListLlmEvaluationExperimentsRequest {
 
     // Optional. Substring filter on experiment name.
     string name_filter = 6;
+
+    // Optional BCP-47 language-code filter. When set, only experiments
+    // authored for the given language are returned.
+    string language_code = 7;
 }
 
 // Response for ListExperiments.
