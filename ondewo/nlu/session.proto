@@ -727,8 +727,10 @@ message LlmTelemetry {
     int32 reflection_iterations = 42;
     string termination_reason = 43;
 
-    // Computed cost in USD (TokenUsage * price-table lookup).
-    double cost_usd = 44;
+    // Field 44 reserved (previously cost_usd, removed in OND211-2396 — USD cost
+    // tracking is no longer collected). Do not reuse this tag.
+    reserved 44;
+    reserved "cost_usd";
 
     // Join key linking this LLM call to an evaluator run (see llm_evaluation.proto).
     string evaluator_runs_join_key = 45;

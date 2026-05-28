@@ -1064,7 +1064,7 @@ message GetSessionsStatisticsResponse {
     SessionsReportType type = 3;
 
     // Optional aggregate LLM telemetry summarizing the report (tokens, tool
-    // calls, thinking, costs) across all sessions matched by the request.
+    // calls, thinking) across all sessions matched by the request.
     // Populated only for LLM-typed report types (SESSION_LLM_*).
     LlmTelemetryReport llm_telemetry_report = 4;
 }
@@ -1158,9 +1158,10 @@ enum SessionsReportType {
     // provider surfaces extended thinking).
     SESSION_LLM_THINKING = 20;
 
-    // Aggregate LLM cost (USD) across sessions in scope, computed via the
-    // configured price table.
-    SESSION_LLM_COST = 21;
+    // Enum value 21 reserved (previously SESSION_LLM_COST, removed in
+    // OND211-2396 — USD cost tracking is no longer collected).
+    reserved 21;
+    reserved "SESSION_LLM_COST";
 
     // Finish-reason distribution across sessions in scope (<code>stop</code>,
     // <code>length</code>, <code>tool_calls</code>, <code>content_filter</code>,
