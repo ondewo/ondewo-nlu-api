@@ -943,6 +943,25 @@ message GetAgentStatisticsRequest {
 
     // Type of reports about the domain of the agent
     ReportType type = 4;
+
+    // Optional. Restrict LLM aggregations to specific models (e.g.
+    // <code>"claude-3-5-sonnet-20241022"</code>). Empty list = all models.
+    repeated string llm_model_filter = 5;
+
+    // Optional. Restrict LLM aggregations to specific providers
+    // (e.g. <code>"anthropic"</code>, <code>"openai"</code>). Empty list = all providers.
+    repeated string llm_provider_filter = 6;
+
+    // Optional. Restrict LLM aggregations to specific intent-agent names.
+    repeated string llm_agent_name_filter = 7;
+
+    // Optional. Group LLM aggregations by named dimensions (e.g.
+    // <code>["model_name", "provider"]</code>). Empty list = no grouping.
+    repeated string llm_group_bys = 8;
+
+    // Optional. The mask to control which fields will be filled with data on the
+    // response (e.g. paths=["llm_telemetry_report"]).
+    google.protobuf.FieldMask field_mask = 9;
 }
 
 // Response to get statistics of the agent
@@ -956,6 +975,11 @@ message GetAgentStatisticsResponse {
 
     // Type of reports about the domain of the agent
     ReportType type = 3;
+
+    // Optional aggregate LLM telemetry across all sessions / steps in scope
+    // (subject to the LLM filters in the request). Populated only when the
+    // request field_mask includes <code>llm_telemetry_report</code>.
+    LlmTelemetryReport llm_telemetry_report = 4;
 }
 
 // Type of reports about the domain of the agent
@@ -1013,6 +1037,18 @@ message GetSessionsStatisticsRequest {
 
     // SQL Query - only usable with specific SessionsReportType such as SessionsReportType.SESSION_SQL_QUERY
     string sql_query = 10;
+
+    // Optional. Restrict LLM-typed reports to specific models. Empty = all models.
+    repeated string llm_model_filter = 11;
+
+    // Optional. Restrict LLM-typed reports to specific providers. Empty = all providers.
+    repeated string llm_provider_filter = 12;
+
+    // Optional. Restrict LLM-typed reports to specific intent-agent names. Empty = all.
+    repeated string llm_agent_name_filter = 13;
+
+    // Optional. Restrict LLM-typed reports to specific tool names. Empty = all.
+    repeated string llm_tool_name_filter = 14;
 }
 
 // Report of the statistics about sessions
@@ -1026,6 +1062,11 @@ message GetSessionsStatisticsResponse {
 
     // Type of reports about the domain of the agent
     SessionsReportType type = 3;
+
+    // Optional aggregate LLM telemetry summarizing the report (tokens, tool
+    // calls, thinking, costs) across all sessions matched by the request.
+    // Populated only for LLM-typed report types (SESSION_LLM_*).
+    LlmTelemetryReport llm_telemetry_report = 4;
 }
 
 // Type of reports about the domain of the agent
@@ -1104,6 +1145,34 @@ enum SessionsReportType {
 
     // report total numbers of e.g. sessions, session steps, etc.
     TOTAL_STATISTICS = 17;
+
+    // Aggregate LLM token usage (input / output / cache) across sessions in scope.
+    // Supports SessionFilter to filter and the request's <code>llm_*_filter</code> fields
+    // to restrict to specific models / providers / agents.
+    SESSION_LLM_TOKEN_USAGE = 18;
+
+    // Tool-call breakdown across sessions in scope (counts, durations, error rate).
+    SESSION_LLM_TOOL_CALLS = 19;
+
+    // Thinking-token / duration aggregates across sessions in scope (where the
+    // provider surfaces extended thinking).
+    SESSION_LLM_THINKING = 20;
+
+    // Aggregate LLM cost (USD) across sessions in scope, computed via the
+    // configured price table.
+    SESSION_LLM_COST = 21;
+
+    // Finish-reason distribution across sessions in scope (<code>stop</code>,
+    // <code>length</code>, <code>tool_calls</code>, <code>content_filter</code>,
+    // <code>error</code>, ...).
+    SESSION_LLM_FINISH_REASONS = 22;
+
+    // LLM call latency aggregates (p50 / p95 / p99, time-to-first-token).
+    SESSION_LLM_LATENCY = 23;
+
+    // RAG-specific metrics (retrieval hit-rate, context precision, citation
+    // overlap) aggregated across sessions in scope.
+    SESSION_LLM_RAG_METRICS = 24;
 
 }
 
