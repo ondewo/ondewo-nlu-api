@@ -131,84 +131,98 @@ service Sessions {
 
     // *** SESSION-LABEL RELATED ENDPOINTS *** //
 
+    // Returns the list of labels attached to a single session.
     rpc ListSessionLabels (ListSessionLabelsRequest) returns (ListSessionLabelsResponse) {
         option (google.api.http) = {
             get: "/v2/{session_id=projects/*/agent/sessions/*}/labels"
         };
     };
 
+    // Returns the distinct set of labels observed across all sessions of the agent, optionally narrowed by a SessionFilter.
     rpc ListSessionLabelsOfAllSessions (ListSessionLabelsOfAllSessionsRequest) returns (ListSessionLabelsResponse) {
         option (google.api.http) = {
             get: "/v2/{parent=projects/*/agent}/sessions/labels"
         };
     };
 
+    // Returns the distinct set of language codes observed across all sessions of the agent, optionally narrowed by a SessionFilter.
     rpc ListLanguageCodesOfAllSessions (ListLanguageCodesOfAllSessionsRequest) returns (ListLanguageCodesResponse) {
         option (google.api.http) = {
             get: "/v2/{parent=projects/*/agent}/sessions/language_codes"
         };
     };
 
+    // Returns the distinct set of intents matched across all sessions of the agent, optionally narrowed by a SessionFilter.
     rpc ListMatchedIntentsOfAllSessions (ListMatchedIntentsOfAllSessionsRequest) returns (ListMatchedIntentsResponse) {
         option (google.api.http) = {
             get: "/v2/{parent=projects/*/agent}/sessions/matched_intents"
         };
     };
 
+    // Returns the distinct set of entity types recognised across all sessions of the agent, optionally narrowed by a SessionFilter.
     rpc ListMatchedEntityTypesOfAllSessions (ListMatchedEntityTypesOfAllSessionsRequest) returns (ListMatchedEntityTypesResponse) {
         option (google.api.http) = {
             get: "/v2/{parent=projects/*/agent}/sessions/matched_entity_types"
         };
     };
 
+    // Returns the distinct set of <code>user_id</code> values observed across all sessions of the agent, optionally narrowed by a SessionFilter.
     rpc ListUserIdsOfAllSessions (ListUserIdsOfAllSessionsRequest) returns (ListUserIdsResponse) {
         option (google.api.http) = {
             get: "/v2/{parent=projects/*/agent}/sessions/user_ids"
         };
     };
 
+    // Returns the distinct set of <code>identified_user_id</code> values observed across all sessions of the agent, optionally narrowed by a SessionFilter.
     rpc ListIdentifiedUserIdsOfAllSessions (ListIdentifiedUserIdsOfAllSessionsRequest) returns (ListIdentifiedUserIdsResponse) {
         option (google.api.http) = {
             get: "/v2/{parent=projects/*/agent}/sessions/identified_user_ids"
         };
     };
 
+    // Returns the distinct set of intent tags observed across all sessions of the agent, optionally narrowed by a SessionFilter.
     rpc ListTagsOfAllSessions (ListTagsOfAllSessionsRequest) returns (ListTagsResponse) {
         option (google.api.http) = {
             get: "/v2/{parent=projects/*/agent}/sessions/tags"
         };
     };
 
+    // Returns the distinct set of input contexts observed across all sessions of the agent, optionally narrowed by a SessionFilter.
     rpc ListInputContextsOfAllSessions (ListInputContextsOfAllSessionsRequest) returns (ListInputContextsResponse) {
         option (google.api.http) = {
             get: "/v2/{parent=projects/*/agent}/sessions/input_contexts"
         };
     };
 
+    // Returns the distinct set of output contexts observed across all sessions of the agent, optionally narrowed by a SessionFilter.
     rpc ListOutputContextsOfAllSessions (ListOutputContextsOfAllSessionsRequest) returns (ListOutputContextsResponse) {
         option (google.api.http) = {
             get: "/v2/{parent=projects/*/agent}/sessions/output_contexts"
         };
     };
 
+    // Returns the distinct set of <code>Intent.Message.Platform</code> values observed across all sessions of the agent, optionally narrowed by a SessionFilter.
     rpc ListPlatformsOfAllSessions (ListPlatformsOfAllSessionsRequest) returns (ListPlatformsResponse) {
         option (google.api.http) = {
             get: "/v2/{parent=projects/*/agent}/sessions/platforms"
         };
     };
 
+    // Returns the distinct set of <code>account_id</code> values observed across all sessions of the agent, optionally narrowed by a SessionFilter.
     rpc ListAccountIdsOfAllSessions (ListAccountIdsOfAllSessionsRequest) returns (ListAccountIdsResponse) {
         option (google.api.http) = {
             get: "/v2/{parent=projects/*/agent}/sessions/account_ids"
         };
     };
 
+    // Returns the distinct set of <code>property_id</code> values observed across all sessions of the agent, optionally narrowed by a SessionFilter.
     rpc ListPropertyIdsOfAllSessions (ListPropertyIdsOfAllSessionsRequest) returns (ListPropertyIdsResponse) {
         option (google.api.http) = {
             get: "/v2/{parent=projects/*/agent}/sessions/property_ids"
         };
     };
 
+    // Returns the distinct set of <code>datastream_id</code> values observed across all sessions of the agent, optionally narrowed by a SessionFilter.
     rpc ListDatastreamIdsOfAllSessions (ListDatastreamIdsOfAllSessionsRequest) returns (ListDatastreamIdsResponse) {
         option (google.api.http) = {
             get: "/v2/{parent=projects/*/agent}/sessions/datastream_ids"
@@ -216,6 +230,7 @@ service Sessions {
     };
 
 
+    // Returns the distinct set of <code>origin_id</code> values observed across all sessions of the agent, optionally narrowed by a SessionFilter.
     rpc ListOriginIdsOfAllSessions (ListOriginIdsOfAllSessionsRequest) returns (ListOriginIdsResponse) {
         option (google.api.http) = {
             get: "/v2/{parent=projects/*/agent}/sessions/origin_ids"
@@ -223,6 +238,7 @@ service Sessions {
     };
 
 
+    // Attaches the supplied labels to a session and returns the updated session.
     rpc AddSessionLabels (AddSessionLabelsRequest) returns (Session) {
         option (google.api.http) = {
             post: "/v2/{session_id=projects/*/agent/sessions/*}/labels:add"
@@ -230,6 +246,7 @@ service Sessions {
         };
     };
 
+    // Removes the supplied labels from a session and returns the updated session.
     rpc DeleteSessionLabels (DeleteSessionLabelsRequest) returns (Session) {
         option (google.api.http) = {
             post: "/v2/{session_id=projects/*/agent/sessions/*}/labels:delete"
@@ -237,6 +254,7 @@ service Sessions {
         };
     };
 
+    // Appends a comment to a session and returns the persisted comment.
     rpc AddSessionComment (AddSessionCommentRequest) returns (Comment) {
         option (google.api.http) = {
             post: "/v2/{session_id=projects/*/agent/sessions/*}/comments:add"
@@ -244,6 +262,7 @@ service Sessions {
         };
     };
 
+    // Removes the comments named in the request from a session and returns the updated session.
     rpc DeleteSessionComments (DeleteSessionCommentsRequest) returns (Session) {
         option (google.api.http) = {
             post: "/v2/{session_id=projects/*/agent/sessions/*}/comments:delete"
@@ -251,6 +270,7 @@ service Sessions {
         };
     };
 
+    // Updates an existing comment on a session and returns the updated session.
     rpc UpdateSessionComments (UpdateSessionCommentsRequest) returns (Session) {
         option (google.api.http) = {
             post: "/v2/{session_id=projects/*/agent/sessions/*}/comments:update"
@@ -258,6 +278,7 @@ service Sessions {
         };
     };
 
+    // Lists the comments attached to a session with pagination support.
     rpc ListSessionComments (ListSessionCommentsRequest) returns (ListSessionCommentsResponse) {
         option (google.api.http) = {
             get: "/v2/{session_id=projects/*/agent/sessions/*}/reviews"
@@ -480,15 +501,17 @@ message QueryParameters {
 
 }
 
+// Identifies whether a transcription was produced by an automatic
+// speech-to-text system or by a human annotator.
 enum TranscriptionType {
 
-    // unspecified
+    // Sentinel value when the source of the transcription was not specified.
     TRANSCRIPTION_TYPE_UNSPECIFIED = 0;
 
-    // Automatic transcription by a speech to text system
+    // Automatic transcription produced by a speech-to-text system.
     TRANSCRIPTION_TYPE_S2T = 1;
 
-    // Manual human transcription
+    // Manual transcription produced by a human annotator.
     TRANSCRIPTION_TYPE_HUMAN = 2;
 }
 
@@ -656,8 +679,11 @@ message LlmTelemetry {
     // Convenience duration (end_time - start_time).
     double duration_seconds = 10;
 
-    // LangChain / LangSmith run-tree identifiers.
+    // LangChain / LangSmith run identifier for this LLM call (UUID).
     string run_id = 11;
+
+    // LangChain / LangSmith identifier of the parent run that spawned this call,
+    // forming the LangSmith run tree.
     string parent_run_id = 12;
 
     // LangSmith run taxonomy: chain | llm | tool | retriever | agent | parser | prompt.
@@ -678,9 +704,13 @@ message LlmTelemetry {
     // Redaction-aware snapshot of outputs at the run boundary.
     google.protobuf.Struct outputs = 18;
 
-    // Failure surface: class, message, stack trace.
+    // Exception class name when the LLM call failed; empty on success.
     string error_class = 19;
+
+    // Exception message text when the LLM call failed; empty on success.
     string error_message = 20;
+
+    // Formatted stack trace when the LLM call failed; empty on success.
     string traceback = 21;
 
     // Streaming chunk count observed during the call.
@@ -701,30 +731,54 @@ message LlmTelemetry {
     // Index inside a with_fallbacks([...]) chain when the call succeeded.
     int32 fallback_depth = 27;
 
-    // Sampling / generation params (from request kwargs).
+    // Sampling temperature requested for the LLM call (request kwargs).
     double temperature = 28;
+
+    // Top-p (nucleus sampling) parameter requested for the LLM call.
     double top_p = 29;
+
+    // Maximum number of tokens the model was allowed to produce.
     int32 max_tokens = 30;
+
+    // Number of generations the model was asked to return (<code>n</code> in OpenAI API).
     int32 n_generations = 31;
+
+    // One finish reason per generation (e.g. <code>stop</code>, <code>length</code>, <code>tool_calls</code>, <code>content_filter</code>).
     repeated string finish_reasons = 32;
 
-    // Anthropic / Bedrock cache token counters (separate from prompt-cache TokenUsage).
+    // Number of input tokens served from the provider-side prompt cache
+    // (Anthropic <code>cache_read_input_tokens</code>).
     int32 cached_input_tokens = 33;
+
+    // Number of input tokens written to the provider-side prompt cache
+    // (Anthropic <code>cache_creation_input_tokens</code>).
     int32 cache_creation_input_tokens = 34;
 
-    // External tracing handle.
+    // LangSmith run URL for direct click-through when LangSmith tracing is active.
     string langsmith_run_url = 35;
 
-    // Autogen team metadata.
+    // Autogen team display name owning the call.
     string team_name = 36;
+
+    // Autogen team identifier (UUID).
     string team_id = 37;
 
     // Autogen agent role tag (user_proxy | assistant | tool_executor | reflection).
     string agent_role = 38;
+
+    // Name of the autogen agent that produced the message.
     string sender_agent = 39;
+
+    // Name of the autogen agent that received the message.
     string recipient_agent = 40;
+
+    // Zero-based position of this LLM call inside the autogen <code>run_stream()</code> sequence.
     int32 turn_index = 41;
+
+    // Number of reflection loops executed in <code>robust_assistant_agent</code> for this call.
     int32 reflection_iterations = 42;
+
+    // Autogen <code>TaskResult.stop_reason</code> string when surfaced.
     string termination_reason = 43;
 
     // Join key linking this LLM call to an evaluator run (see llm_evaluation.proto).
@@ -1237,10 +1291,10 @@ message Session {
 
 }
 
-// SessionStep is a single user interaction as part of a session
+// SessionStep is a single user interaction as part of a session.
 message SessionStep {
 
-    // The unique identifier for the given review
+    // The unique identifier of the session step.
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/sessionsteps/&lt;session_step_uuid&gt;</code></pre>
     string name = 1;
 
@@ -1315,17 +1369,18 @@ message DeleteSessionStepRequest {
 
 }
 
-// CreateSessionStepRequest stores a session step into the session
+// Request to append a new SessionStep to an existing session.
 message CreateSessionStepRequest {
 
-    // The unique identifier for the given review
-    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/sessionsteps/&lt;session_step_uuid&gt;</code></pre>.
+    // The unique identifier of the parent session.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre>.
     string session_id = 1;
 
-    // The session step to be added
+    // The session step to be added.
     SessionStep session_step = 2;
 
-    // field mask specifying what the request should return, e.g. only name, created_at etc.
+    // Field mask specifying which fields the returned SessionStep should carry
+    // (e.g. only <code>name</code>, <code>created_at</code>).
     google.protobuf.FieldMask field_mask = 3;
 
 }
@@ -1772,6 +1827,8 @@ message DeleteSessionRequest {
 
 // *** SESSION-REVIEW RELATED MESSAGES *** //
 
+// Request to persist a session review for a given session.
+// As a side effect, training data in ondewo-cai may also be updated.
 message CreateSessionReviewRequest {
 
     // The unique identifier for the session under review
@@ -2521,16 +2578,17 @@ message DocumentFileResource {
 
 }
 
+// Represents an image file resource (e.g., JPEG, PNG, GIF) attached to a session.
 message ImageFileResource {
 
-    // The unique identifier of the session for which the latest review should be returned
+    // The unique identifier of the image file resource.
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/images/&lt;image_uuid&gt;</code></pre>
     string name = 1;
 
     // File name of the image, e.g., MyPicture.jpg, or a user assigned display name
     string display_name = 2;
 
-    // Bytes of the audio file
+    // Raw bytes of the image file.
     bytes bytes = 3;
 
     // Creation date and time. Read-only field.
@@ -2547,9 +2605,10 @@ message ImageFileResource {
 
 }
 
+// Represents an audio file resource attached to a session (input recording or generated TTS output).
 message AudioFileResource {
 
-    // The unique identifier of the session for which the latest review should be returned
+    // The unique identifier of the audio file resource.
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/audios/&lt;audio_uuid&gt;</code></pre>
     string name = 1;
 
@@ -2584,7 +2643,7 @@ message AudioFileResource {
     // User id in form of a valid UUID.
     string modified_by = 11;
 
-    // Bytes of the audio file
+    // Display name of the audio file, e.g., MyRecording.wav, or a user-assigned label.
     string display_name = 12;
 
 }

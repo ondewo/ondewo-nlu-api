@@ -2,6 +2,17 @@
 
 *****************
 
+## Release ONDEWO NLU API 6.11.0
+
+### Improvements
+
+* [[OND211-2396]](https://ondewo.atlassian.net/browse/OND211-2396) Add LLM telemetry to `session.proto`: `TokenUsage`, `ToolCallMetadata`, `ThinkingMetadata`, `LlmTelemetry`, `LlmTelemetryReport` + six streaming `telemetry_event` messages on `StreamingDetectIntentResponse`. `llm_telemetry_report` field on `QueryResult`, `SessionStep`, `DetectIntentResponse`.
+* [[OND211-2396]](https://ondewo.atlassian.net/browse/OND211-2396) New `llm_evaluation.proto` with `LlmEvaluations` service (datasets / examples / experiments / evaluator runs / feedback / pairwise CRUD + RunExperiment / CompareExperiments).
+* [[OND211-2396]](https://ondewo.atlassian.net/browse/OND211-2396) `agent.proto` gains LLM-aware `SessionsReportType` values and `LlmTelemetryReport` on stats responses.
+* [[OND211-2396]](https://ondewo.atlassian.net/browse/OND211-2396) Snake-case-of-message-name field naming + full per-property documentation pass on `session.proto`.
+
+*****************
+
 ## Release ONDEWO NLU API 6.10.0
 
 ### Improvements
