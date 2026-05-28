@@ -31,6 +31,7 @@ syntax = "proto3";
 package ondewo.nlu;
 
 import "google/api/annotations.proto";
+import "google/protobuf/duration.proto";
 import "google/protobuf/empty.proto";
 import "google/protobuf/field_mask.proto";
 import "google/protobuf/struct.proto";
@@ -41,6 +42,7 @@ import "ondewo/nlu/common.proto";
 import "ondewo/nlu/context.proto";
 import "ondewo/nlu/intent.proto";
 import "ondewo/nlu/entity_type.proto";
+import "ondewo/nlu/llm_evaluation.proto";
 
 option cc_enable_arenas = true;
 option csharp_namespace = "Google.Cloud.Dialogflow.V2";
@@ -365,6 +367,10 @@ message DetectIntentResponse {
     // Specifies the status of the webhook request. <code>webhook_status</code>
     // is never populated in webhook requests.
     google.rpc.Status webhook_status = 3;
+
+    // Aggregated LLM telemetry — duplicated convenience copy of
+    // <code>query_result.llm_telemetry</code> for unary clients.
+    LlmTelemetryReport llm_telemetry = 4;
 }
 
 // Represents the parameters of the conversational query.
@@ -557,6 +563,252 @@ message QueryInput {
 
 }
 
+// Token usage counters for a single LLM call (or aggregate).
+message TokenUsage {
+    // Sum of input and output tokens for this call (or aggregate across calls).
+    int64 total_tokens = 1;
+
+    // Number of prompt / input tokens consumed.
+    int64 input_tokens = 2;
+
+    // Number of completion / output tokens produced.
+    int64 output_tokens = 3;
+}
+
+// Metadata for one tool call executed by the LLM.
+message ToolCallMetadata {
+    // Stable id assigned by the upstream framework (autogen / langchain).
+    string tool_call_id = 1;
+
+    // Name of the tool / function invoked.
+    string tool_name = 2;
+
+    // Wall-clock start time of the tool call.
+    google.protobuf.Timestamp start_time = 3;
+
+    // Wall-clock end time of the tool call.
+    google.protobuf.Timestamp end_time = 4;
+
+    // Convenience duration (end_time - start_time).
+    double duration_seconds = 5;
+
+    // Token attribution for this tool call when available.
+    TokenUsage tokens = 6;
+
+    // Tool arguments as a structured payload. May be omitted on incremental events.
+    google.protobuf.Struct arguments = 7;
+
+    // Tool result as a structured payload. May be omitted on incremental events.
+    google.protobuf.Struct result = 8;
+
+    // Populated only when the tool call failed; empty string on success.
+    string error_message = 9;
+}
+
+// Thinking / reasoning block emitted by the model (e.g. Anthropic extended thinking,
+// OpenAI o-series reasoning).
+message ThinkingMetadata {
+    // Token attribution for the thinking block when surfaced by the provider.
+    TokenUsage tokens = 1;
+
+    // Wall-clock start of the thinking block.
+    google.protobuf.Timestamp start_time = 2;
+
+    // Wall-clock end of the thinking block.
+    google.protobuf.Timestamp end_time = 3;
+
+    // Convenience duration (end_time - start_time).
+    double duration_seconds = 4;
+
+    // Raw thinking text. Subject to redaction depending on telemetry policy.
+    string thinking_text = 5;
+}
+
+// Telemetry for a single LLM invocation inside one DetectIntent turn.
+message LlmTelemetry {
+    // Provider tag: "autogen" | "langchain" | "openai" | "anthropic" | ...
+    string provider = 1;
+
+    // Concrete model identifier (e.g. "claude-3-5-sonnet-20241022").
+    string model_name = 2;
+
+    // intent_agent executor / agent name.
+    string agent_name = 3;
+
+    // Totals for this call.
+    TokenUsage tokens = 4;
+
+    // Tool calls observed during this LLM invocation.
+    repeated ToolCallMetadata tool_calls = 5;
+
+    // Denormalized len(tool_calls).
+    int32 tool_call_count = 6;
+
+    // Thinking block when surfaced by the model.
+    ThinkingMetadata thinking = 7;
+
+    // Wall-clock start of the LLM call.
+    google.protobuf.Timestamp start_time = 8;
+
+    // Wall-clock end of the LLM call.
+    google.protobuf.Timestamp end_time = 9;
+
+    // Convenience duration (end_time - start_time).
+    double duration_seconds = 10;
+
+    // LangChain / LangSmith run-tree identifiers.
+    string run_id = 11;
+    string parent_run_id = 12;
+
+    // LangSmith run taxonomy: chain | llm | tool | retriever | agent | parser | prompt.
+    string run_type = 13;
+
+    // Serialized component name from LangChain callbacks (e.g. "ChatOpenAI").
+    string component_name = 14;
+
+    // Tags propagated via RunnableConfig.
+    repeated string tags = 15;
+
+    // Free-form metadata propagated via RunnableConfig.
+    google.protobuf.Struct metadata = 16;
+
+    // Redaction-aware snapshot of inputs at the run boundary.
+    google.protobuf.Struct inputs = 17;
+
+    // Redaction-aware snapshot of outputs at the run boundary.
+    google.protobuf.Struct outputs = 18;
+
+    // Failure surface: class, message, stack trace.
+    string error_class = 19;
+    string error_message = 20;
+    string traceback = 21;
+
+    // Streaming chunk count observed during the call.
+    int32 streaming_chunk_count = 22;
+
+    // Time-to-first-token (start_time -> first chunk).
+    double first_token_latency_seconds = 23;
+
+    // OpenAI system_fingerprint when available.
+    string system_fingerprint = 24;
+
+    // Whether the result was served from a client-side cache.
+    bool cached = 25;
+
+    // Retry count for the underlying provider call.
+    int32 retry_count = 26;
+
+    // Index inside a with_fallbacks([...]) chain when the call succeeded.
+    int32 fallback_depth = 27;
+
+    // Sampling / generation params (from request kwargs).
+    double temperature = 28;
+    double top_p = 29;
+    int32 max_tokens = 30;
+    int32 n_generations = 31;
+    repeated string finish_reasons = 32;
+
+    // Anthropic / Bedrock cache token counters (separate from prompt-cache TokenUsage).
+    int32 cached_input_tokens = 33;
+    int32 cache_creation_input_tokens = 34;
+
+    // External tracing handle.
+    string langsmith_run_url = 35;
+
+    // Autogen team metadata.
+    string team_name = 36;
+    string team_id = 37;
+
+    // Autogen agent role tag (user_proxy | assistant | tool_executor | reflection).
+    string agent_role = 38;
+    string sender_agent = 39;
+    string recipient_agent = 40;
+    int32 turn_index = 41;
+    int32 reflection_iterations = 42;
+    string termination_reason = 43;
+
+    // Computed cost in USD (TokenUsage * price-table lookup).
+    double cost_usd = 44;
+
+    // Join key linking this LLM call to an evaluator run (see llm_evaluation.proto).
+    string evaluator_runs_join_key = 45;
+
+    // Immediate feedback recorded inside the turn (e.g. self-grading by a reflection agent).
+    repeated LlmFeedback inline_feedbacks = 46;
+}
+
+// Aggregated telemetry across all LLM calls in one DetectIntent turn.
+message LlmTelemetryReport {
+    // Summed TokenUsage across llm_calls.
+    TokenUsage tokens_total = 1;
+
+    // Sum of LlmTelemetry.tool_call_count across llm_calls.
+    int32 tool_call_count_total = 2;
+
+    // Denormalized len(llm_calls).
+    int32 llm_call_count = 3;
+
+    // Per-LLM-invocation breakdown.
+    repeated LlmTelemetry llm_calls = 4;
+
+    // Sum of LlmTelemetry.duration_seconds across llm_calls.
+    double duration_seconds_total = 5;
+}
+
+// Emitted on a streaming DetectIntent when an LLM invocation starts.
+message LlmCallStartedEvent {
+    string llm_call_id = 1;
+    string provider = 2;
+    string model_name = 3;
+    string agent_name = 4;
+    google.protobuf.Timestamp start_time = 5;
+}
+
+// Emitted on a streaming DetectIntent when an LLM invocation finishes.
+message LlmCallFinishedEvent {
+    string llm_call_id = 1;
+    google.protobuf.Timestamp end_time = 2;
+    double duration_seconds = 3;
+    TokenUsage tokens = 4;
+}
+
+// Emitted on a streaming DetectIntent when a tool call starts.
+message ToolCallStartedEvent {
+    string tool_call_id = 1;
+    string tool_name = 2;
+    google.protobuf.Struct arguments = 3;
+    google.protobuf.Timestamp start_time = 4;
+
+    // Groups events under an LlmTelemetry entry.
+    string llm_call_id = 5;
+}
+
+// Emitted on a streaming DetectIntent when a tool call finishes.
+message ToolCallFinishedEvent {
+    string tool_call_id = 1;
+    google.protobuf.Timestamp end_time = 2;
+    double duration_seconds = 3;
+    TokenUsage tokens = 4;
+    google.protobuf.Struct result = 5;
+    string error_message = 6;
+    string llm_call_id = 7;
+}
+
+// Emitted on a streaming DetectIntent for each thinking-delta chunk.
+message ThinkingDeltaEvent {
+    string llm_call_id = 1;
+    string text_delta = 2;
+    google.protobuf.Timestamp timestamp = 3;
+}
+
+// Emitted on a streaming DetectIntent when running token counts update.
+message TokenUsageUpdateEvent {
+    string llm_call_id = 1;
+
+    // Running totals for that llm_call.
+    TokenUsage tokens = 2;
+}
+
 // Represents the result of conversational query or event processing.
 message QueryResult {
 
@@ -642,6 +894,9 @@ message QueryResult {
     // Generated or attached files, e.g., llm generates a picture or file attachment
     repeated FileResource file_resources = 16;
 
+    // Aggregated LLM telemetry (tokens, tool calls, thinking) for this turn.
+    LlmTelemetryReport llm_telemetry = 17;
+
 }
 
 
@@ -705,6 +960,18 @@ message StreamingDetectIntentResponse {
 
     // Specifies the status of the webhook request.
     google.rpc.Status webhook_status = 4;
+
+    // Incremental telemetry events emitted during the turn. The final response chunk
+    // continues to carry the aggregated <code>LlmTelemetryReport</code> under
+    // <code>query_result.llm_telemetry</code>.
+    oneof telemetry_event {
+        LlmCallStartedEvent llm_call_started = 5;
+        LlmCallFinishedEvent llm_call_finished = 6;
+        ToolCallStartedEvent tool_call_started = 7;
+        ToolCallFinishedEvent tool_call_finished = 8;
+        ThinkingDeltaEvent thinking_delta = 9;
+        TokenUsageUpdateEvent token_usage_update = 10;
+    }
 
 }
 
@@ -963,6 +1230,10 @@ message SessionStep {
 
     // audio file resources associated with the session step
     repeated AudioFileResource audio_file_resources = 10;
+
+    // Aggregated LLM telemetry for this step (one entry per LLM invocation,
+    // plus turn-level totals).
+    LlmTelemetryReport llm_telemetry = 11;
 
 }
 
