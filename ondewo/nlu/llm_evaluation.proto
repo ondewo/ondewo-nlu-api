@@ -16,7 +16,6 @@ syntax = "proto3";
 
 package ondewo.nlu;
 
-import "google/api/annotations.proto";
 import "google/protobuf/field_mask.proto";
 import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
@@ -144,7 +143,7 @@ message LlmEvaluationDataset {
     string modified_by = 9;
 
     // Project owning the dataset.
-    // Format: <code>projects/&lt;project_uuid&gt;</code>.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
     string parent = 10;
 
     // BCP-47 language code (e.g. <code>"en"</code>, <code>"de"</code>, <code>"en-US"</code>)
@@ -178,7 +177,7 @@ message LlmEvaluationExample {
     string created_by = 7;
 
     // Project owning the example (denormalized from parent dataset for cheap
-    // per-project filtering). Format: <code>projects/&lt;project_uuid&gt;</code>.
+    // per-project filtering). Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
     string parent = 8;
 
     // BCP-47 language code (denormalized from parent dataset for cheap filtering).
@@ -233,7 +232,7 @@ message LlmEvaluationExperiment {
     string baseline_experiment_id = 15;
 
     // Project owning the experiment.
-    // Format: <code>projects/&lt;project_uuid&gt;</code>.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
     string parent = 16;
 
     // Current lifecycle status of the experiment (pending / running / succeeded /
@@ -331,7 +330,9 @@ message LlmFeedback {
     // "exact_match", "embedding_distance", "bleu", "rouge", "regression", ...
     string criterion = 2;
 
-    // Numeric score (0.0-1.0 by convention). Empty when the feedback is purely categorical.
+    // Numeric score (0.0-1.0 by convention). Defaults to 0.0 (proto3 has no field
+    // presence on this scalar, so an unset score and a genuine 0.0 are indistinguishable);
+    // for purely categorical feedback, rely on categorical_value rather than this field.
     double score = 3;
 
     // Categorical value when applicable ("pass" | "fail" | "yes" | "no" | tier).
@@ -403,7 +404,7 @@ message PairwiseResult {
 // Request to create a new evaluation dataset.
 message CreateLlmEvaluationDatasetRequest {
     // Project owning the dataset.
-    // Format: <code>projects/&lt;project_uuid&gt;</code>.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
     string parent = 1;
 
     // Human-readable dataset name (unique within the (project, language_code) tuple).
@@ -433,7 +434,7 @@ message GetLlmEvaluationDatasetRequest {
     google.protobuf.FieldMask field_mask = 2;
 
     // Project owning the dataset.
-    // Format: <code>projects/&lt;project_uuid&gt;</code>.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
     string parent = 3;
 
     // BCP-47 language-code scope (required).
@@ -443,7 +444,7 @@ message GetLlmEvaluationDatasetRequest {
 // Request to list evaluation datasets within a project.
 message ListLlmEvaluationDatasetsRequest {
     // Project owning the datasets.
-    // Format: <code>projects/&lt;project_uuid&gt;</code>.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
     string parent = 1;
 
     // Optional pagination token (e.g. <code>"current_index-0--page_size-20"</code>).
@@ -485,7 +486,7 @@ message UpdateLlmEvaluationDatasetRequest {
     google.protobuf.FieldMask field_mask = 3;
 
     // Project owning the dataset.
-    // Format: <code>projects/&lt;project_uuid&gt;</code>.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
     string parent = 4;
 
     // BCP-47 language-code scope (required).
@@ -498,7 +499,7 @@ message DeleteLlmEvaluationDatasetRequest {
     string dataset_id = 1;
 
     // Project owning the dataset.
-    // Format: <code>projects/&lt;project_uuid&gt;</code>.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
     string parent = 2;
 
     // BCP-47 language-code scope (required).
@@ -518,7 +519,7 @@ message AddLlmEvaluationExampleRequest {
     LlmEvaluationExample llm_evaluation_example = 2;
 
     // Project owning the dataset.
-    // Format: <code>projects/&lt;project_uuid&gt;</code>.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
     string parent = 3;
 
     // BCP-47 language-code scope (required, must match the dataset's).
@@ -534,7 +535,7 @@ message AddLlmEvaluationExamplesRequest {
     repeated LlmEvaluationExample llm_evaluation_examples = 2;
 
     // Project owning the dataset.
-    // Format: <code>projects/&lt;project_uuid&gt;</code>.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
     string parent = 3;
 
     // BCP-47 language-code scope (required, must match the dataset's).
@@ -556,7 +557,7 @@ message GetLlmEvaluationExampleRequest {
     google.protobuf.FieldMask field_mask = 2;
 
     // Project owning the example.
-    // Format: <code>projects/&lt;project_uuid&gt;</code>.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
     string parent = 3;
 
     // BCP-47 language-code scope (required).
@@ -575,7 +576,7 @@ message ListLlmEvaluationExamplesRequest {
     google.protobuf.FieldMask field_mask = 3;
 
     // Project owning the dataset.
-    // Format: <code>projects/&lt;project_uuid&gt;</code>.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
     string parent = 4;
 
     // BCP-47 language-code scope (required).
@@ -604,7 +605,7 @@ message UpdateLlmEvaluationExampleRequest {
     google.protobuf.FieldMask field_mask = 3;
 
     // Project owning the example.
-    // Format: <code>projects/&lt;project_uuid&gt;</code>.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
     string parent = 4;
 
     // BCP-47 language-code scope (required).
@@ -617,7 +618,7 @@ message DeleteLlmEvaluationExampleRequest {
     string example_id = 1;
 
     // Project owning the example.
-    // Format: <code>projects/&lt;project_uuid&gt;</code>.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
     string parent = 2;
 
     // BCP-47 language-code scope (required).
@@ -631,7 +632,7 @@ message DeleteLlmEvaluationExampleRequest {
 // Request to run a fresh experiment.
 message RunLlmEvaluationExperimentRequest {
     // Project owning the experiment.
-    // Format: <code>projects/&lt;project_uuid&gt;</code>.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
     string parent = 1;
 
     // Dataset to evaluate against.
@@ -672,7 +673,7 @@ message GetLlmEvaluationExperimentRequest {
     google.protobuf.FieldMask field_mask = 2;
 
     // Project owning the experiment.
-    // Format: <code>projects/&lt;project_uuid&gt;</code>.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
     string parent = 3;
 
     // BCP-47 language-code scope (required).
@@ -682,7 +683,7 @@ message GetLlmEvaluationExperimentRequest {
 // Request to list experiments in a project, optionally scoped to a dataset.
 message ListLlmEvaluationExperimentsRequest {
     // Project owning the experiments.
-    // Format: <code>projects/&lt;project_uuid&gt;</code>.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
     string parent = 1;
 
     // Optional. Restrict to experiments tied to a specific dataset.
@@ -728,7 +729,7 @@ message UpdateLlmEvaluationExperimentRequest {
     google.protobuf.FieldMask field_mask = 3;
 
     // Project owning the experiment.
-    // Format: <code>projects/&lt;project_uuid&gt;</code>.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
     string parent = 4;
 
     // BCP-47 language-code scope (required).
@@ -741,7 +742,7 @@ message DeleteLlmEvaluationExperimentRequest {
     string experiment_id = 1;
 
     // Project owning the experiment.
-    // Format: <code>projects/&lt;project_uuid&gt;</code>.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
     string parent = 2;
 
     // BCP-47 language-code scope (required).
@@ -754,7 +755,7 @@ message CancelLlmEvaluationExperimentRequest {
     string experiment_id = 1;
 
     // Project owning the experiment.
-    // Format: <code>projects/&lt;project_uuid&gt;</code>.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
     string parent = 2;
 
     // BCP-47 language-code scope (required).
@@ -770,7 +771,7 @@ message CompareLlmEvaluationExperimentsRequest {
     string baseline_experiment_id = 2;
 
     // Project owning the experiments.
-    // Format: <code>projects/&lt;project_uuid&gt;</code>.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
     string parent = 3;
 
     // BCP-47 language-code scope (required, all experiments must share the same).
@@ -794,7 +795,7 @@ message SubmitLlmFeedbackRequest {
     LlmFeedback llm_feedback = 3;
 
     // Project owning the experiment.
-    // Format: <code>projects/&lt;project_uuid&gt;</code>.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
     string parent = 4;
 
     // BCP-47 language-code scope (required).
@@ -822,7 +823,7 @@ message ListLlmFeedbackRequest {
     google.protobuf.FieldMask field_mask = 6;
 
     // Project owning the feedback records.
-    // Format: <code>projects/&lt;project_uuid&gt;</code>.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
     string parent = 7;
 
     // BCP-47 language-code scope (required).
@@ -844,7 +845,7 @@ message DeleteLlmFeedbackRequest {
     string feedback_id = 1;
 
     // Project owning the feedback.
-    // Format: <code>projects/&lt;project_uuid&gt;</code>.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
     string parent = 2;
 
     // BCP-47 language-code scope (required).
