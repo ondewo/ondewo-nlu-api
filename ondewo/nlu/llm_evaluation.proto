@@ -246,6 +246,10 @@ message LlmEvaluationExperiment {
     // scoped per (project, language_code); experiment name uniqueness is
     // enforced per (project, language_code) tuple.
     string language_code = 19;
+
+    // CcaiService name(s) whose LLM connection details defined the model(s) evaluated in this run
+    // (echoed from RunLlmEvaluationExperimentRequest for audit / reproducibility).
+    repeated string ccai_service_names = 20;
 }
 
 // Lifecycle status of an experiment.
@@ -662,6 +666,13 @@ message RunLlmEvaluationExperimentRequest {
     // BCP-47 language code the experiment runs against. Required — selects
     // which language-scoped dataset is loaded.
     string language_code = 10;
+
+    // Logical names of the CcaiService(s) that carry the LLM connection details (host/port/model/
+    // auth) of the model(s) under evaluation, resolved server-side — mirroring the
+    // IntentRagflowClassifier / IntentAgent <code>ccai_service_names</code> pattern. Each named
+    // service defines one LLM to evaluate; supplying several evaluates and compares multiple LLMs
+    // in a single run. Takes precedence over the free-form <code>model_name</code> label.
+    repeated string ccai_service_names = 11;
 }
 
 // Request to fetch a previously-run experiment.
