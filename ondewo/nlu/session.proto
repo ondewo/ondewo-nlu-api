@@ -586,7 +586,7 @@ message QueryInput {
 }
 
 // Token usage counters for a single LLM call (or aggregate).
-message TokenUsage {
+message LlmTokenUsage {
     // Sum of input and output tokens for this call (or aggregate across calls).
     int64 total_tokens = 1;
 
@@ -598,7 +598,7 @@ message TokenUsage {
 }
 
 // Metadata for one tool call executed by the LLM.
-message ToolCallMetadata {
+message LlmToolCallMetadata {
     // Stable id assigned by the upstream framework (autogen / langchain).
     string tool_call_id = 1;
 
@@ -615,7 +615,7 @@ message ToolCallMetadata {
     double duration_seconds = 5;
 
     // Token attribution for this tool call when available.
-    TokenUsage token_usage = 6;
+    LlmTokenUsage llm_token_usage = 6;
 
     // Tool arguments as a structured payload. May be omitted on incremental events.
     google.protobuf.Struct arguments = 7;
@@ -629,9 +629,9 @@ message ToolCallMetadata {
 
 // Thinking / reasoning block emitted by the model (e.g. Anthropic extended thinking,
 // OpenAI o-series reasoning).
-message ThinkingMetadata {
+message LlmThinkingMetadata {
     // Token attribution for the thinking block when surfaced by the provider.
-    TokenUsage token_usage = 1;
+    LlmTokenUsage llm_token_usage = 1;
 
     // Wall-clock start of the thinking block.
     google.protobuf.Timestamp start_time = 2;
@@ -658,16 +658,16 @@ message LlmTelemetry {
     string agent_name = 3;
 
     // Totals for this call.
-    TokenUsage token_usage = 4;
+    LlmTokenUsage llm_token_usage = 4;
 
     // Tool calls observed during this LLM invocation.
-    repeated ToolCallMetadata tool_call_metadatas = 5;
+    repeated LlmToolCallMetadata llm_tool_call_metadatas = 5;
 
-    // Denormalized len(tool_call_metadatas).
+    // Denormalized len(llm_tool_call_metadatas).
     int32 tool_call_count = 6;
 
     // Thinking block when surfaced by the model.
-    ThinkingMetadata thinking_metadata = 7;
+    LlmThinkingMetadata llm_thinking_metadata = 7;
 
     // Wall-clock start of the LLM call.
     google.protobuf.Timestamp start_time = 8;
@@ -784,14 +784,14 @@ message LlmTelemetry {
     string evaluator_runs_join_key = 44;
 
     // Immediate inline feedback recorded inside the turn (e.g. self-grading by a
-    // reflection agent). Each entry is a single LlmEvaluationLlmFeedback record.
-    repeated LlmEvaluationLlmFeedback llm_feedbacks = 45;
+    // reflection agent). Each entry is a single LlmEvaluationFeedback record.
+    repeated LlmEvaluationFeedback llm_evaluation_feedbacks = 45;
 }
 
 // Aggregated telemetry across all LLM calls in one DetectIntent turn.
 message LlmTelemetryReport {
-    // Summed TokenUsage across llm_telemetries.
-    TokenUsage token_usage_total = 1;
+    // Summed LlmTokenUsage across llm_telemetries.
+    LlmTokenUsage llm_token_usage = 1;
 
     // Sum of LlmTelemetry.tool_call_count across llm_telemetries.
     int32 tool_call_count_total = 2;
@@ -836,11 +836,11 @@ message LlmCallFinishedEvent {
     double duration_seconds = 3;
 
     // Final token totals for this LLM call.
-    TokenUsage token_usage = 4;
+    LlmTokenUsage llm_token_usage = 4;
 }
 
 // Emitted on a streaming DetectIntent when a tool call starts.
-message ToolCallStartedEvent {
+message LlmToolCallStartedEvent {
     // Stable id assigned by the upstream framework (autogen / langchain).
     string tool_call_id = 1;
 
@@ -858,8 +858,8 @@ message ToolCallStartedEvent {
 }
 
 // Emitted on a streaming DetectIntent when a tool call finishes.
-message ToolCallFinishedEvent {
-    // Stable id matching the matching ToolCallStartedEvent.
+message LlmToolCallFinishedEvent {
+    // Stable id matching the matching LlmToolCallStartedEvent.
     string tool_call_id = 1;
 
     // Wall-clock end time of the tool call.
@@ -869,7 +869,7 @@ message ToolCallFinishedEvent {
     double duration_seconds = 3;
 
     // Token attribution for this tool call when available.
-    TokenUsage token_usage = 4;
+    LlmTokenUsage llm_token_usage = 4;
 
     // Tool result payload (may be omitted on failure or redaction).
     google.protobuf.Struct result = 5;
@@ -882,7 +882,7 @@ message ToolCallFinishedEvent {
 }
 
 // Emitted on a streaming DetectIntent for each thinking-delta chunk.
-message ThinkingDeltaEvent {
+message LlmThinkingDeltaEvent {
     // Groups events under an LlmTelemetry entry.
     string llm_call_id = 1;
 
@@ -894,12 +894,12 @@ message ThinkingDeltaEvent {
 }
 
 // Emitted on a streaming DetectIntent when running token counts update.
-message TokenUsageUpdateEvent {
+message LlmTokenUsageUpdateEvent {
     // Groups events under an LlmTelemetry entry.
     string llm_call_id = 1;
 
     // Running totals for that llm_call.
-    TokenUsage token_usage = 2;
+    LlmTokenUsage llm_token_usage = 2;
 }
 
 // Represents the result of conversational query or event processing.
@@ -1060,10 +1060,10 @@ message StreamingDetectIntentResponse {
     oneof telemetry_event {
         LlmCallStartedEvent llm_call_started = 5;
         LlmCallFinishedEvent llm_call_finished = 6;
-        ToolCallStartedEvent tool_call_started = 7;
-        ToolCallFinishedEvent tool_call_finished = 8;
-        ThinkingDeltaEvent thinking_delta = 9;
-        TokenUsageUpdateEvent token_usage_update = 10;
+        LlmToolCallStartedEvent llm_tool_call_started = 7;
+        LlmToolCallFinishedEvent llm_tool_call_finished = 8;
+        LlmThinkingDeltaEvent llm_thinking_delta = 9;
+        LlmTokenUsageUpdateEvent llm_token_usage_update = 10;
     }
 
 }

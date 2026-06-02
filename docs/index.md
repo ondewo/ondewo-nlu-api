@@ -323,6 +323,50 @@
   
     - [Intents](#ondewo.nlu.Intents)
   
+- [ondewo/nlu/llm_evaluation.proto](#ondewo/nlu/llm_evaluation.proto)
+    - [AddLlmEvaluationExampleRequest](#ondewo.nlu.AddLlmEvaluationExampleRequest)
+    - [AddLlmEvaluationExamplesRequest](#ondewo.nlu.AddLlmEvaluationExamplesRequest)
+    - [AddLlmEvaluationExamplesResponse](#ondewo.nlu.AddLlmEvaluationExamplesResponse)
+    - [CancelLlmEvaluationExperimentRequest](#ondewo.nlu.CancelLlmEvaluationExperimentRequest)
+    - [CompareLlmEvaluationExperimentsRequest](#ondewo.nlu.CompareLlmEvaluationExperimentsRequest)
+    - [CreateLlmEvaluationDatasetRequest](#ondewo.nlu.CreateLlmEvaluationDatasetRequest)
+    - [DeleteLlmEvaluationDatasetRequest](#ondewo.nlu.DeleteLlmEvaluationDatasetRequest)
+    - [DeleteLlmEvaluationExampleRequest](#ondewo.nlu.DeleteLlmEvaluationExampleRequest)
+    - [DeleteLlmEvaluationExperimentRequest](#ondewo.nlu.DeleteLlmEvaluationExperimentRequest)
+    - [DeleteLlmEvaluationFeedbackRequest](#ondewo.nlu.DeleteLlmEvaluationFeedbackRequest)
+    - [GetLlmEvaluationDatasetRequest](#ondewo.nlu.GetLlmEvaluationDatasetRequest)
+    - [GetLlmEvaluationExampleRequest](#ondewo.nlu.GetLlmEvaluationExampleRequest)
+    - [GetLlmEvaluationExperimentRequest](#ondewo.nlu.GetLlmEvaluationExperimentRequest)
+    - [ListLlmEvaluationDatasetsRequest](#ondewo.nlu.ListLlmEvaluationDatasetsRequest)
+    - [ListLlmEvaluationDatasetsResponse](#ondewo.nlu.ListLlmEvaluationDatasetsResponse)
+    - [ListLlmEvaluationExamplesRequest](#ondewo.nlu.ListLlmEvaluationExamplesRequest)
+    - [ListLlmEvaluationExamplesResponse](#ondewo.nlu.ListLlmEvaluationExamplesResponse)
+    - [ListLlmEvaluationExperimentsRequest](#ondewo.nlu.ListLlmEvaluationExperimentsRequest)
+    - [ListLlmEvaluationExperimentsResponse](#ondewo.nlu.ListLlmEvaluationExperimentsResponse)
+    - [ListLlmEvaluationFeedbackRequest](#ondewo.nlu.ListLlmEvaluationFeedbackRequest)
+    - [ListLlmEvaluationFeedbackResponse](#ondewo.nlu.ListLlmEvaluationFeedbackResponse)
+    - [LlmEvaluationComparison](#ondewo.nlu.LlmEvaluationComparison)
+    - [LlmEvaluationDataset](#ondewo.nlu.LlmEvaluationDataset)
+    - [LlmEvaluationDatasetFilter](#ondewo.nlu.LlmEvaluationDatasetFilter)
+    - [LlmEvaluationEvaluatorRun](#ondewo.nlu.LlmEvaluationEvaluatorRun)
+    - [LlmEvaluationExample](#ondewo.nlu.LlmEvaluationExample)
+    - [LlmEvaluationExampleFilter](#ondewo.nlu.LlmEvaluationExampleFilter)
+    - [LlmEvaluationExperiment](#ondewo.nlu.LlmEvaluationExperiment)
+    - [LlmEvaluationExperimentFilter](#ondewo.nlu.LlmEvaluationExperimentFilter)
+    - [LlmEvaluationFeedback](#ondewo.nlu.LlmEvaluationFeedback)
+    - [LlmEvaluationFeedbackFilter](#ondewo.nlu.LlmEvaluationFeedbackFilter)
+    - [LlmEvaluationPairwiseResult](#ondewo.nlu.LlmEvaluationPairwiseResult)
+    - [RunLlmEvaluationExperimentRequest](#ondewo.nlu.RunLlmEvaluationExperimentRequest)
+    - [SubmitLlmEvaluationFeedbackRequest](#ondewo.nlu.SubmitLlmEvaluationFeedbackRequest)
+    - [UpdateLlmEvaluationDatasetRequest](#ondewo.nlu.UpdateLlmEvaluationDatasetRequest)
+    - [UpdateLlmEvaluationExampleRequest](#ondewo.nlu.UpdateLlmEvaluationExampleRequest)
+    - [UpdateLlmEvaluationExperimentRequest](#ondewo.nlu.UpdateLlmEvaluationExperimentRequest)
+  
+    - [LlmEvaluationEvaluatorType](#ondewo.nlu.LlmEvaluationEvaluatorType)
+    - [LlmEvaluationExperimentStatus](#ondewo.nlu.LlmEvaluationExperimentStatus)
+  
+    - [LlmEvaluations](#ondewo.nlu.LlmEvaluations)
+  
 - [ondewo/nlu/operation_metadata.proto](#ondewo/nlu/operation_metadata.proto)
     - [OperationMetadata](#ondewo.nlu.OperationMetadata)
   
@@ -521,6 +565,17 @@
     - [ListTagsResponse](#ondewo.nlu.ListTagsResponse)
     - [ListUserIdsOfAllSessionsRequest](#ondewo.nlu.ListUserIdsOfAllSessionsRequest)
     - [ListUserIdsResponse](#ondewo.nlu.ListUserIdsResponse)
+    - [LlmCallFinishedEvent](#ondewo.nlu.LlmCallFinishedEvent)
+    - [LlmCallStartedEvent](#ondewo.nlu.LlmCallStartedEvent)
+    - [LlmTelemetry](#ondewo.nlu.LlmTelemetry)
+    - [LlmTelemetryReport](#ondewo.nlu.LlmTelemetryReport)
+    - [LlmThinkingDeltaEvent](#ondewo.nlu.LlmThinkingDeltaEvent)
+    - [LlmThinkingMetadata](#ondewo.nlu.LlmThinkingMetadata)
+    - [LlmTokenUsage](#ondewo.nlu.LlmTokenUsage)
+    - [LlmTokenUsageUpdateEvent](#ondewo.nlu.LlmTokenUsageUpdateEvent)
+    - [LlmToolCallFinishedEvent](#ondewo.nlu.LlmToolCallFinishedEvent)
+    - [LlmToolCallMetadata](#ondewo.nlu.LlmToolCallMetadata)
+    - [LlmToolCallStartedEvent](#ondewo.nlu.LlmToolCallStartedEvent)
     - [QueryInput](#ondewo.nlu.QueryInput)
     - [QueryParameters](#ondewo.nlu.QueryParameters)
     - [QueryResult](#ondewo.nlu.QueryResult)
@@ -1478,6 +1533,11 @@ Request statistics of the agent
 | format | [ReportFormat](#ondewo.nlu.ReportFormat) |  | File formats for reports |
 | language_code | [string](#string) |  | Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc. the language to calculate statistics about |
 | type | [ReportType](#ondewo.nlu.ReportType) |  | Type of reports about the domain of the agent |
+| llm_model_filter | [string](#string) | repeated | Optional. Restrict LLM aggregations to specific models (e.g. <code>"claude-3-5-sonnet-20241022"</code>). Empty list = all models. |
+| llm_provider_filter | [string](#string) | repeated | Optional. Restrict LLM aggregations to specific providers (e.g. <code>"anthropic"</code>, <code>"openai"</code>). Empty list = all providers. |
+| llm_agent_name_filter | [string](#string) | repeated | Optional. Restrict LLM aggregations to specific intent-agent names. |
+| llm_group_bys | [string](#string) | repeated | Optional. Group LLM aggregations by named dimensions (e.g. <code>["model_name", "provider"]</code>). Empty list = no grouping. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which fields will be filled with data on the response (e.g. paths=["llm_telemetry_report"]). |
 
 
 
@@ -1495,6 +1555,7 @@ Response to get statistics of the agent
 | reports | [bytes](#bytes) |  | Statistic info. |
 | format | [ReportFormat](#ondewo.nlu.ReportFormat) |  | File formats for reports |
 | type | [ReportType](#ondewo.nlu.ReportType) |  | Type of reports about the domain of the agent |
+| llm_telemetry_report | [LlmTelemetryReport](#ondewo.nlu.LlmTelemetryReport) |  | Optional aggregate LLM telemetry across all sessions / steps in scope (subject to the LLM filters in the request). Populated only when the request field_mask includes <code>llm_telemetry_report</code>. |
 
 
 
@@ -1583,6 +1644,10 @@ Request of the report of the statistics about sessions
 | order_bys | [string](#string) | repeated | Optional. Order based on named properties |
 | field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which data fields will be added to the returned data. <br> Example: paths=[&quot;duration_in_s_min&quot;, &quot;id&quot;, &quot;session_id&quot;, &quot;project_id&quot;] <br> |
 | sql_query | [string](#string) |  | SQL Query - only usable with specific SessionsReportType such as SessionsReportType.SESSION_SQL_QUERY |
+| llm_model_filter | [string](#string) | repeated | Optional. Restrict LLM-typed reports to specific models. Empty = all models. |
+| llm_provider_filter | [string](#string) | repeated | Optional. Restrict LLM-typed reports to specific providers. Empty = all providers. |
+| llm_agent_name_filter | [string](#string) | repeated | Optional. Restrict LLM-typed reports to specific intent-agent names. Empty = all. |
+| llm_tool_name_filter | [string](#string) | repeated | Optional. Restrict LLM-typed reports to specific tool names. Empty = all. |
 
 
 
@@ -1600,6 +1665,7 @@ Report of the statistics about sessions
 | reports | [bytes](#bytes) |  | Statistic info. |
 | format | [ReportFormat](#ondewo.nlu.ReportFormat) |  | File formats for reports |
 | type | [SessionsReportType](#ondewo.nlu.SessionsReportType) |  | Type of reports about the domain of the agent |
+| llm_telemetry_report | [LlmTelemetryReport](#ondewo.nlu.LlmTelemetryReport) |  | Optional aggregate LLM telemetry summarizing the report (tokens, tool calls, thinking) across all sessions matched by the request. Populated only for LLM-typed report types (SESSION_LLM_*). |
 
 
 
@@ -2145,6 +2211,12 @@ Example: <pre><code>SELECT ... FROM session</code></pre> <pre><code>SELECT ... F
 | SESSION_LEAST_X_LABELS | 15 | report least x labels. Supports SessionFilter to filter |
 | SESSION_LEAST_X_TAGS | 16 | report least x tags. Supports SessionFilter to filter |
 | TOTAL_STATISTICS | 17 | report total numbers of e.g. sessions, session steps, etc. |
+| SESSION_LLM_TOKEN_USAGE | 18 | Aggregate LLM token usage (input / output / cache) across sessions in scope. Supports SessionFilter to filter and the request's <code>llm_*_filter</code> fields to restrict to specific models / providers / agents. |
+| SESSION_LLM_TOOL_CALLS | 19 | Tool-call breakdown across sessions in scope (counts, durations, error rate). |
+| SESSION_LLM_THINKING | 20 | Thinking-token / duration aggregates across sessions in scope (where the provider surfaces extended thinking). |
+| SESSION_LLM_FINISH_REASONS | 21 | Finish-reason distribution across sessions in scope (<code>stop</code>, <code>length</code>, <code>tool_calls</code>, <code>content_filter</code>, <code>error</code>, ...). |
+| SESSION_LLM_LATENCY | 22 | LLM call latency aggregates (p50 / p95 / p99, time-to-first-token). |
+| SESSION_LLM_RAG_METRICS | 23 | RAG-specific metrics (retrieval hit-rate, context precision, citation overlap) aggregated across sessions in scope. |
 
 
  <!-- end enums -->
@@ -3399,6 +3471,7 @@ CcaiProjectView defines what the CcaiProject message contains
 | CCAI_SERVICE_PROVIDER_OPENSEARCH | 31 | Opensearch as the CCAI service provider, enabling integration with Opensearch vector database and search services <a href="https://opensearch.org/">Opensearch</a> |
 | CCAI_SERVICE_PROVIDER_GROK | 32 | Grok as the CCAI service provider, commonly used for models such as Grok-1 <a href="https://grok.x.ai/">Grok</a> |
 | CCAI_SERVICE_PROVIDER_POSTGRES | 33 | PostgreSQL as the CCAI service provider, enabling integration with PostgreSQL databases <a href="https://www.postgresql.org/">PostgreSQL</a> |
+| CCAI_SERVICE_PROVIDER_MICROSOFT_AGENT_FRAMEWORK | 34 | Microsoft Agent Framework as the CCAI service provider <a href="https://github.com/microsoft/agent-framework">Microsoft Agent Framework</a> |
 
 
 
@@ -6297,6 +6370,825 @@ Operation &lt;response: <a href="index.html#ondewo.nlu.BatchUpdateIntentsRespons
 
 
 
+<a name="ondewo/nlu/llm_evaluation.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## ondewo/nlu/llm_evaluation.proto
+
+
+
+<a name="ondewo.nlu.AddLlmEvaluationExampleRequest"></a>
+
+### AddLlmEvaluationExampleRequest
+Request to append a single example to an existing dataset.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| llm_evaluation_dataset_name | [string](#string) |  | Resource name of the dataset to extend. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationDatasets/&lt;dataset_uuid&gt;</code>. |
+| llm_evaluation_example | [LlmEvaluationExample](#ondewo.nlu.LlmEvaluationExample) |  | Example payload to append. |
+| parent | [string](#string) |  | Project owning the dataset. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| language_code | [string](#string) |  | BCP-47 language-code scope (required, must match the dataset's). |
+
+
+
+
+
+
+<a name="ondewo.nlu.AddLlmEvaluationExamplesRequest"></a>
+
+### AddLlmEvaluationExamplesRequest
+Request to append multiple examples to an existing dataset.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| llm_evaluation_dataset_name | [string](#string) |  | Resource name of the dataset to extend. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationDatasets/&lt;dataset_uuid&gt;</code>. |
+| llm_evaluation_examples | [LlmEvaluationExample](#ondewo.nlu.LlmEvaluationExample) | repeated | Examples to append. |
+| parent | [string](#string) |  | Project owning the dataset. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| language_code | [string](#string) |  | BCP-47 language-code scope (required, must match the dataset's). |
+
+
+
+
+
+
+<a name="ondewo.nlu.AddLlmEvaluationExamplesResponse"></a>
+
+### AddLlmEvaluationExamplesResponse
+Response for AddExamples.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| llm_evaluation_examples | [LlmEvaluationExample](#ondewo.nlu.LlmEvaluationExample) | repeated | Example records created. |
+
+
+
+
+
+
+<a name="ondewo.nlu.CancelLlmEvaluationExperimentRequest"></a>
+
+### CancelLlmEvaluationExperimentRequest
+Request to cancel a running experiment.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | Resource name of the experiment to cancel. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationExperiments/&lt;experiment_uuid&gt;</code>. |
+| parent | [string](#string) |  | Project owning the experiment. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| language_code | [string](#string) |  | BCP-47 language-code scope (required). |
+
+
+
+
+
+
+<a name="ondewo.nlu.CompareLlmEvaluationExperimentsRequest"></a>
+
+### CompareLlmEvaluationExperimentsRequest
+Request to compare two-or-more experiments.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| llm_evaluation_experiment_names | [string](#string) | repeated | Resource names of the experiments to compare (two-or-more). Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationExperiments/&lt;experiment_uuid&gt;</code>. |
+| llm_evaluation_baseline_experiment_name | [string](#string) |  | Optional. Resource name of the baseline experiment used for delta computation. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationExperiments/&lt;experiment_uuid&gt;</code>. |
+| parent | [string](#string) |  | Project owning the experiments. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| language_code | [string](#string) |  | BCP-47 language-code scope (required, all experiments must share the same). |
+
+
+
+
+
+
+<a name="ondewo.nlu.CreateLlmEvaluationDatasetRequest"></a>
+
+### CreateLlmEvaluationDatasetRequest
+Request to create a new evaluation dataset.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  | Project owning the dataset. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| display_name | [string](#string) |  | Required. Human-readable display name (unique within the (project, language_code) tuple). |
+| description | [string](#string) |  | Free-form description. |
+| llm_evaluation_examples | [LlmEvaluationExample](#ondewo.nlu.LlmEvaluationExample) | repeated | Optional initial set of examples. |
+| tags | [string](#string) | repeated | Free-form tags for grouping / filtering. |
+| language_code | [string](#string) |  | BCP-47 language code the dataset is authored for. Required — the same dataset name may coexist across different languages. |
+
+
+
+
+
+
+<a name="ondewo.nlu.DeleteLlmEvaluationDatasetRequest"></a>
+
+### DeleteLlmEvaluationDatasetRequest
+Request to delete a dataset and all owned examples.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | Resource name of the dataset to delete. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationDatasets/&lt;dataset_uuid&gt;</code>. |
+| parent | [string](#string) |  | Project owning the dataset. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| language_code | [string](#string) |  | BCP-47 language-code scope (required). |
+
+
+
+
+
+
+<a name="ondewo.nlu.DeleteLlmEvaluationExampleRequest"></a>
+
+### DeleteLlmEvaluationExampleRequest
+Request to delete an example.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | Resource name of the example to delete. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationDatasets/&lt;dataset_uuid&gt;/examples/&lt;example_uuid&gt;</code>. |
+| parent | [string](#string) |  | Project owning the example. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| language_code | [string](#string) |  | BCP-47 language-code scope (required). |
+
+
+
+
+
+
+<a name="ondewo.nlu.DeleteLlmEvaluationExperimentRequest"></a>
+
+### DeleteLlmEvaluationExperimentRequest
+Request to delete an experiment.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | Resource name of the experiment to delete. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationExperiments/&lt;experiment_uuid&gt;</code>. |
+| parent | [string](#string) |  | Project owning the experiment. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| language_code | [string](#string) |  | BCP-47 language-code scope (required). |
+
+
+
+
+
+
+<a name="ondewo.nlu.DeleteLlmEvaluationFeedbackRequest"></a>
+
+### DeleteLlmEvaluationFeedbackRequest
+Request to delete a single feedback record.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | Resource name of the feedback record to delete. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationExperiments/&lt;experiment_uuid&gt;/evaluatorRuns/&lt;evaluator_run_uuid&gt;/feedbacks/&lt;feedback_uuid&gt;</code>. |
+| parent | [string](#string) |  | Project owning the feedback. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| language_code | [string](#string) |  | BCP-47 language-code scope (required). |
+
+
+
+
+
+
+<a name="ondewo.nlu.GetLlmEvaluationDatasetRequest"></a>
+
+### GetLlmEvaluationDatasetRequest
+Request to get a single evaluation dataset.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | Resource name of the dataset to fetch. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationDatasets/&lt;dataset_uuid&gt;</code>. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which fields will be filled with data. Example: paths=["name", "llm_evaluation_examples"] |
+| parent | [string](#string) |  | Project owning the dataset. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| language_code | [string](#string) |  | BCP-47 language-code scope (required). |
+
+
+
+
+
+
+<a name="ondewo.nlu.GetLlmEvaluationExampleRequest"></a>
+
+### GetLlmEvaluationExampleRequest
+Request to get a single example.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | Resource name of the example to fetch. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationDatasets/&lt;dataset_uuid&gt;/examples/&lt;example_uuid&gt;</code>. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which fields will be filled with data. Example: paths=["name", "inputs", "expected_outputs"] |
+| parent | [string](#string) |  | Project owning the example. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| language_code | [string](#string) |  | BCP-47 language-code scope (required). |
+
+
+
+
+
+
+<a name="ondewo.nlu.GetLlmEvaluationExperimentRequest"></a>
+
+### GetLlmEvaluationExperimentRequest
+Request to fetch a previously-run experiment.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | Resource name of the experiment to fetch. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationExperiments/&lt;experiment_uuid&gt;</code>. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which fields will be filled with data. Example: paths=["display_name", "status", "llm_evaluation_evaluator_runs"] |
+| parent | [string](#string) |  | Project owning the experiment. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| language_code | [string](#string) |  | BCP-47 language-code scope (required). |
+
+
+
+
+
+
+<a name="ondewo.nlu.ListLlmEvaluationDatasetsRequest"></a>
+
+### ListLlmEvaluationDatasetsRequest
+Request to list evaluation datasets within a project.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  | Project owning the datasets. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| page_token | [string](#string) |  | Optional. Page token for pagination. Retrieves a large result set in smaller, more manageable portions. The token encodes the current index and the page size.
+
+Valid page token strings: <ul> <li><code>&quot;&quot;</code> (empty string) - Retrieves the first page.</li> <li><code>&quot;current_index-0--page_size-20&quot;</code> - First page, page size 20.</li> <li><code>&quot;current_index-1--page_size-20&quot;</code> - Second page, page size 20.</li> </ul> Index starts at 0. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which fields will be filled with data. Example: paths=["llm_evaluation_datasets.display_name", "llm_evaluation_datasets.tags"] |
+| language_code | [string](#string) |  | BCP-47 language-code scope (required). |
+| llm_evaluation_dataset_filter | [LlmEvaluationDatasetFilter](#ondewo.nlu.LlmEvaluationDatasetFilter) |  | Optional. Filter conditions to narrow the returned datasets. |
+
+
+
+
+
+
+<a name="ondewo.nlu.ListLlmEvaluationDatasetsResponse"></a>
+
+### ListLlmEvaluationDatasetsResponse
+Response for ListDatasets.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| llm_evaluation_datasets | [LlmEvaluationDataset](#ondewo.nlu.LlmEvaluationDataset) | repeated | Datasets matching the request. |
+| next_page_token | [string](#string) |  | Pagination token for the next page (empty if this is the last page). |
+
+
+
+
+
+
+<a name="ondewo.nlu.ListLlmEvaluationExamplesRequest"></a>
+
+### ListLlmEvaluationExamplesRequest
+Request to list examples in a dataset.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| llm_evaluation_dataset_name | [string](#string) |  | Resource name of the dataset to enumerate examples from. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationDatasets/&lt;dataset_uuid&gt;</code>. |
+| page_token | [string](#string) |  | Optional. Page token for pagination. Retrieves a large result set in smaller, more manageable portions. The token encodes the current index and the page size.
+
+Valid page token strings: <ul> <li><code>&quot;&quot;</code> (empty string) - Retrieves the first page.</li> <li><code>&quot;current_index-0--page_size-20&quot;</code> - First page, page size 20.</li> <li><code>&quot;current_index-1--page_size-20&quot;</code> - Second page, page size 20.</li> </ul> Index starts at 0. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which fields will be filled with data. Example: paths=["llm_evaluation_examples.display_name", "llm_evaluation_examples.inputs"] |
+| parent | [string](#string) |  | Project owning the dataset. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| language_code | [string](#string) |  | BCP-47 language-code scope (required). |
+| llm_evaluation_example_filter | [LlmEvaluationExampleFilter](#ondewo.nlu.LlmEvaluationExampleFilter) |  | Optional. Filter conditions to narrow the returned examples. |
+
+
+
+
+
+
+<a name="ondewo.nlu.ListLlmEvaluationExamplesResponse"></a>
+
+### ListLlmEvaluationExamplesResponse
+Response for ListExamples.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| llm_evaluation_examples | [LlmEvaluationExample](#ondewo.nlu.LlmEvaluationExample) | repeated | Examples in the dataset matching the request. |
+| next_page_token | [string](#string) |  | Pagination token for the next page (empty if this is the last page). |
+
+
+
+
+
+
+<a name="ondewo.nlu.ListLlmEvaluationExperimentsRequest"></a>
+
+### ListLlmEvaluationExperimentsRequest
+Request to list experiments in a project, optionally narrowed by filter.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  | Project owning the experiments. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| page_token | [string](#string) |  | Optional. Page token for pagination. Retrieves a large result set in smaller, more manageable portions. The token encodes the current index and the page size.
+
+Valid page token strings: <ul> <li><code>&quot;&quot;</code> (empty string) - Retrieves the first page.</li> <li><code>&quot;current_index-0--page_size-20&quot;</code> - First page, page size 20.</li> <li><code>&quot;current_index-1--page_size-20&quot;</code> - Second page, page size 20.</li> </ul> Index starts at 0. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which fields will be filled with data. Example: paths=["llm_evaluation_experiments.display_name", "llm_evaluation_experiments.status"] |
+| language_code | [string](#string) |  | BCP-47 language-code scope (required). |
+| llm_evaluation_experiment_filter | [LlmEvaluationExperimentFilter](#ondewo.nlu.LlmEvaluationExperimentFilter) |  | Optional. Filter conditions to narrow the returned experiments. |
+
+
+
+
+
+
+<a name="ondewo.nlu.ListLlmEvaluationExperimentsResponse"></a>
+
+### ListLlmEvaluationExperimentsResponse
+Response for ListExperiments.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| llm_evaluation_experiments | [LlmEvaluationExperiment](#ondewo.nlu.LlmEvaluationExperiment) | repeated | Experiments matching the request. |
+| next_page_token | [string](#string) |  | Pagination token for the next page (empty if this is the last page). |
+
+
+
+
+
+
+<a name="ondewo.nlu.ListLlmEvaluationFeedbackRequest"></a>
+
+### ListLlmEvaluationFeedbackRequest
+Request to list feedback records, optionally narrowed by filter.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| page_token | [string](#string) |  | Optional. Page token for pagination. Retrieves a large result set in smaller, more manageable portions. The token encodes the current index and the page size.
+
+Valid page token strings: <ul> <li><code>&quot;&quot;</code> (empty string) - Retrieves the first page.</li> <li><code>&quot;current_index-0--page_size-20&quot;</code> - First page, page size 20.</li> <li><code>&quot;current_index-1--page_size-20&quot;</code> - Second page, page size 20.</li> </ul> Index starts at 0. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which fields will be filled with data. Example: paths=["llm_evaluation_feedbacks.score", "llm_evaluation_feedbacks.categorical_value"] |
+| parent | [string](#string) |  | Project owning the feedback records. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| language_code | [string](#string) |  | BCP-47 language-code scope (required). |
+| llm_evaluation_feedback_filter | [LlmEvaluationFeedbackFilter](#ondewo.nlu.LlmEvaluationFeedbackFilter) |  | Optional. Filter conditions to narrow the returned feedback records. |
+
+
+
+
+
+
+<a name="ondewo.nlu.ListLlmEvaluationFeedbackResponse"></a>
+
+### ListLlmEvaluationFeedbackResponse
+Response for ListFeedback.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| llm_evaluation_feedbacks | [LlmEvaluationFeedback](#ondewo.nlu.LlmEvaluationFeedback) | repeated | Feedback records matching the request. |
+| next_page_token | [string](#string) |  | Pagination token for the next page (empty if this is the last page). |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmEvaluationComparison"></a>
+
+### LlmEvaluationComparison
+Pairwise comparison report across multiple experiments.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The unique resource name of the comparison. Read-only; populated by the server. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationComparisons/&lt;comparison_uuid&gt;</code>. |
+| display_name | [string](#string) |  | Human-readable display name. |
+| llm_evaluation_experiment_names | [string](#string) | repeated | Resource names of the experiments being compared (two-or-more). Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationExperiments/&lt;experiment_uuid&gt;</code>. |
+| llm_evaluation_baseline_experiment_name | [string](#string) |  | Optional. Resource name of the baseline experiment used for delta computation. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationExperiments/&lt;experiment_uuid&gt;</code>. |
+| llm_evaluation_pairwise_results | [LlmEvaluationPairwiseResult](#ondewo.nlu.LlmEvaluationPairwiseResult) | repeated | One entry per example. |
+| aggregate | [google.protobuf.Struct](#google.protobuf.Struct) |  | Aggregate stats: win-rate, mean-delta, ... |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
+| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
+| created_by | [string](#string) |  | User id in form of a valid UUID. |
+| modified_by | [string](#string) |  | User id in form of a valid UUID. |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmEvaluationDataset"></a>
+
+### LlmEvaluationDataset
+A dataset is a named collection of evaluation examples plus optional metadata.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The unique resource name of the dataset. Read-only; populated by the server. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationDatasets/&lt;dataset_uuid&gt;</code>. |
+| display_name | [string](#string) |  | Required. Human-readable display name (unique within the (project, language_code) tuple). |
+| description | [string](#string) |  | Free-form description. |
+| llm_evaluation_examples | [LlmEvaluationExample](#ondewo.nlu.LlmEvaluationExample) | repeated | Examples contained in this dataset. May be returned empty by List endpoints; use ListExamples for paginated retrieval. |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
+| created_by | [string](#string) |  | User id in form of a valid UUID. |
+| tags | [string](#string) | repeated | Free-form tags for grouping / filtering. |
+| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
+| modified_by | [string](#string) |  | User id in form of a valid UUID. |
+| parent | [string](#string) |  | Project owning the dataset. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| language_code | [string](#string) |  | BCP-47 language code (e.g. <code>"en"</code>, <code>"de"</code>, <code>"en-US"</code>) identifying which language the dataset was authored for. Datasets are scoped per (project, language_code) — the same dataset name may exist independently per language. |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmEvaluationDatasetFilter"></a>
+
+### LlmEvaluationDatasetFilter
+Filter conditions for ListDatasets. All fields are optional; multiple fields
+set at the same time are combined via logical AND.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| display_name | [string](#string) |  | Optional. Match only datasets whose display name contains this substring (case-insensitive). |
+| tags | [string](#string) | repeated | Optional. Match only datasets carrying every tag in this list. |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmEvaluationEvaluatorRun"></a>
+
+### LlmEvaluationEvaluatorRun
+Result of running one evaluator against one example.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The unique resource name of the evaluator run. Read-only; populated by the server. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationExperiments/&lt;experiment_uuid&gt;/evaluatorRuns/&lt;evaluator_run_uuid&gt;</code>. |
+| display_name | [string](#string) |  | Human-readable display name. |
+| llm_evaluation_example_name | [string](#string) |  | Resource name of the example the evaluator was run against. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationDatasets/&lt;dataset_uuid&gt;/examples/&lt;example_uuid&gt;</code>. |
+| llm_telemetry_run_id | [string](#string) |  | Ties this evaluator run back to the LlmTelemetry produced when running the target. |
+| llm_evaluation_evaluator_type | [LlmEvaluationEvaluatorType](#ondewo.nlu.LlmEvaluationEvaluatorType) |  | Family of evaluator implementations. |
+| evaluator_name | [string](#string) |  | Logical name of the evaluator (e.g. "faithfulness", "exact_match"). |
+| llm_evaluation_feedbacks | [LlmEvaluationFeedback](#ondewo.nlu.LlmEvaluationFeedback) | repeated | One or more feedback records produced by the evaluator. |
+| llm_evaluation_experiment_name | [string](#string) |  | Resource name of the owning experiment. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationExperiments/&lt;experiment_uuid&gt;</code>. |
+| started_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Wall-clock start of the evaluator run. |
+| finished_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Wall-clock end of the evaluator run. |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
+| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
+| created_by | [string](#string) |  | User id in form of a valid UUID. |
+| modified_by | [string](#string) |  | User id in form of a valid UUID. |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmEvaluationExample"></a>
+
+### LlmEvaluationExample
+A single example in an evaluation dataset.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The unique resource name of the example. Read-only; populated by the server. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationDatasets/&lt;dataset_uuid&gt;/examples/&lt;example_uuid&gt;</code>. |
+| display_name | [string](#string) |  | Human-readable display name. |
+| description | [string](#string) |  | Free-form description. |
+| inputs | [google.protobuf.Struct](#google.protobuf.Struct) |  | Structured inputs payload — agent inputs, prompt vars, retrieval context, ... |
+| expected_outputs | [google.protobuf.Struct](#google.protobuf.Struct) |  | Structured expected outputs — gold answer, expected tool sequence, ... |
+| metadata | [google.protobuf.Struct](#google.protobuf.Struct) |  | Free-form metadata. |
+| llm_evaluation_dataset_name | [string](#string) |  | Resource name of the owning dataset. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationDatasets/&lt;dataset_uuid&gt;</code>. |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
+| created_by | [string](#string) |  | User id in form of a valid UUID. |
+| parent | [string](#string) |  | Project owning the example (denormalized from parent dataset for cheap per-project filtering). Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| language_code | [string](#string) |  | BCP-47 language code (denormalized from parent dataset for cheap filtering). |
+| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
+| modified_by | [string](#string) |  | User id in form of a valid UUID. |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmEvaluationExampleFilter"></a>
+
+### LlmEvaluationExampleFilter
+Filter conditions for ListExamples. All fields are optional; multiple fields
+set at the same time are combined via logical AND.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| display_name | [string](#string) |  | Optional. Match only examples whose display name contains this substring (case-insensitive). |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmEvaluationExperiment"></a>
+
+### LlmEvaluationExperiment
+A single experiment run over a dataset.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The unique resource name of the experiment. Read-only; populated by the server. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationExperiments/&lt;experiment_uuid&gt;</code>. |
+| llm_evaluation_dataset_name | [string](#string) |  | Resource name of the source dataset. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationDatasets/&lt;dataset_uuid&gt;</code>. |
+| display_name | [string](#string) |  | Required. Human-readable display name. |
+| description | [string](#string) |  | Free-form description. |
+| git_sha | [string](#string) |  | Pin the experiment to a source-tree revision for reproducibility. |
+| prompt_version | [string](#string) |  | Logical version identifier of the prompt under test. |
+| model_name | [string](#string) |  | Concrete model identifier exercised by the experiment. |
+| config | [google.protobuf.Struct](#google.protobuf.Struct) |  | Arbitrary configuration captured at run time. |
+| llm_evaluation_evaluator_runs | [LlmEvaluationEvaluatorRun](#ondewo.nlu.LlmEvaluationEvaluatorRun) | repeated | One entry per evaluator x example combination. |
+| started_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Wall-clock start of the experiment run. |
+| finished_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Wall-clock end of the experiment run. |
+| duration_seconds | [double](#double) |  | Convenience duration (finished_at - started_at). |
+| n_examples | [int32](#int32) |  | Number of dataset examples consumed. |
+| n_passed | [int32](#int32) |  | Number of evaluator runs that produced a passing score. |
+| n_failed | [int32](#int32) |  | Number of evaluator runs that produced a failing score. |
+| llm_evaluation_baseline_experiment_name | [string](#string) |  | Optional. Resource name of a baseline experiment for regression detection. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationExperiments/&lt;experiment_uuid&gt;</code>. |
+| parent | [string](#string) |  | Project owning the experiment. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| llm_evaluation_experiment_status | [LlmEvaluationExperimentStatus](#ondewo.nlu.LlmEvaluationExperimentStatus) |  | Current lifecycle status of the experiment (pending / running / succeeded / failed / cancelled). |
+| created_by | [string](#string) |  | User id in form of a valid UUID. |
+| language_code | [string](#string) |  | BCP-47 language code (denormalized from parent dataset). Experiments are scoped per (project, language_code); experiment name uniqueness is enforced per (project, language_code) tuple. |
+| ccai_service_names | [string](#string) | repeated | CcaiService name(s) whose LLM connection details defined the model(s) evaluated in this run (echoed from RunLlmEvaluationExperimentRequest for audit / reproducibility). |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
+| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
+| modified_by | [string](#string) |  | User id in form of a valid UUID. |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmEvaluationExperimentFilter"></a>
+
+### LlmEvaluationExperimentFilter
+Filter conditions for ListExperiments. All fields are optional; multiple
+fields set at the same time are combined via logical AND.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| display_name | [string](#string) |  | Optional. Match only experiments whose display name contains this substring (case-insensitive). |
+| llm_evaluation_experiment_status | [LlmEvaluationExperimentStatus](#ondewo.nlu.LlmEvaluationExperimentStatus) |  | Optional. Match only experiments with this lifecycle status. |
+| llm_evaluation_dataset_name | [string](#string) |  | Optional. Match only experiments tied to this dataset (resource name). Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationDatasets/&lt;dataset_uuid&gt;</code>. |
+| model_name | [string](#string) |  | Optional. Match only experiments exercising this concrete model identifier. |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmEvaluationFeedback"></a>
+
+### LlmEvaluationFeedback
+A single feedback record (score + optional categorical + comment + raw payload).
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The unique resource name of the feedback record. Read-only; populated by the server. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationExperiments/&lt;experiment_uuid&gt;/evaluatorRuns/&lt;evaluator_run_uuid&gt;/feedbacks/&lt;feedback_uuid&gt;</code>. |
+| display_name | [string](#string) |  | Human-readable display name. |
+| criterion | [string](#string) |  | Free-form criterion label: "correctness", "faithfulness", "hallucination", "context_precision", "tool_trajectory", "format", "groundedness", "tone", "exact_match", "embedding_distance", "bleu", "rouge", "regression", ... |
+| score | [double](#double) |  | Numeric score (0.0-1.0 by convention). Defaults to 0.0 (proto3 has no field presence on this scalar, so an unset score and a genuine 0.0 are indistinguishable); for purely categorical feedback, rely on categorical_value rather than this field. |
+| categorical_value | [string](#string) |  | Categorical value when applicable ("pass" | "fail" | "yes" | "no" | tier). |
+| comment | [string](#string) |  | Human-readable comment / rationale. |
+| annotator_user_id | [string](#string) |  | Human reviewer id or "evaluator:&lt;name&gt;". |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
+| raw | [google.protobuf.Struct](#google.protobuf.Struct) |  | Verbatim evaluator JSON output kept for forensic replay. |
+| llm_evaluation_evaluator_run_name | [string](#string) |  | Resource name of the owning evaluator run (may be empty for top-level experiment-scoped feedback submitted via SubmitFeedback). Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationExperiments/&lt;experiment_uuid&gt;/evaluatorRuns/&lt;evaluator_run_uuid&gt;</code>. |
+| llm_evaluation_experiment_name | [string](#string) |  | Resource name of the owning experiment. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationExperiments/&lt;experiment_uuid&gt;</code>. |
+| llm_evaluation_example_name | [string](#string) |  | Resource name of the example the feedback targets. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationDatasets/&lt;dataset_uuid&gt;/examples/&lt;example_uuid&gt;</code>. |
+| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
+| created_by | [string](#string) |  | User id in form of a valid UUID. |
+| modified_by | [string](#string) |  | User id in form of a valid UUID. |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmEvaluationFeedbackFilter"></a>
+
+### LlmEvaluationFeedbackFilter
+Filter conditions for ListFeedback. All fields are optional; multiple fields
+set at the same time are combined via logical AND.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| llm_evaluation_experiment_name | [string](#string) |  | Optional. Match only feedback attached to this experiment (resource name). Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationExperiments/&lt;experiment_uuid&gt;</code>. |
+| llm_evaluation_example_name | [string](#string) |  | Optional. Match only feedback targeting this example (resource name). Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationDatasets/&lt;dataset_uuid&gt;/examples/&lt;example_uuid&gt;</code>. |
+| llm_evaluation_evaluator_run_name | [string](#string) |  | Optional. Match only feedback produced by this evaluator run (resource name). Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationExperiments/&lt;experiment_uuid&gt;/evaluatorRuns/&lt;evaluator_run_uuid&gt;</code>. |
+| criterion | [string](#string) |  | Optional. Match only feedback with this criterion label (e.g. "correctness", "faithfulness"). |
+| categorical_value | [string](#string) |  | Optional. Match only feedback with this categorical value ("pass" | "fail" | "yes" | "no" | tier). |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmEvaluationPairwiseResult"></a>
+
+### LlmEvaluationPairwiseResult
+Per-example pairwise comparison entry.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| llm_evaluation_example_name | [string](#string) |  | Resource name of the example being compared. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationDatasets/&lt;dataset_uuid&gt;/examples/&lt;example_uuid&gt;</code>. |
+| llm_evaluation_winner_experiment_name | [string](#string) |  | Resource name of the winning experiment. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationExperiments/&lt;experiment_uuid&gt;</code>. |
+| score_delta | [double](#double) |  | Score delta against the baseline (positive means winner improved). |
+| reason | [string](#string) |  | Free-form reason / rationale. |
+
+
+
+
+
+
+<a name="ondewo.nlu.RunLlmEvaluationExperimentRequest"></a>
+
+### RunLlmEvaluationExperimentRequest
+Request to run a fresh experiment.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  | Project owning the experiment. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| llm_evaluation_dataset_name | [string](#string) |  | Resource name of the dataset to evaluate against. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationDatasets/&lt;dataset_uuid&gt;</code>. |
+| display_name | [string](#string) |  | Required. Human-readable display name. |
+| git_sha | [string](#string) |  | Source-tree revision pin for reproducibility. |
+| prompt_version | [string](#string) |  | Logical prompt version identifier. |
+| model_name | [string](#string) |  | Concrete model identifier under test. |
+| config | [google.protobuf.Struct](#google.protobuf.Struct) |  | Arbitrary run-time configuration. |
+| llm_evaluation_evaluator_names | [string](#string) | repeated | Logical names of evaluators to run (resolved server-side to evaluator implementations). |
+| llm_evaluation_baseline_experiment_name | [string](#string) |  | Optional. Resource name of a baseline experiment for regression detection. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationExperiments/&lt;experiment_uuid&gt;</code>. |
+| language_code | [string](#string) |  | BCP-47 language code the experiment runs against. Required — selects which language-scoped dataset is loaded. |
+| ccai_service_names | [string](#string) | repeated | Logical names of the CcaiService(s) that carry the LLM connection details (host/port/model/ auth) of the model(s) under evaluation, resolved server-side — mirroring the IntentRagflowClassifier / IntentAgent <code>ccai_service_names</code> pattern. Each named service defines one LLM to evaluate; supplying several evaluates and compares multiple LLMs in a single run. Takes precedence over the free-form <code>model_name</code> label. |
+
+
+
+
+
+
+<a name="ondewo.nlu.SubmitLlmEvaluationFeedbackRequest"></a>
+
+### SubmitLlmEvaluationFeedbackRequest
+Request to submit a single feedback record.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| llm_evaluation_experiment_name | [string](#string) |  | Resource name of the experiment the feedback applies to. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationExperiments/&lt;experiment_uuid&gt;</code>. |
+| llm_evaluation_evaluator_run_name | [string](#string) |  | Optional. Resource name of the evaluator run the feedback attaches to. Empty for top-level experiment-scoped feedback (e.g. human review at experiment granularity). Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationExperiments/&lt;experiment_uuid&gt;/evaluatorRuns/&lt;evaluator_run_uuid&gt;</code>. |
+| llm_evaluation_feedback | [LlmEvaluationFeedback](#ondewo.nlu.LlmEvaluationFeedback) |  | Feedback payload. |
+| parent | [string](#string) |  | Project owning the experiment. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| language_code | [string](#string) |  | BCP-47 language-code scope (required). |
+
+
+
+
+
+
+<a name="ondewo.nlu.UpdateLlmEvaluationDatasetRequest"></a>
+
+### UpdateLlmEvaluationDatasetRequest
+Request to update an existing dataset.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| llm_evaluation_dataset | [LlmEvaluationDataset](#ondewo.nlu.LlmEvaluationDataset) |  | Dataset payload (only fields covered by <code>update_mask</code> are applied). |
+| update_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Mask of fields to update on the dataset record. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which fields will be filled with data on the returned dataset. |
+| parent | [string](#string) |  | Project owning the dataset. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| language_code | [string](#string) |  | BCP-47 language-code scope (required). |
+
+
+
+
+
+
+<a name="ondewo.nlu.UpdateLlmEvaluationExampleRequest"></a>
+
+### UpdateLlmEvaluationExampleRequest
+Request to update an existing example.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| llm_evaluation_example | [LlmEvaluationExample](#ondewo.nlu.LlmEvaluationExample) |  | Example payload (only fields covered by <code>update_mask</code> are applied). |
+| update_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Mask of fields to update on the example record. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which fields will be filled with data on the returned example. |
+| parent | [string](#string) |  | Project owning the example. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| language_code | [string](#string) |  | BCP-47 language-code scope (required). |
+
+
+
+
+
+
+<a name="ondewo.nlu.UpdateLlmEvaluationExperimentRequest"></a>
+
+### UpdateLlmEvaluationExperimentRequest
+Request to update an experiment's metadata.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| llm_evaluation_experiment | [LlmEvaluationExperiment](#ondewo.nlu.LlmEvaluationExperiment) |  | Experiment payload (only fields covered by <code>update_mask</code> are applied). |
+| update_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Mask of fields to update on the experiment record. Evaluator runs and feedback are immutable and ignored here. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which fields will be filled with data on the returned experiment. |
+| parent | [string](#string) |  | Project owning the experiment. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| language_code | [string](#string) |  | BCP-47 language-code scope (required). |
+
+
+
+
+
+ <!-- end messages -->
+
+
+<a name="ondewo.nlu.LlmEvaluationEvaluatorType"></a>
+
+### LlmEvaluationEvaluatorType
+Family of evaluator implementations.
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| LLM_EVALUATION_EVALUATOR_TYPE_UNSPECIFIED | 0 | Default / unset. |
+| LLM_EVALUATION_EVALUATOR_TYPE_LLM_AS_JUDGE | 1 | LLM acting as a judge (LangSmith-style). |
+| LLM_EVALUATION_EVALUATOR_TYPE_HUMAN | 2 | Human reviewer. |
+| LLM_EVALUATION_EVALUATOR_TYPE_HEURISTIC | 3 | Deterministic heuristic (regex, exact match, ...). |
+| LLM_EVALUATION_EVALUATOR_TYPE_CUSTOM_CODE | 4 | Custom Python code provided by the user. |
+| LLM_EVALUATION_EVALUATOR_TYPE_PAIRWISE | 5 | Pairwise comparison evaluator. |
+
+
+
+<a name="ondewo.nlu.LlmEvaluationExperimentStatus"></a>
+
+### LlmEvaluationExperimentStatus
+Lifecycle status of an experiment.
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| LLM_EVALUATION_EXPERIMENT_STATUS_UNSPECIFIED | 0 | Default / unset. |
+| LLM_EVALUATION_EXPERIMENT_STATUS_PENDING | 1 | Queued, not yet started. |
+| LLM_EVALUATION_EXPERIMENT_STATUS_RUNNING | 2 | Currently running. |
+| LLM_EVALUATION_EXPERIMENT_STATUS_SUCCEEDED | 3 | Finished successfully. |
+| LLM_EVALUATION_EXPERIMENT_STATUS_FAILED | 4 | Finished with errors. |
+| LLM_EVALUATION_EXPERIMENT_STATUS_CANCELLED | 5 | Cancelled by user request. |
+
+
+ <!-- end enums -->
+
+ <!-- end HasExtensions -->
+
+
+<a name="ondewo.nlu.LlmEvaluations"></a>
+
+### LlmEvaluations
+LangSmith-style evaluation surface: datasets, examples, experiments, evaluator
+runs, feedback (LLM-as-judge / human / heuristic / custom code / pairwise) and
+pairwise comparisons.
+
+| Method Name | Request Type | Response Type | Description |
+| ----------- | ------------ | ------------- | ------------|
+| LlmEvaluationCreateDataset | [CreateLlmEvaluationDatasetRequest](#ondewo.nlu.CreateLlmEvaluationDatasetRequest) | [LlmEvaluationDataset](#ondewo.nlu.LlmEvaluationDataset) | Create a new evaluation dataset. |
+| LlmEvaluationGetDataset | [GetLlmEvaluationDatasetRequest](#ondewo.nlu.GetLlmEvaluationDatasetRequest) | [LlmEvaluationDataset](#ondewo.nlu.LlmEvaluationDataset) | Get an evaluation dataset by resource name. |
+| LlmEvaluationListDatasets | [ListLlmEvaluationDatasetsRequest](#ondewo.nlu.ListLlmEvaluationDatasetsRequest) | [ListLlmEvaluationDatasetsResponse](#ondewo.nlu.ListLlmEvaluationDatasetsResponse) | List evaluation datasets in the project, optionally filtered + paginated. |
+| LlmEvaluationUpdateDataset | [UpdateLlmEvaluationDatasetRequest](#ondewo.nlu.UpdateLlmEvaluationDatasetRequest) | [LlmEvaluationDataset](#ondewo.nlu.LlmEvaluationDataset) | Update metadata of an existing evaluation dataset (examples managed via Add/Update/Delete RPCs). |
+| LlmEvaluationDeleteDataset | [DeleteLlmEvaluationDatasetRequest](#ondewo.nlu.DeleteLlmEvaluationDatasetRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Delete an evaluation dataset and all owned examples. |
+| LlmEvaluationAddExample | [AddLlmEvaluationExampleRequest](#ondewo.nlu.AddLlmEvaluationExampleRequest) | [LlmEvaluationExample](#ondewo.nlu.LlmEvaluationExample) | Add a single example to an existing dataset. |
+| LlmEvaluationAddExamples | [AddLlmEvaluationExamplesRequest](#ondewo.nlu.AddLlmEvaluationExamplesRequest) | [AddLlmEvaluationExamplesResponse](#ondewo.nlu.AddLlmEvaluationExamplesResponse) | Add multiple examples to an existing dataset in one call. |
+| LlmEvaluationGetExample | [GetLlmEvaluationExampleRequest](#ondewo.nlu.GetLlmEvaluationExampleRequest) | [LlmEvaluationExample](#ondewo.nlu.LlmEvaluationExample) | Get a single evaluation example by resource name. |
+| LlmEvaluationListExamples | [ListLlmEvaluationExamplesRequest](#ondewo.nlu.ListLlmEvaluationExamplesRequest) | [ListLlmEvaluationExamplesResponse](#ondewo.nlu.ListLlmEvaluationExamplesResponse) | List examples in a dataset, optionally filtered + paginated. |
+| LlmEvaluationUpdateExample | [UpdateLlmEvaluationExampleRequest](#ondewo.nlu.UpdateLlmEvaluationExampleRequest) | [LlmEvaluationExample](#ondewo.nlu.LlmEvaluationExample) | Update fields of an existing evaluation example. |
+| LlmEvaluationDeleteExample | [DeleteLlmEvaluationExampleRequest](#ondewo.nlu.DeleteLlmEvaluationExampleRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Delete an evaluation example. |
+| LlmEvaluationRunExperiment | [RunLlmEvaluationExperimentRequest](#ondewo.nlu.RunLlmEvaluationExperimentRequest) | [Operation](#ondewo.nlu.Operation) | Run a fresh experiment over a dataset. Long-running operation: the returned Operation resolves to the completed LlmEvaluationExperiment once all evaluators have produced feedback. |
+| LlmEvaluationGetExperiment | [GetLlmEvaluationExperimentRequest](#ondewo.nlu.GetLlmEvaluationExperimentRequest) | [LlmEvaluationExperiment](#ondewo.nlu.LlmEvaluationExperiment) | Retrieve a previously-run experiment by resource name. |
+| LlmEvaluationListExperiments | [ListLlmEvaluationExperimentsRequest](#ondewo.nlu.ListLlmEvaluationExperimentsRequest) | [ListLlmEvaluationExperimentsResponse](#ondewo.nlu.ListLlmEvaluationExperimentsResponse) | List experiments in a project, optionally filtered + paginated. |
+| LlmEvaluationUpdateExperiment | [UpdateLlmEvaluationExperimentRequest](#ondewo.nlu.UpdateLlmEvaluationExperimentRequest) | [LlmEvaluationExperiment](#ondewo.nlu.LlmEvaluationExperiment) | Update metadata of an experiment (e.g. baseline pointer, display_name). Evaluator runs and feedback are immutable; use LlmEvaluationSubmitFeedback / LlmEvaluationDeleteFeedback for downstream annotations. |
+| LlmEvaluationDeleteExperiment | [DeleteLlmEvaluationExperimentRequest](#ondewo.nlu.DeleteLlmEvaluationExperimentRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Delete an experiment and all owned evaluator runs + feedbacks. |
+| LlmEvaluationCancelExperiment | [CancelLlmEvaluationExperimentRequest](#ondewo.nlu.CancelLlmEvaluationExperimentRequest) | [LlmEvaluationExperiment](#ondewo.nlu.LlmEvaluationExperiment) | Cancel a still-running experiment. No-op if already finished. |
+| LlmEvaluationCompareExperiments | [CompareLlmEvaluationExperimentsRequest](#ondewo.nlu.CompareLlmEvaluationExperimentsRequest) | [LlmEvaluationComparison](#ondewo.nlu.LlmEvaluationComparison) | Compare two-or-more experiments and emit a pairwise comparison report. |
+| LlmEvaluationSubmitFeedback | [SubmitLlmEvaluationFeedbackRequest](#ondewo.nlu.SubmitLlmEvaluationFeedbackRequest) | [LlmEvaluationFeedback](#ondewo.nlu.LlmEvaluationFeedback) | Submit a single feedback record (used by human reviewers / external evaluators). |
+| LlmEvaluationListFeedback | [ListLlmEvaluationFeedbackRequest](#ondewo.nlu.ListLlmEvaluationFeedbackRequest) | [ListLlmEvaluationFeedbackResponse](#ondewo.nlu.ListLlmEvaluationFeedbackResponse) | List feedback records, optionally filtered + paginated. |
+| LlmEvaluationDeleteFeedback | [DeleteLlmEvaluationFeedbackRequest](#ondewo.nlu.DeleteLlmEvaluationFeedbackRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Delete a single feedback record. |
+
+ <!-- end services -->
+
+
+
 <a name="ondewo/nlu/operation_metadata.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
@@ -8689,12 +9581,12 @@ This message is a request to add session labels
 <a name="ondewo.nlu.AudioFileResource"></a>
 
 ### AudioFileResource
-
+Represents an audio file resource attached to a session (input recording or generated TTS output).
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| name | [string](#string) |  | The unique identifier of the session for which the latest review should be returned Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/audios/&lt;audio_uuid&gt;</code></pre> |
+| name | [string](#string) |  | The unique identifier of the audio file resource. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/audios/&lt;audio_uuid&gt;</code></pre> |
 | bytes | [bytes](#bytes) |  | Bytes of the audio file |
 | language | [string](#string) |  | Language of the audio file |
 | duration_in_s | [float](#float) |  | Duration in seconds and milliseconds of the audio file |
@@ -8705,7 +9597,7 @@ This message is a request to add session labels
 | modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
 | created_by | [string](#string) |  | User id in form of a valid UUID. |
 | modified_by | [string](#string) |  | User id in form of a valid UUID. |
-| display_name | [string](#string) |  | Bytes of the audio file |
+| display_name | [string](#string) |  | Display name of the audio file, e.g., MyRecording.wav, or a user-assigned label. |
 
 
 
@@ -8753,7 +9645,8 @@ Optional. If not provided, it will be auto-generated |
 <a name="ondewo.nlu.CreateSessionReviewRequest"></a>
 
 ### CreateSessionReviewRequest
-
+Request to persist a session review for a given session.
+As a side effect, training data in ondewo-cai may also be updated.
 
 
 | Field | Type | Label | Description |
@@ -8771,14 +9664,14 @@ Optional. If not provided, it will be auto-generated |
 <a name="ondewo.nlu.CreateSessionStepRequest"></a>
 
 ### CreateSessionStepRequest
-CreateSessionStepRequest stores a session step into the session
+Request to append a new SessionStep to an existing session.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| session_id | [string](#string) |  | The unique identifier for the given review Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/sessionsteps/&lt;session_step_uuid&gt;</code></pre>. |
-| session_step | [SessionStep](#ondewo.nlu.SessionStep) |  | The session step to be added |
-| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | field mask specifying what the request should return, e.g. only name, created_at etc. |
+| session_id | [string](#string) |  | The unique identifier of the parent session. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre>. |
+| session_step | [SessionStep](#ondewo.nlu.SessionStep) |  | The session step to be added. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Field mask specifying which fields the returned SessionStep should carry (e.g. only <code>name</code>, <code>created_at</code>). |
 
 
 
@@ -8908,6 +9801,7 @@ The message returned from the DetectIntent method.
 | response_id | [string](#string) |  | The unique identifier of the response. It can be used to locate a response in the training example set or for reporting issues. |
 | query_result | [QueryResult](#ondewo.nlu.QueryResult) |  | The results of the conversational query or event processing. |
 | webhook_status | [google.rpc.Status](#google.rpc.Status) |  | Specifies the status of the webhook request. <code>webhook_status</code> is never populated in webhook requests. |
+| llm_telemetry_report | [LlmTelemetryReport](#ondewo.nlu.LlmTelemetryReport) |  | Aggregated LLM telemetry — duplicated convenience copy of <code>query_result.llm_telemetry_report</code> for unary clients. |
 
 
 
@@ -9124,14 +10018,14 @@ This message is a request to get a session step
 <a name="ondewo.nlu.ImageFileResource"></a>
 
 ### ImageFileResource
-
+Represents an image file resource (e.g., JPEG, PNG, GIF) attached to a session.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| name | [string](#string) |  | The unique identifier of the session for which the latest review should be returned Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/images/&lt;image_uuid&gt;</code></pre> |
+| name | [string](#string) |  | The unique identifier of the image file resource. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/images/&lt;image_uuid&gt;</code></pre> |
 | display_name | [string](#string) |  | File name of the image, e.g., MyPicture.jpg, or a user assigned display name |
-| bytes | [bytes](#bytes) |  | Bytes of the audio file |
+| bytes | [bytes](#bytes) |  | Raw bytes of the image file. |
 | created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
 | modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
 | created_by | [string](#string) |  | User id in form of a valid UUID. |
@@ -9799,6 +10693,254 @@ This message is a response of listing session user_ids
 
 
 
+<a name="ondewo.nlu.LlmCallFinishedEvent"></a>
+
+### LlmCallFinishedEvent
+Emitted on a streaming DetectIntent when an LLM invocation finishes.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| llm_call_id | [string](#string) |  | Collector-assigned id grouping events for this LLM call. |
+| end_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Wall-clock end time of the LLM call. |
+| duration_seconds | [double](#double) |  | Convenience duration (end_time - start_time). |
+| llm_token_usage | [LlmTokenUsage](#ondewo.nlu.LlmTokenUsage) |  | Final token totals for this LLM call. |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmCallStartedEvent"></a>
+
+### LlmCallStartedEvent
+Emitted on a streaming DetectIntent when an LLM invocation starts.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| llm_call_id | [string](#string) |  | Collector-assigned id grouping all events emitted for this LLM call. |
+| provider | [string](#string) |  | Provider tag: "autogen" | "langchain" | "openai" | "anthropic" | ... |
+| model_name | [string](#string) |  | Concrete model identifier (e.g. "claude-3-5-sonnet-20241022"). |
+| agent_name | [string](#string) |  | intent_agent executor / agent name owning the call. |
+| start_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Wall-clock start of the LLM call. |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmTelemetry"></a>
+
+### LlmTelemetry
+Telemetry for a single LLM invocation inside one DetectIntent turn.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| provider | [string](#string) |  | Provider tag: "autogen" | "langchain" | "openai" | "anthropic" | ... |
+| model_name | [string](#string) |  | Concrete model identifier (e.g. "claude-3-5-sonnet-20241022"). |
+| agent_name | [string](#string) |  | intent_agent executor / agent name. |
+| llm_token_usage | [LlmTokenUsage](#ondewo.nlu.LlmTokenUsage) |  | Totals for this call. |
+| llm_tool_call_metadatas | [LlmToolCallMetadata](#ondewo.nlu.LlmToolCallMetadata) | repeated | Tool calls observed during this LLM invocation. |
+| tool_call_count | [int32](#int32) |  | Denormalized len(llm_tool_call_metadatas). |
+| llm_thinking_metadata | [LlmThinkingMetadata](#ondewo.nlu.LlmThinkingMetadata) |  | Thinking block when surfaced by the model. |
+| start_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Wall-clock start of the LLM call. |
+| end_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Wall-clock end of the LLM call. |
+| duration_seconds | [double](#double) |  | Convenience duration (end_time - start_time). |
+| run_id | [string](#string) |  | LangChain / LangSmith run identifier for this LLM call (UUID). |
+| parent_run_id | [string](#string) |  | LangChain / LangSmith identifier of the parent run that spawned this call, forming the LangSmith run tree. |
+| run_type | [string](#string) |  | LangSmith run taxonomy: chain | llm | tool | retriever | agent | parser | prompt. |
+| component_name | [string](#string) |  | Serialized component name from LangChain callbacks (e.g. "ChatOpenAI"). |
+| tags | [string](#string) | repeated | Tags propagated via RunnableConfig. |
+| metadata | [google.protobuf.Struct](#google.protobuf.Struct) |  | Free-form metadata propagated via RunnableConfig. |
+| inputs | [google.protobuf.Struct](#google.protobuf.Struct) |  | Redaction-aware snapshot of inputs at the run boundary. |
+| outputs | [google.protobuf.Struct](#google.protobuf.Struct) |  | Redaction-aware snapshot of outputs at the run boundary. |
+| error_class | [string](#string) |  | Exception class name when the LLM call failed; empty on success. |
+| error_message | [string](#string) |  | Exception message text when the LLM call failed; empty on success. |
+| traceback | [string](#string) |  | Formatted stack trace when the LLM call failed; empty on success. |
+| streaming_chunk_count | [int32](#int32) |  | Streaming chunk count observed during the call. |
+| first_token_latency_seconds | [double](#double) |  | Time-to-first-token (start_time -> first chunk). |
+| system_fingerprint | [string](#string) |  | OpenAI system_fingerprint when available. |
+| cached | [bool](#bool) |  | Whether the result was served from a client-side cache. |
+| retry_count | [int32](#int32) |  | Retry count for the underlying provider call. |
+| fallback_depth | [int32](#int32) |  | Index inside a with_fallbacks([...]) chain when the call succeeded. |
+| temperature | [double](#double) |  | Sampling temperature requested for the LLM call (request kwargs). |
+| top_p | [double](#double) |  | Top-p (nucleus sampling) parameter requested for the LLM call. |
+| max_tokens | [int32](#int32) |  | Maximum number of tokens the model was allowed to produce. |
+| n_generations | [int32](#int32) |  | Number of generations the model was asked to return (<code>n</code> in OpenAI API). |
+| finish_reasons | [string](#string) | repeated | One finish reason per generation (e.g. <code>stop</code>, <code>length</code>, <code>tool_calls</code>, <code>content_filter</code>). |
+| cached_input_tokens | [int32](#int32) |  | Number of input tokens served from the provider-side prompt cache (Anthropic <code>cache_read_input_tokens</code>). |
+| cache_creation_input_tokens | [int32](#int32) |  | Number of input tokens written to the provider-side prompt cache (Anthropic <code>cache_creation_input_tokens</code>). |
+| langsmith_run_url | [string](#string) |  | LangSmith run URL for direct click-through when LangSmith tracing is active. |
+| team_name | [string](#string) |  | Autogen team display name owning the call. |
+| team_id | [string](#string) |  | Autogen team identifier (UUID). |
+| agent_role | [string](#string) |  | Autogen agent role tag (user_proxy | assistant | tool_executor | reflection). |
+| sender_agent | [string](#string) |  | Name of the autogen agent that produced the message. |
+| recipient_agent | [string](#string) |  | Name of the autogen agent that received the message. |
+| turn_index | [int32](#int32) |  | Zero-based position of this LLM call inside the autogen <code>run_stream()</code> sequence. |
+| reflection_iterations | [int32](#int32) |  | Number of reflection loops executed in <code>robust_assistant_agent</code> for this call. |
+| termination_reason | [string](#string) |  | Autogen <code>TaskResult.stop_reason</code> string when surfaced. |
+| evaluator_runs_join_key | [string](#string) |  | Join key linking this LLM call to an evaluator run (see llm_evaluation.proto). |
+| llm_evaluation_feedbacks | [LlmEvaluationFeedback](#ondewo.nlu.LlmEvaluationFeedback) | repeated | Immediate inline feedback recorded inside the turn (e.g. self-grading by a reflection agent). Each entry is a single LlmEvaluationFeedback record. |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmTelemetryReport"></a>
+
+### LlmTelemetryReport
+Aggregated telemetry across all LLM calls in one DetectIntent turn.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| llm_token_usage | [LlmTokenUsage](#ondewo.nlu.LlmTokenUsage) |  | Summed LlmTokenUsage across llm_telemetries. |
+| tool_call_count_total | [int32](#int32) |  | Sum of LlmTelemetry.tool_call_count across llm_telemetries. |
+| llm_call_count | [int32](#int32) |  | Denormalized len(llm_telemetries). |
+| llm_telemetries | [LlmTelemetry](#ondewo.nlu.LlmTelemetry) | repeated | Per-LLM-invocation breakdown. |
+| duration_seconds_total | [double](#double) |  | Sum of LlmTelemetry.duration_seconds across llm_telemetries. |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmThinkingDeltaEvent"></a>
+
+### LlmThinkingDeltaEvent
+Emitted on a streaming DetectIntent for each thinking-delta chunk.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| llm_call_id | [string](#string) |  | Groups events under an LlmTelemetry entry. |
+| text_delta | [string](#string) |  | Incremental thinking text chunk (subject to redaction policy on the client). |
+| timestamp | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Wall-clock timestamp of the chunk. |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmThinkingMetadata"></a>
+
+### LlmThinkingMetadata
+Thinking / reasoning block emitted by the model (e.g. Anthropic extended thinking,
+OpenAI o-series reasoning).
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| llm_token_usage | [LlmTokenUsage](#ondewo.nlu.LlmTokenUsage) |  | Token attribution for the thinking block when surfaced by the provider. |
+| start_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Wall-clock start of the thinking block. |
+| end_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Wall-clock end of the thinking block. |
+| duration_seconds | [double](#double) |  | Convenience duration (end_time - start_time). |
+| thinking_text | [string](#string) |  | Raw thinking text. Subject to redaction depending on telemetry policy. |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmTokenUsage"></a>
+
+### LlmTokenUsage
+Token usage counters for a single LLM call (or aggregate).
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| total_tokens | [int64](#int64) |  | Sum of input and output tokens for this call (or aggregate across calls). |
+| input_tokens | [int64](#int64) |  | Number of prompt / input tokens consumed. |
+| output_tokens | [int64](#int64) |  | Number of completion / output tokens produced. |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmTokenUsageUpdateEvent"></a>
+
+### LlmTokenUsageUpdateEvent
+Emitted on a streaming DetectIntent when running token counts update.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| llm_call_id | [string](#string) |  | Groups events under an LlmTelemetry entry. |
+| llm_token_usage | [LlmTokenUsage](#ondewo.nlu.LlmTokenUsage) |  | Running totals for that llm_call. |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmToolCallFinishedEvent"></a>
+
+### LlmToolCallFinishedEvent
+Emitted on a streaming DetectIntent when a tool call finishes.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| tool_call_id | [string](#string) |  | Stable id matching the matching LlmToolCallStartedEvent. |
+| end_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Wall-clock end time of the tool call. |
+| duration_seconds | [double](#double) |  | Convenience duration (end_time - start_time). |
+| llm_token_usage | [LlmTokenUsage](#ondewo.nlu.LlmTokenUsage) |  | Token attribution for this tool call when available. |
+| result | [google.protobuf.Struct](#google.protobuf.Struct) |  | Tool result payload (may be omitted on failure or redaction). |
+| error_message | [string](#string) |  | Populated only when the tool call failed; empty string on success. |
+| llm_call_id | [string](#string) |  | Groups events under an LlmTelemetry entry. |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmToolCallMetadata"></a>
+
+### LlmToolCallMetadata
+Metadata for one tool call executed by the LLM.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| tool_call_id | [string](#string) |  | Stable id assigned by the upstream framework (autogen / langchain). |
+| tool_name | [string](#string) |  | Name of the tool / function invoked. |
+| start_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Wall-clock start time of the tool call. |
+| end_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Wall-clock end time of the tool call. |
+| duration_seconds | [double](#double) |  | Convenience duration (end_time - start_time). |
+| llm_token_usage | [LlmTokenUsage](#ondewo.nlu.LlmTokenUsage) |  | Token attribution for this tool call when available. |
+| arguments | [google.protobuf.Struct](#google.protobuf.Struct) |  | Tool arguments as a structured payload. May be omitted on incremental events. |
+| result | [google.protobuf.Struct](#google.protobuf.Struct) |  | Tool result as a structured payload. May be omitted on incremental events. |
+| error_message | [string](#string) |  | Populated only when the tool call failed; empty string on success. |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmToolCallStartedEvent"></a>
+
+### LlmToolCallStartedEvent
+Emitted on a streaming DetectIntent when a tool call starts.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| tool_call_id | [string](#string) |  | Stable id assigned by the upstream framework (autogen / langchain). |
+| tool_name | [string](#string) |  | Name of the tool / function invoked. |
+| arguments | [google.protobuf.Struct](#google.protobuf.Struct) |  | Tool arguments as a structured payload (Struct kept as-is; not a custom Message). |
+| start_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Wall-clock start time of the tool call. |
+| llm_call_id | [string](#string) |  | Groups events under an LlmTelemetry entry. |
+
+
+
+
+
+
 <a name="ondewo.nlu.QueryInput"></a>
 
 ### QueryInput
@@ -9884,6 +11026,7 @@ You should not rely on this field as it isn&apos;t guaranteed to be accurate, or
 | diagnostic_info | [google.protobuf.Struct](#google.protobuf.Struct) |  | The free-form diagnostic info. For example, this field could contain webhook call latency. |
 | language_code | [string](#string) |  | The language that was triggered during intent detection. See <a href="https://dialogflow.com/docs/reference/language">Language Support</a> for a list of the currently supported language codes. |
 | file_resources | [FileResource](#ondewo.nlu.FileResource) | repeated | Generated or attached files, e.g., llm generates a picture or file attachment |
+| llm_telemetry_report | [LlmTelemetryReport](#ondewo.nlu.LlmTelemetryReport) |  | Aggregated LLM telemetry (tokens, tool calls, thinking) for this turn. |
 
 
 
@@ -10123,12 +11266,12 @@ This string represents what has been passed to the entity recognition and intent
 <a name="ondewo.nlu.SessionStep"></a>
 
 ### SessionStep
-SessionStep is a single user interaction as part of a session
+SessionStep is a single user interaction as part of a session.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| name | [string](#string) |  | The unique identifier for the given review Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/sessionsteps/&lt;session_step_uuid&gt;</code></pre> |
+| name | [string](#string) |  | The unique identifier of the session step. Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/sessionsteps/&lt;session_step_uuid&gt;</code></pre> |
 | detect_intent_request | [DetectIntentRequest](#ondewo.nlu.DetectIntentRequest) |  | The detect intent request of the session step |
 | detect_intent_response | [DetectIntentResponse](#ondewo.nlu.DetectIntentResponse) |  | The detect intent response of the session step |
 | contexts | [Context](#ondewo.nlu.Context) | repeated | The contexts which were active at the beginning of this step |
@@ -10138,6 +11281,7 @@ SessionStep is a single user interaction as part of a session
 | created_by | [string](#string) |  | User id in form of a valid UUID. |
 | modified_by | [string](#string) |  | User id in form of a valid UUID. |
 | audio_file_resources | [AudioFileResource](#ondewo.nlu.AudioFileResource) | repeated | audio file resources associated with the session step |
+| llm_telemetry_report | [LlmTelemetryReport](#ondewo.nlu.LlmTelemetryReport) |  | Aggregated LLM telemetry for this step (one entry per LLM invocation, plus turn-level totals). |
 
 
 
@@ -10181,6 +11325,12 @@ Multiple response messages can be returned in order:
 | recognition_result | [StreamingRecognitionResult](#ondewo.nlu.StreamingRecognitionResult) |  | The result of speech recognition. |
 | query_result | [QueryResult](#ondewo.nlu.QueryResult) |  | The result of the conversational query or event processing. |
 | webhook_status | [google.rpc.Status](#google.rpc.Status) |  | Specifies the status of the webhook request. |
+| llm_call_started | [LlmCallStartedEvent](#ondewo.nlu.LlmCallStartedEvent) |  |  |
+| llm_call_finished | [LlmCallFinishedEvent](#ondewo.nlu.LlmCallFinishedEvent) |  |  |
+| llm_tool_call_started | [LlmToolCallStartedEvent](#ondewo.nlu.LlmToolCallStartedEvent) |  |  |
+| llm_tool_call_finished | [LlmToolCallFinishedEvent](#ondewo.nlu.LlmToolCallFinishedEvent) |  |  |
+| llm_thinking_delta | [LlmThinkingDeltaEvent](#ondewo.nlu.LlmThinkingDeltaEvent) |  |  |
+| llm_token_usage_update | [LlmTokenUsageUpdateEvent](#ondewo.nlu.LlmTokenUsageUpdateEvent) |  |  |
 
 
 
@@ -10419,13 +11569,14 @@ Type of the response message.
 <a name="ondewo.nlu.TranscriptionType"></a>
 
 ### TranscriptionType
-
+Identifies whether a transcription was produced by an automatic
+speech-to-text system or by a human annotator.
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| TRANSCRIPTION_TYPE_UNSPECIFIED | 0 | unspecified |
-| TRANSCRIPTION_TYPE_S2T | 1 | Automatic transcription by a speech to text system |
-| TRANSCRIPTION_TYPE_HUMAN | 2 | Manual human transcription |
+| TRANSCRIPTION_TYPE_UNSPECIFIED | 0 | Sentinel value when the source of the transcription was not specified. |
+| TRANSCRIPTION_TYPE_S2T | 1 | Automatic transcription produced by a speech-to-text system. |
+| TRANSCRIPTION_TYPE_HUMAN | 2 | Manual transcription produced by a human annotator. |
 
 
  <!-- end enums -->
@@ -10450,27 +11601,27 @@ A session represents an interaction with a user. You retrieve user input and pas
 | UpdateSessionStep | [UpdateSessionStepRequest](#ondewo.nlu.UpdateSessionStepRequest) | [SessionStep](#ondewo.nlu.SessionStep) | UpdateSessionStep: updates an existing session step in a session |
 | DeleteSessionStep | [DeleteSessionStepRequest](#ondewo.nlu.DeleteSessionStepRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | DeleteSessionStep: deletes an existing session step from the session |
 | DeleteSession | [DeleteSessionRequest](#ondewo.nlu.DeleteSessionRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | DeleteSession: delete a session(=conversation) from ondewo-kb (for testing only) |
-| ListSessionLabels | [ListSessionLabelsRequest](#ondewo.nlu.ListSessionLabelsRequest) | [ListSessionLabelsResponse](#ondewo.nlu.ListSessionLabelsResponse) |  |
-| ListSessionLabelsOfAllSessions | [ListSessionLabelsOfAllSessionsRequest](#ondewo.nlu.ListSessionLabelsOfAllSessionsRequest) | [ListSessionLabelsResponse](#ondewo.nlu.ListSessionLabelsResponse) |  |
-| ListLanguageCodesOfAllSessions | [ListLanguageCodesOfAllSessionsRequest](#ondewo.nlu.ListLanguageCodesOfAllSessionsRequest) | [ListLanguageCodesResponse](#ondewo.nlu.ListLanguageCodesResponse) |  |
-| ListMatchedIntentsOfAllSessions | [ListMatchedIntentsOfAllSessionsRequest](#ondewo.nlu.ListMatchedIntentsOfAllSessionsRequest) | [ListMatchedIntentsResponse](#ondewo.nlu.ListMatchedIntentsResponse) |  |
-| ListMatchedEntityTypesOfAllSessions | [ListMatchedEntityTypesOfAllSessionsRequest](#ondewo.nlu.ListMatchedEntityTypesOfAllSessionsRequest) | [ListMatchedEntityTypesResponse](#ondewo.nlu.ListMatchedEntityTypesResponse) |  |
-| ListUserIdsOfAllSessions | [ListUserIdsOfAllSessionsRequest](#ondewo.nlu.ListUserIdsOfAllSessionsRequest) | [ListUserIdsResponse](#ondewo.nlu.ListUserIdsResponse) |  |
-| ListIdentifiedUserIdsOfAllSessions | [ListIdentifiedUserIdsOfAllSessionsRequest](#ondewo.nlu.ListIdentifiedUserIdsOfAllSessionsRequest) | [ListIdentifiedUserIdsResponse](#ondewo.nlu.ListIdentifiedUserIdsResponse) |  |
-| ListTagsOfAllSessions | [ListTagsOfAllSessionsRequest](#ondewo.nlu.ListTagsOfAllSessionsRequest) | [ListTagsResponse](#ondewo.nlu.ListTagsResponse) |  |
-| ListInputContextsOfAllSessions | [ListInputContextsOfAllSessionsRequest](#ondewo.nlu.ListInputContextsOfAllSessionsRequest) | [ListInputContextsResponse](#ondewo.nlu.ListInputContextsResponse) |  |
-| ListOutputContextsOfAllSessions | [ListOutputContextsOfAllSessionsRequest](#ondewo.nlu.ListOutputContextsOfAllSessionsRequest) | [ListOutputContextsResponse](#ondewo.nlu.ListOutputContextsResponse) |  |
-| ListPlatformsOfAllSessions | [ListPlatformsOfAllSessionsRequest](#ondewo.nlu.ListPlatformsOfAllSessionsRequest) | [ListPlatformsResponse](#ondewo.nlu.ListPlatformsResponse) |  |
-| ListAccountIdsOfAllSessions | [ListAccountIdsOfAllSessionsRequest](#ondewo.nlu.ListAccountIdsOfAllSessionsRequest) | [ListAccountIdsResponse](#ondewo.nlu.ListAccountIdsResponse) |  |
-| ListPropertyIdsOfAllSessions | [ListPropertyIdsOfAllSessionsRequest](#ondewo.nlu.ListPropertyIdsOfAllSessionsRequest) | [ListPropertyIdsResponse](#ondewo.nlu.ListPropertyIdsResponse) |  |
-| ListDatastreamIdsOfAllSessions | [ListDatastreamIdsOfAllSessionsRequest](#ondewo.nlu.ListDatastreamIdsOfAllSessionsRequest) | [ListDatastreamIdsResponse](#ondewo.nlu.ListDatastreamIdsResponse) |  |
-| ListOriginIdsOfAllSessions | [ListOriginIdsOfAllSessionsRequest](#ondewo.nlu.ListOriginIdsOfAllSessionsRequest) | [ListOriginIdsResponse](#ondewo.nlu.ListOriginIdsResponse) |  |
-| AddSessionLabels | [AddSessionLabelsRequest](#ondewo.nlu.AddSessionLabelsRequest) | [Session](#ondewo.nlu.Session) |  |
-| DeleteSessionLabels | [DeleteSessionLabelsRequest](#ondewo.nlu.DeleteSessionLabelsRequest) | [Session](#ondewo.nlu.Session) |  |
-| AddSessionComment | [AddSessionCommentRequest](#ondewo.nlu.AddSessionCommentRequest) | [Comment](#ondewo.nlu.Comment) |  |
-| DeleteSessionComments | [DeleteSessionCommentsRequest](#ondewo.nlu.DeleteSessionCommentsRequest) | [Session](#ondewo.nlu.Session) |  |
-| UpdateSessionComments | [UpdateSessionCommentsRequest](#ondewo.nlu.UpdateSessionCommentsRequest) | [Session](#ondewo.nlu.Session) |  |
-| ListSessionComments | [ListSessionCommentsRequest](#ondewo.nlu.ListSessionCommentsRequest) | [ListSessionCommentsResponse](#ondewo.nlu.ListSessionCommentsResponse) |  |
+| ListSessionLabels | [ListSessionLabelsRequest](#ondewo.nlu.ListSessionLabelsRequest) | [ListSessionLabelsResponse](#ondewo.nlu.ListSessionLabelsResponse) | Returns the list of labels attached to a single session. |
+| ListSessionLabelsOfAllSessions | [ListSessionLabelsOfAllSessionsRequest](#ondewo.nlu.ListSessionLabelsOfAllSessionsRequest) | [ListSessionLabelsResponse](#ondewo.nlu.ListSessionLabelsResponse) | Returns the distinct set of labels observed across all sessions of the agent, optionally narrowed by a SessionFilter. |
+| ListLanguageCodesOfAllSessions | [ListLanguageCodesOfAllSessionsRequest](#ondewo.nlu.ListLanguageCodesOfAllSessionsRequest) | [ListLanguageCodesResponse](#ondewo.nlu.ListLanguageCodesResponse) | Returns the distinct set of language codes observed across all sessions of the agent, optionally narrowed by a SessionFilter. |
+| ListMatchedIntentsOfAllSessions | [ListMatchedIntentsOfAllSessionsRequest](#ondewo.nlu.ListMatchedIntentsOfAllSessionsRequest) | [ListMatchedIntentsResponse](#ondewo.nlu.ListMatchedIntentsResponse) | Returns the distinct set of intents matched across all sessions of the agent, optionally narrowed by a SessionFilter. |
+| ListMatchedEntityTypesOfAllSessions | [ListMatchedEntityTypesOfAllSessionsRequest](#ondewo.nlu.ListMatchedEntityTypesOfAllSessionsRequest) | [ListMatchedEntityTypesResponse](#ondewo.nlu.ListMatchedEntityTypesResponse) | Returns the distinct set of entity types recognised across all sessions of the agent, optionally narrowed by a SessionFilter. |
+| ListUserIdsOfAllSessions | [ListUserIdsOfAllSessionsRequest](#ondewo.nlu.ListUserIdsOfAllSessionsRequest) | [ListUserIdsResponse](#ondewo.nlu.ListUserIdsResponse) | Returns the distinct set of <code>user_id</code> values observed across all sessions of the agent, optionally narrowed by a SessionFilter. |
+| ListIdentifiedUserIdsOfAllSessions | [ListIdentifiedUserIdsOfAllSessionsRequest](#ondewo.nlu.ListIdentifiedUserIdsOfAllSessionsRequest) | [ListIdentifiedUserIdsResponse](#ondewo.nlu.ListIdentifiedUserIdsResponse) | Returns the distinct set of <code>identified_user_id</code> values observed across all sessions of the agent, optionally narrowed by a SessionFilter. |
+| ListTagsOfAllSessions | [ListTagsOfAllSessionsRequest](#ondewo.nlu.ListTagsOfAllSessionsRequest) | [ListTagsResponse](#ondewo.nlu.ListTagsResponse) | Returns the distinct set of intent tags observed across all sessions of the agent, optionally narrowed by a SessionFilter. |
+| ListInputContextsOfAllSessions | [ListInputContextsOfAllSessionsRequest](#ondewo.nlu.ListInputContextsOfAllSessionsRequest) | [ListInputContextsResponse](#ondewo.nlu.ListInputContextsResponse) | Returns the distinct set of input contexts observed across all sessions of the agent, optionally narrowed by a SessionFilter. |
+| ListOutputContextsOfAllSessions | [ListOutputContextsOfAllSessionsRequest](#ondewo.nlu.ListOutputContextsOfAllSessionsRequest) | [ListOutputContextsResponse](#ondewo.nlu.ListOutputContextsResponse) | Returns the distinct set of output contexts observed across all sessions of the agent, optionally narrowed by a SessionFilter. |
+| ListPlatformsOfAllSessions | [ListPlatformsOfAllSessionsRequest](#ondewo.nlu.ListPlatformsOfAllSessionsRequest) | [ListPlatformsResponse](#ondewo.nlu.ListPlatformsResponse) | Returns the distinct set of <code>Intent.Message.Platform</code> values observed across all sessions of the agent, optionally narrowed by a SessionFilter. |
+| ListAccountIdsOfAllSessions | [ListAccountIdsOfAllSessionsRequest](#ondewo.nlu.ListAccountIdsOfAllSessionsRequest) | [ListAccountIdsResponse](#ondewo.nlu.ListAccountIdsResponse) | Returns the distinct set of <code>account_id</code> values observed across all sessions of the agent, optionally narrowed by a SessionFilter. |
+| ListPropertyIdsOfAllSessions | [ListPropertyIdsOfAllSessionsRequest](#ondewo.nlu.ListPropertyIdsOfAllSessionsRequest) | [ListPropertyIdsResponse](#ondewo.nlu.ListPropertyIdsResponse) | Returns the distinct set of <code>property_id</code> values observed across all sessions of the agent, optionally narrowed by a SessionFilter. |
+| ListDatastreamIdsOfAllSessions | [ListDatastreamIdsOfAllSessionsRequest](#ondewo.nlu.ListDatastreamIdsOfAllSessionsRequest) | [ListDatastreamIdsResponse](#ondewo.nlu.ListDatastreamIdsResponse) | Returns the distinct set of <code>datastream_id</code> values observed across all sessions of the agent, optionally narrowed by a SessionFilter. |
+| ListOriginIdsOfAllSessions | [ListOriginIdsOfAllSessionsRequest](#ondewo.nlu.ListOriginIdsOfAllSessionsRequest) | [ListOriginIdsResponse](#ondewo.nlu.ListOriginIdsResponse) | Returns the distinct set of <code>origin_id</code> values observed across all sessions of the agent, optionally narrowed by a SessionFilter. |
+| AddSessionLabels | [AddSessionLabelsRequest](#ondewo.nlu.AddSessionLabelsRequest) | [Session](#ondewo.nlu.Session) | Attaches the supplied labels to a session and returns the updated session. |
+| DeleteSessionLabels | [DeleteSessionLabelsRequest](#ondewo.nlu.DeleteSessionLabelsRequest) | [Session](#ondewo.nlu.Session) | Removes the supplied labels from a session and returns the updated session. |
+| AddSessionComment | [AddSessionCommentRequest](#ondewo.nlu.AddSessionCommentRequest) | [Comment](#ondewo.nlu.Comment) | Appends a comment to a session and returns the persisted comment. |
+| DeleteSessionComments | [DeleteSessionCommentsRequest](#ondewo.nlu.DeleteSessionCommentsRequest) | [Session](#ondewo.nlu.Session) | Removes the comments named in the request from a session and returns the updated session. |
+| UpdateSessionComments | [UpdateSessionCommentsRequest](#ondewo.nlu.UpdateSessionCommentsRequest) | [Session](#ondewo.nlu.Session) | Updates an existing comment on a session and returns the updated session. |
+| ListSessionComments | [ListSessionCommentsRequest](#ondewo.nlu.ListSessionCommentsRequest) | [ListSessionCommentsResponse](#ondewo.nlu.ListSessionCommentsResponse) | Lists the comments attached to a session with pagination support. |
 | ListSessionReviews | [ListSessionReviewsRequest](#ondewo.nlu.ListSessionReviewsRequest) | [ListSessionReviewsResponse](#ondewo.nlu.ListSessionReviewsResponse) | ListSessionReviews: returns list of session reviews from ondewo-kb; by default only returns session review IDs |
 | GetSessionReview | [GetSessionReviewRequest](#ondewo.nlu.GetSessionReviewRequest) | [SessionReview](#ondewo.nlu.SessionReview) | GetSessionReview: returns a session-review from ondewo-kb or computes the first review if none exists |
 | GetLatestSessionReview | [GetLatestSessionReviewRequest](#ondewo.nlu.GetLatestSessionReviewRequest) | [SessionReview](#ondewo.nlu.SessionReview) | GetLatestSessionReview: returns a session-review from ondewo-kb or computes the first review if none exists |
