@@ -784,8 +784,8 @@ message LlmTelemetry {
     string evaluator_runs_join_key = 44;
 
     // Immediate inline feedback recorded inside the turn (e.g. self-grading by a
-    // reflection agent). Each entry is a single LlmFeedback record.
-    repeated LlmFeedback llm_feedbacks = 45;
+    // reflection agent). Each entry is a single LlmEvaluationLlmFeedback record.
+    repeated LlmEvaluationLlmFeedback llm_feedbacks = 45;
 }
 
 // Aggregated telemetry across all LLM calls in one DetectIntent turn.
