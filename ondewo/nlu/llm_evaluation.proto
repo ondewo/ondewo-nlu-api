@@ -20,6 +20,7 @@ import "google/protobuf/field_mask.proto";
 import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/empty.proto";
+import "ondewo/nlu/operations.proto";
 
 // LangSmith-style evaluation surface: datasets, examples, experiments, evaluator
 // runs, feedback (LLM-as-judge / human / heuristic / custom code / pairwise) and
@@ -31,7 +32,7 @@ service LlmEvaluations {
     // Create a new evaluation dataset.
     rpc LlmEvaluationCreateDataset (CreateLlmEvaluationDatasetRequest) returns (LlmEvaluationDataset);
 
-    // Get an evaluation dataset by id.
+    // Get an evaluation dataset by resource name.
     rpc LlmEvaluationGetDataset (GetLlmEvaluationDatasetRequest) returns (LlmEvaluationDataset);
 
     // List evaluation datasets in the project, optionally filtered + paginated.
@@ -53,10 +54,10 @@ service LlmEvaluations {
     // Add multiple examples to an existing dataset in one call.
     rpc LlmEvaluationAddExamples (AddLlmEvaluationExamplesRequest) returns (AddLlmEvaluationExamplesResponse);
 
-    // Get a single evaluation example by id.
+    // Get a single evaluation example by resource name.
     rpc LlmEvaluationGetExample (GetLlmEvaluationExampleRequest) returns (LlmEvaluationExample);
 
-    // List examples in a dataset, optionally paginated.
+    // List examples in a dataset, optionally filtered + paginated.
     rpc LlmEvaluationListExamples (ListLlmEvaluationExamplesRequest) returns (ListLlmEvaluationExamplesResponse);
 
     // Update fields of an existing evaluation example.
@@ -69,19 +70,20 @@ service LlmEvaluations {
 
     // region experiments
 
-    // Run a fresh experiment over a dataset. Long-running: returns the completed
-    // experiment record once all evaluators have produced feedback.
-    rpc LlmEvaluationEvaluatorRunExperiment (RunLlmEvaluationExperimentRequest) returns (LlmEvaluationExperiment);
+    // Run a fresh experiment over a dataset. Long-running operation: the returned
+    // Operation resolves to the completed LlmEvaluationExperiment once all
+    // evaluators have produced feedback.
+    rpc LlmEvaluationRunExperiment (RunLlmEvaluationExperimentRequest) returns (ondewo.nlu.Operation);
 
-    // Retrieve a previously-run experiment by id.
+    // Retrieve a previously-run experiment by resource name.
     rpc LlmEvaluationGetExperiment (GetLlmEvaluationExperimentRequest) returns (LlmEvaluationExperiment);
 
-    // List experiments in a project / dataset, optionally paginated.
+    // List experiments in a project, optionally filtered + paginated.
     rpc LlmEvaluationListExperiments (ListLlmEvaluationExperimentsRequest) returns (ListLlmEvaluationExperimentsResponse);
 
-    // Update metadata of an experiment (e.g. baseline pointer, name, tags).
-    // Evaluator runs and feedback are immutable; use SubmitFeedback / DeleteFeedback
-    // for downstream annotations.
+    // Update metadata of an experiment (e.g. baseline pointer, display_name).
+    // Evaluator runs and feedback are immutable; use LlmEvaluationSubmitFeedback /
+    // LlmEvaluationDeleteFeedback for downstream annotations.
     rpc LlmEvaluationUpdateExperiment (UpdateLlmEvaluationExperimentRequest) returns (LlmEvaluationExperiment);
 
     // Delete an experiment and all owned evaluator runs + feedbacks.
@@ -98,13 +100,13 @@ service LlmEvaluations {
     // region feedback
 
     // Submit a single feedback record (used by human reviewers / external evaluators).
-    rpc LlmEvaluationSubmitFeedback (SubmitLlmEvaluationLlmFeedbackRequest) returns (LlmEvaluationLlmFeedback);
+    rpc LlmEvaluationSubmitFeedback (SubmitLlmEvaluationFeedbackRequest) returns (LlmEvaluationFeedback);
 
-    // List feedback records, optionally filtered by experiment / example / criterion.
-    rpc LlmEvaluationListFeedback (ListLlmEvaluationLlmFeedbackRequest) returns (ListLlmEvaluationLlmFeedbackResponse);
+    // List feedback records, optionally filtered + paginated.
+    rpc LlmEvaluationListFeedback (ListLlmEvaluationFeedbackRequest) returns (ListLlmEvaluationFeedbackResponse);
 
     // Delete a single feedback record.
-    rpc LlmEvaluationDeleteFeedback (DeleteLlmEvaluationLlmFeedbackRequest) returns (google.protobuf.Empty);
+    rpc LlmEvaluationDeleteFeedback (DeleteLlmEvaluationFeedbackRequest) returns (google.protobuf.Empty);
 
     // endregion feedback
 
@@ -161,38 +163,42 @@ message LlmEvaluationExample {
     string name = 1;
 
     // Human-readable display name.
-    string display_name = 12;
+    string display_name = 2;
+
+    // Free-form description.
+    string description = 3;
 
     // Structured inputs payload — agent inputs, prompt vars, retrieval context, ...
-    google.protobuf.Struct inputs = 2;
+    google.protobuf.Struct inputs = 4;
 
     // Structured expected outputs — gold answer, expected tool sequence, ...
-    google.protobuf.Struct expected_outputs = 3;
+    google.protobuf.Struct expected_outputs = 5;
 
     // Free-form metadata.
-    google.protobuf.Struct metadata = 4;
+    google.protobuf.Struct metadata = 6;
 
-    // Foreign key to the owning dataset.
-    string dataset_id = 5;
+    // Resource name of the owning dataset.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationDatasets/&lt;dataset_uuid&gt;</code>.
+    string llm_evaluation_dataset_name = 7;
 
     // Creation date and time. Read-only field.
-    google.protobuf.Timestamp created_at = 6;
+    google.protobuf.Timestamp created_at = 8;
 
     // User id in form of a valid UUID.
-    string created_by = 7;
+    string created_by = 9;
 
     // Project owning the example (denormalized from parent dataset for cheap
     // per-project filtering). Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
-    string parent = 8;
+    string parent = 10;
 
     // BCP-47 language code (denormalized from parent dataset for cheap filtering).
-    string language_code = 9;
+    string language_code = 11;
 
     // Modification date and time. Read-only field.
-    google.protobuf.Timestamp modified_at = 10;
+    google.protobuf.Timestamp modified_at = 12;
 
     // User id in form of a valid UUID.
-    string modified_by = 11;
+    string modified_by = 13;
 }
 
 // A single experiment run over a dataset.
@@ -201,76 +207,81 @@ message LlmEvaluationExperiment {
     // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationExperiments/&lt;experiment_uuid&gt;</code>.
     string name = 1;
 
-    // Foreign key to the source dataset.
-    string dataset_id = 2;
+    // Resource name of the source dataset.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationDatasets/&lt;dataset_uuid&gt;</code>.
+    string llm_evaluation_dataset_name = 2;
 
     // Required. Human-readable display name.
     string display_name = 3;
 
+    // Free-form description.
+    string description = 4;
+
     // Pin the experiment to a source-tree revision for reproducibility.
-    string git_sha = 4;
+    string git_sha = 5;
 
     // Logical version identifier of the prompt under test.
-    string prompt_version = 5;
+    string prompt_version = 6;
 
     // Concrete model identifier exercised by the experiment.
-    string model_name = 6;
+    string model_name = 7;
 
     // Arbitrary configuration captured at run time.
-    google.protobuf.Struct config = 7;
+    google.protobuf.Struct config = 8;
 
     // One entry per evaluator x example combination.
-    repeated LlmEvaluationEvaluatorRun llm_evaluator_runs = 8;
+    repeated LlmEvaluationEvaluatorRun llm_evaluation_evaluator_runs = 9;
 
     // Wall-clock start of the experiment run.
-    google.protobuf.Timestamp started_at = 9;
+    google.protobuf.Timestamp started_at = 10;
 
     // Wall-clock end of the experiment run.
-    google.protobuf.Timestamp finished_at = 10;
+    google.protobuf.Timestamp finished_at = 11;
 
     // Convenience duration (finished_at - started_at).
-    double duration_seconds = 11;
+    double duration_seconds = 12;
 
     // Number of dataset examples consumed.
-    int32 n_examples = 12;
+    int32 n_examples = 13;
 
     // Number of evaluator runs that produced a passing score.
-    int32 n_passed = 13;
+    int32 n_passed = 14;
 
     // Number of evaluator runs that produced a failing score.
-    int32 n_failed = 14;
+    int32 n_failed = 15;
 
-    // Optional pointer to a baseline experiment for regression detection.
-    string baseline_experiment_id = 15;
+    // Optional. Resource name of a baseline experiment for regression detection.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationExperiments/&lt;experiment_uuid&gt;</code>.
+    string llm_evaluation_baseline_experiment_name = 16;
 
     // Project owning the experiment.
     // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
-    string parent = 16;
+    string parent = 17;
 
     // Current lifecycle status of the experiment (pending / running / succeeded /
     // failed / cancelled).
-    LlmEvaluationExperimentStatus status = 17;
+    LlmEvaluationExperimentStatus llm_evaluation_experiment_status = 18;
 
     // User id in form of a valid UUID.
-    string created_by = 18;
+    string created_by = 19;
 
     // BCP-47 language code (denormalized from parent dataset). Experiments are
     // scoped per (project, language_code); experiment name uniqueness is
     // enforced per (project, language_code) tuple.
-    string language_code = 19;
+    string language_code = 20;
 
     // CcaiService name(s) whose LLM connection details defined the model(s) evaluated in this run
     // (echoed from RunLlmEvaluationExperimentRequest for audit / reproducibility).
-    repeated string ccai_service_names = 20;
+    repeated string ccai_service_names = 21;
 
     // Creation date and time. Read-only field.
-    google.protobuf.Timestamp created_at = 21;
+    google.protobuf.Timestamp created_at = 22;
 
     // Modification date and time. Read-only field.
-    google.protobuf.Timestamp modified_at = 22;
+    google.protobuf.Timestamp modified_at = 23;
 
     // User id in form of a valid UUID.
-    string modified_by = 23;
+    string modified_by = 24;
 }
 
 // Lifecycle status of an experiment.
@@ -301,43 +312,45 @@ message LlmEvaluationEvaluatorRun {
     string name = 1;
 
     // Human-readable display name.
-    string display_name = 14;
+    string display_name = 2;
 
-    // Example the evaluator was run against.
-    string example_id = 2;
+    // Resource name of the example the evaluator was run against.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationDatasets/&lt;dataset_uuid&gt;/examples/&lt;example_uuid&gt;</code>.
+    string llm_evaluation_example_name = 3;
 
     // Ties this evaluator run back to the LlmTelemetry produced when running the target.
-    string llm_telemetry_run_id = 3;
+    string llm_telemetry_run_id = 4;
 
     // Family of evaluator implementations.
-    LlmEvaluationEvaluatorType evaluator_type = 4;
+    LlmEvaluationEvaluatorType llm_evaluation_evaluator_type = 5;
 
     // Logical name of the evaluator (e.g. "faithfulness", "exact_match").
-    string evaluator_name = 5;
+    string evaluator_name = 6;
 
     // One or more feedback records produced by the evaluator.
-    repeated LlmEvaluationLlmFeedback llm_feedbacks = 6;
+    repeated LlmEvaluationFeedback llm_evaluation_feedbacks = 7;
 
-    // Foreign key to the owning experiment.
-    string experiment_id = 7;
+    // Resource name of the owning experiment.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationExperiments/&lt;experiment_uuid&gt;</code>.
+    string llm_evaluation_experiment_name = 8;
 
     // Wall-clock start of the evaluator run.
-    google.protobuf.Timestamp started_at = 8;
+    google.protobuf.Timestamp started_at = 9;
 
     // Wall-clock end of the evaluator run.
-    google.protobuf.Timestamp finished_at = 9;
+    google.protobuf.Timestamp finished_at = 10;
 
     // Creation date and time. Read-only field.
-    google.protobuf.Timestamp created_at = 10;
+    google.protobuf.Timestamp created_at = 11;
 
     // Modification date and time. Read-only field.
-    google.protobuf.Timestamp modified_at = 11;
+    google.protobuf.Timestamp modified_at = 12;
 
     // User id in form of a valid UUID.
-    string created_by = 12;
+    string created_by = 13;
 
     // User id in form of a valid UUID.
-    string modified_by = 13;
+    string modified_by = 14;
 }
 
 // Family of evaluator implementations.
@@ -362,57 +375,60 @@ enum LlmEvaluationEvaluatorType {
 }
 
 // A single feedback record (score + optional categorical + comment + raw payload).
-message LlmEvaluationLlmFeedback {
+message LlmEvaluationFeedback {
     // The unique resource name of the feedback record. Read-only; populated by the server.
     // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationExperiments/&lt;experiment_uuid&gt;/evaluatorRuns/&lt;evaluator_run_uuid&gt;/feedbacks/&lt;feedback_uuid&gt;</code>.
     string name = 1;
 
     // Human-readable display name.
-    string display_name = 15;
+    string display_name = 2;
 
     // Free-form criterion label: "correctness", "faithfulness", "hallucination",
     // "context_precision", "tool_trajectory", "format", "groundedness", "tone",
     // "exact_match", "embedding_distance", "bleu", "rouge", "regression", ...
-    string criterion = 2;
+    string criterion = 3;
 
     // Numeric score (0.0-1.0 by convention). Defaults to 0.0 (proto3 has no field
     // presence on this scalar, so an unset score and a genuine 0.0 are indistinguishable);
     // for purely categorical feedback, rely on categorical_value rather than this field.
-    double score = 3;
+    double score = 4;
 
     // Categorical value when applicable ("pass" | "fail" | "yes" | "no" | tier).
-    string categorical_value = 4;
+    string categorical_value = 5;
 
     // Human-readable comment / rationale.
-    string comment = 5;
+    string comment = 6;
 
     // Human reviewer id or "evaluator:&lt;name&gt;".
-    string annotator_id = 6;
+    string annotator_user_id = 7;
 
     // Creation date and time. Read-only field.
-    google.protobuf.Timestamp created_at = 7;
+    google.protobuf.Timestamp created_at = 8;
 
     // Verbatim evaluator JSON output kept for forensic replay.
-    google.protobuf.Struct raw = 8;
+    google.protobuf.Struct raw = 9;
 
-    // Foreign key to the owning evaluator run (may be empty for top-level
+    // Resource name of the owning evaluator run (may be empty for top-level
     // experiment-scoped feedback submitted via SubmitFeedback).
-    string evaluator_run_id = 9;
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationExperiments/&lt;experiment_uuid&gt;/evaluatorRuns/&lt;evaluator_run_uuid&gt;</code>.
+    string llm_evaluation_evaluator_run_name = 10;
 
-    // Foreign key to the owning experiment.
-    string experiment_id = 10;
+    // Resource name of the owning experiment.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationExperiments/&lt;experiment_uuid&gt;</code>.
+    string llm_evaluation_experiment_name = 11;
 
-    // Foreign key to the example the feedback targets.
-    string example_id = 11;
+    // Resource name of the example the feedback targets.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationDatasets/&lt;dataset_uuid&gt;/examples/&lt;example_uuid&gt;</code>.
+    string llm_evaluation_example_name = 12;
 
     // Modification date and time. Read-only field.
-    google.protobuf.Timestamp modified_at = 12;
+    google.protobuf.Timestamp modified_at = 13;
 
     // User id in form of a valid UUID.
-    string created_by = 13;
+    string created_by = 14;
 
     // User id in form of a valid UUID.
-    string modified_by = 14;
+    string modified_by = 15;
 }
 
 // Pairwise comparison report across multiple experiments.
@@ -422,40 +438,44 @@ message LlmEvaluationComparison {
     string name = 1;
 
     // Human-readable display name.
-    string display_name = 10;
+    string display_name = 2;
 
-    // Experiments being compared (two-or-more).
-    repeated string experiment_ids = 2;
+    // Resource names of the experiments being compared (two-or-more).
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationExperiments/&lt;experiment_uuid&gt;</code>.
+    repeated string llm_evaluation_experiment_names = 3;
 
-    // Optional baseline used for delta computation.
-    string baseline_experiment_id = 3;
+    // Optional. Resource name of the baseline experiment used for delta computation.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationExperiments/&lt;experiment_uuid&gt;</code>.
+    string llm_evaluation_baseline_experiment_name = 4;
 
     // One entry per example.
-    repeated LlmEvaluationPairwiseResult pairwise_results = 4;
+    repeated LlmEvaluationPairwiseResult llm_evaluation_pairwise_results = 5;
 
     // Aggregate stats: win-rate, mean-delta, ...
-    google.protobuf.Struct aggregate = 5;
+    google.protobuf.Struct aggregate = 6;
 
     // Creation date and time. Read-only field.
-    google.protobuf.Timestamp created_at = 6;
+    google.protobuf.Timestamp created_at = 7;
 
     // Modification date and time. Read-only field.
-    google.protobuf.Timestamp modified_at = 7;
+    google.protobuf.Timestamp modified_at = 8;
 
     // User id in form of a valid UUID.
-    string created_by = 8;
+    string created_by = 9;
 
     // User id in form of a valid UUID.
-    string modified_by = 9;
+    string modified_by = 10;
 }
 
 // Per-example pairwise comparison entry.
 message LlmEvaluationPairwiseResult {
-    // Example being compared.
-    string example_id = 1;
+    // Resource name of the example being compared.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationDatasets/&lt;dataset_uuid&gt;/examples/&lt;example_uuid&gt;</code>.
+    string llm_evaluation_example_name = 1;
 
-    // Experiment id of the winner.
-    string winner_experiment_id = 2;
+    // Resource name of the winning experiment.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationExperiments/&lt;experiment_uuid&gt;</code>.
+    string llm_evaluation_winner_experiment_name = 2;
 
     // Score delta against the baseline (positive means winner improved).
     double score_delta = 3;
@@ -498,7 +518,7 @@ message GetLlmEvaluationDatasetRequest {
     string name = 1;
 
     // Optional. The mask to control which fields will be filled with data.
-    // Example: paths=["dataset.name", "dataset.llm_evaluation_examples"]
+    // Example: paths=["name", "llm_evaluation_examples"]
     google.protobuf.FieldMask field_mask = 2;
 
     // Project owning the dataset.
@@ -509,27 +529,45 @@ message GetLlmEvaluationDatasetRequest {
     string language_code = 4;
 }
 
+// Filter conditions for ListDatasets. All fields are optional; multiple fields
+// set at the same time are combined via logical AND.
+message LlmEvaluationDatasetFilter {
+    // Optional. Match only datasets whose display name contains this substring
+    // (case-insensitive).
+    string display_name = 1;
+
+    // Optional. Match only datasets carrying every tag in this list.
+    repeated string tags = 2;
+}
+
 // Request to list evaluation datasets within a project.
 message ListLlmEvaluationDatasetsRequest {
     // Project owning the datasets.
     // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
     string parent = 1;
 
-    // Optional pagination token (e.g. <code>"current_index-0--page_size-20"</code>).
+    // Optional. Page token for pagination. Retrieves a large result set in
+    // smaller, more manageable portions. The token encodes the current index
+    // and the page size.
+    //
+    // Valid page token strings:
+    // <ul>
+    //   <li><code>&quot;&quot;</code> (empty string) - Retrieves the first page.</li>
+    //   <li><code>&quot;current_index-0--page_size-20&quot;</code> - First page, page size 20.</li>
+    //   <li><code>&quot;current_index-1--page_size-20&quot;</code> - Second page, page size 20.</li>
+    // </ul>
+    // Index starts at 0.
     string page_token = 2;
 
     // Optional. The mask to control which fields will be filled with data.
+    // Example: paths=["llm_evaluation_datasets.display_name", "llm_evaluation_datasets.tags"]
     google.protobuf.FieldMask field_mask = 3;
 
-    // Optional name substring filter.
-    string name_filter = 4;
+    // BCP-47 language-code scope (required).
+    string language_code = 4;
 
-    // Optional tag filter (returned dataset must carry every tag in the list).
-    repeated string tags_filter = 5;
-
-    // Optional BCP-47 language-code filter. When set, only datasets authored
-    // for the given language are returned.
-    string language_code = 6;
+    // Optional. Filter conditions to narrow the returned datasets.
+    LlmEvaluationDatasetFilter llm_evaluation_dataset_filter = 5;
 }
 
 // Response for ListDatasets.
@@ -581,8 +619,9 @@ message DeleteLlmEvaluationDatasetRequest {
 
 // Request to append a single example to an existing dataset.
 message AddLlmEvaluationExampleRequest {
-    // Dataset to extend.
-    string dataset_id = 1;
+    // Resource name of the dataset to extend.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationDatasets/&lt;dataset_uuid&gt;</code>.
+    string llm_evaluation_dataset_name = 1;
 
     // Example payload to append.
     LlmEvaluationExample llm_evaluation_example = 2;
@@ -597,8 +636,9 @@ message AddLlmEvaluationExampleRequest {
 
 // Request to append multiple examples to an existing dataset.
 message AddLlmEvaluationExamplesRequest {
-    // Dataset to extend.
-    string dataset_id = 1;
+    // Resource name of the dataset to extend.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationDatasets/&lt;dataset_uuid&gt;</code>.
+    string llm_evaluation_dataset_name = 1;
 
     // Examples to append.
     repeated LlmEvaluationExample llm_evaluation_examples = 2;
@@ -624,6 +664,7 @@ message GetLlmEvaluationExampleRequest {
     string name = 1;
 
     // Optional. The mask to control which fields will be filled with data.
+    // Example: paths=["name", "inputs", "expected_outputs"]
     google.protobuf.FieldMask field_mask = 2;
 
     // Project owning the example.
@@ -634,15 +675,35 @@ message GetLlmEvaluationExampleRequest {
     string language_code = 4;
 }
 
+// Filter conditions for ListExamples. All fields are optional; multiple fields
+// set at the same time are combined via logical AND.
+message LlmEvaluationExampleFilter {
+    // Optional. Match only examples whose display name contains this substring
+    // (case-insensitive).
+    string display_name = 1;
+}
+
 // Request to list examples in a dataset.
 message ListLlmEvaluationExamplesRequest {
-    // Dataset to enumerate.
-    string dataset_id = 1;
+    // Resource name of the dataset to enumerate examples from.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationDatasets/&lt;dataset_uuid&gt;</code>.
+    string llm_evaluation_dataset_name = 1;
 
-    // Optional pagination token (e.g. <code>"current_index-0--page_size-20"</code>).
+    // Optional. Page token for pagination. Retrieves a large result set in
+    // smaller, more manageable portions. The token encodes the current index
+    // and the page size.
+    //
+    // Valid page token strings:
+    // <ul>
+    //   <li><code>&quot;&quot;</code> (empty string) - Retrieves the first page.</li>
+    //   <li><code>&quot;current_index-0--page_size-20&quot;</code> - First page, page size 20.</li>
+    //   <li><code>&quot;current_index-1--page_size-20&quot;</code> - Second page, page size 20.</li>
+    // </ul>
+    // Index starts at 0.
     string page_token = 2;
 
     // Optional. The mask to control which fields will be filled with data.
+    // Example: paths=["llm_evaluation_examples.display_name", "llm_evaluation_examples.inputs"]
     google.protobuf.FieldMask field_mask = 3;
 
     // Project owning the dataset.
@@ -651,6 +712,9 @@ message ListLlmEvaluationExamplesRequest {
 
     // BCP-47 language-code scope (required).
     string language_code = 5;
+
+    // Optional. Filter conditions to narrow the returned examples.
+    LlmEvaluationExampleFilter llm_evaluation_example_filter = 6;
 }
 
 // Response for ListExamples.
@@ -706,8 +770,9 @@ message RunLlmEvaluationExperimentRequest {
     // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
     string parent = 1;
 
-    // Dataset to evaluate against.
-    string dataset_id = 2;
+    // Resource name of the dataset to evaluate against.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationDatasets/&lt;dataset_uuid&gt;</code>.
+    string llm_evaluation_dataset_name = 2;
 
     // Required. Human-readable display name.
     string display_name = 3;
@@ -725,10 +790,11 @@ message RunLlmEvaluationExperimentRequest {
     google.protobuf.Struct config = 7;
 
     // Logical names of evaluators to run (resolved server-side to evaluator implementations).
-    repeated string evaluator_names = 8;
+    repeated string llm_evaluation_evaluator_names = 8;
 
-    // Optional baseline experiment id for regression detection.
-    string baseline_experiment_id = 9;
+    // Optional. Resource name of a baseline experiment for regression detection.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationExperiments/&lt;experiment_uuid&gt;</code>.
+    string llm_evaluation_baseline_experiment_name = 9;
 
     // BCP-47 language code the experiment runs against. Required — selects
     // which language-scoped dataset is loaded.
@@ -749,6 +815,7 @@ message GetLlmEvaluationExperimentRequest {
     string name = 1;
 
     // Optional. The mask to control which fields will be filled with data.
+    // Example: paths=["display_name", "status", "llm_evaluation_evaluator_runs"]
     google.protobuf.FieldMask field_mask = 2;
 
     // Project owning the experiment.
@@ -759,30 +826,52 @@ message GetLlmEvaluationExperimentRequest {
     string language_code = 4;
 }
 
-// Request to list experiments in a project, optionally scoped to a dataset.
+// Filter conditions for ListExperiments. All fields are optional; multiple
+// fields set at the same time are combined via logical AND.
+message LlmEvaluationExperimentFilter {
+    // Optional. Match only experiments whose display name contains this substring
+    // (case-insensitive).
+    string display_name = 1;
+
+    // Optional. Match only experiments with this lifecycle status.
+    LlmEvaluationExperimentStatus llm_evaluation_experiment_status = 2;
+
+    // Optional. Match only experiments tied to this dataset (resource name).
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationDatasets/&lt;dataset_uuid&gt;</code>.
+    string llm_evaluation_dataset_name = 3;
+
+    // Optional. Match only experiments exercising this concrete model identifier.
+    string model_name = 4;
+}
+
+// Request to list experiments in a project, optionally narrowed by filter.
 message ListLlmEvaluationExperimentsRequest {
     // Project owning the experiments.
     // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
     string parent = 1;
 
-    // Optional. Restrict to experiments tied to a specific dataset.
-    string dataset_id = 2;
-
-    // Optional pagination token.
-    string page_token = 3;
+    // Optional. Page token for pagination. Retrieves a large result set in
+    // smaller, more manageable portions. The token encodes the current index
+    // and the page size.
+    //
+    // Valid page token strings:
+    // <ul>
+    //   <li><code>&quot;&quot;</code> (empty string) - Retrieves the first page.</li>
+    //   <li><code>&quot;current_index-0--page_size-20&quot;</code> - First page, page size 20.</li>
+    //   <li><code>&quot;current_index-1--page_size-20&quot;</code> - Second page, page size 20.</li>
+    // </ul>
+    // Index starts at 0.
+    string page_token = 2;
 
     // Optional. The mask to control which fields will be filled with data.
-    google.protobuf.FieldMask field_mask = 4;
+    // Example: paths=["llm_evaluation_experiments.display_name", "llm_evaluation_experiments.status"]
+    google.protobuf.FieldMask field_mask = 3;
 
-    // Optional. Restrict to a specific status (RUNNING, SUCCEEDED, ...).
-    LlmEvaluationExperimentStatus status_filter = 5;
+    // BCP-47 language-code scope (required).
+    string language_code = 4;
 
-    // Optional. Substring filter on experiment name.
-    string name_filter = 6;
-
-    // Optional BCP-47 language-code filter. When set, only experiments
-    // authored for the given language are returned.
-    string language_code = 7;
+    // Optional. Filter conditions to narrow the returned experiments.
+    LlmEvaluationExperimentFilter llm_evaluation_experiment_filter = 5;
 }
 
 // Response for ListExperiments.
@@ -845,11 +934,13 @@ message CancelLlmEvaluationExperimentRequest {
 
 // Request to compare two-or-more experiments.
 message CompareLlmEvaluationExperimentsRequest {
-    // Experiments to compare (two-or-more).
-    repeated string experiment_ids = 1;
+    // Resource names of the experiments to compare (two-or-more).
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationExperiments/&lt;experiment_uuid&gt;</code>.
+    repeated string llm_evaluation_experiment_names = 1;
 
-    // Optional baseline used for delta computation.
-    string baseline_experiment_id = 2;
+    // Optional. Resource name of the baseline experiment used for delta computation.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationExperiments/&lt;experiment_uuid&gt;</code>.
+    string llm_evaluation_baseline_experiment_name = 2;
 
     // Project owning the experiments.
     // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
@@ -864,16 +955,19 @@ message CompareLlmEvaluationExperimentsRequest {
 // region feedback RPC messages
 
 // Request to submit a single feedback record.
-message SubmitLlmEvaluationLlmFeedbackRequest {
-    // Experiment the feedback applies to.
-    string experiment_id = 1;
+message SubmitLlmEvaluationFeedbackRequest {
+    // Resource name of the experiment the feedback applies to.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationExperiments/&lt;experiment_uuid&gt;</code>.
+    string llm_evaluation_experiment_name = 1;
 
-    // Optional. Evaluator run id the feedback attaches to. Empty for top-level
-    // experiment-scoped feedback (e.g. human review at experiment granularity).
-    string evaluator_run_id = 2;
+    // Optional. Resource name of the evaluator run the feedback attaches to. Empty
+    // for top-level experiment-scoped feedback (e.g. human review at experiment
+    // granularity).
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationExperiments/&lt;experiment_uuid&gt;/evaluatorRuns/&lt;evaluator_run_uuid&gt;</code>.
+    string llm_evaluation_evaluator_run_name = 2;
 
     // Feedback payload.
-    LlmEvaluationLlmFeedback llm_feedback = 3;
+    LlmEvaluationFeedback llm_evaluation_feedback = 3;
 
     // Project owning the experiment.
     // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
@@ -883,45 +977,71 @@ message SubmitLlmEvaluationLlmFeedbackRequest {
     string language_code = 5;
 }
 
-// Request to list feedback records, optionally filtered.
-message ListLlmEvaluationLlmFeedbackRequest {
-    // Optional. Restrict to a specific experiment.
-    string experiment_id = 1;
+// Filter conditions for ListFeedback. All fields are optional; multiple fields
+// set at the same time are combined via logical AND.
+message LlmEvaluationFeedbackFilter {
+    // Optional. Match only feedback attached to this experiment (resource name).
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationExperiments/&lt;experiment_uuid&gt;</code>.
+    string llm_evaluation_experiment_name = 1;
 
-    // Optional. Restrict to a specific example.
-    string example_id = 2;
+    // Optional. Match only feedback targeting this example (resource name).
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationDatasets/&lt;dataset_uuid&gt;/examples/&lt;example_uuid&gt;</code>.
+    string llm_evaluation_example_name = 2;
 
-    // Optional. Restrict to feedback with this criterion label.
-    string criterion = 3;
+    // Optional. Match only feedback produced by this evaluator run (resource name).
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationExperiments/&lt;experiment_uuid&gt;/evaluatorRuns/&lt;evaluator_run_uuid&gt;</code>.
+    string llm_evaluation_evaluator_run_name = 3;
 
-    // Optional. Per-page record cap (default 20).
-    int32 page_size = 4;
+    // Optional. Match only feedback with this criterion label
+    // (e.g. "correctness", "faithfulness").
+    string criterion = 4;
 
-    // Optional. Pagination token.
-    string page_token = 5;
+    // Optional. Match only feedback with this categorical value
+    // ("pass" | "fail" | "yes" | "no" | tier).
+    string categorical_value = 5;
+}
+
+// Request to list feedback records, optionally narrowed by filter.
+message ListLlmEvaluationFeedbackRequest {
+    // Optional. Page token for pagination. Retrieves a large result set in
+    // smaller, more manageable portions. The token encodes the current index
+    // and the page size.
+    //
+    // Valid page token strings:
+    // <ul>
+    //   <li><code>&quot;&quot;</code> (empty string) - Retrieves the first page.</li>
+    //   <li><code>&quot;current_index-0--page_size-20&quot;</code> - First page, page size 20.</li>
+    //   <li><code>&quot;current_index-1--page_size-20&quot;</code> - Second page, page size 20.</li>
+    // </ul>
+    // Index starts at 0.
+    string page_token = 1;
 
     // Optional. The mask to control which fields will be filled with data.
-    google.protobuf.FieldMask field_mask = 6;
+    // Example: paths=["llm_evaluation_feedbacks.score", "llm_evaluation_feedbacks.categorical_value"]
+    google.protobuf.FieldMask field_mask = 2;
 
     // Project owning the feedback records.
     // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
-    string parent = 7;
+    string parent = 3;
 
     // BCP-47 language-code scope (required).
-    string language_code = 8;
+    string language_code = 4;
+
+    // Optional. Filter conditions to narrow the returned feedback records.
+    LlmEvaluationFeedbackFilter llm_evaluation_feedback_filter = 5;
 }
 
-// Response to ListFeedback.
-message ListLlmEvaluationLlmFeedbackResponse {
+// Response for ListFeedback.
+message ListLlmEvaluationFeedbackResponse {
     // Feedback records matching the request.
-    repeated LlmEvaluationLlmFeedback llm_feedbacks = 1;
+    repeated LlmEvaluationFeedback llm_evaluation_feedbacks = 1;
 
     // Pagination token for the next page (empty if this is the last page).
     string next_page_token = 2;
 }
 
 // Request to delete a single feedback record.
-message DeleteLlmEvaluationLlmFeedbackRequest {
+message DeleteLlmEvaluationFeedbackRequest {
     // Resource name of the feedback record to delete.
     // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationExperiments/&lt;experiment_uuid&gt;/evaluatorRuns/&lt;evaluator_run_uuid&gt;/feedbacks/&lt;feedback_uuid&gt;</code>.
     string name = 1;
