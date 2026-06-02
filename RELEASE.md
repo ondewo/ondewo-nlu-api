@@ -10,6 +10,7 @@
 * [[OND211-2396]](https://ondewo.atlassian.net/browse/OND211-2396) New `llm_evaluation.proto` with `LlmEvaluations` service (datasets / examples / experiments / evaluator runs / feedback / pairwise CRUD + RunExperiment / CompareExperiments).
 * [[OND211-2396]](https://ondewo.atlassian.net/browse/OND211-2396) `agent.proto` gains LLM-aware `SessionsReportType` values and `LlmTelemetryReport` on stats responses.
 * [[OND211-2396]](https://ondewo.atlassian.net/browse/OND211-2396) Snake-case-of-message-name field naming + full per-property documentation pass on `session.proto`.
+* [[OND211-2396]](https://ondewo.atlassian.net/browse/OND211-2396) Added `CcaiServiceProvider` value `CCAI_SERVICE_PROVIDER_MICROSOFT_AGENT_FRAMEWORK` (= 34) to `ccai_project.proto`.
 
 *****************
 
