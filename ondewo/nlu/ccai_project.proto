@@ -490,6 +490,10 @@ enum CcaiServiceProvider {
     // <a href="https://www.postgresql.org/">PostgreSQL</a>
     CCAI_SERVICE_PROVIDER_POSTGRES = 33;
 
+    // Microsoft Agent Framework as the CCAI service provider
+    // <a href="https://github.com/microsoft/agent-framework">Microsoft Agent Framework</a>
+    CCAI_SERVICE_PROVIDER_MICROSOFT_AGENT_FRAMEWORK = 34;
+
 }
 
 
