@@ -239,7 +239,7 @@ message LlmEvaluationExperiment {
     google.protobuf.Timestamp finished_at = 11;
 
     // Convenience duration (finished_at - started_at).
-    double duration_seconds = 12;
+    double duration_in_s = 12;
 
     // Number of dataset examples consumed.
     int32 n_examples = 13;
