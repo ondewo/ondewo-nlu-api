@@ -3071,6 +3071,10 @@
                       </li>
                     
                       <li>
+                        <a href="#ondewo.nlu.ReasoningEffort" class="title-badge enum">ReasoningEffort</a>
+                      </li>
+                    
+                      <li>
                         <a href="#ondewo.nlu.ResourceView" class="title-badge enum">ResourceView</a>
                       </li>
                     
@@ -21390,7 +21394,7 @@ Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationDatasets/&lt;data
                 </tr>
               
                 <tr>
-                  <td>duration_seconds</td>
+                  <td>duration_in_s</td>
                   <td><a href="#double">double</a></td>
                   <td></td>
                   <td><p>Convenience duration (finished_at - started_at). </p></td>
@@ -32235,7 +32239,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 </tr>
               
                 <tr>
-                  <td>duration_seconds</td>
+                  <td>duration_in_s</td>
                   <td><a href="#double">double</a></td>
                   <td></td>
                   <td><p>Convenience duration (end_time - start_time). </p></td>
@@ -32328,7 +32332,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td>model_name</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Concrete model identifier (e.g. "claude-3-5-sonnet-20241022"). </p></td>
+                  <td><p>Concrete model identifier (e.g. "Qwen/Qwen3.6-27b-fp8"). </p></td>
                 </tr>
               
                 <tr>
@@ -32381,7 +32385,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                 </tr>
               
                 <tr>
-                  <td>duration_seconds</td>
+                  <td>duration_in_s</td>
                   <td><a href="#double">double</a></td>
                   <td></td>
                   <td><p>Convenience duration (end_time - start_time). </p></td>
@@ -32636,6 +32640,126 @@ forming the LangSmith run tree. </p></td>
 reflection agent). Each entry is a single LlmEvaluationFeedback record. </p></td>
                 </tr>
               
+                <tr>
+                  <td>ccai_service_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Resource name of the CCAI service that issued this LLM call. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>base_url</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The base URL for the OpenAI API. Overrides the default endpoint, useful
+for proxies or compatible third-party providers. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>default_headers</td>
+                  <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. Default HTTP headers to include with every request to the OpenAI API. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>default_query</td>
+                  <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. Default query parameters to append to every request URL sent to
+the OpenAI API. Values can be of any type (string, number, boolean, list),
+hence the use of Struct. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>frequency_penalty</td>
+                  <td><a href="#float">float</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. A number between -2.0 and 2.0. Positive values penalize new
+tokens based on their existing frequency in the text so far, decreasing the
+likelihood of the model repeating the same line verbatim. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>openai_metadata</td>
+                  <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. Developer-defined tags and values used for filtering completions
+in the OpenAI dashboard. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>presence_penalty</td>
+                  <td><a href="#float">float</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. A number between -2.0 and 2.0. Positive values penalize new
+tokens based on whether they have already appeared in the text, increasing
+the likelihood of the model discussing new topics. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>reasoning_effort</td>
+                  <td><a href="#ondewo.nlu.ReasoningEffort">ReasoningEffort</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. Constrains the effort level for reasoning models (e.g. o1, o3).
+Controls the trade-off between speed and quality. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>user</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. A unique identifier representing the end-user, which helps OpenAI
+monitor and detect abuse. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>timeout</td>
+                  <td><a href="#float">float</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. The timeout in seconds for requests to the OpenAI API. Applies to
+the entire request lifecycle including connection, sending, and receiving. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>strict_response_validation</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. If true, enables strict validation of response payloads returned
+by the OpenAI API. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>extra_headers</td>
+                  <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. Additional HTTP headers to send with the request. These are
+merged with and override default_headers for this specific request only. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>extra_query</td>
+                  <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. Additional query parameters to send with the request. These are
+merged with and override default_query for this specific request only. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>extra_body</td>
+                  <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. Additional JSON properties to include in the request body. Useful
+for accessing new or undocumented API parameters. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>ccai_service_provider</td>
+                  <td><a href="#ondewo.nlu.CcaiServiceProvider">CcaiServiceProvider</a></td>
+                  <td></td>
+                  <td><p>Provider of the ccai service </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -32685,7 +32809,7 @@ reflection agent). Each entry is a single LlmEvaluationFeedback record. </p></td
                   <td>duration_seconds_total</td>
                   <td><a href="#double">double</a></td>
                   <td></td>
-                  <td><p>Sum of LlmTelemetry.duration_seconds across llm_telemetries. </p></td>
+                  <td><p>Sum of LlmTelemetry.duration_in_s across llm_telemetries. </p></td>
                 </tr>
               
             </tbody>
@@ -32765,7 +32889,7 @@ reflection agent). Each entry is a single LlmEvaluationFeedback record. </p></td
                 </tr>
               
                 <tr>
-                  <td>duration_seconds</td>
+                  <td>duration_in_s</td>
                   <td><a href="#double">double</a></td>
                   <td></td>
                   <td><p>Convenience duration (end_time - start_time). </p></td>
@@ -32879,7 +33003,7 @@ reflection agent). Each entry is a single LlmEvaluationFeedback record. </p></td
                 </tr>
               
                 <tr>
-                  <td>duration_seconds</td>
+                  <td>duration_in_s</td>
                   <td><a href="#double">double</a></td>
                   <td></td>
                   <td><p>Convenience duration (end_time - start_time). </p></td>
@@ -32959,7 +33083,7 @@ reflection agent). Each entry is a single LlmEvaluationFeedback record. </p></td
                 </tr>
               
                 <tr>
-                  <td>duration_seconds</td>
+                  <td>duration_in_s</td>
                   <td><a href="#double">double</a></td>
                   <td></td>
                   <td><p>Convenience duration (end_time - start_time). </p></td>
@@ -35129,6 +35253,47 @@ wideband is supported. <code>sample_rate_hertz</code> must be 16000.</p></td>
                 <td>ENDS_WITH</td>
                 <td>6</td>
                 <td><p>ends with operator for string comparison only</p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="ondewo.nlu.ReasoningEffort" class="title-badge enum">ReasoningEffort</h3>
+        <p>Effort level for reasoning models (e.g. o1, o3). Controls the trade-off</p><p>between speed and quality.</p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>REASONING_EFFORT_UNSPECIFIED</td>
+                <td>0</td>
+                <td><p>Unspecified reasoning effort.</p></td>
+              </tr>
+            
+              <tr>
+                <td>REASONING_EFFORT_MINIMAL</td>
+                <td>1</td>
+                <td><p>Minimal reasoning effort.</p></td>
+              </tr>
+            
+              <tr>
+                <td>REASONING_EFFORT_LOW</td>
+                <td>2</td>
+                <td><p>Low reasoning effort.</p></td>
+              </tr>
+            
+              <tr>
+                <td>REASONING_EFFORT_MEDIUM</td>
+                <td>3</td>
+                <td><p>Medium reasoning effort.</p></td>
+              </tr>
+            
+              <tr>
+                <td>REASONING_EFFORT_HIGH</td>
+                <td>4</td>
+                <td><p>High reasoning effort.</p></td>
               </tr>
             
           </tbody>

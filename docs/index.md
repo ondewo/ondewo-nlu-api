@@ -598,6 +598,7 @@
     - [AudioEncoding](#ondewo.nlu.AudioEncoding)
     - [AudioFileResourceType](#ondewo.nlu.AudioFileResourceType)
     - [ComparisonOperator](#ondewo.nlu.ComparisonOperator)
+    - [ReasoningEffort](#ondewo.nlu.ReasoningEffort)
     - [ResourceView](#ondewo.nlu.ResourceView)
     - [Session.View](#ondewo.nlu.Session.View)
     - [SessionReview.View](#ondewo.nlu.SessionReview.View)
@@ -6910,7 +6911,7 @@ A single experiment run over a dataset.
 | llm_evaluation_evaluator_runs | [LlmEvaluationEvaluatorRun](#ondewo.nlu.LlmEvaluationEvaluatorRun) | repeated | One entry per evaluator x example combination. |
 | started_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Wall-clock start of the experiment run. |
 | finished_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Wall-clock end of the experiment run. |
-| duration_seconds | [double](#double) |  | Convenience duration (finished_at - started_at). |
+| duration_in_s | [double](#double) |  | Convenience duration (finished_at - started_at). |
 | n_examples | [int32](#int32) |  | Number of dataset examples consumed. |
 | n_passed | [int32](#int32) |  | Number of evaluator runs that produced a passing score. |
 | n_failed | [int32](#int32) |  | Number of evaluator runs that produced a failing score. |
@@ -10703,7 +10704,7 @@ Emitted on a streaming DetectIntent when an LLM invocation finishes.
 | ----- | ---- | ----- | ----------- |
 | llm_call_id | [string](#string) |  | Collector-assigned id grouping events for this LLM call. |
 | end_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Wall-clock end time of the LLM call. |
-| duration_seconds | [double](#double) |  | Convenience duration (end_time - start_time). |
+| duration_in_s | [double](#double) |  | Convenience duration (end_time - start_time). |
 | llm_token_usage | [LlmTokenUsage](#ondewo.nlu.LlmTokenUsage) |  | Final token totals for this LLM call. |
 
 
@@ -10739,7 +10740,7 @@ Telemetry for a single LLM invocation inside one DetectIntent turn.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | provider | [string](#string) |  | Provider tag: "autogen" | "langchain" | "openai" | "anthropic" | ... |
-| model_name | [string](#string) |  | Concrete model identifier (e.g. "claude-3-5-sonnet-20241022"). |
+| model_name | [string](#string) |  | Concrete model identifier (e.g. "Qwen/Qwen3.6-27b-fp8"). |
 | agent_name | [string](#string) |  | intent_agent executor / agent name. |
 | llm_token_usage | [LlmTokenUsage](#ondewo.nlu.LlmTokenUsage) |  | Totals for this call. |
 | llm_tool_call_metadatas | [LlmToolCallMetadata](#ondewo.nlu.LlmToolCallMetadata) | repeated | Tool calls observed during this LLM invocation. |
@@ -10747,7 +10748,7 @@ Telemetry for a single LLM invocation inside one DetectIntent turn.
 | llm_thinking_metadata | [LlmThinkingMetadata](#ondewo.nlu.LlmThinkingMetadata) |  | Thinking block when surfaced by the model. |
 | start_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Wall-clock start of the LLM call. |
 | end_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Wall-clock end of the LLM call. |
-| duration_seconds | [double](#double) |  | Convenience duration (end_time - start_time). |
+| duration_in_s | [double](#double) |  | Convenience duration (end_time - start_time). |
 | run_id | [string](#string) |  | LangChain / LangSmith run identifier for this LLM call (UUID). |
 | parent_run_id | [string](#string) |  | LangChain / LangSmith identifier of the parent run that spawned this call, forming the LangSmith run tree. |
 | run_type | [string](#string) |  | LangSmith run taxonomy: chain | llm | tool | retriever | agent | parser | prompt. |
@@ -10783,6 +10784,21 @@ Telemetry for a single LLM invocation inside one DetectIntent turn.
 | termination_reason | [string](#string) |  | Autogen <code>TaskResult.stop_reason</code> string when surfaced. |
 | evaluator_runs_join_key | [string](#string) |  | Join key linking this LLM call to an evaluator run (see llm_evaluation.proto). |
 | llm_evaluation_feedbacks | [LlmEvaluationFeedback](#ondewo.nlu.LlmEvaluationFeedback) | repeated | Immediate inline feedback recorded inside the turn (e.g. self-grading by a reflection agent). Each entry is a single LlmEvaluationFeedback record. |
+| ccai_service_name | [string](#string) |  | Resource name of the CCAI service that issued this LLM call. |
+| base_url | [string](#string) |  | The base URL for the OpenAI API. Overrides the default endpoint, useful for proxies or compatible third-party providers. |
+| default_headers | [google.protobuf.Struct](#google.protobuf.Struct) | optional | Optional. Default HTTP headers to include with every request to the OpenAI API. |
+| default_query | [google.protobuf.Struct](#google.protobuf.Struct) | optional | Optional. Default query parameters to append to every request URL sent to the OpenAI API. Values can be of any type (string, number, boolean, list), hence the use of Struct. |
+| frequency_penalty | [float](#float) | optional | Optional. A number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the likelihood of the model repeating the same line verbatim. |
+| openai_metadata | [google.protobuf.Struct](#google.protobuf.Struct) | optional | Optional. Developer-defined tags and values used for filtering completions in the OpenAI dashboard. |
+| presence_penalty | [float](#float) | optional | Optional. A number between -2.0 and 2.0. Positive values penalize new tokens based on whether they have already appeared in the text, increasing the likelihood of the model discussing new topics. |
+| reasoning_effort | [ReasoningEffort](#ondewo.nlu.ReasoningEffort) | optional | Optional. Constrains the effort level for reasoning models (e.g. o1, o3). Controls the trade-off between speed and quality. |
+| user | [string](#string) | optional | Optional. A unique identifier representing the end-user, which helps OpenAI monitor and detect abuse. |
+| timeout | [float](#float) | optional | Optional. The timeout in seconds for requests to the OpenAI API. Applies to the entire request lifecycle including connection, sending, and receiving. |
+| strict_response_validation | [bool](#bool) | optional | Optional. If true, enables strict validation of response payloads returned by the OpenAI API. |
+| extra_headers | [google.protobuf.Struct](#google.protobuf.Struct) | optional | Optional. Additional HTTP headers to send with the request. These are merged with and override default_headers for this specific request only. |
+| extra_query | [google.protobuf.Struct](#google.protobuf.Struct) | optional | Optional. Additional query parameters to send with the request. These are merged with and override default_query for this specific request only. |
+| extra_body | [google.protobuf.Struct](#google.protobuf.Struct) | optional | Optional. Additional JSON properties to include in the request body. Useful for accessing new or undocumented API parameters. |
+| ccai_service_provider | [CcaiServiceProvider](#ondewo.nlu.CcaiServiceProvider) |  | Provider of the ccai service |
 
 
 
@@ -10801,7 +10817,7 @@ Aggregated telemetry across all LLM calls in one DetectIntent turn.
 | tool_call_count_total | [int32](#int32) |  | Sum of LlmTelemetry.tool_call_count across llm_telemetries. |
 | llm_call_count | [int32](#int32) |  | Denormalized len(llm_telemetries). |
 | llm_telemetries | [LlmTelemetry](#ondewo.nlu.LlmTelemetry) | repeated | Per-LLM-invocation breakdown. |
-| duration_seconds_total | [double](#double) |  | Sum of LlmTelemetry.duration_seconds across llm_telemetries. |
+| duration_seconds_total | [double](#double) |  | Sum of LlmTelemetry.duration_in_s across llm_telemetries. |
 
 
 
@@ -10837,7 +10853,7 @@ OpenAI o-series reasoning).
 | llm_token_usage | [LlmTokenUsage](#ondewo.nlu.LlmTokenUsage) |  | Token attribution for the thinking block when surfaced by the provider. |
 | start_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Wall-clock start of the thinking block. |
 | end_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Wall-clock end of the thinking block. |
-| duration_seconds | [double](#double) |  | Convenience duration (end_time - start_time). |
+| duration_in_s | [double](#double) |  | Convenience duration (end_time - start_time). |
 | thinking_text | [string](#string) |  | Raw thinking text. Subject to redaction depending on telemetry policy. |
 
 
@@ -10888,7 +10904,7 @@ Emitted on a streaming DetectIntent when a tool call finishes.
 | ----- | ---- | ----- | ----------- |
 | tool_call_id | [string](#string) |  | Stable id matching the matching LlmToolCallStartedEvent. |
 | end_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Wall-clock end time of the tool call. |
-| duration_seconds | [double](#double) |  | Convenience duration (end_time - start_time). |
+| duration_in_s | [double](#double) |  | Convenience duration (end_time - start_time). |
 | llm_token_usage | [LlmTokenUsage](#ondewo.nlu.LlmTokenUsage) |  | Token attribution for this tool call when available. |
 | result | [google.protobuf.Struct](#google.protobuf.Struct) |  | Tool result payload (may be omitted on failure or redaction). |
 | error_message | [string](#string) |  | Populated only when the tool call failed; empty string on success. |
@@ -10911,7 +10927,7 @@ Metadata for one tool call executed by the LLM.
 | tool_name | [string](#string) |  | Name of the tool / function invoked. |
 | start_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Wall-clock start time of the tool call. |
 | end_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Wall-clock end time of the tool call. |
-| duration_seconds | [double](#double) |  | Convenience duration (end_time - start_time). |
+| duration_in_s | [double](#double) |  | Convenience duration (end_time - start_time). |
 | llm_token_usage | [LlmTokenUsage](#ondewo.nlu.LlmTokenUsage) |  | Token attribution for this tool call when available. |
 | arguments | [google.protobuf.Struct](#google.protobuf.Struct) |  | Tool arguments as a structured payload. May be omitted on incremental events. |
 | result | [google.protobuf.Struct](#google.protobuf.Struct) |  | Tool result as a structured payload. May be omitted on incremental events. |
@@ -11508,6 +11524,22 @@ Type of operator to compare
 | CONTAINS | 4 | contains operator, e.g. part of string, or one of the elements in an iterable such as set or list |
 | STARTS_WITH | 5 | starts with operator for string comparison only |
 | ENDS_WITH | 6 | ends with operator for string comparison only |
+
+
+
+<a name="ondewo.nlu.ReasoningEffort"></a>
+
+### ReasoningEffort
+Effort level for reasoning models (e.g. o1, o3). Controls the trade-off
+between speed and quality.
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| REASONING_EFFORT_UNSPECIFIED | 0 | Unspecified reasoning effort. |
+| REASONING_EFFORT_MINIMAL | 1 | Minimal reasoning effort. |
+| REASONING_EFFORT_LOW | 2 | Low reasoning effort. |
+| REASONING_EFFORT_MEDIUM | 3 | Medium reasoning effort. |
+| REASONING_EFFORT_HIGH | 4 | High reasoning effort. |
 
 
 
