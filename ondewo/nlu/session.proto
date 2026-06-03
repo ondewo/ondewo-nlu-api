@@ -42,6 +42,7 @@ import "ondewo/nlu/context.proto";
 import "ondewo/nlu/intent.proto";
 import "ondewo/nlu/entity_type.proto";
 import "ondewo/nlu/llm_evaluation.proto";
+import "ccai_project.proto";
 
 option cc_enable_arenas = true;
 option csharp_namespace = "Google.Cloud.Dialogflow.V2";
@@ -612,7 +613,7 @@ message LlmToolCallMetadata {
     google.protobuf.Timestamp end_time = 4;
 
     // Convenience duration (end_time - start_time).
-    double duration_seconds = 5;
+    double duration_in_s = 5;
 
     // Token attribution for this tool call when available.
     LlmTokenUsage llm_token_usage = 6;
@@ -640,7 +641,7 @@ message LlmThinkingMetadata {
     google.protobuf.Timestamp end_time = 3;
 
     // Convenience duration (end_time - start_time).
-    double duration_seconds = 4;
+    double duration_in_s = 4;
 
     // Raw thinking text. Subject to redaction depending on telemetry policy.
     string thinking_text = 5;
@@ -651,7 +652,7 @@ message LlmTelemetry {
     // Provider tag: "autogen" | "langchain" | "openai" | "anthropic" | ...
     string provider = 1;
 
-    // Concrete model identifier (e.g. "claude-3-5-sonnet-20241022").
+    // Concrete model identifier (e.g. "Qwen/Qwen3.6-27b-fp8").
     string model_name = 2;
 
     // intent_agent executor / agent name.
@@ -676,7 +677,7 @@ message LlmTelemetry {
     google.protobuf.Timestamp end_time = 9;
 
     // Convenience duration (end_time - start_time).
-    double duration_seconds = 10;
+    double duration_in_s = 10;
 
     // LangChain / LangSmith run identifier for this LLM call (UUID).
     string run_id = 11;
@@ -786,6 +787,86 @@ message LlmTelemetry {
     // Immediate inline feedback recorded inside the turn (e.g. self-grading by a
     // reflection agent). Each entry is a single LlmEvaluationFeedback record.
     repeated LlmEvaluationFeedback llm_evaluation_feedbacks = 45;
+
+    // Resource name of the CCAI service that issued this LLM call.
+    string ccai_service_name = 46;
+
+    // The base URL for the OpenAI API. Overrides the default endpoint, useful
+    // for proxies or compatible third-party providers.
+    string base_url = 47;
+
+    // Optional. Default HTTP headers to include with every request to the OpenAI API.
+    optional google.protobuf.Struct default_headers = 48;
+
+    // Optional. Default query parameters to append to every request URL sent to
+    // the OpenAI API. Values can be of any type (string, number, boolean, list),
+    // hence the use of Struct.
+    optional google.protobuf.Struct default_query = 49;
+
+    // Optional. A number between -2.0 and 2.0. Positive values penalize new
+    // tokens based on their existing frequency in the text so far, decreasing the
+    // likelihood of the model repeating the same line verbatim.
+    optional float frequency_penalty = 50;
+
+    // Optional. Developer-defined tags and values used for filtering completions
+    // in the OpenAI dashboard.
+    optional google.protobuf.Struct openai_metadata = 51;
+
+    // Optional. A number between -2.0 and 2.0. Positive values penalize new
+    // tokens based on whether they have already appeared in the text, increasing
+    // the likelihood of the model discussing new topics.
+    optional float presence_penalty = 52;
+
+    // Optional. Constrains the effort level for reasoning models (e.g. o1, o3).
+    // Controls the trade-off between speed and quality.
+    optional ReasoningEffort reasoning_effort = 53;
+
+    // Optional. A unique identifier representing the end-user, which helps OpenAI
+    // monitor and detect abuse.
+    optional string user = 54;
+
+    // Optional. The timeout in seconds for requests to the OpenAI API. Applies to
+    // the entire request lifecycle including connection, sending, and receiving.
+    optional float timeout = 55;
+
+    // Optional. If true, enables strict validation of response payloads returned
+    // by the OpenAI API.
+    optional bool strict_response_validation = 56;
+
+    // Optional. Additional HTTP headers to send with the request. These are
+    // merged with and override default_headers for this specific request only.
+    optional google.protobuf.Struct extra_headers = 57;
+
+    // Optional. Additional query parameters to send with the request. These are
+    // merged with and override default_query for this specific request only.
+    optional google.protobuf.Struct extra_query = 58;
+
+    // Optional. Additional JSON properties to include in the request body. Useful
+    // for accessing new or undocumented API parameters.
+    optional google.protobuf.Struct extra_body = 59;
+
+    // Provider of the ccai service
+    CcaiServiceProvider ccai_service_provider = 60;
+}
+
+// Effort level for reasoning models (e.g. o1, o3). Controls the trade-off
+// between speed and quality.
+enum ReasoningEffort {
+
+    // Unspecified reasoning effort.
+    REASONING_EFFORT_UNSPECIFIED = 0;
+
+    // Minimal reasoning effort.
+    REASONING_EFFORT_MINIMAL = 1;
+
+    // Low reasoning effort.
+    REASONING_EFFORT_LOW = 2;
+
+    // Medium reasoning effort.
+    REASONING_EFFORT_MEDIUM = 3;
+
+    // High reasoning effort.
+    REASONING_EFFORT_HIGH = 4;
 }
 
 // Aggregated telemetry across all LLM calls in one DetectIntent turn.
@@ -802,7 +883,7 @@ message LlmTelemetryReport {
     // Per-LLM-invocation breakdown.
     repeated LlmTelemetry llm_telemetries = 4;
 
-    // Sum of LlmTelemetry.duration_seconds across llm_telemetries.
+    // Sum of LlmTelemetry.duration_in_s across llm_telemetries.
     double duration_seconds_total = 5;
 }
 
@@ -833,7 +914,7 @@ message LlmCallFinishedEvent {
     google.protobuf.Timestamp end_time = 2;
 
     // Convenience duration (end_time - start_time).
-    double duration_seconds = 3;
+    double duration_in_s = 3;
 
     // Final token totals for this LLM call.
     LlmTokenUsage llm_token_usage = 4;
@@ -866,7 +947,7 @@ message LlmToolCallFinishedEvent {
     google.protobuf.Timestamp end_time = 2;
 
     // Convenience duration (end_time - start_time).
-    double duration_seconds = 3;
+    double duration_in_s = 3;
 
     // Token attribution for this tool call when available.
     LlmTokenUsage llm_token_usage = 4;
