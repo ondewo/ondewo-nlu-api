@@ -11,6 +11,8 @@
 * [[OND211-2396]](https://ondewo.atlassian.net/browse/OND211-2396) `agent.proto` gains LLM-aware `SessionsReportType` values and `LlmTelemetryReport` on stats responses.
 * [[OND211-2396]](https://ondewo.atlassian.net/browse/OND211-2396) Snake-case-of-message-name field naming + full per-property documentation pass on `session.proto`.
 * [[OND211-2396]](https://ondewo.atlassian.net/browse/OND211-2396) Added `CcaiServiceProvider` value `CCAI_SERVICE_PROVIDER_MICROSOFT_AGENT_FRAMEWORK` (= 34) to `ccai_project.proto`.
+* [[OND211-2396]](https://ondewo.atlassian.net/browse/OND211-2396) Extended LLM statistics reporting in `agent.proto`: new agent-domain `ReportType` values `AGENT_LLM_*` (5-24) and session-scoped `SessionsReportType` values `SESSION_LLM_*` (24-40) covering token usage (input/output/thinking/tool-call), models / providers / CCAI services / agents used, errors, cache efficiency, reasoning effort, latency, finish reasons, top-X breakdowns, and total-statistics rollups. Added `llm_ccai_service_provider_filter` to `GetAgentStatisticsRequest` (= 10) and `GetSessionsStatisticsRequest` (= 15).
+* [[OND211-2396]](https://ondewo.atlassian.net/browse/OND211-2396) Extended `LlmTelemetryReport` in `session.proto` with structured aggregate breakdowns (fields 6-19) and added aggregate messages `LlmLatencyStats`, `LlmCacheStats`, `LlmModelUsage`, `LlmProviderUsage`, `LlmCcaiServiceUsage`, `LlmAgentUsage`, `LlmToolUsage`, `LlmErrorStat`, `LlmErrorStats`, `LlmFinishReasonStat`, `LlmReasoningEffortStat`.
 
 *****************
 

@@ -869,7 +869,250 @@ enum ReasoningEffort {
     REASONING_EFFORT_HIGH = 4;
 }
 
-// Aggregated telemetry across all LLM calls in one DetectIntent turn.
+// Latency aggregate (seconds) across the LLM calls in scope.
+message LlmLatencyStats {
+    // Number of LLM calls included in these latency stats.
+    int64 call_count = 1;
+
+    // Mean end-to-end call duration in seconds.
+    double mean_duration_seconds = 2;
+
+    // 50th percentile end-to-end call duration in seconds.
+    double p50_duration_seconds = 3;
+
+    // 95th percentile end-to-end call duration in seconds.
+    double p95_duration_seconds = 4;
+
+    // 99th percentile end-to-end call duration in seconds.
+    double p99_duration_seconds = 5;
+
+    // Maximum observed end-to-end call duration in seconds.
+    double max_duration_seconds = 6;
+
+    // Mean time-to-first-token in seconds (streaming calls only).
+    double mean_first_token_latency_seconds = 7;
+
+    // 95th percentile time-to-first-token in seconds.
+    double p95_first_token_latency_seconds = 8;
+}
+
+// Prompt-cache efficiency aggregate across the LLM calls in scope.
+message LlmCacheStats {
+    // Tokens served from prompt cache (cached_input_tokens summed).
+    int64 cached_input_tokens = 1;
+
+    // Tokens written to prompt cache (cache_creation_input_tokens summed).
+    int64 cache_creation_input_tokens = 2;
+
+    // Non-cached input tokens.
+    int64 uncached_input_tokens = 3;
+
+    // cached_input_tokens / (cached_input_tokens + uncached_input_tokens).
+    double cache_hit_rate = 4;
+
+    // Input tokens avoided by cache reuse.
+    int64 token_savings = 5;
+}
+
+// Per-model usage rollup across the scope.
+message LlmModelUsage {
+    // Concrete model identifier (e.g. "claude-3-5-sonnet-20241022").
+    string model_name = 1;
+
+    // Provider tag owning the model (e.g. "anthropic").
+    string provider = 2;
+
+    // Number of LLM calls to this model in scope.
+    int64 call_count = 3;
+
+    // Summed token usage (input / output / total) for this model.
+    LlmTokenUsage llm_token_usage = 4;
+
+    // Tool-call count attributed to this model.
+    int64 tool_call_count = 5;
+
+    // Error count attributed to this model.
+    int64 error_count = 6;
+
+    // Summed call duration in seconds for this model.
+    double duration_seconds_total = 7;
+
+    // Optional cache stats for this model.
+    LlmCacheStats cache_stats = 8;
+
+    // Resource name of the CCAI service that issued the calls.
+    string ccai_service_name = 9;
+
+    // Provider of the CCAI service.
+    CcaiServiceProvider ccai_service_provider = 10;
+
+    // Base URL used for the calls (proxy / compatible provider).
+    string base_url = 11;
+
+    // Summed thinking-block tokens for this model.
+    int64 thinking_tokens_total = 12;
+
+    // Summed thinking-block duration in seconds for this model.
+    double thinking_duration_seconds_total = 13;
+
+    // Summed tool-call tokens for this model.
+    int64 tool_call_tokens_total = 14;
+
+    // Summed tool-call duration in seconds for this model.
+    double tool_call_duration_seconds_total = 15;
+}
+
+// Per-provider usage rollup across the scope.
+message LlmProviderUsage {
+    // Provider tag (e.g. "anthropic", "openai", "ollama").
+    string provider = 1;
+
+    // Number of LLM calls to this provider in scope.
+    int64 call_count = 2;
+
+    // Summed token usage for this provider.
+    LlmTokenUsage llm_token_usage = 3;
+
+    // Error count attributed to this provider.
+    int64 error_count = 4;
+
+    // Summed call duration in seconds for this provider.
+    double duration_seconds_total = 5;
+
+    // Distinct model names seen under this provider.
+    repeated string model_names = 6;
+}
+
+// Per-CCAI-service usage rollup across the scope.
+message LlmCcaiServiceUsage {
+    // CCAI service provider enum value.
+    CcaiServiceProvider ccai_service_provider = 1;
+
+    // Resource name of the CCAI service.
+    string ccai_service_name = 2;
+
+    // Number of LLM calls attributed to this CCAI service in scope.
+    int64 call_count = 3;
+
+    // Summed token usage for this CCAI service.
+    LlmTokenUsage llm_token_usage = 4;
+
+    // Base URL used by this CCAI service.
+    string base_url = 5;
+
+    // Distinct model names seen under this CCAI service.
+    repeated string model_names = 6;
+}
+
+// Per-intent-agent usage rollup across the scope.
+message LlmAgentUsage {
+    // intent_agent executor / agent name owning the calls.
+    string agent_name = 1;
+
+    // Optional agent role.
+    string agent_role = 2;
+
+    // Optional team name.
+    string team_name = 3;
+
+    // Number of LLM calls attributed to this agent in scope.
+    int64 call_count = 4;
+
+    // Summed token usage for this agent.
+    LlmTokenUsage llm_token_usage = 5;
+
+    // Tool-call count attributed to this agent.
+    int64 tool_call_count = 6;
+}
+
+// One tool's invocation aggregate across the scope.
+message LlmToolUsage {
+    // Name of the tool / function.
+    string tool_name = 1;
+
+    // Number of times the tool was invoked in scope.
+    int64 call_count = 2;
+
+    // Number of failed invocations.
+    int64 error_count = 3;
+
+    // error_count / call_count.
+    double error_rate = 4;
+
+    // Summed tool-call duration in seconds.
+    double duration_seconds_total = 5;
+
+    // Mean tool-call duration in seconds.
+    double mean_duration_seconds = 6;
+
+    // Summed tool-call token usage (input / output / total).
+    LlmTokenUsage llm_token_usage = 7;
+}
+
+// One error class aggregate.
+message LlmErrorStat {
+    // Error class / type (LlmTelemetry.error_class).
+    string error_class = 1;
+
+    // Number of occurrences in scope.
+    int64 count = 2;
+
+    // count / total LLM calls in scope.
+    double rate = 3;
+
+    // A representative error_message sample (may be truncated / redacted).
+    string sample_message = 4;
+}
+
+// Error breakdown aggregate across the scope.
+message LlmErrorStats {
+    // Total failed LLM calls in scope.
+    int64 total_error_count = 1;
+
+    // total_error_count / total LLM calls in scope.
+    double overall_error_rate = 2;
+
+    // Per-error-class breakdown, descending by count.
+    repeated LlmErrorStat errors_by_class = 3;
+
+    // Total retries observed (LlmTelemetry.retry_count summed).
+    int64 retry_count_total = 4;
+
+    // Max fallback depth observed (LlmTelemetry.fallback_depth max).
+    int32 max_fallback_depth = 5;
+}
+
+// One finish-reason aggregate.
+message LlmFinishReasonStat {
+    // Finish reason ("stop" | "length" | "tool_calls" | "content_filter" | "error" | ...).
+    string finish_reason = 1;
+
+    // Number of occurrences in scope.
+    int64 count = 2;
+
+    // count / total LLM calls in scope.
+    double rate = 3;
+}
+
+// One reasoning-effort aggregate.
+message LlmReasoningEffortStat {
+    // Reasoning effort enum value.
+    ReasoningEffort reasoning_effort = 1;
+
+    // Number of LLM calls at this effort level in scope.
+    int64 count = 2;
+
+    // count / total LLM calls in scope.
+    double rate = 3;
+
+    // Summed token usage at this effort level.
+    LlmTokenUsage llm_token_usage = 4;
+}
+
+// Aggregated telemetry across all LLM calls in one DetectIntent turn, or across
+// a session / agent-domain scope when used as a statistics report payload. The
+// breakdown fields (6+) are populated only for the matching report type; a
+// *_LLM_TOTAL_STATISTICS report populates all of them.
 message LlmTelemetryReport {
     // Summed LlmTokenUsage across llm_telemetries.
     LlmTokenUsage llm_token_usage = 1;
@@ -885,6 +1128,48 @@ message LlmTelemetryReport {
 
     // Sum of LlmTelemetry.duration_in_s across llm_telemetries.
     double duration_seconds_total = 5;
+
+    // Per-model usage rollup. Populated for *_LLM_MODELS_USED and *_LLM_TOTAL_STATISTICS.
+    repeated LlmModelUsage models_used = 6;
+
+    // Per-provider usage rollup. Populated for *_LLM_PROVIDERS_USED and *_LLM_TOTAL_STATISTICS.
+    repeated LlmProviderUsage providers_used = 7;
+
+    // Per-CCAI-service usage rollup. Populated for *_LLM_CCAI_SERVICES_USED and *_LLM_TOTAL_STATISTICS.
+    repeated LlmCcaiServiceUsage ccai_services_used = 8;
+
+    // Per-intent-agent usage rollup. Populated for *_LLM_AGENTS_USED and *_LLM_TOTAL_STATISTICS.
+    repeated LlmAgentUsage agents_used = 9;
+
+    // Tool-usage rollup. Populated for *_LLM_TOP_X_TOOLS / *_LLM_LEAST_X_TOOLS and *_LLM_TOTAL_STATISTICS.
+    repeated LlmToolUsage tools_used = 10;
+
+    // Latency aggregate. Populated for *_LLM_LATENCY and *_LLM_TOTAL_STATISTICS.
+    LlmLatencyStats latency_stats = 11;
+
+    // Cache efficiency aggregate. Populated for *_LLM_CACHE_EFFICIENCY and *_LLM_TOTAL_STATISTICS.
+    LlmCacheStats cache_stats = 12;
+
+    // Error aggregate. Populated for *_LLM_ERRORS and *_LLM_TOTAL_STATISTICS.
+    LlmErrorStats error_stats = 13;
+
+    // Finish-reason distribution. Populated for *_LLM_FINISH_REASONS and *_LLM_TOTAL_STATISTICS.
+    repeated LlmFinishReasonStat finish_reason_distribution = 14;
+
+    // Reasoning-effort distribution. Populated for *_LLM_REASONING_EFFORT and *_LLM_TOTAL_STATISTICS.
+    repeated LlmReasoningEffortStat reasoning_effort_distribution = 15;
+
+    // Scope-wide summed thinking-block tokens.
+    int64 thinking_tokens_total = 16;
+
+    // Scope-wide summed thinking-block duration in seconds.
+    double thinking_duration_seconds_total = 17;
+
+    // Scope-wide summed tool-call tokens.
+    int64 tool_call_tokens_total = 18;
+
+    // Scope-wide summed tool-call duration in seconds.
+    double tool_call_duration_seconds_total = 19;
 }
 
 // Emitted on a streaming DetectIntent when an LLM invocation starts.
