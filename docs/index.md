@@ -565,8 +565,18 @@
     - [ListTagsResponse](#ondewo.nlu.ListTagsResponse)
     - [ListUserIdsOfAllSessionsRequest](#ondewo.nlu.ListUserIdsOfAllSessionsRequest)
     - [ListUserIdsResponse](#ondewo.nlu.ListUserIdsResponse)
+    - [LlmAgentUsage](#ondewo.nlu.LlmAgentUsage)
+    - [LlmCacheStats](#ondewo.nlu.LlmCacheStats)
     - [LlmCallFinishedEvent](#ondewo.nlu.LlmCallFinishedEvent)
     - [LlmCallStartedEvent](#ondewo.nlu.LlmCallStartedEvent)
+    - [LlmCcaiServiceUsage](#ondewo.nlu.LlmCcaiServiceUsage)
+    - [LlmErrorStat](#ondewo.nlu.LlmErrorStat)
+    - [LlmErrorStats](#ondewo.nlu.LlmErrorStats)
+    - [LlmFinishReasonStat](#ondewo.nlu.LlmFinishReasonStat)
+    - [LlmLatencyStats](#ondewo.nlu.LlmLatencyStats)
+    - [LlmModelUsage](#ondewo.nlu.LlmModelUsage)
+    - [LlmProviderUsage](#ondewo.nlu.LlmProviderUsage)
+    - [LlmReasoningEffortStat](#ondewo.nlu.LlmReasoningEffortStat)
     - [LlmTelemetry](#ondewo.nlu.LlmTelemetry)
     - [LlmTelemetryReport](#ondewo.nlu.LlmTelemetryReport)
     - [LlmThinkingDeltaEvent](#ondewo.nlu.LlmThinkingDeltaEvent)
@@ -576,6 +586,7 @@
     - [LlmToolCallFinishedEvent](#ondewo.nlu.LlmToolCallFinishedEvent)
     - [LlmToolCallMetadata](#ondewo.nlu.LlmToolCallMetadata)
     - [LlmToolCallStartedEvent](#ondewo.nlu.LlmToolCallStartedEvent)
+    - [LlmToolUsage](#ondewo.nlu.LlmToolUsage)
     - [QueryInput](#ondewo.nlu.QueryInput)
     - [QueryParameters](#ondewo.nlu.QueryParameters)
     - [QueryResult](#ondewo.nlu.QueryResult)
@@ -598,6 +609,7 @@
     - [AudioEncoding](#ondewo.nlu.AudioEncoding)
     - [AudioFileResourceType](#ondewo.nlu.AudioFileResourceType)
     - [ComparisonOperator](#ondewo.nlu.ComparisonOperator)
+    - [ReasoningEffort](#ondewo.nlu.ReasoningEffort)
     - [ResourceView](#ondewo.nlu.ResourceView)
     - [Session.View](#ondewo.nlu.Session.View)
     - [SessionReview.View](#ondewo.nlu.SessionReview.View)
@@ -1538,6 +1550,7 @@ Request statistics of the agent
 | llm_agent_name_filter | [string](#string) | repeated | Optional. Restrict LLM aggregations to specific intent-agent names. |
 | llm_group_bys | [string](#string) | repeated | Optional. Group LLM aggregations by named dimensions (e.g. <code>["model_name", "provider"]</code>). Empty list = no grouping. |
 | field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which fields will be filled with data on the response (e.g. paths=["llm_telemetry_report"]). |
+| llm_ccai_service_provider_filter | [CcaiServiceProvider](#ondewo.nlu.CcaiServiceProvider) | repeated | Optional. Restrict LLM aggregations to specific CCAI service providers. Empty = all. |
 
 
 
@@ -1648,6 +1661,7 @@ Request of the report of the statistics about sessions
 | llm_provider_filter | [string](#string) | repeated | Optional. Restrict LLM-typed reports to specific providers. Empty = all providers. |
 | llm_agent_name_filter | [string](#string) | repeated | Optional. Restrict LLM-typed reports to specific intent-agent names. Empty = all. |
 | llm_tool_name_filter | [string](#string) | repeated | Optional. Restrict LLM-typed reports to specific tool names. Empty = all. |
+| llm_ccai_service_provider_filter | [CcaiServiceProvider](#ondewo.nlu.CcaiServiceProvider) | repeated | Optional. Restrict LLM-typed reports to specific CCAI service providers. Empty = all. |
 
 
 
@@ -2179,6 +2193,26 @@ Type of reports about the domain of the agent
 | ENTITY_PER_LANGUAGE | 2 | statistics of the language specific part of the entity database |
 | ENTITY_COLLISION | 3 | report on collision of the entity synonyms |
 | INTENT_GENERAL | 4 | report of statistics of the general (relevant to all supported languages) part of intent database |
+| AGENT_LLM_TOKEN_USAGE | 5 | Aggregate LLM token usage (input / output / cache) over the agent domain. |
+| AGENT_LLM_MODELS_USED | 6 | Per-model usage rollup (calls, tokens, latency) over the agent domain. |
+| AGENT_LLM_PROVIDERS_USED | 7 | Per-provider usage rollup over the agent domain. |
+| AGENT_LLM_CCAI_SERVICES_USED | 8 | Per-CCAI-service usage rollup (keyed by CcaiServiceProvider) over the agent domain. |
+| AGENT_LLM_AGENTS_USED | 9 | Per-intent-agent usage rollup over the agent domain. |
+| AGENT_LLM_ERRORS | 10 | LLM error breakdown (counts and rate per error_class) over the agent domain. |
+| AGENT_LLM_CACHE_EFFICIENCY | 11 | Prompt-cache efficiency over the agent domain. |
+| AGENT_LLM_REASONING_EFFORT | 12 | Reasoning-effort distribution (keyed by ReasoningEffort) over the agent domain. |
+| AGENT_LLM_TOP_X_TOOLS | 13 | Top X most-invoked tools over the agent domain. |
+| AGENT_LLM_LEAST_X_TOOLS | 14 | Least X invoked tools over the agent domain. |
+| AGENT_LLM_LATENCY | 15 | LLM latency aggregates (p50 / p95 / p99, time-to-first-token) over the agent domain. |
+| AGENT_LLM_FINISH_REASONS | 16 | Finish-reason distribution over the agent domain. |
+| AGENT_LLM_TOTAL_STATISTICS | 17 | Single rolled-up LLM statistics summary (totals + all breakdowns) over the agent domain. |
+| AGENT_LLM_INPUT_TOKEN_USAGE | 18 | Aggregate LLM input / prompt token usage over the agent domain. |
+| AGENT_LLM_OUTPUT_TOKEN_USAGE | 19 | Aggregate LLM output / completion token usage over the agent domain. |
+| AGENT_LLM_THINKING_TOKEN_USAGE | 20 | Aggregate LLM thinking / reasoning token usage over the agent domain. |
+| AGENT_LLM_TOOL_CALL_TOKEN_USAGE | 21 | Aggregate LLM tool-call token usage over the agent domain. |
+| AGENT_LLM_TOP_X_MODELS | 22 | Top X most-used models (by calls / tokens) over the agent domain. |
+| AGENT_LLM_TOP_X_CCAI_SERVICE_PROVIDERS | 23 | Top X most-used CCAI service providers over the agent domain. |
+| AGENT_LLM_TOP_X_AGENT_NAMES | 24 | Top X most-used agent name of agentic AI team |
 
 
 
@@ -2217,6 +2251,23 @@ Example: <pre><code>SELECT ... FROM session</code></pre> <pre><code>SELECT ... F
 | SESSION_LLM_FINISH_REASONS | 21 | Finish-reason distribution across sessions in scope (<code>stop</code>, <code>length</code>, <code>tool_calls</code>, <code>content_filter</code>, <code>error</code>, ...). |
 | SESSION_LLM_LATENCY | 22 | LLM call latency aggregates (p50 / p95 / p99, time-to-first-token). |
 | SESSION_LLM_RAG_METRICS | 23 | RAG-specific metrics (retrieval hit-rate, context precision, citation overlap) aggregated across sessions in scope. |
+| SESSION_LLM_MODELS_USED | 24 | Per-model usage rollup (calls, tokens, latency) across sessions in scope. |
+| SESSION_LLM_PROVIDERS_USED | 25 | Per-provider usage rollup across sessions in scope. |
+| SESSION_LLM_CCAI_SERVICES_USED | 26 | Per-CCAI-service usage rollup (keyed by CcaiServiceProvider) across sessions in scope. |
+| SESSION_LLM_AGENTS_USED | 27 | Per-intent-agent usage rollup across sessions in scope. |
+| SESSION_LLM_ERRORS | 28 | LLM error breakdown (counts and rate per error_class) across sessions in scope. |
+| SESSION_LLM_CACHE_EFFICIENCY | 29 | Prompt-cache efficiency (cache read / creation tokens, hit-rate, savings). |
+| SESSION_LLM_REASONING_EFFORT | 30 | Reasoning-effort distribution (keyed by ReasoningEffort) across sessions in scope. |
+| SESSION_LLM_TOP_X_TOOLS | 31 | Top X most-invoked tools (count, duration, error-rate) across sessions in scope. |
+| SESSION_LLM_LEAST_X_TOOLS | 32 | Least X invoked tools across sessions in scope. |
+| SESSION_LLM_TOTAL_STATISTICS | 33 | Single rolled-up LLM statistics summary (totals + all breakdowns) across sessions in scope. |
+| SESSION_LLM_INPUT_TOKEN_USAGE | 34 | Aggregate LLM input / prompt token usage across sessions in scope. |
+| SESSION_LLM_OUTPUT_TOKEN_USAGE | 35 | Aggregate LLM output / completion token usage across sessions in scope. |
+| SESSION_LLM_THINKING_TOKEN_USAGE | 36 | Aggregate LLM thinking / reasoning token usage across sessions in scope. |
+| SESSION_LLM_TOOL_CALL_TOKEN_USAGE | 37 | Aggregate LLM tool-call token usage across sessions in scope. |
+| SESSION_LLM_TOP_X_MODELS | 38 | Top X most-used models (by calls / tokens) across sessions in scope. |
+| SESSION_LLM_TOP_X_CCAI_SERVICE_PROVIDERS | 39 | Top X most-used CCAI service providers across sessions in scope. |
+| SESSION_LLM_TOP_X_AGENT_NAMES | 40 | Top X most-used agent name of agentic AI team |
 
 
  <!-- end enums -->
@@ -6910,7 +6961,7 @@ A single experiment run over a dataset.
 | llm_evaluation_evaluator_runs | [LlmEvaluationEvaluatorRun](#ondewo.nlu.LlmEvaluationEvaluatorRun) | repeated | One entry per evaluator x example combination. |
 | started_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Wall-clock start of the experiment run. |
 | finished_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Wall-clock end of the experiment run. |
-| duration_seconds | [double](#double) |  | Convenience duration (finished_at - started_at). |
+| duration_in_s | [double](#double) |  | Convenience duration (finished_at - started_at). |
 | n_examples | [int32](#int32) |  | Number of dataset examples consumed. |
 | n_passed | [int32](#int32) |  | Number of evaluator runs that produced a passing score. |
 | n_failed | [int32](#int32) |  | Number of evaluator runs that produced a failing score. |
@@ -10693,6 +10744,45 @@ This message is a response of listing session user_ids
 
 
 
+<a name="ondewo.nlu.LlmAgentUsage"></a>
+
+### LlmAgentUsage
+Per-intent-agent usage rollup across the scope.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| agent_name | [string](#string) |  | intent_agent executor / agent name owning the calls. |
+| agent_role | [string](#string) |  | Optional agent role. |
+| team_name | [string](#string) |  | Optional team name. |
+| call_count | [int64](#int64) |  | Number of LLM calls attributed to this agent in scope. |
+| llm_token_usage | [LlmTokenUsage](#ondewo.nlu.LlmTokenUsage) |  | Summed token usage for this agent. |
+| tool_call_count | [int64](#int64) |  | Tool-call count attributed to this agent. |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmCacheStats"></a>
+
+### LlmCacheStats
+Prompt-cache efficiency aggregate across the LLM calls in scope.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| cached_input_tokens | [int64](#int64) |  | Tokens served from prompt cache (cached_input_tokens summed). |
+| cache_creation_input_tokens | [int64](#int64) |  | Tokens written to prompt cache (cache_creation_input_tokens summed). |
+| uncached_input_tokens | [int64](#int64) |  | Non-cached input tokens. |
+| cache_hit_rate | [double](#double) |  | cached_input_tokens / (cached_input_tokens + uncached_input_tokens). |
+| token_savings | [int64](#int64) |  | Input tokens avoided by cache reuse. |
+
+
+
+
+
+
 <a name="ondewo.nlu.LlmCallFinishedEvent"></a>
 
 ### LlmCallFinishedEvent
@@ -10703,7 +10793,7 @@ Emitted on a streaming DetectIntent when an LLM invocation finishes.
 | ----- | ---- | ----- | ----------- |
 | llm_call_id | [string](#string) |  | Collector-assigned id grouping events for this LLM call. |
 | end_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Wall-clock end time of the LLM call. |
-| duration_seconds | [double](#double) |  | Convenience duration (end_time - start_time). |
+| duration_in_s | [double](#double) |  | Convenience duration (end_time - start_time). |
 | llm_token_usage | [LlmTokenUsage](#ondewo.nlu.LlmTokenUsage) |  | Final token totals for this LLM call. |
 
 
@@ -10730,6 +10820,169 @@ Emitted on a streaming DetectIntent when an LLM invocation starts.
 
 
 
+<a name="ondewo.nlu.LlmCcaiServiceUsage"></a>
+
+### LlmCcaiServiceUsage
+Per-CCAI-service usage rollup across the scope.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| ccai_service_provider | [CcaiServiceProvider](#ondewo.nlu.CcaiServiceProvider) |  | CCAI service provider enum value. |
+| ccai_service_name | [string](#string) |  | Resource name of the CCAI service. |
+| call_count | [int64](#int64) |  | Number of LLM calls attributed to this CCAI service in scope. |
+| llm_token_usage | [LlmTokenUsage](#ondewo.nlu.LlmTokenUsage) |  | Summed token usage for this CCAI service. |
+| base_url | [string](#string) |  | Base URL used by this CCAI service. |
+| model_names | [string](#string) | repeated | Distinct model names seen under this CCAI service. |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmErrorStat"></a>
+
+### LlmErrorStat
+One error class aggregate.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| error_class | [string](#string) |  | Error class / type (LlmTelemetry.error_class). |
+| count | [int64](#int64) |  | Number of occurrences in scope. |
+| rate | [double](#double) |  | count / total LLM calls in scope. |
+| sample_message | [string](#string) |  | A representative error_message sample (may be truncated / redacted). |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmErrorStats"></a>
+
+### LlmErrorStats
+Error breakdown aggregate across the scope.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| total_error_count | [int64](#int64) |  | Total failed LLM calls in scope. |
+| overall_error_rate | [double](#double) |  | total_error_count / total LLM calls in scope. |
+| errors_by_class | [LlmErrorStat](#ondewo.nlu.LlmErrorStat) | repeated | Per-error-class breakdown, descending by count. |
+| retry_count_total | [int64](#int64) |  | Total retries observed (LlmTelemetry.retry_count summed). |
+| max_fallback_depth | [int32](#int32) |  | Max fallback depth observed (LlmTelemetry.fallback_depth max). |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmFinishReasonStat"></a>
+
+### LlmFinishReasonStat
+One finish-reason aggregate.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| finish_reason | [string](#string) |  | Finish reason ("stop" | "length" | "tool_calls" | "content_filter" | "error" | ...). |
+| count | [int64](#int64) |  | Number of occurrences in scope. |
+| rate | [double](#double) |  | count / total LLM calls in scope. |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmLatencyStats"></a>
+
+### LlmLatencyStats
+Latency aggregate (seconds) across the LLM calls in scope.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| call_count | [int64](#int64) |  | Number of LLM calls included in these latency stats. |
+| mean_duration_seconds | [double](#double) |  | Mean end-to-end call duration in seconds. |
+| p50_duration_seconds | [double](#double) |  | 50th percentile end-to-end call duration in seconds. |
+| p95_duration_seconds | [double](#double) |  | 95th percentile end-to-end call duration in seconds. |
+| p99_duration_seconds | [double](#double) |  | 99th percentile end-to-end call duration in seconds. |
+| max_duration_seconds | [double](#double) |  | Maximum observed end-to-end call duration in seconds. |
+| mean_first_token_latency_seconds | [double](#double) |  | Mean time-to-first-token in seconds (streaming calls only). |
+| p95_first_token_latency_seconds | [double](#double) |  | 95th percentile time-to-first-token in seconds. |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmModelUsage"></a>
+
+### LlmModelUsage
+Per-model usage rollup across the scope.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| model_name | [string](#string) |  | Concrete model identifier (e.g. "claude-3-5-sonnet-20241022"). |
+| provider | [string](#string) |  | Provider tag owning the model (e.g. "anthropic"). |
+| call_count | [int64](#int64) |  | Number of LLM calls to this model in scope. |
+| llm_token_usage | [LlmTokenUsage](#ondewo.nlu.LlmTokenUsage) |  | Summed token usage (input / output / total) for this model. |
+| tool_call_count | [int64](#int64) |  | Tool-call count attributed to this model. |
+| error_count | [int64](#int64) |  | Error count attributed to this model. |
+| duration_seconds_total | [double](#double) |  | Summed call duration in seconds for this model. |
+| cache_stats | [LlmCacheStats](#ondewo.nlu.LlmCacheStats) |  | Optional cache stats for this model. |
+| ccai_service_name | [string](#string) |  | Resource name of the CCAI service that issued the calls. |
+| ccai_service_provider | [CcaiServiceProvider](#ondewo.nlu.CcaiServiceProvider) |  | Provider of the CCAI service. |
+| base_url | [string](#string) |  | Base URL used for the calls (proxy / compatible provider). |
+| thinking_tokens_total | [int64](#int64) |  | Summed thinking-block tokens for this model. |
+| thinking_duration_seconds_total | [double](#double) |  | Summed thinking-block duration in seconds for this model. |
+| tool_call_tokens_total | [int64](#int64) |  | Summed tool-call tokens for this model. |
+| tool_call_duration_seconds_total | [double](#double) |  | Summed tool-call duration in seconds for this model. |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmProviderUsage"></a>
+
+### LlmProviderUsage
+Per-provider usage rollup across the scope.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| provider | [string](#string) |  | Provider tag (e.g. "anthropic", "openai", "ollama"). |
+| call_count | [int64](#int64) |  | Number of LLM calls to this provider in scope. |
+| llm_token_usage | [LlmTokenUsage](#ondewo.nlu.LlmTokenUsage) |  | Summed token usage for this provider. |
+| error_count | [int64](#int64) |  | Error count attributed to this provider. |
+| duration_seconds_total | [double](#double) |  | Summed call duration in seconds for this provider. |
+| model_names | [string](#string) | repeated | Distinct model names seen under this provider. |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmReasoningEffortStat"></a>
+
+### LlmReasoningEffortStat
+One reasoning-effort aggregate.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| reasoning_effort | [ReasoningEffort](#ondewo.nlu.ReasoningEffort) |  | Reasoning effort enum value. |
+| count | [int64](#int64) |  | Number of LLM calls at this effort level in scope. |
+| rate | [double](#double) |  | count / total LLM calls in scope. |
+| llm_token_usage | [LlmTokenUsage](#ondewo.nlu.LlmTokenUsage) |  | Summed token usage at this effort level. |
+
+
+
+
+
+
 <a name="ondewo.nlu.LlmTelemetry"></a>
 
 ### LlmTelemetry
@@ -10739,7 +10992,7 @@ Telemetry for a single LLM invocation inside one DetectIntent turn.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | provider | [string](#string) |  | Provider tag: "autogen" | "langchain" | "openai" | "anthropic" | ... |
-| model_name | [string](#string) |  | Concrete model identifier (e.g. "claude-3-5-sonnet-20241022"). |
+| model_name | [string](#string) |  | Concrete model identifier (e.g. "Qwen/Qwen3.6-27b-fp8"). |
 | agent_name | [string](#string) |  | intent_agent executor / agent name. |
 | llm_token_usage | [LlmTokenUsage](#ondewo.nlu.LlmTokenUsage) |  | Totals for this call. |
 | llm_tool_call_metadatas | [LlmToolCallMetadata](#ondewo.nlu.LlmToolCallMetadata) | repeated | Tool calls observed during this LLM invocation. |
@@ -10747,7 +11000,7 @@ Telemetry for a single LLM invocation inside one DetectIntent turn.
 | llm_thinking_metadata | [LlmThinkingMetadata](#ondewo.nlu.LlmThinkingMetadata) |  | Thinking block when surfaced by the model. |
 | start_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Wall-clock start of the LLM call. |
 | end_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Wall-clock end of the LLM call. |
-| duration_seconds | [double](#double) |  | Convenience duration (end_time - start_time). |
+| duration_in_s | [double](#double) |  | Convenience duration (end_time - start_time). |
 | run_id | [string](#string) |  | LangChain / LangSmith run identifier for this LLM call (UUID). |
 | parent_run_id | [string](#string) |  | LangChain / LangSmith identifier of the parent run that spawned this call, forming the LangSmith run tree. |
 | run_type | [string](#string) |  | LangSmith run taxonomy: chain | llm | tool | retriever | agent | parser | prompt. |
@@ -10783,6 +11036,21 @@ Telemetry for a single LLM invocation inside one DetectIntent turn.
 | termination_reason | [string](#string) |  | Autogen <code>TaskResult.stop_reason</code> string when surfaced. |
 | evaluator_runs_join_key | [string](#string) |  | Join key linking this LLM call to an evaluator run (see llm_evaluation.proto). |
 | llm_evaluation_feedbacks | [LlmEvaluationFeedback](#ondewo.nlu.LlmEvaluationFeedback) | repeated | Immediate inline feedback recorded inside the turn (e.g. self-grading by a reflection agent). Each entry is a single LlmEvaluationFeedback record. |
+| ccai_service_name | [string](#string) |  | Resource name of the CCAI service that issued this LLM call. |
+| base_url | [string](#string) |  | The base URL for the OpenAI API. Overrides the default endpoint, useful for proxies or compatible third-party providers. |
+| default_headers | [google.protobuf.Struct](#google.protobuf.Struct) | optional | Optional. Default HTTP headers to include with every request to the OpenAI API. |
+| default_query | [google.protobuf.Struct](#google.protobuf.Struct) | optional | Optional. Default query parameters to append to every request URL sent to the OpenAI API. Values can be of any type (string, number, boolean, list), hence the use of Struct. |
+| frequency_penalty | [float](#float) | optional | Optional. A number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the likelihood of the model repeating the same line verbatim. |
+| openai_metadata | [google.protobuf.Struct](#google.protobuf.Struct) | optional | Optional. Developer-defined tags and values used for filtering completions in the OpenAI dashboard. |
+| presence_penalty | [float](#float) | optional | Optional. A number between -2.0 and 2.0. Positive values penalize new tokens based on whether they have already appeared in the text, increasing the likelihood of the model discussing new topics. |
+| reasoning_effort | [ReasoningEffort](#ondewo.nlu.ReasoningEffort) | optional | Optional. Constrains the effort level for reasoning models (e.g. o1, o3). Controls the trade-off between speed and quality. |
+| user | [string](#string) | optional | Optional. A unique identifier representing the end-user, which helps OpenAI monitor and detect abuse. |
+| timeout | [float](#float) | optional | Optional. The timeout in seconds for requests to the OpenAI API. Applies to the entire request lifecycle including connection, sending, and receiving. |
+| strict_response_validation | [bool](#bool) | optional | Optional. If true, enables strict validation of response payloads returned by the OpenAI API. |
+| extra_headers | [google.protobuf.Struct](#google.protobuf.Struct) | optional | Optional. Additional HTTP headers to send with the request. These are merged with and override default_headers for this specific request only. |
+| extra_query | [google.protobuf.Struct](#google.protobuf.Struct) | optional | Optional. Additional query parameters to send with the request. These are merged with and override default_query for this specific request only. |
+| extra_body | [google.protobuf.Struct](#google.protobuf.Struct) | optional | Optional. Additional JSON properties to include in the request body. Useful for accessing new or undocumented API parameters. |
+| ccai_service_provider | [CcaiServiceProvider](#ondewo.nlu.CcaiServiceProvider) |  | Provider of the ccai service |
 
 
 
@@ -10792,7 +11060,10 @@ Telemetry for a single LLM invocation inside one DetectIntent turn.
 <a name="ondewo.nlu.LlmTelemetryReport"></a>
 
 ### LlmTelemetryReport
-Aggregated telemetry across all LLM calls in one DetectIntent turn.
+Aggregated telemetry across all LLM calls in one DetectIntent turn, or across
+a session / agent-domain scope when used as a statistics report payload. The
+breakdown fields (6+) are populated only for the matching report type; a
+*_LLM_TOTAL_STATISTICS report populates all of them.
 
 
 | Field | Type | Label | Description |
@@ -10801,7 +11072,21 @@ Aggregated telemetry across all LLM calls in one DetectIntent turn.
 | tool_call_count_total | [int32](#int32) |  | Sum of LlmTelemetry.tool_call_count across llm_telemetries. |
 | llm_call_count | [int32](#int32) |  | Denormalized len(llm_telemetries). |
 | llm_telemetries | [LlmTelemetry](#ondewo.nlu.LlmTelemetry) | repeated | Per-LLM-invocation breakdown. |
-| duration_seconds_total | [double](#double) |  | Sum of LlmTelemetry.duration_seconds across llm_telemetries. |
+| duration_seconds_total | [double](#double) |  | Sum of LlmTelemetry.duration_in_s across llm_telemetries. |
+| models_used | [LlmModelUsage](#ondewo.nlu.LlmModelUsage) | repeated | Per-model usage rollup. Populated for *_LLM_MODELS_USED and *_LLM_TOTAL_STATISTICS. |
+| providers_used | [LlmProviderUsage](#ondewo.nlu.LlmProviderUsage) | repeated | Per-provider usage rollup. Populated for *_LLM_PROVIDERS_USED and *_LLM_TOTAL_STATISTICS. |
+| ccai_services_used | [LlmCcaiServiceUsage](#ondewo.nlu.LlmCcaiServiceUsage) | repeated | Per-CCAI-service usage rollup. Populated for *_LLM_CCAI_SERVICES_USED and *_LLM_TOTAL_STATISTICS. |
+| agents_used | [LlmAgentUsage](#ondewo.nlu.LlmAgentUsage) | repeated | Per-intent-agent usage rollup. Populated for *_LLM_AGENTS_USED and *_LLM_TOTAL_STATISTICS. |
+| tools_used | [LlmToolUsage](#ondewo.nlu.LlmToolUsage) | repeated | Tool-usage rollup. Populated for *_LLM_TOP_X_TOOLS / *_LLM_LEAST_X_TOOLS and *_LLM_TOTAL_STATISTICS. |
+| latency_stats | [LlmLatencyStats](#ondewo.nlu.LlmLatencyStats) |  | Latency aggregate. Populated for *_LLM_LATENCY and *_LLM_TOTAL_STATISTICS. |
+| cache_stats | [LlmCacheStats](#ondewo.nlu.LlmCacheStats) |  | Cache efficiency aggregate. Populated for *_LLM_CACHE_EFFICIENCY and *_LLM_TOTAL_STATISTICS. |
+| error_stats | [LlmErrorStats](#ondewo.nlu.LlmErrorStats) |  | Error aggregate. Populated for *_LLM_ERRORS and *_LLM_TOTAL_STATISTICS. |
+| finish_reason_distribution | [LlmFinishReasonStat](#ondewo.nlu.LlmFinishReasonStat) | repeated | Finish-reason distribution. Populated for *_LLM_FINISH_REASONS and *_LLM_TOTAL_STATISTICS. |
+| reasoning_effort_distribution | [LlmReasoningEffortStat](#ondewo.nlu.LlmReasoningEffortStat) | repeated | Reasoning-effort distribution. Populated for *_LLM_REASONING_EFFORT and *_LLM_TOTAL_STATISTICS. |
+| thinking_tokens_total | [int64](#int64) |  | Scope-wide summed thinking-block tokens. |
+| thinking_duration_seconds_total | [double](#double) |  | Scope-wide summed thinking-block duration in seconds. |
+| tool_call_tokens_total | [int64](#int64) |  | Scope-wide summed tool-call tokens. |
+| tool_call_duration_seconds_total | [double](#double) |  | Scope-wide summed tool-call duration in seconds. |
 
 
 
@@ -10837,7 +11122,7 @@ OpenAI o-series reasoning).
 | llm_token_usage | [LlmTokenUsage](#ondewo.nlu.LlmTokenUsage) |  | Token attribution for the thinking block when surfaced by the provider. |
 | start_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Wall-clock start of the thinking block. |
 | end_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Wall-clock end of the thinking block. |
-| duration_seconds | [double](#double) |  | Convenience duration (end_time - start_time). |
+| duration_in_s | [double](#double) |  | Convenience duration (end_time - start_time). |
 | thinking_text | [string](#string) |  | Raw thinking text. Subject to redaction depending on telemetry policy. |
 
 
@@ -10888,7 +11173,7 @@ Emitted on a streaming DetectIntent when a tool call finishes.
 | ----- | ---- | ----- | ----------- |
 | tool_call_id | [string](#string) |  | Stable id matching the matching LlmToolCallStartedEvent. |
 | end_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Wall-clock end time of the tool call. |
-| duration_seconds | [double](#double) |  | Convenience duration (end_time - start_time). |
+| duration_in_s | [double](#double) |  | Convenience duration (end_time - start_time). |
 | llm_token_usage | [LlmTokenUsage](#ondewo.nlu.LlmTokenUsage) |  | Token attribution for this tool call when available. |
 | result | [google.protobuf.Struct](#google.protobuf.Struct) |  | Tool result payload (may be omitted on failure or redaction). |
 | error_message | [string](#string) |  | Populated only when the tool call failed; empty string on success. |
@@ -10911,7 +11196,7 @@ Metadata for one tool call executed by the LLM.
 | tool_name | [string](#string) |  | Name of the tool / function invoked. |
 | start_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Wall-clock start time of the tool call. |
 | end_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Wall-clock end time of the tool call. |
-| duration_seconds | [double](#double) |  | Convenience duration (end_time - start_time). |
+| duration_in_s | [double](#double) |  | Convenience duration (end_time - start_time). |
 | llm_token_usage | [LlmTokenUsage](#ondewo.nlu.LlmTokenUsage) |  | Token attribution for this tool call when available. |
 | arguments | [google.protobuf.Struct](#google.protobuf.Struct) |  | Tool arguments as a structured payload. May be omitted on incremental events. |
 | result | [google.protobuf.Struct](#google.protobuf.Struct) |  | Tool result as a structured payload. May be omitted on incremental events. |
@@ -10935,6 +11220,27 @@ Emitted on a streaming DetectIntent when a tool call starts.
 | arguments | [google.protobuf.Struct](#google.protobuf.Struct) |  | Tool arguments as a structured payload (Struct kept as-is; not a custom Message). |
 | start_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Wall-clock start time of the tool call. |
 | llm_call_id | [string](#string) |  | Groups events under an LlmTelemetry entry. |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmToolUsage"></a>
+
+### LlmToolUsage
+One tool's invocation aggregate across the scope.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| tool_name | [string](#string) |  | Name of the tool / function. |
+| call_count | [int64](#int64) |  | Number of times the tool was invoked in scope. |
+| error_count | [int64](#int64) |  | Number of failed invocations. |
+| error_rate | [double](#double) |  | error_count / call_count. |
+| duration_seconds_total | [double](#double) |  | Summed tool-call duration in seconds. |
+| mean_duration_seconds | [double](#double) |  | Mean tool-call duration in seconds. |
+| llm_token_usage | [LlmTokenUsage](#ondewo.nlu.LlmTokenUsage) |  | Summed tool-call token usage (input / output / total). |
 
 
 
@@ -11508,6 +11814,22 @@ Type of operator to compare
 | CONTAINS | 4 | contains operator, e.g. part of string, or one of the elements in an iterable such as set or list |
 | STARTS_WITH | 5 | starts with operator for string comparison only |
 | ENDS_WITH | 6 | ends with operator for string comparison only |
+
+
+
+<a name="ondewo.nlu.ReasoningEffort"></a>
+
+### ReasoningEffort
+Effort level for reasoning models (e.g. o1, o3). Controls the trade-off
+between speed and quality.
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| REASONING_EFFORT_UNSPECIFIED | 0 | Unspecified reasoning effort. |
+| REASONING_EFFORT_MINIMAL | 1 | Minimal reasoning effort. |
+| REASONING_EFFORT_LOW | 2 | Low reasoning effort. |
+| REASONING_EFFORT_MEDIUM | 3 | Medium reasoning effort. |
+| REASONING_EFFORT_HIGH | 4 | High reasoning effort. |
 
 
 
