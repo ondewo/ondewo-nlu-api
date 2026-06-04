@@ -37,10 +37,12 @@ import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
 import "google/rpc/status.proto";
 import "google/type/latlng.proto";
+import "ondewo/nlu/ccai_project.proto";
 import "ondewo/nlu/common.proto";
 import "ondewo/nlu/context.proto";
-import "ondewo/nlu/intent.proto";
 import "ondewo/nlu/entity_type.proto";
+import "ondewo/nlu/intent.proto";
+import "ondewo/nlu/llm_evaluation.proto";
 
 option cc_enable_arenas = true;
 option csharp_namespace = "Google.Cloud.Dialogflow.V2";
@@ -129,84 +131,98 @@ service Sessions {
 
     // *** SESSION-LABEL RELATED ENDPOINTS *** //
 
+    // Returns the list of labels attached to a single session.
     rpc ListSessionLabels (ListSessionLabelsRequest) returns (ListSessionLabelsResponse) {
         option (google.api.http) = {
             get: "/v2/{session_id=projects/*/agent/sessions/*}/labels"
         };
     };
 
+    // Returns the distinct set of labels observed across all sessions of the agent, optionally narrowed by a SessionFilter.
     rpc ListSessionLabelsOfAllSessions (ListSessionLabelsOfAllSessionsRequest) returns (ListSessionLabelsResponse) {
         option (google.api.http) = {
             get: "/v2/{parent=projects/*/agent}/sessions/labels"
         };
     };
 
+    // Returns the distinct set of language codes observed across all sessions of the agent, optionally narrowed by a SessionFilter.
     rpc ListLanguageCodesOfAllSessions (ListLanguageCodesOfAllSessionsRequest) returns (ListLanguageCodesResponse) {
         option (google.api.http) = {
             get: "/v2/{parent=projects/*/agent}/sessions/language_codes"
         };
     };
 
+    // Returns the distinct set of intents matched across all sessions of the agent, optionally narrowed by a SessionFilter.
     rpc ListMatchedIntentsOfAllSessions (ListMatchedIntentsOfAllSessionsRequest) returns (ListMatchedIntentsResponse) {
         option (google.api.http) = {
             get: "/v2/{parent=projects/*/agent}/sessions/matched_intents"
         };
     };
 
+    // Returns the distinct set of entity types recognised across all sessions of the agent, optionally narrowed by a SessionFilter.
     rpc ListMatchedEntityTypesOfAllSessions (ListMatchedEntityTypesOfAllSessionsRequest) returns (ListMatchedEntityTypesResponse) {
         option (google.api.http) = {
             get: "/v2/{parent=projects/*/agent}/sessions/matched_entity_types"
         };
     };
 
+    // Returns the distinct set of <code>user_id</code> values observed across all sessions of the agent, optionally narrowed by a SessionFilter.
     rpc ListUserIdsOfAllSessions (ListUserIdsOfAllSessionsRequest) returns (ListUserIdsResponse) {
         option (google.api.http) = {
             get: "/v2/{parent=projects/*/agent}/sessions/user_ids"
         };
     };
 
+    // Returns the distinct set of <code>identified_user_id</code> values observed across all sessions of the agent, optionally narrowed by a SessionFilter.
     rpc ListIdentifiedUserIdsOfAllSessions (ListIdentifiedUserIdsOfAllSessionsRequest) returns (ListIdentifiedUserIdsResponse) {
         option (google.api.http) = {
             get: "/v2/{parent=projects/*/agent}/sessions/identified_user_ids"
         };
     };
 
+    // Returns the distinct set of intent tags observed across all sessions of the agent, optionally narrowed by a SessionFilter.
     rpc ListTagsOfAllSessions (ListTagsOfAllSessionsRequest) returns (ListTagsResponse) {
         option (google.api.http) = {
             get: "/v2/{parent=projects/*/agent}/sessions/tags"
         };
     };
 
+    // Returns the distinct set of input contexts observed across all sessions of the agent, optionally narrowed by a SessionFilter.
     rpc ListInputContextsOfAllSessions (ListInputContextsOfAllSessionsRequest) returns (ListInputContextsResponse) {
         option (google.api.http) = {
             get: "/v2/{parent=projects/*/agent}/sessions/input_contexts"
         };
     };
 
+    // Returns the distinct set of output contexts observed across all sessions of the agent, optionally narrowed by a SessionFilter.
     rpc ListOutputContextsOfAllSessions (ListOutputContextsOfAllSessionsRequest) returns (ListOutputContextsResponse) {
         option (google.api.http) = {
             get: "/v2/{parent=projects/*/agent}/sessions/output_contexts"
         };
     };
 
+    // Returns the distinct set of <code>Intent.Message.Platform</code> values observed across all sessions of the agent, optionally narrowed by a SessionFilter.
     rpc ListPlatformsOfAllSessions (ListPlatformsOfAllSessionsRequest) returns (ListPlatformsResponse) {
         option (google.api.http) = {
             get: "/v2/{parent=projects/*/agent}/sessions/platforms"
         };
     };
 
+    // Returns the distinct set of <code>account_id</code> values observed across all sessions of the agent, optionally narrowed by a SessionFilter.
     rpc ListAccountIdsOfAllSessions (ListAccountIdsOfAllSessionsRequest) returns (ListAccountIdsResponse) {
         option (google.api.http) = {
             get: "/v2/{parent=projects/*/agent}/sessions/account_ids"
         };
     };
 
+    // Returns the distinct set of <code>property_id</code> values observed across all sessions of the agent, optionally narrowed by a SessionFilter.
     rpc ListPropertyIdsOfAllSessions (ListPropertyIdsOfAllSessionsRequest) returns (ListPropertyIdsResponse) {
         option (google.api.http) = {
             get: "/v2/{parent=projects/*/agent}/sessions/property_ids"
         };
     };
 
+    // Returns the distinct set of <code>datastream_id</code> values observed across all sessions of the agent, optionally narrowed by a SessionFilter.
     rpc ListDatastreamIdsOfAllSessions (ListDatastreamIdsOfAllSessionsRequest) returns (ListDatastreamIdsResponse) {
         option (google.api.http) = {
             get: "/v2/{parent=projects/*/agent}/sessions/datastream_ids"
@@ -214,6 +230,7 @@ service Sessions {
     };
 
 
+    // Returns the distinct set of <code>origin_id</code> values observed across all sessions of the agent, optionally narrowed by a SessionFilter.
     rpc ListOriginIdsOfAllSessions (ListOriginIdsOfAllSessionsRequest) returns (ListOriginIdsResponse) {
         option (google.api.http) = {
             get: "/v2/{parent=projects/*/agent}/sessions/origin_ids"
@@ -221,6 +238,7 @@ service Sessions {
     };
 
 
+    // Attaches the supplied labels to a session and returns the updated session.
     rpc AddSessionLabels (AddSessionLabelsRequest) returns (Session) {
         option (google.api.http) = {
             post: "/v2/{session_id=projects/*/agent/sessions/*}/labels:add"
@@ -228,6 +246,7 @@ service Sessions {
         };
     };
 
+    // Removes the supplied labels from a session and returns the updated session.
     rpc DeleteSessionLabels (DeleteSessionLabelsRequest) returns (Session) {
         option (google.api.http) = {
             post: "/v2/{session_id=projects/*/agent/sessions/*}/labels:delete"
@@ -235,6 +254,7 @@ service Sessions {
         };
     };
 
+    // Appends a comment to a session and returns the persisted comment.
     rpc AddSessionComment (AddSessionCommentRequest) returns (Comment) {
         option (google.api.http) = {
             post: "/v2/{session_id=projects/*/agent/sessions/*}/comments:add"
@@ -242,6 +262,7 @@ service Sessions {
         };
     };
 
+    // Removes the comments named in the request from a session and returns the updated session.
     rpc DeleteSessionComments (DeleteSessionCommentsRequest) returns (Session) {
         option (google.api.http) = {
             post: "/v2/{session_id=projects/*/agent/sessions/*}/comments:delete"
@@ -249,6 +270,7 @@ service Sessions {
         };
     };
 
+    // Updates an existing comment on a session and returns the updated session.
     rpc UpdateSessionComments (UpdateSessionCommentsRequest) returns (Session) {
         option (google.api.http) = {
             post: "/v2/{session_id=projects/*/agent/sessions/*}/comments:update"
@@ -256,6 +278,7 @@ service Sessions {
         };
     };
 
+    // Lists the comments attached to a session with pagination support.
     rpc ListSessionComments (ListSessionCommentsRequest) returns (ListSessionCommentsResponse) {
         option (google.api.http) = {
             get: "/v2/{session_id=projects/*/agent/sessions/*}/reviews"
@@ -365,6 +388,10 @@ message DetectIntentResponse {
     // Specifies the status of the webhook request. <code>webhook_status</code>
     // is never populated in webhook requests.
     google.rpc.Status webhook_status = 3;
+
+    // Aggregated LLM telemetry — duplicated convenience copy of
+    // <code>query_result.llm_telemetry_report</code> for unary clients.
+    LlmTelemetryReport llm_telemetry_report = 4;
 }
 
 // Represents the parameters of the conversational query.
@@ -474,15 +501,17 @@ message QueryParameters {
 
 }
 
+// Identifies whether a transcription was produced by an automatic
+// speech-to-text system or by a human annotator.
 enum TranscriptionType {
 
-    // unspecified
+    // Sentinel value when the source of the transcription was not specified.
     TRANSCRIPTION_TYPE_UNSPECIFIED = 0;
 
-    // Automatic transcription by a speech to text system
+    // Automatic transcription produced by a speech-to-text system.
     TRANSCRIPTION_TYPE_S2T = 1;
 
-    // Manual human transcription
+    // Manual transcription produced by a human annotator.
     TRANSCRIPTION_TYPE_HUMAN = 2;
 }
 
@@ -555,6 +584,688 @@ message QueryInput {
     // Files as input for the detect intent request, e.g., image, document, audio, video etc.
     repeated FileResource file_resources = 4;
 
+}
+
+// Token usage counters for a single LLM call (or aggregate).
+message LlmTokenUsage {
+    // Sum of input and output tokens for this call (or aggregate across calls).
+    int64 total_tokens = 1;
+
+    // Number of prompt / input tokens consumed.
+    int64 input_tokens = 2;
+
+    // Number of completion / output tokens produced.
+    int64 output_tokens = 3;
+}
+
+// Metadata for one tool call executed by the LLM.
+message LlmToolCallMetadata {
+    // Stable id assigned by the upstream framework (autogen / langchain).
+    string tool_call_id = 1;
+
+    // Name of the tool / function invoked.
+    string tool_name = 2;
+
+    // Wall-clock start time of the tool call.
+    google.protobuf.Timestamp start_time = 3;
+
+    // Wall-clock end time of the tool call.
+    google.protobuf.Timestamp end_time = 4;
+
+    // Convenience duration (end_time - start_time).
+    double duration_in_s = 5;
+
+    // Token attribution for this tool call when available.
+    LlmTokenUsage llm_token_usage = 6;
+
+    // Tool arguments as a structured payload. May be omitted on incremental events.
+    google.protobuf.Struct arguments = 7;
+
+    // Tool result as a structured payload. May be omitted on incremental events.
+    google.protobuf.Struct result = 8;
+
+    // Populated only when the tool call failed; empty string on success.
+    string error_message = 9;
+}
+
+// Thinking / reasoning block emitted by the model (e.g. Anthropic extended thinking,
+// OpenAI o-series reasoning).
+message LlmThinkingMetadata {
+    // Token attribution for the thinking block when surfaced by the provider.
+    LlmTokenUsage llm_token_usage = 1;
+
+    // Wall-clock start of the thinking block.
+    google.protobuf.Timestamp start_time = 2;
+
+    // Wall-clock end of the thinking block.
+    google.protobuf.Timestamp end_time = 3;
+
+    // Convenience duration (end_time - start_time).
+    double duration_in_s = 4;
+
+    // Raw thinking text. Subject to redaction depending on telemetry policy.
+    string thinking_text = 5;
+}
+
+// Telemetry for a single LLM invocation inside one DetectIntent turn.
+message LlmTelemetry {
+    // Provider tag: "autogen" | "langchain" | "openai" | "anthropic" | ...
+    string provider = 1;
+
+    // Concrete model identifier (e.g. "Qwen/Qwen3.6-27b-fp8").
+    string model_name = 2;
+
+    // intent_agent executor / agent name.
+    string agent_name = 3;
+
+    // Totals for this call.
+    LlmTokenUsage llm_token_usage = 4;
+
+    // Tool calls observed during this LLM invocation.
+    repeated LlmToolCallMetadata llm_tool_call_metadatas = 5;
+
+    // Denormalized len(llm_tool_call_metadatas).
+    int32 tool_call_count = 6;
+
+    // Thinking block when surfaced by the model.
+    LlmThinkingMetadata llm_thinking_metadata = 7;
+
+    // Wall-clock start of the LLM call.
+    google.protobuf.Timestamp start_time = 8;
+
+    // Wall-clock end of the LLM call.
+    google.protobuf.Timestamp end_time = 9;
+
+    // Convenience duration (end_time - start_time).
+    double duration_in_s = 10;
+
+    // LangChain / LangSmith run identifier for this LLM call (UUID).
+    string run_id = 11;
+
+    // LangChain / LangSmith identifier of the parent run that spawned this call,
+    // forming the LangSmith run tree.
+    string parent_run_id = 12;
+
+    // LangSmith run taxonomy: chain | llm | tool | retriever | agent | parser | prompt.
+    string run_type = 13;
+
+    // Serialized component name from LangChain callbacks (e.g. "ChatOpenAI").
+    string component_name = 14;
+
+    // Tags propagated via RunnableConfig.
+    repeated string tags = 15;
+
+    // Free-form metadata propagated via RunnableConfig.
+    google.protobuf.Struct metadata = 16;
+
+    // Redaction-aware snapshot of inputs at the run boundary.
+    google.protobuf.Struct inputs = 17;
+
+    // Redaction-aware snapshot of outputs at the run boundary.
+    google.protobuf.Struct outputs = 18;
+
+    // Exception class name when the LLM call failed; empty on success.
+    string error_class = 19;
+
+    // Exception message text when the LLM call failed; empty on success.
+    string error_message = 20;
+
+    // Formatted stack trace when the LLM call failed; empty on success.
+    string traceback = 21;
+
+    // Streaming chunk count observed during the call.
+    int32 streaming_chunk_count = 22;
+
+    // Time-to-first-token (start_time -> first chunk).
+    double first_token_latency_seconds = 23;
+
+    // OpenAI system_fingerprint when available.
+    string system_fingerprint = 24;
+
+    // Whether the result was served from a client-side cache.
+    bool cached = 25;
+
+    // Retry count for the underlying provider call.
+    int32 retry_count = 26;
+
+    // Index inside a with_fallbacks([...]) chain when the call succeeded.
+    int32 fallback_depth = 27;
+
+    // Sampling temperature requested for the LLM call (request kwargs).
+    double temperature = 28;
+
+    // Top-p (nucleus sampling) parameter requested for the LLM call.
+    double top_p = 29;
+
+    // Maximum number of tokens the model was allowed to produce.
+    int32 max_tokens = 30;
+
+    // Number of generations the model was asked to return (<code>n</code> in OpenAI API).
+    int32 n_generations = 31;
+
+    // One finish reason per generation (e.g. <code>stop</code>, <code>length</code>, <code>tool_calls</code>, <code>content_filter</code>).
+    repeated string finish_reasons = 32;
+
+    // Number of input tokens served from the provider-side prompt cache
+    // (Anthropic <code>cache_read_input_tokens</code>).
+    int32 cached_input_tokens = 33;
+
+    // Number of input tokens written to the provider-side prompt cache
+    // (Anthropic <code>cache_creation_input_tokens</code>).
+    int32 cache_creation_input_tokens = 34;
+
+    // LangSmith run URL for direct click-through when LangSmith tracing is active.
+    string langsmith_run_url = 35;
+
+    // Autogen team display name owning the call.
+    string team_name = 36;
+
+    // Autogen team identifier (UUID).
+    string team_id = 37;
+
+    // Autogen agent role tag (user_proxy | assistant | tool_executor | reflection).
+    string agent_role = 38;
+
+    // Name of the autogen agent that produced the message.
+    string sender_agent = 39;
+
+    // Name of the autogen agent that received the message.
+    string recipient_agent = 40;
+
+    // Zero-based position of this LLM call inside the autogen <code>run_stream()</code> sequence.
+    int32 turn_index = 41;
+
+    // Number of reflection loops executed in <code>robust_assistant_agent</code> for this call.
+    int32 reflection_iterations = 42;
+
+    // Autogen <code>TaskResult.stop_reason</code> string when surfaced.
+    string termination_reason = 43;
+
+    // Join key linking this LLM call to an evaluator run (see llm_evaluation.proto).
+    string evaluator_runs_join_key = 44;
+
+    // Immediate inline feedback recorded inside the turn (e.g. self-grading by a
+    // reflection agent). Each entry is a single LlmEvaluationFeedback record.
+    repeated LlmEvaluationFeedback llm_evaluation_feedbacks = 45;
+
+    // Resource name of the CCAI service that issued this LLM call.
+    string ccai_service_name = 46;
+
+    // The base URL for the OpenAI API. Overrides the default endpoint, useful
+    // for proxies or compatible third-party providers.
+    string base_url = 47;
+
+    // Optional. Default HTTP headers to include with every request to the OpenAI API.
+    optional google.protobuf.Struct default_headers = 48;
+
+    // Optional. Default query parameters to append to every request URL sent to
+    // the OpenAI API. Values can be of any type (string, number, boolean, list),
+    // hence the use of Struct.
+    optional google.protobuf.Struct default_query = 49;
+
+    // Optional. A number between -2.0 and 2.0. Positive values penalize new
+    // tokens based on their existing frequency in the text so far, decreasing the
+    // likelihood of the model repeating the same line verbatim.
+    optional float frequency_penalty = 50;
+
+    // Optional. Developer-defined tags and values used for filtering completions
+    // in the OpenAI dashboard.
+    optional google.protobuf.Struct openai_metadata = 51;
+
+    // Optional. A number between -2.0 and 2.0. Positive values penalize new
+    // tokens based on whether they have already appeared in the text, increasing
+    // the likelihood of the model discussing new topics.
+    optional float presence_penalty = 52;
+
+    // Optional. Constrains the effort level for reasoning models (e.g. o1, o3).
+    // Controls the trade-off between speed and quality.
+    optional ReasoningEffort reasoning_effort = 53;
+
+    // Optional. A unique identifier representing the end-user, which helps OpenAI
+    // monitor and detect abuse.
+    optional string user = 54;
+
+    // Optional. The timeout in seconds for requests to the OpenAI API. Applies to
+    // the entire request lifecycle including connection, sending, and receiving.
+    optional float timeout = 55;
+
+    // Optional. If true, enables strict validation of response payloads returned
+    // by the OpenAI API.
+    optional bool strict_response_validation = 56;
+
+    // Optional. Additional HTTP headers to send with the request. These are
+    // merged with and override default_headers for this specific request only.
+    optional google.protobuf.Struct extra_headers = 57;
+
+    // Optional. Additional query parameters to send with the request. These are
+    // merged with and override default_query for this specific request only.
+    optional google.protobuf.Struct extra_query = 58;
+
+    // Optional. Additional JSON properties to include in the request body. Useful
+    // for accessing new or undocumented API parameters.
+    optional google.protobuf.Struct extra_body = 59;
+
+    // Provider of the ccai service
+    CcaiServiceProvider ccai_service_provider = 60;
+}
+
+// Effort level for reasoning models (e.g. o1, o3). Controls the trade-off
+// between speed and quality.
+enum ReasoningEffort {
+
+    // Unspecified reasoning effort.
+    REASONING_EFFORT_UNSPECIFIED = 0;
+
+    // Minimal reasoning effort.
+    REASONING_EFFORT_MINIMAL = 1;
+
+    // Low reasoning effort.
+    REASONING_EFFORT_LOW = 2;
+
+    // Medium reasoning effort.
+    REASONING_EFFORT_MEDIUM = 3;
+
+    // High reasoning effort.
+    REASONING_EFFORT_HIGH = 4;
+}
+
+// Latency aggregate (seconds) across the LLM calls in scope.
+message LlmLatencyStats {
+    // Number of LLM calls included in these latency stats.
+    int64 call_count = 1;
+
+    // Mean end-to-end call duration in seconds.
+    double mean_duration_seconds = 2;
+
+    // 50th percentile end-to-end call duration in seconds.
+    double p50_duration_seconds = 3;
+
+    // 95th percentile end-to-end call duration in seconds.
+    double p95_duration_seconds = 4;
+
+    // 99th percentile end-to-end call duration in seconds.
+    double p99_duration_seconds = 5;
+
+    // Maximum observed end-to-end call duration in seconds.
+    double max_duration_seconds = 6;
+
+    // Mean time-to-first-token in seconds (streaming calls only).
+    double mean_first_token_latency_seconds = 7;
+
+    // 95th percentile time-to-first-token in seconds.
+    double p95_first_token_latency_seconds = 8;
+}
+
+// Prompt-cache efficiency aggregate across the LLM calls in scope.
+message LlmCacheStats {
+    // Tokens served from prompt cache (cached_input_tokens summed).
+    int64 cached_input_tokens = 1;
+
+    // Tokens written to prompt cache (cache_creation_input_tokens summed).
+    int64 cache_creation_input_tokens = 2;
+
+    // Non-cached input tokens.
+    int64 uncached_input_tokens = 3;
+
+    // cached_input_tokens / (cached_input_tokens + uncached_input_tokens).
+    double cache_hit_rate = 4;
+
+    // Input tokens avoided by cache reuse.
+    int64 token_savings = 5;
+}
+
+// Per-model usage rollup across the scope.
+message LlmModelUsage {
+    // Concrete model identifier (e.g. "claude-3-5-sonnet-20241022").
+    string model_name = 1;
+
+    // Provider tag owning the model (e.g. "anthropic").
+    string provider = 2;
+
+    // Number of LLM calls to this model in scope.
+    int64 call_count = 3;
+
+    // Summed token usage (input / output / total) for this model.
+    LlmTokenUsage llm_token_usage = 4;
+
+    // Tool-call count attributed to this model.
+    int64 tool_call_count = 5;
+
+    // Error count attributed to this model.
+    int64 error_count = 6;
+
+    // Summed call duration in seconds for this model.
+    double duration_seconds_total = 7;
+
+    // Optional cache stats for this model.
+    LlmCacheStats cache_stats = 8;
+
+    // Resource name of the CCAI service that issued the calls.
+    string ccai_service_name = 9;
+
+    // Provider of the CCAI service.
+    CcaiServiceProvider ccai_service_provider = 10;
+
+    // Base URL used for the calls (proxy / compatible provider).
+    string base_url = 11;
+
+    // Summed thinking-block tokens for this model.
+    int64 thinking_tokens_total = 12;
+
+    // Summed thinking-block duration in seconds for this model.
+    double thinking_duration_seconds_total = 13;
+
+    // Summed tool-call tokens for this model.
+    int64 tool_call_tokens_total = 14;
+
+    // Summed tool-call duration in seconds for this model.
+    double tool_call_duration_seconds_total = 15;
+}
+
+// Per-provider usage rollup across the scope.
+message LlmProviderUsage {
+    // Provider tag (e.g. "anthropic", "openai", "ollama").
+    string provider = 1;
+
+    // Number of LLM calls to this provider in scope.
+    int64 call_count = 2;
+
+    // Summed token usage for this provider.
+    LlmTokenUsage llm_token_usage = 3;
+
+    // Error count attributed to this provider.
+    int64 error_count = 4;
+
+    // Summed call duration in seconds for this provider.
+    double duration_seconds_total = 5;
+
+    // Distinct model names seen under this provider.
+    repeated string model_names = 6;
+}
+
+// Per-CCAI-service usage rollup across the scope.
+message LlmCcaiServiceUsage {
+    // CCAI service provider enum value.
+    CcaiServiceProvider ccai_service_provider = 1;
+
+    // Resource name of the CCAI service.
+    string ccai_service_name = 2;
+
+    // Number of LLM calls attributed to this CCAI service in scope.
+    int64 call_count = 3;
+
+    // Summed token usage for this CCAI service.
+    LlmTokenUsage llm_token_usage = 4;
+
+    // Base URL used by this CCAI service.
+    string base_url = 5;
+
+    // Distinct model names seen under this CCAI service.
+    repeated string model_names = 6;
+}
+
+// Per-intent-agent usage rollup across the scope.
+message LlmAgentUsage {
+    // intent_agent executor / agent name owning the calls.
+    string agent_name = 1;
+
+    // Optional agent role.
+    string agent_role = 2;
+
+    // Optional team name.
+    string team_name = 3;
+
+    // Number of LLM calls attributed to this agent in scope.
+    int64 call_count = 4;
+
+    // Summed token usage for this agent.
+    LlmTokenUsage llm_token_usage = 5;
+
+    // Tool-call count attributed to this agent.
+    int64 tool_call_count = 6;
+}
+
+// One tool's invocation aggregate across the scope.
+message LlmToolUsage {
+    // Name of the tool / function.
+    string tool_name = 1;
+
+    // Number of times the tool was invoked in scope.
+    int64 call_count = 2;
+
+    // Number of failed invocations.
+    int64 error_count = 3;
+
+    // error_count / call_count.
+    double error_rate = 4;
+
+    // Summed tool-call duration in seconds.
+    double duration_seconds_total = 5;
+
+    // Mean tool-call duration in seconds.
+    double mean_duration_seconds = 6;
+
+    // Summed tool-call token usage (input / output / total).
+    LlmTokenUsage llm_token_usage = 7;
+}
+
+// One error class aggregate.
+message LlmErrorStat {
+    // Error class / type (LlmTelemetry.error_class).
+    string error_class = 1;
+
+    // Number of occurrences in scope.
+    int64 count = 2;
+
+    // count / total LLM calls in scope.
+    double rate = 3;
+
+    // A representative error_message sample (may be truncated / redacted).
+    string sample_message = 4;
+}
+
+// Error breakdown aggregate across the scope.
+message LlmErrorStats {
+    // Total failed LLM calls in scope.
+    int64 total_error_count = 1;
+
+    // total_error_count / total LLM calls in scope.
+    double overall_error_rate = 2;
+
+    // Per-error-class breakdown, descending by count.
+    repeated LlmErrorStat errors_by_class = 3;
+
+    // Total retries observed (LlmTelemetry.retry_count summed).
+    int64 retry_count_total = 4;
+
+    // Max fallback depth observed (LlmTelemetry.fallback_depth max).
+    int32 max_fallback_depth = 5;
+}
+
+// One finish-reason aggregate.
+message LlmFinishReasonStat {
+    // Finish reason ("stop" | "length" | "tool_calls" | "content_filter" | "error" | ...).
+    string finish_reason = 1;
+
+    // Number of occurrences in scope.
+    int64 count = 2;
+
+    // count / total LLM calls in scope.
+    double rate = 3;
+}
+
+// One reasoning-effort aggregate.
+message LlmReasoningEffortStat {
+    // Reasoning effort enum value.
+    ReasoningEffort reasoning_effort = 1;
+
+    // Number of LLM calls at this effort level in scope.
+    int64 count = 2;
+
+    // count / total LLM calls in scope.
+    double rate = 3;
+
+    // Summed token usage at this effort level.
+    LlmTokenUsage llm_token_usage = 4;
+}
+
+// Aggregated telemetry across all LLM calls in one DetectIntent turn, or across
+// a session / agent-domain scope when used as a statistics report payload. The
+// breakdown fields (6+) are populated only for the matching report type; a
+// *_LLM_TOTAL_STATISTICS report populates all of them.
+message LlmTelemetryReport {
+    // Summed LlmTokenUsage across llm_telemetries.
+    LlmTokenUsage llm_token_usage = 1;
+
+    // Sum of LlmTelemetry.tool_call_count across llm_telemetries.
+    int32 tool_call_count_total = 2;
+
+    // Denormalized len(llm_telemetries).
+    int32 llm_call_count = 3;
+
+    // Per-LLM-invocation breakdown.
+    repeated LlmTelemetry llm_telemetries = 4;
+
+    // Sum of LlmTelemetry.duration_in_s across llm_telemetries.
+    double duration_seconds_total = 5;
+
+    // Per-model usage rollup. Populated for *_LLM_MODELS_USED and *_LLM_TOTAL_STATISTICS.
+    repeated LlmModelUsage models_used = 6;
+
+    // Per-provider usage rollup. Populated for *_LLM_PROVIDERS_USED and *_LLM_TOTAL_STATISTICS.
+    repeated LlmProviderUsage providers_used = 7;
+
+    // Per-CCAI-service usage rollup. Populated for *_LLM_CCAI_SERVICES_USED and *_LLM_TOTAL_STATISTICS.
+    repeated LlmCcaiServiceUsage ccai_services_used = 8;
+
+    // Per-intent-agent usage rollup. Populated for *_LLM_AGENTS_USED and *_LLM_TOTAL_STATISTICS.
+    repeated LlmAgentUsage agents_used = 9;
+
+    // Tool-usage rollup. Populated for *_LLM_TOP_X_TOOLS / *_LLM_LEAST_X_TOOLS and *_LLM_TOTAL_STATISTICS.
+    repeated LlmToolUsage tools_used = 10;
+
+    // Latency aggregate. Populated for *_LLM_LATENCY and *_LLM_TOTAL_STATISTICS.
+    LlmLatencyStats latency_stats = 11;
+
+    // Cache efficiency aggregate. Populated for *_LLM_CACHE_EFFICIENCY and *_LLM_TOTAL_STATISTICS.
+    LlmCacheStats cache_stats = 12;
+
+    // Error aggregate. Populated for *_LLM_ERRORS and *_LLM_TOTAL_STATISTICS.
+    LlmErrorStats error_stats = 13;
+
+    // Finish-reason distribution. Populated for *_LLM_FINISH_REASONS and *_LLM_TOTAL_STATISTICS.
+    repeated LlmFinishReasonStat finish_reason_distribution = 14;
+
+    // Reasoning-effort distribution. Populated for *_LLM_REASONING_EFFORT and *_LLM_TOTAL_STATISTICS.
+    repeated LlmReasoningEffortStat reasoning_effort_distribution = 15;
+
+    // Scope-wide summed thinking-block tokens.
+    int64 thinking_tokens_total = 16;
+
+    // Scope-wide summed thinking-block duration in seconds.
+    double thinking_duration_seconds_total = 17;
+
+    // Scope-wide summed tool-call tokens.
+    int64 tool_call_tokens_total = 18;
+
+    // Scope-wide summed tool-call duration in seconds.
+    double tool_call_duration_seconds_total = 19;
+}
+
+// Emitted on a streaming DetectIntent when an LLM invocation starts.
+message LlmCallStartedEvent {
+    // Collector-assigned id grouping all events emitted for this LLM call.
+    string llm_call_id = 1;
+
+    // Provider tag: "autogen" | "langchain" | "openai" | "anthropic" | ...
+    string provider = 2;
+
+    // Concrete model identifier (e.g. "claude-3-5-sonnet-20241022").
+    string model_name = 3;
+
+    // intent_agent executor / agent name owning the call.
+    string agent_name = 4;
+
+    // Wall-clock start of the LLM call.
+    google.protobuf.Timestamp start_time = 5;
+}
+
+// Emitted on a streaming DetectIntent when an LLM invocation finishes.
+message LlmCallFinishedEvent {
+    // Collector-assigned id grouping events for this LLM call.
+    string llm_call_id = 1;
+
+    // Wall-clock end time of the LLM call.
+    google.protobuf.Timestamp end_time = 2;
+
+    // Convenience duration (end_time - start_time).
+    double duration_in_s = 3;
+
+    // Final token totals for this LLM call.
+    LlmTokenUsage llm_token_usage = 4;
+}
+
+// Emitted on a streaming DetectIntent when a tool call starts.
+message LlmToolCallStartedEvent {
+    // Stable id assigned by the upstream framework (autogen / langchain).
+    string tool_call_id = 1;
+
+    // Name of the tool / function invoked.
+    string tool_name = 2;
+
+    // Tool arguments as a structured payload (Struct kept as-is; not a custom Message).
+    google.protobuf.Struct arguments = 3;
+
+    // Wall-clock start time of the tool call.
+    google.protobuf.Timestamp start_time = 4;
+
+    // Groups events under an LlmTelemetry entry.
+    string llm_call_id = 5;
+}
+
+// Emitted on a streaming DetectIntent when a tool call finishes.
+message LlmToolCallFinishedEvent {
+    // Stable id matching the matching LlmToolCallStartedEvent.
+    string tool_call_id = 1;
+
+    // Wall-clock end time of the tool call.
+    google.protobuf.Timestamp end_time = 2;
+
+    // Convenience duration (end_time - start_time).
+    double duration_in_s = 3;
+
+    // Token attribution for this tool call when available.
+    LlmTokenUsage llm_token_usage = 4;
+
+    // Tool result payload (may be omitted on failure or redaction).
+    google.protobuf.Struct result = 5;
+
+    // Populated only when the tool call failed; empty string on success.
+    string error_message = 6;
+
+    // Groups events under an LlmTelemetry entry.
+    string llm_call_id = 7;
+}
+
+// Emitted on a streaming DetectIntent for each thinking-delta chunk.
+message LlmThinkingDeltaEvent {
+    // Groups events under an LlmTelemetry entry.
+    string llm_call_id = 1;
+
+    // Incremental thinking text chunk (subject to redaction policy on the client).
+    string text_delta = 2;
+
+    // Wall-clock timestamp of the chunk.
+    google.protobuf.Timestamp timestamp = 3;
+}
+
+// Emitted on a streaming DetectIntent when running token counts update.
+message LlmTokenUsageUpdateEvent {
+    // Groups events under an LlmTelemetry entry.
+    string llm_call_id = 1;
+
+    // Running totals for that llm_call.
+    LlmTokenUsage llm_token_usage = 2;
 }
 
 // Represents the result of conversational query or event processing.
@@ -642,6 +1353,9 @@ message QueryResult {
     // Generated or attached files, e.g., llm generates a picture or file attachment
     repeated FileResource file_resources = 16;
 
+    // Aggregated LLM telemetry (tokens, tool calls, thinking) for this turn.
+    LlmTelemetryReport llm_telemetry_report = 17;
+
 }
 
 
@@ -705,6 +1419,18 @@ message StreamingDetectIntentResponse {
 
     // Specifies the status of the webhook request.
     google.rpc.Status webhook_status = 4;
+
+    // Incremental telemetry events emitted during the turn. The final response chunk
+    // continues to carry the aggregated <code>LlmTelemetryReport</code> under
+    // <code>query_result.llm_telemetry_report</code>.
+    oneof telemetry_event {
+        LlmCallStartedEvent llm_call_started = 5;
+        LlmCallFinishedEvent llm_call_finished = 6;
+        LlmToolCallStartedEvent llm_tool_call_started = 7;
+        LlmToolCallFinishedEvent llm_tool_call_finished = 8;
+        LlmThinkingDeltaEvent llm_thinking_delta = 9;
+        LlmTokenUsageUpdateEvent llm_token_usage_update = 10;
+    }
 
 }
 
@@ -930,10 +1656,10 @@ message Session {
 
 }
 
-// SessionStep is a single user interaction as part of a session
+// SessionStep is a single user interaction as part of a session.
 message SessionStep {
 
-    // The unique identifier for the given review
+    // The unique identifier of the session step.
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/sessionsteps/&lt;session_step_uuid&gt;</code></pre>
     string name = 1;
 
@@ -963,6 +1689,10 @@ message SessionStep {
 
     // audio file resources associated with the session step
     repeated AudioFileResource audio_file_resources = 10;
+
+    // Aggregated LLM telemetry for this step (one entry per LLM invocation,
+    // plus turn-level totals).
+    LlmTelemetryReport llm_telemetry_report = 11;
 
 }
 
@@ -1004,17 +1734,18 @@ message DeleteSessionStepRequest {
 
 }
 
-// CreateSessionStepRequest stores a session step into the session
+// Request to append a new SessionStep to an existing session.
 message CreateSessionStepRequest {
 
-    // The unique identifier for the given review
-    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/sessionsteps/&lt;session_step_uuid&gt;</code></pre>.
+    // The unique identifier of the parent session.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre>.
     string session_id = 1;
 
-    // The session step to be added
+    // The session step to be added.
     SessionStep session_step = 2;
 
-    // field mask specifying what the request should return, e.g. only name, created_at etc.
+    // Field mask specifying which fields the returned SessionStep should carry
+    // (e.g. only <code>name</code>, <code>created_at</code>).
     google.protobuf.FieldMask field_mask = 3;
 
 }
@@ -1461,6 +2192,8 @@ message DeleteSessionRequest {
 
 // *** SESSION-REVIEW RELATED MESSAGES *** //
 
+// Request to persist a session review for a given session.
+// As a side effect, training data in ondewo-cai may also be updated.
 message CreateSessionReviewRequest {
 
     // The unique identifier for the session under review
@@ -2210,16 +2943,17 @@ message DocumentFileResource {
 
 }
 
+// Represents an image file resource (e.g., JPEG, PNG, GIF) attached to a session.
 message ImageFileResource {
 
-    // The unique identifier of the session for which the latest review should be returned
+    // The unique identifier of the image file resource.
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/images/&lt;image_uuid&gt;</code></pre>
     string name = 1;
 
     // File name of the image, e.g., MyPicture.jpg, or a user assigned display name
     string display_name = 2;
 
-    // Bytes of the audio file
+    // Raw bytes of the image file.
     bytes bytes = 3;
 
     // Creation date and time. Read-only field.
@@ -2236,9 +2970,10 @@ message ImageFileResource {
 
 }
 
+// Represents an audio file resource attached to a session (input recording or generated TTS output).
 message AudioFileResource {
 
-    // The unique identifier of the session for which the latest review should be returned
+    // The unique identifier of the audio file resource.
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/audios/&lt;audio_uuid&gt;</code></pre>
     string name = 1;
 
@@ -2273,7 +3008,7 @@ message AudioFileResource {
     // User id in form of a valid UUID.
     string modified_by = 11;
 
-    // Bytes of the audio file
+    // Display name of the audio file, e.g., MyRecording.wav, or a user-assigned label.
     string display_name = 12;
 
 }
