@@ -239,6 +239,42 @@ service LlmEvaluations {
 
     // endregion reports
 
+    // region a/b experiments
+
+    // Create a new A/B experiment (a set of routing variants over live
+    // DetectIntent traffic). Created in DRAFT status; traffic is only split once
+    // it is started via LlmEvaluationStartAbExperiment.
+    rpc LlmEvaluationCreateAbExperiment (CreateLlmEvaluationAbExperimentRequest) returns (LlmEvaluationAbExperiment);
+
+    // Get an A/B experiment by resource name.
+    rpc LlmEvaluationGetAbExperiment (GetLlmEvaluationAbExperimentRequest) returns (LlmEvaluationAbExperiment);
+
+    // List A/B experiments in the project, optionally filtered + paginated.
+    rpc LlmEvaluationListAbExperiments (ListLlmEvaluationAbExperimentsRequest) returns (ListLlmEvaluationAbExperimentsResponse);
+
+    // Update an existing A/B experiment (variants, traffic config, metadata).
+    // Only allowed in DRAFT / STOPPED status; running experiments must be stopped first.
+    rpc LlmEvaluationUpdateAbExperiment (UpdateLlmEvaluationAbExperimentRequest) returns (LlmEvaluationAbExperiment);
+
+    // Delete an A/B experiment and all owned sticky-assignment rows.
+    rpc LlmEvaluationDeleteAbExperiment (DeleteLlmEvaluationAbExperimentRequest) returns (google.protobuf.Empty);
+
+    // Start an A/B experiment: validates that the variant traffic weights are
+    // well-formed (sum to the configured total), stamps started_at and transitions
+    // the experiment to RUNNING so live traffic begins to be split.
+    rpc LlmEvaluationStartAbExperiment (StartLlmEvaluationAbExperimentRequest) returns (LlmEvaluationAbExperiment);
+
+    // Stop a running A/B experiment: stamps stopped_at and transitions to STOPPED.
+    // Existing sticky assignments are retained for results computation.
+    rpc LlmEvaluationStopAbExperiment (StopLlmEvaluationAbExperimentRequest) returns (LlmEvaluationAbExperiment);
+
+    // Compute per-variant telemetry rollups for an A/B experiment. Stateless /
+    // computed on demand: gathers each variant's sessions and aggregates their
+    // LlmTelemetry into a per-variant LlmTelemetryReport. There is no auto-rollout.
+    rpc LlmEvaluationGetAbExperimentResults (GetLlmEvaluationAbExperimentResultsRequest) returns (GetLlmEvaluationAbExperimentResultsResponse);
+
+    // endregion a/b experiments
+
 }
 
 // region domain messages
@@ -2602,3 +2638,310 @@ message DeleteLlmEvaluationReportRequest {
 }
 
 // endregion report messages
+
+// region a/b experiment domain messages
+
+// Lifecycle status of an A/B experiment.
+enum LlmEvaluationAbExperimentStatus {
+    // Default / unset.
+    LLM_EVALUATION_AB_EXPERIMENT_STATUS_UNSPECIFIED = 0;
+
+    // Defined but not yet started; no traffic is split.
+    LLM_EVALUATION_AB_EXPERIMENT_STATUS_DRAFT = 1;
+
+    // Started; live DetectIntent traffic is being split across the variants.
+    LLM_EVALUATION_AB_EXPERIMENT_STATUS_RUNNING = 2;
+
+    // Stopped; traffic split has ended. Sticky assignments and results are retained.
+    LLM_EVALUATION_AB_EXPERIMENT_STATUS_STOPPED = 3;
+
+    // Archived; read-only, hidden from the default list.
+    LLM_EVALUATION_AB_EXPERIMENT_STATUS_ARCHIVED = 4;
+}
+
+// Traffic-splitting configuration for an A/B experiment.
+message LlmEvaluationAbTrafficConfig {
+    // Fraction of eligible sessions (0.0-1.0) actually enrolled into the
+    // experiment; the remainder use the project default path. <code>1.0</code>
+    // enrolls every eligible session.
+    double enrollment_rate = 1;
+
+    // Optional. Salt mixed into the deterministic session-bucketing hash so that
+    // re-running the same experiment id re-randomizes the assignment.
+    string assignment_salt = 2;
+}
+
+// One routing variant of an A/B experiment. The variant overrides the LLM
+// connection (CcaiService(s) / model / prompt) for the sessions assigned to it.
+message LlmEvaluationAbVariant {
+    // Required. Stable slug identifying the variant within its experiment
+    // (e.g. "control", "qwen3-fp8"). Lower-case, used as the assignment key.
+    string variant_id = 1;
+
+    // Required. Human-readable display name.
+    string display_name = 2;
+
+    // CcaiService name(s) defining this variant's LLM connection.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/ccaiServices/&lt;ccai_service_uuid&gt;</code>.
+    repeated string ccai_service_names = 3;
+
+    // Traffic weight for this variant. Expressed as a percentage in the
+    // <code>[0.0, 100.0]</code> range; the variant weights of a started
+    // experiment must sum to <code>100.0</code>.
+    double traffic_weight = 4;
+
+    // Whether this variant is the control (baseline) arm.
+    bool is_control = 5;
+
+    // Optional. Concrete model identifier override (e.g. "Qwen/Qwen3-27b-fp8").
+    string model_name = 6;
+
+    // Optional. Logical prompt version recorded for this variant.
+    string prompt_version = 7;
+
+    // Optional. Free-form target descriptor (the serialized CcaiServiceList /
+    // routing override applied for sessions assigned to this variant).
+    google.protobuf.Struct config = 8;
+}
+
+// An A/B experiment: a set of routing variants split over live DetectIntent
+// traffic for a (project, language_code) scope.
+message LlmEvaluationAbExperiment {
+    // The unique resource name of the A/B experiment. Read-only; populated by the server.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationAbExperiments/&lt;experiment_uuid&gt;</code>.
+    string name = 1;
+
+    // Required. Human-readable display name (unique within the (project, language_code) tuple).
+    string display_name = 2;
+
+    // Free-form description.
+    string description = 3;
+
+    // Lifecycle status. Read-only; transitioned via Start / Stop RPCs.
+    LlmEvaluationAbExperimentStatus status = 4;
+
+    // The routing variants of this experiment.
+    repeated LlmEvaluationAbVariant variants = 5;
+
+    // Traffic-splitting configuration (enrollment rate, assignment salt).
+    LlmEvaluationAbTrafficConfig traffic_config = 6;
+
+    // Wall-clock time the experiment was started (set by Start). Read-only.
+    google.protobuf.Timestamp started_at = 7;
+
+    // Wall-clock time the experiment was stopped (set by Stop). Read-only.
+    google.protobuf.Timestamp stopped_at = 8;
+
+    // Creation date and time. Read-only field.
+    google.protobuf.Timestamp created_at = 9;
+
+    // User id in form of a valid UUID.
+    string created_by = 10;
+
+    // Modification date and time. Read-only field.
+    google.protobuf.Timestamp modified_at = 11;
+
+    // User id in form of a valid UUID.
+    string modified_by = 12;
+
+    // Project owning the experiment.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 13;
+
+    // BCP-47 language-code scope.
+    string language_code = 14;
+}
+
+// Per-variant rollup returned by GetAbExperimentResults. Stateless / computed.
+message LlmEvaluationAbVariantResult {
+    // Variant slug these results belong to.
+    string variant_id = 1;
+
+    // Number of distinct sessions assigned to this variant in scope.
+    int64 session_count = 2;
+
+    // Aggregated LLM telemetry over this variant's sessions, as a JSON-encoded
+    // <code>ondewo.nlu.LlmTelemetryReport</code> (see <code>session.proto</code>).
+    // Carried as a Struct rather than the typed message because
+    // <code>session.proto</code> already imports this file (for
+    // <code>LlmEvaluationFeedback</code> on <code>LlmTelemetry</code>), so a typed
+    // import back would form an illegal proto import cycle; the report is produced
+    // by the same server-side aggregator that fills the typed
+    // <code>LlmTelemetryReport</code> on the statistics RPCs.
+    google.protobuf.Struct telemetry = 3;
+
+    // Optional. Derived comparison metrics (e.g. token / latency / error / cost
+    // deltas versus the control variant), keyed by metric name.
+    google.protobuf.Struct derived_metrics = 4;
+}
+
+// endregion a/b experiment domain messages
+
+// region a/b experiment RPC messages
+
+// Request to create a new A/B experiment.
+message CreateLlmEvaluationAbExperimentRequest {
+    // A/B experiment payload (name / status / audit fields are server-populated).
+    LlmEvaluationAbExperiment llm_evaluation_ab_experiment = 1;
+
+    // Project owning the experiment.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 2;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 3;
+}
+
+// Request to get a single A/B experiment.
+message GetLlmEvaluationAbExperimentRequest {
+    // Resource name of the experiment to fetch.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationAbExperiments/&lt;experiment_uuid&gt;</code>.
+    string name = 1;
+
+    // Optional. The mask to control which fields will be filled with data.
+    google.protobuf.FieldMask field_mask = 2;
+
+    // Project owning the experiment.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 3;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 4;
+}
+
+// Filter conditions for ListAbExperiments. All fields are optional; multiple
+// fields set at the same time are combined via logical AND.
+message LlmEvaluationAbExperimentFilter {
+    // Optional. Match only experiments whose display name contains this substring
+    // (case-insensitive).
+    string display_name = 1;
+
+    // Optional. Match only experiments with this status.
+    LlmEvaluationAbExperimentStatus status = 2;
+}
+
+// Request to list A/B experiments within a project.
+message ListLlmEvaluationAbExperimentsRequest {
+    // Project owning the experiments.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 1;
+
+    // Optional. Page token for pagination. Retrieves a large result set in
+    // smaller, more manageable portions. The token encodes the current index
+    // and the page size.
+    //
+    // Valid page token strings:
+    // <ul>
+    //   <li><code>&quot;&quot;</code> (empty string) - Retrieves the first page.</li>
+    //   <li><code>&quot;current_index-0--page_size-20&quot;</code> - First page, page size 20.</li>
+    //   <li><code>&quot;current_index-1--page_size-20&quot;</code> - Second page, page size 20.</li>
+    // </ul>
+    // Index starts at 0.
+    string page_token = 2;
+
+    // Optional. The mask to control which fields will be filled with data.
+    google.protobuf.FieldMask field_mask = 3;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 4;
+
+    // Optional. Filter conditions to narrow the returned experiments.
+    LlmEvaluationAbExperimentFilter llm_evaluation_ab_experiment_filter = 5;
+}
+
+// Response for ListAbExperiments.
+message ListLlmEvaluationAbExperimentsResponse {
+    // A/B experiments matching the request.
+    repeated LlmEvaluationAbExperiment llm_evaluation_ab_experiments = 1;
+
+    // Pagination token for the next page (empty if this is the last page).
+    string next_page_token = 2;
+}
+
+// Request to update an existing A/B experiment.
+message UpdateLlmEvaluationAbExperimentRequest {
+    // Experiment payload (only fields covered by <code>update_mask</code> are applied).
+    LlmEvaluationAbExperiment llm_evaluation_ab_experiment = 1;
+
+    // Mask of fields to update on the experiment record.
+    google.protobuf.FieldMask update_mask = 2;
+
+    // Optional. The mask to control which fields will be filled with data on the
+    // returned experiment.
+    google.protobuf.FieldMask field_mask = 3;
+
+    // Project owning the experiment.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 4;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 5;
+}
+
+// Request to delete an A/B experiment and all owned sticky-assignment rows.
+message DeleteLlmEvaluationAbExperimentRequest {
+    // Resource name of the experiment to delete.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationAbExperiments/&lt;experiment_uuid&gt;</code>.
+    string name = 1;
+
+    // Project owning the experiment.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 2;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 3;
+}
+
+// Request to start an A/B experiment (validates weights, sets RUNNING).
+message StartLlmEvaluationAbExperimentRequest {
+    // Resource name of the experiment to start.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationAbExperiments/&lt;experiment_uuid&gt;</code>.
+    string name = 1;
+
+    // Project owning the experiment.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 2;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 3;
+}
+
+// Request to stop a running A/B experiment (sets STOPPED).
+message StopLlmEvaluationAbExperimentRequest {
+    // Resource name of the experiment to stop.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationAbExperiments/&lt;experiment_uuid&gt;</code>.
+    string name = 1;
+
+    // Project owning the experiment.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 2;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 3;
+}
+
+// Request to compute per-variant telemetry rollups for an A/B experiment.
+message GetLlmEvaluationAbExperimentResultsRequest {
+    // Resource name of the experiment whose results to compute.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationAbExperiments/&lt;experiment_uuid&gt;</code>.
+    string name = 1;
+
+    // Project owning the experiment.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 2;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 3;
+}
+
+// Response for GetAbExperimentResults: one rollup per variant.
+message GetLlmEvaluationAbExperimentResultsResponse {
+    // Resource name of the experiment these results belong to.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationAbExperiments/&lt;experiment_uuid&gt;</code>.
+    string llm_evaluation_ab_experiment_name = 1;
+
+    // Per-variant telemetry rollups (one entry per variant).
+    repeated LlmEvaluationAbVariantResult variant_results = 2;
+}
+
+// endregion a/b experiment RPC messages

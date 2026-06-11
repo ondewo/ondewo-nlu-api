@@ -1071,6 +1071,10 @@ enum ReportType {
 
     // Top X most-used agent name of agentic AI team
     AGENT_LLM_TOP_X_AGENT_NAMES = 24;
+
+    // Native-safety breakdown (flagged counts / rates per category, mean safety
+    // score) over the agent domain.
+    AGENT_LLM_SAFETY = 25;
 }
 
 // Request of the report of the statistics about sessions
@@ -1360,6 +1364,10 @@ enum SessionsReportType {
 
     // Top X most-used agent name of agentic AI team
     SESSION_LLM_TOP_X_AGENT_NAMES = 40;
+
+    // Native-safety breakdown (flagged counts / rates per category, mean safety
+    // score) across sessions in scope.
+    SESSION_LLM_SAFETY = 41;
 
 }
 
