@@ -430,6 +430,14 @@ service Agents {
         };
     }
 
+    // Gets LLM telemetry statistics for sessions bucketed over time (time series).
+    // Supports LLM-typed report types (SESSION_LLM_*) only.
+    rpc GetSessionsStatisticsTimeSeries (GetSessionsStatisticsTimeSeriesRequest) returns (GetSessionsStatisticsTimeSeriesResponse) {
+        option (google.api.http) = {
+            get: "/v2/{parent=projects/*/agent}:session_statistics_time_series"
+        };
+    }
+
     // Sets status for the agent
     rpc SetAgentStatus (SetAgentStatusRequest) returns (Agent) {
         option (google.api.http) = {
@@ -1134,6 +1142,71 @@ message GetSessionsStatisticsResponse {
     // calls, thinking) across all sessions matched by the request.
     // Populated only for LLM-typed report types (SESSION_LLM_*).
     LlmTelemetryReport llm_telemetry_report = 4;
+}
+
+// Request for time-bucketed LLM telemetry statistics about sessions.
+message GetSessionsStatisticsTimeSeriesRequest {
+
+    // Required. The project to get statistics from.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
+    string parent = 1;
+
+    // Type of report. Only LLM-typed report types (SESSION_LLM_*) are supported.
+    SessionsReportType type = 2;
+
+    // Required. A filter narrowing the sessions; <code>earliest</code> /
+    // <code>latest</code> define the time range that is bucketed.
+    SessionFilter session_filter = 3;
+
+    // Optional. Width of one bucket in seconds. 0 = the server picks
+    // (time range divided by <code>max_buckets</code>).
+    int32 bucket_width_seconds = 4;
+
+    // Optional. Maximum number of buckets (default 50, server-side cap 200).
+    int32 max_buckets = 5;
+
+    // Optional. Restrict to specific models. Empty = all models.
+    repeated string llm_model_filter = 6;
+
+    // Optional. Restrict to specific providers. Empty = all providers.
+    repeated string llm_provider_filter = 7;
+
+    // Optional. Restrict to specific intent-agent names. Empty = all.
+    repeated string llm_agent_name_filter = 8;
+
+    // Optional. Restrict to specific tool names. Empty = all.
+    repeated string llm_tool_name_filter = 9;
+
+    // Optional. Restrict to specific CCAI service providers. Empty = all.
+    repeated CcaiServiceProvider llm_ccai_service_provider_filter = 10;
+
+    // Optional. The mask to control which data fields will be added to the
+    // returned data (e.g. paths=["llm_telemetry_time_series_buckets.llm_telemetry_report.llm_token_usage"]).
+    google.protobuf.FieldMask field_mask = 11;
+}
+
+// One time bucket of aggregated LLM telemetry.
+message LlmTelemetryTimeSeriesBucket {
+
+    // Inclusive start of the bucket.
+    google.protobuf.Timestamp bucket_start = 1;
+
+    // Exclusive end of the bucket.
+    google.protobuf.Timestamp bucket_end = 2;
+
+    // Aggregated LLM telemetry of all matched sessions inside the bucket.
+    LlmTelemetryReport llm_telemetry_report = 3;
+}
+
+// Response with time-bucketed LLM telemetry statistics.
+message GetSessionsStatisticsTimeSeriesResponse {
+
+    // Buckets in ascending time order. Buckets without any matching telemetry
+    // carry an empty report (llm_call_count == 0).
+    repeated LlmTelemetryTimeSeriesBucket llm_telemetry_time_series_buckets = 1;
+
+    // Effective bucket width in seconds the server used.
+    int32 bucket_width_seconds = 2;
 }
 
 // Type of reports about the domain of the agent

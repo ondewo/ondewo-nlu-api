@@ -2,6 +2,21 @@
 
 *****************
 
+## Release ONDEWO NLU API 6.12.0
+
+### Improvements
+
+* [[OND221-2774]](https://ondewo.atlassian.net/browse/OND221-2774) `llm_evaluation.proto`: release gates as first-class entities — `LlmEvaluationReleaseGate` (thresholds / safety / weights) CRUD, `LlmEvaluationRunReleaseGate` (long-running) and persisted `LlmEvaluationReleaseGateRun` verdict history (`LlmEvaluationReleaseGateVerdict`, `LlmEvaluationReleaseGateCheck`).
+* [[OND221-2774]](https://ondewo.atlassian.net/browse/OND221-2774) `llm_evaluation.proto`: `LlmEvaluationScorecard` CRUD (weighted multi-criteria roll-ups) and per-(project, language_code) `LlmEvaluationProjectSettings` singleton with `LlmEvaluationJudgeConfig` (judge CcaiService, verbose reasoning, per-evaluator overrides).
+* [[OND221-2774]](https://ondewo.atlassian.net/browse/OND221-2774) `llm_evaluation.proto`: `LlmEvaluationListEvaluators` registry RPC — `LlmEvaluationEvaluatorSpec` with category, required example fields, multi-turn support, default threshold, judge requirement and parameter specs.
+* [[OND221-2774]](https://ondewo.atlassian.net/browse/OND221-2774) `llm_evaluation.proto`: multi-turn conversation-flow runs — `LlmEvaluationTurnResult` (expected vs. actual per turn + per-turn telemetry join key) on `LlmEvaluationEvaluatorRun` (also gains `repetition_index`, `actual_output`); `repetitions`, `llm_evaluation_experiment_kind` and `evaluator_configs` on `RunLlmEvaluationExperimentRequest`; `LlmEvaluationDatasetType` on datasets; new `LlmEvaluationExperimentKind` enum.
+* [[OND221-2774]](https://ondewo.atlassian.net/browse/OND221-2774) `llm_evaluation.proto`: `LlmEvaluationCreateExamplesFromSession` (golden transcripts from recorded sessions) and `LlmEvaluationSimulateConversations` (persona-driven user simulation + adversarial red-teaming; long-running).
+* [[OND221-2774]](https://ondewo.atlassian.net/browse/OND221-2774) `llm_evaluation.proto`: `LlmEvaluationSchedule` CRUD for recurring experiment / release-gate runs (cron or interval) and immutable `LlmEvaluationReport` artifacts (Create / Get / List / Delete with payload bytes).
+* [[OND221-2774]](https://ondewo.atlassian.net/browse/OND221-2774) `llm_evaluation.proto`: `LlmEvaluationUpdateFeedback` RPC (update_mask-based corrections of feedback records).
+* [[OND221-2774]](https://ondewo.atlassian.net/browse/OND221-2774) `agent.proto`: `GetSessionsStatisticsTimeSeries` RPC — time-bucketed LLM telemetry aggregation (`LlmTelemetryTimeSeriesBucket` with full `LlmTelemetryReport` per bucket, llm_* filters, server-side bucketing).
+
+*****************
+
 ## Release ONDEWO NLU API 6.11.0
 
 ### Improvements
