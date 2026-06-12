@@ -275,6 +275,31 @@ service LlmEvaluations {
 
     // endregion a/b experiments
 
+    // region a/b rollout
+
+    // Compute a rollout recommendation for an A/B experiment: which variant wins
+    // against the control on the chosen optimize metric under the supplied
+    // statistical guard-rails (confidence level, minimum sessions per variant,
+    // minimum effect size). Stateless / read-only — computed on demand from the
+    // per-variant results; nothing is persisted and no traffic / config changes.
+    rpc LlmEvaluationGetAbRolloutRecommendation (GetLlmEvaluationAbRolloutRecommendationRequest) returns (LlmEvaluationAbRolloutRecommendation);
+
+    // Apply a rollout for an A/B experiment: promotes the chosen variant's config
+    // as the project's classifier default, stops the experiment, and writes +
+    // returns the LlmEvaluationAbRolloutDecision audit record. The operator picks
+    // the variant explicitly (there is no auto-rollout). Idempotent: re-applying
+    // an already-rolled-out experiment returns the existing decision.
+    rpc LlmEvaluationApplyAbRollout (ApplyLlmEvaluationAbRolloutRequest) returns (LlmEvaluationAbRolloutDecision);
+
+    // Get the applied rollout decision (audit record) by resource name.
+    rpc LlmEvaluationGetAbRolloutDecision (GetLlmEvaluationAbRolloutDecisionRequest) returns (LlmEvaluationAbRolloutDecision);
+
+    // List applied rollout decisions in the project, optionally filtered (e.g. by
+    // experiment) + paginated.
+    rpc LlmEvaluationListAbRolloutDecisions (ListLlmEvaluationAbRolloutDecisionsRequest) returns (ListLlmEvaluationAbRolloutDecisionsResponse);
+
+    // endregion a/b rollout
+
     // region online evaluation
 
     // Create a new online-evaluation config: a per-(project, language_code)
@@ -2728,8 +2753,55 @@ message LlmEvaluationAbTrafficConfig {
     string assignment_salt = 2;
 }
 
-// One routing variant of an A/B experiment. The variant overrides the LLM
-// connection (CcaiService(s) / model / prompt) for the sessions assigned to it.
+// RAGFlow variant override for an A/B experiment running on a RAG-classifier
+// project (<code>IntentRagflowClassifier</code>). Where an IntentAgent variant
+// overrides the LLM via <code>ccai_service_names</code>, a RAG variant overrides
+// the project's chat-assistant LLM CcaiService and the retrieval parameters used
+// when answering the assigned sessions. Override-or-inherit semantics apply per
+// field: an empty / zero value means "inherit the project's base
+// IntentRagflowClassifier config for this field".
+message RagVariantConfig {
+    // CcaiService name whose LLM connection details back the chat-assistant LLM
+    // for sessions assigned to this variant (overrides the project's
+    // <code>chat_assistant_llm_ccai_service_name</code>). Empty = inherit.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/ccaiServices/&lt;ccai_service_uuid&gt;</code>.
+    string chat_assistant_llm_ccai_service_name = 1;
+
+    // Retrieval top_k: the maximum number of chunks retrieved per turn (overrides
+    // the project's <code>retrieval_max_retrieval_chunks</code>). 0 = inherit.
+    int32 top_k = 2;
+
+    // Retrieval similarity threshold in <code>[0.0, 1.0]</code>: chunks scoring
+    // below it are dropped (overrides the project's
+    // <code>chat_assistant_similarity_threshold</code>). 0.0 = inherit.
+    double similarity_threshold = 3;
+
+    // Vector-vs-keyword similarity weight in <code>[0.0, 1.0]</code> (overrides
+    // the project's <code>retrieval_vector_similarity_weight</code>, surfaced to
+    // RAGFlow as the chat assistant's keywords-similarity weight). 0.0 = inherit.
+    double vector_similarity_weight = 4;
+
+    // Optional. CcaiService name backing the rerank model for sessions assigned to
+    // this variant (overrides the project's
+    // <code>chat_assistant_rerank_ccai_service_name</code>). Empty = inherit (or
+    // no reranking when the project itself configures none).
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/ccaiServices/&lt;ccai_service_uuid&gt;</code>.
+    string rerank_model_ccai_service_name = 5;
+}
+
+// One routing variant of an A/B experiment. The variant overrides the model used
+// for the sessions assigned to it. A variant is one of two shapes depending on
+// the project's classifier:
+// <ul>
+//   <li><b>IntentAgent projects</b> — the variant overrides the LLM connection
+//       via <code>ccai_service_names</code> (+ optional <code>model_name</code> /
+//       <code>prompt_version</code>).</li>
+//   <li><b>RAG projects</b> (<code>IntentRagflowClassifier</code>) — the variant
+//       overrides the chat-assistant LLM CcaiService and retrieval parameters via
+//       <code>rag_variant_config</code>.</li>
+// </ul>
+// The two override shapes are mutually exclusive per variant; the server applies
+// whichever matches the project's classifier type.
 message LlmEvaluationAbVariant {
     // Required. Stable slug identifying the variant within its experiment
     // (e.g. "control", "qwen3-fp8"). Lower-case, used as the assignment key.
@@ -2738,7 +2810,8 @@ message LlmEvaluationAbVariant {
     // Required. Human-readable display name.
     string display_name = 2;
 
-    // CcaiService name(s) defining this variant's LLM connection.
+    // CcaiService name(s) defining this variant's LLM connection (IntentAgent
+    // projects). Mutually exclusive with <code>rag_variant_config</code>.
     // Format: <code>projects/&lt;project_uuid&gt;/agent/ccaiServices/&lt;ccai_service_uuid&gt;</code>.
     repeated string ccai_service_names = 3;
 
@@ -2759,6 +2832,13 @@ message LlmEvaluationAbVariant {
     // Optional. Free-form target descriptor (the serialized CcaiServiceList /
     // routing override applied for sessions assigned to this variant).
     google.protobuf.Struct config = 8;
+
+    // Optional. RAGFlow override for a RAG-classifier project: the chat-assistant
+    // LLM CcaiService + retrieval parameters applied to sessions assigned to this
+    // variant. Used instead of <code>ccai_service_names</code> when the project's
+    // classifier is <code>IntentRagflowClassifier</code>; empty / zero fields
+    // inside it inherit the project's base config.
+    RagVariantConfig rag_variant_config = 9;
 }
 
 // An A/B experiment: a set of routing variants split over live DetectIntent
@@ -2807,6 +2887,13 @@ message LlmEvaluationAbExperiment {
 
     // BCP-47 language-code scope.
     string language_code = 14;
+
+    // Optional. Resource name of the rollout decision that was applied to this
+    // experiment (set once an operator explicitly applies a variant via
+    // <code>LlmEvaluationApplyAbRollout</code>; empty while no rollout has been
+    // applied). Lets a results view link straight to the applied audit record.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationAbRolloutDecisions/&lt;decision_uuid&gt;</code>.
+    string llm_evaluation_ab_rollout_decision_name = 15;
 }
 
 // Per-variant rollup returned by GetAbExperimentResults. Stateless / computed.
@@ -3002,6 +3089,265 @@ message GetLlmEvaluationAbExperimentResultsResponse {
 }
 
 // endregion a/b experiment RPC messages
+
+// region a/b rollout domain messages
+
+// The metric an A/B rollout optimizes when comparing each variant against the
+// control. Each value maps to a quantity already produced by the per-variant
+// results rollup (see GetAbExperimentResults). Higher-is-better vs.
+// lower-is-better is implied by the metric (e.g. PASS_RATE / CRITERION_SCORE /
+// SAFETY_SCORE are higher-is-better; ERROR_RATE / MEAN_LATENCY are
+// lower-is-better) and applied server-side when picking the winner.
+enum LlmEvaluationAbOptimizeMetric {
+    // Default / unset.
+    LLM_EVALUATION_AB_OPTIMIZE_METRIC_UNSPECIFIED = 0;
+
+    // Fraction of sessions that passed (1 - error_rate). Higher is better.
+    LLM_EVALUATION_AB_OPTIMIZE_METRIC_PASS_RATE = 1;
+
+    // Fraction of sessions that errored. Lower is better.
+    LLM_EVALUATION_AB_OPTIMIZE_METRIC_ERROR_RATE = 2;
+
+    // Mean first-token / response latency in seconds. Lower is better.
+    LLM_EVALUATION_AB_OPTIMIZE_METRIC_MEAN_LATENCY = 3;
+
+    // Mean offline-criterion score in <code>[0.0, 1.0]</code>. Higher is better.
+    LLM_EVALUATION_AB_OPTIMIZE_METRIC_CRITERION_SCORE = 4;
+
+    // Mean native-safety score in <code>[0.0, 1.0]</code>. Higher is better.
+    LLM_EVALUATION_AB_OPTIMIZE_METRIC_SAFETY_SCORE = 5;
+}
+
+// A computed, read-only rollout recommendation for an A/B experiment: which
+// variant currently wins against the control on the chosen optimize metric,
+// under the requested statistical guard-rails. Stateless — recomputed on demand
+// by <code>LlmEvaluationGetAbRolloutRecommendation</code> from the per-variant
+// results rollup; nothing is persisted and no traffic / config changes. The
+// operator decides whether to apply it via <code>LlmEvaluationApplyAbRollout</code>.
+message LlmEvaluationAbRolloutRecommendation {
+    // The metric the recommendation was computed against (echoed from the request).
+    LlmEvaluationAbOptimizeMetric optimize_metric = 1;
+
+    // Variant slug that currently wins against the control on this metric, once
+    // the guard-rails (significance, effect size, minimum sessions) are met.
+    // Empty while <code>needs_more_data</code> is true or no variant beats the
+    // control.
+    string winner_variant_id = 2;
+
+    // Variant slug of the control (baseline) arm the winner was compared against.
+    string control_variant_id = 3;
+
+    // Two-sided p-value of the winner-vs-control test on the optimize metric.
+    double p_value = 4;
+
+    // Observed effect size between winner and control (absolute risk difference
+    // for rate metrics, standardized / raw mean difference for continuous metrics).
+    double effect_size = 5;
+
+    // Whether the result is statistically significant at the requested confidence
+    // level AND clears the requested minimum effect size.
+    bool is_significant = 6;
+
+    // Number of sessions observed per variant in scope, keyed by variant slug.
+    // Used to surface the guard-rail check against the requested minimum.
+    map<string, int64> sessions_per_variant = 7;
+
+    // True when at least one arm has not yet reached the requested minimum number
+    // of sessions, so no winner can be called yet (collect more traffic).
+    bool needs_more_data = 8;
+
+    // Human-readable rationale for the recommendation (e.g. the winner and its
+    // margin, or "needs N more sessions on variant X", or "no variant beats
+    // control").
+    string reason = 9;
+}
+
+// The persisted audit record of an A/B rollout that an operator explicitly
+// applied: it captures which variant's config was promoted to the project's
+// classifier default, on which metric, and the statistics at the moment of
+// application. Written + returned by <code>LlmEvaluationApplyAbRollout</code>;
+// read back via <code>LlmEvaluationGetAbRolloutDecision</code> /
+// <code>LlmEvaluationListAbRolloutDecisions</code>. There is no auto-rollout —
+// every decision row corresponds to an explicit operator action.
+message LlmEvaluationAbRolloutDecision {
+    // The unique resource name of the rollout decision. Read-only; populated by the server.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationAbRolloutDecisions/&lt;decision_uuid&gt;</code>.
+    string name = 1;
+
+    // Resource name of the A/B experiment this decision was applied to.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationAbExperiments/&lt;experiment_uuid&gt;</code>.
+    string llm_evaluation_ab_experiment_name = 2;
+
+    // Variant slug whose config was promoted to the project classifier default.
+    string applied_variant_id = 3;
+
+    // The metric the rollout was decided on (recorded for the audit trail).
+    LlmEvaluationAbOptimizeMetric optimize_metric = 4;
+
+    // Two-sided p-value of the applied-variant-vs-control test at application time.
+    double p_value = 5;
+
+    // Observed effect size (applied variant vs. control) at application time.
+    double effect_size = 6;
+
+    // Wall-clock time the rollout was applied. Read-only.
+    google.protobuf.Timestamp applied_at = 7;
+
+    // User id (in form of a valid UUID) of the operator who applied the rollout.
+    string applied_by = 8;
+
+    // Creation date and time. Read-only field.
+    google.protobuf.Timestamp created_at = 9;
+
+    // Modification date and time. Read-only field.
+    google.protobuf.Timestamp modified_at = 10;
+
+    // User id in form of a valid UUID.
+    string created_by = 11;
+
+    // User id in form of a valid UUID.
+    string modified_by = 12;
+
+    // Project owning the decision.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 13;
+
+    // BCP-47 language-code scope.
+    string language_code = 14;
+}
+
+// endregion a/b rollout domain messages
+
+// region a/b rollout RPC messages
+
+// Request to compute a rollout recommendation for an A/B experiment. Read-only /
+// stateless — computes the winner-vs-control statistics on demand under the
+// supplied guard-rails and returns a LlmEvaluationAbRolloutRecommendation
+// without mutating anything.
+message GetLlmEvaluationAbRolloutRecommendationRequest {
+    // Resource name of the experiment to evaluate.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationAbExperiments/&lt;experiment_uuid&gt;</code>.
+    string name = 1;
+
+    // Required. The metric to optimize when picking the winner.
+    LlmEvaluationAbOptimizeMetric optimize_metric = 2;
+
+    // Optional. Confidence level for the significance test in <code>(0.0, 1.0)</code>
+    // (e.g. <code>0.95</code> for 95%). Unset / 0 defaults to <code>0.95</code>.
+    double confidence_level = 3;
+
+    // Optional. Minimum number of sessions required per variant before a winner
+    // may be called; below it the recommendation reports
+    // <code>needs_more_data</code>. Unset / 0 applies the server default.
+    int32 min_sessions_per_variant = 4;
+
+    // Optional. Minimum absolute effect size required to call a winner; guards
+    // against statistically-significant-but-trivial differences. Unset / 0 applies
+    // the server default.
+    double min_effect_size = 5;
+
+    // Project owning the experiment.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 6;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 7;
+}
+
+// Request to apply an A/B rollout: promotes the chosen variant's config to the
+// project's classifier default, stops the experiment and writes the audit
+// decision. Idempotent — re-applying the same already-applied experiment returns
+// the existing decision rather than promoting twice.
+message ApplyLlmEvaluationAbRolloutRequest {
+    // Resource name of the experiment to roll out.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationAbExperiments/&lt;experiment_uuid&gt;</code>.
+    string name = 1;
+
+    // Required. Variant slug whose config to promote to the project classifier
+    // default. The operator's explicit choice; the server applies exactly this
+    // variant.
+    string variant_id = 2;
+
+    // The metric the decision was made on, recorded on the audit decision.
+    LlmEvaluationAbOptimizeMetric optimize_metric = 3;
+
+    // Project owning the experiment.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 4;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 5;
+}
+
+// Request to get a single A/B rollout decision (the applied audit record) for an
+// experiment.
+message GetLlmEvaluationAbRolloutDecisionRequest {
+    // Resource name of the rollout decision to fetch.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationAbRolloutDecisions/&lt;decision_uuid&gt;</code>.
+    string name = 1;
+
+    // Optional. The mask to control which fields will be filled with data.
+    google.protobuf.FieldMask field_mask = 2;
+
+    // Project owning the decision.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 3;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 4;
+}
+
+// Filter conditions for ListAbRolloutDecisions. All fields are optional;
+// multiple fields set at the same time are combined via logical AND.
+message LlmEvaluationAbRolloutDecisionFilter {
+    // Optional. Match only decisions applied to this A/B experiment (resource name).
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationAbExperiments/&lt;experiment_uuid&gt;</code>.
+    string llm_evaluation_ab_experiment_name = 1;
+
+    // Optional. Match only decisions applied by this user id (UUID).
+    string applied_by = 2;
+}
+
+// Request to list A/B rollout decisions within a project, optionally narrowed by
+// filter (typically by experiment).
+message ListLlmEvaluationAbRolloutDecisionsRequest {
+    // Project owning the decisions.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 1;
+
+    // Optional. Page token for pagination. Retrieves a large result set in
+    // smaller, more manageable portions. The token encodes the current index
+    // and the page size.
+    //
+    // Valid page token strings:
+    // <ul>
+    //   <li><code>&quot;&quot;</code> (empty string) - Retrieves the first page.</li>
+    //   <li><code>&quot;current_index-0--page_size-20&quot;</code> - First page, page size 20.</li>
+    //   <li><code>&quot;current_index-1--page_size-20&quot;</code> - Second page, page size 20.</li>
+    // </ul>
+    // Index starts at 0.
+    string page_token = 2;
+
+    // Optional. The mask to control which fields will be filled with data.
+    google.protobuf.FieldMask field_mask = 3;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 4;
+
+    // Optional. Filter conditions to narrow the returned decisions.
+    LlmEvaluationAbRolloutDecisionFilter llm_evaluation_ab_rollout_decision_filter = 5;
+}
+
+// Response for ListAbRolloutDecisions.
+message ListLlmEvaluationAbRolloutDecisionsResponse {
+    // Rollout decisions matching the request.
+    repeated LlmEvaluationAbRolloutDecision llm_evaluation_ab_rollout_decisions = 1;
+
+    // Pagination token for the next page (empty if this is the last page).
+    string next_page_token = 2;
+}
+
+// endregion a/b rollout RPC messages
 
 // region online evaluation domain messages
 
