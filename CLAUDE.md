@@ -49,7 +49,7 @@ pinned via `NLU_API_GIT_BRANCH` / `ONDEWO_NLU_API_GIT_BRANCH` in their Makefiles
   hook prepend `[<TICKET>]` from the branch name — typing it yourself yields `[<TICKET>] [<TICKET>]`.
 - Push the branch **before** regenerating clients whose submodule should reference it. For unpushed
   local work, clients can fetch the submodule from the local path instead:
-  `git -C <submodule-dir> fetch /home/arath/ondewo/ondewo-nlu-api <branch> && git -C <submodule-dir> checkout FETCH_HEAD`.
+  `git -C <submodule-dir> fetch ~/ondewo/ondewo-nlu-api <branch> && git -C <submodule-dir> checkout FETCH_HEAD`.
 
 ## After a proto change: regenerate downstream (in order)
 
