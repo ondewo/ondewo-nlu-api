@@ -1816,7 +1816,7 @@ Request for time-bucketed LLM telemetry statistics about sessions.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| parent | [string](#string) |  | Required. The project to get statistics from. Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre> |
+| parent | [string](#string) |  | Required. The project to get statistics from. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
 | type | [SessionsReportType](#ondewo.nlu.SessionsReportType) |  | Type of report. Only LLM-typed report types (SESSION_LLM_*) are supported. |
 | session_filter | [SessionFilter](#ondewo.nlu.SessionFilter) |  | Required. A filter narrowing the sessions; <code>earliest</code> / <code>latest</code> define the time range that is bucketed. |
 | bucket_width_seconds | [int32](#int32) |  | Optional. Width of one bucket in seconds. 0 = the server picks (time range divided by <code>max_buckets</code>). |
