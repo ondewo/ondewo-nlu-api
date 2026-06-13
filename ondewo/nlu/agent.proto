@@ -1152,7 +1152,7 @@ message GetSessionsStatisticsResponse {
 message GetSessionsStatisticsTimeSeriesRequest {
 
     // Required. The project to get statistics from.
-    // Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string parent = 1;
 
     // Type of report. Only LLM-typed report types (SESSION_LLM_*) are supported.
