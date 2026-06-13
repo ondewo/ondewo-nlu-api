@@ -23,8 +23,11 @@ import "google/protobuf/timestamp.proto";
 import "ondewo/nlu/operations.proto";
 
 // LangSmith-style evaluation surface: datasets, examples, experiments, evaluator
-// runs, feedback (LLM-as-judge / human / heuristic / custom code / pairwise) and
-// pairwise comparisons.
+// runs, feedback (LLM-as-judge / human / heuristic / custom code / pairwise),
+// pairwise comparisons, release gates + persisted gate runs, scorecards,
+// per-project evaluation settings (judge configuration), the evaluator registry,
+// golden-transcript recording from sessions, conversation simulation
+// (standard + adversarial red-teaming), recurring schedules and report artifacts.
 service LlmEvaluations {
 
     // region datasets
@@ -108,7 +111,251 @@ service LlmEvaluations {
     // Delete a single feedback record.
     rpc LlmEvaluationDeleteFeedback (DeleteLlmEvaluationFeedbackRequest) returns (google.protobuf.Empty);
 
+    // Update a single feedback record (e.g. correct a human review score or comment).
+    rpc LlmEvaluationUpdateFeedback (UpdateLlmEvaluationFeedbackRequest) returns (LlmEvaluationFeedback);
+
     // endregion feedback
+
+    // region release gates
+
+    // Create a new release gate (a named set of thresholds over evaluator scores,
+    // regression deltas and telemetry that decides whether a candidate configuration ships).
+    rpc LlmEvaluationCreateReleaseGate (CreateLlmEvaluationReleaseGateRequest) returns (LlmEvaluationReleaseGate);
+
+    // Get a release gate by resource name.
+    rpc LlmEvaluationGetReleaseGate (GetLlmEvaluationReleaseGateRequest) returns (LlmEvaluationReleaseGate);
+
+    // List release gates in the project, optionally filtered + paginated.
+    rpc LlmEvaluationListReleaseGates (ListLlmEvaluationReleaseGatesRequest) returns (ListLlmEvaluationReleaseGatesResponse);
+
+    // Update an existing release gate. Semantic changes (suite, baseline,
+    // evaluators, thresholds, weights, safety) increment the server-managed revision.
+    rpc LlmEvaluationUpdateReleaseGate (UpdateLlmEvaluationReleaseGateRequest) returns (LlmEvaluationReleaseGate);
+
+    // Delete a release gate and all owned gate runs.
+    rpc LlmEvaluationDeleteReleaseGate (DeleteLlmEvaluationReleaseGateRequest) returns (google.protobuf.Empty);
+
+    // Run a release gate against a candidate target. Long-running operation: the
+    // returned Operation resolves to the completed LlmEvaluationReleaseGateRun once
+    // the candidate (and optional safety) experiments finished and the verdict has
+    // been computed and persisted server-side.
+    rpc LlmEvaluationRunReleaseGate (RunLlmEvaluationReleaseGateRequest) returns (ondewo.nlu.Operation);
+
+    // Get a single release gate run (persisted verdict + checks) by resource name.
+    rpc LlmEvaluationGetReleaseGateRun (GetLlmEvaluationReleaseGateRunRequest) returns (LlmEvaluationReleaseGateRun);
+
+    // List release gate runs, optionally filtered + paginated.
+    rpc LlmEvaluationListReleaseGateRuns (ListLlmEvaluationReleaseGateRunsRequest) returns (ListLlmEvaluationReleaseGateRunsResponse);
+
+    // endregion release gates
+
+    // region scorecards
+
+    // Create a new scorecard (weighted multi-criteria roll-up definition).
+    rpc LlmEvaluationCreateScorecard (CreateLlmEvaluationScorecardRequest) returns (LlmEvaluationScorecard);
+
+    // Get a scorecard by resource name.
+    rpc LlmEvaluationGetScorecard (GetLlmEvaluationScorecardRequest) returns (LlmEvaluationScorecard);
+
+    // List scorecards in the project, optionally filtered + paginated.
+    rpc LlmEvaluationListScorecards (ListLlmEvaluationScorecardsRequest) returns (ListLlmEvaluationScorecardsResponse);
+
+    // Update an existing scorecard.
+    rpc LlmEvaluationUpdateScorecard (UpdateLlmEvaluationScorecardRequest) returns (LlmEvaluationScorecard);
+
+    // Delete a scorecard.
+    rpc LlmEvaluationDeleteScorecard (DeleteLlmEvaluationScorecardRequest) returns (google.protobuf.Empty);
+
+    // endregion scorecards
+
+    // region project settings
+
+    // Get the per-(project, language_code) evaluation settings singleton (judge
+    // configuration, default weights, pass cutoffs). The server auto-creates
+    // default settings on first access.
+    rpc LlmEvaluationGetProjectSettings (GetLlmEvaluationProjectSettingsRequest) returns (LlmEvaluationProjectSettings);
+
+    // Update the per-(project, language_code) evaluation settings singleton.
+    rpc LlmEvaluationUpdateProjectSettings (UpdateLlmEvaluationProjectSettingsRequest) returns (LlmEvaluationProjectSettings);
+
+    // endregion project settings
+
+    // region evaluator registry
+
+    // List the evaluators available on this server, with metadata describing the
+    // category, required example fields, multi-turn support, default threshold,
+    // judge requirement and configurable parameters of each evaluator.
+    rpc LlmEvaluationListEvaluators (ListLlmEvaluationEvaluatorsRequest) returns (ListLlmEvaluationEvaluatorsResponse);
+
+    // endregion evaluator registry
+
+    // region golden transcripts + simulation
+
+    // Convert a recorded session (or a selection of its session steps) into
+    // evaluation examples ("golden transcripts") inside an existing dataset.
+    rpc LlmEvaluationCreateExamplesFromSession (CreateLlmEvaluationExamplesFromSessionRequest) returns (CreateLlmEvaluationExamplesFromSessionResponse);
+
+    // Generate synthetic multi-turn evaluation conversations by simulating users
+    // (persona-driven; STANDARD kind) or attackers (red-teaming; ADVERSARIAL kind)
+    // against the live target. Long-running operation: the returned Operation
+    // resolves once the generated examples have been persisted into the receiving dataset.
+    rpc LlmEvaluationSimulateConversations (SimulateLlmEvaluationConversationsRequest) returns (ondewo.nlu.Operation);
+
+    // endregion golden transcripts + simulation
+
+    // region schedules
+
+    // Create a new schedule for recurring experiment / release gate runs.
+    rpc LlmEvaluationCreateSchedule (CreateLlmEvaluationScheduleRequest) returns (LlmEvaluationSchedule);
+
+    // Get a schedule by resource name.
+    rpc LlmEvaluationGetSchedule (GetLlmEvaluationScheduleRequest) returns (LlmEvaluationSchedule);
+
+    // List schedules in the project, optionally filtered + paginated.
+    rpc LlmEvaluationListSchedules (ListLlmEvaluationSchedulesRequest) returns (ListLlmEvaluationSchedulesResponse);
+
+    // Update an existing schedule (cron / interval, enabled flag, request template).
+    rpc LlmEvaluationUpdateSchedule (UpdateLlmEvaluationScheduleRequest) returns (LlmEvaluationSchedule);
+
+    // Delete a schedule. Experiments / gate runs already created by it are kept.
+    rpc LlmEvaluationDeleteSchedule (DeleteLlmEvaluationScheduleRequest) returns (google.protobuf.Empty);
+
+    // endregion schedules
+
+    // region reports
+
+    // Persist a generated report as an immutable artifact (incl. payload bytes).
+    rpc LlmEvaluationCreateReport (CreateLlmEvaluationReportRequest) returns (LlmEvaluationReport);
+
+    // Get a report by resource name (incl. payload bytes).
+    rpc LlmEvaluationGetReport (GetLlmEvaluationReportRequest) returns (LlmEvaluationReport);
+
+    // List reports, optionally filtered + paginated. Payload bytes are omitted
+    // unless explicitly requested via field_mask.
+    rpc LlmEvaluationListReports (ListLlmEvaluationReportsRequest) returns (ListLlmEvaluationReportsResponse);
+
+    // Delete a report.
+    rpc LlmEvaluationDeleteReport (DeleteLlmEvaluationReportRequest) returns (google.protobuf.Empty);
+
+    // endregion reports
+
+    // region a/b experiments
+
+    // Create a new A/B experiment (a set of routing variants over live
+    // DetectIntent traffic). Created in DRAFT status; traffic is only split once
+    // it is started via LlmEvaluationStartAbExperiment.
+    rpc LlmEvaluationCreateAbExperiment (CreateLlmEvaluationAbExperimentRequest) returns (LlmEvaluationAbExperiment);
+
+    // Get an A/B experiment by resource name.
+    rpc LlmEvaluationGetAbExperiment (GetLlmEvaluationAbExperimentRequest) returns (LlmEvaluationAbExperiment);
+
+    // List A/B experiments in the project, optionally filtered + paginated.
+    rpc LlmEvaluationListAbExperiments (ListLlmEvaluationAbExperimentsRequest) returns (ListLlmEvaluationAbExperimentsResponse);
+
+    // Update an existing A/B experiment (variants, traffic config, metadata).
+    // Only allowed in DRAFT / STOPPED status; running experiments must be stopped first.
+    rpc LlmEvaluationUpdateAbExperiment (UpdateLlmEvaluationAbExperimentRequest) returns (LlmEvaluationAbExperiment);
+
+    // Delete an A/B experiment and all owned sticky-assignment rows.
+    rpc LlmEvaluationDeleteAbExperiment (DeleteLlmEvaluationAbExperimentRequest) returns (google.protobuf.Empty);
+
+    // Start an A/B experiment: validates that the variant traffic weights are
+    // well-formed (sum to the configured total), stamps started_at and transitions
+    // the experiment to RUNNING so live traffic begins to be split.
+    rpc LlmEvaluationStartAbExperiment (StartLlmEvaluationAbExperimentRequest) returns (LlmEvaluationAbExperiment);
+
+    // Stop a running A/B experiment: stamps stopped_at and transitions to STOPPED.
+    // Existing sticky assignments are retained for results computation.
+    rpc LlmEvaluationStopAbExperiment (StopLlmEvaluationAbExperimentRequest) returns (LlmEvaluationAbExperiment);
+
+    // Compute per-variant telemetry rollups for an A/B experiment. Stateless /
+    // computed on demand: gathers each variant's sessions and aggregates their
+    // LlmTelemetry into a per-variant LlmTelemetryReport. There is no auto-rollout.
+    rpc LlmEvaluationGetAbExperimentResults (GetLlmEvaluationAbExperimentResultsRequest) returns (GetLlmEvaluationAbExperimentResultsResponse);
+
+    // endregion a/b experiments
+
+    // region a/b rollout
+
+    // Compute a rollout recommendation for an A/B experiment: which variant wins
+    // against the control on the chosen optimize metric under the supplied
+    // statistical guard-rails (confidence level, minimum sessions per variant,
+    // minimum effect size). Stateless / read-only — computed on demand from the
+    // per-variant results; nothing is persisted and no traffic / config changes.
+    rpc LlmEvaluationGetAbRolloutRecommendation (GetLlmEvaluationAbRolloutRecommendationRequest) returns (LlmEvaluationAbRolloutRecommendation);
+
+    // Apply a rollout for an A/B experiment: promotes the chosen variant's config
+    // as the project's classifier default, stops the experiment, and writes +
+    // returns the LlmEvaluationAbRolloutDecision audit record. The operator picks
+    // the variant explicitly (there is no auto-rollout). Idempotent: re-applying
+    // an already-rolled-out experiment returns the existing decision.
+    rpc LlmEvaluationApplyAbRollout (ApplyLlmEvaluationAbRolloutRequest) returns (LlmEvaluationAbRolloutDecision);
+
+    // Get the applied rollout decision (audit record) by resource name.
+    rpc LlmEvaluationGetAbRolloutDecision (GetLlmEvaluationAbRolloutDecisionRequest) returns (LlmEvaluationAbRolloutDecision);
+
+    // List applied rollout decisions in the project, optionally filtered (e.g. by
+    // experiment) + paginated.
+    rpc LlmEvaluationListAbRolloutDecisions (ListLlmEvaluationAbRolloutDecisionsRequest) returns (ListLlmEvaluationAbRolloutDecisionsResponse);
+
+    // endregion a/b rollout
+
+    // region online evaluation
+
+    // Create a new online-evaluation config: a per-(project, language_code)
+    // definition selecting a reference-free evaluator set + a sample rate. A
+    // swarm-safe background worker samples already-persisted live session steps,
+    // scores the recorded answer with these evaluators and enqueues failing steps
+    // into the annotation queue.
+    rpc LlmEvaluationCreateOnlineConfig (CreateLlmEvaluationOnlineConfigRequest) returns (LlmEvaluationOnlineConfig);
+
+    // Get an online-evaluation config by resource name.
+    rpc LlmEvaluationGetOnlineConfig (GetLlmEvaluationOnlineConfigRequest) returns (LlmEvaluationOnlineConfig);
+
+    // List online-evaluation configs in the project, optionally filtered + paginated.
+    rpc LlmEvaluationListOnlineConfigs (ListLlmEvaluationOnlineConfigsRequest) returns (ListLlmEvaluationOnlineConfigsResponse);
+
+    // Update an existing online-evaluation config (enabled flag, evaluator set,
+    // sample rate, thresholds, session filter).
+    rpc LlmEvaluationUpdateOnlineConfig (UpdateLlmEvaluationOnlineConfigRequest) returns (LlmEvaluationOnlineConfig);
+
+    // Delete an online-evaluation config. Already-produced online results and
+    // annotation-queue items are kept.
+    rpc LlmEvaluationDeleteOnlineConfig (DeleteLlmEvaluationOnlineConfigRequest) returns (google.protobuf.Empty);
+
+    // endregion online evaluation
+
+    // region online results
+
+    // Get a single online-evaluation result (per scored session step) by resource name.
+    rpc LlmEvaluationGetOnlineResult (GetLlmEvaluationOnlineResultRequest) returns (LlmEvaluationOnlineResult);
+
+    // List online-evaluation results, optionally filtered by config / pass-state + paginated.
+    // Read-only: result rows are produced by the online-evaluation worker (no Create RPC).
+    rpc LlmEvaluationListOnlineResults (ListLlmEvaluationOnlineResultsRequest) returns (ListLlmEvaluationOnlineResultsResponse);
+
+    // endregion online results
+
+    // region annotation queue
+
+    // Get a single annotation-queue item by resource name.
+    rpc LlmEvaluationGetAnnotationQueueItem (GetLlmEvaluationAnnotationQueueItemRequest) returns (LlmEvaluationAnnotationQueueItem);
+
+    // List annotation-queue items, optionally filtered by status / assignee + paginated.
+    // Items are enqueued by the online-evaluation worker (no Create RPC).
+    rpc LlmEvaluationListAnnotationQueueItems (ListLlmEvaluationAnnotationQueueItemsRequest) returns (ListLlmEvaluationAnnotationQueueItemsResponse);
+
+    // Update an annotation-queue item (status / assignee / reason transitions:
+    // PENDING -> REVIEWED / DISMISSED).
+    rpc LlmEvaluationUpdateAnnotationQueueItem (UpdateLlmEvaluationAnnotationQueueItemRequest) returns (LlmEvaluationAnnotationQueueItem);
+
+    // Promote an annotation-queue item into a regression dataset. Thin server-side
+    // composition: delegates to LlmEvaluationCreateExamplesFromSession with the
+    // item's session (+ selected steps), flips the item status to PROMOTED and
+    // stamps the promoted dataset name. Returns the created example(s).
+    rpc LlmEvaluationPromoteAnnotationQueueItem (PromoteLlmEvaluationAnnotationQueueItemRequest) returns (PromoteLlmEvaluationAnnotationQueueItemResponse);
+
+    // endregion annotation queue
 
 }
 
@@ -154,6 +401,10 @@ message LlmEvaluationDataset {
     // scoped per (project, language_code) — the same dataset name may exist
     // independently per language.
     string language_code = 11;
+
+    // Kind of examples the dataset holds (single-turn, multi-turn conversation
+    // flow, RAG question-answering, adversarial red-team probes, simulated).
+    LlmEvaluationDatasetType llm_evaluation_dataset_type = 12;
 }
 
 // A single example in an evaluation dataset.
@@ -282,6 +533,24 @@ message LlmEvaluationExperiment {
 
     // User id in form of a valid UUID.
     string modified_by = 24;
+
+    // Number of repetitions each (example, evaluator) pair was executed with
+    // (echoed from RunLlmEvaluationExperimentRequest; 0 is treated as 1).
+    int32 repetitions = 25;
+
+    // Optional. Resource name of the schedule that created this experiment
+    // (empty for manually-triggered experiments).
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationSchedules/&lt;schedule_uuid&gt;</code>.
+    string llm_evaluation_schedule_name = 26;
+
+    // Kind of experiment (standard single-turn, multi-turn flow, red-team,
+    // gate candidate, gate safety, scheduled).
+    LlmEvaluationExperimentKind llm_evaluation_experiment_kind = 27;
+
+    // Optional. Resource name of the release gate run this experiment belongs to
+    // (set for gate-candidate and gate-safety experiments).
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationReleaseGates/&lt;gate_uuid&gt;/runs/&lt;run_uuid&gt;</code>.
+    string llm_evaluation_release_gate_run_name = 28;
 }
 
 // Lifecycle status of an experiment.
@@ -351,6 +620,19 @@ message LlmEvaluationEvaluatorRun {
 
     // User id in form of a valid UUID.
     string modified_by = 14;
+
+    // Per-turn results for multi-turn (conversation-flow) runs: one entry per
+    // executed conversation turn, carrying expected vs. actual outputs and the
+    // per-turn telemetry join key. Empty for single-turn runs.
+    repeated LlmEvaluationTurnResult llm_evaluation_turn_results = 15;
+
+    // Zero-based repetition index when the experiment ran with repetitions > 1.
+    int32 repetition_index = 16;
+
+    // Actual output produced by the target for this run (answer text, tool
+    // calls, final state) — first-class so result views need not parse feedback
+    // <code>raw</code> payloads.
+    google.protobuf.Struct actual_output = 17;
 }
 
 // Family of evaluator implementations.
@@ -538,6 +820,9 @@ message LlmEvaluationDatasetFilter {
 
     // Optional. Match only datasets carrying every tag in this list.
     repeated string tags = 2;
+
+    // Optional. Match only datasets of this type.
+    LlmEvaluationDatasetType llm_evaluation_dataset_type = 3;
 }
 
 // Request to list evaluation datasets within a project.
@@ -806,6 +1091,20 @@ message RunLlmEvaluationExperimentRequest {
     // service defines one LLM to evaluate; supplying several evaluates and compares multiple LLMs
     // in a single run. Takes precedence over the free-form <code>model_name</code> label.
     repeated string ccai_service_names = 11;
+
+    // Optional. Number of repetitions per (example, evaluator) pair for
+    // consistency / dispersion analysis. 0 is treated as 1.
+    int32 repetitions = 12;
+
+    // Optional. Kind of experiment to run. Unspecified defaults to STANDARD
+    // (or FLOW when the dataset type is FLOW).
+    LlmEvaluationExperimentKind llm_evaluation_experiment_kind = 13;
+
+    // Optional. Per-evaluator parameter overrides for this run, keyed by
+    // evaluator name. Values are objects matching the evaluator's parameter
+    // specs from LlmEvaluationListEvaluators
+    // (e.g. <code>{"geeval": {"criteria": "...", "threshold": 0.7}}</code>).
+    google.protobuf.Struct evaluator_configs = 14;
 }
 
 // Request to fetch a previously-run experiment.
@@ -842,6 +1141,13 @@ message LlmEvaluationExperimentFilter {
 
     // Optional. Match only experiments exercising this concrete model identifier.
     string model_name = 4;
+
+    // Optional. Match only experiments created by this schedule (resource name).
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationSchedules/&lt;schedule_uuid&gt;</code>.
+    string llm_evaluation_schedule_name = 5;
+
+    // Optional. Match only experiments of this kind.
+    LlmEvaluationExperimentKind llm_evaluation_experiment_kind = 6;
 }
 
 // Request to list experiments in a project, optionally narrowed by filter.
@@ -1054,4 +1360,2529 @@ message DeleteLlmEvaluationFeedbackRequest {
     string language_code = 3;
 }
 
+// Request to update an existing feedback record.
+message UpdateLlmEvaluationFeedbackRequest {
+    // Feedback payload (only fields covered by <code>update_mask</code> are
+    // applied; typically <code>score</code>, <code>categorical_value</code>
+    // and / or <code>comment</code>).
+    LlmEvaluationFeedback llm_evaluation_feedback = 1;
+
+    // Mask of fields to update on the feedback record.
+    google.protobuf.FieldMask update_mask = 2;
+
+    // Optional. The mask to control which fields will be filled with data on the
+    // returned feedback record.
+    google.protobuf.FieldMask field_mask = 3;
+
+    // Project owning the feedback.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 4;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 5;
+}
+
 // endregion feedback RPC messages
+
+// region extended domain enums
+
+// Kind of examples an evaluation dataset holds.
+enum LlmEvaluationDatasetType {
+    // Default / unset (treated as SINGLE_TURN).
+    LLM_EVALUATION_DATASET_TYPE_UNSPECIFIED = 0;
+
+    // Single-turn examples (one input, one expected output).
+    LLM_EVALUATION_DATASET_TYPE_SINGLE_TURN = 1;
+
+    // Multi-turn conversation-flow examples (scripted user turns with expected
+    // tool calls / final state / answers per turn).
+    LLM_EVALUATION_DATASET_TYPE_FLOW = 2;
+
+    // RAG question-answering examples (question, gold answer, expected sources).
+    LLM_EVALUATION_DATASET_TYPE_RAG = 3;
+
+    // Adversarial red-team probes (prompt injection, PII extraction, jailbreaks, ...).
+    LLM_EVALUATION_DATASET_TYPE_RED_TEAM = 4;
+
+    // Synthetically generated examples (conversation simulator output).
+    LLM_EVALUATION_DATASET_TYPE_SIMULATED = 5;
+}
+
+// Kind of an experiment run.
+enum LlmEvaluationExperimentKind {
+    // Default / unset (treated as STANDARD).
+    LLM_EVALUATION_EXPERIMENT_KIND_UNSPECIFIED = 0;
+
+    // Standard single-turn evaluation run.
+    LLM_EVALUATION_EXPERIMENT_KIND_STANDARD = 1;
+
+    // Multi-turn conversation-flow run (per-turn results populated).
+    LLM_EVALUATION_EXPERIMENT_KIND_FLOW = 2;
+
+    // Red-team / adversarial safety run.
+    LLM_EVALUATION_EXPERIMENT_KIND_RED_TEAM = 3;
+
+    // Candidate experiment dispatched by a release gate run.
+    LLM_EVALUATION_EXPERIMENT_KIND_GATE_CANDIDATE = 4;
+
+    // Safety experiment dispatched by a release gate run.
+    LLM_EVALUATION_EXPERIMENT_KIND_GATE_SAFETY = 5;
+
+    // Experiment dispatched by a recurring schedule.
+    LLM_EVALUATION_EXPERIMENT_KIND_SCHEDULED = 6;
+}
+
+// Result of executing one conversation turn of a multi-turn (flow) example.
+message LlmEvaluationTurnResult {
+    // Zero-based index of the turn within the example's scripted conversation.
+    int32 turn_index = 1;
+
+    // The user input that was sent for this turn (text, contexts, parameters).
+    google.protobuf.Struct user_input = 2;
+
+    // Expected output for this turn as authored in the example
+    // (expected tool calls, final state, answer).
+    google.protobuf.Struct expected_output = 3;
+
+    // Actual output produced by the target for this turn
+    // (answer text, tool calls, final state).
+    google.protobuf.Struct actual_output = 4;
+
+    // Ties this turn back to the LlmTelemetry produced when running the target
+    // for this turn (per-turn telemetry join key).
+    string llm_telemetry_run_id = 5;
+
+    // Optional. Resource name of the session step created by executing this
+    // turn against the live target (deep link into trace views).
+    string session_step_name = 6;
+
+    // Per-turn feedback records produced by turn-aware evaluators.
+    repeated LlmEvaluationFeedback llm_evaluation_feedbacks = 7;
+
+    // Wall-clock duration of this turn in seconds.
+    double duration_in_s = 8;
+}
+
+// endregion extended domain enums
+
+// region release gate domain messages
+
+// Threshold set evaluated by a release gate. Nested in a dedicated message so
+// presence can be detected at the message level (proto3 scalars carry no presence).
+message LlmEvaluationReleaseGateThresholds {
+    // Minimum pass rate (0.0-1.0) the candidate experiment must reach.
+    double min_pass_rate = 1;
+
+    // Maximum tolerated per-criterion mean-score regression (0.0-1.0) versus
+    // the baseline experiment.
+    double max_regression_per_criterion = 2;
+
+    // Maximum tolerated p95 latency in seconds (requires telemetry join).
+    double max_p95_latency_seconds = 3;
+
+    // If true, every example tagged "acceptance" must pass for the gate to pass.
+    bool acceptance_must_pass = 4;
+}
+
+// Safety section of a release gate: a separate adversarial experiment scored
+// with safety evaluators.
+message LlmEvaluationReleaseGateSafetyConfig {
+    // Whether the safety section is evaluated as part of gate runs.
+    bool enabled = 1;
+
+    // Resource name of the adversarial (red-team) dataset to run.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationDatasets/&lt;dataset_uuid&gt;</code>.
+    string adversarial_dataset_name = 2;
+
+    // Logical names of safety evaluators to run (e.g. "toxicity", "bias", "pii_leakage").
+    repeated string evaluator_names = 3;
+
+    // Maximum tolerated mean toxicity score (0.0-1.0).
+    double max_toxicity = 4;
+
+    // Maximum tolerated mean bias score (0.0-1.0).
+    double max_bias = 5;
+}
+
+// A release gate: a named set of thresholds over evaluator scores, regression
+// deltas and telemetry that decides whether a candidate configuration ships.
+message LlmEvaluationReleaseGate {
+    // The unique resource name of the release gate. Read-only; populated by the server.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationReleaseGates/&lt;gate_uuid&gt;</code>.
+    string name = 1;
+
+    // Required. Human-readable display name (unique within the (project, language_code) tuple).
+    string display_name = 2;
+
+    // Free-form description.
+    string description = 3;
+
+    // Server-managed revision counter, incremented on semantic updates
+    // (suite, baseline, evaluators, thresholds, weights, safety). Read-only.
+    int32 revision = 4;
+
+    // Resource name of the benchmark suite (dataset) the gate runs.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationDatasets/&lt;dataset_uuid&gt;</code>.
+    string llm_evaluation_dataset_name = 5;
+
+    // Optional. Resource name of the baseline experiment for regression checks.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationExperiments/&lt;experiment_uuid&gt;</code>.
+    string llm_evaluation_baseline_experiment_name = 6;
+
+    // Logical names of the evaluators the gate runs against the suite.
+    repeated string llm_evaluation_evaluator_names = 7;
+
+    // Threshold set evaluated against the candidate experiment.
+    LlmEvaluationReleaseGateThresholds thresholds = 8;
+
+    // Optional safety section (separate adversarial experiment).
+    LlmEvaluationReleaseGateSafetyConfig safety = 9;
+
+    // Per-criterion weights used for the weighted composite score
+    // (criterion name -> numeric weight; normalized server-side).
+    google.protobuf.Struct weights = 10;
+
+    // Score cutoff (0.0-1.0) above which an evaluator run counts as passed.
+    double pass_cutoff_score = 11;
+
+    // Number of days after which a gate verdict is considered stale.
+    int32 staleness_window_days = 12;
+
+    // Default CcaiService name(s) defining the candidate target's LLM connection
+    // (can be overridden per run).
+    repeated string ccai_service_names = 13;
+
+    // Creation date and time. Read-only field.
+    google.protobuf.Timestamp created_at = 14;
+
+    // User id in form of a valid UUID.
+    string created_by = 15;
+
+    // Modification date and time. Read-only field.
+    google.protobuf.Timestamp modified_at = 16;
+
+    // User id in form of a valid UUID.
+    string modified_by = 17;
+
+    // Project owning the release gate.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 18;
+
+    // BCP-47 language-code scope.
+    string language_code = 19;
+}
+
+// Verdict of a release gate run.
+enum LlmEvaluationReleaseGateVerdict {
+    // Default / unset.
+    LLM_EVALUATION_RELEASE_GATE_VERDICT_UNSPECIFIED = 0;
+
+    // Experiments still running; verdict not yet computed.
+    LLM_EVALUATION_RELEASE_GATE_VERDICT_PENDING = 1;
+
+    // All checks passed.
+    LLM_EVALUATION_RELEASE_GATE_VERDICT_PASS = 2;
+
+    // At least one check failed.
+    LLM_EVALUATION_RELEASE_GATE_VERDICT_FAIL = 3;
+
+    // Verdict is older than the gate's staleness window.
+    LLM_EVALUATION_RELEASE_GATE_VERDICT_STALE = 4;
+}
+
+// One evaluated check inside a release gate run verdict.
+message LlmEvaluationReleaseGateCheck {
+    // Stable check identifier, e.g. "pass_rate", "criterion.&lt;name&gt;",
+    // "regression.&lt;name&gt;", "latency_p95_seconds", "safety.&lt;name&gt;",
+    // "acceptance_must_pass".
+    string id = 1;
+
+    // Threshold the check compared against.
+    double threshold = 2;
+
+    // Actual value observed.
+    double actual = 3;
+
+    // False when the input needed for the check was unavailable (e.g. telemetry
+    // not recorded); <code>actual</code> is meaningless in that case.
+    bool actual_available = 4;
+
+    // Whether the check passed.
+    bool passed = 5;
+
+    // True when the actual value was only window-attributed (partial telemetry).
+    bool partial = 6;
+
+    // Where the actual value came from: "LIVE" | "DERIVED" | "TELEMETRY".
+    string provenance = 7;
+}
+
+// One persisted execution of a release gate: experiments + computed verdict.
+message LlmEvaluationReleaseGateRun {
+    // The unique resource name of the gate run. Read-only; populated by the server.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationReleaseGates/&lt;gate_uuid&gt;/runs/&lt;run_uuid&gt;</code>.
+    string name = 1;
+
+    // Resource name of the gate this run belongs to.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationReleaseGates/&lt;gate_uuid&gt;</code>.
+    string llm_evaluation_release_gate_name = 2;
+
+    // Gate revision at run time.
+    int32 gate_revision = 3;
+
+    // Full gate document snapshot taken at run time, so the verdict stays
+    // interpretable after later gate edits.
+    google.protobuf.Struct gate_snapshot = 4;
+
+    // Resource name of the candidate experiment.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationExperiments/&lt;experiment_uuid&gt;</code>.
+    string llm_evaluation_experiment_name = 5;
+
+    // Optional. Resource name of the safety (adversarial) experiment.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationExperiments/&lt;experiment_uuid&gt;</code>.
+    string llm_evaluation_safety_experiment_name = 6;
+
+    // Optional. Resource name of the baseline experiment used for regression checks.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationExperiments/&lt;experiment_uuid&gt;</code>.
+    string llm_evaluation_baseline_experiment_name = 7;
+
+    // Computed verdict. Read-only; persisted server-side.
+    LlmEvaluationReleaseGateVerdict llm_evaluation_release_gate_verdict = 8;
+
+    // Individual checks the verdict was derived from. Read-only.
+    repeated LlmEvaluationReleaseGateCheck checks = 9;
+
+    // Wall-clock start of the gate run.
+    google.protobuf.Timestamp started_at = 10;
+
+    // Wall-clock end of the gate run (verdict computation finished).
+    google.protobuf.Timestamp finished_at = 11;
+
+    // Creation date and time. Read-only field.
+    google.protobuf.Timestamp created_at = 12;
+
+    // User id in form of a valid UUID.
+    string created_by = 13;
+
+    // Modification date and time. Read-only field.
+    google.protobuf.Timestamp modified_at = 14;
+
+    // User id in form of a valid UUID.
+    string modified_by = 15;
+
+    // Project owning the gate run.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 16;
+
+    // BCP-47 language-code scope.
+    string language_code = 17;
+}
+
+// endregion release gate domain messages
+
+// region release gate RPC messages
+
+// Request to create a new release gate.
+message CreateLlmEvaluationReleaseGateRequest {
+    // Release gate payload (name / revision / audit fields are server-populated).
+    LlmEvaluationReleaseGate llm_evaluation_release_gate = 1;
+
+    // Project owning the gate.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 2;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 3;
+}
+
+// Request to get a single release gate.
+message GetLlmEvaluationReleaseGateRequest {
+    // Resource name of the gate to fetch.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationReleaseGates/&lt;gate_uuid&gt;</code>.
+    string name = 1;
+
+    // Optional. The mask to control which fields will be filled with data.
+    google.protobuf.FieldMask field_mask = 2;
+
+    // Project owning the gate.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 3;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 4;
+}
+
+// Filter conditions for ListReleaseGates. All fields are optional; multiple
+// fields set at the same time are combined via logical AND.
+message LlmEvaluationReleaseGateFilter {
+    // Optional. Match only gates whose display name contains this substring
+    // (case-insensitive).
+    string display_name = 1;
+
+    // Optional. Match only gates running this suite (dataset resource name).
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationDatasets/&lt;dataset_uuid&gt;</code>.
+    string llm_evaluation_dataset_name = 2;
+}
+
+// Request to list release gates within a project.
+message ListLlmEvaluationReleaseGatesRequest {
+    // Project owning the gates.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 1;
+
+    // Optional. Page token for pagination. Retrieves a large result set in
+    // smaller, more manageable portions. The token encodes the current index
+    // and the page size.
+    //
+    // Valid page token strings:
+    // <ul>
+    //   <li><code>&quot;&quot;</code> (empty string) - Retrieves the first page.</li>
+    //   <li><code>&quot;current_index-0--page_size-20&quot;</code> - First page, page size 20.</li>
+    //   <li><code>&quot;current_index-1--page_size-20&quot;</code> - Second page, page size 20.</li>
+    // </ul>
+    // Index starts at 0.
+    string page_token = 2;
+
+    // Optional. The mask to control which fields will be filled with data.
+    google.protobuf.FieldMask field_mask = 3;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 4;
+
+    // Optional. Filter conditions to narrow the returned gates.
+    LlmEvaluationReleaseGateFilter llm_evaluation_release_gate_filter = 5;
+}
+
+// Response for ListReleaseGates.
+message ListLlmEvaluationReleaseGatesResponse {
+    // Release gates matching the request.
+    repeated LlmEvaluationReleaseGate llm_evaluation_release_gates = 1;
+
+    // Pagination token for the next page (empty if this is the last page).
+    string next_page_token = 2;
+}
+
+// Request to update an existing release gate.
+message UpdateLlmEvaluationReleaseGateRequest {
+    // Gate payload (only fields covered by <code>update_mask</code> are applied).
+    LlmEvaluationReleaseGate llm_evaluation_release_gate = 1;
+
+    // Mask of fields to update on the gate record.
+    google.protobuf.FieldMask update_mask = 2;
+
+    // Optional. The mask to control which fields will be filled with data on the
+    // returned gate.
+    google.protobuf.FieldMask field_mask = 3;
+
+    // Project owning the gate.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 4;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 5;
+}
+
+// Request to delete a release gate and all owned gate runs.
+message DeleteLlmEvaluationReleaseGateRequest {
+    // Resource name of the gate to delete.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationReleaseGates/&lt;gate_uuid&gt;</code>.
+    string name = 1;
+
+    // Project owning the gate.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 2;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 3;
+}
+
+// Request to run a release gate against a candidate target.
+message RunLlmEvaluationReleaseGateRequest {
+    // Resource name of the gate to run.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationReleaseGates/&lt;gate_uuid&gt;</code>.
+    string name = 1;
+
+    // Project owning the gate.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 2;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 3;
+
+    // Optional. CcaiService name(s) defining the candidate target's LLM
+    // connection; overrides the gate's default <code>ccai_service_names</code>.
+    repeated string ccai_service_names = 4;
+
+    // Optional. Source-tree revision pin recorded on the candidate experiment.
+    string git_sha = 5;
+
+    // Optional. Logical prompt version recorded on the candidate experiment.
+    string prompt_version = 6;
+}
+
+// Request to get a single release gate run.
+message GetLlmEvaluationReleaseGateRunRequest {
+    // Resource name of the gate run to fetch.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationReleaseGates/&lt;gate_uuid&gt;/runs/&lt;run_uuid&gt;</code>.
+    string name = 1;
+
+    // Optional. The mask to control which fields will be filled with data.
+    google.protobuf.FieldMask field_mask = 2;
+
+    // Project owning the gate run.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 3;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 4;
+}
+
+// Filter conditions for ListReleaseGateRuns. All fields are optional; multiple
+// fields set at the same time are combined via logical AND.
+message LlmEvaluationReleaseGateRunFilter {
+    // Optional. Match only runs of this gate (resource name).
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationReleaseGates/&lt;gate_uuid&gt;</code>.
+    string llm_evaluation_release_gate_name = 1;
+
+    // Optional. Match only runs with this verdict.
+    LlmEvaluationReleaseGateVerdict llm_evaluation_release_gate_verdict = 2;
+}
+
+// Request to list release gate runs within a project.
+message ListLlmEvaluationReleaseGateRunsRequest {
+    // Project owning the gate runs.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 1;
+
+    // Optional. Page token for pagination. Retrieves a large result set in
+    // smaller, more manageable portions. The token encodes the current index
+    // and the page size.
+    //
+    // Valid page token strings:
+    // <ul>
+    //   <li><code>&quot;&quot;</code> (empty string) - Retrieves the first page.</li>
+    //   <li><code>&quot;current_index-0--page_size-20&quot;</code> - First page, page size 20.</li>
+    //   <li><code>&quot;current_index-1--page_size-20&quot;</code> - Second page, page size 20.</li>
+    // </ul>
+    // Index starts at 0.
+    string page_token = 2;
+
+    // Optional. The mask to control which fields will be filled with data.
+    google.protobuf.FieldMask field_mask = 3;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 4;
+
+    // Optional. Filter conditions to narrow the returned gate runs.
+    LlmEvaluationReleaseGateRunFilter llm_evaluation_release_gate_run_filter = 5;
+}
+
+// Response for ListReleaseGateRuns.
+message ListLlmEvaluationReleaseGateRunsResponse {
+    // Gate runs matching the request, newest first.
+    repeated LlmEvaluationReleaseGateRun llm_evaluation_release_gate_runs = 1;
+
+    // Pagination token for the next page (empty if this is the last page).
+    string next_page_token = 2;
+}
+
+// endregion release gate RPC messages
+
+// region scorecard messages
+
+// One weighted criterion row of a scorecard.
+message LlmEvaluationScorecardComponent {
+    // Criterion label the component aggregates (e.g. "faithfulness").
+    string criterion = 1;
+
+    // Relative weight of the component (normalized server-side).
+    double weight = 2;
+
+    // Target score (0.0-1.0) the criterion should reach.
+    double target_score = 3;
+
+    // Optional. Logical evaluator name backing the criterion.
+    string evaluator_name = 4;
+}
+
+// A scorecard: a named weighted multi-criteria roll-up definition applied to
+// experiments for release reporting.
+message LlmEvaluationScorecard {
+    // The unique resource name of the scorecard. Read-only; populated by the server.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationScorecards/&lt;scorecard_uuid&gt;</code>.
+    string name = 1;
+
+    // Required. Human-readable display name (unique within the (project, language_code) tuple).
+    string display_name = 2;
+
+    // Free-form description.
+    string description = 3;
+
+    // Weighted criterion components.
+    repeated LlmEvaluationScorecardComponent llm_evaluation_scorecard_components = 4;
+
+    // Creation date and time. Read-only field.
+    google.protobuf.Timestamp created_at = 5;
+
+    // User id in form of a valid UUID.
+    string created_by = 6;
+
+    // Modification date and time. Read-only field.
+    google.protobuf.Timestamp modified_at = 7;
+
+    // User id in form of a valid UUID.
+    string modified_by = 8;
+
+    // Project owning the scorecard.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 9;
+
+    // BCP-47 language-code scope.
+    string language_code = 10;
+}
+
+// Request to create a new scorecard.
+message CreateLlmEvaluationScorecardRequest {
+    // Scorecard payload (name / audit fields are server-populated).
+    LlmEvaluationScorecard llm_evaluation_scorecard = 1;
+
+    // Project owning the scorecard.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 2;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 3;
+}
+
+// Request to get a single scorecard.
+message GetLlmEvaluationScorecardRequest {
+    // Resource name of the scorecard to fetch.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationScorecards/&lt;scorecard_uuid&gt;</code>.
+    string name = 1;
+
+    // Optional. The mask to control which fields will be filled with data.
+    google.protobuf.FieldMask field_mask = 2;
+
+    // Project owning the scorecard.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 3;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 4;
+}
+
+// Filter conditions for ListScorecards. All fields are optional; multiple
+// fields set at the same time are combined via logical AND.
+message LlmEvaluationScorecardFilter {
+    // Optional. Match only scorecards whose display name contains this substring
+    // (case-insensitive).
+    string display_name = 1;
+}
+
+// Request to list scorecards within a project.
+message ListLlmEvaluationScorecardsRequest {
+    // Project owning the scorecards.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 1;
+
+    // Optional. Page token for pagination. Retrieves a large result set in
+    // smaller, more manageable portions. The token encodes the current index
+    // and the page size.
+    //
+    // Valid page token strings:
+    // <ul>
+    //   <li><code>&quot;&quot;</code> (empty string) - Retrieves the first page.</li>
+    //   <li><code>&quot;current_index-0--page_size-20&quot;</code> - First page, page size 20.</li>
+    //   <li><code>&quot;current_index-1--page_size-20&quot;</code> - Second page, page size 20.</li>
+    // </ul>
+    // Index starts at 0.
+    string page_token = 2;
+
+    // Optional. The mask to control which fields will be filled with data.
+    google.protobuf.FieldMask field_mask = 3;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 4;
+
+    // Optional. Filter conditions to narrow the returned scorecards.
+    LlmEvaluationScorecardFilter llm_evaluation_scorecard_filter = 5;
+}
+
+// Response for ListScorecards.
+message ListLlmEvaluationScorecardsResponse {
+    // Scorecards matching the request.
+    repeated LlmEvaluationScorecard llm_evaluation_scorecards = 1;
+
+    // Pagination token for the next page (empty if this is the last page).
+    string next_page_token = 2;
+}
+
+// Request to update an existing scorecard.
+message UpdateLlmEvaluationScorecardRequest {
+    // Scorecard payload (only fields covered by <code>update_mask</code> are applied).
+    LlmEvaluationScorecard llm_evaluation_scorecard = 1;
+
+    // Mask of fields to update on the scorecard record.
+    google.protobuf.FieldMask update_mask = 2;
+
+    // Optional. The mask to control which fields will be filled with data on the
+    // returned scorecard.
+    google.protobuf.FieldMask field_mask = 3;
+
+    // Project owning the scorecard.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 4;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 5;
+}
+
+// Request to delete a scorecard.
+message DeleteLlmEvaluationScorecardRequest {
+    // Resource name of the scorecard to delete.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationScorecards/&lt;scorecard_uuid&gt;</code>.
+    string name = 1;
+
+    // Project owning the scorecard.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 2;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 3;
+}
+
+// endregion scorecard messages
+
+// region project settings messages
+
+// Judge-LLM configuration used by LLM-as-judge evaluators.
+message LlmEvaluationJudgeConfig {
+    // Resource name of the CcaiService whose LLM connection details (host /
+    // port / model / auth) the judge uses. Preferred over free-form model_name.
+    string ccai_service_name = 1;
+
+    // Free-form judge model label (fallback / display).
+    string model_name = 2;
+
+    // Sampling temperature for the judge model.
+    double temperature = 3;
+
+    // When true, the judge's full reasoning is kept in feedback
+    // <code>comment</code> / <code>raw</code> payloads.
+    bool verbose_reasoning = 4;
+
+    // Per-evaluator overrides keyed by evaluator name. Values are objects
+    // matching the evaluator's parameter specs from LlmEvaluationListEvaluators
+    // (e.g. <code>{"geeval": {"criteria": "...", "threshold": 0.7}}</code>).
+    google.protobuf.Struct evaluator_overrides = 5;
+}
+
+// Per-(project, language_code) evaluation settings singleton.
+message LlmEvaluationProjectSettings {
+    // The unique resource name of the settings singleton. Read-only.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationProjectSettings</code>.
+    string name = 1;
+
+    // Judge-LLM configuration for LLM-as-judge evaluators.
+    LlmEvaluationJudgeConfig llm_evaluation_judge_config = 2;
+
+    // Default per-criterion weights (criterion name -> numeric weight) applied
+    // by comparison / scorecard views when no explicit weights are configured.
+    google.protobuf.Struct default_weights = 3;
+
+    // Default score cutoff (0.0-1.0) above which an evaluator run counts as passed.
+    double default_pass_cutoff_score = 4;
+
+    // Optional. Resource name of the default scorecard.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationScorecards/&lt;scorecard_uuid&gt;</code>.
+    string default_scorecard_name = 5;
+
+    // Creation date and time. Read-only field.
+    google.protobuf.Timestamp created_at = 6;
+
+    // User id in form of a valid UUID.
+    string created_by = 7;
+
+    // Modification date and time. Read-only field.
+    google.protobuf.Timestamp modified_at = 8;
+
+    // User id in form of a valid UUID.
+    string modified_by = 9;
+
+    // Project owning the settings.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 10;
+
+    // BCP-47 language-code scope.
+    string language_code = 11;
+}
+
+// Request to get the evaluation settings singleton.
+message GetLlmEvaluationProjectSettingsRequest {
+    // Project owning the settings.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 1;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 2;
+
+    // Optional. The mask to control which fields will be filled with data.
+    google.protobuf.FieldMask field_mask = 3;
+}
+
+// Request to update the evaluation settings singleton.
+message UpdateLlmEvaluationProjectSettingsRequest {
+    // Settings payload (only fields covered by <code>update_mask</code> are applied).
+    LlmEvaluationProjectSettings llm_evaluation_project_settings = 1;
+
+    // Mask of fields to update on the settings record.
+    google.protobuf.FieldMask update_mask = 2;
+
+    // Optional. The mask to control which fields will be filled with data on the
+    // returned settings.
+    google.protobuf.FieldMask field_mask = 3;
+
+    // Project owning the settings.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 4;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 5;
+}
+
+// endregion project settings messages
+
+// region evaluator registry messages
+
+// Category an evaluator belongs to.
+enum LlmEvaluationEvaluatorCategory {
+    // Default / unset.
+    LLM_EVALUATION_EVALUATOR_CATEGORY_UNSPECIFIED = 0;
+
+    // Retrieval-augmented-generation quality (faithfulness, contextual precision, ...).
+    LLM_EVALUATION_EVALUATOR_CATEGORY_RAG = 1;
+
+    // Agentic behavior (tool correctness, task completion, MCP usage, ...).
+    LLM_EVALUATION_EVALUATOR_CATEGORY_AGENTIC = 2;
+
+    // Multi-turn conversational quality (knowledge retention, role adherence, ...).
+    LLM_EVALUATION_EVALUATOR_CATEGORY_CONVERSATIONAL = 3;
+
+    // Safety (toxicity, bias, PII leakage, hallucination, ...).
+    LLM_EVALUATION_EVALUATOR_CATEGORY_SAFETY = 4;
+
+    // Deterministic heuristics (exact match, embedding distance, JSON validity, ...).
+    LLM_EVALUATION_EVALUATOR_CATEGORY_HEURISTIC = 5;
+
+    // User-configurable custom metrics (G-Eval rubrics, DAG metrics, ...).
+    LLM_EVALUATION_EVALUATOR_CATEGORY_CUSTOM = 6;
+}
+
+// Specification of one configurable evaluator parameter.
+message LlmEvaluationEvaluatorParameterSpec {
+    // Parameter key (e.g. "criteria", "threshold", "expected_output_key").
+    string name = 1;
+
+    // Human-readable display name.
+    string display_name = 2;
+
+    // Free-form description.
+    string description = 3;
+
+    // Value type: "string" | "double" | "bool" | "string_list" | "json".
+    string value_type = 4;
+
+    // JSON-encoded default value.
+    string default_value = 5;
+
+    // Whether the parameter must be supplied.
+    bool required = 6;
+}
+
+// Server-side metadata describing one available evaluator.
+message LlmEvaluationEvaluatorSpec {
+    // Logical evaluator name used in RunExperiment requests (e.g. "faithfulness").
+    string evaluator_name = 1;
+
+    // Human-readable display name.
+    string display_name = 2;
+
+    // Free-form description of what the evaluator measures.
+    string description = 3;
+
+    // Family of evaluator implementations.
+    LlmEvaluationEvaluatorType llm_evaluation_evaluator_type = 4;
+
+    // Category the evaluator belongs to.
+    LlmEvaluationEvaluatorCategory llm_evaluation_evaluator_category = 5;
+
+    // Dotted paths of example fields the evaluator requires
+    // (e.g. "inputs.question", "expected_outputs.answer", "inputs.turns").
+    repeated string required_example_fields = 6;
+
+    // True when the evaluator consumes multi-turn conversations.
+    bool multi_turn = 7;
+
+    // Default pass threshold (0.0-1.0).
+    double default_threshold = 8;
+
+    // True when the evaluator requires a judge LLM.
+    bool requires_judge = 9;
+
+    // Configurable parameters accepted via evaluator_configs / evaluator_overrides.
+    repeated LlmEvaluationEvaluatorParameterSpec llm_evaluation_evaluator_parameter_specs = 10;
+}
+
+// Request to list available evaluators.
+message ListLlmEvaluationEvaluatorsRequest {
+    // Project scope (registry may be filtered by project capabilities).
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 1;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 2;
+}
+
+// Response for ListEvaluators.
+message ListLlmEvaluationEvaluatorsResponse {
+    // Available evaluators with metadata.
+    repeated LlmEvaluationEvaluatorSpec llm_evaluation_evaluator_specs = 1;
+}
+
+// endregion evaluator registry messages
+
+// region golden transcript + simulation messages
+
+// How session steps are converted into evaluation examples.
+enum LlmEvaluationExampleExtractionMode {
+    // Default / unset (treated as SINGLE_TURN).
+    LLM_EVALUATION_EXAMPLE_EXTRACTION_MODE_UNSPECIFIED = 0;
+
+    // One single-turn example per selected session step.
+    LLM_EVALUATION_EXAMPLE_EXTRACTION_MODE_SINGLE_TURN = 1;
+
+    // One multi-turn (conversation-flow) example with one turn per selected
+    // session step, in session order.
+    LLM_EVALUATION_EXAMPLE_EXTRACTION_MODE_MULTI_TURN_FLOW = 2;
+}
+
+// Request to convert a recorded session into evaluation examples ("golden transcripts").
+message CreateLlmEvaluationExamplesFromSessionRequest {
+    // Project owning the session and the dataset.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 1;
+
+    // Resource name of the recorded session to convert.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code>.
+    string session_name = 2;
+
+    // Resource name of the dataset receiving the created examples.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationDatasets/&lt;dataset_uuid&gt;</code>.
+    string llm_evaluation_dataset_name = 3;
+
+    // Optional. Session steps to convert (resource names). Empty = all steps,
+    // in session order.
+    repeated string session_step_names = 4;
+
+    // How the selected steps are turned into examples.
+    LlmEvaluationExampleExtractionMode llm_evaluation_example_extraction_mode = 5;
+
+    // Optional. Display-name prefix for the created example(s); the server
+    // appends a per-example suffix.
+    string display_name = 6;
+
+    // BCP-47 language-code scope (required, must match the dataset's).
+    string language_code = 7;
+
+    // When true, tool calls recorded in the session's telemetry are captured as
+    // expected tool calls on the created examples.
+    bool include_tool_calls = 8;
+
+    // When true, retrieved chunks recorded by retriever spans are captured as
+    // frozen retrieval context on the created examples.
+    bool include_retrieval_context = 9;
+}
+
+// Response for CreateExamplesFromSession.
+message CreateLlmEvaluationExamplesFromSessionResponse {
+    // Example records created.
+    repeated LlmEvaluationExample llm_evaluation_examples = 1;
+}
+
+// Kind of conversation simulation.
+enum LlmEvaluationSimulationKind {
+    // Default / unset (treated as STANDARD).
+    LLM_EVALUATION_SIMULATION_KIND_UNSPECIFIED = 0;
+
+    // Persona-driven user simulation for coverage / stress testing.
+    LLM_EVALUATION_SIMULATION_KIND_STANDARD = 1;
+
+    // Adversarial (red-team) simulation probing safety weaknesses.
+    LLM_EVALUATION_SIMULATION_KIND_ADVERSARIAL = 2;
+}
+
+// One simulated user persona.
+message LlmEvaluationSimulationPersona {
+    // Short persona label (e.g. "impatient customer").
+    string persona = 1;
+
+    // Scenario the simulated user pursues (e.g. "wants a refund for a double charge").
+    string scenario = 2;
+
+    // Expected outcome of a successful conversation (used as expected output
+    // on generated examples).
+    string expected_outcome = 3;
+
+    // Free-form additional description of the simulated user's behavior.
+    string user_description = 4;
+}
+
+// Request to generate synthetic multi-turn evaluation conversations.
+message SimulateLlmEvaluationConversationsRequest {
+    // Project owning the dataset.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 1;
+
+    // Resource name of the dataset receiving the generated examples.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationDatasets/&lt;dataset_uuid&gt;</code>.
+    string llm_evaluation_dataset_name = 2;
+
+    // Personas to simulate. At least one is required for STANDARD simulations.
+    repeated LlmEvaluationSimulationPersona llm_evaluation_simulation_personas = 3;
+
+    // Number of conversations to generate (across all personas).
+    int32 num_conversations = 4;
+
+    // Maximum number of user turns per generated conversation.
+    int32 max_turns = 5;
+
+    // CcaiService name(s) defining the LLM connection used to simulate the user
+    // side of the conversations.
+    repeated string ccai_service_names = 6;
+
+    // BCP-47 language-code scope (required, must match the dataset's).
+    string language_code = 7;
+
+    // Arbitrary simulator configuration captured for reproducibility.
+    google.protobuf.Struct config = 8;
+
+    // Kind of simulation (standard persona-driven vs adversarial red-teaming).
+    LlmEvaluationSimulationKind llm_evaluation_simulation_kind = 9;
+
+    // ADVERSARIAL only. Attack types to probe (e.g. "prompt_injection",
+    // "pii_extraction", "jailbreak", "off_topic_drift"). Empty = all built-in types.
+    repeated string attack_types = 10;
+}
+
+// endregion golden transcript + simulation messages
+
+// region schedule messages
+
+// What a schedule executes when it fires.
+enum LlmEvaluationScheduleAction {
+    // Default / unset.
+    LLM_EVALUATION_SCHEDULE_ACTION_UNSPECIFIED = 0;
+
+    // Run the experiment template (recurring regression run).
+    LLM_EVALUATION_SCHEDULE_ACTION_RUN_EXPERIMENT = 1;
+
+    // Run the referenced release gate.
+    LLM_EVALUATION_SCHEDULE_ACTION_RUN_RELEASE_GATE = 2;
+}
+
+// A schedule for recurring experiment / release gate runs.
+message LlmEvaluationSchedule {
+    // The unique resource name of the schedule. Read-only; populated by the server.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationSchedules/&lt;schedule_uuid&gt;</code>.
+    string name = 1;
+
+    // Required. Human-readable display name (unique within the (project, language_code) tuple).
+    string display_name = 2;
+
+    // Free-form description.
+    string description = 3;
+
+    // 5-field cron expression in UTC (e.g. <code>"0 2 * * *"</code>). Exactly one
+    // of <code>cron_expression</code> / <code>interval_seconds</code> must be set.
+    string cron_expression = 4;
+
+    // Fixed interval between runs in seconds. Exactly one of
+    // <code>cron_expression</code> / <code>interval_seconds</code> must be set.
+    int32 interval_seconds = 5;
+
+    // Whether the schedule fires. Disabled schedules keep their configuration.
+    bool enabled = 6;
+
+    // What the schedule executes when it fires.
+    LlmEvaluationScheduleAction llm_evaluation_schedule_action = 7;
+
+    // RUN_EXPERIMENT only. Template request dispatched on every firing
+    // (display_name is suffixed with the firing timestamp).
+    RunLlmEvaluationExperimentRequest run_llm_evaluation_experiment_request = 8;
+
+    // RUN_RELEASE_GATE only. Resource name of the gate to run.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationReleaseGates/&lt;gate_uuid&gt;</code>.
+    string llm_evaluation_release_gate_name = 9;
+
+    // Wall-clock time of the most recent firing. Read-only.
+    google.protobuf.Timestamp last_run_at = 10;
+
+    // Wall-clock time of the next planned firing. Read-only.
+    google.protobuf.Timestamp next_run_at = 11;
+
+    // Resource name created by the most recent firing (experiment or gate run).
+    // Read-only.
+    string last_run_resource_name = 12;
+
+    // Status of the experiment created by the most recent firing. Read-only.
+    LlmEvaluationExperimentStatus last_run_status = 13;
+
+    // Creation date and time. Read-only field.
+    google.protobuf.Timestamp created_at = 14;
+
+    // User id in form of a valid UUID.
+    string created_by = 15;
+
+    // Modification date and time. Read-only field.
+    google.protobuf.Timestamp modified_at = 16;
+
+    // User id in form of a valid UUID.
+    string modified_by = 17;
+
+    // Project owning the schedule.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 18;
+
+    // BCP-47 language-code scope.
+    string language_code = 19;
+}
+
+// Request to create a new schedule.
+message CreateLlmEvaluationScheduleRequest {
+    // Schedule payload (name / audit / last-next-run fields are server-populated).
+    LlmEvaluationSchedule llm_evaluation_schedule = 1;
+
+    // Project owning the schedule.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 2;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 3;
+}
+
+// Request to get a single schedule.
+message GetLlmEvaluationScheduleRequest {
+    // Resource name of the schedule to fetch.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationSchedules/&lt;schedule_uuid&gt;</code>.
+    string name = 1;
+
+    // Optional. The mask to control which fields will be filled with data.
+    google.protobuf.FieldMask field_mask = 2;
+
+    // Project owning the schedule.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 3;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 4;
+}
+
+// Filter conditions for ListSchedules. All fields are optional; multiple fields
+// set at the same time are combined via logical AND.
+message LlmEvaluationScheduleFilter {
+    // Optional. Match only schedules whose display name contains this substring
+    // (case-insensitive).
+    string display_name = 1;
+
+    // Optional. When true, match only enabled schedules.
+    bool enabled_only = 2;
+
+    // Optional. Match only schedules with this action.
+    LlmEvaluationScheduleAction llm_evaluation_schedule_action = 3;
+}
+
+// Request to list schedules within a project.
+message ListLlmEvaluationSchedulesRequest {
+    // Project owning the schedules.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 1;
+
+    // Optional. Page token for pagination. Retrieves a large result set in
+    // smaller, more manageable portions. The token encodes the current index
+    // and the page size.
+    //
+    // Valid page token strings:
+    // <ul>
+    //   <li><code>&quot;&quot;</code> (empty string) - Retrieves the first page.</li>
+    //   <li><code>&quot;current_index-0--page_size-20&quot;</code> - First page, page size 20.</li>
+    //   <li><code>&quot;current_index-1--page_size-20&quot;</code> - Second page, page size 20.</li>
+    // </ul>
+    // Index starts at 0.
+    string page_token = 2;
+
+    // Optional. The mask to control which fields will be filled with data.
+    google.protobuf.FieldMask field_mask = 3;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 4;
+
+    // Optional. Filter conditions to narrow the returned schedules.
+    LlmEvaluationScheduleFilter llm_evaluation_schedule_filter = 5;
+}
+
+// Response for ListSchedules.
+message ListLlmEvaluationSchedulesResponse {
+    // Schedules matching the request.
+    repeated LlmEvaluationSchedule llm_evaluation_schedules = 1;
+
+    // Pagination token for the next page (empty if this is the last page).
+    string next_page_token = 2;
+}
+
+// Request to update an existing schedule.
+message UpdateLlmEvaluationScheduleRequest {
+    // Schedule payload (only fields covered by <code>update_mask</code> are applied).
+    LlmEvaluationSchedule llm_evaluation_schedule = 1;
+
+    // Mask of fields to update on the schedule record.
+    google.protobuf.FieldMask update_mask = 2;
+
+    // Optional. The mask to control which fields will be filled with data on the
+    // returned schedule.
+    google.protobuf.FieldMask field_mask = 3;
+
+    // Project owning the schedule.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 4;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 5;
+}
+
+// Request to delete a schedule.
+message DeleteLlmEvaluationScheduleRequest {
+    // Resource name of the schedule to delete.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationSchedules/&lt;schedule_uuid&gt;</code>.
+    string name = 1;
+
+    // Project owning the schedule.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 2;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 3;
+}
+
+// endregion schedule messages
+
+// region report messages
+
+// An immutable persisted report artifact (release summaries, gate sign-offs,
+// exported evaluation snapshots).
+message LlmEvaluationReport {
+    // The unique resource name of the report. Read-only; populated by the server.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationReports/&lt;report_uuid&gt;</code>.
+    string name = 1;
+
+    // Required. Human-readable display name.
+    string display_name = 2;
+
+    // Free-form description.
+    string description = 3;
+
+    // Logical report type identifier (e.g. <code>"release-summary.v1"</code>).
+    string report_type = 4;
+
+    // MIME type of the payload
+    // (e.g. <code>"text/markdown"</code>, <code>"text/csv"</code>, <code>"application/pdf"</code>).
+    string mime_type = 5;
+
+    // Report payload. Omitted from List responses unless explicitly requested
+    // via field_mask.
+    bytes payload = 6;
+
+    // Source references (gate runs, experiments, filters) captured at creation time.
+    google.protobuf.Struct metadata = 7;
+
+    // Creation date and time. Read-only field.
+    google.protobuf.Timestamp created_at = 8;
+
+    // User id in form of a valid UUID.
+    string created_by = 9;
+
+    // Modification date and time. Read-only field.
+    google.protobuf.Timestamp modified_at = 10;
+
+    // User id in form of a valid UUID.
+    string modified_by = 11;
+
+    // Project owning the report.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 12;
+
+    // BCP-47 language-code scope.
+    string language_code = 13;
+}
+
+// Request to persist a generated report.
+message CreateLlmEvaluationReportRequest {
+    // Report payload (name / audit fields are server-populated).
+    LlmEvaluationReport llm_evaluation_report = 1;
+
+    // Project owning the report.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 2;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 3;
+}
+
+// Request to get a single report (incl. payload bytes).
+message GetLlmEvaluationReportRequest {
+    // Resource name of the report to fetch.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationReports/&lt;report_uuid&gt;</code>.
+    string name = 1;
+
+    // Optional. The mask to control which fields will be filled with data.
+    google.protobuf.FieldMask field_mask = 2;
+
+    // Project owning the report.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 3;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 4;
+}
+
+// Filter conditions for ListReports. All fields are optional; multiple fields
+// set at the same time are combined via logical AND.
+message LlmEvaluationReportFilter {
+    // Optional. Match only reports whose display name contains this substring
+    // (case-insensitive).
+    string display_name = 1;
+
+    // Optional. Match only reports of this logical type.
+    string report_type = 2;
+}
+
+// Request to list reports within a project.
+message ListLlmEvaluationReportsRequest {
+    // Project owning the reports.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 1;
+
+    // Optional. Page token for pagination. Retrieves a large result set in
+    // smaller, more manageable portions. The token encodes the current index
+    // and the page size.
+    //
+    // Valid page token strings:
+    // <ul>
+    //   <li><code>&quot;&quot;</code> (empty string) - Retrieves the first page.</li>
+    //   <li><code>&quot;current_index-0--page_size-20&quot;</code> - First page, page size 20.</li>
+    //   <li><code>&quot;current_index-1--page_size-20&quot;</code> - Second page, page size 20.</li>
+    // </ul>
+    // Index starts at 0.
+    string page_token = 2;
+
+    // Optional. The mask to control which fields will be filled with data.
+    // Payload bytes are omitted unless paths include
+    // <code>llm_evaluation_reports.payload</code>.
+    google.protobuf.FieldMask field_mask = 3;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 4;
+
+    // Optional. Filter conditions to narrow the returned reports.
+    LlmEvaluationReportFilter llm_evaluation_report_filter = 5;
+}
+
+// Response for ListReports.
+message ListLlmEvaluationReportsResponse {
+    // Reports matching the request (payload omitted unless requested via field_mask).
+    repeated LlmEvaluationReport llm_evaluation_reports = 1;
+
+    // Pagination token for the next page (empty if this is the last page).
+    string next_page_token = 2;
+}
+
+// Request to delete a report.
+message DeleteLlmEvaluationReportRequest {
+    // Resource name of the report to delete.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationReports/&lt;report_uuid&gt;</code>.
+    string name = 1;
+
+    // Project owning the report.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 2;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 3;
+}
+
+// endregion report messages
+
+// region a/b experiment domain messages
+
+// Lifecycle status of an A/B experiment.
+enum LlmEvaluationAbExperimentStatus {
+    // Default / unset.
+    LLM_EVALUATION_AB_EXPERIMENT_STATUS_UNSPECIFIED = 0;
+
+    // Defined but not yet started; no traffic is split.
+    LLM_EVALUATION_AB_EXPERIMENT_STATUS_DRAFT = 1;
+
+    // Started; live DetectIntent traffic is being split across the variants.
+    LLM_EVALUATION_AB_EXPERIMENT_STATUS_RUNNING = 2;
+
+    // Stopped; traffic split has ended. Sticky assignments and results are retained.
+    LLM_EVALUATION_AB_EXPERIMENT_STATUS_STOPPED = 3;
+
+    // Archived; read-only, hidden from the default list.
+    LLM_EVALUATION_AB_EXPERIMENT_STATUS_ARCHIVED = 4;
+}
+
+// Traffic-splitting configuration for an A/B experiment.
+message LlmEvaluationAbTrafficConfig {
+    // Fraction of eligible sessions (0.0-1.0) actually enrolled into the
+    // experiment; the remainder use the project default path. <code>1.0</code>
+    // enrolls every eligible session.
+    double enrollment_rate = 1;
+
+    // Optional. Salt mixed into the deterministic session-bucketing hash so that
+    // re-running the same experiment id re-randomizes the assignment.
+    string assignment_salt = 2;
+}
+
+// RAGFlow variant override for an A/B experiment running on a RAG-classifier
+// project (<code>IntentRagflowClassifier</code>). Where an IntentAgent variant
+// overrides the LLM via <code>ccai_service_names</code>, a RAG variant overrides
+// the project's chat-assistant LLM CcaiService and the retrieval parameters used
+// when answering the assigned sessions. Override-or-inherit semantics apply per
+// field: an empty / zero value means "inherit the project's base
+// IntentRagflowClassifier config for this field".
+message RagVariantConfig {
+    // CcaiService name whose LLM connection details back the chat-assistant LLM
+    // for sessions assigned to this variant (overrides the project's
+    // <code>chat_assistant_llm_ccai_service_name</code>). Empty = inherit.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/ccaiServices/&lt;ccai_service_uuid&gt;</code>.
+    string chat_assistant_llm_ccai_service_name = 1;
+
+    // Retrieval top_k: the maximum number of chunks retrieved per turn (overrides
+    // the project's <code>retrieval_max_retrieval_chunks</code>). 0 = inherit.
+    int32 top_k = 2;
+
+    // Retrieval similarity threshold in <code>[0.0, 1.0]</code>: chunks scoring
+    // below it are dropped (overrides the project's
+    // <code>chat_assistant_similarity_threshold</code>). 0.0 = inherit.
+    double similarity_threshold = 3;
+
+    // Vector-vs-keyword similarity weight in <code>[0.0, 1.0]</code> (overrides
+    // the project's <code>retrieval_vector_similarity_weight</code>, surfaced to
+    // RAGFlow as the chat assistant's keywords-similarity weight). 0.0 = inherit.
+    double vector_similarity_weight = 4;
+
+    // Optional. CcaiService name backing the rerank model for sessions assigned to
+    // this variant (overrides the project's
+    // <code>chat_assistant_rerank_ccai_service_name</code>). Empty = inherit (or
+    // no reranking when the project itself configures none).
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/ccaiServices/&lt;ccai_service_uuid&gt;</code>.
+    string rerank_model_ccai_service_name = 5;
+}
+
+// One routing variant of an A/B experiment. The variant overrides the model used
+// for the sessions assigned to it. A variant is one of two shapes depending on
+// the project's classifier:
+// <ul>
+//   <li><b>IntentAgent projects</b> — the variant overrides the LLM connection
+//       via <code>ccai_service_names</code> (+ optional <code>model_name</code> /
+//       <code>prompt_version</code>).</li>
+//   <li><b>RAG projects</b> (<code>IntentRagflowClassifier</code>) — the variant
+//       overrides the chat-assistant LLM CcaiService and retrieval parameters via
+//       <code>rag_variant_config</code>.</li>
+// </ul>
+// The two override shapes are mutually exclusive per variant; the server applies
+// whichever matches the project's classifier type.
+message LlmEvaluationAbVariant {
+    // Required. Stable slug identifying the variant within its experiment
+    // (e.g. "control", "qwen3-fp8"). Lower-case, used as the assignment key.
+    string variant_id = 1;
+
+    // Required. Human-readable display name.
+    string display_name = 2;
+
+    // CcaiService name(s) defining this variant's LLM connection (IntentAgent
+    // projects). Mutually exclusive with <code>rag_variant_config</code>.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/ccaiServices/&lt;ccai_service_uuid&gt;</code>.
+    repeated string ccai_service_names = 3;
+
+    // Traffic weight for this variant. Expressed as a percentage in the
+    // <code>[0.0, 100.0]</code> range; the variant weights of a started
+    // experiment must sum to <code>100.0</code>.
+    double traffic_weight = 4;
+
+    // Whether this variant is the control (baseline) arm.
+    bool is_control = 5;
+
+    // Optional. Concrete model identifier override (e.g. "Qwen/Qwen3-27b-fp8").
+    string model_name = 6;
+
+    // Optional. Logical prompt version recorded for this variant.
+    string prompt_version = 7;
+
+    // Optional. Free-form target descriptor (the serialized CcaiServiceList /
+    // routing override applied for sessions assigned to this variant).
+    google.protobuf.Struct config = 8;
+
+    // Optional. RAGFlow override for a RAG-classifier project: the chat-assistant
+    // LLM CcaiService + retrieval parameters applied to sessions assigned to this
+    // variant. Used instead of <code>ccai_service_names</code> when the project's
+    // classifier is <code>IntentRagflowClassifier</code>; empty / zero fields
+    // inside it inherit the project's base config.
+    RagVariantConfig rag_variant_config = 9;
+}
+
+// An A/B experiment: a set of routing variants split over live DetectIntent
+// traffic for a (project, language_code) scope.
+message LlmEvaluationAbExperiment {
+    // The unique resource name of the A/B experiment. Read-only; populated by the server.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationAbExperiments/&lt;experiment_uuid&gt;</code>.
+    string name = 1;
+
+    // Required. Human-readable display name (unique within the (project, language_code) tuple).
+    string display_name = 2;
+
+    // Free-form description.
+    string description = 3;
+
+    // Lifecycle status. Read-only; transitioned via Start / Stop RPCs.
+    LlmEvaluationAbExperimentStatus status = 4;
+
+    // The routing variants of this experiment.
+    repeated LlmEvaluationAbVariant variants = 5;
+
+    // Traffic-splitting configuration (enrollment rate, assignment salt).
+    LlmEvaluationAbTrafficConfig traffic_config = 6;
+
+    // Wall-clock time the experiment was started (set by Start). Read-only.
+    google.protobuf.Timestamp started_at = 7;
+
+    // Wall-clock time the experiment was stopped (set by Stop). Read-only.
+    google.protobuf.Timestamp stopped_at = 8;
+
+    // Creation date and time. Read-only field.
+    google.protobuf.Timestamp created_at = 9;
+
+    // User id in form of a valid UUID.
+    string created_by = 10;
+
+    // Modification date and time. Read-only field.
+    google.protobuf.Timestamp modified_at = 11;
+
+    // User id in form of a valid UUID.
+    string modified_by = 12;
+
+    // Project owning the experiment.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 13;
+
+    // BCP-47 language-code scope.
+    string language_code = 14;
+
+    // Optional. Resource name of the rollout decision that was applied to this
+    // experiment (set once an operator explicitly applies a variant via
+    // <code>LlmEvaluationApplyAbRollout</code>; empty while no rollout has been
+    // applied). Lets a results view link straight to the applied audit record.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationAbRolloutDecisions/&lt;decision_uuid&gt;</code>.
+    string llm_evaluation_ab_rollout_decision_name = 15;
+}
+
+// Per-variant rollup returned by GetAbExperimentResults. Stateless / computed.
+message LlmEvaluationAbVariantResult {
+    // Variant slug these results belong to.
+    string variant_id = 1;
+
+    // Number of distinct sessions assigned to this variant in scope.
+    int64 session_count = 2;
+
+    // Aggregated LLM telemetry over this variant's sessions, as a JSON-encoded
+    // <code>ondewo.nlu.LlmTelemetryReport</code> (see <code>session.proto</code>).
+    // Carried as a Struct rather than the typed message because
+    // <code>session.proto</code> already imports this file (for
+    // <code>LlmEvaluationFeedback</code> on <code>LlmTelemetry</code>), so a typed
+    // import back would form an illegal proto import cycle; the report is produced
+    // by the same server-side aggregator that fills the typed
+    // <code>LlmTelemetryReport</code> on the statistics RPCs.
+    google.protobuf.Struct telemetry = 3;
+
+    // Optional. Derived comparison metrics (e.g. token / latency / error / cost
+    // deltas versus the control variant), keyed by metric name.
+    google.protobuf.Struct derived_metrics = 4;
+}
+
+// endregion a/b experiment domain messages
+
+// region a/b experiment RPC messages
+
+// Request to create a new A/B experiment.
+message CreateLlmEvaluationAbExperimentRequest {
+    // A/B experiment payload (name / status / audit fields are server-populated).
+    LlmEvaluationAbExperiment llm_evaluation_ab_experiment = 1;
+
+    // Project owning the experiment.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 2;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 3;
+}
+
+// Request to get a single A/B experiment.
+message GetLlmEvaluationAbExperimentRequest {
+    // Resource name of the experiment to fetch.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationAbExperiments/&lt;experiment_uuid&gt;</code>.
+    string name = 1;
+
+    // Optional. The mask to control which fields will be filled with data.
+    google.protobuf.FieldMask field_mask = 2;
+
+    // Project owning the experiment.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 3;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 4;
+}
+
+// Filter conditions for ListAbExperiments. All fields are optional; multiple
+// fields set at the same time are combined via logical AND.
+message LlmEvaluationAbExperimentFilter {
+    // Optional. Match only experiments whose display name contains this substring
+    // (case-insensitive).
+    string display_name = 1;
+
+    // Optional. Match only experiments with this status.
+    LlmEvaluationAbExperimentStatus status = 2;
+}
+
+// Request to list A/B experiments within a project.
+message ListLlmEvaluationAbExperimentsRequest {
+    // Project owning the experiments.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 1;
+
+    // Optional. Page token for pagination. Retrieves a large result set in
+    // smaller, more manageable portions. The token encodes the current index
+    // and the page size.
+    //
+    // Valid page token strings:
+    // <ul>
+    //   <li><code>&quot;&quot;</code> (empty string) - Retrieves the first page.</li>
+    //   <li><code>&quot;current_index-0--page_size-20&quot;</code> - First page, page size 20.</li>
+    //   <li><code>&quot;current_index-1--page_size-20&quot;</code> - Second page, page size 20.</li>
+    // </ul>
+    // Index starts at 0.
+    string page_token = 2;
+
+    // Optional. The mask to control which fields will be filled with data.
+    google.protobuf.FieldMask field_mask = 3;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 4;
+
+    // Optional. Filter conditions to narrow the returned experiments.
+    LlmEvaluationAbExperimentFilter llm_evaluation_ab_experiment_filter = 5;
+}
+
+// Response for ListAbExperiments.
+message ListLlmEvaluationAbExperimentsResponse {
+    // A/B experiments matching the request.
+    repeated LlmEvaluationAbExperiment llm_evaluation_ab_experiments = 1;
+
+    // Pagination token for the next page (empty if this is the last page).
+    string next_page_token = 2;
+}
+
+// Request to update an existing A/B experiment.
+message UpdateLlmEvaluationAbExperimentRequest {
+    // Experiment payload (only fields covered by <code>update_mask</code> are applied).
+    LlmEvaluationAbExperiment llm_evaluation_ab_experiment = 1;
+
+    // Mask of fields to update on the experiment record.
+    google.protobuf.FieldMask update_mask = 2;
+
+    // Optional. The mask to control which fields will be filled with data on the
+    // returned experiment.
+    google.protobuf.FieldMask field_mask = 3;
+
+    // Project owning the experiment.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 4;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 5;
+}
+
+// Request to delete an A/B experiment and all owned sticky-assignment rows.
+message DeleteLlmEvaluationAbExperimentRequest {
+    // Resource name of the experiment to delete.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationAbExperiments/&lt;experiment_uuid&gt;</code>.
+    string name = 1;
+
+    // Project owning the experiment.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 2;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 3;
+}
+
+// Request to start an A/B experiment (validates weights, sets RUNNING).
+message StartLlmEvaluationAbExperimentRequest {
+    // Resource name of the experiment to start.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationAbExperiments/&lt;experiment_uuid&gt;</code>.
+    string name = 1;
+
+    // Project owning the experiment.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 2;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 3;
+}
+
+// Request to stop a running A/B experiment (sets STOPPED).
+message StopLlmEvaluationAbExperimentRequest {
+    // Resource name of the experiment to stop.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationAbExperiments/&lt;experiment_uuid&gt;</code>.
+    string name = 1;
+
+    // Project owning the experiment.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 2;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 3;
+}
+
+// Request to compute per-variant telemetry rollups for an A/B experiment.
+message GetLlmEvaluationAbExperimentResultsRequest {
+    // Resource name of the experiment whose results to compute.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationAbExperiments/&lt;experiment_uuid&gt;</code>.
+    string name = 1;
+
+    // Project owning the experiment.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 2;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 3;
+}
+
+// Response for GetAbExperimentResults: one rollup per variant.
+message GetLlmEvaluationAbExperimentResultsResponse {
+    // Resource name of the experiment these results belong to.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationAbExperiments/&lt;experiment_uuid&gt;</code>.
+    string llm_evaluation_ab_experiment_name = 1;
+
+    // Per-variant telemetry rollups (one entry per variant).
+    repeated LlmEvaluationAbVariantResult variant_results = 2;
+}
+
+// endregion a/b experiment RPC messages
+
+// region a/b rollout domain messages
+
+// The metric an A/B rollout optimizes when comparing each variant against the
+// control. Each value maps to a quantity already produced by the per-variant
+// results rollup (see GetAbExperimentResults). Higher-is-better vs.
+// lower-is-better is implied by the metric (e.g. PASS_RATE / CRITERION_SCORE /
+// SAFETY_SCORE are higher-is-better; ERROR_RATE / MEAN_LATENCY are
+// lower-is-better) and applied server-side when picking the winner.
+enum LlmEvaluationAbOptimizeMetric {
+    // Default / unset.
+    LLM_EVALUATION_AB_OPTIMIZE_METRIC_UNSPECIFIED = 0;
+
+    // Fraction of sessions that passed (1 - error_rate). Higher is better.
+    LLM_EVALUATION_AB_OPTIMIZE_METRIC_PASS_RATE = 1;
+
+    // Fraction of sessions that errored. Lower is better.
+    LLM_EVALUATION_AB_OPTIMIZE_METRIC_ERROR_RATE = 2;
+
+    // Mean first-token / response latency in seconds. Lower is better.
+    LLM_EVALUATION_AB_OPTIMIZE_METRIC_MEAN_LATENCY = 3;
+
+    // Mean offline-criterion score in <code>[0.0, 1.0]</code>. Higher is better.
+    LLM_EVALUATION_AB_OPTIMIZE_METRIC_CRITERION_SCORE = 4;
+
+    // Mean native-safety score in <code>[0.0, 1.0]</code>. Higher is better.
+    LLM_EVALUATION_AB_OPTIMIZE_METRIC_SAFETY_SCORE = 5;
+}
+
+// A computed, read-only rollout recommendation for an A/B experiment: which
+// variant currently wins against the control on the chosen optimize metric,
+// under the requested statistical guard-rails. Stateless — recomputed on demand
+// by <code>LlmEvaluationGetAbRolloutRecommendation</code> from the per-variant
+// results rollup; nothing is persisted and no traffic / config changes. The
+// operator decides whether to apply it via <code>LlmEvaluationApplyAbRollout</code>.
+message LlmEvaluationAbRolloutRecommendation {
+    // The metric the recommendation was computed against (echoed from the request).
+    LlmEvaluationAbOptimizeMetric optimize_metric = 1;
+
+    // Variant slug that currently wins against the control on this metric, once
+    // the guard-rails (significance, effect size, minimum sessions) are met.
+    // Empty while <code>needs_more_data</code> is true or no variant beats the
+    // control.
+    string winner_variant_id = 2;
+
+    // Variant slug of the control (baseline) arm the winner was compared against.
+    string control_variant_id = 3;
+
+    // Two-sided p-value of the winner-vs-control test on the optimize metric.
+    double p_value = 4;
+
+    // Observed effect size between winner and control (absolute risk difference
+    // for rate metrics, standardized / raw mean difference for continuous metrics).
+    double effect_size = 5;
+
+    // Whether the result is statistically significant at the requested confidence
+    // level AND clears the requested minimum effect size.
+    bool is_significant = 6;
+
+    // Number of sessions observed per variant in scope, keyed by variant slug.
+    // Used to surface the guard-rail check against the requested minimum.
+    map<string, int64> sessions_per_variant = 7;
+
+    // True when at least one arm has not yet reached the requested minimum number
+    // of sessions, so no winner can be called yet (collect more traffic).
+    bool needs_more_data = 8;
+
+    // Human-readable rationale for the recommendation (e.g. the winner and its
+    // margin, or "needs N more sessions on variant X", or "no variant beats
+    // control").
+    string reason = 9;
+}
+
+// The persisted audit record of an A/B rollout that an operator explicitly
+// applied: it captures which variant's config was promoted to the project's
+// classifier default, on which metric, and the statistics at the moment of
+// application. Written + returned by <code>LlmEvaluationApplyAbRollout</code>;
+// read back via <code>LlmEvaluationGetAbRolloutDecision</code> /
+// <code>LlmEvaluationListAbRolloutDecisions</code>. There is no auto-rollout —
+// every decision row corresponds to an explicit operator action.
+message LlmEvaluationAbRolloutDecision {
+    // The unique resource name of the rollout decision. Read-only; populated by the server.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationAbRolloutDecisions/&lt;decision_uuid&gt;</code>.
+    string name = 1;
+
+    // Resource name of the A/B experiment this decision was applied to.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationAbExperiments/&lt;experiment_uuid&gt;</code>.
+    string llm_evaluation_ab_experiment_name = 2;
+
+    // Variant slug whose config was promoted to the project classifier default.
+    string applied_variant_id = 3;
+
+    // The metric the rollout was decided on (recorded for the audit trail).
+    LlmEvaluationAbOptimizeMetric optimize_metric = 4;
+
+    // Two-sided p-value of the applied-variant-vs-control test at application time.
+    double p_value = 5;
+
+    // Observed effect size (applied variant vs. control) at application time.
+    double effect_size = 6;
+
+    // Wall-clock time the rollout was applied. Read-only.
+    google.protobuf.Timestamp applied_at = 7;
+
+    // User id (in form of a valid UUID) of the operator who applied the rollout.
+    string applied_by = 8;
+
+    // Creation date and time. Read-only field.
+    google.protobuf.Timestamp created_at = 9;
+
+    // Modification date and time. Read-only field.
+    google.protobuf.Timestamp modified_at = 10;
+
+    // User id in form of a valid UUID.
+    string created_by = 11;
+
+    // User id in form of a valid UUID.
+    string modified_by = 12;
+
+    // Project owning the decision.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 13;
+
+    // BCP-47 language-code scope.
+    string language_code = 14;
+}
+
+// endregion a/b rollout domain messages
+
+// region a/b rollout RPC messages
+
+// Request to compute a rollout recommendation for an A/B experiment. Read-only /
+// stateless — computes the winner-vs-control statistics on demand under the
+// supplied guard-rails and returns a LlmEvaluationAbRolloutRecommendation
+// without mutating anything.
+message GetLlmEvaluationAbRolloutRecommendationRequest {
+    // Resource name of the experiment to evaluate.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationAbExperiments/&lt;experiment_uuid&gt;</code>.
+    string name = 1;
+
+    // Required. The metric to optimize when picking the winner.
+    LlmEvaluationAbOptimizeMetric optimize_metric = 2;
+
+    // Optional. Confidence level for the significance test in <code>(0.0, 1.0)</code>
+    // (e.g. <code>0.95</code> for 95%). Unset / 0 defaults to <code>0.95</code>.
+    double confidence_level = 3;
+
+    // Optional. Minimum number of sessions required per variant before a winner
+    // may be called; below it the recommendation reports
+    // <code>needs_more_data</code>. Unset / 0 applies the server default.
+    int32 min_sessions_per_variant = 4;
+
+    // Optional. Minimum absolute effect size required to call a winner; guards
+    // against statistically-significant-but-trivial differences. Unset / 0 applies
+    // the server default.
+    double min_effect_size = 5;
+
+    // Project owning the experiment.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 6;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 7;
+}
+
+// Request to apply an A/B rollout: promotes the chosen variant's config to the
+// project's classifier default, stops the experiment and writes the audit
+// decision. Idempotent — re-applying the same already-applied experiment returns
+// the existing decision rather than promoting twice.
+message ApplyLlmEvaluationAbRolloutRequest {
+    // Resource name of the experiment to roll out.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationAbExperiments/&lt;experiment_uuid&gt;</code>.
+    string name = 1;
+
+    // Required. Variant slug whose config to promote to the project classifier
+    // default. The operator's explicit choice; the server applies exactly this
+    // variant.
+    string variant_id = 2;
+
+    // The metric the decision was made on, recorded on the audit decision.
+    LlmEvaluationAbOptimizeMetric optimize_metric = 3;
+
+    // Project owning the experiment.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 4;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 5;
+}
+
+// Request to get a single A/B rollout decision (the applied audit record) for an
+// experiment.
+message GetLlmEvaluationAbRolloutDecisionRequest {
+    // Resource name of the rollout decision to fetch.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationAbRolloutDecisions/&lt;decision_uuid&gt;</code>.
+    string name = 1;
+
+    // Optional. The mask to control which fields will be filled with data.
+    google.protobuf.FieldMask field_mask = 2;
+
+    // Project owning the decision.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 3;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 4;
+}
+
+// Filter conditions for ListAbRolloutDecisions. All fields are optional;
+// multiple fields set at the same time are combined via logical AND.
+message LlmEvaluationAbRolloutDecisionFilter {
+    // Optional. Match only decisions applied to this A/B experiment (resource name).
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationAbExperiments/&lt;experiment_uuid&gt;</code>.
+    string llm_evaluation_ab_experiment_name = 1;
+
+    // Optional. Match only decisions applied by this user id (UUID).
+    string applied_by = 2;
+}
+
+// Request to list A/B rollout decisions within a project, optionally narrowed by
+// filter (typically by experiment).
+message ListLlmEvaluationAbRolloutDecisionsRequest {
+    // Project owning the decisions.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 1;
+
+    // Optional. Page token for pagination. Retrieves a large result set in
+    // smaller, more manageable portions. The token encodes the current index
+    // and the page size.
+    //
+    // Valid page token strings:
+    // <ul>
+    //   <li><code>&quot;&quot;</code> (empty string) - Retrieves the first page.</li>
+    //   <li><code>&quot;current_index-0--page_size-20&quot;</code> - First page, page size 20.</li>
+    //   <li><code>&quot;current_index-1--page_size-20&quot;</code> - Second page, page size 20.</li>
+    // </ul>
+    // Index starts at 0.
+    string page_token = 2;
+
+    // Optional. The mask to control which fields will be filled with data.
+    google.protobuf.FieldMask field_mask = 3;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 4;
+
+    // Optional. Filter conditions to narrow the returned decisions.
+    LlmEvaluationAbRolloutDecisionFilter llm_evaluation_ab_rollout_decision_filter = 5;
+}
+
+// Response for ListAbRolloutDecisions.
+message ListLlmEvaluationAbRolloutDecisionsResponse {
+    // Rollout decisions matching the request.
+    repeated LlmEvaluationAbRolloutDecision llm_evaluation_ab_rollout_decisions = 1;
+
+    // Pagination token for the next page (empty if this is the last page).
+    string next_page_token = 2;
+}
+
+// endregion a/b rollout RPC messages
+
+// region online evaluation domain messages
+
+// Optional filter narrowing which already-persisted live session steps an
+// online-evaluation config samples. All fields are optional; multiple fields set
+// at the same time are combined via logical AND.
+message LlmEvaluationOnlineSessionFilter {
+    // Optional. Match only session steps whose session carries every one of these
+    // labels (e.g. <code>"AI_FLAGGED"</code>).
+    repeated string labels = 1;
+
+    // Optional. Restrict sampling to these BCP-47 language codes. Empty = the
+    // owning config's language_code only.
+    repeated string language_codes = 2;
+
+    // Optional. Restrict sampling to these integration platforms.
+    repeated string platforms = 3;
+
+    // Optional. When true, only sample steps that have recorded LLM telemetry
+    // (a <code>session_step_llm_telemetry</code> row), so reference-free judges
+    // requiring the trace can run.
+    bool require_telemetry = 4;
+}
+
+// An online-evaluation config: a per-(project, language_code) definition that a
+// swarm-safe background worker uses to sample already-persisted live session
+// steps, score the recorded answer with a reference-free evaluator set, and
+// enqueue failing steps into the annotation queue. Mirrors the LlmEvaluationSchedule
+// scoping / audit / enabled-flag shape.
+message LlmEvaluationOnlineConfig {
+    // The unique resource name of the online config. Read-only; populated by the server.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationOnlineConfigs/&lt;config_uuid&gt;</code>.
+    string name = 1;
+
+    // Required. Human-readable display name (unique within the (project, language_code) tuple).
+    string display_name = 2;
+
+    // Free-form description.
+    string description = 3;
+
+    // Reference-free evaluator names the worker runs on each sampled step (e.g.
+    // <code>"answer_relevancy"</code>, <code>"faithfulness"</code>, <code>"toxicity"</code>).
+    // AIM restricts the picker to reference-free evaluators via LlmEvaluationListEvaluators.
+    repeated string evaluator_names = 4;
+
+    // Fraction of candidate steps to score, in the range 0.0-1.0. Applied
+    // deterministically per step.
+    double sample_rate = 5;
+
+    // Whether the worker samples for this config. Disabled configs keep their configuration.
+    bool enabled = 6;
+
+    // Optional. Default promotion target dataset for steps enqueued by this config.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationDatasets/&lt;dataset_uuid&gt;</code>.
+    string target_dataset_name = 7;
+
+    // Score cutoff (0.0-1.0). Scored steps whose aggregate score is below this
+    // threshold are enqueued into the annotation queue. Defaults to 0.5.
+    double fail_threshold = 8;
+
+    // Settle window in seconds: the worker only considers steps older than this,
+    // so per-step telemetry has landed before scoring. Defaults to 30.
+    int32 settle_seconds = 9;
+
+    // When true, only steps with recorded LLM telemetry are sampled (shorthand for
+    // the session-filter flag of the same name).
+    bool require_telemetry = 10;
+
+    // Optional. Filter narrowing which session steps are sampled.
+    LlmEvaluationOnlineSessionFilter llm_evaluation_online_session_filter = 11;
+
+    // Wall-clock time of the worker's most recent evaluation pass for this config.
+    // Read-only; set by the worker.
+    google.protobuf.Timestamp last_evaluated_at = 12;
+
+    // Running count of session steps this config has scored. Read-only; set by the worker.
+    int64 n_sessions_evaluated = 13;
+
+    // Creation date and time. Read-only field.
+    google.protobuf.Timestamp created_at = 14;
+
+    // User id in form of a valid UUID.
+    string created_by = 15;
+
+    // Modification date and time. Read-only field.
+    google.protobuf.Timestamp modified_at = 16;
+
+    // User id in form of a valid UUID.
+    string modified_by = 17;
+
+    // Project owning the config.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 18;
+
+    // BCP-47 language-code scope.
+    string language_code = 19;
+}
+
+// Request to create a new online-evaluation config.
+message CreateLlmEvaluationOnlineConfigRequest {
+    // Config payload (name / audit / last-evaluated fields are server-populated).
+    LlmEvaluationOnlineConfig llm_evaluation_online_config = 1;
+
+    // Project owning the config.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 2;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 3;
+}
+
+// Request to get a single online-evaluation config.
+message GetLlmEvaluationOnlineConfigRequest {
+    // Resource name of the config to fetch.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationOnlineConfigs/&lt;config_uuid&gt;</code>.
+    string name = 1;
+
+    // Optional. The mask to control which fields will be filled with data.
+    google.protobuf.FieldMask field_mask = 2;
+
+    // Project owning the config.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 3;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 4;
+}
+
+// Filter conditions for ListOnlineConfigs. All fields are optional; multiple
+// fields set at the same time are combined via logical AND.
+message LlmEvaluationOnlineConfigFilter {
+    // Optional. Match only configs whose display name contains this substring
+    // (case-insensitive).
+    string display_name = 1;
+
+    // Optional. When true, match only enabled configs.
+    bool enabled_only = 2;
+}
+
+// Request to list online-evaluation configs within a project.
+message ListLlmEvaluationOnlineConfigsRequest {
+    // Project owning the configs.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 1;
+
+    // Optional. Page token for pagination. Retrieves a large result set in
+    // smaller, more manageable portions. The token encodes the current index
+    // and the page size.
+    //
+    // Valid page token strings:
+    // <ul>
+    //   <li><code>&quot;&quot;</code> (empty string) - Retrieves the first page.</li>
+    //   <li><code>&quot;current_index-0--page_size-20&quot;</code> - First page, page size 20.</li>
+    //   <li><code>&quot;current_index-1--page_size-20&quot;</code> - Second page, page size 20.</li>
+    // </ul>
+    // Index starts at 0.
+    string page_token = 2;
+
+    // Optional. The mask to control which fields will be filled with data.
+    google.protobuf.FieldMask field_mask = 3;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 4;
+
+    // Optional. Filter conditions to narrow the returned configs.
+    LlmEvaluationOnlineConfigFilter llm_evaluation_online_config_filter = 5;
+}
+
+// Response for ListOnlineConfigs.
+message ListLlmEvaluationOnlineConfigsResponse {
+    // Configs matching the request.
+    repeated LlmEvaluationOnlineConfig llm_evaluation_online_configs = 1;
+
+    // Pagination token for the next page (empty if this is the last page).
+    string next_page_token = 2;
+}
+
+// Request to update an existing online-evaluation config.
+message UpdateLlmEvaluationOnlineConfigRequest {
+    // Config payload (only fields covered by <code>update_mask</code> are applied).
+    LlmEvaluationOnlineConfig llm_evaluation_online_config = 1;
+
+    // Mask of fields to update on the config record.
+    google.protobuf.FieldMask update_mask = 2;
+
+    // Optional. The mask to control which fields will be filled with data on the
+    // returned config.
+    google.protobuf.FieldMask field_mask = 3;
+
+    // Project owning the config.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 4;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 5;
+}
+
+// Request to delete an online-evaluation config.
+message DeleteLlmEvaluationOnlineConfigRequest {
+    // Resource name of the config to delete.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationOnlineConfigs/&lt;config_uuid&gt;</code>.
+    string name = 1;
+
+    // Project owning the config.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 2;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 3;
+}
+
+// endregion online evaluation domain messages
+
+// region online result domain messages
+
+// A self-contained online-evaluation result: one row per scored session step.
+// Per-criterion feedbacks are stored as an embedded repeated LlmEvaluationFeedback
+// list (exactly like LlmEvaluationTurnResult.feedbacks — NOT persisted into the
+// experiment-scoped llm_feedback table). Produced by the online-evaluation worker;
+// read-only over the API.
+message LlmEvaluationOnlineResult {
+    // The unique resource name of the result. Read-only; populated by the server.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationOnlineResults/&lt;result_uuid&gt;</code>.
+    string name = 1;
+
+    // Resource name of the online config that produced this result.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationOnlineConfigs/&lt;config_uuid&gt;</code>.
+    string llm_evaluation_online_config_name = 2;
+
+    // Resource name of the scored session.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code>.
+    string session_name = 3;
+
+    // Resource name of the scored session step.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/sessionSteps/&lt;step_uuid&gt;</code>.
+    string session_step_name = 4;
+
+    // Per-criterion feedback records, one per configured evaluator (embedded list;
+    // the same LlmEvaluationFeedback message reused as the per-criterion result
+    // element).
+    repeated LlmEvaluationFeedback llm_evaluation_feedbacks = 5;
+
+    // Whether the step passed every criterion (aggregate_score >= the config's
+    // fail_threshold and no criterion failed).
+    bool passed = 6;
+
+    // Aggregate roll-up score across the criteria (0.0-1.0).
+    double aggregate_score = 7;
+
+    // Wall-clock time the worker scored this step. Read-only.
+    google.protobuf.Timestamp evaluated_at = 8;
+
+    // Creation date and time. Read-only field.
+    google.protobuf.Timestamp created_at = 9;
+
+    // User id in form of a valid UUID (the worker / system identity).
+    string created_by = 10;
+
+    // Project owning the result.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 11;
+
+    // BCP-47 language-code scope.
+    string language_code = 12;
+}
+
+// Request to get a single online-evaluation result.
+message GetLlmEvaluationOnlineResultRequest {
+    // Resource name of the result to fetch.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationOnlineResults/&lt;result_uuid&gt;</code>.
+    string name = 1;
+
+    // Optional. The mask to control which fields will be filled with data.
+    google.protobuf.FieldMask field_mask = 2;
+
+    // Project owning the result.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 3;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 4;
+}
+
+// Filter conditions for ListOnlineResults. All fields are optional; multiple
+// fields set at the same time are combined via logical AND.
+message LlmEvaluationOnlineResultFilter {
+    // Optional. Match only results produced by this online config.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationOnlineConfigs/&lt;config_uuid&gt;</code>.
+    string llm_evaluation_online_config_name = 1;
+
+    // Optional. Match only results with this pass-state.
+    bool passed = 2;
+
+    // Optional. When true, the <code>passed</code> field is applied as a filter;
+    // when false the <code>passed</code> field is ignored (so unset means "any").
+    bool filter_by_passed = 3;
+}
+
+// Request to list online-evaluation results within a project.
+message ListLlmEvaluationOnlineResultsRequest {
+    // Project owning the results.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 1;
+
+    // Optional. Page token for pagination. Retrieves a large result set in
+    // smaller, more manageable portions. The token encodes the current index
+    // and the page size.
+    //
+    // Valid page token strings:
+    // <ul>
+    //   <li><code>&quot;&quot;</code> (empty string) - Retrieves the first page.</li>
+    //   <li><code>&quot;current_index-0--page_size-20&quot;</code> - First page, page size 20.</li>
+    //   <li><code>&quot;current_index-1--page_size-20&quot;</code> - Second page, page size 20.</li>
+    // </ul>
+    // Index starts at 0.
+    string page_token = 2;
+
+    // Optional. The mask to control which fields will be filled with data.
+    google.protobuf.FieldMask field_mask = 3;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 4;
+
+    // Optional. Filter conditions to narrow the returned results.
+    LlmEvaluationOnlineResultFilter llm_evaluation_online_result_filter = 5;
+}
+
+// Response for ListOnlineResults.
+message ListLlmEvaluationOnlineResultsResponse {
+    // Results matching the request.
+    repeated LlmEvaluationOnlineResult llm_evaluation_online_results = 1;
+
+    // Pagination token for the next page (empty if this is the last page).
+    string next_page_token = 2;
+}
+
+// endregion online result domain messages
+
+// region annotation queue domain messages
+
+// Lifecycle status of an annotation-queue item.
+enum LlmEvaluationAnnotationStatus {
+    // Default / unset.
+    LLM_EVALUATION_ANNOTATION_STATUS_UNSPECIFIED = 0;
+
+    // Enqueued, awaiting human review.
+    LLM_EVALUATION_ANNOTATION_STATUS_PENDING = 1;
+
+    // Reviewed by a human (verdict / reason recorded), not yet promoted or dismissed.
+    LLM_EVALUATION_ANNOTATION_STATUS_REVIEWED = 2;
+
+    // Promoted into a regression dataset (promoted_dataset_name stamped).
+    LLM_EVALUATION_ANNOTATION_STATUS_PROMOTED = 3;
+
+    // Dismissed (not a genuine failure; will not be promoted).
+    LLM_EVALUATION_ANNOTATION_STATUS_DISMISSED = 4;
+}
+
+// A human-review annotation-queue item: one per failing session step enqueued by
+// the online-evaluation worker. The reviewer annotates (status / reason) and may
+// promote the offending session into a regression dataset.
+message LlmEvaluationAnnotationQueueItem {
+    // The unique resource name of the queue item. Read-only; populated by the server.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationAnnotationQueueItems/&lt;item_uuid&gt;</code>.
+    string name = 1;
+
+    // Resource name of the offending session.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code>.
+    string session_name = 2;
+
+    // Resource name of the offending session step.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/sessionSteps/&lt;step_uuid&gt;</code>.
+    string session_step_name = 3;
+
+    // Resource name of the online result that triggered the enqueue.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationOnlineResults/&lt;result_uuid&gt;</code>.
+    string llm_evaluation_online_result_name = 4;
+
+    // Current lifecycle status.
+    LlmEvaluationAnnotationStatus status = 5;
+
+    // Optional. User id (UUID) the item is assigned to for review.
+    string assigned_to = 6;
+
+    // Human-readable reason / rationale (e.g. <code>"faithfulness=0.2 &lt; 0.5"</code>).
+    string reason = 7;
+
+    // Resource name of the dataset the item was promoted into. Set when the item
+    // reaches PROMOTED status.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationDatasets/&lt;dataset_uuid&gt;</code>.
+    string llm_evaluation_dataset_name = 8;
+
+    // Creation date and time. Read-only field.
+    google.protobuf.Timestamp created_at = 9;
+
+    // User id in form of a valid UUID.
+    string created_by = 10;
+
+    // Modification date and time. Read-only field.
+    google.protobuf.Timestamp modified_at = 11;
+
+    // User id in form of a valid UUID.
+    string modified_by = 12;
+
+    // Project owning the item.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 13;
+
+    // BCP-47 language-code scope.
+    string language_code = 14;
+}
+
+// Request to get a single annotation-queue item.
+message GetLlmEvaluationAnnotationQueueItemRequest {
+    // Resource name of the item to fetch.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationAnnotationQueueItems/&lt;item_uuid&gt;</code>.
+    string name = 1;
+
+    // Optional. The mask to control which fields will be filled with data.
+    google.protobuf.FieldMask field_mask = 2;
+
+    // Project owning the item.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 3;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 4;
+}
+
+// Filter conditions for ListAnnotationQueueItems. All fields are optional;
+// multiple fields set at the same time are combined via logical AND.
+message LlmEvaluationAnnotationQueueItemFilter {
+    // Optional. Match only items with this status.
+    LlmEvaluationAnnotationStatus status = 1;
+
+    // Optional. Match only items assigned to this user id (UUID).
+    string assigned_to = 2;
+}
+
+// Request to list annotation-queue items within a project.
+message ListLlmEvaluationAnnotationQueueItemsRequest {
+    // Project owning the items.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 1;
+
+    // Optional. Page token for pagination. Retrieves a large result set in
+    // smaller, more manageable portions. The token encodes the current index
+    // and the page size.
+    //
+    // Valid page token strings:
+    // <ul>
+    //   <li><code>&quot;&quot;</code> (empty string) - Retrieves the first page.</li>
+    //   <li><code>&quot;current_index-0--page_size-20&quot;</code> - First page, page size 20.</li>
+    //   <li><code>&quot;current_index-1--page_size-20&quot;</code> - Second page, page size 20.</li>
+    // </ul>
+    // Index starts at 0.
+    string page_token = 2;
+
+    // Optional. The mask to control which fields will be filled with data.
+    google.protobuf.FieldMask field_mask = 3;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 4;
+
+    // Optional. Filter conditions to narrow the returned items.
+    LlmEvaluationAnnotationQueueItemFilter llm_evaluation_annotation_queue_item_filter = 5;
+}
+
+// Response for ListAnnotationQueueItems.
+message ListLlmEvaluationAnnotationQueueItemsResponse {
+    // Items matching the request.
+    repeated LlmEvaluationAnnotationQueueItem llm_evaluation_annotation_queue_items = 1;
+
+    // Pagination token for the next page (empty if this is the last page).
+    string next_page_token = 2;
+}
+
+// Request to update an annotation-queue item (status / assignee / reason transitions).
+message UpdateLlmEvaluationAnnotationQueueItemRequest {
+    // Item payload (only fields covered by <code>update_mask</code> are applied).
+    LlmEvaluationAnnotationQueueItem llm_evaluation_annotation_queue_item = 1;
+
+    // Mask of fields to update on the item record.
+    google.protobuf.FieldMask update_mask = 2;
+
+    // Optional. The mask to control which fields will be filled with data on the
+    // returned item.
+    google.protobuf.FieldMask field_mask = 3;
+
+    // Project owning the item.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 4;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 5;
+}
+
+// Request to promote an annotation-queue item into a regression dataset. Thin
+// server-side composition over LlmEvaluationCreateExamplesFromSession; the item
+// status is flipped to PROMOTED and the dataset name stamped on success.
+message PromoteLlmEvaluationAnnotationQueueItemRequest {
+    // Resource name of the item to promote.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationAnnotationQueueItems/&lt;item_uuid&gt;</code>.
+    string name = 1;
+
+    // Resource name of the dataset receiving the created example(s).
+    // Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationDatasets/&lt;dataset_uuid&gt;</code>.
+    string target_dataset_name = 2;
+
+    // How the item's session steps are turned into examples (reused mode enum).
+    LlmEvaluationExampleExtractionMode llm_evaluation_example_extraction_mode = 3;
+
+    // When true, tool calls recorded in the session's telemetry are captured as
+    // expected tool calls on the created examples.
+    bool include_tool_calls = 4;
+
+    // When true, retrieved chunks recorded by retriever spans are captured as
+    // frozen retrieval context on the created examples.
+    bool include_retrieval_context = 5;
+
+    // Project owning the item and the dataset.
+    // Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    string parent = 6;
+
+    // BCP-47 language-code scope (required).
+    string language_code = 7;
+}
+
+// Response for PromoteAnnotationQueueItem.
+message PromoteLlmEvaluationAnnotationQueueItemResponse {
+    // Example record(s) created in the target dataset.
+    repeated LlmEvaluationExample llm_evaluation_examples = 1;
+
+    // The promoted queue item (status flipped to PROMOTED, dataset name stamped).
+    LlmEvaluationAnnotationQueueItem llm_evaluation_annotation_queue_item = 2;
+}
+
+// endregion annotation queue domain messages

@@ -847,6 +847,19 @@ message LlmTelemetry {
 
     // Provider of the ccai service
     CcaiServiceProvider ccai_service_provider = 60;
+
+    // Native (regex / substring, no-LLM) safety assessment computed at telemetry
+    // build time over the call's input / output text. Distinct from the offline
+    // LLM-judge safety evaluators in <code>llm_evaluation.proto</code>: this is the
+    // live MONITORING signal on real DetectIntent traffic. Unset when safety
+    // scoring is disabled.
+    LlmSafetyAssessment llm_safety_assessment = 61;
+
+    // Typed view of the retrieved RAG chunks for this LLM call. Populated
+    // alongside the unstructured <code>outputs.retrieved_chunks</code> Struct
+    // (field 18, kept for back-compat); both carry the same chunk list. Unset for
+    // non-retrieval calls.
+    LlmRetrievalMetadata llm_retrieval_metadata = 62;
 }
 
 // Effort level for reasoning models (e.g. o1, o3). Controls the trade-off
@@ -867,6 +880,95 @@ enum ReasoningEffort {
 
     // High reasoning effort.
     REASONING_EFFORT_HIGH = 4;
+}
+
+// Where a safety finding was located in the LLM call.
+enum LlmSafetyLocation {
+    // Default / unset.
+    LLM_SAFETY_LOCATION_UNSPECIFIED = 0;
+
+    // The finding was matched in the model input (prompt / user turn).
+    LLM_SAFETY_LOCATION_INPUT = 1;
+
+    // The finding was matched in the model output (completion).
+    LLM_SAFETY_LOCATION_OUTPUT = 2;
+}
+
+// One concrete safety finding inside an LlmSafetyAssessment.
+message LlmSafetyFinding {
+    // Detector category that fired (e.g. <code>prompt_injection</code>,
+    // <code>jailbreak</code>, <code>pii</code>, <code>info_leak</code>).
+    string category = 1;
+
+    // Severity tag ("low" | "medium" | "high" | "critical").
+    string severity = 2;
+
+    // The pattern / detector rule that matched (may be a redacted excerpt).
+    string matched_pattern = 3;
+
+    // Whether the finding was located in the input or the output.
+    LlmSafetyLocation location = 4;
+}
+
+// Native safety assessment for one LLM call, computed at telemetry build time by
+// a dependency-free (regex / substring) assessor over the call's input / output
+// text. Additive, optional: absent when safety scoring is disabled. This is the
+// live MONITORING signal; the offline LLM-judge safety evaluators live in
+// <code>llm_evaluation.proto</code>.
+message LlmSafetyAssessment {
+    // Detector categories that fired across input and output
+    // (<code>prompt_injection</code> | <code>jailbreak</code> | <code>pii</code> |
+    // <code>info_leak</code>). Empty when nothing was flagged.
+    repeated string flagged_categories = 1;
+
+    // True when any PII pattern (email / phone / IBAN / credit-card / national-id)
+    // was detected in input or output.
+    bool has_pii = 2;
+
+    // True when a prompt-injection pattern was detected in the input.
+    bool has_injection_attempt = 3;
+
+    // True when a jailbreak / role-override pattern was detected in the input.
+    bool has_jailbreak_attempt = 4;
+
+    // Overall safety score in <code>[0.0, 1.0]</code> where <code>1.0</code> means
+    // fully safe (no findings) and lower values indicate higher risk.
+    double safety_score = 5;
+
+    // Per-finding detail records (category / severity / matched pattern / location).
+    repeated LlmSafetyFinding findings = 6;
+}
+
+// One retrieved RAG chunk surfaced during an LLM call. Mirrors the five-field
+// chunk already emitted into <code>outputs.retrieved_chunks</code> (Struct) plus
+// a typed <code>rank</code>.
+message LlmRetrievedChunk {
+    // Source document identifier the chunk was retrieved from.
+    string document_id = 1;
+
+    // Chunk identifier within the source document.
+    string chunk_id = 2;
+
+    // Retrieval similarity / relevance score assigned by the retriever.
+    double score = 3;
+
+    // Chunk text (already truncated to the emit-time character cap, ~2000 chars).
+    string text = 4;
+
+    // Source URI (document URL or document name) for click-through.
+    string source_uri = 5;
+
+    // Zero-based position of this chunk in the retrieval result order
+    // (RAGFlow reference order / LangChain document order).
+    int32 rank = 6;
+}
+
+// Typed view of the chunks retrieved for one LLM call. Populated alongside the
+// unstructured <code>outputs.retrieved_chunks</code> Struct (field 18 on
+// LlmTelemetry, kept for back-compat); both carry the same chunk list.
+message LlmRetrievalMetadata {
+    // The retrieved chunks in retrieval-result order.
+    repeated LlmRetrievedChunk chunks = 1;
 }
 
 // Latency aggregate (seconds) across the LLM calls in scope.
@@ -1170,6 +1272,40 @@ message LlmTelemetryReport {
 
     // Scope-wide summed tool-call duration in seconds.
     double tool_call_duration_seconds_total = 19;
+
+    // Native safety aggregate (counts / rates / mean score). Populated for
+    // *_LLM_SAFETY and *_LLM_TOTAL_STATISTICS reports.
+    LlmSafetyStats safety_stats = 20;
+}
+
+// Per-category native-safety aggregate across the LLM calls in scope.
+message LlmSafetyCategoryStat {
+    // Detector category (<code>prompt_injection</code> | <code>jailbreak</code> |
+    // <code>pii</code> | <code>info_leak</code>).
+    string category = 1;
+
+    // Number of calls flagged for this category in scope.
+    int64 count = 2;
+
+    // count / total_assessed.
+    double rate = 3;
+}
+
+// Native-safety breakdown aggregate across the LLM calls in scope. Computed from
+// the per-call LlmSafetyAssessment records.
+message LlmSafetyStats {
+    // Number of LLM calls that carried a safety assessment in scope.
+    int64 total_assessed = 1;
+
+    // Number of assessed calls with at least one flagged category.
+    int64 flagged_count = 2;
+
+    // Mean LlmSafetyAssessment.safety_score across assessed calls
+    // (<code>1.0</code> = fully safe).
+    double overall_safety_score = 3;
+
+    // Per-category counts and rates, descending by count.
+    repeated LlmSafetyCategoryStat category_stats = 4;
 }
 
 // Emitted on a streaming DetectIntent when an LLM invocation starts.
