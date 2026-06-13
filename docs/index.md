@@ -51,6 +51,8 @@
     - [GetPlatformMappingRequest](#ondewo.nlu.GetPlatformMappingRequest)
     - [GetSessionsStatisticsRequest](#ondewo.nlu.GetSessionsStatisticsRequest)
     - [GetSessionsStatisticsResponse](#ondewo.nlu.GetSessionsStatisticsResponse)
+    - [GetSessionsStatisticsTimeSeriesRequest](#ondewo.nlu.GetSessionsStatisticsTimeSeriesRequest)
+    - [GetSessionsStatisticsTimeSeriesResponse](#ondewo.nlu.GetSessionsStatisticsTimeSeriesResponse)
     - [ImportAgentRequest](#ondewo.nlu.ImportAgentRequest)
     - [ListAgentsOfUserResponse](#ondewo.nlu.ListAgentsOfUserResponse)
     - [ListAgentsRequest](#ondewo.nlu.ListAgentsRequest)
@@ -59,6 +61,7 @@
     - [ListProjectPermissionsResponse](#ondewo.nlu.ListProjectPermissionsResponse)
     - [ListUsersInProjectRequest](#ondewo.nlu.ListUsersInProjectRequest)
     - [ListUsersInProjectResponse](#ondewo.nlu.ListUsersInProjectResponse)
+    - [LlmTelemetryTimeSeriesBucket](#ondewo.nlu.LlmTelemetryTimeSeriesBucket)
     - [MigrateAgentRequest](#ondewo.nlu.MigrateAgentRequest)
     - [ModelStatus](#ondewo.nlu.ModelStatus)
     - [OptimizeRankingMatchRequest](#ondewo.nlu.OptimizeRankingMatchRequest)
@@ -327,43 +330,155 @@
     - [AddLlmEvaluationExampleRequest](#ondewo.nlu.AddLlmEvaluationExampleRequest)
     - [AddLlmEvaluationExamplesRequest](#ondewo.nlu.AddLlmEvaluationExamplesRequest)
     - [AddLlmEvaluationExamplesResponse](#ondewo.nlu.AddLlmEvaluationExamplesResponse)
+    - [ApplyLlmEvaluationAbRolloutRequest](#ondewo.nlu.ApplyLlmEvaluationAbRolloutRequest)
     - [CancelLlmEvaluationExperimentRequest](#ondewo.nlu.CancelLlmEvaluationExperimentRequest)
     - [CompareLlmEvaluationExperimentsRequest](#ondewo.nlu.CompareLlmEvaluationExperimentsRequest)
+    - [CreateLlmEvaluationAbExperimentRequest](#ondewo.nlu.CreateLlmEvaluationAbExperimentRequest)
     - [CreateLlmEvaluationDatasetRequest](#ondewo.nlu.CreateLlmEvaluationDatasetRequest)
+    - [CreateLlmEvaluationExamplesFromSessionRequest](#ondewo.nlu.CreateLlmEvaluationExamplesFromSessionRequest)
+    - [CreateLlmEvaluationExamplesFromSessionResponse](#ondewo.nlu.CreateLlmEvaluationExamplesFromSessionResponse)
+    - [CreateLlmEvaluationOnlineConfigRequest](#ondewo.nlu.CreateLlmEvaluationOnlineConfigRequest)
+    - [CreateLlmEvaluationReleaseGateRequest](#ondewo.nlu.CreateLlmEvaluationReleaseGateRequest)
+    - [CreateLlmEvaluationReportRequest](#ondewo.nlu.CreateLlmEvaluationReportRequest)
+    - [CreateLlmEvaluationScheduleRequest](#ondewo.nlu.CreateLlmEvaluationScheduleRequest)
+    - [CreateLlmEvaluationScorecardRequest](#ondewo.nlu.CreateLlmEvaluationScorecardRequest)
+    - [DeleteLlmEvaluationAbExperimentRequest](#ondewo.nlu.DeleteLlmEvaluationAbExperimentRequest)
     - [DeleteLlmEvaluationDatasetRequest](#ondewo.nlu.DeleteLlmEvaluationDatasetRequest)
     - [DeleteLlmEvaluationExampleRequest](#ondewo.nlu.DeleteLlmEvaluationExampleRequest)
     - [DeleteLlmEvaluationExperimentRequest](#ondewo.nlu.DeleteLlmEvaluationExperimentRequest)
     - [DeleteLlmEvaluationFeedbackRequest](#ondewo.nlu.DeleteLlmEvaluationFeedbackRequest)
+    - [DeleteLlmEvaluationOnlineConfigRequest](#ondewo.nlu.DeleteLlmEvaluationOnlineConfigRequest)
+    - [DeleteLlmEvaluationReleaseGateRequest](#ondewo.nlu.DeleteLlmEvaluationReleaseGateRequest)
+    - [DeleteLlmEvaluationReportRequest](#ondewo.nlu.DeleteLlmEvaluationReportRequest)
+    - [DeleteLlmEvaluationScheduleRequest](#ondewo.nlu.DeleteLlmEvaluationScheduleRequest)
+    - [DeleteLlmEvaluationScorecardRequest](#ondewo.nlu.DeleteLlmEvaluationScorecardRequest)
+    - [GetLlmEvaluationAbExperimentRequest](#ondewo.nlu.GetLlmEvaluationAbExperimentRequest)
+    - [GetLlmEvaluationAbExperimentResultsRequest](#ondewo.nlu.GetLlmEvaluationAbExperimentResultsRequest)
+    - [GetLlmEvaluationAbExperimentResultsResponse](#ondewo.nlu.GetLlmEvaluationAbExperimentResultsResponse)
+    - [GetLlmEvaluationAbRolloutDecisionRequest](#ondewo.nlu.GetLlmEvaluationAbRolloutDecisionRequest)
+    - [GetLlmEvaluationAbRolloutRecommendationRequest](#ondewo.nlu.GetLlmEvaluationAbRolloutRecommendationRequest)
+    - [GetLlmEvaluationAnnotationQueueItemRequest](#ondewo.nlu.GetLlmEvaluationAnnotationQueueItemRequest)
     - [GetLlmEvaluationDatasetRequest](#ondewo.nlu.GetLlmEvaluationDatasetRequest)
     - [GetLlmEvaluationExampleRequest](#ondewo.nlu.GetLlmEvaluationExampleRequest)
     - [GetLlmEvaluationExperimentRequest](#ondewo.nlu.GetLlmEvaluationExperimentRequest)
+    - [GetLlmEvaluationOnlineConfigRequest](#ondewo.nlu.GetLlmEvaluationOnlineConfigRequest)
+    - [GetLlmEvaluationOnlineResultRequest](#ondewo.nlu.GetLlmEvaluationOnlineResultRequest)
+    - [GetLlmEvaluationProjectSettingsRequest](#ondewo.nlu.GetLlmEvaluationProjectSettingsRequest)
+    - [GetLlmEvaluationReleaseGateRequest](#ondewo.nlu.GetLlmEvaluationReleaseGateRequest)
+    - [GetLlmEvaluationReleaseGateRunRequest](#ondewo.nlu.GetLlmEvaluationReleaseGateRunRequest)
+    - [GetLlmEvaluationReportRequest](#ondewo.nlu.GetLlmEvaluationReportRequest)
+    - [GetLlmEvaluationScheduleRequest](#ondewo.nlu.GetLlmEvaluationScheduleRequest)
+    - [GetLlmEvaluationScorecardRequest](#ondewo.nlu.GetLlmEvaluationScorecardRequest)
+    - [ListLlmEvaluationAbExperimentsRequest](#ondewo.nlu.ListLlmEvaluationAbExperimentsRequest)
+    - [ListLlmEvaluationAbExperimentsResponse](#ondewo.nlu.ListLlmEvaluationAbExperimentsResponse)
+    - [ListLlmEvaluationAbRolloutDecisionsRequest](#ondewo.nlu.ListLlmEvaluationAbRolloutDecisionsRequest)
+    - [ListLlmEvaluationAbRolloutDecisionsResponse](#ondewo.nlu.ListLlmEvaluationAbRolloutDecisionsResponse)
+    - [ListLlmEvaluationAnnotationQueueItemsRequest](#ondewo.nlu.ListLlmEvaluationAnnotationQueueItemsRequest)
+    - [ListLlmEvaluationAnnotationQueueItemsResponse](#ondewo.nlu.ListLlmEvaluationAnnotationQueueItemsResponse)
     - [ListLlmEvaluationDatasetsRequest](#ondewo.nlu.ListLlmEvaluationDatasetsRequest)
     - [ListLlmEvaluationDatasetsResponse](#ondewo.nlu.ListLlmEvaluationDatasetsResponse)
+    - [ListLlmEvaluationEvaluatorsRequest](#ondewo.nlu.ListLlmEvaluationEvaluatorsRequest)
+    - [ListLlmEvaluationEvaluatorsResponse](#ondewo.nlu.ListLlmEvaluationEvaluatorsResponse)
     - [ListLlmEvaluationExamplesRequest](#ondewo.nlu.ListLlmEvaluationExamplesRequest)
     - [ListLlmEvaluationExamplesResponse](#ondewo.nlu.ListLlmEvaluationExamplesResponse)
     - [ListLlmEvaluationExperimentsRequest](#ondewo.nlu.ListLlmEvaluationExperimentsRequest)
     - [ListLlmEvaluationExperimentsResponse](#ondewo.nlu.ListLlmEvaluationExperimentsResponse)
     - [ListLlmEvaluationFeedbackRequest](#ondewo.nlu.ListLlmEvaluationFeedbackRequest)
     - [ListLlmEvaluationFeedbackResponse](#ondewo.nlu.ListLlmEvaluationFeedbackResponse)
+    - [ListLlmEvaluationOnlineConfigsRequest](#ondewo.nlu.ListLlmEvaluationOnlineConfigsRequest)
+    - [ListLlmEvaluationOnlineConfigsResponse](#ondewo.nlu.ListLlmEvaluationOnlineConfigsResponse)
+    - [ListLlmEvaluationOnlineResultsRequest](#ondewo.nlu.ListLlmEvaluationOnlineResultsRequest)
+    - [ListLlmEvaluationOnlineResultsResponse](#ondewo.nlu.ListLlmEvaluationOnlineResultsResponse)
+    - [ListLlmEvaluationReleaseGateRunsRequest](#ondewo.nlu.ListLlmEvaluationReleaseGateRunsRequest)
+    - [ListLlmEvaluationReleaseGateRunsResponse](#ondewo.nlu.ListLlmEvaluationReleaseGateRunsResponse)
+    - [ListLlmEvaluationReleaseGatesRequest](#ondewo.nlu.ListLlmEvaluationReleaseGatesRequest)
+    - [ListLlmEvaluationReleaseGatesResponse](#ondewo.nlu.ListLlmEvaluationReleaseGatesResponse)
+    - [ListLlmEvaluationReportsRequest](#ondewo.nlu.ListLlmEvaluationReportsRequest)
+    - [ListLlmEvaluationReportsResponse](#ondewo.nlu.ListLlmEvaluationReportsResponse)
+    - [ListLlmEvaluationSchedulesRequest](#ondewo.nlu.ListLlmEvaluationSchedulesRequest)
+    - [ListLlmEvaluationSchedulesResponse](#ondewo.nlu.ListLlmEvaluationSchedulesResponse)
+    - [ListLlmEvaluationScorecardsRequest](#ondewo.nlu.ListLlmEvaluationScorecardsRequest)
+    - [ListLlmEvaluationScorecardsResponse](#ondewo.nlu.ListLlmEvaluationScorecardsResponse)
+    - [LlmEvaluationAbExperiment](#ondewo.nlu.LlmEvaluationAbExperiment)
+    - [LlmEvaluationAbExperimentFilter](#ondewo.nlu.LlmEvaluationAbExperimentFilter)
+    - [LlmEvaluationAbRolloutDecision](#ondewo.nlu.LlmEvaluationAbRolloutDecision)
+    - [LlmEvaluationAbRolloutDecisionFilter](#ondewo.nlu.LlmEvaluationAbRolloutDecisionFilter)
+    - [LlmEvaluationAbRolloutRecommendation](#ondewo.nlu.LlmEvaluationAbRolloutRecommendation)
+    - [LlmEvaluationAbRolloutRecommendation.SessionsPerVariantEntry](#ondewo.nlu.LlmEvaluationAbRolloutRecommendation.SessionsPerVariantEntry)
+    - [LlmEvaluationAbTrafficConfig](#ondewo.nlu.LlmEvaluationAbTrafficConfig)
+    - [LlmEvaluationAbVariant](#ondewo.nlu.LlmEvaluationAbVariant)
+    - [LlmEvaluationAbVariantResult](#ondewo.nlu.LlmEvaluationAbVariantResult)
+    - [LlmEvaluationAnnotationQueueItem](#ondewo.nlu.LlmEvaluationAnnotationQueueItem)
+    - [LlmEvaluationAnnotationQueueItemFilter](#ondewo.nlu.LlmEvaluationAnnotationQueueItemFilter)
     - [LlmEvaluationComparison](#ondewo.nlu.LlmEvaluationComparison)
     - [LlmEvaluationDataset](#ondewo.nlu.LlmEvaluationDataset)
     - [LlmEvaluationDatasetFilter](#ondewo.nlu.LlmEvaluationDatasetFilter)
+    - [LlmEvaluationEvaluatorParameterSpec](#ondewo.nlu.LlmEvaluationEvaluatorParameterSpec)
     - [LlmEvaluationEvaluatorRun](#ondewo.nlu.LlmEvaluationEvaluatorRun)
+    - [LlmEvaluationEvaluatorSpec](#ondewo.nlu.LlmEvaluationEvaluatorSpec)
     - [LlmEvaluationExample](#ondewo.nlu.LlmEvaluationExample)
     - [LlmEvaluationExampleFilter](#ondewo.nlu.LlmEvaluationExampleFilter)
     - [LlmEvaluationExperiment](#ondewo.nlu.LlmEvaluationExperiment)
     - [LlmEvaluationExperimentFilter](#ondewo.nlu.LlmEvaluationExperimentFilter)
     - [LlmEvaluationFeedback](#ondewo.nlu.LlmEvaluationFeedback)
     - [LlmEvaluationFeedbackFilter](#ondewo.nlu.LlmEvaluationFeedbackFilter)
+    - [LlmEvaluationJudgeConfig](#ondewo.nlu.LlmEvaluationJudgeConfig)
+    - [LlmEvaluationOnlineConfig](#ondewo.nlu.LlmEvaluationOnlineConfig)
+    - [LlmEvaluationOnlineConfigFilter](#ondewo.nlu.LlmEvaluationOnlineConfigFilter)
+    - [LlmEvaluationOnlineResult](#ondewo.nlu.LlmEvaluationOnlineResult)
+    - [LlmEvaluationOnlineResultFilter](#ondewo.nlu.LlmEvaluationOnlineResultFilter)
+    - [LlmEvaluationOnlineSessionFilter](#ondewo.nlu.LlmEvaluationOnlineSessionFilter)
     - [LlmEvaluationPairwiseResult](#ondewo.nlu.LlmEvaluationPairwiseResult)
+    - [LlmEvaluationProjectSettings](#ondewo.nlu.LlmEvaluationProjectSettings)
+    - [LlmEvaluationReleaseGate](#ondewo.nlu.LlmEvaluationReleaseGate)
+    - [LlmEvaluationReleaseGateCheck](#ondewo.nlu.LlmEvaluationReleaseGateCheck)
+    - [LlmEvaluationReleaseGateFilter](#ondewo.nlu.LlmEvaluationReleaseGateFilter)
+    - [LlmEvaluationReleaseGateRun](#ondewo.nlu.LlmEvaluationReleaseGateRun)
+    - [LlmEvaluationReleaseGateRunFilter](#ondewo.nlu.LlmEvaluationReleaseGateRunFilter)
+    - [LlmEvaluationReleaseGateSafetyConfig](#ondewo.nlu.LlmEvaluationReleaseGateSafetyConfig)
+    - [LlmEvaluationReleaseGateThresholds](#ondewo.nlu.LlmEvaluationReleaseGateThresholds)
+    - [LlmEvaluationReport](#ondewo.nlu.LlmEvaluationReport)
+    - [LlmEvaluationReportFilter](#ondewo.nlu.LlmEvaluationReportFilter)
+    - [LlmEvaluationSchedule](#ondewo.nlu.LlmEvaluationSchedule)
+    - [LlmEvaluationScheduleFilter](#ondewo.nlu.LlmEvaluationScheduleFilter)
+    - [LlmEvaluationScorecard](#ondewo.nlu.LlmEvaluationScorecard)
+    - [LlmEvaluationScorecardComponent](#ondewo.nlu.LlmEvaluationScorecardComponent)
+    - [LlmEvaluationScorecardFilter](#ondewo.nlu.LlmEvaluationScorecardFilter)
+    - [LlmEvaluationSimulationPersona](#ondewo.nlu.LlmEvaluationSimulationPersona)
+    - [LlmEvaluationTurnResult](#ondewo.nlu.LlmEvaluationTurnResult)
+    - [PromoteLlmEvaluationAnnotationQueueItemRequest](#ondewo.nlu.PromoteLlmEvaluationAnnotationQueueItemRequest)
+    - [PromoteLlmEvaluationAnnotationQueueItemResponse](#ondewo.nlu.PromoteLlmEvaluationAnnotationQueueItemResponse)
+    - [RagVariantConfig](#ondewo.nlu.RagVariantConfig)
     - [RunLlmEvaluationExperimentRequest](#ondewo.nlu.RunLlmEvaluationExperimentRequest)
+    - [RunLlmEvaluationReleaseGateRequest](#ondewo.nlu.RunLlmEvaluationReleaseGateRequest)
+    - [SimulateLlmEvaluationConversationsRequest](#ondewo.nlu.SimulateLlmEvaluationConversationsRequest)
+    - [StartLlmEvaluationAbExperimentRequest](#ondewo.nlu.StartLlmEvaluationAbExperimentRequest)
+    - [StopLlmEvaluationAbExperimentRequest](#ondewo.nlu.StopLlmEvaluationAbExperimentRequest)
     - [SubmitLlmEvaluationFeedbackRequest](#ondewo.nlu.SubmitLlmEvaluationFeedbackRequest)
+    - [UpdateLlmEvaluationAbExperimentRequest](#ondewo.nlu.UpdateLlmEvaluationAbExperimentRequest)
+    - [UpdateLlmEvaluationAnnotationQueueItemRequest](#ondewo.nlu.UpdateLlmEvaluationAnnotationQueueItemRequest)
     - [UpdateLlmEvaluationDatasetRequest](#ondewo.nlu.UpdateLlmEvaluationDatasetRequest)
     - [UpdateLlmEvaluationExampleRequest](#ondewo.nlu.UpdateLlmEvaluationExampleRequest)
     - [UpdateLlmEvaluationExperimentRequest](#ondewo.nlu.UpdateLlmEvaluationExperimentRequest)
+    - [UpdateLlmEvaluationFeedbackRequest](#ondewo.nlu.UpdateLlmEvaluationFeedbackRequest)
+    - [UpdateLlmEvaluationOnlineConfigRequest](#ondewo.nlu.UpdateLlmEvaluationOnlineConfigRequest)
+    - [UpdateLlmEvaluationProjectSettingsRequest](#ondewo.nlu.UpdateLlmEvaluationProjectSettingsRequest)
+    - [UpdateLlmEvaluationReleaseGateRequest](#ondewo.nlu.UpdateLlmEvaluationReleaseGateRequest)
+    - [UpdateLlmEvaluationScheduleRequest](#ondewo.nlu.UpdateLlmEvaluationScheduleRequest)
+    - [UpdateLlmEvaluationScorecardRequest](#ondewo.nlu.UpdateLlmEvaluationScorecardRequest)
   
+    - [LlmEvaluationAbExperimentStatus](#ondewo.nlu.LlmEvaluationAbExperimentStatus)
+    - [LlmEvaluationAbOptimizeMetric](#ondewo.nlu.LlmEvaluationAbOptimizeMetric)
+    - [LlmEvaluationAnnotationStatus](#ondewo.nlu.LlmEvaluationAnnotationStatus)
+    - [LlmEvaluationDatasetType](#ondewo.nlu.LlmEvaluationDatasetType)
+    - [LlmEvaluationEvaluatorCategory](#ondewo.nlu.LlmEvaluationEvaluatorCategory)
     - [LlmEvaluationEvaluatorType](#ondewo.nlu.LlmEvaluationEvaluatorType)
+    - [LlmEvaluationExampleExtractionMode](#ondewo.nlu.LlmEvaluationExampleExtractionMode)
+    - [LlmEvaluationExperimentKind](#ondewo.nlu.LlmEvaluationExperimentKind)
     - [LlmEvaluationExperimentStatus](#ondewo.nlu.LlmEvaluationExperimentStatus)
+    - [LlmEvaluationReleaseGateVerdict](#ondewo.nlu.LlmEvaluationReleaseGateVerdict)
+    - [LlmEvaluationScheduleAction](#ondewo.nlu.LlmEvaluationScheduleAction)
+    - [LlmEvaluationSimulationKind](#ondewo.nlu.LlmEvaluationSimulationKind)
   
     - [LlmEvaluations](#ondewo.nlu.LlmEvaluations)
   
@@ -577,6 +692,12 @@
     - [LlmModelUsage](#ondewo.nlu.LlmModelUsage)
     - [LlmProviderUsage](#ondewo.nlu.LlmProviderUsage)
     - [LlmReasoningEffortStat](#ondewo.nlu.LlmReasoningEffortStat)
+    - [LlmRetrievalMetadata](#ondewo.nlu.LlmRetrievalMetadata)
+    - [LlmRetrievedChunk](#ondewo.nlu.LlmRetrievedChunk)
+    - [LlmSafetyAssessment](#ondewo.nlu.LlmSafetyAssessment)
+    - [LlmSafetyCategoryStat](#ondewo.nlu.LlmSafetyCategoryStat)
+    - [LlmSafetyFinding](#ondewo.nlu.LlmSafetyFinding)
+    - [LlmSafetyStats](#ondewo.nlu.LlmSafetyStats)
     - [LlmTelemetry](#ondewo.nlu.LlmTelemetry)
     - [LlmTelemetryReport](#ondewo.nlu.LlmTelemetryReport)
     - [LlmThinkingDeltaEvent](#ondewo.nlu.LlmThinkingDeltaEvent)
@@ -609,6 +730,7 @@
     - [AudioEncoding](#ondewo.nlu.AudioEncoding)
     - [AudioFileResourceType](#ondewo.nlu.AudioFileResourceType)
     - [ComparisonOperator](#ondewo.nlu.ComparisonOperator)
+    - [LlmSafetyLocation](#ondewo.nlu.LlmSafetyLocation)
     - [ReasoningEffort](#ondewo.nlu.ReasoningEffort)
     - [ResourceView](#ondewo.nlu.ResourceView)
     - [Session.View](#ondewo.nlu.Session.View)
@@ -1686,6 +1808,47 @@ Report of the statistics about sessions
 
 
 
+<a name="ondewo.nlu.GetSessionsStatisticsTimeSeriesRequest"></a>
+
+### GetSessionsStatisticsTimeSeriesRequest
+Request for time-bucketed LLM telemetry statistics about sessions.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  | Required. The project to get statistics from. Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre> |
+| type | [SessionsReportType](#ondewo.nlu.SessionsReportType) |  | Type of report. Only LLM-typed report types (SESSION_LLM_*) are supported. |
+| session_filter | [SessionFilter](#ondewo.nlu.SessionFilter) |  | Required. A filter narrowing the sessions; <code>earliest</code> / <code>latest</code> define the time range that is bucketed. |
+| bucket_width_seconds | [int32](#int32) |  | Optional. Width of one bucket in seconds. 0 = the server picks (time range divided by <code>max_buckets</code>). |
+| max_buckets | [int32](#int32) |  | Optional. Maximum number of buckets (default 50, server-side cap 200). |
+| llm_model_filter | [string](#string) | repeated | Optional. Restrict to specific models. Empty = all models. |
+| llm_provider_filter | [string](#string) | repeated | Optional. Restrict to specific providers. Empty = all providers. |
+| llm_agent_name_filter | [string](#string) | repeated | Optional. Restrict to specific intent-agent names. Empty = all. |
+| llm_tool_name_filter | [string](#string) | repeated | Optional. Restrict to specific tool names. Empty = all. |
+| llm_ccai_service_provider_filter | [CcaiServiceProvider](#ondewo.nlu.CcaiServiceProvider) | repeated | Optional. Restrict to specific CCAI service providers. Empty = all. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which data fields will be added to the returned data (e.g. paths=["llm_telemetry_time_series_buckets.llm_telemetry_report.llm_token_usage"]). |
+
+
+
+
+
+
+<a name="ondewo.nlu.GetSessionsStatisticsTimeSeriesResponse"></a>
+
+### GetSessionsStatisticsTimeSeriesResponse
+Response with time-bucketed LLM telemetry statistics.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| llm_telemetry_time_series_buckets | [LlmTelemetryTimeSeriesBucket](#ondewo.nlu.LlmTelemetryTimeSeriesBucket) | repeated | Buckets in ascending time order. Buckets without any matching telemetry carry an empty report (llm_call_count == 0). |
+| bucket_width_seconds | [int32](#int32) |  | Effective bucket width in seconds the server used. |
+
+
+
+
+
+
 <a name="ondewo.nlu.ImportAgentRequest"></a>
 
 ### ImportAgentRequest
@@ -1828,6 +1991,23 @@ List the users in a project
 | ----- | ---- | ----- | ----------- |
 | users | [UserInProject](#ondewo.nlu.UserInProject) | repeated | The list of users in a project. There will be a maximum number of items returned based on the page_token field in the request. |
 | next_page_token | [string](#string) |  | The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2 |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmTelemetryTimeSeriesBucket"></a>
+
+### LlmTelemetryTimeSeriesBucket
+One time bucket of aggregated LLM telemetry.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| bucket_start | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Inclusive start of the bucket. |
+| bucket_end | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Exclusive end of the bucket. |
+| llm_telemetry_report | [LlmTelemetryReport](#ondewo.nlu.LlmTelemetryReport) |  | Aggregated LLM telemetry of all matched sessions inside the bucket. |
 
 
 
@@ -2213,6 +2393,7 @@ Type of reports about the domain of the agent
 | AGENT_LLM_TOP_X_MODELS | 22 | Top X most-used models (by calls / tokens) over the agent domain. |
 | AGENT_LLM_TOP_X_CCAI_SERVICE_PROVIDERS | 23 | Top X most-used CCAI service providers over the agent domain. |
 | AGENT_LLM_TOP_X_AGENT_NAMES | 24 | Top X most-used agent name of agentic AI team |
+| AGENT_LLM_SAFETY | 25 | Native-safety breakdown (flagged counts / rates per category, mean safety score) over the agent domain. |
 
 
 
@@ -2268,6 +2449,7 @@ Example: <pre><code>SELECT ... FROM session</code></pre> <pre><code>SELECT ... F
 | SESSION_LLM_TOP_X_MODELS | 38 | Top X most-used models (by calls / tokens) across sessions in scope. |
 | SESSION_LLM_TOP_X_CCAI_SERVICE_PROVIDERS | 39 | Top X most-used CCAI service providers across sessions in scope. |
 | SESSION_LLM_TOP_X_AGENT_NAMES | 40 | Top X most-used agent name of agentic AI team |
+| SESSION_LLM_SAFETY | 41 | Native-safety breakdown (flagged counts / rates per category, mean safety score) across sessions in scope. |
 
 
  <!-- end enums -->
@@ -2355,6 +2537,7 @@ Operation &lt;response: <a href="https://protobuf.dev/reference/protobuf/google.
 | RestoreAgent | [RestoreAgentRequest](#ondewo.nlu.RestoreAgentRequest) | [Operation](#ondewo.nlu.Operation) | Restores the specified agent from a ZIP file. <br> Replaces the current agent version with a new one. All the intents and entity types in the older version are deleted. <br> Operation &lt;response: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#empty">google.protobuf.Empty</a>, metadata: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#struct">google.protobuf.Struct</a>&gt; |
 | GetAgentStatistics | [GetAgentStatisticsRequest](#ondewo.nlu.GetAgentStatisticsRequest) | [GetAgentStatisticsResponse](#ondewo.nlu.GetAgentStatisticsResponse) | Gets statistics for the agent |
 | GetSessionsStatistics | [GetSessionsStatisticsRequest](#ondewo.nlu.GetSessionsStatisticsRequest) | [GetSessionsStatisticsResponse](#ondewo.nlu.GetSessionsStatisticsResponse) |  |
+| GetSessionsStatisticsTimeSeries | [GetSessionsStatisticsTimeSeriesRequest](#ondewo.nlu.GetSessionsStatisticsTimeSeriesRequest) | [GetSessionsStatisticsTimeSeriesResponse](#ondewo.nlu.GetSessionsStatisticsTimeSeriesResponse) | Gets LLM telemetry statistics for sessions bucketed over time (time series). Supports LLM-typed report types (SESSION_LLM_*) only. |
 | SetAgentStatus | [SetAgentStatusRequest](#ondewo.nlu.SetAgentStatusRequest) | [Agent](#ondewo.nlu.Agent) | Sets status for the agent |
 | SetResources | [SetResourcesRequest](#ondewo.nlu.SetResourcesRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Sets resources |
 | DeleteResources | [DeleteResourcesRequest](#ondewo.nlu.DeleteResourcesRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Deletes resources |
@@ -6479,6 +6662,28 @@ Response for AddExamples.
 
 
 
+<a name="ondewo.nlu.ApplyLlmEvaluationAbRolloutRequest"></a>
+
+### ApplyLlmEvaluationAbRolloutRequest
+Request to apply an A/B rollout: promotes the chosen variant's config to the
+project's classifier default, stops the experiment and writes the audit
+decision. Idempotent — re-applying the same already-applied experiment returns
+the existing decision rather than promoting twice.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | Resource name of the experiment to roll out. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationAbExperiments/&lt;experiment_uuid&gt;</code>. |
+| variant_id | [string](#string) |  | Required. Variant slug whose config to promote to the project classifier default. The operator's explicit choice; the server applies exactly this variant. |
+| optimize_metric | [LlmEvaluationAbOptimizeMetric](#ondewo.nlu.LlmEvaluationAbOptimizeMetric) |  | The metric the decision was made on, recorded on the audit decision. |
+| parent | [string](#string) |  | Project owning the experiment. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| language_code | [string](#string) |  | BCP-47 language-code scope (required). |
+
+
+
+
+
+
 <a name="ondewo.nlu.CancelLlmEvaluationExperimentRequest"></a>
 
 ### CancelLlmEvaluationExperimentRequest
@@ -6514,6 +6719,23 @@ Request to compare two-or-more experiments.
 
 
 
+<a name="ondewo.nlu.CreateLlmEvaluationAbExperimentRequest"></a>
+
+### CreateLlmEvaluationAbExperimentRequest
+Request to create a new A/B experiment.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| llm_evaluation_ab_experiment | [LlmEvaluationAbExperiment](#ondewo.nlu.LlmEvaluationAbExperiment) |  | A/B experiment payload (name / status / audit fields are server-populated). |
+| parent | [string](#string) |  | Project owning the experiment. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| language_code | [string](#string) |  | BCP-47 language-code scope (required). |
+
+
+
+
+
+
 <a name="ondewo.nlu.CreateLlmEvaluationDatasetRequest"></a>
 
 ### CreateLlmEvaluationDatasetRequest
@@ -6528,6 +6750,146 @@ Request to create a new evaluation dataset.
 | llm_evaluation_examples | [LlmEvaluationExample](#ondewo.nlu.LlmEvaluationExample) | repeated | Optional initial set of examples. |
 | tags | [string](#string) | repeated | Free-form tags for grouping / filtering. |
 | language_code | [string](#string) |  | BCP-47 language code the dataset is authored for. Required — the same dataset name may coexist across different languages. |
+
+
+
+
+
+
+<a name="ondewo.nlu.CreateLlmEvaluationExamplesFromSessionRequest"></a>
+
+### CreateLlmEvaluationExamplesFromSessionRequest
+Request to convert a recorded session into evaluation examples ("golden transcripts").
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  | Project owning the session and the dataset. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| session_name | [string](#string) |  | Resource name of the recorded session to convert. Format: <code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code>. |
+| llm_evaluation_dataset_name | [string](#string) |  | Resource name of the dataset receiving the created examples. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationDatasets/&lt;dataset_uuid&gt;</code>. |
+| session_step_names | [string](#string) | repeated | Optional. Session steps to convert (resource names). Empty = all steps, in session order. |
+| llm_evaluation_example_extraction_mode | [LlmEvaluationExampleExtractionMode](#ondewo.nlu.LlmEvaluationExampleExtractionMode) |  | How the selected steps are turned into examples. |
+| display_name | [string](#string) |  | Optional. Display-name prefix for the created example(s); the server appends a per-example suffix. |
+| language_code | [string](#string) |  | BCP-47 language-code scope (required, must match the dataset's). |
+| include_tool_calls | [bool](#bool) |  | When true, tool calls recorded in the session's telemetry are captured as expected tool calls on the created examples. |
+| include_retrieval_context | [bool](#bool) |  | When true, retrieved chunks recorded by retriever spans are captured as frozen retrieval context on the created examples. |
+
+
+
+
+
+
+<a name="ondewo.nlu.CreateLlmEvaluationExamplesFromSessionResponse"></a>
+
+### CreateLlmEvaluationExamplesFromSessionResponse
+Response for CreateExamplesFromSession.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| llm_evaluation_examples | [LlmEvaluationExample](#ondewo.nlu.LlmEvaluationExample) | repeated | Example records created. |
+
+
+
+
+
+
+<a name="ondewo.nlu.CreateLlmEvaluationOnlineConfigRequest"></a>
+
+### CreateLlmEvaluationOnlineConfigRequest
+Request to create a new online-evaluation config.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| llm_evaluation_online_config | [LlmEvaluationOnlineConfig](#ondewo.nlu.LlmEvaluationOnlineConfig) |  | Config payload (name / audit / last-evaluated fields are server-populated). |
+| parent | [string](#string) |  | Project owning the config. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| language_code | [string](#string) |  | BCP-47 language-code scope (required). |
+
+
+
+
+
+
+<a name="ondewo.nlu.CreateLlmEvaluationReleaseGateRequest"></a>
+
+### CreateLlmEvaluationReleaseGateRequest
+Request to create a new release gate.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| llm_evaluation_release_gate | [LlmEvaluationReleaseGate](#ondewo.nlu.LlmEvaluationReleaseGate) |  | Release gate payload (name / revision / audit fields are server-populated). |
+| parent | [string](#string) |  | Project owning the gate. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| language_code | [string](#string) |  | BCP-47 language-code scope (required). |
+
+
+
+
+
+
+<a name="ondewo.nlu.CreateLlmEvaluationReportRequest"></a>
+
+### CreateLlmEvaluationReportRequest
+Request to persist a generated report.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| llm_evaluation_report | [LlmEvaluationReport](#ondewo.nlu.LlmEvaluationReport) |  | Report payload (name / audit fields are server-populated). |
+| parent | [string](#string) |  | Project owning the report. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| language_code | [string](#string) |  | BCP-47 language-code scope (required). |
+
+
+
+
+
+
+<a name="ondewo.nlu.CreateLlmEvaluationScheduleRequest"></a>
+
+### CreateLlmEvaluationScheduleRequest
+Request to create a new schedule.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| llm_evaluation_schedule | [LlmEvaluationSchedule](#ondewo.nlu.LlmEvaluationSchedule) |  | Schedule payload (name / audit / last-next-run fields are server-populated). |
+| parent | [string](#string) |  | Project owning the schedule. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| language_code | [string](#string) |  | BCP-47 language-code scope (required). |
+
+
+
+
+
+
+<a name="ondewo.nlu.CreateLlmEvaluationScorecardRequest"></a>
+
+### CreateLlmEvaluationScorecardRequest
+Request to create a new scorecard.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| llm_evaluation_scorecard | [LlmEvaluationScorecard](#ondewo.nlu.LlmEvaluationScorecard) |  | Scorecard payload (name / audit fields are server-populated). |
+| parent | [string](#string) |  | Project owning the scorecard. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| language_code | [string](#string) |  | BCP-47 language-code scope (required). |
+
+
+
+
+
+
+<a name="ondewo.nlu.DeleteLlmEvaluationAbExperimentRequest"></a>
+
+### DeleteLlmEvaluationAbExperimentRequest
+Request to delete an A/B experiment and all owned sticky-assignment rows.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | Resource name of the experiment to delete. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationAbExperiments/&lt;experiment_uuid&gt;</code>. |
+| parent | [string](#string) |  | Project owning the experiment. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| language_code | [string](#string) |  | BCP-47 language-code scope (required). |
 
 
 
@@ -6602,6 +6964,203 @@ Request to delete a single feedback record.
 
 
 
+<a name="ondewo.nlu.DeleteLlmEvaluationOnlineConfigRequest"></a>
+
+### DeleteLlmEvaluationOnlineConfigRequest
+Request to delete an online-evaluation config.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | Resource name of the config to delete. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationOnlineConfigs/&lt;config_uuid&gt;</code>. |
+| parent | [string](#string) |  | Project owning the config. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| language_code | [string](#string) |  | BCP-47 language-code scope (required). |
+
+
+
+
+
+
+<a name="ondewo.nlu.DeleteLlmEvaluationReleaseGateRequest"></a>
+
+### DeleteLlmEvaluationReleaseGateRequest
+Request to delete a release gate and all owned gate runs.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | Resource name of the gate to delete. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationReleaseGates/&lt;gate_uuid&gt;</code>. |
+| parent | [string](#string) |  | Project owning the gate. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| language_code | [string](#string) |  | BCP-47 language-code scope (required). |
+
+
+
+
+
+
+<a name="ondewo.nlu.DeleteLlmEvaluationReportRequest"></a>
+
+### DeleteLlmEvaluationReportRequest
+Request to delete a report.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | Resource name of the report to delete. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationReports/&lt;report_uuid&gt;</code>. |
+| parent | [string](#string) |  | Project owning the report. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| language_code | [string](#string) |  | BCP-47 language-code scope (required). |
+
+
+
+
+
+
+<a name="ondewo.nlu.DeleteLlmEvaluationScheduleRequest"></a>
+
+### DeleteLlmEvaluationScheduleRequest
+Request to delete a schedule.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | Resource name of the schedule to delete. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationSchedules/&lt;schedule_uuid&gt;</code>. |
+| parent | [string](#string) |  | Project owning the schedule. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| language_code | [string](#string) |  | BCP-47 language-code scope (required). |
+
+
+
+
+
+
+<a name="ondewo.nlu.DeleteLlmEvaluationScorecardRequest"></a>
+
+### DeleteLlmEvaluationScorecardRequest
+Request to delete a scorecard.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | Resource name of the scorecard to delete. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationScorecards/&lt;scorecard_uuid&gt;</code>. |
+| parent | [string](#string) |  | Project owning the scorecard. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| language_code | [string](#string) |  | BCP-47 language-code scope (required). |
+
+
+
+
+
+
+<a name="ondewo.nlu.GetLlmEvaluationAbExperimentRequest"></a>
+
+### GetLlmEvaluationAbExperimentRequest
+Request to get a single A/B experiment.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | Resource name of the experiment to fetch. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationAbExperiments/&lt;experiment_uuid&gt;</code>. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which fields will be filled with data. |
+| parent | [string](#string) |  | Project owning the experiment. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| language_code | [string](#string) |  | BCP-47 language-code scope (required). |
+
+
+
+
+
+
+<a name="ondewo.nlu.GetLlmEvaluationAbExperimentResultsRequest"></a>
+
+### GetLlmEvaluationAbExperimentResultsRequest
+Request to compute per-variant telemetry rollups for an A/B experiment.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | Resource name of the experiment whose results to compute. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationAbExperiments/&lt;experiment_uuid&gt;</code>. |
+| parent | [string](#string) |  | Project owning the experiment. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| language_code | [string](#string) |  | BCP-47 language-code scope (required). |
+
+
+
+
+
+
+<a name="ondewo.nlu.GetLlmEvaluationAbExperimentResultsResponse"></a>
+
+### GetLlmEvaluationAbExperimentResultsResponse
+Response for GetAbExperimentResults: one rollup per variant.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| llm_evaluation_ab_experiment_name | [string](#string) |  | Resource name of the experiment these results belong to. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationAbExperiments/&lt;experiment_uuid&gt;</code>. |
+| variant_results | [LlmEvaluationAbVariantResult](#ondewo.nlu.LlmEvaluationAbVariantResult) | repeated | Per-variant telemetry rollups (one entry per variant). |
+
+
+
+
+
+
+<a name="ondewo.nlu.GetLlmEvaluationAbRolloutDecisionRequest"></a>
+
+### GetLlmEvaluationAbRolloutDecisionRequest
+Request to get a single A/B rollout decision (the applied audit record) for an
+experiment.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | Resource name of the rollout decision to fetch. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationAbRolloutDecisions/&lt;decision_uuid&gt;</code>. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which fields will be filled with data. |
+| parent | [string](#string) |  | Project owning the decision. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| language_code | [string](#string) |  | BCP-47 language-code scope (required). |
+
+
+
+
+
+
+<a name="ondewo.nlu.GetLlmEvaluationAbRolloutRecommendationRequest"></a>
+
+### GetLlmEvaluationAbRolloutRecommendationRequest
+Request to compute a rollout recommendation for an A/B experiment. Read-only /
+stateless — computes the winner-vs-control statistics on demand under the
+supplied guard-rails and returns a LlmEvaluationAbRolloutRecommendation
+without mutating anything.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | Resource name of the experiment to evaluate. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationAbExperiments/&lt;experiment_uuid&gt;</code>. |
+| optimize_metric | [LlmEvaluationAbOptimizeMetric](#ondewo.nlu.LlmEvaluationAbOptimizeMetric) |  | Required. The metric to optimize when picking the winner. |
+| confidence_level | [double](#double) |  | Optional. Confidence level for the significance test in <code>(0.0, 1.0)</code> (e.g. <code>0.95</code> for 95%). Unset / 0 defaults to <code>0.95</code>. |
+| min_sessions_per_variant | [int32](#int32) |  | Optional. Minimum number of sessions required per variant before a winner may be called; below it the recommendation reports <code>needs_more_data</code>. Unset / 0 applies the server default. |
+| min_effect_size | [double](#double) |  | Optional. Minimum absolute effect size required to call a winner; guards against statistically-significant-but-trivial differences. Unset / 0 applies the server default. |
+| parent | [string](#string) |  | Project owning the experiment. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| language_code | [string](#string) |  | BCP-47 language-code scope (required). |
+
+
+
+
+
+
+<a name="ondewo.nlu.GetLlmEvaluationAnnotationQueueItemRequest"></a>
+
+### GetLlmEvaluationAnnotationQueueItemRequest
+Request to get a single annotation-queue item.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | Resource name of the item to fetch. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationAnnotationQueueItems/&lt;item_uuid&gt;</code>. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which fields will be filled with data. |
+| parent | [string](#string) |  | Project owning the item. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| language_code | [string](#string) |  | BCP-47 language-code scope (required). |
+
+
+
+
+
+
 <a name="ondewo.nlu.GetLlmEvaluationDatasetRequest"></a>
 
 ### GetLlmEvaluationDatasetRequest
@@ -6656,6 +7215,261 @@ Request to fetch a previously-run experiment.
 
 
 
+<a name="ondewo.nlu.GetLlmEvaluationOnlineConfigRequest"></a>
+
+### GetLlmEvaluationOnlineConfigRequest
+Request to get a single online-evaluation config.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | Resource name of the config to fetch. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationOnlineConfigs/&lt;config_uuid&gt;</code>. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which fields will be filled with data. |
+| parent | [string](#string) |  | Project owning the config. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| language_code | [string](#string) |  | BCP-47 language-code scope (required). |
+
+
+
+
+
+
+<a name="ondewo.nlu.GetLlmEvaluationOnlineResultRequest"></a>
+
+### GetLlmEvaluationOnlineResultRequest
+Request to get a single online-evaluation result.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | Resource name of the result to fetch. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationOnlineResults/&lt;result_uuid&gt;</code>. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which fields will be filled with data. |
+| parent | [string](#string) |  | Project owning the result. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| language_code | [string](#string) |  | BCP-47 language-code scope (required). |
+
+
+
+
+
+
+<a name="ondewo.nlu.GetLlmEvaluationProjectSettingsRequest"></a>
+
+### GetLlmEvaluationProjectSettingsRequest
+Request to get the evaluation settings singleton.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  | Project owning the settings. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| language_code | [string](#string) |  | BCP-47 language-code scope (required). |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which fields will be filled with data. |
+
+
+
+
+
+
+<a name="ondewo.nlu.GetLlmEvaluationReleaseGateRequest"></a>
+
+### GetLlmEvaluationReleaseGateRequest
+Request to get a single release gate.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | Resource name of the gate to fetch. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationReleaseGates/&lt;gate_uuid&gt;</code>. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which fields will be filled with data. |
+| parent | [string](#string) |  | Project owning the gate. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| language_code | [string](#string) |  | BCP-47 language-code scope (required). |
+
+
+
+
+
+
+<a name="ondewo.nlu.GetLlmEvaluationReleaseGateRunRequest"></a>
+
+### GetLlmEvaluationReleaseGateRunRequest
+Request to get a single release gate run.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | Resource name of the gate run to fetch. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationReleaseGates/&lt;gate_uuid&gt;/runs/&lt;run_uuid&gt;</code>. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which fields will be filled with data. |
+| parent | [string](#string) |  | Project owning the gate run. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| language_code | [string](#string) |  | BCP-47 language-code scope (required). |
+
+
+
+
+
+
+<a name="ondewo.nlu.GetLlmEvaluationReportRequest"></a>
+
+### GetLlmEvaluationReportRequest
+Request to get a single report (incl. payload bytes).
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | Resource name of the report to fetch. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationReports/&lt;report_uuid&gt;</code>. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which fields will be filled with data. |
+| parent | [string](#string) |  | Project owning the report. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| language_code | [string](#string) |  | BCP-47 language-code scope (required). |
+
+
+
+
+
+
+<a name="ondewo.nlu.GetLlmEvaluationScheduleRequest"></a>
+
+### GetLlmEvaluationScheduleRequest
+Request to get a single schedule.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | Resource name of the schedule to fetch. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationSchedules/&lt;schedule_uuid&gt;</code>. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which fields will be filled with data. |
+| parent | [string](#string) |  | Project owning the schedule. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| language_code | [string](#string) |  | BCP-47 language-code scope (required). |
+
+
+
+
+
+
+<a name="ondewo.nlu.GetLlmEvaluationScorecardRequest"></a>
+
+### GetLlmEvaluationScorecardRequest
+Request to get a single scorecard.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | Resource name of the scorecard to fetch. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationScorecards/&lt;scorecard_uuid&gt;</code>. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which fields will be filled with data. |
+| parent | [string](#string) |  | Project owning the scorecard. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| language_code | [string](#string) |  | BCP-47 language-code scope (required). |
+
+
+
+
+
+
+<a name="ondewo.nlu.ListLlmEvaluationAbExperimentsRequest"></a>
+
+### ListLlmEvaluationAbExperimentsRequest
+Request to list A/B experiments within a project.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  | Project owning the experiments. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| page_token | [string](#string) |  | Optional. Page token for pagination. Retrieves a large result set in smaller, more manageable portions. The token encodes the current index and the page size.
+
+Valid page token strings: <ul> <li><code>&quot;&quot;</code> (empty string) - Retrieves the first page.</li> <li><code>&quot;current_index-0--page_size-20&quot;</code> - First page, page size 20.</li> <li><code>&quot;current_index-1--page_size-20&quot;</code> - Second page, page size 20.</li> </ul> Index starts at 0. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which fields will be filled with data. |
+| language_code | [string](#string) |  | BCP-47 language-code scope (required). |
+| llm_evaluation_ab_experiment_filter | [LlmEvaluationAbExperimentFilter](#ondewo.nlu.LlmEvaluationAbExperimentFilter) |  | Optional. Filter conditions to narrow the returned experiments. |
+
+
+
+
+
+
+<a name="ondewo.nlu.ListLlmEvaluationAbExperimentsResponse"></a>
+
+### ListLlmEvaluationAbExperimentsResponse
+Response for ListAbExperiments.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| llm_evaluation_ab_experiments | [LlmEvaluationAbExperiment](#ondewo.nlu.LlmEvaluationAbExperiment) | repeated | A/B experiments matching the request. |
+| next_page_token | [string](#string) |  | Pagination token for the next page (empty if this is the last page). |
+
+
+
+
+
+
+<a name="ondewo.nlu.ListLlmEvaluationAbRolloutDecisionsRequest"></a>
+
+### ListLlmEvaluationAbRolloutDecisionsRequest
+Request to list A/B rollout decisions within a project, optionally narrowed by
+filter (typically by experiment).
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  | Project owning the decisions. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| page_token | [string](#string) |  | Optional. Page token for pagination. Retrieves a large result set in smaller, more manageable portions. The token encodes the current index and the page size.
+
+Valid page token strings: <ul> <li><code>&quot;&quot;</code> (empty string) - Retrieves the first page.</li> <li><code>&quot;current_index-0--page_size-20&quot;</code> - First page, page size 20.</li> <li><code>&quot;current_index-1--page_size-20&quot;</code> - Second page, page size 20.</li> </ul> Index starts at 0. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which fields will be filled with data. |
+| language_code | [string](#string) |  | BCP-47 language-code scope (required). |
+| llm_evaluation_ab_rollout_decision_filter | [LlmEvaluationAbRolloutDecisionFilter](#ondewo.nlu.LlmEvaluationAbRolloutDecisionFilter) |  | Optional. Filter conditions to narrow the returned decisions. |
+
+
+
+
+
+
+<a name="ondewo.nlu.ListLlmEvaluationAbRolloutDecisionsResponse"></a>
+
+### ListLlmEvaluationAbRolloutDecisionsResponse
+Response for ListAbRolloutDecisions.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| llm_evaluation_ab_rollout_decisions | [LlmEvaluationAbRolloutDecision](#ondewo.nlu.LlmEvaluationAbRolloutDecision) | repeated | Rollout decisions matching the request. |
+| next_page_token | [string](#string) |  | Pagination token for the next page (empty if this is the last page). |
+
+
+
+
+
+
+<a name="ondewo.nlu.ListLlmEvaluationAnnotationQueueItemsRequest"></a>
+
+### ListLlmEvaluationAnnotationQueueItemsRequest
+Request to list annotation-queue items within a project.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  | Project owning the items. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| page_token | [string](#string) |  | Optional. Page token for pagination. Retrieves a large result set in smaller, more manageable portions. The token encodes the current index and the page size.
+
+Valid page token strings: <ul> <li><code>&quot;&quot;</code> (empty string) - Retrieves the first page.</li> <li><code>&quot;current_index-0--page_size-20&quot;</code> - First page, page size 20.</li> <li><code>&quot;current_index-1--page_size-20&quot;</code> - Second page, page size 20.</li> </ul> Index starts at 0. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which fields will be filled with data. |
+| language_code | [string](#string) |  | BCP-47 language-code scope (required). |
+| llm_evaluation_annotation_queue_item_filter | [LlmEvaluationAnnotationQueueItemFilter](#ondewo.nlu.LlmEvaluationAnnotationQueueItemFilter) |  | Optional. Filter conditions to narrow the returned items. |
+
+
+
+
+
+
+<a name="ondewo.nlu.ListLlmEvaluationAnnotationQueueItemsResponse"></a>
+
+### ListLlmEvaluationAnnotationQueueItemsResponse
+Response for ListAnnotationQueueItems.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| llm_evaluation_annotation_queue_items | [LlmEvaluationAnnotationQueueItem](#ondewo.nlu.LlmEvaluationAnnotationQueueItem) | repeated | Items matching the request. |
+| next_page_token | [string](#string) |  | Pagination token for the next page (empty if this is the last page). |
+
+
+
+
+
+
 <a name="ondewo.nlu.ListLlmEvaluationDatasetsRequest"></a>
 
 ### ListLlmEvaluationDatasetsRequest
@@ -6687,6 +7501,37 @@ Response for ListDatasets.
 | ----- | ---- | ----- | ----------- |
 | llm_evaluation_datasets | [LlmEvaluationDataset](#ondewo.nlu.LlmEvaluationDataset) | repeated | Datasets matching the request. |
 | next_page_token | [string](#string) |  | Pagination token for the next page (empty if this is the last page). |
+
+
+
+
+
+
+<a name="ondewo.nlu.ListLlmEvaluationEvaluatorsRequest"></a>
+
+### ListLlmEvaluationEvaluatorsRequest
+Request to list available evaluators.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  | Project scope (registry may be filtered by project capabilities). Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| language_code | [string](#string) |  | BCP-47 language-code scope (required). |
+
+
+
+
+
+
+<a name="ondewo.nlu.ListLlmEvaluationEvaluatorsResponse"></a>
+
+### ListLlmEvaluationEvaluatorsResponse
+Response for ListEvaluators.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| llm_evaluation_evaluator_specs | [LlmEvaluationEvaluatorSpec](#ondewo.nlu.LlmEvaluationEvaluatorSpec) | repeated | Available evaluators with metadata. |
 
 
 
@@ -6805,6 +7650,523 @@ Response for ListFeedback.
 
 
 
+<a name="ondewo.nlu.ListLlmEvaluationOnlineConfigsRequest"></a>
+
+### ListLlmEvaluationOnlineConfigsRequest
+Request to list online-evaluation configs within a project.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  | Project owning the configs. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| page_token | [string](#string) |  | Optional. Page token for pagination. Retrieves a large result set in smaller, more manageable portions. The token encodes the current index and the page size.
+
+Valid page token strings: <ul> <li><code>&quot;&quot;</code> (empty string) - Retrieves the first page.</li> <li><code>&quot;current_index-0--page_size-20&quot;</code> - First page, page size 20.</li> <li><code>&quot;current_index-1--page_size-20&quot;</code> - Second page, page size 20.</li> </ul> Index starts at 0. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which fields will be filled with data. |
+| language_code | [string](#string) |  | BCP-47 language-code scope (required). |
+| llm_evaluation_online_config_filter | [LlmEvaluationOnlineConfigFilter](#ondewo.nlu.LlmEvaluationOnlineConfigFilter) |  | Optional. Filter conditions to narrow the returned configs. |
+
+
+
+
+
+
+<a name="ondewo.nlu.ListLlmEvaluationOnlineConfigsResponse"></a>
+
+### ListLlmEvaluationOnlineConfigsResponse
+Response for ListOnlineConfigs.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| llm_evaluation_online_configs | [LlmEvaluationOnlineConfig](#ondewo.nlu.LlmEvaluationOnlineConfig) | repeated | Configs matching the request. |
+| next_page_token | [string](#string) |  | Pagination token for the next page (empty if this is the last page). |
+
+
+
+
+
+
+<a name="ondewo.nlu.ListLlmEvaluationOnlineResultsRequest"></a>
+
+### ListLlmEvaluationOnlineResultsRequest
+Request to list online-evaluation results within a project.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  | Project owning the results. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| page_token | [string](#string) |  | Optional. Page token for pagination. Retrieves a large result set in smaller, more manageable portions. The token encodes the current index and the page size.
+
+Valid page token strings: <ul> <li><code>&quot;&quot;</code> (empty string) - Retrieves the first page.</li> <li><code>&quot;current_index-0--page_size-20&quot;</code> - First page, page size 20.</li> <li><code>&quot;current_index-1--page_size-20&quot;</code> - Second page, page size 20.</li> </ul> Index starts at 0. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which fields will be filled with data. |
+| language_code | [string](#string) |  | BCP-47 language-code scope (required). |
+| llm_evaluation_online_result_filter | [LlmEvaluationOnlineResultFilter](#ondewo.nlu.LlmEvaluationOnlineResultFilter) |  | Optional. Filter conditions to narrow the returned results. |
+
+
+
+
+
+
+<a name="ondewo.nlu.ListLlmEvaluationOnlineResultsResponse"></a>
+
+### ListLlmEvaluationOnlineResultsResponse
+Response for ListOnlineResults.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| llm_evaluation_online_results | [LlmEvaluationOnlineResult](#ondewo.nlu.LlmEvaluationOnlineResult) | repeated | Results matching the request. |
+| next_page_token | [string](#string) |  | Pagination token for the next page (empty if this is the last page). |
+
+
+
+
+
+
+<a name="ondewo.nlu.ListLlmEvaluationReleaseGateRunsRequest"></a>
+
+### ListLlmEvaluationReleaseGateRunsRequest
+Request to list release gate runs within a project.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  | Project owning the gate runs. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| page_token | [string](#string) |  | Optional. Page token for pagination. Retrieves a large result set in smaller, more manageable portions. The token encodes the current index and the page size.
+
+Valid page token strings: <ul> <li><code>&quot;&quot;</code> (empty string) - Retrieves the first page.</li> <li><code>&quot;current_index-0--page_size-20&quot;</code> - First page, page size 20.</li> <li><code>&quot;current_index-1--page_size-20&quot;</code> - Second page, page size 20.</li> </ul> Index starts at 0. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which fields will be filled with data. |
+| language_code | [string](#string) |  | BCP-47 language-code scope (required). |
+| llm_evaluation_release_gate_run_filter | [LlmEvaluationReleaseGateRunFilter](#ondewo.nlu.LlmEvaluationReleaseGateRunFilter) |  | Optional. Filter conditions to narrow the returned gate runs. |
+
+
+
+
+
+
+<a name="ondewo.nlu.ListLlmEvaluationReleaseGateRunsResponse"></a>
+
+### ListLlmEvaluationReleaseGateRunsResponse
+Response for ListReleaseGateRuns.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| llm_evaluation_release_gate_runs | [LlmEvaluationReleaseGateRun](#ondewo.nlu.LlmEvaluationReleaseGateRun) | repeated | Gate runs matching the request, newest first. |
+| next_page_token | [string](#string) |  | Pagination token for the next page (empty if this is the last page). |
+
+
+
+
+
+
+<a name="ondewo.nlu.ListLlmEvaluationReleaseGatesRequest"></a>
+
+### ListLlmEvaluationReleaseGatesRequest
+Request to list release gates within a project.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  | Project owning the gates. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| page_token | [string](#string) |  | Optional. Page token for pagination. Retrieves a large result set in smaller, more manageable portions. The token encodes the current index and the page size.
+
+Valid page token strings: <ul> <li><code>&quot;&quot;</code> (empty string) - Retrieves the first page.</li> <li><code>&quot;current_index-0--page_size-20&quot;</code> - First page, page size 20.</li> <li><code>&quot;current_index-1--page_size-20&quot;</code> - Second page, page size 20.</li> </ul> Index starts at 0. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which fields will be filled with data. |
+| language_code | [string](#string) |  | BCP-47 language-code scope (required). |
+| llm_evaluation_release_gate_filter | [LlmEvaluationReleaseGateFilter](#ondewo.nlu.LlmEvaluationReleaseGateFilter) |  | Optional. Filter conditions to narrow the returned gates. |
+
+
+
+
+
+
+<a name="ondewo.nlu.ListLlmEvaluationReleaseGatesResponse"></a>
+
+### ListLlmEvaluationReleaseGatesResponse
+Response for ListReleaseGates.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| llm_evaluation_release_gates | [LlmEvaluationReleaseGate](#ondewo.nlu.LlmEvaluationReleaseGate) | repeated | Release gates matching the request. |
+| next_page_token | [string](#string) |  | Pagination token for the next page (empty if this is the last page). |
+
+
+
+
+
+
+<a name="ondewo.nlu.ListLlmEvaluationReportsRequest"></a>
+
+### ListLlmEvaluationReportsRequest
+Request to list reports within a project.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  | Project owning the reports. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| page_token | [string](#string) |  | Optional. Page token for pagination. Retrieves a large result set in smaller, more manageable portions. The token encodes the current index and the page size.
+
+Valid page token strings: <ul> <li><code>&quot;&quot;</code> (empty string) - Retrieves the first page.</li> <li><code>&quot;current_index-0--page_size-20&quot;</code> - First page, page size 20.</li> <li><code>&quot;current_index-1--page_size-20&quot;</code> - Second page, page size 20.</li> </ul> Index starts at 0. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which fields will be filled with data. Payload bytes are omitted unless paths include <code>llm_evaluation_reports.payload</code>. |
+| language_code | [string](#string) |  | BCP-47 language-code scope (required). |
+| llm_evaluation_report_filter | [LlmEvaluationReportFilter](#ondewo.nlu.LlmEvaluationReportFilter) |  | Optional. Filter conditions to narrow the returned reports. |
+
+
+
+
+
+
+<a name="ondewo.nlu.ListLlmEvaluationReportsResponse"></a>
+
+### ListLlmEvaluationReportsResponse
+Response for ListReports.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| llm_evaluation_reports | [LlmEvaluationReport](#ondewo.nlu.LlmEvaluationReport) | repeated | Reports matching the request (payload omitted unless requested via field_mask). |
+| next_page_token | [string](#string) |  | Pagination token for the next page (empty if this is the last page). |
+
+
+
+
+
+
+<a name="ondewo.nlu.ListLlmEvaluationSchedulesRequest"></a>
+
+### ListLlmEvaluationSchedulesRequest
+Request to list schedules within a project.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  | Project owning the schedules. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| page_token | [string](#string) |  | Optional. Page token for pagination. Retrieves a large result set in smaller, more manageable portions. The token encodes the current index and the page size.
+
+Valid page token strings: <ul> <li><code>&quot;&quot;</code> (empty string) - Retrieves the first page.</li> <li><code>&quot;current_index-0--page_size-20&quot;</code> - First page, page size 20.</li> <li><code>&quot;current_index-1--page_size-20&quot;</code> - Second page, page size 20.</li> </ul> Index starts at 0. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which fields will be filled with data. |
+| language_code | [string](#string) |  | BCP-47 language-code scope (required). |
+| llm_evaluation_schedule_filter | [LlmEvaluationScheduleFilter](#ondewo.nlu.LlmEvaluationScheduleFilter) |  | Optional. Filter conditions to narrow the returned schedules. |
+
+
+
+
+
+
+<a name="ondewo.nlu.ListLlmEvaluationSchedulesResponse"></a>
+
+### ListLlmEvaluationSchedulesResponse
+Response for ListSchedules.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| llm_evaluation_schedules | [LlmEvaluationSchedule](#ondewo.nlu.LlmEvaluationSchedule) | repeated | Schedules matching the request. |
+| next_page_token | [string](#string) |  | Pagination token for the next page (empty if this is the last page). |
+
+
+
+
+
+
+<a name="ondewo.nlu.ListLlmEvaluationScorecardsRequest"></a>
+
+### ListLlmEvaluationScorecardsRequest
+Request to list scorecards within a project.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  | Project owning the scorecards. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| page_token | [string](#string) |  | Optional. Page token for pagination. Retrieves a large result set in smaller, more manageable portions. The token encodes the current index and the page size.
+
+Valid page token strings: <ul> <li><code>&quot;&quot;</code> (empty string) - Retrieves the first page.</li> <li><code>&quot;current_index-0--page_size-20&quot;</code> - First page, page size 20.</li> <li><code>&quot;current_index-1--page_size-20&quot;</code> - Second page, page size 20.</li> </ul> Index starts at 0. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which fields will be filled with data. |
+| language_code | [string](#string) |  | BCP-47 language-code scope (required). |
+| llm_evaluation_scorecard_filter | [LlmEvaluationScorecardFilter](#ondewo.nlu.LlmEvaluationScorecardFilter) |  | Optional. Filter conditions to narrow the returned scorecards. |
+
+
+
+
+
+
+<a name="ondewo.nlu.ListLlmEvaluationScorecardsResponse"></a>
+
+### ListLlmEvaluationScorecardsResponse
+Response for ListScorecards.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| llm_evaluation_scorecards | [LlmEvaluationScorecard](#ondewo.nlu.LlmEvaluationScorecard) | repeated | Scorecards matching the request. |
+| next_page_token | [string](#string) |  | Pagination token for the next page (empty if this is the last page). |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmEvaluationAbExperiment"></a>
+
+### LlmEvaluationAbExperiment
+An A/B experiment: a set of routing variants split over live DetectIntent
+traffic for a (project, language_code) scope.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The unique resource name of the A/B experiment. Read-only; populated by the server. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationAbExperiments/&lt;experiment_uuid&gt;</code>. |
+| display_name | [string](#string) |  | Required. Human-readable display name (unique within the (project, language_code) tuple). |
+| description | [string](#string) |  | Free-form description. |
+| status | [LlmEvaluationAbExperimentStatus](#ondewo.nlu.LlmEvaluationAbExperimentStatus) |  | Lifecycle status. Read-only; transitioned via Start / Stop RPCs. |
+| variants | [LlmEvaluationAbVariant](#ondewo.nlu.LlmEvaluationAbVariant) | repeated | The routing variants of this experiment. |
+| traffic_config | [LlmEvaluationAbTrafficConfig](#ondewo.nlu.LlmEvaluationAbTrafficConfig) |  | Traffic-splitting configuration (enrollment rate, assignment salt). |
+| started_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Wall-clock time the experiment was started (set by Start). Read-only. |
+| stopped_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Wall-clock time the experiment was stopped (set by Stop). Read-only. |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
+| created_by | [string](#string) |  | User id in form of a valid UUID. |
+| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
+| modified_by | [string](#string) |  | User id in form of a valid UUID. |
+| parent | [string](#string) |  | Project owning the experiment. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| language_code | [string](#string) |  | BCP-47 language-code scope. |
+| llm_evaluation_ab_rollout_decision_name | [string](#string) |  | Optional. Resource name of the rollout decision that was applied to this experiment (set once an operator explicitly applies a variant via <code>LlmEvaluationApplyAbRollout</code>; empty while no rollout has been applied). Lets a results view link straight to the applied audit record. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationAbRolloutDecisions/&lt;decision_uuid&gt;</code>. |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmEvaluationAbExperimentFilter"></a>
+
+### LlmEvaluationAbExperimentFilter
+Filter conditions for ListAbExperiments. All fields are optional; multiple
+fields set at the same time are combined via logical AND.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| display_name | [string](#string) |  | Optional. Match only experiments whose display name contains this substring (case-insensitive). |
+| status | [LlmEvaluationAbExperimentStatus](#ondewo.nlu.LlmEvaluationAbExperimentStatus) |  | Optional. Match only experiments with this status. |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmEvaluationAbRolloutDecision"></a>
+
+### LlmEvaluationAbRolloutDecision
+The persisted audit record of an A/B rollout that an operator explicitly
+applied: it captures which variant's config was promoted to the project's
+classifier default, on which metric, and the statistics at the moment of
+application. Written + returned by <code>LlmEvaluationApplyAbRollout</code>;
+read back via <code>LlmEvaluationGetAbRolloutDecision</code> /
+<code>LlmEvaluationListAbRolloutDecisions</code>. There is no auto-rollout —
+every decision row corresponds to an explicit operator action.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The unique resource name of the rollout decision. Read-only; populated by the server. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationAbRolloutDecisions/&lt;decision_uuid&gt;</code>. |
+| llm_evaluation_ab_experiment_name | [string](#string) |  | Resource name of the A/B experiment this decision was applied to. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationAbExperiments/&lt;experiment_uuid&gt;</code>. |
+| applied_variant_id | [string](#string) |  | Variant slug whose config was promoted to the project classifier default. |
+| optimize_metric | [LlmEvaluationAbOptimizeMetric](#ondewo.nlu.LlmEvaluationAbOptimizeMetric) |  | The metric the rollout was decided on (recorded for the audit trail). |
+| p_value | [double](#double) |  | Two-sided p-value of the applied-variant-vs-control test at application time. |
+| effect_size | [double](#double) |  | Observed effect size (applied variant vs. control) at application time. |
+| applied_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Wall-clock time the rollout was applied. Read-only. |
+| applied_by | [string](#string) |  | User id (in form of a valid UUID) of the operator who applied the rollout. |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
+| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
+| created_by | [string](#string) |  | User id in form of a valid UUID. |
+| modified_by | [string](#string) |  | User id in form of a valid UUID. |
+| parent | [string](#string) |  | Project owning the decision. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| language_code | [string](#string) |  | BCP-47 language-code scope. |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmEvaluationAbRolloutDecisionFilter"></a>
+
+### LlmEvaluationAbRolloutDecisionFilter
+Filter conditions for ListAbRolloutDecisions. All fields are optional;
+multiple fields set at the same time are combined via logical AND.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| llm_evaluation_ab_experiment_name | [string](#string) |  | Optional. Match only decisions applied to this A/B experiment (resource name). Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationAbExperiments/&lt;experiment_uuid&gt;</code>. |
+| applied_by | [string](#string) |  | Optional. Match only decisions applied by this user id (UUID). |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmEvaluationAbRolloutRecommendation"></a>
+
+### LlmEvaluationAbRolloutRecommendation
+A computed, read-only rollout recommendation for an A/B experiment: which
+variant currently wins against the control on the chosen optimize metric,
+under the requested statistical guard-rails. Stateless — recomputed on demand
+by <code>LlmEvaluationGetAbRolloutRecommendation</code> from the per-variant
+results rollup; nothing is persisted and no traffic / config changes. The
+operator decides whether to apply it via <code>LlmEvaluationApplyAbRollout</code>.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| optimize_metric | [LlmEvaluationAbOptimizeMetric](#ondewo.nlu.LlmEvaluationAbOptimizeMetric) |  | The metric the recommendation was computed against (echoed from the request). |
+| winner_variant_id | [string](#string) |  | Variant slug that currently wins against the control on this metric, once the guard-rails (significance, effect size, minimum sessions) are met. Empty while <code>needs_more_data</code> is true or no variant beats the control. |
+| control_variant_id | [string](#string) |  | Variant slug of the control (baseline) arm the winner was compared against. |
+| p_value | [double](#double) |  | Two-sided p-value of the winner-vs-control test on the optimize metric. |
+| effect_size | [double](#double) |  | Observed effect size between winner and control (absolute risk difference for rate metrics, standardized / raw mean difference for continuous metrics). |
+| is_significant | [bool](#bool) |  | Whether the result is statistically significant at the requested confidence level AND clears the requested minimum effect size. |
+| sessions_per_variant | [LlmEvaluationAbRolloutRecommendation.SessionsPerVariantEntry](#ondewo.nlu.LlmEvaluationAbRolloutRecommendation.SessionsPerVariantEntry) | repeated | Number of sessions observed per variant in scope, keyed by variant slug. Used to surface the guard-rail check against the requested minimum. |
+| needs_more_data | [bool](#bool) |  | True when at least one arm has not yet reached the requested minimum number of sessions, so no winner can be called yet (collect more traffic). |
+| reason | [string](#string) |  | Human-readable rationale for the recommendation (e.g. the winner and its margin, or "needs N more sessions on variant X", or "no variant beats control"). |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmEvaluationAbRolloutRecommendation.SessionsPerVariantEntry"></a>
+
+### LlmEvaluationAbRolloutRecommendation.SessionsPerVariantEntry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
+| value | [int64](#int64) |  |  |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmEvaluationAbTrafficConfig"></a>
+
+### LlmEvaluationAbTrafficConfig
+Traffic-splitting configuration for an A/B experiment.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enrollment_rate | [double](#double) |  | Fraction of eligible sessions (0.0-1.0) actually enrolled into the experiment; the remainder use the project default path. <code>1.0</code> enrolls every eligible session. |
+| assignment_salt | [string](#string) |  | Optional. Salt mixed into the deterministic session-bucketing hash so that re-running the same experiment id re-randomizes the assignment. |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmEvaluationAbVariant"></a>
+
+### LlmEvaluationAbVariant
+One routing variant of an A/B experiment. The variant overrides the model used
+for the sessions assigned to it. A variant is one of two shapes depending on
+the project's classifier:
+<ul>
+  <li><b>IntentAgent projects</b> — the variant overrides the LLM connection
+      via <code>ccai_service_names</code> (+ optional <code>model_name</code> /
+      <code>prompt_version</code>).</li>
+  <li><b>RAG projects</b> (<code>IntentRagflowClassifier</code>) — the variant
+      overrides the chat-assistant LLM CcaiService and retrieval parameters via
+      <code>rag_variant_config</code>.</li>
+</ul>
+The two override shapes are mutually exclusive per variant; the server applies
+whichever matches the project's classifier type.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| variant_id | [string](#string) |  | Required. Stable slug identifying the variant within its experiment (e.g. "control", "qwen3-fp8"). Lower-case, used as the assignment key. |
+| display_name | [string](#string) |  | Required. Human-readable display name. |
+| ccai_service_names | [string](#string) | repeated | CcaiService name(s) defining this variant's LLM connection (IntentAgent projects). Mutually exclusive with <code>rag_variant_config</code>. Format: <code>projects/&lt;project_uuid&gt;/agent/ccaiServices/&lt;ccai_service_uuid&gt;</code>. |
+| traffic_weight | [double](#double) |  | Traffic weight for this variant. Expressed as a percentage in the <code>[0.0, 100.0]</code> range; the variant weights of a started experiment must sum to <code>100.0</code>. |
+| is_control | [bool](#bool) |  | Whether this variant is the control (baseline) arm. |
+| model_name | [string](#string) |  | Optional. Concrete model identifier override (e.g. "Qwen/Qwen3-27b-fp8"). |
+| prompt_version | [string](#string) |  | Optional. Logical prompt version recorded for this variant. |
+| config | [google.protobuf.Struct](#google.protobuf.Struct) |  | Optional. Free-form target descriptor (the serialized CcaiServiceList / routing override applied for sessions assigned to this variant). |
+| rag_variant_config | [RagVariantConfig](#ondewo.nlu.RagVariantConfig) |  | Optional. RAGFlow override for a RAG-classifier project: the chat-assistant LLM CcaiService + retrieval parameters applied to sessions assigned to this variant. Used instead of <code>ccai_service_names</code> when the project's classifier is <code>IntentRagflowClassifier</code>; empty / zero fields inside it inherit the project's base config. |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmEvaluationAbVariantResult"></a>
+
+### LlmEvaluationAbVariantResult
+Per-variant rollup returned by GetAbExperimentResults. Stateless / computed.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| variant_id | [string](#string) |  | Variant slug these results belong to. |
+| session_count | [int64](#int64) |  | Number of distinct sessions assigned to this variant in scope. |
+| telemetry | [google.protobuf.Struct](#google.protobuf.Struct) |  | Aggregated LLM telemetry over this variant's sessions, as a JSON-encoded <code>ondewo.nlu.LlmTelemetryReport</code> (see <code>session.proto</code>). Carried as a Struct rather than the typed message because <code>session.proto</code> already imports this file (for <code>LlmEvaluationFeedback</code> on <code>LlmTelemetry</code>), so a typed import back would form an illegal proto import cycle; the report is produced by the same server-side aggregator that fills the typed <code>LlmTelemetryReport</code> on the statistics RPCs. |
+| derived_metrics | [google.protobuf.Struct](#google.protobuf.Struct) |  | Optional. Derived comparison metrics (e.g. token / latency / error / cost deltas versus the control variant), keyed by metric name. |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmEvaluationAnnotationQueueItem"></a>
+
+### LlmEvaluationAnnotationQueueItem
+A human-review annotation-queue item: one per failing session step enqueued by
+the online-evaluation worker. The reviewer annotates (status / reason) and may
+promote the offending session into a regression dataset.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The unique resource name of the queue item. Read-only; populated by the server. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationAnnotationQueueItems/&lt;item_uuid&gt;</code>. |
+| session_name | [string](#string) |  | Resource name of the offending session. Format: <code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code>. |
+| session_step_name | [string](#string) |  | Resource name of the offending session step. Format: <code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/sessionSteps/&lt;step_uuid&gt;</code>. |
+| llm_evaluation_online_result_name | [string](#string) |  | Resource name of the online result that triggered the enqueue. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationOnlineResults/&lt;result_uuid&gt;</code>. |
+| status | [LlmEvaluationAnnotationStatus](#ondewo.nlu.LlmEvaluationAnnotationStatus) |  | Current lifecycle status. |
+| assigned_to | [string](#string) |  | Optional. User id (UUID) the item is assigned to for review. |
+| reason | [string](#string) |  | Human-readable reason / rationale (e.g. <code>"faithfulness=0.2 &lt; 0.5"</code>). |
+| llm_evaluation_dataset_name | [string](#string) |  | Resource name of the dataset the item was promoted into. Set when the item reaches PROMOTED status. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationDatasets/&lt;dataset_uuid&gt;</code>. |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
+| created_by | [string](#string) |  | User id in form of a valid UUID. |
+| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
+| modified_by | [string](#string) |  | User id in form of a valid UUID. |
+| parent | [string](#string) |  | Project owning the item. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| language_code | [string](#string) |  | BCP-47 language-code scope. |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmEvaluationAnnotationQueueItemFilter"></a>
+
+### LlmEvaluationAnnotationQueueItemFilter
+Filter conditions for ListAnnotationQueueItems. All fields are optional;
+multiple fields set at the same time are combined via logical AND.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| status | [LlmEvaluationAnnotationStatus](#ondewo.nlu.LlmEvaluationAnnotationStatus) |  | Optional. Match only items with this status. |
+| assigned_to | [string](#string) |  | Optional. Match only items assigned to this user id (UUID). |
+
+
+
+
+
+
 <a name="ondewo.nlu.LlmEvaluationComparison"></a>
 
 ### LlmEvaluationComparison
@@ -6848,6 +8210,7 @@ A dataset is a named collection of evaluation examples plus optional metadata.
 | modified_by | [string](#string) |  | User id in form of a valid UUID. |
 | parent | [string](#string) |  | Project owning the dataset. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
 | language_code | [string](#string) |  | BCP-47 language code (e.g. <code>"en"</code>, <code>"de"</code>, <code>"en-US"</code>) identifying which language the dataset was authored for. Datasets are scoped per (project, language_code) — the same dataset name may exist independently per language. |
+| llm_evaluation_dataset_type | [LlmEvaluationDatasetType](#ondewo.nlu.LlmEvaluationDatasetType) |  | Kind of examples the dataset holds (single-turn, multi-turn conversation flow, RAG question-answering, adversarial red-team probes, simulated). |
 
 
 
@@ -6865,6 +8228,27 @@ set at the same time are combined via logical AND.
 | ----- | ---- | ----- | ----------- |
 | display_name | [string](#string) |  | Optional. Match only datasets whose display name contains this substring (case-insensitive). |
 | tags | [string](#string) | repeated | Optional. Match only datasets carrying every tag in this list. |
+| llm_evaluation_dataset_type | [LlmEvaluationDatasetType](#ondewo.nlu.LlmEvaluationDatasetType) |  | Optional. Match only datasets of this type. |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmEvaluationEvaluatorParameterSpec"></a>
+
+### LlmEvaluationEvaluatorParameterSpec
+Specification of one configurable evaluator parameter.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | Parameter key (e.g. "criteria", "threshold", "expected_output_key"). |
+| display_name | [string](#string) |  | Human-readable display name. |
+| description | [string](#string) |  | Free-form description. |
+| value_type | [string](#string) |  | Value type: "string" | "double" | "bool" | "string_list" | "json". |
+| default_value | [string](#string) |  | JSON-encoded default value. |
+| required | [bool](#bool) |  | Whether the parameter must be supplied. |
 
 
 
@@ -6893,6 +8277,33 @@ Result of running one evaluator against one example.
 | modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
 | created_by | [string](#string) |  | User id in form of a valid UUID. |
 | modified_by | [string](#string) |  | User id in form of a valid UUID. |
+| llm_evaluation_turn_results | [LlmEvaluationTurnResult](#ondewo.nlu.LlmEvaluationTurnResult) | repeated | Per-turn results for multi-turn (conversation-flow) runs: one entry per executed conversation turn, carrying expected vs. actual outputs and the per-turn telemetry join key. Empty for single-turn runs. |
+| repetition_index | [int32](#int32) |  | Zero-based repetition index when the experiment ran with repetitions > 1. |
+| actual_output | [google.protobuf.Struct](#google.protobuf.Struct) |  | Actual output produced by the target for this run (answer text, tool calls, final state) — first-class so result views need not parse feedback <code>raw</code> payloads. |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmEvaluationEvaluatorSpec"></a>
+
+### LlmEvaluationEvaluatorSpec
+Server-side metadata describing one available evaluator.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| evaluator_name | [string](#string) |  | Logical evaluator name used in RunExperiment requests (e.g. "faithfulness"). |
+| display_name | [string](#string) |  | Human-readable display name. |
+| description | [string](#string) |  | Free-form description of what the evaluator measures. |
+| llm_evaluation_evaluator_type | [LlmEvaluationEvaluatorType](#ondewo.nlu.LlmEvaluationEvaluatorType) |  | Family of evaluator implementations. |
+| llm_evaluation_evaluator_category | [LlmEvaluationEvaluatorCategory](#ondewo.nlu.LlmEvaluationEvaluatorCategory) |  | Category the evaluator belongs to. |
+| required_example_fields | [string](#string) | repeated | Dotted paths of example fields the evaluator requires (e.g. "inputs.question", "expected_outputs.answer", "inputs.turns"). |
+| multi_turn | [bool](#bool) |  | True when the evaluator consumes multi-turn conversations. |
+| default_threshold | [double](#double) |  | Default pass threshold (0.0-1.0). |
+| requires_judge | [bool](#bool) |  | True when the evaluator requires a judge LLM. |
+| llm_evaluation_evaluator_parameter_specs | [LlmEvaluationEvaluatorParameterSpec](#ondewo.nlu.LlmEvaluationEvaluatorParameterSpec) | repeated | Configurable parameters accepted via evaluator_configs / evaluator_overrides. |
 
 
 
@@ -6974,6 +8385,10 @@ A single experiment run over a dataset.
 | created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
 | modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
 | modified_by | [string](#string) |  | User id in form of a valid UUID. |
+| repetitions | [int32](#int32) |  | Number of repetitions each (example, evaluator) pair was executed with (echoed from RunLlmEvaluationExperimentRequest; 0 is treated as 1). |
+| llm_evaluation_schedule_name | [string](#string) |  | Optional. Resource name of the schedule that created this experiment (empty for manually-triggered experiments). Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationSchedules/&lt;schedule_uuid&gt;</code>. |
+| llm_evaluation_experiment_kind | [LlmEvaluationExperimentKind](#ondewo.nlu.LlmEvaluationExperimentKind) |  | Kind of experiment (standard single-turn, multi-turn flow, red-team, gate candidate, gate safety, scheduled). |
+| llm_evaluation_release_gate_run_name | [string](#string) |  | Optional. Resource name of the release gate run this experiment belongs to (set for gate-candidate and gate-safety experiments). Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationReleaseGates/&lt;gate_uuid&gt;/runs/&lt;run_uuid&gt;</code>. |
 
 
 
@@ -6993,6 +8408,8 @@ fields set at the same time are combined via logical AND.
 | llm_evaluation_experiment_status | [LlmEvaluationExperimentStatus](#ondewo.nlu.LlmEvaluationExperimentStatus) |  | Optional. Match only experiments with this lifecycle status. |
 | llm_evaluation_dataset_name | [string](#string) |  | Optional. Match only experiments tied to this dataset (resource name). Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationDatasets/&lt;dataset_uuid&gt;</code>. |
 | model_name | [string](#string) |  | Optional. Match only experiments exercising this concrete model identifier. |
+| llm_evaluation_schedule_name | [string](#string) |  | Optional. Match only experiments created by this schedule (resource name). Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationSchedules/&lt;schedule_uuid&gt;</code>. |
+| llm_evaluation_experiment_kind | [LlmEvaluationExperimentKind](#ondewo.nlu.LlmEvaluationExperimentKind) |  | Optional. Match only experiments of this kind. |
 
 
 
@@ -7048,6 +8465,147 @@ set at the same time are combined via logical AND.
 
 
 
+<a name="ondewo.nlu.LlmEvaluationJudgeConfig"></a>
+
+### LlmEvaluationJudgeConfig
+Judge-LLM configuration used by LLM-as-judge evaluators.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| ccai_service_name | [string](#string) |  | Resource name of the CcaiService whose LLM connection details (host / port / model / auth) the judge uses. Preferred over free-form model_name. |
+| model_name | [string](#string) |  | Free-form judge model label (fallback / display). |
+| temperature | [double](#double) |  | Sampling temperature for the judge model. |
+| verbose_reasoning | [bool](#bool) |  | When true, the judge's full reasoning is kept in feedback <code>comment</code> / <code>raw</code> payloads. |
+| evaluator_overrides | [google.protobuf.Struct](#google.protobuf.Struct) |  | Per-evaluator overrides keyed by evaluator name. Values are objects matching the evaluator's parameter specs from LlmEvaluationListEvaluators (e.g. <code>{"geeval": {"criteria": "...", "threshold": 0.7}}</code>). |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmEvaluationOnlineConfig"></a>
+
+### LlmEvaluationOnlineConfig
+An online-evaluation config: a per-(project, language_code) definition that a
+swarm-safe background worker uses to sample already-persisted live session
+steps, score the recorded answer with a reference-free evaluator set, and
+enqueue failing steps into the annotation queue. Mirrors the LlmEvaluationSchedule
+scoping / audit / enabled-flag shape.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The unique resource name of the online config. Read-only; populated by the server. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationOnlineConfigs/&lt;config_uuid&gt;</code>. |
+| display_name | [string](#string) |  | Required. Human-readable display name (unique within the (project, language_code) tuple). |
+| description | [string](#string) |  | Free-form description. |
+| evaluator_names | [string](#string) | repeated | Reference-free evaluator names the worker runs on each sampled step (e.g. <code>"answer_relevancy"</code>, <code>"faithfulness"</code>, <code>"toxicity"</code>). AIM restricts the picker to reference-free evaluators via LlmEvaluationListEvaluators. |
+| sample_rate | [double](#double) |  | Fraction of candidate steps to score, in the range 0.0-1.0. Applied deterministically per step. |
+| enabled | [bool](#bool) |  | Whether the worker samples for this config. Disabled configs keep their configuration. |
+| target_dataset_name | [string](#string) |  | Optional. Default promotion target dataset for steps enqueued by this config. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationDatasets/&lt;dataset_uuid&gt;</code>. |
+| fail_threshold | [double](#double) |  | Score cutoff (0.0-1.0). Scored steps whose aggregate score is below this threshold are enqueued into the annotation queue. Defaults to 0.5. |
+| settle_seconds | [int32](#int32) |  | Settle window in seconds: the worker only considers steps older than this, so per-step telemetry has landed before scoring. Defaults to 30. |
+| require_telemetry | [bool](#bool) |  | When true, only steps with recorded LLM telemetry are sampled (shorthand for the session-filter flag of the same name). |
+| llm_evaluation_online_session_filter | [LlmEvaluationOnlineSessionFilter](#ondewo.nlu.LlmEvaluationOnlineSessionFilter) |  | Optional. Filter narrowing which session steps are sampled. |
+| last_evaluated_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Wall-clock time of the worker's most recent evaluation pass for this config. Read-only; set by the worker. |
+| n_sessions_evaluated | [int64](#int64) |  | Running count of session steps this config has scored. Read-only; set by the worker. |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
+| created_by | [string](#string) |  | User id in form of a valid UUID. |
+| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
+| modified_by | [string](#string) |  | User id in form of a valid UUID. |
+| parent | [string](#string) |  | Project owning the config. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| language_code | [string](#string) |  | BCP-47 language-code scope. |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmEvaluationOnlineConfigFilter"></a>
+
+### LlmEvaluationOnlineConfigFilter
+Filter conditions for ListOnlineConfigs. All fields are optional; multiple
+fields set at the same time are combined via logical AND.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| display_name | [string](#string) |  | Optional. Match only configs whose display name contains this substring (case-insensitive). |
+| enabled_only | [bool](#bool) |  | Optional. When true, match only enabled configs. |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmEvaluationOnlineResult"></a>
+
+### LlmEvaluationOnlineResult
+A self-contained online-evaluation result: one row per scored session step.
+Per-criterion feedbacks are stored as an embedded repeated LlmEvaluationFeedback
+list (exactly like LlmEvaluationTurnResult.feedbacks — NOT persisted into the
+experiment-scoped llm_feedback table). Produced by the online-evaluation worker;
+read-only over the API.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The unique resource name of the result. Read-only; populated by the server. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationOnlineResults/&lt;result_uuid&gt;</code>. |
+| llm_evaluation_online_config_name | [string](#string) |  | Resource name of the online config that produced this result. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationOnlineConfigs/&lt;config_uuid&gt;</code>. |
+| session_name | [string](#string) |  | Resource name of the scored session. Format: <code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code>. |
+| session_step_name | [string](#string) |  | Resource name of the scored session step. Format: <code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/sessionSteps/&lt;step_uuid&gt;</code>. |
+| llm_evaluation_feedbacks | [LlmEvaluationFeedback](#ondewo.nlu.LlmEvaluationFeedback) | repeated | Per-criterion feedback records, one per configured evaluator (embedded list; the same LlmEvaluationFeedback message reused as the per-criterion result element). |
+| passed | [bool](#bool) |  | Whether the step passed every criterion (aggregate_score >= the config's fail_threshold and no criterion failed). |
+| aggregate_score | [double](#double) |  | Aggregate roll-up score across the criteria (0.0-1.0). |
+| evaluated_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Wall-clock time the worker scored this step. Read-only. |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
+| created_by | [string](#string) |  | User id in form of a valid UUID (the worker / system identity). |
+| parent | [string](#string) |  | Project owning the result. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| language_code | [string](#string) |  | BCP-47 language-code scope. |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmEvaluationOnlineResultFilter"></a>
+
+### LlmEvaluationOnlineResultFilter
+Filter conditions for ListOnlineResults. All fields are optional; multiple
+fields set at the same time are combined via logical AND.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| llm_evaluation_online_config_name | [string](#string) |  | Optional. Match only results produced by this online config. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationOnlineConfigs/&lt;config_uuid&gt;</code>. |
+| passed | [bool](#bool) |  | Optional. Match only results with this pass-state. |
+| filter_by_passed | [bool](#bool) |  | Optional. When true, the <code>passed</code> field is applied as a filter; when false the <code>passed</code> field is ignored (so unset means "any"). |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmEvaluationOnlineSessionFilter"></a>
+
+### LlmEvaluationOnlineSessionFilter
+Optional filter narrowing which already-persisted live session steps an
+online-evaluation config samples. All fields are optional; multiple fields set
+at the same time are combined via logical AND.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| labels | [string](#string) | repeated | Optional. Match only session steps whose session carries every one of these labels (e.g. <code>"AI_FLAGGED"</code>). |
+| language_codes | [string](#string) | repeated | Optional. Restrict sampling to these BCP-47 language codes. Empty = the owning config's language_code only. |
+| platforms | [string](#string) | repeated | Optional. Restrict sampling to these integration platforms. |
+| require_telemetry | [bool](#bool) |  | Optional. When true, only sample steps that have recorded LLM telemetry (a <code>session_step_llm_telemetry</code> row), so reference-free judges requiring the trace can run. |
+
+
+
+
+
+
 <a name="ondewo.nlu.LlmEvaluationPairwiseResult"></a>
 
 ### LlmEvaluationPairwiseResult
@@ -7060,6 +8618,449 @@ Per-example pairwise comparison entry.
 | llm_evaluation_winner_experiment_name | [string](#string) |  | Resource name of the winning experiment. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationExperiments/&lt;experiment_uuid&gt;</code>. |
 | score_delta | [double](#double) |  | Score delta against the baseline (positive means winner improved). |
 | reason | [string](#string) |  | Free-form reason / rationale. |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmEvaluationProjectSettings"></a>
+
+### LlmEvaluationProjectSettings
+Per-(project, language_code) evaluation settings singleton.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The unique resource name of the settings singleton. Read-only. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationProjectSettings</code>. |
+| llm_evaluation_judge_config | [LlmEvaluationJudgeConfig](#ondewo.nlu.LlmEvaluationJudgeConfig) |  | Judge-LLM configuration for LLM-as-judge evaluators. |
+| default_weights | [google.protobuf.Struct](#google.protobuf.Struct) |  | Default per-criterion weights (criterion name -> numeric weight) applied by comparison / scorecard views when no explicit weights are configured. |
+| default_pass_cutoff_score | [double](#double) |  | Default score cutoff (0.0-1.0) above which an evaluator run counts as passed. |
+| default_scorecard_name | [string](#string) |  | Optional. Resource name of the default scorecard. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationScorecards/&lt;scorecard_uuid&gt;</code>. |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
+| created_by | [string](#string) |  | User id in form of a valid UUID. |
+| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
+| modified_by | [string](#string) |  | User id in form of a valid UUID. |
+| parent | [string](#string) |  | Project owning the settings. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| language_code | [string](#string) |  | BCP-47 language-code scope. |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmEvaluationReleaseGate"></a>
+
+### LlmEvaluationReleaseGate
+A release gate: a named set of thresholds over evaluator scores, regression
+deltas and telemetry that decides whether a candidate configuration ships.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The unique resource name of the release gate. Read-only; populated by the server. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationReleaseGates/&lt;gate_uuid&gt;</code>. |
+| display_name | [string](#string) |  | Required. Human-readable display name (unique within the (project, language_code) tuple). |
+| description | [string](#string) |  | Free-form description. |
+| revision | [int32](#int32) |  | Server-managed revision counter, incremented on semantic updates (suite, baseline, evaluators, thresholds, weights, safety). Read-only. |
+| llm_evaluation_dataset_name | [string](#string) |  | Resource name of the benchmark suite (dataset) the gate runs. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationDatasets/&lt;dataset_uuid&gt;</code>. |
+| llm_evaluation_baseline_experiment_name | [string](#string) |  | Optional. Resource name of the baseline experiment for regression checks. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationExperiments/&lt;experiment_uuid&gt;</code>. |
+| llm_evaluation_evaluator_names | [string](#string) | repeated | Logical names of the evaluators the gate runs against the suite. |
+| thresholds | [LlmEvaluationReleaseGateThresholds](#ondewo.nlu.LlmEvaluationReleaseGateThresholds) |  | Threshold set evaluated against the candidate experiment. |
+| safety | [LlmEvaluationReleaseGateSafetyConfig](#ondewo.nlu.LlmEvaluationReleaseGateSafetyConfig) |  | Optional safety section (separate adversarial experiment). |
+| weights | [google.protobuf.Struct](#google.protobuf.Struct) |  | Per-criterion weights used for the weighted composite score (criterion name -> numeric weight; normalized server-side). |
+| pass_cutoff_score | [double](#double) |  | Score cutoff (0.0-1.0) above which an evaluator run counts as passed. |
+| staleness_window_days | [int32](#int32) |  | Number of days after which a gate verdict is considered stale. |
+| ccai_service_names | [string](#string) | repeated | Default CcaiService name(s) defining the candidate target's LLM connection (can be overridden per run). |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
+| created_by | [string](#string) |  | User id in form of a valid UUID. |
+| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
+| modified_by | [string](#string) |  | User id in form of a valid UUID. |
+| parent | [string](#string) |  | Project owning the release gate. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| language_code | [string](#string) |  | BCP-47 language-code scope. |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmEvaluationReleaseGateCheck"></a>
+
+### LlmEvaluationReleaseGateCheck
+One evaluated check inside a release gate run verdict.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| id | [string](#string) |  | Stable check identifier, e.g. "pass_rate", "criterion.&lt;name&gt;", "regression.&lt;name&gt;", "latency_p95_seconds", "safety.&lt;name&gt;", "acceptance_must_pass". |
+| threshold | [double](#double) |  | Threshold the check compared against. |
+| actual | [double](#double) |  | Actual value observed. |
+| actual_available | [bool](#bool) |  | False when the input needed for the check was unavailable (e.g. telemetry not recorded); <code>actual</code> is meaningless in that case. |
+| passed | [bool](#bool) |  | Whether the check passed. |
+| partial | [bool](#bool) |  | True when the actual value was only window-attributed (partial telemetry). |
+| provenance | [string](#string) |  | Where the actual value came from: "LIVE" | "DERIVED" | "TELEMETRY". |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmEvaluationReleaseGateFilter"></a>
+
+### LlmEvaluationReleaseGateFilter
+Filter conditions for ListReleaseGates. All fields are optional; multiple
+fields set at the same time are combined via logical AND.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| display_name | [string](#string) |  | Optional. Match only gates whose display name contains this substring (case-insensitive). |
+| llm_evaluation_dataset_name | [string](#string) |  | Optional. Match only gates running this suite (dataset resource name). Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationDatasets/&lt;dataset_uuid&gt;</code>. |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmEvaluationReleaseGateRun"></a>
+
+### LlmEvaluationReleaseGateRun
+One persisted execution of a release gate: experiments + computed verdict.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The unique resource name of the gate run. Read-only; populated by the server. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationReleaseGates/&lt;gate_uuid&gt;/runs/&lt;run_uuid&gt;</code>. |
+| llm_evaluation_release_gate_name | [string](#string) |  | Resource name of the gate this run belongs to. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationReleaseGates/&lt;gate_uuid&gt;</code>. |
+| gate_revision | [int32](#int32) |  | Gate revision at run time. |
+| gate_snapshot | [google.protobuf.Struct](#google.protobuf.Struct) |  | Full gate document snapshot taken at run time, so the verdict stays interpretable after later gate edits. |
+| llm_evaluation_experiment_name | [string](#string) |  | Resource name of the candidate experiment. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationExperiments/&lt;experiment_uuid&gt;</code>. |
+| llm_evaluation_safety_experiment_name | [string](#string) |  | Optional. Resource name of the safety (adversarial) experiment. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationExperiments/&lt;experiment_uuid&gt;</code>. |
+| llm_evaluation_baseline_experiment_name | [string](#string) |  | Optional. Resource name of the baseline experiment used for regression checks. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationExperiments/&lt;experiment_uuid&gt;</code>. |
+| llm_evaluation_release_gate_verdict | [LlmEvaluationReleaseGateVerdict](#ondewo.nlu.LlmEvaluationReleaseGateVerdict) |  | Computed verdict. Read-only; persisted server-side. |
+| checks | [LlmEvaluationReleaseGateCheck](#ondewo.nlu.LlmEvaluationReleaseGateCheck) | repeated | Individual checks the verdict was derived from. Read-only. |
+| started_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Wall-clock start of the gate run. |
+| finished_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Wall-clock end of the gate run (verdict computation finished). |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
+| created_by | [string](#string) |  | User id in form of a valid UUID. |
+| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
+| modified_by | [string](#string) |  | User id in form of a valid UUID. |
+| parent | [string](#string) |  | Project owning the gate run. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| language_code | [string](#string) |  | BCP-47 language-code scope. |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmEvaluationReleaseGateRunFilter"></a>
+
+### LlmEvaluationReleaseGateRunFilter
+Filter conditions for ListReleaseGateRuns. All fields are optional; multiple
+fields set at the same time are combined via logical AND.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| llm_evaluation_release_gate_name | [string](#string) |  | Optional. Match only runs of this gate (resource name). Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationReleaseGates/&lt;gate_uuid&gt;</code>. |
+| llm_evaluation_release_gate_verdict | [LlmEvaluationReleaseGateVerdict](#ondewo.nlu.LlmEvaluationReleaseGateVerdict) |  | Optional. Match only runs with this verdict. |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmEvaluationReleaseGateSafetyConfig"></a>
+
+### LlmEvaluationReleaseGateSafetyConfig
+Safety section of a release gate: a separate adversarial experiment scored
+with safety evaluators.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  | Whether the safety section is evaluated as part of gate runs. |
+| adversarial_dataset_name | [string](#string) |  | Resource name of the adversarial (red-team) dataset to run. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationDatasets/&lt;dataset_uuid&gt;</code>. |
+| evaluator_names | [string](#string) | repeated | Logical names of safety evaluators to run (e.g. "toxicity", "bias", "pii_leakage"). |
+| max_toxicity | [double](#double) |  | Maximum tolerated mean toxicity score (0.0-1.0). |
+| max_bias | [double](#double) |  | Maximum tolerated mean bias score (0.0-1.0). |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmEvaluationReleaseGateThresholds"></a>
+
+### LlmEvaluationReleaseGateThresholds
+Threshold set evaluated by a release gate. Nested in a dedicated message so
+presence can be detected at the message level (proto3 scalars carry no presence).
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| min_pass_rate | [double](#double) |  | Minimum pass rate (0.0-1.0) the candidate experiment must reach. |
+| max_regression_per_criterion | [double](#double) |  | Maximum tolerated per-criterion mean-score regression (0.0-1.0) versus the baseline experiment. |
+| max_p95_latency_seconds | [double](#double) |  | Maximum tolerated p95 latency in seconds (requires telemetry join). |
+| acceptance_must_pass | [bool](#bool) |  | If true, every example tagged "acceptance" must pass for the gate to pass. |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmEvaluationReport"></a>
+
+### LlmEvaluationReport
+An immutable persisted report artifact (release summaries, gate sign-offs,
+exported evaluation snapshots).
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The unique resource name of the report. Read-only; populated by the server. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationReports/&lt;report_uuid&gt;</code>. |
+| display_name | [string](#string) |  | Required. Human-readable display name. |
+| description | [string](#string) |  | Free-form description. |
+| report_type | [string](#string) |  | Logical report type identifier (e.g. <code>"release-summary.v1"</code>). |
+| mime_type | [string](#string) |  | MIME type of the payload (e.g. <code>"text/markdown"</code>, <code>"text/csv"</code>, <code>"application/pdf"</code>). |
+| payload | [bytes](#bytes) |  | Report payload. Omitted from List responses unless explicitly requested via field_mask. |
+| metadata | [google.protobuf.Struct](#google.protobuf.Struct) |  | Source references (gate runs, experiments, filters) captured at creation time. |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
+| created_by | [string](#string) |  | User id in form of a valid UUID. |
+| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
+| modified_by | [string](#string) |  | User id in form of a valid UUID. |
+| parent | [string](#string) |  | Project owning the report. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| language_code | [string](#string) |  | BCP-47 language-code scope. |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmEvaluationReportFilter"></a>
+
+### LlmEvaluationReportFilter
+Filter conditions for ListReports. All fields are optional; multiple fields
+set at the same time are combined via logical AND.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| display_name | [string](#string) |  | Optional. Match only reports whose display name contains this substring (case-insensitive). |
+| report_type | [string](#string) |  | Optional. Match only reports of this logical type. |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmEvaluationSchedule"></a>
+
+### LlmEvaluationSchedule
+A schedule for recurring experiment / release gate runs.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The unique resource name of the schedule. Read-only; populated by the server. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationSchedules/&lt;schedule_uuid&gt;</code>. |
+| display_name | [string](#string) |  | Required. Human-readable display name (unique within the (project, language_code) tuple). |
+| description | [string](#string) |  | Free-form description. |
+| cron_expression | [string](#string) |  | 5-field cron expression in UTC (e.g. <code>"0 2 * * *"</code>). Exactly one of <code>cron_expression</code> / <code>interval_seconds</code> must be set. |
+| interval_seconds | [int32](#int32) |  | Fixed interval between runs in seconds. Exactly one of <code>cron_expression</code> / <code>interval_seconds</code> must be set. |
+| enabled | [bool](#bool) |  | Whether the schedule fires. Disabled schedules keep their configuration. |
+| llm_evaluation_schedule_action | [LlmEvaluationScheduleAction](#ondewo.nlu.LlmEvaluationScheduleAction) |  | What the schedule executes when it fires. |
+| run_llm_evaluation_experiment_request | [RunLlmEvaluationExperimentRequest](#ondewo.nlu.RunLlmEvaluationExperimentRequest) |  | RUN_EXPERIMENT only. Template request dispatched on every firing (display_name is suffixed with the firing timestamp). |
+| llm_evaluation_release_gate_name | [string](#string) |  | RUN_RELEASE_GATE only. Resource name of the gate to run. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationReleaseGates/&lt;gate_uuid&gt;</code>. |
+| last_run_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Wall-clock time of the most recent firing. Read-only. |
+| next_run_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Wall-clock time of the next planned firing. Read-only. |
+| last_run_resource_name | [string](#string) |  | Resource name created by the most recent firing (experiment or gate run). Read-only. |
+| last_run_status | [LlmEvaluationExperimentStatus](#ondewo.nlu.LlmEvaluationExperimentStatus) |  | Status of the experiment created by the most recent firing. Read-only. |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
+| created_by | [string](#string) |  | User id in form of a valid UUID. |
+| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
+| modified_by | [string](#string) |  | User id in form of a valid UUID. |
+| parent | [string](#string) |  | Project owning the schedule. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| language_code | [string](#string) |  | BCP-47 language-code scope. |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmEvaluationScheduleFilter"></a>
+
+### LlmEvaluationScheduleFilter
+Filter conditions for ListSchedules. All fields are optional; multiple fields
+set at the same time are combined via logical AND.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| display_name | [string](#string) |  | Optional. Match only schedules whose display name contains this substring (case-insensitive). |
+| enabled_only | [bool](#bool) |  | Optional. When true, match only enabled schedules. |
+| llm_evaluation_schedule_action | [LlmEvaluationScheduleAction](#ondewo.nlu.LlmEvaluationScheduleAction) |  | Optional. Match only schedules with this action. |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmEvaluationScorecard"></a>
+
+### LlmEvaluationScorecard
+A scorecard: a named weighted multi-criteria roll-up definition applied to
+experiments for release reporting.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | The unique resource name of the scorecard. Read-only; populated by the server. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationScorecards/&lt;scorecard_uuid&gt;</code>. |
+| display_name | [string](#string) |  | Required. Human-readable display name (unique within the (project, language_code) tuple). |
+| description | [string](#string) |  | Free-form description. |
+| llm_evaluation_scorecard_components | [LlmEvaluationScorecardComponent](#ondewo.nlu.LlmEvaluationScorecardComponent) | repeated | Weighted criterion components. |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Creation date and time. Read-only field. |
+| created_by | [string](#string) |  | User id in form of a valid UUID. |
+| modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
+| modified_by | [string](#string) |  | User id in form of a valid UUID. |
+| parent | [string](#string) |  | Project owning the scorecard. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| language_code | [string](#string) |  | BCP-47 language-code scope. |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmEvaluationScorecardComponent"></a>
+
+### LlmEvaluationScorecardComponent
+One weighted criterion row of a scorecard.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| criterion | [string](#string) |  | Criterion label the component aggregates (e.g. "faithfulness"). |
+| weight | [double](#double) |  | Relative weight of the component (normalized server-side). |
+| target_score | [double](#double) |  | Target score (0.0-1.0) the criterion should reach. |
+| evaluator_name | [string](#string) |  | Optional. Logical evaluator name backing the criterion. |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmEvaluationScorecardFilter"></a>
+
+### LlmEvaluationScorecardFilter
+Filter conditions for ListScorecards. All fields are optional; multiple
+fields set at the same time are combined via logical AND.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| display_name | [string](#string) |  | Optional. Match only scorecards whose display name contains this substring (case-insensitive). |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmEvaluationSimulationPersona"></a>
+
+### LlmEvaluationSimulationPersona
+One simulated user persona.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| persona | [string](#string) |  | Short persona label (e.g. "impatient customer"). |
+| scenario | [string](#string) |  | Scenario the simulated user pursues (e.g. "wants a refund for a double charge"). |
+| expected_outcome | [string](#string) |  | Expected outcome of a successful conversation (used as expected output on generated examples). |
+| user_description | [string](#string) |  | Free-form additional description of the simulated user's behavior. |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmEvaluationTurnResult"></a>
+
+### LlmEvaluationTurnResult
+Result of executing one conversation turn of a multi-turn (flow) example.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| turn_index | [int32](#int32) |  | Zero-based index of the turn within the example's scripted conversation. |
+| user_input | [google.protobuf.Struct](#google.protobuf.Struct) |  | The user input that was sent for this turn (text, contexts, parameters). |
+| expected_output | [google.protobuf.Struct](#google.protobuf.Struct) |  | Expected output for this turn as authored in the example (expected tool calls, final state, answer). |
+| actual_output | [google.protobuf.Struct](#google.protobuf.Struct) |  | Actual output produced by the target for this turn (answer text, tool calls, final state). |
+| llm_telemetry_run_id | [string](#string) |  | Ties this turn back to the LlmTelemetry produced when running the target for this turn (per-turn telemetry join key). |
+| session_step_name | [string](#string) |  | Optional. Resource name of the session step created by executing this turn against the live target (deep link into trace views). |
+| llm_evaluation_feedbacks | [LlmEvaluationFeedback](#ondewo.nlu.LlmEvaluationFeedback) | repeated | Per-turn feedback records produced by turn-aware evaluators. |
+| duration_in_s | [double](#double) |  | Wall-clock duration of this turn in seconds. |
+
+
+
+
+
+
+<a name="ondewo.nlu.PromoteLlmEvaluationAnnotationQueueItemRequest"></a>
+
+### PromoteLlmEvaluationAnnotationQueueItemRequest
+Request to promote an annotation-queue item into a regression dataset. Thin
+server-side composition over LlmEvaluationCreateExamplesFromSession; the item
+status is flipped to PROMOTED and the dataset name stamped on success.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | Resource name of the item to promote. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationAnnotationQueueItems/&lt;item_uuid&gt;</code>. |
+| target_dataset_name | [string](#string) |  | Resource name of the dataset receiving the created example(s). Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationDatasets/&lt;dataset_uuid&gt;</code>. |
+| llm_evaluation_example_extraction_mode | [LlmEvaluationExampleExtractionMode](#ondewo.nlu.LlmEvaluationExampleExtractionMode) |  | How the item's session steps are turned into examples (reused mode enum). |
+| include_tool_calls | [bool](#bool) |  | When true, tool calls recorded in the session's telemetry are captured as expected tool calls on the created examples. |
+| include_retrieval_context | [bool](#bool) |  | When true, retrieved chunks recorded by retriever spans are captured as frozen retrieval context on the created examples. |
+| parent | [string](#string) |  | Project owning the item and the dataset. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| language_code | [string](#string) |  | BCP-47 language-code scope (required). |
+
+
+
+
+
+
+<a name="ondewo.nlu.PromoteLlmEvaluationAnnotationQueueItemResponse"></a>
+
+### PromoteLlmEvaluationAnnotationQueueItemResponse
+Response for PromoteAnnotationQueueItem.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| llm_evaluation_examples | [LlmEvaluationExample](#ondewo.nlu.LlmEvaluationExample) | repeated | Example record(s) created in the target dataset. |
+| llm_evaluation_annotation_queue_item | [LlmEvaluationAnnotationQueueItem](#ondewo.nlu.LlmEvaluationAnnotationQueueItem) |  | The promoted queue item (status flipped to PROMOTED, dataset name stamped). |
+
+
+
+
+
+
+<a name="ondewo.nlu.RagVariantConfig"></a>
+
+### RagVariantConfig
+RAGFlow variant override for an A/B experiment running on a RAG-classifier
+project (<code>IntentRagflowClassifier</code>). Where an IntentAgent variant
+overrides the LLM via <code>ccai_service_names</code>, a RAG variant overrides
+the project's chat-assistant LLM CcaiService and the retrieval parameters used
+when answering the assigned sessions. Override-or-inherit semantics apply per
+field: an empty / zero value means "inherit the project's base
+IntentRagflowClassifier config for this field".
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| chat_assistant_llm_ccai_service_name | [string](#string) |  | CcaiService name whose LLM connection details back the chat-assistant LLM for sessions assigned to this variant (overrides the project's <code>chat_assistant_llm_ccai_service_name</code>). Empty = inherit. Format: <code>projects/&lt;project_uuid&gt;/agent/ccaiServices/&lt;ccai_service_uuid&gt;</code>. |
+| top_k | [int32](#int32) |  | Retrieval top_k: the maximum number of chunks retrieved per turn (overrides the project's <code>retrieval_max_retrieval_chunks</code>). 0 = inherit. |
+| similarity_threshold | [double](#double) |  | Retrieval similarity threshold in <code>[0.0, 1.0]</code>: chunks scoring below it are dropped (overrides the project's <code>chat_assistant_similarity_threshold</code>). 0.0 = inherit. |
+| vector_similarity_weight | [double](#double) |  | Vector-vs-keyword similarity weight in <code>[0.0, 1.0]</code> (overrides the project's <code>retrieval_vector_similarity_weight</code>, surfaced to RAGFlow as the chat assistant's keywords-similarity weight). 0.0 = inherit. |
+| rerank_model_ccai_service_name | [string](#string) |  | Optional. CcaiService name backing the rerank model for sessions assigned to this variant (overrides the project's <code>chat_assistant_rerank_ccai_service_name</code>). Empty = inherit (or no reranking when the project itself configures none). Format: <code>projects/&lt;project_uuid&gt;/agent/ccaiServices/&lt;ccai_service_uuid&gt;</code>. |
 
 
 
@@ -7085,6 +9086,87 @@ Request to run a fresh experiment.
 | llm_evaluation_baseline_experiment_name | [string](#string) |  | Optional. Resource name of a baseline experiment for regression detection. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationExperiments/&lt;experiment_uuid&gt;</code>. |
 | language_code | [string](#string) |  | BCP-47 language code the experiment runs against. Required — selects which language-scoped dataset is loaded. |
 | ccai_service_names | [string](#string) | repeated | Logical names of the CcaiService(s) that carry the LLM connection details (host/port/model/ auth) of the model(s) under evaluation, resolved server-side — mirroring the IntentRagflowClassifier / IntentAgent <code>ccai_service_names</code> pattern. Each named service defines one LLM to evaluate; supplying several evaluates and compares multiple LLMs in a single run. Takes precedence over the free-form <code>model_name</code> label. |
+| repetitions | [int32](#int32) |  | Optional. Number of repetitions per (example, evaluator) pair for consistency / dispersion analysis. 0 is treated as 1. |
+| llm_evaluation_experiment_kind | [LlmEvaluationExperimentKind](#ondewo.nlu.LlmEvaluationExperimentKind) |  | Optional. Kind of experiment to run. Unspecified defaults to STANDARD (or FLOW when the dataset type is FLOW). |
+| evaluator_configs | [google.protobuf.Struct](#google.protobuf.Struct) |  | Optional. Per-evaluator parameter overrides for this run, keyed by evaluator name. Values are objects matching the evaluator's parameter specs from LlmEvaluationListEvaluators (e.g. <code>{"geeval": {"criteria": "...", "threshold": 0.7}}</code>). |
+
+
+
+
+
+
+<a name="ondewo.nlu.RunLlmEvaluationReleaseGateRequest"></a>
+
+### RunLlmEvaluationReleaseGateRequest
+Request to run a release gate against a candidate target.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | Resource name of the gate to run. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationReleaseGates/&lt;gate_uuid&gt;</code>. |
+| parent | [string](#string) |  | Project owning the gate. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| language_code | [string](#string) |  | BCP-47 language-code scope (required). |
+| ccai_service_names | [string](#string) | repeated | Optional. CcaiService name(s) defining the candidate target's LLM connection; overrides the gate's default <code>ccai_service_names</code>. |
+| git_sha | [string](#string) |  | Optional. Source-tree revision pin recorded on the candidate experiment. |
+| prompt_version | [string](#string) |  | Optional. Logical prompt version recorded on the candidate experiment. |
+
+
+
+
+
+
+<a name="ondewo.nlu.SimulateLlmEvaluationConversationsRequest"></a>
+
+### SimulateLlmEvaluationConversationsRequest
+Request to generate synthetic multi-turn evaluation conversations.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  | Project owning the dataset. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| llm_evaluation_dataset_name | [string](#string) |  | Resource name of the dataset receiving the generated examples. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationDatasets/&lt;dataset_uuid&gt;</code>. |
+| llm_evaluation_simulation_personas | [LlmEvaluationSimulationPersona](#ondewo.nlu.LlmEvaluationSimulationPersona) | repeated | Personas to simulate. At least one is required for STANDARD simulations. |
+| num_conversations | [int32](#int32) |  | Number of conversations to generate (across all personas). |
+| max_turns | [int32](#int32) |  | Maximum number of user turns per generated conversation. |
+| ccai_service_names | [string](#string) | repeated | CcaiService name(s) defining the LLM connection used to simulate the user side of the conversations. |
+| language_code | [string](#string) |  | BCP-47 language-code scope (required, must match the dataset's). |
+| config | [google.protobuf.Struct](#google.protobuf.Struct) |  | Arbitrary simulator configuration captured for reproducibility. |
+| llm_evaluation_simulation_kind | [LlmEvaluationSimulationKind](#ondewo.nlu.LlmEvaluationSimulationKind) |  | Kind of simulation (standard persona-driven vs adversarial red-teaming). |
+| attack_types | [string](#string) | repeated | ADVERSARIAL only. Attack types to probe (e.g. "prompt_injection", "pii_extraction", "jailbreak", "off_topic_drift"). Empty = all built-in types. |
+
+
+
+
+
+
+<a name="ondewo.nlu.StartLlmEvaluationAbExperimentRequest"></a>
+
+### StartLlmEvaluationAbExperimentRequest
+Request to start an A/B experiment (validates weights, sets RUNNING).
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | Resource name of the experiment to start. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationAbExperiments/&lt;experiment_uuid&gt;</code>. |
+| parent | [string](#string) |  | Project owning the experiment. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| language_code | [string](#string) |  | BCP-47 language-code scope (required). |
+
+
+
+
+
+
+<a name="ondewo.nlu.StopLlmEvaluationAbExperimentRequest"></a>
+
+### StopLlmEvaluationAbExperimentRequest
+Request to stop a running A/B experiment (sets STOPPED).
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | Resource name of the experiment to stop. Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationAbExperiments/&lt;experiment_uuid&gt;</code>. |
+| parent | [string](#string) |  | Project owning the experiment. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| language_code | [string](#string) |  | BCP-47 language-code scope (required). |
 
 
 
@@ -7103,6 +9185,44 @@ Request to submit a single feedback record.
 | llm_evaluation_evaluator_run_name | [string](#string) |  | Optional. Resource name of the evaluator run the feedback attaches to. Empty for top-level experiment-scoped feedback (e.g. human review at experiment granularity). Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationExperiments/&lt;experiment_uuid&gt;/evaluatorRuns/&lt;evaluator_run_uuid&gt;</code>. |
 | llm_evaluation_feedback | [LlmEvaluationFeedback](#ondewo.nlu.LlmEvaluationFeedback) |  | Feedback payload. |
 | parent | [string](#string) |  | Project owning the experiment. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| language_code | [string](#string) |  | BCP-47 language-code scope (required). |
+
+
+
+
+
+
+<a name="ondewo.nlu.UpdateLlmEvaluationAbExperimentRequest"></a>
+
+### UpdateLlmEvaluationAbExperimentRequest
+Request to update an existing A/B experiment.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| llm_evaluation_ab_experiment | [LlmEvaluationAbExperiment](#ondewo.nlu.LlmEvaluationAbExperiment) |  | Experiment payload (only fields covered by <code>update_mask</code> are applied). |
+| update_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Mask of fields to update on the experiment record. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which fields will be filled with data on the returned experiment. |
+| parent | [string](#string) |  | Project owning the experiment. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| language_code | [string](#string) |  | BCP-47 language-code scope (required). |
+
+
+
+
+
+
+<a name="ondewo.nlu.UpdateLlmEvaluationAnnotationQueueItemRequest"></a>
+
+### UpdateLlmEvaluationAnnotationQueueItemRequest
+Request to update an annotation-queue item (status / assignee / reason transitions).
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| llm_evaluation_annotation_queue_item | [LlmEvaluationAnnotationQueueItem](#ondewo.nlu.LlmEvaluationAnnotationQueueItem) |  | Item payload (only fields covered by <code>update_mask</code> are applied). |
+| update_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Mask of fields to update on the item record. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which fields will be filled with data on the returned item. |
+| parent | [string](#string) |  | Project owning the item. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
 | language_code | [string](#string) |  | BCP-47 language-code scope (required). |
 
 
@@ -7166,7 +9286,205 @@ Request to update an experiment's metadata.
 
 
 
+
+<a name="ondewo.nlu.UpdateLlmEvaluationFeedbackRequest"></a>
+
+### UpdateLlmEvaluationFeedbackRequest
+Request to update an existing feedback record.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| llm_evaluation_feedback | [LlmEvaluationFeedback](#ondewo.nlu.LlmEvaluationFeedback) |  | Feedback payload (only fields covered by <code>update_mask</code> are applied; typically <code>score</code>, <code>categorical_value</code> and / or <code>comment</code>). |
+| update_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Mask of fields to update on the feedback record. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which fields will be filled with data on the returned feedback record. |
+| parent | [string](#string) |  | Project owning the feedback. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| language_code | [string](#string) |  | BCP-47 language-code scope (required). |
+
+
+
+
+
+
+<a name="ondewo.nlu.UpdateLlmEvaluationOnlineConfigRequest"></a>
+
+### UpdateLlmEvaluationOnlineConfigRequest
+Request to update an existing online-evaluation config.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| llm_evaluation_online_config | [LlmEvaluationOnlineConfig](#ondewo.nlu.LlmEvaluationOnlineConfig) |  | Config payload (only fields covered by <code>update_mask</code> are applied). |
+| update_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Mask of fields to update on the config record. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which fields will be filled with data on the returned config. |
+| parent | [string](#string) |  | Project owning the config. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| language_code | [string](#string) |  | BCP-47 language-code scope (required). |
+
+
+
+
+
+
+<a name="ondewo.nlu.UpdateLlmEvaluationProjectSettingsRequest"></a>
+
+### UpdateLlmEvaluationProjectSettingsRequest
+Request to update the evaluation settings singleton.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| llm_evaluation_project_settings | [LlmEvaluationProjectSettings](#ondewo.nlu.LlmEvaluationProjectSettings) |  | Settings payload (only fields covered by <code>update_mask</code> are applied). |
+| update_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Mask of fields to update on the settings record. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which fields will be filled with data on the returned settings. |
+| parent | [string](#string) |  | Project owning the settings. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| language_code | [string](#string) |  | BCP-47 language-code scope (required). |
+
+
+
+
+
+
+<a name="ondewo.nlu.UpdateLlmEvaluationReleaseGateRequest"></a>
+
+### UpdateLlmEvaluationReleaseGateRequest
+Request to update an existing release gate.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| llm_evaluation_release_gate | [LlmEvaluationReleaseGate](#ondewo.nlu.LlmEvaluationReleaseGate) |  | Gate payload (only fields covered by <code>update_mask</code> are applied). |
+| update_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Mask of fields to update on the gate record. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which fields will be filled with data on the returned gate. |
+| parent | [string](#string) |  | Project owning the gate. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| language_code | [string](#string) |  | BCP-47 language-code scope (required). |
+
+
+
+
+
+
+<a name="ondewo.nlu.UpdateLlmEvaluationScheduleRequest"></a>
+
+### UpdateLlmEvaluationScheduleRequest
+Request to update an existing schedule.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| llm_evaluation_schedule | [LlmEvaluationSchedule](#ondewo.nlu.LlmEvaluationSchedule) |  | Schedule payload (only fields covered by <code>update_mask</code> are applied). |
+| update_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Mask of fields to update on the schedule record. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which fields will be filled with data on the returned schedule. |
+| parent | [string](#string) |  | Project owning the schedule. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| language_code | [string](#string) |  | BCP-47 language-code scope (required). |
+
+
+
+
+
+
+<a name="ondewo.nlu.UpdateLlmEvaluationScorecardRequest"></a>
+
+### UpdateLlmEvaluationScorecardRequest
+Request to update an existing scorecard.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| llm_evaluation_scorecard | [LlmEvaluationScorecard](#ondewo.nlu.LlmEvaluationScorecard) |  | Scorecard payload (only fields covered by <code>update_mask</code> are applied). |
+| update_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Mask of fields to update on the scorecard record. |
+| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which fields will be filled with data on the returned scorecard. |
+| parent | [string](#string) |  | Project owning the scorecard. Format: <code>projects/&lt;project_uuid&gt;/agent</code>. |
+| language_code | [string](#string) |  | BCP-47 language-code scope (required). |
+
+
+
+
+
  <!-- end messages -->
+
+
+<a name="ondewo.nlu.LlmEvaluationAbExperimentStatus"></a>
+
+### LlmEvaluationAbExperimentStatus
+Lifecycle status of an A/B experiment.
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| LLM_EVALUATION_AB_EXPERIMENT_STATUS_UNSPECIFIED | 0 | Default / unset. |
+| LLM_EVALUATION_AB_EXPERIMENT_STATUS_DRAFT | 1 | Defined but not yet started; no traffic is split. |
+| LLM_EVALUATION_AB_EXPERIMENT_STATUS_RUNNING | 2 | Started; live DetectIntent traffic is being split across the variants. |
+| LLM_EVALUATION_AB_EXPERIMENT_STATUS_STOPPED | 3 | Stopped; traffic split has ended. Sticky assignments and results are retained. |
+| LLM_EVALUATION_AB_EXPERIMENT_STATUS_ARCHIVED | 4 | Archived; read-only, hidden from the default list. |
+
+
+
+<a name="ondewo.nlu.LlmEvaluationAbOptimizeMetric"></a>
+
+### LlmEvaluationAbOptimizeMetric
+The metric an A/B rollout optimizes when comparing each variant against the
+control. Each value maps to a quantity already produced by the per-variant
+results rollup (see GetAbExperimentResults). Higher-is-better vs.
+lower-is-better is implied by the metric (e.g. PASS_RATE / CRITERION_SCORE /
+SAFETY_SCORE are higher-is-better; ERROR_RATE / MEAN_LATENCY are
+lower-is-better) and applied server-side when picking the winner.
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| LLM_EVALUATION_AB_OPTIMIZE_METRIC_UNSPECIFIED | 0 | Default / unset. |
+| LLM_EVALUATION_AB_OPTIMIZE_METRIC_PASS_RATE | 1 | Fraction of sessions that passed (1 - error_rate). Higher is better. |
+| LLM_EVALUATION_AB_OPTIMIZE_METRIC_ERROR_RATE | 2 | Fraction of sessions that errored. Lower is better. |
+| LLM_EVALUATION_AB_OPTIMIZE_METRIC_MEAN_LATENCY | 3 | Mean first-token / response latency in seconds. Lower is better. |
+| LLM_EVALUATION_AB_OPTIMIZE_METRIC_CRITERION_SCORE | 4 | Mean offline-criterion score in <code>[0.0, 1.0]</code>. Higher is better. |
+| LLM_EVALUATION_AB_OPTIMIZE_METRIC_SAFETY_SCORE | 5 | Mean native-safety score in <code>[0.0, 1.0]</code>. Higher is better. |
+
+
+
+<a name="ondewo.nlu.LlmEvaluationAnnotationStatus"></a>
+
+### LlmEvaluationAnnotationStatus
+Lifecycle status of an annotation-queue item.
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| LLM_EVALUATION_ANNOTATION_STATUS_UNSPECIFIED | 0 | Default / unset. |
+| LLM_EVALUATION_ANNOTATION_STATUS_PENDING | 1 | Enqueued, awaiting human review. |
+| LLM_EVALUATION_ANNOTATION_STATUS_REVIEWED | 2 | Reviewed by a human (verdict / reason recorded), not yet promoted or dismissed. |
+| LLM_EVALUATION_ANNOTATION_STATUS_PROMOTED | 3 | Promoted into a regression dataset (promoted_dataset_name stamped). |
+| LLM_EVALUATION_ANNOTATION_STATUS_DISMISSED | 4 | Dismissed (not a genuine failure; will not be promoted). |
+
+
+
+<a name="ondewo.nlu.LlmEvaluationDatasetType"></a>
+
+### LlmEvaluationDatasetType
+Kind of examples an evaluation dataset holds.
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| LLM_EVALUATION_DATASET_TYPE_UNSPECIFIED | 0 | Default / unset (treated as SINGLE_TURN). |
+| LLM_EVALUATION_DATASET_TYPE_SINGLE_TURN | 1 | Single-turn examples (one input, one expected output). |
+| LLM_EVALUATION_DATASET_TYPE_FLOW | 2 | Multi-turn conversation-flow examples (scripted user turns with expected tool calls / final state / answers per turn). |
+| LLM_EVALUATION_DATASET_TYPE_RAG | 3 | RAG question-answering examples (question, gold answer, expected sources). |
+| LLM_EVALUATION_DATASET_TYPE_RED_TEAM | 4 | Adversarial red-team probes (prompt injection, PII extraction, jailbreaks, ...). |
+| LLM_EVALUATION_DATASET_TYPE_SIMULATED | 5 | Synthetically generated examples (conversation simulator output). |
+
+
+
+<a name="ondewo.nlu.LlmEvaluationEvaluatorCategory"></a>
+
+### LlmEvaluationEvaluatorCategory
+Category an evaluator belongs to.
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| LLM_EVALUATION_EVALUATOR_CATEGORY_UNSPECIFIED | 0 | Default / unset. |
+| LLM_EVALUATION_EVALUATOR_CATEGORY_RAG | 1 | Retrieval-augmented-generation quality (faithfulness, contextual precision, ...). |
+| LLM_EVALUATION_EVALUATOR_CATEGORY_AGENTIC | 2 | Agentic behavior (tool correctness, task completion, MCP usage, ...). |
+| LLM_EVALUATION_EVALUATOR_CATEGORY_CONVERSATIONAL | 3 | Multi-turn conversational quality (knowledge retention, role adherence, ...). |
+| LLM_EVALUATION_EVALUATOR_CATEGORY_SAFETY | 4 | Safety (toxicity, bias, PII leakage, hallucination, ...). |
+| LLM_EVALUATION_EVALUATOR_CATEGORY_HEURISTIC | 5 | Deterministic heuristics (exact match, embedding distance, JSON validity, ...). |
+| LLM_EVALUATION_EVALUATOR_CATEGORY_CUSTOM | 6 | User-configurable custom metrics (G-Eval rubrics, DAG metrics, ...). |
+
 
 
 <a name="ondewo.nlu.LlmEvaluationEvaluatorType"></a>
@@ -7185,6 +9503,36 @@ Family of evaluator implementations.
 
 
 
+<a name="ondewo.nlu.LlmEvaluationExampleExtractionMode"></a>
+
+### LlmEvaluationExampleExtractionMode
+How session steps are converted into evaluation examples.
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| LLM_EVALUATION_EXAMPLE_EXTRACTION_MODE_UNSPECIFIED | 0 | Default / unset (treated as SINGLE_TURN). |
+| LLM_EVALUATION_EXAMPLE_EXTRACTION_MODE_SINGLE_TURN | 1 | One single-turn example per selected session step. |
+| LLM_EVALUATION_EXAMPLE_EXTRACTION_MODE_MULTI_TURN_FLOW | 2 | One multi-turn (conversation-flow) example with one turn per selected session step, in session order. |
+
+
+
+<a name="ondewo.nlu.LlmEvaluationExperimentKind"></a>
+
+### LlmEvaluationExperimentKind
+Kind of an experiment run.
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| LLM_EVALUATION_EXPERIMENT_KIND_UNSPECIFIED | 0 | Default / unset (treated as STANDARD). |
+| LLM_EVALUATION_EXPERIMENT_KIND_STANDARD | 1 | Standard single-turn evaluation run. |
+| LLM_EVALUATION_EXPERIMENT_KIND_FLOW | 2 | Multi-turn conversation-flow run (per-turn results populated). |
+| LLM_EVALUATION_EXPERIMENT_KIND_RED_TEAM | 3 | Red-team / adversarial safety run. |
+| LLM_EVALUATION_EXPERIMENT_KIND_GATE_CANDIDATE | 4 | Candidate experiment dispatched by a release gate run. |
+| LLM_EVALUATION_EXPERIMENT_KIND_GATE_SAFETY | 5 | Safety experiment dispatched by a release gate run. |
+| LLM_EVALUATION_EXPERIMENT_KIND_SCHEDULED | 6 | Experiment dispatched by a recurring schedule. |
+
+
+
 <a name="ondewo.nlu.LlmEvaluationExperimentStatus"></a>
 
 ### LlmEvaluationExperimentStatus
@@ -7200,6 +9548,47 @@ Lifecycle status of an experiment.
 | LLM_EVALUATION_EXPERIMENT_STATUS_CANCELLED | 5 | Cancelled by user request. |
 
 
+
+<a name="ondewo.nlu.LlmEvaluationReleaseGateVerdict"></a>
+
+### LlmEvaluationReleaseGateVerdict
+Verdict of a release gate run.
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| LLM_EVALUATION_RELEASE_GATE_VERDICT_UNSPECIFIED | 0 | Default / unset. |
+| LLM_EVALUATION_RELEASE_GATE_VERDICT_PENDING | 1 | Experiments still running; verdict not yet computed. |
+| LLM_EVALUATION_RELEASE_GATE_VERDICT_PASS | 2 | All checks passed. |
+| LLM_EVALUATION_RELEASE_GATE_VERDICT_FAIL | 3 | At least one check failed. |
+| LLM_EVALUATION_RELEASE_GATE_VERDICT_STALE | 4 | Verdict is older than the gate's staleness window. |
+
+
+
+<a name="ondewo.nlu.LlmEvaluationScheduleAction"></a>
+
+### LlmEvaluationScheduleAction
+What a schedule executes when it fires.
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| LLM_EVALUATION_SCHEDULE_ACTION_UNSPECIFIED | 0 | Default / unset. |
+| LLM_EVALUATION_SCHEDULE_ACTION_RUN_EXPERIMENT | 1 | Run the experiment template (recurring regression run). |
+| LLM_EVALUATION_SCHEDULE_ACTION_RUN_RELEASE_GATE | 2 | Run the referenced release gate. |
+
+
+
+<a name="ondewo.nlu.LlmEvaluationSimulationKind"></a>
+
+### LlmEvaluationSimulationKind
+Kind of conversation simulation.
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| LLM_EVALUATION_SIMULATION_KIND_UNSPECIFIED | 0 | Default / unset (treated as STANDARD). |
+| LLM_EVALUATION_SIMULATION_KIND_STANDARD | 1 | Persona-driven user simulation for coverage / stress testing. |
+| LLM_EVALUATION_SIMULATION_KIND_ADVERSARIAL | 2 | Adversarial (red-team) simulation probing safety weaknesses. |
+
+
  <!-- end enums -->
 
  <!-- end HasExtensions -->
@@ -7209,8 +9598,11 @@ Lifecycle status of an experiment.
 
 ### LlmEvaluations
 LangSmith-style evaluation surface: datasets, examples, experiments, evaluator
-runs, feedback (LLM-as-judge / human / heuristic / custom code / pairwise) and
-pairwise comparisons.
+runs, feedback (LLM-as-judge / human / heuristic / custom code / pairwise),
+pairwise comparisons, release gates + persisted gate runs, scorecards,
+per-project evaluation settings (judge configuration), the evaluator registry,
+golden-transcript recording from sessions, conversation simulation
+(standard + adversarial red-teaming), recurring schedules and report artifacts.
 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
@@ -7235,6 +9627,57 @@ pairwise comparisons.
 | LlmEvaluationSubmitFeedback | [SubmitLlmEvaluationFeedbackRequest](#ondewo.nlu.SubmitLlmEvaluationFeedbackRequest) | [LlmEvaluationFeedback](#ondewo.nlu.LlmEvaluationFeedback) | Submit a single feedback record (used by human reviewers / external evaluators). |
 | LlmEvaluationListFeedback | [ListLlmEvaluationFeedbackRequest](#ondewo.nlu.ListLlmEvaluationFeedbackRequest) | [ListLlmEvaluationFeedbackResponse](#ondewo.nlu.ListLlmEvaluationFeedbackResponse) | List feedback records, optionally filtered + paginated. |
 | LlmEvaluationDeleteFeedback | [DeleteLlmEvaluationFeedbackRequest](#ondewo.nlu.DeleteLlmEvaluationFeedbackRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Delete a single feedback record. |
+| LlmEvaluationUpdateFeedback | [UpdateLlmEvaluationFeedbackRequest](#ondewo.nlu.UpdateLlmEvaluationFeedbackRequest) | [LlmEvaluationFeedback](#ondewo.nlu.LlmEvaluationFeedback) | Update a single feedback record (e.g. correct a human review score or comment). |
+| LlmEvaluationCreateReleaseGate | [CreateLlmEvaluationReleaseGateRequest](#ondewo.nlu.CreateLlmEvaluationReleaseGateRequest) | [LlmEvaluationReleaseGate](#ondewo.nlu.LlmEvaluationReleaseGate) | Create a new release gate (a named set of thresholds over evaluator scores, regression deltas and telemetry that decides whether a candidate configuration ships). |
+| LlmEvaluationGetReleaseGate | [GetLlmEvaluationReleaseGateRequest](#ondewo.nlu.GetLlmEvaluationReleaseGateRequest) | [LlmEvaluationReleaseGate](#ondewo.nlu.LlmEvaluationReleaseGate) | Get a release gate by resource name. |
+| LlmEvaluationListReleaseGates | [ListLlmEvaluationReleaseGatesRequest](#ondewo.nlu.ListLlmEvaluationReleaseGatesRequest) | [ListLlmEvaluationReleaseGatesResponse](#ondewo.nlu.ListLlmEvaluationReleaseGatesResponse) | List release gates in the project, optionally filtered + paginated. |
+| LlmEvaluationUpdateReleaseGate | [UpdateLlmEvaluationReleaseGateRequest](#ondewo.nlu.UpdateLlmEvaluationReleaseGateRequest) | [LlmEvaluationReleaseGate](#ondewo.nlu.LlmEvaluationReleaseGate) | Update an existing release gate. Semantic changes (suite, baseline, evaluators, thresholds, weights, safety) increment the server-managed revision. |
+| LlmEvaluationDeleteReleaseGate | [DeleteLlmEvaluationReleaseGateRequest](#ondewo.nlu.DeleteLlmEvaluationReleaseGateRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Delete a release gate and all owned gate runs. |
+| LlmEvaluationRunReleaseGate | [RunLlmEvaluationReleaseGateRequest](#ondewo.nlu.RunLlmEvaluationReleaseGateRequest) | [Operation](#ondewo.nlu.Operation) | Run a release gate against a candidate target. Long-running operation: the returned Operation resolves to the completed LlmEvaluationReleaseGateRun once the candidate (and optional safety) experiments finished and the verdict has been computed and persisted server-side. |
+| LlmEvaluationGetReleaseGateRun | [GetLlmEvaluationReleaseGateRunRequest](#ondewo.nlu.GetLlmEvaluationReleaseGateRunRequest) | [LlmEvaluationReleaseGateRun](#ondewo.nlu.LlmEvaluationReleaseGateRun) | Get a single release gate run (persisted verdict + checks) by resource name. |
+| LlmEvaluationListReleaseGateRuns | [ListLlmEvaluationReleaseGateRunsRequest](#ondewo.nlu.ListLlmEvaluationReleaseGateRunsRequest) | [ListLlmEvaluationReleaseGateRunsResponse](#ondewo.nlu.ListLlmEvaluationReleaseGateRunsResponse) | List release gate runs, optionally filtered + paginated. |
+| LlmEvaluationCreateScorecard | [CreateLlmEvaluationScorecardRequest](#ondewo.nlu.CreateLlmEvaluationScorecardRequest) | [LlmEvaluationScorecard](#ondewo.nlu.LlmEvaluationScorecard) | Create a new scorecard (weighted multi-criteria roll-up definition). |
+| LlmEvaluationGetScorecard | [GetLlmEvaluationScorecardRequest](#ondewo.nlu.GetLlmEvaluationScorecardRequest) | [LlmEvaluationScorecard](#ondewo.nlu.LlmEvaluationScorecard) | Get a scorecard by resource name. |
+| LlmEvaluationListScorecards | [ListLlmEvaluationScorecardsRequest](#ondewo.nlu.ListLlmEvaluationScorecardsRequest) | [ListLlmEvaluationScorecardsResponse](#ondewo.nlu.ListLlmEvaluationScorecardsResponse) | List scorecards in the project, optionally filtered + paginated. |
+| LlmEvaluationUpdateScorecard | [UpdateLlmEvaluationScorecardRequest](#ondewo.nlu.UpdateLlmEvaluationScorecardRequest) | [LlmEvaluationScorecard](#ondewo.nlu.LlmEvaluationScorecard) | Update an existing scorecard. |
+| LlmEvaluationDeleteScorecard | [DeleteLlmEvaluationScorecardRequest](#ondewo.nlu.DeleteLlmEvaluationScorecardRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Delete a scorecard. |
+| LlmEvaluationGetProjectSettings | [GetLlmEvaluationProjectSettingsRequest](#ondewo.nlu.GetLlmEvaluationProjectSettingsRequest) | [LlmEvaluationProjectSettings](#ondewo.nlu.LlmEvaluationProjectSettings) | Get the per-(project, language_code) evaluation settings singleton (judge configuration, default weights, pass cutoffs). The server auto-creates default settings on first access. |
+| LlmEvaluationUpdateProjectSettings | [UpdateLlmEvaluationProjectSettingsRequest](#ondewo.nlu.UpdateLlmEvaluationProjectSettingsRequest) | [LlmEvaluationProjectSettings](#ondewo.nlu.LlmEvaluationProjectSettings) | Update the per-(project, language_code) evaluation settings singleton. |
+| LlmEvaluationListEvaluators | [ListLlmEvaluationEvaluatorsRequest](#ondewo.nlu.ListLlmEvaluationEvaluatorsRequest) | [ListLlmEvaluationEvaluatorsResponse](#ondewo.nlu.ListLlmEvaluationEvaluatorsResponse) | List the evaluators available on this server, with metadata describing the category, required example fields, multi-turn support, default threshold, judge requirement and configurable parameters of each evaluator. |
+| LlmEvaluationCreateExamplesFromSession | [CreateLlmEvaluationExamplesFromSessionRequest](#ondewo.nlu.CreateLlmEvaluationExamplesFromSessionRequest) | [CreateLlmEvaluationExamplesFromSessionResponse](#ondewo.nlu.CreateLlmEvaluationExamplesFromSessionResponse) | Convert a recorded session (or a selection of its session steps) into evaluation examples ("golden transcripts") inside an existing dataset. |
+| LlmEvaluationSimulateConversations | [SimulateLlmEvaluationConversationsRequest](#ondewo.nlu.SimulateLlmEvaluationConversationsRequest) | [Operation](#ondewo.nlu.Operation) | Generate synthetic multi-turn evaluation conversations by simulating users (persona-driven; STANDARD kind) or attackers (red-teaming; ADVERSARIAL kind) against the live target. Long-running operation: the returned Operation resolves once the generated examples have been persisted into the receiving dataset. |
+| LlmEvaluationCreateSchedule | [CreateLlmEvaluationScheduleRequest](#ondewo.nlu.CreateLlmEvaluationScheduleRequest) | [LlmEvaluationSchedule](#ondewo.nlu.LlmEvaluationSchedule) | Create a new schedule for recurring experiment / release gate runs. |
+| LlmEvaluationGetSchedule | [GetLlmEvaluationScheduleRequest](#ondewo.nlu.GetLlmEvaluationScheduleRequest) | [LlmEvaluationSchedule](#ondewo.nlu.LlmEvaluationSchedule) | Get a schedule by resource name. |
+| LlmEvaluationListSchedules | [ListLlmEvaluationSchedulesRequest](#ondewo.nlu.ListLlmEvaluationSchedulesRequest) | [ListLlmEvaluationSchedulesResponse](#ondewo.nlu.ListLlmEvaluationSchedulesResponse) | List schedules in the project, optionally filtered + paginated. |
+| LlmEvaluationUpdateSchedule | [UpdateLlmEvaluationScheduleRequest](#ondewo.nlu.UpdateLlmEvaluationScheduleRequest) | [LlmEvaluationSchedule](#ondewo.nlu.LlmEvaluationSchedule) | Update an existing schedule (cron / interval, enabled flag, request template). |
+| LlmEvaluationDeleteSchedule | [DeleteLlmEvaluationScheduleRequest](#ondewo.nlu.DeleteLlmEvaluationScheduleRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Delete a schedule. Experiments / gate runs already created by it are kept. |
+| LlmEvaluationCreateReport | [CreateLlmEvaluationReportRequest](#ondewo.nlu.CreateLlmEvaluationReportRequest) | [LlmEvaluationReport](#ondewo.nlu.LlmEvaluationReport) | Persist a generated report as an immutable artifact (incl. payload bytes). |
+| LlmEvaluationGetReport | [GetLlmEvaluationReportRequest](#ondewo.nlu.GetLlmEvaluationReportRequest) | [LlmEvaluationReport](#ondewo.nlu.LlmEvaluationReport) | Get a report by resource name (incl. payload bytes). |
+| LlmEvaluationListReports | [ListLlmEvaluationReportsRequest](#ondewo.nlu.ListLlmEvaluationReportsRequest) | [ListLlmEvaluationReportsResponse](#ondewo.nlu.ListLlmEvaluationReportsResponse) | List reports, optionally filtered + paginated. Payload bytes are omitted unless explicitly requested via field_mask. |
+| LlmEvaluationDeleteReport | [DeleteLlmEvaluationReportRequest](#ondewo.nlu.DeleteLlmEvaluationReportRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Delete a report. |
+| LlmEvaluationCreateAbExperiment | [CreateLlmEvaluationAbExperimentRequest](#ondewo.nlu.CreateLlmEvaluationAbExperimentRequest) | [LlmEvaluationAbExperiment](#ondewo.nlu.LlmEvaluationAbExperiment) | Create a new A/B experiment (a set of routing variants over live DetectIntent traffic). Created in DRAFT status; traffic is only split once it is started via LlmEvaluationStartAbExperiment. |
+| LlmEvaluationGetAbExperiment | [GetLlmEvaluationAbExperimentRequest](#ondewo.nlu.GetLlmEvaluationAbExperimentRequest) | [LlmEvaluationAbExperiment](#ondewo.nlu.LlmEvaluationAbExperiment) | Get an A/B experiment by resource name. |
+| LlmEvaluationListAbExperiments | [ListLlmEvaluationAbExperimentsRequest](#ondewo.nlu.ListLlmEvaluationAbExperimentsRequest) | [ListLlmEvaluationAbExperimentsResponse](#ondewo.nlu.ListLlmEvaluationAbExperimentsResponse) | List A/B experiments in the project, optionally filtered + paginated. |
+| LlmEvaluationUpdateAbExperiment | [UpdateLlmEvaluationAbExperimentRequest](#ondewo.nlu.UpdateLlmEvaluationAbExperimentRequest) | [LlmEvaluationAbExperiment](#ondewo.nlu.LlmEvaluationAbExperiment) | Update an existing A/B experiment (variants, traffic config, metadata). Only allowed in DRAFT / STOPPED status; running experiments must be stopped first. |
+| LlmEvaluationDeleteAbExperiment | [DeleteLlmEvaluationAbExperimentRequest](#ondewo.nlu.DeleteLlmEvaluationAbExperimentRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Delete an A/B experiment and all owned sticky-assignment rows. |
+| LlmEvaluationStartAbExperiment | [StartLlmEvaluationAbExperimentRequest](#ondewo.nlu.StartLlmEvaluationAbExperimentRequest) | [LlmEvaluationAbExperiment](#ondewo.nlu.LlmEvaluationAbExperiment) | Start an A/B experiment: validates that the variant traffic weights are well-formed (sum to the configured total), stamps started_at and transitions the experiment to RUNNING so live traffic begins to be split. |
+| LlmEvaluationStopAbExperiment | [StopLlmEvaluationAbExperimentRequest](#ondewo.nlu.StopLlmEvaluationAbExperimentRequest) | [LlmEvaluationAbExperiment](#ondewo.nlu.LlmEvaluationAbExperiment) | Stop a running A/B experiment: stamps stopped_at and transitions to STOPPED. Existing sticky assignments are retained for results computation. |
+| LlmEvaluationGetAbExperimentResults | [GetLlmEvaluationAbExperimentResultsRequest](#ondewo.nlu.GetLlmEvaluationAbExperimentResultsRequest) | [GetLlmEvaluationAbExperimentResultsResponse](#ondewo.nlu.GetLlmEvaluationAbExperimentResultsResponse) | Compute per-variant telemetry rollups for an A/B experiment. Stateless / computed on demand: gathers each variant's sessions and aggregates their LlmTelemetry into a per-variant LlmTelemetryReport. There is no auto-rollout. |
+| LlmEvaluationGetAbRolloutRecommendation | [GetLlmEvaluationAbRolloutRecommendationRequest](#ondewo.nlu.GetLlmEvaluationAbRolloutRecommendationRequest) | [LlmEvaluationAbRolloutRecommendation](#ondewo.nlu.LlmEvaluationAbRolloutRecommendation) | Compute a rollout recommendation for an A/B experiment: which variant wins against the control on the chosen optimize metric under the supplied statistical guard-rails (confidence level, minimum sessions per variant, minimum effect size). Stateless / read-only — computed on demand from the per-variant results; nothing is persisted and no traffic / config changes. |
+| LlmEvaluationApplyAbRollout | [ApplyLlmEvaluationAbRolloutRequest](#ondewo.nlu.ApplyLlmEvaluationAbRolloutRequest) | [LlmEvaluationAbRolloutDecision](#ondewo.nlu.LlmEvaluationAbRolloutDecision) | Apply a rollout for an A/B experiment: promotes the chosen variant's config as the project's classifier default, stops the experiment, and writes + returns the LlmEvaluationAbRolloutDecision audit record. The operator picks the variant explicitly (there is no auto-rollout). Idempotent: re-applying an already-rolled-out experiment returns the existing decision. |
+| LlmEvaluationGetAbRolloutDecision | [GetLlmEvaluationAbRolloutDecisionRequest](#ondewo.nlu.GetLlmEvaluationAbRolloutDecisionRequest) | [LlmEvaluationAbRolloutDecision](#ondewo.nlu.LlmEvaluationAbRolloutDecision) | Get the applied rollout decision (audit record) by resource name. |
+| LlmEvaluationListAbRolloutDecisions | [ListLlmEvaluationAbRolloutDecisionsRequest](#ondewo.nlu.ListLlmEvaluationAbRolloutDecisionsRequest) | [ListLlmEvaluationAbRolloutDecisionsResponse](#ondewo.nlu.ListLlmEvaluationAbRolloutDecisionsResponse) | List applied rollout decisions in the project, optionally filtered (e.g. by experiment) + paginated. |
+| LlmEvaluationCreateOnlineConfig | [CreateLlmEvaluationOnlineConfigRequest](#ondewo.nlu.CreateLlmEvaluationOnlineConfigRequest) | [LlmEvaluationOnlineConfig](#ondewo.nlu.LlmEvaluationOnlineConfig) | Create a new online-evaluation config: a per-(project, language_code) definition selecting a reference-free evaluator set + a sample rate. A swarm-safe background worker samples already-persisted live session steps, scores the recorded answer with these evaluators and enqueues failing steps into the annotation queue. |
+| LlmEvaluationGetOnlineConfig | [GetLlmEvaluationOnlineConfigRequest](#ondewo.nlu.GetLlmEvaluationOnlineConfigRequest) | [LlmEvaluationOnlineConfig](#ondewo.nlu.LlmEvaluationOnlineConfig) | Get an online-evaluation config by resource name. |
+| LlmEvaluationListOnlineConfigs | [ListLlmEvaluationOnlineConfigsRequest](#ondewo.nlu.ListLlmEvaluationOnlineConfigsRequest) | [ListLlmEvaluationOnlineConfigsResponse](#ondewo.nlu.ListLlmEvaluationOnlineConfigsResponse) | List online-evaluation configs in the project, optionally filtered + paginated. |
+| LlmEvaluationUpdateOnlineConfig | [UpdateLlmEvaluationOnlineConfigRequest](#ondewo.nlu.UpdateLlmEvaluationOnlineConfigRequest) | [LlmEvaluationOnlineConfig](#ondewo.nlu.LlmEvaluationOnlineConfig) | Update an existing online-evaluation config (enabled flag, evaluator set, sample rate, thresholds, session filter). |
+| LlmEvaluationDeleteOnlineConfig | [DeleteLlmEvaluationOnlineConfigRequest](#ondewo.nlu.DeleteLlmEvaluationOnlineConfigRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Delete an online-evaluation config. Already-produced online results and annotation-queue items are kept. |
+| LlmEvaluationGetOnlineResult | [GetLlmEvaluationOnlineResultRequest](#ondewo.nlu.GetLlmEvaluationOnlineResultRequest) | [LlmEvaluationOnlineResult](#ondewo.nlu.LlmEvaluationOnlineResult) | Get a single online-evaluation result (per scored session step) by resource name. |
+| LlmEvaluationListOnlineResults | [ListLlmEvaluationOnlineResultsRequest](#ondewo.nlu.ListLlmEvaluationOnlineResultsRequest) | [ListLlmEvaluationOnlineResultsResponse](#ondewo.nlu.ListLlmEvaluationOnlineResultsResponse) | List online-evaluation results, optionally filtered by config / pass-state + paginated. Read-only: result rows are produced by the online-evaluation worker (no Create RPC). |
+| LlmEvaluationGetAnnotationQueueItem | [GetLlmEvaluationAnnotationQueueItemRequest](#ondewo.nlu.GetLlmEvaluationAnnotationQueueItemRequest) | [LlmEvaluationAnnotationQueueItem](#ondewo.nlu.LlmEvaluationAnnotationQueueItem) | Get a single annotation-queue item by resource name. |
+| LlmEvaluationListAnnotationQueueItems | [ListLlmEvaluationAnnotationQueueItemsRequest](#ondewo.nlu.ListLlmEvaluationAnnotationQueueItemsRequest) | [ListLlmEvaluationAnnotationQueueItemsResponse](#ondewo.nlu.ListLlmEvaluationAnnotationQueueItemsResponse) | List annotation-queue items, optionally filtered by status / assignee + paginated. Items are enqueued by the online-evaluation worker (no Create RPC). |
+| LlmEvaluationUpdateAnnotationQueueItem | [UpdateLlmEvaluationAnnotationQueueItemRequest](#ondewo.nlu.UpdateLlmEvaluationAnnotationQueueItemRequest) | [LlmEvaluationAnnotationQueueItem](#ondewo.nlu.LlmEvaluationAnnotationQueueItem) | Update an annotation-queue item (status / assignee / reason transitions: PENDING -> REVIEWED / DISMISSED). |
+| LlmEvaluationPromoteAnnotationQueueItem | [PromoteLlmEvaluationAnnotationQueueItemRequest](#ondewo.nlu.PromoteLlmEvaluationAnnotationQueueItemRequest) | [PromoteLlmEvaluationAnnotationQueueItemResponse](#ondewo.nlu.PromoteLlmEvaluationAnnotationQueueItemResponse) | Promote an annotation-queue item into a regression dataset. Thin server-side composition: delegates to LlmEvaluationCreateExamplesFromSession with the item's session (+ selected steps), flips the item status to PROMOTED and stamps the promoted dataset name. Returns the created example(s). |
 
  <!-- end services -->
 
@@ -10983,6 +13426,123 @@ One reasoning-effort aggregate.
 
 
 
+<a name="ondewo.nlu.LlmRetrievalMetadata"></a>
+
+### LlmRetrievalMetadata
+Typed view of the chunks retrieved for one LLM call. Populated alongside the
+unstructured <code>outputs.retrieved_chunks</code> Struct (field 18 on
+LlmTelemetry, kept for back-compat); both carry the same chunk list.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| chunks | [LlmRetrievedChunk](#ondewo.nlu.LlmRetrievedChunk) | repeated | The retrieved chunks in retrieval-result order. |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmRetrievedChunk"></a>
+
+### LlmRetrievedChunk
+One retrieved RAG chunk surfaced during an LLM call. Mirrors the five-field
+chunk already emitted into <code>outputs.retrieved_chunks</code> (Struct) plus
+a typed <code>rank</code>.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| document_id | [string](#string) |  | Source document identifier the chunk was retrieved from. |
+| chunk_id | [string](#string) |  | Chunk identifier within the source document. |
+| score | [double](#double) |  | Retrieval similarity / relevance score assigned by the retriever. |
+| text | [string](#string) |  | Chunk text (already truncated to the emit-time character cap, ~2000 chars). |
+| source_uri | [string](#string) |  | Source URI (document URL or document name) for click-through. |
+| rank | [int32](#int32) |  | Zero-based position of this chunk in the retrieval result order (RAGFlow reference order / LangChain document order). |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmSafetyAssessment"></a>
+
+### LlmSafetyAssessment
+Native safety assessment for one LLM call, computed at telemetry build time by
+a dependency-free (regex / substring) assessor over the call's input / output
+text. Additive, optional: absent when safety scoring is disabled. This is the
+live MONITORING signal; the offline LLM-judge safety evaluators live in
+<code>llm_evaluation.proto</code>.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| flagged_categories | [string](#string) | repeated | Detector categories that fired across input and output (<code>prompt_injection</code> | <code>jailbreak</code> | <code>pii</code> | <code>info_leak</code>). Empty when nothing was flagged. |
+| has_pii | [bool](#bool) |  | True when any PII pattern (email / phone / IBAN / credit-card / national-id) was detected in input or output. |
+| has_injection_attempt | [bool](#bool) |  | True when a prompt-injection pattern was detected in the input. |
+| has_jailbreak_attempt | [bool](#bool) |  | True when a jailbreak / role-override pattern was detected in the input. |
+| safety_score | [double](#double) |  | Overall safety score in <code>[0.0, 1.0]</code> where <code>1.0</code> means fully safe (no findings) and lower values indicate higher risk. |
+| findings | [LlmSafetyFinding](#ondewo.nlu.LlmSafetyFinding) | repeated | Per-finding detail records (category / severity / matched pattern / location). |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmSafetyCategoryStat"></a>
+
+### LlmSafetyCategoryStat
+Per-category native-safety aggregate across the LLM calls in scope.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| category | [string](#string) |  | Detector category (<code>prompt_injection</code> | <code>jailbreak</code> | <code>pii</code> | <code>info_leak</code>). |
+| count | [int64](#int64) |  | Number of calls flagged for this category in scope. |
+| rate | [double](#double) |  | count / total_assessed. |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmSafetyFinding"></a>
+
+### LlmSafetyFinding
+One concrete safety finding inside an LlmSafetyAssessment.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| category | [string](#string) |  | Detector category that fired (e.g. <code>prompt_injection</code>, <code>jailbreak</code>, <code>pii</code>, <code>info_leak</code>). |
+| severity | [string](#string) |  | Severity tag ("low" | "medium" | "high" | "critical"). |
+| matched_pattern | [string](#string) |  | The pattern / detector rule that matched (may be a redacted excerpt). |
+| location | [LlmSafetyLocation](#ondewo.nlu.LlmSafetyLocation) |  | Whether the finding was located in the input or the output. |
+
+
+
+
+
+
+<a name="ondewo.nlu.LlmSafetyStats"></a>
+
+### LlmSafetyStats
+Native-safety breakdown aggregate across the LLM calls in scope. Computed from
+the per-call LlmSafetyAssessment records.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| total_assessed | [int64](#int64) |  | Number of LLM calls that carried a safety assessment in scope. |
+| flagged_count | [int64](#int64) |  | Number of assessed calls with at least one flagged category. |
+| overall_safety_score | [double](#double) |  | Mean LlmSafetyAssessment.safety_score across assessed calls (<code>1.0</code> = fully safe). |
+| category_stats | [LlmSafetyCategoryStat](#ondewo.nlu.LlmSafetyCategoryStat) | repeated | Per-category counts and rates, descending by count. |
+
+
+
+
+
+
 <a name="ondewo.nlu.LlmTelemetry"></a>
 
 ### LlmTelemetry
@@ -11051,6 +13611,8 @@ Telemetry for a single LLM invocation inside one DetectIntent turn.
 | extra_query | [google.protobuf.Struct](#google.protobuf.Struct) | optional | Optional. Additional query parameters to send with the request. These are merged with and override default_query for this specific request only. |
 | extra_body | [google.protobuf.Struct](#google.protobuf.Struct) | optional | Optional. Additional JSON properties to include in the request body. Useful for accessing new or undocumented API parameters. |
 | ccai_service_provider | [CcaiServiceProvider](#ondewo.nlu.CcaiServiceProvider) |  | Provider of the ccai service |
+| llm_safety_assessment | [LlmSafetyAssessment](#ondewo.nlu.LlmSafetyAssessment) |  | Native (regex / substring, no-LLM) safety assessment computed at telemetry build time over the call's input / output text. Distinct from the offline LLM-judge safety evaluators in <code>llm_evaluation.proto</code>: this is the live MONITORING signal on real DetectIntent traffic. Unset when safety scoring is disabled. |
+| llm_retrieval_metadata | [LlmRetrievalMetadata](#ondewo.nlu.LlmRetrievalMetadata) |  | Typed view of the retrieved RAG chunks for this LLM call. Populated alongside the unstructured <code>outputs.retrieved_chunks</code> Struct (field 18, kept for back-compat); both carry the same chunk list. Unset for non-retrieval calls. |
 
 
 
@@ -11087,6 +13649,7 @@ breakdown fields (6+) are populated only for the matching report type; a
 | thinking_duration_seconds_total | [double](#double) |  | Scope-wide summed thinking-block duration in seconds. |
 | tool_call_tokens_total | [int64](#int64) |  | Scope-wide summed tool-call tokens. |
 | tool_call_duration_seconds_total | [double](#double) |  | Scope-wide summed tool-call duration in seconds. |
+| safety_stats | [LlmSafetyStats](#ondewo.nlu.LlmSafetyStats) |  | Native safety aggregate (counts / rates / mean score). Populated for *_LLM_SAFETY and *_LLM_TOTAL_STATISTICS reports. |
 
 
 
@@ -11814,6 +14377,19 @@ Type of operator to compare
 | CONTAINS | 4 | contains operator, e.g. part of string, or one of the elements in an iterable such as set or list |
 | STARTS_WITH | 5 | starts with operator for string comparison only |
 | ENDS_WITH | 6 | ends with operator for string comparison only |
+
+
+
+<a name="ondewo.nlu.LlmSafetyLocation"></a>
+
+### LlmSafetyLocation
+Where a safety finding was located in the LLM call.
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| LLM_SAFETY_LOCATION_UNSPECIFIED | 0 | Default / unset. |
+| LLM_SAFETY_LOCATION_INPUT | 1 | The finding was matched in the model input (prompt / user turn). |
+| LLM_SAFETY_LOCATION_OUTPUT | 2 | The finding was matched in the model output (completion). |
 
 
 
