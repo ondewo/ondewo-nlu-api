@@ -3625,6 +3625,10 @@
                       </li>
                     
                       <li>
+                        <a href="#ondewo.nlu.ReferencedChunk" class="title-badge message">ReferencedChunk</a>
+                      </li>
+                    
+                      <li>
                         <a href="#ondewo.nlu.S2tTranscription" class="title-badge message">S2tTranscription</a>
                       </li>
                     
@@ -42309,6 +42313,93 @@ for a list of the currently supported language codes. </p></td>
                   <td><a href="#ondewo.nlu.LlmTelemetryReport">LlmTelemetryReport</a></td>
                   <td></td>
                   <td><p>Aggregated LLM telemetry (tokens, tool calls, thinking) for this turn. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>referenced_chunks</td>
+                  <td><a href="#ondewo.nlu.ReferencedChunk">ReferencedChunk</a></td>
+                  <td>repeated</td>
+                  <td><p>Source chunks the answer cited via in-text <code>[ID:N]</code> markers, documents. Empty when the turn was not answered from a RAG dataset. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="ondewo.nlu.ReferencedChunk" class="title-badge message">ReferencedChunk</h3>
+        <p>Chunk information for a document chunk referenced in a RAG based <code>StreamingDetectIntentResponse</code></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>reference_index</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>Index by which this chunk is referenced in the response text. For index <code>N</code> the reference in the response text has format <code>[ID:N]</code> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>dataset_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>ID of the dataset the chunk belongs to. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>document_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>ID of the document the chunk belongs to. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>chunk_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>ID of the chunk. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>document_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Name of the document the chunk belongs to. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>content</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Text of the chunk. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>similarity</td>
+                  <td><a href="#float">float</a></td>
+                  <td></td>
+                  <td><p>Similarity score of this chunk for response it is retruned with. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>document_url</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>For crawled documents the URL of the source document. For any other document it is left empty. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>deep_link_url</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>For crawled documents link to the source document that directly jumps to the chunk's location on the page using a text fragment anchor (a bit fragile and might not always work). For any other document it is left empty. </p></td>
                 </tr>
               
             </tbody>
