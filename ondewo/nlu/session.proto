@@ -1404,6 +1404,36 @@ message LlmTokenUsageUpdateEvent {
     LlmTokenUsage llm_token_usage = 2;
 }
 
+// Chunk information for a document chunk referenced in a RAG based <code>StreamingDetectIntentResponse</code>
+message ReferencedChunk {
+    // Index by which this chunk is referenced in the response text. For index <code>N</code> the reference in the response text has format <code>[ID:N]</code>
+    int32 reference_index = 1;
+
+    // ID of the dataset the chunk belongs to.
+    string dataset_id = 2;
+
+    // ID of the document the chunk belongs to.
+    string document_id = 3;
+
+    // ID of the chunk.
+    string chunk_id = 4;
+
+    // Name of the document the chunk belongs to.
+    string document_name = 5;
+
+    // Text of the chunk.
+    string content = 6;
+
+    // Similarity score of this chunk for response it is retruned with.
+    float similarity = 7;
+
+    // For crawled documents the URL of the source document. For any other document it is left empty.
+    string document_url = 8;
+
+    // For crawled documents link to the source document that directly jumps to the chunk's location on the page using a text fragment anchor (a bit fragile and might not always work). For any other document it is left empty.
+    string deep_link_url = 9;
+}
+
 // Represents the result of conversational query or event processing.
 message QueryResult {
 
@@ -1491,6 +1521,9 @@ message QueryResult {
 
     // Aggregated LLM telemetry (tokens, tool calls, thinking) for this turn.
     LlmTelemetryReport llm_telemetry_report = 17;
+
+    // Source chunks the answer cited via in-text <code>[ID:N]</code> markers, documents. Empty when the turn was not answered from a RAG dataset.
+    repeated ReferencedChunk referenced_chunks = 18;
 
 }
 
