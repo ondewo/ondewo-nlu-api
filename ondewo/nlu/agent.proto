@@ -2615,6 +2615,12 @@ message ProjectTechnicalUser {
 
     // The technical user's login username / email.
     string username = 2;
+
+    // The time the technical user was created (Keycloak createdTimestamp).
+    google.protobuf.Timestamp created_at = 3;
+
+    // The id of the user that created this technical user.
+    string created_by = 4;
 }
 
 // Response listing the project-scoped technical users of a project (agent).
