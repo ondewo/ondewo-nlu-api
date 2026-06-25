@@ -711,6 +711,7 @@
     - [QueryInput](#ondewo.nlu.QueryInput)
     - [QueryParameters](#ondewo.nlu.QueryParameters)
     - [QueryResult](#ondewo.nlu.QueryResult)
+    - [ReferencedChunk](#ondewo.nlu.ReferencedChunk)
     - [S2tTranscription](#ondewo.nlu.S2tTranscription)
     - [Session](#ondewo.nlu.Session)
     - [SessionFilter](#ondewo.nlu.SessionFilter)
@@ -13896,6 +13897,30 @@ You should not rely on this field as it isn&apos;t guaranteed to be accurate, or
 | language_code | [string](#string) |  | The language that was triggered during intent detection. See <a href="https://dialogflow.com/docs/reference/language">Language Support</a> for a list of the currently supported language codes. |
 | file_resources | [FileResource](#ondewo.nlu.FileResource) | repeated | Generated or attached files, e.g., llm generates a picture or file attachment |
 | llm_telemetry_report | [LlmTelemetryReport](#ondewo.nlu.LlmTelemetryReport) |  | Aggregated LLM telemetry (tokens, tool calls, thinking) for this turn. |
+| referenced_chunks | [ReferencedChunk](#ondewo.nlu.ReferencedChunk) | repeated | Source chunks the answer cited via in-text <code>[ID:N]</code> markers, documents. Empty when the turn was not answered from a RAG dataset. |
+
+
+
+
+
+
+<a name="ondewo.nlu.ReferencedChunk"></a>
+
+### ReferencedChunk
+Chunk information for a document chunk referenced in a RAG based <code>StreamingDetectIntentResponse</code>
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| reference_index | [int32](#int32) |  | Index by which this chunk is referenced in the response text. For index <code>N</code> the reference in the response text has format <code>[ID:N]</code> |
+| dataset_id | [string](#string) |  | ID of the dataset the chunk belongs to. |
+| document_id | [string](#string) |  | ID of the document the chunk belongs to. |
+| chunk_id | [string](#string) |  | ID of the chunk. |
+| document_name | [string](#string) |  | Name of the document the chunk belongs to. |
+| content | [string](#string) |  | Text of the chunk. |
+| similarity | [float](#float) |  | Similarity score of this chunk for response it is retruned with. |
+| document_url | [string](#string) |  | For crawled documents the URL of the source document. For any other document it is left empty. |
+| deep_link_url | [string](#string) |  | For crawled documents link to the source document that directly jumps to the chunk's location on the page using a text fragment anchor (a bit fragile and might not always work). For any other document it is left empty. |
 
 
 

@@ -2,6 +2,14 @@
 
 *****************
 
+## Release ONDEWO NLU API 6.13.0
+
+### New Features
+
+* [[OND211-2417]](https://ondewo.atlassian.net/browse/OND211-2417) `session.proto`: Add list of new `ReferencedChunk` message to `QueryResults` to return chunk information of referenced chunks with `StreamingDetectIntentResponse`s.
+
+*****************
+
 ## Release ONDEWO NLU API 6.12.0
 
 ### New Features
