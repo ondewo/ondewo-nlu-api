@@ -15,7 +15,7 @@ fail_fast: false
 
 repos:
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.19.1
+    rev: v2.1.0
     hooks:
       - id: mypy  # Run mypy type checker; note: runs with flag --missing-imports
         args: [ --config-file=mypy.ini ]
@@ -72,7 +72,7 @@ repos:
       - id: flake8
 
   - repo: https://github.com/milin/giticket
-    rev: v1.5
+    rev: '1.92'
     hooks:
       - id: giticket  # Prepend the commit message with the JIRA ticket
         args: [ '--regex=(?:(?:feature|bugfix|support|hotfix)/)?([A-Z][A-Z][A-Z][0-9]{3}-[0-9]{1,5})[_-][\w-]+',

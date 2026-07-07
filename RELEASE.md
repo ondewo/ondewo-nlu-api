@@ -2,6 +2,14 @@
 
 *****************
 
+## Release ONDEWO NLU API 6.14.0
+
+### Improvements
+
+* [[OND211-2418]](https://ondewo.atlassian.net/browse/OND211-2418) `ondewo/nlu`: Complete the inline field documentation across the protos. Documented the remaining batch-CRUD status oneofs and sorting requests in `intent.proto` and `entity_type.proto`, the streaming `telemetry_event` LLM events in `session.proto`, the crawler path filters in `rag.proto`, and `ValidateEmbeddedRegexRequest` in `utility.proto`, so every message field and enum value now carries a `//` doc comment.
+
+*****************
+
 ## Release ONDEWO NLU API 6.13.0
 
 ### New Features

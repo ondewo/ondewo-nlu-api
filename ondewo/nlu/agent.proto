@@ -65,7 +65,7 @@ service Agents {
     // Examples:
     //
     // <pre>
-    // grpcurl -plaintext -H 'cai-token: aimp' -d '{
+    // grpcurl -plaintext -H 'Authorization: Bearer <jwt>' -d '{
     //   "agent": {
     //     "display_name": "My Pizza Bot",
     //     "default_language_code": "en",
@@ -100,7 +100,7 @@ service Agents {
     // Examples:
     //
     // <pre>
-    // grpcurl -plaintext -H 'cai-token: aimp' -d '{
+    // grpcurl -plaintext -H 'Authorization: Bearer <jwt>' -d '{
     //   "agent": {
     //     "parent": "projects/76aaf4f3-a1f6-4fda-b4b3-351c64e65bc4/agent",
     //     "display_name": "Pizza Bot 2",
@@ -140,7 +140,7 @@ service Agents {
     // Examples:
     //
     // <pre>
-    // grpcurl -plaintext -H 'cai-token: aimp' -d '{
+    // grpcurl -plaintext -H 'Authorization: Bearer <jwt>' -d '{
     //   "parent": "projects/76aaf4f3-a1f6-4fda-b4b3-351c64e65bc4/agent"
     // }' localhost:50055 ondewo.nlu.Agents.GetAgent
     // </pre>
@@ -169,7 +169,7 @@ service Agents {
     // Examples:
     //
     // <pre>
-    // grpcurl -plaintext -H 'cai-token: aimp' -d '{
+    // grpcurl -plaintext -H 'Authorization: Bearer <jwt>' -d '{
     //   "parent": "projects/76aaf4f3-a1f6-4fda-b4b3-351c64e65bc4/agent"
     // }' localhost:50055 ondewo.nlu.Agents.DeleteAgent
     // </pre>
@@ -185,7 +185,7 @@ service Agents {
     // Examples:
     //
     // <pre>
-    // grpcurl -plaintext -H 'cai-token: aimp' localhost:50055 ondewo.nlu.Agents.DeleteAllAgents
+    // grpcurl -plaintext -H 'Authorization: Bearer <jwt>' localhost:50055 ondewo.nlu.Agents.DeleteAllAgents
     // </pre>
     // <samp>{}</samp>
     rpc DeleteAllAgents (google.protobuf.Empty) returns (google.protobuf.Empty) {
@@ -199,7 +199,7 @@ service Agents {
     // Examples:
     //
     // <pre>
-    // grpcurl -plaintext -H 'cai-token: aimp' localhost:50055 ondewo.nlu.Agents.ListAgents
+    // grpcurl -plaintext -H 'Authorization: Bearer <jwt>' localhost:50055 ondewo.nlu.Agents.ListAgents
     // </pre>
     // <samp>{
     //   "agents_with_owners": [
@@ -231,7 +231,7 @@ service Agents {
     // Examples:
     //
     // <pre>
-    // grpcurl -plaintext -H 'cai-token: aimp' localhost:50055 ondewo.nlu.Agents.ListAgentsOfUser
+    // grpcurl -plaintext -H 'Authorization: Bearer <jwt>' localhost:50055 ondewo.nlu.Agents.ListAgentsOfUser
     // </pre>
     // <samp>{
     //   "agents_of_user_with_owners": [
@@ -269,7 +269,7 @@ service Agents {
     // Examples:
     //
     // <pre>
-    // grpcurl -plaintext -H 'cai-token: aimp' localhost:50055 ondewo.nlu.Agents.ListAllAgents
+    // grpcurl -plaintext -H 'Authorization: Bearer <jwt>' localhost:50055 ondewo.nlu.Agents.ListAllAgents
     // </pre>
     // <samp>{
     //   "agents_with_owners": [
@@ -509,6 +509,41 @@ service Agents {
 
     // Force reindexing Intent and Entity data of Agent
     rpc ReindexAgent (ReindexAgentRequest) returns (ondewo.nlu.Operation);
+
+    // Creates a project-scoped technical user (a normal, 2FA-exempt account holding
+    // PROJECT_EXECUTOR on this one project) for headless/machine access (e.g.
+    // ondewo-sip/csi/vtsi) via the ROPC login bridge. The generated password is
+    // returned ONCE in the response and is not retrievable afterwards.
+    rpc CreateProjectTechnicalUser (CreateProjectTechnicalUserRequest) returns (CreateProjectTechnicalUserResponse) {
+        option (google.api.http) = {
+            post: "/v2/{parent=projects/*/agent}/technical_users"
+            body: "*"
+        };
+    }
+
+    // Lists the project-scoped technical users of the project (agent).
+    rpc ListProjectTechnicalUsers (ListProjectTechnicalUsersRequest) returns (ListProjectTechnicalUsersResponse) {
+        option (google.api.http) = {
+            get: "/v2/{parent=projects/*/agent}/technical_users"
+        };
+    }
+
+    // Deletes a project-scoped technical user (removes the Keycloak user and the
+    // project membership/projection rows).
+    rpc DeleteProjectTechnicalUser (DeleteProjectTechnicalUserRequest) returns (google.protobuf.Empty) {
+        option (google.api.http) = {
+            delete: "/v2/{parent=projects/*/agent}/technical_users/{user_id=*}"
+        };
+    }
+
+    // Rotates the password of a project-scoped technical user. Invalidates the old
+    // password and returns the new generated password ONCE in the response.
+    rpc RotateProjectTechnicalUserPassword (RotateProjectTechnicalUserPasswordRequest) returns (RotateProjectTechnicalUserPasswordResponse) {
+        option (google.api.http) = {
+            post: "/v2/{parent=projects/*/agent}/technical_users/{user_id=*}:rotatePassword"
+            body: "*"
+        };
+    }
 
 }
 
@@ -2529,4 +2564,107 @@ message ReindexAgentRequest {
 
     // Optional, useful for reindexing specific indices in the future
     repeated FullTextSearchRequest.QueryType index_types = 3;
+}
+
+// Project-scoped technical-user messages (D14)
+
+// Request to create a project-scoped technical user (PROJECT_EXECUTOR, 2FA-exempt).
+message CreateProjectTechnicalUserRequest {
+
+    // Required. The project (agent) that the technical user is scoped to.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Optional. A human-readable name used to derive the technical user's
+    // Keycloak username/email (e.g. ondewo-nlu-cai-tech-&lt;project&gt;-&lt;name&gt;).
+    // If empty, the server generates one.
+    string name = 2;
+}
+
+// Response with the freshly minted technical user's credentials.
+// The password is returned ONCE and cannot be retrieved later.
+message CreateProjectTechnicalUserResponse {
+
+    // The technical user's id (Keycloak sub / UUID).
+    string user_id = 1;
+
+    // The technical user's login username / email.
+    string username = 2;
+
+    // The generated password. Shown ONCE; not retrievable afterwards.
+    string password = 3;
+}
+
+// Request to list the project-scoped technical users of a project (agent).
+message ListProjectTechnicalUsersRequest {
+
+    // Required. The project (agent) whose technical users are listed.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Optional. The next_page_token value returned from a previous list request.
+    // The page token to support pagination.
+    string page_token = 2;
+}
+
+// A single project-scoped technical user entry.
+message ProjectTechnicalUser {
+
+    // The technical user's id (Keycloak sub / UUID).
+    string user_id = 1;
+
+    // The technical user's login username / email.
+    string username = 2;
+
+    // The time the technical user was created (Keycloak createdTimestamp).
+    google.protobuf.Timestamp created_at = 3;
+
+    // The id of the user that created this technical user.
+    string created_by = 4;
+}
+
+// Response listing the project-scoped technical users of a project (agent).
+message ListProjectTechnicalUsersResponse {
+
+    // The technical users scoped to the project.
+    repeated ProjectTechnicalUser technical_users = 1;
+
+    // The next_page_token is used to retrieve the next page of a returned result.
+    string next_page_token = 2;
+}
+
+// Request to delete a project-scoped technical user.
+message DeleteProjectTechnicalUserRequest {
+
+    // Required. The project (agent) that the technical user is scoped to.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Required. The id of the technical user to delete.
+    string user_id = 2;
+}
+
+// Request to rotate the password of a project-scoped technical user.
+message RotateProjectTechnicalUserPasswordRequest {
+
+    // Required. The project (agent) that the technical user is scoped to.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Required. The id of the technical user whose password is rotated.
+    string user_id = 2;
+}
+
+// Response with the rotated password.
+// The password is returned ONCE and cannot be retrieved later.
+message RotateProjectTechnicalUserPasswordResponse {
+
+    // The technical user's id (Keycloak sub / UUID).
+    string user_id = 1;
+
+    // The technical user's login username / email.
+    string username = 2;
+
+    // The new generated password. Shown ONCE; not retrievable afterwards.
+    string password = 3;
 }

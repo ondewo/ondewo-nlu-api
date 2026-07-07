@@ -590,7 +590,9 @@ message EntityTypeSorting {
         SORT_ENTITY_TYPE_BY_SYNONYM_COUNT = 5;
     }
 
+    // The field to sort the entity types by
     EntityTypeSortingField sorting_field = 1;
+    // The sorting mode: ascending or descending
     SortingMode sorting_mode = 2;
 }
 
@@ -673,7 +675,9 @@ message DeleteEntityStatus {
 
     // error if any
     oneof delete_status{
+        // Set when the entity was successfully deleted
         google.protobuf.Empty successfully_deleted = 1;
+        // The error message when deleting the entity failed
         string error_message = 2;
     }
 }
@@ -769,6 +773,8 @@ message EntityValueSorting {
         SORT_ENTITY_VALUE_BY_SYNONYM_COUNT = 3;
     }
 
+    // The field to sort the entity values by
     EntityValueSortingField sorting_field = 7;
+    // The sorting mode: ascending or descending
     SortingMode sorting_mode = 8;
 }

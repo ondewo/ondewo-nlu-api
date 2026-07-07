@@ -80,6 +80,7 @@ message ValidateRegexResponse {
 // Validation request for entity type values
 message ValidateEmbeddedRegexRequest {
 
+    // The entity (with embedded regex) to validate
     EntityType.Entity entity_type = 1;
 }
 
