@@ -126,6 +126,14 @@
                       
                         <li><a href="#ondewo.nlu.Agents.ReindexAgent" class="title-badge method">ReindexAgent</a></li>
                       
+                        <li><a href="#ondewo.nlu.Agents.CreateProjectTechnicalUser" class="title-badge method">CreateProjectTechnicalUser</a></li>
+                      
+                        <li><a href="#ondewo.nlu.Agents.ListProjectTechnicalUsers" class="title-badge method">ListProjectTechnicalUsers</a></li>
+                      
+                        <li><a href="#ondewo.nlu.Agents.DeleteProjectTechnicalUser" class="title-badge method">DeleteProjectTechnicalUser</a></li>
+                      
+                        <li><a href="#ondewo.nlu.Agents.RotateProjectTechnicalUserPassword" class="title-badge method">RotateProjectTechnicalUserPassword</a></li>
+                      
                       </ul>
                       
                     </li>
@@ -165,11 +173,23 @@
                       </li>
                     
                       <li>
+                        <a href="#ondewo.nlu.CreateProjectTechnicalUserRequest" class="title-badge message">CreateProjectTechnicalUserRequest</a>
+                      </li>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.CreateProjectTechnicalUserResponse" class="title-badge message">CreateProjectTechnicalUserResponse</a>
+                      </li>
+                    
+                      <li>
                         <a href="#ondewo.nlu.CustomPlatformInfo" class="title-badge message">CustomPlatformInfo</a>
                       </li>
                     
                       <li>
                         <a href="#ondewo.nlu.DeleteAgentRequest" class="title-badge message">DeleteAgentRequest</a>
+                      </li>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.DeleteProjectTechnicalUserRequest" class="title-badge message">DeleteProjectTechnicalUserRequest</a>
                       </li>
                     
                       <li>
@@ -357,6 +377,14 @@
                       </li>
                     
                       <li>
+                        <a href="#ondewo.nlu.ListProjectTechnicalUsersRequest" class="title-badge message">ListProjectTechnicalUsersRequest</a>
+                      </li>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.ListProjectTechnicalUsersResponse" class="title-badge message">ListProjectTechnicalUsersResponse</a>
+                      </li>
+                    
+                      <li>
                         <a href="#ondewo.nlu.ListUsersInProjectRequest" class="title-badge message">ListUsersInProjectRequest</a>
                       </li>
                     
@@ -389,6 +417,10 @@
                       </li>
                     
                       <li>
+                        <a href="#ondewo.nlu.ProjectTechnicalUser" class="title-badge message">ProjectTechnicalUser</a>
+                      </li>
+                    
+                      <li>
                         <a href="#ondewo.nlu.RankingMatchOptimizationConfig" class="title-badge message">RankingMatchOptimizationConfig</a>
                       </li>
                     
@@ -402,6 +434,14 @@
                     
                       <li>
                         <a href="#ondewo.nlu.RestoreAgentRequest" class="title-badge message">RestoreAgentRequest</a>
+                      </li>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.RotateProjectTechnicalUserPasswordRequest" class="title-badge message">RotateProjectTechnicalUserPasswordRequest</a>
+                      </li>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.RotateProjectTechnicalUserPasswordResponse" class="title-badge message">RotateProjectTechnicalUserPasswordResponse</a>
                       </li>
                     
                       <li>
@@ -4319,7 +4359,7 @@
 Examples:
 
 <pre>
-grpcurl -plaintext -H 'cai-token: aimp' -d '{
+grpcurl -plaintext -H 'Authorization: Bearer <jwt>' -d '{
   "agent": {
     "display_name": "My Pizza Bot",
     "default_language_code": "en",
@@ -4352,7 +4392,7 @@ grpcurl -plaintext -H 'cai-token: aimp' -d '{
 Examples:
 
 <pre>
-grpcurl -plaintext -H 'cai-token: aimp' -d '{
+grpcurl -plaintext -H 'Authorization: Bearer <jwt>' -d '{
   "agent": {
     "parent": "projects/76aaf4f3-a1f6-4fda-b4b3-351c64e65bc4/agent",
     "display_name": "Pizza Bot 2",
@@ -4390,7 +4430,7 @@ grpcurl -plaintext -H 'cai-token: aimp' -d '{
 Examples:
 
 <pre>
-grpcurl -plaintext -H 'cai-token: aimp' -d '{
+grpcurl -plaintext -H 'Authorization: Bearer <jwt>' -d '{
   "parent": "projects/76aaf4f3-a1f6-4fda-b4b3-351c64e65bc4/agent"
 }' localhost:50055 ondewo.nlu.Agents.GetAgent
 </pre>
@@ -4418,7 +4458,7 @@ grpcurl -plaintext -H 'cai-token: aimp' -d '{
 Examples:
 
 <pre>
-grpcurl -plaintext -H 'cai-token: aimp' -d '{
+grpcurl -plaintext -H 'Authorization: Bearer <jwt>' -d '{
   "parent": "projects/76aaf4f3-a1f6-4fda-b4b3-351c64e65bc4/agent"
 }' localhost:50055 ondewo.nlu.Agents.DeleteAgent
 </pre>
@@ -4433,7 +4473,7 @@ grpcurl -plaintext -H 'cai-token: aimp' -d '{
 Examples:
 
 <pre>
-grpcurl -plaintext -H 'cai-token: aimp' localhost:50055 ondewo.nlu.Agents.DeleteAllAgents
+grpcurl -plaintext -H 'Authorization: Bearer <jwt>' localhost:50055 ondewo.nlu.Agents.DeleteAllAgents
 </pre>
 <samp>{}</samp>
         
@@ -4446,7 +4486,7 @@ grpcurl -plaintext -H 'cai-token: aimp' localhost:50055 ondewo.nlu.Agents.Delete
 Examples:
 
 <pre>
-grpcurl -plaintext -H 'cai-token: aimp' localhost:50055 ondewo.nlu.Agents.ListAgents
+grpcurl -plaintext -H 'Authorization: Bearer <jwt>' localhost:50055 ondewo.nlu.Agents.ListAgents
 </pre>
 <samp>{
   "agents_with_owners": [
@@ -4477,7 +4517,7 @@ grpcurl -plaintext -H 'cai-token: aimp' localhost:50055 ondewo.nlu.Agents.ListAg
 Examples:
 
 <pre>
-grpcurl -plaintext -H 'cai-token: aimp' localhost:50055 ondewo.nlu.Agents.ListAgentsOfUser
+grpcurl -plaintext -H 'Authorization: Bearer <jwt>' localhost:50055 ondewo.nlu.Agents.ListAgentsOfUser
 </pre>
 <samp>{
   "agents_of_user_with_owners": [
@@ -4514,7 +4554,7 @@ grpcurl -plaintext -H 'cai-token: aimp' localhost:50055 ondewo.nlu.Agents.ListAg
 Examples:
 
 <pre>
-grpcurl -plaintext -H 'cai-token: aimp' localhost:50055 ondewo.nlu.Agents.ListAllAgents
+grpcurl -plaintext -H 'Authorization: Bearer <jwt>' localhost:50055 ondewo.nlu.Agents.ListAllAgents
 </pre>
 <samp>{
   "agents_with_owners": [
@@ -4765,6 +4805,35 @@ Supports LLM-typed report types (SESSION_LLM_*) only.
           <pre>rpc ReindexAgent (<a href="#ondewo.nlu.ReindexAgentRequest">ReindexAgentRequest</a>) returns (<a href="#ondewo.nlu.Operation">Operation)</a></pre>
 
           Force reindexing Intent and Entity data of Agent
+        
+          <h4 id="ondewo.nlu.Agents.CreateProjectTechnicalUser" class="title-badge method">CreateProjectTechnicalUser</h4>
+
+          <pre>rpc CreateProjectTechnicalUser (<a href="#ondewo.nlu.CreateProjectTechnicalUserRequest">CreateProjectTechnicalUserRequest</a>) returns (<a href="#ondewo.nlu.CreateProjectTechnicalUserResponse">CreateProjectTechnicalUserResponse)</a></pre>
+
+          Creates a project-scoped technical user (a normal, 2FA-exempt account holding
+PROJECT_EXECUTOR on this one project) for headless/machine access (e.g.
+ondewo-sip/csi/vtsi) via the ROPC login bridge. The generated password is
+returned ONCE in the response and is not retrievable afterwards.
+        
+          <h4 id="ondewo.nlu.Agents.ListProjectTechnicalUsers" class="title-badge method">ListProjectTechnicalUsers</h4>
+
+          <pre>rpc ListProjectTechnicalUsers (<a href="#ondewo.nlu.ListProjectTechnicalUsersRequest">ListProjectTechnicalUsersRequest</a>) returns (<a href="#ondewo.nlu.ListProjectTechnicalUsersResponse">ListProjectTechnicalUsersResponse)</a></pre>
+
+          Lists the project-scoped technical users of the project (agent).
+        
+          <h4 id="ondewo.nlu.Agents.DeleteProjectTechnicalUser" class="title-badge method">DeleteProjectTechnicalUser</h4>
+
+          <pre>rpc DeleteProjectTechnicalUser (<a href="#ondewo.nlu.DeleteProjectTechnicalUserRequest">DeleteProjectTechnicalUserRequest</a>) returns (<a href="#google.protobuf.Empty">.google.protobuf.Empty)</a></pre>
+
+          Deletes a project-scoped technical user (removes the Keycloak user and the
+project membership/projection rows).
+        
+          <h4 id="ondewo.nlu.Agents.RotateProjectTechnicalUserPassword" class="title-badge method">RotateProjectTechnicalUserPassword</h4>
+
+          <pre>rpc RotateProjectTechnicalUserPassword (<a href="#ondewo.nlu.RotateProjectTechnicalUserPasswordRequest">RotateProjectTechnicalUserPasswordRequest</a>) returns (<a href="#ondewo.nlu.RotateProjectTechnicalUserPasswordResponse">RotateProjectTechnicalUserPasswordResponse)</a></pre>
+
+          Rotates the password of a project-scoped technical user. Invalidates the old
+password and returns the new generated password ONCE in the response.
         
 
         
@@ -5058,6 +5127,46 @@ Supports LLM-typed report types (SESSION_LLM_*) only.
                 <td>ExportResources</td>
                 <td>POST</td>
                 <td>/v2/{parent=projects/*/agent}:resources</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>CreateProjectTechnicalUser</td>
+                <td>POST</td>
+                <td>/v2/{parent=projects/*/agent}/technical_users</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ListProjectTechnicalUsers</td>
+                <td>GET</td>
+                <td>/v2/{parent=projects/*/agent}/technical_users</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>DeleteProjectTechnicalUser</td>
+                <td>DELETE</td>
+                <td>/v2/{parent=projects/*/agent}/technical_users/{user_id=*}</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>RotateProjectTechnicalUserPassword</td>
+                <td>POST</td>
+                <td>/v2/{parent=projects/*/agent}/technical_users/{user_id=*}:rotatePassword</td>
                 <td>*</td>
               </tr>
               
@@ -5394,6 +5503,78 @@ Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre> </p></td>
 
         
       
+        <h3 id="ondewo.nlu.CreateProjectTechnicalUserRequest" class="title-badge message">CreateProjectTechnicalUserRequest</h3>
+        <p>Request to create a project-scoped technical user (PROJECT_EXECUTOR, 2FA-exempt).</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>parent</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The project (agent) that the technical user is scoped to.
+Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. A human-readable name used to derive the technical user's
+Keycloak username/email (e.g. ondewo-nlu-cai-tech-&lt;project&gt;-&lt;name&gt;).
+If empty, the server generates one. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="ondewo.nlu.CreateProjectTechnicalUserResponse" class="title-badge message">CreateProjectTechnicalUserResponse</h3>
+        <p>Response with the freshly minted technical user's credentials.</p><p>The password is returned ONCE and cannot be retrieved later.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>user_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The technical user's id (Keycloak sub / UUID). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>username</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The technical user's login username / email. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>password</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The generated password. Shown ONCE; not retrievable afterwards. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="ondewo.nlu.CustomPlatformInfo" class="title-badge message">CustomPlatformInfo</h3>
         <p>This message contains the information of custom platform</p>
 
@@ -5479,6 +5660,38 @@ Sorting position of the GetPlatformMappingRequest. </p></td>
                   <td></td>
                   <td><p>Required. The project that the agent to fetch is associated with.
 Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="ondewo.nlu.DeleteProjectTechnicalUserRequest" class="title-badge message">DeleteProjectTechnicalUserRequest</h3>
+        <p>Request to delete a project-scoped technical user.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>parent</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The project (agent) that the technical user is scoped to.
+Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>user_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The id of the technical user to delete. </p></td>
                 </tr>
               
             </tbody>
@@ -8348,6 +8561,70 @@ e.g. next_page_token is current_index-2 </p></td>
 
         
       
+        <h3 id="ondewo.nlu.ListProjectTechnicalUsersRequest" class="title-badge message">ListProjectTechnicalUsersRequest</h3>
+        <p>Request to list the project-scoped technical users of a project (agent).</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>parent</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The project (agent) whose technical users are listed.
+Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>page_token</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. The next_page_token value returned from a previous list request.
+The page token to support pagination. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="ondewo.nlu.ListProjectTechnicalUsersResponse" class="title-badge message">ListProjectTechnicalUsersResponse</h3>
+        <p>Response listing the project-scoped technical users of a project (agent).</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>technical_users</td>
+                  <td><a href="#ondewo.nlu.ProjectTechnicalUser">ProjectTechnicalUser</a></td>
+                  <td>repeated</td>
+                  <td><p>The technical users scoped to the project. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>next_page_token</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The next_page_token is used to retrieve the next page of a returned result. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="ondewo.nlu.ListUsersInProjectRequest" class="title-badge message">ListUsersInProjectRequest</h3>
         <p>Request to list users in the project</p>
 
@@ -8683,6 +8960,51 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
 
         
       
+        <h3 id="ondewo.nlu.ProjectTechnicalUser" class="title-badge message">ProjectTechnicalUser</h3>
+        <p>A single project-scoped technical user entry.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>user_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The technical user's id (Keycloak sub / UUID). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>username</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The technical user's login username / email. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>created_at</td>
+                  <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
+                  <td></td>
+                  <td><p>The time the technical user was created (Keycloak createdTimestamp). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>created_by</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The id of the user that created this technical user. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="ondewo.nlu.RankingMatchOptimizationConfig" class="title-badge message">RankingMatchOptimizationConfig</h3>
         <p>This message contains the configuration to run Optimize Ranking Match</p>
 
@@ -8846,6 +9168,76 @@ Example for how to restore an agent via the command line:
        'agentContent': '$(cat <agent zip file> | base64 -w 0)'
    }" \
 </code></pre> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="ondewo.nlu.RotateProjectTechnicalUserPasswordRequest" class="title-badge message">RotateProjectTechnicalUserPasswordRequest</h3>
+        <p>Request to rotate the password of a project-scoped technical user.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>parent</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The project (agent) that the technical user is scoped to.
+Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>user_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The id of the technical user whose password is rotated. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="ondewo.nlu.RotateProjectTechnicalUserPasswordResponse" class="title-badge message">RotateProjectTechnicalUserPasswordResponse</h3>
+        <p>Response with the rotated password.</p><p>The password is returned ONCE and cannot be retrieved later.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>user_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The technical user's id (Keycloak sub / UUID). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>username</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The technical user's login username / email. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>password</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The new generated password. Shown ONCE; not retrievable afterwards. </p></td>
                 </tr>
               
             </tbody>
@@ -15605,14 +15997,14 @@ Note: languages must be enabled in the agent, before they can be used. </p></td>
                   <td>successfully_deleted</td>
                   <td><a href="#google.protobuf.Empty">google.protobuf.Empty</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Set when the entity was successfully deleted </p></td>
                 </tr>
               
                 <tr>
                   <td>error_message</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>The error message when deleting the entity failed </p></td>
                 </tr>
               
             </tbody>
@@ -15954,14 +16346,14 @@ Examples are:
                   <td>sorting_field</td>
                   <td><a href="#ondewo.nlu.EntityTypeSorting.EntityTypeSortingField">EntityTypeSorting.EntityTypeSortingField</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>The field to sort the entity types by </p></td>
                 </tr>
               
                 <tr>
                   <td>sorting_mode</td>
                   <td><a href="#ondewo.nlu.SortingMode">SortingMode</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>The sorting mode: ascending or descending </p></td>
                 </tr>
               
             </tbody>
@@ -15985,14 +16377,14 @@ Examples are:
                   <td>sorting_field</td>
                   <td><a href="#ondewo.nlu.EntityValueSorting.EntityValueSortingField">EntityValueSorting.EntityValueSortingField</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>The field to sort the entity values by </p></td>
                 </tr>
               
                 <tr>
                   <td>sorting_mode</td>
                   <td><a href="#ondewo.nlu.SortingMode">SortingMode</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>The sorting mode: ascending or descending </p></td>
                 </tr>
               
             </tbody>
@@ -17038,7 +17430,7 @@ Operation &lt;response: <a href="https://protobuf.dev/reference/protobuf/google.
                   <td>response_message_requests</td>
                   <td><a href="#ondewo.nlu.BatchCreateResponseMessagesRequest.CreateResponseMessageRequest">BatchCreateResponseMessagesRequest.CreateResponseMessageRequest</a></td>
                   <td>repeated</td>
-                  <td><p> </p></td>
+                  <td><p>The list of response messages to create </p></td>
                 </tr>
               
             </tbody>
@@ -17093,7 +17485,7 @@ Operation &lt;response: <a href="https://protobuf.dev/reference/protobuf/google.
                   <td>training_phrase_requests</td>
                   <td><a href="#ondewo.nlu.BatchCreateTrainingPhrasesRequest.CreateTrainingPhraseRequest">BatchCreateTrainingPhrasesRequest.CreateTrainingPhraseRequest</a></td>
                   <td>repeated</td>
-                  <td><p> </p></td>
+                  <td><p>The list of training phrases to create </p></td>
                 </tr>
               
             </tbody>
@@ -17206,14 +17598,14 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&g
                   <td>delete_statuses</td>
                   <td><a href="#ondewo.nlu.BatchDeleteParametersResponse.DeleteParameterStatus">BatchDeleteParametersResponse.DeleteParameterStatus</a></td>
                   <td>repeated</td>
-                  <td><p> </p></td>
+                  <td><p>The deletion status for each requested parameter </p></td>
                 </tr>
               
                 <tr>
                   <td>has_errors</td>
                   <td><a href="#bool">bool</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Indicates if some of the parameter deletions have errors </p></td>
                 </tr>
               
             </tbody>
@@ -17237,14 +17629,14 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&g
                   <td>successfully_deleted</td>
                   <td><a href="#google.protobuf.Empty">google.protobuf.Empty</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Set when the parameter was successfully deleted </p></td>
                 </tr>
               
                 <tr>
                   <td>error_message</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>The error message when deleting this parameter failed </p></td>
                 </tr>
               
             </tbody>
@@ -17293,14 +17685,14 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&g
                   <td>delete_statuses</td>
                   <td><a href="#ondewo.nlu.BatchDeleteResponseMessagesResponse.DeleteResponseMessageStatus">BatchDeleteResponseMessagesResponse.DeleteResponseMessageStatus</a></td>
                   <td>repeated</td>
-                  <td><p> </p></td>
+                  <td><p>The deletion status for each requested response message </p></td>
                 </tr>
               
                 <tr>
                   <td>has_errors</td>
                   <td><a href="#bool">bool</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Indicates if some of the response message deletions have errors </p></td>
                 </tr>
               
             </tbody>
@@ -17324,14 +17716,14 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&g
                   <td>successfully_deleted</td>
                   <td><a href="#google.protobuf.Empty">google.protobuf.Empty</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Set when the response message was successfully deleted </p></td>
                 </tr>
               
                 <tr>
                   <td>error_message</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>The error message when deleting this response message failed </p></td>
                 </tr>
               
             </tbody>
@@ -17380,14 +17772,14 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&g
                   <td>delete_statuses</td>
                   <td><a href="#ondewo.nlu.BatchDeleteTrainingPhrasesResponse.DeleteTrainingPhraseStatus">BatchDeleteTrainingPhrasesResponse.DeleteTrainingPhraseStatus</a></td>
                   <td>repeated</td>
-                  <td><p> </p></td>
+                  <td><p>The deletion status for each requested training phrase </p></td>
                 </tr>
               
                 <tr>
                   <td>has_errors</td>
                   <td><a href="#bool">bool</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Indicates if some of the training phrase deletions have errors </p></td>
                 </tr>
               
             </tbody>
@@ -17411,14 +17803,14 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&g
                   <td>successfully_deleted</td>
                   <td><a href="#google.protobuf.Empty">google.protobuf.Empty</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Set when the training phrase was successfully deleted </p></td>
                 </tr>
               
                 <tr>
                   <td>error_message</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>The error message when deleting this training phrase failed </p></td>
                 </tr>
               
             </tbody>
@@ -17517,7 +17909,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&g
                   <td>parameter_statuses</td>
                   <td><a href="#ondewo.nlu.BatchParametersStatusResponse.ParameterStatus">BatchParametersStatusResponse.ParameterStatus</a></td>
                   <td>repeated</td>
-                  <td><p> </p></td>
+                  <td><p>The status for each parameter in the batch </p></td>
                 </tr>
               
                 <tr>
@@ -17548,14 +17940,14 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&g
                   <td>parameter</td>
                   <td><a href="#ondewo.nlu.Intent.Parameter">Intent.Parameter</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>The successfully processed parameter </p></td>
                 </tr>
               
                 <tr>
                   <td>error_message</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>The error message when processing this parameter failed </p></td>
                 </tr>
               
             </tbody>
@@ -17579,7 +17971,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&g
                   <td>response_message_statuses</td>
                   <td><a href="#ondewo.nlu.BatchResponseMessagesStatusResponse.ResponseMessageStatus">BatchResponseMessagesStatusResponse.ResponseMessageStatus</a></td>
                   <td>repeated</td>
-                  <td><p> </p></td>
+                  <td><p>The status for each response message in the batch </p></td>
                 </tr>
               
                 <tr>
@@ -17610,14 +18002,14 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&g
                   <td>response_message</td>
                   <td><a href="#ondewo.nlu.Intent.Message">Intent.Message</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>The successfully processed response message </p></td>
                 </tr>
               
                 <tr>
                   <td>error_message</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>The error message when processing this response message failed </p></td>
                 </tr>
               
             </tbody>
@@ -19627,14 +20019,14 @@ annotation. </p></td>
                   <td>sorting_field</td>
                   <td><a href="#ondewo.nlu.IntentSorting.IntentSortingField">IntentSorting.IntentSortingField</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>The field to sort the intents by </p></td>
                 </tr>
               
                 <tr>
                   <td>sorting_mode</td>
                   <td><a href="#ondewo.nlu.SortingMode">SortingMode</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>The sorting mode: ascending or descending </p></td>
                 </tr>
               
             </tbody>
@@ -20240,14 +20632,14 @@ where &lt;CURRENT_INDEX&gt; and &lt;PAGE_SIZE&gt; are of type int, &lt;SUB_FIELD
                   <td>training_phrase</td>
                   <td><a href="#ondewo.nlu.Intent.TrainingPhrase">Intent.TrainingPhrase</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>The successfully processed training phrase </p></td>
                 </tr>
               
                 <tr>
                   <td>error_message</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>The error message when processing this training phrase failed </p></td>
                 </tr>
               
             </tbody>
@@ -32369,28 +32761,28 @@ Default <code>RAG_CRAWLER_CRAWL_STRATEGY_BFS</code>. </p></td>
                   <td>allowed_regex</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
-                  <td><p> </p></td>
+                  <td><p>Optional. Path allow-list by regular expression. </p></td>
                 </tr>
               
                 <tr>
                   <td>disallowed_regex</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
-                  <td><p> </p></td>
+                  <td><p>Optional. Path block-list by regular expression. </p></td>
                 </tr>
               
                 <tr>
                   <td>allowed_paths</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
-                  <td><p> </p></td>
+                  <td><p>Optional. Explicit path allow-list. </p></td>
                 </tr>
               
                 <tr>
                   <td>disallowed_paths</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
-                  <td><p> </p></td>
+                  <td><p>Optional. Explicit path block-list. </p></td>
                 </tr>
               
             </tbody>
@@ -43638,42 +44030,42 @@ locate a response in the training example set or for reporting issues. </p></td>
                   <td>llm_call_started</td>
                   <td><a href="#ondewo.nlu.LlmCallStartedEvent">LlmCallStartedEvent</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Emitted when an LLM call has started. </p></td>
                 </tr>
               
                 <tr>
                   <td>llm_call_finished</td>
                   <td><a href="#ondewo.nlu.LlmCallFinishedEvent">LlmCallFinishedEvent</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Emitted when an LLM call has finished. </p></td>
                 </tr>
               
                 <tr>
                   <td>llm_tool_call_started</td>
                   <td><a href="#ondewo.nlu.LlmToolCallStartedEvent">LlmToolCallStartedEvent</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Emitted when an LLM tool call has started. </p></td>
                 </tr>
               
                 <tr>
                   <td>llm_tool_call_finished</td>
                   <td><a href="#ondewo.nlu.LlmToolCallFinishedEvent">LlmToolCallFinishedEvent</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Emitted when an LLM tool call has finished. </p></td>
                 </tr>
               
                 <tr>
                   <td>llm_thinking_delta</td>
                   <td><a href="#ondewo.nlu.LlmThinkingDeltaEvent">LlmThinkingDeltaEvent</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Emitted for an incremental LLM thinking (reasoning) update. </p></td>
                 </tr>
               
                 <tr>
                   <td>llm_token_usage_update</td>
                   <td><a href="#ondewo.nlu.LlmTokenUsageUpdateEvent">LlmTokenUsageUpdateEvent</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Emitted when the running LLM token-usage totals are updated. </p></td>
                 </tr>
               
             </tbody>
@@ -46864,7 +47256,7 @@ Default = None </p></td>
                   <td>entity_type</td>
                   <td><a href="#ondewo.nlu.EntityType.Entity">EntityType.Entity</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>The entity (with embedded regex) to validate </p></td>
                 </tr>
               
             </tbody>

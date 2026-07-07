@@ -11,8 +11,11 @@
     - [AgentWithOwner](#ondewo.nlu.AgentWithOwner)
     - [BuildCacheRequest](#ondewo.nlu.BuildCacheRequest)
     - [CreateAgentRequest](#ondewo.nlu.CreateAgentRequest)
+    - [CreateProjectTechnicalUserRequest](#ondewo.nlu.CreateProjectTechnicalUserRequest)
+    - [CreateProjectTechnicalUserResponse](#ondewo.nlu.CreateProjectTechnicalUserResponse)
     - [CustomPlatformInfo](#ondewo.nlu.CustomPlatformInfo)
     - [DeleteAgentRequest](#ondewo.nlu.DeleteAgentRequest)
+    - [DeleteProjectTechnicalUserRequest](#ondewo.nlu.DeleteProjectTechnicalUserRequest)
     - [DeleteResourcesRequest](#ondewo.nlu.DeleteResourcesRequest)
     - [ExportAgentRequest](#ondewo.nlu.ExportAgentRequest)
     - [ExportAgentResponse](#ondewo.nlu.ExportAgentResponse)
@@ -59,6 +62,8 @@
     - [ListAgentsResponse](#ondewo.nlu.ListAgentsResponse)
     - [ListProjectPermissionsRequest](#ondewo.nlu.ListProjectPermissionsRequest)
     - [ListProjectPermissionsResponse](#ondewo.nlu.ListProjectPermissionsResponse)
+    - [ListProjectTechnicalUsersRequest](#ondewo.nlu.ListProjectTechnicalUsersRequest)
+    - [ListProjectTechnicalUsersResponse](#ondewo.nlu.ListProjectTechnicalUsersResponse)
     - [ListUsersInProjectRequest](#ondewo.nlu.ListUsersInProjectRequest)
     - [ListUsersInProjectResponse](#ondewo.nlu.ListUsersInProjectResponse)
     - [LlmTelemetryTimeSeriesBucket](#ondewo.nlu.LlmTelemetryTimeSeriesBucket)
@@ -67,10 +72,13 @@
     - [OptimizeRankingMatchRequest](#ondewo.nlu.OptimizeRankingMatchRequest)
     - [OptimizeRankingMatchResponse](#ondewo.nlu.OptimizeRankingMatchResponse)
     - [PlatformMapping](#ondewo.nlu.PlatformMapping)
+    - [ProjectTechnicalUser](#ondewo.nlu.ProjectTechnicalUser)
     - [RankingMatchOptimizationConfig](#ondewo.nlu.RankingMatchOptimizationConfig)
     - [ReindexAgentRequest](#ondewo.nlu.ReindexAgentRequest)
     - [RemoveUserFromProjectRequest](#ondewo.nlu.RemoveUserFromProjectRequest)
     - [RestoreAgentRequest](#ondewo.nlu.RestoreAgentRequest)
+    - [RotateProjectTechnicalUserPasswordRequest](#ondewo.nlu.RotateProjectTechnicalUserPasswordRequest)
+    - [RotateProjectTechnicalUserPasswordResponse](#ondewo.nlu.RotateProjectTechnicalUserPasswordResponse)
     - [SetAgentStatusRequest](#ondewo.nlu.SetAgentStatusRequest)
     - [SetResourcesRequest](#ondewo.nlu.SetResourcesRequest)
     - [TrainAgentRequest](#ondewo.nlu.TrainAgentRequest)
@@ -980,6 +988,40 @@ Request to create an agent
 
 
 
+<a name="ondewo.nlu.CreateProjectTechnicalUserRequest"></a>
+
+### CreateProjectTechnicalUserRequest
+Request to create a project-scoped technical user (PROJECT_EXECUTOR, 2FA-exempt).
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  | Required. The project (agent) that the technical user is scoped to. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| name | [string](#string) |  | Optional. A human-readable name used to derive the technical user's Keycloak username/email (e.g. ondewo-nlu-cai-tech-&lt;project&gt;-&lt;name&gt;). If empty, the server generates one. |
+
+
+
+
+
+
+<a name="ondewo.nlu.CreateProjectTechnicalUserResponse"></a>
+
+### CreateProjectTechnicalUserResponse
+Response with the freshly minted technical user's credentials.
+The password is returned ONCE and cannot be retrieved later.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| user_id | [string](#string) |  | The technical user's id (Keycloak sub / UUID). |
+| username | [string](#string) |  | The technical user's login username / email. |
+| password | [string](#string) |  | The generated password. Shown ONCE; not retrievable afterwards. |
+
+
+
+
+
+
 <a name="ondewo.nlu.CustomPlatformInfo"></a>
 
 ### CustomPlatformInfo
@@ -1010,6 +1052,22 @@ Request to delete the agent
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | parent | [string](#string) |  | Required. The project that the agent to fetch is associated with. Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre> |
+
+
+
+
+
+
+<a name="ondewo.nlu.DeleteProjectTechnicalUserRequest"></a>
+
+### DeleteProjectTechnicalUserRequest
+Request to delete a project-scoped technical user.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  | Required. The project (agent) that the technical user is scoped to. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| user_id | [string](#string) |  | Required. The id of the technical user to delete. |
 
 
 
@@ -1957,6 +2015,38 @@ List project permissions
 
 
 
+<a name="ondewo.nlu.ListProjectTechnicalUsersRequest"></a>
+
+### ListProjectTechnicalUsersRequest
+Request to list the project-scoped technical users of a project (agent).
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  | Required. The project (agent) whose technical users are listed. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| page_token | [string](#string) |  | Optional. The next_page_token value returned from a previous list request. The page token to support pagination. |
+
+
+
+
+
+
+<a name="ondewo.nlu.ListProjectTechnicalUsersResponse"></a>
+
+### ListProjectTechnicalUsersResponse
+Response listing the project-scoped technical users of a project (agent).
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| technical_users | [ProjectTechnicalUser](#ondewo.nlu.ProjectTechnicalUser) | repeated | The technical users scoped to the project. |
+| next_page_token | [string](#string) |  | The next_page_token is used to retrieve the next page of a returned result. |
+
+
+
+
+
+
 <a name="ondewo.nlu.ListUsersInProjectRequest"></a>
 
 ### ListUsersInProjectRequest
@@ -2100,6 +2190,24 @@ This message contains the mapping of platform
 
 
 
+<a name="ondewo.nlu.ProjectTechnicalUser"></a>
+
+### ProjectTechnicalUser
+A single project-scoped technical user entry.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| user_id | [string](#string) |  | The technical user's id (Keycloak sub / UUID). |
+| username | [string](#string) |  | The technical user's login username / email. |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | The time the technical user was created (Keycloak createdTimestamp). |
+| created_by | [string](#string) |  | The id of the user that created this technical user. |
+
+
+
+
+
+
 <a name="ondewo.nlu.RankingMatchOptimizationConfig"></a>
 
 ### RankingMatchOptimizationConfig
@@ -2162,6 +2270,40 @@ The request message for <a href="index.html#ondewo.nlu.Agents.RestoreAgent">Agen
 | parent | [string](#string) |  | Required. The project that the agent to restore is associated with. Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre> |
 | agent_uri | [string](#string) |  | The URI to a Google Cloud Storage file containing the agent to restore. Note: The URI must start with "gs://". |
 | agent_content | [bytes](#bytes) |  | The agent to restore. <br> Example for how to restore an agent via the command line: <pre><code>curl \ 'https://dialogflow.googleapis.com/v2/projects/<project_name>/agent:restore\ -X POST \ -H 'Authorization: Bearer '$(gcloud auth print-access-token) \ -H 'Accept: application/json' \ -H 'Content-Type: application/json' \ --compressed \ --data-binary "{ 'agentContent': '$(cat <agent zip file> | base64 -w 0)' }" \ </code></pre> |
+
+
+
+
+
+
+<a name="ondewo.nlu.RotateProjectTechnicalUserPasswordRequest"></a>
+
+### RotateProjectTechnicalUserPasswordRequest
+Request to rotate the password of a project-scoped technical user.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent | [string](#string) |  | Required. The project (agent) that the technical user is scoped to. Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
+| user_id | [string](#string) |  | Required. The id of the technical user whose password is rotated. |
+
+
+
+
+
+
+<a name="ondewo.nlu.RotateProjectTechnicalUserPasswordResponse"></a>
+
+### RotateProjectTechnicalUserPasswordResponse
+Response with the rotated password.
+The password is returned ONCE and cannot be retrieved later.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| user_id | [string](#string) |  | The technical user's id (Keycloak sub / UUID). |
+| username | [string](#string) |  | The technical user's login username / email. |
+| password | [string](#string) |  | The new generated password. Shown ONCE; not retrievable afterwards. |
 
 
 
@@ -2479,46 +2621,46 @@ For more information about agents, see the <a href="https://dialogflow.com/docs/
 
 Examples:
 
-<pre> grpcurl -plaintext -H 'cai-token: aimp' -d '{ "agent": { "display_name": "My Pizza Bot", "default_language_code": "en", "supported_language_codes": ["en"], "time_zone": "Europe/Vienna", "nlu_platform": "ONDEWO" } }' localhost:50055 ondewo.nlu.Agents.CreateAgent </pre>
+<pre> grpcurl -plaintext -H 'Authorization: Bearer <jwt>' -d '{ "agent": { "display_name": "My Pizza Bot", "default_language_code": "en", "supported_language_codes": ["en"], "time_zone": "Europe/Vienna", "nlu_platform": "ONDEWO" } }' localhost:50055 ondewo.nlu.Agents.CreateAgent </pre>
 
 <samp>{ "parent": "projects/76aaf4f3-a1f6-4fda-b4b3-351c64e65bc4/agent", "display_name": "Pizza Bot", "default_language_code": "en", "supported_language_codes": [ "en" ], "time_zone": "Europe/Vienna", "nlu_platform": "ONDEWO", "owner_id": "5aac51b8-668f-49dd-913f-cc683e56af34" } </samp> |
 | UpdateAgent | [UpdateAgentRequest](#ondewo.nlu.UpdateAgentRequest) | [Agent](#ondewo.nlu.Agent) | Updates the specified agent.
 
 Examples:
 
-<pre> grpcurl -plaintext -H 'cai-token: aimp' -d '{ "agent": { "parent": "projects/76aaf4f3-a1f6-4fda-b4b3-351c64e65bc4/agent", "display_name": "Pizza Bot 2", "supported_language_codes": ["en", "de"] }, "update_mask": { "paths": [ "agent.display_name", "agent.supported_language_codes" ] } }' localhost:50055 ondewo.nlu.Agents.UpdateAgent </pre>
+<pre> grpcurl -plaintext -H 'Authorization: Bearer <jwt>' -d '{ "agent": { "parent": "projects/76aaf4f3-a1f6-4fda-b4b3-351c64e65bc4/agent", "display_name": "Pizza Bot 2", "supported_language_codes": ["en", "de"] }, "update_mask": { "paths": [ "agent.display_name", "agent.supported_language_codes" ] } }' localhost:50055 ondewo.nlu.Agents.UpdateAgent </pre>
 
 <samp>{ "parent": "projects/76aaf4f3-a1f6-4fda-b4b3-351c64e65bc4/agent", "display_name": "Pizza Bot 2", "default_language_code": "en", "supported_language_codes": [ "en", "de" ], "time_zone": "Europe/Vienna", "nlu_platform": "ONDEWO", "owner_id": "5aac51b8-668f-49dd-913f-cc683e56af34" } </samp> |
 | GetAgent | [GetAgentRequest](#ondewo.nlu.GetAgentRequest) | [Agent](#ondewo.nlu.Agent) | Retrieves the specified agent.
 
 Examples:
 
-<pre> grpcurl -plaintext -H 'cai-token: aimp' -d '{ "parent": "projects/76aaf4f3-a1f6-4fda-b4b3-351c64e65bc4/agent" }' localhost:50055 ondewo.nlu.Agents.GetAgent </pre> <samp>{ "parent": "projects/76aaf4f3-a1f6-4fda-b4b3-351c64e65bc4/agent", "display_name": "Pizza Bot 2", "default_language_code": "en", "supported_language_codes": [ "en", "de" ], "time_zone": "Europe/Vienna", "nlu_platform": "ONDEWO", "configs": {...}, "owner_id": "5aac51b8-668f-49dd-913f-cc683e56af34" } </samp> |
+<pre> grpcurl -plaintext -H 'Authorization: Bearer <jwt>' -d '{ "parent": "projects/76aaf4f3-a1f6-4fda-b4b3-351c64e65bc4/agent" }' localhost:50055 ondewo.nlu.Agents.GetAgent </pre> <samp>{ "parent": "projects/76aaf4f3-a1f6-4fda-b4b3-351c64e65bc4/agent", "display_name": "Pizza Bot 2", "default_language_code": "en", "supported_language_codes": [ "en", "de" ], "time_zone": "Europe/Vienna", "nlu_platform": "ONDEWO", "configs": {...}, "owner_id": "5aac51b8-668f-49dd-913f-cc683e56af34" } </samp> |
 | DeleteAgent | [DeleteAgentRequest](#ondewo.nlu.DeleteAgentRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Deletes the specified agent.
 
 Examples:
 
-<pre> grpcurl -plaintext -H 'cai-token: aimp' -d '{ "parent": "projects/76aaf4f3-a1f6-4fda-b4b3-351c64e65bc4/agent" }' localhost:50055 ondewo.nlu.Agents.DeleteAgent </pre> <samp>{}</samp> |
+<pre> grpcurl -plaintext -H 'Authorization: Bearer <jwt>' -d '{ "parent": "projects/76aaf4f3-a1f6-4fda-b4b3-351c64e65bc4/agent" }' localhost:50055 ondewo.nlu.Agents.DeleteAgent </pre> <samp>{}</samp> |
 | DeleteAllAgents | [.google.protobuf.Empty](#google.protobuf.Empty) | [.google.protobuf.Empty](#google.protobuf.Empty) | Deletes all agents in the server (for development purposes only).
 
 Examples:
 
-<pre> grpcurl -plaintext -H 'cai-token: aimp' localhost:50055 ondewo.nlu.Agents.DeleteAllAgents </pre> <samp>{}</samp> |
+<pre> grpcurl -plaintext -H 'Authorization: Bearer <jwt>' localhost:50055 ondewo.nlu.Agents.DeleteAllAgents </pre> <samp>{}</samp> |
 | ListAgents | [ListAgentsRequest](#ondewo.nlu.ListAgentsRequest) | [ListAgentsResponse](#ondewo.nlu.ListAgentsResponse) | Lists agents in the server associated to the current user
 
 Examples:
 
-<pre> grpcurl -plaintext -H 'cai-token: aimp' localhost:50055 ondewo.nlu.Agents.ListAgents </pre> <samp>{ "agents_with_owners": [ { "agent": { "parent": "projects/76aaf4f3-a1f6-4fda-b4b3-351c64e65bc4/agent", "display_name": "Pizza Bot 2", "owner_id": "5aac51b8-668f-49dd-913f-cc683e56af34" }, "owner": { "user_id": "5aac51b8-668f-49dd-913f-cc683e56af34", "display_name": "admin", "server_role_id": 3, "user_email": "admin@ondewo.com" } } ], "next_page_token": "current_index-1" } </samp> |
+<pre> grpcurl -plaintext -H 'Authorization: Bearer <jwt>' localhost:50055 ondewo.nlu.Agents.ListAgents </pre> <samp>{ "agents_with_owners": [ { "agent": { "parent": "projects/76aaf4f3-a1f6-4fda-b4b3-351c64e65bc4/agent", "display_name": "Pizza Bot 2", "owner_id": "5aac51b8-668f-49dd-913f-cc683e56af34" }, "owner": { "user_id": "5aac51b8-668f-49dd-913f-cc683e56af34", "display_name": "admin", "server_role_id": 3, "user_email": "admin@ondewo.com" } } ], "next_page_token": "current_index-1" } </samp> |
 | ListAgentsOfUser | [ListAgentsRequest](#ondewo.nlu.ListAgentsRequest) | [ListAgentsOfUserResponse](#ondewo.nlu.ListAgentsOfUserResponse) | Lists agents in the server associated to the given user
 
 Examples:
 
-<pre> grpcurl -plaintext -H 'cai-token: aimp' localhost:50055 ondewo.nlu.Agents.ListAgentsOfUser </pre> <samp>{ "agents_of_user_with_owners": [ { "agent_with_owner": { "agent": { "parent": "projects/76aaf4f3-a1f6-4fda-b4b3-351c64e65bc4/agent", "display_name": "Pizza Bot 2", "owner_id": "5aac51b8-668f-49dd-913f-cc683e56af34" }, "owner": { "user_id": "5aac51b8-668f-49dd-913f-cc683e56af34", "display_name": "admin", "server_role_id": 3, "user_email": "admin@ondewo.com" } }, "project_role": { "role_id": 4, "name": "ADMIN" } } ], "next_page_token": "current_index-1" } </samp> |
+<pre> grpcurl -plaintext -H 'Authorization: Bearer <jwt>' localhost:50055 ondewo.nlu.Agents.ListAgentsOfUser </pre> <samp>{ "agents_of_user_with_owners": [ { "agent_with_owner": { "agent": { "parent": "projects/76aaf4f3-a1f6-4fda-b4b3-351c64e65bc4/agent", "display_name": "Pizza Bot 2", "owner_id": "5aac51b8-668f-49dd-913f-cc683e56af34" }, "owner": { "user_id": "5aac51b8-668f-49dd-913f-cc683e56af34", "display_name": "admin", "server_role_id": 3, "user_email": "admin@ondewo.com" } }, "project_role": { "role_id": 4, "name": "ADMIN" } } ], "next_page_token": "current_index-1" } </samp> |
 | ListAllAgents | [ListAgentsRequest](#ondewo.nlu.ListAgentsRequest) | [ListAgentsResponse](#ondewo.nlu.ListAgentsResponse) | Lists all agents in the server
 
 Examples:
 
-<pre> grpcurl -plaintext -H 'cai-token: aimp' localhost:50055 ondewo.nlu.Agents.ListAllAgents </pre> <samp>{ "agents_with_owners": [ { "agent": { "parent": "projects/76aaf4f3-a1f6-4fda-b4b3-351c64e65bc4/agent", "display_name": "Pizza Bot 2", "owner_id": "5aac51b8-668f-49dd-913f-cc683e56af34" }, "owner": { "user_id": "5aac51b8-668f-49dd-913f-cc683e56af34", "display_name": "admin", "server_role_id": 3, "user_email": "admin@ondewo.com" } } ], "next_page_token": "current_index-1" } </samp> |
+<pre> grpcurl -plaintext -H 'Authorization: Bearer <jwt>' localhost:50055 ondewo.nlu.Agents.ListAllAgents </pre> <samp>{ "agents_with_owners": [ { "agent": { "parent": "projects/76aaf4f3-a1f6-4fda-b4b3-351c64e65bc4/agent", "display_name": "Pizza Bot 2", "owner_id": "5aac51b8-668f-49dd-913f-cc683e56af34" }, "owner": { "user_id": "5aac51b8-668f-49dd-913f-cc683e56af34", "display_name": "admin", "server_role_id": 3, "user_email": "admin@ondewo.com" } } ], "next_page_token": "current_index-1" } </samp> |
 | AddUserToProject | [AddUserToProjectRequest](#ondewo.nlu.AddUserToProjectRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Adds a user with specified id to the project (agent) |
 | RemoveUserFromProject | [RemoveUserFromProjectRequest](#ondewo.nlu.RemoveUserFromProjectRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Removes a user with specified id from the project (agent) |
 | ListUsersInProject | [ListUsersInProjectRequest](#ondewo.nlu.ListUsersInProjectRequest) | [ListUsersInProjectResponse](#ondewo.nlu.ListUsersInProjectResponse) | Lists users in the project (agent) |
@@ -2557,6 +2699,10 @@ Operation &lt;response: <a href="https://protobuf.dev/reference/protobuf/google.
 | GetFullTextSearchIntentResponse | [FullTextSearchRequest](#ondewo.nlu.FullTextSearchRequest) | [FullTextSearchResponseIntentResponse](#ondewo.nlu.FullTextSearchResponseIntentResponse) | Full text search endpoint in responses of intents |
 | GetFullTextSearchIntentParameters | [FullTextSearchRequest](#ondewo.nlu.FullTextSearchRequest) | [FullTextSearchResponseIntentParameters](#ondewo.nlu.FullTextSearchResponseIntentParameters) | Full text search endpoint in parameters of intents |
 | ReindexAgent | [ReindexAgentRequest](#ondewo.nlu.ReindexAgentRequest) | [Operation](#ondewo.nlu.Operation) | Force reindexing Intent and Entity data of Agent |
+| CreateProjectTechnicalUser | [CreateProjectTechnicalUserRequest](#ondewo.nlu.CreateProjectTechnicalUserRequest) | [CreateProjectTechnicalUserResponse](#ondewo.nlu.CreateProjectTechnicalUserResponse) | Creates a project-scoped technical user (a normal, 2FA-exempt account holding PROJECT_EXECUTOR on this one project) for headless/machine access (e.g. ondewo-sip/csi/vtsi) via the ROPC login bridge. The generated password is returned ONCE in the response and is not retrievable afterwards. |
+| ListProjectTechnicalUsers | [ListProjectTechnicalUsersRequest](#ondewo.nlu.ListProjectTechnicalUsersRequest) | [ListProjectTechnicalUsersResponse](#ondewo.nlu.ListProjectTechnicalUsersResponse) | Lists the project-scoped technical users of the project (agent). |
+| DeleteProjectTechnicalUser | [DeleteProjectTechnicalUserRequest](#ondewo.nlu.DeleteProjectTechnicalUserRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Deletes a project-scoped technical user (removes the Keycloak user and the project membership/projection rows). |
+| RotateProjectTechnicalUserPassword | [RotateProjectTechnicalUserPasswordRequest](#ondewo.nlu.RotateProjectTechnicalUserPasswordRequest) | [RotateProjectTechnicalUserPasswordResponse](#ondewo.nlu.RotateProjectTechnicalUserPasswordResponse) | Rotates the password of a project-scoped technical user. Invalidates the old password and returns the new generated password ONCE in the response. |
 
  <!-- end services -->
 
@@ -4563,8 +4709,8 @@ This message contains the status of an entity deletion
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| successfully_deleted | [google.protobuf.Empty](#google.protobuf.Empty) |  |  |
-| error_message | [string](#string) |  |  |
+| successfully_deleted | [google.protobuf.Empty](#google.protobuf.Empty) |  | Set when the entity was successfully deleted |
+| error_message | [string](#string) |  | The error message when deleting the entity failed |
 
 
 
@@ -4690,8 +4836,8 @@ This message contains Entity type sorting
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| sorting_field | [EntityTypeSorting.EntityTypeSortingField](#ondewo.nlu.EntityTypeSorting.EntityTypeSortingField) |  |  |
-| sorting_mode | [SortingMode](#ondewo.nlu.SortingMode) |  |  |
+| sorting_field | [EntityTypeSorting.EntityTypeSortingField](#ondewo.nlu.EntityTypeSorting.EntityTypeSortingField) |  | The field to sort the entity types by |
+| sorting_mode | [SortingMode](#ondewo.nlu.SortingMode) |  | The sorting mode: ascending or descending |
 
 
 
@@ -4706,8 +4852,8 @@ This message contains entity value sorting
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| sorting_field | [EntityValueSorting.EntityValueSortingField](#ondewo.nlu.EntityValueSorting.EntityValueSortingField) |  |  |
-| sorting_mode | [SortingMode](#ondewo.nlu.SortingMode) |  |  |
+| sorting_field | [EntityValueSorting.EntityValueSortingField](#ondewo.nlu.EntityValueSorting.EntityValueSortingField) |  | The field to sort the entity values by |
+| sorting_mode | [SortingMode](#ondewo.nlu.SortingMode) |  | The sorting mode: ascending or descending |
 
 
 
@@ -5072,7 +5218,7 @@ Request to create a list of new response messages and adds it to an intent
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| response_message_requests | [BatchCreateResponseMessagesRequest.CreateResponseMessageRequest](#ondewo.nlu.BatchCreateResponseMessagesRequest.CreateResponseMessageRequest) | repeated |  |
+| response_message_requests | [BatchCreateResponseMessagesRequest.CreateResponseMessageRequest](#ondewo.nlu.BatchCreateResponseMessagesRequest.CreateResponseMessageRequest) | repeated | The list of response messages to create |
 
 
 
@@ -5103,7 +5249,7 @@ This message is a request of a creation of a batch of training phrases
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| training_phrase_requests | [BatchCreateTrainingPhrasesRequest.CreateTrainingPhraseRequest](#ondewo.nlu.BatchCreateTrainingPhrasesRequest.CreateTrainingPhraseRequest) | repeated |  |
+| training_phrase_requests | [BatchCreateTrainingPhrasesRequest.CreateTrainingPhraseRequest](#ondewo.nlu.BatchCreateTrainingPhrasesRequest.CreateTrainingPhraseRequest) | repeated | The list of training phrases to create |
 
 
 
@@ -5165,8 +5311,8 @@ This message contains response of deleted parameters
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| delete_statuses | [BatchDeleteParametersResponse.DeleteParameterStatus](#ondewo.nlu.BatchDeleteParametersResponse.DeleteParameterStatus) | repeated |  |
-| has_errors | [bool](#bool) |  |  |
+| delete_statuses | [BatchDeleteParametersResponse.DeleteParameterStatus](#ondewo.nlu.BatchDeleteParametersResponse.DeleteParameterStatus) | repeated | The deletion status for each requested parameter |
+| has_errors | [bool](#bool) |  | Indicates if some of the parameter deletions have errors |
 
 
 
@@ -5181,8 +5327,8 @@ Status of a parameter deletion operation
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| successfully_deleted | [google.protobuf.Empty](#google.protobuf.Empty) |  |  |
-| error_message | [string](#string) |  |  |
+| successfully_deleted | [google.protobuf.Empty](#google.protobuf.Empty) |  | Set when the parameter was successfully deleted |
+| error_message | [string](#string) |  | The error message when deleting this parameter failed |
 
 
 
@@ -5212,8 +5358,8 @@ Response containing list with deleted response messages
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| delete_statuses | [BatchDeleteResponseMessagesResponse.DeleteResponseMessageStatus](#ondewo.nlu.BatchDeleteResponseMessagesResponse.DeleteResponseMessageStatus) | repeated |  |
-| has_errors | [bool](#bool) |  |  |
+| delete_statuses | [BatchDeleteResponseMessagesResponse.DeleteResponseMessageStatus](#ondewo.nlu.BatchDeleteResponseMessagesResponse.DeleteResponseMessageStatus) | repeated | The deletion status for each requested response message |
+| has_errors | [bool](#bool) |  | Indicates if some of the response message deletions have errors |
 
 
 
@@ -5228,8 +5374,8 @@ Status of a response message deletion operation
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| successfully_deleted | [google.protobuf.Empty](#google.protobuf.Empty) |  |  |
-| error_message | [string](#string) |  |  |
+| successfully_deleted | [google.protobuf.Empty](#google.protobuf.Empty) |  | Set when the response message was successfully deleted |
+| error_message | [string](#string) |  | The error message when deleting this response message failed |
 
 
 
@@ -5259,8 +5405,8 @@ This message is a response of deleting a batch of training phrases
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| delete_statuses | [BatchDeleteTrainingPhrasesResponse.DeleteTrainingPhraseStatus](#ondewo.nlu.BatchDeleteTrainingPhrasesResponse.DeleteTrainingPhraseStatus) | repeated |  |
-| has_errors | [bool](#bool) |  |  |
+| delete_statuses | [BatchDeleteTrainingPhrasesResponse.DeleteTrainingPhraseStatus](#ondewo.nlu.BatchDeleteTrainingPhrasesResponse.DeleteTrainingPhraseStatus) | repeated | The deletion status for each requested training phrase |
+| has_errors | [bool](#bool) |  | Indicates if some of the training phrase deletions have errors |
 
 
 
@@ -5275,8 +5421,8 @@ Status of a training phrase deletion operation
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| successfully_deleted | [google.protobuf.Empty](#google.protobuf.Empty) |  |  |
-| error_message | [string](#string) |  |  |
+| successfully_deleted | [google.protobuf.Empty](#google.protobuf.Empty) |  | Set when the training phrase was successfully deleted |
+| error_message | [string](#string) |  | The error message when deleting this training phrase failed |
 
 
 
@@ -5336,7 +5482,7 @@ Response containing a batch of parameters in the specified intent
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| parameter_statuses | [BatchParametersStatusResponse.ParameterStatus](#ondewo.nlu.BatchParametersStatusResponse.ParameterStatus) | repeated |  |
+| parameter_statuses | [BatchParametersStatusResponse.ParameterStatus](#ondewo.nlu.BatchParametersStatusResponse.ParameterStatus) | repeated | The status for each parameter in the batch |
 | has_errors | [bool](#bool) |  | indicates if statuses of some of the parameters have errors |
 
 
@@ -5352,8 +5498,8 @@ Status of a parameter operation
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| parameter | [Intent.Parameter](#ondewo.nlu.Intent.Parameter) |  |  |
-| error_message | [string](#string) |  |  |
+| parameter | [Intent.Parameter](#ondewo.nlu.Intent.Parameter) |  | The successfully processed parameter |
+| error_message | [string](#string) |  | The error message when processing this parameter failed |
 
 
 
@@ -5368,7 +5514,7 @@ This message is a response of a batch responses of message status
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| response_message_statuses | [BatchResponseMessagesStatusResponse.ResponseMessageStatus](#ondewo.nlu.BatchResponseMessagesStatusResponse.ResponseMessageStatus) | repeated |  |
+| response_message_statuses | [BatchResponseMessagesStatusResponse.ResponseMessageStatus](#ondewo.nlu.BatchResponseMessagesStatusResponse.ResponseMessageStatus) | repeated | The status for each response message in the batch |
 | has_errors | [bool](#bool) |  | indicates if statuses of some of the response messages have errors |
 
 
@@ -5384,8 +5530,8 @@ Status of a response message operation
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| response_message | [Intent.Message](#ondewo.nlu.Intent.Message) |  |  |
-| error_message | [string](#string) |  |  |
+| response_message | [Intent.Message](#ondewo.nlu.Intent.Message) |  | The successfully processed response message |
+| error_message | [string](#string) |  | The error message when processing this response message failed |
 
 
 
@@ -6151,8 +6297,8 @@ This message contains sorting of an intent
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| sorting_field | [IntentSorting.IntentSortingField](#ondewo.nlu.IntentSorting.IntentSortingField) |  |  |
-| sorting_mode | [SortingMode](#ondewo.nlu.SortingMode) |  |  |
+| sorting_field | [IntentSorting.IntentSortingField](#ondewo.nlu.IntentSorting.IntentSortingField) |  | The field to sort the intents by |
+| sorting_mode | [SortingMode](#ondewo.nlu.SortingMode) |  | The sorting mode: ascending or descending |
 
 
 
@@ -6393,8 +6539,8 @@ This message containing the training phrases status
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| training_phrase | [Intent.TrainingPhrase](#ondewo.nlu.Intent.TrainingPhrase) |  |  |
-| error_message | [string](#string) |  |  |
+| training_phrase | [Intent.TrainingPhrase](#ondewo.nlu.Intent.TrainingPhrase) |  | The successfully processed training phrase |
+| error_message | [string](#string) |  | The error message when processing this training phrase failed |
 
 
 
@@ -10486,10 +10632,10 @@ and domains to be excluded in the deep crawl or extraction of pages to be crawle
 | allow_internal_links | [bool](#bool) | optional | Optional. Include internal links. |
 | allow_external_links | [bool](#bool) | optional | Optional. Include external links. |
 | allow_social_media_links | [bool](#bool) | optional | Optional. Include social media links. |
-| allowed_regex | [string](#string) | repeated |  |
-| disallowed_regex | [string](#string) | repeated |  |
-| allowed_paths | [string](#string) | repeated |  |
-| disallowed_paths | [string](#string) | repeated |  |
+| allowed_regex | [string](#string) | repeated | Optional. Path allow-list by regular expression. |
+| disallowed_regex | [string](#string) | repeated | Optional. Path block-list by regular expression. |
+| allowed_paths | [string](#string) | repeated | Optional. Explicit path allow-list. |
+| disallowed_paths | [string](#string) | repeated | Optional. Explicit path block-list. |
 
 
 
@@ -14219,12 +14365,12 @@ Multiple response messages can be returned in order:
 | recognition_result | [StreamingRecognitionResult](#ondewo.nlu.StreamingRecognitionResult) |  | The result of speech recognition. |
 | query_result | [QueryResult](#ondewo.nlu.QueryResult) |  | The result of the conversational query or event processing. |
 | webhook_status | [google.rpc.Status](#google.rpc.Status) |  | Specifies the status of the webhook request. |
-| llm_call_started | [LlmCallStartedEvent](#ondewo.nlu.LlmCallStartedEvent) |  |  |
-| llm_call_finished | [LlmCallFinishedEvent](#ondewo.nlu.LlmCallFinishedEvent) |  |  |
-| llm_tool_call_started | [LlmToolCallStartedEvent](#ondewo.nlu.LlmToolCallStartedEvent) |  |  |
-| llm_tool_call_finished | [LlmToolCallFinishedEvent](#ondewo.nlu.LlmToolCallFinishedEvent) |  |  |
-| llm_thinking_delta | [LlmThinkingDeltaEvent](#ondewo.nlu.LlmThinkingDeltaEvent) |  |  |
-| llm_token_usage_update | [LlmTokenUsageUpdateEvent](#ondewo.nlu.LlmTokenUsageUpdateEvent) |  |  |
+| llm_call_started | [LlmCallStartedEvent](#ondewo.nlu.LlmCallStartedEvent) |  | Emitted when an LLM call has started. |
+| llm_call_finished | [LlmCallFinishedEvent](#ondewo.nlu.LlmCallFinishedEvent) |  | Emitted when an LLM call has finished. |
+| llm_tool_call_started | [LlmToolCallStartedEvent](#ondewo.nlu.LlmToolCallStartedEvent) |  | Emitted when an LLM tool call has started. |
+| llm_tool_call_finished | [LlmToolCallFinishedEvent](#ondewo.nlu.LlmToolCallFinishedEvent) |  | Emitted when an LLM tool call has finished. |
+| llm_thinking_delta | [LlmThinkingDeltaEvent](#ondewo.nlu.LlmThinkingDeltaEvent) |  | Emitted for an incremental LLM thinking (reasoning) update. |
+| llm_token_usage_update | [LlmTokenUsageUpdateEvent](#ondewo.nlu.LlmTokenUsageUpdateEvent) |  | Emitted when the running LLM token-usage totals are updated. |
 
 
 
@@ -15488,7 +15634,7 @@ Validation request for entity type values
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| entity_type | [EntityType.Entity](#ondewo.nlu.EntityType.Entity) |  |  |
+| entity_type | [EntityType.Entity](#ondewo.nlu.EntityType.Entity) |  | The entity (with embedded regex) to validate |
 
 
 
