@@ -1246,7 +1246,9 @@ message IntentSorting {
         SORT_INTENT_BY_END_DATE = 6;
     }
 
+    // The field to sort the intents by
     IntentSortingField sorting_field = 1;
+    // The sorting mode: ascending or descending
     SortingMode sorting_mode = 2;
 }
 
@@ -1288,7 +1290,9 @@ message BatchUpdateTrainingPhrasesRequest {
 // This message containing the training phrases status
 message TrainingPhraseStatus {
     oneof phrase_or_status {
+        // The successfully processed training phrase
         Intent.TrainingPhrase training_phrase = 1;
+        // The error message when processing this training phrase failed
         string error_message = 2;
     }
 }
@@ -1312,6 +1316,7 @@ message BatchCreateTrainingPhrasesRequest {
         // Required. The training phrase to create.
         Intent.TrainingPhrase training_phrase = 2;
     };
+    // The list of training phrases to create
     repeated CreateTrainingPhraseRequest training_phrase_requests = 1;
 }
 
@@ -1334,11 +1339,15 @@ message BatchDeleteTrainingPhrasesResponse {
     // Status of a training phrase deletion operation
     message DeleteTrainingPhraseStatus{
         oneof delete_status{
+            // Set when the training phrase was successfully deleted
             google.protobuf.Empty successfully_deleted = 1;
+            // The error message when deleting this training phrase failed
             string error_message = 2;
         }
     }
+    // The deletion status for each requested training phrase
     repeated DeleteTrainingPhraseStatus delete_statuses = 1;
+    // Indicates if some of the training phrase deletions have errors
     bool has_errors = 2;
 }
 
@@ -1403,10 +1412,13 @@ message BatchResponseMessagesStatusResponse {
     // Status of a response message operation
     message ResponseMessageStatus {
         oneof phrase_or_status {
+            // The successfully processed response message
             Intent.Message response_message = 1;
+            // The error message when processing this response message failed
             string error_message = 2;
         }
     }
+    // The status for each response message in the batch
     repeated ResponseMessageStatus response_message_statuses = 1;
     // indicates if statuses of some of the response messages have errors
     bool has_errors = 2;
@@ -1423,6 +1435,7 @@ message BatchCreateResponseMessagesRequest {
         // Required. The response message.
         Intent.Message response_message = 2;
     };
+    // The list of response messages to create
     repeated CreateResponseMessageRequest response_message_requests = 1;
 }
 
@@ -1451,11 +1464,15 @@ message BatchDeleteResponseMessagesResponse {
     // Status of a response message deletion operation
     message DeleteResponseMessageStatus{
         oneof delete_status{
+            // Set when the response message was successfully deleted
             google.protobuf.Empty successfully_deleted = 1;
+            // The error message when deleting this response message failed
             string error_message = 2;
         }
     }
+    // The deletion status for each requested response message
     repeated DeleteResponseMessageStatus delete_statuses = 1;
+    // Indicates if some of the response message deletions have errors
     bool has_errors = 2;
 }
 
@@ -1521,10 +1538,13 @@ message BatchParametersStatusResponse {
     // Status of a parameter operation
     message ParameterStatus {
         oneof phrase_or_status {
+            // The successfully processed parameter
             Intent.Parameter parameter = 1;
+            // The error message when processing this parameter failed
             string error_message = 2;
         }
     }
+    // The status for each parameter in the batch
     repeated ParameterStatus parameter_statuses = 1;
     // indicates if statuses of some of the parameters have errors
     bool has_errors = 2;
@@ -1570,11 +1590,15 @@ message BatchDeleteParametersResponse {
     // Status of a parameter deletion operation
     message DeleteParameterStatus{
         oneof delete_status{
+            // Set when the parameter was successfully deleted
             google.protobuf.Empty successfully_deleted = 1;
+            // The error message when deleting this parameter failed
             string error_message = 2;
         }
     }
+    // The deletion status for each requested parameter
     repeated DeleteParameterStatus delete_statuses = 1;
+    // Indicates if some of the parameter deletions have errors
     bool has_errors = 2;
 }
 

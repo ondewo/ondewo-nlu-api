@@ -1482,12 +1482,16 @@ message RagCrawlerFilters {
     // Optional. Include social media links.
     optional bool allow_social_media_links = 5;
 
+    // Optional. Path allow-list by regular expression.
     repeated string allowed_regex = 6;
 
+    // Optional. Path block-list by regular expression.
     repeated string disallowed_regex = 7;
 
+    // Optional. Explicit path allow-list.
     repeated string allowed_paths = 8;
 
+    // Optional. Explicit path block-list.
     repeated string disallowed_paths = 9;
 }
 

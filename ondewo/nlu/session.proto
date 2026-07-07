@@ -1593,11 +1593,17 @@ message StreamingDetectIntentResponse {
     // continues to carry the aggregated <code>LlmTelemetryReport</code> under
     // <code>query_result.llm_telemetry_report</code>.
     oneof telemetry_event {
+        // Emitted when an LLM call has started.
         LlmCallStartedEvent llm_call_started = 5;
+        // Emitted when an LLM call has finished.
         LlmCallFinishedEvent llm_call_finished = 6;
+        // Emitted when an LLM tool call has started.
         LlmToolCallStartedEvent llm_tool_call_started = 7;
+        // Emitted when an LLM tool call has finished.
         LlmToolCallFinishedEvent llm_tool_call_finished = 8;
+        // Emitted for an incremental LLM thinking (reasoning) update.
         LlmThinkingDeltaEvent llm_thinking_delta = 9;
+        // Emitted when the running LLM token-usage totals are updated.
         LlmTokenUsageUpdateEvent llm_token_usage_update = 10;
     }
 
