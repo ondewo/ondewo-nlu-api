@@ -249,6 +249,8 @@
 ### Improvements
 
 * Added `GetEntity`, `CreateEntity`, `UpdateEntity` and `DeleteEntity` request and responses
+* [[OND211-2053]](https://ondewo.atlassian.net/browse/OND211-2053) - Added created at, created by, modified at and
+  modified by properties to most important objects
 
 ### Breaking changes
 
@@ -256,15 +258,6 @@
   * From `BatchEntitiesResponse.EntityStatus` to `EntityStatus`
   * From `BatchCreateEntitiesRequest.CreateEntityRequest` to `CreateEntityRequest`
   * From `BatchDeleteEntitiesResponse.DeleteEntityStatus` to `DeleteEntityStatus`
-
-*****************
-
-## Release ONDEWO NLU API 4.6.0
-
-### Improvements
-
-* [[OND211-2053]](https://ondewo.atlassian.net/browse/OND211-2053) - Added created at, created by, modified at and
-  modified by properties to most important objects
 
 *****************
 
