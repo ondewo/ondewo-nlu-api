@@ -220,7 +220,7 @@ release_client: ## Generic Function to Release a Client
 # Change Version Number and RELEASE NOTES
 	cd ${REPO_DIR} && perl -i -ne 'print; if(/Release History/){open my $$fh,"<","../temp-notes"; print while <$$fh>; close $$fh}' ${RELEASEMD}
 	cd ${REPO_DIR} && head -20 ${RELEASEMD}
-	cd ${REPO_DIR} && perl -i -pe 's/ONDEWO_NLU_VERSION.*=.*/ONDEWO_NLU_VERSION = ${ONDEWO_NLU_API_VERSION}/' Makefile
+	cd ${REPO_DIR} && perl -i -pe 's/ONDEWO_NLU_VERSION.*=.*/ONDEWO_NLU_VERSION=${ONDEWO_NLU_API_VERSION}/' Makefile
 	cd ${REPO_DIR} && perl -i -pe 's/ONDEWO_PROTO_COMPILER_GIT_BRANCH.*=.*/ONDEWO_PROTO_COMPILER_GIT_BRANCH=tags\/${PROTO_COMPILER}/' Makefile
 	cd ${REPO_DIR} && perl -i -pe 's/NLU_API_GIT_BRANCH.*=.*/NLU_API_GIT_BRANCH=tags\/${ONDEWO_NLU_API_VERSION}/' Makefile && head -30 Makefile
 
