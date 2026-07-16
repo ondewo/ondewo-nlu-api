@@ -3820,8 +3820,6 @@
                       
                         <li><a href="#ondewo.nlu.Users.ListServerPermissions" class="title-badge method">ListServerPermissions</a></li>
                       
-                        <li><a href="#ondewo.nlu.Users.Login" class="title-badge method">Login</a></li>
-                      
                         <li><a href="#ondewo.nlu.Users.CheckLogin" class="title-badge method">CheckLogin</a></li>
                       
                         <li><a href="#ondewo.nlu.Users.ListNotifications" class="title-badge method">ListNotifications</a></li>
@@ -3926,14 +3924,6 @@
                     
                       <li>
                         <a href="#ondewo.nlu.ListUsersResponse" class="title-badge message">ListUsersResponse</a>
-                      </li>
-                    
-                      <li>
-                        <a href="#ondewo.nlu.LoginRequest" class="title-badge message">LoginRequest</a>
-                      </li>
-                    
-                      <li>
-                        <a href="#ondewo.nlu.LoginResponse" class="title-badge message">LoginResponse</a>
                       </li>
                     
                       <li>
@@ -44821,12 +44811,6 @@ until the server closes the gRPC connection. This message is only sent if
 
           Lists server permissions.
         
-          <h4 id="ondewo.nlu.Users.Login" class="title-badge method">Login</h4>
-
-          <pre>rpc Login (<a href="#ondewo.nlu.LoginRequest">LoginRequest</a>) returns (<a href="#ondewo.nlu.LoginResponse">LoginResponse)</a></pre>
-
-          Requests login.
-        
           <h4 id="ondewo.nlu.Users.CheckLogin" class="title-badge method">CheckLogin</h4>
 
           <pre>rpc CheckLogin (<a href="#google.protobuf.Empty">.google.protobuf.Empty</a>) returns (<a href="#google.protobuf.Empty">.google.protobuf.Empty)</a></pre>
@@ -45018,16 +45002,6 @@ until the server closes the gRPC connection. This message is only sent if
                 <td>GET</td>
                 <td>/v2/server_permissions</td>
                 <td></td>
-              </tr>
-              
-            
-              
-              
-              <tr>
-                <td>Login</td>
-                <td>POST</td>
-                <td>/v2/login</td>
-                <td>*</td>
               </tr>
               
             
@@ -45817,75 +45791,6 @@ returned based on the page_token field in the request. </p></td>
                   <td></td>
                   <td><p>The next_page_token is used to retrieve the next page of a returned result,
 e.g. next_page_token is current_index-2 </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="ondewo.nlu.LoginRequest" class="title-badge message">LoginRequest</h3>
-        <p>Authentication messages</p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>user_email</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>user email </p></td>
-                </tr>
-              
-                <tr>
-                  <td>password</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>user password </p></td>
-                </tr>
-              
-                <tr>
-                  <td>field_mask</td>
-                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
-                  <td>optional</td>
-                  <td><p>Optional. The mask to control which fields gets returned. </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="ondewo.nlu.LoginResponse" class="title-badge message">LoginResponse</h3>
-        <p>This message is a response of logging</p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>user</td>
-                  <td><a href="#ondewo.nlu.User">User</a></td>
-                  <td></td>
-                  <td><p>user object - user_id must be there </p></td>
-                </tr>
-              
-                <tr>
-                  <td>auth_token</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>authentication token after successful login of the user to access NLU services </p></td>
                 </tr>
               
             </tbody>

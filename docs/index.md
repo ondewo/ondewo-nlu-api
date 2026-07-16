@@ -770,8 +770,6 @@
     - [ListUserPreferencesResponse](#ondewo.nlu.ListUserPreferencesResponse)
     - [ListUsersRequest](#ondewo.nlu.ListUsersRequest)
     - [ListUsersResponse](#ondewo.nlu.ListUsersResponse)
-    - [LoginRequest](#ondewo.nlu.LoginRequest)
-    - [LoginResponse](#ondewo.nlu.LoginResponse)
     - [ServerRole](#ondewo.nlu.ServerRole)
     - [SetUserPreferencesRequest](#ondewo.nlu.SetUserPreferencesRequest)
     - [SetUserPreferencesResponse](#ondewo.nlu.SetUserPreferencesResponse)
@@ -15062,39 +15060,6 @@ Response containing list of users
 
 
 
-<a name="ondewo.nlu.LoginRequest"></a>
-
-### LoginRequest
-Authentication messages
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| user_email | [string](#string) |  | user email |
-| password | [string](#string) |  | user password |
-| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) | optional | Optional. The mask to control which fields gets returned. |
-
-
-
-
-
-
-<a name="ondewo.nlu.LoginResponse"></a>
-
-### LoginResponse
-This message is a response of logging
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| user | [User](#ondewo.nlu.User) |  | user object - user_id must be there |
-| auth_token | [string](#string) |  | authentication token after successful login of the user to access NLU services |
-
-
-
-
-
-
 <a name="ondewo.nlu.ServerRole"></a>
 
 ### ServerRole
@@ -15278,7 +15243,6 @@ gRPC service for managing users and server roles.
 | UpdateServerRole | [UpdateServerRoleRequest](#ondewo.nlu.UpdateServerRoleRequest) | [ServerRole](#ondewo.nlu.ServerRole) | Updates a server role. |
 | ListServerRoles | [ListServerRolesRequest](#ondewo.nlu.ListServerRolesRequest) | [ListServerRolesResponse](#ondewo.nlu.ListServerRolesResponse) | Lists server roles. |
 | ListServerPermissions | [ListServerPermissionsRequest](#ondewo.nlu.ListServerPermissionsRequest) | [ListServerPermissionsResponse](#ondewo.nlu.ListServerPermissionsResponse) | Lists server permissions. |
-| Login | [LoginRequest](#ondewo.nlu.LoginRequest) | [LoginResponse](#ondewo.nlu.LoginResponse) | Requests login. |
 | CheckLogin | [.google.protobuf.Empty](#google.protobuf.Empty) | [.google.protobuf.Empty](#google.protobuf.Empty) | Checks login. |
 | ListNotifications | [ListNotificationsRequest](#ondewo.nlu.ListNotificationsRequest) | [ListNotificationsResponse](#ondewo.nlu.ListNotificationsResponse) | Lists notifications based on specified filters. |
 | SetNotificationsFlaggedStatus | [SetNotificationsFlaggedStatusRequest](#ondewo.nlu.SetNotificationsFlaggedStatusRequest) | [ListNotificationsResponse](#ondewo.nlu.ListNotificationsResponse) | Sets the flagged status for multiple notifications. |

@@ -2,6 +2,20 @@
 
 *****************
 
+## Release ONDEWO NLU API 7.0.0
+
+### Breaking Changes
+
+* [[OND211-2418]](https://ondewo.atlassian.net/browse/OND211-2418) `user.proto`: The `Login` RPC and its `LoginRequest` / `LoginResponse` messages are removed. Authentication is Keycloak-only: obtain an access token from Keycloak and send it as the `Authorization: Bearer <token>` header on every call. The RPC had already stopped authenticating anyone — the server rejected every call with `UNIMPLEMENTED` and a message pointing at Keycloak — so it returned an `auth_token` that no request path would accept. `POST /v2/login` is gone with it.
+
+### Migration Guide
+
+* Replace `Users.Login` with a Keycloak token request. The ONDEWO clients do this for you: construct the client with `keycloak_url`, `realm`, `client_id`, `user_name` and `password` in the `ClientConfig` and it mints and refreshes the token itself.
+* The identity used must be exempt from 2FA, because the token is obtained with a non-interactive password grant. Create one with `CreateProjectTechnicalUser` and pass its `username` (not an e-mail).
+* `CheckLogin` is **not** affected and remains the way to probe whether a token is still valid.
+
+*****************
+
 ## Release ONDEWO NLU API 6.14.0
 
 ### Improvements
