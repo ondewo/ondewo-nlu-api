@@ -21,8 +21,12 @@ ONDEWO_NLU_API_VERSION=7.0.0
 # You need to setup an access token at https://github.com/settings/tokens - permissions are important
 GITHUB_GH_TOKEN?=ENTER_YOUR_TOKEN_HERE
 
+# Terminate on the ***** separator that delimits release entries, NOT on /\*\*/ — that matched the first
+# markdown **bold** span inside the entry and silently truncated the notes there. It was correct only while
+# no entry used inline bold; 7.0.0 is the first that does, and every bullet after the first bold one was
+# dropped from `gh release create -n "$(CURRENT_RELEASE_NOTES)"` with no error.
 CURRENT_RELEASE_NOTES=`cat RELEASE.md \
-	| perl -ne 'print if /Release ONDEWO NLU API ${ONDEWO_NLU_API_VERSION}/../\*\*/'`
+	| perl -ne 'print if /Release ONDEWO NLU API ${ONDEWO_NLU_API_VERSION}/../^\*{5}/'`
 
 GH_REPO="https://github.com/ondewo/ondewo-nlu-api"
 DEVOPS_ACCOUNT_GIT="ondewo-devops-accounts"
@@ -34,21 +38,13 @@ IMAGE_UTILS_NAME=ondewo-nlu-api-utils:${ONDEWO_NLU_API_VERSION}
 #       ONDEWO Standard Make Targets
 ########################################################
 
-setup_developer_environment_locally: install_python_requirements install_precommit_hooks install_nvm ## Sets up local development environment !! Forcefully closes current terminal
+setup_developer_environment_locally: install_precommit_hooks install_nvm ## Sets up local development environment !! Forcefully closes current terminal
 
 install_nvm: ## Install NVM, node and npm !! Forcefully closes current terminal
 	@curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
 	@sh install_nvm.sh
 	$(eval PID:=$(shell ps -ft $(ps | tail -1 | cut -c 8-13) | head -2 | tail -1 | cut -c 1-8))
 	@node --version & npm --version || (kill -KILL ${PID})
-
-install_python_requirements: ## Installs python requirements flak8 and mypy
-	wget -q https://raw.githubusercontent.com/ondewo/ondewo-nlu-client-python/master/requirements.txt -O requirements.txt
-	wget -q https://raw.githubusercontent.com/ondewo/ondewo-nlu-client-python/master/requirements-dev.txt -O requirements-dev.txt
-	wget -q https://raw.githubusercontent.com/ondewo/ondewo-nlu-client-python/master/.flake8 -O .flake8
-	wget -q https://raw.githubusercontent.com/ondewo/ondewo-nlu-client-python/master/mypy.ini -O mypy.ini
-	pip install -r requirements.txt
-	pip install -r requirements-dev.txt
 
 install_precommit_hooks: ## Installs pre-commit hooks and sets them up for the repo
 	pip install pre-commit
@@ -57,20 +53,6 @@ install_precommit_hooks: ## Installs pre-commit hooks and sets them up for the r
 
 precommit_hooks_run_all_files: ## Runs all pre-commit hooks on all files and not just the changed ones
 	pre-commit run --all-file
-
-flake8: ## Runs flake8
-	flake8 --config .flake8 .
-
-mypy: ## Run mypy static code checking
-	@echo "---------------------------------------------"
-	@echo "START: Run mypy in pre-commit hook ..."
-	pre-commit run mypy --all-files
-	@echo "DONE: Run mypy in pre-commit hook."
-	@echo "---------------------------------------------"
-	@echo "START: Run mypy directly ..."
-	mypy --config-file=mypy.ini .
-	@echo "DONE: Run mypy directly"
-	@echo "---------------------------------------------"
 
 help: ## Print usage info about help targets
 	# (first comment after target starting with double hashes ##)
@@ -212,9 +194,15 @@ release_all_clients: ## Release all clients IN PARALLEL; one failing client does
 
 GENERIC_CLIENT?=
 RELEASEMD?=
+# The section heading is driven by GENERIC_RELEASE_SECTION so a breaking API release does not publish five
+# client majors under "Improvements". On a major bump, override it and describe the break:
+#   make release_all_clients GENERIC_RELEASE_SECTION='Breaking Changes' \
+#     GENERIC_RELEASE_EXTRA='* The `Login` RPC and its messages are removed — authenticate via Keycloak. \n'
+GENERIC_RELEASE_SECTION?=Improvements
+GENERIC_RELEASE_EXTRA?=
 GENERIC_RELEASE_NOTES="\n***************** \n\\\#\\\# Release ONDEWO NLU REPONAME Client ${ONDEWO_NLU_API_VERSION} \n \
-	\n\\\#\\\#\\\# Improvements \n \
-	* Tracking API Version [${ONDEWO_NLU_API_VERSION}](https://github.com/ondewo/ondewo-nlu-api/releases/tag/${ONDEWO_NLU_API_VERSION}) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) ) \n"
+	\n\\\#\\\#\\\# ${GENERIC_RELEASE_SECTION} \n \
+	* Tracking API Version [${ONDEWO_NLU_API_VERSION}](https://github.com/ondewo/ondewo-nlu-api/releases/tag/${ONDEWO_NLU_API_VERSION}) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) ) \n ${GENERIC_RELEASE_EXTRA}"
 
 
 release_client: ## Generic Function to Release a Client

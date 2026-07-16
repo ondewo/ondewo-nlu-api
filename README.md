@@ -11,7 +11,7 @@ This repository contains the original interface definitions of public ONDEWO API
 The API documentation is generated from files using [protoc-gen-doc](https://github.com/pseudomuto/protoc-gen-doc) in formats:
 
 * [html](https://ondewo.github.io/ondewo-nlu-api)
-* [markdown](doc/index.md)
+* [markdown](docs/index.md)
 
 The core components of all the client libraries are built directly from files in this repo using [the proto compiler](https://github.com/ondewo/ondewo-proto-compiler).
 
@@ -52,8 +52,6 @@ Please use the issue tracker in this repo for discussions about this API, or the
 │   └── style.css
 ├── LICENSE
 ├── Makefile
-├── googleapis
-│   └── (clone of https://github.com/googleapis/googleapis.git on commit hash ==79ab27f3b70ebc221e265d2e8ab30a8cc2d21fa2)
 ├── ondewo
 │   ├── nlu
 │   │   ├── agent.proto
