@@ -278,10 +278,18 @@ service Sessions {
         };
     };
 
-    // Lists the comments attached to a session with pagination support.
+    // Lists the comments attached to a session with pagination support, optionally narrowed by resolved status.
     rpc ListSessionComments (ListSessionCommentsRequest) returns (ListSessionCommentsResponse) {
         option (google.api.http) = {
-            get: "/v2/{session_id=projects/*/agent/sessions/*}/reviews"
+            get: "/v2/{session_id=projects/*/agent/sessions/*}/comments"
+        };
+    };
+
+    // Lists the comments attached to all sessions of the agent with pagination support,
+    // optionally narrowed by a SessionFilter and by resolved status.
+    rpc ListSessionCommentsOfAllSessions (ListSessionCommentsOfAllSessionsRequest) returns (ListSessionCommentsResponse) {
+        option (google.api.http) = {
+            get: "/v2/{parent=projects/*/agent}/sessions/comments"
         };
     };
 
@@ -2872,7 +2880,7 @@ message UpdateSessionCommentsRequest {
 // This message is a request to list comments of a session
 message ListSessionCommentsRequest {
 
-    // The unique identifier for the session for which reviews should be listed
+    // The unique identifier for the session for which comments should be listed
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre>
     string session_id = 1;
 
@@ -2909,6 +2917,32 @@ message ListSessionCommentsRequest {
 
     // Optional. The mask to control which fields gets returned.
     optional google.protobuf.FieldMask field_mask = 3;
+
+    // Optional. Filter comments by their resolved status.
+    // If unset, comments with any resolved status are returned.
+    optional bool is_resolved = 4;
+
+}
+
+// This message is a request to list comments of all sessions of an agent
+message ListSessionCommentsOfAllSessionsRequest {
+
+    // The parent for which the comments of all sessions should be listed
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Optional. A filter to narrow the response down to sessions of interest.
+    SessionFilter session_filter = 2;
+
+    // Optional. The page token to support pagination.
+    string page_token = 3;
+
+    // Optional. The mask to control which fields gets returned.
+    optional google.protobuf.FieldMask field_mask = 4;
+
+    // Optional. Filter comments by their resolved status.
+    // If unset, comments with any resolved status are returned.
+    optional bool is_resolved = 5;
 
 }
 

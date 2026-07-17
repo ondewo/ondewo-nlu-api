@@ -77,6 +77,9 @@ message Comment {
 
     // User id in form of a valid UUID.
     string modified_by = 9;
+
+    // Whether the comment has been resolved. Defaults to false.
+    bool is_resolved = 10;
 }
 
 
