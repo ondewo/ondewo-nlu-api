@@ -79,7 +79,9 @@ message Comment {
     string modified_by = 9;
 
     // Whether the comment has been resolved. Defaults to false.
-    bool is_resolved = 10;
+    // Declared `optional` so field presence is tracked: on UpdateSessionComments an unset value leaves
+    // the stored resolved status unchanged, so editing a comment's text never clobbers its resolved flag.
+    optional bool is_resolved = 10;
 }
 
 
