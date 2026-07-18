@@ -1655,6 +1655,9 @@ message RagCrawlerConfig {
     // Optional. Structured output configuration (format + metadata policy).
     optional RagCrawlerResultsConfig output_config = 3;
 
+    // Optional. HTTP status filtering: which fetched pages become result documents.
+    optional RagCrawlerStatusFilter status_filter = 4;
+
 }
 
 // Deep crawler options grouped under one config node.
@@ -1679,6 +1682,9 @@ message RagCrawlerDeepCrawlerConfig {
     // Optional. URL and domain restrictions.
     optional RagCrawlerFilters deep_crawler_filters = 5;
 
+    // Optional. Normalize URL case (lowercase the path) during link discovery/deduplication.
+    optional bool normalize_url_case = 6;
+
 }
 
 // Structured output configuration.
@@ -1695,6 +1701,60 @@ message RagCrawlerResultsConfig {
 
     // Optional. Metadata extractors.
     repeated RagCrawlerMetaDataExtractor meta_data_extractors = 2;
+
+    // Optional. CSS-selector based content scoping for markdown extraction.
+    optional RagCrawlerContentScope content_scope = 3;
+
+    // Optional. Density-based content pruning (Crawl4AI PruningContentFilter).
+    // If not set the <code>RagCrawlerDensityPruning</code> defaults are used.
+    optional RagCrawlerDensityPruning density_pruning = 4;
+
+}
+
+// CSS-selector based content scoping for markdown extraction.
+//
+// When set, Markdown is generated only from the elements matched by <code>include_selectors</code> (if any), after removing elements matched by <code>exclude_selectors</code>.
+message RagCrawlerContentScope {
+
+    // Optional. CSS selectors to scope extraction to (keep only matching subtrees).
+    // Empty means the whole page is used.
+    repeated string include_selectors = 1;
+
+    // Optional. CSS selectors whose matching elements are removed before extraction (e.g. navigation, footer, sidebars, internal-only blocks).
+    repeated string exclude_selectors = 2;
+
+}
+
+// Density-based content pruning (Crawl4AI PruningContentFilter).
+//
+// Removes low-text-density and very short nodes by a composite density score.
+message RagCrawlerDensityPruning {
+
+    // Optional. Enable density pruning. Default <code>true</code>.
+    optional bool is_active = 1;
+
+    // Optional. Density score threshold. Default <code>0.5</code>.
+    optional float threshold = 2;
+
+    // Optional. Threshold interpretation. Default <code>RAG_CRAWLER_PRUNING_THRESHOLD_TYPE_FIXED</code>.
+    optional RagCrawlerPruningThresholdType threshold_type = 3;
+
+    // Optional. Nodes with fewer than this many words are removed. Default <code>10</code>.
+    optional int32 min_word_threshold = 4;
+
+}
+
+// Interpretation of the density-pruning threshold.
+enum RagCrawlerPruningThresholdType {
+
+    // Unspecified (treated as FIXED).
+    RAG_CRAWLER_PRUNING_THRESHOLD_TYPE_UNSPECIFIED = 0;
+
+    // Fixed cutoff: nodes scoring below <code>threshold</code> are removed.
+    RAG_CRAWLER_PRUNING_THRESHOLD_TYPE_FIXED = 1;
+
+    // Dynamic: the threshold is adjusted per-document by the pruning heuristic.
+    RAG_CRAWLER_PRUNING_THRESHOLD_TYPE_DYNAMIC = 2;
 
 }
 
@@ -1758,6 +1818,19 @@ message RagCrawlerRetryConfig {
 
     // Optional. Maximum retry attempts per page source.
     optional int32 retry_max_attempts = 2;
+
+}
+
+// HTTP status filtering for crawled pages.
+//
+// When active, a fetched page becomes a result document only if its HTTP status is accepted.
+message RagCrawlerStatusFilter {
+
+    // Optional. Enable HTTP status filtering. Default <code>false</code>.
+    optional bool is_active = 1;
+
+    // Optional. Accepted HTTP status codes. If empty while active, only the 2xx range (<code>200</code>-<code>299</code>) is accepted. Add specific codes here to accept extras.
+    repeated int32 accepted_status_codes = 2;
 
 }
 
