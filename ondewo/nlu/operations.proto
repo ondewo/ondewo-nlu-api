@@ -23,6 +23,7 @@ import "google/protobuf/field_mask.proto";
 import "google/rpc/status.proto";
 import "google/protobuf/timestamp.proto";
 import "ondewo/nlu/operation_metadata.proto";
+import "ondewo/nlu/common.proto";
 
 // Manages long-running operations with an API service.
 //
@@ -65,6 +66,26 @@ service Operations {
     // of 1, corresponding to <code>Code.CANCELLED</code>.
     rpc CancelOperation (CancelOperationRequest) returns (google.protobuf.Empty) {
         option (google.api.http) = {post: "/v1/{name=operations/**}:cancel" body: "*"};
+    }
+
+    // Streams the live container logs of a remote-operation container (LLM evaluation, simulation,
+    // crawl, training) as they are produced, in the manner of <code>docker logs --follow</code>.
+    // The stream stays open until the container exits or the client disconnects. Each message is a
+    // single parsed log line. Secrets in the log text are redacted server-side before streaming.
+    rpc StreamRemoteOperationContainerLogs (StreamRemoteOperationContainerLogsRequest) returns (stream RemoteOperationContainerLogLine);
+
+    // Returns a bounded, filtered snapshot of a remote-operation container&apos;s logs. Supports a
+    // time window (<code>start_time</code> / <code>end_time</code>), a minimum loguru log level,
+    // a regular-expression match on the message, and a cap on the number of returned lines. Secrets
+    // in the log text are redacted server-side before the response is returned.
+    rpc GetRemoteOperationContainerLogs (GetRemoteOperationContainerLogsRequest) returns (GetRemoteOperationContainerLogsResponse) {
+        option (google.api.http) = {get: "/v1/{name=operations/**}:containerLogs"};
+    }
+
+    // Returns the health and lifecycle status of a remote-operation container: whether it still
+    // exists, whether it is running/exited, its exit code, OOM-kill flag and Docker health status.
+    rpc GetRemoteOperationContainerStatus (GetRemoteOperationContainerStatusRequest) returns (RemoteOperationContainerStatus) {
+        option (google.api.http) = {get: "/v1/{name=operations/**}:containerStatus"};
     }
 }
 
@@ -222,4 +243,142 @@ message DeleteOperationRequest {
 
     // The name of the operation resource to be deleted.
     string name = 1;
+}
+
+// The request message for <a href="index.html#ondewo.nlu.Operations.StreamRemoteOperationContainerLogs">Operations.StreamRemoteOperationContainerLogs</a>.
+message StreamRemoteOperationContainerLogsRequest {
+
+    // The name of the operation resource whose container logs should be streamed.
+    string name = 1;
+
+    // Only stream lines at or above this loguru severity. <code>LOG_SEVERITY_UNSPECIFIED</code> (the
+    // default) streams every line regardless of level.
+    LogSeverity min_log_level = 2;
+
+    // Replay at most this many of the most recent existing log lines before switching to live follow.
+    // <code>0</code> (the default) starts the follow with no historical replay.
+    int32 tail_lines = 3;
+}
+
+// The request message for <a href="index.html#ondewo.nlu.Operations.GetRemoteOperationContainerLogs">Operations.GetRemoteOperationContainerLogs</a>.
+message GetRemoteOperationContainerLogsRequest {
+
+    // The name of the operation resource whose container logs should be returned.
+    string name = 1;
+
+    // Only return lines at or above this loguru severity. <code>LOG_SEVERITY_UNSPECIFIED</code> (the
+    // default) returns every line regardless of level.
+    LogSeverity min_log_level = 2;
+
+    // Only return lines whose timestamp is at or after this instant. Unset returns from the start of
+    // the available logs.
+    google.protobuf.Timestamp start_time = 3;
+
+    // Only return lines whose timestamp is at or before this instant. Unset returns up to the latest
+    // available log line.
+    google.protobuf.Timestamp end_time = 4;
+
+    // Return at most this many lines, keeping the most recent matches. <code>0</code> (the default)
+    // applies a server-side safety cap.
+    int32 max_lines = 5;
+
+    // Only return lines whose message matches this regular expression (Python <code>re</code> syntax).
+    // Empty (the default) disables regex filtering.
+    string regex = 6;
+}
+
+// The response message for <a href="index.html#ondewo.nlu.Operations.GetRemoteOperationContainerLogs">Operations.GetRemoteOperationContainerLogs</a>.
+message GetRemoteOperationContainerLogsResponse {
+
+    // The matching log lines, oldest first. Secrets are redacted server-side.
+    repeated RemoteOperationContainerLogLine log_lines = 1;
+
+    // True when older matching lines were dropped because <code>max_lines</code> was reached.
+    bool truncated = 2;
+}
+
+// A single parsed container log line, emitted by both the streaming and the query RPCs.
+message RemoteOperationContainerLogLine {
+
+    // The timestamp parsed from the loguru line prefix, if present.
+    google.protobuf.Timestamp timestamp = 1;
+
+    // The loguru severity parsed from the line, or <code>LOG_SEVERITY_UNSPECIFIED</code> if the line
+    // carried no recognizable level (e.g. a continuation / traceback line).
+    LogSeverity level = 2;
+
+    // The log message text, with ANSI colour codes stripped and secrets redacted.
+    string message = 3;
+}
+
+// The request message for <a href="index.html#ondewo.nlu.Operations.GetRemoteOperationContainerStatus">Operations.GetRemoteOperationContainerStatus</a>.
+message GetRemoteOperationContainerStatusRequest {
+
+    // The name of the operation resource whose container status should be returned.
+    string name = 1;
+}
+
+// The lifecycle state of a remote-operation container, mirroring the Docker container lifecycle.
+enum RemoteOperationContainerLifecycleState {
+
+    // The lifecycle state could not be determined.
+    REMOTE_OPERATION_CONTAINER_LIFECYCLE_STATE_UNSPECIFIED = 0;
+
+    // No container with the recorded name exists on the recorded host (never started, already reaped,
+    // or the dispatch record was garbage-collected after completion).
+    REMOTE_OPERATION_CONTAINER_LIFECYCLE_STATE_NOT_FOUND = 1;
+
+    // The container has been created but is not yet running.
+    REMOTE_OPERATION_CONTAINER_LIFECYCLE_STATE_CREATED = 2;
+
+    // The container is running.
+    REMOTE_OPERATION_CONTAINER_LIFECYCLE_STATE_RUNNING = 3;
+
+    // The container is paused.
+    REMOTE_OPERATION_CONTAINER_LIFECYCLE_STATE_PAUSED = 4;
+
+    // The container is in the process of restarting.
+    REMOTE_OPERATION_CONTAINER_LIFECYCLE_STATE_RESTARTING = 5;
+
+    // The container has exited (successfully or with an error — see <code>exit_code</code>).
+    REMOTE_OPERATION_CONTAINER_LIFECYCLE_STATE_EXITED = 6;
+
+    // The container is dead (Docker could not stop/remove it cleanly).
+    REMOTE_OPERATION_CONTAINER_LIFECYCLE_STATE_DEAD = 7;
+}
+
+// The response message for <a href="index.html#ondewo.nlu.Operations.GetRemoteOperationContainerStatus">Operations.GetRemoteOperationContainerStatus</a>.
+message RemoteOperationContainerStatus {
+
+    // The name of the operation resource this status describes.
+    string name = 1;
+
+    // The lifecycle state of the container.
+    RemoteOperationContainerLifecycleState lifecycle_state = 2;
+
+    // The host the container was dispatched to (empty when the dispatch record is unavailable).
+    string host_name = 3;
+
+    // The container name (empty when the dispatch record is unavailable).
+    string container_name = 4;
+
+    // The container exit code. Only meaningful when <code>lifecycle_state</code> is
+    // <code>EXITED</code> or <code>DEAD</code>.
+    int32 exit_code = 5;
+
+    // True when the container was killed by the out-of-memory killer.
+    bool oom_killed = 6;
+
+    // The Docker healthcheck status (<code>healthy</code> / <code>unhealthy</code> / <code>starting</code>),
+    // empty when the container declares no healthcheck.
+    string health_status = 7;
+
+    // When the container started, if known.
+    google.protobuf.Timestamp started_at = 8;
+
+    // When the container finished, if it has exited.
+    google.protobuf.Timestamp finished_at = 9;
+
+    // When this status was observed by the server.
+    google.protobuf.Timestamp observed_at = 10;
 }
