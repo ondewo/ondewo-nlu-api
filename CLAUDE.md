@@ -51,6 +51,15 @@ pinned via `NLU_API_GIT_BRANCH` / `ONDEWO_NLU_API_GIT_BRANCH` in their Makefiles
   - thresholds/options that need presence-detection go in nested messages
     (proto3 scalars have no presence).
 - Every field gets a `//` doc comment (HTML entities for `<>` in formats, as in the existing files).
+- **Server-streaming (unary→stream) RPCs take NO `google.api.http` annotation** — like
+  `StreamingDetectIntent` in `session.proto`. Only unary RPCs carry the `option (google.api.http) = {…}`
+  binding. Precedent: the three `…RemoteOperationContainerLogs`/`…Status` RPCs added to `operations.proto`
+  (OND211-2418) — the streaming one has no annotation, the two unary ones use a `get:` custom verb.
+- **Reuse an existing enum before inventing a new one.** A new "log level" field should reference the
+  existing `ondewo.nlu.LogSeverity` (`common.proto`), not a fresh enum (OND211-2418 did this). A genuinely
+  new enum whose value names are generic (`RUNNING`, `EXITED`, `NOT_FOUND`, …) must **prefix every value**
+  to avoid colliding with other top-level enums in the C-style flat namespace — e.g.
+  `REMOTE_OPERATION_CONTAINER_LIFECYCLE_STATE_RUNNING`.
 - **Compile check** before committing (no protoc needed):
   `python3 -m grpc_tools.protoc -I . --descriptor_set_out=/dev/null ondewo/nlu/<changed>.proto`
 - Add a `RELEASE.md` entry under the upcoming version heading (format: `* [[TICKET]](jira-url) text`).
@@ -69,10 +78,15 @@ pinned via `NLU_API_GIT_BRANCH` / `ONDEWO_NLU_API_GIT_BRANCH` in their Makefiles
 1. **ondewo-nlu-client-python** — see its CLAUDE.md. Then bump the pin in `ondewo-cai/pyproject.toml`
    (`ondewo-nlu-client @ git+https://…@<client-sha>`) + `uv lock`.
 2. **ondewo-nlu-client-angular** — see its CLAUDE.md. Then copy into ondewo-aim via
-   `cd src && npm run test-in-ondewo-aim-copy-only`.
+   `make test-in-ondewo-aim-copy-only`. For an AIM **streaming** feature the angular client is enough —
+   the aim-server bridges the gRPC server-stream to a WebSocket as a Buffer-passthrough, so
+   **ondewo-nlu-client-nodejs usually does NOT need regenerating** (only when the aim-server itself builds
+   or reads the typed messages, e.g. the RAG download proxy).
 3. Implement server-side in **ondewo-cai** (servicer + ORM + ProtoInfo request-validation
    registrations in `proto_info.py` / enum registrations in `protobuf_helpers.py` — forgetting these
-   breaks request validation at runtime) and client-side in **ondewo-aim**.
+   breaks request validation at runtime; note that a new server→client OUTPUT message also needs a
+   ProtoInfo entry, and a **server-streaming** handler must authorize in-body because the endpoint
+   decorator defers permission checks for async generators) and client-side in **ondewo-aim**.
 
 ## Releases
 
@@ -247,3 +261,14 @@ Pre-commit here uses only the language-agnostic hooks — **markdownlint-cli2, p
   silently truncated the release body there. It looked correct only because no entry had used inline bold;
   7.0.0 is the first that does. Now fixed to `/^\*{5}/`. If you add a bullet to RELEASE.md and it does not
   appear in the GitHub release, check that pattern first — `gh release create` reports no error.
+
+## Jenkins — never trigger a multibranch scan or branch indexing
+
+**NEVER trigger a Jenkins multibranch scan or branch indexing.** Do not call a multibranch/folder job's
+`build`, `scan`, or reindex endpoints, click "Scan Repository Now" / "Build Now" on a folder, run
+`p4 scan`, or use any API/CLI that reindexes branches or scans the repository. A scan/reindex runs across
+**every** branch, consumes CI resources, and can kick off unintended builds and deploys.
+
+If a branch is not building — it was not discovered, or its job is marked `buildable: false` / orphaned —
+**report it and stop**. Let the user or a Jenkins admin adjust branch-discovery/config or rename the branch
+to the convention. Never force a build by scanning or reindexing.
