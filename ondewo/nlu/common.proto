@@ -278,6 +278,9 @@ message AddNotificationsRequest {
 
     // List of notifications to be added.
     repeated Notification notifications = 1;
+
+    // Optional. Mask to control which fields of the returned notifications are filled with data.
+    optional google.protobuf.FieldMask field_mask = 2;
 }
 
 // Message containing the response to adding notifications.
@@ -378,6 +381,9 @@ message SetNotificationsFlaggedStatusRequest {
 
     // Flagged status to set for the specified notifications.
     repeated bool flagged = 2;
+
+    // Optional. Mask to control which fields of the returned notifications are filled with data.
+    optional google.protobuf.FieldMask field_mask = 3;
 }
 
 // Message for setting the read status of notifications.
@@ -388,6 +394,39 @@ message SetNotificationsReadStatusRequest {
 
     // Read status to set for the specified notifications.
     repeated bool flagged = 2;
+
+    // Optional. Mask to control which fields of the returned notifications are filled with data.
+    optional google.protobuf.FieldMask field_mask = 3;
+}
+
+// Message for retrieving a single notification by its resource name.
+message GetNotificationRequest {
+
+    // Resource name of the notification to retrieve.
+    string name = 1;
+
+    // Optional. Mask to control which fields of the notification are returned.
+    optional google.protobuf.FieldMask field_mask = 2;
+}
+
+// Message for updating a single notification.
+message UpdateNotificationRequest {
+
+    // The notification to update, identified by its resource name.
+    Notification notification = 1;
+
+    // Mask controlling which fields of the notification are updated.
+    google.protobuf.FieldMask update_mask = 2;
+
+    // Optional. Mask to control which fields of the returned notification are filled with data.
+    optional google.protobuf.FieldMask field_mask = 3;
+}
+
+// Message for deleting one or more notifications by their resource names.
+message DeleteNotificationsRequest {
+
+    // Resource names of the notifications to delete.
+    repeated string notification_names = 1;
 }
 
 // Key-Value pair message, where the value can be one of various types (int, float, double, string, etc.).

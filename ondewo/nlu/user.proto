@@ -151,6 +151,18 @@ service Users {
     // Sets the read status for multiple notifications.
     rpc SetNotificationsReadStatus (SetNotificationsReadStatusRequest) returns (ListNotificationsResponse);
 
+    // Adds one or more notifications.
+    rpc AddNotifications (AddNotificationsRequest) returns (AddNotificationsResponse);
+
+    // Retrieves a single notification by its resource name.
+    rpc GetNotification (GetNotificationRequest) returns (Notification);
+
+    // Updates a single notification, applying only the fields named in the update mask.
+    rpc UpdateNotification (UpdateNotificationRequest) returns (Notification);
+
+    // Deletes one or more notifications by their resource names.
+    rpc DeleteNotifications (DeleteNotificationsRequest) returns (google.protobuf.Empty);
+
     // Retrieves user preferences based on the provided request.
     rpc GetUserPreferences (GetUserPreferencesRequest) returns (GetUserPreferencesResponse);
 
