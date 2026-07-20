@@ -21,6 +21,17 @@
 
 *****************
 
+## Release ONDEWO NLU API 6.15.0
+
+### New Features
+
+* [[OND211-2381]](https://ondewo.atlassian.net/browse/OND211-2381) `rag.proto`: CSS-selector content scoping for the crawler. New `RagCrawlerContentScope` (`include_selectors`, `exclude_selectors`) on `RagCrawlerResultsConfig.content_scope` (field 3) scopes markdown extraction to chosen page elements and drops navigation/footer/sidebar/internal blocks (bare tag names like `nav`/`footer` are valid selectors). Independent of density pruning; unset means the whole page is used.
+* [[OND211-2381]](https://ondewo.atlassian.net/browse/OND211-2381) `rag.proto`: Configurable density pruning. New `RagCrawlerDensityPruning` (`is_active`, `threshold`, `threshold_type`, `min_word_threshold`) on `RagCrawlerResultsConfig.density_pruning` (field 4) exposes the previously-hardcoded Crawl4AI `PruningContentFilter` parameters (defaults `true` / `0.5` / `FIXED` / `10`) and adds the `RagCrawlerPruningThresholdType` enum. Scoping and pruning are independent — either, both, or neither may be used.
+* [[OND211-2381]](https://ondewo.atlassian.net/browse/OND211-2381) `rag.proto`: HTTP status gate. New `RagCrawlerStatusFilter` (`is_active`, `accepted_status_codes`) on `RagCrawlerConfig.status_filter` (field 4) keeps only pages whose HTTP status is accepted (empty while active = 2xx only), preventing ingestion of soft-error (404/500) navigation-shell pages. Default inactive.
+* [[OND211-2381]](https://ondewo.atlassian.net/browse/OND211-2381) `rag.proto`: URL-case normalization. New `RagCrawlerDeepCrawlerConfig.normalize_url_case` (field 6) optionally lowercases the URL path during link discovery/deduplication to collapse case-variant duplicates (e.g. `/tag/reifen` vs `/tag/Reifen`). Default `false`, since URLs are case-sensitive in general.
+
+*****************
+
 ## Release ONDEWO NLU API 6.14.0
 
 ### Improvements

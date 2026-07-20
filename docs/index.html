@@ -2824,11 +2824,19 @@
                       </li>
                     
                       <li>
+                        <a href="#ondewo.nlu.RagCrawlerContentScope" class="title-badge message">RagCrawlerContentScope</a>
+                      </li>
+                    
+                      <li>
                         <a href="#ondewo.nlu.RagCrawlerCookie" class="title-badge message">RagCrawlerCookie</a>
                       </li>
                     
                       <li>
                         <a href="#ondewo.nlu.RagCrawlerDeepCrawlerConfig" class="title-badge message">RagCrawlerDeepCrawlerConfig</a>
+                      </li>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.RagCrawlerDensityPruning" class="title-badge message">RagCrawlerDensityPruning</a>
                       </li>
                     
                       <li>
@@ -2869,6 +2877,10 @@
                     
                       <li>
                         <a href="#ondewo.nlu.RagCrawlerSources" class="title-badge message">RagCrawlerSources</a>
+                      </li>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.RagCrawlerStatusFilter" class="title-badge message">RagCrawlerStatusFilter</a>
                       </li>
                     
                       <li>
@@ -3099,6 +3111,10 @@
                     
                       <li>
                         <a href="#ondewo.nlu.RagCrawlerMetaDataExtractorType" class="title-badge enum">RagCrawlerMetaDataExtractorType</a>
+                      </li>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.RagCrawlerPruningThresholdType" class="title-badge enum">RagCrawlerPruningThresholdType</a>
                       </li>
                     
                       <li>
@@ -32531,6 +32547,13 @@ Increase for throughput; reduce for fragile sites/rate limits. </p></td>
                   <td><p>Optional. Structured output configuration (format + metadata policy). </p></td>
                 </tr>
               
+                <tr>
+                  <td>status_filter</td>
+                  <td><a href="#ondewo.nlu.RagCrawlerStatusFilter">RagCrawlerStatusFilter</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. HTTP status filtering: which fetched pages become result documents. </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -32561,6 +32584,38 @@ Includes only fields configured in <code>RagCrawlerConfig.output_config.meta_dat
                   <td><a href="#string">string</a></td>
                   <td>optional</td>
                   <td><p>Optional. Extracted markdown output. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="ondewo.nlu.RagCrawlerContentScope" class="title-badge message">RagCrawlerContentScope</h3>
+        <p>CSS-selector based content scoping for markdown extraction.</p><p>When set, Markdown is generated only from the elements matched by <code>include_selectors</code> (if any), after removing elements matched by <code>exclude_selectors</code>.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>include_selectors</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Optional. CSS selectors to scope extraction to (keep only matching subtrees).
+Empty means the whole page is used. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>exclude_selectors</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Optional. CSS selectors whose matching elements are removed before extraction (e.g. navigation, footer, sidebars, internal-only blocks). </p></td>
                 </tr>
               
             </tbody>
@@ -32655,6 +32710,58 @@ Default <code>RAG_CRAWLER_CRAWL_STRATEGY_BFS</code>. </p></td>
                   <td><a href="#ondewo.nlu.RagCrawlerFilters">RagCrawlerFilters</a></td>
                   <td>optional</td>
                   <td><p>Optional. URL and domain restrictions. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>normalize_url_case</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. Normalize URL case (lowercase the path) during link discovery/deduplication. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="ondewo.nlu.RagCrawlerDensityPruning" class="title-badge message">RagCrawlerDensityPruning</h3>
+        <p>Density-based content pruning (Crawl4AI PruningContentFilter).</p><p>Removes low-text-density and very short nodes by a composite density score.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>is_active</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. Enable density pruning. Default <code>true</code>. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>threshold</td>
+                  <td><a href="#float">float</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. Density score threshold. Default <code>0.5</code>. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>threshold_type</td>
+                  <td><a href="#ondewo.nlu.RagCrawlerPruningThresholdType">RagCrawlerPruningThresholdType</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. Threshold interpretation. Default <code>RAG_CRAWLER_PRUNING_THRESHOLD_TYPE_FIXED</code>. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>min_word_threshold</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. Nodes with fewer than this many words are removed. Default <code>10</code>. </p></td>
                 </tr>
               
             </tbody>
@@ -33028,6 +33135,21 @@ Default <code>true</code>. </p></td>
                   <td><p>Optional. Metadata extractors. </p></td>
                 </tr>
               
+                <tr>
+                  <td>content_scope</td>
+                  <td><a href="#ondewo.nlu.RagCrawlerContentScope">RagCrawlerContentScope</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. CSS-selector based content scoping for markdown extraction. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>density_pruning</td>
+                  <td><a href="#ondewo.nlu.RagCrawlerDensityPruning">RagCrawlerDensityPruning</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. Density-based content pruning (Crawl4AI PruningContentFilter).
+If not set the <code>RagCrawlerDensityPruning</code> defaults are used. </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -33134,6 +33256,37 @@ Default <code>true</code>. </p></td>
                   <td>repeated</td>
                   <td><p>Sitemap URLs used for URL discovery.
 Typical values are <code>/sitemap.xml</code> or sitemap index files. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="ondewo.nlu.RagCrawlerStatusFilter" class="title-badge message">RagCrawlerStatusFilter</h3>
+        <p>HTTP status filtering for crawled pages.</p><p>When active, a fetched page becomes a result document only if its HTTP status is accepted.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>is_active</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. Enable HTTP status filtering. Default <code>false</code>. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>accepted_status_codes</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td>repeated</td>
+                  <td><p>Optional. Accepted HTTP status codes. If empty while active, only the 2xx range (<code>200</code>-<code>299</code>) is accepted. Add specific codes here to accept extras. </p></td>
                 </tr>
               
             </tbody>
@@ -36588,6 +36741,35 @@ If metadata field is a list, checks if the joined string of the string represent
                 <td>RAG_CRAWLER_META_DATA_EXTRACTOR_TYPE_ID_SELECTOR</td>
                 <td>5</td>
                 <td><p>ID selector.</p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="ondewo.nlu.RagCrawlerPruningThresholdType" class="title-badge enum">RagCrawlerPruningThresholdType</h3>
+        <p>Interpretation of the density-pruning threshold.</p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>RAG_CRAWLER_PRUNING_THRESHOLD_TYPE_UNSPECIFIED</td>
+                <td>0</td>
+                <td><p>Unspecified (treated as FIXED).</p></td>
+              </tr>
+            
+              <tr>
+                <td>RAG_CRAWLER_PRUNING_THRESHOLD_TYPE_FIXED</td>
+                <td>1</td>
+                <td><p>Fixed cutoff: nodes scoring below <code>threshold</code> are removed.</p></td>
+              </tr>
+            
+              <tr>
+                <td>RAG_CRAWLER_PRUNING_THRESHOLD_TYPE_DYNAMIC</td>
+                <td>2</td>
+                <td><p>Dynamic: the threshold is adjusted per-document by the pruning heuristic.</p></td>
               </tr>
             
           </tbody>

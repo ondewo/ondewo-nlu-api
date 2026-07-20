@@ -538,8 +538,10 @@
     - [RagCrawlerConcurrencyConfig](#ondewo.nlu.RagCrawlerConcurrencyConfig)
     - [RagCrawlerConfig](#ondewo.nlu.RagCrawlerConfig)
     - [RagCrawlerContentResult](#ondewo.nlu.RagCrawlerContentResult)
+    - [RagCrawlerContentScope](#ondewo.nlu.RagCrawlerContentScope)
     - [RagCrawlerCookie](#ondewo.nlu.RagCrawlerCookie)
     - [RagCrawlerDeepCrawlerConfig](#ondewo.nlu.RagCrawlerDeepCrawlerConfig)
+    - [RagCrawlerDensityPruning](#ondewo.nlu.RagCrawlerDensityPruning)
     - [RagCrawlerExecutionInfo](#ondewo.nlu.RagCrawlerExecutionInfo)
     - [RagCrawlerFilters](#ondewo.nlu.RagCrawlerFilters)
     - [RagCrawlerHtmlAuth](#ondewo.nlu.RagCrawlerHtmlAuth)
@@ -550,6 +552,7 @@
     - [RagCrawlerRetryConfig](#ondewo.nlu.RagCrawlerRetryConfig)
     - [RagCrawlerSeedUrlFilters](#ondewo.nlu.RagCrawlerSeedUrlFilters)
     - [RagCrawlerSources](#ondewo.nlu.RagCrawlerSources)
+    - [RagCrawlerStatusFilter](#ondewo.nlu.RagCrawlerStatusFilter)
     - [RagCreateCrawlerRequest](#ondewo.nlu.RagCreateCrawlerRequest)
     - [RagCreateDatasetRequest](#ondewo.nlu.RagCreateDatasetRequest)
     - [RagDataset](#ondewo.nlu.RagDataset)
@@ -607,6 +610,7 @@
     - [RagCrawlerAuthenticationExecutionType](#ondewo.nlu.RagCrawlerAuthenticationExecutionType)
     - [RagCrawlerCrawlStrategy](#ondewo.nlu.RagCrawlerCrawlStrategy)
     - [RagCrawlerMetaDataExtractorType](#ondewo.nlu.RagCrawlerMetaDataExtractorType)
+    - [RagCrawlerPruningThresholdType](#ondewo.nlu.RagCrawlerPruningThresholdType)
     - [RagCrawlerSelectorType](#ondewo.nlu.RagCrawlerSelectorType)
     - [RagDocumentStatus](#ondewo.nlu.RagDocumentStatus)
     - [RagDocumentType](#ondewo.nlu.RagDocumentType)
@@ -10536,6 +10540,7 @@ diagnostics capture, and deep crawling options for each crawler run.
 | concurrency_config | [RagCrawlerConcurrencyConfig](#ondewo.nlu.RagCrawlerConcurrencyConfig) | optional | Optional. Concurrency and pacing controls for crawler requests. |
 | deep_crawler_config | [RagCrawlerDeepCrawlerConfig](#ondewo.nlu.RagCrawlerDeepCrawlerConfig) | optional | Optional. Deep crawler behavior (enable + depth/pages/scoring/filter chain). |
 | output_config | [RagCrawlerResultsConfig](#ondewo.nlu.RagCrawlerResultsConfig) | optional | Optional. Structured output configuration (format + metadata policy). |
+| status_filter | [RagCrawlerStatusFilter](#ondewo.nlu.RagCrawlerStatusFilter) | optional | Optional. HTTP status filtering: which fetched pages become result documents. |
 
 
 
@@ -10552,6 +10557,24 @@ diagnostics capture, and deep crawling options for each crawler run.
 | ----- | ---- | ----- | ----------- |
 | metadata | [google.protobuf.Struct](#google.protobuf.Struct) | optional | Optional. Extracted page metadata. Includes only fields configured in <code>RagCrawlerConfig.output_config.meta_data_extractors</code>. |
 | markdown | [string](#string) | optional | Optional. Extracted markdown output. |
+
+
+
+
+
+
+<a name="ondewo.nlu.RagCrawlerContentScope"></a>
+
+### RagCrawlerContentScope
+CSS-selector based content scoping for markdown extraction.
+
+When set, Markdown is generated only from the elements matched by <code>include_selectors</code> (if any), after removing elements matched by <code>exclude_selectors</code>.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| include_selectors | [string](#string) | repeated | Optional. CSS selectors to scope extraction to (keep only matching subtrees). Empty means the whole page is used. |
+| exclude_selectors | [string](#string) | repeated | Optional. CSS selectors whose matching elements are removed before extraction (e.g. navigation, footer, sidebars, internal-only blocks). |
 
 
 
@@ -10588,6 +10611,27 @@ Deep crawler options grouped under one config node.
 | max_depth | [int32](#int32) | optional | Optional. Maximum link depth from seed URLs. <code>0</code> usually means only seed pages. |
 | max_pages | [int32](#int32) | optional | Optional. Hard cap on total processed pages for this run. |
 | deep_crawler_filters | [RagCrawlerFilters](#ondewo.nlu.RagCrawlerFilters) | optional | Optional. URL and domain restrictions. |
+| normalize_url_case | [bool](#bool) | optional | Optional. Normalize URL case (lowercase the path) during link discovery/deduplication. |
+
+
+
+
+
+
+<a name="ondewo.nlu.RagCrawlerDensityPruning"></a>
+
+### RagCrawlerDensityPruning
+Density-based content pruning (Crawl4AI PruningContentFilter).
+
+Removes low-text-density and very short nodes by a composite density score.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| is_active | [bool](#bool) | optional | Optional. Enable density pruning. Default <code>true</code>. |
+| threshold | [float](#float) | optional | Optional. Density score threshold. Default <code>0.5</code>. |
+| threshold_type | [RagCrawlerPruningThresholdType](#ondewo.nlu.RagCrawlerPruningThresholdType) | optional | Optional. Threshold interpretation. Default <code>RAG_CRAWLER_PRUNING_THRESHOLD_TYPE_FIXED</code>. |
+| min_word_threshold | [int32](#int32) | optional | Optional. Nodes with fewer than this many words are removed. Default <code>10</code>. |
 
 
 
@@ -10736,6 +10780,8 @@ similar to Crawl4AI markdown/output-generation toggles.
 | ----- | ---- | ----- | ----------- |
 | inject_frontmatter | [bool](#bool) | optional | Optional. Inject YAML frontmatter into markdown output. If the content is HTML based, it will automatically be converted to markdown. Optionally, you can inject YAML frontmatter into the markdown output. Default <code>true</code>. |
 | meta_data_extractors | [RagCrawlerMetaDataExtractor](#ondewo.nlu.RagCrawlerMetaDataExtractor) | repeated | Optional. Metadata extractors. |
+| content_scope | [RagCrawlerContentScope](#ondewo.nlu.RagCrawlerContentScope) | optional | Optional. CSS-selector based content scoping for markdown extraction. |
+| density_pruning | [RagCrawlerDensityPruning](#ondewo.nlu.RagCrawlerDensityPruning) | optional | Optional. Density-based content pruning (Crawl4AI PruningContentFilter). If not set the <code>RagCrawlerDensityPruning</code> defaults are used. |
 
 
 
@@ -10790,6 +10836,24 @@ Both inputs can be provided at the same time:
 | ----- | ---- | ----- | ----------- |
 | urls | [string](#string) | repeated | Direct seed URLs to enqueue as starting points. |
 | sitemaps | [string](#string) | repeated | Sitemap URLs used for URL discovery. Typical values are <code>/sitemap.xml</code> or sitemap index files. |
+
+
+
+
+
+
+<a name="ondewo.nlu.RagCrawlerStatusFilter"></a>
+
+### RagCrawlerStatusFilter
+HTTP status filtering for crawled pages.
+
+When active, a fetched page becomes a result document only if its HTTP status is accepted.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| is_active | [bool](#bool) | optional | Optional. Enable HTTP status filtering. Default <code>false</code>. |
+| accepted_status_codes | [int32](#int32) | repeated | Optional. Accepted HTTP status codes. If empty while active, only the 2xx range (<code>200</code>-<code>299</code>) is accepted. Add specific codes here to accept extras. |
 
 
 
@@ -11978,6 +12042,19 @@ Crawl traversal strategy.
 | RAG_CRAWLER_META_DATA_EXTRACTOR_TYPE_CSS_SELECTOR | 3 | CSS selector. |
 | RAG_CRAWLER_META_DATA_EXTRACTOR_TYPE_XPATH_SELECTOR | 4 | XPath selector. |
 | RAG_CRAWLER_META_DATA_EXTRACTOR_TYPE_ID_SELECTOR | 5 | ID selector. |
+
+
+
+<a name="ondewo.nlu.RagCrawlerPruningThresholdType"></a>
+
+### RagCrawlerPruningThresholdType
+Interpretation of the density-pruning threshold.
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| RAG_CRAWLER_PRUNING_THRESHOLD_TYPE_UNSPECIFIED | 0 | Unspecified (treated as FIXED). |
+| RAG_CRAWLER_PRUNING_THRESHOLD_TYPE_FIXED | 1 | Fixed cutoff: nodes scoring below <code>threshold</code> are removed. |
+| RAG_CRAWLER_PRUNING_THRESHOLD_TYPE_DYNAMIC | 2 | Dynamic: the threshold is adjusted per-document by the pruning heuristic. |
 
 
 
