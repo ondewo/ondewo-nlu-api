@@ -14,6 +14,11 @@
 * The identity used must be exempt from 2FA, because the token is obtained with a non-interactive password grant. Create one with `CreateProjectTechnicalUser` and pass its `username` (not an e-mail).
 * `CheckLogin` is **not** affected and remains the way to probe whether a token is still valid.
 
+### Improvements
+
+* [[OND211-2418]](https://ondewo.atlassian.net/browse/OND211-2418) `operations.proto`: add remote-operation container-logs endpoints — `StreamRemoteOperationContainerLogs` (server-stream), `GetRemoteOperationContainerLogs` (time-window / level / regex / max-lines query) and `GetRemoteOperationContainerStatus` (lifecycle + health).
+* [[OND211-2418]](https://ondewo.atlassian.net/browse/OND211-2418) `session.proto`: add an enterprise user-feedback system on the `Sessions` service. New `SessionFeedback` message (thumbs `FeedbackRating` + optional `score` / `categorical_value` / `comment`, `FeedbackAuthorType` for authenticated reviewers vs anonymous end-users, and forensic context ids pinning the exact session step), full CRUD RPCs (`AddSessionFeedback`, `AddSessionStepFeedback`, `GetSessionFeedback`, `UpdateSessionFeedback`, `DeleteSessionFeedback`, `ListSessionFeedback`, `ListSessionFeedbackOfAllSessions`) and analytics RPCs (`GetFeedbackStatistics`, `GetFeedbackStatisticsTimeSeries`). Feedback can be given for a whole session and for each single session step.
+
 *****************
 
 ## Release ONDEWO NLU API 6.14.0
