@@ -209,6 +209,9 @@ enum NotificationOrigin {
 
     // ondewo-vtsi-rabbitmq service
     NOTIFICATION_ORIGIN_ONDEWO_VTSI_RABBITMQ = 9;
+
+    // ondewo-survey service
+    NOTIFICATION_ORIGIN_ONDEWO_SURVEY = 10;
 }
 
 // Notification message
@@ -271,6 +274,10 @@ message Notification {
     // User id in form of a valid UUID.
     string modified_by = 18;
 
+    // Optional deep-link / route target the notification navigates to when clicked, e.g. a relative AIM route to
+    // the referenced intent or entity. Empty when the notification is not clickable.
+    string link = 19;
+
 }
 
 // Message for adding notifications in a batch.
@@ -319,6 +326,9 @@ message NotificationFilter {
 
     // Resource names of the origin of the notification to filter notifications.
     repeated string origin_names = 9;
+
+    // Types of the notifications to filter.
+    repeated NotificationType notification_types = 10;
 
 }
 
