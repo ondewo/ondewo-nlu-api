@@ -306,6 +306,15 @@ message GetRemoteOperationContainerLogsRequest {
     // preserving the legacy single-container behavior. When the container has finished and been removed,
     // its persisted logs are served from the server-side log archive.
     string container_id = 7;
+
+    // Optional cursor for infinite-scroll-UP paging: return the newest lines with
+    // <a href="index.html#ondewo.nlu.RemoteOperationContainerLogLine">seq</a> &lt; <code>before_seq</code>
+    // (older window). <code>0</code> (the default) disables backward paging.
+    int64 before_seq = 8;
+
+    // Optional cursor for infinite-scroll-DOWN paging: return lines with <code>seq</code> &gt;
+    // <code>after_seq</code> (newer window). <code>0</code> (the default) disables forward paging.
+    int64 after_seq = 9;
 }
 
 // The response message for <a href="index.html#ondewo.nlu.Operations.GetRemoteOperationContainerLogs">Operations.GetRemoteOperationContainerLogs</a>.
@@ -316,6 +325,17 @@ message GetRemoteOperationContainerLogsResponse {
 
     // True when older matching lines were dropped because <code>max_lines</code> was reached.
     bool truncated = 2;
+
+    // The smallest <code>seq</code> currently available for this container (its oldest captured line).
+    // A client paging up has reached the beginning when the returned lines start at this value.
+    int64 min_available_seq = 3;
+
+    // The largest <code>seq</code> currently available for this container (its newest captured line).
+    int64 max_available_seq = 4;
+
+    // True when older lines than the returned window still exist (i.e. the window&apos;s first
+    // <code>seq</code> &gt; <code>min_available_seq</code>) — the client may keep scrolling up.
+    bool has_more_older = 5;
 }
 
 // A single parsed container log line, emitted by both the streaming and the query RPCs.
@@ -337,6 +357,11 @@ message RemoteOperationContainerLogLine {
 
     // The docker container name this line was produced by. Empty when unavailable.
     string container_name = 5;
+
+    // The monotonically-increasing sequence number of this line within its container&apos;s captured log
+    // (assigned by the server-side capture). Used as the cursor for infinite-scroll paging. <code>0</code>
+    // when the line was produced by a legacy path that did not assign a sequence.
+    int64 seq = 6;
 }
 
 // The request message for <a href="index.html#ondewo.nlu.Operations.GetRemoteOperationContainerStatus">Operations.GetRemoteOperationContainerStatus</a>.
@@ -417,6 +442,35 @@ message RemoteOperationContainerStatus {
 
     // When this status was observed by the server.
     google.protobuf.Timestamp observed_at = 10;
+
+    // The container&apos;s environment variables (docker <code>Config.Env</code>), as a name→value map.
+    // Secret values (passwords, tokens, private keys, certificates) are redacted server-side; plain
+    // non-secret values such as numeric limits remain visible.
+    map<string, string> environment_variables = 12;
+
+    // The container&apos;s command/args (docker <code>Config.Cmd</code>).
+    repeated string command = 13;
+
+    // The container&apos;s hard memory limit in bytes (docker <code>HostConfig.Memory</code>).
+    // <code>0</code> means unlimited.
+    int64 memory_limit_bytes = 14;
+
+    // The container&apos;s CPU limit in billionths of a CPU (docker <code>HostConfig.NanoCpus</code>);
+    // cores = <code>nano_cpus</code> / 1e9. <code>0</code> means unset (see <code>cpu_quota</code>).
+    int64 nano_cpus = 15;
+
+    // The CPUs the container is pinned to (docker <code>HostConfig.CpusetCpus</code>), empty when unset.
+    string cpuset_cpus = 16;
+
+    // The CFS CPU quota (docker <code>HostConfig.CpuQuota</code>), the older cpu-limit form; cores =
+    // <code>cpu_quota</code> / <code>cpu_period</code> when both are &gt; 0.
+    int64 cpu_quota = 17;
+
+    // The CFS CPU period (docker <code>HostConfig.CpuPeriod</code>).
+    int64 cpu_period = 18;
+
+    // The docker image reference the container was started from (docker <code>Config.Image</code>).
+    string image = 19;
 }
 
 // Describes one docker container started by a remote operation. A single operation may start several
@@ -463,6 +517,33 @@ message RemoteOperationContainer {
     // True when logs for this container can still be fetched — either the container is live, or its logs
     // were persisted to the server-side archive after it finished.
     bool logs_available = 12;
+
+    // The container&apos;s environment variables (docker <code>Config.Env</code>), as a name→value map.
+    // Secret values (passwords, tokens, private keys, certificates) are redacted server-side; plain
+    // non-secret values such as numeric limits remain visible. Persisted at launch so it is available
+    // even after the container is removed.
+    map<string, string> environment_variables = 13;
+
+    // The container&apos;s command/args (docker <code>Config.Cmd</code>).
+    repeated string command = 14;
+
+    // The container&apos;s hard memory limit in bytes (docker <code>HostConfig.Memory</code>).
+    // <code>0</code> means unlimited.
+    int64 memory_limit_bytes = 15;
+
+    // The container&apos;s CPU limit in billionths of a CPU (docker <code>HostConfig.NanoCpus</code>);
+    // cores = <code>nano_cpus</code> / 1e9. <code>0</code> means unset (see <code>cpu_quota</code>).
+    int64 nano_cpus = 16;
+
+    // The CPUs the container is pinned to (docker <code>HostConfig.CpusetCpus</code>), empty when unset.
+    string cpuset_cpus = 17;
+
+    // The CFS CPU quota (docker <code>HostConfig.CpuQuota</code>); cores =
+    // <code>cpu_quota</code> / <code>cpu_period</code> when both are &gt; 0.
+    int64 cpu_quota = 18;
+
+    // The CFS CPU period (docker <code>HostConfig.CpuPeriod</code>).
+    int64 cpu_period = 19;
 }
 
 // The request message for <a href="index.html#ondewo.nlu.Operations.ListRemoteOperationContainers">Operations.ListRemoteOperationContainers</a>.
