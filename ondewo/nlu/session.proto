@@ -3091,6 +3091,42 @@ enum FeedbackAuthorType {
     FEEDBACK_AUTHOR_TYPE_END_USER_ANONYMOUS = 3;
 }
 
+// The scope a feedback filter targets: session-level, step-level, or both.
+enum FeedbackScope {
+
+    // Both session-level and step-level feedback.
+    FEEDBACK_SCOPE_UNSPECIFIED = 0;
+
+    // Only session-level feedback (session_step_id empty).
+    FEEDBACK_SCOPE_SESSION_LEVEL = 1;
+
+    // Only session-step-level feedback (session_step_id set).
+    FEEDBACK_SCOPE_STEP_LEVEL = 2;
+}
+
+// The calendar granularity of a feedback time series. When set (non-unspecified) it overrides the
+// fixed-width bucket_width_seconds on the request.
+enum FeedbackTimeGranularity {
+
+    // Unspecified — use the request's fixed-width bucket_width_seconds instead.
+    FEEDBACK_TIME_GRANULARITY_UNSPECIFIED = 0;
+
+    // Hourly calendar buckets.
+    FEEDBACK_TIME_GRANULARITY_HOUR = 1;
+
+    // Daily calendar buckets.
+    FEEDBACK_TIME_GRANULARITY_DAY = 2;
+
+    // Weekly calendar buckets (ISO weeks, Monday start).
+    FEEDBACK_TIME_GRANULARITY_WEEK = 3;
+
+    // Monthly calendar buckets.
+    FEEDBACK_TIME_GRANULARITY_MONTH = 4;
+
+    // Yearly calendar buckets.
+    FEEDBACK_TIME_GRANULARITY_YEAR = 5;
+}
+
 // A single piece of user feedback about a whole session or a single session step (turn).
 //
 // The rating is intentionally extensible: <code>rating</code> carries the thumbs signal surfaced in the UI
@@ -3239,6 +3275,12 @@ message ListSessionFeedbackOfAllSessionsRequest {
 
     // Optional. The mask to control which fields get returned.
     optional google.protobuf.FieldMask field_mask = 4;
+
+    // Optional. A feedback-native filter (rating / author / comment / score / criterion / date window).
+    FeedbackFilter feedback_filter = 5;
+
+    // Optional. Sort order, e.g. "created_at desc" (default), "created_at asc", "rating desc".
+    string order_by = 6;
 }
 
 // A page of feedback.
@@ -3249,9 +3291,53 @@ message ListSessionFeedbackResponse {
 
     // The page token for the next page (empty when there are no more pages).
     string next_page_token = 2;
+
+    // Total number of feedback matching the filter across all pages.
+    int32 total_count = 3;
 }
 
 // A key + up/down counts breakdown bucket (by language / intent / author type / ...).
+// A feedback-native filter for feedback list + analytics requests, complementing SessionFilter (which
+// filters the parent sessions). All set fields are AND-combined; repeated fields are OR-within-field.
+message FeedbackFilter {
+
+    // Keep only feedback with one of these ratings (thumbs up / down / unspecified).
+    repeated FeedbackRating ratings = 1;
+
+    // Keep only feedback left by one of these author types.
+    repeated FeedbackAuthorType author_types = 2;
+
+    // When set, keep only feedback that has (true) or lacks (false) a free-text comment.
+    optional bool has_comment = 3;
+
+    // Keep only feedback created at or after this time (feedback created_at, not session time).
+    google.protobuf.Timestamp earliest = 4;
+
+    // Keep only feedback created at or before this time.
+    google.protobuf.Timestamp latest = 5;
+
+    // Keep only feedback whose criterion is one of these.
+    repeated string criteria = 6;
+
+    // Keep only feedback whose language code is one of these.
+    repeated string language_codes = 7;
+
+    // Keep only feedback whose authenticated annotator is one of these user ids.
+    repeated string annotator_user_ids = 8;
+
+    // Keep only feedback whose channel origin id is one of these.
+    repeated string origin_ids = 9;
+
+    // When set, keep only feedback with a numeric score at or above this value.
+    optional float score_min = 10;
+
+    // When set, keep only feedback with a numeric score at or below this value.
+    optional float score_max = 11;
+
+    // Restrict to session-level or step-level feedback (unspecified means both).
+    FeedbackScope scope = 12;
+}
+
 message FeedbackBreakdownBucket {
 
     // The bucket key (e.g. a language code, an intent display name, an author type).
@@ -3302,6 +3388,21 @@ message FeedbackStatistics {
 
     // Up/down breakdown by author type.
     repeated FeedbackBreakdownBucket by_author_type = 11;
+
+    // Number of feedback with no rating (comment-only / unspecified rating).
+    int32 unspecified_rating_count = 12;
+
+    // Number of feedback that carry a numeric score.
+    int32 scored_count = 13;
+
+    // Mean of the numeric scores across scored feedback (0 when none).
+    float average_score = 14;
+
+    // Up/down breakdown by channel origin id.
+    repeated FeedbackBreakdownBucket by_origin = 15;
+
+    // Up/down breakdown by criterion.
+    repeated FeedbackBreakdownBucket by_criterion = 16;
 }
 
 // Request for aggregated feedback statistics.
@@ -3319,6 +3420,9 @@ message GetFeedbackStatisticsRequest {
 
     // Optional. The mask to control which fields of the statistics get returned.
     optional google.protobuf.FieldMask field_mask = 4;
+
+    // Optional. A feedback-native filter (rating / author / comment / score / criterion / date window).
+    FeedbackFilter feedback_filter = 5;
 }
 
 // Response carrying aggregated feedback statistics.
@@ -3342,6 +3446,9 @@ message FeedbackTimeSeriesBucket {
 
     // Total feedback in this bucket.
     int32 total = 4;
+
+    // The (exclusive) end of the time bucket.
+    google.protobuf.Timestamp bucket_end = 5;
 }
 
 // Request for feedback statistics bucketed over time.
@@ -3362,6 +3469,21 @@ message GetFeedbackStatisticsTimeSeriesRequest {
 
     // Optional. The mask to control which fields get returned.
     optional google.protobuf.FieldMask field_mask = 5;
+
+    // Optional. A feedback-native filter.
+    FeedbackFilter feedback_filter = 6;
+
+    // Optional. Calendar granularity; when set (non-unspecified) it overrides bucket_width_seconds.
+    FeedbackTimeGranularity granularity = 7;
+
+    // Optional. IANA timezone for calendar bucketing (e.g. "Europe/Vienna"); defaults to UTC.
+    string time_zone = 8;
+
+    // Optional. Inclusive start of the series window; when set, empty leading buckets are zero-filled.
+    google.protobuf.Timestamp start = 9;
+
+    // Optional. Exclusive end of the series window; defaults to now.
+    google.protobuf.Timestamp end = 10;
 }
 
 // Response carrying feedback counts bucketed over time.
