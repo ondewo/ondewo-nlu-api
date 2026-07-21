@@ -163,6 +163,13 @@ service Users {
     // Deletes one or more notifications by their resource names.
     rpc DeleteNotifications (DeleteNotificationsRequest) returns (google.protobuf.Empty);
 
+    // Streams notifications for the authenticated caller in real time: each newly-added notification that
+    // matches the request filter is pushed to the client as it is created (backed server-side by a
+    // Postgres LISTEN/NOTIFY channel). The stream stays open until the client disconnects. When
+    // <code>include_existing</code> is set the currently-stored matching notifications are replayed first
+    // (newest last) before switching to the live tail.
+    rpc StreamNotifications (StreamNotificationsRequest) returns (stream Notification);
+
     // Retrieves user preferences based on the provided request.
     rpc GetUserPreferences (GetUserPreferencesRequest) returns (GetUserPreferencesResponse);
 
