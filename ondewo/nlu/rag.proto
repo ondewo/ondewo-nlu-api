@@ -1709,14 +1709,6 @@ message RagCrawlerResultsConfig {
     // If not set the <code>RagCrawlerDensityPruning</code> defaults are used.
     optional RagCrawlerDensityPruning density_pruning = 4;
 
-    // Optional. Regular expressions matched against a crawled page's URL. A page whose URL matches any
-    // of these is still fetched and its links are followed for discovery, but it is NOT converted into
-    // a document (no <code>RagCrawlerContentResult</code> is stored for it). This decouples link
-    // discovery from document creation: use it for hub / listing / index pages — e.g. author, tag,
-    // archive, or paginated section pages — that are valuable for reaching other pages but should not
-    // themselves become documents. Empty means every crawled page is stored as a document (default).
-    repeated string discovery_only_url_regex = 5;
-
 }
 
 // CSS-selector based content scoping for markdown extraction.
