@@ -1709,6 +1709,9 @@ message RagCrawlerResultsConfig {
     // If not set the <code>RagCrawlerDensityPruning</code> defaults are used.
     optional RagCrawlerDensityPruning density_pruning = 4;
 
+    // Optional. Regular expressions matched against a crawled page's URL. A page whose URL matches any of these is still fetched and its links are followed for discovery, but it is NOT converted into a document
+    repeated string discovery_only_url_regex = 5;
+
 }
 
 // CSS-selector based content scoping for markdown extraction.
