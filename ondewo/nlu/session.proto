@@ -3161,7 +3161,15 @@ message SessionFeedback {
     string categorical_value = 7;
 
     // Optional. A numeric score in [0, 1] for future continuous scales.
-    float score = 8;
+    //
+    // Explicit presence (<code>optional</code>): a score of <code>0.0</code> is a MEANINGFUL rating — the
+    // worst point of a 0-10 NPS or 0-5 CSAT scale — and without presence it is indistinguishable from
+    // "no score given". The server persists an absent score as SQL NULL and excludes it from
+    // <code>average_score</code> / <code>scored_count</code> and from the <code>score_min</code> /
+    // <code>score_max</code> range filters, so conflating the two silently dropped exactly the worst
+    // ratings and biased the reported average upward. Use <code>HasField("score")</code> to distinguish.
+    // Matches <code>FeedbackFilter.score_min</code> / <code>score_max</code>, which are already optional.
+    optional float score = 8;
 
     // Optional. Free-text comment.
     string comment = 9;
