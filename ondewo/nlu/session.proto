@@ -877,12 +877,12 @@ message LlmTelemetry {
     string base_url = 47;
 
     // Optional. Default HTTP headers to include with every request to the OpenAI API.
-    optional google.protobuf.Struct default_headers = 48;
+    google.protobuf.Struct default_headers = 48;
 
     // Optional. Default query parameters to append to every request URL sent to
     // the OpenAI API. Values can be of any type (string, number, boolean, list),
     // hence the use of Struct.
-    optional google.protobuf.Struct default_query = 49;
+    google.protobuf.Struct default_query = 49;
 
     // Optional. A number between -2.0 and 2.0. Positive values penalize new
     // tokens based on their existing frequency in the text so far, decreasing the
@@ -891,7 +891,7 @@ message LlmTelemetry {
 
     // Optional. Developer-defined tags and values used for filtering completions
     // in the OpenAI dashboard.
-    optional google.protobuf.Struct openai_metadata = 51;
+    google.protobuf.Struct openai_metadata = 51;
 
     // Optional. A number between -2.0 and 2.0. Positive values penalize new
     // tokens based on whether they have already appeared in the text, increasing
@@ -916,15 +916,15 @@ message LlmTelemetry {
 
     // Optional. Additional HTTP headers to send with the request. These are
     // merged with and override default_headers for this specific request only.
-    optional google.protobuf.Struct extra_headers = 57;
+    google.protobuf.Struct extra_headers = 57;
 
     // Optional. Additional query parameters to send with the request. These are
     // merged with and override default_query for this specific request only.
-    optional google.protobuf.Struct extra_query = 58;
+    google.protobuf.Struct extra_query = 58;
 
     // Optional. Additional JSON properties to include in the request body. Useful
     // for accessing new or undocumented API parameters.
-    optional google.protobuf.Struct extra_body = 59;
+    google.protobuf.Struct extra_body = 59;
 
     // Provider of the ccai service
     CcaiServiceProvider ccai_service_provider = 60;
@@ -2600,7 +2600,7 @@ message ListSessionLabelsOfAllSessionsRequest {
     SessionFilter session_filter = 2;
 
     // Optional. The mask to control which fields gets returned.
-    optional google.protobuf.FieldMask field_mask = 3;
+    google.protobuf.FieldMask field_mask = 3;
 
 }
 
@@ -2622,7 +2622,7 @@ message ListLanguageCodesOfAllSessionsRequest {
     SessionFilter session_filter = 2;
 
     // Optional. The mask to control which fields gets returned.
-    optional google.protobuf.FieldMask field_mask = 3;
+    google.protobuf.FieldMask field_mask = 3;
 
 }
 
@@ -2646,7 +2646,7 @@ message ListMatchedIntentsOfAllSessionsRequest {
     SessionFilter session_filter = 2;
 
     // Optional. The mask to control which fields gets returned.
-    optional google.protobuf.FieldMask field_mask = 3;
+    google.protobuf.FieldMask field_mask = 3;
 }
 
 // This message is a response of listing session matched_intents
@@ -2668,7 +2668,7 @@ message ListMatchedEntityTypesOfAllSessionsRequest {
     SessionFilter session_filter = 2;
 
     // Optional. The mask to control which fields gets returned.
-    optional google.protobuf.FieldMask field_mask = 3;
+    google.protobuf.FieldMask field_mask = 3;
 
 }
 
@@ -2691,7 +2691,7 @@ message ListUserIdsOfAllSessionsRequest {
     SessionFilter session_filter = 2;
 
     // Optional. The mask to control which fields gets returned.
-    optional google.protobuf.FieldMask field_mask = 3;
+    google.protobuf.FieldMask field_mask = 3;
 
 }
 
@@ -2714,7 +2714,7 @@ message ListIdentifiedUserIdsOfAllSessionsRequest {
     SessionFilter session_filter = 2;
 
     // Optional. The mask to control which fields gets returned.
-    optional google.protobuf.FieldMask field_mask = 3;
+    google.protobuf.FieldMask field_mask = 3;
 
 }
 
@@ -2737,7 +2737,7 @@ message ListTagsOfAllSessionsRequest {
     SessionFilter session_filter = 2;
 
     // Optional. The mask to control which fields gets returned.
-    optional google.protobuf.FieldMask field_mask = 3;
+    google.protobuf.FieldMask field_mask = 3;
 
 }
 
@@ -2760,7 +2760,7 @@ message ListInputContextsOfAllSessionsRequest {
     SessionFilter session_filter = 2;
 
     // Optional. The mask to control which fields gets returned.
-    optional google.protobuf.FieldMask field_mask = 3;
+    google.protobuf.FieldMask field_mask = 3;
 
 }
 
@@ -2783,7 +2783,7 @@ message ListOutputContextsOfAllSessionsRequest {
     SessionFilter session_filter = 2;
 
     // Optional. The mask to control which fields gets returned.
-    optional google.protobuf.FieldMask field_mask = 3;
+    google.protobuf.FieldMask field_mask = 3;
 
 }
 
@@ -2806,7 +2806,7 @@ message ListPlatformsOfAllSessionsRequest {
     SessionFilter session_filter = 2;
 
     // Optional. The mask to control which fields gets returned.
-    optional google.protobuf.FieldMask field_mask = 3;
+    google.protobuf.FieldMask field_mask = 3;
 
 }
 
@@ -2829,7 +2829,7 @@ message ListAccountIdsOfAllSessionsRequest {
     SessionFilter session_filter = 2;
 
     // Optional. The mask to control which fields gets returned.
-    optional google.protobuf.FieldMask field_mask = 3;
+    google.protobuf.FieldMask field_mask = 3;
 
 }
 
@@ -2888,7 +2888,7 @@ message ListOriginIdsOfAllSessionsRequest {
     SessionFilter session_filter = 2;
 
     // Optional. The mask to control which fields gets returned.
-    optional google.protobuf.FieldMask field_mask = 3;
+    google.protobuf.FieldMask field_mask = 3;
 
 }
 
@@ -2989,7 +2989,7 @@ message ListSessionCommentsRequest {
     string page_token = 2;
 
     // Optional. The mask to control which fields gets returned.
-    optional google.protobuf.FieldMask field_mask = 3;
+    google.protobuf.FieldMask field_mask = 3;
 
     // Optional. Filter comments by their resolved status.
     // If unset, comments with any resolved status are returned.
@@ -3011,7 +3011,7 @@ message ListSessionCommentsOfAllSessionsRequest {
     string page_token = 3;
 
     // Optional. The mask to control which fields gets returned.
-    optional google.protobuf.FieldMask field_mask = 4;
+    google.protobuf.FieldMask field_mask = 4;
 
     // Optional. Filter comments by their resolved status.
     // If unset, comments with any resolved status are returned.
@@ -3235,7 +3235,7 @@ message GetSessionFeedbackRequest {
     string name = 1;
 
     // Optional. The mask to control which fields get returned.
-    optional google.protobuf.FieldMask field_mask = 2;
+    google.protobuf.FieldMask field_mask = 2;
 }
 
 // Request to update (revise) an existing feedback.
@@ -3265,7 +3265,7 @@ message ListSessionFeedbackRequest {
     string page_token = 2;
 
     // Optional. The mask to control which fields get returned.
-    optional google.protobuf.FieldMask field_mask = 3;
+    google.protobuf.FieldMask field_mask = 3;
 }
 
 // Request to list feedback across all sessions of an agent.
@@ -3282,7 +3282,7 @@ message ListSessionFeedbackOfAllSessionsRequest {
     string page_token = 3;
 
     // Optional. The mask to control which fields get returned.
-    optional google.protobuf.FieldMask field_mask = 4;
+    google.protobuf.FieldMask field_mask = 4;
 
     // Optional. A feedback-native filter (rating / author / comment / score / criterion / date window).
     FeedbackFilter feedback_filter = 5;
@@ -3427,7 +3427,7 @@ message GetFeedbackStatisticsRequest {
     bool include_review_and_comment_rollup = 3;
 
     // Optional. The mask to control which fields of the statistics get returned.
-    optional google.protobuf.FieldMask field_mask = 4;
+    google.protobuf.FieldMask field_mask = 4;
 
     // Optional. A feedback-native filter (rating / author / comment / score / criterion / date window).
     FeedbackFilter feedback_filter = 5;
@@ -3476,7 +3476,7 @@ message GetFeedbackStatisticsTimeSeriesRequest {
     int32 max_buckets = 4;
 
     // Optional. The mask to control which fields get returned.
-    optional google.protobuf.FieldMask field_mask = 5;
+    google.protobuf.FieldMask field_mask = 5;
 
     // Optional. A feedback-native filter.
     FeedbackFilter feedback_filter = 6;
@@ -3564,7 +3564,7 @@ message GetSessionReviewRequest {
     SessionReview.View session_review_view = 2;
 
     // Optional. The mask to control which fields gets returned.
-    optional google.protobuf.FieldMask field_mask = 3;
+    google.protobuf.FieldMask field_mask = 3;
 
 }
 
@@ -3579,7 +3579,7 @@ message GetLatestSessionReviewRequest {
     SessionReview.View session_review_view = 2;
 
     // Optional. The mask to control which fields gets returned.
-    optional google.protobuf.FieldMask field_mask = 3;
+    google.protobuf.FieldMask field_mask = 3;
 
 }
 
@@ -3822,7 +3822,7 @@ message GetAudioFilesRequest {
     SortingMode sorting_mode = 5;
 
     // Optional. The mask to control which fields gets returned.
-    optional google.protobuf.FieldMask field_mask = 6;
+    google.protobuf.FieldMask field_mask = 6;
 
 }
 
@@ -3948,7 +3948,7 @@ message ListAudioFilesRequest {
     SortingMode sorting_mode = 5;
 
     // Optional. The mask to control which fields gets returned.
-    optional google.protobuf.FieldMask field_mask = 6;
+    google.protobuf.FieldMask field_mask = 6;
 
 }
 
@@ -3984,6 +3984,6 @@ message GetAudioFileOfSessionRequest {
     ResourceView resource_view = 3;
 
     // Optional. The mask to control which fields gets returned.
-    optional google.protobuf.FieldMask field_mask = 4;
+    google.protobuf.FieldMask field_mask = 4;
 
 }

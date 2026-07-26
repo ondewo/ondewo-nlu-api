@@ -178,7 +178,7 @@ message GetProjectRoleRequest {
     ProjectRoleView project_role_view = 4;
 
     // Optional. The mask to control which fields gets returned.
-    optional google.protobuf.FieldMask field_mask = 5;
+    google.protobuf.FieldMask field_mask = 5;
 
 }
 
@@ -235,7 +235,7 @@ message ListProjectRolesRequest {
     ProjectRoleView project_role_view = 3;
 
     // Optional. The mask to control which fields gets returned.
-    optional google.protobuf.FieldMask field_mask = 4;
+    google.protobuf.FieldMask field_mask = 4;
 
 }
 

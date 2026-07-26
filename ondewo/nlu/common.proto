@@ -287,7 +287,7 @@ message AddNotificationsRequest {
     repeated Notification notifications = 1;
 
     // Optional. Mask to control which fields of the returned notifications are filled with data.
-    optional google.protobuf.FieldMask field_mask = 2;
+    google.protobuf.FieldMask field_mask = 2;
 }
 
 // Message containing the response to adding notifications.
@@ -393,7 +393,7 @@ message SetNotificationsFlaggedStatusRequest {
     repeated bool flagged = 2;
 
     // Optional. Mask to control which fields of the returned notifications are filled with data.
-    optional google.protobuf.FieldMask field_mask = 3;
+    google.protobuf.FieldMask field_mask = 3;
 }
 
 // Message for setting the read status of notifications.
@@ -406,7 +406,7 @@ message SetNotificationsReadStatusRequest {
     repeated bool flagged = 2;
 
     // Optional. Mask to control which fields of the returned notifications are filled with data.
-    optional google.protobuf.FieldMask field_mask = 3;
+    google.protobuf.FieldMask field_mask = 3;
 }
 
 // Message for retrieving a single notification by its resource name.
@@ -416,7 +416,7 @@ message GetNotificationRequest {
     string name = 1;
 
     // Optional. Mask to control which fields of the notification are returned.
-    optional google.protobuf.FieldMask field_mask = 2;
+    google.protobuf.FieldMask field_mask = 2;
 }
 
 // Message for updating a single notification.
@@ -429,7 +429,7 @@ message UpdateNotificationRequest {
     google.protobuf.FieldMask update_mask = 2;
 
     // Optional. Mask to control which fields of the returned notification are filled with data.
-    optional google.protobuf.FieldMask field_mask = 3;
+    google.protobuf.FieldMask field_mask = 3;
 }
 
 // Message for deleting one or more notifications by their resource names.
