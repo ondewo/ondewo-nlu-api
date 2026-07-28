@@ -941,6 +941,13 @@ message LlmTelemetry {
     // (field 18, kept for back-compat); both carry the same chunk list. Unset for
     // non-retrieval calls.
     LlmRetrievalMetadata llm_retrieval_metadata = 62;
+
+    // Id of THIS LLM call. Same identifier the streaming telemetry events carry as
+    // <code>llm_call_id</code> (<code>LlmLlmCallStartedEvent</code>,
+    // <code>LlmToolCallStartedEvent</code>, ...), so an aggregate or a persisted row can be
+    // correlated back to the live event stream. Distinct from <code>run_id</code> (field 11),
+    // which is the UPSTREAM framework's id (autogen / langchain).
+    string llm_call_id = 63;
 }
 
 // Effort level for reasoning models (e.g. o1, o3). Controls the trade-off
@@ -1230,6 +1237,24 @@ message LlmToolUsage {
 
     // Summed tool-call token usage (input / output / total).
     LlmTokenUsage llm_token_usage = 7;
+
+    // The three fields below describe ONE REPRESENTATIVE invocation of this tool -- the most
+    // recent one in scope -- not the whole aggregate. The message covers <code>call_count</code>
+    // invocations, each with its own arguments and ids, so a single value can only ever be a
+    // sample. Same intent as <code>LlmErrorStat.sample_message</code>. They are typed exactly as
+    // on <code>LlmToolCallStartedEvent</code>, so a caller can correlate an aggregate row back to
+    // the live event stream.
+
+    // Arguments the representative invocation was called with, as a structured payload
+    // (Struct kept as-is; not a custom Message). Unset when the source metadata carried none.
+    google.protobuf.Struct arguments = 8;
+
+    // Groups the representative invocation under its <code>LlmTelemetry</code> entry.
+    string llm_call_id = 9;
+
+    // Stable id of the representative invocation, assigned by the upstream framework
+    // (autogen / langchain).
+    string tool_call_id = 10;
 }
 
 // One error class aggregate.
