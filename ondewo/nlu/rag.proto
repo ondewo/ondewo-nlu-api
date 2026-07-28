@@ -1473,14 +1473,14 @@ message RagCrawlerFilters {
     // Optional. Domain block-list.
     repeated string disallowed_domains = 2;
 
-    // Optional. Include internal links.
-    optional bool allow_internal_links = 3;
+    // Deprecated. Has never had any effect.
+    optional bool allow_internal_links = 3 [deprecated = true];
 
-    // Optional. Include external links.
+    // Optional. Include external links, that is links outside the crawled site's registrable domain.
     optional bool allow_external_links = 4;
 
-    // Optional. Include social media links.
-    optional bool allow_social_media_links = 5;
+    // Deprecated. Has never had any effect.
+    optional bool allow_social_media_links = 5 [deprecated = true];
 
     // Optional. Path allow-list by regular expression.
     repeated string allowed_regex = 6;
