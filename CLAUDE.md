@@ -23,8 +23,21 @@ pinned via `NLU_API_GIT_BRANCH` / `ONDEWO_NLU_API_GIT_BRANCH` in their Makefiles
 
 ## Editing protos
 
-- **Additive only.** Append new fields with the next free field number; never renumber or remove
-  existing fields/enum values. New RPCs go at the end of the service's matching `// region`.
+- **Additive by default.** Append new fields with the next free field number; never renumber existing
+  fields/enum values. New RPCs go at the end of the service's matching `// region`.
+- **Removing something is a MAJOR release, and only then.** A removal (RPC, message, field, enum value)
+  breaks every generated client, so it may only land in a major bump — e.g. 7.0.0 removed `rpc Login`,
+  `LoginRequest`, `LoginResponse` and `POST /v2/login` (OND211-2418). When you do it:
+  - Bump the major in `Makefile`'s `ONDEWO_NLU_API_VERSION`, in the same commit as the proto change.
+  - Give `RELEASE.md` a `### Breaking Changes` **and** a `### Migration Guide` section naming the
+    replacement — the migration guide is what SDK users actually read.
+  - **Removing a FIELD or an ENUM VALUE additionally needs `reserved <number>;` / `reserved "<name>";`**
+    so the tag can never be silently reused by a later field — a reused tag makes old and new clients
+    disagree about the wire contract with no error. Removing an RPC or a whole message needs no
+    `reserved`. This repo has no `reserved` statements yet; a field removal would be the first.
+  - Regenerate the docs (`make build_docs`) in the same commit — `docs/` is tracked.
+  - `make release_all_clients` publishes five client majors: pass `GENERIC_RELEASE_SECTION='Breaking
+    Changes'` and `GENERIC_RELEASE_EXTRA` so their notes say what broke (default is "Improvements").
 - Follow the established message conventions (copy from `llm_evaluation.proto`, the canonical example
   is `UpdateLlmEvaluationDatasetRequest`):
   - resources carry `name`, `display_name`, `created_at`/`created_by`/`modified_at`/`modified_by`,
@@ -38,6 +51,15 @@ pinned via `NLU_API_GIT_BRANCH` / `ONDEWO_NLU_API_GIT_BRANCH` in their Makefiles
   - thresholds/options that need presence-detection go in nested messages
     (proto3 scalars have no presence).
 - Every field gets a `//` doc comment (HTML entities for `<>` in formats, as in the existing files).
+- **Server-streaming (unary→stream) RPCs take NO `google.api.http` annotation** — like
+  `StreamingDetectIntent` in `session.proto`. Only unary RPCs carry the `option (google.api.http) = {…}`
+  binding. Precedent: the three `…RemoteOperationContainerLogs`/`…Status` RPCs added to `operations.proto`
+  (OND211-2418) — the streaming one has no annotation, the two unary ones use a `get:` custom verb.
+- **Reuse an existing enum before inventing a new one.** A new "log level" field should reference the
+  existing `ondewo.nlu.LogSeverity` (`common.proto`), not a fresh enum (OND211-2418 did this). A genuinely
+  new enum whose value names are generic (`RUNNING`, `EXITED`, `NOT_FOUND`, …) must **prefix every value**
+  to avoid colliding with other top-level enums in the C-style flat namespace — e.g.
+  `REMOTE_OPERATION_CONTAINER_LIFECYCLE_STATE_RUNNING`.
 - **Compile check** before committing (no protoc needed):
   `python3 -m grpc_tools.protoc -I . --descriptor_set_out=/dev/null ondewo/nlu/<changed>.proto`
 - Add a `RELEASE.md` entry under the upcoming version heading (format: `* [[TICKET]](jira-url) text`).
@@ -56,10 +78,15 @@ pinned via `NLU_API_GIT_BRANCH` / `ONDEWO_NLU_API_GIT_BRANCH` in their Makefiles
 1. **ondewo-nlu-client-python** — see its CLAUDE.md. Then bump the pin in `ondewo-cai/pyproject.toml`
    (`ondewo-nlu-client @ git+https://…@<client-sha>`) + `uv lock`.
 2. **ondewo-nlu-client-angular** — see its CLAUDE.md. Then copy into ondewo-aim via
-   `cd src && npm run test-in-ondewo-aim-copy-only`.
+   `make test-in-ondewo-aim-copy-only`. For an AIM **streaming** feature the angular client is enough —
+   the aim-server bridges the gRPC server-stream to a WebSocket as a Buffer-passthrough, so
+   **ondewo-nlu-client-nodejs usually does NOT need regenerating** (only when the aim-server itself builds
+   or reads the typed messages, e.g. the RAG download proxy).
 3. Implement server-side in **ondewo-cai** (servicer + ORM + ProtoInfo request-validation
    registrations in `proto_info.py` / enum registrations in `protobuf_helpers.py` — forgetting these
-   breaks request validation at runtime) and client-side in **ondewo-aim**.
+   breaks request validation at runtime; note that a new server→client OUTPUT message also needs a
+   ProtoInfo entry, and a **server-streaming** handler must authorize in-body because the endpoint
+   decorator defers permission checks for async generators) and client-side in **ondewo-aim**.
 
 ## Releases
 
@@ -104,12 +131,15 @@ When editing existing code:
 - Don't "improve" adjacent code, comments, or formatting.
 - Don't refactor things that aren't broken.
 - Match existing style, even if you'd do it differently.
-- If you notice unrelated dead code, mention it — don't delete it.
+- If you notice unrelated dead code, mention it and delete it.
 
 When your changes create orphans:
 
 - Remove imports/variables/functions that _your_ changes made unused.
-- Don't remove pre-existing dead code unless asked.
+- Dead code goes, but **prove it is dead first**. A symbol can be referenced without an import: a proto
+  field is a wire contract with SDK consumers you cannot enumerate, a Makefile `git add` names a file no
+  code imports, and an ignore-list entry is not a consumer. If you cannot show it is unreferenced, say so
+  and leave it. Deleting live code is worse than leaving dead code.
 
 The test: every changed line should trace directly to the user's request.
 
@@ -225,4 +255,20 @@ Raises:
 Pre-commit here uses only the language-agnostic hooks — **markdownlint-cli2, pre-commit-hooks hygiene, giticket, conventional-pre-commit** — no ruff/mypy/uv (there is no Python). Generated docs (`docs/`) and any generated code are excluded via the top-level `exclude:`.
 
 - **markdownlint MD053 is disabled** (its auto-fix deletes `[comment]: <>` reference-definition markers).
-- **markdownlint RELEASE.md reformatting is content-safe**: it only strips trailing whitespace and adds blank lines around headings — the `## Release … <VERSION>` headings and `*****` separators that `ondewo_release` greps for remain intact. (Confirmed: the 6.5.0 release notes sliced correctly after the reformat.)
+- **markdownlint RELEASE.md reformatting is content-safe**: it only strips trailing whitespace and adds blank lines around headings — the `## Release … <VERSION>` headings and `*****` separators that `ondewo_release` slices on remain intact. (Confirmed: the 6.5.0 release notes sliced correctly after the reformat.)
+  ⚠️ Until 2026-07-16 `CURRENT_RELEASE_NOTES` (`Makefile:25`) did **not** terminate on `*****` as this note
+  claimed — its perl range ended on `/\*\*/`, i.e. the first markdown **bold** span inside the entry, and
+  silently truncated the release body there. It looked correct only because no entry had used inline bold;
+  7.0.0 is the first that does. Now fixed to `/^\*{5}/`. If you add a bullet to RELEASE.md and it does not
+  appear in the GitHub release, check that pattern first — `gh release create` reports no error.
+
+## Jenkins — never trigger a multibranch scan or branch indexing
+
+**NEVER trigger a Jenkins multibranch scan or branch indexing.** Do not call a multibranch/folder job's
+`build`, `scan`, or reindex endpoints, click "Scan Repository Now" / "Build Now" on a folder, run
+`p4 scan`, or use any API/CLI that reindexes branches or scans the repository. A scan/reindex runs across
+**every** branch, consumes CI resources, and can kick off unintended builds and deploys.
+
+If a branch is not building — it was not discovered, or its job is marked `buildable: false` / orphaned —
+**report it and stop**. Let the user or a Jenkins admin adjust branch-discovery/config or rename the branch
+to the convention. Never force a build by scanning or reindexing.

@@ -278,10 +278,91 @@ service Sessions {
         };
     };
 
-    // Lists the comments attached to a session with pagination support.
+    // Lists the comments attached to a session with pagination support, optionally narrowed by resolved status.
     rpc ListSessionComments (ListSessionCommentsRequest) returns (ListSessionCommentsResponse) {
         option (google.api.http) = {
-            get: "/v2/{session_id=projects/*/agent/sessions/*}/reviews"
+            get: "/v2/{session_id=projects/*/agent/sessions/*}/comments"
+        };
+    };
+
+    // Lists the comments attached to all sessions of the agent with pagination support,
+    // optionally narrowed by a SessionFilter and by resolved status.
+    rpc ListSessionCommentsOfAllSessions (ListSessionCommentsOfAllSessionsRequest) returns (ListSessionCommentsResponse) {
+        option (google.api.http) = {
+            get: "/v2/{parent=projects/*/agent}/sessions/comments"
+        };
+    };
+
+    // *** SESSION-FEEDBACK RELATED ENDPOINTS *** //
+
+    // Records user feedback (thumbs up/down + optional comment + optional score/categorical value) about a
+    // whole session and returns the persisted feedback. Works for authenticated reviewers/test users and,
+    // where enabled, anonymous production end-users (webchat/webphone).
+    rpc AddSessionFeedback (AddSessionFeedbackRequest) returns (SessionFeedback) {
+        option (google.api.http) = {
+            post: "/v2/{session_id=projects/*/agent/sessions/*}/feedback:add"
+            body: "*"
+        };
+    };
+
+    // Records user feedback about a single session step (turn), pinned to the exact response, and returns
+    // the persisted feedback.
+    rpc AddSessionStepFeedback (AddSessionStepFeedbackRequest) returns (SessionFeedback) {
+        option (google.api.http) = {
+            post: "/v2/{session_id=projects/*/agent/sessions/*}/sessionSteps/feedback:add"
+            body: "*"
+        };
+    };
+
+    // Returns a single session/step feedback by its resource name.
+    rpc GetSessionFeedback (GetSessionFeedbackRequest) returns (SessionFeedback) {
+        option (google.api.http) = {
+            get: "/v2/{name=projects/*/agent/sessions/*/feedback/*}"
+        };
+    };
+
+    // Updates an existing feedback (a user revising their thumbs / comment) and returns it.
+    rpc UpdateSessionFeedback (UpdateSessionFeedbackRequest) returns (SessionFeedback) {
+        option (google.api.http) = {
+            post: "/v2/{feedback.name=projects/*/agent/sessions/*/feedback/*}:update"
+            body: "*"
+        };
+    };
+
+    // Deletes a feedback (a user withdrawing their feedback).
+    rpc DeleteSessionFeedback (DeleteSessionFeedbackRequest) returns (google.protobuf.Empty) {
+        option (google.api.http) = {
+            post: "/v2/{name=projects/*/agent/sessions/*/feedback/*}:delete"
+            body: "*"
+        };
+    };
+
+    // Lists all feedback (session-level and step-level) attached to a session with pagination support.
+    rpc ListSessionFeedback (ListSessionFeedbackRequest) returns (ListSessionFeedbackResponse) {
+        option (google.api.http) = {
+            get: "/v2/{session_id=projects/*/agent/sessions/*}/feedback"
+        };
+    };
+
+    // Lists feedback across all sessions of the agent, optionally narrowed by a SessionFilter.
+    rpc ListSessionFeedbackOfAllSessions (ListSessionFeedbackOfAllSessionsRequest) returns (ListSessionFeedbackResponse) {
+        option (google.api.http) = {
+            get: "/v2/{parent=projects/*/agent}/sessions/feedback"
+        };
+    };
+
+    // Returns aggregated feedback statistics for an agent (thumbs up/down counts + breakdowns), optionally
+    // rolling up existing session reviews and comments as additional quality signals.
+    rpc GetFeedbackStatistics (GetFeedbackStatisticsRequest) returns (GetFeedbackStatisticsResponse) {
+        option (google.api.http) = {
+            get: "/v2/{parent=projects/*/agent}/feedbackStatistics"
+        };
+    };
+
+    // Returns feedback statistics bucketed over time for trend charts.
+    rpc GetFeedbackStatisticsTimeSeries (GetFeedbackStatisticsTimeSeriesRequest) returns (GetFeedbackStatisticsTimeSeriesResponse) {
+        option (google.api.http) = {
+            get: "/v2/{parent=projects/*/agent}/feedbackStatistics:timeSeries"
         };
     };
 
@@ -796,12 +877,12 @@ message LlmTelemetry {
     string base_url = 47;
 
     // Optional. Default HTTP headers to include with every request to the OpenAI API.
-    optional google.protobuf.Struct default_headers = 48;
+    google.protobuf.Struct default_headers = 48;
 
     // Optional. Default query parameters to append to every request URL sent to
     // the OpenAI API. Values can be of any type (string, number, boolean, list),
     // hence the use of Struct.
-    optional google.protobuf.Struct default_query = 49;
+    google.protobuf.Struct default_query = 49;
 
     // Optional. A number between -2.0 and 2.0. Positive values penalize new
     // tokens based on their existing frequency in the text so far, decreasing the
@@ -810,7 +891,7 @@ message LlmTelemetry {
 
     // Optional. Developer-defined tags and values used for filtering completions
     // in the OpenAI dashboard.
-    optional google.protobuf.Struct openai_metadata = 51;
+    google.protobuf.Struct openai_metadata = 51;
 
     // Optional. A number between -2.0 and 2.0. Positive values penalize new
     // tokens based on whether they have already appeared in the text, increasing
@@ -835,15 +916,15 @@ message LlmTelemetry {
 
     // Optional. Additional HTTP headers to send with the request. These are
     // merged with and override default_headers for this specific request only.
-    optional google.protobuf.Struct extra_headers = 57;
+    google.protobuf.Struct extra_headers = 57;
 
     // Optional. Additional query parameters to send with the request. These are
     // merged with and override default_query for this specific request only.
-    optional google.protobuf.Struct extra_query = 58;
+    google.protobuf.Struct extra_query = 58;
 
     // Optional. Additional JSON properties to include in the request body. Useful
     // for accessing new or undocumented API parameters.
-    optional google.protobuf.Struct extra_body = 59;
+    google.protobuf.Struct extra_body = 59;
 
     // Provider of the ccai service
     CcaiServiceProvider ccai_service_provider = 60;
@@ -860,6 +941,13 @@ message LlmTelemetry {
     // (field 18, kept for back-compat); both carry the same chunk list. Unset for
     // non-retrieval calls.
     LlmRetrievalMetadata llm_retrieval_metadata = 62;
+
+    // Id of THIS LLM call. Same identifier the streaming telemetry events carry as
+    // <code>llm_call_id</code> (<code>LlmLlmCallStartedEvent</code>,
+    // <code>LlmToolCallStartedEvent</code>, ...), so an aggregate or a persisted row can be
+    // correlated back to the live event stream. Distinct from <code>run_id</code> (field 11),
+    // which is the UPSTREAM framework's id (autogen / langchain).
+    string llm_call_id = 63;
 }
 
 // Effort level for reasoning models (e.g. o1, o3). Controls the trade-off
@@ -1149,6 +1237,24 @@ message LlmToolUsage {
 
     // Summed tool-call token usage (input / output / total).
     LlmTokenUsage llm_token_usage = 7;
+
+    // The three fields below describe ONE REPRESENTATIVE invocation of this tool -- the most
+    // recent one in scope -- not the whole aggregate. The message covers <code>call_count</code>
+    // invocations, each with its own arguments and ids, so a single value can only ever be a
+    // sample. Same intent as <code>LlmErrorStat.sample_message</code>. They are typed exactly as
+    // on <code>LlmToolCallStartedEvent</code>, so a caller can correlate an aggregate row back to
+    // the live event stream.
+
+    // Arguments the representative invocation was called with, as a structured payload
+    // (Struct kept as-is; not a custom Message). Unset when the source metadata carried none.
+    google.protobuf.Struct arguments = 8;
+
+    // Groups the representative invocation under its <code>LlmTelemetry</code> entry.
+    string llm_call_id = 9;
+
+    // Stable id of the representative invocation, assigned by the upstream framework
+    // (autogen / langchain).
+    string tool_call_id = 10;
 }
 
 // One error class aggregate.
@@ -2519,7 +2625,7 @@ message ListSessionLabelsOfAllSessionsRequest {
     SessionFilter session_filter = 2;
 
     // Optional. The mask to control which fields gets returned.
-    optional google.protobuf.FieldMask field_mask = 3;
+    google.protobuf.FieldMask field_mask = 3;
 
 }
 
@@ -2541,7 +2647,7 @@ message ListLanguageCodesOfAllSessionsRequest {
     SessionFilter session_filter = 2;
 
     // Optional. The mask to control which fields gets returned.
-    optional google.protobuf.FieldMask field_mask = 3;
+    google.protobuf.FieldMask field_mask = 3;
 
 }
 
@@ -2565,7 +2671,7 @@ message ListMatchedIntentsOfAllSessionsRequest {
     SessionFilter session_filter = 2;
 
     // Optional. The mask to control which fields gets returned.
-    optional google.protobuf.FieldMask field_mask = 3;
+    google.protobuf.FieldMask field_mask = 3;
 }
 
 // This message is a response of listing session matched_intents
@@ -2587,7 +2693,7 @@ message ListMatchedEntityTypesOfAllSessionsRequest {
     SessionFilter session_filter = 2;
 
     // Optional. The mask to control which fields gets returned.
-    optional google.protobuf.FieldMask field_mask = 3;
+    google.protobuf.FieldMask field_mask = 3;
 
 }
 
@@ -2610,7 +2716,7 @@ message ListUserIdsOfAllSessionsRequest {
     SessionFilter session_filter = 2;
 
     // Optional. The mask to control which fields gets returned.
-    optional google.protobuf.FieldMask field_mask = 3;
+    google.protobuf.FieldMask field_mask = 3;
 
 }
 
@@ -2633,7 +2739,7 @@ message ListIdentifiedUserIdsOfAllSessionsRequest {
     SessionFilter session_filter = 2;
 
     // Optional. The mask to control which fields gets returned.
-    optional google.protobuf.FieldMask field_mask = 3;
+    google.protobuf.FieldMask field_mask = 3;
 
 }
 
@@ -2656,7 +2762,7 @@ message ListTagsOfAllSessionsRequest {
     SessionFilter session_filter = 2;
 
     // Optional. The mask to control which fields gets returned.
-    optional google.protobuf.FieldMask field_mask = 3;
+    google.protobuf.FieldMask field_mask = 3;
 
 }
 
@@ -2679,7 +2785,7 @@ message ListInputContextsOfAllSessionsRequest {
     SessionFilter session_filter = 2;
 
     // Optional. The mask to control which fields gets returned.
-    optional google.protobuf.FieldMask field_mask = 3;
+    google.protobuf.FieldMask field_mask = 3;
 
 }
 
@@ -2702,7 +2808,7 @@ message ListOutputContextsOfAllSessionsRequest {
     SessionFilter session_filter = 2;
 
     // Optional. The mask to control which fields gets returned.
-    optional google.protobuf.FieldMask field_mask = 3;
+    google.protobuf.FieldMask field_mask = 3;
 
 }
 
@@ -2725,7 +2831,7 @@ message ListPlatformsOfAllSessionsRequest {
     SessionFilter session_filter = 2;
 
     // Optional. The mask to control which fields gets returned.
-    optional google.protobuf.FieldMask field_mask = 3;
+    google.protobuf.FieldMask field_mask = 3;
 
 }
 
@@ -2748,7 +2854,7 @@ message ListAccountIdsOfAllSessionsRequest {
     SessionFilter session_filter = 2;
 
     // Optional. The mask to control which fields gets returned.
-    optional google.protobuf.FieldMask field_mask = 3;
+    google.protobuf.FieldMask field_mask = 3;
 
 }
 
@@ -2807,7 +2913,7 @@ message ListOriginIdsOfAllSessionsRequest {
     SessionFilter session_filter = 2;
 
     // Optional. The mask to control which fields gets returned.
-    optional google.protobuf.FieldMask field_mask = 3;
+    google.protobuf.FieldMask field_mask = 3;
 
 }
 
@@ -2872,7 +2978,7 @@ message UpdateSessionCommentsRequest {
 // This message is a request to list comments of a session
 message ListSessionCommentsRequest {
 
-    // The unique identifier for the session for which reviews should be listed
+    // The unique identifier for the session for which comments should be listed
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre>
     string session_id = 1;
 
@@ -2908,7 +3014,33 @@ message ListSessionCommentsRequest {
     string page_token = 2;
 
     // Optional. The mask to control which fields gets returned.
-    optional google.protobuf.FieldMask field_mask = 3;
+    google.protobuf.FieldMask field_mask = 3;
+
+    // Optional. Filter comments by their resolved status.
+    // If unset, comments with any resolved status are returned.
+    optional bool is_resolved = 4;
+
+}
+
+// This message is a request to list comments of all sessions of an agent
+message ListSessionCommentsOfAllSessionsRequest {
+
+    // The parent for which the comments of all sessions should be listed
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Optional. A filter to narrow the response down to sessions of interest.
+    SessionFilter session_filter = 2;
+
+    // Optional. The page token to support pagination.
+    string page_token = 3;
+
+    // Optional. The mask to control which fields gets returned.
+    google.protobuf.FieldMask field_mask = 4;
+
+    // Optional. Filter comments by their resolved status.
+    // If unset, comments with any resolved status are returned.
+    optional bool is_resolved = 5;
 
 }
 
@@ -2950,6 +3082,448 @@ message ListSessionCommentsResponse {
     // </ul>
     string page_token = 2;
 
+}
+
+// *** SESSION-FEEDBACK RELATED MESSAGES *** //
+
+// The thumbs rating a user gives as feedback.
+enum FeedbackRating {
+
+    // No rating provided (e.g. a comment-only feedback).
+    FEEDBACK_RATING_UNSPECIFIED = 0;
+
+    // Positive feedback (thumbs up).
+    FEEDBACK_RATING_THUMBS_UP = 1;
+
+    // Negative feedback (thumbs down).
+    FEEDBACK_RATING_THUMBS_DOWN = 2;
+}
+
+// Who left a piece of feedback — distinguishes trusted reviewers from anonymous production end-users.
+enum FeedbackAuthorType {
+
+    // Unknown author type.
+    FEEDBACK_AUTHOR_TYPE_UNSPECIFIED = 0;
+
+    // A logged-in human reviewer / test user (an authenticated Keycloak identity; annotator_user_id is set).
+    FEEDBACK_AUTHOR_TYPE_HUMAN_REVIEWER = 1;
+
+    // A technical / service user.
+    FEEDBACK_AUTHOR_TYPE_TECHNICAL_USER = 2;
+
+    // An anonymous production end-user of the webchat / webphone channel (no authenticated identity;
+    // identified only by the session and channel origin).
+    FEEDBACK_AUTHOR_TYPE_END_USER_ANONYMOUS = 3;
+}
+
+// The scope a feedback filter targets: session-level, step-level, or both.
+enum FeedbackScope {
+
+    // Both session-level and step-level feedback.
+    FEEDBACK_SCOPE_UNSPECIFIED = 0;
+
+    // Only session-level feedback (session_step_id empty).
+    FEEDBACK_SCOPE_SESSION_LEVEL = 1;
+
+    // Only session-step-level feedback (session_step_id set).
+    FEEDBACK_SCOPE_STEP_LEVEL = 2;
+}
+
+// The calendar granularity of a feedback time series. When set (non-unspecified) it overrides the
+// fixed-width bucket_width_seconds on the request.
+enum FeedbackTimeGranularity {
+
+    // Unspecified — use the request's fixed-width bucket_width_seconds instead.
+    FEEDBACK_TIME_GRANULARITY_UNSPECIFIED = 0;
+
+    // Hourly calendar buckets.
+    FEEDBACK_TIME_GRANULARITY_HOUR = 1;
+
+    // Daily calendar buckets.
+    FEEDBACK_TIME_GRANULARITY_DAY = 2;
+
+    // Weekly calendar buckets (ISO weeks, Monday start).
+    FEEDBACK_TIME_GRANULARITY_WEEK = 3;
+
+    // Monthly calendar buckets.
+    FEEDBACK_TIME_GRANULARITY_MONTH = 4;
+
+    // Yearly calendar buckets.
+    FEEDBACK_TIME_GRANULARITY_YEAR = 5;
+}
+
+// A single piece of user feedback about a whole session or a single session step (turn).
+//
+// The rating is intentionally extensible: <code>rating</code> carries the thumbs signal surfaced in the UI
+// today, while <code>score</code> and <code>categorical_value</code> allow richer scales (star / NPS / CSAT)
+// to be added later without a schema change. The feedback is pinned to the exact forensic context it is
+// about (<code>session_id</code>, <code>session_step_id</code>, <code>response_id</code>,
+// <code>session_step_llm_telemetry_id</code>) so the full conversation state up to the feedback can be
+// reconstructed from the already-persisted session step.
+message SessionFeedback {
+
+    // The resource name of the feedback.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/feedback/&lt;feedback_uuid&gt;</code></pre>
+    string name = 1;
+
+    // The session this feedback belongs to.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre>
+    string session_id = 2;
+
+    // The session step (turn) this feedback targets. Empty for session-level feedback.
+    string session_step_id = 3;
+
+    // Optional. The specific detect-intent response this feedback pins.
+    string response_id = 4;
+
+    // Optional. The specific LLM-telemetry sub-event (llm call / tool call) this feedback pins.
+    string session_step_llm_telemetry_id = 5;
+
+    // The thumbs rating.
+    FeedbackRating rating = 6;
+
+    // Optional. An extensible categorical value (e.g. star bucket, NPS/CSAT bucket).
+    string categorical_value = 7;
+
+    // Optional. A numeric score in [0, 1] for future continuous scales.
+    //
+    // Explicit presence (<code>optional</code>): a score of <code>0.0</code> is a MEANINGFUL rating — the
+    // worst point of a 0-10 NPS or 0-5 CSAT scale — and without presence it is indistinguishable from
+    // "no score given". The server persists an absent score as SQL NULL and excludes it from
+    // <code>average_score</code> / <code>scored_count</code> and from the <code>score_min</code> /
+    // <code>score_max</code> range filters, so conflating the two silently dropped exactly the worst
+    // ratings and biased the reported average upward. Use <code>HasField("score")</code> to distinguish.
+    // Matches <code>FeedbackFilter.score_min</code> / <code>score_max</code>, which are already optional.
+    optional float score = 8;
+
+    // Optional. Free-text comment.
+    string comment = 9;
+
+    // Optional. A dimension the feedback is about (e.g. "helpfulness", "accuracy").
+    string criterion = 10;
+
+    // Who left the feedback.
+    FeedbackAuthorType author_type = 11;
+
+    // The authenticated author's user id (Keycloak sub); empty for anonymous end-users.
+    string annotator_user_id = 12;
+
+    // Optional. The channel origin id (webchat / webphone) identifying an anonymous end-user.
+    string origin_id = 13;
+
+    // Optional. The identified end-user id, when the channel provides one.
+    string identified_user_id = 14;
+
+    // Optional. An extensibility escape hatch for channel-specific metadata.
+    google.protobuf.Struct raw = 15;
+
+    // When the feedback was created.
+    google.protobuf.Timestamp created_at = 16;
+
+    // When the feedback was last modified.
+    google.protobuf.Timestamp modified_at = 17;
+
+    // Who created the feedback.
+    string created_by = 18;
+
+    // Who last modified the feedback.
+    string modified_by = 19;
+}
+
+// Request to record feedback about a whole session.
+message AddSessionFeedbackRequest {
+
+    // The id of the session.
+    string session_id = 1;
+
+    // The feedback to record. session_step_id is left empty for session-level feedback.
+    SessionFeedback feedback = 2;
+}
+
+// Request to record feedback about a single session step (turn).
+message AddSessionStepFeedbackRequest {
+
+    // The id of the session.
+    string session_id = 1;
+
+    // The id of the session step (turn) the feedback is about.
+    string session_step_id = 2;
+
+    // The feedback to record.
+    SessionFeedback feedback = 3;
+}
+
+// Request to fetch a single feedback by resource name.
+message GetSessionFeedbackRequest {
+
+    // The resource name of the feedback.
+    string name = 1;
+
+    // Optional. The mask to control which fields get returned.
+    google.protobuf.FieldMask field_mask = 2;
+}
+
+// Request to update (revise) an existing feedback.
+message UpdateSessionFeedbackRequest {
+
+    // The feedback to update; feedback.name identifies the record.
+    SessionFeedback feedback = 1;
+
+    // Optional. The fields of the feedback to update.
+    google.protobuf.FieldMask update_mask = 2;
+}
+
+// Request to delete (withdraw) a feedback.
+message DeleteSessionFeedbackRequest {
+
+    // The resource name of the feedback to delete.
+    string name = 1;
+}
+
+// Request to list all feedback attached to a session.
+message ListSessionFeedbackRequest {
+
+    // The id of the session.
+    string session_id = 1;
+
+    // Optional. The page token to support pagination.
+    string page_token = 2;
+
+    // Optional. The mask to control which fields get returned.
+    google.protobuf.FieldMask field_mask = 3;
+}
+
+// Request to list feedback across all sessions of an agent.
+message ListSessionFeedbackOfAllSessionsRequest {
+
+    // The parent for which the feedback of all sessions should be listed.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Optional. A filter to narrow the response down to sessions of interest.
+    SessionFilter session_filter = 2;
+
+    // Optional. The page token to support pagination.
+    string page_token = 3;
+
+    // Optional. The mask to control which fields get returned.
+    google.protobuf.FieldMask field_mask = 4;
+
+    // Optional. A feedback-native filter (rating / author / comment / score / criterion / date window).
+    FeedbackFilter feedback_filter = 5;
+
+    // Optional. Sort order, e.g. "created_at desc" (default), "created_at asc", "rating desc".
+    string order_by = 6;
+}
+
+// A page of feedback.
+message ListSessionFeedbackResponse {
+
+    // The feedback of the requested scope.
+    repeated SessionFeedback feedback = 1;
+
+    // The page token for the next page (empty when there are no more pages).
+    string next_page_token = 2;
+
+    // Total number of feedback matching the filter across all pages.
+    int32 total_count = 3;
+}
+
+// A key + up/down counts breakdown bucket (by language / intent / author type / ...).
+// A feedback-native filter for feedback list + analytics requests, complementing SessionFilter (which
+// filters the parent sessions). All set fields are AND-combined; repeated fields are OR-within-field.
+message FeedbackFilter {
+
+    // Keep only feedback with one of these ratings (thumbs up / down / unspecified).
+    repeated FeedbackRating ratings = 1;
+
+    // Keep only feedback left by one of these author types.
+    repeated FeedbackAuthorType author_types = 2;
+
+    // When set, keep only feedback that has (true) or lacks (false) a free-text comment.
+    optional bool has_comment = 3;
+
+    // Keep only feedback created at or after this time (feedback created_at, not session time).
+    google.protobuf.Timestamp earliest = 4;
+
+    // Keep only feedback created at or before this time.
+    google.protobuf.Timestamp latest = 5;
+
+    // Keep only feedback whose criterion is one of these.
+    repeated string criteria = 6;
+
+    // Keep only feedback whose language code is one of these.
+    repeated string language_codes = 7;
+
+    // Keep only feedback whose authenticated annotator is one of these user ids.
+    repeated string annotator_user_ids = 8;
+
+    // Keep only feedback whose channel origin id is one of these.
+    repeated string origin_ids = 9;
+
+    // When set, keep only feedback with a numeric score at or above this value.
+    optional float score_min = 10;
+
+    // When set, keep only feedback with a numeric score at or below this value.
+    optional float score_max = 11;
+
+    // Restrict to session-level or step-level feedback (unspecified means both).
+    FeedbackScope scope = 12;
+}
+
+message FeedbackBreakdownBucket {
+
+    // The bucket key (e.g. a language code, an intent display name, an author type).
+    string key = 1;
+
+    // Number of thumbs-up feedback in this bucket.
+    int32 thumbs_up_count = 2;
+
+    // Number of thumbs-down feedback in this bucket.
+    int32 thumbs_down_count = 3;
+
+    // Total feedback in this bucket (including unrated comment-only feedback).
+    int32 total = 4;
+}
+
+// Aggregated feedback statistics for an agent.
+message FeedbackStatistics {
+
+    // Total feedback records.
+    int32 total_feedback = 1;
+
+    // Number of thumbs-up feedback.
+    int32 thumbs_up_count = 2;
+
+    // Number of thumbs-down feedback.
+    int32 thumbs_down_count = 3;
+
+    // Number of session-level feedback.
+    int32 session_level_count = 4;
+
+    // Number of session-step-level feedback.
+    int32 session_step_level_count = 5;
+
+    // Number of feedback that carry a free-text comment.
+    int32 comment_count = 6;
+
+    // Roll-up of existing session reviews (additional quality signal).
+    int32 session_review_count = 7;
+
+    // Roll-up of existing session comments (additional quality signal).
+    int32 session_comment_count = 8;
+
+    // Up/down breakdown by language code.
+    repeated FeedbackBreakdownBucket by_language = 9;
+
+    // Up/down breakdown by matched intent.
+    repeated FeedbackBreakdownBucket by_intent = 10;
+
+    // Up/down breakdown by author type.
+    repeated FeedbackBreakdownBucket by_author_type = 11;
+
+    // Number of feedback with no rating (comment-only / unspecified rating).
+    int32 unspecified_rating_count = 12;
+
+    // Number of feedback that carry a numeric score.
+    int32 scored_count = 13;
+
+    // Mean of the numeric scores across scored feedback (0 when none).
+    float average_score = 14;
+
+    // Up/down breakdown by channel origin id.
+    repeated FeedbackBreakdownBucket by_origin = 15;
+
+    // Up/down breakdown by criterion.
+    repeated FeedbackBreakdownBucket by_criterion = 16;
+}
+
+// Request for aggregated feedback statistics.
+message GetFeedbackStatisticsRequest {
+
+    // The agent parent.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Optional. A filter to narrow the sessions considered.
+    SessionFilter session_filter = 2;
+
+    // Optional. When true, roll up existing session reviews and comments as additional signals.
+    bool include_review_and_comment_rollup = 3;
+
+    // Optional. The mask to control which fields of the statistics get returned.
+    google.protobuf.FieldMask field_mask = 4;
+
+    // Optional. A feedback-native filter (rating / author / comment / score / criterion / date window).
+    FeedbackFilter feedback_filter = 5;
+}
+
+// Response carrying aggregated feedback statistics.
+message GetFeedbackStatisticsResponse {
+
+    // The aggregated statistics.
+    FeedbackStatistics statistics = 1;
+}
+
+// One time bucket of feedback counts.
+message FeedbackTimeSeriesBucket {
+
+    // The (inclusive) start of the time bucket.
+    google.protobuf.Timestamp bucket_start = 1;
+
+    // Number of thumbs-up feedback in this bucket.
+    int32 thumbs_up_count = 2;
+
+    // Number of thumbs-down feedback in this bucket.
+    int32 thumbs_down_count = 3;
+
+    // Total feedback in this bucket.
+    int32 total = 4;
+
+    // The (exclusive) end of the time bucket.
+    google.protobuf.Timestamp bucket_end = 5;
+}
+
+// Request for feedback statistics bucketed over time.
+message GetFeedbackStatisticsTimeSeriesRequest {
+
+    // The agent parent.
+    // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    string parent = 1;
+
+    // Optional. A filter to narrow the sessions considered.
+    SessionFilter session_filter = 2;
+
+    // The width of each time bucket in seconds.
+    int32 bucket_width_seconds = 3;
+
+    // The maximum number of buckets to return.
+    int32 max_buckets = 4;
+
+    // Optional. The mask to control which fields get returned.
+    google.protobuf.FieldMask field_mask = 5;
+
+    // Optional. A feedback-native filter.
+    FeedbackFilter feedback_filter = 6;
+
+    // Optional. Calendar granularity; when set (non-unspecified) it overrides bucket_width_seconds.
+    FeedbackTimeGranularity granularity = 7;
+
+    // Optional. IANA timezone for calendar bucketing (e.g. "Europe/Vienna"); defaults to UTC.
+    string time_zone = 8;
+
+    // Optional. Inclusive start of the series window; when set, empty leading buckets are zero-filled.
+    google.protobuf.Timestamp start = 9;
+
+    // Optional. Exclusive end of the series window; defaults to now.
+    google.protobuf.Timestamp end = 10;
+}
+
+// Response carrying feedback counts bucketed over time.
+message GetFeedbackStatisticsTimeSeriesResponse {
+
+    // The time buckets, oldest first.
+    repeated FeedbackTimeSeriesBucket buckets = 1;
 }
 
 // This message is a request to list session reviews
@@ -3015,7 +3589,7 @@ message GetSessionReviewRequest {
     SessionReview.View session_review_view = 2;
 
     // Optional. The mask to control which fields gets returned.
-    optional google.protobuf.FieldMask field_mask = 3;
+    google.protobuf.FieldMask field_mask = 3;
 
 }
 
@@ -3030,7 +3604,7 @@ message GetLatestSessionReviewRequest {
     SessionReview.View session_review_view = 2;
 
     // Optional. The mask to control which fields gets returned.
-    optional google.protobuf.FieldMask field_mask = 3;
+    google.protobuf.FieldMask field_mask = 3;
 
 }
 
@@ -3273,7 +3847,7 @@ message GetAudioFilesRequest {
     SortingMode sorting_mode = 5;
 
     // Optional. The mask to control which fields gets returned.
-    optional google.protobuf.FieldMask field_mask = 6;
+    google.protobuf.FieldMask field_mask = 6;
 
 }
 
@@ -3399,7 +3973,7 @@ message ListAudioFilesRequest {
     SortingMode sorting_mode = 5;
 
     // Optional. The mask to control which fields gets returned.
-    optional google.protobuf.FieldMask field_mask = 6;
+    google.protobuf.FieldMask field_mask = 6;
 
 }
 
@@ -3435,6 +4009,6 @@ message GetAudioFileOfSessionRequest {
     ResourceView resource_view = 3;
 
     // Optional. The mask to control which fields gets returned.
-    optional google.protobuf.FieldMask field_mask = 4;
+    google.protobuf.FieldMask field_mask = 4;
 
 }

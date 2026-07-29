@@ -705,7 +705,7 @@ message ListAgentsRequest {
     AgentSorting sort_by_field = 3;
 
     // Optional. The mask to control which fields gets returned.
-    optional google.protobuf.FieldMask field_mask = 4;
+    google.protobuf.FieldMask field_mask = 4;
 
 }
 
@@ -1487,7 +1487,7 @@ message ListUsersInProjectRequest {
 
     // Optional. The mask to control which fields gets returned.
     // <br>
-    optional google.protobuf.FieldMask field_mask = 3;
+    google.protobuf.FieldMask field_mask = 3;
 
 }
 
@@ -1566,7 +1566,7 @@ message ListProjectPermissionsRequest {
     string page_token = 1;
 
     // Optional. The mask to control which fields gets returned.
-    optional google.protobuf.FieldMask field_mask = 2;
+    google.protobuf.FieldMask field_mask = 2;
 
 }
 

@@ -23,6 +23,7 @@ import "google/protobuf/field_mask.proto";
 import "google/rpc/status.proto";
 import "google/protobuf/timestamp.proto";
 import "ondewo/nlu/operation_metadata.proto";
+import "ondewo/nlu/common.proto";
 
 // Manages long-running operations with an API service.
 //
@@ -65,6 +66,35 @@ service Operations {
     // of 1, corresponding to <code>Code.CANCELLED</code>.
     rpc CancelOperation (CancelOperationRequest) returns (google.protobuf.Empty) {
         option (google.api.http) = {post: "/v1/{name=operations/**}:cancel" body: "*"};
+    }
+
+    // Streams the live container logs of a remote-operation container (LLM evaluation, simulation,
+    // crawl, training) as they are produced, in the manner of <code>docker logs --follow</code>.
+    // The stream stays open until the container exits or the client disconnects. Each message is a
+    // single parsed log line. Secrets in the log text are redacted server-side before streaming.
+    rpc StreamRemoteOperationContainerLogs (StreamRemoteOperationContainerLogsRequest) returns (stream RemoteOperationContainerLogLine);
+
+    // Returns a bounded, filtered snapshot of a remote-operation container&apos;s logs. Supports a
+    // time window (<code>start_time</code> / <code>end_time</code>), a minimum loguru log level,
+    // a regular-expression match on the message, and a cap on the number of returned lines. Secrets
+    // in the log text are redacted server-side before the response is returned.
+    rpc GetRemoteOperationContainerLogs (GetRemoteOperationContainerLogsRequest) returns (GetRemoteOperationContainerLogsResponse) {
+        option (google.api.http) = {get: "/v1/{name=operations/**}:containerLogs"};
+    }
+
+    // Returns the health and lifecycle status of a remote-operation container: whether it still
+    // exists, whether it is running/exited, its exit code, OOM-kill flag and Docker health status.
+    rpc GetRemoteOperationContainerStatus (GetRemoteOperationContainerStatusRequest) returns (RemoteOperationContainerStatus) {
+        option (google.api.http) = {get: "/v1/{name=operations/**}:containerStatus"};
+    }
+
+    // Lists every docker container that a remote operation started (a single operation may run several
+    // containers sequentially, e.g. hardware-check, GPU pre-allocation, build-cache and one training
+    // container per algorithm). When <code>include_sub_operations</code> is set, the containers of the
+    // operation&apos;s sub-operations are included as well. Each entry carries the container id + name,
+    // its host, lifecycle state and whether logs are still available (live or persisted).
+    rpc ListRemoteOperationContainers (ListRemoteOperationContainersRequest) returns (ListRemoteOperationContainersResponse) {
+        option (google.api.http) = {get: "/v1/{name=operations/**}:containers"};
     }
 }
 
@@ -113,7 +143,7 @@ message GetOperationRequest {
     string name = 1;
 
     // Optional. The mask to control which fields gets returned.
-    optional google.protobuf.FieldMask field_mask = 2;
+    google.protobuf.FieldMask field_mask = 2;
 
 }
 
@@ -164,7 +194,7 @@ message ListOperationsRequest {
     OperationFilter operation_filter = 5;
 
     // Optional. The mask to control which fields gets returned.
-    optional google.protobuf.FieldMask field_mask = 6;
+    google.protobuf.FieldMask field_mask = 6;
 
 }
 
@@ -222,4 +252,314 @@ message DeleteOperationRequest {
 
     // The name of the operation resource to be deleted.
     string name = 1;
+}
+
+// The request message for <a href="index.html#ondewo.nlu.Operations.StreamRemoteOperationContainerLogs">Operations.StreamRemoteOperationContainerLogs</a>.
+message StreamRemoteOperationContainerLogsRequest {
+
+    // The name of the operation resource whose container logs should be streamed.
+    string name = 1;
+
+    // Only stream lines at or above this loguru severity. <code>LOG_SEVERITY_UNSPECIFIED</code> (the
+    // default) streams every line regardless of level.
+    LogSeverity min_log_level = 2;
+
+    // Replay at most this many of the most recent existing log lines before switching to live follow.
+    // <code>0</code> (the default) starts the follow with no historical replay.
+    int32 tail_lines = 3;
+
+    // Optional. Scope the stream to a single container of the operation, identified by its docker
+    // container id (as returned by <a href="index.html#ondewo.nlu.RemoteOperationContainer">RemoteOperationContainer</a>).
+    // Empty (the default) streams the operation&apos;s currently-registered container, preserving the
+    // legacy single-container behavior.
+    string container_id = 4;
+}
+
+// The request message for <a href="index.html#ondewo.nlu.Operations.GetRemoteOperationContainerLogs">Operations.GetRemoteOperationContainerLogs</a>.
+message GetRemoteOperationContainerLogsRequest {
+
+    // The name of the operation resource whose container logs should be returned.
+    string name = 1;
+
+    // Only return lines at or above this loguru severity. <code>LOG_SEVERITY_UNSPECIFIED</code> (the
+    // default) returns every line regardless of level.
+    LogSeverity min_log_level = 2;
+
+    // Only return lines whose timestamp is at or after this instant. Unset returns from the start of
+    // the available logs.
+    google.protobuf.Timestamp start_time = 3;
+
+    // Only return lines whose timestamp is at or before this instant. Unset returns up to the latest
+    // available log line.
+    google.protobuf.Timestamp end_time = 4;
+
+    // Return at most this many lines, keeping the most recent matches. <code>0</code> (the default)
+    // applies a server-side safety cap.
+    int32 max_lines = 5;
+
+    // Only return lines whose message matches this regular expression (Python <code>re</code> syntax).
+    // Empty (the default) disables regex filtering.
+    string regex = 6;
+
+    // Optional. Scope the query to a single container of the operation, identified by its docker
+    // container id. Empty (the default) queries the operation&apos;s currently-registered container,
+    // preserving the legacy single-container behavior. When the container has finished and been removed,
+    // its persisted logs are served from the server-side log archive.
+    string container_id = 7;
+
+    // Optional cursor for infinite-scroll-UP paging: return the newest lines with
+    // <a href="index.html#ondewo.nlu.RemoteOperationContainerLogLine">seq</a> &lt; <code>before_seq</code>
+    // (older window). <code>0</code> (the default) disables backward paging.
+    int64 before_seq = 8;
+
+    // Optional cursor for infinite-scroll-DOWN paging: return lines with <code>seq</code> &gt;
+    // <code>after_seq</code> (newer window). <code>0</code> (the default) disables forward paging.
+    int64 after_seq = 9;
+}
+
+// The response message for <a href="index.html#ondewo.nlu.Operations.GetRemoteOperationContainerLogs">Operations.GetRemoteOperationContainerLogs</a>.
+message GetRemoteOperationContainerLogsResponse {
+
+    // The matching log lines, oldest first. Secrets are redacted server-side.
+    repeated RemoteOperationContainerLogLine log_lines = 1;
+
+    // True when older matching lines were dropped because <code>max_lines</code> was reached.
+    bool truncated = 2;
+
+    // The smallest <code>seq</code> currently available for this container (its oldest captured line).
+    // A client paging up has reached the beginning when the returned lines start at this value.
+    int64 min_available_seq = 3;
+
+    // The largest <code>seq</code> currently available for this container (its newest captured line).
+    int64 max_available_seq = 4;
+
+    // True when older lines than the returned window still exist (i.e. the window&apos;s first
+    // <code>seq</code> &gt; <code>min_available_seq</code>) — the client may keep scrolling up.
+    bool has_more_older = 5;
+}
+
+// A single parsed container log line, emitted by both the streaming and the query RPCs.
+message RemoteOperationContainerLogLine {
+
+    // The timestamp parsed from the loguru line prefix, if present.
+    google.protobuf.Timestamp timestamp = 1;
+
+    // The loguru severity parsed from the line, or <code>LOG_SEVERITY_UNSPECIFIED</code> if the line
+    // carried no recognizable level (e.g. a continuation / traceback line).
+    LogSeverity level = 2;
+
+    // The log message text, with ANSI colour codes stripped and secrets redacted.
+    string message = 3;
+
+    // The docker container id this line was produced by. Lets a client attribute or group lines when an
+    // operation ran several containers. Empty when the id was not captured.
+    string container_id = 4;
+
+    // The docker container name this line was produced by. Empty when unavailable.
+    string container_name = 5;
+
+    // The monotonically-increasing sequence number of this line within its container&apos;s captured log
+    // (assigned by the server-side capture). Used as the cursor for infinite-scroll paging. <code>0</code>
+    // when the line was produced by a legacy path that did not assign a sequence.
+    int64 seq = 6;
+}
+
+// The request message for <a href="index.html#ondewo.nlu.Operations.GetRemoteOperationContainerStatus">Operations.GetRemoteOperationContainerStatus</a>.
+message GetRemoteOperationContainerStatusRequest {
+
+    // The name of the operation resource whose container status should be returned.
+    string name = 1;
+
+    // Optional. Scope the status to a single container of the operation, identified by its docker
+    // container id. Empty (the default) returns the status of the operation&apos;s currently-registered
+    // container, preserving the legacy single-container behavior.
+    string container_id = 2;
+}
+
+// The lifecycle state of a remote-operation container, mirroring the Docker container lifecycle.
+enum RemoteOperationContainerLifecycleState {
+
+    // The lifecycle state could not be determined.
+    REMOTE_OPERATION_CONTAINER_LIFECYCLE_STATE_UNSPECIFIED = 0;
+
+    // No container with the recorded name exists on the recorded host (never started, already reaped,
+    // or the dispatch record was garbage-collected after completion).
+    REMOTE_OPERATION_CONTAINER_LIFECYCLE_STATE_NOT_FOUND = 1;
+
+    // The container has been created but is not yet running.
+    REMOTE_OPERATION_CONTAINER_LIFECYCLE_STATE_CREATED = 2;
+
+    // The container is running.
+    REMOTE_OPERATION_CONTAINER_LIFECYCLE_STATE_RUNNING = 3;
+
+    // The container is paused.
+    REMOTE_OPERATION_CONTAINER_LIFECYCLE_STATE_PAUSED = 4;
+
+    // The container is in the process of restarting.
+    REMOTE_OPERATION_CONTAINER_LIFECYCLE_STATE_RESTARTING = 5;
+
+    // The container has exited (successfully or with an error — see <code>exit_code</code>).
+    REMOTE_OPERATION_CONTAINER_LIFECYCLE_STATE_EXITED = 6;
+
+    // The container is dead (Docker could not stop/remove it cleanly).
+    REMOTE_OPERATION_CONTAINER_LIFECYCLE_STATE_DEAD = 7;
+}
+
+// The response message for <a href="index.html#ondewo.nlu.Operations.GetRemoteOperationContainerStatus">Operations.GetRemoteOperationContainerStatus</a>.
+message RemoteOperationContainerStatus {
+
+    // The name of the operation resource this status describes.
+    string name = 1;
+
+    // The lifecycle state of the container.
+    RemoteOperationContainerLifecycleState lifecycle_state = 2;
+
+    // The host the container was dispatched to (empty when the dispatch record is unavailable).
+    string host_name = 3;
+
+    // The container name (empty when the dispatch record is unavailable).
+    string container_name = 4;
+
+    // The docker container id (64-hex), empty when it was not captured or the record is unavailable.
+    string container_id = 11;
+
+    // The container exit code. Only meaningful when <code>lifecycle_state</code> is
+    // <code>EXITED</code> or <code>DEAD</code>.
+    int32 exit_code = 5;
+
+    // True when the container was killed by the out-of-memory killer.
+    bool oom_killed = 6;
+
+    // The Docker healthcheck status (<code>healthy</code> / <code>unhealthy</code> / <code>starting</code>),
+    // empty when the container declares no healthcheck.
+    string health_status = 7;
+
+    // When the container started, if known.
+    google.protobuf.Timestamp started_at = 8;
+
+    // When the container finished, if it has exited.
+    google.protobuf.Timestamp finished_at = 9;
+
+    // When this status was observed by the server.
+    google.protobuf.Timestamp observed_at = 10;
+
+    // The container&apos;s environment variables (docker <code>Config.Env</code>), as a name→value map.
+    // Secret values (passwords, tokens, private keys, certificates) are redacted server-side; plain
+    // non-secret values such as numeric limits remain visible.
+    map<string, string> environment_variables = 12;
+
+    // The container&apos;s command/args (docker <code>Config.Cmd</code>).
+    repeated string command = 13;
+
+    // The container&apos;s hard memory limit in bytes (docker <code>HostConfig.Memory</code>).
+    // <code>0</code> means unlimited.
+    int64 memory_limit_bytes = 14;
+
+    // The container&apos;s CPU limit in billionths of a CPU (docker <code>HostConfig.NanoCpus</code>);
+    // cores = <code>nano_cpus</code> / 1e9. <code>0</code> means unset (see <code>cpu_quota</code>).
+    int64 nano_cpus = 15;
+
+    // The CPUs the container is pinned to (docker <code>HostConfig.CpusetCpus</code>), empty when unset.
+    string cpuset_cpus = 16;
+
+    // The CFS CPU quota (docker <code>HostConfig.CpuQuota</code>), the older cpu-limit form; cores =
+    // <code>cpu_quota</code> / <code>cpu_period</code> when both are &gt; 0.
+    int64 cpu_quota = 17;
+
+    // The CFS CPU period (docker <code>HostConfig.CpuPeriod</code>).
+    int64 cpu_period = 18;
+
+    // The docker image reference the container was started from (docker <code>Config.Image</code>).
+    string image = 19;
+}
+
+// Describes one docker container started by a remote operation. A single operation may start several
+// containers sequentially (hardware-check, GPU pre-allocation, build-cache, and one training container
+// per algorithm), so containers are enumerated by
+// <a href="index.html#ondewo.nlu.Operations.ListRemoteOperationContainers">Operations.ListRemoteOperationContainers</a>.
+message RemoteOperationContainer {
+
+    // The docker container id (64-hex). Empty until captured at launch.
+    string container_id = 1;
+
+    // The deterministic docker container name (the <code>--name</code>).
+    string container_name = 2;
+
+    // The host the container runs (or ran) on.
+    string host_name = 3;
+
+    // The last-known lifecycle state of the container.
+    RemoteOperationContainerLifecycleState lifecycle_state = 4;
+
+    // The operation resource that started this container. May be a sub-operation of the queried
+    // operation when <code>include_sub_operations</code> was set.
+    string operation_name = 5;
+
+    // The docker image reference the container was started from.
+    string image = 6;
+
+    // A human-readable phase label for the container within the operation, e.g. <code>hw_check</code>,
+    // <code>gpu_prealloc</code>, <code>build_cache</code>, <code>train</code>, <code>rag_crawl</code>.
+    string phase = 7;
+
+    // The container exit code. Only meaningful once the container has exited.
+    int32 exit_code = 8;
+
+    // True when the container was killed by the out-of-memory killer.
+    bool oom_killed = 9;
+
+    // When the container started, if known.
+    google.protobuf.Timestamp started_at = 10;
+
+    // When the container finished, if it has exited.
+    google.protobuf.Timestamp finished_at = 11;
+
+    // True when logs for this container can still be fetched — either the container is live, or its logs
+    // were persisted to the server-side archive after it finished.
+    bool logs_available = 12;
+
+    // The container&apos;s environment variables (docker <code>Config.Env</code>), as a name→value map.
+    // Secret values (passwords, tokens, private keys, certificates) are redacted server-side; plain
+    // non-secret values such as numeric limits remain visible. Persisted at launch so it is available
+    // even after the container is removed.
+    map<string, string> environment_variables = 13;
+
+    // The container&apos;s command/args (docker <code>Config.Cmd</code>).
+    repeated string command = 14;
+
+    // The container&apos;s hard memory limit in bytes (docker <code>HostConfig.Memory</code>).
+    // <code>0</code> means unlimited.
+    int64 memory_limit_bytes = 15;
+
+    // The container&apos;s CPU limit in billionths of a CPU (docker <code>HostConfig.NanoCpus</code>);
+    // cores = <code>nano_cpus</code> / 1e9. <code>0</code> means unset (see <code>cpu_quota</code>).
+    int64 nano_cpus = 16;
+
+    // The CPUs the container is pinned to (docker <code>HostConfig.CpusetCpus</code>), empty when unset.
+    string cpuset_cpus = 17;
+
+    // The CFS CPU quota (docker <code>HostConfig.CpuQuota</code>); cores =
+    // <code>cpu_quota</code> / <code>cpu_period</code> when both are &gt; 0.
+    int64 cpu_quota = 18;
+
+    // The CFS CPU period (docker <code>HostConfig.CpuPeriod</code>).
+    int64 cpu_period = 19;
+}
+
+// The request message for <a href="index.html#ondewo.nlu.Operations.ListRemoteOperationContainers">Operations.ListRemoteOperationContainers</a>.
+message ListRemoteOperationContainersRequest {
+
+    // The name of the operation resource whose containers should be listed.
+    string name = 1;
+
+    // When true, also include the containers of the operation&apos;s sub-operations
+    // (<a href="index.html#ondewo.nlu.OperationMetadata">OperationMetadata.sub_operation_names</a>).
+    bool include_sub_operations = 2;
+}
+
+// The response message for <a href="index.html#ondewo.nlu.Operations.ListRemoteOperationContainers">Operations.ListRemoteOperationContainers</a>.
+message ListRemoteOperationContainersResponse {
+
+    // The containers started by the operation (and, when requested, its sub-operations), oldest first.
+    repeated RemoteOperationContainer containers = 1;
 }

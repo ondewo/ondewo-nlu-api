@@ -160,7 +160,7 @@ message Context {
     map<string, Parameter> parameters = 3;
 
     // Optional. The time span in seconds after which the context expires. By default it does not expire.
-    float lifespan_time = 4;
+    optional float lifespan_time = 4;
 
     // Creation date and time. Read-only field.
     google.protobuf.Timestamp created_at = 5;

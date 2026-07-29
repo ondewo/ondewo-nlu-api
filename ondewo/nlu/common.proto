@@ -77,6 +77,11 @@ message Comment {
 
     // User id in form of a valid UUID.
     string modified_by = 9;
+
+    // Whether the comment has been resolved. Defaults to false.
+    // Declared `optional` so field presence is tracked: on UpdateSessionComments an unset value leaves
+    // the stored resolved status unchanged, so editing a comment's text never clobbers its resolved flag.
+    optional bool is_resolved = 10;
 }
 
 
@@ -204,6 +209,9 @@ enum NotificationOrigin {
 
     // ondewo-vtsi-rabbitmq service
     NOTIFICATION_ORIGIN_ONDEWO_VTSI_RABBITMQ = 9;
+
+    // ondewo-survey service
+    NOTIFICATION_ORIGIN_ONDEWO_SURVEY = 10;
 }
 
 // Notification message
@@ -266,6 +274,10 @@ message Notification {
     // User id in form of a valid UUID.
     string modified_by = 18;
 
+    // Optional deep-link / route target the notification navigates to when clicked, e.g. a relative AIM route to
+    // the referenced intent or entity. Empty when the notification is not clickable.
+    string link = 19;
+
 }
 
 // Message for adding notifications in a batch.
@@ -273,6 +285,9 @@ message AddNotificationsRequest {
 
     // List of notifications to be added.
     repeated Notification notifications = 1;
+
+    // Optional. Mask to control which fields of the returned notifications are filled with data.
+    google.protobuf.FieldMask field_mask = 2;
 }
 
 // Message containing the response to adding notifications.
@@ -311,6 +326,9 @@ message NotificationFilter {
 
     // Resource names of the origin of the notification to filter notifications.
     repeated string origin_names = 9;
+
+    // Types of the notifications to filter.
+    repeated NotificationType notification_types = 10;
 
 }
 
@@ -373,6 +391,9 @@ message SetNotificationsFlaggedStatusRequest {
 
     // Flagged status to set for the specified notifications.
     repeated bool flagged = 2;
+
+    // Optional. Mask to control which fields of the returned notifications are filled with data.
+    google.protobuf.FieldMask field_mask = 3;
 }
 
 // Message for setting the read status of notifications.
@@ -383,6 +404,54 @@ message SetNotificationsReadStatusRequest {
 
     // Read status to set for the specified notifications.
     repeated bool flagged = 2;
+
+    // Optional. Mask to control which fields of the returned notifications are filled with data.
+    google.protobuf.FieldMask field_mask = 3;
+}
+
+// Message for retrieving a single notification by its resource name.
+message GetNotificationRequest {
+
+    // Resource name of the notification to retrieve.
+    string name = 1;
+
+    // Optional. Mask to control which fields of the notification are returned.
+    google.protobuf.FieldMask field_mask = 2;
+}
+
+// Message for updating a single notification.
+message UpdateNotificationRequest {
+
+    // The notification to update, identified by its resource name.
+    Notification notification = 1;
+
+    // Mask controlling which fields of the notification are updated.
+    google.protobuf.FieldMask update_mask = 2;
+
+    // Optional. Mask to control which fields of the returned notification are filled with data.
+    google.protobuf.FieldMask field_mask = 3;
+}
+
+// Message for deleting one or more notifications by their resource names.
+message DeleteNotificationsRequest {
+
+    // Resource names of the notifications to delete.
+    repeated string notification_names = 1;
+}
+
+// Message for streaming notifications in real time via
+// <a href="index.html#ondewo.nlu.Users.StreamNotifications">Users.StreamNotifications</a>.
+message StreamNotificationsRequest {
+
+    // Optional filter to narrow the stream down to specific notifications (same semantics as
+    // <a href="index.html#ondewo.nlu.NotificationFilter">NotificationFilter</a> used by ListNotifications).
+    // The caller is always additionally scoped to their own notifications server-side.
+    NotificationFilter notification_filter = 1;
+
+    // When true, the currently-stored matching notifications are replayed first (oldest first) before the
+    // stream switches to pushing only newly-created notifications. When false (the default) only
+    // notifications created after the stream opened are pushed.
+    bool include_existing = 2;
 }
 
 // Key-Value pair message, where the value can be one of various types (int, float, double, string, etc.).
