@@ -2,6 +2,27 @@
 
 *****************
 
+## Release ONDEWO NLU API 7.0.0
+
+### Breaking Changes
+
+* [[OND211-2418]](https://ondewo.atlassian.net/browse/OND211-2418) `user.proto`: The `Login` RPC and its `LoginRequest` / `LoginResponse` messages are removed. Authentication is Keycloak-only: obtain an access token from Keycloak and send it as the `Authorization: Bearer <token>` header on every call. The RPC had already stopped authenticating anyone — the server rejected every call with `UNIMPLEMENTED` and a message pointing at Keycloak — so it returned an `auth_token` that no request path would accept. `POST /v2/login` is gone with it.
+
+### Migration Guide
+
+* Replace `Users.Login` with a Keycloak token request. The ONDEWO clients do this for you: construct the client with `keycloak_url`, `realm`, `client_id`, `user_name` and `password` in the `ClientConfig` and it mints and refreshes the token itself.
+* The identity used must be exempt from 2FA, because the token is obtained with a non-interactive password grant. Create one with `CreateProjectTechnicalUser` and pass its `username` (not an e-mail).
+* `CheckLogin` is **not** affected and remains the way to probe whether a token is still valid.
+
+### Improvements
+
+* [[OND211-2418]](https://ondewo.atlassian.net/browse/OND211-2418) `operations.proto`: add remote-operation container-logs endpoints — `StreamRemoteOperationContainerLogs` (server-stream), `GetRemoteOperationContainerLogs` (time-window / level / regex / max-lines query) and `GetRemoteOperationContainerStatus` (lifecycle + health).
+* [[OND211-2418]](https://ondewo.atlassian.net/browse/OND211-2418) `session.proto`: add an enterprise user-feedback system on the `Sessions` service. New `SessionFeedback` message (thumbs `FeedbackRating` + optional `score` / `categorical_value` / `comment`, `FeedbackAuthorType` for authenticated reviewers vs anonymous end-users, and forensic context ids pinning the exact session step), full CRUD RPCs (`AddSessionFeedback`, `AddSessionStepFeedback`, `GetSessionFeedback`, `UpdateSessionFeedback`, `DeleteSessionFeedback`, `ListSessionFeedback`, `ListSessionFeedbackOfAllSessions`) and analytics RPCs (`GetFeedbackStatistics`, `GetFeedbackStatisticsTimeSeries`). Feedback can be given for a whole session and for each single session step.
+* [[OND211-2418]](https://ondewo.atlassian.net/browse/OND211-2418) `user.proto` / `common.proto`: complete the notification management API on the `Users` service. The pre-existing `ListNotifications` (with `field_mask`), `SetNotificationsFlaggedStatus` and `SetNotificationsReadStatus` are joined by full CRUD RPCs: `AddNotifications` (message already existed), `GetNotification` (with `field_mask`), `UpdateNotification` (with `update_mask` for partial updates plus a response `field_mask`) and `DeleteNotifications`. A read `field_mask` was added to `AddNotificationsRequest`, `SetNotificationsFlaggedStatusRequest` and `SetNotificationsReadStatusRequest` so every notification-returning RPC can shape its response, and the new `GetNotificationRequest`, `UpdateNotificationRequest` and `DeleteNotificationsRequest` messages were added. The `Notification` message gains a `link` field (a deep-link / route target the UI navigates to when the notification is clicked), the `NotificationOrigin` enum gains `NOTIFICATION_ORIGIN_ONDEWO_SURVEY`, and `NotificationFilter` gains a `notification_types` filter so notifications can be filtered by type.
+* [[OND211-2418]](https://ondewo.atlassian.net/browse/OND211-2418) `session.proto`: extend the feedback analytics surface for a full-fledged feedback dashboard. New `FeedbackFilter` message (filter feedback by `ratings` / `author_types` / `has_comment` / `criteria` / `language_codes` / `annotator_user_ids` / `origin_ids` / `score_min` / `score_max` / feedback-native `earliest`-`latest` window / `scope`) plus `FeedbackScope` and `FeedbackTimeGranularity` enums. `GetFeedbackStatisticsRequest`, `GetFeedbackStatisticsTimeSeriesRequest` and `ListSessionFeedbackOfAllSessionsRequest` gain a `feedback_filter`; the time-series request gains calendar `granularity` / `time_zone` / explicit `start`-`end` window (zero-filled buckets), and `FeedbackTimeSeriesBucket` gains `bucket_end`. `FeedbackStatistics` gains `unspecified_rating_count`, `scored_count`, `average_score`, and `by_origin` / `by_criterion` breakdowns; `ListSessionFeedbackOfAllSessionsRequest` gains `order_by` and the list response gains `total_count`.
+
+*****************
+
 ## Release ONDEWO NLU API 6.15.0
 
 ### New Features

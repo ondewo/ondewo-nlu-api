@@ -673,7 +673,7 @@ message LlmEvaluationFeedback {
     // Numeric score (0.0-1.0 by convention). Defaults to 0.0 (proto3 has no field
     // presence on this scalar, so an unset score and a genuine 0.0 are indistinguishable);
     // for purely categorical feedback, rely on categorical_value rather than this field.
-    double score = 4;
+    optional double score = 4;
 
     // Categorical value when applicable ("pass" | "fail" | "yes" | "no" | tier).
     string categorical_value = 5;
@@ -1475,7 +1475,7 @@ message LlmEvaluationReleaseGateThresholds {
 
     // Maximum tolerated per-criterion mean-score regression (0.0-1.0) versus
     // the baseline experiment.
-    double max_regression_per_criterion = 2;
+    optional double max_regression_per_criterion = 2;
 
     // Maximum tolerated p95 latency in seconds (requires telemetry join).
     double max_p95_latency_seconds = 3;
@@ -1498,10 +1498,10 @@ message LlmEvaluationReleaseGateSafetyConfig {
     repeated string evaluator_names = 3;
 
     // Maximum tolerated mean toxicity score (0.0-1.0).
-    double max_toxicity = 4;
+    optional double max_toxicity = 4;
 
     // Maximum tolerated mean bias score (0.0-1.0).
-    double max_bias = 5;
+    optional double max_bias = 5;
 }
 
 // A release gate: a named set of thresholds over evaluator scores, regression
@@ -3406,7 +3406,7 @@ message LlmEvaluationOnlineConfig {
 
     // Score cutoff (0.0-1.0). Scored steps whose aggregate score is below this
     // threshold are enqueued into the annotation queue. Defaults to 0.5.
-    double fail_threshold = 8;
+    optional double fail_threshold = 8;
 
     // Settle window in seconds: the worker only considers steps older than this,
     // so per-step telemetry has landed before scoring. Defaults to 30.

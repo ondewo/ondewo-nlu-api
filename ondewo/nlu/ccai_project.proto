@@ -322,10 +322,10 @@ message CcaiService {
     string modified_by = 22;
 
     // Optional. The headers of the request message
-    optional google.protobuf.Struct headers = 23;
+    google.protobuf.Struct headers = 23;
 
     // Provider of the ccai service
-    optional CcaiServiceProvider ccai_service_provider = 24;
+    CcaiServiceProvider ccai_service_provider = 24;
 
     // Index indicating the hierarchical position of a service within the service hierarchy.
     // The index follows a tree-like structure, where each level of depth is separated by a &quot;_&quot;.
@@ -348,7 +348,7 @@ message CcaiService {
     // Service B and C will be executed in parallel and the Service A receives both results of service B and C.
     // The variable for the return value of a service is {{OUTPUT_SERVICE_service_hierarchy}}. So in the example
     // above the outputs of the services are {{OUTPUT_SERVICE_1}}, {{OUTPUT_SERVICE_1_1}}, and {{OUTPUT_SERVICE_1_2}}.
-    optional string service_hierarchy = 25;
+    string service_hierarchy = 25;
 
 }
 
@@ -529,17 +529,17 @@ message GetCcaiProjectRequest{
     string name = 1;
 
     // Optional. Specify the view of the returned CcaiProject (full view by default)
-    optional CcaiProjectView ccai_project_view = 2;
+    CcaiProjectView ccai_project_view = 2;
 
     // Filter which services should be included in the returned CcaiProject
-    optional CcaiServiceFilter ccai_service_filter = 3;
+    CcaiServiceFilter ccai_service_filter = 3;
 
     // Required. The nlu agent project of this CcaiProject.
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     string nlu_project_name = 4;
 
     // Optional. The mask to control which fields gets returned.
-    optional google.protobuf.FieldMask field_mask = 5;
+    google.protobuf.FieldMask field_mask = 5;
 
 }
 
@@ -555,7 +555,7 @@ message GetCcaiServiceRequest{
     string nlu_project_name = 4;
 
     // Optional. The mask to control which fields gets returned.
-    optional google.protobuf.FieldMask field_mask = 5;
+    google.protobuf.FieldMask field_mask = 5;
 
 }
 
@@ -567,11 +567,11 @@ message ListCcaiProjectsRequest {
     CcaiProjectView ccai_project_view = 1;
 
     // Filter which services should be included in the CcaiProject
-    optional CcaiServiceFilter ccai_service_filter = 2;
+    CcaiServiceFilter ccai_service_filter = 2;
 
     // Optional. Field to define the sorting of the list of CCAI service projects in the response.
     // If not specified, the default behavior is to have no sorting.
-    optional CcaiProjectSorting ccai_project_sorting = 3;
+    CcaiProjectSorting ccai_project_sorting = 3;
 
     // Optional. The next_page_token value returned from a previous list request.
     // Example: &quot;current_index-1--page_size-20&quot;
@@ -604,7 +604,7 @@ message ListCcaiProjectsRequest {
     //   <li>&quot;current_index1--page_size-20&quot;</li>
     //   <li>&quot;current_index-1--page_size--20&quot;</li>
     // </ul>
-    optional string page_token = 4;
+    string page_token = 4;
 
 
     // Required. The nlu agent project of this CcaiProject.
@@ -612,7 +612,7 @@ message ListCcaiProjectsRequest {
     string nlu_project_name = 5;
 
     // Optional. The mask to control which fields gets returned.
-    optional google.protobuf.FieldMask field_mask = 6;
+    google.protobuf.FieldMask field_mask = 6;
 
 }
 
@@ -653,10 +653,10 @@ message CcaiProjectSorting {
     }
 
     // sorting field for ccai projects sorting
-    optional CcaiProjectSortingField sorting_field = 1;
+    CcaiProjectSortingField sorting_field = 1;
 
     // Sorting mode
-    optional SortingMode sorting_mode = 2;
+    SortingMode sorting_mode = 2;
 
 }
 
@@ -699,10 +699,10 @@ message UpdateCcaiProjectRequest{
     CcaiProject ccai_project = 1;
 
     // Filter which services should be updated in the CcaiProject
-    optional CcaiServiceFilter ccai_service_filter = 2;
+    CcaiServiceFilter ccai_service_filter = 2;
 
     // Optional. The mask to control which fields get updated.
-    optional google.protobuf.FieldMask update_mask = 3;
+    google.protobuf.FieldMask update_mask = 3;
 
     // Required. The nlu agent project of this CcaiProject.
     // Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>

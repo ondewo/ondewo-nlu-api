@@ -16,13 +16,17 @@ export
 
 # MUST BE THE SAME AS API in Mayor and Minor Version Number
 # example: API 2.9.0 --> Client 2.9.X
-ONDEWO_NLU_API_VERSION=6.15.0
+ONDEWO_NLU_API_VERSION=7.0.0
 
 # You need to setup an access token at https://github.com/settings/tokens - permissions are important
 GITHUB_GH_TOKEN?=ENTER_YOUR_TOKEN_HERE
 
+# Terminate on the ***** separator that delimits release entries, NOT on /\*\*/ — that matched the first
+# markdown **bold** span inside the entry and silently truncated the notes there. It was correct only while
+# no entry used inline bold; 7.0.0 is the first that does, and every bullet after the first bold one was
+# dropped from `gh release create -n "$(CURRENT_RELEASE_NOTES)"` with no error.
 CURRENT_RELEASE_NOTES=`cat RELEASE.md \
-	| perl -ne 'print if /Release ONDEWO NLU API ${ONDEWO_NLU_API_VERSION}/../\*\*/'`
+	| perl -ne 'print if /Release ONDEWO NLU API ${ONDEWO_NLU_API_VERSION}/../^\*{5}/'`
 
 GH_REPO="https://github.com/ondewo/ondewo-nlu-api"
 DEVOPS_ACCOUNT_GIT="ondewo-devops-accounts"
@@ -34,21 +38,13 @@ IMAGE_UTILS_NAME=ondewo-nlu-api-utils:${ONDEWO_NLU_API_VERSION}
 #       ONDEWO Standard Make Targets
 ########################################################
 
-setup_developer_environment_locally: install_python_requirements install_precommit_hooks install_nvm ## Sets up local development environment !! Forcefully closes current terminal
+setup_developer_environment_locally: install_precommit_hooks install_nvm ## Sets up local development environment !! Forcefully closes current terminal
 
 install_nvm: ## Install NVM, node and npm !! Forcefully closes current terminal
 	@curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
 	@sh install_nvm.sh
 	$(eval PID:=$(shell ps -ft $(ps | tail -1 | cut -c 8-13) | head -2 | tail -1 | cut -c 1-8))
 	@node --version & npm --version || (kill -KILL ${PID})
-
-install_python_requirements: ## Installs python requirements flak8 and mypy
-	wget -q https://raw.githubusercontent.com/ondewo/ondewo-nlu-client-python/master/requirements.txt -O requirements.txt
-	wget -q https://raw.githubusercontent.com/ondewo/ondewo-nlu-client-python/master/requirements-dev.txt -O requirements-dev.txt
-	wget -q https://raw.githubusercontent.com/ondewo/ondewo-nlu-client-python/master/.flake8 -O .flake8
-	wget -q https://raw.githubusercontent.com/ondewo/ondewo-nlu-client-python/master/mypy.ini -O mypy.ini
-	pip install -r requirements.txt
-	pip install -r requirements-dev.txt
 
 install_precommit_hooks: ## Installs pre-commit hooks and sets them up for the repo
 	pip install pre-commit
@@ -57,20 +53,6 @@ install_precommit_hooks: ## Installs pre-commit hooks and sets them up for the r
 
 precommit_hooks_run_all_files: ## Runs all pre-commit hooks on all files and not just the changed ones
 	pre-commit run --all-file
-
-flake8: ## Runs flake8
-	flake8 --config .flake8 .
-
-mypy: ## Run mypy static code checking
-	@echo "---------------------------------------------"
-	@echo "START: Run mypy in pre-commit hook ..."
-	pre-commit run mypy --all-files
-	@echo "DONE: Run mypy in pre-commit hook."
-	@echo "---------------------------------------------"
-	@echo "START: Run mypy directly ..."
-	mypy --config-file=mypy.ini .
-	@echo "DONE: Run mypy directly"
-	@echo "---------------------------------------------"
 
 help: ## Print usage info about help targets
 	# (first comment after target starting with double hashes ##)
@@ -123,14 +105,11 @@ githubio_logic: | githubio_logic_pre
 	@git branch | grep "*" | grep -q "master" || (echo "Not on master branch"  & rm -rf ondewo.github.io && exit 1)
 	@! cat ondewo.github.io/data.js | perl -ne "print if /name\: '${REPO_NAME_UPPER}'/../end\: ''/" | grep -q "number: '${ONDEWO_NLU_API_VERSION}'" || (echo "Already Released" && exit 1)
 	$(eval VERSION_LINE:= $(shell cat -n ondewo.github.io/data.js | perl -ne "print if /name\: '${REPO_NAME_UPPER}'/../end\: ''/" | grep "versions: " -A 1 | tail -1 | grep -o -E '[0-9]+' | head -1 | perl -pe 's/^0+//'))
-	$(eval TEMP_TEXT:= $(shell cat ondewo.github.io/script_object.txt | perl -pe "s/VERSION/${ONDEWO_NLU_API_VERSION}/g; s/TECHNOLOGY/${REPO_NAME}/g"))
-	@perl -i -pe 'print "${TEMP_TEXT}\n" if $$. == ${VERSION_LINE}' ondewo.github.io/data.js
+	@TEMP_TEXT="$$(cat ondewo.github.io/script_object.txt | perl -pe 's/VERSION/${ONDEWO_NLU_API_VERSION}/g; s/TECHNOLOGY/${REPO_NAME}/g')" perl -i -pe 'print "$$ENV{TEMP_TEXT}\n" if $$. == ${VERSION_LINE}' ondewo.github.io/data.js
 	@npm install prettier && cd ondewo.github.io && npx prettier -w --single-quote data.js
 	$(eval DOCS_DIR:=ondewo.github.io/docs/ondewo-${REPO_NAME}-api/${ONDEWO_NLU_API_VERSION})
 	$(eval HEADER_LINE:= $(shell cat ${DOCS_DIR}/index.html | grep -n "${REPO_NAME_UPPER} ${ONDEWO_NLU_API_VERSION} Documentation" | grep -o -E '[0-9]+' | head -1 | perl -pe 's/^0+//'))
-	$(eval TEMP_IMG:= $(shell cat  ondewo.github.io/script_image.txt))
-	$(eval TEMP_CALC:= $(shell expr ${HEADER_LINE} ))
-	perl -i -pe 'print "${TEMP_IMG}\n" if $$. == ${TEMP_CALC}' ${DOCS_DIR}/index.html
+	@TEMP_IMG="$$(cat ondewo.github.io/script_image.txt)" perl -i -pe 'print "$$ENV{TEMP_IMG}\n" if $$. == ${HEADER_LINE}' ${DOCS_DIR}/index.html
 	head -30 ${DOCS_DIR}/index.html
 	cat ondewo.github.io/data.js | perl -ne "print if /name\: '${REPO_NAME_UPPER}'/../end\: ''/"
 	@git -C ondewo.github.io status
@@ -212,9 +191,15 @@ release_all_clients: ## Release all clients IN PARALLEL; one failing client does
 
 GENERIC_CLIENT?=
 RELEASEMD?=
+# The section heading is driven by GENERIC_RELEASE_SECTION so a breaking API release does not publish five
+# client majors under "Improvements". On a major bump, override it and describe the break:
+#   make release_all_clients GENERIC_RELEASE_SECTION='Breaking Changes' \
+#     GENERIC_RELEASE_EXTRA='* The `Login` RPC and its messages are removed — authenticate via Keycloak. \n'
+GENERIC_RELEASE_SECTION?=Improvements
+GENERIC_RELEASE_EXTRA?=
 GENERIC_RELEASE_NOTES="\n***************** \n\\\#\\\# Release ONDEWO NLU REPONAME Client ${ONDEWO_NLU_API_VERSION} \n \
-	\n\\\#\\\#\\\# Improvements \n \
-	* Tracking API Version [${ONDEWO_NLU_API_VERSION}](https://github.com/ondewo/ondewo-nlu-api/releases/tag/${ONDEWO_NLU_API_VERSION}) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) ) \n"
+	\n\\\#\\\#\\\# ${GENERIC_RELEASE_SECTION} \n \
+	* Tracking API Version [${ONDEWO_NLU_API_VERSION}](https://github.com/ondewo/ondewo-nlu-api/releases/tag/${ONDEWO_NLU_API_VERSION}) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) ) \n ${GENERIC_RELEASE_EXTRA}"
 
 
 release_client: ## Generic Function to Release a Client
@@ -233,7 +218,16 @@ release_client: ## Generic Function to Release a Client
 	@! git -C ${REPO_DIR} branch -a | grep -q ${ONDEWO_NLU_API_VERSION} || (echo "Already Released ${ONDEWO_NLU_API_VERSION} \n\n\n"  && touch .already_released_marker-${REPO_NAME} && rm -rf ${REPO_DIR} && rm -f temp-notes-${REPO_NAME} && exit 1)
 
 # Change Version Number and RELEASE NOTES
-	cd ${REPO_DIR} && perl -i -ne 'print; if(/Release History/){open my $$fh,"<","../temp-notes-${REPO_NAME}"; print while <$$fh>; close $$fh}' ${RELEASEMD}
+# Only insert the generated boilerplate when the client does not already document this version. A client
+# whose RELEASE.md was written by hand ahead of the release (7.0.0: python, angular, js) would otherwise
+# get a SECOND "Release ONDEWO NLU <Name> Client <VERSION>" heading, which (a) buries the curated entry
+# because the notes slice below takes the FIRST match and (b) trips markdownlint MD025/MD024 — neither of
+# which auto-fixes, so the client's own pre-commit fails the build and the release aborts.
+	cd ${REPO_DIR} && if grep -qE "^#+ Release ONDEWO NLU ${UPPER_REPO_NAME} Client ${ONDEWO_NLU_API_VERSION}$$" ${RELEASEMD}; then \
+		echo "${RELEASEMD} already documents ${ONDEWO_NLU_API_VERSION} - keeping the curated entry, not inserting the generated notes"; \
+	else \
+		perl -i -ne 'print; if(/Release History/){open my $$fh,"<","../temp-notes-${REPO_NAME}"; print while <$$fh>; close $$fh}' ${RELEASEMD}; \
+	fi
 	cd ${REPO_DIR} && head -20 ${RELEASEMD}
 	cd ${REPO_DIR} && perl -i -pe 's/ONDEWO_NLU_VERSION.*=.*/ONDEWO_NLU_VERSION=${ONDEWO_NLU_API_VERSION}/' Makefile
 	cd ${REPO_DIR} && perl -i -pe 's/ONDEWO_PROTO_COMPILER_GIT_BRANCH.*=.*/ONDEWO_PROTO_COMPILER_GIT_BRANCH=tags\/${PROTO_COMPILER}/' Makefile
