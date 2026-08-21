@@ -2,6 +2,17 @@
 
 *****************
 
+## Release ONDEWO NLU API 7.1.0
+
+### New Features
+
+* [[OND211-2381]](https://ondewo.atlassian.net/browse/OND211-2381) `rag.proto`: CSS-selector content scoping for the crawler. New `RagCrawlerContentScope` (`include_selectors`, `exclude_selectors`) on `RagCrawlerResultsConfig.content_scope` (field 3) scopes markdown extraction to chosen page elements and drops navigation/footer/sidebar/internal blocks (bare tag names like `nav`/`footer` are valid selectors). Independent of density pruning; unset means the whole page is used.
+* [[OND211-2381]](https://ondewo.atlassian.net/browse/OND211-2381) `rag.proto`: Configurable density pruning. New `RagCrawlerDensityPruning` (`is_active`, `threshold`, `threshold_type`, `min_word_threshold`) on `RagCrawlerResultsConfig.density_pruning` (field 4) exposes the previously-hardcoded Crawl4AI `PruningContentFilter` parameters (defaults `true` / `0.5` / `FIXED` / `10`) and adds the `RagCrawlerPruningThresholdType` enum. Scoping and pruning are independent — either, both, or neither may be used.
+* [[OND211-2381]](https://ondewo.atlassian.net/browse/OND211-2381) `rag.proto`: HTTP status gate. New `RagCrawlerStatusFilter` (`is_active`, `accepted_status_codes`) on `RagCrawlerConfig.status_filter` (field 4) keeps only pages whose HTTP status is accepted (empty while active = 2xx only), preventing ingestion of soft-error (404/500) navigation-shell pages. Default inactive.
+* [[OND211-2381]](https://ondewo.atlassian.net/browse/OND211-2381) `rag.proto`: URL-case normalization. New `RagCrawlerDeepCrawlerConfig.normalize_url_case` (field 6) optionally lowercases the URL path during link discovery/deduplication to collapse case-variant duplicates (e.g. `/tag/reifen` vs `/tag/Reifen`). Default `false`, since URLs are case-sensitive in general.
+
+*****************
+
 ## Release ONDEWO NLU API 7.0.0
 
 ### Breaking Changes
@@ -20,17 +31,6 @@
 * [[OND211-2418]](https://ondewo.atlassian.net/browse/OND211-2418) `session.proto`: add an enterprise user-feedback system on the `Sessions` service. New `SessionFeedback` message (thumbs `FeedbackRating` + optional `score` / `categorical_value` / `comment`, `FeedbackAuthorType` for authenticated reviewers vs anonymous end-users, and forensic context ids pinning the exact session step), full CRUD RPCs (`AddSessionFeedback`, `AddSessionStepFeedback`, `GetSessionFeedback`, `UpdateSessionFeedback`, `DeleteSessionFeedback`, `ListSessionFeedback`, `ListSessionFeedbackOfAllSessions`) and analytics RPCs (`GetFeedbackStatistics`, `GetFeedbackStatisticsTimeSeries`). Feedback can be given for a whole session and for each single session step.
 * [[OND211-2418]](https://ondewo.atlassian.net/browse/OND211-2418) `user.proto` / `common.proto`: complete the notification management API on the `Users` service. The pre-existing `ListNotifications` (with `field_mask`), `SetNotificationsFlaggedStatus` and `SetNotificationsReadStatus` are joined by full CRUD RPCs: `AddNotifications` (message already existed), `GetNotification` (with `field_mask`), `UpdateNotification` (with `update_mask` for partial updates plus a response `field_mask`) and `DeleteNotifications`. A read `field_mask` was added to `AddNotificationsRequest`, `SetNotificationsFlaggedStatusRequest` and `SetNotificationsReadStatusRequest` so every notification-returning RPC can shape its response, and the new `GetNotificationRequest`, `UpdateNotificationRequest` and `DeleteNotificationsRequest` messages were added. The `Notification` message gains a `link` field (a deep-link / route target the UI navigates to when the notification is clicked), the `NotificationOrigin` enum gains `NOTIFICATION_ORIGIN_ONDEWO_SURVEY`, and `NotificationFilter` gains a `notification_types` filter so notifications can be filtered by type.
 * [[OND211-2418]](https://ondewo.atlassian.net/browse/OND211-2418) `session.proto`: extend the feedback analytics surface for a full-fledged feedback dashboard. New `FeedbackFilter` message (filter feedback by `ratings` / `author_types` / `has_comment` / `criteria` / `language_codes` / `annotator_user_ids` / `origin_ids` / `score_min` / `score_max` / feedback-native `earliest`-`latest` window / `scope`) plus `FeedbackScope` and `FeedbackTimeGranularity` enums. `GetFeedbackStatisticsRequest`, `GetFeedbackStatisticsTimeSeriesRequest` and `ListSessionFeedbackOfAllSessionsRequest` gain a `feedback_filter`; the time-series request gains calendar `granularity` / `time_zone` / explicit `start`-`end` window (zero-filled buckets), and `FeedbackTimeSeriesBucket` gains `bucket_end`. `FeedbackStatistics` gains `unspecified_rating_count`, `scored_count`, `average_score`, and `by_origin` / `by_criterion` breakdowns; `ListSessionFeedbackOfAllSessionsRequest` gains `order_by` and the list response gains `total_count`.
-
-*****************
-
-## Release ONDEWO NLU API 6.15.0
-
-### New Features
-
-* [[OND211-2381]](https://ondewo.atlassian.net/browse/OND211-2381) `rag.proto`: CSS-selector content scoping for the crawler. New `RagCrawlerContentScope` (`include_selectors`, `exclude_selectors`) on `RagCrawlerResultsConfig.content_scope` (field 3) scopes markdown extraction to chosen page elements and drops navigation/footer/sidebar/internal blocks (bare tag names like `nav`/`footer` are valid selectors). Independent of density pruning; unset means the whole page is used.
-* [[OND211-2381]](https://ondewo.atlassian.net/browse/OND211-2381) `rag.proto`: Configurable density pruning. New `RagCrawlerDensityPruning` (`is_active`, `threshold`, `threshold_type`, `min_word_threshold`) on `RagCrawlerResultsConfig.density_pruning` (field 4) exposes the previously-hardcoded Crawl4AI `PruningContentFilter` parameters (defaults `true` / `0.5` / `FIXED` / `10`) and adds the `RagCrawlerPruningThresholdType` enum. Scoping and pruning are independent — either, both, or neither may be used.
-* [[OND211-2381]](https://ondewo.atlassian.net/browse/OND211-2381) `rag.proto`: HTTP status gate. New `RagCrawlerStatusFilter` (`is_active`, `accepted_status_codes`) on `RagCrawlerConfig.status_filter` (field 4) keeps only pages whose HTTP status is accepted (empty while active = 2xx only), preventing ingestion of soft-error (404/500) navigation-shell pages. Default inactive.
-* [[OND211-2381]](https://ondewo.atlassian.net/browse/OND211-2381) `rag.proto`: URL-case normalization. New `RagCrawlerDeepCrawlerConfig.normalize_url_case` (field 6) optionally lowercases the URL path during link discovery/deduplication to collapse case-variant duplicates (e.g. `/tag/reifen` vs `/tag/Reifen`). Default `false`, since URLs are case-sensitive in general.
 
 *****************
 
