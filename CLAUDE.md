@@ -262,6 +262,61 @@ Pre-commit here uses only the language-agnostic hooks — **markdownlint-cli2, p
   7.0.0 is the first that does. Now fixed to `/^\*{5}/`. If you add a bullet to RELEASE.md and it does not
   appear in the GitHub release, check that pattern first — `gh release create` reports no error.
 
+## GitHub Actions — `Generate Documentation` is a REQUIRED gate
+
+`.github/workflows/generate-doc-and-deploy.yaml` (note `.yaml`, and it is the **only** workflow file)
+runs on every push to `master`, every PR against `master`, and `workflow_dispatch`. It is a gate, not
+advisory: it regenerates `docs/` from the protos and **commits the result back to `master`**, so a
+broken run means the published API docs stop tracking the `.proto` files. Three steps, in order:
+
+1. `actions/checkout@v5`.
+2. `ondewo/ondewo-protoc-gen-doc-action@master` — a **docker** action: it builds its own `Dockerfile`
+   (`FROM pseudomuto/protoc-gen-doc`) and runs `entrypoint.sh` with the default inputs `html,md` and
+   `index`, i.e. `protoc` once per format.
+3. `Deploy 🚀` — `JamesIves/github-pages-deploy-action@v4`, `branch: master`, `folder: docs`,
+   `target-folder: docs`, guarded by `if: ${{ !env.ACT }}`.
+
+**Reproduce steps 1–2 locally with `make build_docs`.** It clones the action, builds the same image and
+runs the same entrypoint arguments, so it is the workflow rather than an approximation of it:
+
+```bash
+make build_docs       # clones .tmp-protoc-gen-doc-action, builds it, runs `html,md index`
+git status --porcelain  # MUST be empty — see below
+make clean_docs_builder
+```
+
+The raw form the action itself executes, for when you need to see it:
+
+```bash
+protoc -I. -Igoogleapis --doc_opt=/resources/templates/<fmt>.tmpl,index.<fmt> \
+  --doc_out=docs $(find ondewo -name '*.proto' | sort)
+```
+
+- **`git status --porcelain` after `make build_docs` IS the check.** Because step 3 commits generated
+  docs back to `master`, `docs/index.html`, `docs/index.md` and `docs/style.css` are build artifacts
+  that happen to be tracked — never hand-edit them, CI overwrites them. A dirty tree after a rebuild
+  means the committed docs no longer match the protos. Verified byte-identical at `e1b39db`.
+- **The doc set is FILESYSTEM-SCANNED (`find ondewo -name '*.proto'`), and that fails OPEN.** Only
+  files under `ondewo/` are documented; `google/` is import-path input via `-I.` and gets no section of
+  its own (confirmed: `index.md` has 20 file sections, all `ondewo/nlu/*` plus `ondewo/qa/qa.proto`,
+  and no `## google/` heading). So a `.proto` added OUTSIDE `ondewo/` is silently absent from the docs
+  and the workflow still goes **green** — the run cannot tell you that a file vanished from the report.
+  Put new protos under `ondewo/`, and check the new `## <path>` heading actually appears in `index.md`.
+- **`googleapis: warning: directory does not exist.` twice per run is EXPECTED, not a failure.** The
+  action's entrypoint passes `-Igoogleapis`; this repo has no such directory, so protoc warns once per
+  format and exits `0`. Do not "fix" it here — the `-I` list lives in the action repo, not this one.
+- **`--user "$(id -u):$(id -g)"` in `build_docs` is load-bearing.** GitHub Actions runs a docker action
+  as root; a raw root `docker run` of the same entrypoint leaves `docs/style.css` owned by `root:root`
+  in your worktree (it is the file the entrypoint `cp -r /resources/html/*` recreates), and you then
+  need `sudo` to clean up. Reproduced twice — keep the flag if you touch that recipe.
+- **There is no Python gate here, and no `uv`.** No `pyproject.toml`, no `uv.lock`, no ruff / mypy /
+  pytest / coverage threshold — so the sibling repos' `uv run --frozen …` fast loop has no analogue in
+  this repo and there is no stale lock to catch. The only local gates are `make build_docs` and
+  `make precommit_hooks_run_all_files`.
+- **Step 3 cannot be run locally, by design.** It pushes to `master`, and its `!env.ACT` guard exists so
+  a local `act` run stops after doc generation. Never reproduce it by hand.
+- History as of `e1b39db`: 22 runs, **22 successes**, PR runs included; run #21 is this commit.
+
 ## Jenkins — never trigger a multibranch scan or branch indexing
 
 **NEVER trigger a Jenkins multibranch scan or branch indexing.** Do not call a multibranch/folder job's
