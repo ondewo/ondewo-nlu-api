@@ -10969,9 +10969,9 @@ Deep crawler options grouped under one config node.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | is_active | [bool](#bool) |  | Optional. Enable deep crawler behavior (link following beyond seeds). Default <code>false</code>. If <code>false</code>, <code>config</code> is ignored. |
-| crawl_strategy | [RagCrawlerCrawlStrategy](#ondewo.nlu.RagCrawlerCrawlStrategy) |  | Optional. Crawl traversal strategy. Default <code>RAG_CRAWLER_CRAWL_STRATEGY_BEST_FIRST</code>. |
-| max_depth | [int32](#int32) | optional | Optional. Maximum link depth from seed URLs, counted from the nearest seed. <code>0</code> means unlimited depth. |
-| max_pages | [int32](#int32) |  | Optional. Hard cap on pages fetched successfully in this run; <code>0</code> means unlimited. |
+| crawl_strategy | [RagCrawlerCrawlStrategy](#ondewo.nlu.RagCrawlerCrawlStrategy) |  | Optional. Crawl traversal strategy. BFS is often best for broad site coverage; DFS for deep section traversal. Default <code>RAG_CRAWLER_CRAWL_STRATEGY_BFS</code>. |
+| max_depth | [int32](#int32) | optional | Optional. Maximum link depth from seed URLs. <code>0</code> usually means only seed pages. |
+| max_pages | [int32](#int32) |  | Optional. Hard cap on total processed pages for this run. |
 | deep_crawler_filters | [RagCrawlerFilters](#ondewo.nlu.RagCrawlerFilters) |  | Optional. URL and domain restrictions. |
 | normalize_url_case | [bool](#bool) | optional | Optional. Normalize URL case (lowercase the path) during link discovery/deduplication. |
 
@@ -11033,13 +11033,13 @@ and domains to be excluded in the deep crawl or extraction of pages to be crawle
 | ----- | ---- | ----- | ----------- |
 | allowed_domains | [string](#string) | repeated | Optional. Domain allow-list (host-level gating). |
 | disallowed_domains | [string](#string) | repeated | Optional. Domain block-list. |
-| allow_internal_links | [bool](#bool) |  | **Deprecated.** Deprecated. Has never had any effect. |
-| allow_external_links | [bool](#bool) |  | Optional. Include external links, that is links outside the crawled site's registrable domain. |
-| allow_social_media_links | [bool](#bool) |  | **Deprecated.** Deprecated. Has never had any effect. |
-| allowed_regex | [string](#string) | repeated | Optional. URL allow-list by regular expression. |
-| disallowed_regex | [string](#string) | repeated | Optional. URL block-list by regular expression. |
-| allowed_paths | [string](#string) | repeated | **Deprecated.** Deprecated. Use <code>allowed_regex</code>, which can express everything this field could. |
-| disallowed_paths | [string](#string) | repeated | **Deprecated.** Deprecated. Use <code>disallowed_regex</code>. |
+| allow_internal_links | [bool](#bool) |  | Optional. Include internal links. |
+| allow_external_links | [bool](#bool) |  | Optional. Include external links. |
+| allow_social_media_links | [bool](#bool) |  | Optional. Include social media links. |
+| allowed_regex | [string](#string) | repeated | Optional. Path allow-list by regular expression. |
+| disallowed_regex | [string](#string) | repeated | Optional. Path block-list by regular expression. |
+| allowed_paths | [string](#string) | repeated | Optional. Explicit path allow-list. |
+| disallowed_paths | [string](#string) | repeated | Optional. Explicit path block-list. |
 
 
 
@@ -11140,11 +11140,10 @@ similar to Crawl4AI markdown/output-generation toggles.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| inject_frontmatter | [bool](#bool) | optional | Optional. Prepend the page's extracted metadata to the markdown as a YAML frontmatter block. |
+| inject_frontmatter | [bool](#bool) | optional | Optional. Inject YAML frontmatter into markdown output. If the content is HTML based, it will automatically be converted to markdown. Optionally, you can inject YAML frontmatter into the markdown output. Default <code>true</code>. |
 | meta_data_extractors | [RagCrawlerMetaDataExtractor](#ondewo.nlu.RagCrawlerMetaDataExtractor) | repeated | Optional. Metadata extractors. |
 | content_scope | [RagCrawlerContentScope](#ondewo.nlu.RagCrawlerContentScope) |  | Optional. CSS-selector based content scoping for markdown extraction. |
 | density_pruning | [RagCrawlerDensityPruning](#ondewo.nlu.RagCrawlerDensityPruning) |  | Optional. Density-based content pruning (Crawl4AI PruningContentFilter). If not set the <code>RagCrawlerDensityPruning</code> defaults are used. |
-| discovery_only_url_regex | [string](#string) | repeated | Optional. Regular expressions matched against a crawled page's URL. A page whose URL matches any of these is still fetched and its links are followed for discovery, but it is NOT converted into a document |
 
 
 
@@ -11161,8 +11160,6 @@ Timeout settings for crawler operations.
 | ----- | ---- | ----- | ----------- |
 | page_load_timeout_seconds | [int32](#int32) | optional | Optional. Page load/render timeout in seconds. |
 | retry_max_attempts | [int32](#int32) | optional | Optional. Maximum retry attempts per page source. |
-| retry_backoff_seconds | [float](#float) | optional | Optional. Base for the per-URL retry linear backoff, in seconds (default: 2). |
-| max_stall_seconds | [int32](#int32) | optional | Optional. Abort the crawl run when no page has been fetched successfully for this many seconds (default: 600). <code>0</code> disables the bound. |
 
 
 

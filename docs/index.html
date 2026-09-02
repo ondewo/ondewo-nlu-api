@@ -33912,21 +33912,24 @@ Default <code>false</code>. If <code>false</code>, <code>config</code> is ignore
                   <td>crawl_strategy</td>
                   <td><a href="#ondewo.nlu.RagCrawlerCrawlStrategy">RagCrawlerCrawlStrategy</a></td>
                   <td></td>
-                  <td><p>Optional. Crawl traversal strategy. Default <code>RAG_CRAWLER_CRAWL_STRATEGY_BEST_FIRST</code>. </p></td>
+                  <td><p>Optional. Crawl traversal strategy.
+BFS is often best for broad site coverage; DFS for deep section traversal.
+Default <code>RAG_CRAWLER_CRAWL_STRATEGY_BFS</code>. </p></td>
                 </tr>
               
                 <tr>
                   <td>max_depth</td>
                   <td><a href="#int32">int32</a></td>
                   <td>optional</td>
-                  <td><p>Optional. Maximum link depth from seed URLs, counted from the nearest seed. <code>0</code> means unlimited depth. </p></td>
+                  <td><p>Optional. Maximum link depth from seed URLs.
+<code>0</code> usually means only seed pages. </p></td>
                 </tr>
               
                 <tr>
                   <td>max_pages</td>
                   <td><a href="#int32">int32</a></td>
                   <td></td>
-                  <td><p>Optional. Hard cap on pages fetched successfully in this run; <code>0</code> means unlimited. </p></td>
+                  <td><p>Optional. Hard cap on total processed pages for this run. </p></td>
                 </tr>
               
                 <tr>
@@ -34061,90 +34064,54 @@ Default <code>false</code>. If <code>false</code>, <code>config</code> is ignore
                   <td>allow_internal_links</td>
                   <td><a href="#bool">bool</a></td>
                   <td></td>
-                  <td><p><strong>Deprecated.</strong> Deprecated. Has never had any effect. </p></td>
+                  <td><p>Optional. Include internal links. </p></td>
                 </tr>
               
                 <tr>
                   <td>allow_external_links</td>
                   <td><a href="#bool">bool</a></td>
                   <td></td>
-                  <td><p>Optional. Include external links, that is links outside the crawled site's registrable domain. </p></td>
+                  <td><p>Optional. Include external links. </p></td>
                 </tr>
               
                 <tr>
                   <td>allow_social_media_links</td>
                   <td><a href="#bool">bool</a></td>
                   <td></td>
-                  <td><p><strong>Deprecated.</strong> Deprecated. Has never had any effect. </p></td>
+                  <td><p>Optional. Include social media links. </p></td>
                 </tr>
               
                 <tr>
                   <td>allowed_regex</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
-                  <td><p>Optional. URL allow-list by regular expression. </p></td>
+                  <td><p>Optional. Path allow-list by regular expression. </p></td>
                 </tr>
               
                 <tr>
                   <td>disallowed_regex</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
-                  <td><p>Optional. URL block-list by regular expression. </p></td>
+                  <td><p>Optional. Path block-list by regular expression. </p></td>
                 </tr>
               
                 <tr>
                   <td>allowed_paths</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
-                  <td><p><strong>Deprecated.</strong> Deprecated. Use <code>allowed_regex</code>, which can express everything this field could. </p></td>
+                  <td><p>Optional. Explicit path allow-list. </p></td>
                 </tr>
               
                 <tr>
                   <td>disallowed_paths</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
-                  <td><p><strong>Deprecated.</strong> Deprecated. Use <code>disallowed_regex</code>. </p></td>
+                  <td><p>Optional. Explicit path block-list. </p></td>
                 </tr>
               
             </tbody>
           </table>
 
-          
-            
-            
-            <h4>Fields with deprecated option</h4>
-            <table>
-              <thead>
-                <tr>
-                  <td>Name</td>
-                  <td>Option</td>
-                </tr>
-              </thead>
-              <tbody>
-              
-                <tr>
-                  <td>allow_internal_links</td>
-                  <td><p>true</p></td>
-                </tr>
-              
-                <tr>
-                  <td>allow_social_media_links</td>
-                  <td><p>true</p></td>
-                </tr>
-              
-                <tr>
-                  <td>allowed_paths</td>
-                  <td><p>true</p></td>
-                </tr>
-              
-                <tr>
-                  <td>disallowed_paths</td>
-                  <td><p>true</p></td>
-                </tr>
-              
-              </tbody>
-            </table>
-            
           
 
         
@@ -34382,7 +34349,10 @@ Source precedence: HTTP Last-Modified header, then sitemap <lastmod> fallback. <
                   <td>inject_frontmatter</td>
                   <td><a href="#bool">bool</a></td>
                   <td>optional</td>
-                  <td><p>Optional. Prepend the page's extracted metadata to the markdown as a YAML frontmatter block. </p></td>
+                  <td><p>Optional. Inject YAML frontmatter into markdown output.
+If the content is HTML based, it will automatically be converted to markdown.
+Optionally, you can inject YAML frontmatter into the markdown output.
+Default <code>true</code>. </p></td>
                 </tr>
               
                 <tr>
@@ -34405,13 +34375,6 @@ Source precedence: HTTP Last-Modified header, then sitemap <lastmod> fallback. <
                   <td></td>
                   <td><p>Optional. Density-based content pruning (Crawl4AI PruningContentFilter).
 If not set the <code>RagCrawlerDensityPruning</code> defaults are used. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>discovery_only_url_regex</td>
-                  <td><a href="#string">string</a></td>
-                  <td>repeated</td>
-                  <td><p>Optional. Regular expressions matched against a crawled page's URL. A page whose URL matches any of these is still fetched and its links are followed for discovery, but it is NOT converted into a document </p></td>
                 </tr>
               
             </tbody>
@@ -34443,21 +34406,6 @@ If not set the <code>RagCrawlerDensityPruning</code> defaults are used. </p></td
                   <td><a href="#int32">int32</a></td>
                   <td>optional</td>
                   <td><p>Optional. Maximum retry attempts per page source. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>retry_backoff_seconds</td>
-                  <td><a href="#float">float</a></td>
-                  <td>optional</td>
-                  <td><p>Optional. Base for the per-URL retry linear backoff, in seconds (default: 2). </p></td>
-                </tr>
-              
-                <tr>
-                  <td>max_stall_seconds</td>
-                  <td><a href="#int32">int32</a></td>
-                  <td>optional</td>
-                  <td><p>Optional. Abort the crawl run when no page has been fetched successfully for this many seconds (default: 600).
-<code>0</code> disables the bound. </p></td>
                 </tr>
               
             </tbody>
