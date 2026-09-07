@@ -194,12 +194,18 @@ RELEASEMD?=
 # The section heading is driven by GENERIC_RELEASE_SECTION so a breaking API release does not publish five
 # client majors under "Improvements". On a major bump, override it and describe the break:
 #   make release_all_clients GENERIC_RELEASE_SECTION='Breaking Changes' \
-#     GENERIC_RELEASE_EXTRA='* The `Login` RPC and its messages are removed — authenticate via Keycloak. \n'
+#     GENERIC_RELEASE_EXTRA='* The `Login` RPC and its messages are removed — authenticate via Keycloak.\n'
 GENERIC_RELEASE_SECTION?=Improvements
 GENERIC_RELEASE_EXTRA?=
-GENERIC_RELEASE_NOTES="\n***************** \n\\\#\\\# Release ONDEWO NLU REPONAME Client ${ONDEWO_NLU_API_VERSION} \n \
-	\n\\\#\\\#\\\# ${GENERIC_RELEASE_SECTION} \n \
-	* Tracking API Version [${ONDEWO_NLU_API_VERSION}](https://github.com/ondewo/ondewo-nlu-api/releases/tag/${ONDEWO_NLU_API_VERSION}) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) ) \n ${GENERIC_RELEASE_EXTRA}"
+# Emitted markdownlint-clean, and deliberately on ONE line. Every ` \n` used to leave a trailing space
+# on each generated line and a leading space on the list item, and make's line-continuation collapses
+# `\<newline><tab>` to a further space, so the block tripped MD009/MD007/MD022/MD012/MD032 in EVERY client and the
+# first pre-commit run of every release `Failed - files were modified by this hook`. It self-healed on
+# the re-run, but it also left the heading as `\#\# Release ... <VERSION> ` WITH a trailing space, which
+# the release_client guard below cannot match because that grep anchors on `$$` - so the duplicate-entry
+# guard only worked on entries a previous markdownlint run had already stripped. Keep this byte-identical
+# to what markdownlint normalises to: no trailing spaces, a blank line around the heading and the list.
+GENERIC_RELEASE_NOTES=\n*****************\n\n\\\#\\\# Release ONDEWO NLU REPONAME Client ${ONDEWO_NLU_API_VERSION}\n\n\\\#\\\#\\\# ${GENERIC_RELEASE_SECTION}\n\n* Tracking API Version [${ONDEWO_NLU_API_VERSION}](https://github.com/ondewo/ondewo-nlu-api/releases/tag/${ONDEWO_NLU_API_VERSION}) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )\n${GENERIC_RELEASE_EXTRA}
 
 
 release_client: ## Generic Function to Release a Client
@@ -212,7 +218,14 @@ release_client: ## Generic Function to Release a Client
 	rm -rf ${REPO_DIR}
 	rm -f build_log_${REPO_NAME}.txt
 
-	@echo ${GENERIC_RELEASE_NOTES} > temp-notes-${REPO_NAME} && perl -i -pe 's/\\//g' temp-notes-${REPO_NAME} && perl -i -pe 's/REPONAME/${UPPER_REPO_NAME}/g' temp-notes-${REPO_NAME}
+	@# printf '%b', not echo: echo appends a newline of its own on top of the trailing \n, which left a
+	@# second blank line before the previous entry's separator (markdownlint MD012 used to eat it).
+	@# Read through the environment (line 1 is a bare `export`) rather than interpolating the value into
+	@# the command text: the value used to carry its own double quotes, so a backtick in
+	@# GENERIC_RELEASE_EXTRA was command-substituted by the shell - which silently gutted this Makefile's
+	@# own documented breaking-change example, turning '* The `Login` RPC and its messages are removed'
+	@# into '* The  RPC and its messages are removed' plus a 'not found' error.
+	@printf '%b' "$$GENERIC_RELEASE_NOTES" > temp-notes-${REPO_NAME} && perl -i -pe 's/\\//g' temp-notes-${REPO_NAME} && perl -i -pe 's/REPONAME/${UPPER_REPO_NAME}/g' temp-notes-${REPO_NAME}
 	git clone ${GENERIC_CLIENT}
 # Check if Client is already uptodate with API Version
 	@! git -C ${REPO_DIR} branch -a | grep -q ${ONDEWO_NLU_API_VERSION} || (echo "Already Released ${ONDEWO_NLU_API_VERSION} \n\n\n"  && touch .already_released_marker-${REPO_NAME} && rm -rf ${REPO_DIR} && rm -f temp-notes-${REPO_NAME} && exit 1)
