@@ -10,6 +10,7 @@
 * [[OND211-2381]](https://ondewo.atlassian.net/browse/OND211-2381) `rag.proto`: deprecate redundant `allowed_paths` and `disallowed_paths` fields of `RagCrawlerFilters`
 * [[OND211-2381]](https://ondewo.atlassian.net/browse/OND211-2381) `rag.proto`: add `discovery_only_url_regex` field to `RagCrawlerResultsConfig`
 * [[OND211-2381]](https://ondewo.atlassian.net/browse/OND211-2381) `rag.proto`: add `retry_backoff_seconds` and `max_stall_seconds` fields to `RagCrawlerRetryConfig`
+* [[OND211-2381]](https://ondewo.atlassian.net/browse/OND211-2381) `rag.proto`: add `rerank_candidates`, `dedup_threshold` and `dedup_before_rerank` fields to `RagRetrievalRequest`
 
 *****************
 

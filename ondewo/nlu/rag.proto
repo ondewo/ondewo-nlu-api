@@ -1132,6 +1132,15 @@ message RagRetrievalRequest {
     // Optional. Rerank model used to refine the initial retrieval scores. If not provided, the default model is used (if one is set). If empty, the results are not reranked.
     optional string rerank_model_ccai_service_name = 16;
 
+    // Optional. Minimum 0. Number of retrieved chunks the rerank model scores (default: <code>64</code>). Only takes effect when a rerank model is used.
+    int32 rerank_candidates = 17;
+
+    // Optional. Drop a retrieved chunk whose word-shingle similarity to a better-ranked chunk reaches this threshold, between <code>0.0</code> and <code>1.0</code> (default: <code>0.0</code>).
+    optional float dedup_threshold = 18;
+
+    // Optional. Suppress near-duplicates before reranking instead of after (default: <code>false</code>).
+    optional bool dedup_before_rerank = 19;
+
 }
 
 // Response message for chunk retrieval.
