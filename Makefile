@@ -225,7 +225,12 @@ release_client: ## Generic Function to Release a Client
 	@# GENERIC_RELEASE_EXTRA was command-substituted by the shell - which silently gutted this Makefile's
 	@# own documented breaking-change example, turning '* The `Login` RPC and its messages are removed'
 	@# into '* The  RPC and its messages are removed' plus a 'not found' error.
-	@printf '%b' "$$GENERIC_RELEASE_NOTES" > temp-notes-${REPO_NAME} && perl -i -pe 's/\\//g' temp-notes-${REPO_NAME} && perl -i -pe 's/REPONAME/${UPPER_REPO_NAME}/g' temp-notes-${REPO_NAME}
+	@# The last pass normalises the file to exactly ONE trailing newline. printf '%b' adds none of its own,
+	@# so a GENERIC_RELEASE_EXTRA that does not end in \n leaves the notes without a final newline; the
+	@# perl insert below then prints its last line straight into the blank line that precedes the previous
+	@# entry's ***** separator, swallowing it - and markdownlint MD032 (blanks-around-lists) auto-fixes it
+	@# back, which is exactly the `Failed - files were modified by this hook` first run this block removed.
+	@printf '%b' "$$GENERIC_RELEASE_NOTES" > temp-notes-${REPO_NAME} && perl -i -pe 's/\\//g' temp-notes-${REPO_NAME} && perl -i -pe 's/REPONAME/${UPPER_REPO_NAME}/g' temp-notes-${REPO_NAME} && perl -0777 -i -pe 's/\n*\z/\n/' temp-notes-${REPO_NAME}
 	git clone ${GENERIC_CLIENT}
 # Check if Client is already uptodate with API Version
 	@! git -C ${REPO_DIR} branch -a | grep -q ${ONDEWO_NLU_API_VERSION} || (echo "Already Released ${ONDEWO_NLU_API_VERSION} \n\n\n"  && touch .already_released_marker-${REPO_NAME} && rm -rf ${REPO_DIR} && rm -f temp-notes-${REPO_NAME} && exit 1)
