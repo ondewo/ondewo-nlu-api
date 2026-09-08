@@ -1132,6 +1132,15 @@ message RagRetrievalRequest {
     // Optional. Rerank model used to refine the initial retrieval scores. If not provided, the default model is used (if one is set). If empty, the results are not reranked.
     optional string rerank_model_ccai_service_name = 16;
 
+    // Optional. Minimum 0. Number of retrieved chunks the rerank model scores (default: <code>64</code>). Only takes effect when a rerank model is used.
+    int32 rerank_candidates = 17;
+
+    // Optional. Drop a retrieved chunk whose word-shingle similarity to a better-ranked chunk reaches this threshold, between <code>0.0</code> and <code>1.0</code> (default: <code>0.0</code>).
+    optional float dedup_threshold = 18;
+
+    // Optional. Suppress near-duplicates before reranking instead of after (default: <code>false</code>).
+    optional bool dedup_before_rerank = 19;
+
 }
 
 // Response message for chunk retrieval.
@@ -1474,26 +1483,26 @@ message RagCrawlerFilters {
     // Optional. Domain block-list.
     repeated string disallowed_domains = 2;
 
-    // Optional. Include internal links.
-    bool allow_internal_links = 3;
+    // Deprecated. Has never had any effect.
+    bool allow_internal_links = 3 [deprecated = true];
 
-    // Optional. Include external links.
+    // Optional. Include external links, that is links outside the crawled site's registrable domain.
     bool allow_external_links = 4;
 
-    // Optional. Include social media links.
-    bool allow_social_media_links = 5;
+    // Deprecated. Has never had any effect.
+    bool allow_social_media_links = 5 [deprecated = true];
 
-    // Optional. Path allow-list by regular expression.
+    // Optional. URL allow-list by regular expression.
     repeated string allowed_regex = 6;
 
-    // Optional. Path block-list by regular expression.
+    // Optional. URL block-list by regular expression.
     repeated string disallowed_regex = 7;
 
-    // Optional. Explicit path allow-list.
-    repeated string allowed_paths = 8;
+    // Deprecated. Use <code>allowed_regex</code>, which can express everything this field could.
+    repeated string allowed_paths = 8 [deprecated = true];
 
-    // Optional. Explicit path block-list.
-    repeated string disallowed_paths = 9;
+    // Deprecated. Use <code>disallowed_regex</code>.
+    repeated string disallowed_paths = 9 [deprecated = true];
 }
 
 message RagCrawlerSeedUrlFilters {
@@ -1668,16 +1677,13 @@ message RagCrawlerDeepCrawlerConfig {
     // Default <code>false</code>. If <code>false</code>, <code>config</code> is ignored.
     bool is_active = 1;
 
-    // Optional. Crawl traversal strategy.
-    // BFS is often best for broad site coverage; DFS for deep section traversal.
-    // Default <code>RAG_CRAWLER_CRAWL_STRATEGY_BFS</code>.
+    // Optional. Crawl traversal strategy. Default <code>RAG_CRAWLER_CRAWL_STRATEGY_BEST_FIRST</code>.
     RagCrawlerCrawlStrategy crawl_strategy = 2;
 
-    // Optional. Maximum link depth from seed URLs.
-    // <code>0</code> usually means only seed pages.
+    // Optional. Maximum link depth from seed URLs, counted from the nearest seed. <code>0</code> means unlimited depth.
     optional int32 max_depth = 3;
 
-    // Optional. Hard cap on total processed pages for this run.
+    // Optional. Hard cap on pages fetched successfully in this run; <code>0</code> means unlimited.
     int32 max_pages = 4;
 
     // Optional. URL and domain restrictions.
@@ -1694,10 +1700,7 @@ message RagCrawlerDeepCrawlerConfig {
 // similar to Crawl4AI markdown/output-generation toggles.
 message RagCrawlerResultsConfig {
 
-    // Optional. Inject YAML frontmatter into markdown output.
-    // If the content is HTML based, it will automatically be converted to markdown.
-    // Optionally, you can inject YAML frontmatter into the markdown output.
-    // Default <code>true</code>.
+    // Optional. Prepend the page's extracted metadata to the markdown as a YAML frontmatter block.
     optional bool inject_frontmatter = 1;
 
     // Optional. Metadata extractors.
@@ -1709,6 +1712,9 @@ message RagCrawlerResultsConfig {
     // Optional. Density-based content pruning (Crawl4AI PruningContentFilter).
     // If not set the <code>RagCrawlerDensityPruning</code> defaults are used.
     RagCrawlerDensityPruning density_pruning = 4;
+
+    // Optional. Regular expressions matched against a crawled page's URL. A page whose URL matches any of these is still fetched and its links are followed for discovery, but it is NOT converted into a document
+    repeated string discovery_only_url_regex = 5;
 
 }
 
@@ -1819,6 +1825,13 @@ message RagCrawlerRetryConfig {
 
     // Optional. Maximum retry attempts per page source.
     optional int32 retry_max_attempts = 2;
+
+    // Optional. Base for the per-URL retry linear backoff, in seconds (default: 2).
+    optional float retry_backoff_seconds = 3;
+
+    // Optional. Abort the crawl run when no page has been fetched successfully for this many seconds (default: 600).
+    // <code>0</code> disables the bound.
+    optional int32 max_stall_seconds = 4;
 
 }
 

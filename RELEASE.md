@@ -2,6 +2,18 @@
 
 *****************
 
+## Release ONDEWO NLU API 7.1.0
+
+### Changes
+
+* [[OND211-2381]](https://ondewo.atlassian.net/browse/OND211-2381) `rag.proto`: deprecate never used `allow_internal_links` and `allow_social_media_links` fields of `RagCrawlerFilters`
+* [[OND211-2381]](https://ondewo.atlassian.net/browse/OND211-2381) `rag.proto`: deprecate redundant `allowed_paths` and `disallowed_paths` fields of `RagCrawlerFilters`
+* [[OND211-2381]](https://ondewo.atlassian.net/browse/OND211-2381) `rag.proto`: add `discovery_only_url_regex` field to `RagCrawlerResultsConfig`
+* [[OND211-2381]](https://ondewo.atlassian.net/browse/OND211-2381) `rag.proto`: add `retry_backoff_seconds` and `max_stall_seconds` fields to `RagCrawlerRetryConfig`
+* [[OND211-2381]](https://ondewo.atlassian.net/browse/OND211-2381) `rag.proto`: add `rerank_candidates`, `dedup_threshold` and `dedup_before_rerank` fields to `RagRetrievalRequest`
+
+*****************
+
 ## Release ONDEWO NLU API 7.0.0
 
 ### Breaking Changes
