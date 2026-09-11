@@ -1668,6 +1668,9 @@ message RagCrawlerConfig {
     // Optional. HTTP status filtering: which fetched pages become result documents.
     RagCrawlerStatusFilter status_filter = 4;
 
+    // Optional. Incremental crawling: reuse unchanged pages from the previous run instead of re-fetching them.
+    RagCrawlerIncrementalConfig incremental_config = 5;
+
 }
 
 // Deep crawler options grouped under one config node.
@@ -1848,6 +1851,22 @@ message RagCrawlerStatusFilter {
 
 }
 
+// Incremental crawling: skip re-fetching pages a sitemap reports as unchanged.
+//
+// A page is reused from the most recent completed run of the same crawler when its sitemap/ <code>&lt;lastmod&gt;</code> is not newer than the <code>page_last_updated_date</code> of the copy that run holds. A reused page is part of the new run exactly like a freshly fetched one; only <code>RagCrawlerResult.last_crawled_date</code> still reports when its content was actually fetched.
+//
+// A page is always fetched when any of the following holds: its sitemap entry carries no <code>&lt;lastmod&gt;</code>; the most recent completed run did not contain it; there is no completed previous
+// run; the crawler configuration changed since that run; or <code>max_age_days</code> has elapsed.
+message RagCrawlerIncrementalConfig {
+
+    // Optional. Enable incremental crawling. Default <code>false</code>.
+    bool is_active = 1;
+
+    // Optional. Force a re-fetch of any page whose content was fetched more than this many days ago, regardless of what <code>&lt;lastmod&gt;</code> reports. Unset means never force a re-fetch.
+    optional int32 max_age_days = 2;
+
+}
+
 message RagCrawlerContentResult {
 
     // Optional. Extracted page metadata.
@@ -1886,7 +1905,7 @@ message RagCrawlerResult {
     // Resource name of the source crawler profile.
     string crawler_name = 2;
 
-    // Resource name of the crawler run that produced this result.
+    // Resource name of the crawler run this result was requested under.
     string operation_name = 3;
 
     // URL this content came from.
