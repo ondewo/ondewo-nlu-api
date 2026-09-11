@@ -2933,6 +2933,10 @@
                       </li>
                     
                       <li>
+                        <a href="#ondewo.nlu.RagCrawlerIncrementalConfig" class="title-badge message">RagCrawlerIncrementalConfig</a>
+                      </li>
+                    
+                      <li>
                         <a href="#ondewo.nlu.RagCrawlerMetaDataExtractor" class="title-badge message">RagCrawlerMetaDataExtractor</a>
                       </li>
                     
@@ -33781,6 +33785,13 @@ Increase for throughput; reduce for fragile sites/rate limits. </p></td>
                   <td><p>Optional. HTTP status filtering: which fetched pages become result documents. </p></td>
                 </tr>
               
+                <tr>
+                  <td>incremental_config</td>
+                  <td><a href="#ondewo.nlu.RagCrawlerIncrementalConfig">RagCrawlerIncrementalConfig</a></td>
+                  <td></td>
+                  <td><p>Optional. Incremental crawling: reuse unchanged pages from the previous run instead of re-fetching them. </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -33912,24 +33923,21 @@ Default <code>false</code>. If <code>false</code>, <code>config</code> is ignore
                   <td>crawl_strategy</td>
                   <td><a href="#ondewo.nlu.RagCrawlerCrawlStrategy">RagCrawlerCrawlStrategy</a></td>
                   <td></td>
-                  <td><p>Optional. Crawl traversal strategy.
-BFS is often best for broad site coverage; DFS for deep section traversal.
-Default <code>RAG_CRAWLER_CRAWL_STRATEGY_BFS</code>. </p></td>
+                  <td><p>Optional. Crawl traversal strategy. Default <code>RAG_CRAWLER_CRAWL_STRATEGY_BEST_FIRST</code>. </p></td>
                 </tr>
               
                 <tr>
                   <td>max_depth</td>
                   <td><a href="#int32">int32</a></td>
                   <td>optional</td>
-                  <td><p>Optional. Maximum link depth from seed URLs.
-<code>0</code> usually means only seed pages. </p></td>
+                  <td><p>Optional. Maximum link depth from seed URLs, counted from the nearest seed. <code>0</code> means unlimited depth. </p></td>
                 </tr>
               
                 <tr>
                   <td>max_pages</td>
                   <td><a href="#int32">int32</a></td>
                   <td></td>
-                  <td><p>Optional. Hard cap on total processed pages for this run. </p></td>
+                  <td><p>Optional. Hard cap on pages fetched successfully in this run; <code>0</code> means unlimited. </p></td>
                 </tr>
               
                 <tr>
@@ -34064,54 +34072,90 @@ Default <code>RAG_CRAWLER_CRAWL_STRATEGY_BFS</code>. </p></td>
                   <td>allow_internal_links</td>
                   <td><a href="#bool">bool</a></td>
                   <td></td>
-                  <td><p>Optional. Include internal links. </p></td>
+                  <td><p><strong>Deprecated.</strong> Deprecated. Has never had any effect. </p></td>
                 </tr>
               
                 <tr>
                   <td>allow_external_links</td>
                   <td><a href="#bool">bool</a></td>
                   <td></td>
-                  <td><p>Optional. Include external links. </p></td>
+                  <td><p>Optional. Include external links, that is links outside the crawled site's registrable domain. </p></td>
                 </tr>
               
                 <tr>
                   <td>allow_social_media_links</td>
                   <td><a href="#bool">bool</a></td>
                   <td></td>
-                  <td><p>Optional. Include social media links. </p></td>
+                  <td><p><strong>Deprecated.</strong> Deprecated. Has never had any effect. </p></td>
                 </tr>
               
                 <tr>
                   <td>allowed_regex</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
-                  <td><p>Optional. Path allow-list by regular expression. </p></td>
+                  <td><p>Optional. URL allow-list by regular expression. </p></td>
                 </tr>
               
                 <tr>
                   <td>disallowed_regex</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
-                  <td><p>Optional. Path block-list by regular expression. </p></td>
+                  <td><p>Optional. URL block-list by regular expression. </p></td>
                 </tr>
               
                 <tr>
                   <td>allowed_paths</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
-                  <td><p>Optional. Explicit path allow-list. </p></td>
+                  <td><p><strong>Deprecated.</strong> Deprecated. Use <code>allowed_regex</code>, which can express everything this field could. </p></td>
                 </tr>
               
                 <tr>
                   <td>disallowed_paths</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
-                  <td><p>Optional. Explicit path block-list. </p></td>
+                  <td><p><strong>Deprecated.</strong> Deprecated. Use <code>disallowed_regex</code>. </p></td>
                 </tr>
               
             </tbody>
           </table>
 
+          
+            
+            
+            <h4>Fields with deprecated option</h4>
+            <table>
+              <thead>
+                <tr>
+                  <td>Name</td>
+                  <td>Option</td>
+                </tr>
+              </thead>
+              <tbody>
+              
+                <tr>
+                  <td>allow_internal_links</td>
+                  <td><p>true</p></td>
+                </tr>
+              
+                <tr>
+                  <td>allow_social_media_links</td>
+                  <td><p>true</p></td>
+                </tr>
+              
+                <tr>
+                  <td>allowed_paths</td>
+                  <td><p>true</p></td>
+                </tr>
+              
+                <tr>
+                  <td>disallowed_paths</td>
+                  <td><p>true</p></td>
+                </tr>
+              
+              </tbody>
+            </table>
+            
           
 
         
@@ -34220,6 +34264,37 @@ Default <code>RAG_CRAWLER_CRAWL_STRATEGY_BFS</code>. </p></td>
 
         
       
+        <h3 id="ondewo.nlu.RagCrawlerIncrementalConfig" class="title-badge message">RagCrawlerIncrementalConfig</h3>
+        <p>Incremental crawling: skip re-fetching pages a sitemap reports as unchanged.</p><p>A page is reused from the most recent completed run of the same crawler when its sitemap/ <code>&lt;lastmod&gt;</code> is not newer than the <code>page_last_updated_date</code> of the copy that run holds. A reused page is part of the new run exactly like a freshly fetched one; only <code>RagCrawlerResult.last_crawled_date</code> still reports when its content was actually fetched.</p><p>A page is always fetched when any of the following holds: its sitemap entry carries no <code>&lt;lastmod&gt;</code>; the most recent completed run did not contain it; there is no completed previous</p><p>run; the crawler configuration changed since that run; or <code>max_age_days</code> has elapsed.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>is_active</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Optional. Enable incremental crawling. Default <code>false</code>. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>max_age_days</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. Force a re-fetch of any page whose content was fetched more than this many days ago, regardless of what <code>&lt;lastmod&gt;</code> reports. Unset means never force a re-fetch. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="ondewo.nlu.RagCrawlerMetaDataExtractor" class="title-badge message">RagCrawlerMetaDataExtractor</h3>
         <p>Metadata extractor configuration.</p>
 
@@ -34287,7 +34362,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawler_results/&lt;crawl
                   <td>operation_name</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Resource name of the crawler run that produced this result. </p></td>
+                  <td><p>Resource name of the crawler run this result was requested under. </p></td>
                 </tr>
               
                 <tr>
@@ -34349,10 +34424,7 @@ Source precedence: HTTP Last-Modified header, then sitemap <lastmod> fallback. <
                   <td>inject_frontmatter</td>
                   <td><a href="#bool">bool</a></td>
                   <td>optional</td>
-                  <td><p>Optional. Inject YAML frontmatter into markdown output.
-If the content is HTML based, it will automatically be converted to markdown.
-Optionally, you can inject YAML frontmatter into the markdown output.
-Default <code>true</code>. </p></td>
+                  <td><p>Optional. Prepend the page's extracted metadata to the markdown as a YAML frontmatter block. </p></td>
                 </tr>
               
                 <tr>
@@ -34375,6 +34447,13 @@ Default <code>true</code>. </p></td>
                   <td></td>
                   <td><p>Optional. Density-based content pruning (Crawl4AI PruningContentFilter).
 If not set the <code>RagCrawlerDensityPruning</code> defaults are used. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>discovery_only_url_regex</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Optional. Regular expressions matched against a crawled page's URL. A page whose URL matches any of these is still fetched and its links are followed for discovery, but it is NOT converted into a document </p></td>
                 </tr>
               
             </tbody>
@@ -34406,6 +34485,21 @@ If not set the <code>RagCrawlerDensityPruning</code> defaults are used. </p></td
                   <td><a href="#int32">int32</a></td>
                   <td>optional</td>
                   <td><p>Optional. Maximum retry attempts per page source. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>retry_backoff_seconds</td>
+                  <td><a href="#float">float</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. Base for the per-URL retry linear backoff, in seconds (default: 2). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>max_stall_seconds</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. Abort the crawl run when no page has been fetched successfully for this many seconds (default: 600).
+<code>0</code> disables the bound. </p></td>
                 </tr>
               
             </tbody>
@@ -37189,6 +37283,27 @@ Higher values favor vector similarity, lower values favor keyword matching. </p>
                   <td><a href="#string">string</a></td>
                   <td>optional</td>
                   <td><p>Optional. Rerank model used to refine the initial retrieval scores. If not provided, the default model is used (if one is set). If empty, the results are not reranked. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>rerank_candidates</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>Optional. Minimum 0. Number of retrieved chunks the rerank model scores (default: <code>64</code>). Only takes effect when a rerank model is used. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>dedup_threshold</td>
+                  <td><a href="#float">float</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. Drop a retrieved chunk whose word-shingle similarity to a better-ranked chunk reaches this threshold, between <code>0.0</code> and <code>1.0</code> (default: <code>0.0</code>). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>dedup_before_rerank</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. Suppress near-duplicates before reranking instead of after (default: <code>false</code>). </p></td>
                 </tr>
               
             </tbody>
