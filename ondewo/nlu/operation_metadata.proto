@@ -127,6 +127,9 @@ message OperationMetadata {
 
         // change the embedding model of dataset that already contains parsed documents
         CHANGE_DATASET_EMBEDDING_MODEL = 13;
+
+        // re-parse of all documents in a dataset
+        REPARSE_DATASET = 14;
     }
 
     // name of the host where the operation was executed
