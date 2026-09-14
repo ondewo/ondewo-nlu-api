@@ -10012,6 +10012,7 @@ It can be creating, importing, exporting, deleting, restoring, building cache, t
 | ADD_RAG_CRAWLER_RESULT_TO_DATASET | 11 | add a rag crawler result to a dataset |
 | REMOVE_RAG_CRAWLER_RESULT_FROM_DATASET | 12 | remove a rag crawler result from a dataset |
 | CHANGE_DATASET_EMBEDDING_MODEL | 13 | change the embedding model of dataset that already contains parsed documents |
+| REPARSE_DATASET | 14 | re-parse of all documents in a dataset |
 
 
 
