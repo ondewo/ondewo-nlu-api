@@ -2,6 +2,13 @@
 ondewo.github.io
 ondewo-devops-accounts
 build_log_*.txt
+# left behind by a failed release_all_clients / release_<client>_client run (release_run_*.log: see *.log below)
+ondewo-nlu-client-*/
+temp-notes-*
+.already_released_marker-*
+.incomplete_marker-*
+.unknown_marker-*
+.client_status-*
 node_modules
 package.json
 package-lock.json

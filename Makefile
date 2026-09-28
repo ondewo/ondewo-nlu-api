@@ -2,13 +2,14 @@ export
 # ---------------- BEFORE RELEASE ----------------
 # 1 - Update Version Number
 # 2 - Update RELEASE.md
-# 3 - make update_setup
+# 3 - Commit and push both: the release branch and tag are cut from HEAD
 # -------------- Release Process Steps --------------
-# 1 - Get Credentials from devops-accounts repo
-# 2 - Create Release Branch and push
-# 3 - Create Release Tag and push
-# 4 - GitHub Release
-# 5 - PyPI Release
+# 1 - Check that Release Branch and Tag do not exist yet (spc)
+# 2 - Get Credentials from devops-accounts repo
+# 3 - Check that the GitHub token is set and may push to this repo, before anything is pushed (gh in the utils docker image)
+# 4 - Create Release Branch and push
+# 5 - Create Release Tag and push
+# 6 - GitHub Release (gh in the utils docker image)
 
 ########################################################
 # 		Variables
@@ -18,7 +19,8 @@ export
 # example: API 2.9.0 --> Client 2.9.X
 ONDEWO_NLU_API_VERSION=7.2.0
 
-# You need to setup an access token at https://github.com/settings/tokens - permissions are important
+# Placeholder only: `make ondewo_release` passes the real token from ondewo-devops-accounts/account_github.env on
+# the command line. Credentials live only in that repo - never commit one here or store it anywhere on GitHub.
 GITHUB_GH_TOKEN?=ENTER_YOUR_TOKEN_HERE
 
 # Terminate on the ***** separator that delimits release entries, NOT on /\*\*/ — that matched the first
@@ -133,8 +135,26 @@ update_githubio:
 ########################################################
 #		Release
 
-release: create_release_branch create_release_tag build_and_release_to_github_via_docker ## Automate the entire release process
+release: check_release_credentials validate_release_credentials_via_docker_image create_release_branch create_release_tag build_and_release_to_github_via_docker ## Automate the entire release process
 	@echo "Release Finished"
+
+# The two credential checks run before anything is pushed. Without them a missing, revoked or
+# under-privileged token let the branch and the tag reach origin and failed only at `gh release create`,
+# after which spc refuses a rerun.
+check_release_credentials: ## Fail unless GITHUB_GH_TOKEN is set (make ondewo_release reads it from ondewo-devops-accounts)
+	@if [ -z "$${GITHUB_GH_TOKEN}" ] || [ "$${GITHUB_GH_TOKEN}" = ENTER_YOUR_TOKEN_HERE ]; then \
+		echo "ERROR: GITHUB_GH_TOKEN is not set - run 'make ondewo_release', which reads it from ondewo-devops-accounts/account_github.env"; exit 1; fi
+	@echo "GITHUB_GH_TOKEN is set"
+
+# Read-only: one `gh api` GET. It needs gh, so the release runs it in the utils image (wrapper below).
+validate_release_credentials: ## Fail unless GitHub accepts GITHUB_GH_TOKEN with push access to ondewo/ondewo-nlu-api (read-only; needs gh)
+	@GH_TOKEN="$${GITHUB_GH_TOKEN}" gh api repos/ondewo/ondewo-nlu-api --jq .permissions.push | grep -qx true \
+		|| { echo "ERROR: GITHUB_GH_TOKEN from ondewo-devops-accounts cannot push to ondewo/ondewo-nlu-api (invalid, expired or without write access) - nothing was pushed"; exit 1; }
+	@echo "GITHUB_GH_TOKEN may push to ondewo/ondewo-nlu-api"
+
+# The token reaches the container through the environment, never on a command line.
+validate_release_credentials_via_docker_image: check_release_credentials build_utils_docker_image ## Run validate_release_credentials in the utils image
+	@docker run --rm -e GITHUB_GH_TOKEN ${IMAGE_UTILS_NAME} make validate_release_credentials
 
 create_release_branch: ## Create Release Branch and push it to origin
 	git checkout -b "release/${ONDEWO_NLU_API_VERSION}"
@@ -166,33 +186,68 @@ unrelease: build_utils_docker_image unrelease_to_github_via_docker_image ## Undo
 	-git fetch --prune
 	@echo "Unrelease of ${ONDEWO_NLU_API_VERSION} complete"
 
-CLIENTS := python nodejs typescript angular js
+# Each entry must be the part of the client's ssh URL after "ondewo-nlu-client-": release_client derives
+# REPO_NAME, and with it the .already_released_marker-<name> / .incomplete_marker-<name> /
+# .unknown_marker-<name> read below, from that URL. Each entry also needs a release_<entry>_client target.
+CLIENTS := python nodejs typescript angular js php go rust cpp java csharp
 
-release_all_clients: ## Release all clients IN PARALLEL; one failing client does not abort the others
-	@echo "Releasing all clients in parallel for ${ONDEWO_NLU_API_VERSION} ..."; \
-	rm -f .already_released_marker-* .client_status-*; \
-	for c in $(CLIENTS); do \
-		( if make release_$${c}_client > release_run_$${c}.log 2>&1; then echo RELEASED > .client_status-$$c; \
-		  elif [ -f .already_released_marker-$$c ]; then echo SKIP > .client_status-$$c; \
-		  else echo FAILED > .client_status-$$c; fi ) & \
-	done; \
-	wait; \
+# How many client releases release_all_clients runs at the same time; 1 releases them one after the other.
+# Every client release builds docker images and compiles its code, so all of them at once overload the host.
+RELEASE_JOBS?=2
+
+# Newest ondewo-proto-compiler release tag (X.Y.Z tags only, version-sorted), read with git ls-remote rather
+# than the GitHub REST API, which allows 60 unauthenticated calls per hour. release_all_clients resolves it
+# ONCE per run and passes it to every client as PROTO_COMPILER_TAG=<tag> on the command line; a standalone
+# release_<client>_client resolves it itself in release_client.
+PROTO_COMPILER_GIT=https://github.com/ondewo/ondewo-proto-compiler.git
+NEWEST_PROTO_COMPILER_TAG=GIT_TERMINAL_PROMPT=0 git ls-remote --tags --refs ${PROTO_COMPILER_GIT} | sed 's|.*refs/tags/||' | grep -E '^[0-9]+\.[0-9]+\.[0-9]+$$' | sort -V | tail -1
+
+release_all_clients: ## Release every client in CLIENTS, at most RELEASE_JOBS at a time; one failing client does not abort the others
+	@case "${RELEASE_JOBS}" in ''|*[!0-9]*|0*) echo "ERROR: RELEASE_JOBS must be a positive integer (1, 2, ...), not '${RELEASE_JOBS}'"; exit 1;; esac; \
+	tag=$$(${NEWEST_PROTO_COMPILER_TAG}); \
+	if [ -z "$$tag" ]; then echo "ERROR: could not read the newest release tag of ${PROTO_COMPILER_GIT} - no client was released"; exit 1; fi; \
+	echo "Releasing all clients for ${ONDEWO_NLU_API_VERSION} with ondewo-proto-compiler $$tag, at most ${RELEASE_JOBS} at a time ..."; \
+	rm -f .already_released_marker-* .incomplete_marker-* .unknown_marker-* .client_status-*; \
+	printf '%s\n' $(CLIENTS) | xargs -P ${RELEASE_JOBS} -I{} make release_client_job RELEASE_JOB_CLIENT={} PROTO_COMPILER_TAG=$$tag; \
 	echo ""; echo "=============== CLIENT RELEASE SUMMARY (${ONDEWO_NLU_API_VERSION}) ==============="; \
 	failed=0; \
 	for c in $(CLIENTS); do \
 		s=$$(cat .client_status-$$c 2>/dev/null || echo NO_STATUS); \
 		echo "  $$c : $$s"; \
-		if [ "$$s" = FAILED ] || [ "$$s" = NO_STATUS ]; then failed=1; echo "      -> see release_run_$$c.log"; fi; \
+		case "$$s" in \
+			RELEASED|SKIP) ;; \
+			INCOMPLETE) failed=1; \
+				echo "      -> release/${ONDEWO_NLU_API_VERSION} exists but GitHub has no published release ${ONDEWO_NLU_API_VERSION}: an earlier"; \
+				echo "         release of ondewo-nlu-client-$$c stopped part-way. Finish or undo it in the client - see release_run_$$c.log";; \
+			UNKNOWN) failed=1; \
+				echo "      -> release/${ONDEWO_NLU_API_VERSION} exists, but the GitHub API did not answer whether release ${ONDEWO_NLU_API_VERSION} is"; \
+				echo "         published (HTTP code in release_run_$$c.log; 403/429 = rate limit). Nothing was changed - rerun later";; \
+			*) failed=1; echo "      -> see release_run_$$c.log";; \
+		esac; \
 	done; \
 	echo "==============================================================="; \
-	rm -f .already_released_marker-* .client_status-*; \
-	if [ "$$failed" = 1 ]; then echo "RESULT: one or more clients FAILED (the others released independently)."; exit 1; fi; \
+	rm -f .already_released_marker-* .incomplete_marker-* .unknown_marker-* .client_status-*; \
+	if [ "$$failed" = 1 ]; then echo "RESULT: one or more clients FAILED or are INCOMPLETE or UNKNOWN (the others released independently)."; exit 1; fi; \
 	echo "RESULT: all clients released or already up-to-date."
+
+# One job of release_all_clients: releases RELEASE_JOB_CLIENT with its output in release_run_<client>.log and
+# records RELEASED, SKIP, INCOMPLETE, UNKNOWN or FAILED in .client_status-<client>. make flattens every recipe
+# failure to exit code 2, so the marker files release_client leaves tell SKIP, INCOMPLETE and UNKNOWN apart
+# from FAILED. This job always exits 0: an exit code of 255 would make xargs stop starting the remaining clients.
+release_client_job:
+	@echo "START: ${RELEASE_JOB_CLIENT} ($$(date +%T))"; \
+	if make release_${RELEASE_JOB_CLIENT}_client > release_run_${RELEASE_JOB_CLIENT}.log 2>&1; then s=RELEASED; \
+	elif [ -f .already_released_marker-${RELEASE_JOB_CLIENT} ]; then s=SKIP; \
+	elif [ -f .incomplete_marker-${RELEASE_JOB_CLIENT} ]; then s=INCOMPLETE; \
+	elif [ -f .unknown_marker-${RELEASE_JOB_CLIENT} ]; then s=UNKNOWN; \
+	else s=FAILED; fi; \
+	echo $$s > .client_status-${RELEASE_JOB_CLIENT}; \
+	echo "DONE: ${RELEASE_JOB_CLIENT}: $$s ($$(date +%T))"
 
 GENERIC_CLIENT?=
 RELEASEMD?=
-# The section heading is driven by GENERIC_RELEASE_SECTION so a breaking API release does not publish five
-# client majors under "Improvements". On a major bump, override it and describe the break:
+# The section heading is driven by GENERIC_RELEASE_SECTION so a breaking API release does not publish every
+# client major under "Improvements". On a major bump, override it and describe the break:
 #   make release_all_clients GENERIC_RELEASE_SECTION='Breaking Changes' \
 #     GENERIC_RELEASE_EXTRA='* The `Login` RPC and its messages are removed — authenticate via Keycloak.\n'
 GENERIC_RELEASE_SECTION?=Improvements
@@ -212,8 +267,11 @@ release_client: ## Generic Function to Release a Client
 	$(eval REPO_NAME:= $(shell echo ${GENERIC_CLIENT} | cut -c 41- | cut -d '.' -f 1))
 	$(eval REPO_DIR:= $(shell echo "ondewo-nlu-client-${REPO_NAME}"))
 	$(eval UPPER_REPO_NAME:= $(shell echo ${REPO_NAME} | perl -pe 's/.*/\u$$&/'))
-# Get newest Proto-Compiler Version
-	$(eval PROTO_COMPILER:= $(shell curl https://api.github.com/repos/ondewo/ondewo-proto-compiler/tags | grep "\"name\"" | head -1 | cut -d '"' -f 4))
+# Newest Proto-Compiler tag: PROTO_COMPILER_TAG from release_all_clients, else resolved here. An empty one
+# would pin the client to `tags/`, so stop before anything is cloned.
+	$(eval PROTO_COMPILER:= $(or ${PROTO_COMPILER_TAG},$(shell ${NEWEST_PROTO_COMPILER_TAG})))
+	@if [ -z "${PROTO_COMPILER}" ]; then echo "ERROR: could not read the newest release tag of ${PROTO_COMPILER_GIT} - ${REPO_NAME} was not released"; exit 1; fi
+	@echo "ondewo-proto-compiler tag for ${REPO_NAME}: ${PROTO_COMPILER}"
 # Clone Repo
 	rm -rf ${REPO_DIR}
 	rm -f build_log_${REPO_NAME}.txt
@@ -232,8 +290,20 @@ release_client: ## Generic Function to Release a Client
 	@# back, which is exactly the `Failed - files were modified by this hook` first run this block removed.
 	@printf '%b' "$$GENERIC_RELEASE_NOTES" > temp-notes-${REPO_NAME} && perl -i -pe 's/\\//g' temp-notes-${REPO_NAME} && perl -i -pe 's/REPONAME/${UPPER_REPO_NAME}/g' temp-notes-${REPO_NAME} && perl -0777 -i -pe 's/\n*\z/\n/' temp-notes-${REPO_NAME}
 	git clone ${GENERIC_CLIENT}
-# Check if Client is already uptodate with API Version
-	@! git -C ${REPO_DIR} branch -a | grep -q ${ONDEWO_NLU_API_VERSION} || (echo "Already Released ${ONDEWO_NLU_API_VERSION} \n\n\n"  && touch .already_released_marker-${REPO_NAME} && rm -rf ${REPO_DIR} && rm -f temp-notes-${REPO_NAME} && exit 1)
+# Rerun check. A client that already has the branch release/<version> (exactly that name) was released
+# before: SKIP when GitHub also has its published release <version> (HTTP 200), INCOMPLETE when it has none
+# (HTTP 404), i.e. that run stopped part-way - the six new clients create their GitHub release as their LAST
+# step. Any other answer is UNKNOWN, never SKIP: 403/429 is the limit of 60 unauthenticated calls per hour,
+# 000 no connection. This asks the REST API, because the page github.com/<repo>/releases/tag/<version>
+# answers 200 for a bare tag without any release as well. It is one unauthenticated call, made only for a
+# client whose release branch exists.
+	@if git -C ${REPO_DIR} rev-parse -q --verify "refs/remotes/origin/release/${ONDEWO_NLU_API_VERSION}" > /dev/null; then \
+		code=$$(curl -s -o /dev/null -w '%{http_code}' -L "https://api.github.com/repos/ondewo/${REPO_DIR}/releases/tags/${ONDEWO_NLU_API_VERSION}"); \
+		if [ "$$code" = 200 ]; then echo "Already Released ${ONDEWO_NLU_API_VERSION}"; touch .already_released_marker-${REPO_NAME}; \
+		elif [ "$$code" = 404 ]; then echo "INCOMPLETE: ${REPO_DIR} has release/${ONDEWO_NLU_API_VERSION} but no published GitHub release ${ONDEWO_NLU_API_VERSION} (GitHub API: HTTP 404)"; touch .incomplete_marker-${REPO_NAME}; \
+		else echo "UNKNOWN: ${REPO_DIR} has release/${ONDEWO_NLU_API_VERSION}, but the GitHub API did not say whether release ${ONDEWO_NLU_API_VERSION} is published (HTTP $$code; 403/429 = rate limit, 000 = no connection) - nothing was changed, rerun later"; touch .unknown_marker-${REPO_NAME}; fi; \
+		rm -rf ${REPO_DIR} temp-notes-${REPO_NAME}; exit 1; \
+	fi
 
 # Change Version Number and RELEASE NOTES
 # Only insert the generated boilerplate when the client does not already document this version. A client
@@ -247,12 +317,20 @@ release_client: ## Generic Function to Release a Client
 		perl -i -ne 'print; if(/Release History/){open my $$fh,"<","../temp-notes-${REPO_NAME}"; print while <$$fh>; close $$fh}' ${RELEASEMD}; \
 	fi
 	cd ${REPO_DIR} && head -20 ${RELEASEMD}
-	cd ${REPO_DIR} && perl -i -pe 's/ONDEWO_NLU_VERSION.*=.*/ONDEWO_NLU_VERSION=${ONDEWO_NLU_API_VERSION}/' Makefile
-	cd ${REPO_DIR} && perl -i -pe 's/ONDEWO_PROTO_COMPILER_GIT_BRANCH.*=.*/ONDEWO_PROTO_COMPILER_GIT_BRANCH=tags\/${PROTO_COMPILER}/' Makefile
-	cd ${REPO_DIR} && perl -i -pe 's/NLU_API_GIT_BRANCH.*=.*/NLU_API_GIT_BRANCH=tags\/${ONDEWO_NLU_API_VERSION}/' Makefile && head -30 Makefile
+# Anchored to the definition lines. Unanchored, `ONDEWO_NLU_VERSION.*=.*` also matched every recipe or
+# comment line that mentions the name with any `=` after it and cut off the rest of it: that would turn
+# go's check_go_module_path into a shell syntax error and rust's update_cargo_version into an unterminated
+# make variable reference, and it already mangled two comments in angular's committed Makefile. The
+# capture keeps both spellings of the API pin:
+# NLU_API_GIT_BRANCH (nodejs, typescript, angular, js) and ONDEWO_NLU_API_GIT_BRANCH (all others).
+	cd ${REPO_DIR} && perl -i -pe 's/^ONDEWO_NLU_VERSION\s*=.*/ONDEWO_NLU_VERSION=${ONDEWO_NLU_API_VERSION}/' Makefile
+	cd ${REPO_DIR} && perl -i -pe 's/^ONDEWO_PROTO_COMPILER_GIT_BRANCH\s*=.*/ONDEWO_PROTO_COMPILER_GIT_BRANCH=tags\/${PROTO_COMPILER}/' Makefile
+	cd ${REPO_DIR} && perl -i -pe 's/^((ONDEWO_)?NLU_API_GIT_BRANCH)\s*=.*/$$1=tags\/${ONDEWO_NLU_API_VERSION}/' Makefile && head -30 Makefile
 
-# Release
-	bash -c 'set -o pipefail; make -C ${REPO_DIR} ondewo_release | tee build_log_${REPO_NAME}.txt'
+# Release. Every client's ondewo_release clones ondewo-devops-accounts - the real credentials - into its root.
+# The trap removes that clone whenever the release leaves it behind, i.e. when it fails or is interrupted;
+# the rest of ${REPO_DIR} is kept for debugging.
+	bash -c 'set -o pipefail; trap "rm -rf ${REPO_DIR}/ondewo-devops-accounts" EXIT INT TERM; make -C ${REPO_DIR} ondewo_release | tee build_log_${REPO_NAME}.txt'
 	make -C ${REPO_DIR} TEST
 # Remove everything from Release
 	sudo rm -rf ${REPO_DIR}
@@ -294,6 +372,52 @@ release_js_client: ## Release JS Client
 	make release_client GENERIC_CLIENT=${JS_CLIENT} RELEASEMD="src/RELEASE.md"
 	@echo "End releasing Js Client \n \n \n"
 
+# UPPER_REPO_NAME on the command line beats the ucfirst() $(eval) in release_client. PHP and C++ need it:
+# their RELEASE.md headings, which their own notes slice matches case-sensitively, say "PHP" and "C++",
+# not "Php" and "Cpp". The + are escaped for the duplicate-entry `grep -E`; the perl that fills in the
+# heading drops the backslashes, so the heading still reads "C++".
+PHP_CLIENT="git@github.com:ondewo/ondewo-nlu-client-php.git"
+
+release_php_client: ## Release PHP Client
+	@echo "Start releasing PHP Client"
+	make release_client GENERIC_CLIENT=${PHP_CLIENT} RELEASEMD="RELEASE.md" UPPER_REPO_NAME=PHP
+	@echo "End releasing PHP Client \n \n \n"
+
+GO_CLIENT="git@github.com:ondewo/ondewo-nlu-client-go.git"
+
+release_go_client: ## Release Go Client
+	@echo "Start releasing Go Client"
+	make release_client GENERIC_CLIENT=${GO_CLIENT} RELEASEMD="RELEASE.md"
+	@echo "End releasing Go Client \n \n \n"
+
+RUST_CLIENT="git@github.com:ondewo/ondewo-nlu-client-rust.git"
+
+release_rust_client: ## Release Rust Client
+	@echo "Start releasing Rust Client"
+	make release_client GENERIC_CLIENT=${RUST_CLIENT} RELEASEMD="RELEASE.md"
+	@echo "End releasing Rust Client \n \n \n"
+
+CPP_CLIENT="git@github.com:ondewo/ondewo-nlu-client-cpp.git"
+
+release_cpp_client: ## Release C++ Client
+	@echo "Start releasing C++ Client"
+	make release_client GENERIC_CLIENT=${CPP_CLIENT} RELEASEMD="RELEASE.md" UPPER_REPO_NAME='C\+\+'
+	@echo "End releasing C++ Client \n \n \n"
+
+JAVA_CLIENT="git@github.com:ondewo/ondewo-nlu-client-java.git"
+
+release_java_client: ## Release Java Client
+	@echo "Start releasing Java Client"
+	make release_client GENERIC_CLIENT=${JAVA_CLIENT} RELEASEMD="RELEASE.md"
+	@echo "End releasing Java Client \n \n \n"
+
+CSHARP_CLIENT="git@github.com:ondewo/ondewo-nlu-client-csharp.git"
+
+release_csharp_client: ## Release Csharp Client
+	@echo "Start releasing Csharp Client"
+	make release_client GENERIC_CLIENT=${CSHARP_CLIENT} RELEASEMD="RELEASE.md"
+	@echo "End releasing Csharp Client \n \n \n"
+
 ########################################################
 #		GITHUB
 
@@ -323,15 +447,18 @@ clone_devops_accounts: ## Clones devops-accounts repo
 	@if [ -d $(DEVOPS_ACCOUNT_GIT) ]; then rm -Rf $(DEVOPS_ACCOUNT_GIT); fi
 	git clone git@bitbucket.org:ondewo/${DEVOPS_ACCOUNT_GIT}.git
 
+# The grep is anchored to the definition line: a '#' comment line naming the variable would otherwise reach
+# the command line below and comment out everything after it. On failure the clone of the credentials repo
+# is removed as well, not only by ondewo_release / ondewo_unrelease after a success.
 run_release_with_devops: ## Gets Credentials from devops-repo and runs release with them
-	$(eval info:= $(shell cat ${DEVOPS_ACCOUNT_DIR}/account_github.env | grep GITHUB_GH))
-	@make release $(info)
+	$(eval info:= $(shell grep -E '^GITHUB_GH_TOKEN=' ${DEVOPS_ACCOUNT_DIR}/account_github.env))
+	@make release $(info) || { rm -rf ${DEVOPS_ACCOUNT_GIT}; exit 1; }
 
 run_unrelease_with_devops: ## Gets Credentials from devops-repo and runs unrelease with them
-	$(eval info:= $(shell cat ${DEVOPS_ACCOUNT_DIR}/account_github.env | grep GITHUB_GH))
-	@make unrelease $(info)
+	$(eval info:= $(shell grep -E '^GITHUB_GH_TOKEN=' ${DEVOPS_ACCOUNT_DIR}/account_github.env))
+	@make unrelease $(info) || { rm -rf ${DEVOPS_ACCOUNT_GIT}; exit 1; }
 
-spc: ## Checks if the Release Branch, Tag and Pypi version already exist
+spc: ## Checks if the Release Branch and Tag already exist
 	$(eval filtered_branches:= $(shell git branch --all | grep "release/${ONDEWO_NLU_API_VERSION}"))
 	$(eval filtered_tags:= $(shell git tag --list | grep "${ONDEWO_NLU_API_VERSION}"))
 	@if test "$(filtered_branches)" != ""; then echo "-- Test 1: Branch exists!!" & exit 1; else echo "-- Test 1: Branch is fine";fi

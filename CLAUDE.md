@@ -5,8 +5,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Role in the ONDEWO repo family
 
 This repo is the **proto source of truth** for the ONDEWO NLU/CAI gRPC API. Nothing here runs —
-the `.proto` files under `ondewo/nlu/` (plus `google/` vendored deps) are compiled into two SDKs,
-which are consumed by the backend and the frontend:
+the `.proto` files under `ondewo/nlu/` (plus `google/` vendored deps) are compiled into the client SDKs
+(one repo per language, see `CLIENTS` in the `Makefile`); two of them are consumed by the backend and
+the frontend:
 
 ```
 ondewo-nlu-api (.proto)                      ← YOU ARE HERE
@@ -36,8 +37,9 @@ pinned via `NLU_API_GIT_BRANCH` / `ONDEWO_NLU_API_GIT_BRANCH` in their Makefiles
     disagree about the wire contract with no error. Removing an RPC or a whole message needs no
     `reserved`. This repo has no `reserved` statements yet; a field removal would be the first.
   - Regenerate the docs (`make build_docs`) in the same commit — `docs/` is tracked.
-  - `make release_all_clients` publishes five client majors: pass `GENERIC_RELEASE_SECTION='Breaking
-    Changes'` and `GENERIC_RELEASE_EXTRA` so their notes say what broke (default is "Improvements").
+  - `make release_all_clients` publishes a new major of every client in `CLIENTS`: pass
+    `GENERIC_RELEASE_SECTION='Breaking Changes'` and `GENERIC_RELEASE_EXTRA` so their notes say what
+    broke (default is "Improvements").
 - Follow the established message conventions (copy from `llm_evaluation.proto`, the canonical example
   is `UpdateLlmEvaluationDatasetRequest`):
   - resources carry `name`, `display_name`, `created_at`/`created_by`/`modified_at`/`modified_by`,
@@ -90,10 +92,17 @@ pinned via `NLU_API_GIT_BRANCH` / `ONDEWO_NLU_API_GIT_BRANCH` in their Makefiles
 
 ## Releases
 
-`make release` tags this repo; `make release_all_clients` (or `release_python_client` /
-`release_angular_client`) clones each client, updates its Makefile pins to the released tag and runs
-its `make ondewo_release` (npm / PyPI publish). After a release, consumers switch from git-hash pins
-to the published version (`ondewo-nlu_client==X.Y.Z` in cai, `@ondewo/nlu-client-angular@X.Y.Z` in aim).
+`make ondewo_release` tags this repo; `make release_all_clients` (or a single `release_<client>_client`, e.g.
+`release_python_client` / `release_angular_client`) clones each client in `CLIENTS` (python, nodejs,
+typescript, angular, js, php, go, rust, cpp, java, csharp), updates its Makefile pins to the released tag
+and runs its `make ondewo_release` (PyPI, npm, Packagist, the Go module proxy, crates.io, an archive on
+the GitHub release for C++, Maven Central, NuGet). **Every release, this repo's and every client's, runs
+locally from the make target**; credentials come only from `ondewo-devops-accounts` (cloned by
+`clone_devops_accounts`, handed over by `run_release_with_devops`). No GitHub workflow builds or publishes
+a release or a package and no GitHub secret is used — the client workflows only test and lint, and this
+repo's only workflow regenerates `docs/` (see below). Never add a CI publish path or tell anyone to set a
+repository secret. After a release, consumers switch from git-hash pins to the published version
+(`ondewo-nlu_client==X.Y.Z` in cai, `@ondewo/nlu-client-angular@X.Y.Z` in aim).
 
 ## Working Principles
 
@@ -247,8 +256,17 @@ Raises:
 
 ## Client-release orchestration (`release_all_clients`)
 
-- It **fails loudly** on a genuine client-release error: the piped sub-make runs under `bash -c 'set -o pipefail; make -C … | tee …'` (a plain sh pipe returns tee's 0 and masks failures), and a **marker file** distinguishes an "already released" SKIP from a real FAILURE (make flattens recipe exit codes to 2, so the code alone can't tell them apart). Do not regress either.
-- Every token-bearing recipe line is `@`-prefixed so make never echoes a secret — `docker run -e <TOKEN>`, `echo $(TOKEN) | gh auth`, `twine … -p${PYPI_PASSWORD}`, and the credential sub-make `make release $(info)` (which expands the token at runtime and is easy to miss).
+- It **fails loudly** on a genuine client-release error: the piped sub-make runs under `bash -c 'set -o pipefail; make -C … | tee …'` (a plain sh pipe returns tee's 0 and masks failures), and **marker files** (`.already_released_marker-<name>`, `.incomplete_marker-<name>`, `.unknown_marker-<name>`) distinguish SKIP, INCOMPLETE and UNKNOWN from a real FAILURE (make flattens recipe exit codes to 2, so the code alone can't tell them apart). Do not regress either.
+- **Bounded parallelism:** `release_all_clients` feeds `CLIENTS` to `xargs -P $(RELEASE_JOBS) -I{} make release_client_job RELEASE_JOB_CLIENT={} …` (`RELEASE_JOBS?=2`, validated as a positive integer — `xargs -P 0` would mean unbounded; `RELEASE_JOBS=1` is sequential in `CLIENTS` order). `release_client_job` runs one `release_<client>_client` into `release_run_<client>.log`, writes `.client_status-<client>` and prints `START:`/`DONE:` lines; it **always exits 0**, because an exit code of 255 makes xargs stop starting the remaining clients. The summary then reads the status files in `CLIENTS` order: `INCOMPLETE`, `UNKNOWN`, `FAILED` and a missing status (`NO_STATUS`) fail the target. Verified with fake client targets at `RELEASE_JOBS=1/2/11`: measured maximum concurrency 1/2/11.
+- **The proto-compiler tag is resolved ONCE per run** with `git ls-remote --tags --refs` (X.Y.Z tags only, `sort -V`, `GIT_TERMINAL_PROMPT=0` so an unreachable URL fails instead of prompting) and handed to every client as `PROTO_COMPILER_TAG=<tag>` on the command line; `release_client` falls back to resolving it itself (standalone `release_<client>_client`) and stops before cloning when it comes back empty — an empty tag would write `ONDEWO_PROTO_COMPILER_GIT_BRANCH=tags/`. It used to be one unauthenticated GitHub REST call per client, 11 per run against a 60-per-hour limit. Command-line variables travel to every sub-make through `MAKEFLAGS`, including the clients' own makes, and override the clients' own definitions, so `PROTO_COMPILER_TAG`, `RELEASE_JOB_CLIENT`, `RELEASE_JOBS`, `GENERIC_CLIENT`, `RELEASEMD`, `UPPER_REPO_NAME` and `GENERIC_RELEASE_SECTION`/`_EXTRA` must stay unused in every client Makefile (checked: none of the 11 uses them).
+- Every token-bearing recipe line is `@`-prefixed so make never echoes a secret — `docker run -e <TOKEN>`, `echo $(TOKEN) | gh auth`, `twine … -p${PYPI_PASSWORD}`, and the credential sub-make `make release $(info)` (which expands the token at runtime and is easy to miss). The python client's `make release $(info)` on `master` is still missing its `@` — see "The release prints credentials" below.
+- `release_client` changes only the client's `RELEASE.md` and three **definition lines** of its `Makefile`, and the rewrites are **anchored**: `^ONDEWO_NLU_VERSION\s*=`, `^ONDEWO_PROTO_COMPILER_GIT_BRANCH\s*=` and `^((ONDEWO_)?NLU_API_GIT_BRANCH)\s*=` (the capture keeps both spellings of the API pin). The old unanchored `ONDEWO_NLU_VERSION.*=.*` also matched every recipe or comment line that mentions the name with any `=` after it and cut off the rest of the line — it would turn go's `check_go_module_path` into a shell syntax error and rust's `update_cargo_version` into an unterminated make variable reference (`*** unterminated variable reference. Stop.`), and angular's committed Makefile still carries two comments it mangled. Do not un-anchor them, and keep these three as plain `NAME=value` lines in every client (a `?=` or `:=` definition is not matched). Every other file that carries the version (composer.json, go.mod, Cargo.toml/Cargo.lock, pom.xml, README install snippets) is bumped by the client's own `ondewo_release` — before its `spc` wherever `spc` checks that file.
+- The notes heading is `## Release ONDEWO NLU <UPPER_REPO_NAME> Client <version>`, and each client's notes slice matches it case-sensitively. `UPPER_REPO_NAME` defaults to the ssh-URL suffix with an upper-case first letter; `release_php_client` passes `UPPER_REPO_NAME=PHP` and `release_cpp_client` passes `UPPER_REPO_NAME='C\+\+'` on the `make release_client` command line, which beats the `$(eval)` inside it. The escapes are for the duplicate-entry `grep -E`; the perl that writes the heading drops them. Without the override php's own `check_release_notes` refuses the `Php` heading before anything is pushed.
+- A `CLIENTS` entry must equal the ssh-URL suffix after `ondewo-nlu-client-` (`csharp`, `cpp`, …): `REPO_NAME`, and with it the marker files, is cut from the URL, so a mismatch reports an already-released client as FAILED instead of SKIP.
+- **Rerun semantics — SKIP vs INCOMPLETE vs UNKNOWN.** Only the exact branch `release/<version>` counts (`git rev-parse --verify refs/remotes/origin/release/<version>` in the fresh clone; the old `git branch -a | grep -q <version>` also matched e.g. `feature/<version>-x`). When it exists, `release_client` asks `https://api.github.com/repos/ondewo/<repo>/releases/tags/<version>` (the endpoint returns only a _published_ release — a draft answers 404): 200 → `SKIP`, 404 → `INCOMPLETE`, anything else → `UNKNOWN` (403/429 is the limit of 60 unauthenticated calls per hour, 000 no connection). Never map an unexpected code to `SKIP`, and never fold it into `INCOMPLETE`, whose hint tells the operator to finish or undo the client release. **Do not replace this with the HTML page `github.com/<repo>/releases/tag/<version>`: it answers 200 for a bare tag without any release** (measured: go's `v7.1.0` tag, which has no release — the REST call answers 404 for it). The six new clients create their GitHub release as their LAST step, and the npm clients (nodejs, typescript, angular, js) publish to npm before they even push the release branch and create the GitHub release last, so for them `SKIP` means complete and `INCOMPLETE` catches any unfinished step. python creates its GitHub release BEFORE its PyPI upload, so for python `INCOMPLETE` covers only the GitHub-release step and a failed PyPI upload still reports `SKIP` — check PyPI.
+- **A failed or interrupted client release no longer leaves the credentials behind.** The `bash -c` that runs the client's `ondewo_release` sets `trap "rm -rf <clone>/ondewo-devops-accounts" EXIT INT TERM`; the rest of `ondewo-nlu-client-<name>/` is kept for debugging. `EXIT` alone is not enough — measured: bash killed by SIGINT skips its EXIT trap, so Ctrl-C kept the clone until `INT TERM` were added. The leftovers of a failed run (`ondewo-nlu-client-*/`, `temp-notes-*`, the three marker kinds and the status files, `release_run_*.log` via `*.log`, `build_log_*.txt`) are gitignored; the next run replaces them. The API's own `run_release_with_devops` / `run_unrelease_with_devops` likewise delete `./ondewo-devops-accounts` when their sub-make fails.
+- **Every release is local and its credentials come only from `ondewo-devops-accounts`.** Nothing is built or published in CI and no GitHub secret is used; the client repos' workflows test only. The six new clients' `run_release_with_devops` read exactly the variables they need with **anchored** greps (`grep -E '^(NAME1|NAME2)='`): several devops env files start with `#` comment lines that name the variables, and one such line reaching `make release $(info)` comments out every credential after it. The old clients' unanchored `grep GITHUB_GH` / `grep PYPI_…` / `grep NPM_AUTOMATION_TOKEN` have worked so far (python and js 7.2.0 released with them), so no comment line naming those variables precedes their values today; anchoring them is the old clients' business. The API's own hand-off reads `^GITHUB_GH_TOKEN=` the same way, and its `make release` first runs `check_release_credentials` (set, on the host) and `validate_release_credentials_via_docker_image` (`gh api repos/ondewo/ondewo-nlu-api --jq .permissions.push` must print `true`, in the utils image) — the target names the six new clients use too (go keeps its older `check_gh_credentials` for the presence check) — so a missing or dead token stops the release before anything is pushed.
+- Host requirements: the php, go, rust, cpp, java and csharp clients generate code in their ondewo-proto-compiler image and run every toolchain, `gh` and registry step in their own `Dockerfile.utils` image (`ondewo-nlu-client-utils-<lang>:<version>`, repo mounted, run with `--user`), so they need only `make`, `git`, `docker`, `perl` and `curl` on the host. The older clients still use host tools: python needs `uv` (its build runs `uv run`, which also provides `pre-commit`), nodejs/typescript/angular/js need `node` and `npm` plus `uv`, `pipx` or `pip` (to install `pre-commit`). `release_client` itself needs `git` (`ls-remote` for the compiler tag), `curl` (the rerun check's REST call) and passwordless `sudo` (`sudo rm -rf` of the clone after a success).
 
 ## Pre-commit upgraded (language-agnostic hook set)
 
@@ -256,7 +274,7 @@ Pre-commit here uses only the language-agnostic hooks — **markdownlint-cli2, p
 
 - **markdownlint MD053 is disabled** (its auto-fix deletes `[comment]: <>` reference-definition markers).
 - **markdownlint RELEASE.md reformatting is content-safe**: it only strips trailing whitespace and adds blank lines around headings — the `## Release … <VERSION>` headings and `*****` separators that `ondewo_release` slices on remain intact. (Confirmed: the 6.5.0 release notes sliced correctly after the reformat.)
-  ⚠️ Until 2026-07-16 `CURRENT_RELEASE_NOTES` (`Makefile:25`) did **not** terminate on `*****` as this note
+  ⚠️ Until 2026-07-16 `CURRENT_RELEASE_NOTES` (`Makefile:30`) did **not** terminate on `*****` as this note
   claimed — its perl range ended on `/\*\*/`, i.e. the first markdown **bold** span inside the entry, and
   silently truncated the release body there. It looked correct only because no entry had used inline bold;
   7.0.0 is the first that does. Now fixed to `/^\*{5}/`. If you add a bullet to RELEASE.md and it does not
@@ -375,26 +393,54 @@ grep -c '^## Release ONDEWO NLU API ' RELEASE.md     # must be >= 1 for your new
 
 ### Where the release notes live
 
-This repo does NOT regenerate the root `RELEASE.md` from `src/`, so the root file is the one
-the release reads. Keep `src/RELEASE.md` in step by hand if it exists.
+This repo has no `src/RELEASE.md` and regenerates nothing: the root `RELEASE.md` is the one the
+release reads (`CURRENT_RELEASE_NOTES`, and the copy `build_utils_docker_image` puts into the image).
 
 ### Publish order decides how a partial failure is recovered
 
 `make release` in this repo runs:
 
+1. `check_release_credentials` — `GITHUB_GH_TOKEN` must be set and not the placeholder;
+2. `validate_release_credentials_via_docker_image` — builds the utils image from `Dockerfile.utils`
+   and runs `make validate_release_credentials` in it: read-only,
+   `gh api repos/ondewo/ondewo-nlu-api --jq .permissions.push`; anything but `true` stops the
+   release **before anything is pushed** (a dummy token stops here with `gh: Bad credentials (HTTP 401)`);
+3. `create_release_branch` — `git checkout -b release/<version>`, then pushes it;
+4. `create_release_tag` — tags HEAD, then pushes the tag;
+5. `build_and_release_to_github_via_docker` — runs `gh auth login` and `gh release create` in the
+   utils image.
 
-The **npm publish happens LAST**. So a failure before it means nothing shipped, but the
-branch, tag and GitHub release may already exist — and `spc` will then refuse a re-run. Recover
-by running only the remaining step, not the whole target.
+There is no package registry here: the **GitHub release happens LAST**. A dead or under-privileged
+token no longer gets that far, but a failure in step 5 itself (GitHub answering 500, say) leaves the
+branch and the tag on origin without a release — and `spc` will then refuse a re-run of
+`make ondewo_release`. Recover by running only the remaining step, not the whole target, from the
+same checkout (the image copies its `Makefile` and `RELEASE.md`):
+
+```bash
+make clone_devops_accounts
+make build_and_release_to_github_via_docker $(grep -E '^GITHUB_GH_TOKEN=' ondewo-devops-accounts/account_github.env)
+rm -rf ondewo-devops-accounts
+```
+
+`make ondewo_unrelease` deletes the GitHub release and the remote branch and tag if you have to start
+over; check out `master` first, or it cannot delete the local `release/<version>` you are on and
+`spc` keeps refusing.
 
 ### Verify against the registry, with the REAL package name
 
-This package publishes as **`<see package.json name>`**, which is not always the repository name — the JS client
-publishes as `@ondewo/ondewo-nlu-client-js` (doubled `ondewo`), so a lookup by repo name returns
-a 404 that reads like a failed release. Check the name in the manifest first, then:
+This repo publishes **no package**: its artefacts are the `release/<version>` branch, the `<version>`
+tag and the GitHub release (plus `docs/`, which CI commits back to `master`, and the versioned docs on
+ondewo.github.io if you run `make update_githubio`). Verify those as in "Verify the three artefacts
+separately" below.
+
+The clients that `release_all_clients` drives do publish packages, and a package name is not always
+the repository name — the JS client publishes as `@ondewo/ondewo-nlu-client-js` (doubled `ondewo`),
+so a lookup by repo name returns a 404 that reads like a failed release. Check the name in the
+client's manifest (`package.json`, `pyproject.toml`, `composer.json`, `go.mod`, `Cargo.toml`,
+`pom.xml`, `Ondewo.NLU.Client.csproj`) first, then query its registry, e.g. for an npm client:
 
 ```bash
-npm view <see package.json name> versions --json
+npm view <name from the client's package.json> versions --json
 ```
 
 **An npm publish can be STAGED but not yet served.** Immediately after a publish the registry may
@@ -404,8 +450,12 @@ not burned — wait and re-check before bumping to a new number.
 
 ### The release prints credentials — read the log BEFORE you scrub it
 
-`make ondewo_release` clones `ondewo-devops-accounts` and passes the registry and GitHub tokens on
-the make command line, so they are echoed into the console and into any transcript capturing it.
+`make ondewo_release` clones `ondewo-devops-accounts` and passes the tokens on the make command line.
+In this repo that line (`@make release $(info)`) and every other token-bearing line are `@`-prefixed,
+so the API's own release echoes no token — but a client's release does wherever its credential
+sub-make lacks the `@`: python's `make release $(info)` on `master` has none, so `release_all_clients`
+writes the GitHub and PyPI credentials into `release_run_python.log` and `build_log_python.txt` in this
+working tree (gitignored, but never scrubbed), and into any transcript capturing them.
 This is a known and accepted property of the shared release path: do **not** re-plumb the recipe.
 Redirect the run to a file, read it through a filter, and shred the file afterwards — and read it
 **before** shredding, or a genuine failure is lost with the secrets:
@@ -414,6 +464,7 @@ Redirect the run to a file, read it through a filter, and shred the file afterwa
 umask 077; make ondewo_release > /tmp/rel.log 2>&1; echo "RC=$?"
 grep -avE 'TOKEN|PASSWORD|USERNAME|_authToken' /tmp/rel.log | tail -20   # read FIRST
 shred -u /tmp/rel.log; rm -rf ondewo-devops-accounts                     # then scrub
+shred -u release_run_python.log build_log_python.txt                      # after release_all_clients, once read
 ```
 
 ### Run the release from `master`, and check with `git branch --show-current`
@@ -432,9 +483,16 @@ git branch --show-current            # must print master BEFORE `make ondewo_rel
 
 ### The release `git add` list is an ALLOW-LIST, so anything outside it ships but is never committed
 
-`make build` writes files the release target then stages from a fixed list of paths. Anything the
-build touches that is not on that list reaches the registry and is **absent from the tag of that
-same version** -- two different things under one name, with nothing anywhere reporting it.
+This repo's `make release` builds nothing and stages nothing: it cuts `release/<version>` and the tag
+from HEAD as it is. Uncommitted edits are therefore **absent from the tag**, although the release still
+reads them — the version comes from the working-tree `Makefile`, and `build_utils_docker_image` copies
+the working-tree `Makefile` and `RELEASE.md` into the image that creates the GitHub release. So an
+uncommitted version bump or notes entry names and describes a release whose tag does not contain it.
+
+The clients do have the allow-list: their `make build` writes files the release target then stages
+from a fixed list of paths. Anything the build touches that is not on that list reaches the registry
+and is **absent from the tag of that same version** -- two different things under one name, with
+nothing anywhere reporting it.
 
 Both directions have bitten: a hand-written directory the build copies into the package, and a
 tracked file the build regenerates. Whatever `make build` writes, either stage it or prove the
@@ -443,7 +501,7 @@ release does not need it.
 The general check costs nothing:
 
 ```bash
-git status --porcelain    # MUST be empty after a release; anything left is published-but-uncommitted
+git status --porcelain    # here: MUST be empty BEFORE the release; in a client: MUST be empty after it
 ```
 
 ### Write the RELEASE.md section BEFORE releasing, or the release body is silently empty
@@ -461,9 +519,10 @@ cat RELEASE.md | perl -ne 'print if /<the exact heading> <version>/../^\*{5}/' |
 
 GitHub's release API returned 500 twice in one session, leaving the registry and the tag correct and
 **no release object at all** (nlu-client-js and -angular 7.1.1); `gh release create` after the fact
-repairs it without touching the artefact.
-
+repairs it without touching the artefact. In this repo the three are the `release/<version>` branch,
+the tag and the GitHub release; in a client they are its registry package, the tag and the GitHub
+release.
 
 ```bash
-git tag --list <version> ; gh release view <version> --json body --jq '.body|length'
+git ls-remote --heads origin release/<version> ; git tag --list <version> ; gh release view <version> --json body --jq '.body|length'
 ```
