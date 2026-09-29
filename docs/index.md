@@ -10902,10 +10902,11 @@ diagnostics capture, and deep crawling options for each crawler run.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | concurrency_config | [RagCrawlerConcurrencyConfig](#ondewo.nlu.RagCrawlerConcurrencyConfig) |  | Optional. Concurrency and pacing controls for crawler requests. |
-| deep_crawler_config | [RagCrawlerDeepCrawlerConfig](#ondewo.nlu.RagCrawlerDeepCrawlerConfig) |  | Optional. Deep crawler behavior (enable + depth/pages/scoring/filter chain). |
+| deep_crawler_config | [RagCrawlerDeepCrawlerConfig](#ondewo.nlu.RagCrawlerDeepCrawlerConfig) |  | Optional. Deep crawler behavior (enable + depth/scoring/filter chain). |
 | output_config | [RagCrawlerResultsConfig](#ondewo.nlu.RagCrawlerResultsConfig) |  | Optional. Structured output configuration (format + metadata policy). |
 | status_filter | [RagCrawlerStatusFilter](#ondewo.nlu.RagCrawlerStatusFilter) |  | Optional. HTTP status filtering: which fetched pages become result documents. |
 | incremental_config | [RagCrawlerIncrementalConfig](#ondewo.nlu.RagCrawlerIncrementalConfig) |  | Optional. Incremental crawling: reuse unchanged pages from the previous run instead of re-fetching them. |
+| max_pages | [int32](#int32) | optional | Optional. Hard cap on pages fetched successfully in this run; <code>0</code> means unlimited. |
 
 
 
@@ -10974,7 +10975,7 @@ Deep crawler options grouped under one config node.
 | is_active | [bool](#bool) |  | Optional. Enable deep crawler behavior (link following beyond seeds). Default <code>false</code>. If <code>false</code>, <code>config</code> is ignored. |
 | crawl_strategy | [RagCrawlerCrawlStrategy](#ondewo.nlu.RagCrawlerCrawlStrategy) |  | Optional. Crawl traversal strategy. Default <code>RAG_CRAWLER_CRAWL_STRATEGY_BEST_FIRST</code>. |
 | max_depth | [int32](#int32) | optional | Optional. Maximum link depth from seed URLs, counted from the nearest seed. <code>0</code> means unlimited depth. |
-| max_pages | [int32](#int32) |  | Optional. Hard cap on pages fetched successfully in this run; <code>0</code> means unlimited. |
+| max_pages | [int32](#int32) |  | **Deprecated.** Deprecated. Use <code>RagCrawlerConfig.max_pages</code> instead |
 | deep_crawler_filters | [RagCrawlerFilters](#ondewo.nlu.RagCrawlerFilters) |  | Optional. URL and domain restrictions. |
 | normalize_url_case | [bool](#bool) | optional | Optional. Normalize URL case (lowercase the path) during link discovery/deduplication. |
 

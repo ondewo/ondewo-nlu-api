@@ -33774,7 +33774,7 @@ Increase for throughput; reduce for fragile sites/rate limits. </p></td>
                   <td>deep_crawler_config</td>
                   <td><a href="#ondewo.nlu.RagCrawlerDeepCrawlerConfig">RagCrawlerDeepCrawlerConfig</a></td>
                   <td></td>
-                  <td><p>Optional. Deep crawler behavior (enable + depth/pages/scoring/filter chain). </p></td>
+                  <td><p>Optional. Deep crawler behavior (enable + depth/scoring/filter chain). </p></td>
                 </tr>
               
                 <tr>
@@ -33796,6 +33796,13 @@ Increase for throughput; reduce for fragile sites/rate limits. </p></td>
                   <td><a href="#ondewo.nlu.RagCrawlerIncrementalConfig">RagCrawlerIncrementalConfig</a></td>
                   <td></td>
                   <td><p>Optional. Incremental crawling: reuse unchanged pages from the previous run instead of re-fetching them. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>max_pages</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. Hard cap on pages fetched successfully in this run; <code>0</code> means unlimited. </p></td>
                 </tr>
               
             </tbody>
@@ -33943,7 +33950,7 @@ Default <code>false</code>. If <code>false</code>, <code>config</code> is ignore
                   <td>max_pages</td>
                   <td><a href="#int32">int32</a></td>
                   <td></td>
-                  <td><p>Optional. Hard cap on pages fetched successfully in this run; <code>0</code> means unlimited. </p></td>
+                  <td><p><strong>Deprecated.</strong> Deprecated. Use <code>RagCrawlerConfig.max_pages</code> instead </p></td>
                 </tr>
               
                 <tr>
@@ -33963,6 +33970,27 @@ Default <code>false</code>. If <code>false</code>, <code>config</code> is ignore
             </tbody>
           </table>
 
+          
+            
+            
+            <h4>Fields with deprecated option</h4>
+            <table>
+              <thead>
+                <tr>
+                  <td>Name</td>
+                  <td>Option</td>
+                </tr>
+              </thead>
+              <tbody>
+              
+                <tr>
+                  <td>max_pages</td>
+                  <td><p>true</p></td>
+                </tr>
+              
+              </tbody>
+            </table>
+            
           
 
         
