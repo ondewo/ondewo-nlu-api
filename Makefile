@@ -17,7 +17,7 @@ export
 
 # MUST BE THE SAME AS API in Mayor and Minor Version Number
 # example: API 2.9.0 --> Client 2.9.X
-ONDEWO_NLU_API_VERSION=7.2.0
+ONDEWO_NLU_API_VERSION=7.3.0
 
 # Placeholder only: `make ondewo_release` passes the real token from ondewo-devops-accounts/account_github.env on
 # the command line. Credentials live only in that repo - never commit one here or store it anywhere on GitHub.

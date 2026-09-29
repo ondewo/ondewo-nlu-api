@@ -2,6 +2,14 @@
 
 *****************
 
+## Release ONDEWO NLU API 7.3.0
+
+### Changes
+
+* [[OND211-2444]](https://ondewo.atlassian.net/browse/OND211-2444) move `max_pages` from `RagCrawlerDeepCrawlerConfig` to `RagCrawlerConfig` because it does not just apply to deep crawls.
+
+*****************
+
 ## Release ONDEWO NLU API 7.2.0
 
 ### Changes

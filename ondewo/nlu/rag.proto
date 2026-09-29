@@ -1659,7 +1659,7 @@ message RagCrawlerConfig {
     // Optional. Concurrency and pacing controls for crawler requests.
     RagCrawlerConcurrencyConfig concurrency_config = 1;
 
-    // Optional. Deep crawler behavior (enable + depth/pages/scoring/filter chain).
+    // Optional. Deep crawler behavior (enable + depth/scoring/filter chain).
     RagCrawlerDeepCrawlerConfig deep_crawler_config = 2;
 
     // Optional. Structured output configuration (format + metadata policy).
@@ -1670,6 +1670,9 @@ message RagCrawlerConfig {
 
     // Optional. Incremental crawling: reuse unchanged pages from the previous run instead of re-fetching them.
     RagCrawlerIncrementalConfig incremental_config = 5;
+
+    // Optional. Hard cap on pages fetched successfully in this run; <code>0</code> means unlimited.
+    optional int32 max_pages = 6;
 
 }
 
@@ -1686,8 +1689,8 @@ message RagCrawlerDeepCrawlerConfig {
     // Optional. Maximum link depth from seed URLs, counted from the nearest seed. <code>0</code> means unlimited depth.
     optional int32 max_depth = 3;
 
-    // Optional. Hard cap on pages fetched successfully in this run; <code>0</code> means unlimited.
-    int32 max_pages = 4;
+    // Deprecated. Use <code>RagCrawlerConfig.max_pages</code> instead
+    int32 max_pages = 4 [deprecated = true];
 
     // Optional. URL and domain restrictions.
     RagCrawlerFilters deep_crawler_filters = 5;
