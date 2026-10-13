@@ -3414,6 +3414,10 @@
                       </li>
                     
                       <li>
+                        <a href="#ondewo.nlu.AgentNodeEvent" class="title-badge message">AgentNodeEvent</a>
+                      </li>
+                    
+                      <li>
                         <a href="#ondewo.nlu.AudioFileResource" class="title-badge message">AudioFileResource</a>
                       </li>
                     
@@ -3922,6 +3926,10 @@
                   
                   <a href="#ondewo/nlu/session.proto-enums">Enums</a>
                   <ul>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.AgentNodePhase" class="title-badge enum">AgentNodePhase</a>
+                      </li>
                     
                       <li>
                         <a href="#ondewo.nlu.AudioEncoding" class="title-badge enum">AudioEncoding</a>
@@ -39485,6 +39493,82 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid
 
         
       
+        <h3 id="ondewo.nlu.AgentNodeEvent" class="title-badge message">AgentNodeEvent</h3>
+        <p>Emitted on a streaming DetectIntent when a node of an AI Team graph starts, completes or fails.</p><p>A node inside a nested graph (a subgraph, or a member agent of a supervisor or swarm) is reported too,</p><p>with its full <code>node_path</code>.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>node_run_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Id of this run of the node. The <code>AGENT_NODE_PHASE_STARTED</code> event and the
+<code>AGENT_NODE_PHASE_COMPLETED</code> or <code>AGENT_NODE_PHASE_FAILED</code> event of one run share it. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>parent_node_run_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p><code>node_run_id</code> of the node run this one is nested in; empty for a node of the outermost graph. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>node_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Name of the node, e.g. <code>researcher</code>. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>node_path</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Names of the nodes from the outermost graph down to this one, e.g.
+<code>["supervisor", "researcher", "model"]</code>. The last element equals <code>node_name</code>. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>phase</td>
+                  <td><a href="#ondewo.nlu.AgentNodePhase">AgentNodePhase</a></td>
+                  <td></td>
+                  <td><p>Lifecycle phase this event reports. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>timestamp</td>
+                  <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
+                  <td></td>
+                  <td><p>Wall-clock time of the event. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>duration_in_s</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p>Duration of the node run in seconds; set only on <code>AGENT_NODE_PHASE_COMPLETED</code> and
+<code>AGENT_NODE_PHASE_FAILED</code>. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>error_message</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Populated only on <code>AGENT_NODE_PHASE_FAILED</code>; empty string otherwise. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="ondewo.nlu.AudioFileResource" class="title-badge message">AudioFileResource</h3>
         <p>Represents an audio file resource attached to a session (input recording or generated TTS output).</p>
 
@@ -46813,6 +46897,13 @@ locate a response in the training example set or for reporting issues. </p></td>
                   <td><p>Emitted when the running LLM token-usage totals are updated. </p></td>
                 </tr>
               
+                <tr>
+                  <td>agent_node</td>
+                  <td><a href="#ondewo.nlu.AgentNodeEvent">AgentNodeEvent</a></td>
+                  <td></td>
+                  <td><p>Emitted when a node of an AI Team graph starts, completes or fails. </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -47105,6 +47196,41 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid
 
       
       <div id="ondewo/nlu/session.proto-enums" class="object-category">Enums</div>
+      
+        <h3 id="ondewo.nlu.AgentNodePhase" class="title-badge enum">AgentNodePhase</h3>
+        <p>Lifecycle phase of an AI Team graph node, reported by <code>AgentNodeEvent</code>.</p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>AGENT_NODE_PHASE_UNSPECIFIED</td>
+                <td>0</td>
+                <td><p>Not set.</p></td>
+              </tr>
+            
+              <tr>
+                <td>AGENT_NODE_PHASE_STARTED</td>
+                <td>1</td>
+                <td><p>The node started running.</p></td>
+              </tr>
+            
+              <tr>
+                <td>AGENT_NODE_PHASE_COMPLETED</td>
+                <td>2</td>
+                <td><p>The node finished without an error.</p></td>
+              </tr>
+            
+              <tr>
+                <td>AGENT_NODE_PHASE_FAILED</td>
+                <td>3</td>
+                <td><p>The node raised an error.</p></td>
+              </tr>
+            
+          </tbody>
+        </table>
       
         <h3 id="ondewo.nlu.AudioEncoding" class="title-badge enum">AudioEncoding</h3>
         <p>Audio encoding of the audio content sent in the conversational query request.</p><p>Refer to the <a href="/speech/docs/basics">Cloud Speech API documentation</a> for more details.</p>

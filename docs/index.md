@@ -649,6 +649,7 @@
     - [AddSessionFeedbackRequest](#ondewo.nlu.AddSessionFeedbackRequest)
     - [AddSessionLabelsRequest](#ondewo.nlu.AddSessionLabelsRequest)
     - [AddSessionStepFeedbackRequest](#ondewo.nlu.AddSessionStepFeedbackRequest)
+    - [AgentNodeEvent](#ondewo.nlu.AgentNodeEvent)
     - [AudioFileResource](#ondewo.nlu.AudioFileResource)
     - [ContextFilter](#ondewo.nlu.ContextFilter)
     - [CreateSessionRequest](#ondewo.nlu.CreateSessionRequest)
@@ -776,6 +777,7 @@
     - [UpdateSessionStepRequest](#ondewo.nlu.UpdateSessionStepRequest)
     - [VideoFileResource](#ondewo.nlu.VideoFileResource)
   
+    - [AgentNodePhase](#ondewo.nlu.AgentNodePhase)
     - [AudioEncoding](#ondewo.nlu.AudioEncoding)
     - [AudioFileResourceType](#ondewo.nlu.AudioFileResourceType)
     - [ComparisonOperator](#ondewo.nlu.ComparisonOperator)
@@ -12720,6 +12722,30 @@ Request to record feedback about a single session step (turn).
 
 
 
+<a name="ondewo.nlu.AgentNodeEvent"></a>
+
+### AgentNodeEvent
+Emitted on a streaming DetectIntent when a node of an AI Team graph starts, completes or fails.
+A node inside a nested graph (a subgraph, or a member agent of a supervisor or swarm) is reported too,
+with its full <code>node_path</code>.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| node_run_id | [string](#string) |  | Id of this run of the node. The <code>AGENT_NODE_PHASE_STARTED</code> event and the <code>AGENT_NODE_PHASE_COMPLETED</code> or <code>AGENT_NODE_PHASE_FAILED</code> event of one run share it. |
+| parent_node_run_id | [string](#string) |  | <code>node_run_id</code> of the node run this one is nested in; empty for a node of the outermost graph. |
+| node_name | [string](#string) |  | Name of the node, e.g. <code>researcher</code>. |
+| node_path | [string](#string) | repeated | Names of the nodes from the outermost graph down to this one, e.g. <code>["supervisor", "researcher", "model"]</code>. The last element equals <code>node_name</code>. |
+| phase | [AgentNodePhase](#ondewo.nlu.AgentNodePhase) |  | Lifecycle phase this event reports. |
+| timestamp | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Wall-clock time of the event. |
+| duration_in_s | [double](#double) |  | Duration of the node run in seconds; set only on <code>AGENT_NODE_PHASE_COMPLETED</code> and <code>AGENT_NODE_PHASE_FAILED</code>. |
+| error_message | [string](#string) |  | Populated only on <code>AGENT_NODE_PHASE_FAILED</code>; empty string otherwise. |
+
+
+
+
+
+
 <a name="ondewo.nlu.AudioFileResource"></a>
 
 ### AudioFileResource
@@ -15191,6 +15217,7 @@ Multiple response messages can be returned in order:
 | llm_tool_call_finished | [LlmToolCallFinishedEvent](#ondewo.nlu.LlmToolCallFinishedEvent) |  | Emitted when an LLM tool call has finished. |
 | llm_thinking_delta | [LlmThinkingDeltaEvent](#ondewo.nlu.LlmThinkingDeltaEvent) |  | Emitted for an incremental LLM thinking (reasoning) update. |
 | llm_token_usage_update | [LlmTokenUsageUpdateEvent](#ondewo.nlu.LlmTokenUsageUpdateEvent) |  | Emitted when the running LLM token-usage totals are updated. |
+| agent_node | [AgentNodeEvent](#ondewo.nlu.AgentNodeEvent) |  | Emitted when a node of an AI Team graph starts, completes or fails. |
 
 
 
@@ -15335,6 +15362,20 @@ Represents a video file resource (e.g., MP4, AVI).
 
 
  <!-- end messages -->
+
+
+<a name="ondewo.nlu.AgentNodePhase"></a>
+
+### AgentNodePhase
+Lifecycle phase of an AI Team graph node, reported by <code>AgentNodeEvent</code>.
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| AGENT_NODE_PHASE_UNSPECIFIED | 0 | Not set. |
+| AGENT_NODE_PHASE_STARTED | 1 | The node started running. |
+| AGENT_NODE_PHASE_COMPLETED | 2 | The node finished without an error. |
+| AGENT_NODE_PHASE_FAILED | 3 | The node raised an error. |
+
 
 
 <a name="ondewo.nlu.AudioEncoding"></a>
