@@ -3414,10 +3414,6 @@
                       </li>
                     
                       <li>
-                        <a href="#ondewo.nlu.AgentNodeEvent" class="title-badge message">AgentNodeEvent</a>
-                      </li>
-                    
-                      <li>
                         <a href="#ondewo.nlu.AudioFileResource" class="title-badge message">AudioFileResource</a>
                       </li>
                     
@@ -3730,6 +3726,10 @@
                       </li>
                     
                       <li>
+                        <a href="#ondewo.nlu.LlmBaseUrlUsage" class="title-badge message">LlmBaseUrlUsage</a>
+                      </li>
+                    
+                      <li>
                         <a href="#ondewo.nlu.LlmCacheStats" class="title-badge message">LlmCacheStats</a>
                       </li>
                     
@@ -3926,10 +3926,6 @@
                   
                   <a href="#ondewo/nlu/session.proto-enums">Enums</a>
                   <ul>
-                    
-                      <li>
-                        <a href="#ondewo.nlu.AgentNodePhase" class="title-badge enum">AgentNodePhase</a>
-                      </li>
                     
                       <li>
                         <a href="#ondewo.nlu.AudioEncoding" class="title-badge enum">AudioEncoding</a>
@@ -8033,6 +8029,15 @@ response (e.g. paths=["llm_telemetry_report"]). </p></td>
                   <td><p>Optional. Restrict LLM aggregations to specific CCAI service providers. Empty = all. </p></td>
                 </tr>
               
+                <tr>
+                  <td>llm_base_url_filter</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Optional. Restrict LLM-typed reports to calls made through specific base URLs (the
+<code>LlmTelemetry.base_url</code> values, as reported in <code>LlmTelemetryReport.base_urls_used</code>).
+An empty string selects calls whose model configuration states no base URL. Empty list = all. </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -8332,6 +8337,15 @@ Example: paths=[&quot;duration_in_s_min&quot;, &quot;id&quot;, &quot;session_id&
                   <td><p>Optional. Restrict LLM-typed reports to specific CCAI service providers. Empty = all. </p></td>
                 </tr>
               
+                <tr>
+                  <td>llm_base_url_filter</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Optional. Restrict LLM-typed reports to calls made through specific base URLs (the
+<code>LlmTelemetry.base_url</code> values, as reported in <code>LlmTelemetryReport.base_urls_used</code>).
+An empty string selects calls whose model configuration states no base URL. Empty list = all. </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -8475,6 +8489,15 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
                   <td></td>
                   <td><p>Optional. The mask to control which data fields will be added to the
 returned data (e.g. paths=["llm_telemetry_time_series_buckets.llm_telemetry_report.llm_token_usage"]). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>llm_base_url_filter</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Optional. Restrict LLM-typed reports to calls made through specific base URLs (the
+<code>LlmTelemetry.base_url</code> values, as reported in <code>LlmTelemetryReport.base_urls_used</code>).
+An empty string selects calls whose model configuration states no base URL. Empty list = all. </p></td>
                 </tr>
               
             </tbody>
@@ -39493,82 +39516,6 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid
 
         
       
-        <h3 id="ondewo.nlu.AgentNodeEvent" class="title-badge message">AgentNodeEvent</h3>
-        <p>Emitted on a streaming DetectIntent when a node of an AI Team graph starts, completes or fails.</p><p>A node inside a nested graph (a subgraph, or a member agent of a supervisor or swarm) is reported too,</p><p>with its full <code>node_path</code>.</p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>node_run_id</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Id of this run of the node. The <code>AGENT_NODE_PHASE_STARTED</code> event and the
-<code>AGENT_NODE_PHASE_COMPLETED</code> or <code>AGENT_NODE_PHASE_FAILED</code> event of one run share it. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>parent_node_run_id</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p><code>node_run_id</code> of the node run this one is nested in; empty for a node of the outermost graph. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>node_name</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Name of the node, e.g. <code>researcher</code>. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>node_path</td>
-                  <td><a href="#string">string</a></td>
-                  <td>repeated</td>
-                  <td><p>Names of the nodes from the outermost graph down to this one, e.g.
-<code>["supervisor", "researcher", "model"]</code>. The last element equals <code>node_name</code>. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>phase</td>
-                  <td><a href="#ondewo.nlu.AgentNodePhase">AgentNodePhase</a></td>
-                  <td></td>
-                  <td><p>Lifecycle phase this event reports. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>timestamp</td>
-                  <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
-                  <td></td>
-                  <td><p>Wall-clock time of the event. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>duration_in_s</td>
-                  <td><a href="#double">double</a></td>
-                  <td></td>
-                  <td><p>Duration of the node run in seconds; set only on <code>AGENT_NODE_PHASE_COMPLETED</code> and
-<code>AGENT_NODE_PHASE_FAILED</code>. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>error_message</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Populated only on <code>AGENT_NODE_PHASE_FAILED</code>; empty string otherwise. </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
         <h3 id="ondewo.nlu.AudioFileResource" class="title-badge message">AudioFileResource</h3>
         <p>Represents an audio file resource attached to a session (input recording or generated TTS output).</p>
 
@@ -42983,6 +42930,52 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
 
         
       
+        <h3 id="ondewo.nlu.LlmBaseUrlUsage" class="title-badge message">LlmBaseUrlUsage</h3>
+        <p>Per-base-URL usage rollup across the scope. One entry per distinct</p><p><code>LlmTelemetry.base_url</code>; calls whose model configuration states no base URL are</p><p>grouped under an empty <code>base_url</code>.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>base_url</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Base URL the calls went through (proxy / OpenAI-compatible endpoint), with embedded
+credentials redacted. Empty = the model configuration states no base URL. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>call_count</td>
+                  <td><a href="#int64">int64</a></td>
+                  <td></td>
+                  <td><p>Number of LLM calls made through this base URL in scope. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>llm_token_usage</td>
+                  <td><a href="#ondewo.nlu.LlmTokenUsage">LlmTokenUsage</a></td>
+                  <td></td>
+                  <td><p>Summed token usage for the calls made through this base URL. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>model_names</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Distinct model names called through this base URL. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="ondewo.nlu.LlmCacheStats" class="title-badge message">LlmCacheStats</h3>
         <p>Prompt-cache efficiency aggregate across the LLM calls in scope.</p>
 
@@ -44540,6 +44533,15 @@ which is the UPSTREAM framework's id (autogen / langchain). </p></td>
                   <td></td>
                   <td><p>Native safety aggregate (counts / rates / mean score). Populated for
 *_LLM_SAFETY and *_LLM_TOTAL_STATISTICS reports. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>base_urls_used</td>
+                  <td><a href="#ondewo.nlu.LlmBaseUrlUsage">LlmBaseUrlUsage</a></td>
+                  <td>repeated</td>
+                  <td><p>Per-base-URL usage rollup. Populated for *_LLM_TOTAL_STATISTICS. Unlike
+<code>LlmModelUsage.base_url</code>, which carries one base URL per model, this lists every
+distinct base URL in scope. </p></td>
                 </tr>
               
             </tbody>
@@ -46897,13 +46899,6 @@ locate a response in the training example set or for reporting issues. </p></td>
                   <td><p>Emitted when the running LLM token-usage totals are updated. </p></td>
                 </tr>
               
-                <tr>
-                  <td>agent_node</td>
-                  <td><a href="#ondewo.nlu.AgentNodeEvent">AgentNodeEvent</a></td>
-                  <td></td>
-                  <td><p>Emitted when a node of an AI Team graph starts, completes or fails. </p></td>
-                </tr>
-              
             </tbody>
           </table>
 
@@ -47196,41 +47191,6 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid
 
       
       <div id="ondewo/nlu/session.proto-enums" class="object-category">Enums</div>
-      
-        <h3 id="ondewo.nlu.AgentNodePhase" class="title-badge enum">AgentNodePhase</h3>
-        <p>Lifecycle phase of an AI Team graph node, reported by <code>AgentNodeEvent</code>.</p>
-        <table class="enum-table">
-          <thead>
-            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
-          </thead>
-          <tbody>
-            
-              <tr>
-                <td>AGENT_NODE_PHASE_UNSPECIFIED</td>
-                <td>0</td>
-                <td><p>Not set.</p></td>
-              </tr>
-            
-              <tr>
-                <td>AGENT_NODE_PHASE_STARTED</td>
-                <td>1</td>
-                <td><p>The node started running.</p></td>
-              </tr>
-            
-              <tr>
-                <td>AGENT_NODE_PHASE_COMPLETED</td>
-                <td>2</td>
-                <td><p>The node finished without an error.</p></td>
-              </tr>
-            
-              <tr>
-                <td>AGENT_NODE_PHASE_FAILED</td>
-                <td>3</td>
-                <td><p>The node raised an error.</p></td>
-              </tr>
-            
-          </tbody>
-        </table>
       
         <h3 id="ondewo.nlu.AudioEncoding" class="title-badge enum">AudioEncoding</h3>
         <p>Audio encoding of the audio content sent in the conversational query request.</p><p>Refer to the <a href="/speech/docs/basics">Cloud Speech API documentation</a> for more details.</p>

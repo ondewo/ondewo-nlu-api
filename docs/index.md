@@ -649,7 +649,6 @@
     - [AddSessionFeedbackRequest](#ondewo.nlu.AddSessionFeedbackRequest)
     - [AddSessionLabelsRequest](#ondewo.nlu.AddSessionLabelsRequest)
     - [AddSessionStepFeedbackRequest](#ondewo.nlu.AddSessionStepFeedbackRequest)
-    - [AgentNodeEvent](#ondewo.nlu.AgentNodeEvent)
     - [AudioFileResource](#ondewo.nlu.AudioFileResource)
     - [ContextFilter](#ondewo.nlu.ContextFilter)
     - [CreateSessionRequest](#ondewo.nlu.CreateSessionRequest)
@@ -728,6 +727,7 @@
     - [ListUserIdsOfAllSessionsRequest](#ondewo.nlu.ListUserIdsOfAllSessionsRequest)
     - [ListUserIdsResponse](#ondewo.nlu.ListUserIdsResponse)
     - [LlmAgentUsage](#ondewo.nlu.LlmAgentUsage)
+    - [LlmBaseUrlUsage](#ondewo.nlu.LlmBaseUrlUsage)
     - [LlmCacheStats](#ondewo.nlu.LlmCacheStats)
     - [LlmCallFinishedEvent](#ondewo.nlu.LlmCallFinishedEvent)
     - [LlmCallStartedEvent](#ondewo.nlu.LlmCallStartedEvent)
@@ -777,7 +777,6 @@
     - [UpdateSessionStepRequest](#ondewo.nlu.UpdateSessionStepRequest)
     - [VideoFileResource](#ondewo.nlu.VideoFileResource)
   
-    - [AgentNodePhase](#ondewo.nlu.AgentNodePhase)
     - [AudioEncoding](#ondewo.nlu.AudioEncoding)
     - [AudioFileResourceType](#ondewo.nlu.AudioFileResourceType)
     - [ComparisonOperator](#ondewo.nlu.ComparisonOperator)
@@ -1776,6 +1775,7 @@ Request statistics of the agent
 | llm_group_bys | [string](#string) | repeated | Optional. Group LLM aggregations by named dimensions (e.g. <code>["model_name", "provider"]</code>). Empty list = no grouping. |
 | field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which fields will be filled with data on the response (e.g. paths=["llm_telemetry_report"]). |
 | llm_ccai_service_provider_filter | [CcaiServiceProvider](#ondewo.nlu.CcaiServiceProvider) | repeated | Optional. Restrict LLM aggregations to specific CCAI service providers. Empty = all. |
+| llm_base_url_filter | [string](#string) | repeated | Optional. Restrict LLM-typed reports to calls made through specific base URLs (the <code>LlmTelemetry.base_url</code> values, as reported in <code>LlmTelemetryReport.base_urls_used</code>). An empty string selects calls whose model configuration states no base URL. Empty list = all. |
 
 
 
@@ -1887,6 +1887,7 @@ Request of the report of the statistics about sessions
 | llm_agent_name_filter | [string](#string) | repeated | Optional. Restrict LLM-typed reports to specific intent-agent names. Empty = all. |
 | llm_tool_name_filter | [string](#string) | repeated | Optional. Restrict LLM-typed reports to specific tool names. Empty = all. |
 | llm_ccai_service_provider_filter | [CcaiServiceProvider](#ondewo.nlu.CcaiServiceProvider) | repeated | Optional. Restrict LLM-typed reports to specific CCAI service providers. Empty = all. |
+| llm_base_url_filter | [string](#string) | repeated | Optional. Restrict LLM-typed reports to calls made through specific base URLs (the <code>LlmTelemetry.base_url</code> values, as reported in <code>LlmTelemetryReport.base_urls_used</code>). An empty string selects calls whose model configuration states no base URL. Empty list = all. |
 
 
 
@@ -1930,6 +1931,7 @@ Request for time-bucketed LLM telemetry statistics about sessions.
 | llm_tool_name_filter | [string](#string) | repeated | Optional. Restrict to specific tool names. Empty = all. |
 | llm_ccai_service_provider_filter | [CcaiServiceProvider](#ondewo.nlu.CcaiServiceProvider) | repeated | Optional. Restrict to specific CCAI service providers. Empty = all. |
 | field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which data fields will be added to the returned data (e.g. paths=["llm_telemetry_time_series_buckets.llm_telemetry_report.llm_token_usage"]). |
+| llm_base_url_filter | [string](#string) | repeated | Optional. Restrict LLM-typed reports to calls made through specific base URLs (the <code>LlmTelemetry.base_url</code> values, as reported in <code>LlmTelemetryReport.base_urls_used</code>). An empty string selects calls whose model configuration states no base URL. Empty list = all. |
 
 
 
@@ -12722,30 +12724,6 @@ Request to record feedback about a single session step (turn).
 
 
 
-<a name="ondewo.nlu.AgentNodeEvent"></a>
-
-### AgentNodeEvent
-Emitted on a streaming DetectIntent when a node of an AI Team graph starts, completes or fails.
-A node inside a nested graph (a subgraph, or a member agent of a supervisor or swarm) is reported too,
-with its full <code>node_path</code>.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| node_run_id | [string](#string) |  | Id of this run of the node. The <code>AGENT_NODE_PHASE_STARTED</code> event and the <code>AGENT_NODE_PHASE_COMPLETED</code> or <code>AGENT_NODE_PHASE_FAILED</code> event of one run share it. |
-| parent_node_run_id | [string](#string) |  | <code>node_run_id</code> of the node run this one is nested in; empty for a node of the outermost graph. |
-| node_name | [string](#string) |  | Name of the node, e.g. <code>researcher</code>. |
-| node_path | [string](#string) | repeated | Names of the nodes from the outermost graph down to this one, e.g. <code>["supervisor", "researcher", "model"]</code>. The last element equals <code>node_name</code>. |
-| phase | [AgentNodePhase](#ondewo.nlu.AgentNodePhase) |  | Lifecycle phase this event reports. |
-| timestamp | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Wall-clock time of the event. |
-| duration_in_s | [double](#double) |  | Duration of the node run in seconds; set only on <code>AGENT_NODE_PHASE_COMPLETED</code> and <code>AGENT_NODE_PHASE_FAILED</code>. |
-| error_message | [string](#string) |  | Populated only on <code>AGENT_NODE_PHASE_FAILED</code>; empty string otherwise. |
-
-
-
-
-
-
 <a name="ondewo.nlu.AudioFileResource"></a>
 
 ### AudioFileResource
@@ -14154,6 +14132,26 @@ Per-intent-agent usage rollup across the scope.
 
 
 
+<a name="ondewo.nlu.LlmBaseUrlUsage"></a>
+
+### LlmBaseUrlUsage
+Per-base-URL usage rollup across the scope. One entry per distinct
+<code>LlmTelemetry.base_url</code>; calls whose model configuration states no base URL are
+grouped under an empty <code>base_url</code>.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| base_url | [string](#string) |  | Base URL the calls went through (proxy / OpenAI-compatible endpoint), with embedded credentials redacted. Empty = the model configuration states no base URL. |
+| call_count | [int64](#int64) |  | Number of LLM calls made through this base URL in scope. |
+| llm_token_usage | [LlmTokenUsage](#ondewo.nlu.LlmTokenUsage) |  | Summed token usage for the calls made through this base URL. |
+| model_names | [string](#string) | repeated | Distinct model names called through this base URL. |
+
+
+
+
+
+
 <a name="ondewo.nlu.LlmCacheStats"></a>
 
 ### LlmCacheStats
@@ -14598,6 +14596,7 @@ breakdown fields (6+) are populated only for the matching report type; a
 | tool_call_tokens_total | [int64](#int64) |  | Scope-wide summed tool-call tokens. |
 | tool_call_duration_seconds_total | [double](#double) |  | Scope-wide summed tool-call duration in seconds. |
 | safety_stats | [LlmSafetyStats](#ondewo.nlu.LlmSafetyStats) |  | Native safety aggregate (counts / rates / mean score). Populated for *_LLM_SAFETY and *_LLM_TOTAL_STATISTICS reports. |
+| base_urls_used | [LlmBaseUrlUsage](#ondewo.nlu.LlmBaseUrlUsage) | repeated | Per-base-URL usage rollup. Populated for *_LLM_TOTAL_STATISTICS. Unlike <code>LlmModelUsage.base_url</code>, which carries one base URL per model, this lists every distinct base URL in scope. |
 
 
 
@@ -15217,7 +15216,6 @@ Multiple response messages can be returned in order:
 | llm_tool_call_finished | [LlmToolCallFinishedEvent](#ondewo.nlu.LlmToolCallFinishedEvent) |  | Emitted when an LLM tool call has finished. |
 | llm_thinking_delta | [LlmThinkingDeltaEvent](#ondewo.nlu.LlmThinkingDeltaEvent) |  | Emitted for an incremental LLM thinking (reasoning) update. |
 | llm_token_usage_update | [LlmTokenUsageUpdateEvent](#ondewo.nlu.LlmTokenUsageUpdateEvent) |  | Emitted when the running LLM token-usage totals are updated. |
-| agent_node | [AgentNodeEvent](#ondewo.nlu.AgentNodeEvent) |  | Emitted when a node of an AI Team graph starts, completes or fails. |
 
 
 
@@ -15362,20 +15360,6 @@ Represents a video file resource (e.g., MP4, AVI).
 
 
  <!-- end messages -->
-
-
-<a name="ondewo.nlu.AgentNodePhase"></a>
-
-### AgentNodePhase
-Lifecycle phase of an AI Team graph node, reported by <code>AgentNodeEvent</code>.
-
-| Name | Number | Description |
-| ---- | ------ | ----------- |
-| AGENT_NODE_PHASE_UNSPECIFIED | 0 | Not set. |
-| AGENT_NODE_PHASE_STARTED | 1 | The node started running. |
-| AGENT_NODE_PHASE_COMPLETED | 2 | The node finished without an error. |
-| AGENT_NODE_PHASE_FAILED | 3 | The node raised an error. |
-
 
 
 <a name="ondewo.nlu.AudioEncoding"></a>
