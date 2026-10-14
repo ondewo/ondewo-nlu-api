@@ -1009,6 +1009,11 @@ message GetAgentStatisticsRequest {
 
     // Optional. Restrict LLM aggregations to specific CCAI service providers. Empty = all.
     repeated CcaiServiceProvider llm_ccai_service_provider_filter = 10;
+
+    // Optional. Restrict LLM-typed reports to calls made through specific base URLs (the
+    // <code>LlmTelemetry.base_url</code> values, as reported in <code>LlmTelemetryReport.base_urls_used</code>).
+    // An empty string selects calls whose model configuration states no base URL. Empty list = all.
+    repeated string llm_base_url_filter = 11;
 }
 
 // Response to get statistics of the agent
@@ -1163,6 +1168,11 @@ message GetSessionsStatisticsRequest {
 
     // Optional. Restrict LLM-typed reports to specific CCAI service providers. Empty = all.
     repeated CcaiServiceProvider llm_ccai_service_provider_filter = 15;
+
+    // Optional. Restrict LLM-typed reports to calls made through specific base URLs (the
+    // <code>LlmTelemetry.base_url</code> values, as reported in <code>LlmTelemetryReport.base_urls_used</code>).
+    // An empty string selects calls whose model configuration states no base URL. Empty list = all.
+    repeated string llm_base_url_filter = 16;
 }
 
 // Report of the statistics about sessions
@@ -1222,6 +1232,11 @@ message GetSessionsStatisticsTimeSeriesRequest {
     // Optional. The mask to control which data fields will be added to the
     // returned data (e.g. paths=["llm_telemetry_time_series_buckets.llm_telemetry_report.llm_token_usage"]).
     google.protobuf.FieldMask field_mask = 11;
+
+    // Optional. Restrict LLM-typed reports to calls made through specific base URLs (the
+    // <code>LlmTelemetry.base_url</code> values, as reported in <code>LlmTelemetryReport.base_urls_used</code>).
+    // An empty string selects calls whose model configuration states no base URL. Empty list = all.
+    repeated string llm_base_url_filter = 12;
 }
 
 // One time bucket of aggregated LLM telemetry.
