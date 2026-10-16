@@ -4,10 +4,19 @@
 
 ## Release ONDEWO NLU API 7.4.0
 
-### Changes
+### New Features
 
-* [[OND211-2451]](https://ondewo.atlassian.net/browse/OND211-2451) `agent.proto`: add `llm_base_url_filter` to `GetAgentStatisticsRequest`, `GetSessionsStatisticsRequest` and `GetSessionsStatisticsTimeSeriesRequest`, restricting LLM-typed reports to calls made through specific base URLs (an empty string selects calls without a base URL)
-* [[OND211-2451]](https://ondewo.atlassian.net/browse/OND211-2451) `session.proto`: add the `LlmBaseUrlUsage` message and the `base_urls_used` field of `LlmTelemetryReport`, listing every distinct base URL in scope with its call count, token usage and model names
+* [[OND211-2445]](https://ondewo.atlassian.net/browse/OND211-2445) `session.proto`: Real-time lifecycle events for AI Team graph nodes on `StreamingDetectIntent`. The new `LlmAgentNodeEvent` message is streamed as `agent_node_event` (field 11) of the `StreamingDetectIntentResponse.telemetry_event` oneof whenever a node of an AI Team graph starts, completes or fails; nodes of nested graphs (subgraphs, and member agents of a supervisor or swarm) are reported too. Each event carries `llm_agent_node_event_node_run_id` (shared by the start and the end event of one node run), `llm_agent_node_event_parent_node_run_id` (the enclosing node run, empty for the outermost graph), `llm_agent_node_event_node_display_name`, `llm_agent_node_event_node_path` (node names from the outermost graph down to this node), the `agent_node_phase`, a `timestamp`, `llm_agent_node_event_duration_in_s` (set on completion and failure) and `llm_agent_node_event_error_message` (set on failure). Adds the `LlmAgentNodePhase` enum (`LLM_AGENT_NODE_PHASE_STARTED`, `LLM_AGENT_NODE_PHASE_COMPLETED`, `LLM_AGENT_NODE_PHASE_FAILED`).
+* [[OND211-2451]](https://ondewo.atlassian.net/browse/OND211-2451) `agent.proto`: Filter LLM statistics by base URL. `GetAgentStatisticsRequest` (field 11), `GetSessionsStatisticsRequest` (field 16) and `GetSessionsStatisticsTimeSeriesRequest` (field 12) gain `llm_base_url_filter`, restricting LLM-typed reports to calls made through specific base URLs (the `LlmTelemetry.base_url` values). An empty string selects calls whose model configuration states no base URL; an empty list selects all calls.
+* [[OND211-2451]](https://ondewo.atlassian.net/browse/OND211-2451) `session.proto`: Per-base-URL usage breakdown. `LlmTelemetryReport` gains `base_urls_used` (field 21), populated for the `*_LLM_TOTAL_STATISTICS` reports, with one new `LlmBaseUrlUsage` entry per distinct base URL in scope carrying its `call_count`, summed `llm_token_usage` and the distinct `model_names` called through it. Embedded credentials in a base URL are redacted.
+
+### Improvements
+
+* [[OND211-2443]](https://ondewo.atlassian.net/browse/OND211-2443) Release tooling: the GitHub token used by `make ondewo_release` / `make ondewo_unrelease` is now handed to the sub-make and to the utils container through the environment instead of the command line, so it no longer shows up in a process listing on the release host. A new `Release credential hygiene` GitHub workflow (`scripts/check_release_credentials_hygiene.py`) fails any change to the `Makefile` or the workflows that would put a release credential on a command line again. No change to the API.
+
+### Bug Fixes
+
+* None in this release.
 
 *****************
 
