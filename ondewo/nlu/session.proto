@@ -1194,6 +1194,24 @@ message LlmCcaiServiceUsage {
     repeated string model_names = 6;
 }
 
+// Per-base-URL usage rollup across the scope. One entry per distinct
+// <code>LlmTelemetry.base_url</code>; calls whose model configuration states no base URL are
+// grouped under an empty <code>base_url</code>.
+message LlmBaseUrlUsage {
+    // Base URL the calls went through (proxy / OpenAI-compatible endpoint), with embedded
+    // credentials redacted. Empty = the model configuration states no base URL.
+    string base_url = 1;
+
+    // Number of LLM calls made through this base URL in scope.
+    int64 call_count = 2;
+
+    // Summed token usage for the calls made through this base URL.
+    LlmTokenUsage llm_token_usage = 3;
+
+    // Distinct model names called through this base URL.
+    repeated string model_names = 4;
+}
+
 // Per-intent-agent usage rollup across the scope.
 message LlmAgentUsage {
     // intent_agent executor / agent name owning the calls.
@@ -1382,6 +1400,11 @@ message LlmTelemetryReport {
     // Native safety aggregate (counts / rates / mean score). Populated for
     // *_LLM_SAFETY and *_LLM_TOTAL_STATISTICS reports.
     LlmSafetyStats safety_stats = 20;
+
+    // Per-base-URL usage rollup. Populated for *_LLM_TOTAL_STATISTICS. Unlike
+    // <code>LlmModelUsage.base_url</code>, which carries one base URL per model, this lists every
+    // distinct base URL in scope.
+    repeated LlmBaseUrlUsage base_urls_used = 21;
 }
 
 // Per-category native-safety aggregate across the LLM calls in scope.

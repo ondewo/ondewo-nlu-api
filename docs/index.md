@@ -727,6 +727,7 @@
     - [ListUserIdsOfAllSessionsRequest](#ondewo.nlu.ListUserIdsOfAllSessionsRequest)
     - [ListUserIdsResponse](#ondewo.nlu.ListUserIdsResponse)
     - [LlmAgentUsage](#ondewo.nlu.LlmAgentUsage)
+    - [LlmBaseUrlUsage](#ondewo.nlu.LlmBaseUrlUsage)
     - [LlmCacheStats](#ondewo.nlu.LlmCacheStats)
     - [LlmCallFinishedEvent](#ondewo.nlu.LlmCallFinishedEvent)
     - [LlmCallStartedEvent](#ondewo.nlu.LlmCallStartedEvent)
@@ -1774,6 +1775,7 @@ Request statistics of the agent
 | llm_group_bys | [string](#string) | repeated | Optional. Group LLM aggregations by named dimensions (e.g. <code>["model_name", "provider"]</code>). Empty list = no grouping. |
 | field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which fields will be filled with data on the response (e.g. paths=["llm_telemetry_report"]). |
 | llm_ccai_service_provider_filter | [CcaiServiceProvider](#ondewo.nlu.CcaiServiceProvider) | repeated | Optional. Restrict LLM aggregations to specific CCAI service providers. Empty = all. |
+| llm_base_url_filter | [string](#string) | repeated | Optional. Restrict LLM-typed reports to calls made through specific base URLs (the <code>LlmTelemetry.base_url</code> values, as reported in <code>LlmTelemetryReport.base_urls_used</code>). An empty string selects calls whose model configuration states no base URL. Empty list = all. |
 
 
 
@@ -1885,6 +1887,7 @@ Request of the report of the statistics about sessions
 | llm_agent_name_filter | [string](#string) | repeated | Optional. Restrict LLM-typed reports to specific intent-agent names. Empty = all. |
 | llm_tool_name_filter | [string](#string) | repeated | Optional. Restrict LLM-typed reports to specific tool names. Empty = all. |
 | llm_ccai_service_provider_filter | [CcaiServiceProvider](#ondewo.nlu.CcaiServiceProvider) | repeated | Optional. Restrict LLM-typed reports to specific CCAI service providers. Empty = all. |
+| llm_base_url_filter | [string](#string) | repeated | Optional. Restrict LLM-typed reports to calls made through specific base URLs (the <code>LlmTelemetry.base_url</code> values, as reported in <code>LlmTelemetryReport.base_urls_used</code>). An empty string selects calls whose model configuration states no base URL. Empty list = all. |
 
 
 
@@ -1928,6 +1931,7 @@ Request for time-bucketed LLM telemetry statistics about sessions.
 | llm_tool_name_filter | [string](#string) | repeated | Optional. Restrict to specific tool names. Empty = all. |
 | llm_ccai_service_provider_filter | [CcaiServiceProvider](#ondewo.nlu.CcaiServiceProvider) | repeated | Optional. Restrict to specific CCAI service providers. Empty = all. |
 | field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. The mask to control which data fields will be added to the returned data (e.g. paths=["llm_telemetry_time_series_buckets.llm_telemetry_report.llm_token_usage"]). |
+| llm_base_url_filter | [string](#string) | repeated | Optional. Restrict LLM-typed reports to calls made through specific base URLs (the <code>LlmTelemetry.base_url</code> values, as reported in <code>LlmTelemetryReport.base_urls_used</code>). An empty string selects calls whose model configuration states no base URL. Empty list = all. |
 
 
 
@@ -14128,6 +14132,26 @@ Per-intent-agent usage rollup across the scope.
 
 
 
+<a name="ondewo.nlu.LlmBaseUrlUsage"></a>
+
+### LlmBaseUrlUsage
+Per-base-URL usage rollup across the scope. One entry per distinct
+<code>LlmTelemetry.base_url</code>; calls whose model configuration states no base URL are
+grouped under an empty <code>base_url</code>.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| base_url | [string](#string) |  | Base URL the calls went through (proxy / OpenAI-compatible endpoint), with embedded credentials redacted. Empty = the model configuration states no base URL. |
+| call_count | [int64](#int64) |  | Number of LLM calls made through this base URL in scope. |
+| llm_token_usage | [LlmTokenUsage](#ondewo.nlu.LlmTokenUsage) |  | Summed token usage for the calls made through this base URL. |
+| model_names | [string](#string) | repeated | Distinct model names called through this base URL. |
+
+
+
+
+
+
 <a name="ondewo.nlu.LlmCacheStats"></a>
 
 ### LlmCacheStats
@@ -14572,6 +14596,7 @@ breakdown fields (6+) are populated only for the matching report type; a
 | tool_call_tokens_total | [int64](#int64) |  | Scope-wide summed tool-call tokens. |
 | tool_call_duration_seconds_total | [double](#double) |  | Scope-wide summed tool-call duration in seconds. |
 | safety_stats | [LlmSafetyStats](#ondewo.nlu.LlmSafetyStats) |  | Native safety aggregate (counts / rates / mean score). Populated for *_LLM_SAFETY and *_LLM_TOTAL_STATISTICS reports. |
+| base_urls_used | [LlmBaseUrlUsage](#ondewo.nlu.LlmBaseUrlUsage) | repeated | Per-base-URL usage rollup. Populated for *_LLM_TOTAL_STATISTICS. Unlike <code>LlmModelUsage.base_url</code>, which carries one base URL per model, this lists every distinct base URL in scope. |
 
 
 

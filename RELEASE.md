@@ -2,6 +2,15 @@
 
 *****************
 
+## Release ONDEWO NLU API 7.4.0
+
+### Changes
+
+* [[OND211-2451]](https://ondewo.atlassian.net/browse/OND211-2451) `agent.proto`: add `llm_base_url_filter` to `GetAgentStatisticsRequest`, `GetSessionsStatisticsRequest` and `GetSessionsStatisticsTimeSeriesRequest`, restricting LLM-typed reports to calls made through specific base URLs (an empty string selects calls without a base URL)
+* [[OND211-2451]](https://ondewo.atlassian.net/browse/OND211-2451) `session.proto`: add the `LlmBaseUrlUsage` message and the `base_urls_used` field of `LlmTelemetryReport`, listing every distinct base URL in scope with its call count, token usage and model names
+
+*****************
+
 ## Release ONDEWO NLU API 7.3.0
 
 ### Changes
