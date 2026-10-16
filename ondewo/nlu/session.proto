@@ -1567,7 +1567,7 @@ message LlmAgentNodeEvent {
     repeated string llm_agent_node_event_node_path = 4;
 
     // Lifecycle phase this event reports.
-    LlmAgentNodePhase agent_node_phase = 5;
+    LlmAgentNodePhase llm_agent_node_phase = 5;
 
     // Wall-clock time of the event.
     google.protobuf.Timestamp timestamp = 6;
@@ -1782,7 +1782,7 @@ message StreamingDetectIntentResponse {
         // Emitted when the running LLM token-usage totals are updated.
         LlmTokenUsageUpdateEvent llm_token_usage_update = 10;
         // Emitted when a node of an AI Team graph starts, completes or fails.
-        LlmAgentNodeEvent agent_node_event = 11;
+        LlmAgentNodeEvent llm_agent_node_event = 11;
     }
 
 }
