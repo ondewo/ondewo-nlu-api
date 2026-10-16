@@ -14128,7 +14128,7 @@ with its full <code>llm_agent_node_event_node_path</code>.
 | llm_agent_node_event_parent_node_run_id | [string](#string) |  | <code>llm_agent_node_event_node_run_id</code> of the node run this one is nested in; empty for a node of the outermost graph. |
 | llm_agent_node_event_node_display_name | [string](#string) |  | Name of the node, e.g. <code>researcher</code>. |
 | llm_agent_node_event_node_path | [string](#string) | repeated | Names of the nodes from the outermost graph down to this one, e.g. <code>["supervisor", "researcher", "model"]</code>. The last element equals <code>llm_agent_node_event_node_display_name</code>. |
-| agent_node_phase | [LlmAgentNodePhase](#ondewo.nlu.LlmAgentNodePhase) |  | Lifecycle phase this event reports. |
+| llm_agent_node_phase | [LlmAgentNodePhase](#ondewo.nlu.LlmAgentNodePhase) |  | Lifecycle phase this event reports. |
 | timestamp | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Wall-clock time of the event. |
 | llm_agent_node_event_duration_in_s | [float](#float) |  | Duration of the node run in seconds; set only on <code>LLM_AGENT_NODE_PHASE_COMPLETED</code> and <code>LLM_AGENT_NODE_PHASE_FAILED</code>. |
 | llm_agent_node_event_error_message | [string](#string) |  | Populated only on <code>LLM_AGENT_NODE_PHASE_FAILED</code>; empty string otherwise. |
@@ -15242,7 +15242,7 @@ Multiple response messages can be returned in order:
 | llm_tool_call_finished | [LlmToolCallFinishedEvent](#ondewo.nlu.LlmToolCallFinishedEvent) |  | Emitted when an LLM tool call has finished. |
 | llm_thinking_delta | [LlmThinkingDeltaEvent](#ondewo.nlu.LlmThinkingDeltaEvent) |  | Emitted for an incremental LLM thinking (reasoning) update. |
 | llm_token_usage_update | [LlmTokenUsageUpdateEvent](#ondewo.nlu.LlmTokenUsageUpdateEvent) |  | Emitted when the running LLM token-usage totals are updated. |
-| agent_node_event | [LlmAgentNodeEvent](#ondewo.nlu.LlmAgentNodeEvent) |  | Emitted when a node of an AI Team graph starts, completes or fails. |
+| llm_agent_node_event | [LlmAgentNodeEvent](#ondewo.nlu.LlmAgentNodeEvent) |  | Emitted when a node of an AI Team graph starts, completes or fails. |
 
 
 
