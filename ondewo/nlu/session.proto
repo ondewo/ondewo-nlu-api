@@ -71,6 +71,19 @@ service Sessions {
     // available via the gRPC API (not REST).
     rpc StreamingDetectIntent (stream StreamingDetectIntentRequest) returns (stream StreamingDetectIntentResponse);
 
+    // Interrupts a turn of the session outside a <code>StreamingDetectIntent</code> stream: cancels it, reports what
+    // the user actually heard of its answer, or discards the session step of a preemptive draft. Meant for clients
+    // without a call-length stream (e.g. a stop button) and for a heard report that arrives after the stream closed.
+    // A voice client with an open stream sends the same <code>TurnControl</code> on that stream instead
+    // (<code>StreamingDetectIntentRequest.turn_control</code>). Requires the permission to interrupt a turn of the
+    // session's project.
+    rpc InterruptTurn (InterruptTurnRequest) returns (InterruptTurnResponse) {
+        option (google.api.http) = {
+            post: "/v2/{session=projects/*/agent/sessions/*}:interruptTurn"
+            body: "*"
+        };
+    }
+
     // *** SESSION RELATED ENDPOINTS *** //
 
     // ListSessions: returns list of sessions from ondewo-kb; by default returns only session IDs
@@ -1744,6 +1757,19 @@ message StreamingDetectIntentRequest {
     // over all streaming messages must not exceed 1 minute.
     bytes input_audio = 6;
 
+    // Optional. Controls a turn of this stream: cancels it, reports what the user heard of its answer, or discards
+    // the session step of a preemptive draft. Sent ALONE (no <code>query_input</code>) on a call-length stream; the
+    // server applies it in stream order and starts no turn for it. Send it only to a server that advertised the
+    // initial metadata <code>x-ondewo-cai-turn-control: 1</code> on this stream: an older server treats a request
+    // without <code>query_input</code> as a malformed turn and ends the stream.
+    TurnControl turn_control = 7;
+
+    // Optional. Client-minted id (e.g. a uuid4 hex) of the turn this request STARTS; set together with
+    // <code>query_input</code>. The server echoes it on every response of that turn
+    // (<code>StreamingDetectIntentResponse.client_turn_id</code>), and a <code>CancelTurn</code> or
+    // <code>HeardReport</code> can name the turn by it before the server's <code>response_id</code> is known.
+    string client_turn_id = 8;
+
 }
 
 // The top-level message returned from the <code>StreamingDetectIntent</code> method.
@@ -1785,6 +1811,253 @@ message StreamingDetectIntentResponse {
         LlmAgentNodeEvent llm_agent_node_event = 11;
     }
 
+    // Set on the response that acknowledges a <code>CancelTurn</code> sent as
+    // <code>StreamingDetectIntentRequest.turn_control</code>. It is sent after every other response of the cancelled
+    // turn, so no response of that turn follows it. Only a <code>CancelTurn</code> is acknowledged on the stream; a
+    // <code>HeardReport</code> or a <code>DiscardDraft</code> is not. Not part of <code>telemetry_event</code>.
+    TurnControlAck turn_control_ack = 12;
+
+    // Echo of <code>StreamingDetectIntentRequest.client_turn_id</code> of the turn this response belongs to; empty
+    // when the client sent none.
+    string client_turn_id = 13;
+
+}
+
+// Controls one turn of a session. Sent as <code>StreamingDetectIntentRequest.turn_control</code> on a call-length
+// stream, or in an <code>InterruptTurnRequest</code>.
+message TurnControl {
+
+    // The control to apply.
+    oneof turn_control {
+        // Cancel the turn: stop generating its answer. Acknowledged with a <code>TurnControlAck</code>.
+        CancelTurn cancel_turn = 1;
+
+        // Report what the user heard of the turn's answer, so the server rewrites the session step and the LLM
+        // memory to it.
+        HeardReport heard_report = 2;
+
+        // Discard the session step of a preemptive draft the client did not use.
+        DiscardDraft discard_draft = 3;
+    }
+}
+
+// Why a turn was interrupted.
+enum TurnInterruptionReason {
+
+    // Not set.
+    TURN_INTERRUPTION_REASON_UNSPECIFIED = 0;
+
+    // The user spoke over the answer and the interruption was confirmed as real.
+    TURN_INTERRUPTION_REASON_BARGE_IN = 1;
+
+    // The user spoke again while the turn was still being generated, before any of its answer was played.
+    TURN_INTERRUPTION_REASON_CALLER_SPOKE_WHILE_THINKING = 2;
+
+    // The call ended while the turn was being generated or played.
+    TURN_INTERRUPTION_REASON_CALL_ENDED = 3;
+
+    // A filler of the turn was cut.
+    TURN_INTERRUPTION_REASON_FILLER_CUT = 4;
+
+    // The user started speaking but no final transcript arrived in time, and the held answer was discarded.
+    TURN_INTERRUPTION_REASON_NO_FINAL_TIMEOUT = 5;
+
+    // A human operator took the call over.
+    TURN_INTERRUPTION_REASON_OPERATOR_TAKEOVER = 6;
+
+    // A human operator muted the bot.
+    TURN_INTERRUPTION_REASON_BOT_MUTED = 7;
+}
+
+// What happens to background work (e.g. an asynchronous tool) the cancelled turn started.
+enum BackgroundWorkPolicy {
+
+    // Keep it running; its result is delivered later as usual.
+    BACKGROUND_WORK_POLICY_KEEP = 0;
+
+    // Cancel work that is still pending, unless the user already heard it acknowledged.
+    BACKGROUND_WORK_POLICY_CANCEL_PENDING = 1;
+}
+
+// Cancels a turn. At least one of <code>response_id</code> and <code>client_turn_id</code> must be set; when both
+// are, <code>client_turn_id</code> is authoritative.
+message CancelTurn {
+
+    // The server's <code>response_id</code> of the turn, when the client has already received it; empty otherwise.
+    string response_id = 1;
+
+    // <code>StreamingDetectIntentRequest.client_turn_id</code> of the turn.
+    string client_turn_id = 2;
+
+    // Why the turn is cancelled.
+    TurnInterruptionReason turn_interruption_reason = 3;
+
+    // Wall-clock time at which the client decided to cancel. Telemetry only.
+    google.protobuf.Timestamp decided_at = 4;
+
+    // What happens to background work the turn started.
+    BackgroundWorkPolicy background_work_policy = 5;
+}
+
+// How the heard text of a <code>HeardReport</code> was determined.
+enum HeardTextPrecision {
+
+    // Not set.
+    HEARD_TEXT_PRECISION_UNSPECIFIED = 0;
+
+    // Nothing of the answer was heard.
+    HEARD_TEXT_PRECISION_NONE_HEARD = 1;
+
+    // The whole answer was heard.
+    HEARD_TEXT_PRECISION_FULL = 2;
+
+    // The played share of the audio was estimated by the client from when it handed the audio to the player, not
+    // measured by the player, and mapped proportionally onto the text.
+    HEARD_TEXT_PRECISION_ESTIMATED_SERVER = 3;
+
+    // The played share of the audio was measured by the audio player and mapped proportionally onto the text.
+    HEARD_TEXT_PRECISION_PROPORTIONAL = 4;
+}
+
+// What the user heard of one spoken message of a turn.
+message HeardMessage {
+
+    // Index into the turn's <code>QueryResult.fulfillment_messages</code>; <code>-1</code> for a filler, which is
+    // not one of them.
+    int32 fulfillment_message_index = 1;
+
+    // Platform of that fulfillment message.
+    Intent.Message.Platform platform = 2;
+
+    // The text that was synthesized for the message, SIP and SSML markup stripped.
+    string full_text = 3;
+
+    // The prefix of <code>full_text</code> the user heard, cut back to a word boundary.
+    string heard_text = 4;
+
+    // Length of <code>heard_text</code> in Unicode code points.
+    int32 heard_char_count = 5;
+
+    // Duration of the message's audio that was played to the user, in seconds.
+    float heard_audio_duration_in_s = 6;
+
+    // Duration of the message's whole audio, in seconds; 0 when it was never synthesized.
+    float total_audio_duration_in_s = 7;
+
+    // The message was played to its end.
+    bool completed = 8;
+
+    // Nothing of the message was played (e.g. it was still queued when the turn was interrupted).
+    bool never_started = 9;
+
+    // The message carried a SIP trigger (e.g. a transfer or a hangup) that was NOT executed because the turn was
+    // interrupted first.
+    bool skipped_sip_trigger = 10;
+
+    // For a filler, the filler id the server sent in <code>diagnostic_info.ondewo_filler.filler_id</code>; empty
+    // otherwise.
+    string filler_id = 11;
+}
+
+// Reports what the user heard of a turn's answer. At least one of <code>response_id</code> and
+// <code>client_turn_id</code> must be set. The server keeps the report with the highest <code>revision</code> per
+// turn and ignores a lower or equal one.
+message HeardReport {
+
+    // The server's <code>response_id</code> of the turn, when the client has already received it; empty otherwise.
+    string response_id = 1;
+
+    // <code>StreamingDetectIntentRequest.client_turn_id</code> of the turn.
+    string client_turn_id = 2;
+
+    // Revision of this report, starting at 1. A later, more precise measurement of the same turn carries a higher
+    // revision.
+    int32 revision = 3;
+
+    // Why the turn was interrupted.
+    TurnInterruptionReason turn_interruption_reason = 4;
+
+    // One entry per message of the turn that was spoken, queued or skipped, in playback order.
+    repeated HeardMessage heard_messages = 5;
+
+    // How the heard text was determined.
+    HeardTextPrecision heard_text_precision = 6;
+
+    // Duration of heard audio that was played after the user had started speaking (the overlap of bot and user),
+    // in seconds.
+    float caller_overlap_duration_in_s = 7;
+}
+
+// Discards the session step of a preemptive draft: a turn the client started speculatively on a partial
+// transcript and then did not use. The server deletes only a draft step of this session.
+message DiscardDraft {
+
+    // The server's <code>response_id</code> of the draft turn.
+    string response_id = 1;
+}
+
+// Outcome of a turn control.
+enum TurnControlAckStatus {
+
+    // Not set.
+    TURN_CONTROL_ACK_STATUS_UNSPECIFIED = 0;
+
+    // The turn was being generated and is now cancelled.
+    TURN_CONTROL_ACK_STATUS_CANCELLED = 1;
+
+    // The turn had not started yet; it is cancelled and will not run.
+    TURN_CONTROL_ACK_STATUS_CANCELLED_QUEUED = 2;
+
+    // The turn had already finished generating; nothing was cancelled.
+    TURN_CONTROL_ACK_STATUS_ALREADY_FINISHED = 3;
+
+    // No turn of this session matches the given ids.
+    TURN_CONTROL_ACK_STATUS_UNKNOWN_TURN = 4;
+
+    // The heard report was applied to the turn's session step.
+    TURN_CONTROL_ACK_STATUS_HEARD_APPLIED = 5;
+
+    // The heard report was ignored because a report with the same or a higher revision was already applied.
+    TURN_CONTROL_ACK_STATUS_HEARD_STALE = 6;
+
+    // The draft's session step was discarded.
+    TURN_CONTROL_ACK_STATUS_DRAFT_DISCARDED = 7;
+}
+
+// Acknowledges a turn control.
+message TurnControlAck {
+
+    // The server's <code>response_id</code> of the turn; empty when it is not known (e.g. a turn cancelled before
+    // it started).
+    string response_id = 1;
+
+    // <code>client_turn_id</code> of the turn, as sent by the client.
+    string client_turn_id = 2;
+
+    // Outcome of the turn control.
+    TurnControlAckStatus turn_control_ack_status = 3;
+
+    // Time the server took from receiving a <code>CancelTurn</code> until the turn's generation had stopped, in
+    // seconds; 0 for any other control.
+    float server_cancel_duration_in_s = 4;
+}
+
+// The request to interrupt a turn of a session outside a <code>StreamingDetectIntent</code> stream.
+message InterruptTurnRequest {
+
+    // Required. The session of the turn. Format:
+    // <code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code>.
+    string session = 1;
+
+    // Required. The control to apply.
+    TurnControl turn_control = 2;
+}
+
+// The response to an <code>InterruptTurnRequest</code>.
+message InterruptTurnResponse {
+
+    // Outcome of the control.
+    TurnControlAck turn_control_ack = 1;
 }
 
 // Contains a speech recognition result corresponding to a portion of the audio that is currently being processed or an indication that this is the end of the single requested utterance.

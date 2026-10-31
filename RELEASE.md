@@ -2,6 +2,23 @@
 
 *****************
 
+## Release ONDEWO NLU API 7.5.0
+
+### New Features
+
+* [[OND236-120]](https://ondewo.atlassian.net/browse/OND236-120) `session.proto`: Turn control on `StreamingDetectIntent`. `StreamingDetectIntentRequest` gains `turn_control` (field 7), a `TurnControl` sent alone on a call-length stream, and `client_turn_id` (field 8), a client-minted id of the turn a request starts. `TurnControl` carries exactly one of `cancel_turn` (`CancelTurn`: stop generating a turn's answer, with a `turn_interruption_reason`, `decided_at` and `background_work_policy`), `heard_report` (`HeardReport`: what the user actually heard of a turn's answer, one `HeardMessage` per spoken, queued or skipped message with its `heard_text`, durations and `filler_id`, a `heard_text_precision` and a `revision` where the highest wins) or `discard_draft` (`DiscardDraft`: delete the session step of an unused preemptive draft). `StreamingDetectIntentResponse` gains `turn_control_ack` (field 12, outside the `telemetry_event` oneof), sent for a `CancelTurn` after every other response of that turn, and `client_turn_id` (field 13), the echo of the request's id. Adds the `TurnInterruptionReason`, `BackgroundWorkPolicy`, `HeardTextPrecision` and `TurnControlAckStatus` enums. A client sends `turn_control` only to a server that advertised the initial metadata `x-ondewo-cai-turn-control: 1`.
+* [[OND236-120]](https://ondewo.atlassian.net/browse/OND236-120) `session.proto`: New `Sessions.InterruptTurn` RPC (`POST /v2/{session=projects/*/agent/sessions/*}:interruptTurn`) applies a `TurnControl` to a turn outside a stream, e.g. for a stop button or a heard report sent after the stream closed, and answers an `InterruptTurnResponse` carrying the `TurnControlAck`.
+
+### Improvements
+
+* None in this release.
+
+### Bug Fixes
+
+* None in this release.
+
+*****************
+
 ## Release ONDEWO NLU API 7.4.0
 
 ### New Features
