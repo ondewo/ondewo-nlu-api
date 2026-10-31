@@ -593,6 +593,13 @@ message QueryParameters {
     // transcriptions of the user input sorted by score
     repeated S2tTranscription transcriptions = 14;
 
+    // Optional. Marks the request as a preemptive draft: a turn the client (e.g. ondewo-csi) starts speculatively,
+    // e.g. on a partial transcript, and may later discard with <code>TurnControl.discard_draft</code>. The server
+    // records the mark on the session step of this request. A <code>DiscardDraft</code> deletes only a session step
+    // of the same session whose request carried this mark. A server that does not know this field ignores it and
+    // keeps the step.
+    bool preemptive_draft = 15;
+
 }
 
 // Identifies whether a transcription was produced by an automatic
@@ -1989,7 +1996,10 @@ message HeardReport {
 }
 
 // Discards the session step of a preemptive draft: a turn the client started speculatively on a partial
-// transcript and then did not use. The server deletes only a draft step of this session.
+// transcript and then did not use. The server deletes the session step only when it belongs to this session and its
+// request carried <code>QueryParameters.preemptive_draft</code> = true; it answers
+// <code>TURN_CONTROL_ACK_STATUS_DRAFT_DISCARDED</code>. Any other step is kept and the server answers
+// <code>TURN_CONTROL_ACK_STATUS_UNKNOWN_TURN</code>.
 message DiscardDraft {
 
     // The server's <code>response_id</code> of the draft turn.
@@ -2011,7 +2021,9 @@ enum TurnControlAckStatus {
     // The turn had already finished generating; nothing was cancelled.
     TURN_CONTROL_ACK_STATUS_ALREADY_FINISHED = 3;
 
-    // No turn of this session matches the given ids.
+    // No turn of this session matches the given ids. For a <code>DiscardDraft</code>: no session step of this
+    // session with the given <code>response_id</code> carries <code>QueryParameters.preemptive_draft</code>; the
+    // discard is refused and the step, if one exists, is kept.
     TURN_CONTROL_ACK_STATUS_UNKNOWN_TURN = 4;
 
     // The heard report was applied to the turn's session step.
@@ -2020,7 +2032,7 @@ enum TurnControlAckStatus {
     // The heard report was ignored because a report with the same or a higher revision was already applied.
     TURN_CONTROL_ACK_STATUS_HEARD_STALE = 6;
 
-    // The draft's session step was discarded.
+    // The draft's session step, whose request carried <code>QueryParameters.preemptive_draft</code>, was deleted.
     TURN_CONTROL_ACK_STATUS_DRAFT_DISCARDED = 7;
 }
 
