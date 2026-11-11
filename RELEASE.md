@@ -2,6 +2,14 @@
 
 *****************
 
+## Release ONDEWO NLU API 7.5.0
+
+### New Features
+
+* [[OAMXXX-13]](https://ondewo.atlassian.net/browse/OAMXXX-13) `session.proto`: `ReferencedChunk` gains `document_title` (field 10), the title of the crawled source page, so a client can label a reference with the page title instead of the document name. It is empty for any other document and for a page that has no title.
+
+*****************
+
 ## Release ONDEWO NLU API 7.4.0
 
 ### New Features

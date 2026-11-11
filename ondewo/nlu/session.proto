@@ -1608,6 +1608,9 @@ message ReferencedChunk {
 
     // For crawled documents link to the source document that directly jumps to the chunk's location on the page using a text fragment anchor (a bit fragile and might not always work). For any other document it is left empty.
     string deep_link_url = 9;
+
+    // Title of the document (optional).
+    string document_title = 10;
 }
 
 // Represents the result of conversational query or event processing.
