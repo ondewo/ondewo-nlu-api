@@ -494,32 +494,6 @@
   
     - [LlmEvaluations](#ondewo.nlu.LlmEvaluations)
   
-- [ondewo/nlu/logs.proto](#ondewo/nlu/logs.proto)
-    - [CaiLogEntry](#ondewo.nlu.CaiLogEntry)
-    - [CaiLogFilter](#ondewo.nlu.CaiLogFilter)
-    - [CaiLogStream](#ondewo.nlu.CaiLogStream)
-    - [DeleteLogsRequest](#ondewo.nlu.DeleteLogsRequest)
-    - [DeleteLogsResponse](#ondewo.nlu.DeleteLogsResponse)
-    - [ExportLogsRequest](#ondewo.nlu.ExportLogsRequest)
-    - [ExportLogsResponse](#ondewo.nlu.ExportLogsResponse)
-    - [GetLogStreamRequest](#ondewo.nlu.GetLogStreamRequest)
-    - [ListLogStreamsRequest](#ondewo.nlu.ListLogStreamsRequest)
-    - [ListLogStreamsResponse](#ondewo.nlu.ListLogStreamsResponse)
-    - [ListLogsRequest](#ondewo.nlu.ListLogsRequest)
-    - [ListLogsResponse](#ondewo.nlu.ListLogsResponse)
-    - [ListLogsResponse.CountByLevelEntry](#ondewo.nlu.ListLogsResponse.CountByLevelEntry)
-    - [StreamLogsRequest](#ondewo.nlu.StreamLogsRequest)
-    - [StreamLogsResponse](#ondewo.nlu.StreamLogsResponse)
-  
-    - [CaiLogCaptureState](#ondewo.nlu.CaiLogCaptureState)
-    - [CaiLogExportFormat](#ondewo.nlu.CaiLogExportFormat)
-    - [CaiLogFilterField](#ondewo.nlu.CaiLogFilterField)
-    - [CaiLogSource](#ondewo.nlu.CaiLogSource)
-    - [CaiLogStreamChannel](#ondewo.nlu.CaiLogStreamChannel)
-    - [CaiLogStreamEndReason](#ondewo.nlu.CaiLogStreamEndReason)
-  
-    - [Logs](#ondewo.nlu.Logs)
-  
 - [ondewo/nlu/operation_metadata.proto](#ondewo/nlu/operation_metadata.proto)
     - [OperationMetadata](#ondewo.nlu.OperationMetadata)
   
@@ -676,7 +650,6 @@
     - [AddSessionLabelsRequest](#ondewo.nlu.AddSessionLabelsRequest)
     - [AddSessionStepFeedbackRequest](#ondewo.nlu.AddSessionStepFeedbackRequest)
     - [AudioFileResource](#ondewo.nlu.AudioFileResource)
-    - [CancelTurn](#ondewo.nlu.CancelTurn)
     - [ContextFilter](#ondewo.nlu.ContextFilter)
     - [CreateSessionRequest](#ondewo.nlu.CreateSessionRequest)
     - [CreateSessionReviewRequest](#ondewo.nlu.CreateSessionReviewRequest)
@@ -691,7 +664,6 @@
     - [DetectIntentRequest](#ondewo.nlu.DetectIntentRequest)
     - [DetectIntentResponse](#ondewo.nlu.DetectIntentResponse)
     - [DetectedIntent](#ondewo.nlu.DetectedIntent)
-    - [DiscardDraft](#ondewo.nlu.DiscardDraft)
     - [DocumentFileResource](#ondewo.nlu.DocumentFileResource)
     - [EventInput](#ondewo.nlu.EventInput)
     - [FeedbackBreakdownBucket](#ondewo.nlu.FeedbackBreakdownBucket)
@@ -711,12 +683,8 @@
     - [GetSessionRequest](#ondewo.nlu.GetSessionRequest)
     - [GetSessionReviewRequest](#ondewo.nlu.GetSessionReviewRequest)
     - [GetSessionStepRequest](#ondewo.nlu.GetSessionStepRequest)
-    - [HeardMessage](#ondewo.nlu.HeardMessage)
-    - [HeardReport](#ondewo.nlu.HeardReport)
     - [ImageFileResource](#ondewo.nlu.ImageFileResource)
     - [InputAudioConfig](#ondewo.nlu.InputAudioConfig)
-    - [InterruptTurnRequest](#ondewo.nlu.InterruptTurnRequest)
-    - [InterruptTurnResponse](#ondewo.nlu.InterruptTurnResponse)
     - [ListAccountIdsOfAllSessionsRequest](#ondewo.nlu.ListAccountIdsOfAllSessionsRequest)
     - [ListAccountIdsResponse](#ondewo.nlu.ListAccountIdsResponse)
     - [ListAudioFilesRequest](#ondewo.nlu.ListAudioFilesRequest)
@@ -805,8 +773,6 @@
     - [StreamingDetectIntentResponse](#ondewo.nlu.StreamingDetectIntentResponse)
     - [StreamingRecognitionResult](#ondewo.nlu.StreamingRecognitionResult)
     - [TextInput](#ondewo.nlu.TextInput)
-    - [TurnControl](#ondewo.nlu.TurnControl)
-    - [TurnControlAck](#ondewo.nlu.TurnControlAck)
     - [UpdateSessionCommentsRequest](#ondewo.nlu.UpdateSessionCommentsRequest)
     - [UpdateSessionFeedbackRequest](#ondewo.nlu.UpdateSessionFeedbackRequest)
     - [UpdateSessionStepRequest](#ondewo.nlu.UpdateSessionStepRequest)
@@ -814,13 +780,11 @@
   
     - [AudioEncoding](#ondewo.nlu.AudioEncoding)
     - [AudioFileResourceType](#ondewo.nlu.AudioFileResourceType)
-    - [BackgroundWorkPolicy](#ondewo.nlu.BackgroundWorkPolicy)
     - [ComparisonOperator](#ondewo.nlu.ComparisonOperator)
     - [FeedbackAuthorType](#ondewo.nlu.FeedbackAuthorType)
     - [FeedbackRating](#ondewo.nlu.FeedbackRating)
     - [FeedbackScope](#ondewo.nlu.FeedbackScope)
     - [FeedbackTimeGranularity](#ondewo.nlu.FeedbackTimeGranularity)
-    - [HeardTextPrecision](#ondewo.nlu.HeardTextPrecision)
     - [LlmAgentNodePhase](#ondewo.nlu.LlmAgentNodePhase)
     - [LlmSafetyLocation](#ondewo.nlu.LlmSafetyLocation)
     - [ReasoningEffort](#ondewo.nlu.ReasoningEffort)
@@ -829,8 +793,6 @@
     - [SessionReview.View](#ondewo.nlu.SessionReview.View)
     - [StreamingRecognitionResult.MessageType](#ondewo.nlu.StreamingRecognitionResult.MessageType)
     - [TranscriptionType](#ondewo.nlu.TranscriptionType)
-    - [TurnControlAckStatus](#ondewo.nlu.TurnControlAckStatus)
-    - [TurnInterruptionReason](#ondewo.nlu.TurnInterruptionReason)
   
     - [Sessions](#ondewo.nlu.Sessions)
   
@@ -9988,499 +9950,6 @@ golden-transcript recording from sessions, conversation simulation
 
 
 
-<a name="ondewo/nlu/logs.proto"></a>
-<p align="right"><a href="#top">Top</a></p>
-
-## ondewo/nlu/logs.proto
-
-
-
-<a name="ondewo.nlu.CaiLogEntry"></a>
-
-### CaiLogEntry
-A single captured log record. One record may span several physical lines: a Python traceback, a protobuf
-<code>str()</code> dump and a multi-line banner are all one record and are stored and returned as one entry.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| seq | [int64](#int64) |  | Ordering cursor. Assigned by the database, monotonically increasing WITHIN ONE LOG STREAM. It is NOT contiguous: values are drawn from a sequence shared by every stream, are consumed by rolled-back writes, and are removed by retention. Never compute the next cursor as <code>seq + 1</code>; use <code>resume_token</code>, or <code>before_seq</code> / <code>after_seq</code> when the filter resolves to exactly one log stream. |
-| timestamp | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | When the record was produced, in UTC: the instant the server process logged it, or the instant the docker daemon observed the first physical line of a container record. |
-| timestamp_is_exact | [bool](#bool) |  | False when <code>timestamp</code> is the instant CAI captured the record rather than the instant it was produced, which happens when a container line carried no parsable docker timestamp. |
-| level | [LogSeverity](#ondewo.nlu.LogSeverity) |  | The severity of the record. <code>LOG_SEVERITY_UNSPECIFIED</code> means the emitter does not log in a recognised format. |
-| message | [string](#string) |  | The log text, with ANSI escape sequences removed, continuation lines re-joined, and secrets redacted server-side. |
-| log_source | [CaiLogSource](#ondewo.nlu.CaiLogSource) |  | What produced the log stream this entry belongs to. |
-| channel | [CaiLogStreamChannel](#ondewo.nlu.CaiLogStreamChannel) |  | Which output channel the record arrived on. |
-| emitter | [string](#string) |  | <code>&lt;module&gt;:&lt;function&gt;:&lt;line&gt;</code> of the emitting log statement. Empty for output that is not in the ONDEWO logging format. |
-| thread_name | [string](#string) |  | Name of the thread that emitted the record. Empty when not available. |
-| process_name | [string](#string) |  | Name of the process that emitted the record, e.g. <code>GrpcServer_3</code> for a CAI worker. Empty when not available. |
-| log_stream | [string](#string) |  | Resource name of the log stream this entry belongs to. The format is <pre><code>logStreams/&lt;log_stream_uuid&gt;</code></pre> for a stream that belongs to no project (a server process) and <pre><code>projects/&lt;project_uuid&gt;/logStreams/&lt;log_stream_uuid&gt;</code></pre> for one that does (an operation&apos;s container). |
-| operation_name | [string](#string) |  | Name of the long-running operation the record belongs to. Empty for a server record emitted outside any operation. The format is <pre><code>projects/&lt;project_uuid&gt;/operations/&lt;operation_uuid&gt;</code></pre> for a project operation. |
-| project_parent | [string](#string) |  | The project the record belongs to. Empty for a server record emitted outside any project RPC or operation. The format is <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
-| container_id | [string](#string) |  | Docker container id of the container the record came from. Empty for a server record. |
-| container_name | [string](#string) |  | Docker container name of the container the record came from. Empty for a server record. |
-| replica_id | [string](#string) |  | Identity of the CAI server process that captured the record (<code>&lt;hostname&gt;:&lt;pid&gt;</code> or the configured <code>ONDEWO_NLU_CAI_REPLICA_ID</code>). |
-| trace_id | [string](#string) |  | OpenTelemetry trace id (32 lowercase hex characters) active when a server record was emitted. Empty when no trace was active and for container records. |
-| physical_line_count | [int32](#int32) |  | How many physical lines were folded into <code>message</code>. <code>1</code> for an ordinary single-line record. |
-| operation_type | [OperationMetadata.OperationType](#ondewo.nlu.OperationMetadata.OperationType) |  | Type of the operation named by <code>operation_name</code>; <code>UNSPECIFIED</code> when none. |
-| phase | [string](#string) |  | Lifecycle phase of the container the record came from, e.g. <code>hw_check</code>, <code>gpu_prealloc</code>, <code>build_cache</code>, <code>train</code>, <code>rag_crawl</code>. Empty for a server record. |
-
-
-
-
-
-
-<a name="ondewo.nlu.CaiLogFilter"></a>
-
-### CaiLogFilter
-Narrows a log query. Every field is optional; an empty repeated field means &quot;do not filter on
-this&quot;. Fields are combined with AND; the values within one repeated field are combined with OR.
-
-<p>Filters fall into two groups. IDENTITY filters (fields 1 to 19) select which log streams, operations and
-projects are of interest. CONTENT filters (fields 20 to 30) select which entries of those to return. The time
-window (fields 31, 32) is neither.</p>
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| log_stream_names | [string](#string) | repeated | Log stream resource names, in either form of <a href="index.html#ondewo.nlu.CaiLogEntry">CaiLogEntry.log_stream</a>. |
-| operation_names | [string](#string) | repeated | Operation names, e.g. <pre><code>projects/&lt;project_uuid&gt;/operations/&lt;operation_uuid&gt;</code></pre> |
-| include_sub_operations | [bool](#bool) |  | Also match the sub-operations of every operation in <code>operation_names</code> (a training operation runs one sub-operation per algorithm). Defaults to <code>false</code>. |
-| project_parents | [string](#string) | repeated | Project parents of the form <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> |
-| container_ids | [string](#string) | repeated | Docker container ids. |
-| container_names | [string](#string) | repeated | Docker container names. |
-| replica_ids | [string](#string) | repeated | Identities of the CAI server processes that captured the entries (see <a href="index.html#ondewo.nlu.CaiLogEntry">CaiLogEntry.replica_id</a>). |
-| operation_types | [OperationMetadata.OperationType](#ondewo.nlu.OperationMetadata.OperationType) | repeated | Operation types. |
-| phases | [string](#string) | repeated | Container lifecycle phases, e.g. <code>train</code> or <code>hw_check</code>. |
-| log_sources | [CaiLogSource](#ondewo.nlu.CaiLogSource) | repeated | Restrict to entries of log streams produced by these sources. |
-| channels | [CaiLogStreamChannel](#ondewo.nlu.CaiLogStreamChannel) | repeated | Restrict to entries that arrived on these channels. |
-| min_log_level | [LogSeverity](#ondewo.nlu.LogSeverity) |  | Only return entries at or above this severity. <code>LOG_SEVERITY_UNSPECIFIED</code> (the default) applies no lower bound. Ignored when <code>log_levels</code> is non-empty. |
-| log_levels | [LogSeverity](#ondewo.nlu.LogSeverity) | repeated | Exact severities to include. When non-empty this OVERRIDES <code>min_log_level</code>. |
-| include_unleveled_lines | [bool](#bool) | optional | Keep entries whose severity could not be determined even when a severity bound is set. Defaults to <code>false</code>. |
-| text | [string](#string) | optional | Case-insensitive substring match against the message, as the caller receives it (after the server&apos;s secret redaction). <code>ListLogsResponse.total_matching_count</code>, <code>count_by_level</code>, <code>has_more_older</code> and <code>has_more_newer</code> are computed WITHOUT it and <code>CAI_LOG_FILTER_FIELD_TEXT</code> is reported in <code>scope_limited_filters</code>: they would otherwise reveal whether a redacted secret contains the searched text. |
-| regex | [string](#string) | optional | Regular expression (Python <code>re</code> syntax) matched against the message. At most 512 characters; an invalid, oversized or catastrophically backtracking pattern is rejected with <code>INVALID_ARGUMENT</code>. |
-| emitter_prefixes | [string](#string) | repeated | Prefix match against <code>&lt;module&gt;:&lt;function&gt;:&lt;line&gt;</code>, for example <code>ondewo_cai.ondewo_cdls.services.server.servicers.agents_servicer</code>. |
-| thread_names | [string](#string) | repeated | Restrict to entries emitted by these threads. |
-| process_names | [string](#string) | repeated | Restrict to entries emitted by these processes, e.g. <code>GrpcServer_0</code>. |
-| trace_ids | [string](#string) | repeated | Restrict to entries carrying one of these OpenTelemetry trace ids (32 lowercase hex characters). |
-| start_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) | optional | Only return entries at or after this instant. A zero timestamp counts as unset. |
-| end_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) | optional | Only return entries at or before this instant. A zero timestamp counts as unset. A <code>start_time</code> after <code>end_time</code> is rejected with <code>INVALID_ARGUMENT</code>. |
-
-
-
-
-
-
-<a name="ondewo.nlu.CaiLogStream"></a>
-
-### CaiLogStream
-One capture of one server process or of one container. A server process that restarts, and a container
-recreated under a new id, yield a NEW log stream.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| name | [string](#string) |  | Resource name of the log stream, in the form of <a href="index.html#ondewo.nlu.CaiLogEntry">CaiLogEntry.log_stream</a>. |
-| log_source | [CaiLogSource](#ondewo.nlu.CaiLogSource) |  | What produced the log stream. |
-| channel | [CaiLogStreamChannel](#ondewo.nlu.CaiLogStreamChannel) |  | The channel this stream captures. |
-| project_parent | [string](#string) |  | The project the stream belongs to (<code>projects/&lt;project_uuid&gt;/agent</code>). Empty for a server process. |
-| operation_name | [string](#string) |  | The operation the container serves. Empty for a server process. |
-| container_id | [string](#string) |  | Docker container id. Empty for a server process. |
-| container_name | [string](#string) |  | Docker container name. Empty for a server process. |
-| host | [string](#string) |  | The host the container runs on, or the host name of the server process. |
-| replica_id | [string](#string) |  | Identity of the CAI server process that captures (or captured) this stream. |
-| process_name | [string](#string) |  | Name of the captured server process, e.g. <code>GrpcServer_3</code>. Empty for a container. |
-| phase | [string](#string) |  | Lifecycle phase of the container. Empty for a server process. |
-| capture_state | [CaiLogCaptureState](#ondewo.nlu.CaiLogCaptureState) |  | State of CAI&apos;s capture of this stream. |
-| capture_error | [string](#string) |  | Why capture failed, when <code>capture_state</code> is <code>CAI_LOG_CAPTURE_STATE_FAILED</code>. |
-| capture_started_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | When CAI started capturing this stream. |
-| capture_finished_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | When CAI stopped capturing this stream. Unset while capturing. |
-| partial_capture | [bool](#bool) |  | True when entries the source emitted were not captured and are not recoverable, e.g. a container whose owning CAI process died and whose output was recovered from a bounded snapshot. |
-| min_available_seq | [int64](#int64) |  | The smallest <code>seq</code> currently stored for this stream (<code>0</code> when it holds none). |
-| max_available_seq | [int64](#int64) |  | The largest <code>seq</code> assigned to this stream (<code>0</code> when it holds no entry). Entries up to it may since have been removed by retention or <code>DeleteLogs</code>; it never decreases while the stream holds an entry. |
-| line_count | [int64](#int64) |  | How many entries are currently stored for this stream. |
-| dropped_line_count | [int64](#int64) |  | How many records were deliberately not stored, summed over every reason: the ingest severity floor, the capture queue being full, storage back-pressure, a failed write and retention. |
-| operation_type | [OperationMetadata.OperationType](#ondewo.nlu.OperationMetadata.OperationType) |  | Type of the operation the container serves; <code>UNSPECIFIED</code> for a server process. |
-
-
-
-
-
-
-<a name="ondewo.nlu.DeleteLogsRequest"></a>
-
-### DeleteLogsRequest
-The request message for <a href="index.html#ondewo.nlu.Logs.DeleteLogs">Logs.DeleteLogs</a>.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| filter | [CaiLogFilter](#ondewo.nlu.CaiLogFilter) |  | The entries to delete. Only the identity fields and the time window apply; content filters are rejected. At least one field must be set: an empty filter is rejected rather than treated as &quot;delete everything&quot;. |
-| validate_only | [bool](#bool) |  | Optional. Validate only: run every check of a real deletion and report how many entries and log streams WOULD be deleted now, but delete nothing. Default <code>false</code>. |
-
-
-
-
-
-
-<a name="ondewo.nlu.DeleteLogsResponse"></a>
-
-### DeleteLogsResponse
-The response message for <a href="index.html#ondewo.nlu.Logs.DeleteLogs">Logs.DeleteLogs</a>.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| deleted_log_entry_count | [int64](#int64) |  | How many log entries were deleted (with <code>validate_only</code>: would be deleted). |
-| deleted_log_stream_count | [int64](#int64) |  | How many log streams were deleted because no entries remained (with <code>validate_only</code>: would be deleted). |
-
-
-
-
-
-
-<a name="ondewo.nlu.ExportLogsRequest"></a>
-
-### ExportLogsRequest
-The request message for <a href="index.html#ondewo.nlu.Logs.ExportLogs">Logs.ExportLogs</a>.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| filter | [CaiLogFilter](#ondewo.nlu.CaiLogFilter) |  | The entries to export. Every field of <a href="index.html#ondewo.nlu.CaiLogFilter">CaiLogFilter</a> applies, with the semantics of <code>ListLogs</code>. REQUIRED, with both <code>start_time</code> and <code>end_time</code> set and <code>start_time</code> before <code>end_time</code>; otherwise <code>INVALID_ARGUMENT</code>. |
-| format | [CaiLogExportFormat](#ondewo.nlu.CaiLogExportFormat) |  | The file format. Unset means <code>CAI_LOG_EXPORT_FORMAT_TEXT</code>. |
-| include_metadata | [bool](#bool) |  | Include every field of each entry rather than only the timestamp, the severity and the message (see <a href="index.html#ondewo.nlu.CaiLogExportFormat">CaiLogExportFormat</a>). Default <code>false</code>. |
-
-
-
-
-
-
-<a name="ondewo.nlu.ExportLogsResponse"></a>
-
-### ExportLogsResponse
-One message of an <a href="index.html#ondewo.nlu.Logs.ExportLogs">ExportLogs</a> stream.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| chunk | [bytes](#bytes) |  | The next bytes of the exported file, at most 1 MiB. Chunk boundaries carry no meaning: an entry, a line or a multi-byte UTF-8 character may span two chunks. The last message may carry an empty chunk. |
-| entry_count | [int64](#int64) |  | The number of entries exported so far, including those of this chunk. |
-| last | [bool](#bool) |  | True on the last message of a complete export. A stream that ends without a message carrying <code>last = true</code> was cut off and its file is incomplete. |
-| truncated | [bool](#bool) |  | True on the last message when the export stopped early because it reached <code>ONDEWO_NLU_CAI_LOG_EXPORT_MAX_ENTRIES</code>, <code>ONDEWO_NLU_CAI_LOG_EXPORT_MAX_BYTES</code> or the maximum stream duration. |
-
-
-
-
-
-
-<a name="ondewo.nlu.GetLogStreamRequest"></a>
-
-### GetLogStreamRequest
-The request message for <a href="index.html#ondewo.nlu.Logs.GetLogStream">Logs.GetLogStream</a>.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| name | [string](#string) |  | The name of the log stream, in either form of <a href="index.html#ondewo.nlu.CaiLogEntry">CaiLogEntry.log_stream</a>. |
-| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. Partial response: the <code>CaiLogStream</code> field paths to populate. <code>name</code> is always populated, unset or empty returns every field, an unknown path is rejected with <code>INVALID_ARGUMENT</code> naming it. |
-
-
-
-
-
-
-<a name="ondewo.nlu.ListLogStreamsRequest"></a>
-
-### ListLogStreamsRequest
-The request message for <a href="index.html#ondewo.nlu.Logs.ListLogStreams">Logs.ListLogStreams</a>.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| filter | [CaiLogFilter](#ondewo.nlu.CaiLogFilter) | optional | Optional. A filter to narrow the response down to the log streams of interest. Only the identity fields and <code>log_sources</code> / <code>channels</code> / <code>process_names</code> apply; the other content fields and the time window are ignored. |
-| page_token | [string](#string) |  | Optional: The page token to support pagination. Pagination allows you to retrieve a large result set in smaller, more manageable portions. The page token is a string representing the current index and page size.
-
-Valid page token strings: <ul> <li>&quot;&quot; (empty string) - Retrieves the first page.</li> <li>&quot;current_index-0--page_size-20&quot; - Retrieves the first page with a page size of 20.</li> <li>&quot;current_index-1--page_size-20&quot; - Retrieves the second page with a page size of 20.</li> </ul>
-
-Index starts at 0. A page size above 1000 is clamped to 1000.
-
-Examples of valid page token strings: <ul> <li>&quot;&quot;</li> <li>&quot;current_index-0--page_size-20&quot;</li> <li>&quot;current_index-1--page_size-20&quot;</li> <li>&quot;current_index-10--page_size-20&quot;</li> </ul>
-
-Examples of invalid page token strings: <ul> <li>&quot;1&quot;</li> <li>&quot;current_index--1--page_size-20&quot;</li> <li>&quot;current_index1--page_size-20&quot;</li> <li>&quot;current_index-1--page_size--20&quot;</li> </ul> |
-| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. Partial response: the field paths to populate in every returned <code>CaiLogStream</code>, relative to <code>CaiLogStream</code> (no <code>log_streams.</code> prefix). <code>name</code> is always populated. Unset or empty returns every field. An unknown path is rejected with <code>INVALID_ARGUMENT</code> naming it. |
-| capture_states | [CaiLogCaptureState](#ondewo.nlu.CaiLogCaptureState) | repeated | Optional. Only log streams in one of these capture states. Empty matches every state. <code>CAI_LOG_CAPTURE_STATE_UNSPECIFIED</code> is rejected with <code>INVALID_ARGUMENT</code>. |
-
-
-
-
-
-
-<a name="ondewo.nlu.ListLogStreamsResponse"></a>
-
-### ListLogStreamsResponse
-The response message for <a href="index.html#ondewo.nlu.Logs.ListLogStreams">Logs.ListLogStreams</a>.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| log_streams | [CaiLogStream](#ondewo.nlu.CaiLogStream) | repeated | The log streams of this page, newest <code>capture_started_at</code> first. |
-| next_page_token | [string](#string) |  | The next_page_token is used to retrieve the next page of a returned result, e.g. <code>current_index-2--page_size-20</code>. Empty when there are no more results. |
-
-
-
-
-
-
-<a name="ondewo.nlu.ListLogsRequest"></a>
-
-### ListLogsRequest
-The request message for <a href="index.html#ondewo.nlu.Logs.ListLogs">Logs.ListLogs</a>.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| filter | [CaiLogFilter](#ondewo.nlu.CaiLogFilter) | optional | Optional. A filter to narrow the response down to the entries of interest. |
-| max_lines | [int32](#int32) | optional | Return at most this many entries. <code>0</code> (the default) and negative values apply the server default (<code>ONDEWO_NLU_CAI_LOG_DEFAULT_MAX_LINES</code>, default 5000); values above the server hard cap (<code>ONDEWO_NLU_CAI_LOG_HARD_MAX_LINES</code>, default 50000) are clamped to it. |
-| before_seq | [int64](#int64) | optional | Optional cursor for infinite-scroll UP: return the newest entries with <code>seq</code> less than this value. Valid only when the filter resolves to exactly one log stream. |
-| after_seq | [int64](#int64) | optional | Optional cursor for infinite-scroll DOWN: return entries with <code>seq</code> greater than this value. Valid only when the filter resolves to exactly one log stream. |
-| resume_token | [string](#string) | optional | Optional. An opaque, server-encoded per-log-stream cursor from a previous response. Use this instead of <code>after_seq</code> whenever the filter can match more than one log stream. Combined with <code>oldest_first</code> it walks forward (newer entries); without it, backward (older entries). |
-| oldest_first | [bool](#bool) | optional | Walk forward from the cursor oldest-first instead of returning the most recent window. A client paging through a whole backlog must set this: the default window silently skips everything between the cursor and the newest entries. |
-| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. Partial response: the field paths to populate in every returned <code>CaiLogEntry</code>, relative to <code>CaiLogEntry</code> (no <code>log_entries.</code> prefix), e.g. <code>timestamp</code>, <code>level</code>, <code>message</code>. <code>log_stream</code> and <code>seq</code> are always populated. Unset or empty returns every field. An unknown path, or a path below a repeated field, is rejected with <code>INVALID_ARGUMENT</code> naming it. Applied after the server&apos;s secret redaction. It shapes only the entries: the window and cursor fields of the response are computed exactly as without a mask. |
-| include_counts | [bool](#bool) |  | Optional. Also count the matching entries: fills <code>ListLogsResponse.total_matching_count</code> and <code>count_by_level</code> over the WHOLE filtered history (ignoring the cursors). Off by default; set it on the first page only. |
-
-
-
-
-
-
-<a name="ondewo.nlu.ListLogsResponse"></a>
-
-### ListLogsResponse
-The response message for <a href="index.html#ondewo.nlu.Logs.ListLogs">Logs.ListLogs</a>.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| log_entries | [CaiLogEntry](#ondewo.nlu.CaiLogEntry) | repeated | The matching entries, oldest first. |
-| truncated | [bool](#bool) |  | True when matching entries were dropped because <code>max_lines</code> was reached. |
-| min_available_seq | [int64](#int64) |  | The smallest <code>seq</code> available under the request&apos;s IDENTITY filters and the caller&apos;s access. Deliberately not narrowed by the content filters. |
-| max_available_seq | [int64](#int64) |  | The largest <code>seq</code> assigned under the request&apos;s identity filters and the caller&apos;s access, over the log streams that still hold an entry (<code>0</code> when none does). Entries up to it may since have been removed by retention or <code>DeleteLogs</code>. |
-| has_more_older | [bool](#bool) |  | True when entries older than this window exist. |
-| has_more_newer | [bool](#bool) |  | True when entries newer than this window exist. |
-| next_resume_token | [string](#string) |  | Cursor to fetch the next window (pass it back with <code>oldest_first</code> to page forward, without it to page backward), or to start a <code>StreamLogs</code> that continues exactly here. |
-| scope_limited_filters | [CaiLogFilterField](#ondewo.nlu.CaiLogFilterField) | repeated | Filters that could only be applied WITHIN the returned window rather than across the whole history. A client displaying a match count must qualify it when this is non-empty. |
-| total_matching_count | [int64](#int64) | optional | The number of entries matching the filter over the whole stored history, regardless of the window and the cursors. Set only when <code>include_counts</code> was requested and the count finished within <code>ONDEWO_NLU_CAI_LOG_COUNT_TIMEOUT_S</code>. An UPPER BOUND when <code>scope_limited_filters</code> is non-empty. |
-| count_by_level | [ListLogsResponse.CountByLevelEntry](#ondewo.nlu.ListLogsResponse.CountByLevelEntry) | repeated | The matching entries counted per severity, keyed by the <code>ondewo.nlu.LogSeverity</code> value NAME (e.g. <code>LOG_SEVERITY_ERROR</code>; entries without a recognised severity under <code>LOG_SEVERITY_UNSPECIFIED</code>). Severities with no entry are omitted; the values sum to <code>total_matching_count</code>. Filled under the same conditions as <code>total_matching_count</code>. |
-
-
-
-
-
-
-<a name="ondewo.nlu.ListLogsResponse.CountByLevelEntry"></a>
-
-### ListLogsResponse.CountByLevelEntry
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| key | [string](#string) |  |  |
-| value | [int64](#int64) |  |  |
-
-
-
-
-
-
-<a name="ondewo.nlu.StreamLogsRequest"></a>
-
-### StreamLogsRequest
-The request message for <a href="index.html#ondewo.nlu.Logs.StreamLogs">Logs.StreamLogs</a>.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| filter | [CaiLogFilter](#ondewo.nlu.CaiLogFilter) | optional | Optional. A filter to narrow the stream down to the entries of interest. The time window of the filter is meaningless for a live stream and is rejected with <code>INVALID_ARGUMENT</code> rather than ignored. |
-| tail_lines | [int32](#int32) | optional | Replay at most this many of the most recent stored entries before switching to live follow. <code>0</code> (the default) starts the follow with no historical replay; a negative value is treated as <code>0</code>; values above the server hard cap (<code>ONDEWO_NLU_CAI_LOG_HARD_MAX_LINES</code>, default 50000) are clamped to it. Applied to the FILTERED result. Ignored when <code>resume_token</code> or <code>after_seq</code> is set. |
-| resume_token | [string](#string) | optional | Optional. Resume exactly where a previous stream or page stopped. An opaque, server-encoded per-log-stream cursor that must be echoed back verbatim. Prefer it over <code>after_seq</code>. |
-| after_seq | [int64](#int64) | optional | Optional. Resume after this <code>seq</code>. Valid ONLY when the filter resolves to exactly one log stream; otherwise the request is rejected with <code>INVALID_ARGUMENT</code>. Ignored when <code>resume_token</code> is set. |
-| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. Partial response: the field paths to populate in every streamed <code>CaiLogEntry</code>, relative to <code>CaiLogEntry</code> (no <code>log_entries.</code> prefix). <code>log_stream</code> and <code>seq</code> are always populated. Unset or empty streams every field. An unknown path, or a path below a repeated field, is rejected with <code>INVALID_ARGUMENT</code> naming it. Applied after the server&apos;s secret redaction; never affects the envelope fields. |
-
-
-
-
-
-
-<a name="ondewo.nlu.StreamLogsResponse"></a>
-
-### StreamLogsResponse
-The response message for <a href="index.html#ondewo.nlu.Logs.StreamLogs">Logs.StreamLogs</a>. The stream
-carries an envelope rather than a bare entry so that a viewer can tell a healthy quiet source from a capture
-that has died.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| log_entries | [CaiLogEntry](#ondewo.nlu.CaiLogEntry) | repeated | The entries in this batch, oldest first. May be empty, e.g. on the final message. |
-| capture_state | [CaiLogCaptureState](#ondewo.nlu.CaiLogCaptureState) |  | The capture state of the log streams being followed, aggregated: <code>FAILED</code> if any has failed, else <code>DETACHED</code> if any is detached, else <code>CAPTURING</code> if any is capturing, else <code>STOPPED</code>. |
-| capture_error | [string](#string) |  | Why capture failed, when <code>capture_state</code> is <code>CAI_LOG_CAPTURE_STATE_FAILED</code>. |
-| dropped_line_count | [int64](#int64) |  | Total records deliberately not stored across the followed streams. See <a href="index.html#ondewo.nlu.CaiLogStream">CaiLogStream.dropped_line_count</a>. |
-| resume_token | [string](#string) |  | Cursor to resume this stream. Echo it into <code>StreamLogsRequest.resume_token</code> after a disconnect. |
-| end_reason | [string](#string) |  | Set on the final message when the stream was ended by the server. Human-readable text, not a contract: match on <code>end_reason_code</code>. |
-| end_reason_code | [CaiLogStreamEndReason](#ondewo.nlu.CaiLogStreamEndReason) |  | Set on the final message when the stream was ended by the server, together with <code>end_reason</code>; <code>CAI_LOG_STREAM_END_REASON_UNSPECIFIED</code> on every other message. |
-
-
-
-
-
- <!-- end messages -->
-
-
-<a name="ondewo.nlu.CaiLogCaptureState"></a>
-
-### CaiLogCaptureState
-The state of CAI&apos;s capture of one log stream. This describes the CAPTURE, not the process or the
-container.
-
-| Name | Number | Description |
-| ---- | ------ | ----------- |
-| CAI_LOG_CAPTURE_STATE_UNSPECIFIED | 0 | Unspecified. |
-| CAI_LOG_CAPTURE_STATE_CAPTURING | 1 | Capture is running. |
-| CAI_LOG_CAPTURE_STATE_STOPPED | 2 | Capture ended cleanly; the stream is complete up to the end of the process or the removal of the container. |
-| CAI_LOG_CAPTURE_STATE_FAILED | 3 | Capture failed or its owner stopped renewing it. The stored history may be incomplete and <code>capture_error</code> says why. |
-| CAI_LOG_CAPTURE_STATE_DETACHED | 4 | Another CAI server process holds the capture of this stream. |
-
-
-
-<a name="ondewo.nlu.CaiLogExportFormat"></a>
-
-### CaiLogExportFormat
-File format of an <a href="index.html#ondewo.nlu.Logs.ExportLogs">ExportLogs</a> export. Every format is UTF-8
-with <code>\n</code> line endings and one entry per record; a multi-line entry stays one record.
-
-| Name | Number | Description |
-| ---- | ------ | ----------- |
-| CAI_LOG_EXPORT_FORMAT_UNSPECIFIED | 0 | Unspecified: identical to <code>CAI_LOG_EXPORT_FORMAT_TEXT</code>. |
-| CAI_LOG_EXPORT_FORMAT_TEXT | 1 | Plain text in the manner of <code>docker logs --timestamps</code>: one line per entry, <code>&lt;RFC 3339 UTC timestamp&gt; &lt;message&gt;</code>; continuation lines of a multi-line entry are indented by one tab. With <code>include_metadata</code> the timestamp is followed by the severity, the process or container name and the operation name (<code>-</code> when none), separated by single spaces. |
-| CAI_LOG_EXPORT_FORMAT_NDJSON | 2 | Newline-delimited JSON: one JSON object per line, the proto3 JSON form of a <a href="index.html#ondewo.nlu.CaiLogEntry">CaiLogEntry</a> (lowerCamelCase keys). Without <code>include_metadata</code> only <code>seq</code>, <code>logStream</code>, <code>timestamp</code>, <code>level</code> and <code>message</code> are written; with it every field. |
-| CAI_LOG_EXPORT_FORMAT_CSV | 3 | Comma-separated values (RFC 4180, every field quoted, embedded quotes doubled, embedded line breaks kept inside the quotes), with a header row. Columns without <code>include_metadata</code>: <code>timestamp,level,message</code>; with it: <code>seq,timestamp,timestamp_is_exact,level,log_source, channel,emitter,thread_name,process_name,log_stream,operation_name,operation_type,project_parent, container_id,container_name,replica_id,trace_id,physical_line_count,message</code>. |
-
-
-
-<a name="ondewo.nlu.CaiLogFilterField"></a>
-
-### CaiLogFilterField
-Identifies a field of <a href="index.html#ondewo.nlu.CaiLogFilter">CaiLogFilter</a>. Used by
-<a href="index.html#ondewo.nlu.ListLogsResponse">ListLogsResponse.scope_limited_filters</a> to declare which
-filters could only be applied inside the returned window.
-
-| Name | Number | Description |
-| ---- | ------ | ----------- |
-| CAI_LOG_FILTER_FIELD_UNSPECIFIED | 0 | Unspecified. |
-| CAI_LOG_FILTER_FIELD_TEXT | 1 | <code>CaiLogFilter.text</code>. |
-| CAI_LOG_FILTER_FIELD_REGEX | 2 | <code>CaiLogFilter.regex</code>. |
-| CAI_LOG_FILTER_FIELD_LOG_SOURCES | 3 | <code>CaiLogFilter.log_sources</code>. |
-| CAI_LOG_FILTER_FIELD_EMITTER_PREFIXES | 4 | <code>CaiLogFilter.emitter_prefixes</code>. |
-| CAI_LOG_FILTER_FIELD_THREAD_NAMES | 5 | <code>CaiLogFilter.thread_names</code>. |
-| CAI_LOG_FILTER_FIELD_PROCESS_NAMES | 6 | <code>CaiLogFilter.process_names</code>. |
-
-
-
-<a name="ondewo.nlu.CaiLogSource"></a>
-
-### CaiLogSource
-What produced a log stream.
-
-| Name | Number | Description |
-| ---- | ------ | ----------- |
-| CAI_LOG_SOURCE_UNSPECIFIED | 0 | Unspecified or unrecognised source. |
-| CAI_LOG_SOURCE_SERVER | 1 | A CAI gRPC server process (one worker of one replica) logging through its own logger. |
-| CAI_LOG_SOURCE_REMOTE_OPERATION_CONTAINER | 2 | The docker container a remote operation runs (build cache, training, RAG crawl, LLM evaluation or simulation, RAGFlow upload / removal / re-parse). |
-| CAI_LOG_SOURCE_HELPER_CONTAINER | 3 | A short-lived helper container a remote operation starts before its main container: the hardware check (phase <code>hw_check</code>) and the GPU pre-allocation (phase <code>gpu_prealloc</code>). |
-
-
-
-<a name="ondewo.nlu.CaiLogStreamChannel"></a>
-
-### CaiLogStreamChannel
-The output channel a log stream captures.
-
-| Name | Number | Description |
-| ---- | ------ | ----------- |
-| CAI_LOG_STREAM_CHANNEL_UNSPECIFIED | 0 | The channel is not known. This is the honest value for a container started with a TTY (every remote operation container is), where the pseudo-terminal merges both channels into one stream. |
-| CAI_LOG_STREAM_CHANNEL_STDOUT | 1 | Standard output. |
-| CAI_LOG_STREAM_CHANNEL_STDERR | 2 | Standard error. The CAI server process logs here. |
-
-
-
-<a name="ondewo.nlu.CaiLogStreamEndReason"></a>
-
-### CaiLogStreamEndReason
-Why the SERVER ended a <code>StreamLogs</code> stream. Carried by the final
-<a href="index.html#ondewo.nlu.StreamLogsResponse">StreamLogsResponse</a> beside the human-readable
-<code>end_reason</code>. A stream ended by the client has no final message.
-
-| Name | Number | Description |
-| ---- | ------ | ----------- |
-| CAI_LOG_STREAM_END_REASON_UNSPECIFIED | 0 | Not ended by the server: every message except the final one. |
-| CAI_LOG_STREAM_END_REASON_ALL_CAPTURES_TERMINATED | 1 | The capture of every followed log stream has terminated (<code>STOPPED</code> or <code>FAILED</code>) and every stored entry was sent. Nothing more will arrive for this filter. |
-| CAI_LOG_STREAM_END_REASON_MAX_DURATION | 2 | The server-side maximum stream duration (<code>ONDEWO_NLU_CAI_LOG_STREAM_MAX_DURATION_S</code>) was reached. Reconnect with the <code>resume_token</code> of the final message to continue seamlessly. |
-| CAI_LOG_STREAM_END_REASON_SERVER_SHUTDOWN | 3 | The CAI server process is shutting down. Reconnect, to another replica if there is one, with the <code>resume_token</code>. |
-| CAI_LOG_STREAM_END_REASON_PERMISSION_REVOKED | 4 | The caller lost the access the stream requires. The stream then ends with <code>PERMISSION_DENIED</code>. |
-| CAI_LOG_STREAM_END_REASON_CREDENTIALS_EXPIRED | 5 | The caller&apos;s credential expired. The stream then ends with <code>UNAUTHENTICATED</code>; reconnect with a fresh credential and the <code>resume_token</code>. |
-
-
- <!-- end enums -->
-
- <!-- end HasExtensions -->
-
-
-<a name="ondewo.nlu.Logs"></a>
-
-### Logs
-<p>Reads, follows, exports and erases the logs ONDEWO CAI captures: the log records of the CAI gRPC server
-processes themselves (every worker of every replica), the output of the docker containers that remote
-operations run (build cache, training, RAG crawl, LLM evaluation and simulation, RAGFlow upload / removal /
-re-parse) and of the short-lived helper containers that prepare them (hardware check, GPU pre-allocation).
-Long-running operations that run inside a CAI worker (agent export, import, restore, re-index, ranking
-optimization) are covered too: the server records they emit carry the operation&apos;s name.</p>
-<p>Entries are served from the CAI database, not from the docker daemon, so the logs of a container that was
-already removed, and of a server process that already exited, stay readable until retention or
-<code>DeleteLogs</code> removes them.</p>
-<p><b>Secrets are redacted server-side</b> when an entry is captured and again when it is read, so a
-redaction rule added later also applies to entries captured before it.</p>
-<p>Errors are reported as gRPC status codes: <code>INVALID_ARGUMENT</code> for a malformed name, filter,
-cursor, <code>resume_token</code>, <code>page_token</code> or <code>field_mask</code> (each naming the field);
-<code>NOT_FOUND</code> for an unknown log stream or operation, and for one the caller may not read;
-<code>RESOURCE_EXHAUSTED</code> when the server process already serves its maximum of concurrent streams or
-exports; <code>UNAVAILABLE</code> when the logs API is disabled (<code>ONDEWO_NLU_CAI_LOG_API_ENABLED</code>)
-or the database cannot be reached; <code>UNAUTHENTICATED</code> without a valid credential;
-<code>PERMISSION_DENIED</code> when the caller may read no logs at all.</p>
-<p>Authorization: entries that belong to no project (the server&apos;s own records outside any project RPC
-or operation) require the server permission <code>ServerPermission.Logs.ReadServerLogs</code>, granted to
-<code>SERVER_ADMIN</code> by default; a caller holding it reads every entry. Without it a caller reads only
-the entries tagged with a project in which it holds <code>ProjectPermission.Logs.ReadProjectLogs</code>,
-granted to <code>PROJECT_DEVELOPER</code> and above by default; entries of other projects are filtered out
-and are never reported as existing. <code>DeleteLogs</code> requires
-<code>ServerPermission.Logs.DeleteLogs</code>, granted to <code>SERVER_ADMIN</code> only. A long-running
-<code>StreamLogs</code> or <code>ExportLogs</code> re-checks the caller periodically and ends when the access
-was revoked or the credential expired.</p>
-
-| Method Name | Request Type | Response Type | Description |
-| ----------- | ------------ | ------------- | ------------|
-| StreamLogs | [StreamLogsRequest](#ondewo.nlu.StreamLogsRequest) | [StreamLogsResponse](#ondewo.nlu.StreamLogsResponse) stream | <p>Streams captured log entries as they are written, in the manner of <code>docker logs --follow</code>. The stream replays <code>tail_lines</code> historical entries and then follows. It stays open until the capture of every matching log stream has terminated (only possible when the filter selects container streams alone: the server&apos;s own log streams never terminate while the server runs), until the client disconnects, or until the server-side maximum stream duration is reached.</p> <p>Limits: at most <code>ONDEWO_NLU_CAI_LOG_STREAM_MAX_DURATION_S</code> (default 3600) seconds per stream, after which the server sends a final message with <code>end_reason_code = CAI_LOG_STREAM_END_REASON_MAX_DURATION</code> and a <code>resume_token</code> to reconnect with; at most <code>ONDEWO_NLU_CAI_LOG_MAX_CONCURRENT_STREAMS</code> (default 8) concurrent streams per server process, beyond which a new stream is <code>RESOURCE_EXHAUSTED</code>. The server sends NO keep-alive message: a quiet filter sends nothing, so a client must not treat silence as a dead stream (use HTTP/2 keep-alive pings to detect a dead connection).</p> <p>Errors: <code>INVALID_ARGUMENT</code> for a filter carrying <code>start_time</code> or <code>end_time</code>, an <code>after_seq</code> with a filter that does not resolve to exactly one log stream, a malformed <code>resume_token</code>, an invalid <code>regex</code> or an unknown <code>field_mask</code> path; <code>NOT_FOUND</code> for a named log stream or operation the caller may not read; <code>RESOURCE_EXHAUSTED</code> as above, and when one read of the stored entries exceeds <code>ONDEWO_NLU_CAI_LOG_QUERY_TIMEOUT_S</code> (narrow the filter); <code>UNAVAILABLE</code> when the database cannot be reached (reconnect with the last <code>resume_token</code>). When the caller&apos;s access is revoked or its credential expires during the stream, the server sends a final message (<code>CAI_LOG_STREAM_END_REASON_PERMISSION_REVOKED</code> / <code>CAI_LOG_STREAM_END_REASON_CREDENTIALS_EXPIRED</code>, with a <code>resume_token</code>) and ends the stream with <code>PERMISSION_DENIED</code> / <code>UNAUTHENTICATED</code>.</p> |
-| ListLogs | [ListLogsRequest](#ondewo.nlu.ListLogsRequest) | [ListLogsResponse](#ondewo.nlu.ListLogsResponse) | <p>Returns a bounded, filtered page of captured log entries. Supports a time window, severity filtering, a regular expression, a plain-text search and cursor paging in both directions for infinite scrolling.</p> <p>No time window is required: without <code>start_time</code> / <code>end_time</code> the window is the newest <code>max_lines</code> matching entries (or, with <code>oldest_first</code>, the oldest after the cursor). With <code>include_counts</code> the response also carries the number of matching entries per severity. The <code>next_resume_token</code> of a response can be handed to <code>StreamLogs</code> to continue live exactly where the page ended, without a gap or a duplicate.</p> <p>Errors: <code>INVALID_ARGUMENT</code> for an invalid or over-long <code>regex</code>, a <code>start_time</code> after <code>end_time</code>, <code>before_seq</code> / <code>after_seq</code> combined with <code>resume_token</code> or with a filter that does not resolve to exactly one log stream, a negative <code>before_seq</code> / <code>after_seq</code>, a malformed <code>resume_token</code> or an unknown <code>field_mask</code> path; <code>NOT_FOUND</code> for a named log stream or operation the caller may not read; <code>RESOURCE_EXHAUSTED</code> when the query exceeds <code>ONDEWO_NLU_CAI_LOG_QUERY_TIMEOUT_S</code> (narrow the filter: log streams, time window or severity); <code>UNAVAILABLE</code> when the database cannot be reached.</p> <p>A page is bounded by size as well as by <code>max_lines</code>: when its messages would exceed the server&apos;s size budget it is cut (a forward page keeps its oldest entries, a backward page its newest) and reported with <code>truncated = true</code>; the cursors continue exactly where it was cut.</p> |
-| GetLogStream | [GetLogStreamRequest](#ondewo.nlu.GetLogStreamRequest) | [CaiLogStream](#ondewo.nlu.CaiLogStream) | <p>Returns one log stream, i.e. the capture of one server process or of one container.</p> <p>Errors: <code>INVALID_ARGUMENT</code> for a malformed <code>name</code> or an unknown <code>field_mask</code> path; <code>NOT_FOUND</code> for an unknown log stream or one the caller may not read.</p> |
-| ListLogStreams | [ListLogStreamsRequest](#ondewo.nlu.ListLogStreamsRequest) | [ListLogStreamsResponse](#ondewo.nlu.ListLogStreamsResponse) | <p>Lists the log streams CAI has captured. A server process yields a new log stream every time it starts, and a container every time it is (re)started under a new container id. Ordered by <code>capture_started_at</code>, newest first.</p> <p>A caller without <code>ServerPermission.Logs.ReadServerLogs</code> sees only the log streams of the projects in which it holds <code>ProjectPermission.Logs.ReadProjectLogs</code>; the server&apos;s own log streams are not listed to it, although <code>ListLogs</code> and <code>StreamLogs</code> return their entries that are tagged with such a project.</p> <p>Errors: <code>INVALID_ARGUMENT</code> for a malformed <code>page_token</code>, <code>CAI_LOG_CAPTURE_STATE_UNSPECIFIED</code> in <code>capture_states</code> or an unknown <code>field_mask</code> path.</p> |
-| ExportLogs | [ExportLogsRequest](#ondewo.nlu.ExportLogsRequest) | [ExportLogsResponse](#ondewo.nlu.ExportLogsResponse) stream | <p>Exports the captured log entries matching a filter as a file: plain text, NDJSON or CSV, streamed in chunks. Entries are exported oldest first with the same filter semantics and the same server-side secret redaction as <code>ListLogs</code>; unlike <code>ListLogs</code> the content filters are applied to EVERY entry of the window. Concatenating the <code>chunk</code>s of all messages in order yields the file.</p> <p>A bounded time window is REQUIRED: <code>filter.start_time</code> AND <code>filter.end_time</code> must both be set, with <code>start_time</code> before <code>end_time</code>.</p> <p>Limits: each <code>chunk</code> is at most 1 MiB; an export holds at most <code>ONDEWO_NLU_CAI_LOG_EXPORT_MAX_ENTRIES</code> (default 1000000) entries and at most <code>ONDEWO_NLU_CAI_LOG_EXPORT_MAX_BYTES</code> (default 1 GiB) of output. When a limit is reached the export ends early with <code>truncated = true</code> on the last message; so does an export one of whose reads exceeds <code>ONDEWO_NLU_CAI_LOG_QUERY_TIMEOUT_S</code>. At most <code>ONDEWO_NLU_CAI_LOG_MAX_CONCURRENT_EXPORTS</code> (default 1) exports run per server process, beyond which a new one is <code>RESOURCE_EXHAUSTED</code>.</p> <p>Errors: <code>INVALID_ARGUMENT</code> for a missing, empty or inverted time window, an invalid <code>regex</code> or an unknown <code>format</code> value; <code>NOT_FOUND</code> for a named log stream or operation the caller may not read; <code>RESOURCE_EXHAUSTED</code> as above. A revoked access or an expired credential ends the export with <code>PERMISSION_DENIED</code> / <code>UNAUTHENTICATED</code> and no last message.</p> |
-| DeleteLogs | [DeleteLogsRequest](#ondewo.nlu.DeleteLogsRequest) | [DeleteLogsResponse](#ondewo.nlu.DeleteLogsResponse) | <p>Permanently deletes captured log entries matching a filter. Only the identity filters and the time window apply; content filters are rejected. A time window alone is a valid filter. A log stream whose last entry was deleted is removed too, unless it is still <code>CAI_LOG_CAPTURE_STATE_CAPTURING</code>. A capture that is still running keeps writing, so entries emitted after the deletion are stored again.</p> <p>Idempotent: repeating a deletion succeeds and reports <code>0</code> deleted entries. With <code>validate_only</code> nothing is deleted and the counts are what would be deleted.</p> <p>Errors: <code>INVALID_ARGUMENT</code> for an empty filter, a content filter (<code>text</code>, <code>regex</code>, <code>log_levels</code>, <code>min_log_level</code>, <code>include_unleveled_lines</code>, <code>emitter_prefixes</code>, <code>thread_names</code>, <code>trace_ids</code>; presence alone counts) or a <code>start_time</code> after <code>end_time</code>; <code>PERMISSION_DENIED</code> without <code>ServerPermission.Logs.DeleteLogs</code>; <code>RESOURCE_EXHAUSTED</code> when one deletion step exceeds <code>ONDEWO_NLU_CAI_LOG_QUERY_TIMEOUT_S</code> (what was deleted until then stays deleted; repeat the request); <code>UNAVAILABLE</code> when the database cannot be reached.</p> |
-
- <!-- end services -->
-
-
-
 <a name="ondewo/nlu/operation_metadata.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
@@ -10647,8 +10116,6 @@ The request message for <a href="index.html#ondewo.nlu.Operations.GetRemoteOpera
 | container_id | [string](#string) |  | Optional. Scope the query to a single container of the operation, identified by its docker container id. Empty (the default) queries the operation&apos;s currently-registered container, preserving the legacy single-container behavior. When the container has finished and been removed, its persisted logs are served from the server-side log archive. |
 | before_seq | [int64](#int64) |  | Optional cursor for infinite-scroll-UP paging: return the newest lines with <a href="index.html#ondewo.nlu.RemoteOperationContainerLogLine">seq</a> &lt; <code>before_seq</code> (older window). <code>0</code> (the default) disables backward paging. |
 | after_seq | [int64](#int64) |  | Optional cursor for infinite-scroll-DOWN paging: return lines with <code>seq</code> &gt; <code>after_seq</code> (newer window). <code>0</code> (the default) disables forward paging. |
-| field_mask | [google.protobuf.FieldMask](#google.protobuf.FieldMask) |  | Optional. Partial response: the field paths to populate in every returned <code>RemoteOperationContainerLogLine</code>, relative to that message (no <code>log_lines.</code> prefix). <code>seq</code> and <code>log_stream</code> are always populated. Unset or empty returns every field. An unknown path is rejected with <code>INVALID_ARGUMENT</code> naming it. |
-| resume_token | [string](#string) |  | Optional. An opaque cursor from a previous response&apos;s <code>next_resume_token</code>. Use it instead of <code>after_seq</code> / <code>before_seq</code> when the operation ran several containers. Cannot be combined with <code>before_seq</code> or <code>after_seq</code>. |
 
 
 
@@ -10668,8 +10135,6 @@ The response message for <a href="index.html#ondewo.nlu.Operations.GetRemoteOper
 | min_available_seq | [int64](#int64) |  | The smallest <code>seq</code> currently available for this container (its oldest captured line). A client paging up has reached the beginning when the returned lines start at this value. |
 | max_available_seq | [int64](#int64) |  | The largest <code>seq</code> currently available for this container (its newest captured line). |
 | has_more_older | [bool](#bool) |  | True when older lines than the returned window still exist (i.e. the window&apos;s first <code>seq</code> &gt; <code>min_available_seq</code>) — the client may keep scrolling up. |
-| next_resume_token | [string](#string) |  | Cursor to fetch the next window, or to start a <code>StreamRemoteOperationContainerLogs</code> (or a <code>Logs.StreamLogs</code>) that continues exactly where this window ended. |
-| has_more_newer | [bool](#bool) |  | True when entries newer than this window exist. |
 
 
 
@@ -10873,8 +10338,7 @@ A single parsed container log line, emitted by both the streaming and the query 
 | message | [string](#string) |  | The log message text, with ANSI colour codes stripped and secrets redacted. |
 | container_id | [string](#string) |  | The docker container id this line was produced by. Lets a client attribute or group lines when an operation ran several containers. Empty when the id was not captured. |
 | container_name | [string](#string) |  | The docker container name this line was produced by. Empty when unavailable. |
-| seq | [int64](#int64) |  | Ordering cursor of this line, assigned by the database. Monotonically increasing WITHIN ONE CONTAINER but NOT contiguous: values come from a sequence shared by every log stream and are removed by retention. Never compute the next cursor as <code>seq + 1</code>; pass it back as <code>after_seq</code> / <code>before_seq</code> (strictly greater / smaller) or use <code>resume_token</code>. <code>0</code> when the line was produced by a legacy path that did not assign a sequence. |
-| log_stream | [string](#string) |  | Resource name of the log stream this line belongs to (see <a href="index.html#ondewo.nlu.CaiLogEntry">CaiLogEntry.log_stream</a>). |
+| seq | [int64](#int64) |  | The monotonically-increasing sequence number of this line within its container&apos;s captured log (assigned by the server-side capture). Used as the cursor for infinite-scroll paging. <code>0</code> when the line was produced by a legacy path that did not assign a sequence. |
 
 
 
@@ -10942,8 +10406,6 @@ The request message for <a href="index.html#ondewo.nlu.Operations.StreamRemoteOp
 | min_log_level | [LogSeverity](#ondewo.nlu.LogSeverity) |  | Only stream lines at or above this loguru severity. <code>LOG_SEVERITY_UNSPECIFIED</code> (the default) streams every line regardless of level. |
 | tail_lines | [int32](#int32) |  | Replay at most this many of the most recent existing log lines before switching to live follow. <code>0</code> (the default) starts the follow with no historical replay. |
 | container_id | [string](#string) |  | Optional. Scope the stream to a single container of the operation, identified by its docker container id (as returned by <a href="index.html#ondewo.nlu.RemoteOperationContainer">RemoteOperationContainer</a>). Empty (the default) streams the operation&apos;s currently-registered container, preserving the legacy single-container behavior. |
-| regex | [string](#string) |  | Optional. Only stream lines whose message matches this regular expression (Python <code>re</code> syntax, at most 512 characters). Empty (the default) disables regex filtering. An invalid, oversized or catastrophically backtracking pattern is rejected with <code>INVALID_ARGUMENT</code>. |
-| resume_token | [string](#string) |  | Optional. Resume exactly where a previous stream or <code>GetRemoteOperationContainerLogs</code> page stopped: the <code>next_resume_token</code> of that response, echoed back verbatim. When set, no historical replay is applied and <code>tail_lines</code> is ignored. The token is interchangeable with <code>Logs.StreamLogs</code> / <code>Logs.ListLogs</code> tokens. |
 
 
 
@@ -13290,26 +12752,6 @@ Represents an audio file resource attached to a session (input recording or gene
 
 
 
-<a name="ondewo.nlu.CancelTurn"></a>
-
-### CancelTurn
-Cancels a turn. At least one of <code>response_id</code> and <code>client_turn_id</code> must be set; when both
-are, <code>client_turn_id</code> is authoritative.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| response_id | [string](#string) |  | The server's <code>response_id</code> of the turn, when the client has already received it; empty otherwise. |
-| client_turn_id | [string](#string) |  | <code>StreamingDetectIntentRequest.client_turn_id</code> of the turn. |
-| turn_interruption_reason | [TurnInterruptionReason](#ondewo.nlu.TurnInterruptionReason) |  | Why the turn is cancelled. |
-| decided_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Wall-clock time at which the client decided to cancel. Telemetry only. |
-| background_work_policy | [BackgroundWorkPolicy](#ondewo.nlu.BackgroundWorkPolicy) |  | What happens to background work the turn started. |
-
-
-
-
-
-
 <a name="ondewo.nlu.ContextFilter"></a>
 
 ### ContextFilter
@@ -13542,25 +12984,6 @@ This message contains a detected intent
 | algorithm | [string](#string) |  | intent detection algorithm |
 | fulfillment_messages | [Intent.Message](#ondewo.nlu.Intent.Message) | repeated | collection of rich messages to present to the user This field is set only for the first detected intent. For the rest of the intents the messages are not resolved and the raw messages for the current language code are available in self.intent.messages |
 | required_param_missing | [bool](#bool) |  | This field is set to: <ul> <li><code>true</code> if the matched intent has required parameters and not all of the required parameter values have been collected.</li> <li><code>false</code> if all required parameter values have been collected, or if the matched intent doesn&apos;t contain any required parameters.</li> </ul> |
-
-
-
-
-
-
-<a name="ondewo.nlu.DiscardDraft"></a>
-
-### DiscardDraft
-Discards the session step of a preemptive draft: a turn the client started speculatively on a partial
-transcript and then did not use. The server deletes the session step only when it belongs to this session and its
-request carried <code>QueryParameters.preemptive_draft</code> = true; it answers
-<code>TURN_CONTROL_ACK_STATUS_DRAFT_DISCARDED</code>. Any other step is kept and the server answers
-<code>TURN_CONTROL_ACK_STATUS_UNKNOWN_TURN</code>.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| response_id | [string](#string) |  | The server's <code>response_id</code> of the draft turn. |
 
 
 
@@ -13939,54 +13362,6 @@ This message is a request to get a session step
 
 
 
-<a name="ondewo.nlu.HeardMessage"></a>
-
-### HeardMessage
-What the user heard of one spoken message of a turn.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| fulfillment_message_index | [int32](#int32) |  | Index into the turn's <code>QueryResult.fulfillment_messages</code>; <code>-1</code> for a filler, which is not one of them. |
-| platform | [Intent.Message.Platform](#ondewo.nlu.Intent.Message.Platform) |  | Platform of that fulfillment message. |
-| full_text | [string](#string) |  | The text that was synthesized for the message, SIP and SSML markup stripped. |
-| heard_text | [string](#string) |  | The prefix of <code>full_text</code> the user heard, cut back to a word boundary. |
-| heard_char_count | [int32](#int32) |  | Length of <code>heard_text</code> in Unicode code points. |
-| heard_audio_duration_in_s | [float](#float) |  | Duration of the message's audio that was played to the user, in seconds. |
-| total_audio_duration_in_s | [float](#float) |  | Duration of the message's whole audio, in seconds; 0 when it was never synthesized. |
-| completed | [bool](#bool) |  | The message was played to its end. |
-| never_started | [bool](#bool) |  | Nothing of the message was played (e.g. it was still queued when the turn was interrupted). |
-| skipped_sip_trigger | [bool](#bool) |  | The message carried a SIP trigger (e.g. a transfer or a hangup) that was NOT executed because the turn was interrupted first. |
-| filler_id | [string](#string) |  | For a filler, the filler id the server sent in <code>diagnostic_info.ondewo_filler.filler_id</code>; empty otherwise. |
-
-
-
-
-
-
-<a name="ondewo.nlu.HeardReport"></a>
-
-### HeardReport
-Reports what the user heard of a turn's answer. At least one of <code>response_id</code> and
-<code>client_turn_id</code> must be set. The server keeps the report with the highest <code>revision</code> per
-turn and ignores a lower or equal one.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| response_id | [string](#string) |  | The server's <code>response_id</code> of the turn, when the client has already received it; empty otherwise. |
-| client_turn_id | [string](#string) |  | <code>StreamingDetectIntentRequest.client_turn_id</code> of the turn. |
-| revision | [int32](#int32) |  | Revision of this report, starting at 1. A later, more precise measurement of the same turn carries a higher revision. |
-| turn_interruption_reason | [TurnInterruptionReason](#ondewo.nlu.TurnInterruptionReason) |  | Why the turn was interrupted. |
-| heard_messages | [HeardMessage](#ondewo.nlu.HeardMessage) | repeated | One entry per message of the turn that was spoken, queued or skipped, in playback order. |
-| heard_text_precision | [HeardTextPrecision](#ondewo.nlu.HeardTextPrecision) |  | How the heard text was determined. |
-| caller_overlap_duration_in_s | [float](#float) |  | Duration of heard audio that was played after the user had started speaking (the overlap of bot and user), in seconds. |
-
-
-
-
-
-
 <a name="ondewo.nlu.ImageFileResource"></a>
 
 ### ImageFileResource
@@ -14020,37 +13395,6 @@ Instructs the speech recognizer how to process the audio content.
 | sample_rate_hertz | [int32](#int32) |  | Required. Sample rate (in Hertz) of the audio content sent in the query. Refer to <a href="/speech/docs/basics">Cloud Speech API documentation</a> for more details. |
 | language_code | [string](#string) |  | Required. The language of the supplied audio. Dialogflow does not do translations. See <a href="https://dialogflow.com/docs/languages">Language Support</a> for a list of the currently supported language codes. Note that queries in the same session do not necessarily need to specify the same language. |
 | phrase_hints | [string](#string) | repeated | Optional. The collection of phrase hints which are used to boost accuracy of speech recognition. Refer to <a href="/speech/docs/basics#phrase-hints">Cloud Speech API documentation</a> for more details. |
-
-
-
-
-
-
-<a name="ondewo.nlu.InterruptTurnRequest"></a>
-
-### InterruptTurnRequest
-The request to interrupt a turn of a session outside a <code>StreamingDetectIntent</code> stream.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| session | [string](#string) |  | Required. The session of the turn. Format: <code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code>. |
-| turn_control | [TurnControl](#ondewo.nlu.TurnControl) |  | Required. The control to apply. |
-
-
-
-
-
-
-<a name="ondewo.nlu.InterruptTurnResponse"></a>
-
-### InterruptTurnResponse
-The response to an <code>InterruptTurnRequest</code>.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| turn_control_ack | [TurnControlAck](#ondewo.nlu.TurnControlAck) |  | Outcome of the control. |
 
 
 
@@ -15495,7 +14839,6 @@ For a phone bot, this is the phone number +123456789 the user called (Note: This
 https://aim-develop.ondewo.com/ |
 | identified_user_id | [string](#string) |  | Id of the &quot;identified user&quot; e.g. for a chatbot the email address or for a phone bot the phone number of the user This field can also be used for a customized tracking id or tag id |
 | transcriptions | [S2tTranscription](#ondewo.nlu.S2tTranscription) | repeated | transcriptions of the user input sorted by score |
-| preemptive_draft | [bool](#bool) |  | Optional. Marks the request as a preemptive draft: a turn the client (e.g. ondewo-csi) starts speculatively, e.g. on a partial transcript, and may later discard with <code>TurnControl.discard_draft</code>. The server records the mark on the session step of this request. A <code>DiscardDraft</code> deletes only a session step of the same session whose request carried this mark. A server that does not know this field ignores it and keeps the step. |
 
 
 
@@ -15553,6 +14896,7 @@ Chunk information for a document chunk referenced in a RAG based <code>Streaming
 | similarity | [float](#float) |  | Similarity score of this chunk for response it is retruned with. |
 | document_url | [string](#string) |  | For crawled documents the URL of the source document. For any other document it is left empty. |
 | deep_link_url | [string](#string) |  | For crawled documents link to the source document that directly jumps to the chunk's location on the page using a text fragment anchor (a bit fragile and might not always work). For any other document it is left empty. |
+| document_title | [string](#string) |  | Title of the document (optional). |
 
 
 
@@ -15872,8 +15216,6 @@ Multiple request messages should be sent in order:
 | query_input | [QueryInput](#ondewo.nlu.QueryInput) |  | Required. The input specification. It can be set to: <ol> <li>an audio config which instructs the speech recognizer how to process the speech audio,</li> <li>a conversational query in the form of text, or</li> <li>an event that specifies which intent to trigger.</li> </ol> |
 | single_utterance | [bool](#bool) |  | Optional. If <code>false</code> (default), recognition does not cease until the client closes the stream. If <code>true</code>, the recognizer will detect a single spoken utterance in input audio. Recognition ceases when it detects the audio&apos;s voice has stopped or paused. In this case, once a detected intent is received, the client should close the stream and start a new request with a new stream as needed. This setting is ignored when <code>query_input</code> is a piece of text or an event. |
 | input_audio | [bytes](#bytes) |  | Optional. The input audio content to be recognized. Must be sent if <code>query_input</code> was set to a streaming input audio config. The complete audio over all streaming messages must not exceed 1 minute. |
-| turn_control | [TurnControl](#ondewo.nlu.TurnControl) |  | Optional. Controls a turn of this stream: cancels it, reports what the user heard of its answer, or discards the session step of a preemptive draft. Sent ALONE (no <code>query_input</code>) on a call-length stream; the server applies it in stream order and starts no turn for it. Send it only to a server that advertised the initial metadata <code>x-ondewo-cai-turn-control: 1</code> on this stream: an older server treats a request without <code>query_input</code> as a malformed turn and ends the stream. |
-| client_turn_id | [string](#string) |  | Optional. Client-minted id (e.g. a uuid4 hex) of the turn this request STARTS; set together with <code>query_input</code>. The server echoes it on every response of that turn (<code>StreamingDetectIntentResponse.client_turn_id</code>), and a <code>CancelTurn</code> or <code>HeardReport</code> can name the turn by it before the server's <code>response_id</code> is known. |
 
 
 
@@ -15902,8 +15244,6 @@ Multiple response messages can be returned in order:
 | llm_thinking_delta | [LlmThinkingDeltaEvent](#ondewo.nlu.LlmThinkingDeltaEvent) |  | Emitted for an incremental LLM thinking (reasoning) update. |
 | llm_token_usage_update | [LlmTokenUsageUpdateEvent](#ondewo.nlu.LlmTokenUsageUpdateEvent) |  | Emitted when the running LLM token-usage totals are updated. |
 | llm_agent_node_event | [LlmAgentNodeEvent](#ondewo.nlu.LlmAgentNodeEvent) |  | Emitted when a node of an AI Team graph starts, completes or fails. |
-| turn_control_ack | [TurnControlAck](#ondewo.nlu.TurnControlAck) |  | Set on the response that acknowledges a <code>CancelTurn</code> or a <code>DiscardDraft</code> sent as <code>StreamingDetectIntentRequest.turn_control</code>; a <code>HeardReport</code> is not acknowledged on the stream. A response that carries it carries no query result and is never an answer. The acknowledgement of a <code>CancelTurn</code> is sent after every other response of the cancelled turn, so no response of that turn follows it. The acknowledgement of a <code>DiscardDraft</code> is sent once the discard is decided, between turns, with the draft's <code>response_id</code> and no <code>client_turn_id</code>: <code>TURN_CONTROL_ACK_STATUS_DRAFT_DISCARDED</code> when the draft's session step was deleted, <code>TURN_CONTROL_ACK_STATUS_UNKNOWN_TURN</code> when no step was deleted. Not part of <code>telemetry_event</code>. |
-| client_turn_id | [string](#string) |  | Echo of <code>StreamingDetectIntentRequest.client_turn_id</code> of the turn this response belongs to; empty when the client sent none. |
 
 
 
@@ -15969,42 +15309,6 @@ Represents the natural language text to be processed.
 | ----- | ---- | ----- | ----------- |
 | text | [string](#string) |  | Required. The UTF-8 encoded natural language text to be processed. Text length must not exceed 256 bytes. |
 | language_code | [string](#string) |  | Required. The language of this conversational query. See <a href="https://dialogflow.com/docs/languages">Language Support</a> for a list of the currently supported language codes. Note that queries in the same session do not necessarily need to specify the same language. |
-
-
-
-
-
-
-<a name="ondewo.nlu.TurnControl"></a>
-
-### TurnControl
-Controls one turn of a session. Sent as <code>StreamingDetectIntentRequest.turn_control</code> on a call-length
-stream, or in an <code>InterruptTurnRequest</code>.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| cancel_turn | [CancelTurn](#ondewo.nlu.CancelTurn) |  | Cancel the turn: stop generating its answer. Acknowledged with a <code>TurnControlAck</code>. |
-| heard_report | [HeardReport](#ondewo.nlu.HeardReport) |  | Report what the user heard of the turn's answer, so the server rewrites the session step and the LLM memory to it. |
-| discard_draft | [DiscardDraft](#ondewo.nlu.DiscardDraft) |  | Discard the session step of a preemptive draft the client did not use. Acknowledged with a <code>TurnControlAck</code>. |
-
-
-
-
-
-
-<a name="ondewo.nlu.TurnControlAck"></a>
-
-### TurnControlAck
-Acknowledges a turn control.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| response_id | [string](#string) |  | The server's <code>response_id</code> of the turn; empty when it is not known (e.g. a turn cancelled before it started). |
-| client_turn_id | [string](#string) |  | <code>client_turn_id</code> of the turn, as sent by the client. |
-| turn_control_ack_status | [TurnControlAckStatus](#ondewo.nlu.TurnControlAckStatus) |  | Outcome of the turn control. |
-| server_cancel_duration_in_s | [float](#float) |  | Time the server took from receiving a <code>CancelTurn</code> until the turn's generation had stopped, in seconds; 0 for any other control. |
 
 
 
@@ -16119,18 +15423,6 @@ File type of an audio resource
 
 
 
-<a name="ondewo.nlu.BackgroundWorkPolicy"></a>
-
-### BackgroundWorkPolicy
-What happens to background work (e.g. an asynchronous tool) the cancelled turn started.
-
-| Name | Number | Description |
-| ---- | ------ | ----------- |
-| BACKGROUND_WORK_POLICY_KEEP | 0 | Keep it running; its result is delivered later as usual. |
-| BACKGROUND_WORK_POLICY_CANCEL_PENDING | 1 | Cancel work that is still pending, unless the user already heard it acknowledged. |
-
-
-
 <a name="ondewo.nlu.ComparisonOperator"></a>
 
 ### ComparisonOperator
@@ -16202,21 +15494,6 @@ fixed-width bucket_width_seconds on the request.
 | FEEDBACK_TIME_GRANULARITY_WEEK | 3 | Weekly calendar buckets (ISO weeks, Monday start). |
 | FEEDBACK_TIME_GRANULARITY_MONTH | 4 | Monthly calendar buckets. |
 | FEEDBACK_TIME_GRANULARITY_YEAR | 5 | Yearly calendar buckets. |
-
-
-
-<a name="ondewo.nlu.HeardTextPrecision"></a>
-
-### HeardTextPrecision
-How the heard text of a <code>HeardReport</code> was determined.
-
-| Name | Number | Description |
-| ---- | ------ | ----------- |
-| HEARD_TEXT_PRECISION_UNSPECIFIED | 0 | Not set. |
-| HEARD_TEXT_PRECISION_NONE_HEARD | 1 | Nothing of the answer was heard. |
-| HEARD_TEXT_PRECISION_FULL | 2 | The whole answer was heard. |
-| HEARD_TEXT_PRECISION_ESTIMATED_SERVER | 3 | The played share of the audio was estimated by the client from when it handed the audio to the player, not measured by the player, and mapped proportionally onto the text. |
-| HEARD_TEXT_PRECISION_PROPORTIONAL | 4 | The played share of the audio was measured by the audio player and mapped proportionally onto the text. |
 
 
 
@@ -16331,42 +15608,6 @@ speech-to-text system or by a human annotator.
 | TRANSCRIPTION_TYPE_HUMAN | 2 | Manual transcription produced by a human annotator. |
 
 
-
-<a name="ondewo.nlu.TurnControlAckStatus"></a>
-
-### TurnControlAckStatus
-Outcome of a turn control.
-
-| Name | Number | Description |
-| ---- | ------ | ----------- |
-| TURN_CONTROL_ACK_STATUS_UNSPECIFIED | 0 | Not set. |
-| TURN_CONTROL_ACK_STATUS_CANCELLED | 1 | The turn was being generated and is now cancelled. |
-| TURN_CONTROL_ACK_STATUS_CANCELLED_QUEUED | 2 | The turn had not started yet; it is cancelled and will not run. |
-| TURN_CONTROL_ACK_STATUS_ALREADY_FINISHED | 3 | The turn had already finished generating; nothing was cancelled. |
-| TURN_CONTROL_ACK_STATUS_UNKNOWN_TURN | 4 | No turn of this session matches the given ids. For a <code>DiscardDraft</code>: no session step of this session with the given <code>response_id</code> carries <code>QueryParameters.preemptive_draft</code>; the discard is refused and the step, if one exists, is kept. |
-| TURN_CONTROL_ACK_STATUS_HEARD_APPLIED | 5 | The heard report was applied to the turn's session step. |
-| TURN_CONTROL_ACK_STATUS_HEARD_STALE | 6 | The heard report was ignored because a report with the same or a higher revision was already applied. |
-| TURN_CONTROL_ACK_STATUS_DRAFT_DISCARDED | 7 | The draft's session step, whose request carried <code>QueryParameters.preemptive_draft</code>, was deleted. |
-
-
-
-<a name="ondewo.nlu.TurnInterruptionReason"></a>
-
-### TurnInterruptionReason
-Why a turn was interrupted.
-
-| Name | Number | Description |
-| ---- | ------ | ----------- |
-| TURN_INTERRUPTION_REASON_UNSPECIFIED | 0 | Not set. |
-| TURN_INTERRUPTION_REASON_BARGE_IN | 1 | The user spoke over the answer and the interruption was confirmed as real. |
-| TURN_INTERRUPTION_REASON_CALLER_SPOKE_WHILE_THINKING | 2 | The user spoke again while the turn was still being generated, before any of its answer was played. |
-| TURN_INTERRUPTION_REASON_CALL_ENDED | 3 | The call ended while the turn was being generated or played. |
-| TURN_INTERRUPTION_REASON_FILLER_CUT | 4 | A filler of the turn was cut. |
-| TURN_INTERRUPTION_REASON_NO_FINAL_TIMEOUT | 5 | The user started speaking but no final transcript arrived in time, and the held answer was discarded. |
-| TURN_INTERRUPTION_REASON_OPERATOR_TAKEOVER | 6 | A human operator took the call over. |
-| TURN_INTERRUPTION_REASON_BOT_MUTED | 7 | A human operator muted the bot. |
-
-
  <!-- end enums -->
 
  <!-- end HasExtensions -->
@@ -16381,7 +15622,6 @@ A session represents an interaction with a user. You retrieve user input and pas
 | ----------- | ------------ | ------------- | ------------|
 | DetectIntent | [DetectIntentRequest](#ondewo.nlu.DetectIntentRequest) | [DetectIntentResponse](#ondewo.nlu.DetectIntentResponse) | Processes a natural language query and returns structured, actionable data as a result. This method is not idempotent, because it may cause contexts and session entity types to be updated, which in turn might affect results of future queries. |
 | StreamingDetectIntent | [StreamingDetectIntentRequest](#ondewo.nlu.StreamingDetectIntentRequest) stream | [StreamingDetectIntentResponse](#ondewo.nlu.StreamingDetectIntentResponse) stream | Processes a natural language query in audio format in a streaming fashion and returns structured, actionable data as a result. This method is only available via the gRPC API (not REST). |
-| InterruptTurn | [InterruptTurnRequest](#ondewo.nlu.InterruptTurnRequest) | [InterruptTurnResponse](#ondewo.nlu.InterruptTurnResponse) | Interrupts a turn of the session outside a <code>StreamingDetectIntent</code> stream: cancels it, reports what the user actually heard of its answer, or discards the session step of a preemptive draft. Meant for clients without a call-length stream (e.g. a stop button) and for a heard report that arrives after the stream closed. A voice client with an open stream sends the same <code>TurnControl</code> on that stream instead (<code>StreamingDetectIntentRequest.turn_control</code>). Requires the permission to interrupt a turn of the session's project. |
 | ListSessions | [ListSessionsRequest](#ondewo.nlu.ListSessionsRequest) | [ListSessionsResponse](#ondewo.nlu.ListSessionsResponse) | ListSessions: returns list of sessions from ondewo-kb; by default returns only session IDs |
 | GetSession | [GetSessionRequest](#ondewo.nlu.GetSessionRequest) | [Session](#ondewo.nlu.Session) | GetSession: returns a session(=conversation) from ondewo-kb |
 | CreateSession | [CreateSessionRequest](#ondewo.nlu.CreateSessionRequest) | [Session](#ondewo.nlu.Session) | CreateSession: creates and returns a session(=conversation) from ondewo-kb |
