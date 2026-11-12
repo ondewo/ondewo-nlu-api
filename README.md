@@ -68,6 +68,7 @@ Please use the issue tracker in this repo for discussions about this API, or the
 │   │   ├── entity_type.proto
 │   │   ├── intent.proto
 │   │   ├── llm_evaluation.proto
+│   │   ├── logs.proto
 │   │   ├── operation_metadata.proto
 │   │   ├── operations.proto
 │   │   ├── project_role.proto
