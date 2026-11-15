@@ -464,6 +464,26 @@
                         <a href="#ondewo.nlu.UserInProject" class="title-badge message">UserInProject</a>
                       </li>
                     
+                      <li>
+                        <a href="#ondewo.nlu.WarmTransferAgentLexicon" class="title-badge message">WarmTransferAgentLexicon</a>
+                      </li>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.WarmTransferAgentSettings" class="title-badge message">WarmTransferAgentSettings</a>
+                      </li>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.WarmTransferAgentSettings.DefaultTextsEntry" class="title-badge message">WarmTransferAgentSettings.DefaultTextsEntry</a>
+                      </li>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.WarmTransferAgentSettings.ExtraLexiconEntry" class="title-badge message">WarmTransferAgentSettings.ExtraLexiconEntry</a>
+                      </li>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.WarmTransferAgentTexts" class="title-badge message">WarmTransferAgentTexts</a>
+                      </li>
+                    
                   </ul>
                   
                   
@@ -3417,6 +3437,10 @@
                       
                         <li><a href="#ondewo.nlu.Sessions.InterruptTurn" class="title-badge method">InterruptTurn</a></li>
                       
+                        <li><a href="#ondewo.nlu.Sessions.PrepareWarmTransferIntro" class="title-badge method">PrepareWarmTransferIntro</a></li>
+                      
+                        <li><a href="#ondewo.nlu.Sessions.GetWarmTransferIntroOutcome" class="title-badge method">GetWarmTransferIntroOutcome</a></li>
+                      
                         <li><a href="#ondewo.nlu.Sessions.ListSessions" class="title-badge method">ListSessions</a></li>
                       
                         <li><a href="#ondewo.nlu.Sessions.GetSession" class="title-badge method">GetSession</a></li>
@@ -3689,6 +3713,10 @@
                     
                       <li>
                         <a href="#ondewo.nlu.GetSessionStepRequest" class="title-badge message">GetSessionStepRequest</a>
+                      </li>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.GetWarmTransferIntroOutcomeRequest" class="title-badge message">GetWarmTransferIntroOutcomeRequest</a>
                       </li>
                     
                       <li>
@@ -4000,6 +4028,14 @@
                       </li>
                     
                       <li>
+                        <a href="#ondewo.nlu.PrepareWarmTransferIntroRequest" class="title-badge message">PrepareWarmTransferIntroRequest</a>
+                      </li>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.PrepareWarmTransferIntroResponse" class="title-badge message">PrepareWarmTransferIntroResponse</a>
+                      </li>
+                    
+                      <li>
                         <a href="#ondewo.nlu.QueryInput" class="title-badge message">QueryInput</a>
                       </li>
                     
@@ -4091,6 +4127,14 @@
                         <a href="#ondewo.nlu.VideoFileResource" class="title-badge message">VideoFileResource</a>
                       </li>
                     
+                      <li>
+                        <a href="#ondewo.nlu.WarmTransferIntroConfig" class="title-badge message">WarmTransferIntroConfig</a>
+                      </li>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.WarmTransferIntroOutcome" class="title-badge message">WarmTransferIntroOutcome</a>
+                      </li>
+                    
                   </ul>
                   
                   
@@ -4171,6 +4215,22 @@
                     
                       <li>
                         <a href="#ondewo.nlu.TurnInterruptionReason" class="title-badge enum">TurnInterruptionReason</a>
+                      </li>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.WarmTransferIntroDecidedBy" class="title-badge enum">WarmTransferIntroDecidedBy</a>
+                      </li>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.WarmTransferIntroDecision" class="title-badge enum">WarmTransferIntroDecision</a>
+                      </li>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.WarmTransferIntroStage" class="title-badge enum">WarmTransferIntroStage</a>
+                      </li>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.WarmTransferIntroTextSource" class="title-badge enum">WarmTransferIntroTextSource</a>
                       </li>
                     
                   </ul>
@@ -5737,6 +5797,14 @@ Read-only in the Agent message </p></td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>User id in form of a valid UUID. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>warm_transfer_settings</td>
+                  <td><a href="#ondewo.nlu.WarmTransferAgentSettings">WarmTransferAgentSettings</a></td>
+                  <td></td>
+                  <td><p>Optional. The agent's settings of warm transfer intros (<code>Sessions.PrepareWarmTransferIntro</code>).
+Unset = intros are enabled while the server's warm transfer feature is switched on, with the built-in texts. </p></td>
                 </tr>
               
             </tbody>
@@ -9872,6 +9940,201 @@ Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre> </p></td>
                   <td><a href="#uint32">uint32</a></td>
                   <td></td>
                   <td><p>ID of the project role of the user </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="ondewo.nlu.WarmTransferAgentLexicon" class="title-badge message">WarmTransferAgentLexicon</h3>
+        <p>Additional entries of the closed decision lexicon of warm transfer intros in one language, matched before an LLM</p><p>classifies an answer. At most 50 entries in <code>accept_phrases</code> and <code>decline_phrases</code></p><p>together.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>accept_phrases</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Words and phrases that accept the call (and confirm the ready question), e.g. "übernehme". </p></td>
+                </tr>
+              
+                <tr>
+                  <td>decline_phrases</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Words and phrases that decline the call, e.g. "bin im Termin". </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="ondewo.nlu.WarmTransferAgentSettings" class="title-badge message">WarmTransferAgentSettings</h3>
+        <p>The agent's settings of warm transfer intros. A text a <code>WarmTransferIntroConfig</code> leaves empty falls back</p><p>to the agent's text for the intro's language, then to the built-in default.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>enabled</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td>optional</td>
+                  <td><p>Whether warm transfer intros are enabled for the agent. Unset = enabled while the server's warm transfer
+feature is switched on. False = <code>PrepareWarmTransferIntro</code> answers <code>FAILED_PRECONDITION</code>
+with <code>reason=warm-intro-disabled-for-agent</code>. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>llm_ccai_service_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The <code>ONDEWO_NLU_LLM</code> CCAI service of the LLM intro when the request names none. Empty = the
+project's first <code>ONDEWO_NLU_LLM</code> service. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>default_texts</td>
+                  <td><a href="#ondewo.nlu.WarmTransferAgentSettings.DefaultTextsEntry">WarmTransferAgentSettings.DefaultTextsEntry</a></td>
+                  <td>repeated</td>
+                  <td><p>The default texts, keyed by language code (e.g. <code>de</code>). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>extra_lexicon</td>
+                  <td><a href="#ondewo.nlu.WarmTransferAgentSettings.ExtraLexiconEntry">WarmTransferAgentSettings.ExtraLexiconEntry</a></td>
+                  <td>repeated</td>
+                  <td><p>Additional words and phrases of the decision lexicon, keyed by language code (e.g. <code>de</code>). </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="ondewo.nlu.WarmTransferAgentSettings.DefaultTextsEntry" class="title-badge message">WarmTransferAgentSettings.DefaultTextsEntry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#ondewo.nlu.WarmTransferAgentTexts">WarmTransferAgentTexts</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="ondewo.nlu.WarmTransferAgentSettings.ExtraLexiconEntry" class="title-badge message">WarmTransferAgentSettings.ExtraLexiconEntry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#ondewo.nlu.WarmTransferAgentLexicon">WarmTransferAgentLexicon</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="ondewo.nlu.WarmTransferAgentTexts" class="title-badge message">WarmTransferAgentTexts</h3>
+        <p>The default texts of warm transfer intros in one language. An empty text = the built-in default. The fields and</p><p>placeholders are those of the same-named fields of <code>WarmTransferIntroConfig</code>.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>ready_question</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The first question to the target (placeholder <code>{project}</code>). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>accept_question</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The question after the intro. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>decline_reason_question</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p>The question after a decline. Unset = the built-in default; set to "" = the reason is not asked for. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>caller_declined_message</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The message the caller hears after a decline (placeholders <code>{callee_name}</code>,
+<code>{reason}</code>). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>caller_unreachable_message</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The message the caller hears when the target could not be reached or gave no decision (placeholder
+<code>{callee_name}</code>). </p></td>
                 </tr>
               
             </tbody>
@@ -40401,6 +40664,28 @@ A voice client with an open stream sends the same <code>TurnControl</code> on th
 (<code>StreamingDetectIntentRequest.turn_control</code>). Requires the permission to interrupt a turn of the
 session's project.
         
+          <h4 id="ondewo.nlu.Sessions.PrepareWarmTransferIntro" class="title-badge method">PrepareWarmTransferIntro</h4>
+
+          <pre>rpc PrepareWarmTransferIntro (<a href="#ondewo.nlu.PrepareWarmTransferIntroRequest">PrepareWarmTransferIntroRequest</a>) returns (<a href="#ondewo.nlu.PrepareWarmTransferIntroResponse">PrepareWarmTransferIntroResponse)</a></pre>
+
+          Prepares the intro session of a warm transfer: reads the history, the contexts and the slots of the source
+(caller) session, renders the intro text (with an LLM within a time budget, or from the TEMPLATE when the LLM
+fails or is not configured), strips every <code>&lt;SIP:…&gt;</code> markup from it, and stores the text, the
+configuration and the stage in the intro session, which must not exist yet. Writes no step into the source
+session. Idempotent per (<code>intro_session</code>, <code>transfer_request_id</code>): a repeated request
+answers the response of the first one. Answers <code>UNIMPLEMENTED</code> when the server's warm transfer
+feature is switched off, and <code>FAILED_PRECONDITION</code> with <code>reason=warm-intro-disabled-for-agent</code>
+when <code>Agent.warm_transfer_settings.enabled</code> is false. Requires the permission to run a warm transfer
+intro of the session's project. See <code>docs/warm_transfer.md</code>.
+        
+          <h4 id="ondewo.nlu.Sessions.GetWarmTransferIntroOutcome" class="title-badge method">GetWarmTransferIntroOutcome</h4>
+
+          <pre>rpc GetWarmTransferIntroOutcome (<a href="#ondewo.nlu.GetWarmTransferIntroOutcomeRequest">GetWarmTransferIntroOutcomeRequest</a>) returns (<a href="#ondewo.nlu.WarmTransferIntroOutcome">WarmTransferIntroOutcome)</a></pre>
+
+          Returns the decision the target gave in the intro session of a warm transfer. Never returns the reason text
+or the intro text. Answers <code>UNIMPLEMENTED</code> when the server's warm transfer feature is switched off.
+Requires the permission to run a warm transfer intro of the session's project.
+        
           <h4 id="ondewo.nlu.Sessions.ListSessions" class="title-badge method">ListSessions</h4>
 
           <pre>rpc ListSessions (<a href="#ondewo.nlu.ListSessionsRequest">ListSessionsRequest</a>) returns (<a href="#ondewo.nlu.ListSessionsResponse">ListSessionsResponse)</a></pre>
@@ -40741,6 +41026,26 @@ Retrieves a single audio file that combines all audio files associated with the 
                 <td>POST</td>
                 <td>/v2/{session=projects/*/agent/sessions/*}:interruptTurn</td>
                 <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>PrepareWarmTransferIntro</td>
+                <td>POST</td>
+                <td>/v2/{intro_session=projects/*/agent/sessions/*}:prepareWarmTransferIntro</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetWarmTransferIntroOutcome</td>
+                <td>GET</td>
+                <td>/v2/{intro_session=projects/*/agent/sessions/*}/warmTransferIntroOutcome</td>
+                <td></td>
               </tr>
               
             
@@ -43128,6 +43433,32 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid
                   <td></td>
                   <td><p>Optional. The mask to control which fields will be filled with data.
 Example: path=["session_step.detect_intent_response.query_result.fulfillment_messages"] </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="ondewo.nlu.GetWarmTransferIntroOutcomeRequest" class="title-badge message">GetWarmTransferIntroOutcomeRequest</h3>
+        <p>The request for the outcome of a warm transfer intro.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>intro_session</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The intro session. Format:
+<code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code>. A session that was not
+prepared by <code>PrepareWarmTransferIntro</code> is answered with <code>NOT_FOUND</code>. </p></td>
                 </tr>
               
             </tbody>
@@ -47240,6 +47571,108 @@ distinct base URL in scope. </p></td>
 
         
       
+        <h3 id="ondewo.nlu.PrepareWarmTransferIntroRequest" class="title-badge message">PrepareWarmTransferIntroRequest</h3>
+        <p>The request to prepare the intro session of a warm transfer.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>intro_session</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The intro session, which must not exist yet. Format:
+<code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code>. An existing session that
+was not prepared with the same <code>transfer_request_id</code> is refused with
+<code>ALREADY_EXISTS</code>. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>source_session</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The caller's session the intro summarises. Format:
+<code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code>. A session of another project
+than <code>intro_session</code> is refused with <code>INVALID_ARGUMENT</code>. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>config</td>
+                  <td><a href="#ondewo.nlu.WarmTransferIntroConfig">WarmTransferIntroConfig</a></td>
+                  <td></td>
+                  <td><p>The configuration of the intro. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>language_code</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The language of the intro session. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>transfer_request_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The idempotency key of the transfer. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="ondewo.nlu.PrepareWarmTransferIntroResponse" class="title-badge message">PrepareWarmTransferIntroResponse</h3>
+        <p>The response to a <code>PrepareWarmTransferIntroRequest</code>. Never carries the intro text.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>text_source_used</td>
+                  <td><a href="#ondewo.nlu.WarmTransferIntroTextSource">WarmTransferIntroTextSource</a></td>
+                  <td></td>
+                  <td><p>The source the intro text was rendered from. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>text_fell_back</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>True when the LLM failed or exceeded its budget and the TEMPLATE was used instead. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>intro_text_chars</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>The length of the intro text in characters. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>prompt_digest</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The SHA-256 (hex) of the resolved prompt, for audit. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="ondewo.nlu.QueryInput" class="title-badge message">QueryInput</h3>
         <p>Represents the query input. It can contain either:</p><p>1.  An audio config which instructs the speech recognizer how to process the speech audio.</p><p>2.  A conversational query in the form of text,.</p><p>3.  An event that specifies which intent to trigger.</p>
 
@@ -49586,6 +50019,199 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid
 
         
       
+        <h3 id="ondewo.nlu.WarmTransferIntroConfig" class="title-badge message">WarmTransferIntroConfig</h3>
+        <p>The configuration of one warm transfer intro, as resolved by the caller of</p><p><code>PrepareWarmTransferIntro</code>. A text left empty (or unset, for an <code>optional</code> field) falls back</p><p>to the agent's default text for the language (<code>Agent.warm_transfer_settings</code>), then to the built-in</p><p>default. Texts are spoken to the target, never to the caller, except <code>caller_declined_message</code> and</p><p><code>caller_unreachable_message</code>.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>intro_prompt</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The LLM instruction (<code>WARM_TRANSFER_INTRO_TEXT_SOURCE_LLM_SUMMARY</code>) or the template text
+(<code>WARM_TRANSFER_INTRO_TEXT_SOURCE_TEMPLATE</code>, placeholders <code>{caller_name}</code>,
+<code>{callee_name}</code>, <code>{topic}</code>, <code>{summary}</code>) of the intro. At most 4000 characters. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>text_source</td>
+                  <td><a href="#ondewo.nlu.WarmTransferIntroTextSource">WarmTransferIntroTextSource</a></td>
+                  <td></td>
+                  <td><p>Where the intro text comes from. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>ready_question</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The first question to the target, which must not reveal anything about the caller, e.g. "Hier ist der
+digitale Assistent von {project}. Ich habe einen Anruf für Sie. Sind Sie am Apparat? Sagen Sie ja oder
+drücken Sie 1." Placeholder <code>{project}</code>: <code>project_display_name</code>. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>confirm_human_before_intro</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td>optional</td>
+                  <td><p>Whether the intro is spoken only after the target answered <code>ready_question</code> (a guard against a
+mailbox). Unset = true. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>accept_question</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The question after the intro, e.g. "Möchten Sie das Gespräch übernehmen? Ja oder 1, nein oder 2." </p></td>
+                </tr>
+              
+                <tr>
+                  <td>decline_reason_question</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p>The question after a decline, e.g. "Was darf ich dem Anrufer ausrichten?". Unset = the agent's or the
+built-in default; set to "" = the reason is not asked for. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>caller_declined_message</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The template of the message the caller hears after a decline. Placeholders <code>{callee_name}</code> and
+<code>{reason}</code>; without a reason, the variant without the reason clause is used. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>caller_unreachable_message</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The template of the message the caller hears when the target was busy, did not answer, gave no decision or
+the intro could not run. Placeholder <code>{callee_name}</code>. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>accept_dtmf</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The DTMF key that accepts: one of <code>0-9</code>, <code>*</code>, <code>#</code>. Empty = "1". </p></td>
+                </tr>
+              
+                <tr>
+                  <td>decline_dtmf</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The DTMF key that declines: one of <code>0-9</code>, <code>*</code>, <code>#</code>, different from
+<code>accept_dtmf</code>. Empty = "2". </p></td>
+                </tr>
+              
+                <tr>
+                  <td>callee_display_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Who the target is, e.g. "Frau Berger, Buchhaltung": <code>{callee_name}</code>. At most 128 characters. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>callee_description</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The role and context of the target, given to the LLM intro. At most 512 characters. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>llm_ccai_service_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The <code>ONDEWO_NLU_LLM</code> CCAI service of the LLM intro. Empty = the agent's
+<code>warm_transfer_settings.llm_ccai_service_name</code>, then the project's first
+<code>ONDEWO_NLU_LLM</code> service. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>max_history_steps</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>How many of the latest steps of the source session the intro reads. 0 = 30. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>decision_timeout_s</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>Seconds from a question to the decision, declared to the client as the expected input's timeout. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>project_display_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The project's display name: <code>{project}</code> in <code>ready_question</code>. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="ondewo.nlu.WarmTransferIntroOutcome" class="title-badge message">WarmTransferIntroOutcome</h3>
+        <p>The outcome of a warm transfer intro. Holds no intro text and no reason text.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>decision</td>
+                  <td><a href="#ondewo.nlu.WarmTransferIntroDecision">WarmTransferIntroDecision</a></td>
+                  <td></td>
+                  <td><p>The decision of the target. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>decided_by</td>
+                  <td><a href="#ondewo.nlu.WarmTransferIntroDecidedBy">WarmTransferIntroDecidedBy</a></td>
+                  <td></td>
+                  <td><p>How the decision was given. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>decline_reason_present</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>True when the target gave a reason after declining. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>stage</td>
+                  <td><a href="#ondewo.nlu.WarmTransferIntroStage">WarmTransferIntroStage</a></td>
+                  <td></td>
+                  <td><p>The stage of the intro session. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>cause</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>A bounded token naming why there is no decision, e.g. <code>voicemail-suspected</code> (no ready answer) or
+<code>unclear-twice</code>; empty otherwise. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
       
 
       
@@ -50339,6 +50965,161 @@ discard is refused and the step, if one exists, is kept.</p></td>
                 <td>TURN_INTERRUPTION_REASON_BOT_MUTED</td>
                 <td>7</td>
                 <td><p>A human operator muted the bot.</p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="ondewo.nlu.WarmTransferIntroDecidedBy" class="title-badge enum">WarmTransferIntroDecidedBy</h3>
+        <p>How the target of a warm transfer intro gave the decision.</p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>WARM_TRANSFER_INTRO_DECIDED_BY_UNSPECIFIED</td>
+                <td>0</td>
+                <td><p>Not set, or not decided yet.</p></td>
+              </tr>
+            
+              <tr>
+                <td>WARM_TRANSFER_INTRO_DECIDED_BY_DTMF</td>
+                <td>1</td>
+                <td><p>By a DTMF key.</p></td>
+              </tr>
+            
+              <tr>
+                <td>WARM_TRANSFER_INTRO_DECIDED_BY_SPEECH</td>
+                <td>2</td>
+                <td><p>By speech.</p></td>
+              </tr>
+            
+              <tr>
+                <td>WARM_TRANSFER_INTRO_DECIDED_BY_TIMEOUT</td>
+                <td>3</td>
+                <td><p>By the decision timeout.</p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="ondewo.nlu.WarmTransferIntroDecision" class="title-badge enum">WarmTransferIntroDecision</h3>
+        <p>The decision of the target of a warm transfer intro.</p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>WARM_TRANSFER_INTRO_DECISION_UNSPECIFIED</td>
+                <td>0</td>
+                <td><p>Not set.</p></td>
+              </tr>
+            
+              <tr>
+                <td>WARM_TRANSFER_INTRO_DECISION_PENDING</td>
+                <td>1</td>
+                <td><p>The intro is still running.</p></td>
+              </tr>
+            
+              <tr>
+                <td>WARM_TRANSFER_INTRO_DECISION_ACCEPTED</td>
+                <td>2</td>
+                <td><p>The target accepted the call.</p></td>
+              </tr>
+            
+              <tr>
+                <td>WARM_TRANSFER_INTRO_DECISION_DECLINED</td>
+                <td>3</td>
+                <td><p>The target declined the call.</p></td>
+              </tr>
+            
+              <tr>
+                <td>WARM_TRANSFER_INTRO_DECISION_NO_DECISION</td>
+                <td>4</td>
+                <td><p>The target gave no decision: no ready answer, an unclear answer twice, or a timeout.</p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="ondewo.nlu.WarmTransferIntroStage" class="title-badge enum">WarmTransferIntroStage</h3>
+        <p>The stage of a warm transfer intro session.</p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>WARM_TRANSFER_INTRO_STAGE_UNSPECIFIED</td>
+                <td>0</td>
+                <td><p>Not set.</p></td>
+              </tr>
+            
+              <tr>
+                <td>WARM_TRANSFER_INTRO_STAGE_PREPARED</td>
+                <td>1</td>
+                <td><p>Prepared; nothing spoken yet.</p></td>
+              </tr>
+            
+              <tr>
+                <td>WARM_TRANSFER_INTRO_STAGE_READY_ASKED</td>
+                <td>2</td>
+                <td><p><code>ready_question</code> spoken, waiting for a person to answer.</p></td>
+              </tr>
+            
+              <tr>
+                <td>WARM_TRANSFER_INTRO_STAGE_INTRO_SPOKEN</td>
+                <td>3</td>
+                <td><p>The intro and <code>accept_question</code> spoken, waiting for the decision.</p></td>
+              </tr>
+            
+              <tr>
+                <td>WARM_TRANSFER_INTRO_STAGE_REASON_ASKED</td>
+                <td>4</td>
+                <td><p><code>decline_reason_question</code> spoken, waiting for the reason.</p></td>
+              </tr>
+            
+              <tr>
+                <td>WARM_TRANSFER_INTRO_STAGE_CLOSED</td>
+                <td>5</td>
+                <td><p>The final answer, which ends the target's call, was generated.</p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="ondewo.nlu.WarmTransferIntroTextSource" class="title-badge enum">WarmTransferIntroTextSource</h3>
+        <p>Where the intro text of a warm transfer comes from.</p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>WARM_TRANSFER_INTRO_TEXT_SOURCE_UNSPECIFIED</td>
+                <td>0</td>
+                <td><p>Not set: <code>WARM_TRANSFER_INTRO_TEXT_SOURCE_LLM_SUMMARY</code> when the project has an LLM service, else
+<code>WARM_TRANSFER_INTRO_TEXT_SOURCE_TEMPLATE</code>.</p></td>
+              </tr>
+            
+              <tr>
+                <td>WARM_TRANSFER_INTRO_TEXT_SOURCE_TEMPLATE</td>
+                <td>1</td>
+                <td><p><code>WarmTransferIntroConfig.intro_prompt</code> is a text with the placeholders <code>{caller_name}</code>,
+<code>{callee_name}</code>, <code>{topic}</code> and <code>{summary}</code>.</p></td>
+              </tr>
+            
+              <tr>
+                <td>WARM_TRANSFER_INTRO_TEXT_SOURCE_LLM_SUMMARY</td>
+                <td>2</td>
+                <td><p>An LLM summarises the source session for the target; <code>WarmTransferIntroConfig.intro_prompt</code> is its
+instruction.</p></td>
               </tr>
             
           </tbody>

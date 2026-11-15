@@ -84,6 +84,11 @@
     - [TrainAgentRequest](#ondewo.nlu.TrainAgentRequest)
     - [UpdateAgentRequest](#ondewo.nlu.UpdateAgentRequest)
     - [UserInProject](#ondewo.nlu.UserInProject)
+    - [WarmTransferAgentLexicon](#ondewo.nlu.WarmTransferAgentLexicon)
+    - [WarmTransferAgentSettings](#ondewo.nlu.WarmTransferAgentSettings)
+    - [WarmTransferAgentSettings.DefaultTextsEntry](#ondewo.nlu.WarmTransferAgentSettings.DefaultTextsEntry)
+    - [WarmTransferAgentSettings.ExtraLexiconEntry](#ondewo.nlu.WarmTransferAgentSettings.ExtraLexiconEntry)
+    - [WarmTransferAgentTexts](#ondewo.nlu.WarmTransferAgentTexts)
   
     - [AgentSorting.AgentSortingField](#ondewo.nlu.AgentSorting.AgentSortingField)
     - [AgentStatus](#ondewo.nlu.AgentStatus)
@@ -711,6 +716,7 @@
     - [GetSessionRequest](#ondewo.nlu.GetSessionRequest)
     - [GetSessionReviewRequest](#ondewo.nlu.GetSessionReviewRequest)
     - [GetSessionStepRequest](#ondewo.nlu.GetSessionStepRequest)
+    - [GetWarmTransferIntroOutcomeRequest](#ondewo.nlu.GetWarmTransferIntroOutcomeRequest)
     - [HeardMessage](#ondewo.nlu.HeardMessage)
     - [HeardReport](#ondewo.nlu.HeardReport)
     - [ImageFileResource](#ondewo.nlu.ImageFileResource)
@@ -788,6 +794,8 @@
     - [LlmToolCallMetadata](#ondewo.nlu.LlmToolCallMetadata)
     - [LlmToolCallStartedEvent](#ondewo.nlu.LlmToolCallStartedEvent)
     - [LlmToolUsage](#ondewo.nlu.LlmToolUsage)
+    - [PrepareWarmTransferIntroRequest](#ondewo.nlu.PrepareWarmTransferIntroRequest)
+    - [PrepareWarmTransferIntroResponse](#ondewo.nlu.PrepareWarmTransferIntroResponse)
     - [QueryInput](#ondewo.nlu.QueryInput)
     - [QueryParameters](#ondewo.nlu.QueryParameters)
     - [QueryResult](#ondewo.nlu.QueryResult)
@@ -811,6 +819,8 @@
     - [UpdateSessionFeedbackRequest](#ondewo.nlu.UpdateSessionFeedbackRequest)
     - [UpdateSessionStepRequest](#ondewo.nlu.UpdateSessionStepRequest)
     - [VideoFileResource](#ondewo.nlu.VideoFileResource)
+    - [WarmTransferIntroConfig](#ondewo.nlu.WarmTransferIntroConfig)
+    - [WarmTransferIntroOutcome](#ondewo.nlu.WarmTransferIntroOutcome)
   
     - [AudioEncoding](#ondewo.nlu.AudioEncoding)
     - [AudioFileResourceType](#ondewo.nlu.AudioFileResourceType)
@@ -831,6 +841,10 @@
     - [TranscriptionType](#ondewo.nlu.TranscriptionType)
     - [TurnControlAckStatus](#ondewo.nlu.TurnControlAckStatus)
     - [TurnInterruptionReason](#ondewo.nlu.TurnInterruptionReason)
+    - [WarmTransferIntroDecidedBy](#ondewo.nlu.WarmTransferIntroDecidedBy)
+    - [WarmTransferIntroDecision](#ondewo.nlu.WarmTransferIntroDecision)
+    - [WarmTransferIntroStage](#ondewo.nlu.WarmTransferIntroStage)
+    - [WarmTransferIntroTextSource](#ondewo.nlu.WarmTransferIntroTextSource)
   
     - [Sessions](#ondewo.nlu.Sessions)
   
@@ -985,6 +999,7 @@ Project/Agent messages
 | modified_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Modification date and time. Read-only field. |
 | created_by | [string](#string) |  | User id in form of a valid UUID. |
 | modified_by | [string](#string) |  | User id in form of a valid UUID. |
+| warm_transfer_settings | [WarmTransferAgentSettings](#ondewo.nlu.WarmTransferAgentSettings) |  | Optional. The agent's settings of warm transfer intros (<code>Sessions.PrepareWarmTransferIntro</code>). Unset = intros are enabled while the server's warm transfer feature is switched on, with the built-in texts. |
 
 
 
@@ -2477,6 +2492,95 @@ Request to get user in project
 | parent | [string](#string) |  | Required. The project that the agent to train is associated with. Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre> |
 | user | [User](#ondewo.nlu.User) |  | User object |
 | role_id | [uint32](#uint32) |  | ID of the project role of the user |
+
+
+
+
+
+
+<a name="ondewo.nlu.WarmTransferAgentLexicon"></a>
+
+### WarmTransferAgentLexicon
+Additional entries of the closed decision lexicon of warm transfer intros in one language, matched before an LLM
+classifies an answer. At most 50 entries in <code>accept_phrases</code> and <code>decline_phrases</code>
+together.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| accept_phrases | [string](#string) | repeated | Words and phrases that accept the call (and confirm the ready question), e.g. "übernehme". |
+| decline_phrases | [string](#string) | repeated | Words and phrases that decline the call, e.g. "bin im Termin". |
+
+
+
+
+
+
+<a name="ondewo.nlu.WarmTransferAgentSettings"></a>
+
+### WarmTransferAgentSettings
+The agent's settings of warm transfer intros. A text a <code>WarmTransferIntroConfig</code> leaves empty falls back
+to the agent's text for the intro's language, then to the built-in default.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) | optional | Whether warm transfer intros are enabled for the agent. Unset = enabled while the server's warm transfer feature is switched on. False = <code>PrepareWarmTransferIntro</code> answers <code>FAILED_PRECONDITION</code> with <code>reason=warm-intro-disabled-for-agent</code>. |
+| llm_ccai_service_name | [string](#string) |  | The <code>ONDEWO_NLU_LLM</code> CCAI service of the LLM intro when the request names none. Empty = the project's first <code>ONDEWO_NLU_LLM</code> service. |
+| default_texts | [WarmTransferAgentSettings.DefaultTextsEntry](#ondewo.nlu.WarmTransferAgentSettings.DefaultTextsEntry) | repeated | The default texts, keyed by language code (e.g. <code>de</code>). |
+| extra_lexicon | [WarmTransferAgentSettings.ExtraLexiconEntry](#ondewo.nlu.WarmTransferAgentSettings.ExtraLexiconEntry) | repeated | Additional words and phrases of the decision lexicon, keyed by language code (e.g. <code>de</code>). |
+
+
+
+
+
+
+<a name="ondewo.nlu.WarmTransferAgentSettings.DefaultTextsEntry"></a>
+
+### WarmTransferAgentSettings.DefaultTextsEntry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
+| value | [WarmTransferAgentTexts](#ondewo.nlu.WarmTransferAgentTexts) |  |  |
+
+
+
+
+
+
+<a name="ondewo.nlu.WarmTransferAgentSettings.ExtraLexiconEntry"></a>
+
+### WarmTransferAgentSettings.ExtraLexiconEntry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
+| value | [WarmTransferAgentLexicon](#ondewo.nlu.WarmTransferAgentLexicon) |  |  |
+
+
+
+
+
+
+<a name="ondewo.nlu.WarmTransferAgentTexts"></a>
+
+### WarmTransferAgentTexts
+The default texts of warm transfer intros in one language. An empty text = the built-in default. The fields and
+placeholders are those of the same-named fields of <code>WarmTransferIntroConfig</code>.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| ready_question | [string](#string) |  | The first question to the target (placeholder <code>{project}</code>). |
+| accept_question | [string](#string) |  | The question after the intro. |
+| decline_reason_question | [string](#string) | optional | The question after a decline. Unset = the built-in default; set to "" = the reason is not asked for. |
+| caller_declined_message | [string](#string) |  | The message the caller hears after a decline (placeholders <code>{callee_name}</code>, <code>{reason}</code>). |
+| caller_unreachable_message | [string](#string) |  | The message the caller hears when the target could not be reached or gave no decision (placeholder <code>{callee_name}</code>). |
 
 
 
@@ -13939,6 +14043,21 @@ This message is a request to get a session step
 
 
 
+<a name="ondewo.nlu.GetWarmTransferIntroOutcomeRequest"></a>
+
+### GetWarmTransferIntroOutcomeRequest
+The request for the outcome of a warm transfer intro.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| intro_session | [string](#string) |  | Required. The intro session. Format: <code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code>. A session that was not prepared by <code>PrepareWarmTransferIntro</code> is answered with <code>NOT_FOUND</code>. |
+
+
+
+
+
+
 <a name="ondewo.nlu.HeardMessage"></a>
 
 ### HeardMessage
@@ -15442,6 +15561,43 @@ One tool's invocation aggregate across the scope.
 
 
 
+<a name="ondewo.nlu.PrepareWarmTransferIntroRequest"></a>
+
+### PrepareWarmTransferIntroRequest
+The request to prepare the intro session of a warm transfer.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| intro_session | [string](#string) |  | Required. The intro session, which must not exist yet. Format: <code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code>. An existing session that was not prepared with the same <code>transfer_request_id</code> is refused with <code>ALREADY_EXISTS</code>. |
+| source_session | [string](#string) |  | Required. The caller's session the intro summarises. Format: <code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code>. A session of another project than <code>intro_session</code> is refused with <code>INVALID_ARGUMENT</code>. |
+| config | [WarmTransferIntroConfig](#ondewo.nlu.WarmTransferIntroConfig) |  | The configuration of the intro. |
+| language_code | [string](#string) |  | The language of the intro session. |
+| transfer_request_id | [string](#string) |  | Required. The idempotency key of the transfer. |
+
+
+
+
+
+
+<a name="ondewo.nlu.PrepareWarmTransferIntroResponse"></a>
+
+### PrepareWarmTransferIntroResponse
+The response to a <code>PrepareWarmTransferIntroRequest</code>. Never carries the intro text.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| text_source_used | [WarmTransferIntroTextSource](#ondewo.nlu.WarmTransferIntroTextSource) |  | The source the intro text was rendered from. |
+| text_fell_back | [bool](#bool) |  | True when the LLM failed or exceeded its budget and the TEMPLATE was used instead. |
+| intro_text_chars | [int32](#int32) |  | The length of the intro text in characters. |
+| prompt_digest | [string](#string) |  | The SHA-256 (hex) of the resolved prompt, for audit. |
+
+
+
+
+
+
 <a name="ondewo.nlu.QueryInput"></a>
 
 ### QueryInput
@@ -16084,6 +16240,59 @@ Represents a video file resource (e.g., MP4, AVI).
 
 
 
+
+<a name="ondewo.nlu.WarmTransferIntroConfig"></a>
+
+### WarmTransferIntroConfig
+The configuration of one warm transfer intro, as resolved by the caller of
+<code>PrepareWarmTransferIntro</code>. A text left empty (or unset, for an <code>optional</code> field) falls back
+to the agent's default text for the language (<code>Agent.warm_transfer_settings</code>), then to the built-in
+default. Texts are spoken to the target, never to the caller, except <code>caller_declined_message</code> and
+<code>caller_unreachable_message</code>.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| intro_prompt | [string](#string) |  | The LLM instruction (<code>WARM_TRANSFER_INTRO_TEXT_SOURCE_LLM_SUMMARY</code>) or the template text (<code>WARM_TRANSFER_INTRO_TEXT_SOURCE_TEMPLATE</code>, placeholders <code>{caller_name}</code>, <code>{callee_name}</code>, <code>{topic}</code>, <code>{summary}</code>) of the intro. At most 4000 characters. |
+| text_source | [WarmTransferIntroTextSource](#ondewo.nlu.WarmTransferIntroTextSource) |  | Where the intro text comes from. |
+| ready_question | [string](#string) |  | The first question to the target, which must not reveal anything about the caller, e.g. "Hier ist der digitale Assistent von {project}. Ich habe einen Anruf für Sie. Sind Sie am Apparat? Sagen Sie ja oder drücken Sie 1." Placeholder <code>{project}</code>: <code>project_display_name</code>. |
+| confirm_human_before_intro | [bool](#bool) | optional | Whether the intro is spoken only after the target answered <code>ready_question</code> (a guard against a mailbox). Unset = true. |
+| accept_question | [string](#string) |  | The question after the intro, e.g. "Möchten Sie das Gespräch übernehmen? Ja oder 1, nein oder 2." |
+| decline_reason_question | [string](#string) | optional | The question after a decline, e.g. "Was darf ich dem Anrufer ausrichten?". Unset = the agent's or the built-in default; set to "" = the reason is not asked for. |
+| caller_declined_message | [string](#string) |  | The template of the message the caller hears after a decline. Placeholders <code>{callee_name}</code> and <code>{reason}</code>; without a reason, the variant without the reason clause is used. |
+| caller_unreachable_message | [string](#string) |  | The template of the message the caller hears when the target was busy, did not answer, gave no decision or the intro could not run. Placeholder <code>{callee_name}</code>. |
+| accept_dtmf | [string](#string) |  | The DTMF key that accepts: one of <code>0-9</code>, <code>*</code>, <code>#</code>. Empty = "1". |
+| decline_dtmf | [string](#string) |  | The DTMF key that declines: one of <code>0-9</code>, <code>*</code>, <code>#</code>, different from <code>accept_dtmf</code>. Empty = "2". |
+| callee_display_name | [string](#string) |  | Who the target is, e.g. "Frau Berger, Buchhaltung": <code>{callee_name}</code>. At most 128 characters. |
+| callee_description | [string](#string) |  | The role and context of the target, given to the LLM intro. At most 512 characters. |
+| llm_ccai_service_name | [string](#string) |  | The <code>ONDEWO_NLU_LLM</code> CCAI service of the LLM intro. Empty = the agent's <code>warm_transfer_settings.llm_ccai_service_name</code>, then the project's first <code>ONDEWO_NLU_LLM</code> service. |
+| max_history_steps | [int32](#int32) |  | How many of the latest steps of the source session the intro reads. 0 = 30. |
+| decision_timeout_s | [int32](#int32) |  | Seconds from a question to the decision, declared to the client as the expected input's timeout. |
+| project_display_name | [string](#string) |  | The project's display name: <code>{project}</code> in <code>ready_question</code>. |
+
+
+
+
+
+
+<a name="ondewo.nlu.WarmTransferIntroOutcome"></a>
+
+### WarmTransferIntroOutcome
+The outcome of a warm transfer intro. Holds no intro text and no reason text.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| decision | [WarmTransferIntroDecision](#ondewo.nlu.WarmTransferIntroDecision) |  | The decision of the target. |
+| decided_by | [WarmTransferIntroDecidedBy](#ondewo.nlu.WarmTransferIntroDecidedBy) |  | How the decision was given. |
+| decline_reason_present | [bool](#bool) |  | True when the target gave a reason after declining. |
+| stage | [WarmTransferIntroStage](#ondewo.nlu.WarmTransferIntroStage) |  | The stage of the intro session. |
+| cause | [string](#string) |  | A bounded token naming why there is no decision, e.g. <code>voicemail-suspected</code> (no ready answer) or <code>unclear-twice</code>; empty otherwise. |
+
+
+
+
+
  <!-- end messages -->
 
 
@@ -16368,6 +16577,64 @@ Why a turn was interrupted.
 | TURN_INTERRUPTION_REASON_BOT_MUTED | 7 | A human operator muted the bot. |
 
 
+
+<a name="ondewo.nlu.WarmTransferIntroDecidedBy"></a>
+
+### WarmTransferIntroDecidedBy
+How the target of a warm transfer intro gave the decision.
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| WARM_TRANSFER_INTRO_DECIDED_BY_UNSPECIFIED | 0 | Not set, or not decided yet. |
+| WARM_TRANSFER_INTRO_DECIDED_BY_DTMF | 1 | By a DTMF key. |
+| WARM_TRANSFER_INTRO_DECIDED_BY_SPEECH | 2 | By speech. |
+| WARM_TRANSFER_INTRO_DECIDED_BY_TIMEOUT | 3 | By the decision timeout. |
+
+
+
+<a name="ondewo.nlu.WarmTransferIntroDecision"></a>
+
+### WarmTransferIntroDecision
+The decision of the target of a warm transfer intro.
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| WARM_TRANSFER_INTRO_DECISION_UNSPECIFIED | 0 | Not set. |
+| WARM_TRANSFER_INTRO_DECISION_PENDING | 1 | The intro is still running. |
+| WARM_TRANSFER_INTRO_DECISION_ACCEPTED | 2 | The target accepted the call. |
+| WARM_TRANSFER_INTRO_DECISION_DECLINED | 3 | The target declined the call. |
+| WARM_TRANSFER_INTRO_DECISION_NO_DECISION | 4 | The target gave no decision: no ready answer, an unclear answer twice, or a timeout. |
+
+
+
+<a name="ondewo.nlu.WarmTransferIntroStage"></a>
+
+### WarmTransferIntroStage
+The stage of a warm transfer intro session.
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| WARM_TRANSFER_INTRO_STAGE_UNSPECIFIED | 0 | Not set. |
+| WARM_TRANSFER_INTRO_STAGE_PREPARED | 1 | Prepared; nothing spoken yet. |
+| WARM_TRANSFER_INTRO_STAGE_READY_ASKED | 2 | <code>ready_question</code> spoken, waiting for a person to answer. |
+| WARM_TRANSFER_INTRO_STAGE_INTRO_SPOKEN | 3 | The intro and <code>accept_question</code> spoken, waiting for the decision. |
+| WARM_TRANSFER_INTRO_STAGE_REASON_ASKED | 4 | <code>decline_reason_question</code> spoken, waiting for the reason. |
+| WARM_TRANSFER_INTRO_STAGE_CLOSED | 5 | The final answer, which ends the target's call, was generated. |
+
+
+
+<a name="ondewo.nlu.WarmTransferIntroTextSource"></a>
+
+### WarmTransferIntroTextSource
+Where the intro text of a warm transfer comes from.
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| WARM_TRANSFER_INTRO_TEXT_SOURCE_UNSPECIFIED | 0 | Not set: <code>WARM_TRANSFER_INTRO_TEXT_SOURCE_LLM_SUMMARY</code> when the project has an LLM service, else <code>WARM_TRANSFER_INTRO_TEXT_SOURCE_TEMPLATE</code>. |
+| WARM_TRANSFER_INTRO_TEXT_SOURCE_TEMPLATE | 1 | <code>WarmTransferIntroConfig.intro_prompt</code> is a text with the placeholders <code>{caller_name}</code>, <code>{callee_name}</code>, <code>{topic}</code> and <code>{summary}</code>. |
+| WARM_TRANSFER_INTRO_TEXT_SOURCE_LLM_SUMMARY | 2 | An LLM summarises the source session for the target; <code>WarmTransferIntroConfig.intro_prompt</code> is its instruction. |
+
+
  <!-- end enums -->
 
  <!-- end HasExtensions -->
@@ -16383,6 +16650,8 @@ A session represents an interaction with a user. You retrieve user input and pas
 | DetectIntent | [DetectIntentRequest](#ondewo.nlu.DetectIntentRequest) | [DetectIntentResponse](#ondewo.nlu.DetectIntentResponse) | Processes a natural language query and returns structured, actionable data as a result. This method is not idempotent, because it may cause contexts and session entity types to be updated, which in turn might affect results of future queries. |
 | StreamingDetectIntent | [StreamingDetectIntentRequest](#ondewo.nlu.StreamingDetectIntentRequest) stream | [StreamingDetectIntentResponse](#ondewo.nlu.StreamingDetectIntentResponse) stream | Processes a natural language query in audio format in a streaming fashion and returns structured, actionable data as a result. This method is only available via the gRPC API (not REST). |
 | InterruptTurn | [InterruptTurnRequest](#ondewo.nlu.InterruptTurnRequest) | [InterruptTurnResponse](#ondewo.nlu.InterruptTurnResponse) | Interrupts a turn of the session outside a <code>StreamingDetectIntent</code> stream: cancels it, reports what the user actually heard of its answer, or discards the session step of a preemptive draft. Meant for clients without a call-length stream (e.g. a stop button) and for a heard report that arrives after the stream closed. A voice client with an open stream sends the same <code>TurnControl</code> on that stream instead (<code>StreamingDetectIntentRequest.turn_control</code>). Requires the permission to interrupt a turn of the session's project. |
+| PrepareWarmTransferIntro | [PrepareWarmTransferIntroRequest](#ondewo.nlu.PrepareWarmTransferIntroRequest) | [PrepareWarmTransferIntroResponse](#ondewo.nlu.PrepareWarmTransferIntroResponse) | Prepares the intro session of a warm transfer: reads the history, the contexts and the slots of the source (caller) session, renders the intro text (with an LLM within a time budget, or from the TEMPLATE when the LLM fails or is not configured), strips every <code>&lt;SIP:…&gt;</code> markup from it, and stores the text, the configuration and the stage in the intro session, which must not exist yet. Writes no step into the source session. Idempotent per (<code>intro_session</code>, <code>transfer_request_id</code>): a repeated request answers the response of the first one. Answers <code>UNIMPLEMENTED</code> when the server's warm transfer feature is switched off, and <code>FAILED_PRECONDITION</code> with <code>reason=warm-intro-disabled-for-agent</code> when <code>Agent.warm_transfer_settings.enabled</code> is false. Requires the permission to run a warm transfer intro of the session's project. See <code>docs/warm_transfer.md</code>. |
+| GetWarmTransferIntroOutcome | [GetWarmTransferIntroOutcomeRequest](#ondewo.nlu.GetWarmTransferIntroOutcomeRequest) | [WarmTransferIntroOutcome](#ondewo.nlu.WarmTransferIntroOutcome) | Returns the decision the target gave in the intro session of a warm transfer. Never returns the reason text or the intro text. Answers <code>UNIMPLEMENTED</code> when the server's warm transfer feature is switched off. Requires the permission to run a warm transfer intro of the session's project. |
 | ListSessions | [ListSessionsRequest](#ondewo.nlu.ListSessionsRequest) | [ListSessionsResponse](#ondewo.nlu.ListSessionsResponse) | ListSessions: returns list of sessions from ondewo-kb; by default returns only session IDs |
 | GetSession | [GetSessionRequest](#ondewo.nlu.GetSessionRequest) | [Session](#ondewo.nlu.Session) | GetSession: returns a session(=conversation) from ondewo-kb |
 | CreateSession | [CreateSessionRequest](#ondewo.nlu.CreateSessionRequest) | [Session](#ondewo.nlu.Session) | CreateSession: creates and returns a session(=conversation) from ondewo-kb |
