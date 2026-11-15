@@ -602,6 +602,64 @@ message Agent {
 
     // User id in form of a valid UUID.
     string modified_by = 14;
+
+    // Optional. The agent's settings of warm transfer intros (<code>Sessions.PrepareWarmTransferIntro</code>).
+    // Unset = intros are enabled while the server's warm transfer feature is switched on, with the built-in texts.
+    WarmTransferAgentSettings warm_transfer_settings = 15;
+}
+
+// The agent's settings of warm transfer intros. A text a <code>WarmTransferIntroConfig</code> leaves empty falls back
+// to the agent's text for the intro's language, then to the built-in default.
+message WarmTransferAgentSettings {
+
+    // Whether warm transfer intros are enabled for the agent. Unset = enabled while the server's warm transfer
+    // feature is switched on. False = <code>PrepareWarmTransferIntro</code> answers <code>FAILED_PRECONDITION</code>
+    // with <code>reason=warm-intro-disabled-for-agent</code>.
+    optional bool enabled = 1;
+
+    // The <code>ONDEWO_NLU_LLM</code> CCAI service of the LLM intro when the request names none. Empty = the
+    // project's first <code>ONDEWO_NLU_LLM</code> service.
+    string llm_ccai_service_name = 2;
+
+    // The default texts, keyed by language code (e.g. <code>de</code>).
+    map<string, WarmTransferAgentTexts> default_texts = 3;
+
+    // Additional words and phrases of the decision lexicon, keyed by language code (e.g. <code>de</code>).
+    map<string, WarmTransferAgentLexicon> extra_lexicon = 4;
+}
+
+// The default texts of warm transfer intros in one language. An empty text = the built-in default. The fields and
+// placeholders are those of the same-named fields of <code>WarmTransferIntroConfig</code>.
+message WarmTransferAgentTexts {
+
+    // The first question to the target (placeholder <code>{project}</code>).
+    string ready_question = 1;
+
+    // The question after the intro.
+    string accept_question = 2;
+
+    // The question after a decline. Unset = the built-in default; set to "" = the reason is not asked for.
+    optional string decline_reason_question = 3;
+
+    // The message the caller hears after a decline (placeholders <code>{callee_name}</code>,
+    // <code>{reason}</code>).
+    string caller_declined_message = 4;
+
+    // The message the caller hears when the target could not be reached or gave no decision (placeholder
+    // <code>{callee_name}</code>).
+    string caller_unreachable_message = 5;
+}
+
+// Additional entries of the closed decision lexicon of warm transfer intros in one language, matched before an LLM
+// classifies an answer. At most 50 entries in <code>accept_phrases</code> and <code>decline_phrases</code>
+// together.
+message WarmTransferAgentLexicon {
+
+    // Words and phrases that accept the call (and confirm the ready question), e.g. "übernehme".
+    repeated string accept_phrases = 1;
+
+    // Words and phrases that decline the call, e.g. "bin im Termin".
+    repeated string decline_phrases = 2;
 }
 
 // This message contains the agent with owner

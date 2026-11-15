@@ -2,6 +2,27 @@
 
 *****************
 
+## Release ONDEWO NLU API 7.6.0
+
+### New Features
+
+* [[OND236-120]](https://ondewo.atlassian.net/browse/OND236-120) `session.proto`: Warm transfer intros. New `Sessions.PrepareWarmTransferIntro` RPC (`POST /v2/{intro_session=projects/*/agent/sessions/*}:prepareWarmTransferIntro`) prepares the intro session of a warm transfer: it reads the caller's session, renders the intro text (LLM within a budget, TEMPLATE on failure), strips every `<SIP:…>` markup, writes no step into the caller's session and stores text, configuration and stage in the new intro session; idempotent per (`intro_session`, `transfer_request_id`). New `Sessions.GetWarmTransferIntroOutcome` RPC (`GET /v2/{intro_session=projects/*/agent/sessions/*}/warmTransferIntroOutcome`) returns the target's decision, never the reason text. Both answer `UNIMPLEMENTED` while the server's warm transfer feature is off, and both require the permission to run a warm transfer intro of the project. The context `c-warm-transfer`, the capability metadata `x-ondewo-cai-warm-intro: 1`, the token turns `[TRANSFER:DECLINED]` / `[TRANSFER:UNREACHABLE]` and the intent tag `ondewo-voice:warm-transfer-outcome` are documented in `docs/warm_transfer.md`.
+* [[OND236-120]](https://ondewo.atlassian.net/browse/OND236-120) `session.proto`: New `WarmTransferIntroConfig` message: `intro_prompt` (1, `string`), `text_source` (2, `WarmTransferIntroTextSource`), `ready_question` (3, `string`), `confirm_human_before_intro` (4, `optional bool`, unset = true), `accept_question` (5, `string`), `decline_reason_question` (6, `optional string`, set to "" = the reason is not asked for), `caller_declined_message` (7, `string`), `caller_unreachable_message` (8, `string`), `accept_dtmf` (9, `string`), `decline_dtmf` (10, `string`), `callee_display_name` (11, `string`), `callee_description` (12, `string`), `llm_ccai_service_name` (13, `string`), `max_history_steps` (14, `int32`), `decision_timeout_s` (15, `int32`) and `project_display_name` (16, `string`). A text left empty (or unset) falls back to the agent's text for the language, then to the built-in default.
+* [[OND236-120]](https://ondewo.atlassian.net/browse/OND236-120) `session.proto`: New `PrepareWarmTransferIntroRequest` message: `intro_session` (1, `string`), `source_session` (2, `string`), `config` (3, `WarmTransferIntroConfig`), `language_code` (4, `string`) and `transfer_request_id` (5, `string`). New `PrepareWarmTransferIntroResponse` message, which never carries the intro text: `text_source_used` (1, `WarmTransferIntroTextSource`), `text_fell_back` (2, `bool`), `intro_text_chars` (3, `int32`) and `prompt_digest` (4, `string`).
+* [[OND236-120]](https://ondewo.atlassian.net/browse/OND236-120) `session.proto`: New `GetWarmTransferIntroOutcomeRequest` message: `intro_session` (1, `string`). New `WarmTransferIntroOutcome` message, which holds no intro text and no reason text: `decision` (1, `WarmTransferIntroDecision`), `decided_by` (2, `WarmTransferIntroDecidedBy`), `decline_reason_present` (3, `bool`), `stage` (4, `WarmTransferIntroStage`) and `cause` (5, `string`).
+* [[OND236-120]](https://ondewo.atlassian.net/browse/OND236-120) `session.proto`: New enums `WarmTransferIntroTextSource` (`WARM_TRANSFER_INTRO_TEXT_SOURCE_UNSPECIFIED`, `WARM_TRANSFER_INTRO_TEXT_SOURCE_TEMPLATE`, `WARM_TRANSFER_INTRO_TEXT_SOURCE_LLM_SUMMARY`), `WarmTransferIntroDecision` (`WARM_TRANSFER_INTRO_DECISION_UNSPECIFIED`, `WARM_TRANSFER_INTRO_DECISION_PENDING`, `WARM_TRANSFER_INTRO_DECISION_ACCEPTED`, `WARM_TRANSFER_INTRO_DECISION_DECLINED`, `WARM_TRANSFER_INTRO_DECISION_NO_DECISION`), `WarmTransferIntroDecidedBy` (`WARM_TRANSFER_INTRO_DECIDED_BY_UNSPECIFIED`, `WARM_TRANSFER_INTRO_DECIDED_BY_DTMF`, `WARM_TRANSFER_INTRO_DECIDED_BY_SPEECH`, `WARM_TRANSFER_INTRO_DECIDED_BY_TIMEOUT`) and `WarmTransferIntroStage` (`WARM_TRANSFER_INTRO_STAGE_UNSPECIFIED`, `WARM_TRANSFER_INTRO_STAGE_PREPARED`, `WARM_TRANSFER_INTRO_STAGE_READY_ASKED`, `WARM_TRANSFER_INTRO_STAGE_INTRO_SPOKEN`, `WARM_TRANSFER_INTRO_STAGE_REASON_ASKED`, `WARM_TRANSFER_INTRO_STAGE_CLOSED`).
+* [[OND236-120]](https://ondewo.atlassian.net/browse/OND236-120) `agent.proto`: `Agent` gains `warm_transfer_settings` (15, `WarmTransferAgentSettings`); unset keeps the server's behaviour (intros enabled while its warm transfer feature is on, built-in texts). New `WarmTransferAgentSettings` message: `enabled` (1, `optional bool`; false = `PrepareWarmTransferIntro` answers `FAILED_PRECONDITION` `reason=warm-intro-disabled-for-agent`), `llm_ccai_service_name` (2, `string`), `default_texts` (3, `map<string, WarmTransferAgentTexts>`, keyed by language code) and `extra_lexicon` (4, `map<string, WarmTransferAgentLexicon>`, keyed by language code). New `WarmTransferAgentTexts` message: `ready_question` (1, `string`), `accept_question` (2, `string`), `decline_reason_question` (3, `optional string`), `caller_declined_message` (4, `string`) and `caller_unreachable_message` (5, `string`). New `WarmTransferAgentLexicon` message, at most 50 entries per language: `accept_phrases` (1, `repeated string`) and `decline_phrases` (2, `repeated string`).
+
+### Improvements
+
+* None in this release.
+
+### Bug Fixes
+
+* None in this release.
+
+*****************
+
 ## Release ONDEWO NLU API 7.5.0
 
 ### New Features
