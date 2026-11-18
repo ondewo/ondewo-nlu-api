@@ -4012,7 +4012,7 @@ CcaiProjectView defines what the CcaiProject message contains
 | CCAI_SERVICE_PROVIDER_ONDEWO | 1 | ONDEWO provider for CCAI service services <a href="https://www.ondewo.com/">ONDEWO</a> |
 | CCAI_SERVICE_PROVIDER_GOOGLE_GEMINI | 2 | Google as the CCAI service provider, utilizing Google&apos;s conversational AI capabilities <a href="https://deepmind.google/technologies/gemini/">Google Gemini</a> |
 | CCAI_SERVICE_PROVIDER_MICROSOFT_AZURE_OPENAI | 3 | Microsoft Azure as the CCAI service provider, using Microsoft&apos;s Azure cognitive services <a href="https://azure.microsoft.com/en-us/products/cognitive-services/openai-service/">Azure OpenAI</a> |
-| CCAI_SERVICE_PROVIDER_MICROSOFT_AUTOGEN | 4 | Microsoft AutoGen as the CCAI service provider <a href="https://github.com/microsoft/autogen">AutoGen</a> |
+| CCAI_SERVICE_PROVIDER_MICROSOFT_AUTOGEN | 4 | Deprecated: Microsoft AutoGen as the CCAI service provider <a href="https://github.com/microsoft/autogen">AutoGen</a>. The server no longer runs AutoGen and refuses to create services with this provider; stored AutoGen services are migrated to AI Teams v2 (LangChain / LangGraph). The value is kept for wire compatibility and may still appear on data written before the migration. |
 | CCAI_SERVICE_PROVIDER_OLLAMA | 5 | Ollama as the CCAI service provider, typically associated with specific OLLAMA AI tools <a href="https://github.com/ollama/ollama">Ollama</a> |
 | CCAI_SERVICE_PROVIDER_OPENAI | 6 | OpenAI as the CCAI service provider, commonly used for models such as GPT <a href="https://openai.com/">OpenAI</a> |
 | CCAI_SERVICE_PROVIDER_ANTHROPIC | 7 | Anthropic as the CCAI service provider, used with AI models from Anthropic <a href="https://www.anthropic.com/">Anthropic</a> |
@@ -14999,7 +14999,7 @@ Emitted on a streaming DetectIntent when an LLM invocation starts.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | llm_call_id | [string](#string) |  | Collector-assigned id grouping all events emitted for this LLM call. |
-| provider | [string](#string) |  | Provider tag: "autogen" | "langchain" | "openai" | "anthropic" | ... |
+| provider | [string](#string) |  | Provider tag: "langchain" | "openai" | "anthropic" | ... ("autogen" only on telemetry recorded before AutoGen was removed). |
 | model_name | [string](#string) |  | Concrete model identifier (e.g. "claude-3-5-sonnet-20241022"). |
 | agent_name | [string](#string) |  | intent_agent executor / agent name owning the call. |
 | start_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Wall-clock start of the LLM call. |
@@ -15297,7 +15297,7 @@ Telemetry for a single LLM invocation inside one DetectIntent turn.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| provider | [string](#string) |  | Provider tag: "autogen" | "langchain" | "openai" | "anthropic" | ... |
+| provider | [string](#string) |  | Provider tag: "langchain" | "openai" | "anthropic" | ... ("autogen" only on telemetry recorded before AutoGen was removed). |
 | model_name | [string](#string) |  | Concrete model identifier (e.g. "Qwen/Qwen3.6-27b-fp8"). |
 | agent_name | [string](#string) |  | intent_agent executor / agent name. |
 | llm_token_usage | [LlmTokenUsage](#ondewo.nlu.LlmTokenUsage) |  | Totals for this call. |
@@ -15332,14 +15332,14 @@ Telemetry for a single LLM invocation inside one DetectIntent turn.
 | cached_input_tokens | [int32](#int32) |  | Number of input tokens served from the provider-side prompt cache (Anthropic <code>cache_read_input_tokens</code>). |
 | cache_creation_input_tokens | [int32](#int32) |  | Number of input tokens written to the provider-side prompt cache (Anthropic <code>cache_creation_input_tokens</code>). |
 | langsmith_run_url | [string](#string) |  | LangSmith run URL for direct click-through when LangSmith tracing is active. |
-| team_name | [string](#string) |  | Autogen team display name owning the call. |
-| team_id | [string](#string) |  | Autogen team identifier (UUID). |
-| agent_role | [string](#string) |  | Autogen agent role tag (user_proxy | assistant | tool_executor | reflection). |
-| sender_agent | [string](#string) |  | Name of the autogen agent that produced the message. |
-| recipient_agent | [string](#string) |  | Name of the autogen agent that received the message. |
-| turn_index | [int32](#int32) |  | Zero-based position of this LLM call inside the autogen <code>run_stream()</code> sequence. |
-| reflection_iterations | [int32](#int32) |  | Number of reflection loops executed in <code>robust_assistant_agent</code> for this call. |
-| termination_reason | [string](#string) |  | Autogen <code>TaskResult.stop_reason</code> string when surfaced. |
+| team_name | [string](#string) |  | Display name of the agent team owning the call; empty for a single agent. |
+| team_id | [string](#string) |  | Identifier (UUID) of the agent team owning the call. |
+| agent_role | [string](#string) |  | Role tag of the agent that made the call inside its team. |
+| sender_agent | [string](#string) |  | Name of the agent that produced the message. |
+| recipient_agent | [string](#string) |  | Name of the agent that received the message. |
+| turn_index | [int32](#int32) |  | Zero-based position of this LLM call inside the agent run&apos;s sequence of LLM calls. |
+| reflection_iterations | [int32](#int32) |  | Deprecated: number of reflection loops of the removed AutoGen <code>robust_assistant_agent</code> for this call. No current agent runs reflection loops, so it is 0. |
+| termination_reason | [string](#string) |  | Stop reason of the agent team run when surfaced (formerly AutoGen <code>TaskResult.stop_reason</code>). |
 | evaluator_runs_join_key | [string](#string) |  | Join key linking this LLM call to an evaluator run (see llm_evaluation.proto). |
 | llm_evaluation_feedbacks | [LlmEvaluationFeedback](#ondewo.nlu.LlmEvaluationFeedback) | repeated | Immediate inline feedback recorded inside the turn (e.g. self-grading by a reflection agent). Each entry is a single LlmEvaluationFeedback record. |
 | ccai_service_name | [string](#string) |  | Resource name of the CCAI service that issued this LLM call. |
@@ -15359,7 +15359,7 @@ Telemetry for a single LLM invocation inside one DetectIntent turn.
 | ccai_service_provider | [CcaiServiceProvider](#ondewo.nlu.CcaiServiceProvider) |  | Provider of the ccai service |
 | llm_safety_assessment | [LlmSafetyAssessment](#ondewo.nlu.LlmSafetyAssessment) |  | Native (regex / substring, no-LLM) safety assessment computed at telemetry build time over the call's input / output text. Distinct from the offline LLM-judge safety evaluators in <code>llm_evaluation.proto</code>: this is the live MONITORING signal on real DetectIntent traffic. Unset when safety scoring is disabled. |
 | llm_retrieval_metadata | [LlmRetrievalMetadata](#ondewo.nlu.LlmRetrievalMetadata) |  | Typed view of the retrieved RAG chunks for this LLM call. Populated alongside the unstructured <code>outputs.retrieved_chunks</code> Struct (field 18, kept for back-compat); both carry the same chunk list. Unset for non-retrieval calls. |
-| llm_call_id | [string](#string) |  | Id of THIS LLM call. Same identifier the streaming telemetry events carry as <code>llm_call_id</code> (<code>LlmLlmCallStartedEvent</code>, <code>LlmToolCallStartedEvent</code>, ...), so an aggregate or a persisted row can be correlated back to the live event stream. Distinct from <code>run_id</code> (field 11), which is the UPSTREAM framework's id (autogen / langchain). |
+| llm_call_id | [string](#string) |  | Id of THIS LLM call. Same identifier the streaming telemetry events carry as <code>llm_call_id</code> (<code>LlmLlmCallStartedEvent</code>, <code>LlmToolCallStartedEvent</code>, ...), so an aggregate or a persisted row can be correlated back to the live event stream. Distinct from <code>run_id</code> (field 11), which is the UPSTREAM framework's id (e.g. langchain). |
 
 
 
@@ -15503,7 +15503,7 @@ Metadata for one tool call executed by the LLM.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| tool_call_id | [string](#string) |  | Stable id assigned by the upstream framework (autogen / langchain). |
+| tool_call_id | [string](#string) |  | Stable id assigned by the upstream framework (e.g. langchain). |
 | tool_name | [string](#string) |  | Name of the tool / function invoked. |
 | start_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Wall-clock start time of the tool call. |
 | end_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Wall-clock end time of the tool call. |
@@ -15526,7 +15526,7 @@ Emitted on a streaming DetectIntent when a tool call starts.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| tool_call_id | [string](#string) |  | Stable id assigned by the upstream framework (autogen / langchain). |
+| tool_call_id | [string](#string) |  | Stable id assigned by the upstream framework (e.g. langchain). |
 | tool_name | [string](#string) |  | Name of the tool / function invoked. |
 | arguments | [google.protobuf.Struct](#google.protobuf.Struct) |  | Tool arguments as a structured payload (Struct kept as-is; not a custom Message). |
 | start_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Wall-clock start time of the tool call. |
@@ -15554,7 +15554,7 @@ One tool's invocation aggregate across the scope.
 | llm_token_usage | [LlmTokenUsage](#ondewo.nlu.LlmTokenUsage) |  | Summed tool-call token usage (input / output / total). |
 | arguments | [google.protobuf.Struct](#google.protobuf.Struct) |  | Arguments the representative invocation was called with, as a structured payload (Struct kept as-is; not a custom Message). Unset when the source metadata carried none. |
 | llm_call_id | [string](#string) |  | Groups the representative invocation under its <code>LlmTelemetry</code> entry. |
-| tool_call_id | [string](#string) |  | Stable id of the representative invocation, assigned by the upstream framework (autogen / langchain). |
+| tool_call_id | [string](#string) |  | Stable id of the representative invocation, assigned by the upstream framework (e.g. langchain). |
 
 
 

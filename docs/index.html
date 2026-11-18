@@ -13971,8 +13971,11 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
               <tr>
                 <td>CCAI_SERVICE_PROVIDER_MICROSOFT_AUTOGEN</td>
                 <td>4</td>
-                <td><p>Microsoft AutoGen as the CCAI service provider
-<a href="https://github.com/microsoft/autogen">AutoGen</a></p></td>
+                <td><p>Deprecated: Microsoft AutoGen as the CCAI service provider
+<a href="https://github.com/microsoft/autogen">AutoGen</a>.
+The server no longer runs AutoGen and refuses to create services with this provider; stored AutoGen
+services are migrated to AI Teams v2 (LangChain / LangGraph). The value is kept for wire
+compatibility and may still appear on data written before the migration.</p></td>
               </tr>
             
               <tr>
@@ -45668,7 +45671,8 @@ credentials redacted. Empty = the model configuration states no base URL. </p></
                   <td>provider</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Provider tag: "autogen" | "langchain" | "openai" | "anthropic" | ... </p></td>
+                  <td><p>Provider tag: "langchain" | "openai" | "anthropic" | ... ("autogen" only on telemetry recorded before AutoGen
+was removed). </p></td>
                 </tr>
               
                 <tr>
@@ -46484,7 +46488,8 @@ fully safe (no findings) and lower values indicate higher risk. </p></td>
                   <td>provider</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Provider tag: "autogen" | "langchain" | "openai" | "anthropic" | ... </p></td>
+                  <td><p>Provider tag: "langchain" | "openai" | "anthropic" | ... ("autogen" only on telemetry recorded before AutoGen
+was removed). </p></td>
                 </tr>
               
                 <tr>
@@ -46732,56 +46737,57 @@ forming the LangSmith run tree. </p></td>
                   <td>team_name</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Autogen team display name owning the call. </p></td>
+                  <td><p>Display name of the agent team owning the call; empty for a single agent. </p></td>
                 </tr>
               
                 <tr>
                   <td>team_id</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Autogen team identifier (UUID). </p></td>
+                  <td><p>Identifier (UUID) of the agent team owning the call. </p></td>
                 </tr>
               
                 <tr>
                   <td>agent_role</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Autogen agent role tag (user_proxy | assistant | tool_executor | reflection). </p></td>
+                  <td><p>Role tag of the agent that made the call inside its team. </p></td>
                 </tr>
               
                 <tr>
                   <td>sender_agent</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Name of the autogen agent that produced the message. </p></td>
+                  <td><p>Name of the agent that produced the message. </p></td>
                 </tr>
               
                 <tr>
                   <td>recipient_agent</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Name of the autogen agent that received the message. </p></td>
+                  <td><p>Name of the agent that received the message. </p></td>
                 </tr>
               
                 <tr>
                   <td>turn_index</td>
                   <td><a href="#int32">int32</a></td>
                   <td></td>
-                  <td><p>Zero-based position of this LLM call inside the autogen <code>run_stream()</code> sequence. </p></td>
+                  <td><p>Zero-based position of this LLM call inside the agent run&apos;s sequence of LLM calls. </p></td>
                 </tr>
               
                 <tr>
                   <td>reflection_iterations</td>
                   <td><a href="#int32">int32</a></td>
                   <td></td>
-                  <td><p>Number of reflection loops executed in <code>robust_assistant_agent</code> for this call. </p></td>
+                  <td><p>Deprecated: number of reflection loops of the removed AutoGen <code>robust_assistant_agent</code> for this
+call. No current agent runs reflection loops, so it is 0. </p></td>
                 </tr>
               
                 <tr>
                   <td>termination_reason</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Autogen <code>TaskResult.stop_reason</code> string when surfaced. </p></td>
+                  <td><p>Stop reason of the agent team run when surfaced (formerly AutoGen <code>TaskResult.stop_reason</code>). </p></td>
                 </tr>
               
                 <tr>
@@ -46948,7 +46954,7 @@ non-retrieval calls. </p></td>
 <code>llm_call_id</code> (<code>LlmLlmCallStartedEvent</code>,
 <code>LlmToolCallStartedEvent</code>, ...), so an aggregate or a persisted row can be
 correlated back to the live event stream. Distinct from <code>run_id</code> (field 11),
-which is the UPSTREAM framework's id (autogen / langchain). </p></td>
+which is the UPSTREAM framework's id (e.g. langchain). </p></td>
                 </tr>
               
             </tbody>
@@ -47364,7 +47370,7 @@ distinct base URL in scope. </p></td>
                   <td>tool_call_id</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Stable id assigned by the upstream framework (autogen / langchain). </p></td>
+                  <td><p>Stable id assigned by the upstream framework (e.g. langchain). </p></td>
                 </tr>
               
                 <tr>
@@ -47444,7 +47450,7 @@ distinct base URL in scope. </p></td>
                   <td>tool_call_id</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Stable id assigned by the upstream framework (autogen / langchain). </p></td>
+                  <td><p>Stable id assigned by the upstream framework (e.g. langchain). </p></td>
                 </tr>
               
                 <tr>
@@ -47561,7 +47567,7 @@ distinct base URL in scope. </p></td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Stable id of the representative invocation, assigned by the upstream framework
-(autogen / langchain). </p></td>
+(e.g. langchain). </p></td>
                 </tr>
               
             </tbody>
