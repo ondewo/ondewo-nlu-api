@@ -369,8 +369,11 @@ enum CcaiServiceProvider {
     // <a href="https://azure.microsoft.com/en-us/products/cognitive-services/openai-service/">Azure OpenAI</a>
     CCAI_SERVICE_PROVIDER_MICROSOFT_AZURE_OPENAI = 3;
 
-    // Microsoft AutoGen as the CCAI service provider
-    // <a href="https://github.com/microsoft/autogen">AutoGen</a>
+    // Deprecated: Microsoft AutoGen as the CCAI service provider
+    // <a href="https://github.com/microsoft/autogen">AutoGen</a>.
+    // The server no longer runs AutoGen and refuses to create services with this provider; stored AutoGen
+    // services are migrated to AI Teams v2 (LangChain / LangGraph). The value is kept for wire
+    // compatibility and may still appear on data written before the migration.
     CCAI_SERVICE_PROVIDER_MICROSOFT_AUTOGEN = 4;
 
     // Ollama as the CCAI service provider, typically associated with specific OLLAMA AI tools

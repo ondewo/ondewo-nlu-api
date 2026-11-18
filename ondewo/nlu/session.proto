@@ -726,7 +726,7 @@ message LlmTokenUsage {
 
 // Metadata for one tool call executed by the LLM.
 message LlmToolCallMetadata {
-    // Stable id assigned by the upstream framework (autogen / langchain).
+    // Stable id assigned by the upstream framework (e.g. langchain).
     string tool_call_id = 1;
 
     // Name of the tool / function invoked.
@@ -775,7 +775,8 @@ message LlmThinkingMetadata {
 
 // Telemetry for a single LLM invocation inside one DetectIntent turn.
 message LlmTelemetry {
-    // Provider tag: "autogen" | "langchain" | "openai" | "anthropic" | ...
+    // Provider tag: "langchain" | "openai" | "anthropic" | ... ("autogen" only on telemetry recorded before AutoGen
+    // was removed).
     string provider = 1;
 
     // Concrete model identifier (e.g. "Qwen/Qwen3.6-27b-fp8").
@@ -883,28 +884,29 @@ message LlmTelemetry {
     // LangSmith run URL for direct click-through when LangSmith tracing is active.
     string langsmith_run_url = 35;
 
-    // Autogen team display name owning the call.
+    // Display name of the agent team owning the call; empty for a single agent.
     string team_name = 36;
 
-    // Autogen team identifier (UUID).
+    // Identifier (UUID) of the agent team owning the call.
     string team_id = 37;
 
-    // Autogen agent role tag (user_proxy | assistant | tool_executor | reflection).
+    // Role tag of the agent that made the call inside its team.
     string agent_role = 38;
 
-    // Name of the autogen agent that produced the message.
+    // Name of the agent that produced the message.
     string sender_agent = 39;
 
-    // Name of the autogen agent that received the message.
+    // Name of the agent that received the message.
     string recipient_agent = 40;
 
-    // Zero-based position of this LLM call inside the autogen <code>run_stream()</code> sequence.
+    // Zero-based position of this LLM call inside the agent run&apos;s sequence of LLM calls.
     int32 turn_index = 41;
 
-    // Number of reflection loops executed in <code>robust_assistant_agent</code> for this call.
+    // Deprecated: number of reflection loops of the removed AutoGen <code>robust_assistant_agent</code> for this
+    // call. No current agent runs reflection loops, so it is 0.
     int32 reflection_iterations = 42;
 
-    // Autogen <code>TaskResult.stop_reason</code> string when surfaced.
+    // Stop reason of the agent team run when surfaced (formerly AutoGen <code>TaskResult.stop_reason</code>).
     string termination_reason = 43;
 
     // Join key linking this LLM call to an evaluator run (see llm_evaluation.proto).
@@ -991,7 +993,7 @@ message LlmTelemetry {
     // <code>llm_call_id</code> (<code>LlmLlmCallStartedEvent</code>,
     // <code>LlmToolCallStartedEvent</code>, ...), so an aggregate or a persisted row can be
     // correlated back to the live event stream. Distinct from <code>run_id</code> (field 11),
-    // which is the UPSTREAM framework's id (autogen / langchain).
+    // which is the UPSTREAM framework's id (e.g. langchain).
     string llm_call_id = 63;
 }
 
@@ -1316,7 +1318,7 @@ message LlmToolUsage {
     string llm_call_id = 9;
 
     // Stable id of the representative invocation, assigned by the upstream framework
-    // (autogen / langchain).
+    // (e.g. langchain).
     string tool_call_id = 10;
 }
 
@@ -1487,7 +1489,8 @@ message LlmCallStartedEvent {
     // Collector-assigned id grouping all events emitted for this LLM call.
     string llm_call_id = 1;
 
-    // Provider tag: "autogen" | "langchain" | "openai" | "anthropic" | ...
+    // Provider tag: "langchain" | "openai" | "anthropic" | ... ("autogen" only on telemetry recorded before AutoGen
+    // was removed).
     string provider = 2;
 
     // Concrete model identifier (e.g. "claude-3-5-sonnet-20241022").
@@ -1517,7 +1520,7 @@ message LlmCallFinishedEvent {
 
 // Emitted on a streaming DetectIntent when a tool call starts.
 message LlmToolCallStartedEvent {
-    // Stable id assigned by the upstream framework (autogen / langchain).
+    // Stable id assigned by the upstream framework (e.g. langchain).
     string tool_call_id = 1;
 
     // Name of the tool / function invoked.
