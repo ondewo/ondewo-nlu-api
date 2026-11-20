@@ -68,6 +68,7 @@ Please use the issue tracker in this repo for discussions about this API, or the
 │   │   ├── entity_type.proto
 │   │   ├── intent.proto
 │   │   ├── llm_evaluation.proto
+│   │   ├── logs.proto
 │   │   ├── operation_metadata.proto
 │   │   ├── operations.proto
 │   │   ├── project_role.proto
@@ -149,8 +150,8 @@ The generic `release_client` command depends on these variables:
   `release_php_client` passes `PHP` and `release_cpp_client` passes `C\+\+` (escaped for `grep -E`), because the
   headings of those two clients read `PHP` and `C++`
 * `PROTO_COMPILER_TAG` -- optional: the ondewo-proto-compiler tag the client is pinned to. `release_all_clients` passes
-  it; without it `release_client` reads the newest `X.Y.Z` tag itself with `git ls-remote` and stops before cloning
-  anything if it cannot
+  `ONDEWO_PROTO_COMPILER_VERSION`; without it `release_client` uses `ONDEWO_PROTO_COMPILER_VERSION` itself and stops
+  before cloning anything if it is empty
 
 `release_client` clones the client and first checks whether it was released before. If the client already has the
 branch `release/<version>`, it asks the GitHub REST API whether the client also has the published GitHub release
@@ -202,8 +203,8 @@ The php, go, rust, cpp, java and csharp clients run every toolchain, `gh` and re
 The older clients differ: nodejs, typescript, angular and js publish to npm before they push their release branch and
 create the GitHub release last; python creates its GitHub release before it uploads to PyPI.
 
-To release all clients, use the `make release_all_clients` command. It reads the newest ondewo-proto-compiler tag once
-(`git ls-remote`; it stops before any client if that fails), passes it to every client and runs
+To release all clients, use the `make release_all_clients` command. It takes the ondewo-proto-compiler version pinned in
+`ONDEWO_PROTO_COMPILER_VERSION` (it stops before any client if that is empty), passes it to every client and runs
 `release_<client>_client` for every entry of `CLIENTS` (python, nodejs, typescript, angular, js, php, go, rust, cpp,
 java, csharp), at most `RELEASE_JOBS` at a time (default 2; `make release_all_clients RELEASE_JOBS=1` releases one
 client after the other). Each client's output goes to `release_run_<client>.log`, and a failing client does not stop

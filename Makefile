@@ -17,7 +17,7 @@ export
 
 # MUST BE THE SAME AS API in Mayor and Minor Version Number
 # example: API 2.9.0 --> Client 2.9.X
-ONDEWO_NLU_API_VERSION=7.5.0
+ONDEWO_NLU_API_VERSION=7.6.0
 
 # Placeholder only: `make ondewo_release` passes the real token from ondewo-devops-accounts/account_github.env on
 # the command line. Credentials live only in that repo - never commit one here or store it anywhere on GitHub.
@@ -195,17 +195,18 @@ CLIENTS := python nodejs typescript angular js php go rust cpp java csharp
 # Every client release builds docker images and compiles its code, so all of them at once overload the host.
 RELEASE_JOBS?=2
 
-# Newest ondewo-proto-compiler release tag (X.Y.Z tags only, version-sorted), read with git ls-remote rather
-# than the GitHub REST API, which allows 60 unauthenticated calls per hour. release_all_clients resolves it
-# ONCE per run and passes it to every client as PROTO_COMPILER_TAG=<tag> on the command line; a standalone
-# release_<client>_client resolves it itself in release_client.
+# The ondewo-proto-compiler every client is built with, pinned EXACTLY and written into each client's
+# ONDEWO_PROTO_COMPILER_GIT_BRANCH as tags/<version>. It used to be the newest X.Y.Z tag `git ls-remote`
+# listed, so any new compiler tag silently moved every client's pin mid-release. Move it deliberately.
+# release_all_clients passes it to every client as PROTO_COMPILER_TAG=<version> on the command line; a
+# standalone release_<client>_client reads it here as well.
 PROTO_COMPILER_GIT=https://github.com/ondewo/ondewo-proto-compiler.git
-NEWEST_PROTO_COMPILER_TAG=GIT_TERMINAL_PROMPT=0 git ls-remote --tags --refs ${PROTO_COMPILER_GIT} | sed 's|.*refs/tags/||' | grep -E '^[0-9]+\.[0-9]+\.[0-9]+$$' | sort -V | tail -1
+ONDEWO_PROTO_COMPILER_VERSION=5.17.0
 
 release_all_clients: ## Release every client in CLIENTS, at most RELEASE_JOBS at a time; one failing client does not abort the others
 	@case "${RELEASE_JOBS}" in ''|*[!0-9]*|0*) echo "ERROR: RELEASE_JOBS must be a positive integer (1, 2, ...), not '${RELEASE_JOBS}'"; exit 1;; esac; \
-	tag=$$(${NEWEST_PROTO_COMPILER_TAG}); \
-	if [ -z "$$tag" ]; then echo "ERROR: could not read the newest release tag of ${PROTO_COMPILER_GIT} - no client was released"; exit 1; fi; \
+	tag=${ONDEWO_PROTO_COMPILER_VERSION}; \
+	if [ -z "$$tag" ]; then echo "ERROR: ONDEWO_PROTO_COMPILER_VERSION is empty - no client was released"; exit 1; fi; \
 	echo "Releasing all clients for ${ONDEWO_NLU_API_VERSION} with ondewo-proto-compiler $$tag, at most ${RELEASE_JOBS} at a time ..."; \
 	rm -f .already_released_marker-* .incomplete_marker-* .unknown_marker-* .client_status-*; \
 	printf '%s\n' $(CLIENTS) | xargs -P ${RELEASE_JOBS} -I{} make release_client_job RELEASE_JOB_CLIENT={} PROTO_COMPILER_TAG=$$tag; \
@@ -267,10 +268,10 @@ release_client: ## Generic Function to Release a Client
 	$(eval REPO_NAME:= $(shell echo ${GENERIC_CLIENT} | cut -c 41- | cut -d '.' -f 1))
 	$(eval REPO_DIR:= $(shell echo "ondewo-nlu-client-${REPO_NAME}"))
 	$(eval UPPER_REPO_NAME:= $(shell echo ${REPO_NAME} | perl -pe 's/.*/\u$$&/'))
-# Newest Proto-Compiler tag: PROTO_COMPILER_TAG from release_all_clients, else resolved here. An empty one
-# would pin the client to `tags/`, so stop before anything is cloned.
-	$(eval PROTO_COMPILER:= $(or ${PROTO_COMPILER_TAG},$(shell ${NEWEST_PROTO_COMPILER_TAG})))
-	@if [ -z "${PROTO_COMPILER}" ]; then echo "ERROR: could not read the newest release tag of ${PROTO_COMPILER_GIT} - ${REPO_NAME} was not released"; exit 1; fi
+# Proto-Compiler tag: PROTO_COMPILER_TAG from release_all_clients, else ONDEWO_PROTO_COMPILER_VERSION. An
+# empty one would pin the client to `tags/`, so stop before anything is cloned.
+	$(eval PROTO_COMPILER:= $(or ${PROTO_COMPILER_TAG},${ONDEWO_PROTO_COMPILER_VERSION}))
+	@if [ -z "${PROTO_COMPILER}" ]; then echo "ERROR: ONDEWO_PROTO_COMPILER_VERSION is empty - ${REPO_NAME} was not released"; exit 1; fi
 	@echo "ondewo-proto-compiler tag for ${REPO_NAME}: ${PROTO_COMPILER}"
 # Clone Repo
 	rm -rf ${REPO_DIR}

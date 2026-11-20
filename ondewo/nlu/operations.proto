@@ -273,6 +273,17 @@ message StreamRemoteOperationContainerLogsRequest {
     // Empty (the default) streams the operation&apos;s currently-registered container, preserving the
     // legacy single-container behavior.
     string container_id = 4;
+
+    // Optional. Only stream lines whose message matches this regular expression (Python <code>re</code> syntax,
+    // at most 512 characters). Empty (the default) disables regex filtering. An invalid, oversized or
+    // catastrophically backtracking pattern is rejected with <code>INVALID_ARGUMENT</code>.
+    string regex = 5;
+
+    // Optional. Resume exactly where a previous stream or <code>GetRemoteOperationContainerLogs</code> page
+    // stopped: the <code>next_resume_token</code> of that response, echoed back verbatim. When set, no
+    // historical replay is applied and <code>tail_lines</code> is ignored. The token is interchangeable with
+    // <code>Logs.StreamLogs</code> / <code>Logs.ListLogs</code> tokens.
+    string resume_token = 6;
 }
 
 // The request message for <a href="index.html#ondewo.nlu.Operations.GetRemoteOperationContainerLogs">Operations.GetRemoteOperationContainerLogs</a>.
@@ -315,6 +326,17 @@ message GetRemoteOperationContainerLogsRequest {
     // Optional cursor for infinite-scroll-DOWN paging: return lines with <code>seq</code> &gt;
     // <code>after_seq</code> (newer window). <code>0</code> (the default) disables forward paging.
     int64 after_seq = 9;
+
+    // Optional. Partial response: the field paths to populate in every returned
+    // <code>RemoteOperationContainerLogLine</code>, relative to that message (no <code>log_lines.</code>
+    // prefix). <code>seq</code> and <code>log_stream</code> are always populated. Unset or empty returns every
+    // field. An unknown path is rejected with <code>INVALID_ARGUMENT</code> naming it.
+    google.protobuf.FieldMask field_mask = 10;
+
+    // Optional. An opaque cursor from a previous response&apos;s <code>next_resume_token</code>. Use it instead of
+    // <code>after_seq</code> / <code>before_seq</code> when the operation ran several containers. Cannot be
+    // combined with <code>before_seq</code> or <code>after_seq</code>.
+    string resume_token = 11;
 }
 
 // The response message for <a href="index.html#ondewo.nlu.Operations.GetRemoteOperationContainerLogs">Operations.GetRemoteOperationContainerLogs</a>.
@@ -336,6 +358,13 @@ message GetRemoteOperationContainerLogsResponse {
     // True when older lines than the returned window still exist (i.e. the window&apos;s first
     // <code>seq</code> &gt; <code>min_available_seq</code>) — the client may keep scrolling up.
     bool has_more_older = 5;
+
+    // Cursor to fetch the next window, or to start a <code>StreamRemoteOperationContainerLogs</code> (or a
+    // <code>Logs.StreamLogs</code>) that continues exactly where this window ended.
+    string next_resume_token = 6;
+
+    // True when entries newer than this window exist.
+    bool has_more_newer = 7;
 }
 
 // A single parsed container log line, emitted by both the streaming and the query RPCs.
@@ -358,10 +387,16 @@ message RemoteOperationContainerLogLine {
     // The docker container name this line was produced by. Empty when unavailable.
     string container_name = 5;
 
-    // The monotonically-increasing sequence number of this line within its container&apos;s captured log
-    // (assigned by the server-side capture). Used as the cursor for infinite-scroll paging. <code>0</code>
-    // when the line was produced by a legacy path that did not assign a sequence.
+    // Ordering cursor of this line, assigned by the database. Monotonically increasing WITHIN ONE CONTAINER but
+    // NOT contiguous: values come from a sequence shared by every log stream and are removed by retention. Never
+    // compute the next cursor as <code>seq + 1</code>; pass it back as <code>after_seq</code> /
+    // <code>before_seq</code> (strictly greater / smaller) or use <code>resume_token</code>. <code>0</code> when
+    // the line was produced by a legacy path that did not assign a sequence.
     int64 seq = 6;
+
+    // Resource name of the log stream this line belongs to (see
+    // <a href="index.html#ondewo.nlu.CaiLogEntry">CaiLogEntry.log_stream</a>).
+    string log_stream = 7;
 }
 
 // The request message for <a href="index.html#ondewo.nlu.Operations.GetRemoteOperationContainerStatus">Operations.GetRemoteOperationContainerStatus</a>.

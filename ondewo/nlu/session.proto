@@ -71,6 +71,44 @@ service Sessions {
     // available via the gRPC API (not REST).
     rpc StreamingDetectIntent (stream StreamingDetectIntentRequest) returns (stream StreamingDetectIntentResponse);
 
+    // Interrupts a turn of the session outside a <code>StreamingDetectIntent</code> stream: cancels it, reports what
+    // the user actually heard of its answer, or discards the session step of a preemptive draft. Meant for clients
+    // without a call-length stream (e.g. a stop button) and for a heard report that arrives after the stream closed.
+    // A voice client with an open stream sends the same <code>TurnControl</code> on that stream instead
+    // (<code>StreamingDetectIntentRequest.turn_control</code>). Requires the permission to interrupt a turn of the
+    // session's project.
+    rpc InterruptTurn (InterruptTurnRequest) returns (InterruptTurnResponse) {
+        option (google.api.http) = {
+            post: "/v2/{session=projects/*/agent/sessions/*}:interruptTurn"
+            body: "*"
+        };
+    }
+
+    // Prepares the intro session of a warm transfer: reads the history, the contexts and the slots of the source
+    // (caller) session, renders the intro text (with an LLM within a time budget, or from the TEMPLATE when the LLM
+    // fails or is not configured), strips every <code>&lt;SIP:…&gt;</code> markup from it, and stores the text, the
+    // configuration and the stage in the intro session, which must not exist yet. Writes no step into the source
+    // session. Idempotent per (<code>intro_session</code>, <code>transfer_request_id</code>): a repeated request
+    // answers the response of the first one. Answers <code>UNIMPLEMENTED</code> when the server's warm transfer
+    // feature is switched off, and <code>FAILED_PRECONDITION</code> with <code>reason=warm-intro-disabled-for-agent</code>
+    // when <code>Agent.warm_transfer_settings.enabled</code> is false. Requires the permission to run a warm transfer
+    // intro of the session's project. See <code>docs/warm_transfer.md</code>.
+    rpc PrepareWarmTransferIntro (PrepareWarmTransferIntroRequest) returns (PrepareWarmTransferIntroResponse) {
+        option (google.api.http) = {
+            post: "/v2/{intro_session=projects/*/agent/sessions/*}:prepareWarmTransferIntro"
+            body: "*"
+        };
+    }
+
+    // Returns the decision the target gave in the intro session of a warm transfer. Never returns the reason text
+    // or the intro text. Answers <code>UNIMPLEMENTED</code> when the server's warm transfer feature is switched off.
+    // Requires the permission to run a warm transfer intro of the session's project.
+    rpc GetWarmTransferIntroOutcome (GetWarmTransferIntroOutcomeRequest) returns (WarmTransferIntroOutcome) {
+        option (google.api.http) = {
+            get: "/v2/{intro_session=projects/*/agent/sessions/*}/warmTransferIntroOutcome"
+        };
+    }
+
     // *** SESSION RELATED ENDPOINTS *** //
 
     // ListSessions: returns list of sessions from ondewo-kb; by default returns only session IDs
@@ -580,6 +618,13 @@ message QueryParameters {
     // transcriptions of the user input sorted by score
     repeated S2tTranscription transcriptions = 14;
 
+    // Optional. Marks the request as a preemptive draft: a turn the client (e.g. ondewo-csi) starts speculatively,
+    // e.g. on a partial transcript, and may later discard with <code>TurnControl.discard_draft</code>. The server
+    // records the mark on the session step of this request. A <code>DiscardDraft</code> deletes only a session step
+    // of the same session whose request carried this mark. A server that does not know this field ignores it and
+    // keeps the step.
+    bool preemptive_draft = 15;
+
 }
 
 // Identifies whether a transcription was produced by an automatic
@@ -681,7 +726,7 @@ message LlmTokenUsage {
 
 // Metadata for one tool call executed by the LLM.
 message LlmToolCallMetadata {
-    // Stable id assigned by the upstream framework (autogen / langchain).
+    // Stable id assigned by the upstream framework (e.g. langchain).
     string tool_call_id = 1;
 
     // Name of the tool / function invoked.
@@ -730,7 +775,8 @@ message LlmThinkingMetadata {
 
 // Telemetry for a single LLM invocation inside one DetectIntent turn.
 message LlmTelemetry {
-    // Provider tag: "autogen" | "langchain" | "openai" | "anthropic" | ...
+    // Provider tag: "langchain" | "openai" | "anthropic" | ... ("autogen" only on telemetry recorded before AutoGen
+    // was removed).
     string provider = 1;
 
     // Concrete model identifier (e.g. "Qwen/Qwen3.6-27b-fp8").
@@ -838,28 +884,29 @@ message LlmTelemetry {
     // LangSmith run URL for direct click-through when LangSmith tracing is active.
     string langsmith_run_url = 35;
 
-    // Autogen team display name owning the call.
+    // Display name of the agent team owning the call; empty for a single agent.
     string team_name = 36;
 
-    // Autogen team identifier (UUID).
+    // Identifier (UUID) of the agent team owning the call.
     string team_id = 37;
 
-    // Autogen agent role tag (user_proxy | assistant | tool_executor | reflection).
+    // Role tag of the agent that made the call inside its team.
     string agent_role = 38;
 
-    // Name of the autogen agent that produced the message.
+    // Name of the agent that produced the message.
     string sender_agent = 39;
 
-    // Name of the autogen agent that received the message.
+    // Name of the agent that received the message.
     string recipient_agent = 40;
 
-    // Zero-based position of this LLM call inside the autogen <code>run_stream()</code> sequence.
+    // Zero-based position of this LLM call inside the agent run&apos;s sequence of LLM calls.
     int32 turn_index = 41;
 
-    // Number of reflection loops executed in <code>robust_assistant_agent</code> for this call.
+    // Deprecated: number of reflection loops of the removed AutoGen <code>robust_assistant_agent</code> for this
+    // call. No current agent runs reflection loops, so it is 0.
     int32 reflection_iterations = 42;
 
-    // Autogen <code>TaskResult.stop_reason</code> string when surfaced.
+    // Stop reason of the agent team run when surfaced (formerly AutoGen <code>TaskResult.stop_reason</code>).
     string termination_reason = 43;
 
     // Join key linking this LLM call to an evaluator run (see llm_evaluation.proto).
@@ -946,7 +993,7 @@ message LlmTelemetry {
     // <code>llm_call_id</code> (<code>LlmLlmCallStartedEvent</code>,
     // <code>LlmToolCallStartedEvent</code>, ...), so an aggregate or a persisted row can be
     // correlated back to the live event stream. Distinct from <code>run_id</code> (field 11),
-    // which is the UPSTREAM framework's id (autogen / langchain).
+    // which is the UPSTREAM framework's id (e.g. langchain).
     string llm_call_id = 63;
 }
 
@@ -1271,7 +1318,7 @@ message LlmToolUsage {
     string llm_call_id = 9;
 
     // Stable id of the representative invocation, assigned by the upstream framework
-    // (autogen / langchain).
+    // (e.g. langchain).
     string tool_call_id = 10;
 }
 
@@ -1442,7 +1489,8 @@ message LlmCallStartedEvent {
     // Collector-assigned id grouping all events emitted for this LLM call.
     string llm_call_id = 1;
 
-    // Provider tag: "autogen" | "langchain" | "openai" | "anthropic" | ...
+    // Provider tag: "langchain" | "openai" | "anthropic" | ... ("autogen" only on telemetry recorded before AutoGen
+    // was removed).
     string provider = 2;
 
     // Concrete model identifier (e.g. "claude-3-5-sonnet-20241022").
@@ -1472,7 +1520,7 @@ message LlmCallFinishedEvent {
 
 // Emitted on a streaming DetectIntent when a tool call starts.
 message LlmToolCallStartedEvent {
-    // Stable id assigned by the upstream framework (autogen / langchain).
+    // Stable id assigned by the upstream framework (e.g. langchain).
     string tool_call_id = 1;
 
     // Name of the tool / function invoked.
@@ -1747,6 +1795,19 @@ message StreamingDetectIntentRequest {
     // over all streaming messages must not exceed 1 minute.
     bytes input_audio = 6;
 
+    // Optional. Controls a turn of this stream: cancels it, reports what the user heard of its answer, or discards
+    // the session step of a preemptive draft. Sent ALONE (no <code>query_input</code>) on a call-length stream; the
+    // server applies it in stream order and starts no turn for it. Send it only to a server that advertised the
+    // initial metadata <code>x-ondewo-cai-turn-control: 1</code> on this stream: an older server treats a request
+    // without <code>query_input</code> as a malformed turn and ends the stream.
+    TurnControl turn_control = 7;
+
+    // Optional. Client-minted id (e.g. a uuid4 hex) of the turn this request STARTS; set together with
+    // <code>query_input</code>. The server echoes it on every response of that turn
+    // (<code>StreamingDetectIntentResponse.client_turn_id</code>), and a <code>CancelTurn</code> or
+    // <code>HeardReport</code> can name the turn by it before the server's <code>response_id</code> is known.
+    string client_turn_id = 8;
+
 }
 
 // The top-level message returned from the <code>StreamingDetectIntent</code> method.
@@ -1788,6 +1849,473 @@ message StreamingDetectIntentResponse {
         LlmAgentNodeEvent llm_agent_node_event = 11;
     }
 
+    // Set on the response that acknowledges a <code>CancelTurn</code> or a <code>DiscardDraft</code> sent as
+    // <code>StreamingDetectIntentRequest.turn_control</code>; a <code>HeardReport</code> is not acknowledged on the
+    // stream. A response that carries it carries no query result and is never an answer. The acknowledgement of a
+    // <code>CancelTurn</code> is sent after every other response of the cancelled turn, so no response of that turn
+    // follows it. The acknowledgement of a <code>DiscardDraft</code> is sent once the discard is decided, between
+    // turns, with the draft's <code>response_id</code> and no <code>client_turn_id</code>:
+    // <code>TURN_CONTROL_ACK_STATUS_DRAFT_DISCARDED</code> when the draft's session step was deleted,
+    // <code>TURN_CONTROL_ACK_STATUS_UNKNOWN_TURN</code> when no step was deleted. Not part of
+    // <code>telemetry_event</code>.
+    TurnControlAck turn_control_ack = 12;
+
+    // Echo of <code>StreamingDetectIntentRequest.client_turn_id</code> of the turn this response belongs to; empty
+    // when the client sent none.
+    string client_turn_id = 13;
+
+}
+
+// Controls one turn of a session. Sent as <code>StreamingDetectIntentRequest.turn_control</code> on a call-length
+// stream, or in an <code>InterruptTurnRequest</code>.
+message TurnControl {
+
+    // The control to apply.
+    oneof turn_control {
+        // Cancel the turn: stop generating its answer. Acknowledged with a <code>TurnControlAck</code>.
+        CancelTurn cancel_turn = 1;
+
+        // Report what the user heard of the turn's answer, so the server rewrites the session step and the LLM
+        // memory to it.
+        HeardReport heard_report = 2;
+
+        // Discard the session step of a preemptive draft the client did not use. Acknowledged with a
+        // <code>TurnControlAck</code>.
+        DiscardDraft discard_draft = 3;
+    }
+}
+
+// Why a turn was interrupted.
+enum TurnInterruptionReason {
+
+    // Not set.
+    TURN_INTERRUPTION_REASON_UNSPECIFIED = 0;
+
+    // The user spoke over the answer and the interruption was confirmed as real.
+    TURN_INTERRUPTION_REASON_BARGE_IN = 1;
+
+    // The user spoke again while the turn was still being generated, before any of its answer was played.
+    TURN_INTERRUPTION_REASON_CALLER_SPOKE_WHILE_THINKING = 2;
+
+    // The call ended while the turn was being generated or played.
+    TURN_INTERRUPTION_REASON_CALL_ENDED = 3;
+
+    // A filler of the turn was cut.
+    TURN_INTERRUPTION_REASON_FILLER_CUT = 4;
+
+    // The user started speaking but no final transcript arrived in time, and the held answer was discarded.
+    TURN_INTERRUPTION_REASON_NO_FINAL_TIMEOUT = 5;
+
+    // A human operator took the call over.
+    TURN_INTERRUPTION_REASON_OPERATOR_TAKEOVER = 6;
+
+    // A human operator muted the bot.
+    TURN_INTERRUPTION_REASON_BOT_MUTED = 7;
+}
+
+// What happens to background work (e.g. an asynchronous tool) the cancelled turn started.
+enum BackgroundWorkPolicy {
+
+    // Keep it running; its result is delivered later as usual.
+    BACKGROUND_WORK_POLICY_KEEP = 0;
+
+    // Cancel work that is still pending, unless the user already heard it acknowledged.
+    BACKGROUND_WORK_POLICY_CANCEL_PENDING = 1;
+}
+
+// Cancels a turn. At least one of <code>response_id</code> and <code>client_turn_id</code> must be set; when both
+// are, <code>client_turn_id</code> is authoritative.
+message CancelTurn {
+
+    // The server's <code>response_id</code> of the turn, when the client has already received it; empty otherwise.
+    string response_id = 1;
+
+    // <code>StreamingDetectIntentRequest.client_turn_id</code> of the turn.
+    string client_turn_id = 2;
+
+    // Why the turn is cancelled.
+    TurnInterruptionReason turn_interruption_reason = 3;
+
+    // Wall-clock time at which the client decided to cancel. Telemetry only.
+    google.protobuf.Timestamp decided_at = 4;
+
+    // What happens to background work the turn started.
+    BackgroundWorkPolicy background_work_policy = 5;
+}
+
+// How the heard text of a <code>HeardReport</code> was determined.
+enum HeardTextPrecision {
+
+    // Not set.
+    HEARD_TEXT_PRECISION_UNSPECIFIED = 0;
+
+    // Nothing of the answer was heard.
+    HEARD_TEXT_PRECISION_NONE_HEARD = 1;
+
+    // The whole answer was heard.
+    HEARD_TEXT_PRECISION_FULL = 2;
+
+    // The played share of the audio was estimated by the client from when it handed the audio to the player, not
+    // measured by the player, and mapped proportionally onto the text.
+    HEARD_TEXT_PRECISION_ESTIMATED_SERVER = 3;
+
+    // The played share of the audio was measured by the audio player and mapped proportionally onto the text.
+    HEARD_TEXT_PRECISION_PROPORTIONAL = 4;
+}
+
+// What the user heard of one spoken message of a turn.
+message HeardMessage {
+
+    // Index into the turn's <code>QueryResult.fulfillment_messages</code>; <code>-1</code> for a filler, which is
+    // not one of them.
+    int32 fulfillment_message_index = 1;
+
+    // Platform of that fulfillment message.
+    Intent.Message.Platform platform = 2;
+
+    // The text that was synthesized for the message, SIP and SSML markup stripped.
+    string full_text = 3;
+
+    // The prefix of <code>full_text</code> the user heard, cut back to a word boundary.
+    string heard_text = 4;
+
+    // Length of <code>heard_text</code> in Unicode code points.
+    int32 heard_char_count = 5;
+
+    // Duration of the message's audio that was played to the user, in seconds.
+    float heard_audio_duration_in_s = 6;
+
+    // Duration of the message's whole audio, in seconds; 0 when it was never synthesized.
+    float total_audio_duration_in_s = 7;
+
+    // The message was played to its end.
+    bool completed = 8;
+
+    // Nothing of the message was played (e.g. it was still queued when the turn was interrupted).
+    bool never_started = 9;
+
+    // The message carried a SIP trigger (e.g. a transfer or a hangup) that was NOT executed because the turn was
+    // interrupted first.
+    bool skipped_sip_trigger = 10;
+
+    // For a filler, the filler id the server sent in <code>diagnostic_info.ondewo_filler.filler_id</code>; empty
+    // otherwise.
+    string filler_id = 11;
+}
+
+// Reports what the user heard of a turn's answer. At least one of <code>response_id</code> and
+// <code>client_turn_id</code> must be set. The server keeps the report with the highest <code>revision</code> per
+// turn and ignores a lower or equal one.
+message HeardReport {
+
+    // The server's <code>response_id</code> of the turn, when the client has already received it; empty otherwise.
+    string response_id = 1;
+
+    // <code>StreamingDetectIntentRequest.client_turn_id</code> of the turn.
+    string client_turn_id = 2;
+
+    // Revision of this report, starting at 1. A later, more precise measurement of the same turn carries a higher
+    // revision.
+    int32 revision = 3;
+
+    // Why the turn was interrupted.
+    TurnInterruptionReason turn_interruption_reason = 4;
+
+    // One entry per message of the turn that was spoken, queued or skipped, in playback order.
+    repeated HeardMessage heard_messages = 5;
+
+    // How the heard text was determined.
+    HeardTextPrecision heard_text_precision = 6;
+
+    // Duration of heard audio that was played after the user had started speaking (the overlap of bot and user),
+    // in seconds.
+    float caller_overlap_duration_in_s = 7;
+}
+
+// Discards the session step of a preemptive draft: a turn the client started speculatively on a partial
+// transcript and then did not use. The server deletes the session step only when it belongs to this session and its
+// request carried <code>QueryParameters.preemptive_draft</code> = true; it answers
+// <code>TURN_CONTROL_ACK_STATUS_DRAFT_DISCARDED</code>. Any other step is kept and the server answers
+// <code>TURN_CONTROL_ACK_STATUS_UNKNOWN_TURN</code>.
+message DiscardDraft {
+
+    // The server's <code>response_id</code> of the draft turn.
+    string response_id = 1;
+}
+
+// Outcome of a turn control.
+enum TurnControlAckStatus {
+
+    // Not set.
+    TURN_CONTROL_ACK_STATUS_UNSPECIFIED = 0;
+
+    // The turn was being generated and is now cancelled.
+    TURN_CONTROL_ACK_STATUS_CANCELLED = 1;
+
+    // The turn had not started yet; it is cancelled and will not run.
+    TURN_CONTROL_ACK_STATUS_CANCELLED_QUEUED = 2;
+
+    // The turn had already finished generating; nothing was cancelled.
+    TURN_CONTROL_ACK_STATUS_ALREADY_FINISHED = 3;
+
+    // No turn of this session matches the given ids. For a <code>DiscardDraft</code>: no session step of this
+    // session with the given <code>response_id</code> carries <code>QueryParameters.preemptive_draft</code>; the
+    // discard is refused and the step, if one exists, is kept.
+    TURN_CONTROL_ACK_STATUS_UNKNOWN_TURN = 4;
+
+    // The heard report was applied to the turn's session step.
+    TURN_CONTROL_ACK_STATUS_HEARD_APPLIED = 5;
+
+    // The heard report was ignored because a report with the same or a higher revision was already applied.
+    TURN_CONTROL_ACK_STATUS_HEARD_STALE = 6;
+
+    // The draft's session step, whose request carried <code>QueryParameters.preemptive_draft</code>, was deleted.
+    TURN_CONTROL_ACK_STATUS_DRAFT_DISCARDED = 7;
+}
+
+// Acknowledges a turn control.
+message TurnControlAck {
+
+    // The server's <code>response_id</code> of the turn; empty when it is not known (e.g. a turn cancelled before
+    // it started).
+    string response_id = 1;
+
+    // <code>client_turn_id</code> of the turn, as sent by the client.
+    string client_turn_id = 2;
+
+    // Outcome of the turn control.
+    TurnControlAckStatus turn_control_ack_status = 3;
+
+    // Time the server took from receiving a <code>CancelTurn</code> until the turn's generation had stopped, in
+    // seconds; 0 for any other control.
+    float server_cancel_duration_in_s = 4;
+}
+
+// The request to interrupt a turn of a session outside a <code>StreamingDetectIntent</code> stream.
+message InterruptTurnRequest {
+
+    // Required. The session of the turn. Format:
+    // <code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code>.
+    string session = 1;
+
+    // Required. The control to apply.
+    TurnControl turn_control = 2;
+}
+
+// The response to an <code>InterruptTurnRequest</code>.
+message InterruptTurnResponse {
+
+    // Outcome of the control.
+    TurnControlAck turn_control_ack = 1;
+}
+
+// Where the intro text of a warm transfer comes from.
+enum WarmTransferIntroTextSource {
+
+    // Not set: <code>WARM_TRANSFER_INTRO_TEXT_SOURCE_LLM_SUMMARY</code> when the project has an LLM service, else
+    // <code>WARM_TRANSFER_INTRO_TEXT_SOURCE_TEMPLATE</code>.
+    WARM_TRANSFER_INTRO_TEXT_SOURCE_UNSPECIFIED = 0;
+
+    // <code>WarmTransferIntroConfig.intro_prompt</code> is a text with the placeholders <code>{caller_name}</code>,
+    // <code>{callee_name}</code>, <code>{topic}</code> and <code>{summary}</code>.
+    WARM_TRANSFER_INTRO_TEXT_SOURCE_TEMPLATE = 1;
+
+    // An LLM summarises the source session for the target; <code>WarmTransferIntroConfig.intro_prompt</code> is its
+    // instruction.
+    WARM_TRANSFER_INTRO_TEXT_SOURCE_LLM_SUMMARY = 2;
+}
+
+// The configuration of one warm transfer intro, as resolved by the caller of
+// <code>PrepareWarmTransferIntro</code>. A text left empty (or unset, for an <code>optional</code> field) falls back
+// to the agent's default text for the language (<code>Agent.warm_transfer_settings</code>), then to the built-in
+// default. Texts are spoken to the target, never to the caller, except <code>caller_declined_message</code> and
+// <code>caller_unreachable_message</code>.
+message WarmTransferIntroConfig {
+
+    // The LLM instruction (<code>WARM_TRANSFER_INTRO_TEXT_SOURCE_LLM_SUMMARY</code>) or the template text
+    // (<code>WARM_TRANSFER_INTRO_TEXT_SOURCE_TEMPLATE</code>, placeholders <code>{caller_name}</code>,
+    // <code>{callee_name}</code>, <code>{topic}</code>, <code>{summary}</code>) of the intro. At most 4000 characters.
+    string intro_prompt = 1;
+
+    // Where the intro text comes from.
+    WarmTransferIntroTextSource text_source = 2;
+
+    // The first question to the target, which must not reveal anything about the caller, e.g. "Hier ist der
+    // digitale Assistent von {project}. Ich habe einen Anruf für Sie. Sind Sie am Apparat? Sagen Sie ja oder
+    // drücken Sie 1." Placeholder <code>{project}</code>: <code>project_display_name</code>.
+    string ready_question = 3;
+
+    // Whether the intro is spoken only after the target answered <code>ready_question</code> (a guard against a
+    // mailbox). Unset = true.
+    optional bool confirm_human_before_intro = 4;
+
+    // The question after the intro, e.g. "Möchten Sie das Gespräch übernehmen? Ja oder 1, nein oder 2."
+    string accept_question = 5;
+
+    // The question after a decline, e.g. "Was darf ich dem Anrufer ausrichten?". Unset = the agent's or the
+    // built-in default; set to "" = the reason is not asked for.
+    optional string decline_reason_question = 6;
+
+    // The template of the message the caller hears after a decline. Placeholders <code>{callee_name}</code> and
+    // <code>{reason}</code>; without a reason, the variant without the reason clause is used.
+    string caller_declined_message = 7;
+
+    // The template of the message the caller hears when the target was busy, did not answer, gave no decision or
+    // the intro could not run. Placeholder <code>{callee_name}</code>.
+    string caller_unreachable_message = 8;
+
+    // The DTMF key that accepts: one of <code>0-9</code>, <code>*</code>, <code>#</code>. Empty = "1".
+    string accept_dtmf = 9;
+
+    // The DTMF key that declines: one of <code>0-9</code>, <code>*</code>, <code>#</code>, different from
+    // <code>accept_dtmf</code>. Empty = "2".
+    string decline_dtmf = 10;
+
+    // Who the target is, e.g. "Frau Berger, Buchhaltung": <code>{callee_name}</code>. At most 128 characters.
+    string callee_display_name = 11;
+
+    // The role and context of the target, given to the LLM intro. At most 512 characters.
+    string callee_description = 12;
+
+    // The <code>ONDEWO_NLU_LLM</code> CCAI service of the LLM intro. Empty = the agent's
+    // <code>warm_transfer_settings.llm_ccai_service_name</code>, then the project's first
+    // <code>ONDEWO_NLU_LLM</code> service.
+    string llm_ccai_service_name = 13;
+
+    // How many of the latest steps of the source session the intro reads. 0 = 30.
+    int32 max_history_steps = 14;
+
+    // Seconds from a question to the decision, declared to the client as the expected input's timeout.
+    int32 decision_timeout_s = 15;
+
+    // The project's display name: <code>{project}</code> in <code>ready_question</code>.
+    string project_display_name = 16;
+}
+
+// The request to prepare the intro session of a warm transfer.
+message PrepareWarmTransferIntroRequest {
+
+    // Required. The intro session, which must not exist yet. Format:
+    // <code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code>. An existing session that
+    // was not prepared with the same <code>transfer_request_id</code> is refused with
+    // <code>ALREADY_EXISTS</code>.
+    string intro_session = 1;
+
+    // Required. The caller's session the intro summarises. Format:
+    // <code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code>. A session of another project
+    // than <code>intro_session</code> is refused with <code>INVALID_ARGUMENT</code>.
+    string source_session = 2;
+
+    // The configuration of the intro.
+    WarmTransferIntroConfig config = 3;
+
+    // The language of the intro session.
+    string language_code = 4;
+
+    // Required. The idempotency key of the transfer.
+    string transfer_request_id = 5;
+}
+
+// The response to a <code>PrepareWarmTransferIntroRequest</code>. Never carries the intro text.
+message PrepareWarmTransferIntroResponse {
+
+    // The source the intro text was rendered from.
+    WarmTransferIntroTextSource text_source_used = 1;
+
+    // True when the LLM failed or exceeded its budget and the TEMPLATE was used instead.
+    bool text_fell_back = 2;
+
+    // The length of the intro text in characters.
+    int32 intro_text_chars = 3;
+
+    // The SHA-256 (hex) of the resolved prompt, for audit.
+    string prompt_digest = 4;
+}
+
+// The decision of the target of a warm transfer intro.
+enum WarmTransferIntroDecision {
+
+    // Not set.
+    WARM_TRANSFER_INTRO_DECISION_UNSPECIFIED = 0;
+
+    // The intro is still running.
+    WARM_TRANSFER_INTRO_DECISION_PENDING = 1;
+
+    // The target accepted the call.
+    WARM_TRANSFER_INTRO_DECISION_ACCEPTED = 2;
+
+    // The target declined the call.
+    WARM_TRANSFER_INTRO_DECISION_DECLINED = 3;
+
+    // The target gave no decision: no ready answer, an unclear answer twice, or a timeout.
+    WARM_TRANSFER_INTRO_DECISION_NO_DECISION = 4;
+}
+
+// How the target of a warm transfer intro gave the decision.
+enum WarmTransferIntroDecidedBy {
+
+    // Not set, or not decided yet.
+    WARM_TRANSFER_INTRO_DECIDED_BY_UNSPECIFIED = 0;
+
+    // By a DTMF key.
+    WARM_TRANSFER_INTRO_DECIDED_BY_DTMF = 1;
+
+    // By speech.
+    WARM_TRANSFER_INTRO_DECIDED_BY_SPEECH = 2;
+
+    // By the decision timeout.
+    WARM_TRANSFER_INTRO_DECIDED_BY_TIMEOUT = 3;
+}
+
+// The stage of a warm transfer intro session.
+enum WarmTransferIntroStage {
+
+    // Not set.
+    WARM_TRANSFER_INTRO_STAGE_UNSPECIFIED = 0;
+
+    // Prepared; nothing spoken yet.
+    WARM_TRANSFER_INTRO_STAGE_PREPARED = 1;
+
+    // <code>ready_question</code> spoken, waiting for a person to answer.
+    WARM_TRANSFER_INTRO_STAGE_READY_ASKED = 2;
+
+    // The intro and <code>accept_question</code> spoken, waiting for the decision.
+    WARM_TRANSFER_INTRO_STAGE_INTRO_SPOKEN = 3;
+
+    // <code>decline_reason_question</code> spoken, waiting for the reason.
+    WARM_TRANSFER_INTRO_STAGE_REASON_ASKED = 4;
+
+    // The final answer, which ends the target's call, was generated.
+    WARM_TRANSFER_INTRO_STAGE_CLOSED = 5;
+}
+
+// The request for the outcome of a warm transfer intro.
+message GetWarmTransferIntroOutcomeRequest {
+
+    // Required. The intro session. Format:
+    // <code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code>. A session that was not
+    // prepared by <code>PrepareWarmTransferIntro</code> is answered with <code>NOT_FOUND</code>.
+    string intro_session = 1;
+}
+
+// The outcome of a warm transfer intro. Holds no intro text and no reason text.
+message WarmTransferIntroOutcome {
+
+    // The decision of the target.
+    WarmTransferIntroDecision decision = 1;
+
+    // How the decision was given.
+    WarmTransferIntroDecidedBy decided_by = 2;
+
+    // True when the target gave a reason after declining.
+    bool decline_reason_present = 3;
+
+    // The stage of the intro session.
+    WarmTransferIntroStage stage = 4;
+
+    // A bounded token naming why there is no decision, e.g. <code>voicemail-suspected</code> (no ready answer) or
+    // <code>unclear-twice</code>; empty otherwise.
+    string cause = 5;
 }
 
 // Contains a speech recognition result corresponding to a portion of the audio that is currently being processed or an indication that this is the end of the single requested utterance.
