@@ -2,6 +2,15 @@
 
 *****************
 
+## Release ONDEWO NLU API 7.7.0
+
+### New Features
+
+* [[OND236-120]](https://ondewo.atlassian.net/browse/OND236-120) `session.proto`: `HeardTextPrecision` gains `HEARD_TEXT_PRECISION_SENTENCE_ALIGNED` (5, the played share was mapped onto the text through the synthesizer's per-segment text spans) and `HEARD_TEXT_PRECISION_WORD_TIMED` (6, through its word timings). A server advertises that it accepts both with the response metadata `x-ondewo-cai-heard-precision: 1`; a client must not send them to a server that does not.
+* [[OND236-120]](https://ondewo.atlassian.net/browse/OND236-120) `session.proto`: New read-only `SessionStep.interruption` (12, `SessionStepInterruption`), set only on the step of an interrupted turn. New `SessionStepInterruption` message: `interrupted` (1, `bool`), `cancelled` (2, `bool`), `phase` (3, `SessionStepInterruptionPhase`), `turn_interruption_reason` (4, `TurnInterruptionReason`), `heard_report_revision` (5, `int32`), `heard_text_precision` (6, `HeardTextPrecision`), `heard_char_count` (7, `int32`), `total_char_count` (8, `int32`), `generated_text` (9, `string`), `tools_in_flight` (10, `repeated string`), `skipped_sip_trigger_count` (11, `int32`) and `caller_overlap_duration_in_s` (12, `float`). New enum `SessionStepInterruptionPhase` (`UNSPECIFIED`, `GENERATING`, `FINISHED`). All changes are additive.
+
+*****************
+
 ## Release ONDEWO NLU API 7.6.0
 
 ### New Features
