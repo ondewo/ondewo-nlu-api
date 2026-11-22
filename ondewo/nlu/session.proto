@@ -1961,6 +1961,14 @@ enum HeardTextPrecision {
 
     // The played share of the audio was measured by the audio player and mapped proportionally onto the text.
     HEARD_TEXT_PRECISION_PROPORTIONAL = 4;
+
+    // The played share of the audio was measured by the audio player and mapped onto the text through the speech
+    // synthesizer's per-segment text spans; proportionally only inside the segment that was cut.
+    HEARD_TEXT_PRECISION_SENTENCE_ALIGNED = 5;
+
+    // The played share of the audio was measured by the audio player and mapped onto the text through the speech
+    // synthesizer's word timings.
+    HEARD_TEXT_PRECISION_WORD_TIMED = 6;
 }
 
 // What the user heard of one spoken message of a turn.
@@ -2578,6 +2586,63 @@ message SessionStep {
     // plus turn-level totals).
     LlmTelemetryReport llm_telemetry_report = 11;
 
+    // Read-only. How the step's turn was interrupted; set only when it was. The server fills it from the step it
+    // stored and ignores a value a client sends.
+    SessionStepInterruption interruption = 12;
+
+}
+
+// The phase a turn was in when it was interrupted.
+enum SessionStepInterruptionPhase {
+
+    // Not set.
+    SESSION_STEP_INTERRUPTION_PHASE_UNSPECIFIED = 0;
+
+    // The turn was still being generated.
+    SESSION_STEP_INTERRUPTION_PHASE_GENERATING = 1;
+
+    // The turn had finished generating; its answer was being played.
+    SESSION_STEP_INTERRUPTION_PHASE_FINISHED = 2;
+}
+
+// How a session step's turn was interrupted. Read-only; the server fills it from the step it stored.
+message SessionStepInterruption {
+
+    // Whether the turn was interrupted: cancelled, or its answer was not heard in full.
+    bool interrupted = 1;
+
+    // Whether the turn was cancelled by a <code>CancelTurn</code>.
+    bool cancelled = 2;
+
+    // The phase the turn was in when it was interrupted.
+    SessionStepInterruptionPhase phase = 3;
+
+    // Why the turn was interrupted.
+    TurnInterruptionReason turn_interruption_reason = 4;
+
+    // <code>HeardReport.revision</code> of the report applied; <code>0</code> when none arrived.
+    int32 heard_report_revision = 5;
+
+    // How the heard text of the applied report was determined.
+    HeardTextPrecision heard_text_precision = 6;
+
+    // Unicode code points of the answer the user heard.
+    int32 heard_char_count = 7;
+
+    // Unicode code points of the answer that was spoken, queued or skipped.
+    int32 total_char_count = 8;
+
+    // The answer text as generated, before it was rewritten to the heard text.
+    string generated_text = 9;
+
+    // The tools the turn called whose result was never recorded.
+    repeated string tools_in_flight = 10;
+
+    // Number of messages whose SIP trigger was not executed because the turn was interrupted first.
+    int32 skipped_sip_trigger_count = 11;
+
+    // Duration of heard audio that was played after the user had started speaking, in seconds.
+    float caller_overlap_duration_in_s = 12;
 }
 
 // This message is a request to get a session step
