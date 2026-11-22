@@ -4088,6 +4088,10 @@
                       </li>
                     
                       <li>
+                        <a href="#ondewo.nlu.SessionStepInterruption" class="title-badge message">SessionStepInterruption</a>
+                      </li>
+                    
+                      <li>
                         <a href="#ondewo.nlu.StreamingDetectIntentRequest" class="title-badge message">StreamingDetectIntentRequest</a>
                       </li>
                     
@@ -4199,6 +4203,10 @@
                     
                       <li>
                         <a href="#ondewo.nlu.SessionReview.View" class="title-badge enum">SessionReview.View</a>
+                      </li>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.SessionStepInterruptionPhase" class="title-badge enum">SessionStepInterruptionPhase</a>
                       </li>
                     
                       <li>
@@ -49440,6 +49448,115 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid
 plus turn-level totals). </p></td>
                 </tr>
               
+                <tr>
+                  <td>interruption</td>
+                  <td><a href="#ondewo.nlu.SessionStepInterruption">SessionStepInterruption</a></td>
+                  <td></td>
+                  <td><p>Read-only. How the step's turn was interrupted; set only when it was. The server fills it from the step it
+stored and ignores a value a client sends. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="ondewo.nlu.SessionStepInterruption" class="title-badge message">SessionStepInterruption</h3>
+        <p>How a session step's turn was interrupted. Read-only; the server fills it from the step it stored.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>interrupted</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Whether the turn was interrupted: cancelled, or its answer was not heard in full. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>cancelled</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Whether the turn was cancelled by a <code>CancelTurn</code>. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>phase</td>
+                  <td><a href="#ondewo.nlu.SessionStepInterruptionPhase">SessionStepInterruptionPhase</a></td>
+                  <td></td>
+                  <td><p>The phase the turn was in when it was interrupted. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>turn_interruption_reason</td>
+                  <td><a href="#ondewo.nlu.TurnInterruptionReason">TurnInterruptionReason</a></td>
+                  <td></td>
+                  <td><p>Why the turn was interrupted. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>heard_report_revision</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p><code>HeardReport.revision</code> of the report applied; <code>0</code> when none arrived. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>heard_text_precision</td>
+                  <td><a href="#ondewo.nlu.HeardTextPrecision">HeardTextPrecision</a></td>
+                  <td></td>
+                  <td><p>How the heard text of the applied report was determined. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>heard_char_count</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>Unicode code points of the answer the user heard. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>total_char_count</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>Unicode code points of the answer that was spoken, queued or skipped. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>generated_text</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The answer text as generated, before it was rewritten to the heard text. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>tools_in_flight</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>The tools the turn called whose result was never recorded. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>skipped_sip_trigger_count</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>Number of messages whose SIP trigger was not executed because the turn was interrupted first. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>caller_overlap_duration_in_s</td>
+                  <td><a href="#float">float</a></td>
+                  <td></td>
+                  <td><p>Duration of heard audio that was played after the user had started speaking, in seconds. </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -50591,6 +50708,20 @@ measured by the player, and mapped proportionally onto the text.</p></td>
                 <td><p>The played share of the audio was measured by the audio player and mapped proportionally onto the text.</p></td>
               </tr>
             
+              <tr>
+                <td>HEARD_TEXT_PRECISION_SENTENCE_ALIGNED</td>
+                <td>5</td>
+                <td><p>The played share of the audio was measured by the audio player and mapped onto the text through the speech
+synthesizer's per-segment text spans; proportionally only inside the segment that was cut.</p></td>
+              </tr>
+            
+              <tr>
+                <td>HEARD_TEXT_PRECISION_WORD_TIMED</td>
+                <td>6</td>
+                <td><p>The played share of the audio was measured by the audio player and mapped onto the text through the speech
+synthesizer's word timings.</p></td>
+              </tr>
+            
           </tbody>
         </table>
       
@@ -50787,6 +50918,35 @@ measured by the player, and mapped proportionally onto the text.</p></td>
                 <td>VIEW_SPARSE</td>
                 <td>2</td>
                 <td><p>Only some fields are populated in the response.</p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="ondewo.nlu.SessionStepInterruptionPhase" class="title-badge enum">SessionStepInterruptionPhase</h3>
+        <p>The phase a turn was in when it was interrupted.</p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>SESSION_STEP_INTERRUPTION_PHASE_UNSPECIFIED</td>
+                <td>0</td>
+                <td><p>Not set.</p></td>
+              </tr>
+            
+              <tr>
+                <td>SESSION_STEP_INTERRUPTION_PHASE_GENERATING</td>
+                <td>1</td>
+                <td><p>The turn was still being generated.</p></td>
+              </tr>
+            
+              <tr>
+                <td>SESSION_STEP_INTERRUPTION_PHASE_FINISHED</td>
+                <td>2</td>
+                <td><p>The turn had finished generating; its answer was being played.</p></td>
               </tr>
             
           </tbody>

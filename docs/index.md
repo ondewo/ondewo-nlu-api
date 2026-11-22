@@ -809,6 +809,7 @@
     - [SessionReview](#ondewo.nlu.SessionReview)
     - [SessionReviewStep](#ondewo.nlu.SessionReviewStep)
     - [SessionStep](#ondewo.nlu.SessionStep)
+    - [SessionStepInterruption](#ondewo.nlu.SessionStepInterruption)
     - [StreamingDetectIntentRequest](#ondewo.nlu.StreamingDetectIntentRequest)
     - [StreamingDetectIntentResponse](#ondewo.nlu.StreamingDetectIntentResponse)
     - [StreamingRecognitionResult](#ondewo.nlu.StreamingRecognitionResult)
@@ -837,6 +838,7 @@
     - [ResourceView](#ondewo.nlu.ResourceView)
     - [Session.View](#ondewo.nlu.Session.View)
     - [SessionReview.View](#ondewo.nlu.SessionReview.View)
+    - [SessionStepInterruptionPhase](#ondewo.nlu.SessionStepInterruptionPhase)
     - [StreamingRecognitionResult.MessageType](#ondewo.nlu.StreamingRecognitionResult.MessageType)
     - [TranscriptionType](#ondewo.nlu.TranscriptionType)
     - [TurnControlAckStatus](#ondewo.nlu.TurnControlAckStatus)
@@ -16007,6 +16009,33 @@ SessionStep is a single user interaction as part of a session.
 | modified_by | [string](#string) |  | User id in form of a valid UUID. |
 | audio_file_resources | [AudioFileResource](#ondewo.nlu.AudioFileResource) | repeated | audio file resources associated with the session step |
 | llm_telemetry_report | [LlmTelemetryReport](#ondewo.nlu.LlmTelemetryReport) |  | Aggregated LLM telemetry for this step (one entry per LLM invocation, plus turn-level totals). |
+| interruption | [SessionStepInterruption](#ondewo.nlu.SessionStepInterruption) |  | Read-only. How the step's turn was interrupted; set only when it was. The server fills it from the step it stored and ignores a value a client sends. |
+
+
+
+
+
+
+<a name="ondewo.nlu.SessionStepInterruption"></a>
+
+### SessionStepInterruption
+How a session step's turn was interrupted. Read-only; the server fills it from the step it stored.
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| interrupted | [bool](#bool) |  | Whether the turn was interrupted: cancelled, or its answer was not heard in full. |
+| cancelled | [bool](#bool) |  | Whether the turn was cancelled by a <code>CancelTurn</code>. |
+| phase | [SessionStepInterruptionPhase](#ondewo.nlu.SessionStepInterruptionPhase) |  | The phase the turn was in when it was interrupted. |
+| turn_interruption_reason | [TurnInterruptionReason](#ondewo.nlu.TurnInterruptionReason) |  | Why the turn was interrupted. |
+| heard_report_revision | [int32](#int32) |  | <code>HeardReport.revision</code> of the report applied; <code>0</code> when none arrived. |
+| heard_text_precision | [HeardTextPrecision](#ondewo.nlu.HeardTextPrecision) |  | How the heard text of the applied report was determined. |
+| heard_char_count | [int32](#int32) |  | Unicode code points of the answer the user heard. |
+| total_char_count | [int32](#int32) |  | Unicode code points of the answer that was spoken, queued or skipped. |
+| generated_text | [string](#string) |  | The answer text as generated, before it was rewritten to the heard text. |
+| tools_in_flight | [string](#string) | repeated | The tools the turn called whose result was never recorded. |
+| skipped_sip_trigger_count | [int32](#int32) |  | Number of messages whose SIP trigger was not executed because the turn was interrupted first. |
+| caller_overlap_duration_in_s | [float](#float) |  | Duration of heard audio that was played after the user had started speaking, in seconds. |
 
 
 
@@ -16427,6 +16456,8 @@ How the heard text of a <code>HeardReport</code> was determined.
 | HEARD_TEXT_PRECISION_FULL | 2 | The whole answer was heard. |
 | HEARD_TEXT_PRECISION_ESTIMATED_SERVER | 3 | The played share of the audio was estimated by the client from when it handed the audio to the player, not measured by the player, and mapped proportionally onto the text. |
 | HEARD_TEXT_PRECISION_PROPORTIONAL | 4 | The played share of the audio was measured by the audio player and mapped proportionally onto the text. |
+| HEARD_TEXT_PRECISION_SENTENCE_ALIGNED | 5 | The played share of the audio was measured by the audio player and mapped onto the text through the speech synthesizer's per-segment text spans; proportionally only inside the segment that was cut. |
+| HEARD_TEXT_PRECISION_WORD_TIMED | 6 | The played share of the audio was measured by the audio player and mapped onto the text through the speech synthesizer's word timings. |
 
 
 
@@ -16512,6 +16543,19 @@ A session_review can be a sizable object. Therefore, we provide a resource view 
 | VIEW_UNSPECIFIED | 0 | Endpoints decide whether to return the full or the sparse view |
 | VIEW_FULL | 1 | All fields are populated. |
 | VIEW_SPARSE | 2 | Only some fields are populated in the response. |
+
+
+
+<a name="ondewo.nlu.SessionStepInterruptionPhase"></a>
+
+### SessionStepInterruptionPhase
+The phase a turn was in when it was interrupted.
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| SESSION_STEP_INTERRUPTION_PHASE_UNSPECIFIED | 0 | Not set. |
+| SESSION_STEP_INTERRUPTION_PHASE_GENERATING | 1 | The turn was still being generated. |
+| SESSION_STEP_INTERRUPTION_PHASE_FINISHED | 2 | The turn had finished generating; its answer was being played. |
 
 
 
