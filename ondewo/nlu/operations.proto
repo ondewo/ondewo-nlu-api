@@ -508,10 +508,7 @@ message RemoteOperationContainerStatus {
     string image = 19;
 }
 
-// Describes one docker container started by a remote operation. A single operation may start several
-// containers sequentially (hardware-check, GPU pre-allocation, build-cache, and one training container
-// per algorithm), so containers are enumerated by
-// <a href="index.html#ondewo.nlu.Operations.ListRemoteOperationContainers">Operations.ListRemoteOperationContainers</a>.
+// Describes one docker container started by a remote operation. A single operation may start several containers sequentially (hardware-check, GPU pre-allocation, build-cache, and one training container per algorithm), so containers are enumerated by <a href="index.html#ondewo.nlu.Operations.ListRemoteOperationContainers">Operations.ListRemoteOperationContainers</a>.
 message RemoteOperationContainer {
 
     // The docker container id (64-hex). Empty until captured at launch.

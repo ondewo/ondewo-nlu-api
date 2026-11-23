@@ -608,8 +608,7 @@ message Agent {
     WarmTransferAgentSettings warm_transfer_settings = 15;
 }
 
-// The agent's settings of warm transfer intros. A text a <code>WarmTransferIntroConfig</code> leaves empty falls back
-// to the agent's text for the intro's language, then to the built-in default.
+// The agent's settings of warm transfer intros. A text a <code>WarmTransferIntroConfig</code> leaves empty falls back to the agent's text for the intro's language, then to the built-in default.
 message WarmTransferAgentSettings {
 
     // Whether warm transfer intros are enabled for the agent. Unset = enabled while the server's warm transfer
@@ -628,8 +627,7 @@ message WarmTransferAgentSettings {
     map<string, WarmTransferAgentLexicon> extra_lexicon = 4;
 }
 
-// The default texts of warm transfer intros in one language. An empty text = the built-in default. The fields and
-// placeholders are those of the same-named fields of <code>WarmTransferIntroConfig</code>.
+// The default texts of warm transfer intros in one language. An empty text = the built-in default. The fields and placeholders are those of the same-named fields of <code>WarmTransferIntroConfig</code>.
 message WarmTransferAgentTexts {
 
     // The first question to the target (placeholder <code>{project}</code>).
@@ -650,9 +648,7 @@ message WarmTransferAgentTexts {
     string caller_unreachable_message = 5;
 }
 
-// Additional entries of the closed decision lexicon of warm transfer intros in one language, matched before an LLM
-// classifies an answer. At most 50 entries in <code>accept_phrases</code> and <code>decline_phrases</code>
-// together.
+// Additional entries of the closed decision lexicon of warm transfer intros in one language, matched before an LLM classifies an answer. At most 50 entries in <code>accept_phrases</code> and <code>decline_phrases</code> together.
 message WarmTransferAgentLexicon {
 
     // Words and phrases that accept the call (and confirm the ready question), e.g. "übernehme".
@@ -2654,8 +2650,7 @@ message CreateProjectTechnicalUserRequest {
     string name = 2;
 }
 
-// Response with the freshly minted technical user's credentials.
-// The password is returned ONCE and cannot be retrieved later.
+// Response with the freshly minted technical user's credentials. The password is returned ONCE and cannot be retrieved later.
 message CreateProjectTechnicalUserResponse {
 
     // The technical user's id (Keycloak sub / UUID).
@@ -2728,8 +2723,7 @@ message RotateProjectTechnicalUserPasswordRequest {
     string user_id = 2;
 }
 
-// Response with the rotated password.
-// The password is returned ONCE and cannot be retrieved later.
+// Response with the rotated password. The password is returned ONCE and cannot be retrieved later.
 message RotateProjectTechnicalUserPasswordResponse {
 
     // The technical user's id (Keycloak sub / UUID).

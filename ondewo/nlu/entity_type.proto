@@ -51,13 +51,7 @@ option objc_class_prefix = "DF";
 //
 // There are three types of entities:
 //
-// <ul>
-//   <li><strong>System</strong> - entities that are defined by the Dialogflow API for common data types such as date, time, currency, and so on. A system entity is represented by the <code>EntityType</code> type.</li>
-//
-//   <li><strong>Developer</strong> - entities that are defined by you that represent actionable data that is meaningful to your application. For example, you could define a <code>pizza.sauce</code> entity for red or white pizza sauce, a <code>pizza.cheese</code> entity for the different types of cheese on a pizza, a <code>pizza.topping</code> entity for different toppings, and so on. A developer entity is represented by the <code>EntityType</code> type.</li>
-//
-//   <li><strong>User</strong> - entities that are built for an individual user such as favorites, preferences, playlists, and so on. A user entity is represented by the <a href="index.html#ondewo.nlu.SessionEntityType">SessionEntityType</a> type.</li>
-// </ul>
+// <ul> <li><strong>System</strong> - entities that are defined by the Dialogflow API for common data types such as date, time, currency, and so on. A system entity is represented by the <code>EntityType</code> type.</li> <li><strong>Developer</strong> - entities that are defined by you that represent actionable data that is meaningful to your application. For example, you could define a <code>pizza.sauce</code> entity for red or white pizza sauce, a <code>pizza.cheese</code> entity for the different types of cheese on a pizza, a <code>pizza.topping</code> entity for different toppings, and so on. A developer entity is represented by the <code>EntityType</code> type.</li> <li><strong>User</strong> - entities that are built for an individual user such as favorites, preferences, playlists, and so on. A user entity is represented by the <a href="index.html#ondewo.nlu.SessionEntityType">SessionEntityType</a> type.</li> </ul>
 //
 // For more information about entity types, see the <a href="https://dialogflow.com/docs/entities">Dialogflow documentation</a>.
 service EntityTypes {
@@ -165,9 +159,7 @@ service EntityTypes {
     rpc ListEntities(ListEntitiesRequest) returns (ListEntitiesResponse);
 }
 
-// Represents an entity type.
-// Entity types serve as a tool for extracting parameter values from natural
-// language queries.
+// Represents an entity type. Entity types serve as a tool for extracting parameter values from natural language queries.
 message EntityType {
 
     // Represents an entity value within an entity type
@@ -264,9 +256,7 @@ message EntityType {
         INACTIVE = 1;
     }
 
-    // Represents different entity type expansion modes. Automated expansion
-    // allows an agent to recognize values that have not been explicitly listed in
-    // the entity (for example, new kinds of shopping list items).
+    // Represents different entity type expansion modes. Automated expansion allows an agent to recognize values that have not been explicitly listed in the entity (for example, new kinds of shopping list items).
     enum AutoExpansionMode {
         // Auto expansion disabled for the entity.
         AUTO_EXPANSION_MODE_UNSPECIFIED = 0;
@@ -541,9 +531,7 @@ message EntityTypeBatch {
     repeated EntityType entity_types = 1;
 }
 
-// Represents the options for views of an entity type.
-// An entity type can be a sizable object. Therefore, we provide a resource view that
-// does not return all values and synonyms besides the full view that is set by default.
+// Represents the options for views of an entity type. An entity type can be a sizable object. Therefore, we provide a resource view that does not return all values and synonyms besides the full view that is set by default.
 enum EntityTypeView {
     // Same as ENTITY_TYPE_VIEW_FULL
     ENTITY_TYPE_VIEW_UNSPECIFIED = 0;

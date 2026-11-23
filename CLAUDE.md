@@ -285,16 +285,23 @@ Pre-commit here uses only the language-agnostic hooks — **markdownlint-cli2, p
 `.github/workflows/generate-doc-and-deploy.yaml` (note `.yaml`, and it is the **only** workflow file)
 runs on every push to `master`, every PR against `master`, and `workflow_dispatch`. It is a gate, not
 advisory: it regenerates `docs/` from the protos and **commits the result back to `master`**, so a
-broken run means the published API docs stop tracking the `.proto` files. Three steps, in order:
+broken run means the published API docs stop tracking the `.proto` files. Four steps, in order:
 
 1. `actions/checkout@v5`.
-2. `ondewo/ondewo-protoc-gen-doc-action@master` — a **docker** action: it builds its own `Dockerfile`
+2. `make doc_rendering_check` (see below).
+3. `ondewo/ondewo-protoc-gen-doc-action@master` — a **docker** action: it builds its own `Dockerfile`
    (`FROM pseudomuto/protoc-gen-doc`) and runs `entrypoint.sh` with the default inputs `html,md` and
    `index`, i.e. `protoc` once per format.
-3. `Deploy 🚀` — `JamesIves/github-pages-deploy-action@v4`, `branch: master`, `folder: docs`,
+4. `Deploy 🚀` — `JamesIves/github-pages-deploy-action@v4`, `branch: master`, `folder: docs`,
    `target-folder: docs`, guarded by `if: ${{ !env.ACT }}`.
 
-**Reproduce steps 1–2 locally with `make build_docs`.** It clones the action, builds the same image and
+**A file, service, message or enum description is one paragraph per source line.** protoc-gen-doc renders them
+with `{{p .Description}}`, which starts a new paragraph at every newline, so a description wrapped at 120
+characters is published broken mid-sentence (field, enum-value and method comments are inserted raw and wrap
+freely). `make doc_rendering_check` enforces it (step 2 above and `make release` run it), `make doc_rendering_fix`
+reflows; rules and the `&#10;` convention inside `<pre>`: `doc_rendering/README.md`.
+
+**Reproduce steps 1 and 3 locally with `make build_docs`.** It clones the action, builds the same image and
 runs the same entrypoint arguments, so it is the workflow rather than an approximation of it:
 
 ```bash
@@ -329,7 +336,8 @@ protoc -I. -Igoogleapis --doc_opt=/resources/templates/<fmt>.tmpl,index.<fmt> \
   need `sudo` to clean up. Reproduced twice — keep the flag if you touch that recipe.
 - **There is no Python gate here, and no `uv`.** No `pyproject.toml`, no `uv.lock`, no ruff / mypy /
   pytest / coverage threshold — so the sibling repos' `uv run --frozen …` fast loop has no analogue in
-  this repo and there is no stale lock to catch. The only local gates are `make build_docs` and
+  this repo and there is no stale lock to catch. The only local gates are `make build_docs`,
+  `make doc_rendering_check` (stdlib-only Python, tests: `python3 -m pytest doc_rendering`) and
   `make precommit_hooks_run_all_files`.
 - **Step 3 cannot be run locally, by design.** It pushes to `master`, and its `!env.ACT` guard exists so
   a local `act` run stops after doc generation. Never reproduce it by hand.

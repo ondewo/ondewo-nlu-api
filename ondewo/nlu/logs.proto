@@ -23,33 +23,15 @@ import "ondewo/nlu/common.proto";
 // <code>ondewo.nlu.OperationMetadata.OperationType</code>.
 import "ondewo/nlu/operation_metadata.proto";
 
-// <p>Reads, follows, exports and erases the logs ONDEWO CAI captures: the log records of the CAI gRPC server
-// processes themselves (every worker of every replica), the output of the docker containers that remote
-// operations run (build cache, training, RAG crawl, LLM evaluation and simulation, RAGFlow upload / removal /
-// re-parse) and of the short-lived helper containers that prepare them (hardware check, GPU pre-allocation).
-// Long-running operations that run inside a CAI worker (agent export, import, restore, re-index, ranking
-// optimization) are covered too: the server records they emit carry the operation&apos;s name.</p>
-// <p>Entries are served from the CAI database, not from the docker daemon, so the logs of a container that was
-// already removed, and of a server process that already exited, stay readable until retention or
-// <code>DeleteLogs</code> removes them.</p>
-// <p><b>Secrets are redacted server-side</b> when an entry is captured and again when it is read, so a
-// redaction rule added later also applies to entries captured before it.</p>
-// <p>Errors are reported as gRPC status codes: <code>INVALID_ARGUMENT</code> for a malformed name, filter,
-// cursor, <code>resume_token</code>, <code>page_token</code> or <code>field_mask</code> (each naming the field);
-// <code>NOT_FOUND</code> for an unknown log stream or operation, and for one the caller may not read;
-// <code>RESOURCE_EXHAUSTED</code> when the server process already serves its maximum of concurrent streams or
-// exports; <code>UNAVAILABLE</code> when the logs API is disabled (<code>ONDEWO_NLU_CAI_LOG_API_ENABLED</code>)
-// or the database cannot be reached; <code>UNAUTHENTICATED</code> without a valid credential;
-// <code>PERMISSION_DENIED</code> when the caller may read no logs at all.</p>
-// <p>Authorization: entries that belong to no project (the server&apos;s own records outside any project RPC
-// or operation) require the server permission <code>ServerPermission.Logs.ReadServerLogs</code>, granted to
-// <code>SERVER_ADMIN</code> by default; a caller holding it reads every entry. Without it a caller reads only
-// the entries tagged with a project in which it holds <code>ProjectPermission.Logs.ReadProjectLogs</code>,
-// granted to <code>PROJECT_DEVELOPER</code> and above by default; entries of other projects are filtered out
-// and are never reported as existing. <code>DeleteLogs</code> requires
-// <code>ServerPermission.Logs.DeleteLogs</code>, granted to <code>SERVER_ADMIN</code> only. A long-running
-// <code>StreamLogs</code> or <code>ExportLogs</code> re-checks the caller periodically and ends when the access
-// was revoked or the credential expired.</p>
+// Reads, follows, exports and erases the logs ONDEWO CAI captures: the log records of the CAI gRPC server processes themselves (every worker of every replica), the output of the docker containers that remote operations run (build cache, training, RAG crawl, LLM evaluation and simulation, RAGFlow upload / removal / re-parse) and of the short-lived helper containers that prepare them (hardware check, GPU pre-allocation). Long-running operations that run inside a CAI worker (agent export, import, restore, re-index, ranking optimization) are covered too: the server records they emit carry the operation&apos;s name.
+//
+// Entries are served from the CAI database, not from the docker daemon, so the logs of a container that was already removed, and of a server process that already exited, stay readable until retention or <code>DeleteLogs</code> removes them.
+//
+// <b>Secrets are redacted server-side</b> when an entry is captured and again when it is read, so a redaction rule added later also applies to entries captured before it.
+//
+// Errors are reported as gRPC status codes: <code>INVALID_ARGUMENT</code> for a malformed name, filter, cursor, <code>resume_token</code>, <code>page_token</code> or <code>field_mask</code> (each naming the field); <code>NOT_FOUND</code> for an unknown log stream or operation, and for one the caller may not read; <code>RESOURCE_EXHAUSTED</code> when the server process already serves its maximum of concurrent streams or exports; <code>UNAVAILABLE</code> when the logs API is disabled (<code>ONDEWO_NLU_CAI_LOG_API_ENABLED</code>) or the database cannot be reached; <code>UNAUTHENTICATED</code> without a valid credential; <code>PERMISSION_DENIED</code> when the caller may read no logs at all.
+//
+// Authorization: entries that belong to no project (the server&apos;s own records outside any project RPC or operation) require the server permission <code>ServerPermission.Logs.ReadServerLogs</code>, granted to <code>SERVER_ADMIN</code> by default; a caller holding it reads every entry. Without it a caller reads only the entries tagged with a project in which it holds <code>ProjectPermission.Logs.ReadProjectLogs</code>, granted to <code>PROJECT_DEVELOPER</code> and above by default; entries of other projects are filtered out and are never reported as existing. <code>DeleteLogs</code> requires <code>ServerPermission.Logs.DeleteLogs</code>, granted to <code>SERVER_ADMIN</code> only. A long-running <code>StreamLogs</code> or <code>ExportLogs</code> re-checks the caller periodically and ends when the access was revoked or the credential expired.
 service Logs {
 
     //////////////////////////////////////////////////////////////////////////////
@@ -194,8 +176,7 @@ enum CaiLogStreamChannel {
     CAI_LOG_STREAM_CHANNEL_STDERR = 2;
 }
 
-// The state of CAI&apos;s capture of one log stream. This describes the CAPTURE, not the process or the
-// container.
+// The state of CAI&apos;s capture of one log stream. This describes the CAPTURE, not the process or the container.
 enum CaiLogCaptureState {
 
     // Unspecified.
@@ -216,9 +197,7 @@ enum CaiLogCaptureState {
     CAI_LOG_CAPTURE_STATE_DETACHED = 4;
 }
 
-// Identifies a field of <a href="index.html#ondewo.nlu.CaiLogFilter">CaiLogFilter</a>. Used by
-// <a href="index.html#ondewo.nlu.ListLogsResponse">ListLogsResponse.scope_limited_filters</a> to declare which
-// filters could only be applied inside the returned window.
+// Identifies a field of <a href="index.html#ondewo.nlu.CaiLogFilter">CaiLogFilter</a>. Used by <a href="index.html#ondewo.nlu.ListLogsResponse">ListLogsResponse.scope_limited_filters</a> to declare which filters could only be applied inside the returned window.
 enum CaiLogFilterField {
 
     // Unspecified.
@@ -243,9 +222,7 @@ enum CaiLogFilterField {
     CAI_LOG_FILTER_FIELD_PROCESS_NAMES = 6;
 }
 
-// Why the SERVER ended a <code>StreamLogs</code> stream. Carried by the final
-// <a href="index.html#ondewo.nlu.StreamLogsResponse">StreamLogsResponse</a> beside the human-readable
-// <code>end_reason</code>. A stream ended by the client has no final message.
+// Why the SERVER ended a <code>StreamLogs</code> stream. Carried by the final <a href="index.html#ondewo.nlu.StreamLogsResponse">StreamLogsResponse</a> beside the human-readable <code>end_reason</code>. A stream ended by the client has no final message.
 enum CaiLogStreamEndReason {
 
     // Not ended by the server: every message except the final one.
@@ -271,8 +248,7 @@ enum CaiLogStreamEndReason {
     CAI_LOG_STREAM_END_REASON_CREDENTIALS_EXPIRED = 5;
 }
 
-// File format of an <a href="index.html#ondewo.nlu.Logs.ExportLogs">ExportLogs</a> export. Every format is UTF-8
-// with <code>\n</code> line endings and one entry per record; a multi-line entry stays one record.
+// File format of an <a href="index.html#ondewo.nlu.Logs.ExportLogs">ExportLogs</a> export. Every format is UTF-8 with <code>\n</code> line endings and one entry per record; a multi-line entry stays one record.
 enum CaiLogExportFormat {
 
     // Unspecified: identical to <code>CAI_LOG_EXPORT_FORMAT_TEXT</code>.
@@ -304,8 +280,7 @@ enum CaiLogExportFormat {
 // region Messages
 //////////////////////////////////////////////////////////////////////////////
 
-// A single captured log record. One record may span several physical lines: a Python traceback, a protobuf
-// <code>str()</code> dump and a multi-line banner are all one record and are stored and returned as one entry.
+// A single captured log record. One record may span several physical lines: a Python traceback, a protobuf <code>str()</code> dump and a multi-line banner are all one record and are stored and returned as one entry.
 message CaiLogEntry {
 
     // Ordering cursor. Assigned by the database, monotonically increasing WITHIN ONE LOG STREAM. It is NOT
@@ -390,12 +365,9 @@ message CaiLogEntry {
     string phase = 20;
 }
 
-// Narrows a log query. Every field is optional; an empty repeated field means &quot;do not filter on
-// this&quot;. Fields are combined with AND; the values within one repeated field are combined with OR.
+// Narrows a log query. Every field is optional; an empty repeated field means &quot;do not filter on this&quot;. Fields are combined with AND; the values within one repeated field are combined with OR.
 //
-// <p>Filters fall into two groups. IDENTITY filters (fields 1 to 19) select which log streams, operations and
-// projects are of interest. CONTENT filters (fields 20 to 30) select which entries of those to return. The time
-// window (fields 31, 32) is neither.</p>
+// Filters fall into two groups. IDENTITY filters (fields 1 to 19) select which log streams, operations and projects are of interest. CONTENT filters (fields 20 to 30) select which entries of those to return. The time window (fields 31, 32) is neither.
 message CaiLogFilter {
 
     //////////////////////////////////////////////////////////////////////////////
@@ -489,8 +461,7 @@ message CaiLogFilter {
     optional google.protobuf.Timestamp end_time = 32;
 }
 
-// One capture of one server process or of one container. A server process that restarts, and a container
-// recreated under a new id, yield a NEW log stream.
+// One capture of one server process or of one container. A server process that restarts, and a container recreated under a new id, yield a NEW log stream.
 message CaiLogStream {
 
     // Resource name of the log stream, in the form of
@@ -594,9 +565,7 @@ message StreamLogsRequest {
     google.protobuf.FieldMask field_mask = 5;
 }
 
-// The response message for <a href="index.html#ondewo.nlu.Logs.StreamLogs">Logs.StreamLogs</a>. The stream
-// carries an envelope rather than a bare entry so that a viewer can tell a healthy quiet source from a capture
-// that has died.
+// The response message for <a href="index.html#ondewo.nlu.Logs.StreamLogs">Logs.StreamLogs</a>. The stream carries an envelope rather than a bare entry so that a viewer can tell a healthy quiet source from a capture that has died.
 message StreamLogsResponse {
 
     // The entries in this batch, oldest first. May be empty, e.g. on the final message.

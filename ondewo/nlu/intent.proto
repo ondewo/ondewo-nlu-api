@@ -44,13 +44,7 @@ import "google/protobuf/struct.proto";
 //
 // You can provide additional information for the Dialogflow API to use to match user input to an intent by adding the following to your intent.
 //
-// <ul>
-//   <li><strong>Contexts</strong> - provide additional context for intent analysis. For example, if an intent is related to an object in your application that plays music, you can provide a context to determine when to match the intent if the user input is &quot;turn it off&quot;.  You can include a context that matches the intent when there is previous user input of &quot;play music&quot;, and not when there is previous user input of &quot;turn on the light&quot;.</li>
-//
-//   <li><strong>Events</strong> - allow for matching an intent by using an event name instead of user input. Your application can provide an event name and related parameters to the Dialogflow API to match an intent. For example, when your application starts, you can send a welcome event with a user name parameter to the Dialogflow API to match an intent with a personalized welcome message for the user.</li>
-//
-//   <li><strong>Training phrases</strong> - provide examples of user input to train the Dialogflow API agent to better match intents.</li>
-// </ul>
+// <ul> <li><strong>Contexts</strong> - provide additional context for intent analysis. For example, if an intent is related to an object in your application that plays music, you can provide a context to determine when to match the intent if the user input is &quot;turn it off&quot;.  You can include a context that matches the intent when there is previous user input of &quot;play music&quot;, and not when there is previous user input of &quot;turn on the light&quot;.</li> <li><strong>Events</strong> - allow for matching an intent by using an event name instead of user input. Your application can provide an event name and related parameters to the Dialogflow API to match an intent. For example, when your application starts, you can send a welcome event with a user name parameter to the Dialogflow API to match an intent with a personalized welcome message for the user.</li> <li><strong>Training phrases</strong> - provide examples of user input to train the Dialogflow API agent to better match intents.</li> </ul>
 //
 // For more information about intents, see the <a href="https://dialogflow.com/docs/intents">Dialogflow documentation</a>.
 service Intents {
@@ -191,15 +185,13 @@ service Intents {
 
 }
 
-// Represents an intent.
-// Intents convert a number of user expressions or patterns into an action. An action is an extraction of a user command or sentence semantics.
+// Represents an intent. Intents convert a number of user expressions or patterns into an action. An action is an extraction of a user command or sentence semantics.
 message Intent {
 
     // Represents an example or template that the agent is trained on.
     message TrainingPhrase {
 
-        // Represents an entity annotation in a training phrase. The entity can be annotated on the level of
-        // entity type only or both entity type and entity value.
+        // Represents an entity annotation in a training phrase. The entity can be annotated on the level of entity type only or both entity type and entity value.
         message Entity {
 
             // Required. The unique entity type identifier in format
@@ -1188,9 +1180,7 @@ message IntentBatch {
     repeated Intent intents = 1;
 }
 
-// Represents the options for views of an intent.
-// An intent can be a sizable object. Therefore, we provide a resource view that
-// does not return training phrases in the response by default.
+// Represents the options for views of an intent. An intent can be a sizable object. Therefore, we provide a resource view that does not return training phrases in the response by default.
 enum IntentView {
     // Same as INTENT_VIEW_FULL
     INTENT_VIEW_UNSPECIFIED = 0;

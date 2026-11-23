@@ -4088,6 +4088,10 @@
                       </li>
                     
                       <li>
+                        <a href="#ondewo.nlu.SessionStepInterruption" class="title-badge message">SessionStepInterruption</a>
+                      </li>
+                    
+                      <li>
                         <a href="#ondewo.nlu.StreamingDetectIntentRequest" class="title-badge message">StreamingDetectIntentRequest</a>
                       </li>
                     
@@ -4199,6 +4203,10 @@
                     
                       <li>
                         <a href="#ondewo.nlu.SessionReview.View" class="title-badge enum">SessionReview.View</a>
+                      </li>
+                    
+                      <li>
+                        <a href="#ondewo.nlu.SessionStepInterruptionPhase" class="title-badge enum">SessionStepInterruptionPhase</a>
                       </li>
                     
                       <li>
@@ -6005,7 +6013,7 @@ If empty, the server generates one. </p></td>
         
       
         <h3 id="ondewo.nlu.CreateProjectTechnicalUserResponse" class="title-badge message">CreateProjectTechnicalUserResponse</h3>
-        <p>Response with the freshly minted technical user's credentials.</p><p>The password is returned ONCE and cannot be retrieved later.</p>
+        <p>Response with the freshly minted technical user's credentials. The password is returned ONCE and cannot be retrieved later.</p>
 
         
           <table class="field-table">
@@ -9704,7 +9712,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
         
       
         <h3 id="ondewo.nlu.RotateProjectTechnicalUserPasswordResponse" class="title-badge message">RotateProjectTechnicalUserPasswordResponse</h3>
-        <p>Response with the rotated password.</p><p>The password is returned ONCE and cannot be retrieved later.</p>
+        <p>Response with the rotated password. The password is returned ONCE and cannot be retrieved later.</p>
 
         
           <table class="field-table">
@@ -9950,7 +9958,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre> </p></td>
         
       
         <h3 id="ondewo.nlu.WarmTransferAgentLexicon" class="title-badge message">WarmTransferAgentLexicon</h3>
-        <p>Additional entries of the closed decision lexicon of warm transfer intros in one language, matched before an LLM</p><p>classifies an answer. At most 50 entries in <code>accept_phrases</code> and <code>decline_phrases</code></p><p>together.</p>
+        <p>Additional entries of the closed decision lexicon of warm transfer intros in one language, matched before an LLM classifies an answer. At most 50 entries in <code>accept_phrases</code> and <code>decline_phrases</code> together.</p>
 
         
           <table class="field-table">
@@ -9981,7 +9989,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre> </p></td>
         
       
         <h3 id="ondewo.nlu.WarmTransferAgentSettings" class="title-badge message">WarmTransferAgentSettings</h3>
-        <p>The agent's settings of warm transfer intros. A text a <code>WarmTransferIntroConfig</code> leaves empty falls back</p><p>to the agent's text for the intro's language, then to the built-in default.</p>
+        <p>The agent's settings of warm transfer intros. A text a <code>WarmTransferIntroConfig</code> leaves empty falls back to the agent's text for the intro's language, then to the built-in default.</p>
 
         
           <table class="field-table">
@@ -10091,7 +10099,7 @@ project's first <code>ONDEWO_NLU_LLM</code> service. </p></td>
         
       
         <h3 id="ondewo.nlu.WarmTransferAgentTexts" class="title-badge message">WarmTransferAgentTexts</h3>
-        <p>The default texts of warm transfer intros in one language. An empty text = the built-in default. The fields and</p><p>placeholders are those of the same-named fields of <code>WarmTransferIntroConfig</code>.</p>
+        <p>The default texts of warm transfer intros in one language. An empty text = the built-in default. The fields and placeholders are those of the same-named fields of <code>WarmTransferIntroConfig</code>.</p>
 
         
           <table class="field-table">
@@ -13429,7 +13437,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
         
       
         <h3 id="ondewo.nlu.DeleteCcaiProjectRequest" class="title-badge message">DeleteCcaiProjectRequest</h3>
-        <p>Request to delete a CCAI service project</p><p>If a deployed CCAI service project was deleted then it was undeployed beforehand automatically</p>
+        <p>Request to delete a CCAI service project If a deployed CCAI service project was deleted then it was undeployed beforehand automatically</p>
 
         
           <table class="field-table">
@@ -13461,7 +13469,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
         
       
         <h3 id="ondewo.nlu.DeleteCcaiProjectResponse" class="title-badge message">DeleteCcaiProjectResponse</h3>
-        <p>Response to delete a CCAI service project</p><p>If a deployed CCAI service project was deleted then it was undeployed beforehand automatically</p>
+        <p>Response to delete a CCAI service project If a deployed CCAI service project was deleted then it was undeployed beforehand automatically</p>
 
         
           <table class="field-table">
@@ -14193,7 +14201,7 @@ the Model Context Protocol standard.
         </table>
       
         <h3 id="ondewo.nlu.CcaiServiceType" class="title-badge enum">CcaiServiceType</h3>
-        <p>Defines the types of CCAI (Call Center AI) services available in the system.</p><p>Each service type represents a specific capability or module within the ONDEWO platform</p><p>that enables comprehensive call center and customer interaction management. Services can be</p><p>composed in workflows and are identified by their type, language code, and provider configuration.</p>
+        <p>Defines the types of CCAI (Call Center AI) services available in the system.</p><p>Each service type represents a specific capability or module within the ONDEWO platform that enables comprehensive call center and customer interaction management. Services can be composed in workflows and are identified by their type, language code, and provider configuration.</p>
         <table class="enum-table">
           <thead>
             <tr><td>Name</td><td>Number</td><td>Description</td></tr>
@@ -15201,7 +15209,7 @@ the referenced intent or entity. Empty when the notification is not clickable. <
         
       
         <h3 id="ondewo.nlu.StreamNotificationsRequest" class="title-badge message">StreamNotificationsRequest</h3>
-        <p>Message for streaming notifications in real time via</p><p><a href="index.html#ondewo.nlu.Users.StreamNotifications">Users.StreamNotifications</a>.</p>
+        <p>Message for streaming notifications in real time via <a href="index.html#ondewo.nlu.Users.StreamNotifications">Users.StreamNotifications</a>.</p>
 
         
           <table class="field-table">
@@ -15647,7 +15655,7 @@ notifications created after the stream opened are pushed. </p></td>
       
         
         <h3 id="ondewo.nlu.Contexts" class="title-badge service">Contexts</h3>
-        <p>A context represents additional information included with user input or with an intent returned by the Dialogflow API. Contexts are helpful for differentiating user input which may be vague or have a different meaning depending on additional details from your application such as user setting and preferences, previous user input, where the user is in your application, geographic location, and so on.</p><p>You can include contexts as input parameters of a <a href="index.html#ondewo.nlu.Sessions.DetectIntent">DetectIntent</a> (or <a href="index.html#ondewo.nlu.Sessions.StreamingDetectIntent">StreamingDetectIntent</a>) request, or as output contexts included in the returned intent.</p><p>Contexts expire when an intent is matched, after the number of <code>DetectIntent</code> requests specified by the <code>lifespan_count</code> parameter, or after 10 minutes if no intents are matched for a <code>DetectIntent</code> request.</p><p>For more information about contexts, see the <a href="https://dialogflow.com/docs/contexts">Dialogflow documentation</a>.</p>
+        <p>A context represents additional information included with user input or with an intent returned by the Dialogflow API. Contexts are helpful for differentiating user input which may be vague or have a different meaning depending on additional details from your application such as user setting and preferences, previous user input, where the user is in your application, geographic location, and so on.</p><p>You can include contexts as input parameters of a <a href="index.html#ondewo.nlu.Sessions.DetectIntent">DetectIntent</a> (or <a href="index.html#ondewo.nlu.Sessions.StreamingDetectIntent">StreamingDetectIntent</a>) request, or as output contexts included in the returned intent. Contexts expire when an intent is matched, after the number of <code>DetectIntent</code> requests specified by the <code>lifespan_count</code> parameter, or after 10 minutes if no intents are matched for a <code>DetectIntent</code> request. For more information about contexts, see the <a href="https://dialogflow.com/docs/contexts">Dialogflow documentation</a>.</p>
 
         
         <div id="ondewo.nlu.Contexts-methods" class="service-methods">Service Methods</div>
@@ -16226,7 +16234,7 @@ e.g. next_page_token is current_index-2 </p></td>
       
         
         <h3 id="ondewo.nlu.EntityTypes" class="title-badge service">EntityTypes</h3>
-        <p>Entities are extracted from user input and represent parameters that are meaningful to your application. For example, a date range, a proper name such as a geographic location or landmark, and so on. Entities represent actionable data for your application.</p><p>When you define an entity, you can also include synonyms that all map to that entity. For example, &quot;soft drink&quot;, &quot;soda&quot;, &quot;pop&quot;, and so on.</p><p>There are three types of entities:</p><p><ul></p><p><li><strong>System</strong> - entities that are defined by the Dialogflow API for common data types such as date, time, currency, and so on. A system entity is represented by the <code>EntityType</code> type.</li></p><p><li><strong>Developer</strong> - entities that are defined by you that represent actionable data that is meaningful to your application. For example, you could define a <code>pizza.sauce</code> entity for red or white pizza sauce, a <code>pizza.cheese</code> entity for the different types of cheese on a pizza, a <code>pizza.topping</code> entity for different toppings, and so on. A developer entity is represented by the <code>EntityType</code> type.</li></p><p><li><strong>User</strong> - entities that are built for an individual user such as favorites, preferences, playlists, and so on. A user entity is represented by the <a href="index.html#ondewo.nlu.SessionEntityType">SessionEntityType</a> type.</li></p><p></ul></p><p>For more information about entity types, see the <a href="https://dialogflow.com/docs/entities">Dialogflow documentation</a>.</p>
+        <p>Entities are extracted from user input and represent parameters that are meaningful to your application. For example, a date range, a proper name such as a geographic location or landmark, and so on. Entities represent actionable data for your application.</p><p>When you define an entity, you can also include synonyms that all map to that entity. For example, &quot;soft drink&quot;, &quot;soda&quot;, &quot;pop&quot;, and so on.</p><p>There are three types of entities:</p><p><ul> <li><strong>System</strong> - entities that are defined by the Dialogflow API for common data types such as date, time, currency, and so on. A system entity is represented by the <code>EntityType</code> type.</li> <li><strong>Developer</strong> - entities that are defined by you that represent actionable data that is meaningful to your application. For example, you could define a <code>pizza.sauce</code> entity for red or white pizza sauce, a <code>pizza.cheese</code> entity for the different types of cheese on a pizza, a <code>pizza.topping</code> entity for different toppings, and so on. A developer entity is represented by the <code>EntityType</code> type.</li> <li><strong>User</strong> - entities that are built for an individual user such as favorites, preferences, playlists, and so on. A user entity is represented by the <a href="index.html#ondewo.nlu.SessionEntityType">SessionEntityType</a> type.</li> </ul></p><p>For more information about entity types, see the <a href="https://dialogflow.com/docs/entities">Dialogflow documentation</a>.</p>
 
         
         <div id="ondewo.nlu.EntityTypes-methods" class="service-methods">Service Methods</div>
@@ -16942,7 +16950,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_ty
         
       
         <h3 id="ondewo.nlu.EntityType" class="title-badge message">EntityType</h3>
-        <p>Represents an entity type.</p><p>Entity types serve as a tool for extracting parameter values from natural</p><p>language queries.</p>
+        <p>Represents an entity type. Entity types serve as a tool for extracting parameter values from natural language queries.</p>
 
         
           <table class="field-table">
@@ -17698,7 +17706,7 @@ Note: languages must be enabled in the agent, before they can be used. </p></td>
       <div id="ondewo/nlu/entity_type.proto-enums" class="object-category">Enums</div>
       
         <h3 id="ondewo.nlu.EntityType.AutoExpansionMode" class="title-badge enum">EntityType.AutoExpansionMode</h3>
-        <p>Represents different entity type expansion modes. Automated expansion</p><p>allows an agent to recognize values that have not been explicitly listed in</p><p>the entity (for example, new kinds of shopping list items).</p>
+        <p>Represents different entity type expansion modes. Automated expansion allows an agent to recognize values that have not been explicitly listed in the entity (for example, new kinds of shopping list items).</p>
         <table class="enum-table">
           <thead>
             <tr><td>Name</td><td>Number</td><td>Description</td></tr>
@@ -17853,7 +17861,7 @@ types (with or without aliases).</p></td>
         </table>
       
         <h3 id="ondewo.nlu.EntityTypeView" class="title-badge enum">EntityTypeView</h3>
-        <p>Represents the options for views of an entity type.</p><p>An entity type can be a sizable object. Therefore, we provide a resource view that</p><p>does not return all values and synonyms besides the full view that is set by default.</p>
+        <p>Represents the options for views of an entity type. An entity type can be a sizable object. Therefore, we provide a resource view that does not return all values and synonyms besides the full view that is set by default.</p>
         <table class="enum-table">
           <thead>
             <tr><td>Name</td><td>Number</td><td>Description</td></tr>
@@ -17944,7 +17952,7 @@ types (with or without aliases).</p></td>
       
         
         <h3 id="ondewo.nlu.Intents" class="title-badge service">Intents</h3>
-        <p>An intent represents a mapping between input from a user and an action to be taken by your application. When you pass user input to the <a href="index.html#ondewo.nlu.Sessions.DetectIntent">DetectIntent</a> (or <a href="index.html#ondewo.nlu.Sessions.StreamingDetectIntent">StreamingDetectIntent</a>) method, the Dialogflow API analyzes the input and searches for a matching intent. If no match is found, the Dialogflow API returns a fallback intent (<code>is_fallback</code> = true).</p><p>You can provide additional information for the Dialogflow API to use to match user input to an intent by adding the following to your intent.</p><p><ul></p><p><li><strong>Contexts</strong> - provide additional context for intent analysis. For example, if an intent is related to an object in your application that plays music, you can provide a context to determine when to match the intent if the user input is &quot;turn it off&quot;.  You can include a context that matches the intent when there is previous user input of &quot;play music&quot;, and not when there is previous user input of &quot;turn on the light&quot;.</li></p><p><li><strong>Events</strong> - allow for matching an intent by using an event name instead of user input. Your application can provide an event name and related parameters to the Dialogflow API to match an intent. For example, when your application starts, you can send a welcome event with a user name parameter to the Dialogflow API to match an intent with a personalized welcome message for the user.</li></p><p><li><strong>Training phrases</strong> - provide examples of user input to train the Dialogflow API agent to better match intents.</li></p><p></ul></p><p>For more information about intents, see the <a href="https://dialogflow.com/docs/intents">Dialogflow documentation</a>.</p>
+        <p>An intent represents a mapping between input from a user and an action to be taken by your application. When you pass user input to the <a href="index.html#ondewo.nlu.Sessions.DetectIntent">DetectIntent</a> (or <a href="index.html#ondewo.nlu.Sessions.StreamingDetectIntent">StreamingDetectIntent</a>) method, the Dialogflow API analyzes the input and searches for a matching intent. If no match is found, the Dialogflow API returns a fallback intent (<code>is_fallback</code> = true).</p><p>You can provide additional information for the Dialogflow API to use to match user input to an intent by adding the following to your intent.</p><p><ul> <li><strong>Contexts</strong> - provide additional context for intent analysis. For example, if an intent is related to an object in your application that plays music, you can provide a context to determine when to match the intent if the user input is &quot;turn it off&quot;.  You can include a context that matches the intent when there is previous user input of &quot;play music&quot;, and not when there is previous user input of &quot;turn on the light&quot;.</li> <li><strong>Events</strong> - allow for matching an intent by using an event name instead of user input. Your application can provide an event name and related parameters to the Dialogflow API to match an intent. For example, when your application starts, you can send a welcome event with a user name parameter to the Dialogflow API to match an intent with a personalized welcome message for the user.</li> <li><strong>Training phrases</strong> - provide examples of user input to train the Dialogflow API agent to better match intents.</li> </ul></p><p>For more information about intents, see the <a href="https://dialogflow.com/docs/intents">Dialogflow documentation</a>.</p>
 
         
         <div id="ondewo.nlu.Intents-methods" class="service-methods">Service Methods</div>
@@ -19313,7 +19321,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&g
         
       
         <h3 id="ondewo.nlu.Intent" class="title-badge message">Intent</h3>
-        <p>Represents an intent.</p><p>Intents convert a number of user expressions or patterns into an action. An action is an extraction of a user command or sentence semantics.</p>
+        <p>Represents an intent. Intents convert a number of user expressions or patterns into an action. An action is an extraction of a user command or sentence semantics.</p>
 
         
           <table class="field-table">
@@ -20742,7 +20750,7 @@ intent or training, this counter is increased. </p></td>
         
       
         <h3 id="ondewo.nlu.Intent.TrainingPhrase.Entity" class="title-badge message">Intent.TrainingPhrase.Entity</h3>
-        <p>Represents an entity annotation in a training phrase. The entity can be annotated on the level of</p><p>entity type only or both entity type and entity value.</p>
+        <p>Represents an entity annotation in a training phrase. The entity can be annotated on the level of entity type only or both entity type and entity value.</p>
 
         
           <table class="field-table">
@@ -22006,7 +22014,7 @@ filling prompt is forwarded to the webhook.</p></td>
         </table>
       
         <h3 id="ondewo.nlu.IntentView" class="title-badge enum">IntentView</h3>
-        <p>Represents the options for views of an intent.</p><p>An intent can be a sizable object. Therefore, we provide a resource view that</p><p>does not return training phrases in the response by default.</p>
+        <p>Represents the options for views of an intent. An intent can be a sizable object. Therefore, we provide a resource view that does not return training phrases in the response by default.</p>
         <table class="enum-table">
           <thead>
             <tr><td>Name</td><td>Number</td><td>Description</td></tr>
@@ -22063,7 +22071,7 @@ The Training phrases field is populated with only a few entries and no annotatio
       
         
         <h3 id="ondewo.nlu.LlmEvaluations" class="title-badge service">LlmEvaluations</h3>
-        <p>LangSmith-style evaluation surface: datasets, examples, experiments, evaluator</p><p>runs, feedback (LLM-as-judge / human / heuristic / custom code / pairwise),</p><p>pairwise comparisons, release gates + persisted gate runs, scorecards,</p><p>per-project evaluation settings (judge configuration), the evaluator registry,</p><p>golden-transcript recording from sessions, conversation simulation</p><p>(standard + adversarial red-teaming), recurring schedules and report artifacts.</p>
+        <p>LangSmith-style evaluation surface: datasets, examples, experiments, evaluator runs, feedback (LLM-as-judge / human / heuristic / custom code / pairwise), pairwise comparisons, release gates + persisted gate runs, scorecards, per-project evaluation settings (judge configuration), the evaluator registry, golden-transcript recording from sessions, conversation simulation (standard + adversarial red-teaming), recurring schedules and report artifacts.</p>
 
         
         <div id="ondewo.nlu.LlmEvaluations-methods" class="service-methods">Service Methods</div>
@@ -22675,7 +22683,7 @@ Format: <code>projects/&lt;project_uuid&gt;/agent</code>. </p></td>
         
       
         <h3 id="ondewo.nlu.ApplyLlmEvaluationAbRolloutRequest" class="title-badge message">ApplyLlmEvaluationAbRolloutRequest</h3>
-        <p>Request to apply an A/B rollout: promotes the chosen variant's config to the</p><p>project's classifier default, stops the experiment and writes the audit</p><p>decision. Idempotent — re-applying the same already-applied experiment returns</p><p>the existing decision rather than promoting twice.</p>
+        <p>Request to apply an A/B rollout: promotes the chosen variant's config to the project's classifier default, stops the experiment and writes the audit decision. Idempotent — re-applying the same already-applied experiment returns the existing decision rather than promoting twice.</p>
 
         
           <table class="field-table">
@@ -23744,7 +23752,7 @@ Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationAbExperiments/&lt
         
       
         <h3 id="ondewo.nlu.GetLlmEvaluationAbRolloutDecisionRequest" class="title-badge message">GetLlmEvaluationAbRolloutDecisionRequest</h3>
-        <p>Request to get a single A/B rollout decision (the applied audit record) for an</p><p>experiment.</p>
+        <p>Request to get a single A/B rollout decision (the applied audit record) for an experiment.</p>
 
         
           <table class="field-table">
@@ -23791,7 +23799,7 @@ Format: <code>projects/&lt;project_uuid&gt;/agent</code>. </p></td>
         
       
         <h3 id="ondewo.nlu.GetLlmEvaluationAbRolloutRecommendationRequest" class="title-badge message">GetLlmEvaluationAbRolloutRecommendationRequest</h3>
-        <p>Request to compute a rollout recommendation for an A/B experiment. Read-only /</p><p>stateless — computes the winner-vs-control statistics on demand under the</p><p>supplied guard-rails and returns a LlmEvaluationAbRolloutRecommendation</p><p>without mutating anything.</p>
+        <p>Request to compute a rollout recommendation for an A/B experiment. Read-only / stateless — computes the winner-vs-control statistics on demand under the supplied guard-rails and returns a LlmEvaluationAbRolloutRecommendation without mutating anything.</p>
 
         
           <table class="field-table">
@@ -24517,7 +24525,7 @@ Index starts at 0. </p></td>
         
       
         <h3 id="ondewo.nlu.ListLlmEvaluationAbRolloutDecisionsRequest" class="title-badge message">ListLlmEvaluationAbRolloutDecisionsRequest</h3>
-        <p>Request to list A/B rollout decisions within a project, optionally narrowed by</p><p>filter (typically by experiment).</p>
+        <p>Request to list A/B rollout decisions within a project, optionally narrowed by filter (typically by experiment).</p>
 
         
           <table class="field-table">
@@ -25809,7 +25817,7 @@ Index starts at 0. </p></td>
         
       
         <h3 id="ondewo.nlu.LlmEvaluationAbExperiment" class="title-badge message">LlmEvaluationAbExperiment</h3>
-        <p>An A/B experiment: a set of routing variants split over live DetectIntent</p><p>traffic for a (project, language_code) scope.</p>
+        <p>An A/B experiment: a set of routing variants split over live DetectIntent traffic for a (project, language_code) scope.</p>
 
         
           <table class="field-table">
@@ -25937,7 +25945,7 @@ Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationAbRolloutDecision
         
       
         <h3 id="ondewo.nlu.LlmEvaluationAbExperimentFilter" class="title-badge message">LlmEvaluationAbExperimentFilter</h3>
-        <p>Filter conditions for ListAbExperiments. All fields are optional; multiple</p><p>fields set at the same time are combined via logical AND.</p>
+        <p>Filter conditions for ListAbExperiments. All fields are optional; multiple fields set at the same time are combined via logical AND.</p>
 
         
           <table class="field-table">
@@ -25969,7 +25977,7 @@ Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationAbRolloutDecision
         
       
         <h3 id="ondewo.nlu.LlmEvaluationAbRolloutDecision" class="title-badge message">LlmEvaluationAbRolloutDecision</h3>
-        <p>The persisted audit record of an A/B rollout that an operator explicitly</p><p>applied: it captures which variant's config was promoted to the project's</p><p>classifier default, on which metric, and the statistics at the moment of</p><p>application. Written + returned by <code>LlmEvaluationApplyAbRollout</code>;</p><p>read back via <code>LlmEvaluationGetAbRolloutDecision</code> /</p><p><code>LlmEvaluationListAbRolloutDecisions</code>. There is no auto-rollout —</p><p>every decision row corresponds to an explicit operator action.</p>
+        <p>The persisted audit record of an A/B rollout that an operator explicitly applied: it captures which variant's config was promoted to the project's classifier default, on which metric, and the statistics at the moment of application. Written + returned by <code>LlmEvaluationApplyAbRollout</code>; read back via <code>LlmEvaluationGetAbRolloutDecision</code> / <code>LlmEvaluationListAbRolloutDecisions</code>. There is no auto-rollout — every decision row corresponds to an explicit operator action.</p>
 
         
           <table class="field-table">
@@ -26087,7 +26095,7 @@ Format: <code>projects/&lt;project_uuid&gt;/agent</code>. </p></td>
         
       
         <h3 id="ondewo.nlu.LlmEvaluationAbRolloutDecisionFilter" class="title-badge message">LlmEvaluationAbRolloutDecisionFilter</h3>
-        <p>Filter conditions for ListAbRolloutDecisions. All fields are optional;</p><p>multiple fields set at the same time are combined via logical AND.</p>
+        <p>Filter conditions for ListAbRolloutDecisions. All fields are optional; multiple fields set at the same time are combined via logical AND.</p>
 
         
           <table class="field-table">
@@ -26119,7 +26127,7 @@ Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationAbExperiments/&lt
         
       
         <h3 id="ondewo.nlu.LlmEvaluationAbRolloutRecommendation" class="title-badge message">LlmEvaluationAbRolloutRecommendation</h3>
-        <p>A computed, read-only rollout recommendation for an A/B experiment: which</p><p>variant currently wins against the control on the chosen optimize metric,</p><p>under the requested statistical guard-rails. Stateless — recomputed on demand</p><p>by <code>LlmEvaluationGetAbRolloutRecommendation</code> from the per-variant</p><p>results rollup; nothing is persisted and no traffic / config changes. The</p><p>operator decides whether to apply it via <code>LlmEvaluationApplyAbRollout</code>.</p>
+        <p>A computed, read-only rollout recommendation for an A/B experiment: which variant currently wins against the control on the chosen optimize metric, under the requested statistical guard-rails. Stateless — recomputed on demand by <code>LlmEvaluationGetAbRolloutRecommendation</code> from the per-variant results rollup; nothing is persisted and no traffic / config changes. The operator decides whether to apply it via <code>LlmEvaluationApplyAbRollout</code>.</p>
 
         
           <table class="field-table">
@@ -26273,7 +26281,7 @@ re-running the same experiment id re-randomizes the assignment. </p></td>
         
       
         <h3 id="ondewo.nlu.LlmEvaluationAbVariant" class="title-badge message">LlmEvaluationAbVariant</h3>
-        <p>One routing variant of an A/B experiment. The variant overrides the model used</p><p>for the sessions assigned to it. A variant is one of two shapes depending on</p><p>the project's classifier:</p><p><ul></p><p><li><b>IntentAgent projects</b> — the variant overrides the LLM connection</p><p>via <code>ccai_service_names</code> (+ optional <code>model_name</code> /</p><p><code>prompt_version</code>).</li></p><p><li><b>RAG projects</b> (<code>IntentRagflowClassifier</code>) — the variant</p><p>overrides the chat-assistant LLM CcaiService and retrieval parameters via</p><p><code>rag_variant_config</code>.</li></p><p></ul></p><p>The two override shapes are mutually exclusive per variant; the server applies</p><p>whichever matches the project's classifier type.</p>
+        <p>One routing variant of an A/B experiment. The variant overrides the model used for the sessions assigned to it. A variant is one of two shapes depending on the project's classifier: <ul> <li><b>IntentAgent projects</b> — the variant overrides the LLM connection via <code>ccai_service_names</code> (+ optional <code>model_name</code> / <code>prompt_version</code>).</li> <li><b>RAG projects</b> (<code>IntentRagflowClassifier</code>) — the variant overrides the chat-assistant LLM CcaiService and retrieval parameters via <code>rag_variant_config</code>.</li> </ul> The two override shapes are mutually exclusive per variant; the server applies whichever matches the project's classifier type.</p>
 
         
           <table class="field-table">
@@ -26416,7 +26424,7 @@ deltas versus the control variant), keyed by metric name. </p></td>
         
       
         <h3 id="ondewo.nlu.LlmEvaluationAnnotationQueueItem" class="title-badge message">LlmEvaluationAnnotationQueueItem</h3>
-        <p>A human-review annotation-queue item: one per failing session step enqueued by</p><p>the online-evaluation worker. The reviewer annotates (status / reason) and may</p><p>promote the offending session into a regression dataset.</p>
+        <p>A human-review annotation-queue item: one per failing session step enqueued by the online-evaluation worker. The reviewer annotates (status / reason) and may promote the offending session into a regression dataset.</p>
 
         
           <table class="field-table">
@@ -26538,7 +26546,7 @@ Format: <code>projects/&lt;project_uuid&gt;/agent</code>. </p></td>
         
       
         <h3 id="ondewo.nlu.LlmEvaluationAnnotationQueueItemFilter" class="title-badge message">LlmEvaluationAnnotationQueueItemFilter</h3>
-        <p>Filter conditions for ListAnnotationQueueItems. All fields are optional;</p><p>multiple fields set at the same time are combined via logical AND.</p>
+        <p>Filter conditions for ListAnnotationQueueItems. All fields are optional; multiple fields set at the same time are combined via logical AND.</p>
 
         
           <table class="field-table">
@@ -26767,7 +26775,7 @@ flow, RAG question-answering, adversarial red-team probes, simulated). </p></td>
         
       
         <h3 id="ondewo.nlu.LlmEvaluationDatasetFilter" class="title-badge message">LlmEvaluationDatasetFilter</h3>
-        <p>Filter conditions for ListDatasets. All fields are optional; multiple fields</p><p>set at the same time are combined via logical AND.</p>
+        <p>Filter conditions for ListDatasets. All fields are optional; multiple fields set at the same time are combined via logical AND.</p>
 
         
           <table class="field-table">
@@ -27207,7 +27215,7 @@ per-project filtering). Format: <code>projects/&lt;project_uuid&gt;/agent</code>
         
       
         <h3 id="ondewo.nlu.LlmEvaluationExampleFilter" class="title-badge message">LlmEvaluationExampleFilter</h3>
-        <p>Filter conditions for ListExamples. All fields are optional; multiple fields</p><p>set at the same time are combined via logical AND.</p>
+        <p>Filter conditions for ListExamples. All fields are optional; multiple fields set at the same time are combined via logical AND.</p>
 
         
           <table class="field-table">
@@ -27459,7 +27467,7 @@ Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationReleaseGates/&lt;
         
       
         <h3 id="ondewo.nlu.LlmEvaluationExperimentFilter" class="title-badge message">LlmEvaluationExperimentFilter</h3>
-        <p>Filter conditions for ListExperiments. All fields are optional; multiple</p><p>fields set at the same time are combined via logical AND.</p>
+        <p>Filter conditions for ListExperiments. All fields are optional; multiple fields set at the same time are combined via logical AND.</p>
 
         
           <table class="field-table">
@@ -27652,7 +27660,7 @@ Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationDatasets/&lt;data
         
       
         <h3 id="ondewo.nlu.LlmEvaluationFeedbackFilter" class="title-badge message">LlmEvaluationFeedbackFilter</h3>
-        <p>Filter conditions for ListFeedback. All fields are optional; multiple fields</p><p>set at the same time are combined via logical AND.</p>
+        <p>Filter conditions for ListFeedback. All fields are optional; multiple fields set at the same time are combined via logical AND.</p>
 
         
           <table class="field-table">
@@ -27765,7 +27773,7 @@ matching the evaluator's parameter specs from LlmEvaluationListEvaluators
         
       
         <h3 id="ondewo.nlu.LlmEvaluationOnlineConfig" class="title-badge message">LlmEvaluationOnlineConfig</h3>
-        <p>An online-evaluation config: a per-(project, language_code) definition that a</p><p>swarm-safe background worker uses to sample already-persisted live session</p><p>steps, score the recorded answer with a reference-free evaluator set, and</p><p>enqueue failing steps into the annotation queue. Mirrors the LlmEvaluationSchedule</p><p>scoping / audit / enabled-flag shape.</p>
+        <p>An online-evaluation config: a per-(project, language_code) definition that a swarm-safe background worker uses to sample already-persisted live session steps, score the recorded answer with a reference-free evaluator set, and enqueue failing steps into the annotation queue. Mirrors the LlmEvaluationSchedule scoping / audit / enabled-flag shape.</p>
 
         
           <table class="field-table">
@@ -27925,7 +27933,7 @@ Format: <code>projects/&lt;project_uuid&gt;/agent</code>. </p></td>
         
       
         <h3 id="ondewo.nlu.LlmEvaluationOnlineConfigFilter" class="title-badge message">LlmEvaluationOnlineConfigFilter</h3>
-        <p>Filter conditions for ListOnlineConfigs. All fields are optional; multiple</p><p>fields set at the same time are combined via logical AND.</p>
+        <p>Filter conditions for ListOnlineConfigs. All fields are optional; multiple fields set at the same time are combined via logical AND.</p>
 
         
           <table class="field-table">
@@ -27957,7 +27965,7 @@ Format: <code>projects/&lt;project_uuid&gt;/agent</code>. </p></td>
         
       
         <h3 id="ondewo.nlu.LlmEvaluationOnlineResult" class="title-badge message">LlmEvaluationOnlineResult</h3>
-        <p>A self-contained online-evaluation result: one row per scored session step.</p><p>Per-criterion feedbacks are stored as an embedded repeated LlmEvaluationFeedback</p><p>list (exactly like LlmEvaluationTurnResult.feedbacks — NOT persisted into the</p><p>experiment-scoped llm_feedback table). Produced by the online-evaluation worker;</p><p>read-only over the API.</p>
+        <p>A self-contained online-evaluation result: one row per scored session step. Per-criterion feedbacks are stored as an embedded repeated LlmEvaluationFeedback list (exactly like LlmEvaluationTurnResult.feedbacks — NOT persisted into the experiment-scoped llm_feedback table). Produced by the online-evaluation worker; read-only over the API.</p>
 
         
           <table class="field-table">
@@ -28066,7 +28074,7 @@ Format: <code>projects/&lt;project_uuid&gt;/agent</code>. </p></td>
         
       
         <h3 id="ondewo.nlu.LlmEvaluationOnlineResultFilter" class="title-badge message">LlmEvaluationOnlineResultFilter</h3>
-        <p>Filter conditions for ListOnlineResults. All fields are optional; multiple</p><p>fields set at the same time are combined via logical AND.</p>
+        <p>Filter conditions for ListOnlineResults. All fields are optional; multiple fields set at the same time are combined via logical AND.</p>
 
         
           <table class="field-table">
@@ -28106,7 +28114,7 @@ when false the <code>passed</code> field is ignored (so unset means "any"). </p>
         
       
         <h3 id="ondewo.nlu.LlmEvaluationOnlineSessionFilter" class="title-badge message">LlmEvaluationOnlineSessionFilter</h3>
-        <p>Optional filter narrowing which already-persisted live session steps an</p><p>online-evaluation config samples. All fields are optional; multiple fields set</p><p>at the same time are combined via logical AND.</p>
+        <p>Optional filter narrowing which already-persisted live session steps an online-evaluation config samples. All fields are optional; multiple fields set at the same time are combined via logical AND.</p>
 
         
           <table class="field-table">
@@ -28300,7 +28308,7 @@ Format: <code>projects/&lt;project_uuid&gt;/agent</code>. </p></td>
         
       
         <h3 id="ondewo.nlu.LlmEvaluationReleaseGate" class="title-badge message">LlmEvaluationReleaseGate</h3>
-        <p>A release gate: a named set of thresholds over evaluator scores, regression</p><p>deltas and telemetry that decides whether a candidate configuration ships.</p>
+        <p>A release gate: a named set of thresholds over evaluator scores, regression deltas and telemetry that decides whether a candidate configuration ships.</p>
 
         
           <table class="field-table">
@@ -28526,7 +28534,7 @@ not recorded); <code>actual</code> is meaningless in that case. </p></td>
         
       
         <h3 id="ondewo.nlu.LlmEvaluationReleaseGateFilter" class="title-badge message">LlmEvaluationReleaseGateFilter</h3>
-        <p>Filter conditions for ListReleaseGates. All fields are optional; multiple</p><p>fields set at the same time are combined via logical AND.</p>
+        <p>Filter conditions for ListReleaseGates. All fields are optional; multiple fields set at the same time are combined via logical AND.</p>
 
         
           <table class="field-table">
@@ -28702,7 +28710,7 @@ Format: <code>projects/&lt;project_uuid&gt;/agent</code>. </p></td>
         
       
         <h3 id="ondewo.nlu.LlmEvaluationReleaseGateRunFilter" class="title-badge message">LlmEvaluationReleaseGateRunFilter</h3>
-        <p>Filter conditions for ListReleaseGateRuns. All fields are optional; multiple</p><p>fields set at the same time are combined via logical AND.</p>
+        <p>Filter conditions for ListReleaseGateRuns. All fields are optional; multiple fields set at the same time are combined via logical AND.</p>
 
         
           <table class="field-table">
@@ -28734,7 +28742,7 @@ Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationReleaseGates/&lt;
         
       
         <h3 id="ondewo.nlu.LlmEvaluationReleaseGateSafetyConfig" class="title-badge message">LlmEvaluationReleaseGateSafetyConfig</h3>
-        <p>Safety section of a release gate: a separate adversarial experiment scored</p><p>with safety evaluators.</p>
+        <p>Safety section of a release gate: a separate adversarial experiment scored with safety evaluators.</p>
 
         
           <table class="field-table">
@@ -28787,7 +28795,7 @@ Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationDatasets/&lt;data
         
       
         <h3 id="ondewo.nlu.LlmEvaluationReleaseGateThresholds" class="title-badge message">LlmEvaluationReleaseGateThresholds</h3>
-        <p>Threshold set evaluated by a release gate. Nested in a dedicated message so</p><p>presence can be detected at the message level (proto3 scalars carry no presence).</p>
+        <p>Threshold set evaluated by a release gate. Nested in a dedicated message so presence can be detected at the message level (proto3 scalars carry no presence).</p>
 
         
           <table class="field-table">
@@ -28833,7 +28841,7 @@ the baseline experiment. </p></td>
         
       
         <h3 id="ondewo.nlu.LlmEvaluationReport" class="title-badge message">LlmEvaluationReport</h3>
-        <p>An immutable persisted report artifact (release summaries, gate sign-offs,</p><p>exported evaluation snapshots).</p>
+        <p>An immutable persisted report artifact (release summaries, gate sign-offs, exported evaluation snapshots).</p>
 
         
           <table class="field-table">
@@ -28945,7 +28953,7 @@ Format: <code>projects/&lt;project_uuid&gt;/agent</code>. </p></td>
         
       
         <h3 id="ondewo.nlu.LlmEvaluationReportFilter" class="title-badge message">LlmEvaluationReportFilter</h3>
-        <p>Filter conditions for ListReports. All fields are optional; multiple fields</p><p>set at the same time are combined via logical AND.</p>
+        <p>Filter conditions for ListReports. All fields are optional; multiple fields set at the same time are combined via logical AND.</p>
 
         
           <table class="field-table">
@@ -29134,7 +29142,7 @@ Format: <code>projects/&lt;project_uuid&gt;/agent</code>. </p></td>
         
       
         <h3 id="ondewo.nlu.LlmEvaluationScheduleFilter" class="title-badge message">LlmEvaluationScheduleFilter</h3>
-        <p>Filter conditions for ListSchedules. All fields are optional; multiple fields</p><p>set at the same time are combined via logical AND.</p>
+        <p>Filter conditions for ListSchedules. All fields are optional; multiple fields set at the same time are combined via logical AND.</p>
 
         
           <table class="field-table">
@@ -29173,7 +29181,7 @@ Format: <code>projects/&lt;project_uuid&gt;/agent</code>. </p></td>
         
       
         <h3 id="ondewo.nlu.LlmEvaluationScorecard" class="title-badge message">LlmEvaluationScorecard</h3>
-        <p>A scorecard: a named weighted multi-criteria roll-up definition applied to</p><p>experiments for release reporting.</p>
+        <p>A scorecard: a named weighted multi-criteria roll-up definition applied to experiments for release reporting.</p>
 
         
           <table class="field-table">
@@ -29307,7 +29315,7 @@ Format: <code>projects/&lt;project_uuid&gt;/agent</code>. </p></td>
         
       
         <h3 id="ondewo.nlu.LlmEvaluationScorecardFilter" class="title-badge message">LlmEvaluationScorecardFilter</h3>
-        <p>Filter conditions for ListScorecards. All fields are optional; multiple</p><p>fields set at the same time are combined via logical AND.</p>
+        <p>Filter conditions for ListScorecards. All fields are optional; multiple fields set at the same time are combined via logical AND.</p>
 
         
           <table class="field-table">
@@ -29455,7 +29463,7 @@ turn against the live target (deep link into trace views). </p></td>
         
       
         <h3 id="ondewo.nlu.PromoteLlmEvaluationAnnotationQueueItemRequest" class="title-badge message">PromoteLlmEvaluationAnnotationQueueItemRequest</h3>
-        <p>Request to promote an annotation-queue item into a regression dataset. Thin</p><p>server-side composition over LlmEvaluationCreateExamplesFromSession; the item</p><p>status is flipped to PROMOTED and the dataset name stamped on success.</p>
+        <p>Request to promote an annotation-queue item into a regression dataset. Thin server-side composition over LlmEvaluationCreateExamplesFromSession; the item status is flipped to PROMOTED and the dataset name stamped on success.</p>
 
         
           <table class="field-table">
@@ -29557,7 +29565,7 @@ Format: <code>projects/&lt;project_uuid&gt;/agent</code>. </p></td>
         
       
         <h3 id="ondewo.nlu.RagVariantConfig" class="title-badge message">RagVariantConfig</h3>
-        <p>RAGFlow variant override for an A/B experiment running on a RAG-classifier</p><p>project (<code>IntentRagflowClassifier</code>). Where an IntentAgent variant</p><p>overrides the LLM via <code>ccai_service_names</code>, a RAG variant overrides</p><p>the project's chat-assistant LLM CcaiService and the retrieval parameters used</p><p>when answering the assigned sessions. Override-or-inherit semantics apply per</p><p>field: an empty / zero value means "inherit the project's base</p><p>IntentRagflowClassifier config for this field".</p>
+        <p>RAGFlow variant override for an A/B experiment running on a RAG-classifier project (<code>IntentRagflowClassifier</code>). Where an IntentAgent variant overrides the LLM via <code>ccai_service_names</code>, a RAG variant overrides the project's chat-assistant LLM CcaiService and the retrieval parameters used when answering the assigned sessions. Override-or-inherit semantics apply per field: an empty / zero value means "inherit the project's base IntentRagflowClassifier config for this field".</p>
 
         
           <table class="field-table">
@@ -30682,7 +30690,7 @@ Format: <code>projects/&lt;project_uuid&gt;/agent</code>. </p></td>
         </table>
       
         <h3 id="ondewo.nlu.LlmEvaluationAbOptimizeMetric" class="title-badge enum">LlmEvaluationAbOptimizeMetric</h3>
-        <p>The metric an A/B rollout optimizes when comparing each variant against the</p><p>control. Each value maps to a quantity already produced by the per-variant</p><p>results rollup (see GetAbExperimentResults). Higher-is-better vs.</p><p>lower-is-better is implied by the metric (e.g. PASS_RATE / CRITERION_SCORE /</p><p>SAFETY_SCORE are higher-is-better; ERROR_RATE / MEAN_LATENCY are</p><p>lower-is-better) and applied server-side when picking the winner.</p>
+        <p>The metric an A/B rollout optimizes when comparing each variant against the control. Each value maps to a quantity already produced by the per-variant results rollup (see GetAbExperimentResults). Higher-is-better vs. lower-is-better is implied by the metric (e.g. PASS_RATE / CRITERION_SCORE / SAFETY_SCORE are higher-is-better; ERROR_RATE / MEAN_LATENCY are lower-is-better) and applied server-side when picking the winner.</p>
         <table class="enum-table">
           <thead>
             <tr><td>Name</td><td>Number</td><td>Description</td></tr>
@@ -31162,7 +31170,7 @@ session step, in session order.</p></td>
       
         
         <h3 id="ondewo.nlu.Logs" class="title-badge service">Logs</h3>
-        <p><p>Reads, follows, exports and erases the logs ONDEWO CAI captures: the log records of the CAI gRPC server</p><p>processes themselves (every worker of every replica), the output of the docker containers that remote</p><p>operations run (build cache, training, RAG crawl, LLM evaluation and simulation, RAGFlow upload / removal /</p><p>re-parse) and of the short-lived helper containers that prepare them (hardware check, GPU pre-allocation).</p><p>Long-running operations that run inside a CAI worker (agent export, import, restore, re-index, ranking</p><p>optimization) are covered too: the server records they emit carry the operation&apos;s name.</p></p><p><p>Entries are served from the CAI database, not from the docker daemon, so the logs of a container that was</p><p>already removed, and of a server process that already exited, stay readable until retention or</p><p><code>DeleteLogs</code> removes them.</p></p><p><p><b>Secrets are redacted server-side</b> when an entry is captured and again when it is read, so a</p><p>redaction rule added later also applies to entries captured before it.</p></p><p><p>Errors are reported as gRPC status codes: <code>INVALID_ARGUMENT</code> for a malformed name, filter,</p><p>cursor, <code>resume_token</code>, <code>page_token</code> or <code>field_mask</code> (each naming the field);</p><p><code>NOT_FOUND</code> for an unknown log stream or operation, and for one the caller may not read;</p><p><code>RESOURCE_EXHAUSTED</code> when the server process already serves its maximum of concurrent streams or</p><p>exports; <code>UNAVAILABLE</code> when the logs API is disabled (<code>ONDEWO_NLU_CAI_LOG_API_ENABLED</code>)</p><p>or the database cannot be reached; <code>UNAUTHENTICATED</code> without a valid credential;</p><p><code>PERMISSION_DENIED</code> when the caller may read no logs at all.</p></p><p><p>Authorization: entries that belong to no project (the server&apos;s own records outside any project RPC</p><p>or operation) require the server permission <code>ServerPermission.Logs.ReadServerLogs</code>, granted to</p><p><code>SERVER_ADMIN</code> by default; a caller holding it reads every entry. Without it a caller reads only</p><p>the entries tagged with a project in which it holds <code>ProjectPermission.Logs.ReadProjectLogs</code>,</p><p>granted to <code>PROJECT_DEVELOPER</code> and above by default; entries of other projects are filtered out</p><p>and are never reported as existing. <code>DeleteLogs</code> requires</p><p><code>ServerPermission.Logs.DeleteLogs</code>, granted to <code>SERVER_ADMIN</code> only. A long-running</p><p><code>StreamLogs</code> or <code>ExportLogs</code> re-checks the caller periodically and ends when the access</p><p>was revoked or the credential expired.</p></p>
+        <p>Reads, follows, exports and erases the logs ONDEWO CAI captures: the log records of the CAI gRPC server processes themselves (every worker of every replica), the output of the docker containers that remote operations run (build cache, training, RAG crawl, LLM evaluation and simulation, RAGFlow upload / removal / re-parse) and of the short-lived helper containers that prepare them (hardware check, GPU pre-allocation). Long-running operations that run inside a CAI worker (agent export, import, restore, re-index, ranking optimization) are covered too: the server records they emit carry the operation&apos;s name.</p><p>Entries are served from the CAI database, not from the docker daemon, so the logs of a container that was already removed, and of a server process that already exited, stay readable until retention or <code>DeleteLogs</code> removes them.</p><p><b>Secrets are redacted server-side</b> when an entry is captured and again when it is read, so a redaction rule added later also applies to entries captured before it.</p><p>Errors are reported as gRPC status codes: <code>INVALID_ARGUMENT</code> for a malformed name, filter, cursor, <code>resume_token</code>, <code>page_token</code> or <code>field_mask</code> (each naming the field); <code>NOT_FOUND</code> for an unknown log stream or operation, and for one the caller may not read; <code>RESOURCE_EXHAUSTED</code> when the server process already serves its maximum of concurrent streams or exports; <code>UNAVAILABLE</code> when the logs API is disabled (<code>ONDEWO_NLU_CAI_LOG_API_ENABLED</code>) or the database cannot be reached; <code>UNAUTHENTICATED</code> without a valid credential; <code>PERMISSION_DENIED</code> when the caller may read no logs at all.</p><p>Authorization: entries that belong to no project (the server&apos;s own records outside any project RPC or operation) require the server permission <code>ServerPermission.Logs.ReadServerLogs</code>, granted to <code>SERVER_ADMIN</code> by default; a caller holding it reads every entry. Without it a caller reads only the entries tagged with a project in which it holds <code>ProjectPermission.Logs.ReadProjectLogs</code>, granted to <code>PROJECT_DEVELOPER</code> and above by default; entries of other projects are filtered out and are never reported as existing. <code>DeleteLogs</code> requires <code>ServerPermission.Logs.DeleteLogs</code>, granted to <code>SERVER_ADMIN</code> only. A long-running <code>StreamLogs</code> or <code>ExportLogs</code> re-checks the caller periodically and ends when the access was revoked or the credential expired.</p>
 
         
         <div id="ondewo.nlu.Logs-methods" class="service-methods">Service Methods</div>
@@ -31294,7 +31302,7 @@ cannot be reached.</p>
       <div id="ondewo/nlu/logs.proto-messages" class="object-category">Messages</div>
       
         <h3 id="ondewo.nlu.CaiLogEntry" class="title-badge message">CaiLogEntry</h3>
-        <p>A single captured log record. One record may span several physical lines: a Python traceback, a protobuf</p><p><code>str()</code> dump and a multi-line banner are all one record and are stored and returned as one entry.</p>
+        <p>A single captured log record. One record may span several physical lines: a Python traceback, a protobuf <code>str()</code> dump and a multi-line banner are all one record and are stored and returned as one entry.</p>
 
         
           <table class="field-table">
@@ -31472,7 +31480,7 @@ server record. </p></td>
         
       
         <h3 id="ondewo.nlu.CaiLogFilter" class="title-badge message">CaiLogFilter</h3>
-        <p>Narrows a log query. Every field is optional; an empty repeated field means &quot;do not filter on</p><p>this&quot;. Fields are combined with AND; the values within one repeated field are combined with OR.</p><p><p>Filters fall into two groups. IDENTITY filters (fields 1 to 19) select which log streams, operations and</p><p>projects are of interest. CONTENT filters (fields 20 to 30) select which entries of those to return. The time</p><p>window (fields 31, 32) is neither.</p></p>
+        <p>Narrows a log query. Every field is optional; an empty repeated field means &quot;do not filter on this&quot;. Fields are combined with AND; the values within one repeated field are combined with OR.</p><p>Filters fall into two groups. IDENTITY filters (fields 1 to 19) select which log streams, operations and projects are of interest. CONTENT filters (fields 20 to 30) select which entries of those to return. The time window (fields 31, 32) is neither.</p>
 
         
           <table class="field-table">
@@ -31655,7 +31663,7 @@ after <code>end_time</code> is rejected with <code>INVALID_ARGUMENT</code>. </p>
         
       
         <h3 id="ondewo.nlu.CaiLogStream" class="title-badge message">CaiLogStream</h3>
-        <p>One capture of one server process or of one container. A server process that restarts, and a container</p><p>recreated under a new id, yield a NEW log stream.</p>
+        <p>One capture of one server process or of one container. A server process that restarts, and a container recreated under a new id, yield a NEW log stream.</p>
 
         
           <table class="field-table">
@@ -32408,7 +32416,7 @@ Applied after the server&apos;s secret redaction; never affects the envelope fie
         
       
         <h3 id="ondewo.nlu.StreamLogsResponse" class="title-badge message">StreamLogsResponse</h3>
-        <p>The response message for <a href="index.html#ondewo.nlu.Logs.StreamLogs">Logs.StreamLogs</a>. The stream</p><p>carries an envelope rather than a bare entry so that a viewer can tell a healthy quiet source from a capture</p><p>that has died.</p>
+        <p>The response message for <a href="index.html#ondewo.nlu.Logs.StreamLogs">Logs.StreamLogs</a>. The stream carries an envelope rather than a bare entry so that a viewer can tell a healthy quiet source from a capture that has died.</p>
 
         
           <table class="field-table">
@@ -32484,7 +32492,7 @@ match on <code>end_reason_code</code>. </p></td>
       <div id="ondewo/nlu/logs.proto-enums" class="object-category">Enums</div>
       
         <h3 id="ondewo.nlu.CaiLogCaptureState" class="title-badge enum">CaiLogCaptureState</h3>
-        <p>The state of CAI&apos;s capture of one log stream. This describes the CAPTURE, not the process or the</p><p>container.</p>
+        <p>The state of CAI&apos;s capture of one log stream. This describes the CAPTURE, not the process or the container.</p>
         <table class="enum-table">
           <thead>
             <tr><td>Name</td><td>Number</td><td>Description</td></tr>
@@ -32527,7 +32535,7 @@ container.</p></td>
         </table>
       
         <h3 id="ondewo.nlu.CaiLogExportFormat" class="title-badge enum">CaiLogExportFormat</h3>
-        <p>File format of an <a href="index.html#ondewo.nlu.Logs.ExportLogs">ExportLogs</a> export. Every format is UTF-8</p><p>with <code>\n</code> line endings and one entry per record; a multi-line entry stays one record.</p>
+        <p>File format of an <a href="index.html#ondewo.nlu.Logs.ExportLogs">ExportLogs</a> export. Every format is UTF-8 with <code>\n</code> line endings and one entry per record; a multi-line entry stays one record.</p>
         <table class="enum-table">
           <thead>
             <tr><td>Name</td><td>Number</td><td>Description</td></tr>
@@ -32572,7 +32580,7 @@ container_id,container_name,replica_id,trace_id,physical_line_count,message</cod
         </table>
       
         <h3 id="ondewo.nlu.CaiLogFilterField" class="title-badge enum">CaiLogFilterField</h3>
-        <p>Identifies a field of <a href="index.html#ondewo.nlu.CaiLogFilter">CaiLogFilter</a>. Used by</p><p><a href="index.html#ondewo.nlu.ListLogsResponse">ListLogsResponse.scope_limited_filters</a> to declare which</p><p>filters could only be applied inside the returned window.</p>
+        <p>Identifies a field of <a href="index.html#ondewo.nlu.CaiLogFilter">CaiLogFilter</a>. Used by <a href="index.html#ondewo.nlu.ListLogsResponse">ListLogsResponse.scope_limited_filters</a> to declare which filters could only be applied inside the returned window.</p>
         <table class="enum-table">
           <thead>
             <tr><td>Name</td><td>Number</td><td>Description</td></tr>
@@ -32692,7 +32700,7 @@ operation container is), where the pseudo-terminal merges both channels into one
         </table>
       
         <h3 id="ondewo.nlu.CaiLogStreamEndReason" class="title-badge enum">CaiLogStreamEndReason</h3>
-        <p>Why the SERVER ended a <code>StreamLogs</code> stream. Carried by the final</p><p><a href="index.html#ondewo.nlu.StreamLogsResponse">StreamLogsResponse</a> beside the human-readable</p><p><code>end_reason</code>. A stream ended by the client has no final message.</p>
+        <p>Why the SERVER ended a <code>StreamLogs</code> stream. Carried by the final <a href="index.html#ondewo.nlu.StreamLogsResponse">StreamLogsResponse</a> beside the human-readable <code>end_reason</code>. A stream ended by the client has no final message.</p>
         <table class="enum-table">
           <thead>
             <tr><td>Name</td><td>Number</td><td>Description</td></tr>
@@ -32759,7 +32767,7 @@ with a fresh credential and the <code>resume_token</code>.</p></td>
       <div id="ondewo/nlu/operation_metadata.proto-messages" class="object-category">Messages</div>
       
         <h3 id="ondewo.nlu.OperationMetadata" class="title-badge message">OperationMetadata</h3>
-        <p>Represents the metadata of the long-running operation that can be a parent operation for sub-operations or</p><p>can be a sub-operation itself</p>
+        <p>Represents the metadata of the long-running operation that can be a parent operation for sub-operations or can be a sub-operation itself</p>
 
         
           <table class="field-table">
@@ -32935,7 +32943,7 @@ with a fresh credential and the <code>resume_token</code>.</p></td>
       <div id="ondewo/nlu/operation_metadata.proto-enums" class="object-category">Enums</div>
       
         <h3 id="ondewo.nlu.OperationMetadata.OperationType" class="title-badge enum">OperationMetadata.OperationType</h3>
-        <p>Type of operation.</p><p>It can be creating, importing, exporting, deleting, restoring, building cache, training or exporting benchmark an agent</p>
+        <p>Type of operation. It can be creating, importing, exporting, deleting, restoring, building cache, training or exporting benchmark an agent</p>
         <table class="enum-table">
           <thead>
             <tr><td>Name</td><td>Number</td><td>Description</td></tr>
@@ -33036,7 +33044,7 @@ with a fresh credential and the <code>resume_token</code>.</p></td>
         </table>
       
         <h3 id="ondewo.nlu.OperationMetadata.Status" class="title-badge enum">OperationMetadata.Status</h3>
-        <p>Structure to set status of operation.</p><p>An operation may not be started if NOT_STARTED is set, in progress if IN_PROGRESS, finished if DONE, interrupted if CANCELED or failed if FAILED.</p>
+        <p>Structure to set status of operation. An operation may not be started if NOT_STARTED is set, in progress if IN_PROGRESS, finished if DONE, interrupted if CANCELED or failed if FAILED.</p>
         <table class="enum-table">
           <thead>
             <tr><td>Name</td><td>Number</td><td>Description</td></tr>
@@ -33872,7 +33880,7 @@ Match operations with any of the following project parents. </p></td>
         
       
         <h3 id="ondewo.nlu.RemoteOperationContainer" class="title-badge message">RemoteOperationContainer</h3>
-        <p>Describes one docker container started by a remote operation. A single operation may start several</p><p>containers sequentially (hardware-check, GPU pre-allocation, build-cache, and one training container</p><p>per algorithm), so containers are enumerated by</p><p><a href="index.html#ondewo.nlu.Operations.ListRemoteOperationContainers">Operations.ListRemoteOperationContainers</a>.</p>
+        <p>Describes one docker container started by a remote operation. A single operation may start several containers sequentially (hardware-check, GPU pre-allocation, build-cache, and one training container per algorithm), so containers are enumerated by <a href="index.html#ondewo.nlu.Operations.ListRemoteOperationContainers">Operations.ListRemoteOperationContainers</a>.</p>
 
         
           <table class="field-table">
@@ -35330,14 +35338,14 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre> </p></td>
       <div class="file-heading">
         <h2 id="ondewo/nlu/rag.proto">ondewo/nlu/rag.proto</h2><a href="#top">Top</a>
       </div>
-      <p>File-level comment for <code>ondewo/nlu/rag.proto</code>.</p><p>This file contains a single service <a href="#ondewo.nlu.Rags">Rags</a>. The Rags service provides RAG (Retrieval-Augmented Generation) and web crawler functionality.</p><p>Fields marked as <code>optional</code> carry explicit presence, so that an explicitly set default value (<code>0</code>, <code>false</code>, <code>""</code>) can be distinguished from a field that was never set. Without the <code>optional</code> keyword it would for instance not be possible to distinguish between an integer <code>0</code> and <code>null</code>.</p><p>The marker is applied where that distinction is actually consumed — the partial-update inputs (an unset field leaves the stored value untouched, an explicit default clears it) and the retrieval overrides that are forwarded to RAGFlow (an explicit <code>0.0</code> or <code>false</code> must override the server-side default rather than fall back to it). Fields that carry no such distinction are deliberately left without the keyword, and for message-typed fields it is omitted because proto3 gives them explicit presence anyway.</p>
+      <p>File-level comment for <code>ondewo/nlu/rag.proto</code>. This file contains a single service <a href="#ondewo.nlu.Rags">Rags</a>. The Rags service provides RAG (Retrieval-Augmented Generation) and web crawler functionality. Fields marked as <code>optional</code> carry explicit presence, so that an explicitly set default value (<code>0</code>, <code>false</code>, <code>""</code>) can be distinguished from a field that was never set. Without the <code>optional</code> keyword it would for instance not be possible to distinguish between an integer <code>0</code> and <code>null</code>. The marker is applied where that distinction is actually consumed — the partial-update inputs (an unset field leaves the stored value untouched, an explicit default clears it) and the retrieval overrides that are forwarded to RAGFlow (an explicit <code>0.0</code> or <code>false</code> must override the server-side default rather than fall back to it). Fields that carry no such distinction are deliberately left without the keyword, and for message-typed fields it is omitted because proto3 gives them explicit presence anyway.</p>
 
       
       <div id="ondewo/nlu/rag.proto-services" class="object-category">Services</div>
       
         
         <h3 id="ondewo.nlu.Rags" class="title-badge service">Rags</h3>
-        <p>Provides RAG and web crawler endpoints.</p><p>Most of the RAG related endpoints largely mirror <a href="https://github.com/ondewo/ragflow">RAGFlow's</a> HTTP API endpoints. For more information on RAGFlow refer to the <a href="https://ragflow.io/docs/dev/">official documentation</a></p>
+        <p>Provides RAG and web crawler endpoints. Most of the RAG related endpoints largely mirror <a href="https://github.com/ondewo/ragflow">RAGFlow's</a> HTTP API endpoints. For more information on RAGFlow refer to the <a href="https://ragflow.io/docs/dev/">official documentation</a></p>
 
         
         <div id="ondewo.nlu.Rags-methods" class="service-methods">Service Methods</div>
@@ -35538,7 +35546,7 @@ Queues documents for background processing.
       <div id="ondewo/nlu/rag.proto-messages" class="object-category">Messages</div>
       
         <h3 id="ondewo.nlu.RagAddCrawlerResultsToDatasetsRequest" class="title-badge message">RagAddCrawlerResultsToDatasetsRequest</h3>
-        <p>Request message for adding crawler output to one or more datasets.<br></p><p>Either <code>crawler_names</code> or <code>crawler_result_names</code> (or both) must be provided.</p>
+        <p>Request message for adding crawler output to one or more datasets.<br> Either <code>crawler_names</code> or <code>crawler_result_names</code> (or both) must be provided.</p>
 
         
           <table class="field-table">
@@ -35594,7 +35602,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawler_results/&lt;crawl
         
       
         <h3 id="ondewo.nlu.RagChunk" class="title-badge message">RagChunk</h3>
-        <p>Chunk of text extracted from a document.<br></p><p>Chunks are the basic retrieval units used for vector similarity search in RAG.</p>
+        <p>Chunk of text extracted from a document.<br> Chunks are the basic retrieval units used for vector similarity search in RAG.</p>
 
         
           <table class="field-table">
@@ -35689,7 +35697,7 @@ Each position is an array of 5 integers representing location data (format varie
         
       
         <h3 id="ondewo.nlu.RagCrawler" class="title-badge message">RagCrawler</h3>
-        <p>RagCrawler definition.</p><p>This object represents a reusable crawler profile that can be run multiple times.</p><p>It is modeled after Crawl4AI concepts:</p><p><ul></p><p><li>seed/sitemap discovery (<code>RagCrawlerSources</code>)</li></p><p><li>URL/domain constraints (<code>RagCrawlerFilters</code>)</li></p><p><li>authentication/session bootstrap (<code>RagCrawlerAuth</code>, <code>RagCrawlerBrowserConfig</code>)</li></p><p><li>run behavior and extraction output (<code>RagCrawlerConfig</code>)</li></p><p></ul></p><p>The same crawler can be executed multiple times; each execution creates</p><p>a separate crawler run and result set.</p>
+        <p>RagCrawler definition.</p><p>This object represents a reusable crawler profile that can be run multiple times. It is modeled after Crawl4AI concepts: <ul> <li>seed/sitemap discovery (<code>RagCrawlerSources</code>)</li> <li>URL/domain constraints (<code>RagCrawlerFilters</code>)</li> <li>authentication/session bootstrap (<code>RagCrawlerAuth</code>, <code>RagCrawlerBrowserConfig</code>)</li> <li>run behavior and extraction output (<code>RagCrawlerConfig</code>)</li> </ul></p><p>The same crawler can be executed multiple times; each execution creates a separate crawler run and result set.</p>
 
         
           <table class="field-table">
@@ -35798,7 +35806,7 @@ Roughly corresponds to Crawl4AI <code>CrawlerRunConfig</code>. </p></td>
         
       
         <h3 id="ondewo.nlu.RagCrawlerAuth" class="title-badge message">RagCrawlerAuth</h3>
-        <p>Authentication configuration.</p><p>Supports both browser/form login and HTTP auth patterns used by Crawl4AI pipelines when crawling protected content.</p><p>HTTP Auth is used on all pages of the sources, while html_auth is a separate authentication flow used in the beginning of the crawl to extract the cookies. This is done through a login screen. If HTTP Auth is set, this would ALSO be used on the HTML auth page.</p>
+        <p>Authentication configuration.</p><p>Supports both browser/form login and HTTP auth patterns used by Crawl4AI pipelines when crawling protected content. HTTP Auth is used on all pages of the sources, while html_auth is a separate authentication flow used in the beginning of the crawl to extract the cookies. This is done through a login screen. If HTTP Auth is set, this would ALSO be used on the HTML auth page.</p>
 
         
           <table class="field-table">
@@ -35829,7 +35837,7 @@ Roughly corresponds to Crawl4AI <code>CrawlerRunConfig</code>. </p></td>
         
       
         <h3 id="ondewo.nlu.RagCrawlerBrowserConfig" class="title-badge message">RagCrawlerBrowserConfig</h3>
-        <p>Browser runtime configuration.</p><p>This block maps closely to Crawl4AI BrowserConfig and controls browser</p><p>process setup (engine, headless mode, viewport, context, proxy, cookies,</p><p>user-agent behavior, and launch arguments).</p>
+        <p>Browser runtime configuration.</p><p>This block maps closely to Crawl4AI BrowserConfig and controls browser process setup (engine, headless mode, viewport, context, proxy, cookies, user-agent behavior, and launch arguments).</p>
 
         
           <table class="field-table">
@@ -35900,7 +35908,7 @@ Increase for throughput; reduce for fragile sites/rate limits. </p></td>
         
       
         <h3 id="ondewo.nlu.RagCrawlerConfig" class="title-badge message">RagCrawlerConfig</h3>
-        <p>Crawl run behavior.</p><p>This block controls scheduling, traversal, extraction outputs, retries,</p><p>diagnostics capture, and deep crawling options for each crawler run.</p>
+        <p>Crawl run behavior.</p><p>This block controls scheduling, traversal, extraction outputs, retries, diagnostics capture, and deep crawling options for each crawler run.</p>
 
         
           <table class="field-table">
@@ -36225,7 +36233,7 @@ Default <code>false</code>. If <code>false</code>, <code>config</code> is ignore
         
       
         <h3 id="ondewo.nlu.RagCrawlerFilters" class="title-badge message">RagCrawlerFilters</h3>
-        <p>URL and domain restrictions.</p><p>Filters are evaluated during link discovery/scheduling and help avoid</p><p>crawling irrelevant, duplicate, or unsafe sections (auth/logout pages,</p><p>marketing subdomains, binary downloads, etc.).</p><p>These include domains to be excluded in the sources (e.g. through sitemaps or seed URLs)</p><p>and domains to be excluded in the deep crawl or extraction of pages to be crawled.</p>
+        <p>URL and domain restrictions.</p><p>Filters are evaluated during link discovery/scheduling and help avoid crawling irrelevant, duplicate, or unsafe sections (auth/logout pages, marketing subdomains, binary downloads, etc.). These include domains to be excluded in the sources (e.g. through sitemaps or seed URLs) and domains to be excluded in the deep crawl or extraction of pages to be crawled.</p>
 
         
           <table class="field-table">
@@ -36341,7 +36349,7 @@ Default <code>false</code>. If <code>false</code>, <code>config</code> is ignore
         
       
         <h3 id="ondewo.nlu.RagCrawlerHtmlAuth" class="title-badge message">RagCrawlerHtmlAuth</h3>
-        <p>Form/HTML login configuration.</p><p>Selector types and selector strings identify login form fields in the page</p><p>DOM. Credentials are then filled before form submission.</p>
+        <p>Form/HTML login configuration.</p><p>Selector types and selector strings identify login form fields in the page DOM. Credentials are then filled before form submission.</p>
 
         
           <table class="field-table">
@@ -36445,7 +36453,7 @@ Default <code>false</code>. If <code>false</code>, <code>config</code> is ignore
         
       
         <h3 id="ondewo.nlu.RagCrawlerIncrementalConfig" class="title-badge message">RagCrawlerIncrementalConfig</h3>
-        <p>Incremental crawling: skip re-fetching pages a sitemap reports as unchanged.</p><p>A page is reused from the most recent completed run of the same crawler when its sitemap/ <code>&lt;lastmod&gt;</code> is not newer than the <code>page_last_updated_date</code> of the copy that run holds. A reused page is part of the new run exactly like a freshly fetched one; only <code>RagCrawlerResult.last_crawled_date</code> still reports when its content was actually fetched.</p><p>A page is always fetched when any of the following holds: its sitemap entry carries no <code>&lt;lastmod&gt;</code>; the most recent completed run did not contain it; there is no completed previous</p><p>run; the crawler configuration changed since that run; or <code>max_age_days</code> has elapsed.</p>
+        <p>Incremental crawling: skip re-fetching pages a sitemap reports as unchanged.</p><p>A page is reused from the most recent completed run of the same crawler when its sitemap/ <code>&lt;lastmod&gt;</code> is not newer than the <code>page_last_updated_date</code> of the copy that run holds. A reused page is part of the new run exactly like a freshly fetched one; only <code>RagCrawlerResult.last_crawled_date</code> still reports when its content was actually fetched.</p><p>A page is always fetched when any of the following holds: its sitemap entry carries no <code>&lt;lastmod&gt;</code>; the most recent completed run did not contain it; there is no completed previous run; the crawler configuration changed since that run; or <code>max_age_days</code> has elapsed.</p>
 
         
           <table class="field-table">
@@ -36514,7 +36522,7 @@ Default <code>false</code>. If <code>false</code>, <code>config</code> is ignore
         
       
         <h3 id="ondewo.nlu.RagCrawlerResult" class="title-badge message">RagCrawlerResult</h3>
-        <p>Crawler result entity.</p><p>Each result corresponds to one crawled URL in a crawler run and includes</p><p>extracted content, metadata, diagnostics, and optional binary artifacts.</p>
+        <p>Crawler result entity.</p><p>Each result corresponds to one crawled URL in a crawler run and includes extracted content, metadata, diagnostics, and optional binary artifacts.</p>
 
         
           <table class="field-table">
@@ -36591,7 +36599,7 @@ Source precedence: HTTP Last-Modified header, then sitemap <lastmod> fallback. <
         
       
         <h3 id="ondewo.nlu.RagCrawlerResultsConfig" class="title-badge message">RagCrawlerResultsConfig</h3>
-        <p>Structured output configuration.</p><p>Use this block to define result payload shape and metadata behavior,</p><p>similar to Crawl4AI markdown/output-generation toggles.</p>
+        <p>Structured output configuration.</p><p>Use this block to define result payload shape and metadata behavior, similar to Crawl4AI markdown/output-generation toggles.</p>
 
         
           <table class="field-table">
@@ -36735,7 +36743,7 @@ If not set the <code>RagCrawlerDensityPruning</code> defaults are used. </p></td
         
       
         <h3 id="ondewo.nlu.RagCrawlerSources" class="title-badge message">RagCrawlerSources</h3>
-        <p>Crawl entry points.</p><p>Both inputs can be provided at the same time:</p><p>- Sitemaps are expanded into a crawl URL list (in discovery order)</p><p>- Seed URLs are appended afterwards (in the order provided)</p>
+        <p>Crawl entry points.</p><p>Both inputs can be provided at the same time: - Sitemaps are expanded into a crawl URL list (in discovery order) - Seed URLs are appended afterwards (in the order provided)</p>
 
         
           <table class="field-table">
@@ -37202,7 +37210,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid
         
       
         <h3 id="ondewo.nlu.RagDeleteCrawlerRunsRequest" class="title-badge message">RagDeleteCrawlerRunsRequest</h3>
-        <p>Request message for deleting crawler runs.</p><p>Deletion candidates are the union of:</p><p>- explicit run names in <code>crawler_run_names</code></p><p>- all runs belonging to crawlers listed in <code>crawler_names</code></p><p>If both lists are empty, the call is a no-op.</p>
+        <p>Request message for deleting crawler runs.</p><p>Deletion candidates are the union of: - explicit run names in <code>crawler_run_names</code> - all runs belonging to crawlers listed in <code>crawler_names</code></p><p>If both lists are empty, the call is a no-op.</p>
 
         
           <table class="field-table">
@@ -37769,7 +37777,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
         
       
         <h3 id="ondewo.nlu.RagFileChunk" class="title-badge message">RagFileChunk</h3>
-        <p>File chunk for streaming downloads.<br></p><p>First chunk contains metadata, subsequent chunks only contain data.</p>
+        <p>File chunk for streaming downloads.<br> First chunk contains metadata, subsequent chunks only contain data.</p>
 
         
           <table class="field-table">
@@ -38064,7 +38072,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawler_runs/&lt;crawler_
         
       
         <h3 id="ondewo.nlu.RagGetCrawlerResultsRequest" class="title-badge message">RagGetCrawlerResultsRequest</h3>
-        <p>Request message for getting crawler results of a crawler run.</p><p>Results are returned in pages. Request the first page with an empty</p><p><code>page_token</code>, then continue with each response <code>next_page_token</code>.</p><p>Example:</p><p><pre><code>RagGetCrawlerResults(run_name, page_token="")</p><p>-> next_page_token="..."</p><p>RagGetCrawlerResults(run_name, page_token="...")</p><p></code></pre></p>
+        <p>Request message for getting crawler results of a crawler run.</p><p>Results are returned in pages. Request the first page with an empty <code>page_token</code>, then continue with each response <code>next_page_token</code>.</p><p>Example: <pre><code>RagGetCrawlerResults(run_name, page_token="")&#10;-> next_page_token="..."&#10;RagGetCrawlerResults(run_name, page_token="...")&#10;</code></pre></p>
 
         
           <table class="field-table">
@@ -39002,7 +39010,7 @@ Both <code>current_index-&lt;idx&gt;</code> and <code>page_size-&lt;size&gt;</co
         
       
         <h3 id="ondewo.nlu.RagMetadataCondition" class="title-badge message">RagMetadataCondition</h3>
-        <p>Condition to filter document metadata on.</p><p>String comparison is always case-insensitive.</p>
+        <p>Condition to filter document metadata on. String comparison is always case-insensitive.</p>
 
         
           <table class="field-table">
@@ -39072,7 +39080,7 @@ Must always be a string, but can also be the string representation of a differen
         
       
         <h3 id="ondewo.nlu.RagParserConfig" class="title-badge message">RagParserConfig</h3>
-        <p>Document parser configuration.</p><p>Used fields depend on the chunking method of the document.</p><p><ul></p><p><li><code>naive</code>: uses the following fields (all optional)</li></p><p><ul></p><p><li><code>auto_keywords</code></li></p><p><li><code>auto_questions</code></li></p><p><li><code>chunk_token_num</code></li></p><p><li><code>delimiter</code></li></p><p><li><code>html4excel</code></li></p><p><li><code>layout_recognize</code></li></p><p><li><code>tag_kb_ids</code></li></p><p><li><code>task_page_size</code></li></p><p><li><code>raptor</code></li></p><p><li><code>graphrag</code></li></p><p></ul></p><p><li><code>qa</code>, <code>manual</code>, <code>paper</code>, <code>book</code>, <code>laws</code>, <code>presentation</code>: uses only the <code>raptor</code> field</li></p><p><li><code>table</code>, <code>picture</code>, <code>one</code>, <code>email</code>: does not use any field (expects empty message)</li></p><p></ul></p>
+        <p>Document parser configuration.</p><p>Used fields depend on the chunking method of the document. <ul> <li><code>naive</code>: uses the following fields (all optional)</li> <ul> <li><code>auto_keywords</code></li> <li><code>auto_questions</code></li> <li><code>chunk_token_num</code></li> <li><code>delimiter</code></li> <li><code>html4excel</code></li> <li><code>layout_recognize</code></li> <li><code>tag_kb_ids</code></li> <li><code>task_page_size</code></li> <li><code>raptor</code></li> <li><code>graphrag</code></li> </ul> <li><code>qa</code>, <code>manual</code>, <code>paper</code>, <code>book</code>, <code>laws</code>, <code>presentation</code>: uses only the <code>raptor</code> field</li> <li><code>table</code>, <code>picture</code>, <code>one</code>, <code>email</code>: does not use any field (expects empty message)</li> </ul></p>
 
         
           <table class="field-table">
@@ -39173,7 +39181,7 @@ Must always be a string, but can also be the string representation of a differen
         
       
         <h3 id="ondewo.nlu.RagPartialSuccess" class="title-badge message">RagPartialSuccess</h3>
-        <p>On complete success: no fields set (empty message).</p><p>On partial success/failure: both fields set.</p>
+        <p>On complete success: no fields set (empty message). On partial success/failure: both fields set.</p>
 
         
           <table class="field-table">
@@ -39324,7 +39332,7 @@ dataset_ids = ["dataset-a", "dataset-b"]</code></pre> </p></td>
         
       
         <h3 id="ondewo.nlu.RagRetrievalRequest" class="title-badge message">RagRetrievalRequest</h3>
-        <p>Request message for retrieving chunks using vector similarity search.<br></p><p>Supports hybrid search combining vector similarity with keyword matching.</p>
+        <p>Request message for retrieving chunks using vector similarity search.<br> Supports hybrid search combining vector similarity with keyword matching.</p>
 
         
           <table class="field-table">
@@ -39539,7 +39547,7 @@ Higher values favor vector similarity, lower values favor keyword matching. </p>
         
       
         <h3 id="ondewo.nlu.RagStartCrawlerRequest" class="title-badge message">RagStartCrawlerRequest</h3>
-        <p>Request message for running a crawler.</p><p>This starts a long-running operation and returns immediately.</p><p>Clients should poll operation status via <code>RagGetCrawlerRun</code>.</p>
+        <p>Request message for running a crawler.</p><p>This starts a long-running operation and returns immediately. Clients should poll operation status via <code>RagGetCrawlerRun</code>.</p>
 
         
           <table class="field-table">
@@ -39707,7 +39715,7 @@ If not provided, all configuration fields in crawler are updated. </p></td>
         
       
         <h3 id="ondewo.nlu.RagUpdateDatasetRequest" class="title-badge message">RagUpdateDatasetRequest</h3>
-        <p>Request message for updating an existing dataset.</p><p>The same field constraints as for <code>RagCreateDatasetRequest</code> apply here.</p>
+        <p>Request message for updating an existing dataset. The same field constraints as for <code>RagCreateDatasetRequest</code> apply here.</p>
 
         
           <table class="field-table">
@@ -41798,7 +41806,7 @@ A transcription can be from a speech-to-text system or a human </p></td>
         
       
         <h3 id="ondewo.nlu.CancelTurn" class="title-badge message">CancelTurn</h3>
-        <p>Cancels a turn. At least one of <code>response_id</code> and <code>client_turn_id</code> must be set; when both</p><p>are, <code>client_turn_id</code> is authoritative.</p>
+        <p>Cancels a turn. At least one of <code>response_id</code> and <code>client_turn_id</code> must be set; when both are, <code>client_turn_id</code> is authoritative.</p>
 
         
           <table class="field-table">
@@ -41944,7 +41952,7 @@ Optional. If not provided, it will be auto-generated </p></td>
         
       
         <h3 id="ondewo.nlu.CreateSessionReviewRequest" class="title-badge message">CreateSessionReviewRequest</h3>
-        <p>Request to persist a session review for a given session.</p><p>As a side effect, training data in ondewo-cai may also be updated.</p>
+        <p>Request to persist a session review for a given session. As a side effect, training data in ondewo-cai may also be updated.</p>
 
         
           <table class="field-table">
@@ -42395,7 +42403,7 @@ This field is set only for the first detected intent. For the rest of the intent
         
       
         <h3 id="ondewo.nlu.DiscardDraft" class="title-badge message">DiscardDraft</h3>
-        <p>Discards the session step of a preemptive draft: a turn the client started speculatively on a partial</p><p>transcript and then did not use. The server deletes the session step only when it belongs to this session and its</p><p>request carried <code>QueryParameters.preemptive_draft</code> = true; it answers</p><p><code>TURN_CONTROL_ACK_STATUS_DRAFT_DISCARDED</code>. Any other step is kept and the server answers</p><p><code>TURN_CONTROL_ACK_STATUS_UNKNOWN_TURN</code>.</p>
+        <p>Discards the session step of a preemptive draft: a turn the client started speculatively on a partial transcript and then did not use. The server deletes the session step only when it belongs to this session and its request carried <code>QueryParameters.preemptive_draft</code> = true; it answers <code>TURN_CONTROL_ACK_STATUS_DRAFT_DISCARDED</code>. Any other step is kept and the server answers <code>TURN_CONTROL_ACK_STATUS_UNKNOWN_TURN</code>.</p>
 
         
           <table class="field-table">
@@ -42487,7 +42495,7 @@ or a user-assigned name. </p></td>
         
       
         <h3 id="ondewo.nlu.EventInput" class="title-badge message">EventInput</h3>
-        <p>Events allow for matching intents by event name instead of the natural language input.</p><p>For instance, input <code>&lt;event: { name: &quot;welcome_event&quot;, parameters: { name: &quot;Sam&quot; } }&gt;</code> can trigger a personalized welcome response.</p><p>The parameter <code>name</code> may be used by the agent in the response: <code>&quot;Hello #welcome_event.name! What can I do for you today?&quot;</code>.</p>
+        <p>Events allow for matching intents by event name instead of the natural language input. For instance, input <code>&lt;event: { name: &quot;welcome_event&quot;, parameters: { name: &quot;Sam&quot; } }&gt;</code> can trigger a personalized welcome response. The parameter <code>name</code> may be used by the agent in the response: <code>&quot;Hello #welcome_event.name! What can I do for you today?&quot;</code>.</p>
 
         
           <table class="field-table">
@@ -42573,7 +42581,7 @@ do not necessarily need to specify the same language. </p></td>
         
       
         <h3 id="ondewo.nlu.FeedbackFilter" class="title-badge message">FeedbackFilter</h3>
-        <p>A key + up/down counts breakdown bucket (by language / intent / author type / ...).</p><p>A feedback-native filter for feedback list + analytics requests, complementing SessionFilter (which</p><p>filters the parent sessions). All set fields are AND-combined; repeated fields are OR-within-field.</p>
+        <p>A key + up/down counts breakdown bucket (by language / intent / author type / ...). A feedback-native filter for feedback list + analytics requests, complementing SessionFilter (which filters the parent sessions). All set fields are AND-combined; repeated fields are OR-within-field.</p>
 
         
           <table class="field-table">
@@ -43569,7 +43577,7 @@ otherwise. </p></td>
         
       
         <h3 id="ondewo.nlu.HeardReport" class="title-badge message">HeardReport</h3>
-        <p>Reports what the user heard of a turn's answer. At least one of <code>response_id</code> and</p><p><code>client_turn_id</code> must be set. The server keeps the report with the highest <code>revision</code> per</p><p>turn and ignores a lower or equal one.</p>
+        <p>Reports what the user heard of a turn's answer. At least one of <code>response_id</code> and <code>client_turn_id</code> must be set. The server keeps the report with the highest <code>revision</code> per turn and ignores a lower or equal one.</p>
 
         
           <table class="field-table">
@@ -45373,7 +45381,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
         
       
         <h3 id="ondewo.nlu.LlmAgentNodeEvent" class="title-badge message">LlmAgentNodeEvent</h3>
-        <p>Emitted on a streaming DetectIntent when a node of an AI Team graph starts, completes or fails.</p><p>A node inside a nested graph (a subgraph, or a member agent of a supervisor or swarm) is reported too,</p><p>with its full <code>llm_agent_node_event_node_path</code>.</p>
+        <p>Emitted on a streaming DetectIntent when a node of an AI Team graph starts, completes or fails. A node inside a nested graph (a subgraph, or a member agent of a supervisor or swarm) is reported too, with its full <code>llm_agent_node_event_node_path</code>.</p>
 
         
           <table class="field-table">
@@ -45508,7 +45516,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre> </p></td>
         
       
         <h3 id="ondewo.nlu.LlmBaseUrlUsage" class="title-badge message">LlmBaseUrlUsage</h3>
-        <p>Per-base-URL usage rollup across the scope. One entry per distinct</p><p><code>LlmTelemetry.base_url</code>; calls whose model configuration states no base URL are</p><p>grouped under an empty <code>base_url</code>.</p>
+        <p>Per-base-URL usage rollup across the scope. One entry per distinct <code>LlmTelemetry.base_url</code>; calls whose model configuration states no base URL are grouped under an empty <code>base_url</code>.</p>
 
         
           <table class="field-table">
@@ -46197,7 +46205,7 @@ was removed). </p></td>
         
       
         <h3 id="ondewo.nlu.LlmRetrievalMetadata" class="title-badge message">LlmRetrievalMetadata</h3>
-        <p>Typed view of the chunks retrieved for one LLM call. Populated alongside the</p><p>unstructured <code>outputs.retrieved_chunks</code> Struct (field 18 on</p><p>LlmTelemetry, kept for back-compat); both carry the same chunk list.</p>
+        <p>Typed view of the chunks retrieved for one LLM call. Populated alongside the unstructured <code>outputs.retrieved_chunks</code> Struct (field 18 on LlmTelemetry, kept for back-compat); both carry the same chunk list.</p>
 
         
           <table class="field-table">
@@ -46221,7 +46229,7 @@ was removed). </p></td>
         
       
         <h3 id="ondewo.nlu.LlmRetrievedChunk" class="title-badge message">LlmRetrievedChunk</h3>
-        <p>One retrieved RAG chunk surfaced during an LLM call. Mirrors the five-field</p><p>chunk already emitted into <code>outputs.retrieved_chunks</code> (Struct) plus</p><p>a typed <code>rank</code>.</p>
+        <p>One retrieved RAG chunk surfaced during an LLM call. Mirrors the five-field chunk already emitted into <code>outputs.retrieved_chunks</code> (Struct) plus a typed <code>rank</code>.</p>
 
         
           <table class="field-table">
@@ -46281,7 +46289,7 @@ was removed). </p></td>
         
       
         <h3 id="ondewo.nlu.LlmSafetyAssessment" class="title-badge message">LlmSafetyAssessment</h3>
-        <p>Native safety assessment for one LLM call, computed at telemetry build time by</p><p>a dependency-free (regex / substring) assessor over the call's input / output</p><p>text. Additive, optional: absent when safety scoring is disabled. This is the</p><p>live MONITORING signal; the offline LLM-judge safety evaluators live in</p><p><code>llm_evaluation.proto</code>.</p>
+        <p>Native safety assessment for one LLM call, computed at telemetry build time by a dependency-free (regex / substring) assessor over the call's input / output text. Additive, optional: absent when safety scoring is disabled. This is the live MONITORING signal; the offline LLM-judge safety evaluators live in <code>llm_evaluation.proto</code>.</p>
 
         
           <table class="field-table">
@@ -46429,7 +46437,7 @@ fully safe (no findings) and lower values indicate higher risk. </p></td>
         
       
         <h3 id="ondewo.nlu.LlmSafetyStats" class="title-badge message">LlmSafetyStats</h3>
-        <p>Native-safety breakdown aggregate across the LLM calls in scope. Computed from</p><p>the per-call LlmSafetyAssessment records.</p>
+        <p>Native-safety breakdown aggregate across the LLM calls in scope. Computed from the per-call LlmSafetyAssessment records.</p>
 
         
           <table class="field-table">
@@ -46965,7 +46973,7 @@ which is the UPSTREAM framework's id (e.g. langchain). </p></td>
         
       
         <h3 id="ondewo.nlu.LlmTelemetryReport" class="title-badge message">LlmTelemetryReport</h3>
-        <p>Aggregated telemetry across all LLM calls in one DetectIntent turn, or across</p><p>a session / agent-domain scope when used as a statistics report payload. The</p><p>breakdown fields (6+) are populated only for the matching report type; a</p><p>*_LLM_TOTAL_STATISTICS report populates all of them.</p>
+        <p>Aggregated telemetry across all LLM calls in one DetectIntent turn, or across a session / agent-domain scope when used as a statistics report payload. The breakdown fields (6+) are populated only for the matching report type; a *_LLM_TOTAL_STATISTICS report populates all of them.</p>
 
         
           <table class="field-table">
@@ -47170,7 +47178,7 @@ distinct base URL in scope. </p></td>
         
       
         <h3 id="ondewo.nlu.LlmThinkingMetadata" class="title-badge message">LlmThinkingMetadata</h3>
-        <p>Thinking / reasoning block emitted by the model (e.g. Anthropic extended thinking,</p><p>OpenAI o-series reasoning).</p>
+        <p>Thinking / reasoning block emitted by the model (e.g. Anthropic extended thinking, OpenAI o-series reasoning).</p>
 
         
           <table class="field-table">
@@ -48344,7 +48352,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid
         
       
         <h3 id="ondewo.nlu.SessionFeedback" class="title-badge message">SessionFeedback</h3>
-        <p>A single piece of user feedback about a whole session or a single session step (turn).</p><p>The rating is intentionally extensible: <code>rating</code> carries the thumbs signal surfaced in the UI</p><p>today, while <code>score</code> and <code>categorical_value</code> allow richer scales (star / NPS / CSAT)</p><p>to be added later without a schema change. The feedback is pinned to the exact forensic context it is</p><p>about (<code>session_id</code>, <code>session_step_id</code>, <code>response_id</code>,</p><p><code>session_step_llm_telemetry_id</code>) so the full conversation state up to the feedback can be</p><p>reconstructed from the already-persisted session step.</p>
+        <p>A single piece of user feedback about a whole session or a single session step (turn).</p><p>The rating is intentionally extensible: <code>rating</code> carries the thumbs signal surfaced in the UI today, while <code>score</code> and <code>categorical_value</code> allow richer scales (star / NPS / CSAT) to be added later without a schema change. The feedback is pinned to the exact forensic context it is about (<code>session_id</code>, <code>session_step_id</code>, <code>response_id</code>, <code>session_step_llm_telemetry_id</code>) so the full conversation state up to the feedback can be reconstructed from the already-persisted session step.</p>
 
         
           <table class="field-table">
@@ -49440,6 +49448,115 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid
 plus turn-level totals). </p></td>
                 </tr>
               
+                <tr>
+                  <td>interruption</td>
+                  <td><a href="#ondewo.nlu.SessionStepInterruption">SessionStepInterruption</a></td>
+                  <td></td>
+                  <td><p>Read-only. How the step's turn was interrupted; set only when it was. The server fills it from the step it
+stored and ignores a value a client sends. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="ondewo.nlu.SessionStepInterruption" class="title-badge message">SessionStepInterruption</h3>
+        <p>How a session step's turn was interrupted. Read-only; the server fills it from the step it stored.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>interrupted</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Whether the turn was interrupted: cancelled, or its answer was not heard in full. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>cancelled</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Whether the turn was cancelled by a <code>CancelTurn</code>. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>phase</td>
+                  <td><a href="#ondewo.nlu.SessionStepInterruptionPhase">SessionStepInterruptionPhase</a></td>
+                  <td></td>
+                  <td><p>The phase the turn was in when it was interrupted. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>turn_interruption_reason</td>
+                  <td><a href="#ondewo.nlu.TurnInterruptionReason">TurnInterruptionReason</a></td>
+                  <td></td>
+                  <td><p>Why the turn was interrupted. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>heard_report_revision</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p><code>HeardReport.revision</code> of the report applied; <code>0</code> when none arrived. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>heard_text_precision</td>
+                  <td><a href="#ondewo.nlu.HeardTextPrecision">HeardTextPrecision</a></td>
+                  <td></td>
+                  <td><p>How the heard text of the applied report was determined. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>heard_char_count</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>Unicode code points of the answer the user heard. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>total_char_count</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>Unicode code points of the answer that was spoken, queued or skipped. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>generated_text</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The answer text as generated, before it was rewritten to the heard text. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>tools_in_flight</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>The tools the turn called whose result was never recorded. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>skipped_sip_trigger_count</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>Number of messages whose SIP trigger was not executed because the turn was interrupted first. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>caller_overlap_duration_in_s</td>
+                  <td><a href="#float">float</a></td>
+                  <td></td>
+                  <td><p>Duration of heard audio that was played after the user had started speaking, in seconds. </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -49448,7 +49565,7 @@ plus turn-level totals). </p></td>
         
       
         <h3 id="ondewo.nlu.StreamingDetectIntentRequest" class="title-badge message">StreamingDetectIntentRequest</h3>
-        <p>The top-level message sent by the client to the <code>StreamingDetectIntent</code> method.</p><p>Multiple request messages should be sent in order:</p><p>1.  The first message must contain <code>session</code>, <code>query_input</code> plus optionally <code>query_params</code> and/or <code>single_utterance</code>. The message must not contain <code>input_audio</code>.</p><p>2.  If <code>query_input</code> was set to a streaming input audio config, all subsequent messages must contain only <code>input_audio</code>. Otherwise, finish the request stream.</p>
+        <p>The top-level message sent by the client to the <code>StreamingDetectIntent</code> method. Multiple request messages should be sent in order: 1.  The first message must contain <code>session</code>, <code>query_input</code> plus optionally <code>query_params</code> and/or <code>single_utterance</code>. The message must not contain <code>input_audio</code>. 2.  If <code>query_input</code> was set to a streaming input audio config, all subsequent messages must contain only <code>input_audio</code>. Otherwise, finish the request stream.</p>
 
         
           <table class="field-table">
@@ -49540,7 +49657,7 @@ without <code>query_input</code> as a malformed turn and ends the stream. </p></
         
       
         <h3 id="ondewo.nlu.StreamingDetectIntentResponse" class="title-badge message">StreamingDetectIntentResponse</h3>
-        <p>The top-level message returned from the <code>StreamingDetectIntent</code> method.</p><p>Multiple response messages can be returned in order:</p><p>1.  If the input was set to streaming audio, the first one or more messages contain <code>recognition_result</code>. Each <code>recognition_result</code> represents a more complete transcript of what the user said. The last <code>recognition_result</code> has <code>is_final</code> set to <code>true</code>.</p><p>2.  The next message contains <code>response_id</code>, <code>query_result</code> and optionally <code>webhook_status</code> if a WebHook was called.</p>
+        <p>The top-level message returned from the <code>StreamingDetectIntent</code> method. Multiple response messages can be returned in order: 1.  If the input was set to streaming audio, the first one or more messages contain <code>recognition_result</code>. Each <code>recognition_result</code> represents a more complete transcript of what the user said. The last <code>recognition_result</code> has <code>is_final</code> set to <code>true</code>. 2.  The next message contains <code>response_id</code>, <code>query_result</code> and optionally <code>webhook_status</code> if a WebHook was called.</p>
 
         
           <table class="field-table">
@@ -49658,7 +49775,7 @@ when the client sent none. </p></td>
         
       
         <h3 id="ondewo.nlu.StreamingRecognitionResult" class="title-badge message">StreamingRecognitionResult</h3>
-        <p>Contains a speech recognition result corresponding to a portion of the audio that is currently being processed or an indication that this is the end of the single requested utterance.</p><p>Example:</p><p>1.  transcript: &quot;tube&quot;</p><p>2.  transcript: &quot;to be a&quot;</p><p>3.  transcript: &quot;to be&quot;</p><p>4.  transcript: &quot;to be or not to be&quot;</p><p>is_final: true</p><p>5.  transcript: &quot; that&apos;s&quot;</p><p>6.  transcript: &quot; that is&quot;</p><p>7.  recognition_event_type: <code>RECOGNITION_EVENT_END_OF_SINGLE_UTTERANCE</code></p><p>8.  transcript: &quot; that is the question&quot;</p><p>is_final: true</p><p>Only two of the responses contain final results (#4 and #8 indicated by <code>is_final: true</code>). Concatenating these generates the full transcript: <code>"to be or not to be that is the question"</code>.</p><p>In each response we populate:</p><p><ul></p><p><li>for <code>MESSAGE_TYPE_TRANSCRIPT</code>: <code>transcript</code> and possibly <code>is_final</code>.</li></p><p><li>for <code>MESSAGE_TYPE_END_OF_SINGLE_UTTERANCE</code>: only <code>event_type</code>.</li></p><p></ul></p>
+        <p>Contains a speech recognition result corresponding to a portion of the audio that is currently being processed or an indication that this is the end of the single requested utterance.</p><p>Example:</p><p>1.  transcript: &quot;tube&quot;</p><p>2.  transcript: &quot;to be a&quot;</p><p>3.  transcript: &quot;to be&quot;</p><p>4.  transcript: &quot;to be or not to be&quot; is_final: true</p><p>5.  transcript: &quot; that&apos;s&quot;</p><p>6.  transcript: &quot; that is&quot;</p><p>7.  recognition_event_type: <code>RECOGNITION_EVENT_END_OF_SINGLE_UTTERANCE</code></p><p>8.  transcript: &quot; that is the question&quot; is_final: true</p><p>Only two of the responses contain final results (#4 and #8 indicated by <code>is_final: true</code>). Concatenating these generates the full transcript: <code>"to be or not to be that is the question"</code>.</p><p>In each response we populate:</p><p><ul> <li>for <code>MESSAGE_TYPE_TRANSCRIPT</code>: <code>transcript</code> and possibly <code>is_final</code>.</li> <li>for <code>MESSAGE_TYPE_END_OF_SINGLE_UTTERANCE</code>: only <code>event_type</code>.</li> </ul></p>
 
         
           <table class="field-table">
@@ -49749,7 +49866,7 @@ do not necessarily need to specify the same language. </p></td>
         
       
         <h3 id="ondewo.nlu.TurnControl" class="title-badge message">TurnControl</h3>
-        <p>Controls one turn of a session. Sent as <code>StreamingDetectIntentRequest.turn_control</code> on a call-length</p><p>stream, or in an <code>InterruptTurnRequest</code>.</p>
+        <p>Controls one turn of a session. Sent as <code>StreamingDetectIntentRequest.turn_control</code> on a call-length stream, or in an <code>InterruptTurnRequest</code>.</p>
 
         
           <table class="field-table">
@@ -50026,7 +50143,7 @@ Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid
         
       
         <h3 id="ondewo.nlu.WarmTransferIntroConfig" class="title-badge message">WarmTransferIntroConfig</h3>
-        <p>The configuration of one warm transfer intro, as resolved by the caller of</p><p><code>PrepareWarmTransferIntro</code>. A text left empty (or unset, for an <code>optional</code> field) falls back</p><p>to the agent's default text for the language (<code>Agent.warm_transfer_settings</code>), then to the built-in</p><p>default. Texts are spoken to the target, never to the caller, except <code>caller_declined_message</code> and</p><p><code>caller_unreachable_message</code>.</p>
+        <p>The configuration of one warm transfer intro, as resolved by the caller of <code>PrepareWarmTransferIntro</code>. A text left empty (or unset, for an <code>optional</code> field) falls back to the agent's default text for the language (<code>Agent.warm_transfer_settings</code>), then to the built-in default. Texts are spoken to the target, never to the caller, except <code>caller_declined_message</code> and <code>caller_unreachable_message</code>.</p>
 
         
           <table class="field-table">
@@ -50224,7 +50341,7 @@ the intro could not run. Placeholder <code>{callee_name}</code>. </p></td>
       <div id="ondewo/nlu/session.proto-enums" class="object-category">Enums</div>
       
         <h3 id="ondewo.nlu.AudioEncoding" class="title-badge enum">AudioEncoding</h3>
-        <p>Audio encoding of the audio content sent in the conversational query request.</p><p>Refer to the <a href="/speech/docs/basics">Cloud Speech API documentation</a> for more details.</p>
+        <p>Audio encoding of the audio content sent in the conversational query request. Refer to the <a href="/speech/docs/basics">Cloud Speech API documentation</a> for more details.</p>
         <table class="enum-table">
           <thead>
             <tr><td>Name</td><td>Number</td><td>Description</td></tr>
@@ -50506,7 +50623,7 @@ identified only by the session and channel origin).</p></td>
         </table>
       
         <h3 id="ondewo.nlu.FeedbackTimeGranularity" class="title-badge enum">FeedbackTimeGranularity</h3>
-        <p>The calendar granularity of a feedback time series. When set (non-unspecified) it overrides the</p><p>fixed-width bucket_width_seconds on the request.</p>
+        <p>The calendar granularity of a feedback time series. When set (non-unspecified) it overrides the fixed-width bucket_width_seconds on the request.</p>
         <table class="enum-table">
           <thead>
             <tr><td>Name</td><td>Number</td><td>Description</td></tr>
@@ -50591,6 +50708,20 @@ measured by the player, and mapped proportionally onto the text.</p></td>
                 <td><p>The played share of the audio was measured by the audio player and mapped proportionally onto the text.</p></td>
               </tr>
             
+              <tr>
+                <td>HEARD_TEXT_PRECISION_SENTENCE_ALIGNED</td>
+                <td>5</td>
+                <td><p>The played share of the audio was measured by the audio player and mapped onto the text through the speech
+synthesizer's per-segment text spans; proportionally only inside the segment that was cut.</p></td>
+              </tr>
+            
+              <tr>
+                <td>HEARD_TEXT_PRECISION_WORD_TIMED</td>
+                <td>6</td>
+                <td><p>The played share of the audio was measured by the audio player and mapped onto the text through the speech
+synthesizer's word timings.</p></td>
+              </tr>
+            
           </tbody>
         </table>
       
@@ -50659,7 +50790,7 @@ measured by the player, and mapped proportionally onto the text.</p></td>
         </table>
       
         <h3 id="ondewo.nlu.ReasoningEffort" class="title-badge enum">ReasoningEffort</h3>
-        <p>Effort level for reasoning models (e.g. o1, o3). Controls the trade-off</p><p>between speed and quality.</p>
+        <p>Effort level for reasoning models (e.g. o1, o3). Controls the trade-off between speed and quality.</p>
         <table class="enum-table">
           <thead>
             <tr><td>Name</td><td>Number</td><td>Description</td></tr>
@@ -50735,7 +50866,7 @@ measured by the player, and mapped proportionally onto the text.</p></td>
         </table>
       
         <h3 id="ondewo.nlu.Session.View" class="title-badge enum">Session.View</h3>
-        <p>Represents the options for views of a session.</p><p>A session can be a sizable object. Therefore, we provide a resource view that does not return all data</p>
+        <p>Represents the options for views of a session. A session can be a sizable object. Therefore, we provide a resource view that does not return all data</p>
         <table class="enum-table">
           <thead>
             <tr><td>Name</td><td>Number</td><td>Description</td></tr>
@@ -50764,7 +50895,7 @@ measured by the player, and mapped proportionally onto the text.</p></td>
         </table>
       
         <h3 id="ondewo.nlu.SessionReview.View" class="title-badge enum">SessionReview.View</h3>
-        <p>Represents the options for views of a session_review.</p><p>A session_review can be a sizable object. Therefore, we provide a resource view that does not return all data</p>
+        <p>Represents the options for views of a session_review. A session_review can be a sizable object. Therefore, we provide a resource view that does not return all data</p>
         <table class="enum-table">
           <thead>
             <tr><td>Name</td><td>Number</td><td>Description</td></tr>
@@ -50787,6 +50918,35 @@ measured by the player, and mapped proportionally onto the text.</p></td>
                 <td>VIEW_SPARSE</td>
                 <td>2</td>
                 <td><p>Only some fields are populated in the response.</p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="ondewo.nlu.SessionStepInterruptionPhase" class="title-badge enum">SessionStepInterruptionPhase</h3>
+        <p>The phase a turn was in when it was interrupted.</p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>SESSION_STEP_INTERRUPTION_PHASE_UNSPECIFIED</td>
+                <td>0</td>
+                <td><p>Not set.</p></td>
+              </tr>
+            
+              <tr>
+                <td>SESSION_STEP_INTERRUPTION_PHASE_GENERATING</td>
+                <td>1</td>
+                <td><p>The turn was still being generated.</p></td>
+              </tr>
+            
+              <tr>
+                <td>SESSION_STEP_INTERRUPTION_PHASE_FINISHED</td>
+                <td>2</td>
+                <td><p>The turn had finished generating; its answer was being played.</p></td>
               </tr>
             
           </tbody>
@@ -50828,7 +50988,7 @@ until the server closes the gRPC connection. This message is only sent if
         </table>
       
         <h3 id="ondewo.nlu.TranscriptionType" class="title-badge enum">TranscriptionType</h3>
-        <p>Identifies whether a transcription was produced by an automatic</p><p>speech-to-text system or by a human annotator.</p>
+        <p>Identifies whether a transcription was produced by an automatic speech-to-text system or by a human annotator.</p>
         <table class="enum-table">
           <thead>
             <tr><td>Name</td><td>Number</td><td>Description</td></tr>

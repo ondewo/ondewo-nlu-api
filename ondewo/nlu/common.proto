@@ -439,8 +439,7 @@ message DeleteNotificationsRequest {
     repeated string notification_names = 1;
 }
 
-// Message for streaming notifications in real time via
-// <a href="index.html#ondewo.nlu.Users.StreamNotifications">Users.StreamNotifications</a>.
+// Message for streaming notifications in real time via <a href="index.html#ondewo.nlu.Users.StreamNotifications">Users.StreamNotifications</a>.
 message StreamNotificationsRequest {
 
     // Optional filter to narrow the stream down to specific notifications (same semantics as

@@ -18,15 +18,13 @@ package ondewo.nlu;
 
 import "google/protobuf/timestamp.proto";
 
-// Represents the metadata of the long-running operation that can be a parent operation for sub-operations or
-// can be a sub-operation itself
+// Represents the metadata of the long-running operation that can be a parent operation for sub-operations or can be a sub-operation itself
 message OperationMetadata {
 
     // long-running operation status code
     Status status = 1;
 
-    // Structure to set status of operation.
-    // An operation may not be started if NOT_STARTED is set, in progress if IN_PROGRESS, finished if DONE, interrupted if CANCELED or failed if FAILED.
+    // Structure to set status of operation. An operation may not be started if NOT_STARTED is set, in progress if IN_PROGRESS, finished if DONE, interrupted if CANCELED or failed if FAILED.
     enum Status {
 
         // unspecified status code
@@ -82,8 +80,7 @@ message OperationMetadata {
     // operation type
     OperationType operation_type = 12;
 
-    // Type of operation.
-    // It can be creating, importing, exporting, deleting, restoring, building cache, training or exporting benchmark an agent
+    // Type of operation. It can be creating, importing, exporting, deleting, restoring, building cache, training or exporting benchmark an agent
     enum OperationType {
 
         // unspecified operation type

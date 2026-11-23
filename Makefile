@@ -81,6 +81,17 @@ build_docs: ## Build documentation locally using the same Docker image as CI/CD
 	@echo "✓ Documentation generated in docs/ directory"
 	@echo "  Open docs/index.html in your browser to view"
 
+# protoc-gen-doc renders file, service, message and enum descriptions with `{{p .Description}}`, which starts a
+# new paragraph at EVERY newline: a description wrapped across source lines renders broken mid-sentence on the
+# published page. These descriptions keep one paragraph per source line (doc_rendering/README.md).
+DOC_RENDERING_PROTOS = ondewo/nlu/*.proto ondewo/qa/*.proto
+
+doc_rendering_check: ## Check that every p-rendered proto description keeps one paragraph per source line
+	@python3 doc_rendering/reflow_proto_docs.py --check ${DOC_RENDERING_PROTOS}
+
+doc_rendering_fix: ## Reflow the p-rendered proto descriptions to one paragraph per source line
+	@python3 doc_rendering/reflow_proto_docs.py ${DOC_RENDERING_PROTOS}
+
 clean_docs_builder: ## Remove the cloned protoc-gen-doc-action repo and Docker image
 	@echo "Cleaning up documentation builder..."
 	@rm -rf .tmp-protoc-gen-doc-action
@@ -135,7 +146,7 @@ update_githubio:
 ########################################################
 #		Release
 
-release: check_release_credentials validate_release_credentials_via_docker_image create_release_branch create_release_tag build_and_release_to_github_via_docker ## Automate the entire release process
+release: doc_rendering_check check_release_credentials validate_release_credentials_via_docker_image create_release_branch create_release_tag build_and_release_to_github_via_docker ## Automate the entire release process
 	@echo "Release Finished"
 
 # The two credential checks run before anything is pushed. Without them a missing, revoked or

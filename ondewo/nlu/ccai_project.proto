@@ -121,9 +121,7 @@ message CcaiServiceList {
 
 // Defines the types of CCAI (Call Center AI) services available in the system.
 //
-// Each service type represents a specific capability or module within the ONDEWO platform
-// that enables comprehensive call center and customer interaction management. Services can be
-// composed in workflows and are identified by their type, language code, and provider configuration.
+// Each service type represents a specific capability or module within the ONDEWO platform that enables comprehensive call center and customer interaction management. Services can be composed in workflows and are identified by their type, language code, and provider configuration.
 enum CcaiServiceType {
 
     // No service type specified or unknown type
@@ -724,8 +722,7 @@ message UpdateCcaiProjectResponse{
 
 }
 
-// Request to delete a CCAI service project
-// If a deployed CCAI service project was deleted then it was undeployed beforehand automatically
+// Request to delete a CCAI service project If a deployed CCAI service project was deleted then it was undeployed beforehand automatically
 message DeleteCcaiProjectRequest{
 
     // CCAI service project name with which to perform the call of the form <pre><code>projects/&lt;project_uuid&gt;/project</code></pre>
@@ -737,8 +734,7 @@ message DeleteCcaiProjectRequest{
 
 }
 
-// Response to delete a CCAI service project
-// If a deployed CCAI service project was deleted then it was undeployed beforehand automatically
+// Response to delete a CCAI service project If a deployed CCAI service project was deleted then it was undeployed beforehand automatically
 message DeleteCcaiProjectResponse{
 
     // CCAI service project name with which to perform the call of the form <pre><code>projects/&lt;project_uuid&gt;/project</code></pre>

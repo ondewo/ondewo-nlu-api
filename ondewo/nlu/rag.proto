@@ -26,10 +26,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// File-level comment for <code>ondewo/nlu/rag.proto</code>.
-// This file contains a single service <a href="#ondewo.nlu.Rags">Rags</a>. The Rags service provides RAG (Retrieval-Augmented Generation) and web crawler functionality.
-// Fields marked as <code>optional</code> carry explicit presence, so that an explicitly set default value (<code>0</code>, <code>false</code>, <code>""</code>) can be distinguished from a field that was never set. Without the <code>optional</code> keyword it would for instance not be possible to distinguish between an integer <code>0</code> and <code>null</code>.
-// The marker is applied where that distinction is actually consumed — the partial-update inputs (an unset field leaves the stored value untouched, an explicit default clears it) and the retrieval overrides that are forwarded to RAGFlow (an explicit <code>0.0</code> or <code>false</code> must override the server-side default rather than fall back to it). Fields that carry no such distinction are deliberately left without the keyword, and for message-typed fields it is omitted because proto3 gives them explicit presence anyway.
+// File-level comment for <code>ondewo/nlu/rag.proto</code>. This file contains a single service <a href="#ondewo.nlu.Rags">Rags</a>. The Rags service provides RAG (Retrieval-Augmented Generation) and web crawler functionality. Fields marked as <code>optional</code> carry explicit presence, so that an explicitly set default value (<code>0</code>, <code>false</code>, <code>""</code>) can be distinguished from a field that was never set. Without the <code>optional</code> keyword it would for instance not be possible to distinguish between an integer <code>0</code> and <code>null</code>. The marker is applied where that distinction is actually consumed — the partial-update inputs (an unset field leaves the stored value untouched, an explicit default clears it) and the retrieval overrides that are forwarded to RAGFlow (an explicit <code>0.0</code> or <code>false</code> must override the server-side default rather than fall back to it). Fields that carry no such distinction are deliberately left without the keyword, and for message-typed fields it is omitted because proto3 gives them explicit presence anyway.
 syntax = "proto3";
 
 package ondewo.nlu;
@@ -42,8 +39,7 @@ import "ondewo/nlu/operation_metadata.proto";
 import "ondewo/nlu/operations.proto";
 import "ondewo/nlu/session.proto";
 
-// Provides RAG and web crawler endpoints.
-// Most of the RAG related endpoints largely mirror <a href="https://github.com/ondewo/ragflow">RAGFlow's</a> HTTP API endpoints. For more information on RAGFlow refer to the <a href="https://ragflow.io/docs/dev/">official documentation</a>
+// Provides RAG and web crawler endpoints. Most of the RAG related endpoints largely mirror <a href="https://github.com/ondewo/ragflow">RAGFlow's</a> HTTP API endpoints. For more information on RAGFlow refer to the <a href="https://ragflow.io/docs/dev/">official documentation</a>
 service Rags {
 
     // ===========================================
@@ -208,8 +204,7 @@ message RagFileMetadata {
 
 }
 
-// On complete success: no fields set (empty message).
-// On partial success/failure: both fields set.
+// On complete success: no fields set (empty message). On partial success/failure: both fields set.
 message RagPartialSuccess {
 
     // Number of successful operations.
@@ -306,24 +301,7 @@ enum RagChunkMethod {
 
 // Document parser configuration.
 //
-// Used fields depend on the chunking method of the document.
-// <ul>
-//     <li><code>naive</code>: uses the following fields (all optional)</li>
-//     <ul>
-//         <li><code>auto_keywords</code></li>
-//         <li><code>auto_questions</code></li>
-//         <li><code>chunk_token_num</code></li>
-//         <li><code>delimiter</code></li>
-//         <li><code>html4excel</code></li>
-//         <li><code>layout_recognize</code></li>
-//         <li><code>tag_kb_ids</code></li>
-//         <li><code>task_page_size</code></li>
-//         <li><code>raptor</code></li>
-//         <li><code>graphrag</code></li>
-//     </ul>
-//     <li><code>qa</code>, <code>manual</code>, <code>paper</code>, <code>book</code>, <code>laws</code>, <code>presentation</code>: uses only the <code>raptor</code> field</li>
-//     <li><code>table</code>, <code>picture</code>, <code>one</code>, <code>email</code>: does not use any field (expects empty message)</li>
-// </ul>
+// Used fields depend on the chunking method of the document. <ul> <li><code>naive</code>: uses the following fields (all optional)</li> <ul> <li><code>auto_keywords</code></li> <li><code>auto_questions</code></li> <li><code>chunk_token_num</code></li> <li><code>delimiter</code></li> <li><code>html4excel</code></li> <li><code>layout_recognize</code></li> <li><code>tag_kb_ids</code></li> <li><code>task_page_size</code></li> <li><code>raptor</code></li> <li><code>graphrag</code></li> </ul> <li><code>qa</code>, <code>manual</code>, <code>paper</code>, <code>book</code>, <code>laws</code>, <code>presentation</code>: uses only the <code>raptor</code> field</li> <li><code>table</code>, <code>picture</code>, <code>one</code>, <code>email</code>: does not use any field (expects empty message)</li> </ul>
 message RagParserConfig {
 
     // Optional. Minimum 0, maximum 32, default 0. See <a href="https://ragflow.io/docs/dev/autokeyword_autoquestion">https://ragflow.io/docs/dev/autokeyword_autoquestion</a> for details.
@@ -489,8 +467,7 @@ message RagDatasetParsingStatus {
 
 }
 
-// Request message for updating an existing dataset.
-// The same field constraints as for <code>RagCreateDatasetRequest</code> apply here.
+// Request message for updating an existing dataset. The same field constraints as for <code>RagCreateDatasetRequest</code> apply here.
 message RagUpdateDatasetRequest {
 
     // Required. The agent to update the dataset for.
@@ -823,8 +800,7 @@ message RagDownloadDocumentRequest {
 
 }
 
-// File chunk for streaming downloads.<br>
-// First chunk contains metadata, subsequent chunks only contain data.
+// File chunk for streaming downloads.<br> First chunk contains metadata, subsequent chunks only contain data.
 message RagFileChunk {
 
     // Required in first chunk, ignored in later chunks. File metadata.
@@ -931,8 +907,7 @@ enum RagLogic {
 
 }
 
-// Condition to filter document metadata on.
-// String comparison is always case-insensitive.
+// Condition to filter document metadata on. String comparison is always case-insensitive.
 message RagMetadataCondition {
 
     // Required. Metadata field name.
@@ -1060,8 +1035,7 @@ message RagDocumentIdsRequest {
 // Chunk Management Types
 // ============================================================================
 
-// Request message for retrieving chunks using vector similarity search.<br>
-// Supports hybrid search combining vector similarity with keyword matching.
+// Request message for retrieving chunks using vector similarity search.<br> Supports hybrid search combining vector similarity with keyword matching.
 message RagRetrievalRequest {
 
     // Required. The agent to retrieve chunks for.
@@ -1160,8 +1134,7 @@ message RagRetrievalResponse {
 
 }
 
-// Chunk of text extracted from a document.<br>
-// Chunks are the basic retrieval units used for vector similarity search in RAG.
+// Chunk of text extracted from a document.<br> Chunks are the basic retrieval units used for vector similarity search in RAG.
 message RagChunk {
 
     // Chunk ID (computed as xxhash of content combined with document_id).
@@ -1393,17 +1366,9 @@ message RagUpdateCrawlerRequest {
 
 // RagCrawler definition.
 //
-// This object represents a reusable crawler profile that can be run multiple times.
-// It is modeled after Crawl4AI concepts:
-// <ul>
-//     <li>seed/sitemap discovery (<code>RagCrawlerSources</code>)</li>
-//     <li>URL/domain constraints (<code>RagCrawlerFilters</code>)</li>
-//     <li>authentication/session bootstrap (<code>RagCrawlerAuth</code>, <code>RagCrawlerBrowserConfig</code>)</li>
-//     <li>run behavior and extraction output (<code>RagCrawlerConfig</code>)</li>
-// </ul>
+// This object represents a reusable crawler profile that can be run multiple times. It is modeled after Crawl4AI concepts: <ul> <li>seed/sitemap discovery (<code>RagCrawlerSources</code>)</li> <li>URL/domain constraints (<code>RagCrawlerFilters</code>)</li> <li>authentication/session bootstrap (<code>RagCrawlerAuth</code>, <code>RagCrawlerBrowserConfig</code>)</li> <li>run behavior and extraction output (<code>RagCrawlerConfig</code>)</li> </ul>
 //
-// The same crawler can be executed multiple times; each execution creates
-// a separate crawler run and result set.
+// The same crawler can be executed multiple times; each execution creates a separate crawler run and result set.
 message RagCrawler {
 
     // Resource name of the RagCrawler
@@ -1454,9 +1419,7 @@ message RagCrawler {
 
 // Crawl entry points.
 //
-// Both inputs can be provided at the same time:
-// - Sitemaps are expanded into a crawl URL list (in discovery order)
-// - Seed URLs are appended afterwards (in the order provided)
+// Both inputs can be provided at the same time: - Sitemaps are expanded into a crawl URL list (in discovery order) - Seed URLs are appended afterwards (in the order provided)
 message RagCrawlerSources {
 
     // Direct seed URLs to enqueue as starting points.
@@ -1470,11 +1433,7 @@ message RagCrawlerSources {
 
 // URL and domain restrictions.
 //
-// Filters are evaluated during link discovery/scheduling and help avoid
-// crawling irrelevant, duplicate, or unsafe sections (auth/logout pages,
-// marketing subdomains, binary downloads, etc.).
-// These include domains to be excluded in the sources (e.g. through sitemaps or seed URLs)
-// and domains to be excluded in the deep crawl or extraction of pages to be crawled.
+// Filters are evaluated during link discovery/scheduling and help avoid crawling irrelevant, duplicate, or unsafe sections (auth/logout pages, marketing subdomains, binary downloads, etc.). These include domains to be excluded in the sources (e.g. through sitemaps or seed URLs) and domains to be excluded in the deep crawl or extraction of pages to be crawled.
 message RagCrawlerFilters {
 
     // Optional. Domain allow-list (host-level gating).
@@ -1523,8 +1482,7 @@ message RagCrawlerSeedUrlFilters {
 
 // Authentication configuration.
 //
-// Supports both browser/form login and HTTP auth patterns used by Crawl4AI pipelines when crawling protected content.
-// HTTP Auth is used on all pages of the sources, while html_auth is a separate authentication flow used in the beginning of the crawl to extract the cookies. This is done through a login screen. If HTTP Auth is set, this would ALSO be used on the HTML auth page.
+// Supports both browser/form login and HTTP auth patterns used by Crawl4AI pipelines when crawling protected content. HTTP Auth is used on all pages of the sources, while html_auth is a separate authentication flow used in the beginning of the crawl to extract the cookies. This is done through a login screen. If HTTP Auth is set, this would ALSO be used on the HTML auth page.
 message RagCrawlerAuth {
 
     // Optional. HTTP Basic auth settings.
@@ -1553,8 +1511,7 @@ enum RagCrawlerSelectorType {
 
 // Form/HTML login configuration.
 //
-// Selector types and selector strings identify login form fields in the page
-// DOM. Credentials are then filled before form submission.
+// Selector types and selector strings identify login form fields in the page DOM. Credentials are then filled before form submission.
 message RagCrawlerHtmlAuth {
 
     // Optional. Base URL used for auth/login navigation.
@@ -1607,9 +1564,7 @@ message RagCrawlerHttpAuth {
 
 // Browser runtime configuration.
 //
-// This block maps closely to Crawl4AI BrowserConfig and controls browser
-// process setup (engine, headless mode, viewport, context, proxy, cookies,
-// user-agent behavior, and launch arguments).
+// This block maps closely to Crawl4AI BrowserConfig and controls browser process setup (engine, headless mode, viewport, context, proxy, cookies, user-agent behavior, and launch arguments).
 message RagCrawlerBrowserConfig {
 
     // Optional. HTTP headers sent on page/resource requests.
@@ -1652,8 +1607,7 @@ message RagCrawlerConcurrencyConfig {
 
 // Crawl run behavior.
 //
-// This block controls scheduling, traversal, extraction outputs, retries,
-// diagnostics capture, and deep crawling options for each crawler run.
+// This block controls scheduling, traversal, extraction outputs, retries, diagnostics capture, and deep crawling options for each crawler run.
 message RagCrawlerConfig {
 
     // Optional. Concurrency and pacing controls for crawler requests.
@@ -1702,8 +1656,7 @@ message RagCrawlerDeepCrawlerConfig {
 
 // Structured output configuration.
 //
-// Use this block to define result payload shape and metadata behavior,
-// similar to Crawl4AI markdown/output-generation toggles.
+// Use this block to define result payload shape and metadata behavior, similar to Crawl4AI markdown/output-generation toggles.
 message RagCrawlerResultsConfig {
 
     // Optional. Prepend the page's extracted metadata to the markdown as a YAML frontmatter block.
@@ -1858,8 +1811,7 @@ message RagCrawlerStatusFilter {
 //
 // A page is reused from the most recent completed run of the same crawler when its sitemap/ <code>&lt;lastmod&gt;</code> is not newer than the <code>page_last_updated_date</code> of the copy that run holds. A reused page is part of the new run exactly like a freshly fetched one; only <code>RagCrawlerResult.last_crawled_date</code> still reports when its content was actually fetched.
 //
-// A page is always fetched when any of the following holds: its sitemap entry carries no <code>&lt;lastmod&gt;</code>; the most recent completed run did not contain it; there is no completed previous
-// run; the crawler configuration changed since that run; or <code>max_age_days</code> has elapsed.
+// A page is always fetched when any of the following holds: its sitemap entry carries no <code>&lt;lastmod&gt;</code>; the most recent completed run did not contain it; there is no completed previous run; the crawler configuration changed since that run; or <code>max_age_days</code> has elapsed.
 message RagCrawlerIncrementalConfig {
 
     // Optional. Enable incremental crawling. Default <code>false</code>.
@@ -1897,8 +1849,7 @@ message RagCrawlerExecutionInfo {
 
 // Crawler result entity.
 //
-// Each result corresponds to one crawled URL in a crawler run and includes
-// extracted content, metadata, diagnostics, and optional binary artifacts.
+// Each result corresponds to one crawled URL in a crawler run and includes extracted content, metadata, diagnostics, and optional binary artifacts.
 message RagCrawlerResult {
 
     // Resource name of the crawler result.
@@ -1933,8 +1884,7 @@ message RagCrawlerResult {
 
 // Request message for running a crawler.
 //
-// This starts a long-running operation and returns immediately.
-// Clients should poll operation status via <code>RagGetCrawlerRun</code>.
+// This starts a long-running operation and returns immediately. Clients should poll operation status via <code>RagGetCrawlerRun</code>.
 message RagStartCrawlerRequest {
 
     // Required. The agent that owns the crawler.
@@ -2022,9 +1972,7 @@ message RagListCrawlerRunsResponse {
 
 // Request message for deleting crawler runs.
 //
-// Deletion candidates are the union of:
-// - explicit run names in <code>crawler_run_names</code>
-// - all runs belonging to crawlers listed in <code>crawler_names</code>
+// Deletion candidates are the union of: - explicit run names in <code>crawler_run_names</code> - all runs belonging to crawlers listed in <code>crawler_names</code>
 //
 // If both lists are empty, the call is a no-op.
 message RagDeleteCrawlerRunsRequest {
@@ -2087,14 +2035,9 @@ message RagStopCrawlerResponse {
 
 // Request message for getting crawler results of a crawler run.
 //
-// Results are returned in pages. Request the first page with an empty
-// <code>page_token</code>, then continue with each response <code>next_page_token</code>.
+// Results are returned in pages. Request the first page with an empty <code>page_token</code>, then continue with each response <code>next_page_token</code>.
 //
-// Example:
-// <pre><code>RagGetCrawlerResults(run_name, page_token="")
-// -> next_page_token="..."
-// RagGetCrawlerResults(run_name, page_token="...")
-// </code></pre>
+// Example: <pre><code>RagGetCrawlerResults(run_name, page_token="")&#10;-> next_page_token="..."&#10;RagGetCrawlerResults(run_name, page_token="...")&#10;</code></pre>
 message RagGetCrawlerResultsRequest {
 
     // Required. The agent that owns the crawler run.
@@ -2178,8 +2121,7 @@ message RagGetCrawlerResultRequest {
 
 }
 
-// Request message for adding crawler output to one or more datasets.<br>
-// Either <code>crawler_names</code> or <code>crawler_result_names</code> (or both) must be provided.
+// Request message for adding crawler output to one or more datasets.<br> Either <code>crawler_names</code> or <code>crawler_result_names</code> (or both) must be provided.
 message RagAddCrawlerResultsToDatasetsRequest {
 
     // Required. The agent that owns the crawler.
