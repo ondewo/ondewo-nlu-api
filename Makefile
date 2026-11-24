@@ -167,8 +167,9 @@ create_release_tag: ## Create Release Tag and push it to origin
 login_to_gh: ## Login to Github CLI with Access Token
 	@printf '%s\n' "$${GITHUB_GH_TOKEN}" | gh auth login -p ssh --with-token
 
+# --latest=false: 7.5.0 is published after 7.6.0 and 7.7.0, and GitHub would otherwise mark it as the latest release.
 build_gh_release: ## Generate Github Release with CLI
-	gh release create --repo $(GH_REPO) "$(ONDEWO_NLU_API_VERSION)" -n "$(CURRENT_RELEASE_NOTES)" -t "Release ${ONDEWO_NLU_API_VERSION}"
+	gh release create --latest=false --repo $(GH_REPO) "$(ONDEWO_NLU_API_VERSION)" -n "$(CURRENT_RELEASE_NOTES)" -t "Release ${ONDEWO_NLU_API_VERSION}"
 
 delete_gh_release: ## Delete GitHub Release, release branch and release tag via gh CLI
 	-gh release delete --repo $(GH_REPO) "$(ONDEWO_NLU_API_VERSION)" --yes
@@ -189,23 +190,31 @@ unrelease: build_utils_docker_image unrelease_to_github_via_docker_image ## Undo
 # Each entry must be the part of the client's ssh URL after "ondewo-nlu-client-": release_client derives
 # REPO_NAME, and with it the .already_released_marker-<name> / .incomplete_marker-<name> /
 # .unknown_marker-<name> read below, from that URL. Each entry also needs a release_<entry>_client target.
-CLIENTS := python nodejs typescript angular js php go rust cpp java csharp
+# java is not released for 7.5.0: its release publishes to Maven Central, which no-one uses.
+CLIENTS := python nodejs typescript angular js php go rust cpp csharp
 
 # How many client releases release_all_clients runs at the same time; 1 releases them one after the other.
 # Every client release builds docker images and compiles its code, so all of them at once overload the host.
 RELEASE_JOBS?=2
 
-# Newest ondewo-proto-compiler release tag (X.Y.Z tags only, version-sorted), read with git ls-remote rather
-# than the GitHub REST API, which allows 60 unauthenticated calls per hour. release_all_clients resolves it
-# ONCE per run and passes it to every client as PROTO_COMPILER_TAG=<tag> on the command line; a standalone
-# release_<client>_client resolves it itself in release_client.
+# The ondewo-proto-compiler every client is built with, pinned EXACTLY and written into each client's
+# ONDEWO_PROTO_COMPILER_GIT_BRANCH as tags/<version>. 7.5.0 is 7.4.0 plus `ReferencedChunk.document_title`, so
+# every client is built with the compiler its 7.4.0 was built with. release_all_clients passes it to every client
+# as PROTO_COMPILER_TAG=<version> on the command line; a standalone release_<client>_client reads it here as well.
 PROTO_COMPILER_GIT=https://github.com/ondewo/ondewo-proto-compiler.git
-NEWEST_PROTO_COMPILER_TAG=GIT_TERMINAL_PROMPT=0 git ls-remote --tags --refs ${PROTO_COMPILER_GIT} | sed 's|.*refs/tags/||' | grep -E '^[0-9]+\.[0-9]+\.[0-9]+$$' | sort -V | tail -1
+ONDEWO_PROTO_COMPILER_VERSION=5.15.7
+
+# 7.5.0 is released after 7.6.0 and 7.7.0, so no client is released from its default branch: release_client
+# builds each one on the branch support/<version>, created from the client's tag CLIENT_BASE_REF, and that branch
+# receives the release commit instead of master. Every GitHub release is created with --latest=false and every
+# npm package is published under the dist-tag NPM_DIST_TAG, so the newest release stays the latest one.
+CLIENT_BASE_REF=7.4.0
+NPM_DIST_TAG=release-7.5
 
 release_all_clients: ## Release every client in CLIENTS, at most RELEASE_JOBS at a time; one failing client does not abort the others
 	@case "${RELEASE_JOBS}" in ''|*[!0-9]*|0*) echo "ERROR: RELEASE_JOBS must be a positive integer (1, 2, ...), not '${RELEASE_JOBS}'"; exit 1;; esac; \
-	tag=$$(${NEWEST_PROTO_COMPILER_TAG}); \
-	if [ -z "$$tag" ]; then echo "ERROR: could not read the newest release tag of ${PROTO_COMPILER_GIT} - no client was released"; exit 1; fi; \
+	tag=${ONDEWO_PROTO_COMPILER_VERSION}; \
+	if [ -z "$$tag" ]; then echo "ERROR: ONDEWO_PROTO_COMPILER_VERSION is empty - no client was released"; exit 1; fi; \
 	echo "Releasing all clients for ${ONDEWO_NLU_API_VERSION} with ondewo-proto-compiler $$tag, at most ${RELEASE_JOBS} at a time ..."; \
 	rm -f .already_released_marker-* .incomplete_marker-* .unknown_marker-* .client_status-*; \
 	printf '%s\n' $(CLIENTS) | xargs -P ${RELEASE_JOBS} -I{} make release_client_job RELEASE_JOB_CLIENT={} PROTO_COMPILER_TAG=$$tag; \
@@ -251,7 +260,7 @@ RELEASEMD?=
 #   make release_all_clients GENERIC_RELEASE_SECTION='Breaking Changes' \
 #     GENERIC_RELEASE_EXTRA='* The `Login` RPC and its messages are removed — authenticate via Keycloak.\n'
 GENERIC_RELEASE_SECTION?=Improvements
-GENERIC_RELEASE_EXTRA?=
+GENERIC_RELEASE_EXTRA?=* [[OAMXXX-13]](https://ondewo.atlassian.net/browse/OAMXXX-13) `ReferencedChunk` carries `document_title` (field 10), the title of the crawled source page.\n
 # Emitted markdownlint-clean, and deliberately on ONE line. Every ` \n` used to leave a trailing space
 # on each generated line and a leading space on the list item, and make's line-continuation collapses
 # `\<newline><tab>` to a further space, so the block tripped MD009/MD007/MD022/MD012/MD032 in EVERY client and the
@@ -267,10 +276,10 @@ release_client: ## Generic Function to Release a Client
 	$(eval REPO_NAME:= $(shell echo ${GENERIC_CLIENT} | cut -c 41- | cut -d '.' -f 1))
 	$(eval REPO_DIR:= $(shell echo "ondewo-nlu-client-${REPO_NAME}"))
 	$(eval UPPER_REPO_NAME:= $(shell echo ${REPO_NAME} | perl -pe 's/.*/\u$$&/'))
-# Newest Proto-Compiler tag: PROTO_COMPILER_TAG from release_all_clients, else resolved here. An empty one
-# would pin the client to `tags/`, so stop before anything is cloned.
-	$(eval PROTO_COMPILER:= $(or ${PROTO_COMPILER_TAG},$(shell ${NEWEST_PROTO_COMPILER_TAG})))
-	@if [ -z "${PROTO_COMPILER}" ]; then echo "ERROR: could not read the newest release tag of ${PROTO_COMPILER_GIT} - ${REPO_NAME} was not released"; exit 1; fi
+# Proto-Compiler tag: PROTO_COMPILER_TAG from release_all_clients, else ONDEWO_PROTO_COMPILER_VERSION. An
+# empty one would pin the client to `tags/`, so stop before anything is cloned.
+	$(eval PROTO_COMPILER:= $(or ${PROTO_COMPILER_TAG},${ONDEWO_PROTO_COMPILER_VERSION}))
+	@if [ -z "${PROTO_COMPILER}" ]; then echo "ERROR: ONDEWO_PROTO_COMPILER_VERSION is empty - ${REPO_NAME} was not released"; exit 1; fi
 	@echo "ondewo-proto-compiler tag for ${REPO_NAME}: ${PROTO_COMPILER}"
 # Clone Repo
 	rm -rf ${REPO_DIR}
@@ -304,6 +313,13 @@ release_client: ## Generic Function to Release a Client
 		else echo "UNKNOWN: ${REPO_DIR} has release/${ONDEWO_NLU_API_VERSION}, but the GitHub API did not say whether release ${ONDEWO_NLU_API_VERSION} is published (HTTP $$code; 403/429 = rate limit, 000 = no connection) - nothing was changed, rerun later"; touch .unknown_marker-${REPO_NAME}; fi; \
 		rm -rf ${REPO_DIR} temp-notes-${REPO_NAME}; exit 1; \
 	fi
+# Release from support/<version> (see CLIENT_BASE_REF), never from the default branch. A rerun continues the
+# support branch an earlier run pushed.
+	cd ${REPO_DIR} && if git rev-parse -q --verify "refs/remotes/origin/support/${ONDEWO_NLU_API_VERSION}" > /dev/null; then \
+		git checkout "support/${ONDEWO_NLU_API_VERSION}"; \
+	else \
+		git checkout -b "support/${ONDEWO_NLU_API_VERSION}" "refs/tags/${CLIENT_BASE_REF}"; \
+	fi
 
 # Change Version Number and RELEASE NOTES
 # Only insert the generated boilerplate when the client does not already document this version. A client
@@ -326,6 +342,15 @@ release_client: ## Generic Function to Release a Client
 	cd ${REPO_DIR} && perl -i -pe 's/^ONDEWO_NLU_VERSION\s*=.*/ONDEWO_NLU_VERSION=${ONDEWO_NLU_API_VERSION}/' Makefile
 	cd ${REPO_DIR} && perl -i -pe 's/^ONDEWO_PROTO_COMPILER_GIT_BRANCH\s*=.*/ONDEWO_PROTO_COMPILER_GIT_BRANCH=tags\/${PROTO_COMPILER}/' Makefile
 	cd ${REPO_DIR} && perl -i -pe 's/^((ONDEWO_)?NLU_API_GIT_BRANCH)\s*=.*/$$1=tags\/${ONDEWO_NLU_API_VERSION}/' Makefile && head -30 Makefile
+# Keep the newest release the latest one (see CLIENT_BASE_REF): --latest=false on every `gh release create`, the
+# dist-tag NPM_DIST_TAG on every `npm publish`. A recipe line these substitutions miss stops the client here,
+# before anything is pushed.
+	cd ${REPO_DIR} && perl -i -pe 's/gh release create --repo/gh release create --latest=false --repo/' Makefile
+	cd ${REPO_DIR} && perl -i -pe 's/(npm publish \S+ --access public)(?! --tag)/$$1 --tag ${NPM_DIST_TAG}/' Makefile
+	cd ${REPO_DIR} && perl -ne 'next unless /^\t(?!\s*@?#)/; if ((/gh release create/ && !/--latest=false/) || (/npm publish/ && !/--tag ${NPM_DIST_TAG}/)) { print STDERR "ERROR: ${REPO_DIR}/Makefile:$$.: $$_"; $$bad = 1 } END { exit($$bad ? 1 : 0) }' Makefile \
+		|| { echo "ERROR: a publish command of ${REPO_NAME} would mark ${ONDEWO_NLU_API_VERSION} as the latest release - ${REPO_NAME} was not released"; exit 1; }
+	cd ${REPO_DIR} && if ! git rev-parse -q --verify "refs/remotes/origin/support/${ONDEWO_NLU_API_VERSION}" > /dev/null; then \
+		git push -u origin "support/${ONDEWO_NLU_API_VERSION}"; fi
 
 # Release. Every client's ondewo_release clones ondewo-devops-accounts - the real credentials - into its root.
 # The trap removes that clone whenever the release leaves it behind, i.e. when it fails or is interrupted;
